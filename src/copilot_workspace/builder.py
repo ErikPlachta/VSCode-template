@@ -204,6 +204,40 @@ if __name__ == "__main__":
 """
 
 
+def load_datasets(root: Path) -> Dict[str, dict]:
+    """Return dataset definitions keyed by dataset name."""
+
+    dataset_map: Dict[str, dict] = {}
+    for dataset_path in root.glob("*/dataset.json"):
+        dataset = json.loads(dataset_path.read_text(encoding="utf-8"))
+        name = dataset.get("dataset_name")
+        if name:
+            dataset_map[str(name)] = dataset
+    return dataset_map
+
+
+def validate_bridge(bridge_path: Path, dataset_map: Dict[str, dict], errors: List[str]) -> None:
+    """Collect missing key errors for the provided bridge definition."""
+
+    bridge = json.loads(bridge_path.read_text(encoding="utf-8"))
+    for participant in bridge.get("participants", []):
+        participant_dataset = participant.get("dataset")
+        if not participant_dataset:
+            continue
+        dataset = dataset_map.get(participant_dataset)
+        if dataset is None:
+            print(
+                f"{bridge_path}: dataset {participant_dataset} not found "
+                "(conceptual datasets are allowed)",
+            )
+            continue
+        available_columns = {column.get("name") for column in dataset.get("columns", [])}
+        for key in participant.get("keys", []):
+            if key not in available_columns:
+                errors.append(f"{bridge_path}: key {key} missing in {participant_dataset}")
+
+
+
 def dataset_template(name: str) -> Dict[str, object]:
     """Return a base dataset schema used for each category and utility template."""
     formatted_name = name.replace(" ", "").capitalize()
