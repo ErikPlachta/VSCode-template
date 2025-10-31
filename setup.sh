@@ -1,2 +1,5 @@
-python setup_copilot_framework_v0_0_6.py
-node .github/copilot-instructions-work/config/features/validate/validate-all.js
+#!/usr/bin/env bash
+set -euo pipefail
+
+python install-github-copilot-instructions-work.py "$@"
+python .github/copilot-instructions-work/config/features/validate/validate_all.py
