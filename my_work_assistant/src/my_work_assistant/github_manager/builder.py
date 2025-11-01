@@ -71,6 +71,10 @@ def _write_file(target: Path, content: str) -> None:
 def render_templates() -> list[Path]:
     """Render configured templates into the repository.
 
+    This now renders category files first (instructions/prompts/chatmodes),
+    then embeds their content into ``copilot-instructions.md`` so Copilot Chat
+    receives a single, self-contained reference file.
+
     Returns:
         list[Path]: Paths that were rendered or refreshed.
 
@@ -84,20 +88,28 @@ def render_templates() -> list[Path]:
     rendered: list[Path] = []
     template_root = CONFIG_ROOT.parent / "github"
     github_root = Path(config.get("github_root", ".github"))
-    if config.get("copilot_instructions_enabled", True):
-        path = template_root / "copilot-instructions.md.j2"
-        target = github_root / "copilot-instructions.md"
-        template = _load_template(path)
-        _write_file(
-            target, template.render(additional_notes="These instructions are managed.")
-        )
-        rendered.append(target)
+
+    def extract_body(content: str) -> str:
+        """Return content without YAML front matter and leading comments.
+
+        Heuristic: find two lines that start with '---' and return text after
+        the second delimiter. Falls back to original content if not found.
+        """
+        lines = content.splitlines()
+        dashes_idx: list[int] = [i for i, ln in enumerate(lines) if ln.strip() == "---"]
+        if len(dashes_idx) >= 2:
+            return "\n".join(lines[dashes_idx[1] + 1 :]).strip()
+        return content
+
+    # 1) Render instructions/prompts/chatmodes first
+    instr_targets: list[Path] = []
+    prompt_targets: list[Path] = []
+    chatmode_targets: list[Path] = []
+
     if config.get("instructions_enabled", True):
-        # Corrected template filename (plural: defaults)
         path = (
             template_root / "instructions" / "default-guidelines.instructions.mwa.md.j2"
         )
-        # Output naming rule: insert `.mwa` before `.instructions.md`
         target = github_root / "instructions" / "default-guidelines.instructions.mwa.md"
         template = _load_template(path)
         _write_file(
@@ -107,14 +119,14 @@ def render_templates() -> list[Path]:
             ),
         )
         rendered.append(target)
+        instr_targets.append(target)
+
     if config.get("prompts_enabled", True):
-        # Use suffix-based template filenames and emit corresponding targets (drop .j2)
-        prompt_templates = [
+        for template_name in [
             "document-api.prompt.mwa.md.j2",
             "review-code.prompt.mwa.md.j2",
             "onboarding-plan.prompt.mwa.md.j2",
-        ]
-        for template_name in prompt_templates:
+        ]:
             template = _load_template(template_root / "prompts" / template_name)
             target_name = template_name.replace(".j2", "")
             target = github_root / "prompts" / target_name
@@ -125,6 +137,8 @@ def render_templates() -> list[Path]:
                 ),
             )
             rendered.append(target)
+            prompt_targets.append(target)
+
     if config.get("chatmodes_enabled", True):
         for template_name in [
             "reviewer.chatmode.mwa.md.j2",
@@ -140,4 +154,33 @@ def render_templates() -> list[Path]:
                 ),
             )
             rendered.append(target)
+            chatmode_targets.append(target)
+
+    # 2) Render copilot-instructions last, embedding content
+    if config.get("copilot_instructions_enabled", True):
+        path = template_root / "copilot-instructions.md.j2"
+        target = github_root / "copilot-instructions.md"
+        template = _load_template(path)
+
+        def pack(paths: list[Path]) -> list[dict[str, str]]:
+            items: list[dict[str, str]] = []
+            for p in paths:
+                try:
+                    raw = p.read_text(encoding="utf-8")
+                except OSError:
+                    raw = ""
+                items.append(
+                    {"name": p.name, "path": str(p), "content": extract_body(raw)}
+                )
+            return items
+
+        content = template.render(
+            additional_notes="These instructions are managed.",
+            embedded_instructions=pack(instr_targets),
+            embedded_prompts=pack(prompt_targets),
+            embedded_chatmodes=pack(chatmode_targets),
+        )
+        _write_file(target, content)
+        rendered.append(target)
+
     return rendered

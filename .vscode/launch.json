@@ -1,0 +1,76 @@
+{
+  // For attributes, see https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Pytest: Debug All",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-q"],
+      "justMyCode": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Pytest: Debug Current File",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-q", "${file}"],
+      "justMyCode": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Pytest: Debug Filter (-k)",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-q", "${file}", "-k", "${input:testFilter}"],
+      "justMyCode": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "FastAPI: Uvicorn (factory)",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "my_work_assistant.api.app:create_app",
+        "--factory",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--reload"
+      ],
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "CLI: my_work_assistant init",
+      "type": "python",
+      "request": "launch",
+      "module": "my_work_assistant",
+      "args": ["init"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "CLI: my_work_assistant self-test",
+      "type": "python",
+      "request": "launch",
+      "module": "my_work_assistant",
+      "args": ["self-test"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "testFilter",
+      "type": "promptString",
+      "description": "pytest -k expression (e.g., test_name or ClassName::test_method)",
+      "default": ""
+    }
+  ]
+}

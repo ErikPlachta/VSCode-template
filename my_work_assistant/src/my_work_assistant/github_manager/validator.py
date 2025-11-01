@@ -140,7 +140,8 @@ def validate_file(path: Path) -> None:
             "# Copilot Instructions",
             "<!-- BEGIN my_work_assistant -->",
             "<!-- END my_work_assistant -->",
-            "Links:",
+            "## Quick links",
+            "## Embedded references",
         ]
         for marker in required_markers:
             if marker not in content:

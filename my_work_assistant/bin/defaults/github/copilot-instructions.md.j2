@@ -11,11 +11,52 @@ managed_by_mcp: true
 
 <!-- BEGIN my_work_assistant -->
 [system-managed section – do not edit manually]
-- Links:
-  - .my_work_assistant/docs/
-  - .github/instructions/
-  - .github/prompts/
-  - .github/chatmodes/
+
+## How to use
+- Ask Copilot to follow the guidelines and prompts embedded below.
+- Prefer referring to specific sections by name (e.g., “Use the review-code prompt”).
+- When in doubt, ask Copilot to summarize the embedded references first.
+
+## Quick links
+- .my_work_assistant/docs/
+- .github/instructions/
+- .github/prompts/
+- .github/chatmodes/
+
+## Embedded references
+
+> Note: Copilot Chat in VS Code typically reads this single file and does not follow links to other files. To ensure full context, the contents of key instruction, prompt, and chatmode files are embedded below.
+
+### Instructions
+{% for item in embedded_instructions %}
+<details>
+<summary>{{ item.name }}</summary>
+
+{{ item.content }}
+
+</details>
+{% endfor %}
+
+### Prompts
+{% for item in embedded_prompts %}
+<details>
+<summary>{{ item.name }}</summary>
+
+{{ item.content }}
+
+</details>
+{% endfor %}
+
+### Chatmodes
+{% for item in embedded_chatmodes %}
+<details>
+<summary>{{ item.name }}</summary>
+
+{{ item.content }}
+
+</details>
+{% endfor %}
+
 <!-- END my_work_assistant -->
 
 {{ additional_notes }}
