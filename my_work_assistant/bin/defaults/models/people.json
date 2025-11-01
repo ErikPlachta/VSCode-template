@@ -1,0 +1,8 @@
+[
+  {
+    "id": "person-alex",
+    "full_name": "Alex Rivera",
+    "role_ids": ["role-lead"],
+    "group_ids": ["grp-core"]
+  }
+]

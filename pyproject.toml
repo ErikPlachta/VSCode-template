@@ -1,35 +1,51 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=67", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "custom-mcp-server"
+name = "my_work_assistant"
 version = "0.1.0"
-description = "A customizable Model Context Protocol (MCP) server framework for Copilot Chat"
-authors = [{name = "Your Name", email = "you@example.com"}]
+description = "My Work Assistant MCP server"
+authors = [{name = "My Work Assistant", email = "support@example.com"}]
 readme = "README.md"
+requires-python = ">=3.12"
 license = {text = "MIT"}
-requires-python = ">=3.10"
 dependencies = [
-  "pydantic>=2.6",
-  "pydantic-settings>=2.2",
-  "websockets>=11.0",
-  "uvicorn>=0.27",
-  "python-dotenv>=1.0",
+    "fastapi",
+    "typer",
+    "pydantic>=2",
+    "jinja2",
+    "jsonschema",
+    "watchdog",
+    "uvicorn",
 ]
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=7.4",
-  "pytest-asyncio>=0.23",
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    "ruff",
 ]
 
-[project.scripts]
-custom-mcp-server = "custom_mcp_server.__main__:main"
+[tool.setuptools.packages.find]
+where = ["my_work_assistant/src"]
 
 [tool.pytest.ini_options]
-addopts = "-ra"
-testpaths = ["tests"]
+addopts = "--maxfail=1 --disable-warnings"
+filterwarnings = ["error"]
+markers = [
+    "docstring",
+    "typing",
+]
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["my_work_assistant"]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I", "D"]
+ignore = []
+

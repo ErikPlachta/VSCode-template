@@ -1,0 +1,6 @@
+{
+  "id": "dataset-sales",
+  "name": "Sales Analytics",
+  "platform_id": "plat-analytics",
+  "description": "Aggregated sales metrics by region"
+}

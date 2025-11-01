@@ -1,0 +1,15 @@
+{
+  "logging": {"level": "INFO", "retention_days": 30},
+  "telemetry": {"request_tracking_enabled": true},
+  "changelog": {"generate_detailed": true, "generate_summary": true},
+  "watcher": {
+    "paths": [".github"],
+    "ignore_patterns": ["*.bak"]
+  },
+  "github_manager": {
+    "copilot_instructions_enabled": true,
+    "instructions_enabled": true,
+    "prompts_enabled": true,
+    "chatmodes_enabled": true
+  }
+}
