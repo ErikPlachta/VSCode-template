@@ -1,3 +1,24 @@
+Metadata-Version: 2.4
+Name: my_work_assistant
+Version: 0.1.0
+Summary: My Work Assistant MCP server
+Author-email: My Work Assistant <support@example.com>
+License: MIT
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi
+Requires-Dist: typer
+Requires-Dist: pydantic>=2
+Requires-Dist: jinja2
+Requires-Dist: jsonschema
+Requires-Dist: watchdog
+Requires-Dist: uvicorn
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+
 # My Work Assistant
 
 My Work Assistant is a reference MCP server that provisions GitHub Copilot Chat
@@ -48,7 +69,7 @@ source .venv/bin/activate
 The `pyproject.toml` file defines all dependencies and project metadata. Install the project in development mode:
 
 ```bash
-# Install ALL packages, including the development dependencies
+# Install the package with development dependencies
 pip install -e ".[dev]"
 
 # Note: The quotes around ".[dev]" are required for zsh shell (default on macOS)
