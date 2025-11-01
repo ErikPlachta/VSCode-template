@@ -14,7 +14,7 @@ managed_by_mcp: true
 
 ## Priorities
 - Prefer prompts in this order: review-code, document-api, onboarding-plan.
-- For code changes, start with review-code; for API/docs, start with document-api.
+- For code changes, start with review-code; for api/docs, start with document-api; for onboarding, start with onboarding-plan.
 - When unsure, ask to summarize the embedded references and propose a short plan.
 
 ## How to use
@@ -148,6 +148,7 @@ Create short onboarding plans or contributor guides.
 
 _Summary:_ API & CLI — - `init` — initialize workspace and render templates
 
+
 # API & CLI
 
 ## CLI commands
@@ -182,12 +183,14 @@ Interactive docs:
 - ReDoc: <http://127.0.0.1:8000/redoc>
 
 
+
 </details>
 
 <details>
 <summary>api_reference.md</summary>
 
 _Summary:_ API Reference — my_work_assistant.core.cache
+
 
 # API Reference
 
@@ -456,12 +459,14 @@ Generic JSON validation helpers using bundled schemas.
 
 - `validate_json(data: 'Any', schema_name: 'str') -> 'None'` — Validate JSON data against a packaged schema.
 
+
 </details>
 
 <details>
 <summary>architecture.md</summary>
 
 _Summary:_ Architecture Overview — My Work Assistant is an MCP server that automates GitHub workspace assets with a
+
 
 # Architecture Overview
 
@@ -489,12 +494,14 @@ content- and config-driven approach.
 - Generated docs help keep module-level documentation discoverable.
 
 
+
 </details>
 
 <details>
 <summary>configuration.md</summary>
 
 _Summary:_ Configuration — Configuration is merged from packaged defaults and your user overrides in `.my_work_assistant/my-work-assistant.config.json`.
+
 
 # Configuration
 
@@ -528,12 +535,14 @@ Configuration is merged from packaged defaults and your user overrides in `.my_w
 - The runtime always reads your override file; change values there and re-run commands.
 
 
+
 </details>
 
 <details>
 <summary>developer_guide.md</summary>
 
 _Summary:_ Developer Guide — Use the Typer CLI or FastAPI endpoints to manage workspace assets. Tests enforce
+
 
 # Developer Guide
 
@@ -572,12 +581,14 @@ pip install -e ".[dev]"
 See also: Quickstart, Configuration, GitHub Manager, API & CLI, Docs System.
 
 
+
 </details>
 
 <details>
 <summary>docs_system.md</summary>
 
 _Summary:_ Documentation System — There are two documentation paths:
+
 
 # Documentation System
 
@@ -607,12 +618,14 @@ generate_docs()  # returns Path to the file
 - Ruff enforces pydocstyle (Google style) with helpful checks.
 
 
+
 </details>
 
 <details>
 <summary>github_manager.md</summary>
 
 _Summary:_ GitHub Manager — The GitHub manager renders, validates, and discovers managed files under your configured GitHub root.
+
 
 # GitHub Manager
 
@@ -661,12 +674,14 @@ python -m my_work_assistant validate
 ```
 
 
+
 </details>
 
 <details>
 <summary>index.md</summary>
 
 _Summary:_ Documentation Index — - [Api Reference](api_reference.md)
+
 
 # Documentation Index
 
@@ -681,12 +696,14 @@ _Summary:_ Documentation Index — - [Api Reference](api_reference.md)
 - [Quickstart](quickstart.md)
 
 
+
 </details>
 
 <details>
 <summary>quickstart.md</summary>
 
 _Summary:_ Quickstart — Get up and running locally with a clean virtual environment and the CLI/API.
+
 
 # Quickstart
 
@@ -752,6 +769,7 @@ python -m my_work_assistant validate   # Validate managed files
 python -m my_work_assistant changelog  # Summarize recent changes
 python -m my_work_assistant self-test  # Run unit tests
 ```
+
 
 
 </details>

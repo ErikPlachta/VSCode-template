@@ -9,6 +9,7 @@ managed_by_mcp: true
 version: 1
 topic: document-api
 priority: 2
+category: docs
 ---
 ## When to use
 Generate or improve API docs from code and docstrings.

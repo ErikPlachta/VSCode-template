@@ -9,6 +9,7 @@ managed_by_mcp: true
 version: 1
 topic: onboarding-plan
 priority: 3
+category: onboarding
 ---
 ## When to use
 Create short onboarding plans or contributor guides.

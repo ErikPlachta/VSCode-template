@@ -9,6 +9,7 @@ managed_by_mcp: true
 version: 1
 topic: review-code
 priority: 1
+category: code
 ---
 ## When to use
 Use this prompt for reviewing code diffs, refactors, and PRs.
