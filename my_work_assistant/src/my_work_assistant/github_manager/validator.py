@@ -19,7 +19,6 @@ __all__ = ["parse_front_matter", "validate_file"]
 
 def parse_front_matter(content: str) -> dict[str, Any]:
     """Extract simple YAML-like front matter from markdown content."""
-
     start = content.find("---\n")
     if start == -1:
         return {}
@@ -61,7 +60,6 @@ SCHEMAS = {
 
 def validate_file(path: Path) -> None:
     """Validate a GitHub managed file."""
-
     content = path.read_text(encoding="utf-8")
     if DISCLAIMER not in content:
         raise GitHubFileError("Managed file missing disclaimer", {"path": str(path)})

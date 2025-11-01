@@ -18,6 +18,7 @@ class GitHubManagerConfig(TypedDict):
         ...                     prompts_enabled=True,
         ...                     chatmodes_enabled=True)
         {'copilot_instructions_enabled': True, 'instructions_enabled': True, 'prompts_enabled': True, 'chatmodes_enabled': True}
+
     """
 
     copilot_instructions_enabled: bool

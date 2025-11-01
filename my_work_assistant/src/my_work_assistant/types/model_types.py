@@ -15,6 +15,7 @@ class CategoryPayload(TypedDict):
     Example:
         >>> CategoryPayload(id='cat', name='Category', description='Desc')
         {'id': 'cat', 'name': 'Category', 'description': 'Desc'}
+
     """
 
     id: str

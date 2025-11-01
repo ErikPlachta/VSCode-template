@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timedelta
-from pathlib import Path
 from typing import Any
 
 from .config import USER_ROOT
@@ -21,6 +20,7 @@ class CacheEntry(dict[str, Any]):
     Example:
         >>> CacheEntry({"data": 1})["data"]
         1
+
     """
 
 
@@ -38,8 +38,8 @@ def read_cache(name: str) -> CacheEntry:
 
     Example:
         >>> read_cache('example')  # doctest: +SKIP
-    """
 
+    """
     path = CACHE_DIR / f"{name}.json"
     if not path.exists():
         return CacheEntry()
@@ -58,8 +58,8 @@ def write_cache(name: str, data: dict[str, Any]) -> None:
 
     Example:
         >>> write_cache('example', {'updated': True})
-    """
 
+    """
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     path = CACHE_DIR / f"{name}.json"
     path.write_text(json.dumps(data), encoding="utf-8")
@@ -77,8 +77,8 @@ def is_cache_stale(name: str, refresh_minutes: int) -> bool:
 
     Example:
         >>> is_cache_stale('example', 10)  # doctest: +SKIP
-    """
 
+    """
     path = CACHE_DIR / f"{name}.json"
     if not path.exists():
         return True

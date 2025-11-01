@@ -2,6 +2,7 @@
 
 Helpers for validating and synchronizing managed GitHub assets.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -15,9 +16,8 @@ from .validator import validate_file
 __all__ = ["synchronize"]
 
 
-def _flatten(files: Iterable[Path | Iterable[Path]]) -> list[Path]:
+def _flatten(files: Iterable[Path | list[Path]]) -> list[Path]:
     """Flatten nested file iterables."""
-
     result: list[Path] = []
     for item in files:
         if isinstance(item, Path):
@@ -35,11 +35,13 @@ def synchronize() -> list[Path]:
 
     Example:
         >>> synchronize()  # doctest: +SKIP
-    """
 
+    """
     files = _flatten(MANAGED_FILES.values())
     for path in files:
         validate_file(path)
-    log_event("ChangeLogSummary.md", "INFO", "Validated managed files", count=len(files))
+    log_event(
+        "ChangeLogSummary.md", "INFO", "Validated managed files", count=len(files)
+    )
     record_request("synchronizer", "validated managed files", count=len(files))
     return files

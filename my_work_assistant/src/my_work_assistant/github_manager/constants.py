@@ -2,14 +2,16 @@
 
 Constants describing managed GitHub file paths.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
+from typing import List
 
 __all__ = ["GITHUB_ROOT", "MANAGED_FILES"]
 
 GITHUB_ROOT = Path(".github")
-MANAGED_FILES = {
+MANAGED_FILES: dict[str, Path | List[Path]] = {
     "copilot": GITHUB_ROOT / "copilot-instructions.md",
     "instructions": GITHUB_ROOT / "instructions" / "default-guidelines.instructions.md",
     "prompts": [

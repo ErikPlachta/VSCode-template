@@ -35,8 +35,8 @@ def copy_if_missing(source: Path, destination: Path) -> None:
 
     Example:
         >>> copy_if_missing(Path('a'), Path('b'))  # doctest: +SKIP
-    """
 
+    """
     if destination.exists():
         return
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -59,8 +59,8 @@ def initialize_workspace() -> dict[str, Any]:
         >>> data = initialize_workspace()
         >>> "logging" in data
         True
-    """
 
+    """
     for directory in WORKSPACE_DIRS:
         directory.mkdir(parents=True, exist_ok=True)
     default_config = load_config()

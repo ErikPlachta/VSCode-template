@@ -2,6 +2,7 @@
 
 Generate Markdown documentation from module docstrings.
 """
+
 from __future__ import annotations
 
 import inspect
@@ -9,7 +10,7 @@ from importlib import import_module
 from pathlib import Path
 from typing import Iterable
 
-from ..core.initialize import USER_ROOT
+from ..core.config import USER_ROOT
 
 __all__ = ["generate_docs"]
 
@@ -32,8 +33,8 @@ def generate_docs(modules: Iterable[str] | None = None) -> Path:
 
     Example:
         >>> generate_docs()  # doctest: +SKIP
-    """
 
+    """
     module_names = list(modules or MODULES)
     docs_dir = USER_ROOT / "docs"
     docs_dir.mkdir(parents=True, exist_ok=True)

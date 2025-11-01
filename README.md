@@ -61,6 +61,12 @@ pip install -e ".[dev]"
 
 #### 3. Initialize My Work Assistant
 
+This is a one-time setup step to create necessary configuration files and directories.
+
+> It uses the mcp library code to build local files, including logs and caching data,
+> based on the default templates provided in the repository, and is required for
+> CoPilot Chat to function correctly with this MCP server at this time.
+
 ```bash
 # Initialize the work assistant
 python -m my_work_assistant init

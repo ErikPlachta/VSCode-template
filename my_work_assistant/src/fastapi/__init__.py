@@ -2,6 +2,7 @@
 
 Minimal stub implementation for testing without external dependency.
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -25,23 +26,37 @@ class FastAPI:
     def __init__(self, title: str = "") -> None:
         self.title = title
         self.routes: Dict[Tuple[str, str], Callable[..., Awaitable[Any]]] = {}
-        self.exception_handlers: Dict[type[Exception], Callable[[Any, Exception], Any]] = {}
+        self.exception_handlers: Dict[
+            type[Exception], Callable[[Any, Exception], Any]
+        ] = {}
 
-    def post(self, path: str) -> Callable[[Callable[..., Awaitable[Any]]], Callable[..., Awaitable[Any]]]:
+    def post(
+        self, path: str
+    ) -> Callable[[Callable[..., Awaitable[Any]]], Callable[..., Awaitable[Any]]]:
         return self._register("POST", path)
 
-    def get(self, path: str) -> Callable[[Callable[..., Awaitable[Any]]], Callable[..., Awaitable[Any]]]:
+    def get(
+        self, path: str
+    ) -> Callable[[Callable[..., Awaitable[Any]]], Callable[..., Awaitable[Any]]]:
         return self._register("GET", path)
 
-    def exception_handler(self, exc_type: type[Exception]) -> Callable[[Callable[[Any, Exception], Any]], Callable[[Any, Exception], Any]]:
-        def decorator(handler: Callable[[Any, Exception], Any]) -> Callable[[Any, Exception], Any]:
+    def exception_handler(
+        self, exc_type: type[Exception]
+    ) -> Callable[[Callable[[Any, Exception], Any]], Callable[[Any, Exception], Any]]:
+        def decorator(
+            handler: Callable[[Any, Exception], Any],
+        ) -> Callable[[Any, Exception], Any]:
             self.exception_handlers[exc_type] = handler
             return handler
 
         return decorator
 
-    def _register(self, method: str, path: str) -> Callable[[Callable[..., Awaitable[Any]]], Callable[..., Awaitable[Any]]]:
-        def decorator(func: Callable[..., Awaitable[Any]]) -> Callable[..., Awaitable[Any]]:
+    def _register(
+        self, method: str, path: str
+    ) -> Callable[[Callable[..., Awaitable[Any]]], Callable[..., Awaitable[Any]]]:
+        def decorator(
+            func: Callable[..., Awaitable[Any]],
+        ) -> Callable[..., Awaitable[Any]]:
             self.routes[(method.upper(), path)] = func
             return func
 
@@ -52,10 +67,9 @@ class FastAPI:
         if handler is None:
             return 404, {"detail": "Not Found"}
         try:
-            result = handler()  # type: ignore[arg-type]
+            result = handler()
             if asyncio.iscoroutine(result):
                 result = asyncio.run(result)
             return 200, result
         except HTTPException as exc:
             return exc.status_code, {"detail": exc.detail}
-

@@ -21,6 +21,6 @@ def record_request(source: str, summary: str, **payload: Any) -> None:
 
     Example:
         >>> record_request("api", "listed models", count=1)
-    """
 
+    """
     log_event("RequestLog.md", "INFO", summary, source=source, payload=payload)

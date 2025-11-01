@@ -15,6 +15,7 @@ class JSONDict(TypedDict, total=False):
     Example:
         >>> JSONDict(key='value')
         {'key': 'value'}
+
     """
 
     key: Any

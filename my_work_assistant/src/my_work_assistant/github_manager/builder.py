@@ -5,7 +5,6 @@ Render managed GitHub files from bundled templates.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
 
 from jinja2 import Template
 
@@ -31,8 +30,8 @@ def _load_template(path: Path) -> Template:
 
     Example:
         >>> isinstance(_load_template(Path('sample.j2')), Template)  # doctest: +SKIP
-    """
 
+    """
     try:
         return Template(path.read_text(encoding="utf-8"))
     except OSError as exc:  # pragma: no cover
@@ -51,8 +50,8 @@ def _write_file(target: Path, content: str) -> None:
 
     Example:
         >>> _write_file(Path('tmp.md'), 'content')  # doctest: +SKIP
-    """
 
+    """
     if target.exists():
         existing = target.read_text(encoding="utf-8")
         if DISCLAIMER not in existing:
@@ -72,8 +71,8 @@ def render_templates() -> list[Path]:
 
     Example:
         >>> render_templates()  # doctest: +SKIP
-    """
 
+    """
     config = load_config()["github_manager"]
     rendered: list[Path] = []
     template_root = CONFIG_ROOT.parent / "github"

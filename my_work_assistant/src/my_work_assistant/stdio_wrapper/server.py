@@ -5,7 +5,6 @@ Thin wrapper to expose CLI commands over stdio.
 from __future__ import annotations
 
 import json
-from typing import Any
 
 from ..core.initialize import initialize_workspace
 from ..github_manager import builder, synchronizer
@@ -24,8 +23,8 @@ def run_stdio(command: str) -> str:
 
     Example:
         >>> run_stdio('init')  # doctest: +SKIP
-    """
 
+    """
     if command == "init":
         config = initialize_workspace()
         builder.render_templates()

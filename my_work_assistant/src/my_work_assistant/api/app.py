@@ -2,6 +2,7 @@
 
 FastAPI application exposing MCP server functionality.
 """
+
 from __future__ import annotations
 
 import json
@@ -14,12 +15,14 @@ from fastapi import FastAPI, HTTPException
 from ..core.exceptions import APIError, MCPError
 from ..core.initialize import initialize_workspace
 from ..github_manager import builder, synchronizer
+from ..models import DataSet, Group, Person, Platform
 from ..services import bridges
-from ..models import Group, Person, Platform, DataSet
 
 __all__ = ["create_app"]
 
-MODELS_ROOT = Path(__file__).resolve().parent.parent.parent / "bin" / "defaults" / "models"
+MODELS_ROOT = (
+    Path(__file__).resolve().parent.parent.parent / "bin" / "defaults" / "models"
+)
 PROMPTS_ROOT = Path(".github") / "prompts"
 
 
@@ -33,13 +36,16 @@ def create_app() -> FastAPI:
         >>> app = create_app()
         >>> isinstance(app, FastAPI)
         True
-    """
 
+    """
     app = FastAPI(title="My Work Assistant")
 
     @app.exception_handler(MCPError)
-    async def handle_mcp_error(_: Any, exc: MCPError) -> Any:
-        raise HTTPException(status_code=400, detail={"type": exc.__class__.__name__, "message": str(exc)})
+    async def handle_mcp_error(_: Any, exc: Exception) -> Any:
+        raise HTTPException(
+            status_code=400,
+            detail={"type": exc.__class__.__name__, "message": str(exc)},
+        )
 
     @app.post("/initialize")
     async def initialize() -> dict[str, Any]:
@@ -77,9 +83,13 @@ def create_app() -> FastAPI:
 
     @app.post("/self_test")
     async def self_test() -> dict[str, Any]:
-        result = subprocess.run(["pytest", "-q"], capture_output=True, text=True, check=False)
+        result = subprocess.run(
+            ["pytest", "-q"], capture_output=True, text=True, check=False
+        )
         if result.returncode != 0:
-            raise APIError("Self test failed", {"stdout": result.stdout, "stderr": result.stderr})
+            raise APIError(
+                "Self test failed", {"stdout": result.stdout, "stderr": result.stderr}
+            )
         return _success({"stdout": result.stdout})
 
     return app
@@ -87,7 +97,6 @@ def create_app() -> FastAPI:
 
 def _load_models() -> dict[str, list[dict[str, Any]]]:
     """Load default model definitions from disk."""
-
     data: dict[str, list[dict[str, Any]]] = {}
     for path in MODELS_ROOT.glob("*.json"):
         payload = json.loads(path.read_text(encoding="utf-8"))
@@ -97,5 +106,4 @@ def _load_models() -> dict[str, list[dict[str, Any]]]:
 
 def _success(payload: dict[str, Any]) -> dict[str, Any]:
     """Return a standardized success response."""
-
     return {"success": True, "data": payload}

@@ -5,7 +5,6 @@ Generic JSON validation helpers using bundled schemas.
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any
 
 from jsonschema import Draft7Validator
@@ -18,7 +17,6 @@ __all__ = ["validate_json"]
 
 def validate_json(data: Any, schema_name: str) -> None:
     """Validate JSON data against a packaged schema."""
-
     schema_path = PACKAGE_ROOT / "bin" / "schemas" / schema_name
     try:
         schema = json.loads(schema_path.read_text(encoding="utf-8"))

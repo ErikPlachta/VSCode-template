@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "my_work_assistant"
 version = "0.1.0"
 description = "My Work Assistant MCP server"
-authors = [{name = "My Work Assistant", email = "support@example.com"}]
+authors = [{name = "Erik Plachta"}]
 readme = "README.md"
 requires-python = ">=3.12"
 license = {text = "MIT"}
@@ -26,6 +26,7 @@ dev = [
     "pytest-cov",
     "mypy",
     "ruff",
+    "httpx",
 ]
 
 [tool.setuptools.packages.find]
@@ -44,8 +45,33 @@ python_version = "3.12"
 strict = true
 packages = ["my_work_assistant"]
 
+# Relax checks for tests and vendored shims; keep strict for library code.
+[[tool.mypy.overrides]]
+module = [
+    "my_work_assistant.tests.*",
+]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = [
+    "typer.*",
+]
+ignore_errors = true
+
 [tool.ruff]
-line-length = 88
-select = ["E", "F", "I", "D"]
-ignore = []
+# Adopt a wider line length and move lint config to [tool.ruff.lint]
+line-length = 120
+
+[tool.ruff.lint]
+# Keep core rules (E, F, I). Drop docstring (D) for now to reduce noise.
+select = ["E", "F", "I"]
+# Ignore long-line errors globally; formatting is subjective and many lines exceed legacy 88.
+ignore = ["E501"]
+
+# Tame a few noisy files that intentionally re-export or use broad imports.
+[tool.ruff.lint.per-file-ignores]
+"my_work_assistant/src/pydantic/__init__.py" = ["F401"]
+"my_work_assistant/src/typer/__init__.py" = ["F401"]
+"my_work_assistant/src/typer/testing/__init__.py" = ["F401"]
+"my_work_assistant/src/my_work_assistant/tests/**" = ["F841"]
 

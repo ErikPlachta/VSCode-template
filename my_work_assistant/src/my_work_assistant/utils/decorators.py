@@ -30,6 +30,7 @@ def telemetry(source: str, action: str) -> Callable[[F], F]:
         ...     return 1
         >>> func()
         1
+
     """
 
     def decorator(func: F) -> F:

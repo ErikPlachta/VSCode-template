@@ -25,8 +25,8 @@ def apply_updates(path: Path, data: dict[str, Any]) -> None:
 
     Example:
         >>> apply_updates(Path('sample.json'), {})  # doctest: +SKIP
-    """
 
+    """
     try:
         path.write_text(json.dumps(data, indent=2), encoding="utf-8")
     except OSError as exc:  # pragma: no cover

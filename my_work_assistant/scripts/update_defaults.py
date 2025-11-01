@@ -10,7 +10,6 @@ from pathlib import Path
 
 def main() -> None:
     """Copy default docs into the workspace directory."""
-
     project_root = Path(__file__).resolve().parents[1]
     source = project_root / "bin" / "defaults" / "docs"
     destination = Path.cwd() / ".my_work_assistant" / "docs"

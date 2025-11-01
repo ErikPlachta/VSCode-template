@@ -9,7 +9,6 @@ from pathlib import Path
 
 def main() -> None:
     """Display target schema directory."""
-
     root = Path(__file__).resolve().parents[1] / "bin" / "schemas"
     print(f"Schemas located at: {root}")
 

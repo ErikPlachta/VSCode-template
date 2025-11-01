@@ -24,8 +24,8 @@ def to_dict(obj: Any) -> Any:
         >>> from ..models import Category
         >>> to_dict(Category(id='cat', name='Category'))
         {'id': 'cat', 'name': 'Category', 'description': None}
-    """
 
+    """
     if isinstance(obj, BaseModel):
         return obj.model_dump()
     if isinstance(obj, dict):

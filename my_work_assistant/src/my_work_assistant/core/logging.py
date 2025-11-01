@@ -15,7 +15,6 @@ __all__ = ["log_event"]
 
 def log_event(filename: str, level: str, message: str, **fields: Any) -> None:
     """Write a structured log entry."""
-
     log_dir = USER_ROOT / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
     entry = {

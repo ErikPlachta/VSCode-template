@@ -20,8 +20,8 @@ def record_changes(paths: Iterable[Path]) -> None:
 
     Example:
         >>> record_changes([])
-    """
 
+    """
     entries = [str(path) for path in paths]
     log_event("ChangeLog.md", "INFO", "Managed files updated", files=entries)
     log_event("ChangeLogSummary.md", "INFO", "Summary of updates", count=len(entries))

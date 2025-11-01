@@ -15,6 +15,7 @@ class GitHubFileMetadata(TypedDict, total=False):
     Example:
         >>> GitHubFileMetadata(managed_by_mcp=True)
         {'managed_by_mcp': True}
+
     """
 
     managed_by_mcp: bool
