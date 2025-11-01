@@ -12,6 +12,11 @@ managed_by_mcp: true
 <!-- BEGIN my_work_assistant -->
 [system-managed section – do not edit manually]
 
+## Priorities
+- Prefer prompts in this order: {{ priorities_line }}.
+- {{ guidance_line }}
+- When unsure, ask to summarize the embedded references and propose a short plan.
+
 ## How to use
 - Ask Copilot to follow the guidelines and prompts embedded below.
 - Prefer referring to specific sections by name (e.g., “Use the review-code prompt”).
@@ -47,6 +52,18 @@ managed_by_mcp: true
 </details>
 {% endfor %}
 
+### Documentation
+{% for item in embedded_docs %}
+<details>
+<summary>{{ item.name }}</summary>
+
+_Summary:_ {{ item.summary }}
+
+{{ item.content }}
+
+</details>
+{% endfor %}
+
 ### Chatmodes
 {% for item in embedded_chatmodes %}
 <details>
@@ -56,6 +73,14 @@ managed_by_mcp: true
 
 </details>
 {% endfor %}
+
+## Glossary
+
+- People: contributors defined in the models, associated to roles and groups.
+- Roles: responsibilities like maintainer, reviewer, or docwriter.
+- Groups: logical teams or categories grouping people.
+- Platforms: integration targets or ecosystems used in samples/tests.
+- Datasets: example data assets referenced by platforms.
 
 <!-- END my_work_assistant -->
 

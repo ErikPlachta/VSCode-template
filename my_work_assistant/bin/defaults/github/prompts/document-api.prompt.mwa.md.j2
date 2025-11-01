@@ -8,5 +8,20 @@ To modify content, update:
 managed_by_mcp: true
 version: 1
 topic: document-api
+priority: 2
 ---
-{{ body }}
+## When to use
+Generate or improve API docs from code and docstrings.
+
+## Goals
+- Summarize modules, classes, and functions succinctly.
+- Include signatures, parameter/return descriptions, and examples.
+
+## Inputs
+- Module path(s) or code snippet
+
+## Outputs
+- Markdown sections suitable for API reference
+
+## Guardrails
+- Avoid duplicating implementation details; focus on contracts

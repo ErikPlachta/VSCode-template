@@ -14,7 +14,7 @@ from pathlib import Path
 
 from jinja2 import Template
 
-from ..core.config import CONFIG_ROOT, load_config
+from ..core.config import CONFIG_ROOT, USER_ROOT, load_config
 from ..core.exceptions import GitHubFileError
 
 __all__ = ["DISCLAIMER", "render_templates"]
@@ -101,10 +101,31 @@ def render_templates() -> list[Path]:
             return "\n".join(lines[dashes_idx[1] + 1 :]).strip()
         return content
 
+    def parse_front_matter_local(content: str) -> dict[str, str]:
+        """Minimal front matter parser to avoid circular imports.
+
+        Expects a YAML-like header between '---' lines; returns key/value strings.
+        """
+        start = content.find("---\n")
+        if start == -1:
+            return {}
+        end = content.find("\n---", start + 4)
+        if end == -1:
+            return {}
+        block = content[start + 4 : end]
+        data: dict[str, str] = {}
+        for line in block.splitlines():
+            if ":" not in line:
+                continue
+            key, value = line.split(":", 1)
+            data[key.strip()] = value.strip()
+        return data
+
     # 1) Render instructions/prompts/chatmodes first
     instr_targets: list[Path] = []
     prompt_targets: list[Path] = []
     chatmode_targets: list[Path] = []
+    doc_targets: list[Path] = []
 
     if config.get("instructions_enabled", True):
         path = (
@@ -138,6 +159,40 @@ def render_templates() -> list[Path]:
             )
             rendered.append(target)
             prompt_targets.append(target)
+    # Compute priorities line from prompt metadata (front matter)
+    priorities_line = ""
+    available_topics: set[str] = set()
+    if prompt_targets:
+        items: list[tuple[int, str]] = []
+        for p in prompt_targets:
+            try:
+                meta = parse_front_matter_local(p.read_text(encoding="utf-8"))
+                pr = int(meta.get("priority", 999))  # default low priority
+                topic = str(meta.get("topic", p.stem.split(".prompt")[0]))
+                items.append((pr, topic))
+                available_topics.add(topic)
+            except Exception:
+                topic = p.stem.split(".prompt")[0]
+                items.append((999, topic))
+                available_topics.add(topic)
+        items.sort(key=lambda t: t[0])
+        priorities_line = ", ".join(topic for _, topic in items)
+
+    # Derive a concise guidance sentence from available prompt topics.
+    # This reduces hard-coding while keeping the same intent as before.
+    guidance_line = "Pick the highest-priority prompt for your task."
+    parts: list[str] = []
+    if "review-code" in available_topics:
+        parts.append("For code changes, start with review-code")
+    if "document-api" in available_topics:
+        # stylistic lowercase "for" if it follows a previous clause
+        parts.append(
+            ("for API/docs, start with document-api")
+            if parts
+            else ("For API/docs, start with document-api")
+        )
+    if parts:
+        guidance_line = "; ".join(parts) + "."
 
     if config.get("chatmodes_enabled", True):
         for template_name in [
@@ -156,11 +211,38 @@ def render_templates() -> list[Path]:
             rendered.append(target)
             chatmode_targets.append(target)
 
+    # Optional: embed user docs if present
+    docs_dir = USER_ROOT / "docs"
+    if docs_dir.exists():
+        for p in sorted(docs_dir.glob("*.md")):
+            doc_targets.append(p)
+
     # 2) Render copilot-instructions last, embedding content
     if config.get("copilot_instructions_enabled", True):
         path = template_root / "copilot-instructions.md.j2"
         target = github_root / "copilot-instructions.md"
         template = _load_template(path)
+
+        def _summarize_markdown(raw: str) -> str:
+            """Return a short one-line summary from the first heading/paragraph.
+
+            Heuristics only; keeps things lightweight and zero-dependency.
+            """
+            if not raw:
+                return ""
+            lines = [ln.strip() for ln in raw.splitlines()]
+            # Prefer first ATX heading (# ...)
+            heading = next((ln.lstrip("# ") for ln in lines if ln.startswith("#")), "")
+            # Find first non-empty paragraph line (not a heading or fence)
+            para = next(
+                (ln for ln in lines if ln and not ln.startswith(("#", "<!--", "```"))),
+                "",
+            )
+            if heading and para and heading != para:
+                combo = f"{heading} — {para}"
+            else:
+                combo = heading or para
+            return combo[:240]
 
         def pack(paths: list[Path]) -> list[dict[str, str]]:
             items: list[dict[str, str]] = []
@@ -170,7 +252,12 @@ def render_templates() -> list[Path]:
                 except OSError:
                     raw = ""
                 items.append(
-                    {"name": p.name, "path": str(p), "content": extract_body(raw)}
+                    {
+                        "name": p.name,
+                        "path": str(p),
+                        "content": extract_body(raw),
+                        "summary": _summarize_markdown(raw),
+                    }
                 )
             return items
 
@@ -179,6 +266,9 @@ def render_templates() -> list[Path]:
             embedded_instructions=pack(instr_targets),
             embedded_prompts=pack(prompt_targets),
             embedded_chatmodes=pack(chatmode_targets),
+            embedded_docs=pack(doc_targets),
+            priorities_line=priorities_line,
+            guidance_line=guidance_line,
         )
         _write_file(target, content)
         rendered.append(target)
