@@ -1,67 +1,79 @@
-"""Workspace initialization utilities."""
+"""my_work_assistant.core.initialize
 
+Initialization routines that seed the workspace configuration and docs.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime, timezone
-from pathlib import Path
+import json
 import shutil
+from pathlib import Path
+from typing import Any
 
-from .config import ConfigLoader
+from .config import CONFIG_ROOT, USER_ROOT, load_config
+from .exceptions import ConfigError, GitHubFileError
 
-__all__ = ["Initializer"]
+__all__ = ["initialize_workspace", "copy_if_missing"]
+
+WORKSPACE_DIRS = [
+    USER_ROOT,
+    USER_ROOT / "docs",
+    USER_ROOT / "logs",
+    USER_ROOT / "cache",
+    USER_ROOT / "backups",
+]
 
 
-@dataclass
-class Initializer:
-    """Set up workspace directories and seed default files."""
+def copy_if_missing(source: Path, destination: Path) -> None:
+    """Copy a file if it does not already exist.
 
-    package_root: Path
-    workspace_root: Path
+    Args:
+        source: Source file path.
+        destination: Target file path.
 
-    def _copy_tree(self, source: Path, destination: Path) -> None:
-        """Copy *source* tree into *destination*.
+    Raises:
+        GitHubFileError: If the file cannot be copied.
 
-        The function performs manual iteration instead of relying on
-        ``shutil.copytree`` to support incremental updates. Existing files are
-        overwritten to keep templates in sync.
-        """
+    Example:
+        >>> copy_if_missing(Path('a'), Path('b'))  # doctest: +SKIP
+    """
 
-        for path in source.rglob("*"):
-            relative = path.relative_to(source)
-            target = destination / relative
-            if path.is_dir():
-                target.mkdir(parents=True, exist_ok=True)
-            else:
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(path, target)
+    if destination.exists():
+        return
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        shutil.copy2(source, destination)
+    except OSError as exc:  # pragma: no cover
+        raise GitHubFileError("Failed to copy template", {"source": str(source)}) from exc
 
-    def _log_initialization(self) -> None:
-        """Append an initialization entry to the request log."""
 
-        log_path = self.workspace_root / "logs" / "RequestLog.md"
-        log_path.parent.mkdir(parents=True, exist_ok=True)
-        timestamp = datetime.now(timezone.utc).isoformat()
-        entry = (
-            f"\n## {timestamp}\n"
-            "- source: initializer\n"
-            "- summary: workspace initialized\n"
-            "- actions: copied defaults, merged configuration\n"
-            "- result: success\n"
-        )
-        with log_path.open("a", encoding="utf-8") as handle:
-            handle.write(entry)
+def initialize_workspace() -> dict[str, Any]:
+    """Initialize the local workspace directory.
 
-    def initialize(self) -> ConfigLoader:
-        """Create the workspace directories and copy default assets."""
+    Returns:
+        The merged configuration for reference.
 
-        self.workspace_root.mkdir(parents=True, exist_ok=True)
-        defaults_root = self.package_root / "bin" / "defaults"
-        self._copy_tree(defaults_root, self.workspace_root)
-        config_loader = ConfigLoader(
-            package_root=self.package_root,
-            workspace_root=self.workspace_root,
-        )
-        config_loader.load()
-        self._log_initialization()
-        return config_loader
+    Raises:
+        ConfigError: If configuration files cannot be merged or written.
+
+    Example:
+        >>> data = initialize_workspace()
+        >>> "logging" in data
+        True
+    """
+
+    for directory in WORKSPACE_DIRS:
+        directory.mkdir(parents=True, exist_ok=True)
+    default_config = load_config()
+    target_config = USER_ROOT / "my-work-assistant.config.json"
+    if not target_config.exists():
+        try:
+            target_config.write_text(json.dumps(default_config, indent=2), encoding="utf-8")
+        except OSError as exc:  # pragma: no cover
+            raise ConfigError("Failed to write user configuration", {"path": str(target_config)}) from exc
+    docs_source = CONFIG_ROOT.parent / "docs"
+    for doc in docs_source.glob("*.md"):
+        copy_if_missing(doc, USER_ROOT / "docs" / doc.name)
+    logs_source = CONFIG_ROOT.parent / "logs"
+    for log_template in logs_source.glob("*.md"):
+        copy_if_missing(log_template, USER_ROOT / "logs" / log_template.name)
+    return default_config

@@ -1,35 +1,30 @@
-"""Generic schema validation services."""
+"""my_work_assistant.services.validator
 
+Generic JSON validation helpers using bundled schemas.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
+import json
 from pathlib import Path
 from typing import Any
-import json
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft7Validator
 
-from ..types import JSONDict
+from ..core.config import PACKAGE_ROOT
+from ..core.exceptions import SchemaError, ValidationError
 
-__all__ = ["SchemaValidator"]
+__all__ = ["validate_json"]
 
 
-@dataclass
-class SchemaValidator:
-    """Validate JSON payloads using project schemas."""
+def validate_json(data: Any, schema_name: str) -> None:
+    """Validate JSON data against a packaged schema."""
 
-    schema_root: Path
-
-    def _load_schema(self, relative: Path) -> Draft202012Validator:
-        with (self.schema_root / relative).open("r", encoding="utf-8") as handle:
-            schema = json.load(handle)
-        return Draft202012Validator(schema)
-
-    def validate(self, relative_schema_path: str, payload: JSONDict) -> None:
-        """Validate *payload* with the referenced schema."""
-
-        validator = self._load_schema(Path(relative_schema_path))
-        errors = sorted(validator.iter_errors(payload), key=lambda err: err.path)
-        if errors:
-            messages = "; ".join(error.message for error in errors)
-            raise ValueError(messages)
+    schema_path = PACKAGE_ROOT / "bin" / "schemas" / schema_name
+    try:
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    except OSError as exc:  # pragma: no cover
+        raise SchemaError("Failed to load schema", {"path": str(schema_path)}) from exc
+    validator = Draft7Validator(schema)
+    errors = list(validator.iter_errors(data))
+    if errors:
+        raise ValidationError("Schema validation failed", {"errors": [error.message for error in errors]})

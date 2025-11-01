@@ -1,13 +1,4 @@
-# my_work_assistant Package
+# My Work Assistant Package
 
-`my_work_assistant` is a modular MCP server that manages GitHub collaboration files and a local workspace cache. The package exposes both FastAPI and stdio transports, while providing a Typer CLI for automation.
+This directory hosts the Python package for the My Work Assistant MCP server.
 
-## Quick Start
-
-```bash
-pip install -e .
-my-work-assistant init
-my-work-assistant validate
-```
-
-See the documentation generated in `.my_work_assistant/docs/` for deeper information.

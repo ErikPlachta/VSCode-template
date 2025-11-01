@@ -1,21 +1,17 @@
-"""Pydantic models for my_work_assistant."""
+"""my_work_assistant.models.__init__
 
-from .base import (
-    CategoryModel,
-    DataSetModel,
-    GroupModel,
-    LabelModel,
-    PersonModel,
-    PlatformModel,
-    RoleModel,
-)
+Expose domain models for import convenience.
+"""
+from __future__ import annotations
+
+from .entities import Category, Label, Group, Person, Role, Platform, DataSet
 
 __all__ = [
-    "CategoryModel",
-    "DataSetModel",
-    "GroupModel",
-    "LabelModel",
-    "PersonModel",
-    "PlatformModel",
-    "RoleModel",
+    "Category",
+    "Label",
+    "Group",
+    "Person",
+    "Role",
+    "Platform",
+    "DataSet",
 ]

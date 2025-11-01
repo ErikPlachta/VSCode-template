@@ -1,27 +1,23 @@
-"""Copy bin defaults into the workspace."""
+"""scripts.update_defaults
 
+Sync workspace defaults from packaged templates.
+"""
 from __future__ import annotations
 
-from pathlib import Path
 import shutil
-
-from my_work_assistant.utils import resolve_package_root, resolve_workspace_root
+from pathlib import Path
 
 
 def main() -> None:
-    package_root = resolve_package_root()
-    workspace_root = resolve_workspace_root()
-    defaults = package_root / "bin" / "defaults"
-    workspace_root.mkdir(parents=True, exist_ok=True)
-    for path in defaults.rglob("*"):
-        relative = path.relative_to(defaults)
-        target = workspace_root / relative
-        if path.is_dir():
-            target.mkdir(parents=True, exist_ok=True)
-        else:
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(path, target)
-    print("Defaults updated.")
+    """Copy default docs into the workspace directory."""
+
+    project_root = Path(__file__).resolve().parents[1]
+    source = project_root / "bin" / "defaults" / "docs"
+    destination = Path.cwd() / ".my_work_assistant" / "docs"
+    destination.mkdir(parents=True, exist_ok=True)
+    for doc in source.glob("*.md"):
+        shutil.copy2(doc, destination / doc.name)
+    print(f"Copied docs to {destination}")
 
 
 if __name__ == "__main__":

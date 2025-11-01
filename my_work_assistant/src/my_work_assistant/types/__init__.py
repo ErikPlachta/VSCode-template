@@ -1,37 +1,17 @@
-"""Public types exposed by my_work_assistant."""
+"""my_work_assistant.types.__init__
 
-from .common_types import JSONDict, JSONIterable, JSONMapping, MutableJSONMapping
-from .config_types import (
-    CacheConfig,
-    ChangelogConfig,
-    ConfigData,
-    GitHubManagerConfig,
-    LoggingConfig,
-    TelemetryConfig,
-    WatcherConfig,
-)
-from .github_types import ChatModePayload, InstructionPayload
-from .model_types import Category, DataSet, Group, Label, Person, Platform, Role
+Expose shared type aliases and TypedDict definitions.
+"""
+from __future__ import annotations
+
+from .common_types import JSONDict
+from .config_types import GitHubManagerConfig
+from .github_types import GitHubFileMetadata
+from .model_types import CategoryPayload
 
 __all__ = [
     "JSONDict",
-    "JSONIterable",
-    "JSONMapping",
-    "MutableJSONMapping",
-    "CacheConfig",
-    "ChangelogConfig",
-    "ConfigData",
     "GitHubManagerConfig",
-    "LoggingConfig",
-    "TelemetryConfig",
-    "WatcherConfig",
-    "ChatModePayload",
-    "InstructionPayload",
-    "Category",
-    "DataSet",
-    "Group",
-    "Label",
-    "Person",
-    "Platform",
-    "Role",
+    "GitHubFileMetadata",
+    "CategoryPayload",
 ]

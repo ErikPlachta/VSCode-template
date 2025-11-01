@@ -1,15 +1,9 @@
-"""Core utilities for my_work_assistant."""
+"""my_work_assistant.core.__init__
 
-from .config import ConfigLoader
-from .initialize import Initializer
-from .telemetry import Telemetry
-from .logging import LogManager
-from .cache import Cache
+Expose core submodules for convenience imports.
+"""
+from __future__ import annotations
 
-__all__ = [
-    "ConfigLoader",
-    "Initializer",
-    "Telemetry",
-    "LogManager",
-    "Cache",
-]
+from . import config, initialize, logging, telemetry, cache, exceptions
+
+__all__ = ["config", "initialize", "logging", "telemetry", "cache", "exceptions"]

@@ -1,1 +1,2 @@
-# Change Log Summary Template
+# Change Log Summary
+

@@ -1,40 +1,27 @@
-"""Changelog helpers for workspace events."""
+"""my_work_assistant.github_manager.changelog
 
+Write change logs for repository events.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime, timezone
 from pathlib import Path
+from typing import Iterable
 
-__all__ = ["Changelog"]
+from ..core.logging import log_event
+
+__all__ = ["record_changes"]
 
 
-@dataclass
-class Changelog:
-    """Write detailed and summary entries to workspace logs."""
+def record_changes(paths: Iterable[Path]) -> None:
+    """Record changed file paths to the workspace logs.
 
-    logs_root: Path
+    Args:
+        paths: Iterable of file paths that changed.
 
-    def _append(self, path: Path, header: str, line: str) -> None:
-        if path.exists():
-            content = path.read_text(encoding="utf-8")
-        else:
-            content = f"{header}\n\n"
-        content += line
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+    Example:
+        >>> record_changes([])
+    """
 
-    def record_change(self, description: str) -> None:
-        """Append *description* to both detailed and summary logs."""
-
-        timestamp = datetime.now(timezone.utc).isoformat()
-        self._append(
-            self.logs_root / "ChangeLog.md",
-            "# Change Log",
-            f"- {timestamp}: {description}\n",
-        )
-        self._append(
-            self.logs_root / "ChangeLogSummary.md",
-            "# Change Log Summary",
-            f"- {description}\n",
-        )
+    entries = [str(path) for path in paths]
+    log_event("ChangeLog.md", "INFO", "Managed files updated", files=entries)
+    log_event("ChangeLogSummary.md", "INFO", "Summary of updates", count=len(entries))

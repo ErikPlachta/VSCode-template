@@ -1,76 +1,74 @@
-"""Validation helpers for GitHub assets."""
+"""my_work_assistant.github_manager.validator
 
+Validation helpers for managed GitHub assets.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from pathlib import Path
-from typing import Iterable, List
-
-from jsonschema import Draft202012Validator
 import json
+from pathlib import Path
+from typing import Any
 
-from ..types import InstructionPayload, ChatModePayload
+from jsonschema import Draft7Validator
 
-__all__ = ["Validator", "ValidationError"]
+from ..core.config import PACKAGE_ROOT
+from ..core.exceptions import GitHubFileError, ValidationError
+from .builder import DISCLAIMER
+
+__all__ = ["parse_front_matter", "validate_file"]
 
 
-class ValidationError(RuntimeError):
-    """Raised when GitHub assets fail validation."""
+def parse_front_matter(content: str) -> dict[str, Any]:
+    """Extract simple YAML-like front matter from markdown content."""
+
+    start = content.find("---\n")
+    if start == -1:
+        return {}
+    end = content.find("\n---", start + 4)
+    if end == -1:
+        return {}
+    front_matter = content[start + 4 : end].strip().splitlines()
+    data: dict[str, Any] = {}
+    for line in front_matter:
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        data[key.strip()] = _coerce_value(value.strip())
+    return data
 
 
-@dataclass
-class Validator:
-    """Validate GitHub workspace files against JSON schemas."""
+def _coerce_value(value: str) -> Any:
+    if value.lower() in {"true", "false"}:
+        return value.lower() == "true"
+    return value
 
-    package_root: Path
-    project_root: Path
 
-    def _schema_path(self, *parts: str) -> Path:
-        return self.package_root / "bin" / "schemas" / "github" / Path(*parts)
+def _load_schema(name: str) -> Draft7Validator:
+    schema_root = PACKAGE_ROOT / "bin" / "schemas" / "github"
+    schema = json.loads((schema_root / name).read_text(encoding="utf-8"))
+    return Draft7Validator(schema)
 
-    def _load_schema(self, name: str) -> Draft202012Validator:
-        with self._schema_path(name).open("r", encoding="utf-8") as handle:
-            schema = json.load(handle)
-        return Draft202012Validator(schema)
 
-    def _validate_copilot_instructions(self) -> None:
-        schema = self._load_schema("copilot_instructions.schema.json")
-        content = (self.project_root / ".github" / "copilot-instructions.md").read_text(encoding="utf-8")
-        errors = sorted(schema.iter_errors({"content": content}), key=lambda err: err.path)
-        if errors:
-            raise ValidationError("copilot-instructions.md failed validation")
+SCHEMAS = {
+    "copilot-instructions.md": _load_schema("copilot_instructions.schema.json"),
+    "default-guidelines.instructions.md": _load_schema("instructions.schema.json"),
+    "document-api.prompt.md": _load_schema("prompts.schema.json"),
+    "review-code.prompt.md": _load_schema("prompts.schema.json"),
+    "onboarding-plan.prompt.md": _load_schema("prompts.schema.json"),
+    "reviewer.chatmode.md": _load_schema("chatmodes.schema.json"),
+    "docwriter.chatmode.md": _load_schema("chatmodes.schema.json"),
+}
 
-    def _validate_instruction_files(self) -> None:
-        schema = self._load_schema("instructions.schema.json")
-        instructions_dir = self.project_root / ".github" / "instructions"
-        for path in instructions_dir.glob("*.md"):
-            title = path.read_text(encoding="utf-8").splitlines()[0].lstrip("# ")
-            guidelines = [line[2:] for line in path.read_text(encoding="utf-8").splitlines() if line.startswith("- ")]
-            payload: InstructionPayload = {
-                "title": title,
-                "guidelines": guidelines,
-            }
-            errors = sorted(schema.iter_errors(payload), key=lambda err: err.path)
-            if errors:
-                raise ValidationError(f"{path.name} failed validation")
 
-    def _validate_chat_modes(self) -> None:
-        schema = self._load_schema("chatmodes.schema.json")
-        chatmodes_dir = self.project_root / ".github" / "chatmodes"
-        for path in chatmodes_dir.glob("*.md"):
-            lines = path.read_text(encoding="utf-8").splitlines()
-            payload: ChatModePayload = {
-                "name": lines[0].lstrip("# "),
-                "description": lines[2] if len(lines) > 2 else "",
-                "trigger": path.stem,
-            }
-            errors = sorted(schema.iter_errors(payload), key=lambda err: err.path)
-            if errors:
-                raise ValidationError(f"{path.name} failed validation")
+def validate_file(path: Path) -> None:
+    """Validate a GitHub managed file."""
 
-    def validate_all(self) -> None:
-        """Validate all managed assets."""
-
-        self._validate_copilot_instructions()
-        self._validate_instruction_files()
-        self._validate_chat_modes()
+    content = path.read_text(encoding="utf-8")
+    if DISCLAIMER not in content:
+        raise GitHubFileError("Managed file missing disclaimer", {"path": str(path)})
+    metadata = parse_front_matter(content)
+    schema = SCHEMAS.get(path.name)
+    if schema is None:
+        raise ValidationError("No schema registered for file", {"path": str(path)})
+    errors = list(schema.iter_errors(metadata))
+    if errors:
+        raise ValidationError("Schema validation failed", {"errors": [error.message for error in errors]})

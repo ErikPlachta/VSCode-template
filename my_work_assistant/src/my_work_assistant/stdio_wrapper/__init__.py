@@ -1,5 +1,9 @@
-"""Stdio bridge for my_work_assistant."""
+"""my_work_assistant.stdio_wrapper.__init__
 
-from .server import StdioServer
+Expose stdio helper functions.
+"""
+from __future__ import annotations
 
-__all__ = ["StdioServer"]
+from .server import run_stdio
+
+__all__ = ["run_stdio"]

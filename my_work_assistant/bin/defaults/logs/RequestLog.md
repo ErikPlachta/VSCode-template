@@ -1,1 +1,2 @@
-# Request Log Template
+# Request Log
+

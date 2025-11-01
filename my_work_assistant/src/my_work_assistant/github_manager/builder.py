@@ -1,51 +1,108 @@
-"""Generate GitHub workspace files from templates."""
+"""my_work_assistant.github_manager.builder
 
+Render managed GitHub files from bundled templates.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict
+from typing import Any
 
 from jinja2 import Template
 
-from ..types import JSONDict
+from ..core.config import CONFIG_ROOT, load_config
+from ..core.exceptions import GitHubFileError
 
-__all__ = ["Builder"]
+__all__ = ["DISCLAIMER", "render_templates"]
+
+DISCLAIMER = "⚙️  This file is generated and managed by the My Work Assistant MCP Server."
 
 
-@dataclass
-class Builder:
-    """Render Jinja2 templates into the GitHub workspace."""
+def _load_template(path: Path) -> Template:
+    """Load a Jinja2 template from disk.
 
-    package_root: Path
-    project_root: Path
+    Args:
+        path: Path to the template file.
 
-    def _template_directory(self) -> Path:
-        return self.package_root / "bin" / "defaults" / "github"
+    Returns:
+        A compiled Jinja2 template instance.
 
-    def _render_file(self, source: Path, destination: Path, context: JSONDict | None = None) -> None:
-        """Render a template from *source* to *destination*."""
+    Raises:
+        GitHubFileError: If the template cannot be read.
 
-        context = context or {}
-        with source.open("r", encoding="utf-8") as handle:
-            template = Template(handle.read())
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_text(template.render(**context), encoding="utf-8")
+    Example:
+        >>> isinstance(_load_template(Path('sample.j2')), Template)  # doctest: +SKIP
+    """
 
-    def build(self) -> None:
-        """Generate required GitHub assets."""
+    try:
+        return Template(path.read_text(encoding="utf-8"))
+    except OSError as exc:  # pragma: no cover
+        raise GitHubFileError("Failed to read template", {"path": str(path)}) from exc
 
-        github_root = self.project_root / ".github"
-        template_root = self._template_directory()
-        self._render_file(
-            template_root / "copilot-instructions.md.j2",
-            github_root / "copilot-instructions.md",
-        )
-        instructions_dir = template_root / "instructions"
-        for template in instructions_dir.glob("*.j2"):
-            destination = github_root / "instructions" / template.stem
-            self._render_file(template, destination)
-        chatmodes_dir = template_root / "chatmodes"
-        for template in chatmodes_dir.glob("*.j2"):
-            destination = github_root / "chatmodes" / template.stem
-            self._render_file(template, destination)
+
+def _write_file(target: Path, content: str) -> None:
+    """Write rendered content to disk respecting disclaimers.
+
+    Args:
+        target: Output file path.
+        content: Rendered template content.
+
+    Raises:
+        GitHubFileError: If writing fails or disclaimer safeguards are triggered.
+
+    Example:
+        >>> _write_file(Path('tmp.md'), 'content')  # doctest: +SKIP
+    """
+
+    if target.exists():
+        existing = target.read_text(encoding="utf-8")
+        if DISCLAIMER not in existing:
+            raise GitHubFileError("Refusing to overwrite unmanaged file", {"path": str(target)})
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(content, encoding="utf-8")
+
+
+def render_templates() -> list[Path]:
+    """Render configured templates into the repository.
+
+    Returns:
+        A list of paths that were rendered or refreshed.
+
+    Raises:
+        GitHubFileError: If rendering fails.
+
+    Example:
+        >>> render_templates()  # doctest: +SKIP
+    """
+
+    config = load_config()["github_manager"]
+    rendered: list[Path] = []
+    template_root = CONFIG_ROOT.parent / "github"
+    if config.get("copilot_instructions_enabled", True):
+        path = template_root / "copilot-instructions.md.j2"
+        target = Path(".github") / "copilot-instructions.md"
+        template = _load_template(path)
+        _write_file(target, template.render(additional_notes="These instructions are managed."))
+        rendered.append(target)
+    if config.get("instructions_enabled", True):
+        path = template_root / "instructions" / "default-guidelines.instructions.md.j2"
+        target = Path(".github") / "instructions" / "default-guidelines.instructions.md"
+        template = _load_template(path)
+        _write_file(target, template.render(body="- Follow the docs."))
+        rendered.append(target)
+    if config.get("prompts_enabled", True):
+        for template_name in [
+            "document-api.prompt.md.j2",
+            "review-code.prompt.md.j2",
+            "onboarding-plan.prompt.md.j2",
+        ]:
+            template = _load_template(template_root / "prompts" / template_name)
+            target = Path(".github") / "prompts" / template_name.replace(".j2", "")
+            _write_file(target, template.render(body="Generated by My Work Assistant."))
+            rendered.append(target)
+    if config.get("chatmodes_enabled", True):
+        for template_name in ["reviewer.chatmode.md.j2", "docwriter.chatmode.md.j2"]:
+            template = _load_template(template_root / "chatmodes" / template_name)
+            target = Path(".github") / "chatmodes" / template_name.replace(".j2", "")
+            _write_file(target, template.render(body="Generated persona."))
+            rendered.append(target)
+    return rendered

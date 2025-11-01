@@ -1,26 +1,45 @@
-"""Synchronize GitHub workspace files with a cache directory."""
+"""my_work_assistant.github_manager.synchronizer
 
+Helpers for validating and synchronizing managed GitHub assets.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pathlib import Path
-import shutil
+from typing import Iterable
 
-__all__ = ["Synchronizer"]
+from ..core.logging import log_event
+from ..core.telemetry import record_request
+from .constants import MANAGED_FILES
+from .validator import validate_file
+
+__all__ = ["synchronize"]
 
 
-@dataclass
-class Synchronizer:
-    """Copy `.github` contents into the workspace cache."""
+def _flatten(files: Iterable[Path | Iterable[Path]]) -> list[Path]:
+    """Flatten nested file iterables."""
 
-    project_root: Path
-    cache_root: Path
+    result: list[Path] = []
+    for item in files:
+        if isinstance(item, Path):
+            result.append(item)
+        else:
+            result.extend(list(item))
+    return result
 
-    def sync(self) -> None:
-        """Synchronize GitHub assets to the cache directory."""
 
-        github_root = self.project_root / ".github"
-        destination = self.cache_root / "github"
-        if destination.exists():
-            shutil.rmtree(destination)
-        shutil.copytree(github_root, destination)
+def synchronize() -> list[Path]:
+    """Validate all managed files and return their paths.
+
+    Returns:
+        A list of validated paths.
+
+    Example:
+        >>> synchronize()  # doctest: +SKIP
+    """
+
+    files = _flatten(MANAGED_FILES.values())
+    for path in files:
+        validate_file(path)
+    log_event("ChangeLogSummary.md", "INFO", "Validated managed files", count=len(files))
+    record_request("synchronizer", "validated managed files", count=len(files))
+    return files

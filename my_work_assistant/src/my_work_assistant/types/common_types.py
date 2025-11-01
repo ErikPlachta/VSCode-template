@@ -1,17 +1,20 @@
-"""Common type aliases used across modules."""
+"""my_work_assistant.types.common_types
 
+Primitive type aliases shared across modules.
+"""
 from __future__ import annotations
 
-from typing import Any, Dict, Iterable, Mapping, MutableMapping
+from typing import Any, TypedDict
 
-JSONDict = Dict[str, Any]
-JSONMapping = Mapping[str, Any]
-MutableJSONMapping = MutableMapping[str, Any]
-JSONIterable = Iterable[Any]
+__all__ = ["JSONDict"]
 
-__all__ = [
-    "JSONDict",
-    "JSONMapping",
-    "MutableJSONMapping",
-    "JSONIterable",
-]
+
+class JSONDict(TypedDict, total=False):
+    """Dictionary representing generic JSON data.
+
+    Example:
+        >>> JSONDict(key='value')
+        {'key': 'value'}
+    """
+
+    key: Any

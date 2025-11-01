@@ -1,4 +1,8 @@
 [
-  {"id": "dataset-1", "categories": ["cat-operations"]},
-  {"id": "dataset-2", "categories": ["cat-research"]}
+  {
+    "id": "dataset-sales",
+    "name": "Sales Analytics",
+    "platform_id": "plat-analytics",
+    "description": "Aggregated sales metrics by region"
+  }
 ]

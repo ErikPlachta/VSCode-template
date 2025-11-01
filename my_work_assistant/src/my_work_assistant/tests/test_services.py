@@ -1,66 +1,49 @@
+"""my_work_assistant.tests.test_services
+
+Validate service helper behaviour.
+"""
 from __future__ import annotations
 
 from pathlib import Path
-import json
 
-import pytest
-
-from my_work_assistant.services.bridges import BridgeBuilder
-from my_work_assistant.services.summary import SummaryGenerator
-from my_work_assistant.services.updater import Updater
-from my_work_assistant.services.validator import SchemaValidator
+from my_work_assistant.models import Group, Person, Platform, DataSet
+from my_work_assistant.services.bridges import group_membership, platform_datasets
+from my_work_assistant.services.summary import summarize_changes
 
 
-def test_bridge_builder(tmp_path: Path) -> None:
-    models = tmp_path / "models"
-    models.mkdir()
-    (models / "categories.json").write_text('[{"id": "cat", "name": "Category"}]', encoding="utf-8")
-    (models / "datasets.json").write_text('[{"id": "ds", "categories": ["cat"]}]', encoding="utf-8")
-    builder = BridgeBuilder(models)
-    bridges = builder.build()
-    assert bridges["cat"] == ["ds"]
+def test_group_membership_maps_names() -> None:
+    """group_membership returns sorted member names."""
+
+    mapping = group_membership(
+        [Group(id="grp", name="Group", members=["p1", "p2"])],
+        [
+            Person(id="p1", full_name="Alpha", role_ids=[], group_ids=[]),
+            Person(id="p2", full_name="Beta", role_ids=[], group_ids=[]),
+        ],
+    )
+    assert mapping["grp"] == ["Alpha", "Beta"]
 
 
-def test_bridge_builder_missing_categories(tmp_path: Path) -> None:
-    builder = BridgeBuilder(tmp_path)
-    assert builder.build() == {}
+def test_platform_datasets_maps_names() -> None:
+    """platform_datasets returns sorted dataset names."""
+
+    mapping = platform_datasets(
+        [Platform(id="plat", name="Platform", related_platform_ids=[], datasets=["ds"])],
+        [DataSet(id="ds", name="Dataset", platform_id="plat")],
+    )
+    assert mapping["plat"] == ["Dataset"]
 
 
-def test_schema_validator(tmp_path: Path) -> None:
-    schema_root = tmp_path
-    schema = {"type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]}
-    (schema_root / "schema.json").write_text(json.dumps(schema), encoding="utf-8")
-    validator = SchemaValidator(schema_root)
-    validator.validate("schema.json", {"name": "value"})
+def test_summarize_changes_handles_empty() -> None:
+    """summarize_changes returns default text when empty."""
+
+    assert summarize_changes([]) == "No changes detected."
 
 
-def test_schema_validator_errors(tmp_path: Path) -> None:
-    schema_root = tmp_path
-    schema = {"type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]}
-    (schema_root / "schema.json").write_text(json.dumps(schema), encoding="utf-8")
-    validator = SchemaValidator(schema_root)
-    with pytest.raises(ValueError):
-        validator.validate("schema.json", {})
+def test_summarize_changes_lists_paths(tmp_path) -> None:
+    """summarize_changes renders bullet list when paths exist."""
 
-
-def test_updater(tmp_path: Path) -> None:
-    source = tmp_path / "source"
-    dest = tmp_path / "dest"
-    (source / "dir").mkdir(parents=True)
-    (source / "dir" / "file.txt").write_text("data", encoding="utf-8")
-    updater = Updater(source, dest)
-    updater.update()
-    assert (dest / "dir" / "file.txt").exists()
-
-
-def test_updater_missing_source(tmp_path: Path) -> None:
-    updater = Updater(tmp_path / "missing", tmp_path / "dest")
-    with pytest.raises(FileNotFoundError):
-        updater.update()
-
-
-def test_summary_generator(tmp_path: Path) -> None:
-    detailed = tmp_path / "ChangeLog.md"
-    detailed.write_text("# Change\n- item", encoding="utf-8")
-    summary = SummaryGenerator(detailed)
-    assert summary.summarize() == "- item"
+    file_path = tmp_path / "file.txt"
+    file_path.write_text("content", encoding="utf-8")
+    summary_text = summarize_changes([file_path])
+    assert "file.txt" in summary_text

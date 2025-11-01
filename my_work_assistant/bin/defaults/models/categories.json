@@ -1,4 +1,3 @@
 [
-  {"id": "cat-operations", "name": "Operations"},
-  {"id": "cat-research", "name": "Research"}
+  {"id": "cat-eng", "name": "Engineering", "description": "Engineering initiatives"}
 ]

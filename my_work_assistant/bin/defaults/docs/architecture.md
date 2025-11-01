@@ -1,3 +1,5 @@
-# Architecture Template
+# Architecture Overview
 
-This document will be copied into `.my_work_assistant/docs/architecture.md` during initialization.
+The My Work Assistant MCP server orchestrates GitHub workspace automation using
+layered modules for configuration, GitHub file management, and telemetry.
+

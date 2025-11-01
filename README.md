@@ -1,7 +1,20 @@
-# my_work_assistant
+# My Work Assistant
 
-This repository contains the **my_work_assistant** Modular Copilot Plugin (MCP) server package. The project delivers an opinionated toolkit that manages `.github` collaboration assets, maintains a local `.my_work_assistant` workspace, and exposes both FastAPI and stdio transports for Copilot Chat clients.
+My Work Assistant is a reference MCP server that provisions GitHub Copilot Chat
+instructional assets and maintains a local knowledge base for collaborative
+workflows. The project is intentionally data driven and ships with repeatable
+scripts, templates, and automated documentation tooling.
 
-The package ships with defaults, schemas, and documentation under `my_work_assistant/bin`, ensuring that runtime behavior is fully data-driven. All runtime artifacts are stored inside the `.my_work_assistant` directory and intentionally excluded from version control.
+## Getting Started
 
-Refer to `my_work_assistant/README.md` for detailed usage guidance.
+```bash
+pip install -e .[dev]
+python -m my_work_assistant init
+```
+
+## Development
+
+* `python -m my_work_assistant self-test`
+* `pytest --cov=my_work_assistant`
+* `mypy --strict my_work_assistant`
+

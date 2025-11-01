@@ -1,87 +1,62 @@
-"""Configuration loader for my_work_assistant."""
+"""my_work_assistant.core.config
 
+Configuration loading and merging utilities for the MCP server.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 import json
 
-from ..types import ConfigData, JSONDict, MutableJSONMapping
+from .exceptions import ConfigError
 
-__all__ = ["ConfigLoader"]
+__all__ = ["CONFIG_ROOT", "USER_ROOT", "load_config", "get_config_section"]
+
+PACKAGE_ROOT = Path(__file__).resolve().parents[3]
+CONFIG_ROOT = PACKAGE_ROOT / "bin" / "defaults" / "config"
+USER_ROOT = Path.cwd() / ".my_work_assistant"
 
 
-@dataclass
-class ConfigLoader:
-    """Load and merge configuration data from default and user sources."""
+def load_config() -> dict[str, Any]:
+    """Load and merge configuration dictionaries."""
 
-    package_root: Path
-    workspace_root: Path
+    default_path = CONFIG_ROOT / "my-work-assistant.config.json"
+    user_path = USER_ROOT / "my-work-assistant.config.json"
+    try:
+        default_config = json.loads(default_path.read_text(encoding="utf-8"))
+    except OSError as exc:  # pragma: no cover - handled in tests via monkeypatch
+        raise ConfigError("Failed to read default configuration", {"path": str(default_path)}) from exc
+    try:
+        user_data = json.loads(user_path.read_text(encoding="utf-8")) if user_path.exists() else {}
+    except OSError as exc:  # pragma: no cover
+        raise ConfigError("Failed to read user configuration", {"path": str(user_path)}) from exc
+    return _merge_dicts(default_config, user_data)
 
-    def _load_json(self, path: Path) -> JSONDict:
-        """Load JSON content from *path*.
 
-        Args:
-            path: Path to a JSON file.
+def _merge_dicts(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
+    """Merge two dictionaries recursively."""
 
-        Returns:
-            Parsed JSON dictionary. Returns an empty dictionary when the file
-            does not exist to keep merging logic simple.
-        """
+    result: dict[str, Any] = {}
+    for key, value in base.items():
+        if key in override and isinstance(value, dict) and isinstance(override[key], dict):
+            result[key] = _merge_dicts(value, override[key])
+        elif key in override:
+            result[key] = override[key]
+        else:
+            result[key] = value
+    for key, value in override.items():
+        if key not in result:
+            result[key] = value
+    return result
 
-        if not path.exists():
-            return {}
-        with path.open("r", encoding="utf-8") as handle:
-            data = json.load(handle)
-        return data
 
-    def _iter_sources(self) -> Iterable[Path]:
-        """Yield configuration file locations in priority order."""
+def get_config_section(section: str) -> dict[str, Any]:
+    """Retrieve a configuration section."""
 
-        default_path = self.package_root / "bin" / "defaults" / "config" / "my-work-assistant.config.json"
-        workspace_path = self.workspace_root / "my-work-assistant.config.json"
-        yield default_path
-        yield workspace_path
-
-    def _deep_merge(self, base: MutableJSONMapping, update: JSONDict) -> MutableJSONMapping:
-        """Recursively merge ``update`` into ``base``.
-
-        Primitive values are overwritten while dictionaries are merged
-        recursively. Lists are replaced entirely to ensure deterministic
-        behavior when defaults change.
-        """
-
-        for key, value in update.items():
-            if key in base and isinstance(base[key], dict) and isinstance(value, dict):
-                base[key] = self._deep_merge(base[key], value)  # type: ignore[index]
-            else:
-                base[key] = value
-        return base
-
-    def load(self) -> ConfigData:
-        """Load and merge configuration data."""
-
-        merged: MutableJSONMapping = {}
-        for source in self._iter_sources():
-            data = self._load_json(source)
-            merged = self._deep_merge(merged, data)
-        return merged  # type: ignore[return-value]
-
-    @property
-    def logging_directory(self) -> Path:
-        """Path to the workspace log directory."""
-
-        return self.workspace_root / "logs"
-
-    @property
-    def docs_directory(self) -> Path:
-        """Path to the workspace documentation directory."""
-
-        return self.workspace_root / "docs"
-
-    @property
-    def cache_directory(self) -> Path:
-        """Path to the workspace cache directory."""
-
-        return self.workspace_root / "cache"
+    config = load_config()
+    if section not in config:
+        raise ConfigError("Missing configuration section", {"section": section})
+    value = config[section]
+    if not isinstance(value, dict):
+        raise ConfigError("Configuration section must be a dictionary", {"section": section})
+    return value

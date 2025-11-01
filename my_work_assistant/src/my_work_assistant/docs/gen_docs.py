@@ -1,36 +1,47 @@
-"""Generate documentation from module docstrings."""
+"""my_work_assistant.docs.gen_docs
 
+Generate Markdown documentation from module docstrings.
+"""
 from __future__ import annotations
 
+import inspect
 from importlib import import_module
 from pathlib import Path
 from typing import Iterable
 
+from ..core.initialize import USER_ROOT
+
+__all__ = ["generate_docs"]
+
+
 MODULES = [
     "my_work_assistant.core.config",
     "my_work_assistant.core.initialize",
-    "my_work_assistant.github_manager.validator",
+    "my_work_assistant.github_manager.builder",
 ]
 
 
-def iter_docstrings(modules: Iterable[str]) -> Iterable[tuple[str, str]]:
-    for module_name in modules:
+def generate_docs(modules: Iterable[str] | None = None) -> Path:
+    """Generate documentation files under the workspace directory.
+
+    Args:
+        modules: Optional iterable of module names to document.
+
+    Returns:
+        Path to the generated documentation file.
+
+    Example:
+        >>> generate_docs()  # doctest: +SKIP
+    """
+
+    module_names = list(modules or MODULES)
+    docs_dir = USER_ROOT / "docs"
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    target = docs_dir / "api_reference.md"
+    sections: list[str] = []
+    for module_name in module_names:
         module = import_module(module_name)
-        doc = module.__doc__ or "No documentation available."
-        yield module_name, doc
-
-
-def generate_docs(output_dir: Path) -> None:
-    output_dir.mkdir(parents=True, exist_ok=True)
-    for module_name, doc in iter_docstrings(MODULES):
-        filename = output_dir / f"{module_name.replace('.', '_')}.md"
-        filename.write_text(f"# {module_name}\n\n{doc}\n", encoding="utf-8")
-
-
-def main() -> None:
-    workspace_docs = Path.cwd() / ".my_work_assistant" / "docs"
-    generate_docs(workspace_docs)
-
-
-if __name__ == "__main__":  # pragma: no cover
-    main()
+        doc = inspect.getdoc(module) or "No documentation."
+        sections.append(f"## {module_name}\n\n{doc}")
+    target.write_text("\n\n".join(sections), encoding="utf-8")
+    return target

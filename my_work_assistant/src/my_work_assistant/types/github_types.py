@@ -1,22 +1,23 @@
-"""GitHub-related typed dictionaries."""
+"""my_work_assistant.types.github_types
 
+Typed metadata structures for GitHub managed files.
+"""
 from __future__ import annotations
 
-from typing import List, TypedDict
+from typing import TypedDict
 
-__all__ = ["InstructionPayload", "ChatModePayload"]
-
-
-class InstructionPayload(TypedDict):
-    """Structure for instruction fragments."""
-
-    title: str
-    guidelines: List[str]
+__all__ = ["GitHubFileMetadata"]
 
 
-class ChatModePayload(TypedDict):
-    """Structure describing a chat mode file."""
+class GitHubFileMetadata(TypedDict, total=False):
+    """Metadata parsed from front matter sections.
 
-    name: str
-    description: str
-    trigger: str
+    Example:
+        >>> GitHubFileMetadata(managed_by_mcp=True)
+        {'managed_by_mcp': True}
+    """
+
+    managed_by_mcp: bool
+    scope: str
+    topic: str
+    persona: str

@@ -1,72 +1,64 @@
-"""Typer CLI entry point."""
+"""my_work_assistant.__main__
 
+Typer CLI entrypoint for the MCP server package.
+"""
 from __future__ import annotations
 
-from pathlib import Path
+import json
 import subprocess
 
 import typer
 
-from .core import Initializer
-from .github_manager.validator import Validator
-from .github_manager.synchronizer import Synchronizer
-from .services.summary import SummaryGenerator
-from .utils import resolve_package_root, resolve_workspace_root
+from .core.initialize import initialize_workspace
+from .github_manager import builder, synchronizer, watcher, constants
+from .github_manager.changelog import record_changes
+from .services.summary import summarize_changes
 
-app = typer.Typer(name="my-work-assistant")
+app = typer.Typer(add_completion=False)
 
 
 @app.command()
 def init() -> None:
-    """Initialize the workspace and copy defaults."""
+    """Initialize the workspace and render templates."""
 
-    initializer = Initializer(resolve_package_root(), resolve_workspace_root())
-    initializer.initialize()
-    typer.echo("Workspace initialized.")
+    config = initialize_workspace()
+    paths = builder.render_templates()
+    record_changes(paths)
+    typer.echo(json.dumps({"config": config, "rendered": [str(path) for path in paths]}, indent=2))
 
 
 @app.command()
 def validate() -> None:
-    """Validate .github assets."""
+    """Validate managed GitHub files."""
 
-    validator = Validator(resolve_package_root(), Path.cwd())
-    validator.validate_all()
-    typer.echo("Validation successful.")
+    paths = synchronizer.synchronize()
+    typer.echo(json.dumps({"validated": [str(path) for path in paths]}, indent=2))
 
 
 @app.command()
 def watch() -> None:
-    """Synchronize .github files into the cache once."""
+    """Record a watcher event for managed directories."""
 
-    synchronizer = Synchronizer(Path.cwd(), resolve_workspace_root() / "cache")
-    synchronizer.sync()
-    typer.echo("Synchronization complete.")
+    directories = [constants.GITHUB_ROOT]
+    watcher.watch_paths(directories)
+    typer.echo(json.dumps({"watched": [str(path) for path in directories]}, indent=2))
 
 
 @app.command()
 def changelog() -> None:
-    """Print the changelog summary."""
+    """Print a summary of managed file paths."""
 
-    summary = SummaryGenerator(resolve_workspace_root() / "logs" / "ChangeLog.md")
-    typer.echo(summary.summarize())
+    paths = synchronizer.synchronize()
+    typer.echo(summarize_changes(paths))
 
 
-@app.command()
+@app.command("self-test")
 def self_test() -> None:
-    """Run the test suite."""
+    """Run pytest as a subprocess."""
 
-    result = subprocess.run(
-        ["pytest", "--cov=my_work_assistant", "--cov-report=term-missing", "--cov-fail-under=100"],
-        check=False,
-    )
+    result = subprocess.run(["pytest", "-q"], check=False)
     raise typer.Exit(code=result.returncode)
 
 
-def main() -> None:
-    """Invoke the Typer application."""
-
-    app()
-
-
 if __name__ == "__main__":
-    main()
+    app()

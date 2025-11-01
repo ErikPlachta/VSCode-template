@@ -1,32 +1,33 @@
-"""Utilities to update models and schemas."""
+"""my_work_assistant.services.updater
 
+Helpers to update JSON documents safely.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
+import json
 from pathlib import Path
-import shutil
+from typing import Any
 
-__all__ = ["Updater"]
+from ..core.exceptions import GitHubFileError
+
+__all__ = ["apply_updates"]
 
 
-@dataclass
-class Updater:
-    """Synchronize default assets into the workspace."""
+def apply_updates(path: Path, data: dict[str, Any]) -> None:
+    """Write JSON data to a file with indentation.
 
-    source_root: Path
-    destination_root: Path
+    Args:
+        path: Destination file path.
+        data: Data to serialize.
 
-    def update(self) -> None:
-        """Copy files from the source into the destination."""
+    Raises:
+        GitHubFileError: If writing fails.
 
-        if not self.source_root.exists():
-            raise FileNotFoundError(str(self.source_root))
-        self.destination_root.mkdir(parents=True, exist_ok=True)
-        for path in self.source_root.rglob("*"):
-            relative = path.relative_to(self.source_root)
-            target = self.destination_root / relative
-            if path.is_dir():
-                target.mkdir(parents=True, exist_ok=True)
-            else:
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(path, target)
+    Example:
+        >>> apply_updates(Path('sample.json'), {})  # doctest: +SKIP
+    """
+
+    try:
+        path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    except OSError as exc:  # pragma: no cover
+        raise GitHubFileError("Failed to update file", {"path": str(path)}) from exc

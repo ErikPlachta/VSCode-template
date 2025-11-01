@@ -1,43 +1,86 @@
-"""JSON cache helper."""
+"""my_work_assistant.core.cache
 
+Simple JSON cache helpers.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
-from pathlib import Path
-from typing import Callable, Generic, Optional, TypeVar
 import json
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Any
+
+from .config import USER_ROOT
+from .exceptions import ConfigError
+
+__all__ = ["CacheEntry", "read_cache", "write_cache", "is_cache_stale"]
 
 
-__all__ = ["Cache"]
+class CacheEntry(dict[str, Any]):
+    """Dictionary wrapper for cache entries.
 
-T = TypeVar("T")
+    Example:
+        >>> CacheEntry({"data": 1})["data"]
+        1
+    """
 
 
-@dataclass
-class Cache(Generic[T]):
-    """Persist JSON serializable data with a refresh window."""
+CACHE_DIR = USER_ROOT / "cache"
 
-    path: Path
-    refresh_minutes: int
 
-    def _is_fresh(self) -> bool:
-        """Return ``True`` if the cache file is still fresh."""
+def read_cache(name: str) -> CacheEntry:
+    """Read a cache file by name.
 
-        if not self.path.exists():
-            return False
-        modified = datetime.fromtimestamp(self.path.stat().st_mtime, timezone.utc)
-        return datetime.now(timezone.utc) - modified < timedelta(minutes=self.refresh_minutes)
+    Args:
+        name: Cache file stem without extension.
 
-    def load(self, factory: Callable[[], T], force_refresh: bool = False) -> T:
-        """Load cached data, using *factory* when refresh is required."""
+    Returns:
+        A cache entry dictionary.
 
-        if not force_refresh and self._is_fresh():
-            with self.path.open("r", encoding="utf-8") as handle:
-                data = json.load(handle)
-            return data
-        data = factory()
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        with self.path.open("w", encoding="utf-8") as handle:
-            json.dump(data, handle, indent=2)
-        return data
+    Example:
+        >>> read_cache('example')  # doctest: +SKIP
+    """
+
+    path = CACHE_DIR / f"{name}.json"
+    if not path.exists():
+        return CacheEntry()
+    try:
+        return CacheEntry(json.loads(path.read_text(encoding="utf-8")))
+    except json.JSONDecodeError as exc:  # pragma: no cover
+        raise ConfigError("Failed to decode cache", {"path": str(path)}) from exc
+
+
+def write_cache(name: str, data: dict[str, Any]) -> None:
+    """Persist data to a cache file.
+
+    Args:
+        name: Cache file stem.
+        data: Serializable dictionary content.
+
+    Example:
+        >>> write_cache('example', {'updated': True})
+    """
+
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    path = CACHE_DIR / f"{name}.json"
+    path.write_text(json.dumps(data), encoding="utf-8")
+
+
+def is_cache_stale(name: str, refresh_minutes: int) -> bool:
+    """Determine whether a cache file is stale.
+
+    Args:
+        name: Cache file stem.
+        refresh_minutes: Number of minutes before the cache is considered stale.
+
+    Returns:
+        True if the cache file should be refreshed.
+
+    Example:
+        >>> is_cache_stale('example', 10)  # doctest: +SKIP
+    """
+
+    path = CACHE_DIR / f"{name}.json"
+    if not path.exists():
+        return True
+    modified = datetime.fromtimestamp(path.stat().st_mtime)
+    return datetime.utcnow() - modified > timedelta(minutes=refresh_minutes)

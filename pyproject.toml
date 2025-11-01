@@ -1,55 +1,51 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=67", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "my_work_assistant"
 version = "0.1.0"
-description = "Modular Copilot MCP server for workspace automation"
+description = "My Work Assistant MCP server"
+authors = [{name = "My Work Assistant", email = "support@example.com"}]
 readme = "README.md"
-authors = [{name = "OpenAI Codex", email = "codex@example.com"}]
-license = {text = "MIT"}
 requires-python = ">=3.12"
+license = {text = "MIT"}
 dependencies = [
     "fastapi",
-    "uvicorn",
-    "typer[all]",
+    "typer",
     "pydantic>=2",
-    "watchfiles",
     "jinja2",
     "jsonschema",
-    "pytest",
-    "pytest-cov",
-    "mypy",
-    "black",
-    "ruff"
+    "watchdog",
+    "uvicorn",
 ]
 
 [project.optional-dependencies]
-dev = ["my_work_assistant[tests]"]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    "ruff",
+]
 
 [tool.setuptools.packages.find]
 where = ["my_work_assistant/src"]
 
 [tool.pytest.ini_options]
-minversion = "7.0"
-addopts = "-ra"
-testpaths = ["my_work_assistant/src/my_work_assistant/tests"]
+addopts = "--maxfail=1 --disable-warnings"
+filterwarnings = ["error"]
+markers = [
+    "docstring",
+    "typing",
+]
 
 [tool.mypy]
 python_version = "3.12"
 strict = true
-mypy_path = "my_work_assistant/src"
-
-[tool.black]
-target-version = ["py312"]
-line-length = 88
+packages = ["my_work_assistant"]
 
 [tool.ruff]
-target-version = "py312"
 line-length = 88
-select = ["E", "F", "I", "N", "UP", "ANN", "COM", "PL", "RUF"]
-ignore = ["ANN101", "ANN102"]
+select = ["E", "F", "I", "D"]
+ignore = []
 
-[tool.typer]
-# placeholder to avoid warnings

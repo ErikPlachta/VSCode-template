@@ -1,3 +1,5 @@
-# Developer Guide Template
+# Developer Guide
 
-Document containing contributor workflows.
+Use the Typer CLI or FastAPI endpoints to manage workspace assets. Tests enforce
+strict typing, docstrings, and coverage.
+

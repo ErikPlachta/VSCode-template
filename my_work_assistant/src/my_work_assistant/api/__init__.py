@@ -1,5 +1,9 @@
-"""API package."""
+"""my_work_assistant.api.__init__
 
-from .app import app
+Expose the FastAPI application factory.
+"""
+from __future__ import annotations
 
-__all__ = ["app"]
+from .app import create_app
+
+__all__ = ["create_app"]

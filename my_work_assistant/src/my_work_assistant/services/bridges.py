@@ -1,40 +1,57 @@
-"""Establish relationships between models."""
+"""my_work_assistant.services.bridges
 
+Utilities that build relationships between models.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from pathlib import Path
-import json
-from typing import Dict, List
+from typing import Iterable
 
-from ..types import JSONDict
+from ..models import DataSet, Platform, Person, Group
 
-__all__ = ["BridgeBuilder"]
+__all__ = ["group_membership", "platform_datasets"]
 
 
-@dataclass
-class BridgeBuilder:
-    """Create lookup tables between model entities."""
+def group_membership(groups: Iterable[Group], people: Iterable[Person]) -> dict[str, list[str]]:
+    """Map group identifiers to member names.
 
-    models_root: Path
+    Args:
+        groups: Iterable of group models.
+        people: Iterable of person models.
 
-    def _load(self, name: str) -> List[JSONDict]:
-        path = self.models_root / f"{name}.json"
-        if not path.exists():
-            return []
-        with path.open("r", encoding="utf-8") as handle:
-            return json.load(handle)
+    Returns:
+        Dictionary mapping group identifiers to sorted member names.
 
-    def build(self) -> Dict[str, List[str]]:
-        """Build simple cross references between categories and datasets."""
+    Example:
+        >>> group_membership([], [])
+        {}
+    """
 
-        categories = {item["id"]: item for item in self._load("categories")}
-        bridges: Dict[str, List[str]] = {key: [] for key in categories}
-        datasets_path = self.models_root / "datasets.json"
-        if datasets_path.exists():
-            datasets = json.loads(datasets_path.read_text(encoding="utf-8"))
-            for dataset in datasets:
-                for category in dataset.get("categories", []):
-                    if category in bridges:
-                        bridges[category].append(dataset["id"])
-        return bridges
+    people_index = {person.id: person.full_name for person in people}
+    mapping: dict[str, list[str]] = {}
+    for group in groups:
+        names = [people_index.get(identifier, identifier) for identifier in group.members]
+        mapping[group.id] = sorted(names)
+    return mapping
+
+
+def platform_datasets(platforms: Iterable[Platform], datasets: Iterable[DataSet]) -> dict[str, list[str]]:
+    """Map platforms to dataset names.
+
+    Args:
+        platforms: Iterable of platform models.
+        datasets: Iterable of dataset models.
+
+    Returns:
+        Dictionary mapping platform identifiers to dataset names.
+
+    Example:
+        >>> platform_datasets([], [])
+        {}
+    """
+
+    dataset_index = {dataset.id: dataset.name for dataset in datasets}
+    mapping: dict[str, list[str]] = {}
+    for platform in platforms:
+        names = [dataset_index.get(identifier, identifier) for identifier in platform.datasets]
+        mapping[platform.id] = sorted(names)
+    return mapping

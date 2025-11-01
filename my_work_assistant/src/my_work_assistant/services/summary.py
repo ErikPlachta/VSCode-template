@@ -1,23 +1,31 @@
-"""Generate human-readable summaries."""
+"""my_work_assistant.services.summary
 
+Generate summary strings for changelog entries.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pathlib import Path
+from typing import Iterable
 
-__all__ = ["SummaryGenerator"]
+__all__ = ["summarize_changes"]
 
 
-@dataclass
-class SummaryGenerator:
-    """Generate summary text from a detailed changelog."""
+def summarize_changes(paths: Iterable[Path]) -> str:
+    """Return a human readable summary for change logging.
 
-    detailed_log: Path
+    Args:
+        paths: Collection of paths that changed.
 
-    def summarize(self) -> str:
-        """Return a simple summary string."""
+    Returns:
+        A newline separated summary string.
 
-        if not self.detailed_log.exists():
-            return "No changes recorded."
-        lines = [line.strip() for line in self.detailed_log.read_text(encoding="utf-8").splitlines() if line.startswith("-")]
-        return "\n".join(lines) if lines else "No changes recorded."
+    Example:
+        >>> summarize_changes([])
+        'No changes detected.'
+    """
+
+    entries = [str(path) for path in paths]
+    if not entries:
+        return "No changes detected."
+    formatted = "\n".join(f"- {entry}" for entry in entries)
+    return f"Updated files:\n{formatted}"

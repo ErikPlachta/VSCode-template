@@ -1,43 +1,36 @@
-"""Lightweight stdio wrapper mimicking MCP responses."""
+"""my_work_assistant.stdio_wrapper.server
 
+Thin wrapper to expose CLI commands over stdio.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from pathlib import Path
-from typing import Dict, List
+import json
+from typing import Any
 
-from ..core import ConfigLoader, Initializer
-from ..github_manager.validator import Validator
-from ..services.summary import SummaryGenerator
-from ..utils import resolve_package_root, resolve_workspace_root
+from ..core.initialize import initialize_workspace
+from ..github_manager import builder, synchronizer
 
-__all__ = ["StdioServer"]
+__all__ = ["run_stdio"]
 
 
-@dataclass
-class StdioServer:
-    """Expose package capabilities over stdio for Copilot Chat."""
+def run_stdio(command: str) -> str:
+    """Execute a supported command and return JSON.
 
-    project_root: Path
+    Args:
+        command: Command name to execute.
 
-    def initialize(self) -> Dict[str, str]:
-        package_root = resolve_package_root()
-        workspace_root = resolve_workspace_root()
-        initializer = Initializer(package_root=package_root, workspace_root=workspace_root)
-        initializer.initialize()
-        return {"status": "initialized", "workspace": str(workspace_root)}
+    Returns:
+        JSON encoded response.
 
-    def validate(self) -> Dict[str, str]:
-        package_root = resolve_package_root()
-        validator = Validator(package_root=package_root, project_root=self.project_root)
-        validator.validate_all()
-        return {"status": "validated"}
+    Example:
+        >>> run_stdio('init')  # doctest: +SKIP
+    """
 
-    def changelog(self) -> Dict[str, str]:
-        workspace_root = resolve_workspace_root()
-        summary = SummaryGenerator(workspace_root / "logs" / "ChangeLog.md")
-        return {"summary": summary.summarize()}
-
-    def list_models(self) -> List[str]:
-        models_dir = resolve_package_root() / "bin" / "defaults" / "models"
-        return [path.stem for path in models_dir.glob("*.json")]
+    if command == "init":
+        config = initialize_workspace()
+        builder.render_templates()
+        return json.dumps({"success": True, "config": config})
+    if command == "validate":
+        paths = synchronizer.synchronize()
+        return json.dumps({"success": True, "validated": [str(path) for path in paths]})
+    return json.dumps({"success": False, "error": "unknown command"})

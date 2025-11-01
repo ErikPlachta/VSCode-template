@@ -1,52 +1,28 @@
-"""Simple polling watcher for `.github` assets."""
+"""my_work_assistant.github_manager.watcher
 
+Lightweight watcher stub that records manual refresh events.
+"""
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List
-import fnmatch
+from typing import Iterable
 
-__all__ = ["Watcher", "ChangeEvent"]
+from ..core.logging import log_event
+from ..core.telemetry import record_request
+
+__all__ = ["watch_paths"]
 
 
-ChangeEvent = Dict[str, str]
+def watch_paths(paths: Iterable[Path]) -> None:
+    """Record a watcher event for the provided paths.
 
+    Args:
+        paths: Iterable of paths that were checked.
 
-@dataclass
-class Watcher:
-    """Poll files for modifications using modification timestamps."""
+    Example:
+        >>> watch_paths([])
+    """
 
-    project_root: Path
-    paths: Iterable[str]
-    ignore_patterns: Iterable[str] = field(default_factory=list)
-    _state: Dict[Path, float] = field(default_factory=dict)
-
-    def _should_ignore(self, path: Path) -> bool:
-        for pattern in self.ignore_patterns:
-            if fnmatch.fnmatch(path.name, pattern):
-                return True
-        return False
-
-    def scan(self) -> List[ChangeEvent]:
-        """Return change events for modified files."""
-
-        events: List[ChangeEvent] = []
-        for relative in self.paths:
-            absolute = self.project_root / relative
-            if absolute.is_dir():
-                candidates = [p for p in absolute.rglob("*") if p.is_file()]
-            else:
-                candidates = [absolute]
-            for candidate in candidates:
-                if self._should_ignore(candidate):
-                    continue
-                modified = candidate.stat().st_mtime if candidate.exists() else 0.0
-                previous = self._state.get(candidate)
-                if previous is None:
-                    self._state[candidate] = modified
-                    continue
-                if modified > previous:
-                    events.append({"path": str(candidate), "change": "modified"})
-                    self._state[candidate] = modified
-        return events
+    tracked = [str(path) for path in paths]
+    log_event("ChangeLog.md", "INFO", "Watcher inspected paths", paths=tracked)
+    record_request("watcher", "inspected paths", count=len(tracked))
