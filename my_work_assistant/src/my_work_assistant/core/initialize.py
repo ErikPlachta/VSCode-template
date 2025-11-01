@@ -1,6 +1,13 @@
-"""my_work_assistant.core.initialize
+"""my_work_assistant.core.initialize.
 
 Initialization routines that seed the workspace configuration and docs.
+
+Design:
+- Copy curated static docs from packaged defaults into ``.my_work_assistant/docs``.
+- If repository-level docs exist under ``my_work_assistant/docs``, copy those too
+    (e.g., CI-generated OpenAPI or reference files) so users see the latest.
+- Generate a fresh API reference from docstrings into the user docs folder.
+- Create a simple ``index.md`` that links all docs for easy navigation.
 """
 
 from __future__ import annotations
@@ -11,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from ..docs import generate_docs
-from .config import CONFIG_ROOT, USER_ROOT, load_config
+from .config import CONFIG_ROOT, PACKAGE_ROOT, USER_ROOT, load_config
 from .exceptions import ConfigError, GitHubFileError
 
 __all__ = ["initialize_workspace", "copy_if_missing"]
@@ -78,16 +85,52 @@ def initialize_workspace() -> dict[str, Any]:
             raise ConfigError(
                 "Failed to write user configuration", {"path": str(target_config)}
             ) from exc
-    docs_source = CONFIG_ROOT.parent / "docs"
-    for doc in docs_source.glob("*.md"):
+    # 1) Copy curated static docs from packaged defaults
+    defaults_docs = CONFIG_ROOT.parent / "docs"
+    for doc in defaults_docs.glob("*.md"):
         copy_if_missing(doc, USER_ROOT / "docs" / doc.name)
+
+    # 2) Copy repository-level docs if present (e.g., CI-generated outputs)
+    repo_docs = PACKAGE_ROOT / "docs"
+    if repo_docs.exists():
+        for doc in repo_docs.glob("*.md"):
+            copy_if_missing(doc, USER_ROOT / "docs" / doc.name)
+        for extra in repo_docs.glob("*.json"):
+            copy_if_missing(extra, USER_ROOT / "docs" / extra.name)
     logs_source = CONFIG_ROOT.parent / "logs"
     for log_template in logs_source.glob("*.md"):
         copy_if_missing(log_template, USER_ROOT / "logs" / log_template.name)
-    # Generate API reference docs from docstrings (best-effort; ignore failures)
+    # 3) Generate API reference docs from docstrings (best-effort; ignore failures)
     try:
         generate_docs()
     except Exception:
         # Keep initialization resilient even if doc generation fails
         pass
+    # 4) Create a simple docs index linking everything we know about
+    try:
+        _write_docs_index()
+    except Exception:
+        pass
     return default_config
+
+
+def _write_docs_index() -> None:
+    """Create an ``index.md`` file linking available docs.
+
+    This scans the user docs folder and produces a simple navigation index
+    that highlights the generated API reference and curated guides.
+    """
+    docs_dir = USER_ROOT / "docs"
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    paths = sorted(docs_dir.glob("*.md"))
+
+    # Put api_reference first if present
+    def sort_key(p: Path) -> tuple[int, str]:
+        return (0 if p.name == "api_reference.md" else 1, p.name)
+
+    paths_sorted = sorted(paths, key=sort_key)
+    lines = ["# Documentation Index\n"]
+    for p in paths_sorted:
+        title = p.stem.replace("_", " ").title()
+        lines.append(f"- [{title}]({p.name})")
+    (docs_dir / "index.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

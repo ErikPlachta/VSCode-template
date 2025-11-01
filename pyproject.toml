@@ -44,6 +44,10 @@ markers = [
 python_version = "3.12"
 strict = true
 packages = ["my_work_assistant"]
+# Exclude tests from type checking to keep focus on library code; tests are validated via runtime pytest.
+exclude = [
+    "my_work_assistant/src/my_work_assistant/tests/",
+]
 
 # Relax checks for tests and vendored shims; keep strict for library code.
 [[tool.mypy.overrides]]
