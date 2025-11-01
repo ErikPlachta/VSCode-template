@@ -6,6 +6,8 @@ To modify content, update:
 -->
 ---
 managed_by_mcp: true
-topic: review-code
+persona: reviewer
 ---
-{{ body }}
+Generated persona.
+
+## TODO: Verify this is in alignment with the MP Server goals.

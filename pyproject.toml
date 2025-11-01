@@ -68,7 +68,7 @@ select = ["E", "F", "I"]
 # Ignore long-line errors globally; formatting is subjective and many lines exceed legacy 88.
 ignore = ["E501"]
 
-# Tame a few noisy files that intentionally re-export or use broad imports.
+# Tame a few noisy files that intentionally re-export or use broad imports. # TODO: Verify this is the right way to handle the problem. 
 [tool.ruff.lint.per-file-ignores]
 "my_work_assistant/src/pydantic/__init__.py" = ["F401"]
 "my_work_assistant/src/typer/__init__.py" = ["F401"]

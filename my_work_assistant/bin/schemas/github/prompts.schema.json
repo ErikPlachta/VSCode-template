@@ -4,7 +4,8 @@
   "type": "object",
   "properties": {
     "managed_by_mcp": {"const": true},
-    "topic": {"type": "string"}
+    "version": {"const": 1},
+    "topic": {"type": "string", "enum": ["document-api", "review-code", "onboarding-plan"]}
   },
-  "required": ["managed_by_mcp", "topic"]
+  "required": ["managed_by_mcp", "version", "topic"]
 }
