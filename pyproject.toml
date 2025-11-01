@@ -1,15 +1,35 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "copilot-workspace"
+name = "custom-mcp-server"
 version = "0.1.0"
-description = "Python utilities for generating and interrogating the Copilot instructions workspace"
+description = "A customizable Model Context Protocol (MCP) server framework for Copilot Chat"
+authors = [{name = "Your Name", email = "you@example.com"}]
 readme = "README.md"
-authors = [{name = "Erik Plachta"}]
-requires-python = ">=3.9"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "websockets>=11.0",
+  "uvicorn>=0.27",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "pytest-asyncio>=0.23",
+]
+
+[project.scripts]
+custom-mcp-server = "custom_mcp_server.__main__:main"
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
 addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
