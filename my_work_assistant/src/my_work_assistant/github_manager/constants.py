@@ -1,4 +1,4 @@
-"""my_work_assistant.github_manager.constants
+"""my_work_assistant.github_manager.constants.
 
 Config- and content-driven discovery of managed GitHub file paths.
 
@@ -12,11 +12,11 @@ This keeps the system flexible and driven by content and config.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import List
-import json
 
-from ..core.config import CONFIG_ROOT, load_config, PACKAGE_ROOT
+from ..core.config import CONFIG_ROOT, PACKAGE_ROOT, load_config
 
 __all__ = ["GITHUB_ROOT", "MANAGED_FILES"]
 

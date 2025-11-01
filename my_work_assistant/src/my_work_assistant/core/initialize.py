@@ -2,6 +2,7 @@
 
 Initialization routines that seed the workspace configuration and docs.
 """
+
 from __future__ import annotations
 
 import json
@@ -9,6 +10,7 @@ import shutil
 from pathlib import Path
 from typing import Any
 
+from ..docs import generate_docs
 from .config import CONFIG_ROOT, USER_ROOT, load_config
 from .exceptions import ConfigError, GitHubFileError
 
@@ -43,7 +45,9 @@ def copy_if_missing(source: Path, destination: Path) -> None:
     try:
         shutil.copy2(source, destination)
     except OSError as exc:  # pragma: no cover
-        raise GitHubFileError("Failed to copy template", {"source": str(source)}) from exc
+        raise GitHubFileError(
+            "Failed to copy template", {"source": str(source)}
+        ) from exc
 
 
 def initialize_workspace() -> dict[str, Any]:
@@ -67,13 +71,23 @@ def initialize_workspace() -> dict[str, Any]:
     target_config = USER_ROOT / "my-work-assistant.config.json"
     if not target_config.exists():
         try:
-            target_config.write_text(json.dumps(default_config, indent=2), encoding="utf-8")
+            target_config.write_text(
+                json.dumps(default_config, indent=2), encoding="utf-8"
+            )
         except OSError as exc:  # pragma: no cover
-            raise ConfigError("Failed to write user configuration", {"path": str(target_config)}) from exc
+            raise ConfigError(
+                "Failed to write user configuration", {"path": str(target_config)}
+            ) from exc
     docs_source = CONFIG_ROOT.parent / "docs"
     for doc in docs_source.glob("*.md"):
         copy_if_missing(doc, USER_ROOT / "docs" / doc.name)
     logs_source = CONFIG_ROOT.parent / "logs"
     for log_template in logs_source.glob("*.md"):
         copy_if_missing(log_template, USER_ROOT / "logs" / log_template.name)
+    # Generate API reference docs from docstrings (best-effort; ignore failures)
+    try:
+        generate_docs()
+    except Exception:
+        # Keep initialization resilient even if doc generation fails
+        pass
     return default_config

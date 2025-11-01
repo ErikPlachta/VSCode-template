@@ -1,4 +1,4 @@
-"""my_work_assistant.github_manager.validator
+"""my_work_assistant.github_manager.validator.
 
 Validation helpers for managed GitHub assets.
 """
@@ -11,10 +11,9 @@ from typing import Any, cast
 
 from jsonschema import Draft7Validator
 
-from ..core.config import PACKAGE_ROOT
+from ..core.config import CONFIG_ROOT, PACKAGE_ROOT
 from ..core.exceptions import GitHubFileError, ValidationError
 from .builder import DISCLAIMER
-from ..core.config import CONFIG_ROOT, PACKAGE_ROOT
 
 __all__ = ["parse_front_matter", "validate_file"]
 

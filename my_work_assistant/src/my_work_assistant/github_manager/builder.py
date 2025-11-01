@@ -1,4 +1,4 @@
-"""my_work_assistant.github_manager.builder
+"""my_work_assistant.github_manager.builder.
 
 Render managed GitHub files from bundled templates.
 

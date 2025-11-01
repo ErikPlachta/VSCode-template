@@ -1,4 +1,4 @@
-"""my_work_assistant.api.app
+"""my_work_assistant.api.app.
 
 FastAPI application exposing MCP server functionality.
 
@@ -23,7 +23,7 @@ from fastapi import FastAPI, HTTPException
 from ..core.config import load_config
 from ..core.exceptions import APIError, MCPError
 from ..core.initialize import initialize_workspace
-from ..github_manager import builder, synchronizer, constants
+from ..github_manager import builder, constants, synchronizer
 from ..models import DataSet, Group, Person, Platform
 from ..services import bridges
 

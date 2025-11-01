@@ -58,20 +58,37 @@ module = [
 ]
 ignore_errors = true
 
+[[tool.mypy.overrides]]
+module = [
+    "jsonschema",
+    "jsonschema.*",
+]
+ignore_missing_imports = true
+
 [tool.ruff]
 # Adopt a wider line length and move lint config to [tool.ruff.lint]
 line-length = 120
+extend-exclude = [
+    "my_work_assistant/src/fastapi/**",
+    "my_work_assistant/src/jinja2/**",
+    "my_work_assistant/src/jsonschema/**",
+    "my_work_assistant/src/pydantic/**",
+    "my_work_assistant/src/typer/**",
+]
 
 [tool.ruff.lint]
-# Keep core rules (E, F, I). Drop docstring (D) for now to reduce noise.
-select = ["E", "F", "I"]
-# Ignore long-line errors globally; formatting is subjective and many lines exceed legacy 88.
-ignore = ["E501"]
+# Enable core rules and pydocstyle (D) for docstring quality.
+select = ["E", "F", "I", "D"]
+# Ignore long-line errors globally, and relax D415 (first line punctuation) to reduce churn.
+ignore = ["E501", "D415"]
 
 # Tame a few noisy files that intentionally re-export or use broad imports. # TODO: Verify this is the right way to handle the problem. 
 [tool.ruff.lint.per-file-ignores]
-"my_work_assistant/src/pydantic/__init__.py" = ["F401"]
-"my_work_assistant/src/typer/__init__.py" = ["F401"]
-"my_work_assistant/src/typer/testing/__init__.py" = ["F401"]
-"my_work_assistant/src/my_work_assistant/tests/**" = ["F841"]
+# Allow unused variables in tests and silence docstring requirements there.
+"my_work_assistant/src/my_work_assistant/tests/**" = ["F841", "D"]
+# Relax module/package docstring requirements for __init__ files.
+"**/__init__.py" = ["D100", "D104", "D105", "D107"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
