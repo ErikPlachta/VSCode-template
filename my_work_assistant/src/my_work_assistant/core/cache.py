@@ -2,10 +2,11 @@
 
 Simple JSON cache helpers.
 """
+
 from __future__ import annotations
 
 import json
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from .config import USER_ROOT
@@ -82,5 +83,5 @@ def is_cache_stale(name: str, refresh_minutes: int) -> bool:
     path = CACHE_DIR / f"{name}.json"
     if not path.exists():
         return True
-    modified = datetime.fromtimestamp(path.stat().st_mtime)
-    return datetime.utcnow() - modified > timedelta(minutes=refresh_minutes)
+    modified = datetime.fromtimestamp(path.stat().st_mtime, tz=UTC)
+    return datetime.now(UTC) - modified > timedelta(minutes=refresh_minutes)

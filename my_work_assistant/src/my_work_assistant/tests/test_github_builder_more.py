@@ -1,48 +1,19 @@
-"""my_work_assistant.tests.test_github
+"""Deprecated: merged into test_github.py.
 
-Ensure GitHub manager modules behave as expected, including builder rendering
-and constants override behavior.
+This file is retained temporarily to ease review but is skipped.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+
 import pytest
-from my_work_assistant.core.exceptions import GitHubFileError
-from my_work_assistant.github_manager import builder, constants, synchronizer
-from my_work_assistant.github_manager.constants import GITHUB_ROOT
-from my_work_assistant.github_manager.validator import validate_file
 
+# Skip this module entirely; tests have been consolidated into test_github.py
+pytestmark = pytest.mark.skip(reason="Merged into test_github.py")
 
-def test_builder_respects_disclaimer(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """render_templates writes files containing the disclaimer."""
-    monkeypatch.chdir(Path.cwd())
-    paths = builder.render_templates()
-    for path in paths:
-        assert builder.DISCLAIMER in path.read_text(encoding="utf-8")
-
-
-def test_validator_detects_missing_disclaimer(monkeypatch: pytest.MonkeyPatch) -> None:
-    """validate_file raises when the disclaimer is missing."""
-    monkeypatch.chdir(Path.cwd())
-    # Use configured GitHub root to avoid hard-coded path assumptions.
-    target = GITHUB_ROOT / "copilot-instructions.md"
-    original = target.read_text(encoding="utf-8")
-    target.write_text("# No disclaimer", encoding="utf-8")
-    with pytest.raises(GitHubFileError):
-        validate_file(target)
-    target.write_text(original, encoding="utf-8")
-
-
-def test_synchronizer_returns_paths(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Synchronize validates all configured files."""
-    monkeypatch.chdir(Path.cwd())
-    builder.render_templates()
-    paths = synchronizer.synchronize()
-    assert paths
+from my_work_assistant.github_manager import builder, constants
 
 
 def test_render_templates_to_temp_github_root(
@@ -51,6 +22,7 @@ def test_render_templates_to_temp_github_root(
     """Render templates into a temporary .github root and assert outputs exist."""
     gh_root = tmp_path / ".github"
 
+    # Minimal config: use real defaults for enabled flags
     def fake_load_config() -> dict[str, Any]:
         return {
             "github_manager": {
@@ -66,7 +38,9 @@ def test_render_templates_to_temp_github_root(
         "my_work_assistant.github_manager.builder.load_config", fake_load_config
     )
     paths = builder.render_templates()
+    # We expect at least one rendered file
     assert paths and all(p.exists() for p in paths)
+    # Copilot instructions should include disclaimer
     copilot = gh_root / "copilot-instructions.md"
     assert builder.DISCLAIMER in copilot.read_text(encoding="utf-8")
 
@@ -91,6 +65,7 @@ def test_constants_resolve_overrides(
 
     monkeypatch.setattr(constants, "load_config", fake_load_config)
     data = constants.build_manifest()
+    # Even with empty override roots, manifest structure is produced
     assert {"copilot", "instructions", "prompts", "chatmodes"}.issubset(
         set(data.keys())
     )

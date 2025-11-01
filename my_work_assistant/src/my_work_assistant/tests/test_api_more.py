@@ -1,9 +1,14 @@
-"""my_work_assistant.tests.test_api_more
+"""Deprecated: merged into test_api.py.
 
-Expand API coverage for additional endpoints and error branches.
+This file is retained temporarily to ease review but is skipped.
 """
 
 from __future__ import annotations
+
+import pytest
+
+# Skip this module entirely; tests have been consolidated into test_api.py
+pytestmark = pytest.mark.skip(reason="Merged into test_api.py")
 
 import subprocess
 from typing import Any
@@ -11,7 +16,6 @@ from typing import Any
 import json
 from pathlib import Path
 
-import pytest
 from fastapi.testclient import TestClient
 
 from my_work_assistant.api import create_app

@@ -13,6 +13,7 @@ from pathlib import Path
 import pytest
 
 from my_work_assistant.github_manager.builder import DISCLAIMER
+from my_work_assistant.github_manager import validator as v
 from my_work_assistant.github_manager.validator import ValidationError, validate_file
 
 
@@ -92,3 +93,21 @@ Body
     with pytest.raises(ValidationError) as exc:
         validate_file(path)
     assert "No schema pattern matched" in str(exc.value)
+
+
+def test_parse_front_matter_without_markers_returns_empty() -> None:
+    """Content without front matter markers yields empty metadata."""
+    assert v.parse_front_matter("No front matter here") == {}
+
+
+def test_parse_front_matter_missing_end_marker_returns_empty() -> None:
+    """Missing end delimiter should yield empty metadata."""
+    content = "---\nkey: value\ncontent starts but no end delimiter"
+    assert v.parse_front_matter(content) == {}
+
+
+def test_coerce_value_boolean_and_integer() -> None:
+    """Coercion handles booleans (insensitive) and simple integers."""
+    assert v._coerce_value("TRUE") is True  # type: ignore[attr-defined]
+    assert v._coerce_value("false") is False  # type: ignore[attr-defined]
+    assert v._coerce_value("42") == 42  # type: ignore[attr-defined]

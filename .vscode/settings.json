@@ -1,3 +1,6 @@
 {
-  "cSpell.words": ["chatmodes"]
+  "cSpell.words": ["chatmodes"],
+  "python.testing.pytestArgs": ["my_work_assistant"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }

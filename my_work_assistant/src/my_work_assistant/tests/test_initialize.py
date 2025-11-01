@@ -9,6 +9,8 @@ from pathlib import Path
 
 import pytest
 
+from typing import NoReturn
+
 from my_work_assistant.core import initialize
 
 
@@ -23,25 +25,33 @@ def test_copy_if_missing_skips_existing(tmp_path: Path) -> None:
 
 
 def test_write_docs_index_prioritizes_api_reference(
-    tmp_path: Path, monkeypatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Index should place api_reference.md at the top of the list."""
+    """Index should place api_reference.md at the top of the list.
+
+    Use the public initializer (which calls the index writer) to avoid
+    accessing a private function directly.
+    """
     docs = tmp_path / "docs"
     docs.mkdir(parents=True, exist_ok=True)
     (docs / "other.md").write_text("x", encoding="utf-8")
     (docs / "api_reference.md").write_text("x", encoding="utf-8")
     monkeypatch.setattr("my_work_assistant.core.initialize.USER_ROOT", tmp_path)
-    initialize._write_docs_index()
+    # Avoid expensive doc generation during this test
+    monkeypatch.setattr("my_work_assistant.core.initialize.generate_docs", lambda: None)
+    initialize.initialize_workspace()
     content = (docs / "index.md").read_text(encoding="utf-8")
     lines = [line for line in content.splitlines() if line.startswith("-")]
     assert lines[0].startswith("- [Api Reference]")
 
 
-def test_initialize_workspace_handles_docgen_error(tmp_path: Path, monkeypatch) -> None:
+def test_initialize_workspace_handles_docgen_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """initialize_workspace should swallow exceptions from docs generation and index writing."""
     monkeypatch.setattr("my_work_assistant.core.initialize.USER_ROOT", tmp_path)
 
-    def boom(*_args, **_kwargs):  # noqa: D401
+    def boom(*_args: object, **_kwargs: object) -> NoReturn:  # noqa: D401
         raise RuntimeError("boom")
 
     monkeypatch.setattr("my_work_assistant.core.initialize.generate_docs", boom)
