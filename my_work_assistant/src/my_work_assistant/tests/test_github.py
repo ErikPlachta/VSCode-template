@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 from my_work_assistant.core.exceptions import GitHubFileError
 from my_work_assistant.github_manager import builder, synchronizer
+from my_work_assistant.github_manager.constants import GITHUB_ROOT
 from my_work_assistant.github_manager.validator import validate_file
 
 
@@ -24,7 +25,8 @@ def test_builder_respects_disclaimer(tmp_path, monkeypatch) -> None:
 def test_validator_detects_missing_disclaimer(monkeypatch) -> None:
     """validate_file raises when the disclaimer is missing."""
     monkeypatch.chdir(Path.cwd())
-    target = Path(".github") / "copilot-instructions.md"
+    # Use configured GitHub root to avoid hard-coded path assumptions.
+    target = GITHUB_ROOT / "copilot-instructions.md"
     original = target.read_text(encoding="utf-8")
     target.write_text("# No disclaimer", encoding="utf-8")
     with pytest.raises(GitHubFileError):

@@ -1,0 +1,8 @@
+# This file marks the package as providing PEP 561 type information.
+#
+# Tooling (mypy, pyright, etc.) uses the presence of "py.typed" in
+# installed distributions to know that runtime type hints in this package
+# are intended for type checking by downstream consumers.
+#
+# It is intentionally empty; its presence (and inclusion in package data)
+# is what matters. See: https://peps.python.org/pep-0561/

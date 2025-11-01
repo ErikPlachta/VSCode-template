@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 
+import uvicorn
 from my_work_assistant.__main__ import app
 from typer.testing import CliRunner
 
@@ -54,3 +55,24 @@ def test_cli_manifest_outputs_json() -> None:
     assert result.exit_code == 0
     data = json.loads(result.stdout)
     assert "manifest" in data
+
+
+def test_cli_serve_invokes_uvicorn_run(monkeypatch) -> None:
+    """CLI serve command calls uvicorn.run with expected arguments."""
+    called: dict[str, object] = {}
+
+    def fake_run(app_ref, host: str, port: int, reload: bool, factory: bool) -> None:  # type: ignore[no-untyped-def]
+        called["app_ref"] = app_ref
+        called["host"] = host
+        called["port"] = port
+        called["reload"] = reload
+        called["factory"] = factory
+
+    monkeypatch.setattr(uvicorn, "run", fake_run)
+    runner = CliRunner()
+    result = runner.invoke(
+        app, ["serve", "--host", "127.0.0.1", "--port", "0", "--reload"]
+    )
+    assert result.exit_code == 0
+    assert called.get("factory") is True
+    assert called.get("host") == "127.0.0.1"

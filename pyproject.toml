@@ -32,6 +32,9 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["my_work_assistant/src"]
 
+[tool.setuptools.package-data]
+my_work_assistant = ["py.typed"]
+
 [tool.pytest.ini_options]
 addopts = "--maxfail=1 --disable-warnings"
 filterwarnings = ["error"]
