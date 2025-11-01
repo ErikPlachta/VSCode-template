@@ -14,6 +14,7 @@ from jsonschema import Draft7Validator
 from ..core.config import PACKAGE_ROOT
 from ..core.exceptions import GitHubFileError, ValidationError
 from .builder import DISCLAIMER
+from ..core.config import CONFIG_ROOT, PACKAGE_ROOT
 
 __all__ = ["parse_front_matter", "validate_file"]
 
@@ -77,8 +78,36 @@ def _body_after_front_matter(content: str) -> str:
     return content[end + 4 :].strip()
 
 
-ALLOWED_PROMPT_TOPICS = {"document-api", "review-code", "onboarding-plan"}
-ALLOWED_PERSONAS = {"reviewer", "docwriter"}
+def _load_allowed_prompt_topics() -> set[str]:
+    """Load allowed prompt topics from the prompts JSON schema enum.
+
+    Returns:
+        set[str]: Allowed topics; empty set if schema is not accessible.
+    """
+    schema_path = PACKAGE_ROOT / "bin" / "schemas" / "github" / "prompts.schema.json"
+    try:
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        return set(schema.get("properties", {}).get("topic", {}).get("enum", []))
+    except OSError:
+        return set()
+
+
+def _load_allowed_personas() -> set[str]:
+    """Discover allowed chatmode personas from available templates.
+
+    Returns:
+        set[str]: Persona identifiers derived from template filenames.
+    """
+    chat_dir = CONFIG_ROOT.parent / "github" / "chatmodes"
+    personas: set[str] = set()
+    if chat_dir.exists():
+        for tpl in chat_dir.glob("*.chatmode.mwa.md.j2"):
+            personas.add(tpl.name.split(".chatmode.mwa.md.j2")[0])
+    return personas
+
+
+ALLOWED_PROMPT_TOPICS = _load_allowed_prompt_topics()
+ALLOWED_PERSONAS = _load_allowed_personas()
 
 
 def validate_file(path: Path) -> None:

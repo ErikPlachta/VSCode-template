@@ -1,6 +1,11 @@
 """my_work_assistant.github_manager.builder
 
 Render managed GitHub files from bundled templates.
+
+This module provides utilities to load Jinja2 templates, render them into the
+configured GitHub root, and protect unmanaged files from accidental overwrite
+by requiring a standard disclaimer banner. All public functions include
+type-annotated docstrings.
 """
 
 from __future__ import annotations
@@ -23,17 +28,16 @@ def _load_template(path: Path) -> Template:
     """Load a Jinja2 template from disk.
 
     Args:
-        path: Path to the template file.
+        path (Path): Path to the template file.
 
     Returns:
-        A compiled Jinja2 template instance.
+        Template: Compiled Jinja2 template instance.
 
     Raises:
         GitHubFileError: If the template cannot be read.
 
     Example:
         >>> isinstance(_load_template(Path('sample.j2')), Template)  # doctest: +SKIP
-
     """
     try:
         return Template(path.read_text(encoding="utf-8"))
@@ -45,15 +49,14 @@ def _write_file(target: Path, content: str) -> None:
     """Write rendered content to disk respecting disclaimers.
 
     Args:
-        target: Output file path.
-        content: Rendered template content.
+        target (Path): Output file path.
+        content (str): Rendered template content.
 
     Raises:
         GitHubFileError: If writing fails or disclaimer safeguards are triggered.
 
     Example:
         >>> _write_file(Path('tmp.md'), 'content')  # doctest: +SKIP
-
     """
     if target.exists():
         existing = target.read_text(encoding="utf-8")
@@ -69,21 +72,21 @@ def render_templates() -> list[Path]:
     """Render configured templates into the repository.
 
     Returns:
-        A list of paths that were rendered or refreshed.
+        list[Path]: Paths that were rendered or refreshed.
 
     Raises:
         GitHubFileError: If rendering fails.
 
     Example:
         >>> render_templates()  # doctest: +SKIP
-
     """
     config = load_config()["github_manager"]
     rendered: list[Path] = []
     template_root = CONFIG_ROOT.parent / "github"
+    github_root = Path(config.get("github_root", ".github"))
     if config.get("copilot_instructions_enabled", True):
         path = template_root / "copilot-instructions.md.j2"
-        target = Path(".github") / "copilot-instructions.md"
+        target = github_root / "copilot-instructions.md"
         template = _load_template(path)
         _write_file(
             target, template.render(additional_notes="These instructions are managed.")
@@ -95,9 +98,7 @@ def render_templates() -> list[Path]:
             template_root / "instructions" / "default-guidelines.instructions.mwa.md.j2"
         )
         # Output naming rule: insert `.mwa` before `.instructions.md`
-        target = (
-            Path(".github") / "instructions" / "default-guidelines.instructions.mwa.md"
-        )
+        target = github_root / "instructions" / "default-guidelines.instructions.mwa.md"
         template = _load_template(path)
         _write_file(
             target,
@@ -116,7 +117,7 @@ def render_templates() -> list[Path]:
         for template_name in prompt_templates:
             template = _load_template(template_root / "prompts" / template_name)
             target_name = template_name.replace(".j2", "")
-            target = Path(".github") / "prompts" / target_name
+            target = github_root / "prompts" / target_name
             _write_file(
                 target,
                 template.render(
@@ -131,7 +132,7 @@ def render_templates() -> list[Path]:
         ]:
             template = _load_template(template_root / "chatmodes" / template_name)
             target_name = template_name.replace(".j2", "")
-            target = Path(".github") / "chatmodes" / target_name
+            target = github_root / "chatmodes" / target_name
             _write_file(
                 target,
                 template.render(

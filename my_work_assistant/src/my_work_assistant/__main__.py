@@ -61,5 +61,12 @@ def self_test() -> None:
     raise typer.Exit(result.returncode)
 
 
+@app.command()
+def manifest() -> None:
+    """Dump discovered managed assets manifest as JSON."""
+    data = constants.build_manifest()
+    typer.echo(json.dumps({"manifest": data}, indent=2))
+
+
 if __name__ == "__main__":
     app()
