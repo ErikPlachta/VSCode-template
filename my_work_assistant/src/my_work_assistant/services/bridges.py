@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from ..models import DataSet, Platform, Person, Group
+from ..models import DataSet, Group, Person, Platform
 
 __all__ = ["group_membership", "platform_datasets"]
 
@@ -24,8 +24,8 @@ def group_membership(groups: Iterable[Group], people: Iterable[Person]) -> dict[
     Example:
         >>> group_membership([], [])
         {}
-    """
 
+    """
     people_index = {person.id: person.full_name for person in people}
     mapping: dict[str, list[str]] = {}
     for group in groups:
@@ -47,8 +47,8 @@ def platform_datasets(platforms: Iterable[Platform], datasets: Iterable[DataSet]
     Example:
         >>> platform_datasets([], [])
         {}
-    """
 
+    """
     dataset_index = {dataset.id: dataset.name for dataset in datasets}
     mapping: dict[str, list[str]] = {}
     for platform in platforms:

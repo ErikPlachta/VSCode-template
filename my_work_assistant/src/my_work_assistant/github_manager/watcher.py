@@ -21,8 +21,8 @@ def watch_paths(paths: Iterable[Path]) -> None:
 
     Example:
         >>> watch_paths([])
-    """
 
+    """
     tracked = [str(path) for path in paths]
     log_event("ChangeLog.md", "INFO", "Watcher inspected paths", paths=tracked)
     record_request("watcher", "inspected paths", count=len(tracked))

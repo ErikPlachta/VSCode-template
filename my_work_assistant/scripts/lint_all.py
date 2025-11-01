@@ -14,7 +14,6 @@ COMMANDS = [
 
 def main() -> None:
     """Execute configured lint commands sequentially."""
-
     for command in COMMANDS:
         subprocess.run(command, check=False)
 

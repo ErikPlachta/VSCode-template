@@ -19,7 +19,6 @@ MODULES = [
 @pytest.mark.docstring
 def test_modules_have_docstrings() -> None:
     """All targeted modules expose docstrings."""
-
     for module_name in MODULES:
         module = __import__(module_name, fromlist=["*"])
         assert inspect.getdoc(module)
@@ -28,7 +27,6 @@ def test_modules_have_docstrings() -> None:
 @pytest.mark.typing
 def test_functions_have_type_hints() -> None:
     """Public functions provide typing metadata."""
-
     for module_name in MODULES:
         module = __import__(module_name, fromlist=["*"])
         for name, func in inspect.getmembers(module, inspect.isfunction):

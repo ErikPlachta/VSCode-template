@@ -4,6 +4,6 @@ Expose service modules for convenience imports.
 """
 from __future__ import annotations
 
-from . import bridges, validator, updater, summary
+from . import bridges, summary, updater, validator
 
 __all__ = ["bridges", "validator", "updater", "summary"]

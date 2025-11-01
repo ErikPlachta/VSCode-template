@@ -22,8 +22,8 @@ def list_files(paths: Iterable[Path]) -> list[Path]:
     Example:
         >>> list_files([])
         []
-    """
 
+    """
     collected: list[Path] = []
     for path in paths:
         if path.is_dir():

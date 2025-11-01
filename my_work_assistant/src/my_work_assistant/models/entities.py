@@ -28,6 +28,7 @@ class Category(BaseModel):
     Example:
         >>> Category(id='cat', name='Example').name
         'Example'
+
     """
 
     id: str
@@ -46,6 +47,7 @@ class Label(BaseModel):
     Example:
         >>> Label(id='lbl', name='Label', category_id='cat').category_id
         'cat'
+
     """
 
     id: str
@@ -64,6 +66,7 @@ class Group(BaseModel):
     Example:
         >>> Group(id='grp', name='Group', members=[]).members
         []
+
     """
 
     id: str
@@ -83,6 +86,7 @@ class Person(BaseModel):
     Example:
         >>> Person(id='p', full_name='A', role_ids=[], group_ids=[]).full_name
         'A'
+
     """
 
     id: str
@@ -102,6 +106,7 @@ class Role(BaseModel):
     Example:
         >>> Role(id='r', name='Role').name
         'Role'
+
     """
 
     id: str
@@ -121,6 +126,7 @@ class Platform(BaseModel):
     Example:
         >>> Platform(id='plat', name='Platform', related_platform_ids=[], datasets=[]).datasets
         []
+
     """
 
     id: str
@@ -141,6 +147,7 @@ class DataSet(BaseModel):
     Example:
         >>> DataSet(id='ds', name='Data', platform_id='plat').platform_id
         'plat'
+
     """
 
     id: str

@@ -1,0 +1,40 @@
+<!--
+⚙️  This file is generated and managed by the My Work Assistant MCP Server.
+Do not edit directly.
+To modify content, update:
+  .my_work_assistant/my-work-assistant.config.json
+-->
+---
+managed_by_mcp: true
+scope: repository
+---
+## Default Collaboration Guidelines
+
+{{ body }}
+
+### Working style
+- Prefer small, composable changes with clear scope and tests.
+- Explain assumptions briefly and proceed; ask only when blocked.
+- Keep responses skimmable with short sections and bullet points.
+
+### Code quality
+- Python 3.12, strict typing in library code; tests may be lighter.
+- Docstrings are meaningful; docs are generated from them.
+- Keep public APIs stable and documented; add minimal examples.
+
+### Testing
+- Add unit tests for happy path and 1–2 edge cases.
+- Keep tests deterministic (monkeypatch filesystem/time as needed).
+- Aim for ≥95% coverage; skip low-value branches when justified.
+
+### Lint & type
+- Respect existing lint config and import order.
+- Fix type hints where feasible; defer only with clear comments.
+
+### Security & reliability
+- Avoid secrets in code or logs; prefer env vars.
+- Handle I/O errors defensively with clear messages.
+
+### Commits & PRs
+- Conventional commits (feat/fix/chore/docs/test/refactor).
+- PR description: summary, rationale, risks, and testing notes.

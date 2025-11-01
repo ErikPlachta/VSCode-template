@@ -22,8 +22,8 @@ def read_text(path: Path) -> str:
         >>> write_text(Path('tmp.txt'), 'value')
         >>> read_text(Path('tmp.txt'))
         'value'
-    """
 
+    """
     return path.read_text(encoding="utf-8")
 
 
@@ -36,7 +36,7 @@ def write_text(path: Path, content: str) -> None:
 
     Example:
         >>> write_text(Path('tmp.txt'), 'value')
-    """
 
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")

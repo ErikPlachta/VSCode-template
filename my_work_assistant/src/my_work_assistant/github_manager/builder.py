@@ -1,30 +1,37 @@
-"""my_work_assistant.github_manager.builder
+"""my_work_assistant.github_manager.builder.
 
 Render managed GitHub files from bundled templates.
+
+This module provides utilities to load Jinja2 templates, render them into the
+configured GitHub root, and protect unmanaged files from accidental overwrite
+by requiring a standard disclaimer banner. All public functions include
+type-annotated docstrings.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
 
 from jinja2 import Template
 
-from ..core.config import CONFIG_ROOT, load_config
+from ..core.config import CONFIG_ROOT, USER_ROOT, load_config
 from ..core.exceptions import GitHubFileError
 
 __all__ = ["DISCLAIMER", "render_templates"]
 
-DISCLAIMER = "⚙️  This file is generated and managed by the My Work Assistant MCP Server."
+DISCLAIMER = (
+    "⚙️  This file is generated and managed by the My Work Assistant MCP Server."
+)
 
 
 def _load_template(path: Path) -> Template:
     """Load a Jinja2 template from disk.
 
     Args:
-        path: Path to the template file.
+        path (Path): Path to the template file.
 
     Returns:
-        A compiled Jinja2 template instance.
+        Template: Compiled Jinja2 template instance.
 
     Raises:
         GitHubFileError: If the template cannot be read.
@@ -32,7 +39,6 @@ def _load_template(path: Path) -> Template:
     Example:
         >>> isinstance(_load_template(Path('sample.j2')), Template)  # doctest: +SKIP
     """
-
     try:
         return Template(path.read_text(encoding="utf-8"))
     except OSError as exc:  # pragma: no cover
@@ -43,8 +49,8 @@ def _write_file(target: Path, content: str) -> None:
     """Write rendered content to disk respecting disclaimers.
 
     Args:
-        target: Output file path.
-        content: Rendered template content.
+        target (Path): Output file path.
+        content (str): Rendered template content.
 
     Raises:
         GitHubFileError: If writing fails or disclaimer safeguards are triggered.
@@ -52,11 +58,12 @@ def _write_file(target: Path, content: str) -> None:
     Example:
         >>> _write_file(Path('tmp.md'), 'content')  # doctest: +SKIP
     """
-
     if target.exists():
         existing = target.read_text(encoding="utf-8")
         if DISCLAIMER not in existing:
-            raise GitHubFileError("Refusing to overwrite unmanaged file", {"path": str(target)})
+            raise GitHubFileError(
+                "Refusing to overwrite unmanaged file", {"path": str(target)}
+            )
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(content, encoding="utf-8")
 
@@ -64,8 +71,12 @@ def _write_file(target: Path, content: str) -> None:
 def render_templates() -> list[Path]:
     """Render configured templates into the repository.
 
+    This now renders category files first (instructions/prompts/chatmodes),
+    then embeds their content into ``copilot-instructions.md`` so Copilot Chat
+    receives a single, self-contained reference file.
+
     Returns:
-        A list of paths that were rendered or refreshed.
+        list[Path]: Paths that were rendered or refreshed.
 
     Raises:
         GitHubFileError: If rendering fails.
@@ -73,36 +84,193 @@ def render_templates() -> list[Path]:
     Example:
         >>> render_templates()  # doctest: +SKIP
     """
-
     config = load_config()["github_manager"]
     rendered: list[Path] = []
     template_root = CONFIG_ROOT.parent / "github"
-    if config.get("copilot_instructions_enabled", True):
-        path = template_root / "copilot-instructions.md.j2"
-        target = Path(".github") / "copilot-instructions.md"
-        template = _load_template(path)
-        _write_file(target, template.render(additional_notes="These instructions are managed."))
-        rendered.append(target)
+    github_root = Path(config.get("github_root", ".github"))
+
+    def extract_body(content: str) -> str:
+        """Return content without YAML front matter and leading comments.
+
+        Heuristic: find two lines that start with '---' and return text after
+        the second delimiter. Falls back to original content if not found.
+        """
+        lines = content.splitlines()
+        dashes_idx: list[int] = [i for i, ln in enumerate(lines) if ln.strip() == "---"]
+        if len(dashes_idx) >= 2:
+            return "\n".join(lines[dashes_idx[1] + 1 :]).strip()
+        return content
+
+    def parse_front_matter_local(content: str) -> dict[str, str]:
+        """Minimal front matter parser to avoid circular imports.
+
+        Expects a YAML-like header between '---' lines; returns key/value strings.
+        """
+        start = content.find("---\n")
+        if start == -1:
+            return {}
+        end = content.find("\n---", start + 4)
+        if end == -1:
+            return {}
+        block = content[start + 4 : end]
+        data: dict[str, str] = {}
+        for line in block.splitlines():
+            if ":" not in line:
+                continue
+            key, value = line.split(":", 1)
+            data[key.strip()] = value.strip()
+        return data
+
+    # 1) Render instructions/prompts/chatmodes first
+    instr_targets: list[Path] = []
+    prompt_targets: list[Path] = []
+    chatmode_targets: list[Path] = []
+    doc_targets: list[Path] = []
+
     if config.get("instructions_enabled", True):
-        path = template_root / "instructions" / "default-guidelines.instructions.md.j2"
-        target = Path(".github") / "instructions" / "default-guidelines.instructions.md"
+        path = (
+            template_root / "instructions" / "default-guidelines.instructions.mwa.md.j2"
+        )
+        target = github_root / "instructions" / "default-guidelines.instructions.mwa.md"
         template = _load_template(path)
-        _write_file(target, template.render(body="- Follow the docs."))
+        _write_file(
+            target,
+            template.render(
+                body="- Follow the docs generated by `python -m my_work_assistant init` in path `.my_work_assistant/docs`."
+            ),
+        )
         rendered.append(target)
+        instr_targets.append(target)
+
     if config.get("prompts_enabled", True):
         for template_name in [
-            "document-api.prompt.md.j2",
-            "review-code.prompt.md.j2",
-            "onboarding-plan.prompt.md.j2",
+            "document-api.prompt.mwa.md.j2",
+            "review-code.prompt.mwa.md.j2",
+            "onboarding-plan.prompt.mwa.md.j2",
         ]:
             template = _load_template(template_root / "prompts" / template_name)
-            target = Path(".github") / "prompts" / template_name.replace(".j2", "")
-            _write_file(target, template.render(body="Generated by My Work Assistant."))
+            target_name = template_name.replace(".j2", "")
+            target = github_root / "prompts" / target_name
+            _write_file(
+                target,
+                template.render(
+                    body="Generated by My Work Assistant.\n\n## TODO: Verify this is in alignment with the MP Server goals."
+                ),
+            )
             rendered.append(target)
+            prompt_targets.append(target)
+    # Compute priorities line from prompt metadata (front matter)
+    priorities_line = ""
+    available_topics: set[str] = set()
+    if prompt_targets:
+        items: list[tuple[int, str]] = []
+        for p in prompt_targets:
+            try:
+                meta = parse_front_matter_local(p.read_text(encoding="utf-8"))
+                pr = int(meta.get("priority", 999))  # default low priority
+                topic = str(meta.get("topic", p.stem.split(".prompt")[0]))
+                items.append((pr, topic))
+                available_topics.add(topic)
+            except Exception:
+                topic = p.stem.split(".prompt")[0]
+                items.append((999, topic))
+                available_topics.add(topic)
+        items.sort(key=lambda t: t[0])
+        priorities_line = ", ".join(topic for _, topic in items)
+
+    # Derive a concise guidance sentence from available prompt topics.
+    # This reduces hard-coding while keeping the same intent as before.
+    guidance_line = "Pick the highest-priority prompt for your task."
+    parts: list[str] = []
+    if "review-code" in available_topics:
+        parts.append("For code changes, start with review-code")
+    if "document-api" in available_topics:
+        # stylistic lowercase "for" if it follows a previous clause
+        parts.append(
+            ("for API/docs, start with document-api")
+            if parts
+            else ("For API/docs, start with document-api")
+        )
+    if parts:
+        guidance_line = "; ".join(parts) + "."
+
     if config.get("chatmodes_enabled", True):
-        for template_name in ["reviewer.chatmode.md.j2", "docwriter.chatmode.md.j2"]:
+        for template_name in [
+            "reviewer.chatmode.mwa.md.j2",
+            "docwriter.chatmode.mwa.md.j2",
+        ]:
             template = _load_template(template_root / "chatmodes" / template_name)
-            target = Path(".github") / "chatmodes" / template_name.replace(".j2", "")
-            _write_file(target, template.render(body="Generated persona."))
+            target_name = template_name.replace(".j2", "")
+            target = github_root / "chatmodes" / target_name
+            _write_file(
+                target,
+                template.render(
+                    body="Generated persona.\n\n## TODO: Verify this is in alignment with the MP Server goals."
+                ),
+            )
             rendered.append(target)
+            chatmode_targets.append(target)
+
+    # Optional: embed user docs if present
+    docs_dir = USER_ROOT / "docs"
+    if docs_dir.exists():
+        for p in sorted(docs_dir.glob("*.md")):
+            doc_targets.append(p)
+
+    # 2) Render copilot-instructions last, embedding content
+    if config.get("copilot_instructions_enabled", True):
+        path = template_root / "copilot-instructions.md.j2"
+        target = github_root / "copilot-instructions.md"
+        template = _load_template(path)
+
+        def _summarize_markdown(raw: str) -> str:
+            """Return a short one-line summary from the first heading/paragraph.
+
+            Heuristics only; keeps things lightweight and zero-dependency.
+            """
+            if not raw:
+                return ""
+            lines = [ln.strip() for ln in raw.splitlines()]
+            # Prefer first ATX heading (# ...)
+            heading = next((ln.lstrip("# ") for ln in lines if ln.startswith("#")), "")
+            # Find first non-empty paragraph line (not a heading or fence)
+            para = next(
+                (ln for ln in lines if ln and not ln.startswith(("#", "<!--", "```"))),
+                "",
+            )
+            if heading and para and heading != para:
+                combo = f"{heading} — {para}"
+            else:
+                combo = heading or para
+            return combo[:240]
+
+        def pack(paths: list[Path]) -> list[dict[str, str]]:
+            items: list[dict[str, str]] = []
+            for p in paths:
+                try:
+                    raw = p.read_text(encoding="utf-8")
+                except OSError:
+                    raw = ""
+                items.append(
+                    {
+                        "name": p.name,
+                        "path": str(p),
+                        "content": extract_body(raw),
+                        "summary": _summarize_markdown(raw),
+                    }
+                )
+            return items
+
+        content = template.render(
+            additional_notes="These instructions are managed.",
+            embedded_instructions=pack(instr_targets),
+            embedded_prompts=pack(prompt_targets),
+            embedded_chatmodes=pack(chatmode_targets),
+            embedded_docs=pack(doc_targets),
+            priorities_line=priorities_line,
+            guidance_line=guidance_line,
+        )
+        _write_file(target, content)
+        rendered.append(target)
+
     return rendered

@@ -1,0 +1,13 @@
+fastapi
+typer
+pydantic>=2
+jinja2
+jsonschema
+watchdog
+uvicorn
+
+[dev]
+pytest
+pytest-cov
+mypy
+ruff

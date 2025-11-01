@@ -22,8 +22,8 @@ def summarize_changes(paths: Iterable[Path]) -> str:
     Example:
         >>> summarize_changes([])
         'No changes detected.'
-    """
 
+    """
     entries = [str(path) for path in paths]
     if not entries:
         return "No changes detected."

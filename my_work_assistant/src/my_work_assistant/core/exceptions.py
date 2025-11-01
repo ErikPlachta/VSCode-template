@@ -26,6 +26,7 @@ class MCPError(Exception):
 
     Example:
         >>> raise MCPError("unexpected")
+
     """
 
     message: str
@@ -40,8 +41,8 @@ class MCPError(Exception):
         Example:
             >>> str(MCPError("boom"))
             'boom'
-        """
 
+        """
         return self.message
 
 
@@ -55,6 +56,7 @@ class ConfigError(MCPError):
 
     Example:
         >>> raise ConfigError("missing key")
+
     """
 
 
@@ -68,6 +70,7 @@ class ValidationError(MCPError):
 
     Example:
         >>> raise ValidationError("invalid front matter")
+
     """
 
 
@@ -81,6 +84,7 @@ class SchemaError(MCPError):
 
     Example:
         >>> raise SchemaError("unknown field")
+
     """
 
 
@@ -94,6 +98,7 @@ class GitHubFileError(MCPError):
 
     Example:
         >>> raise GitHubFileError("missing disclaimer")
+
     """
 
 
@@ -107,5 +112,6 @@ class APIError(MCPError):
 
     Example:
         >>> raise APIError("bad request")
+
     """
 

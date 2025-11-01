@@ -4,9 +4,9 @@ Configuration loading and merging utilities for the MCP server.
 """
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
-import json
 
 from .exceptions import ConfigError
 
@@ -19,7 +19,6 @@ USER_ROOT = Path.cwd() / ".my_work_assistant"
 
 def load_config() -> dict[str, Any]:
     """Load and merge configuration dictionaries."""
-
     default_path = CONFIG_ROOT / "my-work-assistant.config.json"
     user_path = USER_ROOT / "my-work-assistant.config.json"
     try:
@@ -35,7 +34,6 @@ def load_config() -> dict[str, Any]:
 
 def _merge_dicts(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
     """Merge two dictionaries recursively."""
-
     result: dict[str, Any] = {}
     for key, value in base.items():
         if key in override and isinstance(value, dict) and isinstance(override[key], dict):
@@ -52,7 +50,6 @@ def _merge_dicts(base: dict[str, Any], override: dict[str, Any]) -> dict[str, An
 
 def get_config_section(section: str) -> dict[str, Any]:
     """Retrieve a configuration section."""
-
     config = load_config()
     if section not in config:
         raise ConfigError("Missing configuration section", {"section": section})
