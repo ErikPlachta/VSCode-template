@@ -8,13 +8,12 @@ import sys
 import os
 from pathlib import Path
 
-from copilot_workspace import WorkspaceContext, default_registry, generate_workspace
+from copilot_workspace import WorkspaceContext, default_registry
 
 
 def test_default_registry_lists_categories(tmp_path: Path) -> None:
     """Ensure the default actions surface category metadata."""
 
-    generate_workspace(tmp_path)
     context = WorkspaceContext(tmp_path)
     registry = default_registry()
     result = registry.run("list_categories", context)
@@ -27,7 +26,6 @@ def test_default_registry_lists_categories(tmp_path: Path) -> None:
 def test_default_registry_validation(tmp_path: Path) -> None:
     """Validation action should succeed for the generated workspace."""
 
-    generate_workspace(tmp_path)
     context = WorkspaceContext(tmp_path)
     registry = default_registry()
     result = registry.run("validate", context)
@@ -38,7 +36,6 @@ def test_default_registry_validation(tmp_path: Path) -> None:
 def test_cli_run_action_json_output(tmp_path: Path) -> None:
     """The CLI should execute actions and emit JSON when requested."""
 
-    generate_workspace(tmp_path)
     script = Path(__file__).resolve().parents[1] / "install-github-copilot-instructions-work.py"
     env = {**os.environ, "PYTHONPATH": os.pathsep.join(filter(None, [os.environ.get("PYTHONPATH"), str(Path(__file__).resolve().parents[1] / "src")]))}
     completed = subprocess.run(

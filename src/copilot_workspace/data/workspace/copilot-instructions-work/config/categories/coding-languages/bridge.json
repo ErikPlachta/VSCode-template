@@ -1,0 +1,27 @@
+{
+  "$schema": "./utilities/bridge-dataset-schema.json",
+  "bridge_name": "Coding-languagesBridge",
+  "entity_type": "conceptual",
+  "participants": [
+    {
+      "source_category": "company",
+      "dataset": "CompanyDataset",
+      "keys": ["DepartmentID"]
+    },
+    {
+      "source_category": "people",
+      "dataset": "PeopleDataset",
+      "keys": ["EmployeeID"]
+    }
+  ],
+  "bridge_keys": [
+    {"name": "DepartmentID", "type": "INT"},
+    {"name": "EmployeeID", "type": "INT"}
+  ],
+  "join_conditions": ["CompanyDataset.DepartmentID = PeopleDataset.DepartmentID"],
+  "relationship_type": "one-to-many",
+  "confidence_score": 0.95,
+  "criticality": "medium",
+  "created_by": "System",
+  "last_validated": "2025-01-01"
+}

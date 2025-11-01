@@ -1,0 +1,32 @@
+{
+  "dataset_name": "CompanyDataset",
+  "primary_keys": ["ID"],
+  "foreign_keys": [
+    {"column": "EmployeeID", "references": "PeopleDataset.EmployeeID"},
+    {"column": "DepartmentID", "references": "CompanyDataset.DepartmentID"}
+  ],
+  "columns": [
+    {"name": "ID", "type": "INT"},
+    {"name": "EmployeeID", "type": "INT"},
+    {"name": "DepartmentID", "type": "INT"},
+    {"name": "Name", "type": "VARCHAR(255)"},
+    {"name": "ModifiedDate", "type": "DATETIME"}
+  ],
+  "sample_rows": [
+    {
+      "ID": 1,
+      "EmployeeID": 101,
+      "DepartmentID": 10,
+      "Name": "Company Example 1",
+      "ModifiedDate": "2025-01-01"
+    },
+    {
+      "ID": 2,
+      "EmployeeID": 102,
+      "DepartmentID": 20,
+      "Name": "Company Example 2",
+      "ModifiedDate": "2025-01-02"
+    }
+  ],
+  "notes": "Template dataset for Copilot Chat validation."
+}
