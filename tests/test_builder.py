@@ -1,4 +1,4 @@
-"""Tests for the Copilot workspace builder."""
+"""Tests for the Copilot workspace template synchronisation."""
 
 from __future__ import annotations
 
@@ -7,8 +7,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from copilot_workspace import generate_workspace
-from copilot_workspace.builder import CATEGORIES
+from copilot_workspace import CATEGORIES, generate_workspace
 
 
 def test_generate_workspace_structure(tmp_path: Path) -> None:

@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict
 
-from copilot_workspace import generate_workspace
+from copilot_workspace import WorkspaceValidationError, generate_workspace
 from copilot_workspace.actions import WorkspaceContext, default_registry
 
 
@@ -96,6 +96,13 @@ def _handle_run(action_name: str | None, directory: Path, fmt: str, list_only: b
     """Execute a registered action or display the available catalogue."""
 
     context = WorkspaceContext(directory)
+    try:
+        context.ensure_workspace()
+    except WorkspaceValidationError as exc:
+        print("❌ Copilot workspace validation failed:")
+        for message in exc.errors:
+            print(f" - {message}")
+        raise SystemExit(1) from exc
     registry = default_registry()
     if list_only or not action_name:
         for name, description in registry.describe().items():

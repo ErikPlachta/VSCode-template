@@ -7,10 +7,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Mapping, MutableMapping, Optional
 
-from .builder import (
-    WorkspaceBuilder,
+from .workspace import (
+    WorkspacePaths,
     bridge_template,
     dataset_template,
+    ensure_workspace,
     load_datasets,
     validate_bridge,
 )
@@ -41,35 +42,32 @@ class WorkspaceContext:
     """Runtime context for interacting with a Copilot workspace."""
 
     base_dir: Path | str
-    builder: WorkspaceBuilder | None = None
+    paths: WorkspacePaths | None = None
 
     def __post_init__(self) -> None:
-        """Create a :class:`WorkspaceBuilder` anchored at ``base_dir``."""
+        """Initialise workspace helper paths."""
 
         base_path = Path(self.base_dir).resolve()
         self.base_dir = base_path
-        self.builder = self.builder or WorkspaceBuilder(base_path)
+        self.paths = WorkspacePaths(base_path)
 
     @property
     def workspace_dir(self) -> Path:
         """Return the directory that stores configuration assets."""
 
-        assert self.builder is not None
-        return self.builder.workspace_dir
+        assert self.paths is not None
+        return self.paths.workspace_dir
 
     def ensure_workspace(self) -> Path:
-        """Generate the workspace if it does not already exist."""
+        """Ensure the packaged workspace exists in the target directory."""
 
-        assert self.builder is not None
-        if not self.workspace_dir.exists():
-            return self.builder.generate()
-        return self.workspace_dir
+        return ensure_workspace(self.base_dir)
 
     def _category_dirs(self) -> Iterable[Path]:
         """Yield category directories beneath the workspace."""
 
-        assert self.builder is not None
-        categories_dir = self.builder.categories_dir
+        assert self.paths is not None
+        categories_dir = self.paths.categories_dir
         self.ensure_workspace()
         return sorted(path for path in categories_dir.iterdir() if path.is_dir())
 
@@ -97,9 +95,9 @@ class WorkspaceContext:
     def load_bridge_diagnostics(self) -> Dict[str, List[str]]:
         """Return validation diagnostics for every bridge file."""
 
-        assert self.builder is not None
+        assert self.paths is not None
         self.ensure_workspace()
-        category_root = self.builder.categories_dir
+        category_root = self.paths.categories_dir
         datasets = load_datasets(category_root)
         errors: List[str] = []
         for bridge_path in category_root.glob("*/bridge.json"):
@@ -162,8 +160,7 @@ def _action_preview_templates(context: WorkspaceContext, _options: Mapping[str, 
     people_template = dataset_template("people")
     company_template = dataset_template("company")
     applications_template = dataset_template("applications")
-    assert context.builder is not None
-    bridge_sample = bridge_template("default", context.builder.timestamp)
+    bridge_sample = bridge_template("default")
     return ActionResult(
         summary="Provided dataset and bridge template previews.",
         data={

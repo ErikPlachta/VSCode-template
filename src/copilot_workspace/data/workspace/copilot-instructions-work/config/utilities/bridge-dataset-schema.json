@@ -1,0 +1,19 @@
+{
+  "$id": "https://schema.local/bridge-dataset.schema.json",
+  "title": "Bridge Dataset Definition",
+  "type": "object",
+  "required": [
+    "bridge_name",
+    "participants",
+    "bridge_keys",
+    "join_conditions",
+    "relationship_type"
+  ],
+  "properties": {
+    "bridge_name": {"type": "string"},
+    "participants": {"type": "array"},
+    "bridge_keys": {"type": "array"},
+    "join_conditions": {"type": "array"},
+    "relationship_type": {"type": "string"}
+  }
+}
