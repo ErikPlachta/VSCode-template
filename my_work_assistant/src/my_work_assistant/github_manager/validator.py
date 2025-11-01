@@ -56,7 +56,7 @@ def _load_schema(name: str) -> Draft7Validator:
 
 def _schema_for(path: Path) -> Draft7Validator:
     name = path.name
-    if name == "copilot-instructions.mwa.md":
+    if name == "copilot-instructions.md":
         return _load_schema("copilot_instructions.schema.json")
     if name.endswith(".instructions.mwa.md"):
         return _load_schema("instructions.schema.json")
@@ -107,7 +107,7 @@ def validate_file(path: Path) -> None:
         )
 
     name = path.name
-    if name == "copilot-instructions.mwa.md":
+    if name == "copilot-instructions.md":
         required_markers = [
             "# Copilot Instructions",
             "<!-- BEGIN my_work_assistant -->",

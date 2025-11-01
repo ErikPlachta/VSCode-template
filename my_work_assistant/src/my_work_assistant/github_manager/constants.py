@@ -12,7 +12,7 @@ __all__ = ["GITHUB_ROOT", "MANAGED_FILES"]
 
 GITHUB_ROOT = Path(".github")
 MANAGED_FILES: dict[str, Path | List[Path]] = {
-    "copilot": GITHUB_ROOT / "copilot-instructions.mwa.md",
+    "copilot": GITHUB_ROOT / "copilot-instructions.md",
     "instructions": GITHUB_ROOT
     / "instructions"
     / "default-guidelines.instructions.mwa.md",

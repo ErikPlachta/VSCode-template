@@ -83,8 +83,7 @@ def render_templates() -> list[Path]:
     template_root = CONFIG_ROOT.parent / "github"
     if config.get("copilot_instructions_enabled", True):
         path = template_root / "copilot-instructions.md.j2"
-        # Output naming rule: add `.mwa` before the final extension, e.g., `copilot-instructions.mwa.md`
-        target = Path(".github") / "copilot-instructions.mwa.md"
+        target = Path(".github") / "copilot-instructions.md"
         template = _load_template(path)
         _write_file(
             target, template.render(additional_notes="These instructions are managed.")

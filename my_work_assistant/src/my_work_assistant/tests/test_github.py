@@ -24,7 +24,7 @@ def test_builder_respects_disclaimer(tmp_path, monkeypatch) -> None:
 def test_validator_detects_missing_disclaimer(monkeypatch) -> None:
     """validate_file raises when the disclaimer is missing."""
     monkeypatch.chdir(Path.cwd())
-    target = Path(".github") / "copilot-instructions.mwa.md"
+    target = Path(".github") / "copilot-instructions.md"
     original = target.read_text(encoding="utf-8")
     target.write_text("# No disclaimer", encoding="utf-8")
     with pytest.raises(GitHubFileError):
