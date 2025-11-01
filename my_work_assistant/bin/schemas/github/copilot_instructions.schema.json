@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "string",
+      "pattern": "<!-- BEGIN my_work_assistant -->[\\s\\S]*<!-- END my_work_assistant -->"
+    }
+  },
+  "required": ["content"]
+}

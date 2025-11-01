@@ -1,2 +1,7 @@
 __pycache__/
+*.pyc
+.mypy_cache/
 .pytest_cache/
+.env
+.mycli
+.my_work_assistant/

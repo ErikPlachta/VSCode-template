@@ -1,0 +1,9 @@
+{
+  "categories": ["cat-operations", "cat-research"],
+  "labels": ["priority-high"],
+  "groups": ["engineering"],
+  "people": ["alice", "bob"],
+  "roles": ["maintainer"],
+  "platform": "github",
+  "datasets": ["sample-dataset"]
+}
