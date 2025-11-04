@@ -59,7 +59,11 @@ managed_by_mcp: true
 
 _Summary:_ {{ item.summary }}
 
+{% if not docs_summary_only %}
 {{ item.content }}
+{% else %}
+<!-- summary-only mode: full content omitted -->
+{% endif %}
 
 </details>
 {% endfor %}

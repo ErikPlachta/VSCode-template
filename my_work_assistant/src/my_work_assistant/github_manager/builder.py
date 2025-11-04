@@ -162,6 +162,7 @@ def render_templates() -> list[Path]:
     # Compute priorities line from prompt metadata (front matter)
     priorities_line = ""
     available_topics: set[str] = set()
+    category_best: dict[str, tuple[int, str]] = {}
     if prompt_targets:
         items: list[tuple[int, str]] = []
         for p in prompt_targets:
@@ -169,8 +170,13 @@ def render_templates() -> list[Path]:
                 meta = parse_front_matter_local(p.read_text(encoding="utf-8"))
                 pr = int(meta.get("priority", 999))  # default low priority
                 topic = str(meta.get("topic", p.stem.split(".prompt")[0]))
+                category = str(meta.get("category", "")).strip()
                 items.append((pr, topic))
                 available_topics.add(topic)
+                if category:
+                    prev = category_best.get(category)
+                    if prev is None or pr < prev[0]:
+                        category_best[category] = (pr, topic)
             except Exception:
                 topic = p.stem.split(".prompt")[0]
                 items.append((999, topic))
@@ -178,19 +184,20 @@ def render_templates() -> list[Path]:
         items.sort(key=lambda t: t[0])
         priorities_line = ", ".join(topic for _, topic in items)
 
-    # Derive a concise guidance sentence from available prompt topics.
-    # This reduces hard-coding while keeping the same intent as before.
+    # Derive a concise guidance sentence from categories: code/docs/onboarding.
     guidance_line = "Pick the highest-priority prompt for your task."
     parts: list[str] = []
-    if "review-code" in available_topics:
-        parts.append("For code changes, start with review-code")
-    if "document-api" in available_topics:
-        # stylistic lowercase "for" if it follows a previous clause
-        parts.append(
-            ("for API/docs, start with document-api")
-            if parts
-            else ("For API/docs, start with document-api")
-        )
+
+    def _recommend(category: str, prefix: str) -> None:
+        item = category_best.get(category)
+        if item:
+            topic = item[1]
+            clause = (prefix.lower() if parts else prefix) + f", start with {topic}"
+            parts.append(clause)
+
+    _recommend("code", "For code changes")
+    _recommend("docs", "For API/docs")
+    _recommend("onboarding", "For onboarding")
     if parts:
         guidance_line = "; ".join(parts) + "."
 
@@ -261,6 +268,7 @@ def render_templates() -> list[Path]:
                 )
             return items
 
+        docs_summary_only = bool(config.get("docs_summary_only", False))
         content = template.render(
             additional_notes="These instructions are managed.",
             embedded_instructions=pack(instr_targets),
@@ -269,6 +277,7 @@ def render_templates() -> list[Path]:
             embedded_docs=pack(doc_targets),
             priorities_line=priorities_line,
             guidance_line=guidance_line,
+            docs_summary_only=docs_summary_only,
         )
         _write_file(target, content)
         rendered.append(target)
