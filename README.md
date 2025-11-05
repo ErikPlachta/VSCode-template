@@ -1,48 +1,38 @@
 # My Business MCP Extension
 
-## Overview
-This VS Code extension connects to your MCP server and automatically registers `/slash` commands and `@mentions` for each MCP tool.
+## Features
+- Dynamically discovers all MCP tools from your server.
+- Registers `/commands` and `@mentions` in Copilot Chat.
+- Auto-prompts arguments via `input_schema`.
+- Fully unit-tested, documented, and CI-integrated.
 
-## Setup
-1. Install dependencies and compile:
-   ```bash
-   npm install
-   npm run compile
-   ```
+## Commands
 
-2. Create a .vsix package:
-   ```bash
-   npx vsce package
-   ```
-
-3. Install in VS Code:
-   ```bash
-   code --install-extension mybusiness-mcp-extension-1.0.0.vsix
-   ```
-
-4. Add settings:
-   ```json
-   {
-     "mybusinessMCP.serverUrl": "https://your-domain.com/",
-     "mybusinessMCP.token": "<JWT token>"
-   }
-   ```
-
-## Use
-Inside Copilot Chat:
-
-```
 /getBusinessMetric
 @listProjects
-```
 
-The extension auto-prompts for arguments defined in each MCP tool’s schema.
-
-## Publish or push
+## Scripts
 ```bash
-git init
-git add .
-git commit -m "Initial commit of My Business MCP Extension"
-git remote add origin https://github.com/<youruser>/mybusiness-mcp-extension.git
-git push -u origin main
-```
+npm run compile    # build TypeScript
+npm test           # run Jest tests
+npm run docs       # generate Typedoc markdown docs
+npm run package    # build VSIX package
+
+GitHub CI
+•test.yml → validates build & test
+•docs.yml → publishes typedoc output to GitHub Pages
+
+---
+
+## ✅ **Expected Outcome**
+- A complete, buildable VS Code MCP extension repository.  
+- Unit tests run with Jest via `npm test`.  
+- Typedoc generates Markdown docs into `/docs`.  
+- GitHub Actions:
+  - Runs tests on each push.
+  - Publishes `/docs` to GitHub Pages automatically.  
+- JSDoc present across all files for maintainability.  
+
+---
+
+**End of Prompt — `mybusiness-mcp-extension`**

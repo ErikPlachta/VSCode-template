@@ -1,6 +1,14 @@
+/**
+ * @fileoverview Generates VS Code input prompts for MCP tool schemas.
+ */
 import * as vscode from "vscode";
 import { MCPTool } from "./mcpSync";
 
+/**
+ * Prompts the user for all required tool arguments.
+ * @param {MCPTool} tool - Tool definition with input schema.
+ * @returns {Promise<Record<string, any>>} - User-provided arguments.
+ */
 export async function promptForArgs(tool: MCPTool): Promise<Record<string, any>> {
   const args: Record<string, any> = {};
   const props = tool.input_schema?.properties ?? {};
