@@ -1,6 +1,0 @@
-fastapi
-jinja2
-jsonschema
-my_work_assistant
-pydantic
-typer

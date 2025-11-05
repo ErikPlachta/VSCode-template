@@ -1,8 +1,0 @@
-[
-  {
-    "id": "plat-analytics",
-    "name": "Analytics Platform",
-    "related_platform_ids": [],
-    "datasets": ["dataset-sales"]
-  }
-]
