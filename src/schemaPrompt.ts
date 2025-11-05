@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { MCPTool } from "./mcpSync";
+import { MCPTool } from "./types";
 
-export async function promptForArgs(tool: MCPTool): Promise<Record<string, any>> {
-  const args: Record<string, any> = {};
+export async function promptForArgs(tool: MCPTool): Promise<Record<string, unknown>> {
+  const args: Record<string, unknown> = {};
   const props = tool.input_schema?.properties ?? {};
   const required = tool.input_schema?.required ?? [];
 
@@ -17,7 +17,19 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, any>>
       vscode.window.showErrorMessage(`Missing required argument: ${key}`);
       return {};
     }
-    if (value) args[key] = value;
+    if (value) args[key] = coerceValue(prop.type, value);
   }
   return args;
+}
+
+function coerceValue(type: string, value: string): unknown {
+  switch (type) {
+    case "number":
+    case "integer":
+      return Number(value);
+    case "boolean":
+      return value.toLowerCase() === "true";
+    default:
+      return value;
+  }
 }

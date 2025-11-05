@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
-import { fetchTools, MCPTool } from "./mcpSync";
+import { fetchTools } from "./mcpSync";
 import { promptForArgs } from "./schemaPrompt";
+import { MCPInvocationPayload, MCPTool } from "./types";
 
 export async function activate(context: vscode.ExtensionContext) {
   const cfg = vscode.workspace.getConfiguration("mybusinessMCP");
@@ -21,7 +22,7 @@ export async function activate(context: vscode.ExtensionContext) {
         const args = await promptForArgs(tool);
         if (!Object.keys(args).length) return new vscode.ChatResponseText("Missing args.");
 
-        const payload = {
+        const payload: MCPInvocationPayload = {
           jsonrpc: "2.0",
           id: Date.now(),
           method: "invokeTool",
@@ -45,7 +46,7 @@ export async function activate(context: vscode.ExtensionContext) {
       title: tool.title,
       description: tool.description,
       handler: async (msg) => {
-        const payload = {
+        const payload: MCPInvocationPayload = {
           jsonrpc: "2.0",
           id: Date.now(),
           method: "invokeTool",

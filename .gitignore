@@ -5,3 +5,10 @@ __pycache__/
 .my_work_assistant/
 .venv/
 .ruff_cache/
+node_modules/
+.coverage
+.python-version
+.DS_Store
+coverage/
+
+
