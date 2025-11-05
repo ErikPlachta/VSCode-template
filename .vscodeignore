@@ -1,4 +1,7 @@
 node_modules
 src
+tests
 tsconfig.json
 .eslintrc.json
+jest.config.js
+typedoc.json

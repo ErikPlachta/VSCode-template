@@ -1,7 +1,0 @@
-__pycache__/
-*.pyc
-.mypy_cache/
-.pytest_cache/
-.my_work_assistant/
-.venv/
-.ruff_cache/
