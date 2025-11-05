@@ -1,0 +1,38 @@
+{
+  "name": "mybusiness-mcp-extension",
+  "displayName": "My Business MCP Extension",
+  "description": "VS Code extension that auto-syncs MCP tools and registers /commands and @mentions with argument prompts.",
+  "version": "1.0.0",
+  "publisher": "myorg",
+  "engines": { "vscode": "^1.90.0" },
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "My Business MCP Settings",
+      "properties": {
+        "mybusinessMCP.serverUrl": {
+          "type": "string",
+          "default": "https://your-domain.com/",
+          "description": "Base URL of the MCP server."
+        },
+        "mybusinessMCP.token": {
+          "type": "string",
+          "description": "Bearer token for MCP authentication."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "package": "vsce package"
+  },
+  "dependencies": { "axios": "^1.7.7" },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.6.3",
+    "eslint": "^9.9.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0"
+  }
+}
