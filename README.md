@@ -6,6 +6,8 @@
 - Maintains conversational context for multi-turn orchestration, automatically persisting a rolling history per tool.
 - Renders MCP responses as rich markdown within Copilot Chat, including structured JSON when appropriate.
 - Captures invocation logs inside a local `.mcp-cache` directory to keep diagnostics client-side.
+- Ships with a modular mock orchestration sandbox (`src/agents/`) featuring dedicated data, database, and relevant-data manager agents backed by rich local dummy datasets.
+- Persists cross-tool shared cache artefacts so generated context can be re-used between agents without remaining in memory.
 - Fully unit-tested, documented, and CI-integrated.
 
 ## Commands
