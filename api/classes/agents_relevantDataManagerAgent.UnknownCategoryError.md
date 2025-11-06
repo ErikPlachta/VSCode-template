@@ -1,52 +1,50 @@
-[mybusiness-mcp-extension - v1.0.0](../README.md) / [Exports](../modules.md) / [mcpSync](../modules/mcpSync.md) / MCPDiscoveryError
+[mybusiness-mcp-extension - v1.0.0](../README.md) / [Exports](../modules.md) / [agents/relevantDataManagerAgent](../modules/agents_relevantDataManagerAgent.md) / UnknownCategoryError
 
-# Class: MCPDiscoveryError
+# Class: UnknownCategoryError
 
-[mcpSync](../modules/mcpSync.md).MCPDiscoveryError
+[agents/relevantDataManagerAgent](../modules/agents_relevantDataManagerAgent.md).UnknownCategoryError
 
-Error wrapper that provides additional context for MCP failures.
+Error thrown when a caller references an unknown category.
 
 ## Hierarchy
 
 - `Error`
 
-  ↳ **`MCPDiscoveryError`**
+  ↳ **`UnknownCategoryError`**
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](mcpSync.MCPDiscoveryError.md#constructor)
+- [constructor](agents_relevantDataManagerAgent.UnknownCategoryError.md#constructor)
 
 ### Properties
 
-- [cause](mcpSync.MCPDiscoveryError.md#cause)
-- [message](mcpSync.MCPDiscoveryError.md#message)
-- [name](mcpSync.MCPDiscoveryError.md#name)
-- [stack](mcpSync.MCPDiscoveryError.md#stack)
-- [stackTraceLimit](mcpSync.MCPDiscoveryError.md#stacktracelimit)
+- [message](agents_relevantDataManagerAgent.UnknownCategoryError.md#message)
+- [name](agents_relevantDataManagerAgent.UnknownCategoryError.md#name)
+- [stack](agents_relevantDataManagerAgent.UnknownCategoryError.md#stack)
+- [stackTraceLimit](agents_relevantDataManagerAgent.UnknownCategoryError.md#stacktracelimit)
 
 ### Methods
 
-- [captureStackTrace](mcpSync.MCPDiscoveryError.md#capturestacktrace)
-- [prepareStackTrace](mcpSync.MCPDiscoveryError.md#preparestacktrace)
+- [captureStackTrace](agents_relevantDataManagerAgent.UnknownCategoryError.md#capturestacktrace)
+- [prepareStackTrace](agents_relevantDataManagerAgent.UnknownCategoryError.md#preparestacktrace)
 
 ## Constructors
 
 ### constructor
 
-• **new MCPDiscoveryError**(`message`, `cause?`): [`MCPDiscoveryError`](mcpSync.MCPDiscoveryError.md)
+• **new UnknownCategoryError**(`topic`): [`UnknownCategoryError`](agents_relevantDataManagerAgent.UnknownCategoryError.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `message` | `string` |
-| `cause?` | `unknown` |
+| `topic` | `string` |
 
 #### Returns
 
-[`MCPDiscoveryError`](mcpSync.MCPDiscoveryError.md)
+[`UnknownCategoryError`](agents_relevantDataManagerAgent.UnknownCategoryError.md)
 
 #### Overrides
 
@@ -54,19 +52,9 @@ Error.constructor
 
 #### Defined in
 
-[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L70)
+[src/agents/relevantDataManagerAgent.ts:1181](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1181)
 
 ## Properties
-
-### cause
-
-• `Optional` `Readonly` **cause**: `unknown`
-
-#### Defined in
-
-[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L70)
-
-___
 
 ### message
 

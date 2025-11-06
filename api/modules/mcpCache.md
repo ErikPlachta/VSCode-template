@@ -6,14 +6,42 @@
 
 ### Interfaces
 
+- [SharedCacheEntry](../interfaces/mcpCache.SharedCacheEntry.md)
 - [ToolLogEntry](../interfaces/mcpCache.ToolLogEntry.md)
 
 ### Functions
 
+- [deleteSharedCacheEntry](mcpCache.md#deletesharedcacheentry)
 - [ensureCacheDirectory](mcpCache.md#ensurecachedirectory)
+- [listSharedCacheEntries](mcpCache.md#listsharedcacheentries)
 - [logInvocation](mcpCache.md#loginvocation)
+- [readSharedCacheEntry](mcpCache.md#readsharedcacheentry)
+- [storeSharedCacheEntry](mcpCache.md#storesharedcacheentry)
 
 ## Functions
+
+### deleteSharedCacheEntry
+
+▸ **deleteSharedCacheEntry**(`cacheDir`, `key`): `Promise`\<`void`\>
+
+Remove a shared cache entry when it is no longer relevant.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cacheDir` | `string` |
+| `key` | `string` |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+#### Defined in
+
+[src/mcpCache.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L136)
+
+___
 
 ### ensureCacheDirectory
 
@@ -31,7 +59,35 @@ local to the client, reducing storage pressure on the MCP backend.
 
 #### Defined in
 
-[src/mcpCache.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/cdb46a59e46fc5b0b0e1bb6229c876631a15aa98/src/mcpCache.ts#L35)
+[src/mcpCache.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L55)
+
+___
+
+### listSharedCacheEntries
+
+▸ **listSharedCacheEntries**\<`T`\>(`cacheDir`): `Promise`\<[`SharedCacheEntry`](../interfaces/mcpCache.SharedCacheEntry.md)\<`T`\>[]\>
+
+Enumerate all cached artefacts currently stored on disk.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cacheDir` | `string` |
+
+#### Returns
+
+`Promise`\<[`SharedCacheEntry`](../interfaces/mcpCache.SharedCacheEntry.md)\<`T`\>[]\>
+
+#### Defined in
+
+[src/mcpCache.ts:110](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L110)
 
 ___
 
@@ -54,4 +110,62 @@ Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
 
 #### Defined in
 
-[src/mcpCache.ts:46](https://github.com/ErikPlachta/VSCode-template/blob/cdb46a59e46fc5b0b0e1bb6229c876631a15aa98/src/mcpCache.ts#L46)
+[src/mcpCache.ts:66](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L66)
+
+___
+
+### readSharedCacheEntry
+
+▸ **readSharedCacheEntry**\<`T`\>(`cacheDir`, `key`): `Promise`\<[`SharedCacheEntry`](../interfaces/mcpCache.SharedCacheEntry.md)\<`T`\> \| `undefined`\>
+
+Retrieve a shared cache entry by key.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cacheDir` | `string` |
+| `key` | `string` |
+
+#### Returns
+
+`Promise`\<[`SharedCacheEntry`](../interfaces/mcpCache.SharedCacheEntry.md)\<`T`\> \| `undefined`\>
+
+#### Defined in
+
+[src/mcpCache.ts:89](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L89)
+
+___
+
+### storeSharedCacheEntry
+
+▸ **storeSharedCacheEntry**\<`T`\>(`cacheDir`, `entry`): `Promise`\<`void`\>
+
+Persist a shared cache entry that can be re-used by other MCP tools.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cacheDir` | `string` |
+| `entry` | [`SharedCacheEntry`](../interfaces/mcpCache.SharedCacheEntry.md)\<`T`\> |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+#### Defined in
+
+[src/mcpCache.ts:75](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L75)

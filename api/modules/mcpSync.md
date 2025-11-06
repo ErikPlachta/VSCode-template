@@ -47,4 +47,4 @@ invalid payload.
 
 #### Defined in
 
-[src/mcpSync.ts:111](https://github.com/ErikPlachta/VSCode-template/blob/cdb46a59e46fc5b0b0e1bb6229c876631a15aa98/src/mcpSync.ts#L111)
+[src/mcpSync.ts:111](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L111)

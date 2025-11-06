@@ -30,7 +30,7 @@ automation hooks.
 
 #### Defined in
 
-[src/extension.ts:200](https://github.com/ErikPlachta/VSCode-template/blob/cdb46a59e46fc5b0b0e1bb6229c876631a15aa98/src/extension.ts#L200)
+[src/extension.ts:200](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/extension.ts#L200)
 
 ___
 
@@ -46,4 +46,4 @@ Deactivates the extension.
 
 #### Defined in
 
-[src/extension.ts:322](https://github.com/ErikPlachta/VSCode-template/blob/cdb46a59e46fc5b0b0e1bb6229c876631a15aa98/src/extension.ts#L322)
+[src/extension.ts:322](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/extension.ts#L322)

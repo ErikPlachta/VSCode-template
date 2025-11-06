@@ -33,4 +33,4 @@ User-provided arguments keyed by schema property name.
 
 #### Defined in
 
-[src/schemaPrompt.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/cdb46a59e46fc5b0b0e1bb6229c876631a15aa98/src/schemaPrompt.ts#L60)
+[src/schemaPrompt.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/schemaPrompt.ts#L60)
