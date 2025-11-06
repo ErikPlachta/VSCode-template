@@ -1,0 +1,3 @@
+.mcp-cache/
+node_modules/
+coverage/

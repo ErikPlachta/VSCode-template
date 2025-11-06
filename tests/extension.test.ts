@@ -1,15 +1,94 @@
 import { activate } from "../src/extension";
 import * as mcpSync from "../src/mcpSync";
+import * as mcpCache from "../src/mcpCache";
+import * as schemaPrompt from "../src/schemaPrompt";
+
+jest.mock("vscode", () => {
+  const registerChatCommand = jest.fn(() => ({ dispose: jest.fn() }));
+  const registerChatMention = jest.fn(() => ({ dispose: jest.fn() }));
+  const registerCommand = jest.fn(() => ({ dispose: jest.fn() }));
+  const showQuickPick = jest.fn();
+  const showInformationMessage = jest.fn();
+  const showErrorMessage = jest.fn();
+
+  return {
+    workspace: {
+      getConfiguration: () => ({ get: () => "https://example.com" })
+    },
+    chat: {
+      createChatParticipantExtensionApi: () => ({
+        registerChatCommand,
+        registerChatMention
+      })
+    },
+    commands: {
+      registerCommand
+    },
+    window: {
+      showInformationMessage,
+      showErrorMessage,
+      showQuickPick,
+      showInputBox: jest.fn()
+    },
+    MarkdownString: class {
+      public value = "";
+      public isTrusted = false;
+      appendMarkdown(text: string) {
+        this.value += text;
+      }
+      appendCodeblock(text: string) {
+        this.value += text;
+      }
+    },
+    __registerChatCommand: registerChatCommand,
+    __registerChatMention: registerChatMention,
+    __registerCommand: registerCommand,
+    __showQuickPick: showQuickPick,
+    __showInformationMessage: showInformationMessage,
+    __showErrorMessage: showErrorMessage
+  };
+}, { virtual: true });
+
+const vscodeMock = jest.requireMock("vscode");
+const registerChatCommand = vscodeMock.__registerChatCommand as jest.Mock;
+const registerChatMention = vscodeMock.__registerChatMention as jest.Mock;
+const registerCommand = vscodeMock.__registerCommand as jest.Mock;
+const showQuickPick = vscodeMock.__showQuickPick as jest.Mock;
+const showInformationMessage = vscodeMock.__showInformationMessage as jest.Mock;
+const showErrorMessage = vscodeMock.__showErrorMessage as jest.Mock;
+
 jest.mock("../src/mcpSync");
-jest.mock("vscode", () => ({
-  workspace: { getConfiguration: () => ({ get: () => "" }) },
-  chat: { createChatParticipantExtensionApi: () => ({ registerChatCommand: jest.fn(), registerChatMention: jest.fn() }) },
-  window: { showInformationMessage: jest.fn(), showErrorMessage: jest.fn() }
-}));
+jest.mock("../src/mcpCache");
+jest.mock("../src/schemaPrompt");
+
 describe("activate", () => {
-  it("registers tools", async () => {
-    (mcpSync.fetchTools as jest.Mock).mockResolvedValue([{ name: "testTool", title: "Test", description: "desc" }]);
-    await activate({} as any);
-    expect(mcpSync.fetchTools).toHaveBeenCalled();
+  beforeEach(() => {
+    (mcpSync.fetchTools as jest.Mock).mockResolvedValue([
+      { name: "testTool", title: "Test", description: "desc" }
+    ]);
+    (mcpCache.ensureCacheDirectory as jest.Mock).mockResolvedValue("/tmp/.mcp-cache");
+    (schemaPrompt.promptForArgs as jest.Mock).mockResolvedValue({ param: "value" });
+    registerChatCommand.mockClear();
+    registerChatMention.mockClear();
+    registerCommand.mockClear();
+    showInformationMessage.mockClear();
+    showErrorMessage.mockClear();
+    showQuickPick.mockClear();
+    (mcpCache.logInvocation as jest.Mock).mockResolvedValue(undefined);
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ jsonrpc: "2.0", id: 1, result: { content: "ok" } })
+    }) as unknown as typeof fetch;
+  });
+
+  it("registers slash commands and mentions for each tool", async () => {
+    await activate({ subscriptions: [] } as any);
+    expect(mcpSync.fetchTools).toHaveBeenCalledWith("https://example.com", "https://example.com");
+    expect(registerChatCommand).toHaveBeenCalled();
+    expect(registerChatMention).toHaveBeenCalled();
+    expect(registerCommand).toHaveBeenCalled();
+    expect(showInformationMessage).toHaveBeenCalledWith(
+      "Loaded 1 MCP tools from https://example.com."
+    );
   });
 });
