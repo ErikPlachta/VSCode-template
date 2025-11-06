@@ -5,9 +5,15 @@
   "version": "1.0.0",
   "publisher": "myorg",
   "engines": { "vscode": "^1.90.0" },
-  "activationEvents": ["onStartupFinished"],
+  "activationEvents": ["onStartupFinished", "onCommand:mybusinessMCP.invokeTool"],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "mybusinessMCP.invokeTool",
+        "title": "My Business MCP: Invoke Tool"
+      }
+    ],
     "configuration": {
       "title": "My Business MCP Settings",
       "properties": {
@@ -31,15 +37,16 @@
   },
   "dependencies": { "axios": "^1.7.7" },
   "devDependencies": {
-    "typescript": "^5.6.3",
+    "typescript": "^5.4.5",
     "@types/vscode": "^1.90.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.2",
     "@types/jest": "^29.5.11",
-    "eslint": "^9.9.0",
+    "eslint": "^8.57.1",
     "@typescript-eslint/parser": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "typedoc": "^0.25.0",
-    "typedoc-plugin-markdown": "^3.16.0"
+    "typedoc-plugin-markdown": "^3.16.0",
+    "@types/node": "^20.16.5"
   }
 }
