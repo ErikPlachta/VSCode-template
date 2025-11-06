@@ -55,17 +55,12 @@ The cache directory now exposes a `shared/` sub-folder that stores JSON payloads
 * Jest unit tests cover metadata normalisation, schema prompting, cache behaviour, and activation wiring.
 * TypeDoc can generate API documentation from the comprehensive JSDoc comments embedded in the TypeScript sources.
 
-## 8. Mock multi-agent orchestration sandbox
+## 8. Modular multi-agent orchestration sandbox
 
-`src/mockOrchestrationAgents.ts` provides a fully in-memory simulation of an MCP server that coordinates several high-value agent
-categories:
+The mock orchestration environment now ships with three focused agents under `src/agents/` so the extension can compose richer, more realistic workflows:
 
-* **Database lookup** — `listPeople` filters a curated people directory by skill, location, project, and reporting chain while persisting the result to the shared cache.
-* **Relationship insights** — `lookupProjectRelationships` joins project metadata with linked contributors and documents so downstream tools can reason about ownership and dependencies.
-* **Document lifecycle** — `findDocuments` and `updateDocument` cover discovery and mutation flows, emitting cache metadata that highlights result counts and mutation status.
-* **Guidance and planning** — `requestGuidance` synthesises actionable plans that reference other tools (e.g. document search, people lookup) to nudge multi-agent collaboration.
-* **Content generation** — `generateDocument` produces templated artefacts (status updates, handovers, kick-off briefs) that other agents can refine or deliver to end users.
+* **RelevantDataManagerAgent (`src/agents/relevantDataManagerAgent.ts`)** — models the MCP server's "relevant data" folder structure. Each business category (departments, people, applications, policies, resources) advertises folder blueprints, JSON schemas, Python type hints, example datasets, test artefacts, and remote query templates. The manager also exposes search and relationship traversal helpers while caching category snapshots on disk for quick reuse.
+* **DatabaseAgent (`src/agents/databaseAgent.ts`)** — offers database-style access to the dataset. Callers can filter people by skills or access, enumerate departments by the systems they own, inspect policy coverage, or run saved query blueprints. Results are cached in `.mcp-cache/shared` so parallel tools can reuse the same payloads without recomputation.
+* **DataAgent (`src/agents/dataAgent.ts`)** — stitches the categories together. It produces topic overviews, narrative connection maps, exploration plans for complex questions, and cross-topic link lookups. The agent relies on the manager for metadata and the database agent for structured retrieval, giving orchestration flows a single entry point for reasoning about the business graph.
 
-The sandbox leans on the shared cache helpers so each agent persists its contributions, enabling realistic orchestration testing without a live backend.
-
-Refer to the inline documentation in `src/` for additional implementation details and extension points.
+The shared dataset mirrors a realistic documentation repository with category-specific schemas, Python type definitions, curated examples, `config.json` metadata, and query definitions for remote services. Unit tests (`tests/relevantDataManagerAgent.test.ts`, `tests/databaseAgent.test.ts`, `tests/dataAgent.test.ts`) exercise the key behaviours so contributors can extend or refactor with confidence.
