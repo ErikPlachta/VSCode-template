@@ -10,19 +10,23 @@ Test artefact reference stored for the category.
 
 ### Properties
 
-- [command](agents_relevantDataManagerAgent.CategoryTestArtefact.md#command)
+- [args](agents_relevantDataManagerAgent.CategoryTestArtefact.md#args)
 - [description](agents_relevantDataManagerAgent.CategoryTestArtefact.md#description)
+- [entryPoint](agents_relevantDataManagerAgent.CategoryTestArtefact.md#entrypoint)
+- [environment](agents_relevantDataManagerAgent.CategoryTestArtefact.md#environment)
 - [name](agents_relevantDataManagerAgent.CategoryTestArtefact.md#name)
+- [runtime](agents_relevantDataManagerAgent.CategoryTestArtefact.md#runtime)
+- [workingDirectory](agents_relevantDataManagerAgent.CategoryTestArtefact.md#workingdirectory)
 
 ## Properties
 
-### command
+### args
 
-• **command**: `string`
+• **args**: `string`[]
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:94](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L94)
+[src/agents/relevantDataManagerAgent.ts:116](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L116)
 
 ___
 
@@ -32,7 +36,27 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:93](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L93)
+[src/agents/relevantDataManagerAgent.ts:113](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L113)
+
+___
+
+### entryPoint
+
+• **entryPoint**: `string`
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L115)
+
+___
+
+### environment
+
+• `Optional` **environment**: `Record`\<`string`, `string`\>
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:118](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L118)
 
 ___
 
@@ -42,4 +66,24 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:92](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L92)
+[src/agents/relevantDataManagerAgent.ts:112](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L112)
+
+___
+
+### runtime
+
+• **runtime**: `string`
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:114](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L114)
+
+___
+
+### workingDirectory
+
+• `Optional` **workingDirectory**: `string`
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:117](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L117)

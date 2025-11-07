@@ -30,6 +30,7 @@ hints, example datasets, tests, and remote query blueprints.
 - [ExampleDataset](../interfaces/agents_relevantDataManagerAgent.ExampleDataset.md)
 - [FolderBlueprint](../interfaces/agents_relevantDataManagerAgent.FolderBlueprint.md)
 - [PythonTypeDefinition](../interfaces/agents_relevantDataManagerAgent.PythonTypeDefinition.md)
+- [PythonTypedDictField](../interfaces/agents_relevantDataManagerAgent.PythonTypedDictField.md)
 - [RelationshipDescription](../interfaces/agents_relevantDataManagerAgent.RelationshipDescription.md)
 - [RemoteQueryBlueprint](../interfaces/agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)
 
@@ -37,6 +38,8 @@ hints, example datasets, tests, and remote query blueprints.
 
 - [CategoryId](agents_relevantDataManagerAgent.md#categoryid)
 - [CategoryRecord](agents_relevantDataManagerAgent.md#categoryrecord)
+- [PythonPrimitiveType](agents_relevantDataManagerAgent.md#pythonprimitivetype)
+- [PythonTypeSchema](agents_relevantDataManagerAgent.md#pythontypeschema)
 
 ### Functions
 
@@ -52,7 +55,7 @@ Unique identifier for a category in the repository.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L115)
+[src/agents/relevantDataManagerAgent.ts:139](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L139)
 
 ___
 
@@ -64,7 +67,31 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:112](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L112)
+[src/agents/relevantDataManagerAgent.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L136)
+
+___
+
+### PythonPrimitiveType
+
+Ƭ **PythonPrimitiveType**: ``"str"`` \| ``"int"`` \| ``"float"`` \| ``"bool"`` \| ``"datetime"``
+
+Supported Python type primitives within the schema definition.
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:77](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L77)
+
+___
+
+### PythonTypeSchema
+
+Ƭ **PythonTypeSchema**: \{ `kind`: ``"primitive"`` ; `name`: [`PythonPrimitiveType`](agents_relevantDataManagerAgent.md#pythonprimitivetype)  } \| \{ `kind`: ``"optional"`` ; `value`: [`PythonTypeSchema`](agents_relevantDataManagerAgent.md#pythontypeschema)  } \| \{ `element`: [`PythonTypeSchema`](agents_relevantDataManagerAgent.md#pythontypeschema) ; `kind`: ``"list"``  } \| \{ `kind`: ``"literal"`` ; `value`: `string` \| `number` \| `boolean` \| ``null``  } \| \{ `kind`: ``"enum"`` ; `values`: (`string` \| `number` \| `boolean`)[]  } \| \{ `fields`: [`PythonTypedDictField`](../interfaces/agents_relevantDataManagerAgent.PythonTypedDictField.md)[] ; `kind`: ``"typedDict"``  }
+
+JSON description for a Python type that can be materialised by an MCP server.
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L80)
 
 ## Functions
 
@@ -78,4 +105,4 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:812](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L812)
+[src/agents/relevantDataManagerAgent.ts:972](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L972)
