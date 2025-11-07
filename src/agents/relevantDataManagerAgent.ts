@@ -73,11 +73,31 @@ export interface CategorySchema {
   schema: Record<string, unknown>;
 }
 
+/** Supported Python type primitives within the schema definition. */
+export type PythonPrimitiveType = "str" | "int" | "float" | "bool" | "datetime";
+
+/** JSON description for a Python type that can be materialised by an MCP server. */
+export type PythonTypeSchema =
+  | { kind: "primitive"; name: PythonPrimitiveType }
+  | { kind: "optional"; value: PythonTypeSchema }
+  | { kind: "list"; element: PythonTypeSchema }
+  | { kind: "literal"; value: string | number | boolean | null }
+  | { kind: "enum"; values: Array<string | number | boolean> }
+  | { kind: "typedDict"; fields: PythonTypedDictField[] };
+
+/** Field description used within a TypedDict schema. */
+export interface PythonTypedDictField {
+  name: string;
+  type: PythonTypeSchema;
+  required?: boolean;
+  description?: string;
+}
+
 /** Python typing hints that mirror the JSON schemas. */
 export interface PythonTypeDefinition {
   name: string;
   description: string;
-  definition: string;
+  schema: PythonTypeSchema;
 }
 
 /** Example dataset artefact hosted in the category folder. */
@@ -91,7 +111,11 @@ export interface ExampleDataset {
 export interface CategoryTestArtefact {
   name: string;
   description: string;
-  command: string;
+  runtime: string;
+  entryPoint: string;
+  args: string[];
+  workingDirectory?: string;
+  environment?: Record<string, string>;
 }
 
 /** Remote query blueprint associated with the category. */
@@ -234,7 +258,7 @@ interface RawSchemaFile {
 interface RawPythonTypeFile {
   name: string;
   description: string;
-  definition: string;
+  schema: unknown;
 }
 
 interface RawExampleFile {
@@ -245,7 +269,11 @@ interface RawExampleFile {
 interface RawTestFile {
   name: string;
   description: string;
-  command: string;
+  runtime: string;
+  entryPoint: string;
+  args?: unknown;
+  workingDirectory?: string;
+  environment?: Record<string, unknown>;
 }
 
 interface RawQueryFile {
@@ -259,6 +287,91 @@ const CONSOLIDATED_INDEX_CACHE_KEY = "relevant-data:catalogue";
 
 function toPosixPath(filePath: string): string {
   return filePath.split(path.sep).join("/");
+}
+
+function parsePythonTypeSchema(value: unknown, context: string): PythonTypeSchema {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(`Invalid python type schema for ${context}.`);
+  }
+  const base = value as { kind?: string };
+  switch (base.kind) {
+    case "primitive": {
+      const name = (base as { name?: unknown }).name;
+      const allowed: PythonPrimitiveType[] = ["str", "int", "float", "bool", "datetime"];
+      if (typeof name !== "string" || !allowed.includes(name as PythonPrimitiveType)) {
+        throw new Error(`Primitive type for ${context} must be one of ${allowed.join(", ")}.`);
+      }
+      return { kind: "primitive", name: name as PythonPrimitiveType };
+    }
+    case "optional": {
+      const inner = (base as { value?: unknown }).value;
+      if (inner === undefined) {
+        throw new Error(`Optional type for ${context} is missing a value definition.`);
+      }
+      return { kind: "optional", value: parsePythonTypeSchema(inner, `${context}.value`) };
+    }
+    case "list": {
+      const element = (base as { element?: unknown }).element;
+      if (element === undefined) {
+        throw new Error(`List type for ${context} is missing an element definition.`);
+      }
+      return { kind: "list", element: parsePythonTypeSchema(element, `${context}.element`) };
+    }
+    case "literal": {
+      if (!("value" in base)) {
+        throw new Error(`Literal type for ${context} must define a value.`);
+      }
+      return { kind: "literal", value: (base as { value: unknown }).value as string | number | boolean | null };
+    }
+    case "enum": {
+      const rawValues = (base as { values?: unknown }).values;
+      if (!Array.isArray(rawValues) || rawValues.length === 0) {
+        throw new Error(`Enum type for ${context} must declare a non-empty values array.`);
+      }
+      for (const entry of rawValues) {
+        if (!["string", "number", "boolean"].includes(typeof entry)) {
+          throw new Error(`Enum values for ${context} must be strings, numbers, or booleans.`);
+        }
+      }
+      return { kind: "enum", values: rawValues as Array<string | number | boolean> };
+    }
+    case "typedDict": {
+      const rawFields = (base as { fields?: unknown }).fields;
+      if (!Array.isArray(rawFields) || rawFields.length === 0) {
+        throw new Error(`TypedDict for ${context} must include at least one field.`);
+      }
+      const fields: PythonTypedDictField[] = rawFields.map((rawField, index) => {
+        if (!rawField || typeof rawField !== "object" || Array.isArray(rawField)) {
+          throw new Error(`Invalid field at index ${index} for ${context}.`);
+        }
+        const field = rawField as {
+          name?: unknown;
+          type?: unknown;
+          required?: unknown;
+          description?: unknown;
+        };
+        if (typeof field.name !== "string" || field.name.trim() === "") {
+          throw new Error(`Field ${index} for ${context} must include a name.`);
+        }
+        const fieldType = parsePythonTypeSchema(field.type, `${context}.${field.name}`);
+        if (field.required !== undefined && typeof field.required !== "boolean") {
+          throw new Error(`Field '${field.name}' in ${context} has an invalid required value.`);
+        }
+        if (field.description !== undefined && typeof field.description !== "string") {
+          throw new Error(`Field '${field.name}' in ${context} has an invalid description.`);
+        }
+        return {
+          name: field.name,
+          type: fieldType,
+          required: field.required as boolean | undefined,
+          description: field.description as string | undefined
+        };
+      });
+      return { kind: "typedDict", fields };
+    }
+    default:
+      throw new Error(`Unknown python type schema kind '${String(base.kind)}' for ${context}.`);
+  }
 }
 
 function normaliseLookupKey(value: string): string {
@@ -556,7 +669,7 @@ export class RelevantDataManagerAgent {
       root: toPosixPath(path.relative(process.cwd(), categoryDir)),
       configFile: toPosixPath(path.relative(process.cwd(), configPath)),
       schemaFiles: this.collectFiles(schemasDir, [".json"]),
-      pythonTypes: this.collectFiles(pythonDir, [".json", ".py"]),
+      pythonTypes: this.collectFiles(pythonDir, [".json"]),
       examplesDir: toPosixPath(path.relative(process.cwd(), examplesDir)),
       testsDir: toPosixPath(path.relative(process.cwd(), testsDir)),
       queriesDir: toPosixPath(path.relative(process.cwd(), queriesDir))
@@ -590,17 +703,13 @@ export class RelevantDataManagerAgent {
 
   private loadPythonTypes(categoryDir: string): PythonTypeDefinition[] {
     const target = path.join(categoryDir, "python-types");
-    return this.collectFiles(target, [".json", ".py"]).map((file) => {
-      if (file.endsWith(".py")) {
-        const definition = fs.readFileSync(path.join(process.cwd(), file), "utf8");
-        const name = path.basename(file, path.extname(file));
-        return { name, description: `Python types defined in ${file}`, definition };
-      }
+    return this.collectFiles(target, [".json"]).map((file) => {
       const typeFile = this.loadJsonFile<RawPythonTypeFile>(path.join(process.cwd(), file), `python types '${file}'`);
-      if (!typeFile.name || !typeFile.definition) {
+      if (!typeFile.name || !typeFile.description) {
         throw new Error(`Python type file '${file}' is missing required fields.`);
       }
-      return typeFile;
+      const schema = parsePythonTypeSchema(typeFile.schema, `python types '${file}'`);
+      return { name: typeFile.name, description: typeFile.description, schema };
     });
   }
 
@@ -619,11 +728,62 @@ export class RelevantDataManagerAgent {
     const target = path.join(categoryDir, "tests");
     return this.collectFiles(target, [".json"]).map((file) => {
       const test = this.loadJsonFile<RawTestFile>(path.join(process.cwd(), file), `test '${file}'`);
-      if (!test.name || !test.command) {
-        throw new Error(`Test file '${file}' is missing required fields.`);
-      }
-      return test;
+      return this.parseTestDefinition(test, file);
     });
+  }
+
+  private parseTestDefinition(raw: RawTestFile, file: string): CategoryTestArtefact {
+    if (!raw.name || typeof raw.name !== "string") {
+      throw new Error(`Test file '${file}' is missing a name.`);
+    }
+    if (!raw.description || typeof raw.description !== "string") {
+      throw new Error(`Test file '${file}' is missing a description.`);
+    }
+    if (!raw.runtime || typeof raw.runtime !== "string") {
+      throw new Error(`Test file '${file}' is missing a runtime.`);
+    }
+    if (!raw.entryPoint || typeof raw.entryPoint !== "string") {
+      throw new Error(`Test file '${file}' is missing an entryPoint.`);
+    }
+    const args: string[] = [];
+    if (raw.args !== undefined) {
+      if (!Array.isArray(raw.args)) {
+        throw new Error(`Test file '${file}' must declare args as an array of strings.`);
+      }
+      for (const value of raw.args) {
+        if (typeof value !== "string") {
+          throw new Error(`Test file '${file}' must declare args as an array of strings.`);
+        }
+        args.push(value);
+      }
+    }
+    let workingDirectory: string | undefined;
+    if (raw.workingDirectory !== undefined) {
+      if (typeof raw.workingDirectory !== "string" || raw.workingDirectory.trim() === "") {
+        throw new Error(`Test file '${file}' has an invalid workingDirectory.`);
+      }
+      workingDirectory = toPosixPath(path.normalize(raw.workingDirectory));
+    }
+    let environment: Record<string, string> | undefined;
+    if (raw.environment) {
+      environment = {};
+      for (const [key, value] of Object.entries(raw.environment)) {
+        if (typeof value !== "string") {
+          throw new Error(`Environment variable '${key}' in test file '${file}' must be a string.`);
+        }
+        environment[key] = value;
+      }
+    }
+
+    return {
+      name: raw.name,
+      description: raw.description,
+      runtime: raw.runtime,
+      entryPoint: raw.entryPoint,
+      args,
+      workingDirectory,
+      environment
+    };
   }
 
   private loadQueries(categoryDir: string): RemoteQueryBlueprint[] {

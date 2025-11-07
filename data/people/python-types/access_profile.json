@@ -1,5 +1,12 @@
 {
   "name": "AccessProfile",
   "description": "TypedDict for person application access records.",
-  "definition": "\"\"\"class AccessProfile(TypedDict):\n    personId: str\n    applicationId: str\n    roles: List[str]\n\"\"\""
+  "schema": {
+    "kind": "typedDict",
+    "fields": [
+      { "name": "personId", "type": { "kind": "primitive", "name": "str" } },
+      { "name": "applicationId", "type": { "kind": "primitive", "name": "str" } },
+      { "name": "roles", "type": { "kind": "list", "element": { "kind": "primitive", "name": "str" } } }
+    ]
+  }
 }
