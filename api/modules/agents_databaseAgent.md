@@ -57,4 +57,4 @@ const policies = await agent.queryPolicies({ category: "security" });
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:506](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L506)
+[src/agents/databaseAgent.ts:506](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L506)

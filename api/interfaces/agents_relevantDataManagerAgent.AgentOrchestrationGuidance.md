@@ -24,7 +24,7 @@ Core responsibility for the agent when invoked for this category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L156)
+[src/agents/relevantDataManagerAgent.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/relevantDataManagerAgent.ts#L156)
 
 ___
 
@@ -36,7 +36,7 @@ Prompt starters that the orchestrator can feed to the agent.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L160)
+[src/agents/relevantDataManagerAgent.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/relevantDataManagerAgent.ts#L160)
 
 ___
 
@@ -48,4 +48,4 @@ Signals that hint the orchestrator should route the request to this agent.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L158)
+[src/agents/relevantDataManagerAgent.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/relevantDataManagerAgent.ts#L158)

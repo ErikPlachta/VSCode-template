@@ -44,7 +44,7 @@ export async function activate(ctx: vscode.ExtensionContext) {
 
 #### Defined in
 
-[src/extension.ts:294](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/extension.ts#L294)
+[src/extension.ts:294](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/extension.ts#L294)
 
 ___
 
@@ -60,4 +60,4 @@ Deactivates the extension.
 
 #### Defined in
 
-[src/extension.ts:503](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/extension.ts#L503)
+[src/extension.ts:503](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/extension.ts#L503)

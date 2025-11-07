@@ -28,4 +28,4 @@ List of supported orchestration intents.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/orchestrator.ts#L17)
+[src/agents/orchestrator.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L17)

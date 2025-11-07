@@ -40,7 +40,7 @@ user's intent and available context.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/orchestrator.ts#L121)
+[src/agents/orchestrator.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L121)
 
 ## Methods
 
@@ -65,7 +65,7 @@ Determine which agent should receive the question.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:142](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/orchestrator.ts#L142)
+[src/agents/orchestrator.ts:142](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L142)
 
 ___
 
@@ -87,7 +87,7 @@ Execute the orchestration flow for the supplied input.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:255](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/orchestrator.ts#L255)
+[src/agents/orchestrator.ts:255](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L255)
 
 ___
 
@@ -103,7 +103,7 @@ Return the consolidated dataset catalogue.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:137](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/orchestrator.ts#L137)
+[src/agents/orchestrator.ts:137](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L137)
 
 ___
 
@@ -119,4 +119,4 @@ List the categories known to the orchestrator.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/orchestrator.ts#L132)
+[src/agents/orchestrator.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L132)
