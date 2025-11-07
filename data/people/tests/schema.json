@@ -1,0 +1,5 @@
+{
+  "name": "Validate person schema",
+  "description": "Ensures person.json includes required keys.",
+  "command": "pytest data/people/tests/test_schema.py"
+}

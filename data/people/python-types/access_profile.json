@@ -1,0 +1,5 @@
+{
+  "name": "AccessProfile",
+  "description": "TypedDict for person application access records.",
+  "definition": "\"\"\"class AccessProfile(TypedDict):\n    personId: str\n    applicationId: str\n    roles: List[str]\n\"\"\""
+}

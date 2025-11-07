@@ -1,0 +1,19 @@
+{
+  "id": "applications",
+  "name": "Applications",
+  "description": "Internal platforms, SaaS tooling, and business systems.",
+  "aliases": ["apps", "software", "systems"],
+  "config": {
+    "purpose": "Map business capabilities to the systems that deliver them.",
+    "primaryKeys": ["id"],
+    "updateCadence": "Change management board weekly updates.",
+    "access": "Engineering and IT stakeholders.",
+    "requirements": {
+      "requiredRecordFields": ["id", "name", "ownerDepartmentId", "criticality"],
+      "requiredRelationshipFields": ["ownerDepartmentId", "relatedPolicyIds", "resourceIds"],
+      "notes": [
+        "Applications must declare an accountable department and policy coverage."
+      ]
+    }
+  }
+}

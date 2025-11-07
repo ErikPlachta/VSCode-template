@@ -1,0 +1,5 @@
+{
+  "name": "Validate application schema",
+  "description": "Ensures required ownership metadata exists.",
+  "command": "pytest data/applications/tests/test_schema.py"
+}

@@ -3,7 +3,6 @@ import * as os from "os";
 import * as path from "path";
 import {
   createRelevantDataManagerAgent,
-  MOCK_RELEVANT_DATASET,
   RelevantDataManagerAgent,
   UnknownCategoryError
 } from "../src/agents/relevantDataManagerAgent";
@@ -36,7 +35,8 @@ describe("RelevantDataManagerAgent", () => {
   it("lists categories and resolves aliases", async () => {
     const { manager } = await createManager();
     const categories = manager.listCategories();
-    expect(categories).toHaveLength(Object.keys(MOCK_RELEVANT_DATASET).length);
+    const catalogue = manager.getDatasetCatalogue();
+    expect(categories).toHaveLength(catalogue.length);
     const departments = manager.getCategory("dept");
     expect(departments.name).toBe("Departments");
   });
@@ -59,6 +59,29 @@ describe("RelevantDataManagerAgent", () => {
       .then(() => true)
       .catch(() => false);
     expect(cacheExists).toBe(true);
+  });
+
+  it("persists a consolidated catalogue cache", async () => {
+    const { manager, cacheDir } = await createManager();
+    const cataloguePath = path.join(cacheDir, "shared", "relevant-data_catalogue.json");
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      try {
+        await fs.stat(cataloguePath);
+        break;
+      } catch (error) {
+        if (attempt === 4) {
+          throw error;
+        }
+        await new Promise((resolve) => setTimeout(resolve, 25));
+      }
+    }
+    const raw = await fs.readFile(cataloguePath, "utf8");
+    const entry = JSON.parse(raw);
+    expect(entry.value).toBeInstanceOf(Array);
+    expect(entry.value[0]).toHaveProperty("id");
+    expect(entry.metadata?.fingerprint).toBeDefined();
+    const datasetIds = manager.getDatasetCatalogue().map((item) => item.id);
+    expect(entry.value.map((item: { id: string }) => item.id)).toEqual(datasetIds);
   });
 
   it("resolves entity connections", async () => {

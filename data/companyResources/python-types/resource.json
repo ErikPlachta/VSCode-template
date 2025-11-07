@@ -1,0 +1,5 @@
+{
+  "name": "Resource",
+  "description": "TypedDict for knowledge resources.",
+  "definition": "\"\"\"class Resource(TypedDict):\n    id: str\n    name: str\n    type: str\n    description: str\n    departmentId: str\n    linkedPolicyIds: List[str]\n    applicationIds: List[str]\n\"\"\""
+}

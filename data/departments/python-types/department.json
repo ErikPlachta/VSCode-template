@@ -1,0 +1,5 @@
+{
+  "name": "Department",
+  "description": "TypedDict describing the department data structure.",
+  "definition": "\"\"\"class Department(TypedDict):\n    id: str\n    name: str\n    description: str\n    leadId: str\n    parentDepartmentId: NotRequired[Optional[str]]\n    applicationIds: List[str]\n    policyIds: List[str]\n    resourceIds: List[str]\n\"\"\""
+}

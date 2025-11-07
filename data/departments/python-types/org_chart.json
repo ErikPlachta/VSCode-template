@@ -1,0 +1,5 @@
+{
+  "name": "OrgChartNode",
+  "description": "Typed node representing the company hierarchy graph.",
+  "definition": "\"\"\"class OrgChartNode(TypedDict):\n    id: str\n    parentId: Optional[str]\n    label: str\n\"\"\""
+}

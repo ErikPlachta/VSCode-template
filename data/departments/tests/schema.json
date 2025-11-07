@@ -1,0 +1,5 @@
+{
+  "name": "Validate department schema",
+  "description": "Ensures config.json aligns with schema expectations.",
+  "command": "pytest data/departments/tests/test_schema.py"
+}
