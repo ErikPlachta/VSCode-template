@@ -1,3 +1,7 @@
+/**
+ * @file schemaUtils implementation for mcp module
+ */
+
 import type {
   BusinessCategory,
   CategoryId,

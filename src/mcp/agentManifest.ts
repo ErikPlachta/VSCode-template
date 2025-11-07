@@ -1,5 +1,10 @@
+/**
+ * @file agentManifest implementation for mcp module
+ */
+
 import {
   AgentIdentifier,
+  OrchestratorProfile,
   ClarificationAgentProfile,
   DataAgentProfile,
   DatabaseAgentProfile,
@@ -28,6 +33,10 @@ export interface AgentCapabilityMetadata {
  * Manifest describing the capabilities of every agent.
  */
 export const agentManifest: Record<AgentIdentifier, AgentCapabilityMetadata> = {
+  orchestrator: {
+    ...OrchestratorProfile,
+    dependsOn: [ClarificationAgentProfile.id],
+  },
   "relevant-data-manager": {
     ...RelevantDataManagerAgentProfile,
     dependsOn: [ClarificationAgentProfile.id],

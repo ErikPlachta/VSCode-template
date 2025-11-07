@@ -1,8 +1,15 @@
 {
   "id": "<application>",
-  "name": "<Application>",
+  "name": "Applications",
   "description": "Internal platforms, SaaS tooling, and business systems.",
-  "aliases": ["apps", "software", "systems"],
+  "aliases": [
+    "apps",
+    "software",
+    "systems",
+    "platforms",
+    "frameworks",
+    "solutions"
+  ],
   "config": {
     "purpose": "Map business capabilities to the systems that deliver them.",
     "primaryKeys": ["id"],

@@ -1,3 +1,7 @@
+/**
+ * @file knowledgeBase implementation for mcp module
+ */
+
 export interface KnowledgeDocument {
   id: string;
   title: string;

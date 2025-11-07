@@ -1,6 +1,6 @@
 {
   "id": "<department>",
-  "name": "<Department>",
+  "name": "Departments",
   "description": "Organisational units, their missions, and leadership hierarchy.",
   "aliases": ["dept", "org units", "teams"],
   "config": {

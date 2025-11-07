@@ -1,4 +1,9 @@
+/**
+ * @file agentProfiles implementation for mcp module
+ */
+
 export type AgentIdentifier =
+  | "orchestrator"
   | "relevant-data-manager"
   | "database-agent"
   | "data-agent"
@@ -17,23 +22,40 @@ export const RelevantDataManagerAgentProfile: AgentProfile = {
   title: "Relevant Data Manager",
   description: "curates category metadata, schemas, and validation artefacts",
   primarySignals: ["schema", "metadata", "catalogue", "snapshot"],
-  escalateWhen: ["category folder is missing", "schema validation fails"]
+  escalateWhen: ["category folder is missing", "schema validation fails"],
+};
+
+export const OrchestratorProfile: AgentProfile = {
+  id: "orchestrator",
+  title: "Orchestrator",
+  description:
+    "routes questions to appropriate agents based on intent classification",
+  primarySignals: ["routing", "coordination", "intent", "workflow"],
+  escalateWhen: ["no suitable agent found", "multiple agents conflict"],
 };
 
 export const DatabaseAgentProfile: AgentProfile = {
   id: "database-agent",
   title: "Database Agent",
-  description: "executes structured queries and saved blueprints against cached datasets",
+  description:
+    "executes structured queries and saved blueprints against cached datasets",
   primarySignals: ["query", "records", "filter", "list"],
-  escalateWhen: ["category metadata is missing", "no records match the criteria"]
+  escalateWhen: [
+    "category metadata is missing",
+    "no records match the criteria",
+  ],
 };
 
 export const DataAgentProfile: AgentProfile = {
   id: "data-agent",
   title: "Exploration & Insight Agent",
-  description: "crafts exploration plans and synthesises insights across datasets",
+  description:
+    "crafts exploration plans and synthesises insights across datasets",
   primarySignals: ["insight", "plan", "narrative", "connections"],
-  escalateWhen: ["relationships are missing", "no supporting records are available"]
+  escalateWhen: [
+    "relationships are missing",
+    "no supporting records are available",
+  ],
 };
 
 export const ClarificationAgentProfile: AgentProfile = {
@@ -41,12 +63,15 @@ export const ClarificationAgentProfile: AgentProfile = {
   title: "Clarification Agent",
   description: "triages ambiguous requests and asks follow-up questions",
   primarySignals: ["unclear", "unknown", "missing context"],
-  escalateWhen: ["the user cannot provide category context", "no agents match the request"]
+  escalateWhen: [
+    "the user cannot provide category context",
+    "no agents match the request",
+  ],
 };
 
 export type KnownAgentProfile =
+  | typeof OrchestratorProfile
   | typeof RelevantDataManagerAgentProfile
   | typeof DatabaseAgentProfile
   | typeof DataAgentProfile
   | typeof ClarificationAgentProfile;
-

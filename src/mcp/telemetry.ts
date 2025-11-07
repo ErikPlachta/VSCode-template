@@ -1,3 +1,7 @@
+/**
+ * @file telemetry implementation for mcp module
+ */
+
 export interface InvocationEvent {
   agent: string;
   operation: string;

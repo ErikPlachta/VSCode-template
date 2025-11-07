@@ -8,9 +8,9 @@ import { loadApplicationConfig } from "./configurationLoader";
 /**
  * Decorator function for automatic analytics tracking on agent methods.
  *
- * @param {string} agentName - Name of the agent class.
- * @param {string} methodName - Name of the method being tracked.
- * @returns {Function} Method decorator function.
+ * @param agentName-  - Name of the agent class.
+ * @param methodName-  - Name of the method being tracked.
+ * @returns - Method decorator function.
  */
 export function trackAgentExecution(agentName: string, methodName?: string) {
   return function <T extends (...args: any[]) => Promise<any>>(
@@ -49,7 +49,7 @@ export abstract class TrackedAgent {
   /**
    * Creates a new tracked agent instance.
    *
-   * @param {string} agentName - Name of the agent for analytics tracking.
+   * @param agentName-  - Name of the agent for analytics tracking.
    */
   constructor(agentName: string) {
     this.agentName = agentName;
@@ -59,10 +59,10 @@ export abstract class TrackedAgent {
   /**
    * Executes a tracked operation with automatic analytics recording.
    *
-   * @param {string} operationName - Name of the operation being performed.
-   * @param {Function} operation - Operation function to execute.
-   * @param {object} options - Additional tracking options.
-   * @returns {Promise<T>} Promise resolving to operation result.
+   * @param operationName-  - Name of the operation being performed.
+   * @param operation-  - Operation function to execute.
+   * @param options-  - Additional tracking options.
+   * @returns - Promise resolving to operation result.
    */
   protected async executeTracked<T>(
     operationName: string,
@@ -83,10 +83,9 @@ export abstract class TrackedAgent {
   /**
    * Records a custom analytics event.
    *
-   * @param {string} method - Method name for the event.
-   * @param {object} eventData - Additional event data.
-   * @returns {void}
-   */
+   * @param method-  - Method name for the event.
+   * @param eventData-  - Additional event data.
+   * @returns - */
   protected recordEvent(
     method: string,
     eventData: Record<string, any> = {}
@@ -101,8 +100,8 @@ export abstract class TrackedAgent {
   /**
    * Gets analytics statistics for this agent.
    *
-   * @param {Date} since - Optional start date for filtering.
-   * @returns {any | null} Agent statistics or null if no data.
+   * @param since-  - Optional start date for filtering.
+   * @returns - Agent statistics or null if no data.
    */
   getStats(since?: Date): any | null {
     return this.analytics.getAgentStats(this.agentName, since);
@@ -112,10 +111,10 @@ export abstract class TrackedAgent {
 /**
  * Analytics middleware for MCP method invocations.
  *
- * @param {string} agentName - Name of the agent.
- * @param {string} methodName - Name of the MCP method.
- * @param {Function} handler - Original method handler.
- * @returns {Function} Wrapped handler with analytics tracking.
+ * @param agentName-  - Name of the agent.
+ * @param methodName-  - Name of the MCP method.
+ * @param handler-  - Original method handler.
+ * @returns - Wrapped handler with analytics tracking.
  */
 export function withAnalytics<T extends (...args: any[]) => Promise<any>>(
   agentName: string,
@@ -155,10 +154,10 @@ export class PerformanceMonitor {
   /**
    * Monitors the performance of a database query operation.
    *
-   * @param {string} queryType - Type of database query.
-   * @param {Function} query - Query function to execute.
-   * @param {object} options - Monitoring options.
-   * @returns {Promise<T>} Promise resolving to query result.
+   * @param queryType-  - Type of database query.
+   * @param query-  - Query function to execute.
+   * @param options-  - Monitoring options.
+   * @returns - Promise resolving to query result.
    */
   async monitorDatabaseQuery<T>(
     queryType: string,
@@ -181,10 +180,10 @@ export class PerformanceMonitor {
   /**
    * Monitors data processing operations.
    *
-   * @param {string} operationType - Type of data processing operation.
-   * @param {Function} processor - Processing function to execute.
-   * @param {object} options - Monitoring options.
-   * @returns {Promise<T>} Promise resolving to processing result.
+   * @param operationType-  - Type of data processing operation.
+   * @param processor-  - Processing function to execute.
+   * @param options-  - Monitoring options.
+   * @returns - Promise resolving to processing result.
    */
   async monitorDataProcessing<T>(
     operationType: string,
@@ -212,10 +211,10 @@ export class PerformanceMonitor {
   /**
    * Monitors orchestration decisions and routing.
    *
-   * @param {string} decision - Type of orchestration decision.
-   * @param {Function} orchestration - Orchestration function to execute.
-   * @param {object} options - Monitoring options.
-   * @returns {Promise<T>} Promise resolving to orchestration result.
+   * @param decision-  - Type of orchestration decision.
+   * @param orchestration-  - Orchestration function to execute.
+   * @param options-  - Monitoring options.
+   * @returns - Promise resolving to orchestration result.
    */
   async monitorOrchestration<T>(
     decision: string,
@@ -244,7 +243,7 @@ export class PerformanceMonitor {
 /**
  * Initializes analytics for the application based on configuration.
  *
- * @returns {Promise<AgentUsageAnalytics>} Promise resolving to configured analytics instance.
+ * @returns - Promise resolving to configured analytics instance.
  */
 export async function initializeAnalytics(): Promise<AgentUsageAnalytics> {
   try {
@@ -273,9 +272,9 @@ export async function initializeAnalytics(): Promise<AgentUsageAnalytics> {
 /**
  * Creates a scheduled analytics report generator.
  *
- * @param {number} intervalMs - Interval in milliseconds between reports.
- * @param {string} outputPath - File path for report output.
- * @returns {NodeJS.Timeout} Timer for the scheduled reports.
+ * @param intervalMs-  - Interval in milliseconds between reports.
+ * @param outputPath-  - File path for report output.
+ * @returns - Timer for the scheduled reports.
  */
 export function scheduleAnalyticsReports(
   intervalMs: number = 24 * 60 * 60 * 1000, // Daily by default

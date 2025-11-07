@@ -9,8 +9,8 @@ import { MCPProperty, MCPTool } from "@extension/mcpSync";
 /**
  * Resolve the declared JSON schema type into a singular primitive string.
  *
- * @param {MCPProperty} property Property descriptor sourced from the tool schema.
- * @returns {string} Primitive type name such as `string`, `number`, `boolean`, or `array`.
+ * @param property - Property descriptor sourced from the tool schema.
+ * @returns - Primitive type name such as `string`, `number`, `boolean`, or `array`.
  */
 function resolvePropertyType(property: MCPProperty): string {
   if (!property.type) {
@@ -22,10 +22,10 @@ function resolvePropertyType(property: MCPProperty): string {
 /**
  * Convert user input to the correct JavaScript type based on the schema.
  *
- * @param {string} rawValue Raw input provided by the user.
- * @param {MCPProperty} property Schema descriptor for the argument.
- * @returns {unknown} Coerced value ready for inclusion in the MCP payload.
- * @throws {Error} When the value cannot be coerced, for example when a number is expected.
+ * @param rawValue - Raw input provided by the user.
+ * @param property - Schema descriptor for the argument.
+ * @returns - Coerced value ready for inclusion in the MCP payload.
+ * @throws - When the value cannot be coerced, for example when a number is expected.
  */
 function coerceValue(rawValue: string, property: MCPProperty): unknown {
   const type = resolvePropertyType(property);
@@ -66,8 +66,8 @@ function coerceValue(rawValue: string, property: MCPProperty): unknown {
  * The prompt adapts to schema metadata by offering quick picks for enumerations
  * and booleans, plus validation for numbers and required fields.
  *
- * @param {MCPTool} tool Tool definition with input schema.
- * @returns {Promise<Record<string, unknown> | undefined>} User-provided arguments keyed by schema property name, or `undefined` when the prompt is cancelled.
+ * @param tool - Tool definition with input schema.
+ * @returns - User-provided arguments keyed by schema property name, or `undefined` when the prompt is cancelled.
  * @example
  * ```ts
  * const args = await promptForArgs(tool);

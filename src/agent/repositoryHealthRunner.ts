@@ -10,8 +10,8 @@ import { RepositoryHealthAgent } from './repositoryHealthAgent';
 /**
  * Execute the repository health agent and optionally persist a Markdown report.
  *
- * @returns {Promise<void>} Promise that resolves when execution completes.
- * @throws {Error} When the agent encounters an unexpected failure.
+ * @returns - Promise that resolves when execution completes.
+ * @throws - When the agent encounters an unexpected failure.
  *
  * @example
  * ```ts

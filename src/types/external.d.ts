@@ -1,3 +1,7 @@
+/**
+ * @file external.d implementation for types module
+ */
+
 declare module 'ajv-formats' {
   import type Ajv from 'ajv';
 

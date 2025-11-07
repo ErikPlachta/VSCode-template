@@ -147,12 +147,12 @@ export class RepositoryHealthAgent {
   /**
    * Create a new health agent using the provided configuration.
    *
-   * @param {string} baseDir - Repository root directory.
-   * @param {AgentConfig} config - Parsed agent configuration contract.
+   * @param baseDir-  - Repository root directory.
+   * @param config-  - Parsed agent configuration contract.
    *
    * @example
    * ```ts
-   * const config = await RepositoryHealthAgent.loadConfig('agent.config.json');
+   * const config = await RepositoryHealthAgent.loadConfig('mcp.config.json');
    * const agent = new RepositoryHealthAgent(process.cwd(), config);
    * ```
    */
@@ -171,13 +171,13 @@ export class RepositoryHealthAgent {
   /**
    * Load configuration from disk using the default location.
    *
-   * @param {string} configPath - Relative path to the configuration file.
-   * @returns {Promise<AgentConfig>} A parsed agent configuration object.
-   * @throws {Error} When the configuration file cannot be parsed.
+   * @param configPath-  - Relative path to the configuration file.
+   * @returns - A parsed agent configuration object.
+   * @throws - When the configuration file cannot be parsed.
    *
    * @example
    * ```ts
-   * const config = await RepositoryHealthAgent.loadConfig('agent.config.json');
+   * const config = await RepositoryHealthAgent.loadConfig('mcp.config.json');
    * ```
    */
   public static async loadConfig(configPath: string): Promise<AgentConfig> {
@@ -189,9 +189,9 @@ export class RepositoryHealthAgent {
   /**
    * Create an agent instance by reading the default configuration file.
    *
-   * @param {string} [configPath] - Optional custom path to the configuration file.
-   * @returns {Promise<RepositoryHealthAgent>} Instantiated repository health agent.
-   * @throws {Error} When configuration loading fails.
+   * @param [configPath]-  - Optional custom path to the configuration file.
+   * @returns - Instantiated repository health agent.
+   * @throws - When configuration loading fails.
    *
    * @example
    * ```ts
@@ -199,7 +199,7 @@ export class RepositoryHealthAgent {
    * ```
    */
   public static async createFromDisk(
-    configPath: string = "bin/agent.config.json"
+    configPath: string = "bin/mcp.config.json"
   ): Promise<RepositoryHealthAgent> {
     const config: AgentConfig = await RepositoryHealthAgent.loadConfig(
       configPath
@@ -210,8 +210,8 @@ export class RepositoryHealthAgent {
   /**
    * Execute every configured check and return a comprehensive report.
    *
-   * @returns {Promise<HealthReport>} Combined health report for lint, schema, and documentation enforcement.
-   * @throws {Error} If an unexpected failure occurs during execution.
+   * @returns - Combined health report for lint, schema, and documentation enforcement.
+   * @throws - If an unexpected failure occurs during execution.
    *
    * @example
    * ```ts
@@ -237,8 +237,8 @@ export class RepositoryHealthAgent {
   /**
    * Execute ESLint using project settings to ensure documentation coverage.
    *
-   * @returns {Promise<CheckResult>} Lint check result with aggregated error messages.
-   * @throws {Error} When ESLint cannot be executed.
+   * @returns - Lint check result with aggregated error messages.
+   * @throws - When ESLint cannot be executed.
    *
    * @example
    * ```ts
@@ -273,8 +273,8 @@ export class RepositoryHealthAgent {
   /**
    * Validate JSON artifacts against defined schemas.
    *
-   * @returns {Promise<CheckResult>} Check result capturing schema validation compliance.
-   * @throws {Error} When schema compilation fails.
+   * @returns - Check result capturing schema validation compliance.
+   * @throws - When schema compilation fails.
    *
    * @example
    * ```ts
@@ -325,8 +325,8 @@ export class RepositoryHealthAgent {
   /**
    * Validate Markdown documents for required metadata and content sections.
    *
-   * @returns {Promise<CheckResult>} Markdown compliance results with file specific diagnostics.
-   * @throws {Error} When Markdown files cannot be read.
+   * @returns - Markdown compliance results with file specific diagnostics.
+   * @throws - When Markdown files cannot be read.
    *
    * @example
    * ```ts
@@ -388,9 +388,9 @@ export class RepositoryHealthAgent {
   /**
    * Persist a markdown report summarising the check outcomes.
    *
-   * @param {HealthReport} report - Generated report to persist.
-   * @returns {Promise<void>} Promise that resolves when the file has been written.
-   * @throws {Error} When the report directory cannot be created.
+   * @param report-  - Generated report to persist.
+   * @returns - Promise that resolves when the file has been written.
+   * @throws - When the report directory cannot be created.
    *
    * @example
    * ```ts
@@ -431,7 +431,7 @@ export class RepositoryHealthAgent {
       "",
       `## Inputs`,
       "",
-      `- agent.config.json for configuration directives.`,
+      `- mcp.config.json for configuration directives.`,
       `- JSON Schemas under the schemas directory.`,
       `- Repository TypeScript and Markdown sources.`,
       "",
@@ -484,8 +484,8 @@ export class RepositoryHealthAgent {
   /**
    * Convert Ajv errors into a readable string.
    *
-   * @param {ErrorObject[]} errors - Ajv validation errors.
-   * @returns {string} A human readable error message.
+   * @param errors-  - Ajv validation errors.
+   * @returns - A human readable error message.
    *
    * @example
    * ```ts

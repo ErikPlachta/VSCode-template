@@ -597,8 +597,8 @@ export class RelevantDataManagerAgent {
   /**
    * Compute a deterministic hash of the records for change detection.
    *
-   * @param {string} topicOrId Category identifier or alias whose records should be hashed.
-   * @returns {string} SHA-1 hash representing the current record contents.
+   * @param topicOrId - Category identifier or alias whose records should be hashed.
+   * @returns - SHA-1 hash representing the current record contents.
    */
   getCategoryRecordHash(topicOrId: string): string {
     const category = this.getCategory(topicOrId);
@@ -608,7 +608,7 @@ export class RelevantDataManagerAgent {
   /**
    * Expose the dataset fingerprint used to detect catalogue changes.
    *
-   * @returns {string} SHA-1 fingerprint of the consolidated dataset catalogue.
+   * @returns - SHA-1 fingerprint of the consolidated dataset catalogue.
    */
   getDatasetFingerprint(): string {
     return this.datasetFingerprint;

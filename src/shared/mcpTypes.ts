@@ -3,6 +3,10 @@
  * and the standalone development server.
  */
 
+/**
+ * @file mcpTypes implementation for shared module
+ */
+
 /** JSON schema fragment describing a tool argument. */
 export interface MCPProperty {
   /** Argument identifier used when invoking the tool. */

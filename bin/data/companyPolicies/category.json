@@ -1,6 +1,6 @@
 {
   "id": "<companyPolicy>",
-  "name": "<Company Policy>",
+  "name": "Company Policies",
   "description": "Governance, compliance, and operating procedures.",
   "aliases": ["policies", "standards"],
   "config": {

@@ -10,8 +10,8 @@ import { RepositoryHealthAgent } from "@agent/repositoryHealthAgent";
 /**
  * Validate Markdown metadata and structural requirements.
  *
- * @returns {Promise<void>} Promise that resolves when validation completes.
- * @throws {Error} When validation fails unexpectedly.
+ * @returns - Promise that resolves when validation completes.
+ * @throws - When validation fails unexpectedly.
  *
  * @example
  * ```ts

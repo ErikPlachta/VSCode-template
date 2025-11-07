@@ -38,9 +38,9 @@ export class AnalyticsDashboard {
   /**
    * Generates a comprehensive analytics report.
    *
-   * @param {UsageAnalyticsSummary} summary - Analytics summary data.
-   * @param {ReportOptions} options - Report generation options.
-   * @returns {string} Generated report content.
+   * @param summary-  - Analytics summary data.
+   * @param options-  - Report generation options.
+   * @returns - Generated report content.
    */
   generateReport(
     summary: UsageAnalyticsSummary,
@@ -61,8 +61,8 @@ export class AnalyticsDashboard {
   /**
    * Generates performance recommendations based on analytics data.
    *
-   * @param {UsageAnalyticsSummary} summary - Analytics summary data.
-   * @returns {string[]} Array of performance recommendations.
+   * @param summary-  - Analytics summary data.
+   * @returns - Array of performance recommendations.
    */
   generateRecommendations(summary: UsageAnalyticsSummary): string[] {
     const recommendations: string[] = [];
@@ -141,9 +141,9 @@ export class AnalyticsDashboard {
   /**
    * Generates a Markdown format report.
    *
-   * @param {UsageAnalyticsSummary} summary - Analytics summary data.
-   * @param {ReportOptions} options - Report generation options.
-   * @returns {string} Markdown formatted report.
+   * @param summary-  - Analytics summary data.
+   * @param options-  - Report generation options.
+   * @returns - Markdown formatted report.
    */
   private generateMarkdownReport(
     summary: UsageAnalyticsSummary,
@@ -257,9 +257,9 @@ export class AnalyticsDashboard {
   /**
    * Generates a JSON format report.
    *
-   * @param {UsageAnalyticsSummary} summary - Analytics summary data.
-   * @param {ReportOptions} options - Report generation options.
-   * @returns {string} JSON formatted report.
+   * @param summary-  - Analytics summary data.
+   * @param options-  - Report generation options.
+   * @returns - JSON formatted report.
    */
   private generateJsonReport(
     summary: UsageAnalyticsSummary,
@@ -291,9 +291,9 @@ export class AnalyticsDashboard {
   /**
    * Generates a CSV format report.
    *
-   * @param {UsageAnalyticsSummary} summary - Analytics summary data.
-   * @param {ReportOptions} options - Report generation options.
-   * @returns {string} CSV formatted report.
+   * @param summary-  - Analytics summary data.
+   * @param options-  - Report generation options.
+   * @returns - CSV formatted report.
    */
   private generateCsvReport(
     summary: UsageAnalyticsSummary,
@@ -331,10 +331,10 @@ export class AnalyticsDashboard {
 /**
  * Creates a standard analytics report with default options.
  *
- * @param {UsageAnalyticsSummary} summary - Analytics summary data.
- * @param {Date} startDate - Start date for the report period.
- * @param {Date} endDate - End date for the report period.
- * @returns {string} Generated Markdown report.
+ * @param summary-  - Analytics summary data.
+ * @param startDate-  - Start date for the report period.
+ * @param endDate-  - End date for the report period.
+ * @returns - Generated Markdown report.
  */
 export function createStandardReport(
   summary: UsageAnalyticsSummary,

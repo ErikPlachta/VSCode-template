@@ -1,4 +1,5 @@
 /**
+ * @file High-level data agent that reasons about the relationships between business categories and produces insights.
  * @fileoverview High-level data agent that reasons about the relationships
  * between business categories and produces insights that orchestration logic
  * can feed to other MCP tools.
@@ -177,8 +178,8 @@ export class DataAgent {
   /**
    * Create a new {@link DataAgent}.
    *
-   * @param {RelevantDataManagerAgent} [manager] Optional manager responsible for dataset access.
-   * @param {DatabaseAgent} [databaseAgent] Optional database agent instance to reuse.
+   * @param manager-  - Optional manager responsible for dataset access.
+   * @param databaseAgent-  - Optional database agent instance to reuse.
    */
   constructor(
     manager?: RelevantDataManagerAgent,
@@ -191,7 +192,7 @@ export class DataAgent {
   /**
    * Expose the consolidated dataset catalogue built from on-disk data sources.
    *
-   * @returns {DatasetCatalogueEntry[]} Summaries for each category with key metadata.
+   * @returns - Summaries for each category with key metadata.
    */
   getDatasetCatalogue(): DatasetCatalogueEntry[] {
     return this.manager.getDatasetCatalogue();
@@ -200,9 +201,9 @@ export class DataAgent {
   /**
    * summarize a topic including schema references and highlight data.
    *
-   * @param {string} topic Category identifier or alias to summarize.
-   * @returns {Promise<TopicOverview>} Snapshot of the category and related artefacts.
-   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @param topic-  - Category identifier or alias to summarize.
+   * @returns Promise resolving to snapshot of the category and related artefacts.
+   * @throws UnknownCategoryError When the topic cannot be resolved.
    * @example
    * ```ts
    * const overview = await agent.getTopicOverview("people");
@@ -238,10 +239,10 @@ export class DataAgent {
   /**
    * Map the connections from a given record to other categories.
    *
-   * @param {string} topic Category that owns the record being inspected.
-   * @param {string} [recordId] Optional record identifier. Defaults to the first record in the category.
-   * @returns {Promise<TopicConnections>} Structured description of relationships originating from the record.
-   * @throws {Error} When no records are available for the category.
+   * @param topic - Category that owns the record being inspected.
+   * @param [recordId] - Optional record identifier. Defaults to the first record in the category.
+   * @returns - Structured description of relationships originating from the record.
+   * @throws - When no records are available for the category.
    * @example
    * ```ts
    * const connections = await agent.mapTopicConnections("applications", "app-aurora");
@@ -285,10 +286,10 @@ export class DataAgent {
   /**
    * Build an exploration plan for answering a specific user question.
    *
-   * @param {string} topic Category that anchors the exploration.
-   * @param {string} question Natural language problem that needs to be solved.
-   * @returns {Promise<ExplorationPlan>} Plan describing steps, queries, and supporting resources.
-   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @param topic - Category that anchors the exploration.
+   * @param question - Natural language problem that needs to be solved.
+   * @returns - Plan describing steps, queries, and supporting resources.
+   * @throws - When the topic cannot be resolved.
    * @example
    * ```ts
    * const plan = await agent.buildExplorationPlan("departments", "How is the analytics team structured?");
@@ -348,11 +349,11 @@ export class DataAgent {
    * Retrieve the records in the target topic that are connected to the source
    * record via declared relationships.
    *
-   * @param {string} sourceTopic Category that contains the anchor record.
-   * @param {string} sourceRecordId Identifier for the anchor record.
-   * @param {string} targetTopic Category whose records should be matched.
-   * @returns {Promise<CrossTopicConnection | undefined>} Relationship details when a link exists, otherwise `undefined`.
-   * @throws {Error} When the source record cannot be found.
+   * @param sourceTopic - Category that contains the anchor record.
+   * @param sourceRecordId - Identifier for the anchor record.
+   * @param targetTopic - Category whose records should be matched.
+   * @returns - Relationship details when a link exists, otherwise `undefined`.
+   * @throws - When the source record cannot be found.
    * @example
    * ```ts
    * const connection = await agent.findCrossTopicConnection("people", "person-001", "departments");
@@ -398,8 +399,8 @@ export class DataAgent {
   /**
    * Run a keyword search across every category.
    *
-   * @param {string} keyword Case-insensitive search string.
-   * @returns {TopicSearchResult[]} Matching records grouped by category.
+   * @param keyword - Case-insensitive search string.
+   * @returns - Matching records grouped by category.
    * @example
    * ```ts
    * const matches = agent.search("analytics");
@@ -418,7 +419,7 @@ export class DataAgent {
   /**
    * Access to the underlying database agent for orchestration workflows.
    *
-   * @returns {DatabaseAgent} Database-like helper that exposes query primitives.
+   * @returns - Database-like helper that exposes query primitives.
    */
   getDatabaseAgent(): DatabaseAgent {
     return this.database;
@@ -427,9 +428,9 @@ export class DataAgent {
   /**
    * Gather the test, schema, and query artefacts for a category.
    *
-   * @param {string} topic Category identifier or alias.
-   * @returns {CategoryToolkit} Collection of supporting artefacts.
-   * @throws {UnknownCategoryError} When the category cannot be resolved.
+   * @param topic - Category identifier or alias.
+   * @returns - Collection of supporting artefacts.
+   * @throws - When the category cannot be resolved.
    */
   getCategoryToolkit(topic: string): CategoryToolkit {
     const category = this.manager.getCategory(topic);
@@ -446,8 +447,8 @@ export class DataAgent {
   /**
    * Compose supporting resource references for a category.
    *
-   * @param {CategoryId} categoryId Category used to source supporting artefacts.
-   * @returns {Array<{categoryId: CategoryId, ids: string[]}>} Related record references including neighbouring categories.
+   * @param categoryId - Category used to source supporting artefacts.
+   * @returns - >} Related record references including neighbouring categories.
    */
   private collectSupportingResources(
     categoryId: CategoryId
@@ -480,8 +481,8 @@ export class DataAgent {
   /**
    * Determine a consistent display name for a record.
    *
-   * @param {CategoryRecord} record Record being formatted.
-   * @returns {string} Human-friendly name for the record.
+   * @param record - Record being formatted.
+   * @returns - Human-friendly name for the record.
    */
   private getRecordDisplayName(record: CategoryRecord): string {
     return (
@@ -495,7 +496,7 @@ export class DataAgent {
 /**
  * Factory function that creates a {@link DataAgent} with default collaborators.
  *
- * @returns {DataAgent} Freshly constructed data agent.
+ * @returns - Freshly constructed data agent.
  * @example
  * ```ts
  * import { createDataAgent } from "@agent/dataAgent";

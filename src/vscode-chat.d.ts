@@ -1,3 +1,7 @@
+/**
+ * @file vscode-chat.d implementation for src module
+ */
+
 import type { Disposable, MarkdownString } from "vscode";
 
 declare module "vscode" {

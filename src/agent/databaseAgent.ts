@@ -1,4 +1,5 @@
 /**
+ * @file Database-oriented agent for structured data retrieval with filtering and joins.
  * @fileoverview Database-oriented agent that simulates querying the MCP
  * relevant-data workspace as if it were backed by persistent stores. The agent
  * focuses on structured retrieval with filtering, joins, and saved queries.
@@ -164,8 +165,8 @@ export class DatabaseAgent {
   /**
    * Create a {@link DatabaseAgent} instance.
    *
-   * @param {RelevantDataManagerAgent} manager Data manager providing dataset access.
-   * @param {Promise<string>} [cacheDirPromise] Optional override for the cache directory resolution.
+   * @param manager - Data manager providing dataset access.
+   * @param [cacheDirPromise] - Optional override for the cache directory resolution.
    */
   constructor(
     private readonly manager: RelevantDataManagerAgent,
@@ -190,9 +191,9 @@ export class DatabaseAgent {
   /**
    * Search for people using the structured directory dataset.
    *
-   * @param {PeopleQuery} [criteria] Filter parameters.
-   * @param {QueryOptions} [options] Query execution options.
-   * @returns {Promise<CategoryRecord[]>} Matching people records.
+   * @param [criteria] - Filter parameters.
+   * @param [options] - Query execution options.
+   * @returns - Matching people records.
    */
   async queryPeople(
     criteria: PeopleQuery = {},
@@ -204,9 +205,9 @@ export class DatabaseAgent {
   /**
    * Retrieve departments by parent, applications, or policies.
    *
-   * @param {DepartmentQuery} [criteria] Filter parameters.
-   * @param {QueryOptions} [options] Query execution options.
-   * @returns {Promise<CategoryRecord[]>} Matching department records.
+   * @param [criteria] - Filter parameters.
+   * @param [options] - Query execution options.
+   * @returns - Matching department records.
    */
   async queryDepartments(
     criteria: DepartmentQuery = {},
@@ -218,9 +219,9 @@ export class DatabaseAgent {
   /**
    * Retrieve applications using ownership or criticality filters.
    *
-   * @param {ApplicationQuery} [criteria] Filter parameters.
-   * @param {QueryOptions} [options] Query execution options.
-   * @returns {Promise<CategoryRecord[]>} Matching application records.
+   * @param [criteria] - Filter parameters.
+   * @param [options] - Query execution options.
+   * @returns - Matching application records.
    */
   async queryApplications(
     criteria: ApplicationQuery = {},
@@ -232,9 +233,9 @@ export class DatabaseAgent {
   /**
    * Retrieve policies by department, category, or application coverage.
    *
-   * @param {PolicyQuery} [criteria] Filter parameters.
-   * @param {QueryOptions} [options] Query execution options.
-   * @returns {Promise<CategoryRecord[]>} Matching policy records.
+   * @param [criteria] - Filter parameters.
+   * @param [options] - Query execution options.
+   * @returns - Matching policy records.
    */
   async queryPolicies(
     criteria: PolicyQuery = {},
@@ -246,9 +247,9 @@ export class DatabaseAgent {
   /**
    * Retrieve knowledge resources filtered by relationships.
    *
-   * @param {ResourceQuery} [criteria] Filter parameters.
-   * @param {QueryOptions} [options] Query execution options.
-   * @returns {Promise<CategoryRecord[]>} Matching resource records.
+   * @param [criteria] - Filter parameters.
+   * @param [options] - Query execution options.
+   * @returns - Matching resource records.
    */
   async queryResources(
     criteria: ResourceQuery = {},
@@ -260,10 +261,10 @@ export class DatabaseAgent {
   /**
    * Execute a query against any category by identifier or alias.
    *
-   * @param {string} topicOrId Category identifier or alias to query.
-   * @param {Record<string, unknown>} [criteria] Filter parameters applied to the category.
-   * @param {QueryOptions} [options] Query execution options.
-   * @returns {Promise<CategoryRecord[]>} Matching records from the category.
+   * @param topicOrId - Category identifier or alias to query.
+   * @param [criteria] - Filter parameters applied to the category.
+   * @param [options] - Query execution options.
+   * @returns - Matching records from the category.
    */
   async queryCategory(
     topicOrId: string,
@@ -278,12 +279,12 @@ export class DatabaseAgent {
    * Execute a saved query blueprint from the relevant-data repository and
    * return local matches that satisfy the provided criteria.
    *
-   * @param {string} topicOrId Category name or identifier that owns the blueprint.
-   * @param {string} queryName Name of the saved query to execute.
-   * @param {Record<string, unknown>} [criteria] Optional filters applied to the query.
-   * @param {QueryOptions} [options] Additional execution options, including caching overrides.
-   * @returns {Promise<SavedQueryResult>} Blueprint and results pair.
-   * @throws {Error} When the query cannot be found for the given category.
+   * @param topicOrId - Category name or identifier that owns the blueprint.
+   * @param queryName - Name of the saved query to execute.
+   * @param [criteria] - Optional filters applied to the query.
+   * @param [options] - Additional execution options, including caching overrides.
+   * @returns - Blueprint and results pair.
+   * @throws - When the query cannot be found for the given category.
    * @example
    * ```ts
    * const saved = await database.runSavedQuery("departments", "List departments");
@@ -315,10 +316,10 @@ export class DatabaseAgent {
   /**
    * Execute an ad-hoc search across a category with optional caching.
    *
-   * @param {CategoryId} categoryId Category being queried.
-   * @param {Record<string, unknown>} criteria Normalised filter criteria.
-   * @param {QueryOptions} [options] Query execution options.
-   * @returns {Promise<CategoryRecord[]>} Matching records.
+   * @param categoryId - Category being queried.
+   * @param criteria - Normalised filter criteria.
+   * @param [options] - Query execution options.
+   * @returns - Matching records.
    */
   private async executeQuery(
     categoryId: CategoryId,
@@ -379,9 +380,9 @@ export class DatabaseAgent {
   /**
    * Run the actual filtering logic against the dataset.
    *
-   * @param {CategoryId} categoryId Category to evaluate.
-   * @param {Record<string, unknown>} criteria Filter criteria after aliasing.
-   * @returns {CategoryRecord[]} Records that satisfy the criteria.
+   * @param categoryId - Category to evaluate.
+   * @param criteria - Filter criteria after aliasing.
+   * @returns - Records that satisfy the criteria.
    */
   private performFilter(
     categoryId: CategoryId,
@@ -397,9 +398,9 @@ export class DatabaseAgent {
   /**
    * Remap friendly filter keys to dataset field names.
    *
-   * @param {CategoryId} categoryId Category whose alias map should be used.
-   * @param {Record<string, unknown>} criteria Original filter criteria supplied by the user.
-   * @returns {Record<string, unknown>} Criteria with keys remapped to dataset fields.
+   * @param categoryId - Category whose alias map should be used.
+   * @param criteria - Original filter criteria supplied by the user.
+   * @returns - Criteria with keys remapped to dataset fields.
    */
   private applyAliases(
     categoryId: CategoryId,
@@ -418,8 +419,8 @@ export class DatabaseAgent {
   /**
    * Normalise filter criteria for consistent caching and comparisons.
    *
-   * @param {Record<string, unknown>} criteria Filter criteria supplied by callers.
-   * @returns {Record<string, unknown>} Criteria stripped of empty values and with consistent casing.
+   * @param criteria - Filter criteria supplied by callers.
+   * @returns - Criteria stripped of empty values and with consistent casing.
    */
   private normaliseCriteria(
     criteria: Record<string, unknown>
@@ -443,8 +444,8 @@ export class DatabaseAgent {
   /**
    * Ensure a value is ready for comparisons (case normalisation, etc.).
    *
-   * @param {unknown} value Raw value supplied in the criteria.
-   * @returns {unknown} Normalised value ready for strict comparisons.
+   * @param value - Raw value supplied in the criteria.
+   * @returns - Normalised value ready for strict comparisons.
    */
   private normaliseValue(value: unknown): unknown {
     if (typeof value === "string") {
@@ -465,9 +466,9 @@ export class DatabaseAgent {
   /**
    * Determine whether a record satisfies all criteria.
    *
-   * @param {CategoryRecord} record Record being evaluated.
-   * @param {Record<string, unknown>} criteria Normalised comparison values.
-   * @returns {boolean} `true` when the record matches all filters.
+   * @param record - Record being evaluated.
+   * @param criteria - Normalised comparison values.
+   * @returns - `true` when the record matches all filters.
    */
   private matchesCriteria(
     record: CategoryRecord,
@@ -485,9 +486,9 @@ export class DatabaseAgent {
   /**
    * Compare two values supporting arrays and case-insensitive strings.
    *
-   * @param {unknown} actual Value sourced from the record.
-   * @param {unknown} expected Comparison value derived from the criteria.
-   * @returns {boolean} `true` when the values are considered a match.
+   * @param actual - Value sourced from the record.
+   * @param expected - Comparison value derived from the criteria.
+   * @returns - `true` when the values are considered a match.
    */
   private valueMatches(actual: unknown, expected: unknown): boolean {
     if (expected == null) {
@@ -533,10 +534,10 @@ export class DatabaseAgent {
   /**
    * Compute a deterministic cache key for query results.
    *
-   * @param {CategoryId} categoryId Category for which the query is executed.
-   * @param {Record<string, unknown>} criteria Normalised filter criteria.
-   * @param {string} [prefix="query"] Cache key prefix.
-   * @returns {string} Hash-based cache key.
+   * @param categoryId - Category for which the query is executed.
+   * @param criteria - Normalised filter criteria.
+   * @param [prefix="query"] - Cache key prefix.
+   * @returns - Hash-based cache key.
    */
   private buildCacheKey(
     categoryId: CategoryId,
@@ -551,8 +552,8 @@ export class DatabaseAgent {
   /**
    * Recursively sort object keys to ensure stable cache keys.
    *
-   * @param {unknown} value Value to be sorted.
-   * @returns {unknown} Value with deterministic key ordering.
+   * @param value - Value to be sorted.
+   * @returns - Value with deterministic key ordering.
    */
   private sortObject(value: unknown): unknown {
     if (Array.isArray(value)) {
@@ -573,8 +574,8 @@ export class DatabaseAgent {
 /**
  * Factory helper that produces a {@link DatabaseAgent} with a default manager.
  *
- * @param {RelevantDataManagerAgent} [manager] Optional manager to reuse.
- * @returns {DatabaseAgent} Instantiated database agent.
+ * @param [manager] - Optional manager to reuse.
+ * @returns - Instantiated database agent.
  * @example
  * ```ts
  * const agent = createDatabaseAgent();

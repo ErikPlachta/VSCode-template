@@ -55,6 +55,62 @@ export interface McpClientConfig {
 export type AgentPriority = "high" | "medium" | "low";
 
 /**
+ * Agent definition with comprehensive metadata.
+ */
+export interface AgentDefinition {
+  /** Technical name used in code/imports. */
+  name: string;
+  /** Human-readable description of agent purpose. */
+  description: string;
+  /** Short label for UI display and templates. */
+  label: string;
+  /** Formal display name for user interfaces. */
+  displayName: string;
+  /** Class name used for instantiation. */
+  className: string;
+  /** List of capabilities this agent provides. */
+  capabilities: string[];
+  /** Primary responsibility summary. */
+  responsibility: string;
+  /** User-facing metadata for enhanced UX. */
+  userFacing?: {
+    /** Friendly description for end users. */
+    friendlyDescription?: string;
+    /** When users should use this agent. */
+    useWhen?: string[];
+    /** Example user queries. */
+    exampleQueries?: string[];
+    /** Help text for users. */
+    helpText?: string;
+  };
+  /** Application-facing metadata for improved logging/logic. */
+  applicationFacing?: {
+    /** Detailed technical description. */
+    technicalDescription?: string;
+    /** Dependencies on other agents. */
+    dependencies?: string[];
+    /** Performance characteristics. */
+    performance?: {
+      expectedResponseTime?: number;
+      memoryUsage?: string;
+      complexity?: "low" | "medium" | "high";
+    };
+    /** Error handling strategies. */
+    errorHandling?: {
+      retryStrategy?: "none" | "exponential" | "fixed";
+      maxRetries?: number;
+      fallbackAgent?: string;
+    };
+    /** Monitoring and metrics. */
+    monitoring?: {
+      healthCheckEndpoint?: string;
+      metricsToTrack?: string[];
+      alertThresholds?: Record<string, number>;
+    };
+  };
+}
+
+/**
  * Agent profile configuration.
  */
 export interface AgentProfile {
@@ -240,6 +296,14 @@ export interface ApplicationConfig {
   agents: {
     /** Global agent settings. */
     global: AgentGlobalConfig;
+    /** Detailed agent definitions with metadata. */
+    definitions: {
+      orchestrator: AgentDefinition;
+      relevantDataManager: AgentDefinition;
+      databaseAgent: AgentDefinition;
+      dataAgent: AgentDefinition;
+      clarificationAgent: AgentDefinition;
+    };
     /** Individual agent profiles. */
     profiles: {
       orchestrator: AgentProfile;
@@ -248,6 +312,8 @@ export interface ApplicationConfig {
       dataAgent: AgentProfile;
       clarificationAgent: AgentProfile;
     };
+    /** Template replacement mappings. */
+    templateReplacements?: Record<string, string>;
   };
 
   /** Data management configuration. */

@@ -10,8 +10,8 @@ import { RepositoryHealthAgent } from "@agent/repositoryHealthAgent";
 /**
  * Execute JSON schema validation using the repository health agent.
  *
- * @returns {Promise<void>} Promise that resolves when validation completes.
- * @throws {Error} When validation fails unexpectedly.
+ * @returns - Promise that resolves when validation completes.
+ * @throws - When validation fails unexpectedly.
  *
  * @example
  * ```ts

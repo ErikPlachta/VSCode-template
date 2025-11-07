@@ -1,0 +1,466 @@
+{
+  "application": {
+    "name": "VSCode MCP Extension Configuration File",
+    "version": "1.0.0",
+    "description": "Configuration file for building MCP-enabled VS Code extensions with AI agents",
+    "environments": {
+      "development": {
+        "debug": true,
+        "logLevel": "verbose",
+        "hotReload": true,
+        "mockData": true
+      },
+      "staging": {
+        "debug": false,
+        "logLevel": "info",
+        "hotReload": false,
+        "mockData": false
+      },
+      "production": {
+        "debug": false,
+        "logLevel": "warn",
+        "hotReload": false,
+        "mockData": false
+      }
+    }
+  },
+  "mcp": {
+    "server": {
+      "protocol": "http",
+      "defaultPort": 39200,
+      "timeout": 30000,
+      "retries": 3,
+      "embedded": {
+        "enabled": true,
+        "autoStart": true
+      }
+    },
+    "client": {
+      "maxConcurrentRequests": 10,
+      "requestTimeout": 15000,
+      "retryDelay": 1000
+    }
+  },
+  "agents": {
+    "global": {
+      "maxExecutionTime": 60000,
+      "enableTelemetry": true,
+      "cacheEnabled": true,
+      "cacheTtl": 300000
+    },
+    "definitions": {
+      "orchestrator": {
+        "name": "Orchestrator",
+        "description": "Routes questions to appropriate agents based on intent classification",
+        "label": "Orchestrator",
+        "displayName": "Orchestrator",
+        "className": "Orchestrator",
+        "capabilities": [
+          "intent-classification",
+          "agent-routing",
+          "workflow-coordination",
+          "escalation-management",
+          "coordination-management",
+          "request-synthesis"
+        ],
+        "responsibility": "Primary coordination and routing of user requests",
+        "userFacing": {
+          "friendlyDescription": "I'm the coordinator who figures out which specialized agent can best help you with your question.",
+          "useWhen": [
+            "You have a complex question that might need multiple agents",
+            "Your request is ambiguous and needs to be routed properly",
+            "You want to understand what capabilities are available"
+          ],
+          "exampleQueries": [
+            "Can you help me find information about our company policies?",
+            "I need to understand how departments connect to our applications",
+            "What can you help me with?"
+          ],
+          "helpText": "Ask me anything about your business data and I'll route your question to the right specialist."
+        },
+        "applicationFacing": {
+          "technicalDescription": "Central routing agent that analyzes user intent and directs requests to appropriate specialized agents",
+          "dependencies": ["clarificationAgent", "relevantDataManager"],
+          "performance": {
+            "expectedResponseTime": 500,
+            "memoryUsage": "low",
+            "complexity": "medium"
+          },
+          "errorHandling": {
+            "retryStrategy": "fixed",
+            "maxRetries": 2,
+            "fallbackAgent": "clarificationAgent"
+          },
+          "monitoring": {
+            "metricsToTrack": [
+              "routing_accuracy",
+              "response_time",
+              "escalation_rate"
+            ],
+            "alertThresholds": {
+              "response_time_ms": 1000,
+              "error_rate_percent": 5
+            }
+          }
+        }
+      },
+      "relevantDataManager": {
+        "name": "RelevantDataManagerAgent",
+        "description": "Manages category metadata, schemas, and data relationships",
+        "label": "Relevant data manager",
+        "displayName": "Relevant Data Manager",
+        "className": "RelevantDataManagerAgent",
+        "capabilities": [
+          "metadata-management",
+          "schema-validation",
+          "relationship-mapping",
+          "data-structure"
+        ],
+        "responsibility": "Provides metadata about categories, schemas, and data structure",
+        "userFacing": {
+          "friendlyDescription": "I help you understand the structure and organization of your business data categories.",
+          "useWhen": [
+            "You want to know what data categories are available",
+            "You need to understand data relationships",
+            "You're looking for schema or structure information"
+          ],
+          "exampleQueries": [
+            "What data categories do we have?",
+            "How are departments related to applications?",
+            "What's the structure of our people data?"
+          ],
+          "helpText": "I'm your guide to understanding how your business data is organized and connected."
+        },
+        "applicationFacing": {
+          "technicalDescription": "Core metadata management agent responsible for category schemas, relationships, and data structure validation",
+          "dependencies": [],
+          "performance": {
+            "expectedResponseTime": 300,
+            "memoryUsage": "medium",
+            "complexity": "medium"
+          },
+          "errorHandling": {
+            "retryStrategy": "exponential",
+            "maxRetries": 3
+          },
+          "monitoring": {
+            "metricsToTrack": [
+              "cache_hit_rate",
+              "schema_validation_time",
+              "metadata_freshness"
+            ],
+            "alertThresholds": {
+              "cache_hit_rate_percent": 80,
+              "validation_time_ms": 100
+            }
+          }
+        }
+      },
+      "databaseAgent": {
+        "name": "DatabaseAgent",
+        "description": "Executes filtered queries and searches across category records",
+        "label": "Database agent",
+        "displayName": "Database Agent",
+        "className": "DatabaseAgent",
+        "capabilities": [
+          "data-querying",
+          "execute-query",
+          "structured-queries",
+          "perform-query",
+          "record-retrieval",
+          "external-data-retrieval",
+          "connection-integrity",
+          "remote-database-access",
+          "sql-query",
+          "dax-query",
+          "microsoft-sql",
+          "azure-sql",
+          "power-bi-semantic-model",
+          "remote-api"
+        ],
+        "responsibility": "Performs structured queries and data retrieval operations from databases, APIs, and/or external data sources.",
+        "userFacing": {
+          "friendlyDescription": "I find specific records and data by searching through your business information with filters and criteria.",
+          "useWhen": [
+            "You need to find specific people, departments, or applications",
+            "You want to filter data by certain criteria",
+            "You're looking for records that match specific conditions"
+          ],
+          "exampleQueries": [
+            "Show me all applications owned by the IT department",
+            "Find people with skill in 'JavaScript' in the Seattle location",
+            "What policies apply to high-criticality applications?"
+          ],
+          "helpText": "I'm your external data source specialist - ask me for a list of available data sources, and I'll provide you with the information you need."
+        },
+        "applicationFacing": {
+          "technicalDescription": "High-performance query engine with caching, filtering, and relationship traversal capabilities. Supports connections to various external data sources including databases and APIs. Gets data and stores in local cache folder to be digested by other agents",
+          "dependencies": ["relevantDataManager"],
+          "performance": {
+            "expectedResponseTime": 800,
+            "memoryUsage": "high",
+            "complexity": "high"
+          },
+          "errorHandling": {
+            "retryStrategy": "exponential",
+            "maxRetries": 3,
+            "fallbackAgent": "relevantDataManager"
+          },
+          "monitoring": {
+            "metricsToTrack": [
+              "query_execution_time",
+              "cache_hit_rate",
+              "result_set_size",
+              "filter_effectiveness"
+            ],
+            "alertThresholds": {
+              "query_time_ms": 2000,
+              "cache_miss_rate_percent": 30,
+              "memory_usage_mb": 256
+            }
+          }
+        }
+      },
+      "dataAgent": {
+        "name": "DataAgent",
+        "description": "Synthesizes insights and creates exploration plans from data analysis",
+        "label": "Data agent",
+        "displayName": "Data Agent",
+        "className": "DataAgent",
+        "capabilities": [
+          "insight-generation",
+          "narrative-synthesis",
+          "exploration-planning",
+          "cross-category-analysis"
+        ],
+        "responsibility": "Ingest data and transform into insights, summaries, and analytical narratives. Identify patterns and relationships across different data categories to drive business decisions.",
+        "userFacing": {
+          "friendlyDescription": "I analyze your data to provide insights, summaries, and help you explore connections between different parts of your business.",
+          "useWhen": [
+            "You want to understand patterns or trends in your data",
+            "You need a summary or overview of a data category",
+            "You're exploring relationships between different business areas"
+          ],
+          "exampleQueries": [
+            "What insights can you provide about our applications?",
+            "Summarize the people data and show key patterns",
+            "How do departments connect to policies and resources?"
+          ],
+          "helpText": "I'm your data analyst - I'll help you discover insights and understand the bigger picture of your business data."
+        },
+        "applicationFacing": {
+          "technicalDescription": "Advanced analytics engine with cross-category analysis, pattern detection, and narrative generation",
+          "dependencies": ["databaseAgent", "relevantDataManager"],
+          "performance": {
+            "expectedResponseTime": 2000,
+            "memoryUsage": "medium",
+            "complexity": "high"
+          },
+          "errorHandling": {
+            "retryStrategy": "none",
+            "maxRetries": 0,
+            "fallbackAgent": "databaseAgent"
+          },
+          "monitoring": {
+            "metricsToTrack": [
+              "insight_quality_score",
+              "analysis_depth",
+              "cross_reference_count",
+              "narrative_coherence"
+            ],
+            "alertThresholds": {
+              "analysis_time_ms": 5000,
+              "insight_count": 3
+            }
+          }
+        }
+      },
+      "clarificationAgent": {
+        "name": "ClarificationAgent",
+        "description": "Handles ambiguous requests and guides users toward actionable queries",
+        "label": "Clarification agent",
+        "displayName": "Clarification Agent",
+        "className": "ClarificationAgent",
+        "capabilities": [
+          "ambiguity-resolution",
+          "user-guidance",
+          "query-refinement"
+        ],
+        "responsibility": "Clarifies unclear requests and provides guidance",
+        "userFacing": {
+          "friendlyDescription": "I help when your question isn't clear by asking for more details and suggesting how to get the information you need.",
+          "useWhen": [
+            "Your question is unclear or too broad",
+            "You're not sure how to ask for what you want",
+            "You need help understanding what information is available"
+          ],
+          "exampleQueries": [
+            "I need information about our company",
+            "Can you help me with something?",
+            "I'm looking for data but not sure what"
+          ],
+          "helpText": "If you're not sure how to ask your question, I'll help you clarify what you're looking for and guide you to the right information."
+        },
+        "applicationFacing": {
+          "technicalDescription": "Interactive guidance system with context analysis and query suggestion capabilities",
+          "dependencies": ["relevantDataManager"],
+          "performance": {
+            "expectedResponseTime": 400,
+            "memoryUsage": "low",
+            "complexity": "low"
+          },
+          "errorHandling": {
+            "retryStrategy": "fixed",
+            "maxRetries": 1
+          },
+          "monitoring": {
+            "metricsToTrack": [
+              "clarification_success_rate",
+              "user_satisfaction",
+              "follow_up_queries"
+            ],
+            "alertThresholds": {
+              "clarification_time_ms": 1000,
+              "success_rate_percent": 90
+            }
+          }
+        }
+      }
+    },
+    "profiles": {
+      "orchestrator": {
+        "priority": "high",
+        "timeout": 30000
+      },
+      "relevantDataManager": {
+        "priority": "medium",
+        "timeout": 20000,
+        "cacheEnabled": true
+      },
+      "databaseAgent": {
+        "priority": "medium",
+        "timeout": 15000,
+        "cacheEnabled": true
+      },
+      "dataAgent": {
+        "priority": "low",
+        "timeout": 45000
+      },
+      "clarificationAgent": {
+        "priority": "high",
+        "timeout": 10000
+      }
+    },
+    "templateReplacements": {
+      "<orchestrator-label>": "{{agents.definitions.orchestrator.label}}",
+      "<relevant-data-manager-label>": "{{agents.definitions.relevantDataManager.label}}",
+      "<database-agent-label>": "{{agents.definitions.databaseAgent.label}}",
+      "<data-agent-label>": "{{agents.definitions.dataAgent.label}}",
+      "<clarification-agent-label>": "{{agents.definitions.clarificationAgent.label}}"
+    }
+  },
+  "data": {
+    "categories": [
+      "<application>",
+      "<department>",
+      "<people>",
+      "<companyPolicy>",
+      "<companyResource>"
+    ],
+    "validation": {
+      "strictMode": true,
+      "validateOnLoad": true,
+      "validateRelationships": true
+    },
+    "cache": {
+      "enabled": true,
+      "directory": ".mcp-cache",
+      "maxSize": "100MB",
+      "ttl": 3600000
+    }
+  },
+  "typescript": {
+    "include": ["src/**/*.ts"]
+  },
+  "jsonSchemas": [
+    {
+      "pattern": "bin/data/*/category.json",
+      "schema": "bin/schemas/category.schema.json",
+      "description": "Category metadata must define purpose, orchestration, and agent responsibilities."
+    },
+    {
+      "pattern": "bin/data/*/records.json",
+      "schema": "bin/schemas/records.schema.json",
+      "description": "Entity records require identifiers, human-readable names, and linkage metadata."
+    },
+    {
+      "pattern": "bin/data/*/relationships.json",
+      "schema": "bin/schemas/relationships.schema.json",
+      "description": "Relationship definitions must clearly communicate target categories and join keys."
+    }
+  ],
+  "markdown": {
+    "include": ["docs/**/*.md"],
+    "exclude": ["docs/api/**"],
+    "requiredFrontMatter": [
+      "title",
+      "summary",
+      "roles",
+      "associations",
+      "hierarchy"
+    ],
+    "requiredSections": [
+      "## Summary",
+      "## Responsibilities",
+      "## Inputs",
+      "## Outputs",
+      "## Error Handling",
+      "## Examples",
+      "## Maintenance"
+    ]
+  },
+  "report": {
+    "output": "docs/reports/health-report.md"
+  },
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "outputs": ["console"],
+    "file": {
+      "enabled": false,
+      "path": "logs/application.log",
+      "maxSize": "10MB",
+      "maxFiles": 5
+    }
+  },
+  "security": {
+    "enableCORS": true,
+    "allowedOrigins": ["vscode-webview://*"],
+    "rateLimit": {
+      "enabled": true,
+      "windowMs": 60000,
+      "maxRequests": 100
+    }
+  },
+  "performance": {
+    "monitoring": {
+      "enabled": true,
+      "sampleRate": 0.1
+    },
+    "memory": {
+      "maxHeapSize": "512MB",
+      "gcThreshold": 0.8
+    }
+  },
+  "features": {
+    "experimental": {
+      "enableAdvancedCaching": false,
+      "enableParallelProcessing": false,
+      "enableStreamingResponses": false
+    },
+    "extensions": {
+      "allowThirdParty": false,
+      "sandboxMode": true
+    }
+  }
+}

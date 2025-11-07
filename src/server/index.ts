@@ -4,6 +4,10 @@
  * extension can connect to a local endpoint during development.
  */
 
+/**
+ * @file index implementation for server module
+ */
+
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";

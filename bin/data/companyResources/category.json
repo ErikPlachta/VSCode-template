@@ -1,6 +1,6 @@
 {
   "id": "<companyResource>",
-  "name": "<Company Resource>",
+  "name": "Company Resources",
   "description": "Knowledge base entries, playbooks, and runbooks.",
   "aliases": ["resources", "knowledge base"],
   "config": {
