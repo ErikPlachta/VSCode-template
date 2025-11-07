@@ -58,7 +58,7 @@ export async function activate(
       request: vscode.ChatRequest,
       _context: vscode.ChatContext,
       stream: vscode.ChatResponseStream,
-      _token: vscode.CancellationToken
+      _token: vscode.CancellationToken // TODO: use this _token to cancel long-running operations or whatever design intention is for this feature.
     ) => {
       try {
         stream.markdown(`Processing your request: "${request.prompt}"\n\n`);
@@ -95,7 +95,7 @@ export async function activate(
     // Set an icon if available
     try {
       chatParticipant.iconPath = vscode.Uri.file(
-        path.join(__dirname, "..", "..", "data", "icon.png")
+        path.join(__dirname, "..", "..", "bin", "data", "icon.png")
       );
     } catch {
       // Icon is optional

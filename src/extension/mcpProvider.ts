@@ -2,6 +2,7 @@
  * @fileoverview MCP server definition provider integration.
  */
 import * as vscode from "vscode";
+import * as path from "path";
 
 export function registerMcpProvider(
   serverUrl: string,
@@ -15,16 +16,23 @@ export function registerMcpProvider(
     {
       onDidChangeMcpServerDefinitions: emitter.event,
       provideMcpServerDefinitions: async () => {
-        // Provide a single HTTP JSON-RPC server definition
-        let headers: Record<string, string> | undefined;
-        if (includeAuthHeader && token) {
-          headers = { Authorization: `Bearer ${token}` };
-        }
-        const def = new vscode.McpHttpServerDefinition(
-          "My Business Embedded Server",
-          vscode.Uri.parse(serverUrl),
-          headers
+        // Provide a stdio server definition that runs our Node.js server
+        const extensionPath = context.extensionPath;
+        const serverScript = path.join(
+          extensionPath,
+          "out",
+          "server",
+          "index.js"
         );
+
+        const def = new vscode.McpStdioServerDefinition(
+          "My Business Embedded Server", // TODO: Update this to be a value pulled from config file somewhere just like should through whole app
+          "node",
+          [serverScript, "--stdio"],
+          {},
+          "1.0.0"
+        );
+
         return [def];
       },
     }

@@ -28,6 +28,7 @@ export async function startMCPServer(port?: number): Promise<string> {
         resolve(`http://localhost:${serverPort}`);
         return;
       }
+
       serverInstance = createServer((req, res) => {
         // Delegate to the main server logic
         void handleRequest(req, res).catch((error) => {

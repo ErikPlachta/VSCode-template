@@ -87,14 +87,15 @@
     }
   },
   "scripts": {
-    "compile": "tsc -p ./",
-    "test": "jest --runInBand --ci",
-    "docs": "typedoc",
     "lint": "eslint \"src/**/*.ts\" --max-warnings=0",
     "lint:json": "npm run compile -- --pretty false && node ./out/tools/validateJson.js",
     "lint:docs": "npm run compile -- --pretty false && node ./out/tools/validateMarkdown.js",
     "health:report": "npm run compile -- --pretty false && node ./out/agent/runHealthCheck.js",
+    "test": "jest --runInBand --ci",
+    "docs": "typedoc",
+    "compile": "tsc -p ./",
     "package": "npx vsce package",
+    "install": "code --install-extension mybusiness-mcp-extension-1.0.0.vsix",
     "server": "npm run compile -- --pretty false && node ./out/server/index.js"
   },
   "dependencies": {

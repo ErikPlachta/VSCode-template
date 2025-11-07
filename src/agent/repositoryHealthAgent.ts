@@ -199,7 +199,7 @@ export class RepositoryHealthAgent {
    * const agent = await RepositoryHealthAgent.createFromDisk();
    * ```
    */
-  public static async createFromDisk(configPath: string = 'agent.config.json'): Promise<RepositoryHealthAgent> {
+  public static async createFromDisk(configPath: string = 'bin/agent.config.json'): Promise<RepositoryHealthAgent> {
     const config: AgentConfig = await RepositoryHealthAgent.loadConfig(configPath);
     return new RepositoryHealthAgent(process.cwd(), config);
   }

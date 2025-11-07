@@ -10,7 +10,7 @@ jest.mock("vscode", () => ({
   }
 }), { virtual: true });
 
-import { promptForArgs } from "../src/extension/schemaPrompt";
+import { promptForArgs } from "../../src/extension/schemaPrompt";
 
 describe("promptForArgs", () => {
   beforeEach(() => {

@@ -329,7 +329,7 @@ interface RawQueryFile {
   samplePayload: Record<string, unknown>;
 }
 
-const DEFAULT_DATA_ROOT = path.resolve(__dirname, "..", "..", "data");
+const DEFAULT_DATA_ROOT = path.resolve(__dirname, "..", "..", "bin", "data");
 const CONSOLIDATED_INDEX_CACHE_KEY = "relevant-data:catalogue";
 
 function toPosixPath(filePath: string): string {

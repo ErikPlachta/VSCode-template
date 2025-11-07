@@ -1,4 +1,4 @@
-import { Orchestrator } from "../src/agents/orchestrator";
+import { Orchestrator } from "../../src/agents/orchestrator";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -8,8 +8,8 @@ jest.mock(
     workspace: {
       get workspaceFolders() {
         return workspaceFoldersMock;
-      }
-    }
+      },
+    },
   }),
   { virtual: true }
 );
@@ -21,9 +21,15 @@ describe("Orchestrator", () => {
 
   it("classifies metadata, record, and insight intents", () => {
     const orchestrator = new Orchestrator();
-    const metadata = orchestrator.classify("Show schemas for departments", { topic: "departments" });
-    const records = orchestrator.classify("List people with python skills", { topic: "people" });
-    const insight = orchestrator.classify("Create an exploration plan", { topic: "departments" });
+    const metadata = orchestrator.classify("Show schemas for departments", {
+      topic: "departments",
+    });
+    const records = orchestrator.classify("List people with python skills", {
+      topic: "people",
+    });
+    const insight = orchestrator.classify("Create an exploration plan", {
+      topic: "departments",
+    });
     expect(metadata.intent).toBe("metadata");
     expect(metadata.matchedSignals).toBeDefined();
     expect(records.intent).toBe("records");
@@ -36,7 +42,7 @@ describe("Orchestrator", () => {
     const orchestrator = new Orchestrator();
     const response = await orchestrator.handle({
       topic: "departments",
-      question: "Which schemas describe departments?"
+      question: "Which schemas describe departments?",
     });
     expect(response.agent).toBe("relevant-data-manager");
     expect(response.intent).toBe("metadata");
@@ -51,7 +57,7 @@ describe("Orchestrator", () => {
     const response = await orchestrator.handle({
       topic: "people",
       question: "List people with python skills",
-      criteria: { skill: "python" }
+      criteria: { skill: "python" },
     });
     expect(response.agent).toBe("database-agent");
     expect(response.intent).toBe("records");
@@ -65,7 +71,7 @@ describe("Orchestrator", () => {
     const orchestrator = new Orchestrator();
     const response = await orchestrator.handle({
       topic: "departments",
-      question: "Create an exploration plan for the analytics team"
+      question: "Create an exploration plan for the analytics team",
     });
     expect(response.agent).toBe("data-agent");
     expect(response.intent).toBe("insight");
@@ -78,7 +84,9 @@ describe("Orchestrator", () => {
 
   it("surfaces escalation guidance when unable to classify", () => {
     const orchestrator = new Orchestrator();
-    const classification = orchestrator.classify("Tell me more", { topic: "people" });
+    const classification = orchestrator.classify("Tell me more", {
+      topic: "people",
+    });
     expect(classification.intent).toBe("clarification");
     expect(classification.escalationPrompt).toBeDefined();
     expect(classification.missingSignals).toBeDefined();
@@ -87,7 +95,7 @@ describe("Orchestrator", () => {
   it("asks for clarification when topic is missing", async () => {
     const orchestrator = new Orchestrator();
     const response = await orchestrator.handle({
-      question: "List records"
+      question: "List records",
     });
     expect(response.intent).toBe("clarification");
     expect(response.agent).toBe("clarification-agent");

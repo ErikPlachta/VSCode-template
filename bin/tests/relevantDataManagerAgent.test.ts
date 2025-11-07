@@ -4,8 +4,8 @@ import * as path from "path";
 import {
   createRelevantDataManagerAgent,
   RelevantDataManagerAgent,
-  UnknownCategoryError
-} from "../src/agents/relevantDataManagerAgent";
+  UnknownCategoryError,
+} from "../../src/agents/relevantDataManagerAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -15,8 +15,8 @@ jest.mock(
     workspace: {
       get workspaceFolders() {
         return workspaceFoldersMock;
-      }
-    }
+      },
+    },
   }),
   { virtual: true }
 );
@@ -26,8 +26,13 @@ describe("RelevantDataManagerAgent", () => {
     workspaceFoldersMock = undefined;
   });
 
-  async function createManager(): Promise<{ manager: RelevantDataManagerAgent; cacheDir: string }> {
-    const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), "relevant-data-manager-test-"));
+  async function createManager(): Promise<{
+    manager: RelevantDataManagerAgent;
+    cacheDir: string;
+  }> {
+    const cacheDir = await fs.mkdtemp(
+      path.join(os.tmpdir(), "relevant-data-manager-test-")
+    );
     const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
     return { manager, cacheDir };
   }
@@ -64,7 +69,11 @@ describe("RelevantDataManagerAgent", () => {
   it("refreshes snapshots when record hashes change", async () => {
     const { manager, cacheDir } = await createManager();
     const snapshot = await manager.getOrCreateSnapshot("people");
-    const cachePath = path.join(cacheDir, "shared", "relevant-data_people_snapshot.json");
+    const cachePath = path.join(
+      cacheDir,
+      "shared",
+      "relevant-data_people_snapshot.json"
+    );
     const initialEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
 
     const category = manager.getCategory("people");
@@ -74,12 +83,18 @@ describe("RelevantDataManagerAgent", () => {
     const refreshed = await manager.getOrCreateSnapshot("people");
     expect(refreshed.recordCount).toBe(snapshot.recordCount + 1);
     const updatedEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
-    expect(updatedEntry.metadata?.recordHash).not.toEqual(initialEntry.metadata.recordHash);
+    expect(updatedEntry.metadata?.recordHash).not.toEqual(
+      initialEntry.metadata.recordHash
+    );
   });
 
   it("persists a consolidated catalogue cache", async () => {
     const { manager, cacheDir } = await createManager();
-    const cataloguePath = path.join(cacheDir, "shared", "relevant-data_catalogue.json");
+    const cataloguePath = path.join(
+      cacheDir,
+      "shared",
+      "relevant-data_catalogue.json"
+    );
     for (let attempt = 0; attempt < 5; attempt += 1) {
       try {
         await fs.stat(cataloguePath);
@@ -97,16 +112,24 @@ describe("RelevantDataManagerAgent", () => {
     expect(entry.value[0]).toHaveProperty("id");
     expect(entry.metadata?.fingerprint).toBeDefined();
     const datasetIds = manager.getDatasetCatalogue().map((item) => item.id);
-    expect(entry.value.map((item: { id: string }) => item.id)).toEqual(datasetIds);
+    expect(entry.value.map((item: { id: string }) => item.id)).toEqual(
+      datasetIds
+    );
   });
 
   it("resolves entity connections", async () => {
     const { manager } = await createManager();
     const connections = manager.getEntityConnections("people", "person-001");
-    const relationshipNames = connections.connections.map((entry) => entry.relationship);
-    expect(relationshipNames).toEqual(expect.arrayContaining(["department", "applications", "policies"]));
+    const relationshipNames = connections.connections.map(
+      (entry) => entry.relationship
+    );
+    expect(relationshipNames).toEqual(
+      expect.arrayContaining(["department", "applications", "policies"])
+    );
 
-    const departmentConnection = connections.connections.find((entry) => entry.relationship === "department");
+    const departmentConnection = connections.connections.find(
+      (entry) => entry.relationship === "department"
+    );
     expect(departmentConnection?.records[0].id).toBe("dept-analytics");
   });
 
@@ -115,7 +138,9 @@ describe("RelevantDataManagerAgent", () => {
     const matches = manager.searchAcrossCategories("analytics");
     expect(matches.length).toBeGreaterThan(0);
     const categories = matches.map((match) => match.categoryId);
-    expect(categories).toEqual(expect.arrayContaining(["departments", "people", "companyResources"]));
+    expect(categories).toEqual(
+      expect.arrayContaining(["departments", "people", "companyResources"])
+    );
   });
 
   it("provides type definitions and validation reports", async () => {
@@ -132,13 +157,16 @@ describe("RelevantDataManagerAgent", () => {
     const config = manager.getCategoryConfig("applications");
     expect(config.orchestration.summary).toMatch(/applications/i);
     expect(config.orchestration.signals.length).toBeGreaterThan(0);
-    expect(config.orchestration.agents.databaseAgent.promptStarters.length).toBeGreaterThan(0);
+    expect(
+      config.orchestration.agents.databaseAgent.promptStarters.length
+    ).toBeGreaterThan(0);
   });
 
   it("throws when an unknown topic is requested", async () => {
     const { manager } = await createManager();
-    expect(() => manager.getCategory("unknown"))
-      .toThrowError(UnknownCategoryError);
+    expect(() => manager.getCategory("unknown")).toThrowError(
+      UnknownCategoryError
+    );
   });
 
   it("creates default manager via factory", () => {

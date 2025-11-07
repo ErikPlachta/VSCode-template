@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchTools, MCPDiscoveryError } from "../src/extension/mcpSync";
+import { fetchTools, MCPDiscoveryError } from "../../src/extension/mcpSync";
 
 jest.mock("axios");
 

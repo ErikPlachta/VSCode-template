@@ -30,7 +30,7 @@ interface InvokeParams {
 
 const DATA_ROOT = process.env.VSCODE_TEMPLATE_DATA_ROOT
   ? path.resolve(process.env.VSCODE_TEMPLATE_DATA_ROOT)
-  : path.join(__dirname, "..", "..", "data");
+  : path.join(__dirname, "..", "..", "bin", "data");
 
 async function loadJson<T>(...segments: string[]): Promise<T> {
   const filePath = path.join(DATA_ROOT, ...segments);
@@ -221,6 +221,72 @@ async function handleRequest(
     return;
   }
 
+  if (payload.method === "initialize") {
+    sendJson(res, {
+      jsonrpc: "2.0",
+      id: payload.id ?? null,
+      result: {
+        protocolVersion: "2024-11-05",
+        capabilities: {
+          tools: {},
+        },
+        serverInfo: {
+          name: "mybusiness-mcp-server", // TODO: Update this to be an arg from a config in the bin folder or something.
+          version: "1.0.0",
+        },
+      },
+    });
+    return;
+  }
+
+  if (payload.method === "listTools") {
+    sendJson(res, {
+      jsonrpc: "2.0",
+      id: payload.id ?? null,
+      result: { tools },
+    });
+    return;
+  }
+
+  if (payload.method === "tools/call") {
+    const params = (payload.params ?? {}) as {
+      name: string;
+      arguments?: Record<string, unknown>;
+    };
+    const toolName = params.name;
+    if (!toolName) {
+      sendJson(res, {
+        jsonrpc: "2.0",
+        id: payload.id ?? null,
+        error: { code: -32602, message: "Tool name is required" },
+      });
+      return;
+    }
+
+    try {
+      const result = await handleInvoke(toolName, params.arguments ?? {});
+      sendJson(res, {
+        jsonrpc: "2.0",
+        id: payload.id ?? null,
+        result: {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        },
+      });
+    } catch (error) {
+      sendJson(res, {
+        jsonrpc: "2.0",
+        id: payload.id ?? null,
+        error: { code: -32000, message: (error as Error).message },
+      });
+    }
+    return;
+  }
+
   if (payload.method === "listTools") {
     sendJson(res, {
       jsonrpc: "2.0",
@@ -282,14 +348,140 @@ export function createMcpServer(
       });
     });
   });
-  return server.listen(port, () => {
+
+  server.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`MCP mock server listening on http://localhost:${port}`);
   });
+
+  return server;
+}
+
+/**
+ * Handle JSON-RPC message processing for MCP protocol.
+ */
+async function handleJsonRpcMessage(
+  message: JsonRpcRequest
+): Promise<JsonRpcResponse> {
+  if (message.method === "initialize") {
+    return {
+      jsonrpc: "2.0",
+      id: message.id ?? null,
+      result: {
+        protocolVersion: "2024-11-05",
+        capabilities: {
+          tools: {},
+        },
+        serverInfo: {
+          name: "mybusiness-mcp-server",
+          version: "1.0.0",
+        },
+      },
+    };
+  }
+
+  if (message.method === "tools/list") {
+    return {
+      jsonrpc: "2.0",
+      id: message.id ?? null,
+      result: { tools },
+    };
+  }
+
+  if (message.method === "tools/call") {
+    const params = (message.params ?? {}) as {
+      name: string;
+      arguments?: Record<string, unknown>;
+    };
+    const toolName = params.name;
+    if (!toolName) {
+      return {
+        jsonrpc: "2.0",
+        id: message.id ?? null,
+        error: { code: -32602, message: "Tool name is required" },
+      };
+    }
+
+    try {
+      const result = await handleInvoke(toolName, params.arguments ?? {});
+      return {
+        jsonrpc: "2.0",
+        id: message.id ?? null,
+        result: {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        },
+      };
+    } catch (error) {
+      return {
+        jsonrpc: "2.0",
+        id: message.id ?? null,
+        error: { code: -32000, message: (error as Error).message },
+      };
+    }
+  }
+
+  return {
+    jsonrpc: "2.0",
+    id: message.id ?? null,
+    error: { code: -32601, message: `Unknown method: ${message.method}` },
+  };
+}
+
+/**
+ * Start a stdio MCP server that communicates via stdin/stdout.
+ */
+function startStdioServer(): void {
+  let buffer = "";
+
+  process.stdin.setEncoding("utf8");
+  process.stdin.on("data", async (chunk) => {
+    buffer += chunk;
+    const lines = buffer.split("\n");
+    buffer = lines.pop() || "";
+
+    for (const line of lines) {
+      if (line.trim()) {
+        try {
+          const message = JSON.parse(line) as JsonRpcRequest;
+          const response = await handleJsonRpcMessage(message);
+          console.log(JSON.stringify(response));
+        } catch (error) {
+          const errorResponse: JsonRpcResponse = {
+            jsonrpc: "2.0",
+            id: null,
+            error: {
+              code: -32700,
+              message: "Parse error",
+              data: (error as Error).message,
+            },
+          };
+          console.log(JSON.stringify(errorResponse));
+        }
+      }
+    }
+  });
+
+  process.stdin.on("end", () => {
+    process.exit(0);
+  });
+
+  // Send initial message to stderr for debugging
+  console.error("MCP stdio server started");
 }
 
 if (require.main === module) {
-  createMcpServer();
+  // Check if we should run in stdio mode
+  const args = process.argv.slice(2);
+  if (args.includes("--stdio")) {
+    startStdioServer();
+  } else {
+    createMcpServer();
+  }
 }
 
 export { tools, handleRequest };
