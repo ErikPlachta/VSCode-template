@@ -4,6 +4,11 @@
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",
   "publisher": "myorg",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErikPlachta/VSCode-template.git"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -11,7 +16,7 @@
     "onStartupFinished",
     "onCommand:mybusinessMCP.invokeTool"
   ],
-  "main": "./out/extension.js",
+  "main": "./out/extension/index.js",
   "contributes": {
     "commands": [
       {
@@ -42,7 +47,8 @@
     "lint:json": "npm run compile -- --pretty false && node ./out/tools/validateJson.js",
     "lint:docs": "npm run compile -- --pretty false && node ./out/tools/validateMarkdown.js",
     "health:report": "npm run compile -- --pretty false && node ./out/agent/runHealthCheck.js",
-    "package": "vsce package"
+    "package": "npx vsce package",
+    "server": "npm run compile -- --pretty false && node ./out/server/index.js"
   },
   "dependencies": {
     "ajv": "^8.17.1",
@@ -58,6 +64,7 @@
     "@types/vscode": "^1.90.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/vsce": "^2.32.0",
     "eslint": "^8.57.1",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-jsdoc": "^46.9.1",

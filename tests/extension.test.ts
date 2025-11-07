@@ -1,7 +1,7 @@
 import { activate } from "../src/extension";
-import * as mcpSync from "../src/mcpSync";
-import * as mcpCache from "../src/mcpCache";
-import * as schemaPrompt from "../src/schemaPrompt";
+import * as mcpSync from "../src/extension/mcpSync";
+import * as mcpCache from "../src/extension/mcpCache";
+import * as schemaPrompt from "../src/extension/schemaPrompt";
 
 jest.mock("../src/agents/orchestrator", () => ({
   Orchestrator: jest.fn(() => ({
@@ -74,9 +74,9 @@ const showQuickPick = vscodeMock.__showQuickPick as jest.Mock;
 const showInformationMessage = vscodeMock.__showInformationMessage as jest.Mock;
 const showErrorMessage = vscodeMock.__showErrorMessage as jest.Mock;
 
-jest.mock("../src/mcpSync");
-jest.mock("../src/mcpCache");
-jest.mock("../src/schemaPrompt");
+jest.mock("../src/extension/mcpSync");
+jest.mock("../src/extension/mcpCache");
+jest.mock("../src/extension/schemaPrompt");
 
 describe("activate", () => {
   beforeEach(() => {

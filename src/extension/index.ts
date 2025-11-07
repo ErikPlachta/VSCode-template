@@ -4,7 +4,7 @@
  * @module extension
  */
 import * as vscode from "vscode";
-import { Orchestrator, OrchestratorResponse } from "./agents/orchestrator";
+import { Orchestrator, OrchestratorResponse } from "../agents/orchestrator";
 import { ensureCacheDirectory, logInvocation, ToolLogEntry } from "./mcpCache";
 import { fetchTools, MCPDiscoveryError, MCPTool } from "./mcpSync";
 import { promptForArgs } from "./schemaPrompt";
