@@ -26,7 +26,7 @@ Expected cardinality of the relationship.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L53)
+[src/agents/relevantDataManagerAgent.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L53)
 
 ___
 
@@ -38,7 +38,7 @@ Narrative description of the relationship.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L55)
+[src/agents/relevantDataManagerAgent.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L55)
 
 ___
 
@@ -50,7 +50,7 @@ Relationship label.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L47)
+[src/agents/relevantDataManagerAgent.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L47)
 
 ___
 
@@ -62,7 +62,7 @@ Category on the other side of the relationship.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L49)
+[src/agents/relevantDataManagerAgent.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L49)
 
 ___
 
@@ -74,4 +74,4 @@ Field or property used to establish the link.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L51)
+[src/agents/relevantDataManagerAgent.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L51)

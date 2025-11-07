@@ -28,4 +28,4 @@
 
 #### Defined in
 
-[src/mcp/telemetry.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/telemetry.ts#L13)
+[src/mcp/telemetry.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L13)

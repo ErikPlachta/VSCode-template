@@ -24,7 +24,7 @@ Detailed findings for the check.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:96](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agent/repositoryHealthAgent.ts#L96)
+[src/agent/repositoryHealthAgent.ts:96](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L96)
 
 ___
 
@@ -36,7 +36,7 @@ Name describing the check.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:88](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agent/repositoryHealthAgent.ts#L88)
+[src/agent/repositoryHealthAgent.ts:88](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L88)
 
 ___
 
@@ -48,4 +48,4 @@ Whether the check succeeded.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:92](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agent/repositoryHealthAgent.ts#L92)
+[src/agent/repositoryHealthAgent.ts:92](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L92)

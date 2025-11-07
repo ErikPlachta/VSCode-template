@@ -52,7 +52,7 @@ Create a new [DataAgent](agents_dataAgent.DataAgent.md).
 
 #### Defined in
 
-[src/agents/dataAgent.ts:183](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L183)
+[src/agents/dataAgent.ts:183](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L183)
 
 ## Methods
 
@@ -88,7 +88,7 @@ console.log(plan.steps.map((step) => step.title));
 
 #### Defined in
 
-[src/agents/dataAgent.ts:281](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L281)
+[src/agents/dataAgent.ts:281](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L281)
 
 ___
 
@@ -126,7 +126,7 @@ console.log(connection?.relationship);
 
 #### Defined in
 
-[src/agents/dataAgent.ts:336](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L336)
+[src/agents/dataAgent.ts:336](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L336)
 
 ___
 
@@ -154,7 +154,7 @@ When the category cannot be resolved.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:398](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L398)
+[src/agents/dataAgent.ts:398](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L398)
 
 ___
 
@@ -172,7 +172,7 @@ Database-like helper that exposes query primitives.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:387](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L387)
+[src/agents/dataAgent.ts:387](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L387)
 
 ___
 
@@ -190,7 +190,7 @@ Summaries for each category with key metadata.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:193](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L193)
+[src/agents/dataAgent.ts:193](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L193)
 
 ___
 
@@ -225,7 +225,7 @@ console.log(overview.examples[0]?.file);
 
 #### Defined in
 
-[src/agents/dataAgent.ts:209](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L209)
+[src/agents/dataAgent.ts:209](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L209)
 
 ___
 
@@ -261,7 +261,7 @@ connections.connections.forEach((link) => console.log(link.relationship));
 
 #### Defined in
 
-[src/agents/dataAgent.ts:246](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L246)
+[src/agents/dataAgent.ts:246](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L246)
 
 ___
 
@@ -292,4 +292,4 @@ console.log(matches[0]?.displayName);
 
 #### Defined in
 
-[src/agents/dataAgent.ts:373](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L373)
+[src/agents/dataAgent.ts:373](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/dataAgent.ts#L373)

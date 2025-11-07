@@ -27,7 +27,7 @@ Path to the category configuration file.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:31](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L31)
+[src/agents/relevantDataManagerAgent.ts:31](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L31)
 
 ___
 
@@ -39,7 +39,7 @@ Directory containing example datasets.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L37)
+[src/agents/relevantDataManagerAgent.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L37)
 
 ___
 
@@ -51,7 +51,7 @@ Directory containing query blueprints.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L39)
+[src/agents/relevantDataManagerAgent.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L39)
 
 ___
 
@@ -63,7 +63,7 @@ Root directory for the category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L29)
+[src/agents/relevantDataManagerAgent.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L29)
 
 ___
 
@@ -75,7 +75,7 @@ JSON schema file paths.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L33)
+[src/agents/relevantDataManagerAgent.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L33)
 
 ___
 
@@ -87,4 +87,4 @@ Structured type definition file paths.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/relevantDataManagerAgent.ts#L35)
+[src/agents/relevantDataManagerAgent.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L35)

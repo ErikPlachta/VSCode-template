@@ -27,7 +27,7 @@ and booleans, plus validation for numbers and required fields.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `tool` | [`MCPTool`](../interfaces/mcpSync.MCPTool.md) | Tool definition with input schema. |
+| `tool` | [`MCPTool`](../interfaces/shared_mcpTypes.MCPTool.md) | Tool definition with input schema. |
 
 #### Returns
 
@@ -46,4 +46,4 @@ if (args) {
 
 #### Defined in
 
-[src/schemaPrompt.ts:77](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/schemaPrompt.ts#L77)
+[src/extension/schemaPrompt.ts:77](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/schemaPrompt.ts#L77)

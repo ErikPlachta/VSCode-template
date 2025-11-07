@@ -9,26 +9,50 @@ definitions.
 
 ## Table of contents
 
+### References
+
+- [MCPInputSchema](mcpSync.md#mcpinputschema)
+- [MCPListToolsResponse](mcpSync.md#mcplisttoolsresponse)
+- [MCPProperty](mcpSync.md#mcpproperty)
+- [MCPTool](mcpSync.md#mcptool)
+
 ### Classes
 
 - [MCPDiscoveryError](../classes/mcpSync.MCPDiscoveryError.md)
-
-### Interfaces
-
-- [MCPInputSchema](../interfaces/mcpSync.MCPInputSchema.md)
-- [MCPListToolsResponse](../interfaces/mcpSync.MCPListToolsResponse.md)
-- [MCPProperty](../interfaces/mcpSync.MCPProperty.md)
-- [MCPTool](../interfaces/mcpSync.MCPTool.md)
 
 ### Functions
 
 - [fetchTools](mcpSync.md#fetchtools)
 
+## References
+
+### MCPInputSchema
+
+Re-exports [MCPInputSchema](../interfaces/shared_mcpTypes.MCPInputSchema.md)
+
+___
+
+### MCPListToolsResponse
+
+Re-exports [MCPListToolsResponse](../interfaces/shared_mcpTypes.MCPListToolsResponse.md)
+
+___
+
+### MCPProperty
+
+Re-exports [MCPProperty](../interfaces/shared_mcpTypes.MCPProperty.md)
+
+___
+
+### MCPTool
+
+Re-exports [MCPTool](../interfaces/shared_mcpTypes.MCPTool.md)
+
 ## Functions
 
 ### fetchTools
 
-▸ **fetchTools**(`serverUrl`, `token?`): `Promise`\<[`MCPTool`](../interfaces/mcpSync.MCPTool.md)[]\>
+▸ **fetchTools**(`serverUrl`, `token?`): `Promise`\<[`MCPTool`](../interfaces/shared_mcpTypes.MCPTool.md)[]\>
 
 Fetch all available MCP tools from the configured server.
 
@@ -41,7 +65,7 @@ Fetch all available MCP tools from the configured server.
 
 #### Returns
 
-`Promise`\<[`MCPTool`](../interfaces/mcpSync.MCPTool.md)[]\>
+`Promise`\<[`MCPTool`](../interfaces/shared_mcpTypes.MCPTool.md)[]\>
 
 Array of available MCP tools with enriched metadata.
 
@@ -58,4 +82,4 @@ console.log(tools.length);
 
 #### Defined in
 
-[src/mcpSync.ts:129](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcpSync.ts#L129)
+[src/extension/mcpSync.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpSync.ts#L72)

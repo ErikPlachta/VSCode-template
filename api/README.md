@@ -13,6 +13,24 @@ mybusiness-mcp-extension / [Exports](modules.md)
 - Fully unit-tested, documented, and CI-integrated.
 - Enforces repository-wide documentation standards through a modular health check agent and GitHub Actions pipeline.
 
+## Architecture overview
+
+| Component | Location | Purpose |
+| --- | --- | --- |
+| **VSIX extension** | `src/extension/` | Ships the VS Code client that registers commands, connects to an MCP endpoint, and renders responses in Copilot Chat. |
+| **Agents** | `src/agents/` | Provide orchestration logic and reusable domain behaviours that power tool responses regardless of the transport. |
+| **Mock MCP server** | `src/server/` | Lightweight JSON-RPC server that exposes the sample datasets so the extension has a local endpoint during development. |
+
+The extension always communicates with an MCP server over HTTP(S). Installing the VSIX does **not** embed the backend logic; you must point the extension to a running MCP endpoint (for example the mock server included in this repository).
+
+## Run the local MCP server
+
+```bash
+npm run server
+```
+
+This compiles the TypeScript sources and starts a JSON-RPC server on `http://localhost:3030`. Configure the VS Code settings `mybusinessMCP.serverUrl` to that URL (leave `mybusinessMCP.token` empty unless you add authentication). The extension will then discover the mock tools via `listTools` and send `invokeTool` calls to the same endpoint.
+
 ## Compliance and Documentation Tooling
 
 The repository now includes a **Repository Health Agent** (`src/agent/repositoryHealthAgent.ts`) that coordinates linting, schema validation, and documentation audits. Its behaviour is defined by [`agent.config.json`](agent.config.json) and supporting schemas under [`schemas/`](schemas/).
