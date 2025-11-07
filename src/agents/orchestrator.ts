@@ -5,7 +5,13 @@
 
 import { DataAgent } from "./dataAgent";
 import { DatabaseAgent } from "./databaseAgent";
-import { CategorySummary, DatasetCatalogueEntry, RelevantDataManagerAgent } from "./relevantDataManagerAgent";
+import { RelevantDataManagerAgent } from "./relevantDataManagerAgent";
+import type {
+  AgentOrchestrationGuidance,
+  CategoryOrchestrationConfig,
+  CategorySummary,
+  DatasetCatalogueEntry
+} from "./relevantDataManagerAgent";
 
 /** List of supported orchestration intents. */
 export type OrchestratorIntent = "metadata" | "records" | "insight" | "clarification";
@@ -15,6 +21,8 @@ export interface OrchestratorClassification {
   intent: OrchestratorIntent;
   rationale: string;
   escalationPrompt?: string;
+  matchedSignals?: string[];
+  missingSignals?: string[];
 }
 
 /** Input supplied when asking the orchestrator to fulfil a task. */
@@ -34,6 +42,71 @@ export interface OrchestratorResponse {
   rationale: string;
   payload: unknown;
   markdown: string;
+}
+
+const STOP_WORDS = new Set([
+  "the",
+  "and",
+  "that",
+  "this",
+  "with",
+  "into",
+  "from",
+  "will",
+  "they",
+  "their",
+  "them",
+  "what",
+  "when",
+  "have",
+  "such",
+  "like",
+  "your",
+  "more",
+  "also",
+  "than",
+  "should",
+  "before",
+  "after",
+  "each",
+  "within",
+  "without",
+  "about",
+  "using",
+  "based"
+]);
+
+function extractKeywords(text: string): string[] {
+  const matches = text.toLowerCase().match(/\b[a-z0-9]{3,}\b/g) ?? [];
+  return matches.filter((token) => !STOP_WORDS.has(token));
+}
+
+function scoreGuidance(
+  questionTokens: Set<string>,
+  guidance?: AgentOrchestrationGuidance
+): { score: number; matches: string[] } {
+  if (!guidance) {
+    return { score: 0, matches: [] };
+  }
+  const texts = [guidance.focus, ...(guidance.signals ?? []), ...(guidance.promptStarters ?? [])];
+  const matches: string[] = [];
+  let score = 0;
+  for (const text of texts) {
+    const keywords = extractKeywords(text);
+    const overlap = keywords.filter((keyword) => questionTokens.has(keyword));
+    if (overlap.length > 0) {
+      score += overlap.length * 2;
+      matches.push(text);
+    }
+  }
+  return { score, matches };
+}
+
+function findMissingSignals(questionTokens: Set<string>, signals: string[]): string[] {
+  return signals.filter((signal) => {
+    const keywords = extractKeywords(signal);
+    return keywords.length > 0 && !keywords.some((keyword) => questionTokens.has(keyword));
+  });
 }
 
 /**
@@ -66,72 +139,155 @@ export class Orchestrator {
   }
 
   /** Determine which agent should receive the question. */
-  classify(question: string): OrchestratorClassification {
+  classify(
+    question: string,
+    context: { topic?: string; orchestration?: CategoryOrchestrationConfig } = {}
+  ): OrchestratorClassification {
     const trimmed = question.trim();
+    const orchestration =
+      context.orchestration ?? (context.topic ? this.resolveOrchestration(context.topic) : undefined);
     if (!trimmed) {
       return {
         intent: "clarification",
         rationale: "Empty question",
-        escalationPrompt: "Please describe the problem you want to solve."
+        escalationPrompt:
+          orchestration?.escalateWhen?.length
+            ? `Share the scenario you are investigating so we can check for:\n- ${orchestration.escalateWhen.join(
+                "\n- "
+              )}`
+            : "Please describe the problem you want to solve.",
+        missingSignals: orchestration ? orchestration.signals : undefined
       };
     }
 
-    const lower = trimmed.toLowerCase();
+    const tokens = new Set(extractKeywords(trimmed));
     const metadataKeywords = ["schema", "schemas", "relationship", "relationships", "metadata", "types", "folder"];
     const recordKeywords = ["list", "find", "show", "fetch", "query", "records", "where", "filter"];
     const insightKeywords = ["plan", "overview", "summary", "explain", "connections", "insight", "narrative"];
 
-    const score = (keywords: string[]) => keywords.reduce((acc, keyword) => (lower.includes(keyword) ? acc + 1 : acc), 0);
+    const evaluateIntent = (
+      baseKeywords: string[],
+      guidance?: AgentOrchestrationGuidance
+    ): { score: number; keywordMatches: string[]; guidanceMatches: string[] } => {
+      const keywordMatches = baseKeywords.filter((keyword) => tokens.has(keyword));
+      const { score: guidanceScore, matches: guidanceMatches } = scoreGuidance(tokens, guidance);
+      return {
+        score: keywordMatches.length + guidanceScore,
+        keywordMatches,
+        guidanceMatches
+      };
+    };
 
-    const metadataScore = score(metadataKeywords);
-    const recordScore = score(recordKeywords);
-    const insightScore = score(insightKeywords);
+    const metadataResult = evaluateIntent(metadataKeywords, orchestration?.agents.relevantDataManager);
+    const recordsResult = evaluateIntent(recordKeywords, orchestration?.agents.databaseAgent);
+    const insightResult = evaluateIntent(insightKeywords, orchestration?.agents.dataAgent);
 
-    const topScore = Math.max(metadataScore, recordScore, insightScore);
-    if (topScore === 0) {
+    const intents: Array<{
+      intent: OrchestratorIntent;
+      result: ReturnType<typeof evaluateIntent>;
+    }> = [
+      { intent: "metadata", result: metadataResult },
+      { intent: "records", result: recordsResult },
+      { intent: "insight", result: insightResult }
+    ];
+
+    const top = intents.reduce((best, current) => {
+      if (!best || current.result.score > best.result.score) {
+        return current;
+      }
+      return best;
+    }, undefined as (typeof intents)[number] | undefined);
+
+    if (!top || top.result.score === 0) {
       return {
         intent: "clarification",
         rationale: "Unable to map question to an agent",
-        escalationPrompt:
-          "Could you clarify whether you need metadata, specific records, or a narrative insight?"
+        escalationPrompt: this.buildEscalationPrompt(context.topic, orchestration),
+        missingSignals: orchestration ? findMissingSignals(tokens, orchestration.signals) : undefined
       };
     }
 
-    if (topScore === metadataScore && metadataScore > 0) {
-      return {
-        intent: "metadata",
-        rationale: "Detected metadata keywords"
-      };
+    const rationaleParts: string[] = [];
+    if (top.result.keywordMatches.length) {
+      rationaleParts.push(`Matched keywords: ${top.result.keywordMatches.join(", ")}`);
     }
-
-    if (topScore === recordScore && recordScore > 0) {
-      return {
-        intent: "records",
-        rationale: "Detected record-level lookup keywords"
-      };
+    if (top.result.guidanceMatches.length) {
+      rationaleParts.push(`Matched orchestration signals (${top.result.guidanceMatches.length})`);
     }
 
     return {
-      intent: "insight",
-      rationale: "Detected synthesis and planning keywords"
+      intent: top.intent,
+      rationale: rationaleParts.join("; ") || "Routed using category orchestration cues.",
+      matchedSignals: top.result.guidanceMatches
     };
+  }
+
+  private resolveOrchestration(topic?: string): CategoryOrchestrationConfig | undefined {
+    if (!topic) {
+      return undefined;
+    }
+    try {
+      return this.manager.getCategoryConfig(topic).orchestration;
+    } catch {
+      return undefined;
+    }
+  }
+
+  private buildEscalationPrompt(
+    topic: string | undefined,
+    orchestration: CategoryOrchestrationConfig | undefined
+  ): string | undefined {
+    if (!orchestration) {
+      return "Could you clarify whether you need metadata, specific records, or a narrative insight?";
+    }
+    const prompts: string[] = [];
+    if (orchestration.escalateWhen?.length) {
+      const label = topic ? `the ${topic} category` : "this category";
+      prompts.push(`The orchestration escalates for ${label} when:\n- ${orchestration.escalateWhen.join("\n- ")}`);
+    }
+    if (orchestration.signals.length) {
+      prompts.push(`Highlight one of these routing signals:\n- ${orchestration.signals.join("\n- ")}`);
+    }
+    return prompts.join("\n\n") || undefined;
   }
 
   /** Execute the orchestration flow for the supplied input. */
   async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
-    const classification = this.classify(input.question);
+    const topic = input.topic;
+    let categoryConfig = undefined as ReturnType<RelevantDataManagerAgent["getCategoryConfig"]> | undefined;
+    let categoryLookupFailed = false;
+    if (topic) {
+      try {
+        categoryConfig = this.manager.getCategoryConfig(topic);
+      } catch {
+        categoryLookupFailed = true;
+      }
+    }
+    const classification = this.classify(input.question, {
+      topic,
+      orchestration: categoryConfig?.orchestration
+    });
     if (classification.intent === "clarification") {
       return {
         intent: "clarification",
         agent: "orchestrator",
         summary: classification.escalationPrompt ?? "Clarification required",
         rationale: classification.rationale,
-        payload: { prompt: classification.escalationPrompt },
-        markdown: `> ${classification.escalationPrompt ?? "Please clarify your request."}`
+        payload: {
+          prompt: classification.escalationPrompt,
+          missingSignals: classification.missingSignals
+        },
+        markdown: [
+          `> ${classification.escalationPrompt ?? "Please clarify your request."}`,
+          classification.missingSignals?.length
+            ? ["", "**Signals not covered**", ...classification.missingSignals.map((signal) => `- ${signal}`)].join("\n")
+            : undefined
+        ]
+          .filter((line): line is string => Boolean(line))
+          .join("\n")
       };
     }
 
-    const topic = input.topic;
     if (!topic) {
       return {
         intent: "clarification",
@@ -143,13 +299,29 @@ export class Orchestrator {
       };
     }
 
+    if (!categoryConfig || categoryLookupFailed) {
+      return {
+        intent: "clarification",
+        agent: "orchestrator",
+        summary: `Unknown category: ${topic}`,
+        rationale: "Category not recognised",
+        payload: {
+          prompt: `The category '${topic}' is not recognised. Choose one of: ${this.manager
+            .listCategories()
+            .map((entry) => entry.id)
+            .join(", ")}.`
+        },
+        markdown: `> The category '${topic}' is not recognised. Use listCategories() to discover available options.`
+      };
+    }
+
     switch (classification.intent) {
       case "metadata":
-        return this.handleMetadata(topic, classification.rationale);
+        return this.handleMetadata(topic, categoryConfig, classification);
       case "records":
-        return this.handleRecords(topic, input.criteria, classification.rationale);
+        return this.handleRecords(topic, categoryConfig, input.criteria, classification);
       case "insight":
-        return this.handleInsights(topic, input.question, classification.rationale);
+        return this.handleInsights(topic, categoryConfig, input.question, classification);
       default:
         return {
           intent: "clarification",
@@ -162,10 +334,14 @@ export class Orchestrator {
     }
   }
 
-  private async handleMetadata(topic: string, rationale: string): Promise<OrchestratorResponse> {
+  private async handleMetadata(
+    topic: string,
+    config: ReturnType<RelevantDataManagerAgent["getCategoryConfig"]>,
+    classification: OrchestratorClassification
+  ): Promise<OrchestratorResponse> {
     const snapshot = await this.manager.getOrCreateSnapshot(topic);
-    const config = this.manager.getCategoryConfig(topic);
     const relationships = config.relationships.map((relationship) => `- ${relationship.name} → ${relationship.targetCategory}`);
+    const guidance = config.orchestration.agents.relevantDataManager;
     const markdownLines = [
       `### ${snapshot.name} snapshot`,
       `*Records*: ${snapshot.recordCount}`,
@@ -175,43 +351,123 @@ export class Orchestrator {
     if (relationships.length > 0) {
       markdownLines.push("\n**Relationships**", ...relationships);
     }
+    markdownLines.push("\n**Orchestration focus**", `- ${guidance.focus}`);
+    if (guidance.promptStarters.length) {
+      markdownLines.push("\n**Prompt starters**", ...guidance.promptStarters.map((starter) => `- ${starter}`));
+    }
+    if (classification.matchedSignals?.length) {
+      markdownLines.push(
+        "\n**Matched signals**",
+        ...classification.matchedSignals.map((signal) => `- ${signal}`)
+      );
+    }
     return {
       intent: "metadata",
       agent: "relevant-data-manager",
       summary: `${snapshot.name} snapshot with ${snapshot.recordCount} records`,
-      rationale,
-      payload: { snapshot, relationships: config.relationships },
+      rationale: classification.rationale,
+      payload: {
+        snapshot,
+        relationships: config.relationships,
+        guidance,
+        matchedSignals: classification.matchedSignals ?? []
+      },
       markdown: markdownLines.join("\n")
     };
   }
 
   private async handleRecords(
     topic: string,
+    config: ReturnType<RelevantDataManagerAgent["getCategoryConfig"]>,
     criteria: Record<string, unknown> | undefined,
-    rationale: string
+    classification: OrchestratorClassification
   ): Promise<OrchestratorResponse> {
     const category = this.manager.getCategory(topic);
     const records = await this.database.queryCategory(category.id, criteria ?? {});
     const sample = records.slice(0, 5);
+    const overview = await this.dataAgent.getTopicOverview(category.id);
+    let connectionsMarkdown: string[] = [];
+    let connectionsPayload: unknown;
+    try {
+      if (records.length > 0) {
+        const connections = await this.dataAgent.mapTopicConnections(category.id, records[0].id);
+        connectionsPayload = connections;
+        if (connections.narrative.length) {
+          connectionsMarkdown = ["\n**Connection narrative**", ...connections.narrative.map((line) => `- ${line}`)];
+        }
+      }
+    } catch (error) {
+      connectionsPayload = undefined;
+    }
+    const guidance = config.orchestration.agents.databaseAgent;
     const markdownLines = [
       `### ${category.name} records (${sample.length} shown of ${records.length})`,
       "",
+      "**Dataset snapshot**",
+      `- Records available: ${overview.snapshot.recordCount}`,
+      `- Schemas: ${overview.snapshot.schemaNames.join(", ") || "None"}`,
+      `- Queries: ${overview.snapshot.queryNames.join(", ") || "None"}`,
+      "",
+      "**Sample records**",
       "```json",
       JSON.stringify(sample, null, 2),
       "```"
     ];
+    markdownLines.push(...connectionsMarkdown);
+    markdownLines.push("\n**Next steps guidance**", `- ${guidance.focus}`);
+    if (guidance.promptStarters.length) {
+      markdownLines.push("\n**Prompt starters**", ...guidance.promptStarters.map((starter) => `- ${starter}`));
+    }
+    if (classification.matchedSignals?.length) {
+      markdownLines.push(
+        "\n**Matched signals**",
+        ...classification.matchedSignals.map((signal) => `- ${signal}`)
+      );
+    }
     return {
       intent: "records",
       agent: "database-agent",
       summary: `Returned ${records.length} records from ${category.name}`,
-      rationale,
-      payload: { records, criteria },
+      rationale: classification.rationale,
+      payload: {
+        records,
+        criteria,
+        snapshot: overview.snapshot,
+        relationships: overview.relationships,
+        connections: connectionsPayload,
+        guidance,
+        matchedSignals: classification.matchedSignals ?? []
+      },
       markdown: markdownLines.join("\n")
     };
   }
 
-  private async handleInsights(topic: string, question: string, rationale: string): Promise<OrchestratorResponse> {
+  private async handleInsights(
+    topic: string,
+    config: ReturnType<RelevantDataManagerAgent["getCategoryConfig"]>,
+    question: string,
+    classification: OrchestratorClassification
+  ): Promise<OrchestratorResponse> {
     const plan = await this.dataAgent.buildExplorationPlan(topic, question);
+    const overview = await this.dataAgent.getTopicOverview(topic);
+    let connectionsMarkdown: string[] = [];
+    let connectionsPayload: unknown;
+    try {
+      const connections = await this.dataAgent.mapTopicConnections(topic);
+      connectionsPayload = connections;
+      if (connections.narrative.length) {
+        connectionsMarkdown = ["\n**Relationship narrative**", ...connections.narrative.map((line) => `- ${line}`)];
+      }
+    } catch (error) {
+      connectionsPayload = undefined;
+    }
+    const supportingRecords = plan.supportingResources.map((resource) => ({
+      categoryId: resource.categoryId,
+      records: resource.ids
+        .map((id) => this.manager.getRecord(resource.categoryId, id))
+        .filter((record): record is NonNullable<typeof record> => Boolean(record))
+    }));
+    const guidance = config.orchestration.agents.dataAgent;
     const markdownLines = [
       `### Exploration plan for ${plan.topic}`,
       `**Question:** ${plan.question}`,
@@ -227,12 +483,30 @@ export class Orchestrator {
     if (plan.recommendedQueries.length) {
       markdownLines.push("\n**Recommended queries**", `- ${plan.recommendedQueries.join("\n- ")}`);
     }
+    markdownLines.push(...connectionsMarkdown);
+    markdownLines.push("\n**Guidance focus**", `- ${guidance.focus}`);
+    if (guidance.promptStarters.length) {
+      markdownLines.push("\n**Prompt starters**", ...guidance.promptStarters.map((starter) => `- ${starter}`));
+    }
+    if (classification.matchedSignals?.length) {
+      markdownLines.push(
+        "\n**Matched signals**",
+        ...classification.matchedSignals.map((signal) => `- ${signal}`)
+      );
+    }
     return {
       intent: "insight",
       agent: "data-agent",
       summary: `Exploration plan for ${plan.topic}`,
-      rationale,
-      payload: plan,
+      rationale: classification.rationale,
+      payload: {
+        plan,
+        overview,
+        connections: connectionsPayload,
+        supportingRecords,
+        guidance,
+        matchedSignals: classification.matchedSignals ?? []
+      },
       markdown: markdownLines.join("\n")
     };
   }

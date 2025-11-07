@@ -347,7 +347,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
           return cancelled;
         }
 
-        const classification = orchestrator.classify(question);
+        const classification = orchestrator.classify(question, { topic: categoryPick.id });
         let criteria: Record<string, unknown> | undefined;
         if (classification.intent === "records") {
           const criteriaInput = await vscode.window.showInputBox({
