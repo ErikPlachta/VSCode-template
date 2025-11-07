@@ -443,7 +443,7 @@ export class RelevantDataManagerAgent {
   private readonly relationshipsBySource: Map<CategoryId, RelationshipDefinition[]>;
   private readonly consolidatedIndex: DatasetCatalogueEntry[];
   private readonly datasetFingerprint: string;
-  private readonly ajv: ReturnType<typeof Ajv>;
+  private readonly ajv: Ajv;
 
   constructor(cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
@@ -1178,8 +1178,12 @@ export class RelevantDataManagerAgent {
     return errors
       .slice(0, 3)
       .map((error) => {
-        const enrichedError = error as ErrorObject & { instancePath?: string };
-        const path = enrichedError.instancePath ?? enrichedError.dataPath ?? enrichedError.schemaPath ?? "";
+        const enrichedError = error as ErrorObject & { dataPath?: string };
+        const path =
+          enrichedError.instancePath ??
+          enrichedError.dataPath ??
+          enrichedError.schemaPath ??
+          "";
         const message = error.message ?? "validation failed";
         return path ? `${path}: ${message}` : message;
       })
