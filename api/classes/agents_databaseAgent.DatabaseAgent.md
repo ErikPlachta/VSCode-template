@@ -6,6 +6,13 @@
 
 Agent offering database-style access patterns.
 
+**`Example`**
+
+```ts
+const database = new DatabaseAgent(new RelevantDataManagerAgent());
+const people = await database.queryPeople({ departmentId: "dept-analytics" });
+```
+
 ## Table of contents
 
 ### Constructors
@@ -27,12 +34,14 @@ Agent offering database-style access patterns.
 
 • **new DatabaseAgent**(`manager`, `cacheDirPromise?`): [`DatabaseAgent`](agents_databaseAgent.DatabaseAgent.md)
 
+Create a [DatabaseAgent](agents_databaseAgent.DatabaseAgent.md) instance.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `manager` | [`RelevantDataManagerAgent`](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md) |
-| `cacheDirPromise?` | `Promise`\<`string`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `manager` | [`RelevantDataManagerAgent`](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md) | Data manager providing dataset access. |
+| `cacheDirPromise?` | `Promise`\<`string`\> | Optional override for the cache directory resolution. |
 
 #### Returns
 
@@ -40,7 +49,7 @@ Agent offering database-style access patterns.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L101)
+[src/agents/databaseAgent.ts:165](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L165)
 
 ## Methods
 
@@ -52,18 +61,20 @@ Retrieve applications using ownership or criticality filters.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `criteria` | [`ApplicationQuery`](../interfaces/agents_databaseAgent.ApplicationQuery.md) |
-| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `criteria?` | [`ApplicationQuery`](../interfaces/agents_databaseAgent.ApplicationQuery.md) | Filter parameters. |
+| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) | Query execution options. |
 
 #### Returns
 
 `Promise`\<[`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]\>
 
+Matching application records.
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:116](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L116)
+[src/agents/databaseAgent.ts:198](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L198)
 
 ___
 
@@ -75,18 +86,20 @@ Retrieve departments by parent, applications, or policies.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `criteria` | [`DepartmentQuery`](../interfaces/agents_databaseAgent.DepartmentQuery.md) |
-| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `criteria?` | [`DepartmentQuery`](../interfaces/agents_databaseAgent.DepartmentQuery.md) | Filter parameters. |
+| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) | Query execution options. |
 
 #### Returns
 
 `Promise`\<[`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]\>
 
+Matching department records.
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:111](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L111)
+[src/agents/databaseAgent.ts:187](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L187)
 
 ___
 
@@ -98,18 +111,20 @@ Search for people using the structured directory dataset.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `criteria` | [`PeopleQuery`](../interfaces/agents_databaseAgent.PeopleQuery.md) |
-| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `criteria?` | [`PeopleQuery`](../interfaces/agents_databaseAgent.PeopleQuery.md) | Filter parameters. |
+| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) | Query execution options. |
 
 #### Returns
 
 `Promise`\<[`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]\>
 
+Matching people records.
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L106)
+[src/agents/databaseAgent.ts:176](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L176)
 
 ___
 
@@ -121,18 +136,20 @@ Retrieve policies by department, category, or application coverage.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `criteria` | [`PolicyQuery`](../interfaces/agents_databaseAgent.PolicyQuery.md) |
-| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `criteria?` | [`PolicyQuery`](../interfaces/agents_databaseAgent.PolicyQuery.md) | Filter parameters. |
+| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) | Query execution options. |
 
 #### Returns
 
 `Promise`\<[`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]\>
 
+Matching policy records.
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L121)
+[src/agents/databaseAgent.ts:209](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L209)
 
 ___
 
@@ -144,18 +161,20 @@ Retrieve knowledge resources filtered by relationships.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `criteria` | [`ResourceQuery`](../interfaces/agents_databaseAgent.ResourceQuery.md) |
-| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `criteria?` | [`ResourceQuery`](../interfaces/agents_databaseAgent.ResourceQuery.md) | Filter parameters. |
+| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) | Query execution options. |
 
 #### Returns
 
 `Promise`\<[`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]\>
 
+Matching resource records.
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:126](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L126)
+[src/agents/databaseAgent.ts:220](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L220)
 
 ___
 
@@ -168,17 +187,30 @@ return local matches that satisfy the provided criteria.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `topicOrId` | `string` |
-| `queryName` | `string` |
-| `criteria` | `Record`\<`string`, `unknown`\> |
-| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `topicOrId` | `string` | Category name or identifier that owns the blueprint. |
+| `queryName` | `string` | Name of the saved query to execute. |
+| `criteria?` | `Record`\<`string`, `unknown`\> | Optional filters applied to the query. |
+| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) | Additional execution options, including caching overrides. |
 
 #### Returns
 
 `Promise`\<[`SavedQueryResult`](../interfaces/agents_databaseAgent.SavedQueryResult.md)\>
 
+Blueprint and results pair.
+
+**`Throws`**
+
+When the query cannot be found for the given category.
+
+**`Example`**
+
+```ts
+const saved = await database.runSavedQuery("departments", "List departments");
+console.log(saved.results.length);
+```
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L134)
+[src/agents/databaseAgent.ts:240](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L240)

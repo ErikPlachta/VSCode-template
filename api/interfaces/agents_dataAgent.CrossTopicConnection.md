@@ -21,9 +21,11 @@ Result describing connections between two topics via a specific record.
 
 • **relatedRecords**: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]
 
+Records in the target category that satisfy the relationship.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L80)
+[src/agents/dataAgent.ts:133](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L133)
 
 ___
 
@@ -31,9 +33,11 @@ ___
 
 • **relationship**: `string`
 
+Human-readable name for the relationship.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L79)
+[src/agents/dataAgent.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L132)
 
 ___
 
@@ -41,9 +45,11 @@ ___
 
 • **sourceRecord**: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)
 
+Record in the source category used to find links.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:77](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L77)
+[src/agents/dataAgent.ts:130](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L130)
 
 ___
 
@@ -51,6 +57,8 @@ ___
 
 • **targetCategory**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
 
+Category that was connected through a relationship.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:78](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L78)
+[src/agents/dataAgent.ts:131](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L131)

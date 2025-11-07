@@ -31,7 +31,7 @@ JSON-RPC 2.0 payload returned by the MCP server.
 
 #### Defined in
 
-[src/mcpSync.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L63)
+[src/mcpSync.ts:65](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L65)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[src/mcpSync.ts:61](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L61)
+[src/mcpSync.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L63)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[src/mcpSync.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L60)
+[src/mcpSync.ts:62](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L62)
 
 ___
 
@@ -67,4 +67,4 @@ ___
 
 #### Defined in
 
-[src/mcpSync.ts:62](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L62)
+[src/mcpSync.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L64)

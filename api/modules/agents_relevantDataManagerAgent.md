@@ -2,6 +2,14 @@
 
 # Module: agents/relevantDataManagerAgent
 
+**`Fileoverview`**
+
+Agent responsible for managing the mock "relevant data"
+workspace that MCP servers expose to users. The agent keeps a rich catalogue
+of categories (departments, people, applications, policies, resources) that
+mirrors a repository folder structure complete with schemas, python type
+hints, example datasets, tests, and remote query blueprints.
+
 ## Table of contents
 
 ### Classes
@@ -46,7 +54,7 @@ Unique identifier for each category in the mock repository.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L83)
+[src/agents/relevantDataManagerAgent.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L158)
 
 ___
 
@@ -58,7 +66,7 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L80)
+[src/agents/relevantDataManagerAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L151)
 
 ## Variables
 
@@ -70,7 +78,7 @@ Static dataset that mimics the MCP relevant-data workspace.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:147](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L147)
+[src/agents/relevantDataManagerAgent.ts:257](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L257)
 
 ## Functions
 
@@ -78,10 +86,20 @@ Static dataset that mimics the MCP relevant-data workspace.
 
 ▸ **createRelevantDataManagerAgent**(): [`RelevantDataManagerAgent`](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md)
 
+Factory helper that constructs a [RelevantDataManagerAgent](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md).
+
 #### Returns
 
 [`RelevantDataManagerAgent`](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md)
 
+Configured manager instance.
+
+**`Example`**
+
+```ts
+const manager = createRelevantDataManagerAgent();
+```
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1399](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1399)
+[src/agents/relevantDataManagerAgent.ts:1621](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1621)

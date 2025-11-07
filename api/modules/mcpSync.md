@@ -2,6 +2,11 @@
 
 # Module: mcpSync
 
+**`Fileoverview`**
+
+Fetches and normalises Model Context Protocol (MCP) tool
+definitions.
+
 ## Table of contents
 
 ### Classes
@@ -42,9 +47,15 @@ Array of available MCP tools with enriched metadata.
 
 **`Throws`**
 
-when the server cannot be reached or returns an
-invalid payload.
+When the server cannot be reached or returns an invalid payload.
+
+**`Example`**
+
+```ts
+const tools = await fetchTools("https://mcp.example.com", "token");
+console.log(tools.length);
+```
 
 #### Defined in
 
-[src/mcpSync.ts:111](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L111)
+[src/mcpSync.ts:129](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L129)

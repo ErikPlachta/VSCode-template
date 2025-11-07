@@ -2,6 +2,10 @@
 
 # Module: extension
 
+**`Fileoverview`**
+
+Entry point for MyBusiness MCP VS Code extension.
+
 ## Table of contents
 
 ### Functions
@@ -20,17 +24,27 @@ automation hooks.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `ExtensionContext` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `context` | `ExtensionContext` | VS Code extension context for managing subscriptions. |
 
 #### Returns
 
 `Promise`\<`void`\>
 
+Resolves once activation completes.
+
+**`Example`**
+
+```ts
+export async function activate(ctx: vscode.ExtensionContext) {
+  await activate(ctx);
+}
+```
+
 #### Defined in
 
-[src/extension.ts:200](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/extension.ts#L200)
+[src/extension.ts:251](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/extension.ts#L251)
 
 ___
 
@@ -46,4 +60,4 @@ Deactivates the extension.
 
 #### Defined in
 
-[src/extension.ts:323](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/extension.ts#L323)
+[src/extension.ts:378](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/extension.ts#L378)

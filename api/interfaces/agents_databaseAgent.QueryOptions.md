@@ -23,7 +23,7 @@ Prefix used when building the shared cache key.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:50](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L50)
+[src/agents/databaseAgent.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L56)
 
 ___
 
@@ -35,4 +35,4 @@ Whether the agent should cache the result in the shared cache.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:48](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L48)
+[src/agents/databaseAgent.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L55)

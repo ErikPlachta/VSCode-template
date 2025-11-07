@@ -6,6 +6,12 @@
 
 Error wrapper that provides additional context for MCP failures.
 
+**`Example`**
+
+```ts
+throw new MCPDiscoveryError("Unable to list tools");
+```
+
 ## Hierarchy
 
 - `Error`
@@ -39,10 +45,10 @@ Error wrapper that provides additional context for MCP failures.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `message` | `string` |
-| `cause?` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `message` | `string` | Human-readable error message. |
+| `cause?` | `unknown` | Optional root cause supplied by axios or the MCP server. |
 
 #### Returns
 
@@ -54,7 +60,7 @@ Error.constructor
 
 #### Defined in
 
-[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L70)
+[src/mcpSync.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L81)
 
 ## Properties
 
@@ -62,9 +68,11 @@ Error.constructor
 
 • `Optional` `Readonly` **cause**: `unknown`
 
+Optional root cause supplied by axios or the MCP server.
+
 #### Defined in
 
-[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L70)
+[src/mcpSync.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L81)
 
 ___
 

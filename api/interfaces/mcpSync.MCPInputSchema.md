@@ -23,7 +23,7 @@ Map of argument names to property descriptors.
 
 #### Defined in
 
-[src/mcpSync.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L33)
+[src/mcpSync.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L35)
 
 ___
 
@@ -35,4 +35,4 @@ List of keys that must be present.
 
 #### Defined in
 
-[src/mcpSync.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L35)
+[src/mcpSync.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L37)

@@ -28,7 +28,7 @@ Filters used to query departments.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:66](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L66)
+[src/agents/databaseAgent.ts:88](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L88)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L64)
+[src/agents/databaseAgent.ts:86](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L86)
 
 ___
 
@@ -48,4 +48,4 @@ ___
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:65](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L65)
+[src/agents/databaseAgent.ts:87](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L87)

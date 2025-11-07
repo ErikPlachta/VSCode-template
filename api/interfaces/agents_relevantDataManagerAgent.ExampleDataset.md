@@ -20,9 +20,11 @@ Example dataset artefact hosted in the category folder.
 
 • **description**: `string`
 
+Description of the example.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:54](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L54)
+[src/agents/relevantDataManagerAgent.ts:97](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L97)
 
 ___
 
@@ -30,9 +32,11 @@ ___
 
 • **file**: `string`
 
+File path for the dataset.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L53)
+[src/agents/relevantDataManagerAgent.ts:96](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L96)
 
 ___
 
@@ -40,6 +44,8 @@ ___
 
 • **sample**: `Record`\<`string`, `unknown`\>
 
+Representative data sample.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L55)
+[src/agents/relevantDataManagerAgent.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L98)

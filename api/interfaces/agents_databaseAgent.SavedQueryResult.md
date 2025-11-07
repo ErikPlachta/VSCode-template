@@ -19,9 +19,11 @@ Structure returned when executing a saved remote query blueprint.
 
 • **blueprint**: [`RemoteQueryBlueprint`](agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)
 
+Blueprint that was executed.
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:93](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L93)
+[src/agents/databaseAgent.ts:143](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L143)
 
 ___
 
@@ -29,6 +31,8 @@ ___
 
 • **results**: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]
 
+Matching records from the mock dataset.
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:94](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L94)
+[src/agents/databaseAgent.ts:144](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L144)

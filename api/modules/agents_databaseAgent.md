@@ -2,6 +2,12 @@
 
 # Module: agents/databaseAgent
 
+**`Fileoverview`**
+
+Database-oriented agent that simulates querying the MCP
+relevant-data workspace as if it were backed by persistent stores. The agent
+focuses on structured retrieval with filtering, joins, and saved queries.
+
 ## Table of contents
 
 ### Classes
@@ -28,16 +34,27 @@
 
 ▸ **createDatabaseAgent**(`manager?`): [`DatabaseAgent`](../classes/agents_databaseAgent.DatabaseAgent.md)
 
+Factory helper that produces a [DatabaseAgent](../classes/agents_databaseAgent.DatabaseAgent.md) with a default manager.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `manager?` | [`RelevantDataManagerAgent`](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `manager?` | [`RelevantDataManagerAgent`](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md) | Optional manager to reuse. |
 
 #### Returns
 
 [`DatabaseAgent`](../classes/agents_databaseAgent.DatabaseAgent.md)
 
+Instantiated database agent.
+
+**`Example`**
+
+```ts
+const agent = createDatabaseAgent();
+const policies = await agent.queryPolicies({ category: "security" });
+```
+
 #### Defined in
 
-[src/agents/databaseAgent.ts:307](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L307)
+[src/agents/databaseAgent.ts:477](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/databaseAgent.ts#L477)

@@ -24,9 +24,11 @@ Summary of a topic including schemas, examples, and queries.
 
 • **examples**: [`ExampleDataset`](agents_relevantDataManagerAgent.ExampleDataset.md)[]
 
+Example datasets that illustrate typical records.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:28](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L28)
+[src/agents/dataAgent.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L41)
 
 ___
 
@@ -34,9 +36,11 @@ ___
 
 • **highlightRecords**: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]
 
+Example records that should be highlighted to the user.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L30)
+[src/agents/dataAgent.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L43)
 
 ___
 
@@ -44,9 +48,11 @@ ___
 
 • **pythonTypes**: [`PythonTypeDefinition`](agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
 
+Python typing hints that mirror the schemas.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L27)
+[src/agents/dataAgent.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L40)
 
 ___
 
@@ -54,9 +60,11 @@ ___
 
 • **queries**: [`RemoteQueryBlueprint`](agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)[]
 
+Remote query blueprints for the authoritative systems.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L29)
+[src/agents/dataAgent.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L42)
 
 ___
 
@@ -64,9 +72,11 @@ ___
 
 • **relationships**: [`RelationshipDescription`](agents_relevantDataManagerAgent.RelationshipDescription.md)[]
 
+Relationship definitions originating from the topic.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L25)
+[src/agents/dataAgent.ts:38](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L38)
 
 ___
 
@@ -74,9 +84,11 @@ ___
 
 • **schemas**: [`CategorySchema`](agents_relevantDataManagerAgent.CategorySchema.md)[]
 
+JSON schema descriptors associated with the topic.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L26)
+[src/agents/dataAgent.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L39)
 
 ___
 
@@ -84,6 +96,8 @@ ___
 
 • **snapshot**: [`CategorySnapshot`](agents_relevantDataManagerAgent.CategorySnapshot.md)
 
+Snapshot metadata persisted in the shared cache.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L24)
+[src/agents/dataAgent.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L37)

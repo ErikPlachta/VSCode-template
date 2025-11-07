@@ -21,9 +21,11 @@ Result returned when searching the dataset for a keyword.
 
 • **categoryId**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
 
+Category that contains the match.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:69](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L69)
+[src/agents/dataAgent.ts:114](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L114)
 
 ___
 
@@ -31,9 +33,11 @@ ___
 
 • **displayName**: `string`
 
+Friendly name rendered in UI surfaces.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:71](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L71)
+[src/agents/dataAgent.ts:116](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L116)
 
 ___
 
@@ -41,9 +45,11 @@ ___
 
 • **matchingFields**: `string`[]
 
+Fields that matched the search term.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L72)
+[src/agents/dataAgent.ts:117](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L117)
 
 ___
 
@@ -51,6 +57,8 @@ ___
 
 • **recordId**: `string`
 
+Identifier of the matching record.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L70)
+[src/agents/dataAgent.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L115)

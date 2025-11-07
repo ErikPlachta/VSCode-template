@@ -24,9 +24,11 @@ Description for how a category folder is organised.
 
 • **configFile**: `string`
 
+Path to the configuration file.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:20](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L20)
+[src/agents/relevantDataManagerAgent.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L33)
 
 ___
 
@@ -34,9 +36,11 @@ ___
 
 • **examplesDir**: `string`
 
+Directory containing example datasets.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L23)
+[src/agents/relevantDataManagerAgent.ts:36](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L36)
 
 ___
 
@@ -44,9 +48,11 @@ ___
 
 • **pythonTypes**: `string`[]
 
+Python typing hint file paths.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L22)
+[src/agents/relevantDataManagerAgent.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L35)
 
 ___
 
@@ -54,9 +60,11 @@ ___
 
 • **queriesDir**: `string`
 
+Directory containing query blueprints.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L25)
+[src/agents/relevantDataManagerAgent.ts:38](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L38)
 
 ___
 
@@ -64,9 +72,11 @@ ___
 
 • **root**: `string`
 
+Root directory for the category.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L19)
+[src/agents/relevantDataManagerAgent.ts:32](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L32)
 
 ___
 
@@ -74,9 +84,11 @@ ___
 
 • **schemaFiles**: `string`[]
 
+JSON schema file paths.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L21)
+[src/agents/relevantDataManagerAgent.ts:34](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L34)
 
 ___
 
@@ -84,6 +96,8 @@ ___
 
 • **testsDir**: `string`
 
+Directory containing tests.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L24)
+[src/agents/relevantDataManagerAgent.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L37)

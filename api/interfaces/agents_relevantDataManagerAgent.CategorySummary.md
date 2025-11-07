@@ -20,9 +20,11 @@ Summary returned when enumerating available categories.
 
 • **description**: `string`
 
+Category description.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:76](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L76)
+[src/agents/relevantDataManagerAgent.ts:140](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L140)
 
 ___
 
@@ -30,9 +32,11 @@ ___
 
 • **id**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
 
+Unique identifier for the category.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:74](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L74)
+[src/agents/relevantDataManagerAgent.ts:138](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L138)
 
 ___
 
@@ -40,6 +44,8 @@ ___
 
 • **name**: `string`
 
+Human readable name.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:75](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L75)
+[src/agents/relevantDataManagerAgent.ts:139](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L139)

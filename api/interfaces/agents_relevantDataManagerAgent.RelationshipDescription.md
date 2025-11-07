@@ -22,9 +22,11 @@ High-level relationship metadata surfaced to consumers.
 
 • **cardinality**: ``"one"`` \| ``"many"``
 
+Expected cardinality of the relationship.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L33)
+[src/agents/relevantDataManagerAgent.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L55)
 
 ___
 
@@ -32,9 +34,11 @@ ___
 
 • **description**: `string`
 
+Narrative description of the relationship.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:34](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L34)
+[src/agents/relevantDataManagerAgent.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L56)
 
 ___
 
@@ -42,9 +46,11 @@ ___
 
 • **name**: `string`
 
+Relationship label.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L30)
+[src/agents/relevantDataManagerAgent.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L52)
 
 ___
 
@@ -52,9 +58,11 @@ ___
 
 • **targetCategory**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
 
+Category on the other side of the relationship.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:31](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L31)
+[src/agents/relevantDataManagerAgent.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L53)
 
 ___
 
@@ -62,6 +70,8 @@ ___
 
 • **viaField**: `string`
 
+Field or property used to establish the link.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:32](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L32)
+[src/agents/relevantDataManagerAgent.ts:54](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L54)

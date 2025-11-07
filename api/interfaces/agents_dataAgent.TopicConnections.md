@@ -20,15 +20,19 @@ Mapping of a record's connections to other categories.
 
 • **connections**: \{ `records`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[] ; `relationship`: `string` ; `targetCategory`: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)  }[]
 
+List of resolved relationships.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L39)
+[src/agents/dataAgent.ts:59](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L59)
 
 ___
 
 ### focus
 
 • **focus**: `Object`
+
+Record that serves as the anchor for the exploration.
 
 #### Type declaration
 
@@ -39,7 +43,7 @@ ___
 
 #### Defined in
 
-[src/agents/dataAgent.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L35)
+[src/agents/dataAgent.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L55)
 
 ___
 
@@ -47,6 +51,8 @@ ___
 
 • **narrative**: `string`[]
 
+Human-readable relationship statements for UI rendering.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:44](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L44)
+[src/agents/dataAgent.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L64)

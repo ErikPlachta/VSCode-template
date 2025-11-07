@@ -20,9 +20,11 @@ JSON schema snippet stored alongside a category.
 
 • **description**: `string`
 
+Schema description.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L40)
+[src/agents/relevantDataManagerAgent.ts:69](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L69)
 
 ___
 
@@ -30,9 +32,11 @@ ___
 
 • **name**: `string`
 
+Schema name.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L39)
+[src/agents/relevantDataManagerAgent.ts:68](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L68)
 
 ___
 
@@ -40,6 +44,8 @@ ___
 
 • **schema**: `Record`\<`string`, `unknown`\>
 
+Raw schema object.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L41)
+[src/agents/relevantDataManagerAgent.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L70)

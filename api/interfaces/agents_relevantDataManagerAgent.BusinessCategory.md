@@ -28,15 +28,19 @@ Full configuration stored for each business category.
 
 • **aliases**: `string`[]
 
+Alternative names that can be used to reference the category.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:95](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L95)
+[src/agents/relevantDataManagerAgent.ts:185](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L185)
 
 ___
 
 ### config
 
 • **config**: `Object`
+
+Configuration metadata.
 
 #### Type declaration
 
@@ -51,7 +55,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:96](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L96)
+[src/agents/relevantDataManagerAgent.ts:186](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L186)
 
 ___
 
@@ -59,9 +63,11 @@ ___
 
 • **description**: `string`
 
+Narrative summary of the category.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:94](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L94)
+[src/agents/relevantDataManagerAgent.ts:184](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L184)
 
 ___
 
@@ -69,9 +75,11 @@ ___
 
 • **examples**: [`ExampleDataset`](agents_relevantDataManagerAgent.ExampleDataset.md)[]
 
+Example datasets.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L106)
+[src/agents/relevantDataManagerAgent.ts:196](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L196)
 
 ___
 
@@ -79,9 +87,11 @@ ___
 
 • **id**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
 
+Category identifier.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:92](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L92)
+[src/agents/relevantDataManagerAgent.ts:182](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L182)
 
 ___
 
@@ -89,9 +99,11 @@ ___
 
 • **name**: `string`
 
+Human readable category name.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:93](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L93)
+[src/agents/relevantDataManagerAgent.ts:183](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L183)
 
 ___
 
@@ -99,9 +111,11 @@ ___
 
 • **pythonTypes**: [`PythonTypeDefinition`](agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
 
+Python typing hints.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:105](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L105)
+[src/agents/relevantDataManagerAgent.ts:195](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L195)
 
 ___
 
@@ -109,9 +123,11 @@ ___
 
 • **queries**: [`RemoteQueryBlueprint`](agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)[]
 
+Query blueprints.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:108](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L108)
+[src/agents/relevantDataManagerAgent.ts:198](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L198)
 
 ___
 
@@ -119,9 +135,11 @@ ___
 
 • **records**: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]
 
+Records stored under the category.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:109](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L109)
+[src/agents/relevantDataManagerAgent.ts:199](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L199)
 
 ___
 
@@ -129,9 +147,11 @@ ___
 
 • **schemas**: [`CategorySchema`](agents_relevantDataManagerAgent.CategorySchema.md)[]
 
+Associated JSON schemas.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:104](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L104)
+[src/agents/relevantDataManagerAgent.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L194)
 
 ___
 
@@ -139,6 +159,8 @@ ___
 
 • **tests**: [`CategoryTestArtefact`](agents_relevantDataManagerAgent.CategoryTestArtefact.md)[]
 
+Test references.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:107](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L107)
+[src/agents/relevantDataManagerAgent.ts:197](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L197)

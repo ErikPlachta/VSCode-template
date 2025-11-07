@@ -2,6 +2,12 @@
 
 # Module: agents/dataAgent
 
+**`Fileoverview`**
+
+High-level data agent that reasons about the relationships
+between business categories and produces insights that orchestration logic
+can feed to other MCP tools.
+
 ## Table of contents
 
 ### Classes
@@ -28,10 +34,21 @@
 
 ▸ **createDataAgent**(): [`DataAgent`](../classes/agents_dataAgent.DataAgent.md)
 
+Factory function that creates a [DataAgent](../classes/agents_dataAgent.DataAgent.md) with default collaborators.
+
 #### Returns
 
 [`DataAgent`](../classes/agents_dataAgent.DataAgent.md)
 
+Freshly constructed data agent.
+
+**`Example`**
+
+```ts
+import { createDataAgent } from "./agents/dataAgent";
+const agent = createDataAgent();
+```
+
 #### Defined in
 
-[src/agents/dataAgent.ts:267](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L267)
+[src/agents/dataAgent.ts:431](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L431)

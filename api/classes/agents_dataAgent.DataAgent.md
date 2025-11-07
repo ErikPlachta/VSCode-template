@@ -6,6 +6,14 @@
 
 Agent that understands data relationships between categories.
 
+**`Example`**
+
+```ts
+const agent = new DataAgent();
+const overview = await agent.getTopicOverview("departments");
+console.log(overview.schemas.map((schema) => schema.name));
+```
+
 ## Table of contents
 
 ### Constructors
@@ -28,12 +36,14 @@ Agent that understands data relationships between categories.
 
 • **new DataAgent**(`manager?`, `databaseAgent?`): [`DataAgent`](agents_dataAgent.DataAgent.md)
 
+Create a new [DataAgent](agents_dataAgent.DataAgent.md).
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `manager?` | [`RelevantDataManagerAgent`](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md) |
-| `databaseAgent?` | [`DatabaseAgent`](agents_databaseAgent.DatabaseAgent.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `manager?` | [`RelevantDataManagerAgent`](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md) | Optional manager responsible for dataset access. |
+| `databaseAgent?` | [`DatabaseAgent`](agents_databaseAgent.DatabaseAgent.md) | Optional database agent instance to reuse. |
 
 #### Returns
 
@@ -41,7 +51,7 @@ Agent that understands data relationships between categories.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L98)
+[src/agents/dataAgent.ts:176](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L176)
 
 ## Methods
 
@@ -53,18 +63,31 @@ Build an exploration plan for answering a specific user question.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `topic` | `string` |
-| `question` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `topic` | `string` | Category that anchors the exploration. |
+| `question` | `string` | Natural language problem that needs to be solved. |
 
 #### Returns
 
 `Promise`\<[`ExplorationPlan`](../interfaces/agents_dataAgent.ExplorationPlan.md)\>
 
+Plan describing steps, queries, and supporting resources.
+
+**`Throws`**
+
+When the topic cannot be resolved.
+
+**`Example`**
+
+```ts
+const plan = await agent.buildExplorationPlan("departments", "How is the analytics team structured?");
+console.log(plan.steps.map((step) => step.title));
+```
+
 #### Defined in
 
-[src/agents/dataAgent.ts:141](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L141)
+[src/agents/dataAgent.ts:254](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L254)
 
 ___
 
@@ -77,19 +100,32 @@ record via declared relationships.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `sourceTopic` | `string` |
-| `sourceRecordId` | `string` |
-| `targetTopic` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `sourceTopic` | `string` | Category that contains the anchor record. |
+| `sourceRecordId` | `string` | Identifier for the anchor record. |
+| `targetTopic` | `string` | Category whose records should be matched. |
 
 #### Returns
 
 `Promise`\<`undefined` \| [`CrossTopicConnection`](../interfaces/agents_dataAgent.CrossTopicConnection.md)\>
 
+Relationship details when a link exists, otherwise `undefined`.
+
+**`Throws`**
+
+When the source record cannot be found.
+
+**`Example`**
+
+```ts
+const connection = await agent.findCrossTopicConnection("people", "person-001", "departments");
+console.log(connection?.relationship);
+```
+
 #### Defined in
 
-[src/agents/dataAgent.ts:181](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L181)
+[src/agents/dataAgent.ts:305](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L305)
 
 ___
 
@@ -101,17 +137,23 @@ Gather the test, schema, and query artefacts for a category.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `topic` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `topic` | `string` | Category identifier or alias. |
 
 #### Returns
 
 [`CategoryToolkit`](../interfaces/agents_dataAgent.CategoryToolkit.md)
 
+Collection of supporting artefacts.
+
+**`Throws`**
+
+When the category cannot be resolved.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L221)
+[src/agents/dataAgent.ts:365](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L365)
 
 ___
 
@@ -125,9 +167,11 @@ Access to the underlying database agent for orchestration workflows.
 
 [`DatabaseAgent`](agents_databaseAgent.DatabaseAgent.md)
 
+Database-like helper that exposes query primitives.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:216](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L216)
+[src/agents/dataAgent.ts:354](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L354)
 
 ___
 
@@ -139,17 +183,30 @@ Summarise a topic including schema references and highlight data.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `topic` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `topic` | `string` | Category identifier or alias to summarise. |
 
 #### Returns
 
 `Promise`\<[`TopicOverview`](../interfaces/agents_dataAgent.TopicOverview.md)\>
 
+Snapshot of the category and related artefacts.
+
+**`Throws`**
+
+When the topic cannot be resolved.
+
+**`Example`**
+
+```ts
+const overview = await agent.getTopicOverview("people");
+console.log(overview.examples[0]?.file);
+```
+
 #### Defined in
 
-[src/agents/dataAgent.ts:104](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L104)
+[src/agents/dataAgent.ts:193](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L193)
 
 ___
 
@@ -161,18 +218,31 @@ Map the connections from a given record to other categories.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `topic` | `string` |
-| `recordId?` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `topic` | `string` | Category that owns the record being inspected. |
+| `recordId?` | `string` | Optional record identifier. Defaults to the first record in the category. |
 
 #### Returns
 
 `Promise`\<[`TopicConnections`](../interfaces/agents_dataAgent.TopicConnections.md)\>
 
+Structured description of relationships originating from the record.
+
+**`Throws`**
+
+When no records are available for the category.
+
+**`Example`**
+
+```ts
+const connections = await agent.mapTopicConnections("applications", "app-aurora");
+connections.connections.forEach((link) => console.log(link.relationship));
+```
+
 #### Defined in
 
-[src/agents/dataAgent.ts:120](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L120)
+[src/agents/dataAgent.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L221)
 
 ___
 
@@ -184,14 +254,23 @@ Run a keyword search across every category.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keyword` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `keyword` | `string` | Case-insensitive search string. |
 
 #### Returns
 
 [`TopicSearchResult`](../interfaces/agents_dataAgent.TopicSearchResult.md)[]
 
+Matching records grouped by category.
+
+**`Example`**
+
+```ts
+const matches = agent.search("analytics");
+console.log(matches[0]?.displayName);
+```
+
 #### Defined in
 
-[src/agents/dataAgent.ts:206](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L206)
+[src/agents/dataAgent.ts:340](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L340)

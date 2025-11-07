@@ -23,9 +23,11 @@ Bundle of artefacts that help contributors work with a category.
 
 • **examples**: [`ExampleDataset`](agents_relevantDataManagerAgent.ExampleDataset.md)[]
 
+Example datasets demonstrating data shape.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:88](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L88)
+[src/agents/dataAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L151)
 
 ___
 
@@ -33,9 +35,11 @@ ___
 
 • **folder**: [`FolderBlueprint`](agents_relevantDataManagerAgent.FolderBlueprint.md)
 
+Blueprint describing the folder layout for the category.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:85](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L85)
+[src/agents/dataAgent.ts:148](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L148)
 
 ___
 
@@ -43,9 +47,11 @@ ___
 
 • **pythonTypes**: [`PythonTypeDefinition`](agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
 
+Python typing hints for SDK implementers.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:87](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L87)
+[src/agents/dataAgent.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L150)
 
 ___
 
@@ -53,9 +59,11 @@ ___
 
 • **queries**: [`RemoteQueryBlueprint`](agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)[]
 
+Remote query definitions that fetch authoritative data.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:90](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L90)
+[src/agents/dataAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L153)
 
 ___
 
@@ -63,9 +71,11 @@ ___
 
 • **schemas**: [`CategorySchema`](agents_relevantDataManagerAgent.CategorySchema.md)[]
 
+Schemas that define expected record structure.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:86](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L86)
+[src/agents/dataAgent.ts:149](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L149)
 
 ___
 
@@ -73,6 +83,8 @@ ___
 
 • **tests**: [`CategoryTestArtefact`](agents_relevantDataManagerAgent.CategoryTestArtefact.md)[]
 
+Test artefacts to validate data assumptions.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:89](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L89)
+[src/agents/dataAgent.ts:152](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L152)

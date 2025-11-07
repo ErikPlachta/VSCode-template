@@ -22,9 +22,11 @@ A plan that helps a user explore or solve a problem.
 
 • **question**: `string`
 
+End-user question that motivated the plan.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:50](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L50)
+[src/agents/dataAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L79)
 
 ___
 
@@ -32,9 +34,11 @@ ___
 
 • **recommendedQueries**: `string`[]
 
+Names of saved queries that can help answer the question.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L52)
+[src/agents/dataAgent.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L81)
 
 ___
 
@@ -42,9 +46,11 @@ ___
 
 • **steps**: [`ExplorationStep`](agents_dataAgent.ExplorationStep.md)[]
 
+Ordered list of recommended analysis actions.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L51)
+[src/agents/dataAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L80)
 
 ___
 
@@ -52,9 +58,11 @@ ___
 
 • **supportingResources**: \{ `categoryId`: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid) ; `ids`: `string`[]  }[]
 
+References to related records for quick access.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L53)
+[src/agents/dataAgent.ts:82](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L82)
 
 ___
 
@@ -62,6 +70,8 @@ ___
 
 • **topic**: `string`
 
+Canonical category identifier.
+
 #### Defined in
 
-[src/agents/dataAgent.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L49)
+[src/agents/dataAgent.ts:78](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L78)

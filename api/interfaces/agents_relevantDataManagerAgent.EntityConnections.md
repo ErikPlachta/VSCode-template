@@ -20,9 +20,11 @@ Connections resolved for a specific record.
 
 • **categoryId**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
 
+Category the record belongs to.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:114](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L114)
+[src/agents/relevantDataManagerAgent.ts:211](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L211)
 
 ___
 
@@ -30,9 +32,11 @@ ___
 
 • **connections**: \{ `records`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[] ; `relationship`: `string` ; `targetCategory`: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)  }[]
 
+Related records grouped by relationship.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:116](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L116)
+[src/agents/relevantDataManagerAgent.ts:213](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L213)
 
 ___
 
@@ -40,6 +44,8 @@ ___
 
 • **recordId**: `string`
 
+Identifier for the record being analysed.
+
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L115)
+[src/agents/relevantDataManagerAgent.ts:212](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L212)
