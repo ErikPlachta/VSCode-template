@@ -13,7 +13,7 @@ import {
   readSharedCacheEntry,
   SharedCacheEntry,
   storeSharedCacheEntry
-} from "../mcpCache";
+} from "../extension/mcpCache";
 import {
   CategoryId,
   CategoryRecord,

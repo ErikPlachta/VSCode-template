@@ -17,7 +17,7 @@ import {
   readSharedCacheEntry,
   SharedCacheEntry,
   storeSharedCacheEntry
-} from "../mcpCache";
+} from "../extension/mcpCache";
 import { createInvocationLogger } from "../mcp/telemetry";
 import { RelevantDataManagerAgentProfile } from "../mcp/agentProfiles";
 

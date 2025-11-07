@@ -8,7 +8,7 @@ import {
   logInvocation,
   readSharedCacheEntry,
   storeSharedCacheEntry
-} from "../src/mcpCache";
+} from "../src/extension/mcpCache";
 
 let workspaceFoldersMock: any[] | undefined;
 
