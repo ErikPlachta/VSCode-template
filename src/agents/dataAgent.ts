@@ -2,6 +2,8 @@
  * @fileoverview High-level data agent that reasons about the relationships
  * between business categories and produces insights that orchestration logic
  * can feed to other MCP tools.
+ *
+ * @module agents/dataAgent
  */
 
 import { DatabaseAgent } from "./databaseAgent";
@@ -19,7 +21,18 @@ import {
   RemoteQueryBlueprint
 } from "./relevantDataManagerAgent";
 
-/** Summary of a topic including schemas, examples, and queries. */
+/**
+ * Summary of a topic including schemas, examples, and queries.
+ *
+ * @typedef {object} TopicOverview
+ * @property {CategorySnapshot} snapshot Snapshot metadata persisted in the shared cache.
+ * @property {RelationshipDescription[]} relationships Relationship definitions originating from the topic.
+ * @property {CategorySchema[]} schemas JSON schema descriptors associated with the topic.
+ * @property {PythonTypeDefinition[]} pythonTypes Python typing hints that mirror the schemas.
+ * @property {ExampleDataset[]} examples Example datasets that illustrate typical records.
+ * @property {RemoteQueryBlueprint[]} queries Remote query blueprints for the authoritative systems.
+ * @property {CategoryRecord[]} highlightRecords Example records that should be highlighted to the user.
+ */
 export interface TopicOverview {
   snapshot: CategorySnapshot;
   relationships: RelationshipDescription[];
@@ -30,7 +43,14 @@ export interface TopicOverview {
   highlightRecords: CategoryRecord[];
 }
 
-/** Mapping of a record's connections to other categories. */
+/**
+ * Mapping of a record's connections to other categories.
+ *
+ * @typedef {object} TopicConnections
+ * @property {{categoryId: CategoryId, record: CategoryRecord}} focus Record that serves as the anchor for the exploration.
+ * @property {Array<{relationship: string, targetCategory: CategoryId, records: CategoryRecord[]}>} connections List of resolved relationships.
+ * @property {string[]} narrative Human-readable relationship statements for UI rendering.
+ */
 export interface TopicConnections {
   focus: {
     categoryId: CategoryId;
@@ -44,7 +64,16 @@ export interface TopicConnections {
   narrative: string[];
 }
 
-/** A plan that helps a user explore or solve a problem. */
+/**
+ * A plan that helps a user explore or solve a problem.
+ *
+ * @typedef {object} ExplorationPlan
+ * @property {string} topic Canonical category identifier.
+ * @property {string} question End-user question that motivated the plan.
+ * @property {ExplorationStep[]} steps Ordered list of recommended analysis actions.
+ * @property {string[]} recommendedQueries Names of saved queries that can help answer the question.
+ * @property {Array<{categoryId: CategoryId, ids: string[]}>} supportingResources References to related records for quick access.
+ */
 export interface ExplorationPlan {
   topic: string;
   question: string;
@@ -56,7 +85,15 @@ export interface ExplorationPlan {
   }>;
 }
 
-/** Individual step inside an exploration plan. */
+/**
+ * Individual step inside an exploration plan.
+ *
+ * @typedef {object} ExplorationStep
+ * @property {string} title Short step title.
+ * @property {string} description Explanation of the action to take.
+ * @property {CategoryId} recommendedCategory Category that should be explored in this step.
+ * @property {string[]} hints Additional hints or nudges to guide investigation.
+ */
 export interface ExplorationStep {
   title: string;
   description: string;
@@ -64,7 +101,15 @@ export interface ExplorationStep {
   hints: string[];
 }
 
-/** Result returned when searching the dataset for a keyword. */
+/**
+ * Result returned when searching the dataset for a keyword.
+ *
+ * @typedef {object} TopicSearchResult
+ * @property {CategoryId} categoryId Category that contains the match.
+ * @property {string} recordId Identifier of the matching record.
+ * @property {string} displayName Friendly name rendered in UI surfaces.
+ * @property {string[]} matchingFields Fields that matched the search term.
+ */
 export interface TopicSearchResult {
   categoryId: CategoryId;
   recordId: string;
@@ -72,7 +117,15 @@ export interface TopicSearchResult {
   matchingFields: string[];
 }
 
-/** Result describing connections between two topics via a specific record. */
+/**
+ * Result describing connections between two topics via a specific record.
+ *
+ * @typedef {object} CrossTopicConnection
+ * @property {CategoryRecord} sourceRecord Record in the source category used to find links.
+ * @property {CategoryId} targetCategory Category that was connected through a relationship.
+ * @property {string} relationship Human-readable name for the relationship.
+ * @property {CategoryRecord[]} relatedRecords Records in the target category that satisfy the relationship.
+ */
 export interface CrossTopicConnection {
   sourceRecord: CategoryRecord;
   targetCategory: CategoryId;
@@ -80,7 +133,17 @@ export interface CrossTopicConnection {
   relatedRecords: CategoryRecord[];
 }
 
-/** Bundle of artefacts that help contributors work with a category. */
+/**
+ * Bundle of artefacts that help contributors work with a category.
+ *
+ * @typedef {object} CategoryToolkit
+ * @property {FolderBlueprint} folder Blueprint describing the folder layout for the category.
+ * @property {CategorySchema[]} schemas Schemas that define expected record structure.
+ * @property {PythonTypeDefinition[]} pythonTypes Python typing hints for SDK implementers.
+ * @property {ExampleDataset[]} examples Example datasets demonstrating data shape.
+ * @property {CategoryTestArtefact[]} tests Test artefacts to validate data assumptions.
+ * @property {RemoteQueryBlueprint[]} queries Remote query definitions that fetch authoritative data.
+ */
 export interface CategoryToolkit {
   folder: FolderBlueprint;
   schemas: CategorySchema[];
@@ -90,17 +153,43 @@ export interface CategoryToolkit {
   queries: RemoteQueryBlueprint[];
 }
 
-/** Agent that understands data relationships between categories. */
+/**
+ * Agent that understands data relationships between categories.
+ *
+ * @example
+ * ```ts
+ * const agent = new DataAgent();
+ * const overview = await agent.getTopicOverview("departments");
+ * console.log(overview.schemas.map((schema) => schema.name));
+ * ```
+ */
 export class DataAgent {
   private readonly manager: RelevantDataManagerAgent;
   private readonly database: DatabaseAgent;
 
+  /**
+   * Create a new {@link DataAgent}.
+   *
+   * @param {RelevantDataManagerAgent} [manager] Optional manager responsible for dataset access.
+   * @param {DatabaseAgent} [databaseAgent] Optional database agent instance to reuse.
+   */
   constructor(manager?: RelevantDataManagerAgent, databaseAgent?: DatabaseAgent) {
     this.manager = manager ?? new RelevantDataManagerAgent();
     this.database = databaseAgent ?? new DatabaseAgent(this.manager);
   }
 
-  /** Summarise a topic including schema references and highlight data. */
+  /**
+   * Summarise a topic including schema references and highlight data.
+   *
+   * @param {string} topic Category identifier or alias to summarise.
+   * @returns {Promise<TopicOverview>} Snapshot of the category and related artefacts.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * ```ts
+   * const overview = await agent.getTopicOverview("people");
+   * console.log(overview.examples[0]?.file);
+   * ```
+   */
   async getTopicOverview(topic: string): Promise<TopicOverview> {
     const category = this.manager.getCategory(topic);
     const snapshot = await this.manager.getOrCreateSnapshot(category.id);
@@ -116,7 +205,19 @@ export class DataAgent {
     };
   }
 
-  /** Map the connections from a given record to other categories. */
+  /**
+   * Map the connections from a given record to other categories.
+   *
+   * @param {string} topic Category that owns the record being inspected.
+   * @param {string} [recordId] Optional record identifier. Defaults to the first record in the category.
+   * @returns {Promise<TopicConnections>} Structured description of relationships originating from the record.
+   * @throws {Error} When no records are available for the category.
+   * @example
+   * ```ts
+   * const connections = await agent.mapTopicConnections("applications", "app-aurora");
+   * connections.connections.forEach((link) => console.log(link.relationship));
+   * ```
+   */
   async mapTopicConnections(topic: string, recordId?: string): Promise<TopicConnections> {
     const category = this.manager.getCategory(topic);
     const focusRecord = recordId
@@ -137,7 +238,19 @@ export class DataAgent {
     };
   }
 
-  /** Build an exploration plan for answering a specific user question. */
+  /**
+   * Build an exploration plan for answering a specific user question.
+   *
+   * @param {string} topic Category that anchors the exploration.
+   * @param {string} question Natural language problem that needs to be solved.
+   * @returns {Promise<ExplorationPlan>} Plan describing steps, queries, and supporting resources.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * ```ts
+   * const plan = await agent.buildExplorationPlan("departments", "How is the analytics team structured?");
+   * console.log(plan.steps.map((step) => step.title));
+   * ```
+   */
   async buildExplorationPlan(topic: string, question: string): Promise<ExplorationPlan> {
     const category = this.manager.getCategory(topic);
     const overview = await this.getTopicOverview(category.id);
@@ -177,6 +290,17 @@ export class DataAgent {
   /**
    * Retrieve the records in the target topic that are connected to the source
    * record via declared relationships.
+   *
+   * @param {string} sourceTopic Category that contains the anchor record.
+   * @param {string} sourceRecordId Identifier for the anchor record.
+   * @param {string} targetTopic Category whose records should be matched.
+   * @returns {Promise<CrossTopicConnection | undefined>} Relationship details when a link exists, otherwise `undefined`.
+   * @throws {Error} When the source record cannot be found.
+   * @example
+   * ```ts
+   * const connection = await agent.findCrossTopicConnection("people", "person-001", "departments");
+   * console.log(connection?.relationship);
+   * ```
    */
   async findCrossTopicConnection(
     sourceTopic: string,
@@ -202,7 +326,17 @@ export class DataAgent {
     };
   }
 
-  /** Run a keyword search across every category. */
+  /**
+   * Run a keyword search across every category.
+   *
+   * @param {string} keyword Case-insensitive search string.
+   * @returns {TopicSearchResult[]} Matching records grouped by category.
+   * @example
+   * ```ts
+   * const matches = agent.search("analytics");
+   * console.log(matches[0]?.displayName);
+   * ```
+   */
   search(keyword: string): TopicSearchResult[] {
     return this.manager.searchAcrossCategories(keyword).map((match) => ({
       categoryId: match.categoryId,
@@ -212,12 +346,22 @@ export class DataAgent {
     }));
   }
 
-  /** Access to the underlying database agent for orchestration workflows. */
+  /**
+   * Access to the underlying database agent for orchestration workflows.
+   *
+   * @returns {DatabaseAgent} Database-like helper that exposes query primitives.
+   */
   getDatabaseAgent(): DatabaseAgent {
     return this.database;
   }
 
-  /** Gather the test, schema, and query artefacts for a category. */
+  /**
+   * Gather the test, schema, and query artefacts for a category.
+   *
+   * @param {string} topic Category identifier or alias.
+   * @returns {CategoryToolkit} Collection of supporting artefacts.
+   * @throws {UnknownCategoryError} When the category cannot be resolved.
+   */
   getCategoryToolkit(topic: string): CategoryToolkit {
     const category = this.manager.getCategory(topic);
     return {
@@ -230,7 +374,12 @@ export class DataAgent {
     };
   }
 
-  /** Compose supporting resource references for a category. */
+  /**
+   * Compose supporting resource references for a category.
+   *
+   * @param {CategoryId} categoryId Category used to source supporting artefacts.
+   * @returns {Array<{categoryId: CategoryId, ids: string[]}>} Related record references including neighbouring categories.
+   */
   private collectSupportingResources(categoryId: CategoryId): Array<{ categoryId: CategoryId; ids: string[] }> {
     const category = this.manager.getCategory(categoryId);
     const focusRecord = category.records[0];
@@ -254,7 +403,12 @@ export class DataAgent {
     return resources;
   }
 
-  /** Determine a consistent display name for a record. */
+  /**
+   * Determine a consistent display name for a record.
+   *
+   * @param {CategoryRecord} record Record being formatted.
+   * @returns {string} Human-friendly name for the record.
+   */
   private getRecordDisplayName(record: CategoryRecord): string {
     return (
       (typeof record.name === "string" && record.name) ||
@@ -264,6 +418,16 @@ export class DataAgent {
   }
 }
 
+/**
+ * Factory function that creates a {@link DataAgent} with default collaborators.
+ *
+ * @returns {DataAgent} Freshly constructed data agent.
+ * @example
+ * ```ts
+ * import { createDataAgent } from "./agents/dataAgent";
+ * const agent = createDataAgent();
+ * ```
+ */
 export function createDataAgent(): DataAgent {
   return new DataAgent();
 }

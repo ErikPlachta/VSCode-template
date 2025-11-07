@@ -1,5 +1,7 @@
 /**
  * @fileoverview Entry point for MyBusiness MCP VS Code extension.
+ *
+ * @module extension
  */
 import * as vscode from "vscode";
 import { ensureCacheDirectory, logInvocation, ToolLogEntry } from "./mcpCache";
@@ -11,6 +13,12 @@ const HISTORY_LIMIT = 10;
 
 /**
  * JSON-RPC response returned after invoking an MCP tool.
+ *
+ * @typedef {object} MCPInvokeToolResponse
+ * @property {string} jsonrpc JSON-RPC version string.
+ * @property {number | string} id Request identifier.
+ * @property {{content?: unknown, metadata?: Record<string, unknown>}} [result] Successful result payload.
+ * @property {{code?: number, message?: string, data?: unknown}} [error] Error payload returned by the server.
  */
 interface MCPInvokeToolResponse {
   jsonrpc: string;
@@ -28,6 +36,12 @@ interface MCPInvokeToolResponse {
 
 /**
  * Aggregate information about a tool invocation for UI and logging.
+ *
+ * @typedef {object} InvocationResult
+ * @property {vscode.MarkdownString} markdown Markdown content returned to the chat UI.
+ * @property {string} summary Concise summary of the invocation result.
+ * @property {string} [error] Error message when the invocation failed.
+ * @property {MCPInvokeToolResponse} [rawResponse] Raw MCP response when available.
  */
 interface InvocationResult {
   markdown: vscode.MarkdownString;
@@ -38,6 +52,10 @@ interface InvocationResult {
 
 /**
  * Build a Markdown-based chat response from the tool output.
+ *
+ * @param {MCPTool} tool Tool metadata describing how to render the result.
+ * @param {unknown} result Raw result payload returned by the MCP server.
+ * @returns {vscode.MarkdownString} Markdown string ready for VS Code chat surfaces.
  */
 function buildMarkdownResponse(tool: MCPTool, result: unknown): vscode.MarkdownString {
   const markdown = new vscode.MarkdownString(undefined, true);
@@ -57,6 +75,9 @@ function buildMarkdownResponse(tool: MCPTool, result: unknown): vscode.MarkdownS
 
 /**
  * Extract the human-consumable content from an MCP response payload.
+ *
+ * @param {MCPInvokeToolResponse} data JSON-RPC response payload.
+ * @returns {unknown} Content suitable for rendering or summarising.
  */
 function extractContent(data: MCPInvokeToolResponse): unknown {
   if (Array.isArray(data.result?.content)) {
@@ -83,6 +104,9 @@ function extractContent(data: MCPInvokeToolResponse): unknown {
 
 /**
  * Turn a result payload into a concise summary for context storage.
+ *
+ * @param {unknown} result Raw result payload to summarise.
+ * @returns {string} Condensed string representation with a 500 character limit.
  */
 function summariseResult(result: unknown): string {
   const raw = typeof result === "string" ? result : JSON.stringify(result);
@@ -91,6 +115,11 @@ function summariseResult(result: unknown): string {
 
 /**
  * Maintain a rolling conversation history for each tool.
+ *
+ * @param {Map<string, string[]>} history Map keyed by tool name containing ordered history entries.
+ * @param {MCPTool} tool Tool whose history should be updated.
+ * @param {string} entry Text describing the latest invocation or error.
+ * @returns {string[]} Updated history array for the tool.
  */
 function updateHistory(
   history: Map<string, string[]>,
@@ -108,6 +137,19 @@ function updateHistory(
 
 /**
  * Invoke the MCP backend and transform the result into a VS Code chat response.
+ *
+ * @param {MCPTool} tool Tool metadata describing the invocation target.
+ * @param {Record<string, unknown>} args Arguments supplied by the user.
+ * @param {string} serverUrl URL of the MCP server.
+ * @param {string | undefined} token Optional bearer token for authentication.
+ * @param {string} cacheDir Directory where invocation logs should be written.
+ * @param {Map<string, string[]>} history Map used to maintain conversation context for follow-up calls.
+ * @returns {Promise<InvocationResult>} Structured result containing markdown output and metadata.
+ * @example
+ * ```ts
+ * const result = await invokeTool(tool, {}, "https://mcp.example.com", undefined, cacheDir, new Map());
+ * console.log(result.summary);
+ * ```
  */
 async function invokeTool(
   tool: MCPTool,
@@ -196,6 +238,15 @@ async function invokeTool(
 /**
  * Activates the extension, registering MCP slash commands, mentions, and
  * automation hooks.
+ *
+ * @param {vscode.ExtensionContext} context VS Code extension context for managing subscriptions.
+ * @returns {Promise<void>} Resolves once activation completes.
+ * @example
+ * ```ts
+ * export async function activate(ctx: vscode.ExtensionContext) {
+ *   await activate(ctx);
+ * }
+ * ```
  */
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
   const cfg = vscode.workspace.getConfiguration("mybusinessMCP");
@@ -319,5 +370,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   }
 }
 
-/** Deactivates the extension. */
+/**
+ * Deactivates the extension.
+ *
+ * @returns {void}
+ */
 export function deactivate(): void {}
