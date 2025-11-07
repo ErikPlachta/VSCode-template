@@ -76,4 +76,13 @@ describe("DataAgent", () => {
     const { agent, database } = await createAgent();
     expect(agent.getDatabaseAgent()).toBe(database);
   });
+
+  it("returns a toolkit bundle for a category", async () => {
+    const { agent } = await createAgent();
+    const toolkit = agent.getCategoryToolkit("departments");
+    expect(toolkit.folder.root).toBe("relevant-data/departments");
+    expect(toolkit.schemas.length).toBeGreaterThan(0);
+    expect(toolkit.tests.map((test) => test.name)).toContain("Validate department schema");
+    expect(toolkit.queries.map((query) => query.name)).toContain("List departments");
+  });
 });

@@ -11,6 +11,8 @@ import {
   CategorySchema,
   CategorySnapshot,
   ExampleDataset,
+  CategoryTestArtefact,
+  FolderBlueprint,
   PythonTypeDefinition,
   RelationshipDescription,
   RelevantDataManagerAgent,
@@ -76,6 +78,16 @@ export interface CrossTopicConnection {
   targetCategory: CategoryId;
   relationship: string;
   relatedRecords: CategoryRecord[];
+}
+
+/** Bundle of artefacts that help contributors work with a category. */
+export interface CategoryToolkit {
+  folder: FolderBlueprint;
+  schemas: CategorySchema[];
+  pythonTypes: PythonTypeDefinition[];
+  examples: ExampleDataset[];
+  tests: CategoryTestArtefact[];
+  queries: RemoteQueryBlueprint[];
 }
 
 /** Agent that understands data relationships between categories. */
@@ -203,6 +215,19 @@ export class DataAgent {
   /** Access to the underlying database agent for orchestration workflows. */
   getDatabaseAgent(): DatabaseAgent {
     return this.database;
+  }
+
+  /** Gather the test, schema, and query artefacts for a category. */
+  getCategoryToolkit(topic: string): CategoryToolkit {
+    const category = this.manager.getCategory(topic);
+    return {
+      folder: category.config.folder,
+      schemas: category.schemas,
+      pythonTypes: category.pythonTypes,
+      examples: category.examples,
+      tests: category.tests,
+      queries: category.queries
+    };
   }
 
   /** Compose supporting resource references for a category. */

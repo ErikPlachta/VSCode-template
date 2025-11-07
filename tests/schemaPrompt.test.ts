@@ -30,7 +30,9 @@ describe("promptForArgs", () => {
       }
     };
     const result = await promptForArgs(tool as any);
-    expect(result.metric_name).toBe("mockValue");
+    expect(result).toBeDefined();
+    const record = result as Record<string, unknown>;
+    expect(record.metric_name).toBe("mockValue");
   });
 
   it("coerces numeric input based on schema type", async () => {
@@ -44,7 +46,9 @@ describe("promptForArgs", () => {
       }
     };
     const result = await promptForArgs(tool as any);
-    expect(result.count).toBe(42);
+    expect(result).toBeDefined();
+    const record = result as Record<string, unknown>;
+    expect(record.count).toBe(42);
   });
 
   it("uses quick pick for boolean types", async () => {
@@ -58,10 +62,12 @@ describe("promptForArgs", () => {
       }
     };
     const result = await promptForArgs(tool as any);
-    expect(result.enabled).toBe(true);
+    expect(result).toBeDefined();
+    const record = result as Record<string, unknown>;
+    expect(record.enabled).toBe(true);
   });
 
-  it("returns empty object when validation fails", async () => {
+  it("returns undefined when the user cancels a required prompt", async () => {
     showQuickPick.mockResolvedValueOnce(undefined);
     const tool = {
       title: "Mock",
@@ -72,7 +78,18 @@ describe("promptForArgs", () => {
       }
     };
     const result = await promptForArgs(tool as any);
+    expect(result).toBeUndefined();
+    expect(showErrorMessage).not.toHaveBeenCalled();
+  });
+
+  it("returns an empty object when no arguments are required", async () => {
+    const tool = {
+      title: "Mock",
+      input_schema: {
+        properties: {}
+      }
+    };
+    const result = await promptForArgs(tool as any);
     expect(result).toEqual({});
-    expect(showErrorMessage).toHaveBeenCalled();
   });
 });
