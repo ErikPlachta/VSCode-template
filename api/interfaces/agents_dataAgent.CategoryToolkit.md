@@ -12,10 +12,10 @@ Bundle of artefacts that help contributors work with a category.
 
 - [examples](agents_dataAgent.CategoryToolkit.md#examples)
 - [folder](agents_dataAgent.CategoryToolkit.md#folder)
-- [pythonTypes](agents_dataAgent.CategoryToolkit.md#pythontypes)
 - [queries](agents_dataAgent.CategoryToolkit.md#queries)
 - [schemas](agents_dataAgent.CategoryToolkit.md#schemas)
-- [tests](agents_dataAgent.CategoryToolkit.md#tests)
+- [types](agents_dataAgent.CategoryToolkit.md#types)
+- [validation](agents_dataAgent.CategoryToolkit.md#validation)
 
 ## Properties
 
@@ -27,7 +27,7 @@ Example datasets demonstrating data shape.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:152](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L152)
+[src/agents/dataAgent.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L154)
 
 ___
 
@@ -39,19 +39,7 @@ Blueprint describing the folder layout for the category.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:149](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L149)
-
-___
-
-### pythonTypes
-
-• **pythonTypes**: [`PythonTypeDefinition`](agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
-
-Python typing hints for SDK implementers.
-
-#### Defined in
-
-[src/agents/dataAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L151)
+[src/agents/dataAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L151)
 
 ___
 
@@ -63,7 +51,7 @@ Remote query definitions that fetch authoritative data.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L154)
+[src/agents/dataAgent.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L156)
 
 ___
 
@@ -75,16 +63,28 @@ Schemas that define expected record structure.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L150)
+[src/agents/dataAgent.ts:152](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L152)
 
 ___
 
-### tests
+### types
 
-• **tests**: [`CategoryTestArtefact`](agents_relevantDataManagerAgent.CategoryTestArtefact.md)[]
+• **types**: [`TypeDefinition`](agents_relevantDataManagerAgent.TypeDefinition.md)[]
 
-Test artefacts to validate data assumptions.
+Structured typing hints for SDK implementers.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L153)
+[src/agents/dataAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L153)
+
+___
+
+### validation
+
+• **validation**: [`DataValidationReport`](agents_relevantDataManagerAgent.DataValidationReport.md)
+
+Validation summary for the category data.
+
+#### Defined in
+
+[src/agents/dataAgent.ts:155](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L155)

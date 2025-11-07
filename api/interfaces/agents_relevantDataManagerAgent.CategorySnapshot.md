@@ -15,10 +15,10 @@ Snapshot persisted to the shared cache for quick lookups.
 - [folder](agents_relevantDataManagerAgent.CategorySnapshot.md#folder)
 - [id](agents_relevantDataManagerAgent.CategorySnapshot.md#id)
 - [name](agents_relevantDataManagerAgent.CategorySnapshot.md#name)
-- [pythonTypeNames](agents_relevantDataManagerAgent.CategorySnapshot.md#pythontypenames)
 - [queryNames](agents_relevantDataManagerAgent.CategorySnapshot.md#querynames)
 - [recordCount](agents_relevantDataManagerAgent.CategorySnapshot.md#recordcount)
 - [schemaNames](agents_relevantDataManagerAgent.CategorySnapshot.md#schemanames)
+- [typeNames](agents_relevantDataManagerAgent.CategorySnapshot.md#typenames)
 
 ## Properties
 
@@ -28,7 +28,7 @@ Snapshot persisted to the shared cache for quick lookups.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:179](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L179)
+[src/agents/relevantDataManagerAgent.ts:191](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L191)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:184](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L184)
+[src/agents/relevantDataManagerAgent.ts:196](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L196)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:185](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L185)
+[src/agents/relevantDataManagerAgent.ts:197](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L197)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:177](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L177)
+[src/agents/relevantDataManagerAgent.ts:189](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L189)
 
 ___
 
@@ -68,17 +68,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:178](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L178)
-
-___
-
-### pythonTypeNames
-
-• **pythonTypeNames**: `string`[]
-
-#### Defined in
-
-[src/agents/relevantDataManagerAgent.ts:182](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L182)
+[src/agents/relevantDataManagerAgent.ts:190](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L190)
 
 ___
 
@@ -88,7 +78,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:183](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L183)
+[src/agents/relevantDataManagerAgent.ts:195](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L195)
 
 ___
 
@@ -98,7 +88,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:180](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L180)
+[src/agents/relevantDataManagerAgent.ts:192](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L192)
 
 ___
 
@@ -108,4 +98,14 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:181](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L181)
+[src/agents/relevantDataManagerAgent.ts:193](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L193)
+
+___
+
+### typeNames
+
+• **typeNames**: `string`[]
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L194)

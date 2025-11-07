@@ -7,8 +7,8 @@
 Agent responsible for managing the mock "relevant data"
 workspace that MCP servers expose to users. The agent keeps a rich catalogue
 of categories (departments, people, applications, policies, resources) that
-mirrors a repository folder structure complete with schemas, python type
-hints, example datasets, tests, and remote query blueprints.
+mirrors a repository folder structure complete with schemas, type
+definitions, example datasets, validation reports, and remote query blueprints.
 
 ## Table of contents
 
@@ -24,22 +24,23 @@ hints, example datasets, tests, and remote query blueprints.
 - [CategorySchema](../interfaces/agents_relevantDataManagerAgent.CategorySchema.md)
 - [CategorySnapshot](../interfaces/agents_relevantDataManagerAgent.CategorySnapshot.md)
 - [CategorySummary](../interfaces/agents_relevantDataManagerAgent.CategorySummary.md)
-- [CategoryTestArtefact](../interfaces/agents_relevantDataManagerAgent.CategoryTestArtefact.md)
+- [DataValidationIssue](../interfaces/agents_relevantDataManagerAgent.DataValidationIssue.md)
+- [DataValidationReport](../interfaces/agents_relevantDataManagerAgent.DataValidationReport.md)
 - [DatasetCatalogueEntry](../interfaces/agents_relevantDataManagerAgent.DatasetCatalogueEntry.md)
 - [EntityConnections](../interfaces/agents_relevantDataManagerAgent.EntityConnections.md)
 - [ExampleDataset](../interfaces/agents_relevantDataManagerAgent.ExampleDataset.md)
 - [FolderBlueprint](../interfaces/agents_relevantDataManagerAgent.FolderBlueprint.md)
-- [PythonTypeDefinition](../interfaces/agents_relevantDataManagerAgent.PythonTypeDefinition.md)
-- [PythonTypedDictField](../interfaces/agents_relevantDataManagerAgent.PythonTypedDictField.md)
 - [RelationshipDescription](../interfaces/agents_relevantDataManagerAgent.RelationshipDescription.md)
 - [RemoteQueryBlueprint](../interfaces/agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)
+- [TypeDefinition](../interfaces/agents_relevantDataManagerAgent.TypeDefinition.md)
+- [TypedDictField](../interfaces/agents_relevantDataManagerAgent.TypedDictField.md)
 
 ### Type Aliases
 
 - [CategoryId](agents_relevantDataManagerAgent.md#categoryid)
 - [CategoryRecord](agents_relevantDataManagerAgent.md#categoryrecord)
-- [PythonPrimitiveType](agents_relevantDataManagerAgent.md#pythonprimitivetype)
-- [PythonTypeSchema](agents_relevantDataManagerAgent.md#pythontypeschema)
+- [PrimitiveTypeName](agents_relevantDataManagerAgent.md#primitivetypename)
+- [TypeSchema](agents_relevantDataManagerAgent.md#typeschema)
 
 ### Functions
 
@@ -55,7 +56,7 @@ Unique identifier for a category in the repository.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:139](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L139)
+[src/agents/relevantDataManagerAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L151)
 
 ___
 
@@ -67,31 +68,31 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L136)
+[src/agents/relevantDataManagerAgent.ts:148](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L148)
 
 ___
 
-### PythonPrimitiveType
+### PrimitiveTypeName
 
-Ƭ **PythonPrimitiveType**: ``"str"`` \| ``"int"`` \| ``"float"`` \| ``"bool"`` \| ``"datetime"``
+Ƭ **PrimitiveTypeName**: ``"str"`` \| ``"int"`` \| ``"float"`` \| ``"bool"`` \| ``"datetime"``
 
-Supported Python type primitives within the schema definition.
+Supported primitive names within a type definition schema.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:77](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L77)
+[src/agents/relevantDataManagerAgent.ts:76](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L76)
 
 ___
 
-### PythonTypeSchema
+### TypeSchema
 
-Ƭ **PythonTypeSchema**: \{ `kind`: ``"primitive"`` ; `name`: [`PythonPrimitiveType`](agents_relevantDataManagerAgent.md#pythonprimitivetype)  } \| \{ `kind`: ``"optional"`` ; `value`: [`PythonTypeSchema`](agents_relevantDataManagerAgent.md#pythontypeschema)  } \| \{ `element`: [`PythonTypeSchema`](agents_relevantDataManagerAgent.md#pythontypeschema) ; `kind`: ``"list"``  } \| \{ `kind`: ``"literal"`` ; `value`: `string` \| `number` \| `boolean` \| ``null``  } \| \{ `kind`: ``"enum"`` ; `values`: (`string` \| `number` \| `boolean`)[]  } \| \{ `fields`: [`PythonTypedDictField`](../interfaces/agents_relevantDataManagerAgent.PythonTypedDictField.md)[] ; `kind`: ``"typedDict"``  }
+Ƭ **TypeSchema**: \{ `kind`: ``"primitive"`` ; `name`: [`PrimitiveTypeName`](agents_relevantDataManagerAgent.md#primitivetypename)  } \| \{ `kind`: ``"optional"`` ; `value`: [`TypeSchema`](agents_relevantDataManagerAgent.md#typeschema)  } \| \{ `element`: [`TypeSchema`](agents_relevantDataManagerAgent.md#typeschema) ; `kind`: ``"list"``  } \| \{ `kind`: ``"literal"`` ; `value`: `string` \| `number` \| `boolean` \| ``null``  } \| \{ `kind`: ``"enum"`` ; `values`: (`string` \| `number` \| `boolean`)[]  } \| \{ `fields`: [`TypedDictField`](../interfaces/agents_relevantDataManagerAgent.TypedDictField.md)[] ; `kind`: ``"typedDict"``  }
 
-JSON description for a Python type that can be materialised by an MCP server.
+JSON description for a structured type that can be materialised by an MCP server.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L80)
+[src/agents/relevantDataManagerAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L79)
 
 ## Functions
 
@@ -105,4 +106,4 @@ JSON description for a Python type that can be materialised by an MCP server.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:972](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L972)
+[src/agents/relevantDataManagerAgent.ts:1058](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L1058)

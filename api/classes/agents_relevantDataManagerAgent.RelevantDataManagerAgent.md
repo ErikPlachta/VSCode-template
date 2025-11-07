@@ -22,11 +22,11 @@ Agent that manages the relevant-data workspace representation.
 - [getExamples](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getexamples)
 - [getFolderBlueprint](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getfolderblueprint)
 - [getOrCreateSnapshot](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getorcreatesnapshot)
-- [getPythonTypes](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getpythontypes)
 - [getQueries](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getqueries)
 - [getRecord](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getrecord)
 - [getRecords](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getrecords)
-- [getTests](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#gettests)
+- [getTypeDefinitions](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#gettypedefinitions)
+- [getValidationReport](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getvalidationreport)
 - [listCategories](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#listcategories)
 - [searchAcrossCategories](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#searchacrosscategories)
 
@@ -48,7 +48,7 @@ Agent that manages the relevant-data workspace representation.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:401](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L401)
+[src/agents/relevantDataManagerAgent.ts:405](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L405)
 
 ## Methods
 
@@ -70,7 +70,7 @@ Resolve a topic or identifier to the underlying category definition.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:424](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L424)
+[src/agents/relevantDataManagerAgent.ts:429](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L429)
 
 ___
 
@@ -102,7 +102,7 @@ Access category configuration metadata such as relationships.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:439](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L439)
+[src/agents/relevantDataManagerAgent.ts:444](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L444)
 
 ___
 
@@ -124,7 +124,7 @@ Access the JSON schemas associated with a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:444](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L444)
+[src/agents/relevantDataManagerAgent.ts:449](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L449)
 
 ___
 
@@ -140,7 +140,7 @@ Expose the consolidated dataset catalogue built from the data directory.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:573](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L573)
+[src/agents/relevantDataManagerAgent.ts:578](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L578)
 
 ___
 
@@ -163,7 +163,7 @@ Resolve relationships for a given record across categories.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:546](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L546)
+[src/agents/relevantDataManagerAgent.ts:551](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L551)
 
 ___
 
@@ -185,7 +185,7 @@ Fetch example datasets included inside the category folder.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:454](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L454)
+[src/agents/relevantDataManagerAgent.ts:459](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L459)
 
 ___
 
@@ -207,7 +207,7 @@ Retrieve the folder blueprint for a given topic.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:434](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L434)
+[src/agents/relevantDataManagerAgent.ts:439](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L439)
 
 ___
 
@@ -229,29 +229,7 @@ Build a snapshot view of a category and persist it to the shared cache.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:513](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L513)
-
-___
-
-### getPythonTypes
-
-▸ **getPythonTypes**(`topicOrId`): [`PythonTypeDefinition`](../interfaces/agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
-
-Retrieve Python type definitions provided as guidance for SDK authors.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `topicOrId` | `string` |
-
-#### Returns
-
-[`PythonTypeDefinition`](../interfaces/agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
-
-#### Defined in
-
-[src/agents/relevantDataManagerAgent.ts:449](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L449)
+[src/agents/relevantDataManagerAgent.ts:518](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L518)
 
 ___
 
@@ -273,7 +251,7 @@ Retrieve query blueprints that demonstrate how to call the authoritative upstrea
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:464](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L464)
+[src/agents/relevantDataManagerAgent.ts:469](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L469)
 
 ___
 
@@ -296,7 +274,7 @@ Retrieve a single record by identifier.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:474](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L474)
+[src/agents/relevantDataManagerAgent.ts:479](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L479)
 
 ___
 
@@ -318,15 +296,15 @@ Return all records stored in the local mock dataset for a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:469](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L469)
+[src/agents/relevantDataManagerAgent.ts:474](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L474)
 
 ___
 
-### getTests
+### getTypeDefinitions
 
-▸ **getTests**(`topicOrId`): [`CategoryTestArtefact`](../interfaces/agents_relevantDataManagerAgent.CategoryTestArtefact.md)[]
+▸ **getTypeDefinitions**(`topicOrId`): [`TypeDefinition`](../interfaces/agents_relevantDataManagerAgent.TypeDefinition.md)[]
 
-List the unit/integration tests referenced by the category.
+Retrieve structured type definitions provided as guidance for SDK authors.
 
 #### Parameters
 
@@ -336,11 +314,33 @@ List the unit/integration tests referenced by the category.
 
 #### Returns
 
-[`CategoryTestArtefact`](../interfaces/agents_relevantDataManagerAgent.CategoryTestArtefact.md)[]
+[`TypeDefinition`](../interfaces/agents_relevantDataManagerAgent.TypeDefinition.md)[]
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:459](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L459)
+[src/agents/relevantDataManagerAgent.ts:454](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L454)
+
+___
+
+### getValidationReport
+
+▸ **getValidationReport**(`topicOrId`): [`DataValidationReport`](../interfaces/agents_relevantDataManagerAgent.DataValidationReport.md)
+
+Retrieve the validation report generated for the category data.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
+
+#### Returns
+
+[`DataValidationReport`](../interfaces/agents_relevantDataManagerAgent.DataValidationReport.md)
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:464](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L464)
 
 ___
 
@@ -356,7 +356,7 @@ Enumerate the categories available to the MCP client.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:415](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L415)
+[src/agents/relevantDataManagerAgent.ts:420](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L420)
 
 ___
 
@@ -378,4 +378,4 @@ Perform a keyword search across every category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:479](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/relevantDataManagerAgent.ts#L479)
+[src/agents/relevantDataManagerAgent.ts:484](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L484)

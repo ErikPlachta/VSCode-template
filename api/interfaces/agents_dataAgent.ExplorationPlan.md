@@ -26,7 +26,7 @@ End-user question that motivated the plan.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L80)
+[src/agents/dataAgent.ts:82](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L82)
 
 ___
 
@@ -38,7 +38,7 @@ Names of saved queries that can help answer the question.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:82](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L82)
+[src/agents/dataAgent.ts:84](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L84)
 
 ___
 
@@ -50,7 +50,7 @@ Ordered list of recommended analysis actions.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L81)
+[src/agents/dataAgent.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L83)
 
 ___
 
@@ -62,7 +62,7 @@ References to related records for quick access.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L83)
+[src/agents/dataAgent.ts:85](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L85)
 
 ___
 
@@ -74,4 +74,4 @@ Canonical category identifier.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L79)
+[src/agents/dataAgent.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L81)

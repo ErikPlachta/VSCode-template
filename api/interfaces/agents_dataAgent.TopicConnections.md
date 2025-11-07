@@ -24,7 +24,7 @@ List of resolved relationships.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L60)
+[src/agents/dataAgent.ts:62](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L62)
 
 ___
 
@@ -43,7 +43,7 @@ Record that serves as the anchor for the exploration.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L56)
+[src/agents/dataAgent.ts:58](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L58)
 
 ___
 
@@ -55,4 +55,4 @@ Human-readable relationship statements for UI rendering.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:65](https://github.com/ErikPlachta/VSCode-template/blob/3add38c617db9bafb49bb7828d0abe48e22be359/src/agents/dataAgent.ts#L65)
+[src/agents/dataAgent.ts:67](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/dataAgent.ts#L67)
