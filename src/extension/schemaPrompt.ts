@@ -4,7 +4,7 @@
  * @module schemaPrompt
  */
 import * as vscode from "vscode";
-import { MCPProperty, MCPTool } from "./mcpSync";
+import { MCPProperty, MCPTool } from "../shared/mcpTypes";
 
 /**
  * Resolve the declared JSON schema type into a singular primitive string.

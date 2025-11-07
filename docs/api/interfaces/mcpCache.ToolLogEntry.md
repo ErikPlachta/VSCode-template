@@ -4,7 +4,7 @@
 
 [mcpCache](../modules/mcpCache.md).ToolLogEntry
 
-Structure for log entries persisted inside `.mcp-cache`.
+Structure for log entries persisted inside `.mybusinessMCP`.
 
 ## Table of contents
 
@@ -13,7 +13,7 @@ Structure for log entries persisted inside `.mcp-cache`.
 - [args](mcpCache.ToolLogEntry.md#args)
 - [context](mcpCache.ToolLogEntry.md#context)
 - [error](mcpCache.ToolLogEntry.md#error)
-- [response](mcpCache.ToolLogEntry.md#response)
+- [result](mcpCache.ToolLogEntry.md#result)
 - [timestamp](mcpCache.ToolLogEntry.md#timestamp)
 - [toolName](mcpCache.ToolLogEntry.md#toolname)
 
@@ -23,11 +23,11 @@ Structure for log entries persisted inside `.mcp-cache`.
 
 • **args**: `Record`\<`string`, `unknown`\>
 
-Arguments sent to the MCP server.
+Arguments sent to the MCP tool implementation.
 
 #### Defined in
 
-src/mcpCache.ts:19
+src/extension/mcpCache.ts:41
 
 ___
 
@@ -39,7 +39,7 @@ High-level conversation context that accompanied the request.
 
 #### Defined in
 
-src/mcpCache.ts:21
+src/extension/mcpCache.ts:43
 
 ___
 
@@ -51,19 +51,19 @@ Human-readable error message when an invocation fails.
 
 #### Defined in
 
-src/mcpCache.ts:25
+src/extension/mcpCache.ts:49
 
 ___
 
-### response
+### result
 
-• `Optional` **response**: `unknown`
+• `Optional` **result**: `unknown`
 
-Raw payload returned by the server, if any.
+Raw payload returned by the tool implementation, if any.
 
 #### Defined in
 
-src/mcpCache.ts:23
+src/extension/mcpCache.ts:47
 
 ___
 
@@ -75,7 +75,7 @@ ISO timestamp when the invocation took place.
 
 #### Defined in
 
-src/mcpCache.ts:15
+src/extension/mcpCache.ts:37
 
 ___
 
@@ -87,4 +87,4 @@ Tool identifier that generated the log entry.
 
 #### Defined in
 
-src/mcpCache.ts:17
+src/extension/mcpCache.ts:39

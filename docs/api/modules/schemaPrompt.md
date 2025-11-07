@@ -23,7 +23,7 @@ and booleans, plus validation for numbers and required fields.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `tool` | [`MCPTool`](../interfaces/mcpSync.MCPTool.md) | Tool definition with input schema. |
+| `tool` | `MCPTool` | Tool definition with input schema. |
 
 #### Returns
 

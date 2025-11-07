@@ -6,7 +6,7 @@ roles:
   - developer-experience
 associations:
   - repository-health-agent
-  - mcp-sync
+  - local-tool-registry
 hierarchy:
   - platform
   - orchestration
@@ -26,10 +26,10 @@ The orchestrator governs how the My Business MCP VS Code extension discovers too
 
 ## Inputs
 
-- MCP capability metadata loaded during activation and refresh cycles.
+- MCP capability metadata loaded from the bundled tool registry during activation.
 - User prompts and clarification flows collected through chat interactions.
-- Data lake resources synchronised by the MCP sync pipeline.
-- Project configuration, including authentication tokens and server URLs.
+- Data lake resources synchronised by the embedded runtime and supporting agents.
+- Workspace configuration for cache management and agent preferences.
 
 ## Outputs
 
@@ -40,7 +40,7 @@ The orchestrator governs how the My Business MCP VS Code extension discovers too
 
 ## Error Handling
 
-- Retries tool discovery when the MCP server connection temporarily fails.
+- Retries tool discovery when local datasets are temporarily unavailable.
 - Surfaces actionable error prompts for missing context or invalid inputs.
 - Escalates to the repository health agent when required metadata is absent.
 - Captures diagnostics for CI visibility to block non-compliant merges.
@@ -55,5 +55,5 @@ The orchestrator governs how the My Business MCP VS Code extension discovers too
 
 - Review orchestration logs weekly to confirm tool coverage and success rates.
 - Coordinate with the health agent team to refine validation thresholds.
-- Update authentication and routing configuration whenever MCP endpoints change.
+- Review runtime configuration whenever local datasets or agent behaviour changes.
 

@@ -6,6 +6,7 @@ import {
   ensureCacheDirectory,
   listSharedCacheEntries,
   logInvocation,
+  pruneCache,
   readSharedCacheEntry,
   storeSharedCacheEntry
 } from "../src/extension/mcpCache";
@@ -30,7 +31,7 @@ describe("mcpCache", () => {
     workspaceFoldersMock = [{ uri: { fsPath: tempDir } }];
 
     const cacheDir = await ensureCacheDirectory();
-    expect(cacheDir).toBe(path.join(tempDir, ".mcp-cache"));
+    expect(cacheDir).toBe(path.join(tempDir, ".mybusinessMCP"));
 
     const stats = await fs.stat(cacheDir);
     expect(stats.isDirectory()).toBe(true);
@@ -48,7 +49,7 @@ describe("mcpCache", () => {
       toolName: "demo",
       args: { query: "hello" },
       context: [],
-      response: { result: "ok" }
+      result: { result: "ok" }
     });
 
     const contents = await fs.readFile(path.join(cacheDir, "invocations.jsonl"), "utf8");
@@ -81,6 +82,56 @@ describe("mcpCache", () => {
     await deleteSharedCacheEntry(cacheDir, "demo:123");
     const afterDelete = await readSharedCacheEntry(cacheDir, "demo:123");
     expect(afterDelete).toBeUndefined();
+
+    await fs.rm(tempDir, { recursive: true, force: true });
+  });
+
+  it("prunes cache artefacts older than the retention window", async () => {
+    const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "mcp-cache-test-"));
+    workspaceFoldersMock = [{ uri: { fsPath: tempDir } }];
+    const cacheDir = await ensureCacheDirectory();
+
+    await storeSharedCacheEntry(cacheDir, {
+      key: "stale",
+      toolName: "demoTool",
+      timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+      value: {}
+    });
+    await storeSharedCacheEntry(cacheDir, {
+      key: "fresh",
+      toolName: "demoTool",
+      timestamp: new Date().toISOString(),
+      value: {}
+    });
+
+    const logPath = path.join(cacheDir, "invocations.jsonl");
+    const oldEntry = {
+      timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+      toolName: "demo",
+      args: {},
+      context: []
+    };
+    const newEntry = {
+      timestamp: new Date().toISOString(),
+      toolName: "demo",
+      args: {},
+      context: []
+    };
+    await fs.writeFile(
+      logPath,
+      `${JSON.stringify(oldEntry)}\n${JSON.stringify(newEntry)}\n`,
+      "utf8"
+    );
+
+    await pruneCache(cacheDir, 2);
+
+    const sharedEntries = await listSharedCacheEntries(cacheDir);
+    expect(sharedEntries).toHaveLength(1);
+    expect(sharedEntries[0].key).toBe("fresh");
+
+    const logContents = await fs.readFile(logPath, "utf8");
+    expect(logContents).toContain(newEntry.timestamp);
+    expect(logContents).not.toContain(oldEntry.timestamp);
 
     await fs.rm(tempDir, { recursive: true, force: true });
   });

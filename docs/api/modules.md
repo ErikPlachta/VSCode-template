@@ -8,6 +8,6 @@
 
 - [extension](modules/extension.md)
 - [mcpCache](modules/mcpCache.md)
-- [mcpSync](modules/mcpSync.md)
+- [localToolRegistry](modules/localToolRegistry.md)
 - [schemaPrompt](modules/schemaPrompt.md)
 - [vscode-chat](modules/vscode_chat.md)

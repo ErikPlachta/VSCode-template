@@ -1,11 +1,11 @@
 # My Business MCP Extension
 
 ## Features
-- Dynamically discovers all MCP tools from your server with enriched metadata and schema validation.
+- Dynamically exposes bundled MCP tools with enriched metadata and schema validation.
 - Registers `/commands`, `@mentions`, and the **My Business MCP: Invoke Tool** automation command in VS Code.
 - Maintains conversational context for multi-turn orchestration, automatically persisting a rolling history per tool.
 - Renders MCP responses as rich markdown within Copilot Chat, including structured JSON when appropriate.
-- Captures invocation logs inside a local `.mcp-cache` directory to keep diagnostics client-side.
+- Captures invocation logs inside a local `.mybusinessMCP` directory to keep diagnostics client-side.
 - Ships with a modular mock orchestration sandbox (`src/agents/`) featuring dedicated data, database, and relevant-data manager agents backed by rich local dummy datasets.
 - Persists cross-tool shared cache artefacts so generated context can be re-used between agents without remaining in memory.
 - Fully unit-tested, documented, and CI-integrated.
@@ -15,19 +15,15 @@
 
 | Component | Location | Purpose |
 | --- | --- | --- |
-| **VSIX extension** | `src/extension/` | Ships the VS Code client that registers commands, connects to an MCP endpoint, and renders responses in Copilot Chat. |
+| **VSIX extension** | `src/extension/` | Ships the VS Code client that registers commands, implements the MCP tools locally, and renders responses in Copilot Chat. |
 | **Agents** | `src/agents/` | Provide orchestration logic and reusable domain behaviours that power tool responses regardless of the transport. |
-| **Mock MCP server** | `src/server/` | Lightweight JSON-RPC server that exposes the sample datasets so the extension has a local endpoint during development. |
+| **Local tool registry** | `src/mcp/localToolRegistry.ts` | Loads datasets from `data/` and executes MCP tools directly within the extension runtime. |
 
-The extension always communicates with an MCP server over HTTP(S). Installing the VSIX does **not** embed the backend logic; you must point the extension to a running MCP endpoint (for example the mock server included in this repository).
+The extension bundles a lightweight MCP runtime. Installing the VSIX is sufficient—no additional MCP server process or settings are required.
 
-## Run the local MCP server
+## Local cache directory
 
-```bash
-npm run server
-```
-
-This compiles the TypeScript sources and starts a JSON-RPC server on `http://localhost:3030`. Configure the VS Code settings `mybusinessMCP.serverUrl` to that URL (leave `mybusinessMCP.token` empty unless you add authentication). The extension will then discover the mock tools via `listTools` and send `invokeTool` calls to the same endpoint.
+The extension creates a `.mybusinessMCP` directory in the root of your workspace. It stores invocation logs, cross-tool cache entries, and any additional local artefacts required by the built-in agents. Use the `mybusinessMCP.cacheRetention` setting to control how many days of history are preserved before old entries are pruned.
 
 ## Compliance and Documentation Tooling
 

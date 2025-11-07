@@ -3,11 +3,11 @@ mybusiness-mcp-extension / [Exports](modules.md)
 # My Business MCP Extension
 
 ## Features
-- Dynamically discovers all MCP tools from your server with enriched metadata and schema validation.
+- Dynamically exposes bundled MCP tools with enriched metadata and schema validation.
 - Registers `/commands`, `@mentions`, and the **My Business MCP: Invoke Tool** automation command in VS Code.
 - Maintains conversational context for multi-turn orchestration, automatically persisting a rolling history per tool.
 - Renders MCP responses as rich markdown within Copilot Chat, including structured JSON when appropriate.
-- Captures invocation logs inside a local `.mcp-cache` directory to keep diagnostics client-side.
+- Captures invocation logs inside a local `.mybusinessMCP` directory to keep diagnostics client-side.
 - Fully unit-tested, documented, and CI-integrated.
 
 ## Commands

@@ -5,35 +5,13 @@
  */
 import * as vscode from "vscode";
 import { Orchestrator, OrchestratorResponse } from "../agents/orchestrator";
-import { ensureCacheDirectory, logInvocation, ToolLogEntry } from "./mcpCache";
-import { fetchTools, MCPDiscoveryError, MCPTool } from "./mcpSync";
+import { listLocalTools, invokeLocalTool, LocalToolError } from "../mcp/localToolRegistry";
+import { MCPTool } from "../shared/mcpTypes";
+import { ensureCacheDirectory, logInvocation, pruneCache, ToolLogEntry } from "./mcpCache";
 import { promptForArgs } from "./schemaPrompt";
 
 /** Maximum number of historical entries to retain per tool. */
 const HISTORY_LIMIT = 10;
-
-/**
- * JSON-RPC response returned after invoking an MCP tool.
- *
- * @typedef {object} MCPInvokeToolResponse
- * @property {string} jsonrpc JSON-RPC version string.
- * @property {number | string} id Request identifier.
- * @property {{content?: unknown, metadata?: Record<string, unknown>}} [result] Successful result payload.
- * @property {{code?: number, message?: string, data?: unknown}} [error] Error payload returned by the server.
- */
-interface MCPInvokeToolResponse {
-  jsonrpc: string;
-  id: number | string;
-  result?: {
-    content?: unknown;
-    metadata?: Record<string, unknown>;
-  };
-  error?: {
-    code?: number;
-    message?: string;
-    data?: unknown;
-  };
-}
 
 /**
  * Aggregate information about a tool invocation for UI and logging.
@@ -42,20 +20,20 @@ interface MCPInvokeToolResponse {
  * @property {vscode.MarkdownString} markdown Markdown content returned to the chat UI.
  * @property {string} summary Concise summary of the invocation result.
  * @property {string} [error] Error message when the invocation failed.
- * @property {MCPInvokeToolResponse} [rawResponse] Raw MCP response when available.
+ * @property {unknown} [result] Raw tool payload when available.
  */
 interface InvocationResult {
   markdown: vscode.MarkdownString;
   summary: string;
   error?: string;
-  rawResponse?: MCPInvokeToolResponse;
+  result?: unknown;
 }
 
 /**
  * Build a Markdown-based chat response from the tool output.
  *
  * @param {MCPTool} tool Tool metadata describing how to render the result.
- * @param {unknown} result Raw result payload returned by the MCP server.
+ * @param {unknown} result Raw result payload returned by the tool implementation.
  * @returns {vscode.MarkdownString} Markdown string ready for VS Code chat surfaces.
  */
 function buildMarkdownResponse(tool: MCPTool, result: unknown): vscode.MarkdownString {
@@ -72,35 +50,6 @@ function buildMarkdownResponse(tool: MCPTool, result: unknown): vscode.MarkdownS
     markdown.appendCodeblock(JSON.stringify(result, null, 2), "json");
   }
   return markdown;
-}
-
-/**
- * Extract the human-consumable content from an MCP response payload.
- *
- * @param {MCPInvokeToolResponse} data JSON-RPC response payload.
- * @returns {unknown} Content suitable for rendering or summarising.
- */
-function extractContent(data: MCPInvokeToolResponse): unknown {
-  if (Array.isArray(data.result?.content)) {
-    return data.result?.content
-      .map((entry) => {
-        if (typeof entry === "string") {
-          return entry;
-        }
-        if (entry && typeof entry === "object" && "text" in entry) {
-          return String((entry as { text?: unknown }).text ?? "");
-        }
-        return JSON.stringify(entry);
-      })
-      .join("\n\n");
-  }
-  if (data.result?.content !== undefined) {
-    return data.result.content;
-  }
-  if (data.result) {
-    return data.result;
-  }
-  return "No response";
 }
 
 /**
@@ -183,37 +132,22 @@ function parseMentionMessage(message: string): {
  *
  * @param {MCPTool} tool Tool metadata describing the invocation target.
  * @param {Record<string, unknown>} args Arguments supplied by the user.
- * @param {string} serverUrl URL of the MCP server.
- * @param {string | undefined} token Optional bearer token for authentication.
  * @param {string} cacheDir Directory where invocation logs should be written.
  * @param {Map<string, string[]>} history Map used to maintain conversation context for follow-up calls.
  * @returns {Promise<InvocationResult>} Structured result containing markdown output and metadata.
  * @example
  * ```ts
- * const result = await invokeTool(tool, {}, "https://mcp.example.com", undefined, cacheDir, new Map());
+ * const result = await invokeTool(tool, {}, cacheDir, new Map());
  * console.log(result.summary);
  * ```
  */
 async function invokeTool(
   tool: MCPTool,
   args: Record<string, unknown>,
-  serverUrl: string,
-  token: string | undefined,
   cacheDir: string,
   history: Map<string, string[]>
 ): Promise<InvocationResult> {
   const contextMessages = history.get(tool.name) ?? [];
-  const payload = {
-    jsonrpc: "2.0",
-    id: Date.now(),
-    method: "invokeTool",
-    params: {
-      name: tool.name,
-      arguments: args,
-      context: contextMessages
-    }
-  };
-
   const logEntry: ToolLogEntry = {
     timestamp: new Date().toISOString(),
     toolName: tool.name,
@@ -222,28 +156,8 @@ async function invokeTool(
   };
 
   try {
-    const response = await fetch(serverUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {})
-      },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status} ${response.statusText}`);
-    }
-
-    const data = (await response.json()) as MCPInvokeToolResponse;
-    logEntry.response = data;
-
-    if (data.error) {
-      const message = data.error.message ?? "Unknown MCP error.";
-      throw new Error(message);
-    }
-
-    const content = extractContent(data);
+    const content = await invokeLocalTool(tool.name, args);
+    logEntry.result = content;
     const summary = summariseResult(content);
     updateHistory(
       history,
@@ -254,7 +168,7 @@ async function invokeTool(
     return {
       markdown: buildMarkdownResponse(tool, content),
       summary,
-      rawResponse: data
+      result: content
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -293,14 +207,14 @@ async function invokeTool(
  */
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
   const cfg = vscode.workspace.getConfiguration("mybusinessMCP");
-  const serverUrl = cfg.get<string>("serverUrl") ?? "";
-  const token = cfg.get<string>("token") ?? "";
+  const retentionDays = cfg.get<number>("cacheRetention") ?? 30;
   const conversationHistory = new Map<string, string[]>();
   const orchestrator = new Orchestrator();
 
   let cacheDir = "";
   try {
     cacheDir = await ensureCacheDirectory();
+    await pruneCache(cacheDir, retentionDays);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     vscode.window.showErrorMessage(
@@ -309,7 +223,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   }
 
   try {
-    const tools: MCPTool[] = await fetchTools(serverUrl, token);
+    const tools: MCPTool[] = await listLocalTools();
     const chat = vscode.chat.createChatParticipantExtensionApi("MyBusinessMCP");
     const disposables: vscode.Disposable[] = [];
 
@@ -411,8 +325,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
           const result = await invokeTool(
             tool,
             args,
-            serverUrl,
-            token,
             cacheDir,
             conversationHistory
           );
@@ -428,8 +340,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
           const result = await invokeTool(
             tool,
             args,
-            serverUrl,
-            token,
             cacheDir,
             conversationHistory
           );
@@ -466,8 +376,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         const result = await invokeTool(
           selected.tool,
           args,
-          serverUrl,
-          token,
           cacheDir,
           conversationHistory
         );
@@ -482,16 +390,16 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     context.subscriptions.push(...disposables, automationDisposable);
 
     vscode.window.showInformationMessage(
-      `Loaded ${tools.length} MCP tools from ${serverUrl}.`
+      `Loaded ${tools.length} local MCP tools.`
     );
   } catch (error) {
     const message =
-      error instanceof MCPDiscoveryError
+      error instanceof LocalToolError
         ? error.message
         : error instanceof Error
           ? error.message
           : String(error);
-    vscode.window.showErrorMessage(`MCP Sync failed: ${message}`);
+    vscode.window.showErrorMessage(`Failed to load local MCP tools: ${message}`);
   }
 }
 

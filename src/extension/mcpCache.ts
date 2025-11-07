@@ -1,5 +1,5 @@
 /**
- * @fileoverview Utilities for managing the local `.mcp-cache` directory.
+ * @fileoverview Utilities for managing the local `.mybusinessMCP` directory.
  *
  * @module mcpCache
  */
@@ -11,6 +11,8 @@ import * as vscode from "vscode";
 
 /** Name of the subdirectory that stores cross-tool shared cache entries. */
 const SHARED_CACHE_DIR = "shared";
+/** Number of milliseconds in a single day. */
+const MS_PER_DAY = 86_400_000;
 
 /**
  * Minimal representation of a cached artefact that can be exchanged across
@@ -30,25 +32,25 @@ export interface SharedCacheEntry<T = unknown> {
 }
 
 /**
- * Structure for log entries persisted inside `.mcp-cache`.
+ * Structure for log entries persisted inside `.mybusinessMCP`.
  */
 export interface ToolLogEntry {
   /** ISO timestamp when the invocation took place. */
   timestamp: string;
   /** Tool identifier that generated the log entry. */
   toolName: string;
-  /** Arguments sent to the MCP server. */
+  /** Arguments sent to the MCP tool implementation. */
   args: Record<string, unknown>;
   /** High-level conversation context that accompanied the request. */
   context: string[];
-  /** Raw payload returned by the server, if any. */
-  response?: unknown;
+  /** Raw payload returned by the tool implementation, if any. */
+  result?: unknown;
   /** Human-readable error message when an invocation fails. */
   error?: string;
 }
 
 /**
- * Ensure the workspace has a `.mcp-cache` directory and return its path.
+ * Ensure the workspace has a `.mybusinessMCP` directory and return its path.
  *
  * The directory is created in the current workspace when available, otherwise
  * the user's home directory is used as a fallback. This keeps diagnostic logs
@@ -64,13 +66,13 @@ export interface ToolLogEntry {
 export async function ensureCacheDirectory(): Promise<string> {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
   const basePath = workspaceRoot ?? os.homedir();
-  const cacheDir = path.join(basePath, ".mcp-cache");
+  const cacheDir = path.join(basePath, ".mybusinessMCP");
   await fs.mkdir(cacheDir, { recursive: true });
   return cacheDir;
 }
 
 /**
- * Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
+ * Append an invocation log entry to `.mybusinessMCP/invocations.jsonl`.
  *
  * @param {string} cacheDir Directory returned by {@link ensureCacheDirectory}.
  * @param {ToolLogEntry} entry Log entry to persist.
@@ -81,6 +83,72 @@ export async function logInvocation(cacheDir: string, entry: ToolLogEntry): Prom
   const target = path.join(cacheDir, "invocations.jsonl");
   const serialised = `${JSON.stringify(entry)}\n`;
   await fs.appendFile(target, serialised, "utf8");
+}
+
+/**
+ * Remove cache artefacts older than the configured retention window.
+ *
+ * @param {string} cacheDir Directory returned by {@link ensureCacheDirectory}.
+ * @param {number} retentionDays Maximum number of days to retain cache entries.
+ * @returns {Promise<void>} Resolves when pruning completes.
+ */
+export async function pruneCache(cacheDir: string, retentionDays: number): Promise<void> {
+  if (!Number.isFinite(retentionDays) || retentionDays <= 0) {
+    return;
+  }
+  const cutoff = Date.now() - retentionDays * MS_PER_DAY;
+
+  const sharedDir = path.join(cacheDir, SHARED_CACHE_DIR);
+  try {
+    const files = await fs.readdir(sharedDir);
+    await Promise.all(
+      files.map(async (file) => {
+        if (!file.endsWith(".json")) {
+          return;
+        }
+        try {
+          const raw = await fs.readFile(path.join(sharedDir, file), "utf8");
+          const entry = JSON.parse(raw) as SharedCacheEntry;
+          const timestamp = new Date(entry.timestamp).getTime();
+          if (Number.isFinite(timestamp) && timestamp < cutoff) {
+            await fs.unlink(path.join(sharedDir, file));
+          }
+        } catch (error) {
+          if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+            return;
+          }
+          throw error;
+        }
+      })
+    );
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  const logPath = path.join(cacheDir, "invocations.jsonl");
+  try {
+    const raw = await fs.readFile(logPath, "utf8");
+    const lines = raw.split("\n").filter((line) => line.trim().length > 0);
+    const retained = lines.filter((line) => {
+      try {
+        const entry = JSON.parse(line) as ToolLogEntry;
+        const timestamp = new Date(entry.timestamp).getTime();
+        return Number.isFinite(timestamp) ? timestamp >= cutoff : true;
+      } catch {
+        return true;
+      }
+    });
+    if (retained.length !== lines.length) {
+      const serialised = retained.map((line) => line.trim()).join("\n");
+      await fs.writeFile(logPath, serialised ? `${serialised}\n` : "", "utf8");
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+  }
 }
 
 /**

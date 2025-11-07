@@ -1,5 +1,5 @@
 import { activate } from "../src/extension";
-import * as mcpSync from "../src/extension/mcpSync";
+import * as localRegistry from "../src/mcp/localToolRegistry";
 import * as mcpCache from "../src/extension/mcpCache";
 import * as schemaPrompt from "../src/extension/schemaPrompt";
 
@@ -30,7 +30,14 @@ jest.mock("vscode", () => {
 
   return {
     workspace: {
-      getConfiguration: () => ({ get: () => "https://example.com" })
+      getConfiguration: () => ({
+        get: (key: string) => {
+          if (key === "cacheRetention") {
+            return 30;
+          }
+          return undefined;
+        }
+      })
     },
     chat: {
       createChatParticipantExtensionApi: () => ({
@@ -74,16 +81,16 @@ const showQuickPick = vscodeMock.__showQuickPick as jest.Mock;
 const showInformationMessage = vscodeMock.__showInformationMessage as jest.Mock;
 const showErrorMessage = vscodeMock.__showErrorMessage as jest.Mock;
 
-jest.mock("../src/extension/mcpSync");
+jest.mock("../src/mcp/localToolRegistry");
 jest.mock("../src/extension/mcpCache");
 jest.mock("../src/extension/schemaPrompt");
 
 describe("activate", () => {
   beforeEach(() => {
-    (mcpSync.fetchTools as jest.Mock).mockResolvedValue([
+    (localRegistry.listLocalTools as jest.Mock).mockResolvedValue([
       { name: "testTool", title: "Test", description: "desc" }
     ]);
-    (mcpCache.ensureCacheDirectory as jest.Mock).mockResolvedValue("/tmp/.mcp-cache");
+    (mcpCache.ensureCacheDirectory as jest.Mock).mockResolvedValue("/tmp/.mybusinessMCP");
     (schemaPrompt.promptForArgs as jest.Mock).mockResolvedValue({ param: "value" });
     registerChatCommand.mockClear();
     registerChatMention.mockClear();
@@ -92,20 +99,15 @@ describe("activate", () => {
     showErrorMessage.mockClear();
     showQuickPick.mockClear();
     (mcpCache.logInvocation as jest.Mock).mockResolvedValue(undefined);
-    global.fetch = jest.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({ jsonrpc: "2.0", id: 1, result: { content: "ok" } })
-    }) as unknown as typeof fetch;
+    (mcpCache.pruneCache as jest.Mock).mockResolvedValue(undefined);
   });
 
   it("registers slash commands and mentions for each tool", async () => {
     await activate({ subscriptions: [] } as any);
-    expect(mcpSync.fetchTools).toHaveBeenCalledWith("https://example.com", "https://example.com");
+    expect(localRegistry.listLocalTools).toHaveBeenCalled();
     expect(registerChatCommand).toHaveBeenCalled();
     expect(registerChatMention).toHaveBeenCalled();
     expect(registerCommand).toHaveBeenCalled();
-    expect(showInformationMessage).toHaveBeenCalledWith(
-      "Loaded 1 MCP tools from https://example.com."
-    );
+    expect(showInformationMessage).toHaveBeenCalledWith("Loaded 1 local MCP tools.");
   });
 });

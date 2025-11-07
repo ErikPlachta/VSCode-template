@@ -27,14 +27,10 @@
     "configuration": {
       "title": "My Business MCP Settings",
       "properties": {
-        "mybusinessMCP.serverUrl": {
-          "type": "string",
-          "default": "https://your-domain.com/",
-          "description": "Base URL of the MCP server."
-        },
-        "mybusinessMCP.token": {
-          "type": "string",
-          "description": "Bearer token for MCP authentication."
+        "mybusinessMCP.cacheRetention": {
+          "type": "number",
+          "default": 30,
+          "description": "Number of days to retain entries inside the .mybusinessMCP cache directory."
         }
       }
     }
@@ -47,13 +43,11 @@
     "lint:json": "npm run compile -- --pretty false && node ./out/tools/validateJson.js",
     "lint:docs": "npm run compile -- --pretty false && node ./out/tools/validateMarkdown.js",
     "health:report": "npm run compile -- --pretty false && node ./out/agent/runHealthCheck.js",
-    "package": "npx vsce package",
-    "server": "npm run compile -- --pretty false && node ./out/server/index.js"
+    "package": "npx vsce package"
   },
   "dependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "axios": "^1.7.7",
     "fast-glob": "^3.3.2",
     "gray-matter": "^4.0.3"
   },
