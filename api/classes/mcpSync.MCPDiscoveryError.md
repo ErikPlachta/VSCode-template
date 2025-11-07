@@ -60,7 +60,7 @@ Error.constructor
 
 #### Defined in
 
-[src/extension/mcpSync.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpSync.ts#L24)
+[src/extension/mcpSync.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpSync.ts#L24)
 
 ## Properties
 
@@ -72,7 +72,7 @@ Optional root cause supplied by axios or the MCP server.
 
 #### Defined in
 
-[src/extension/mcpSync.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpSync.ts#L24)
+[src/extension/mcpSync.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpSync.ts#L24)
 
 ___
 

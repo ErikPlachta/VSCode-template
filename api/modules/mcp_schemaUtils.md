@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[src/mcp/schemaUtils.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/schemaUtils.ts#L23)
+[src/mcp/schemaUtils.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/schemaUtils.ts#L23)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[src/mcp/schemaUtils.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/schemaUtils.ts#L19)
+[src/mcp/schemaUtils.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/schemaUtils.ts#L19)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[src/mcp/schemaUtils.ts:57](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/schemaUtils.ts#L57)
+[src/mcp/schemaUtils.ts:57](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/schemaUtils.ts#L57)
 
 ___
 
@@ -94,4 +94,4 @@ ___
 
 #### Defined in
 
-[src/mcp/schemaUtils.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/schemaUtils.ts#L37)
+[src/mcp/schemaUtils.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/schemaUtils.ts#L37)

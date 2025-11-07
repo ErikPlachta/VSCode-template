@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[src/mcp/telemetry.ts:2](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L2)
+[src/mcp/telemetry.ts:2](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L2)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[src/mcp/telemetry.ts:7](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L7)
+[src/mcp/telemetry.ts:7](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L7)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[src/mcp/telemetry.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L9)
+[src/mcp/telemetry.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L9)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[src/mcp/telemetry.ts:6](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L6)
+[src/mcp/telemetry.ts:6](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L6)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[src/mcp/telemetry.ts:8](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L8)
+[src/mcp/telemetry.ts:8](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L8)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[src/mcp/telemetry.ts:3](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L3)
+[src/mcp/telemetry.ts:3](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L3)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[src/mcp/telemetry.ts:5](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L5)
+[src/mcp/telemetry.ts:5](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L5)
 
 ___
 
@@ -102,4 +102,4 @@ ___
 
 #### Defined in
 
-[src/mcp/telemetry.ts:4](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/telemetry.ts#L4)
+[src/mcp/telemetry.ts:4](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/telemetry.ts#L4)

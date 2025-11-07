@@ -22,7 +22,7 @@ Connections resolved for a specific record.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:205](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L205)
+[src/agents/relevantDataManagerAgent.ts:205](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L205)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:207](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L207)
+[src/agents/relevantDataManagerAgent.ts:207](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L207)
 
 ___
 
@@ -42,4 +42,4 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:206](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L206)
+[src/agents/relevantDataManagerAgent.ts:206](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L206)

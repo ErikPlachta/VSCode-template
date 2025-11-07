@@ -27,7 +27,7 @@ Rich description detailing the tool purpose.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L39)
+[src/shared/mcpTypes.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L39)
 
 ___
 
@@ -39,7 +39,7 @@ JSON schema describing the tool arguments.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L45)
+[src/shared/mcpTypes.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L45)
 
 ___
 
@@ -51,7 +51,7 @@ Machine-readable tool identifier.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L35)
+[src/shared/mcpTypes.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L35)
 
 ___
 
@@ -63,7 +63,7 @@ Optional extended summary for reference content.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L41)
+[src/shared/mcpTypes.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L41)
 
 ___
 
@@ -75,7 +75,7 @@ Optional category or tags provided by the MCP server.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L43)
+[src/shared/mcpTypes.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L43)
 
 ___
 
@@ -87,4 +87,4 @@ Title displayed to VS Code users.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L37)
+[src/shared/mcpTypes.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L37)

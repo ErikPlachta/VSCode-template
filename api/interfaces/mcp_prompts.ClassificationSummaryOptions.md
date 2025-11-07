@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[src/mcp/prompts/index.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/prompts/index.ts#L72)
+[src/mcp/prompts/index.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/prompts/index.ts#L72)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[src/mcp/prompts/index.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/prompts/index.ts#L73)
+[src/mcp/prompts/index.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/prompts/index.ts#L73)

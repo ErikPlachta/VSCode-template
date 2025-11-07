@@ -31,7 +31,7 @@ Agent-specific routing guidance.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:173](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L173)
+[src/agents/relevantDataManagerAgent.ts:173](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L173)
 
 ___
 
@@ -43,7 +43,7 @@ Situations where orchestration should escalate for clarification.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:171](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L171)
+[src/agents/relevantDataManagerAgent.ts:171](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L171)
 
 ___
 
@@ -55,7 +55,7 @@ Triggers that indicate the category is relevant to the request.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:169](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L169)
+[src/agents/relevantDataManagerAgent.ts:169](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L169)
 
 ___
 
@@ -67,4 +67,4 @@ High-level framing of how orchestration should leverage the category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:167](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L167)
+[src/agents/relevantDataManagerAgent.ts:167](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L167)

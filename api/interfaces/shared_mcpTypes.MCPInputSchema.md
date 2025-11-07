@@ -23,7 +23,7 @@ Map of argument names to property descriptors.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L27)
+[src/shared/mcpTypes.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L27)
 
 ___
 
@@ -35,4 +35,4 @@ List of keys that must be present.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L29)
+[src/shared/mcpTypes.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L29)

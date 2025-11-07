@@ -58,7 +58,7 @@ const agent = new RepositoryHealthAgent(process.cwd(), config);
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L160)
+[src/agent/repositoryHealthAgent.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L160)
 
 ## Methods
 
@@ -86,7 +86,7 @@ const report = await agent.runAllChecks();
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:218](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L218)
+[src/agent/repositoryHealthAgent.ts:218](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L218)
 
 ___
 
@@ -114,7 +114,7 @@ const lintResult = await agent.runTypescriptLint();
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:245](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L245)
+[src/agent/repositoryHealthAgent.ts:245](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L245)
 
 ___
 
@@ -142,7 +142,7 @@ const jsonResult = await agent.validateJsonSchemas();
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:279](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L279)
+[src/agent/repositoryHealthAgent.ts:279](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L279)
 
 ___
 
@@ -170,7 +170,7 @@ const markdownResult = await agent.validateMarkdownDocuments();
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:323](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L323)
+[src/agent/repositoryHealthAgent.ts:323](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L323)
 
 ___
 
@@ -205,7 +205,7 @@ await agent.writeReport(report);
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:377](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L377)
+[src/agent/repositoryHealthAgent.ts:377](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L377)
 
 ___
 
@@ -239,7 +239,7 @@ const agent = await RepositoryHealthAgent.createFromDisk();
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:202](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L202)
+[src/agent/repositoryHealthAgent.ts:202](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L202)
 
 ___
 
@@ -273,4 +273,4 @@ const config = await RepositoryHealthAgent.loadConfig('agent.config.json');
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:184](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L184)
+[src/agent/repositoryHealthAgent.ts:184](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L184)

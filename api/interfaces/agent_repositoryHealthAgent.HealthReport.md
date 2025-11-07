@@ -24,7 +24,7 @@ Individual check results.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:114](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L114)
+[src/agent/repositoryHealthAgent.ts:114](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L114)
 
 ___
 
@@ -36,7 +36,7 @@ ISO timestamp representing when the agent executed.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L106)
+[src/agent/repositoryHealthAgent.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L106)
 
 ___
 
@@ -48,4 +48,4 @@ Overall pass/fail status.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:110](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L110)
+[src/agent/repositoryHealthAgent.ts:110](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L110)

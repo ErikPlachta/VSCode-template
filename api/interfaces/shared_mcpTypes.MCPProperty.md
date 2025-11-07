@@ -28,7 +28,7 @@ Suggested default value supplied by the backend.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L17)
+[src/shared/mcpTypes.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L17)
 
 ___
 
@@ -40,7 +40,7 @@ Human readable description for prompts and docs.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L13)
+[src/shared/mcpTypes.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L13)
 
 ___
 
@@ -52,7 +52,7 @@ Static enumeration, if provided by the schema.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L15)
+[src/shared/mcpTypes.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L15)
 
 ___
 
@@ -64,7 +64,7 @@ Nested item type for array arguments.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L19)
+[src/shared/mcpTypes.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L19)
 
 ___
 
@@ -76,7 +76,7 @@ Argument identifier used when invoking the tool.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L9)
+[src/shared/mcpTypes.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L9)
 
 ___
 
@@ -88,7 +88,7 @@ Whether the parameter is required.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L21)
+[src/shared/mcpTypes.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L21)
 
 ___
 
@@ -100,4 +100,4 @@ Primitive type such as `string`, `number`, `boolean`, or `array`.
 
 #### Defined in
 
-[src/shared/mcpTypes.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/shared/mcpTypes.ts#L11)
+[src/shared/mcpTypes.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/shared/mcpTypes.ts#L11)

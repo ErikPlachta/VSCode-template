@@ -46,4 +46,4 @@ if (args) {
 
 #### Defined in
 
-[src/extension/schemaPrompt.ts:77](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/schemaPrompt.ts#L77)
+[src/extension/schemaPrompt.ts:77](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/schemaPrompt.ts#L77)

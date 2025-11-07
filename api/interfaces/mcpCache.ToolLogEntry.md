@@ -27,7 +27,7 @@ Arguments sent to the MCP server.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L41)
+[src/extension/mcpCache.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L41)
 
 ___
 
@@ -39,7 +39,7 @@ High-level conversation context that accompanied the request.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L43)
+[src/extension/mcpCache.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L43)
 
 ___
 
@@ -51,7 +51,7 @@ Human-readable error message when an invocation fails.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L47)
+[src/extension/mcpCache.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L47)
 
 ___
 
@@ -63,7 +63,7 @@ Raw payload returned by the server, if any.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L45)
+[src/extension/mcpCache.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L45)
 
 ___
 
@@ -75,7 +75,7 @@ ISO timestamp when the invocation took place.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L37)
+[src/extension/mcpCache.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L37)
 
 ___
 
@@ -87,4 +87,4 @@ Tool identifier that generated the log entry.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L39)
+[src/extension/mcpCache.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L39)

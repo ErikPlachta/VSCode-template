@@ -49,7 +49,7 @@ When the delete operation fails for reasons other than missing files.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:172](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L172)
+[src/extension/mcpCache.ts:172](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L172)
 
 ___
 
@@ -81,7 +81,7 @@ const cacheDir = await ensureCacheDirectory();
 
 #### Defined in
 
-[src/extension/mcpCache.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L64)
+[src/extension/mcpCache.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L64)
 
 ___
 
@@ -115,7 +115,7 @@ When the directory cannot be read.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:141](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L141)
+[src/extension/mcpCache.ts:141](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L141)
 
 ___
 
@@ -144,7 +144,7 @@ When the log file cannot be written.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L80)
+[src/extension/mcpCache.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L80)
 
 ___
 
@@ -179,7 +179,7 @@ When the file exists but cannot be read.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L115)
+[src/extension/mcpCache.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L115)
 
 ___
 
@@ -214,4 +214,4 @@ When the entry cannot be persisted.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:95](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L95)
+[src/extension/mcpCache.ts:95](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L95)

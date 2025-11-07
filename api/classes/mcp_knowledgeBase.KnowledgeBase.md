@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[src/mcp/knowledgeBase.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/knowledgeBase.ts#L18)
+[src/mcp/knowledgeBase.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/knowledgeBase.ts#L18)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/knowledgeBase.ts#L22)
+[src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/knowledgeBase.ts#L22)
 
 ___
 
@@ -85,4 +85,4 @@ ___
 
 #### Defined in
 
-[src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/knowledgeBase.ts#L26)
+[src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/knowledgeBase.ts#L26)

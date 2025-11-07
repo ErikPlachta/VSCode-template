@@ -27,7 +27,7 @@ Consolidated index entry persisted to the shared cache.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:231](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L231)
+[src/agents/relevantDataManagerAgent.ts:231](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L231)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:229](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L229)
+[src/agents/relevantDataManagerAgent.ts:229](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L229)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:230](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L230)
+[src/agents/relevantDataManagerAgent.ts:230](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L230)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:232](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L232)
+[src/agents/relevantDataManagerAgent.ts:232](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L232)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:233](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L233)
+[src/agents/relevantDataManagerAgent.ts:233](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L233)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:234](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L234)
+[src/agents/relevantDataManagerAgent.ts:234](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L234)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:241](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L241)
+[src/agents/relevantDataManagerAgent.ts:241](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L241)
 
 ___
 
@@ -97,4 +97,4 @@ ___
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:240](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L240)
+[src/agents/relevantDataManagerAgent.ts:240](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L240)

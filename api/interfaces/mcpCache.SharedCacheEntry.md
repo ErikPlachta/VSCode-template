@@ -33,7 +33,7 @@ Uniquely identifies the record on disk.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L21)
+[src/extension/mcpCache.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L21)
 
 ___
 
@@ -45,7 +45,7 @@ Optional metadata hints for downstream orchestration.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L29)
+[src/extension/mcpCache.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L29)
 
 ___
 
@@ -57,7 +57,7 @@ Timestamp recorded when the value was persisted.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L25)
+[src/extension/mcpCache.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L25)
 
 ___
 
@@ -69,7 +69,7 @@ Name of the tool that produced the cached payload.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L23)
+[src/extension/mcpCache.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L23)
 
 ___
 
@@ -81,4 +81,4 @@ Arbitrary payload produced by the tool.
 
 #### Defined in
 
-[src/extension/mcpCache.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/extension/mcpCache.ts#L27)
+[src/extension/mcpCache.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/extension/mcpCache.ts#L27)

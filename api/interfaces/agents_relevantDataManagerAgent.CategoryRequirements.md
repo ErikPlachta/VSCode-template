@@ -24,7 +24,7 @@ Free-form notes surfaced to orchestration layers.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:67](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L67)
+[src/agents/relevantDataManagerAgent.ts:67](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L67)
 
 ___
 
@@ -36,7 +36,7 @@ Fields that every record must provide.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L63)
+[src/agents/relevantDataManagerAgent.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L63)
 
 ___
 
@@ -48,4 +48,4 @@ Record properties that should align with relationship definitions.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:65](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L65)
+[src/agents/relevantDataManagerAgent.ts:65](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L65)

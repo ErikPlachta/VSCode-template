@@ -27,7 +27,7 @@ Downstream agents or services that this agent commonly depends on.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentManifest.ts#L24)
+[src/mcp/agentManifest.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentManifest.ts#L24)
 
 ___
 
@@ -39,7 +39,7 @@ Summary of what the agent is responsible for.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentManifest.ts#L18)
+[src/mcp/agentManifest.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentManifest.ts#L18)
 
 ___
 
@@ -51,7 +51,7 @@ Situations where the agent must escalate to another party.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentManifest.ts#L22)
+[src/mcp/agentManifest.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentManifest.ts#L22)
 
 ___
 
@@ -63,7 +63,7 @@ Stable identifier that matches orchestrator routing names.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:14](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentManifest.ts#L14)
+[src/mcp/agentManifest.ts:14](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentManifest.ts#L14)
 
 ___
 
@@ -75,7 +75,7 @@ Signals that strongly suggest this agent should be invoked.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:20](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentManifest.ts#L20)
+[src/mcp/agentManifest.ts:20](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentManifest.ts#L20)
 
 ___
 
@@ -87,4 +87,4 @@ Human readable agent name.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:16](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentManifest.ts#L16)
+[src/mcp/agentManifest.ts:16](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentManifest.ts#L16)

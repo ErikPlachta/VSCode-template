@@ -58,7 +58,7 @@ Unique identifier for a category in the repository.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L153)
+[src/agents/relevantDataManagerAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L153)
 
 ___
 
@@ -70,7 +70,7 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L150)
+[src/agents/relevantDataManagerAgent.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L150)
 
 ___
 
@@ -82,7 +82,7 @@ Supported primitive names within a type definition schema.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:78](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L78)
+[src/agents/relevantDataManagerAgent.ts:78](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L78)
 
 ___
 
@@ -94,7 +94,7 @@ JSON description for a structured type that can be materialised by an MCP server
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L81)
+[src/agents/relevantDataManagerAgent.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L81)
 
 ## Functions
 
@@ -108,4 +108,4 @@ JSON description for a structured type that can be materialised by an MCP server
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1212](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agents/relevantDataManagerAgent.ts#L1212)
+[src/agents/relevantDataManagerAgent.ts:1212](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agents/relevantDataManagerAgent.ts#L1212)

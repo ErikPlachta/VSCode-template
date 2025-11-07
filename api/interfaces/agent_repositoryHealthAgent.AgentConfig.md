@@ -25,7 +25,7 @@ Schema validations that must pass for JSON artifacts.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L35)
+[src/agent/repositoryHealthAgent.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L35)
 
 ___
 
@@ -46,7 +46,7 @@ Markdown validation requirements.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L52)
+[src/agent/repositoryHealthAgent.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L52)
 
 ___
 
@@ -64,7 +64,7 @@ Report configuration describing where generated documentation is written.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L73)
+[src/agent/repositoryHealthAgent.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L73)
 
 ___
 
@@ -82,4 +82,4 @@ TypeScript lint configuration.
 
 #### Defined in
 
-[src/agent/repositoryHealthAgent.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/agent/repositoryHealthAgent.ts#L26)
+[src/agent/repositoryHealthAgent.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/agent/repositoryHealthAgent.ts#L26)

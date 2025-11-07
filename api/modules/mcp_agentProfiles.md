@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:1](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentProfiles.ts#L1)
+[src/mcp/agentProfiles.ts:1](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentProfiles.ts#L1)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentProfiles.ts#L47)
+[src/mcp/agentProfiles.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentProfiles.ts#L47)
 
 ## Variables
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentProfiles.ts#L39)
+[src/mcp/agentProfiles.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentProfiles.ts#L39)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:31](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentProfiles.ts#L31)
+[src/mcp/agentProfiles.ts:31](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentProfiles.ts#L31)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentProfiles.ts#L23)
+[src/mcp/agentProfiles.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentProfiles.ts#L23)
 
 ___
 
@@ -78,4 +78,4 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/mcp/agentProfiles.ts#L15)
+[src/mcp/agentProfiles.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/mcp/agentProfiles.ts#L15)

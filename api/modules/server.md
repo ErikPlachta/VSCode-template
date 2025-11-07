@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[src/server/index.ts:107](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/server/index.ts#L107)
+[src/server/index.ts:107](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/server/index.ts#L107)
 
 ## Functions
 
@@ -40,4 +40,4 @@
 
 #### Defined in
 
-[src/server/index.ts:238](https://github.com/ErikPlachta/VSCode-template/blob/d11a73dc8620b42f0d3b79c19af0bc50268559b8/src/server/index.ts#L238)
+[src/server/index.ts:238](https://github.com/ErikPlachta/VSCode-template/blob/c2a17be4dbd155b4047974e80e13de2e00582ad8/src/server/index.ts#L238)
