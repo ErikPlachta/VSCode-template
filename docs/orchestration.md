@@ -64,3 +64,90 @@ The mock orchestration environment now ships with three focused agents under `sr
 * **DataAgent (`src/agents/dataAgent.ts`)** — stitches the categories together. It produces topic overviews, narrative connection maps, exploration plans for complex questions, and cross-topic link lookups. The agent relies on the manager for metadata and the database agent for structured retrieval, giving orchestration flows a single entry point for reasoning about the business graph.
 
 The shared dataset mirrors a realistic documentation repository with category-specific schemas, Python type definitions, curated examples, `config.json` metadata, and query definitions for remote services. Unit tests (`tests/relevantDataManagerAgent.test.ts`, `tests/databaseAgent.test.ts`, `tests/dataAgent.test.ts`) exercise the key behaviours so contributors can extend or refactor with confidence.
+
+## 9. Relevant data utilisation playbook
+
+The mock dataset is organised into five top-level categories under `data/`: `applications`, `companyPolicies`, `companyResources`, `departments`, and `people`. Each category follows a consistent structure—`category.json` for high-level metadata, `schemas/` and `types/` for validation guidance, `records.json` for canonical entries, `relationships.json` for cross-links, `examples/` with narrative walkthroughs, and `queries/` for remote lookups. The `config.orchestration` block inside each `category.json` now codifies routing cues, escalation triggers, and agent-specific prompt starters so the orchestrator can respond consistently without hard-coding heuristics. The following guidance helps each agent (and the orchestrator) ingest the dataset efficiently.
+
+### 9.1 RelevantDataManagerAgent
+
+**Primary goals**
+
+* Maintain an index of all category metadata and schemas so downstream agents understand what information exists and how it is structured.
+* Validate new or incoming records by checking against the schemas (`schemas/*.json`) and Python type hints (`types/*.py`).
+* Surface relationship maps (e.g., which departments own specific applications) to other agents.
+
+**How to use the dataset**
+
+1. Start with `category.json` to load descriptive tags, ownership, and update cadences.
+2. Cache parsed schemas and expose helper methods to answer questions like "which fields are required for a policy record?".
+3. Use `relationships.json` to build cross-category graphs that the DataAgent can traverse.
+4. Reference the `examples/` folder when providing usage snippets or onboarding guidance to human operators.
+
+**Prompt starters for the orchestrator**
+
+* "Relevant data manager, list the required fields for a new entry in `<category>` by reading its schema."
+* "Summarise the known relationships between departments and applications using your cached metadata."
+* "Provide the latest metadata snapshot for `<category>` so other agents can plan retrieval." 
+
+### 9.2 DatabaseAgent
+
+**Primary goals**
+
+* Execute structured lookups across `records.json` files to answer precise business questions.
+* Reuse saved filters in `queries/` and synchronise results with the shared cache for other agents.
+* Ensure referential integrity by cross-checking `relationships.json` when joining multiple categories.
+
+**How to use the dataset**
+
+1. Load `records.json` into queryable collections (e.g., arrays with typed accessors) for each category.
+2. Use the query blueprints in `queries/*.json` as starting points for common filters (skills, compliance, ownership, etc.).
+3. When responding with aggregated information, cite the originating records and include any relevant relationship context.
+4. Update `.mcp-cache/shared` with frequently requested slices (for example, "all resources used by the Marketing department") so the DataAgent can retrieve them quickly.
+
+**Prompt starters for the orchestrator**
+
+* "Database agent, filter the `people` records for staff with `<skill>` and return their departments and contact info."
+* "Run the saved query `<queryName>` from `<category>/queries` and summarise the results."
+* "Cross-reference policies and applications to list compliance owners for `<regulation>`."
+
+### 9.3 DataAgent
+
+**Primary goals**
+
+* Deliver narrative insights and cross-topic syntheses that draw on metadata, structured records, and saved cache entries.
+* Suggest investigative paths for multi-step questions by delegating to the other agents when necessary.
+* Provide human-readable explanations that reference the underlying datasets.
+
+**How to use the dataset**
+
+1. Gather context from the RelevantDataManagerAgent about available schemas and relationships before answering broad questions.
+2. Request filtered datasets from the DatabaseAgent instead of reimplementing raw queries.
+3. Combine structured results with `examples/` narratives to produce contextual summaries, onboarding guides, or scenario plans.
+4. When knowledge gaps appear, highlight which category or schema lacks the needed information so humans can prioritise updates.
+
+**Prompt starters for the orchestrator**
+
+* "Data agent, outline an onboarding brief for `<role>` using people, department, and policy data."
+* "Synthesize how `<department>` uses `<application>` and identify related resources or policies."
+* "Propose a research plan to evaluate `<business question>` and note which agents should be invoked at each step."
+
+### 9.4 Orchestrator decision flow
+
+When deciding which agent to invoke, follow this triage path:
+
+1. **Need metadata, schemas, or relationship maps?** Call the **RelevantDataManagerAgent**.
+2. **Need precise record-level answers or saved queries?** Call the **DatabaseAgent**.
+3. **Need narrative synthesis, planning, or multi-source insights?** Call the **DataAgent**.
+
+If the request spans multiple categories, begin with the RelevantDataManagerAgent to understand the available data, then delegate structured lookups to the DatabaseAgent, and finally use the DataAgent for end-user-friendly narratives.
+
+### 9.5 Escalation when uncertain
+
+If the orchestration logic cannot confidently map a user question to the above pathways (for example, ambiguous terminology or missing metadata), it must escalate by asking the LLM to confirm the intent. The orchestrator should prompt the LLM to:
+
+1. Clarify the user’s exact goal and any constraints (timeframe, format, scope).
+2. Suggest which dataset categories are likely relevant based on the clarified request.
+3. Identify whether additional human-provided data is required before proceeding.
+
+Only after receiving confirmation should the orchestrator resume the normal decision flow; otherwise, it should present the clarification request back to the user for validation.

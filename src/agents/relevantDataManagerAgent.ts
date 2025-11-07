@@ -151,6 +151,30 @@ export type CategoryRecord = Record<string, unknown> & { id: string; name?: stri
 export type CategoryId = string;
 
 /** Full configuration stored for each business category. */
+export interface AgentOrchestrationGuidance {
+  /** Core responsibility for the agent when invoked for this category. */
+  focus: string;
+  /** Signals that hint the orchestrator should route the request to this agent. */
+  signals: string[];
+  /** Prompt starters that the orchestrator can feed to the agent. */
+  promptStarters: string[];
+}
+
+export interface CategoryOrchestrationConfig {
+  /** High-level framing of how orchestration should leverage the category. */
+  summary: string;
+  /** Triggers that indicate the category is relevant to the request. */
+  signals: string[];
+  /** Situations where orchestration should escalate for clarification. */
+  escalateWhen?: string[];
+  /** Agent-specific routing guidance. */
+  agents: {
+    relevantDataManager: AgentOrchestrationGuidance;
+    databaseAgent: AgentOrchestrationGuidance;
+    dataAgent: AgentOrchestrationGuidance;
+  };
+}
+
 export interface BusinessCategory {
   id: CategoryId;
   name: string;
@@ -164,6 +188,7 @@ export interface BusinessCategory {
     folder: FolderBlueprint;
     requirements?: CategoryRequirements;
     relationships: RelationshipDescription[];
+    orchestration: CategoryOrchestrationConfig;
   };
   schemas: CategorySchema[];
   types: TypeDefinition[];
@@ -248,6 +273,24 @@ interface RawCategoryMetadata {
     updateCadence: string;
     access: string;
     requirements?: CategoryRequirements;
+    orchestration: RawOrchestrationConfig;
+  };
+}
+
+interface RawAgentOrchestrationGuidance {
+  focus?: unknown;
+  signals?: unknown;
+  promptStarters?: unknown;
+}
+
+interface RawOrchestrationConfig {
+  summary?: unknown;
+  signals?: unknown;
+  escalateWhen?: unknown;
+  agents?: {
+    relevantDataManager?: RawAgentOrchestrationGuidance;
+    databaseAgent?: RawAgentOrchestrationGuidance;
+    dataAgent?: RawAgentOrchestrationGuidance;
   };
 }
 
@@ -400,12 +443,12 @@ export class RelevantDataManagerAgent {
   private readonly relationshipsBySource: Map<CategoryId, RelationshipDefinition[]>;
   private readonly consolidatedIndex: DatasetCatalogueEntry[];
   private readonly datasetFingerprint: string;
-  private readonly ajv: Ajv;
+  private readonly ajv: ReturnType<typeof Ajv>;
 
   constructor(cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
     this.dataRoot = process.env.VSCODE_TEMPLATE_DATA_ROOT ?? DEFAULT_DATA_ROOT;
-    this.ajv = new Ajv({ allErrors: true, strict: false });
+    this.ajv = new Ajv({ allErrors: true });
     const dataset = this.loadDataset();
     this.categories = dataset.categories;
     this.lookupIndex = dataset.lookupIndex;
@@ -624,6 +667,7 @@ export class RelevantDataManagerAgent {
       throw new Error(`Category metadata at '${configPath}' is missing required fields.`);
     }
     const folder = this.buildFolderBlueprint(categoryDir, configPath);
+    const orchestration = this.normaliseOrchestrationConfig(metadata.config.orchestration, configPath);
     const schemas = this.loadSchemas(categoryDir);
     const typeDefinitions = this.loadTypeDefinitions(categoryDir);
     const examples = this.loadExamples(categoryDir);
@@ -644,7 +688,8 @@ export class RelevantDataManagerAgent {
         access: metadata.config.access,
         folder,
         requirements: metadata.config.requirements,
-        relationships: descriptions
+        relationships: descriptions,
+        orchestration
       },
       schemas,
       types: typeDefinitions,
@@ -663,6 +708,80 @@ export class RelevantDataManagerAgent {
     }
 
     return { category, relationshipDefinitions: definitions };
+  }
+
+  private normaliseOrchestrationConfig(
+    raw: RawOrchestrationConfig | undefined,
+    context: string
+  ): CategoryOrchestrationConfig {
+    if (!raw) {
+      throw new Error(`Missing orchestration guidance inside '${context}'.`);
+    }
+    const summary = this.ensureString(raw.summary, `${context} orchestration.summary`);
+    const signals = this.ensureStringArray(raw.signals, `${context} orchestration.signals`);
+    const escalateWhen =
+      raw.escalateWhen !== undefined
+        ? this.ensureStringArray(raw.escalateWhen, `${context} orchestration.escalateWhen`)
+        : undefined;
+    const agents = raw.agents;
+    if (!agents) {
+      throw new Error(`Missing orchestration.agents inside '${context}'.`);
+    }
+    return {
+      summary,
+      signals,
+      escalateWhen,
+      agents: {
+        relevantDataManager: this.normaliseAgentGuidance(agents.relevantDataManager, "relevantDataManager", context),
+        databaseAgent: this.normaliseAgentGuidance(agents.databaseAgent, "databaseAgent", context),
+        dataAgent: this.normaliseAgentGuidance(agents.dataAgent, "dataAgent", context)
+      }
+    };
+  }
+
+  private normaliseAgentGuidance(
+    raw: RawAgentOrchestrationGuidance | undefined,
+    agentKey: keyof CategoryOrchestrationConfig["agents"],
+    context: string
+  ): AgentOrchestrationGuidance {
+    if (!raw) {
+      throw new Error(`Missing orchestration.agents.${String(agentKey)} inside '${context}'.`);
+    }
+    return {
+      focus: this.ensureString(raw.focus, `${context} orchestration.agents.${String(agentKey)}.focus`),
+      signals: this.ensureStringArray(raw.signals, `${context} orchestration.agents.${String(agentKey)}.signals`),
+      promptStarters: this.ensureStringArray(
+        raw.promptStarters,
+        `${context} orchestration.agents.${String(agentKey)}.promptStarters`
+      )
+    };
+  }
+
+  private ensureString(value: unknown, context: string): string {
+    if (typeof value !== "string") {
+      throw new Error(`Expected ${context} to be a string.`);
+    }
+    const trimmed = value.trim();
+    if (!trimmed) {
+      throw new Error(`Expected ${context} to be a non-empty string.`);
+    }
+    return trimmed;
+  }
+
+  private ensureStringArray(value: unknown, context: string): string[] {
+    if (!Array.isArray(value) || value.length === 0) {
+      throw new Error(`Expected ${context} to be a non-empty string array.`);
+    }
+    return value.map((entry, index) => {
+      if (typeof entry !== "string") {
+        throw new Error(`Expected ${context}[${index}] to be a string.`);
+      }
+      const trimmed = entry.trim();
+      if (!trimmed) {
+        throw new Error(`Expected ${context}[${index}] to be a non-empty string.`);
+      }
+      return trimmed;
+    });
   }
 
   private buildFolderBlueprint(categoryDir: string, configPath: string): FolderBlueprint {
@@ -735,7 +854,7 @@ export class RelevantDataManagerAgent {
     relationshipDefinitions: RelationshipDefinition[]
   ): DataValidationReport {
     const issues: DataValidationIssue[] = [];
-    const validators: Array<{ schema: string; validate: ValidateFunction<unknown> }> = [];
+    const validators: Array<{ schema: string; validate: ValidateFunction }> = [];
     for (const schema of schemas) {
       try {
         validators.push({ schema: schema.name, validate: this.ajv.compile(schema.schema) });
@@ -1038,7 +1157,8 @@ export class RelevantDataManagerAgent {
     return errors
       .slice(0, 3)
       .map((error) => {
-        const path = error.instancePath || error.schemaPath || "";
+        const enrichedError = error as ErrorObject & { instancePath?: string };
+        const path = enrichedError.instancePath ?? enrichedError.dataPath ?? enrichedError.schemaPath ?? "";
         const message = error.message ?? "validation failed";
         return path ? `${path}: ${message}` : message;
       })
