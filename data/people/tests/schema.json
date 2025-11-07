@@ -1,5 +1,8 @@
 {
   "name": "Validate person schema",
   "description": "Ensures person.json includes required keys.",
-  "command": "pytest data/people/tests/test_schema.py"
+  "runtime": "python",
+  "entryPoint": "pytest",
+  "args": ["tests/test_schema.py"],
+  "workingDirectory": "data/people"
 }

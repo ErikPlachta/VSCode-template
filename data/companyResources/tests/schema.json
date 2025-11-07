@@ -1,5 +1,8 @@
 {
   "name": "Validate resource schema",
   "description": "Ensures relationships with policies and applications exist.",
-  "command": "pytest data/companyResources/tests/test_schema.py"
+  "runtime": "python",
+  "entryPoint": "pytest",
+  "args": ["tests/test_schema.py"],
+  "workingDirectory": "data/companyResources"
 }
