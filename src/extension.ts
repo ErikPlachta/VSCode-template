@@ -1,5 +1,7 @@
 /**
  * @fileoverview Entry point for MyBusiness MCP VS Code extension.
+ *
+ * @module extension
  */
 import * as vscode from "vscode";
 import { ensureCacheDirectory, logInvocation, ToolLogEntry } from "./mcpCache";
@@ -11,6 +13,14 @@ const HISTORY_LIMIT = 10;
 
 /**
  * JSON-RPC response returned after invoking an MCP tool.
+ *
+ * @interface MCPInvokeToolResponse
+ * @property {string} jsonrpc - JSON-RPC protocol version string.
+ * @property {number | string} id - Identifier matching the originating request.
+ * @property {{ content?: unknown; metadata?: Record<string, unknown>; }=} result -
+ * Response payload returned by the MCP tool.
+ * @property {{ code?: number; message?: string; data?: unknown; }=} error -
+ * Optional error descriptor when the invocation fails.
  */
 interface MCPInvokeToolResponse {
   jsonrpc: string;
@@ -28,6 +38,12 @@ interface MCPInvokeToolResponse {
 
 /**
  * Aggregate information about a tool invocation for UI and logging.
+ *
+ * @interface InvocationResult
+ * @property {vscode.MarkdownString} markdown - Markdown surface rendered in chat.
+ * @property {string} summary - Concise representation of the invocation outcome.
+ * @property {string=} error - Human readable message when the invocation fails.
+ * @property {MCPInvokeToolResponse=} rawResponse - Raw JSON-RPC payload from the server.
  */
 interface InvocationResult {
   markdown: vscode.MarkdownString;
@@ -38,6 +54,12 @@ interface InvocationResult {
 
 /**
  * Build a Markdown-based chat response from the tool output.
+ *
+ * @param {MCPTool} tool - Tool metadata used to decorate the response.
+ * @param {unknown} result - JSON content returned by the MCP backend.
+ * @returns {vscode.MarkdownString} Trusted Markdown ready for the chat UI.
+ * @example
+ * const markdown = buildMarkdownResponse(tool, { value: 1 });
  */
 function buildMarkdownResponse(tool: MCPTool, result: unknown): vscode.MarkdownString {
   const markdown = new vscode.MarkdownString(undefined, true);
@@ -57,6 +79,11 @@ function buildMarkdownResponse(tool: MCPTool, result: unknown): vscode.MarkdownS
 
 /**
  * Extract the human-consumable content from an MCP response payload.
+ *
+ * @param {MCPInvokeToolResponse} data - JSON-RPC payload to parse.
+ * @returns {unknown} Renderable content for downstream formatting.
+ * @example
+ * const content = extractContent(response);
  */
 function extractContent(data: MCPInvokeToolResponse): unknown {
   if (Array.isArray(data.result?.content)) {
@@ -83,6 +110,11 @@ function extractContent(data: MCPInvokeToolResponse): unknown {
 
 /**
  * Turn a result payload into a concise summary for context storage.
+ *
+ * @param {unknown} result - Result payload that should be summarised.
+ * @returns {string} String truncated to 500 characters.
+ * @example
+ * const summary = summariseResult({ foo: "bar" });
  */
 function summariseResult(result: unknown): string {
   const raw = typeof result === "string" ? result : JSON.stringify(result);
@@ -91,6 +123,13 @@ function summariseResult(result: unknown): string {
 
 /**
  * Maintain a rolling conversation history for each tool.
+ *
+ * @param {Map<string, string[]>} history - Existing tool history store.
+ * @param {MCPTool} tool - Tool whose history should be updated.
+ * @param {string} entry - New entry to append.
+ * @returns {string[]} Updated history for the specified tool.
+ * @example
+ * updateHistory(history, tool, "Result: ok");
  */
 function updateHistory(
   history: Map<string, string[]>,
@@ -108,6 +147,17 @@ function updateHistory(
 
 /**
  * Invoke the MCP backend and transform the result into a VS Code chat response.
+ *
+ * @param {MCPTool} tool - Tool definition describing the invocation target.
+ * @param {Record<string, unknown>} args - Arguments collected from the user.
+ * @param {string} serverUrl - URL of the MCP server handling the request.
+ * @param {string | undefined} token - Optional Bearer token for authentication.
+ * @param {string} cacheDir - Directory where invocation logs should be stored.
+ * @param {Map<string, string[]>} history - In-memory history per tool.
+ * @returns {Promise<InvocationResult>} Markdown response plus metadata.
+ * @throws {Error} If the server request fails or returns an error payload.
+ * @example
+ * const result = await invokeTool(tool, args, url, token, cacheDir, history);
  */
 async function invokeTool(
   tool: MCPTool,
@@ -196,6 +246,16 @@ async function invokeTool(
 /**
  * Activates the extension, registering MCP slash commands, mentions, and
  * automation hooks.
+ *
+ * @param {vscode.ExtensionContext} context - VS Code extension lifecycle context.
+ * @returns {Promise<void>} Resolves when activation has completed.
+ * @example
+ * import type { ExtensionContext } from "vscode";
+ * import { activate as activateExtension } from "./extension";
+ *
+ * export async function activate(context: ExtensionContext) {
+ *   await activateExtension(context);
+ * }
  */
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
   const cfg = vscode.workspace.getConfiguration("mybusinessMCP");
@@ -227,10 +287,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         description: tool.summary ?? tool.description,
         handler: async () => {
           const args = await promptForArgs(tool);
-          if (!Object.keys(args).length) {
-            const missing = new vscode.MarkdownString("**Error:** Missing arguments.");
-            missing.isTrusted = true;
-            return missing;
+          if (args === undefined) {
+            const cancelled = new vscode.MarkdownString("_Invocation cancelled._");
+            cancelled.isTrusted = true;
+            return cancelled;
           }
           const result = await invokeTool(
             tool,
@@ -283,7 +343,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
           return;
         }
         const args = await promptForArgs(selected.tool);
-        if (!Object.keys(args).length) {
+        if (args === undefined) {
+          vscode.window.showInformationMessage("Tool invocation cancelled.");
           return;
         }
         const result = await invokeTool(
