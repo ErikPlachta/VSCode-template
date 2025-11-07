@@ -1,6 +1,8 @@
 /**
  * @fileoverview Fetches and normalises Model Context Protocol (MCP) tool
  * definitions.
+ *
+ * @module mcpSync
  */
 
 import axios, { AxiosError } from "axios";
@@ -65,8 +67,17 @@ export interface MCPListToolsResponse {
 
 /**
  * Error wrapper that provides additional context for MCP failures.
+ *
+ * @example
+ * ```ts
+ * throw new MCPDiscoveryError("Unable to list tools");
+ * ```
  */
 export class MCPDiscoveryError extends Error {
+  /**
+   * @param {string} message Human-readable error message.
+   * @param {unknown} [cause] Optional root cause supplied by axios or the MCP server.
+   */
   constructor(message: string, public readonly cause?: unknown) {
     super(message);
     this.name = "MCPDiscoveryError";
@@ -76,6 +87,9 @@ export class MCPDiscoveryError extends Error {
 /**
  * Normalise the tool properties by merging schema metadata so prompts can
  * surface richer descriptions.
+ *
+ * @param {MCPTool} tool Tool metadata as returned by the MCP server.
+ * @returns {MCPTool} Tool with enriched `input_schema` metadata.
  */
 function normaliseTool(tool: MCPTool): MCPTool {
   if (!tool.input_schema?.properties) {
@@ -102,11 +116,15 @@ function normaliseTool(tool: MCPTool): MCPTool {
 /**
  * Fetch all available MCP tools from the configured server.
  *
- * @param serverUrl Base URL of the MCP server.
- * @param token Optional Bearer token.
- * @returns Array of available MCP tools with enriched metadata.
- * @throws {MCPDiscoveryError} when the server cannot be reached or returns an
- * invalid payload.
+ * @param {string} serverUrl Base URL of the MCP server.
+ * @param {string} [token] Optional Bearer token.
+ * @returns {Promise<MCPTool[]>} Array of available MCP tools with enriched metadata.
+ * @throws {MCPDiscoveryError} When the server cannot be reached or returns an invalid payload.
+ * @example
+ * ```ts
+ * const tools = await fetchTools("https://mcp.example.com", "token");
+ * console.log(tools.length);
+ * ```
  */
 export async function fetchTools(
   serverUrl: string,

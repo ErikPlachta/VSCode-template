@@ -1,5 +1,7 @@
 /**
  * @fileoverview Utilities for managing the local `.mcp-cache` directory.
+ *
+ * @module mcpCache
  */
 
 import { promises as fs } from "fs";
@@ -51,6 +53,13 @@ export interface ToolLogEntry {
  * The directory is created in the current workspace when available, otherwise
  * the user's home directory is used as a fallback. This keeps diagnostic logs
  * local to the client, reducing storage pressure on the MCP backend.
+ *
+ * @returns {Promise<string>} Absolute path to the cache directory.
+ * @throws {NodeJS.ErrnoException} When the directory cannot be created.
+ * @example
+ * ```ts
+ * const cacheDir = await ensureCacheDirectory();
+ * ```
  */
 export async function ensureCacheDirectory(): Promise<string> {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
@@ -62,6 +71,11 @@ export async function ensureCacheDirectory(): Promise<string> {
 
 /**
  * Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
+ *
+ * @param {string} cacheDir Directory returned by {@link ensureCacheDirectory}.
+ * @param {ToolLogEntry} entry Log entry to persist.
+ * @returns {Promise<void>} Resolves when the entry has been appended.
+ * @throws {NodeJS.ErrnoException} When the log file cannot be written.
  */
 export async function logInvocation(cacheDir: string, entry: ToolLogEntry): Promise<void> {
   const target = path.join(cacheDir, "invocations.jsonl");
@@ -71,6 +85,12 @@ export async function logInvocation(cacheDir: string, entry: ToolLogEntry): Prom
 
 /**
  * Persist a shared cache entry that can be re-used by other MCP tools.
+ *
+ * @template T
+ * @param {string} cacheDir Directory returned by {@link ensureCacheDirectory}.
+ * @param {SharedCacheEntry<T>} entry Payload to store on disk.
+ * @returns {Promise<void>} Resolves when the entry has been written.
+ * @throws {NodeJS.ErrnoException} When the entry cannot be persisted.
  */
 export async function storeSharedCacheEntry<T>(
   cacheDir: string,
@@ -85,6 +105,12 @@ export async function storeSharedCacheEntry<T>(
 
 /**
  * Retrieve a shared cache entry by key.
+ *
+ * @template T
+ * @param {string} cacheDir Directory returned by {@link ensureCacheDirectory}.
+ * @param {string} key Unique cache entry key.
+ * @returns {Promise<SharedCacheEntry<T> | undefined>} Stored entry or `undefined` if not found.
+ * @throws {NodeJS.ErrnoException} When the file exists but cannot be read.
  */
 export async function readSharedCacheEntry<T = unknown>(
   cacheDir: string,
@@ -106,6 +132,11 @@ export async function readSharedCacheEntry<T = unknown>(
 
 /**
  * Enumerate all cached artefacts currently stored on disk.
+ *
+ * @template T
+ * @param {string} cacheDir Directory returned by {@link ensureCacheDirectory}.
+ * @returns {Promise<SharedCacheEntry<T>[]>} Array of cached entries.
+ * @throws {NodeJS.ErrnoException} When the directory cannot be read.
  */
 export async function listSharedCacheEntries<T = unknown>(
   cacheDir: string
@@ -132,6 +163,11 @@ export async function listSharedCacheEntries<T = unknown>(
 
 /**
  * Remove a shared cache entry when it is no longer relevant.
+ *
+ * @param {string} cacheDir Directory returned by {@link ensureCacheDirectory}.
+ * @param {string} key Cache entry key to delete.
+ * @returns {Promise<void>} Resolves when the entry has been removed or did not exist.
+ * @throws {NodeJS.ErrnoException} When the delete operation fails for reasons other than missing files.
  */
 export async function deleteSharedCacheEntry(cacheDir: string, key: string): Promise<void> {
   const sharedDir = path.join(cacheDir, SHARED_CACHE_DIR);
@@ -147,7 +183,12 @@ export async function deleteSharedCacheEntry(cacheDir: string, key: string): Pro
   }
 }
 
-/** Normalise a cache key so it is safe for use as a file name. */
+/**
+ * Normalise a cache key so it is safe for use as a file name.
+ *
+ * @param {string} key Arbitrary cache entry key.
+ * @returns {string} Sanitised key that can be used as a filename.
+ */
 function sanitiseKey(key: string): string {
   return key.replace(/[^a-z0-9-_]+/gi, "_");
 }
