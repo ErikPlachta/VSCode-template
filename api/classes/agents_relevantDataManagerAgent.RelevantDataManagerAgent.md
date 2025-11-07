@@ -16,8 +16,10 @@ Agent that manages the relevant-data workspace representation.
 
 - [getCategory](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getcategory)
 - [getCategoryConfig](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getcategoryconfig)
+- [getCategoryRecordHash](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getcategoryrecordhash)
 - [getCategorySchemas](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getcategoryschemas)
 - [getDatasetCatalogue](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getdatasetcatalogue)
+- [getDatasetFingerprint](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getdatasetfingerprint)
 - [getEntityConnections](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getentityconnections)
 - [getExamples](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getexamples)
 - [getFolderBlueprint](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getfolderblueprint)
@@ -48,7 +50,7 @@ Agent that manages the relevant-data workspace representation.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:405](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L405)
+[src/agents/relevantDataManagerAgent.ts:448](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L448)
 
 ## Methods
 
@@ -70,7 +72,7 @@ Resolve a topic or identifier to the underlying category definition.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:429](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L429)
+[src/agents/relevantDataManagerAgent.ts:472](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L472)
 
 ___
 
@@ -94,6 +96,7 @@ Access category configuration metadata such as relationships.
 | :------ | :------ |
 | `access` | `string` |
 | `folder` | [`FolderBlueprint`](../interfaces/agents_relevantDataManagerAgent.FolderBlueprint.md) |
+| `orchestration` | [`CategoryOrchestrationConfig`](../interfaces/agents_relevantDataManagerAgent.CategoryOrchestrationConfig.md) |
 | `primaryKeys` | `string`[] |
 | `purpose` | `string` |
 | `relationships` | [`RelationshipDescription`](../interfaces/agents_relevantDataManagerAgent.RelationshipDescription.md)[] |
@@ -102,7 +105,31 @@ Access category configuration metadata such as relationships.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:444](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L444)
+[src/agents/relevantDataManagerAgent.ts:487](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L487)
+
+___
+
+### getCategoryRecordHash
+
+▸ **getCategoryRecordHash**(`topicOrId`): `string`
+
+Compute a deterministic hash of the records for change detection.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `topicOrId` | `string` | Category identifier or alias whose records should be hashed. |
+
+#### Returns
+
+`string`
+
+SHA-1 hash representing the current record contents.
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:527](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L527)
 
 ___
 
@@ -124,7 +151,7 @@ Access the JSON schemas associated with a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:449](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L449)
+[src/agents/relevantDataManagerAgent.ts:492](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L492)
 
 ___
 
@@ -140,7 +167,25 @@ Expose the consolidated dataset catalogue built from the data directory.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:578](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L578)
+[src/agents/relevantDataManagerAgent.ts:642](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L642)
+
+___
+
+### getDatasetFingerprint
+
+▸ **getDatasetFingerprint**(): `string`
+
+Expose the dataset fingerprint used to detect catalogue changes.
+
+#### Returns
+
+`string`
+
+SHA-1 fingerprint of the consolidated dataset catalogue.
+
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:537](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L537)
 
 ___
 
@@ -163,7 +208,7 @@ Resolve relationships for a given record across categories.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:551](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L551)
+[src/agents/relevantDataManagerAgent.ts:615](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L615)
 
 ___
 
@@ -185,7 +230,7 @@ Fetch example datasets included inside the category folder.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:459](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L459)
+[src/agents/relevantDataManagerAgent.ts:502](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L502)
 
 ___
 
@@ -207,7 +252,7 @@ Retrieve the folder blueprint for a given topic.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:439](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L439)
+[src/agents/relevantDataManagerAgent.ts:482](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L482)
 
 ___
 
@@ -229,7 +274,7 @@ Build a snapshot view of a category and persist it to the shared cache.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:518](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L518)
+[src/agents/relevantDataManagerAgent.ts:581](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L581)
 
 ___
 
@@ -251,7 +296,7 @@ Retrieve query blueprints that demonstrate how to call the authoritative upstrea
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:469](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L469)
+[src/agents/relevantDataManagerAgent.ts:512](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L512)
 
 ___
 
@@ -274,7 +319,7 @@ Retrieve a single record by identifier.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:479](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L479)
+[src/agents/relevantDataManagerAgent.ts:542](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L542)
 
 ___
 
@@ -296,7 +341,7 @@ Return all records stored in the local mock dataset for a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:474](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L474)
+[src/agents/relevantDataManagerAgent.ts:517](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L517)
 
 ___
 
@@ -318,7 +363,7 @@ Retrieve structured type definitions provided as guidance for SDK authors.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:454](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L454)
+[src/agents/relevantDataManagerAgent.ts:497](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L497)
 
 ___
 
@@ -340,7 +385,7 @@ Retrieve the validation report generated for the category data.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:464](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L464)
+[src/agents/relevantDataManagerAgent.ts:507](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L507)
 
 ___
 
@@ -356,7 +401,7 @@ Enumerate the categories available to the MCP client.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:420](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L420)
+[src/agents/relevantDataManagerAgent.ts:463](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L463)
 
 ___
 
@@ -378,4 +423,4 @@ Perform a keyword search across every category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:484](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L484)
+[src/agents/relevantDataManagerAgent.ts:547](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L547)

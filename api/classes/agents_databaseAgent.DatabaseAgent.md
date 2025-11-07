@@ -22,6 +22,7 @@ const people = await database.queryPeople({ departmentId: "dept-analytics" });
 ### Methods
 
 - [queryApplications](agents_databaseAgent.DatabaseAgent.md#queryapplications)
+- [queryCategory](agents_databaseAgent.DatabaseAgent.md#querycategory)
 - [queryDepartments](agents_databaseAgent.DatabaseAgent.md#querydepartments)
 - [queryPeople](agents_databaseAgent.DatabaseAgent.md#querypeople)
 - [queryPolicies](agents_databaseAgent.DatabaseAgent.md#querypolicies)
@@ -49,7 +50,7 @@ Create a [DatabaseAgent](agents_databaseAgent.DatabaseAgent.md) instance.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:165](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L165)
+[src/agents/databaseAgent.ts:166](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L166)
 
 ## Methods
 
@@ -74,7 +75,33 @@ Matching application records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:198](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L198)
+[src/agents/databaseAgent.ts:199](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L199)
+
+___
+
+### queryCategory
+
+▸ **queryCategory**(`topicOrId`, `criteria?`, `options?`): `Promise`\<[`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]\>
+
+Execute a query against any category by identifier or alias.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `topicOrId` | `string` | Category identifier or alias to query. |
+| `criteria?` | `Record`\<`string`, `unknown`\> | Filter parameters applied to the category. |
+| `options?` | [`QueryOptions`](../interfaces/agents_databaseAgent.QueryOptions.md) | Query execution options. |
+
+#### Returns
+
+`Promise`\<[`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]\>
+
+Matching records from the category.
+
+#### Defined in
+
+[src/agents/databaseAgent.ts:233](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L233)
 
 ___
 
@@ -99,7 +126,7 @@ Matching department records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:187](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L187)
+[src/agents/databaseAgent.ts:188](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L188)
 
 ___
 
@@ -124,7 +151,7 @@ Matching people records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:176](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L176)
+[src/agents/databaseAgent.ts:177](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L177)
 
 ___
 
@@ -149,7 +176,7 @@ Matching policy records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:209](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L209)
+[src/agents/databaseAgent.ts:210](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L210)
 
 ___
 
@@ -174,7 +201,7 @@ Matching resource records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:220](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L220)
+[src/agents/databaseAgent.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L221)
 
 ___
 
@@ -213,4 +240,4 @@ console.log(saved.results.length);
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:240](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L240)
+[src/agents/databaseAgent.ts:258](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L258)

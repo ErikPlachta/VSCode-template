@@ -52,7 +52,7 @@ Error.constructor
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:386](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L386)
+[src/agents/relevantDataManagerAgent.ts:429](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L429)
 
 ## Properties
 

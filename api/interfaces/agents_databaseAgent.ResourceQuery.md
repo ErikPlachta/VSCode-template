@@ -29,7 +29,7 @@ Filters used to query knowledge resources.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:131](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L131)
+[src/agents/databaseAgent.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L132)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:129](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L129)
+[src/agents/databaseAgent.ts:130](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L130)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:130](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L130)
+[src/agents/databaseAgent.ts:131](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L131)
 
 ___
 
@@ -59,4 +59,4 @@ ___
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/databaseAgent.ts#L132)
+[src/agents/databaseAgent.ts:133](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/databaseAgent.ts#L133)

@@ -19,7 +19,9 @@ definitions, example datasets, validation reports, and remote query blueprints.
 
 ### Interfaces
 
+- [AgentOrchestrationGuidance](../interfaces/agents_relevantDataManagerAgent.AgentOrchestrationGuidance.md)
 - [BusinessCategory](../interfaces/agents_relevantDataManagerAgent.BusinessCategory.md)
+- [CategoryOrchestrationConfig](../interfaces/agents_relevantDataManagerAgent.CategoryOrchestrationConfig.md)
 - [CategoryRequirements](../interfaces/agents_relevantDataManagerAgent.CategoryRequirements.md)
 - [CategorySchema](../interfaces/agents_relevantDataManagerAgent.CategorySchema.md)
 - [CategorySnapshot](../interfaces/agents_relevantDataManagerAgent.CategorySnapshot.md)
@@ -56,7 +58,7 @@ Unique identifier for a category in the repository.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L151)
+[src/agents/relevantDataManagerAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L151)
 
 ___
 
@@ -68,7 +70,7 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:148](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L148)
+[src/agents/relevantDataManagerAgent.ts:148](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L148)
 
 ___
 
@@ -80,7 +82,7 @@ Supported primitive names within a type definition schema.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:76](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L76)
+[src/agents/relevantDataManagerAgent.ts:76](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L76)
 
 ___
 
@@ -92,7 +94,7 @@ JSON description for a structured type that can be materialised by an MCP server
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L79)
+[src/agents/relevantDataManagerAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L79)
 
 ## Functions
 
@@ -106,4 +108,4 @@ JSON description for a structured type that can be materialised by an MCP server
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1058](https://github.com/ErikPlachta/VSCode-template/blob/3d173d019b16cfafe321fa03cc66fd6b9a8b5a5d/src/agents/relevantDataManagerAgent.ts#L1058)
+[src/agents/relevantDataManagerAgent.ts:1203](https://github.com/ErikPlachta/VSCode-template/blob/339c99ef0246565d907bae55528ad8d2322e79b8/src/agents/relevantDataManagerAgent.ts#L1203)

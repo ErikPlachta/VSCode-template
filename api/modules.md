@@ -8,6 +8,7 @@
 
 - [agents/dataAgent](modules/agents_dataAgent.md)
 - [agents/databaseAgent](modules/agents_databaseAgent.md)
+- [agents/orchestrator](modules/agents_orchestrator.md)
 - [agents/relevantDataManagerAgent](modules/agents_relevantDataManagerAgent.md)
 - [extension](modules/extension.md)
 - [mcpCache](modules/mcpCache.md)
