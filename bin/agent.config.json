@@ -4,25 +4,31 @@
   },
   "jsonSchemas": [
     {
-      "pattern": "data/*/category.json",
-      "schema": "schemas/category.schema.json",
+      "pattern": "bin/data/*/category.json",
+      "schema": "bin/schemas/category.schema.json",
       "description": "Category metadata must define purpose, orchestration, and agent responsibilities."
     },
     {
-      "pattern": "data/*/records.json",
-      "schema": "schemas/records.schema.json",
+      "pattern": "bin/data/*/records.json",
+      "schema": "bin/schemas/records.schema.json",
       "description": "Entity records require identifiers, human-readable names, and linkage metadata."
     },
     {
-      "pattern": "data/*/relationships.json",
-      "schema": "schemas/relationships.schema.json",
+      "pattern": "bin/data/*/relationships.json",
+      "schema": "bin/schemas/relationships.schema.json",
       "description": "Relationship definitions must clearly communicate target categories and join keys."
     }
   ],
   "markdown": {
     "include": ["docs/**/*.md"],
     "exclude": ["docs/api/**"],
-    "requiredFrontMatter": ["title", "summary", "roles", "associations", "hierarchy"],
+    "requiredFrontMatter": [
+      "title",
+      "summary",
+      "roles",
+      "associations",
+      "hierarchy"
+    ],
     "requiredSections": [
       "## Summary",
       "## Responsibilities",

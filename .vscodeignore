@@ -1,11 +1,17 @@
 # Exclude source and dev-only files from the VSIX
 src/
-tests/
+bin/tests/
+bin/utils/
+bin/schemas/
 coverage/
-docs/
-schemas/
+docs/api/
+docs/architecture/
+docs/compliance/
+docs/dataQuality/
+docs/reports/
 .github/
 .vscode/
+.mcp-cache/
 
 # Config and metadata not needed at runtime
 tsconfig.json
@@ -15,10 +21,35 @@ typedoc.json
 .vscodeignore
 .gitignore
 .gitattributes
+fix-imports.*
+
+# Test files
+**/*.test.ts
+**/*.test.js
+**/*.spec.ts
+**/*.spec.js
+
+# Development files
+package-lock.json
+*.log
+*.pid
+*.seed
+*.pid.lock
 
 # Keep node_modules so runtime dependencies are included
 # node_modules/
 
+# Keep essential files for marketplace
+# README.md
+# LICENSE
+# package.json
+
+# Keep essential data and configuration
+# bin/data/
+# bin/docs/orchestration.md
+# bin/docs/agents/
+
 # Optional: exclude repo-only artifacts (keep README and LICENSE for marketplace)
 *.code-workspace
-# agent.config.json
+*.vsix
+vsc-extension-quickstart.md

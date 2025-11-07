@@ -27,8 +27,15 @@
   },
   "rules": {
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/explicit-function-return-type": ["error", { "allowExpressions": false }],
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      { "allowExpressions": false }
+    ],
     "@typescript-eslint/explicit-module-boundary-types": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
     "jsdoc/require-file-overview": "off",
     "jsdoc/require-description": "off",
     "jsdoc/require-param": "off",
@@ -57,7 +64,11 @@
               "FunctionExpression": true,
               "MethodDefinition": true
             },
-            "contexts": ["TSInterfaceDeclaration", "TSEnumDeclaration", "TSEnumMember"],
+            "contexts": [
+              "TSInterfaceDeclaration",
+              "TSEnumDeclaration",
+              "TSEnumMember"
+            ],
             "publicOnly": false,
             "checkConstructors": true
           }

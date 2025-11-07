@@ -58,7 +58,7 @@ export async function activate(
       request: vscode.ChatRequest,
       _context: vscode.ChatContext,
       stream: vscode.ChatResponseStream,
-      _token: vscode.CancellationToken // TODO: use this _token to cancel long-running operations or whatever design intention is for this feature.
+      _cancellationToken: vscode.CancellationToken // TODO: use this token to cancel long-running operations
     ) => {
       try {
         stream.markdown(`Processing your request: "${request.prompt}"\n\n`);

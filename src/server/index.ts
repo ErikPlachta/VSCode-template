@@ -363,73 +363,136 @@ export function createMcpServer(
 async function handleJsonRpcMessage(
   message: JsonRpcRequest
 ): Promise<JsonRpcResponse> {
-  if (message.method === "initialize") {
-    return {
-      jsonrpc: "2.0",
-      id: message.id ?? null,
-      result: {
-        protocolVersion: "2024-11-05",
-        capabilities: {
-          tools: {},
-        },
-        serverInfo: {
-          name: "mybusiness-mcp-server",
-          version: "1.0.0",
-        },
-      },
-    };
-  }
-
-  if (message.method === "tools/list") {
-    return {
-      jsonrpc: "2.0",
-      id: message.id ?? null,
-      result: { tools },
-    };
-  }
-
-  if (message.method === "tools/call") {
-    const params = (message.params ?? {}) as {
-      name: string;
-      arguments?: Record<string, unknown>;
-    };
-    const toolName = params.name;
-    if (!toolName) {
+  try {
+    // Validate basic message structure
+    if (!message.jsonrpc || message.jsonrpc !== "2.0") {
       return {
         jsonrpc: "2.0",
         id: message.id ?? null,
-        error: { code: -32602, message: "Tool name is required" },
+        error: {
+          code: -32600,
+          message: "Invalid Request: jsonrpc must be '2.0'",
+        },
       };
     }
 
-    try {
-      const result = await handleInvoke(toolName, params.arguments ?? {});
+    if (!message.method || typeof message.method !== "string") {
+      return {
+        jsonrpc: "2.0",
+        id: message.id ?? null,
+        error: {
+          code: -32600,
+          message: "Invalid Request: method is required and must be a string",
+        },
+      };
+    }
+
+    if (message.method === "initialize") {
       return {
         jsonrpc: "2.0",
         id: message.id ?? null,
         result: {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(result, null, 2),
-            },
-          ],
+          protocolVersion: "2024-11-05",
+          capabilities: {
+            tools: {},
+          },
+          serverInfo: {
+            name: "mybusiness-mcp-server",
+            version: "1.0.0",
+          },
         },
       };
-    } catch (error) {
+    }
+
+    if (message.method === "tools/list") {
       return {
         jsonrpc: "2.0",
         id: message.id ?? null,
-        error: { code: -32000, message: (error as Error).message },
+        result: { tools },
       };
     }
-  }
 
-  return {
-    jsonrpc: "2.0",
-    id: message.id ?? null,
-    error: { code: -32601, message: `Unknown method: ${message.method}` },
-  };
+    if (message.method === "tools/call") {
+      const params = (message.params ?? {}) as {
+        name: string;
+        arguments?: Record<string, unknown>;
+      };
+      const toolName = params.name;
+
+      if (!toolName) {
+        return {
+          jsonrpc: "2.0",
+          id: message.id ?? null,
+          error: {
+            code: -32602,
+            message: "Invalid params: tool name is required",
+          },
+        };
+      }
+
+      // Validate that the tool exists
+      const availableTools = tools.map((tool) => tool.name);
+      if (!availableTools.includes(toolName)) {
+        return {
+          jsonrpc: "2.0",
+          id: message.id ?? null,
+          error: {
+            code: -32602,
+            message: `Invalid params: unknown tool '${toolName}'. Available tools: ${availableTools.join(
+              ", "
+            )}`,
+          },
+        };
+      }
+
+      try {
+        const result = await handleInvoke(toolName, params.arguments ?? {});
+        return {
+          jsonrpc: "2.0",
+          id: message.id ?? null,
+          result: {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(result, null, 2),
+              },
+            ],
+          },
+        };
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        return {
+          jsonrpc: "2.0",
+          id: message.id ?? null,
+          error: {
+            code: -32000,
+            message: `Tool execution error: ${errorMessage}`,
+            data: { tool: toolName, originalError: errorMessage },
+          },
+        };
+      }
+    }
+
+    return {
+      jsonrpc: "2.0",
+      id: message.id ?? null,
+      error: {
+        code: -32601,
+        message: `Unknown method: ${message.method}. Supported methods: initialize, tools/list, tools/call`,
+      },
+    };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return {
+      jsonrpc: "2.0",
+      id: message.id ?? null,
+      error: {
+        code: -32603,
+        message: `Internal error: ${errorMessage}`,
+      },
+    };
+  }
 }
 
 /**
@@ -437,41 +500,100 @@ async function handleJsonRpcMessage(
  */
 function startStdioServer(): void {
   let buffer = "";
+  let isInitialized = false;
+
+  // Log to stderr to avoid interfering with stdout JSON-RPC communication
+  const log = (message: string): void => {
+    console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
+  };
+
+  log("MCP stdio server starting...");
 
   process.stdin.setEncoding("utf8");
   process.stdin.on("data", async (chunk) => {
-    buffer += chunk;
-    const lines = buffer.split("\n");
-    buffer = lines.pop() || "";
+    try {
+      buffer += chunk;
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || "";
 
-    for (const line of lines) {
-      if (line.trim()) {
-        try {
-          const message = JSON.parse(line) as JsonRpcRequest;
-          const response = await handleJsonRpcMessage(message);
-          console.log(JSON.stringify(response));
-        } catch (error) {
-          const errorResponse: JsonRpcResponse = {
-            jsonrpc: "2.0",
-            id: null,
-            error: {
-              code: -32700,
-              message: "Parse error",
-              data: (error as Error).message,
-            },
-          };
-          console.log(JSON.stringify(errorResponse));
+      for (const line of lines) {
+        if (line.trim()) {
+          try {
+            const message = JSON.parse(line) as JsonRpcRequest;
+
+            // Log incoming requests for debugging (but not on every message to avoid spam)
+            if (message.method === "initialize") {
+              log(`Received initialize request`);
+            } else if (!isInitialized) {
+              log(`Received ${message.method} before initialization`);
+            }
+
+            const response = await handleJsonRpcMessage(message);
+
+            // Mark as initialized after successful initialize
+            if (message.method === "initialize" && !response.error) {
+              isInitialized = true;
+              log("Server successfully initialized");
+            }
+
+            console.log(JSON.stringify(response));
+          } catch (parseError) {
+            log(`Parse error for line: ${line}`);
+            log(`Error: ${(parseError as Error).message}`);
+
+            const errorResponse: JsonRpcResponse = {
+              jsonrpc: "2.0",
+              id: null,
+              error: {
+                code: -32700,
+                message: "Parse error",
+                data: (parseError as Error).message,
+              },
+            };
+            console.log(JSON.stringify(errorResponse));
+          }
         }
       }
+    } catch (error) {
+      log(
+        `Unexpected error processing stdin data: ${(error as Error).message}`
+      );
     }
   });
 
   process.stdin.on("end", () => {
+    log("stdin closed, shutting down server");
     process.exit(0);
   });
 
-  // Send initial message to stderr for debugging
-  console.error("MCP stdio server started");
+  process.stdin.on("error", (error) => {
+    log(`stdin error: ${error.message}`);
+    process.exit(1);
+  });
+
+  // Handle process termination gracefully
+  process.on("SIGINT", () => {
+    log("Received SIGINT, shutting down gracefully");
+    process.exit(0);
+  });
+
+  process.on("SIGTERM", () => {
+    log("Received SIGTERM, shutting down gracefully");
+    process.exit(0);
+  });
+
+  process.on("uncaughtException", (error) => {
+    log(`Uncaught exception: ${error.message}`);
+    log(`Stack: ${error.stack}`);
+    process.exit(1);
+  });
+
+  process.on("unhandledRejection", (reason) => {
+    log(`Unhandled rejection: ${reason}`);
+    process.exit(1);
+  });
+
+  log("MCP stdio server ready for requests");
 }
 
 if (require.main === module) {

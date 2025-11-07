@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2021",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "lib": ["es2021"],
     "strict": true,
     "esModuleInterop": true,
@@ -12,5 +12,11 @@
     "types": ["node", "vscode", "jest", "eslint"]
   },
   "include": ["src"],
-  "exclude": ["node_modules", "out", "bin/tests"]
+  "exclude": [
+    "node_modules",
+    "out",
+    "bin/tests",
+    "jest.config.js",
+    "*.config.js"
+  ]
 }
