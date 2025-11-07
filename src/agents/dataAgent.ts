@@ -21,6 +21,9 @@ import {
   RelevantDataManagerAgent,
   RemoteQueryBlueprint
 } from "./relevantDataManagerAgent";
+import { createInvocationLogger } from "../mcp/telemetry";
+import { detectDuplicateSchemas } from "../mcp/schemaUtils";
+import { DataAgentProfile } from "../mcp/agentProfiles";
 
 /**
  * Summary of a topic including schemas, examples, and queries.
@@ -169,6 +172,7 @@ export interface CategoryToolkit {
 export class DataAgent {
   private readonly manager: RelevantDataManagerAgent;
   private readonly database: DatabaseAgent;
+  private readonly telemetry = createInvocationLogger(DataAgentProfile.id);
 
   /**
    * Create a new {@link DataAgent}.
@@ -203,19 +207,27 @@ export class DataAgent {
    * ```
    */
   async getTopicOverview(topic: string): Promise<TopicOverview> {
-    const category = this.manager.getCategory(topic);
-    const snapshot = await this.manager.getOrCreateSnapshot(category.id);
-    const highlightRecords = category.records.slice(0, 3);
-    return {
-      snapshot,
-      relationships: category.config.relationships,
-      schemas: category.schemas,
-      types: category.types,
-      examples: category.examples,
-      queries: category.queries,
-      highlightRecords,
-      validation: category.validation
-    };
+    return this.telemetry("getTopicOverview", async () => {
+      const category = this.manager.getCategory(topic);
+      const duplicateSchemas = detectDuplicateSchemas(category.schemas);
+      if (duplicateSchemas.length) {
+        throw new Error(
+          `Duplicate schema definitions detected for ${category.id}: ${duplicateSchemas.join(", ")}`
+        );
+      }
+      const snapshot = await this.manager.getOrCreateSnapshot(category.id);
+      const highlightRecords = category.records.slice(0, 3);
+      return {
+        snapshot,
+        relationships: category.config.relationships,
+        schemas: category.schemas,
+        types: category.types,
+        examples: category.examples,
+        queries: category.queries,
+        highlightRecords,
+        validation: category.validation
+      };
+    });
   }
 
   /**
@@ -232,23 +244,25 @@ export class DataAgent {
    * ```
    */
   async mapTopicConnections(topic: string, recordId?: string): Promise<TopicConnections> {
-    const category = this.manager.getCategory(topic);
-    const focusRecord = recordId
-      ? this.manager.getRecord(category.id, recordId)
-      : category.records[0];
-    if (!focusRecord) {
-      throw new Error(`No record found in category ${category.id} to analyse.`);
-    }
-    const connections = this.manager.getEntityConnections(category.id, focusRecord.id);
-    const narrative = connections.connections.map((entry) => {
-      const names = entry.records.map((record) => this.getRecordDisplayName(record));
-      return `${this.getRecordDisplayName(focusRecord)} → ${entry.relationship}: ${names.join(", ")}`;
+    return this.telemetry("mapTopicConnections", async () => {
+      const category = this.manager.getCategory(topic);
+      const focusRecord = recordId
+        ? this.manager.getRecord(category.id, recordId)
+        : category.records[0];
+      if (!focusRecord) {
+        throw new Error(`No record found in category ${category.id} to analyse.`);
+      }
+      const connections = this.manager.getEntityConnections(category.id, focusRecord.id);
+      const narrative = connections.connections.map((entry) => {
+        const names = entry.records.map((record) => this.getRecordDisplayName(record));
+        return `${this.getRecordDisplayName(focusRecord)} → ${entry.relationship}: ${names.join(", ")}`;
+      });
+      return {
+        focus: { categoryId: category.id, record: focusRecord },
+        connections: connections.connections,
+        narrative
+      };
     });
-    return {
-      focus: { categoryId: category.id, record: focusRecord },
-      connections: connections.connections,
-      narrative
-    };
   }
 
   /**
@@ -265,42 +279,43 @@ export class DataAgent {
    * ```
    */
   async buildExplorationPlan(topic: string, question: string): Promise<ExplorationPlan> {
-    const category = this.manager.getCategory(topic);
-    const overview = await this.getTopicOverview(category.id);
-    const supportingResources = this.collectSupportingResources(category.id);
-    const steps: ExplorationStep[] = overview.relationships.map((relationship) => {
-      const relatedCategory = this.manager.getCategory(relationship.targetCategory);
-      const schemaHint = relatedCategory.config.folder.schemaFiles.length
-        ? `Inspect schemas: ${relatedCategory.config.folder.schemaFiles.join(", ")}`
-        : undefined;
-      return {
-        title: `Analyse ${relationship.name}`,
-        description: relationship.description,
-        recommendedCategory: relatedCategory.id,
+    return this.telemetry("buildExplorationPlan", async () => {
+      const category = this.manager.getCategory(topic);
+      const overview = await this.getTopicOverview(category.id);
+      const supportingResources = this.collectSupportingResources(category.id);
+      const steps: ExplorationStep[] = overview.relationships.map((relationship) => {
+        const relatedCategory = this.manager.getCategory(relationship.targetCategory);
+        const schemaHint = relatedCategory.config.folder.schemaFiles.length
+          ? `Inspect schemas: ${relatedCategory.config.folder.schemaFiles.join(", ")}`
+          : undefined;
+        return {
+          title: `Analyse ${relationship.name}`,
+          description: relationship.description,
+          recommendedCategory: relatedCategory.id,
+          hints: [
+            schemaHint,
+            `Use databaseAgent to query ${relatedCategory.name} by '${relationship.viaField}'.`
+          ].filter((hint): hint is string => Boolean(hint))
+        };
+      });
+      steps.push({
+        title: "Review examples and validation",
+        description: `Use the example datasets and validation summary under ${category.config.folder.root} to understand data quality considerations before making changes.`,
+        recommendedCategory: category.id,
         hints: [
-          schemaHint,
-          `Use databaseAgent to query ${relatedCategory.name} by '${relationship.viaField}'.`
-        ].filter((hint): hint is string => Boolean(hint))
+          ...category.examples.map((example) => `Example: ${example.file}`),
+          `Validation status: ${category.validation.status}`
+        ]
+      });
+
+      return {
+        topic: category.name,
+        question,
+        steps,
+        recommendedQueries: overview.queries.map((query) => query.name),
+        supportingResources
       };
     });
-    // Add a final step encouraging validation and examples review for context.
-    steps.push({
-      title: "Review examples and validation",
-      description: `Use the example datasets and validation summary under ${category.config.folder.root} to understand data quality considerations before making changes.`,
-      recommendedCategory: category.id,
-      hints: [
-        ...category.examples.map((example) => `Example: ${example.file}`),
-        `Validation status: ${category.validation.status}`
-      ]
-    });
-
-    return {
-      topic: category.name,
-      question,
-      steps,
-      recommendedQueries: overview.queries.map((query) => query.name),
-      supportingResources
-    };
   }
 
   /**
@@ -323,23 +338,25 @@ export class DataAgent {
     sourceRecordId: string,
     targetTopic: string
   ): Promise<CrossTopicConnection | undefined> {
-    const sourceCategory = this.manager.getCategory(sourceTopic);
-    const targetCategory = this.manager.getCategory(targetTopic);
-    const focusRecord = this.manager.getRecord(sourceCategory.id, sourceRecordId);
-    if (!focusRecord) {
-      throw new Error(`Record ${sourceRecordId} not found for category ${sourceCategory.id}`);
-    }
-    const connections = this.manager.getEntityConnections(sourceCategory.id, focusRecord.id);
-    const connection = connections.connections.find((entry) => entry.targetCategory === targetCategory.id);
-    if (!connection) {
-      return undefined;
-    }
-    return {
-      sourceRecord: focusRecord,
-      targetCategory: targetCategory.id,
-      relationship: connection.relationship,
-      relatedRecords: connection.records
-    };
+    return this.telemetry("findCrossTopicConnection", async () => {
+      const sourceCategory = this.manager.getCategory(sourceTopic);
+      const targetCategory = this.manager.getCategory(targetTopic);
+      const focusRecord = this.manager.getRecord(sourceCategory.id, sourceRecordId);
+      if (!focusRecord) {
+        throw new Error(`Record ${sourceRecordId} not found for category ${sourceCategory.id}`);
+      }
+      const connections = this.manager.getEntityConnections(sourceCategory.id, focusRecord.id);
+      const connection = connections.connections.find((entry) => entry.targetCategory === targetCategory.id);
+      if (!connection) {
+        return undefined;
+      }
+      return {
+        sourceRecord: focusRecord,
+        targetCategory: targetCategory.id,
+        relationship: connection.relationship,
+        relatedRecords: connection.records
+      };
+    });
   }
 
   /**

@@ -20,6 +20,9 @@ import {
   RelevantDataManagerAgent,
   RemoteQueryBlueprint
 } from "./relevantDataManagerAgent";
+import { createInvocationLogger } from "../mcp/telemetry";
+import { validateCategorySchemas } from "../mcp/schemaUtils";
+import { DatabaseAgentProfile } from "../mcp/agentProfiles";
 
 type BaseQuery = Record<string, unknown>;
 
@@ -156,6 +159,7 @@ export interface SavedQueryResult {
  */
 export class DatabaseAgent {
   private readonly cacheDirPromise: Promise<string>;
+  private readonly telemetry = createInvocationLogger(DatabaseAgentProfile.id);
 
   /**
    * Create a {@link DatabaseAgent} instance.
@@ -165,6 +169,14 @@ export class DatabaseAgent {
    */
   constructor(private readonly manager: RelevantDataManagerAgent, cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
+    const categories = this.manager.listCategories().map((entry) => this.manager.getCategory(entry.id));
+    const schemaSummary = validateCategorySchemas(categories);
+    if (schemaSummary.missingRelationships.length || schemaSummary.duplicateSchemaNames.length) {
+      console.warn(
+        "[database-agent] Schema integrity issues detected",
+        schemaSummary
+      );
+    }
   }
 
   /**
@@ -286,42 +298,48 @@ export class DatabaseAgent {
     criteria: Record<string, unknown>,
     options: QueryOptions = {}
   ): Promise<CategoryRecord[]> {
-    const normalisedCriteria = this.normaliseCriteria(criteria);
-    const useCache = options.useCache ?? true;
-    const cacheKey = useCache
-      ? this.buildCacheKey(categoryId, normalisedCriteria, options.cacheKeyPrefix)
-      : undefined;
+    return this.telemetry(
+      "executeQuery",
+      async () => {
+        const normalisedCriteria = this.normaliseCriteria(criteria);
+        const useCache = options.useCache ?? true;
+        const cacheKey = useCache
+          ? this.buildCacheKey(categoryId, normalisedCriteria, options.cacheKeyPrefix)
+          : undefined;
 
-    if (!cacheKey) {
-      return this.performFilter(categoryId, normalisedCriteria);
-    }
+        if (!cacheKey) {
+          return this.performFilter(categoryId, normalisedCriteria);
+        }
 
-    const cacheDir = await this.cacheDirPromise;
-    const cached = await readSharedCacheEntry<CategoryRecord[]>(cacheDir, cacheKey);
-    const currentHash = this.manager.getCategoryRecordHash(categoryId);
-    if (cached?.metadata?.recordHash === currentHash) {
-      return cached.value;
-    }
+        const cacheDir = await this.cacheDirPromise;
+        const cached = await readSharedCacheEntry<CategoryRecord[]>(cacheDir, cacheKey);
+        const currentHash = this.manager.getCategoryRecordHash(categoryId);
+        if (cached?.metadata?.recordHash === currentHash) {
+          return cached.value;
+        }
 
-    if (cached) {
-      await deleteSharedCacheEntry(cacheDir, cacheKey);
-    }
+        if (cached) {
+          await deleteSharedCacheEntry(cacheDir, cacheKey);
+        }
 
-    const results = this.performFilter(categoryId, normalisedCriteria);
-    const entry: SharedCacheEntry<CategoryRecord[]> = {
-      key: cacheKey,
-      toolName: "database-agent",
-      timestamp: new Date().toISOString(),
-      value: results,
-      metadata: {
-        categoryId,
-        criteria: normalisedCriteria,
-        recordHash: currentHash,
-        datasetFingerprint: this.manager.getDatasetFingerprint()
-      }
-    };
-    await storeSharedCacheEntry(cacheDir, entry);
-    return results;
+        const results = this.performFilter(categoryId, normalisedCriteria);
+        const entry: SharedCacheEntry<CategoryRecord[]> = {
+          key: cacheKey,
+          toolName: DatabaseAgentProfile.id,
+          timestamp: new Date().toISOString(),
+          value: results,
+          metadata: {
+            categoryId,
+            criteria: normalisedCriteria,
+            recordHash: currentHash,
+            datasetFingerprint: this.manager.getDatasetFingerprint()
+          }
+        };
+        await storeSharedCacheEntry(cacheDir, entry);
+        return results;
+      },
+      { categoryId }
+    );
   }
 
   /**

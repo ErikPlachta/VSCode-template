@@ -90,6 +90,7 @@ describe("Orchestrator", () => {
       question: "List records"
     });
     expect(response.intent).toBe("clarification");
-    expect(response.agent).toBe("orchestrator");
+    expect(response.agent).toBe("clarification-agent");
+    expect((response.payload as { prompt: string }).prompt).toMatch(/clarify/i);
   });
 });

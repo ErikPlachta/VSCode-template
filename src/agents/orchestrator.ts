@@ -5,7 +5,16 @@
 
 import { DataAgent } from "./dataAgent";
 import { DatabaseAgent } from "./databaseAgent";
+import { ClarificationAgent } from "./clarificationAgent";
 import { RelevantDataManagerAgent } from "./relevantDataManagerAgent";
+import {
+  ClarificationAgentProfile,
+  DataAgentProfile,
+  DatabaseAgentProfile,
+  RelevantDataManagerAgentProfile
+} from "../mcp/agentProfiles";
+import { agentManifest, getAgentMetadata } from "../mcp/agentManifest";
+import { renderClassificationSummary, renderEscalationPrompt } from "../mcp/prompts";
 import type {
   AgentOrchestrationGuidance,
   CategoryOrchestrationConfig,
@@ -37,7 +46,7 @@ export interface OrchestratorInput {
  */
 export interface OrchestratorResponse {
   intent: OrchestratorIntent;
-  agent: "relevant-data-manager" | "database-agent" | "data-agent" | "orchestrator";
+  agent: "relevant-data-manager" | "database-agent" | "data-agent" | "clarification-agent" | "orchestrator";
   summary: string;
   rationale: string;
   payload: unknown;
@@ -75,6 +84,13 @@ const STOP_WORDS = new Set([
   "using",
   "based"
 ]);
+
+const INTENT_AGENT_MAP = {
+  metadata: RelevantDataManagerAgentProfile.id,
+  records: DatabaseAgentProfile.id,
+  insight: DataAgentProfile.id,
+  clarification: ClarificationAgentProfile.id
+} as const;
 
 function extractKeywords(text: string): string[] {
   const matches = text.toLowerCase().match(/\b[a-z0-9]{3,}\b/g) ?? [];
@@ -117,15 +133,31 @@ export class Orchestrator {
   private readonly manager: RelevantDataManagerAgent;
   private readonly database: DatabaseAgent;
   private readonly dataAgent: DataAgent;
+  private readonly clarificationAgent: ClarificationAgent;
 
   constructor(
     manager: RelevantDataManagerAgent = new RelevantDataManagerAgent(),
     databaseAgent?: DatabaseAgent,
-    dataAgent?: DataAgent
+    dataAgent?: DataAgent,
+    clarificationAgent?: ClarificationAgent
   ) {
     this.manager = manager;
     this.database = databaseAgent ?? new DatabaseAgent(this.manager);
     this.dataAgent = dataAgent ?? new DataAgent(this.manager, this.database);
+    this.clarificationAgent = clarificationAgent ?? new ClarificationAgent();
+    if (!clarificationAgent) {
+      this.clarificationAgent.loadKnowledge(
+        Object.values(agentManifest).map((entry) => ({
+          id: entry.id,
+          title: entry.title,
+          content: [
+            entry.description,
+            `Signals: ${entry.primarySignals.join(", ")}`,
+            `Escalate when: ${entry.escalateWhen.join(", ") || "n/a"}`
+          ].join("\n")
+        }))
+      );
+    }
   }
 
   /** List the categories known to the orchestrator. */
@@ -147,15 +179,21 @@ export class Orchestrator {
     const orchestration =
       context.orchestration ?? (context.topic ? this.resolveOrchestration(context.topic) : undefined);
     if (!trimmed) {
+      const manifest = getAgentMetadata(ClarificationAgentProfile.id);
       return {
         intent: "clarification",
         rationale: "Empty question",
-        escalationPrompt:
-          orchestration?.escalateWhen?.length
-            ? `Share the scenario you are investigating so we can check for:\n- ${orchestration.escalateWhen.join(
-                "\n- "
-              )}`
-            : "Please describe the problem you want to solve.",
+        escalationPrompt: renderEscalationPrompt({
+          topic: context.topic,
+          missingSignals: orchestration?.signals,
+          manifest,
+          additionalGuidance:
+            orchestration?.escalateWhen?.length
+              ? `Share the scenario so we can check for:\n- ${orchestration.escalateWhen.join(
+                  "\n- "
+                )}`
+              : undefined
+        }),
         missingSignals: orchestration ? orchestration.signals : undefined
       };
     }
@@ -199,25 +237,24 @@ export class Orchestrator {
     }, undefined as (typeof intents)[number] | undefined);
 
     if (!top || top.result.score === 0) {
+      const missingSignals = orchestration ? findMissingSignals(tokens, orchestration.signals) : undefined;
       return {
         intent: "clarification",
         rationale: "Unable to map question to an agent",
-        escalationPrompt: this.buildEscalationPrompt(context.topic, orchestration),
-        missingSignals: orchestration ? findMissingSignals(tokens, orchestration.signals) : undefined
+        escalationPrompt: this.buildEscalationPrompt(context.topic, orchestration, missingSignals),
+        missingSignals
       };
     }
 
-    const rationaleParts: string[] = [];
-    if (top.result.keywordMatches.length) {
-      rationaleParts.push(`Matched keywords: ${top.result.keywordMatches.join(", ")}`);
-    }
-    if (top.result.guidanceMatches.length) {
-      rationaleParts.push(`Matched orchestration signals (${top.result.guidanceMatches.length})`);
-    }
+    const agentMetadata = getAgentMetadata(INTENT_AGENT_MAP[top.intent]);
+    const rationale = renderClassificationSummary({
+      agent: agentMetadata,
+      matchedSignals: top.result.guidanceMatches
+    });
 
     return {
       intent: top.intent,
-      rationale: rationaleParts.join("; ") || "Routed using category orchestration cues.",
+      rationale,
       matchedSignals: top.result.guidanceMatches
     };
   }
@@ -235,20 +272,67 @@ export class Orchestrator {
 
   private buildEscalationPrompt(
     topic: string | undefined,
-    orchestration: CategoryOrchestrationConfig | undefined
+    orchestration: CategoryOrchestrationConfig | undefined,
+    missingSignals?: string[]
   ): string | undefined {
-    if (!orchestration) {
-      return "Could you clarify whether you need metadata, specific records, or a narrative insight?";
-    }
-    const prompts: string[] = [];
-    if (orchestration.escalateWhen?.length) {
-      const label = topic ? `the ${topic} category` : "this category";
-      prompts.push(`The orchestration escalates for ${label} when:\n- ${orchestration.escalateWhen.join("\n- ")}`);
-    }
-    if (orchestration.signals.length) {
-      prompts.push(`Highlight one of these routing signals:\n- ${orchestration.signals.join("\n- ")}`);
-    }
-    return prompts.join("\n\n") || undefined;
+    const manifest = getAgentMetadata(ClarificationAgentProfile.id);
+    const prompt = renderEscalationPrompt({
+      topic,
+      manifest,
+      missingSignals: missingSignals ?? orchestration?.signals,
+      additionalGuidance:
+        orchestration?.escalateWhen?.length
+          ? `Typical escalation triggers:\n- ${orchestration.escalateWhen.join("\n- ")}`
+          : undefined
+    });
+    return prompt || "Could you clarify whether you need metadata, specific records, or a narrative insight?";
+  }
+
+  private async handleClarification(
+    input: OrchestratorInput,
+    classification: OrchestratorClassification,
+    topic: string | undefined,
+    categoryConfig: ReturnType<RelevantDataManagerAgent["getCategoryConfig"]> | undefined
+  ): Promise<OrchestratorResponse> {
+    const candidateAgents = categoryConfig
+      ? [
+          RelevantDataManagerAgentProfile.id,
+          DatabaseAgentProfile.id,
+          DataAgentProfile.id
+        ]
+      : Object.values(agentManifest).map((entry) => entry.id);
+    const clarification = await this.clarificationAgent.clarify({
+      question: input.question,
+      topic,
+      missingSignals: classification.missingSignals ?? categoryConfig?.orchestration?.signals,
+      candidateAgents
+    });
+    const summary =
+      classification.escalationPrompt ?? clarification.prompt.split("\n")[0] ?? "Clarification required";
+    const markdown = [
+      `> ${clarification.prompt}`,
+      clarification.knowledgeSnippets.length
+        ? [
+            "",
+            "**Helpful context**",
+            ...clarification.knowledgeSnippets.map((hit) => `- ${hit.title}: ${hit.summary}`)
+          ].join("\n")
+        : undefined
+    ]
+      .filter((line): line is string => Boolean(line))
+      .join("\n");
+    return {
+      intent: "clarification",
+      agent: ClarificationAgentProfile.id,
+      summary,
+      rationale: classification.rationale,
+      payload: {
+        prompt: clarification.prompt,
+        knowledgeSnippets: clarification.knowledgeSnippets,
+        missingSignals: classification.missingSignals ?? categoryConfig?.orchestration?.signals
+      },
+      markdown
+    };
   }
 
   /** Execute the orchestration flow for the supplied input. */
@@ -268,35 +352,21 @@ export class Orchestrator {
       orchestration: categoryConfig?.orchestration
     });
     if (classification.intent === "clarification") {
-      return {
-        intent: "clarification",
-        agent: "orchestrator",
-        summary: classification.escalationPrompt ?? "Clarification required",
-        rationale: classification.rationale,
-        payload: {
-          prompt: classification.escalationPrompt,
-          missingSignals: classification.missingSignals
-        },
-        markdown: [
-          `> ${classification.escalationPrompt ?? "Please clarify your request."}`,
-          classification.missingSignals?.length
-            ? ["", "**Signals not covered**", ...classification.missingSignals.map((signal) => `- ${signal}`)].join("\n")
-            : undefined
-        ]
-          .filter((line): line is string => Boolean(line))
-          .join("\n")
-      };
+      return this.handleClarification(input, classification, topic, categoryConfig);
     }
 
     if (!topic) {
-      return {
-        intent: "clarification",
-        agent: "orchestrator",
-        summary: "Topic required",
-        rationale: "Missing topic",
-        payload: { prompt: "Specify which category the question refers to." },
-        markdown: "> Please specify the relevant category (for example, `people` or `departments`)."
-      };
+      const prompt = "Please specify which category the question refers to.";
+      return this.handleClarification(
+        input,
+        {
+          intent: "clarification",
+          rationale: "Missing topic",
+          escalationPrompt: prompt
+        },
+        topic,
+        categoryConfig
+      );
     }
 
     if (!categoryConfig || categoryLookupFailed) {
