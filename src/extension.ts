@@ -4,6 +4,7 @@
  * @module extension
  */
 import * as vscode from "vscode";
+import { Orchestrator, OrchestratorResponse } from "./agents/orchestrator";
 import { ensureCacheDirectory, logInvocation, ToolLogEntry } from "./mcpCache";
 import { fetchTools, MCPDiscoveryError, MCPTool } from "./mcpSync";
 import { promptForArgs } from "./schemaPrompt";
@@ -135,6 +136,48 @@ function updateHistory(
   return existing;
 }
 
+function renderOrchestration(response: OrchestratorResponse): vscode.MarkdownString {
+  const markdown = new vscode.MarkdownString(undefined, true);
+  markdown.isTrusted = true;
+  markdown.appendMarkdown(`${response.markdown}\n\n---\n_Orchestrated via ${response.agent}_`);
+  return markdown;
+}
+
+function parseMentionMessage(message: string): {
+  topic?: string;
+  criteria?: Record<string, unknown>;
+  question: string;
+  error?: string;
+} {
+  const parts = message
+    .split("::")
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0);
+
+  if (parts.length === 0) {
+    return { question: "", error: "No question provided." };
+  }
+
+  if (parts.length === 1) {
+    return { question: parts[0] };
+  }
+
+  if (parts.length === 2) {
+    return { topic: parts[0], question: parts[1] };
+  }
+
+  const [topic, rawCriteria, ...rest] = parts;
+  let criteria: Record<string, unknown> | undefined;
+  if (rawCriteria) {
+    try {
+      criteria = JSON.parse(rawCriteria);
+    } catch (error) {
+      return { topic, question: rest.join("::"), error: `Unable to parse criteria JSON: ${(error as Error).message}` };
+    }
+  }
+  return { topic, question: rest.join("::"), criteria };
+}
+
 /**
  * Invoke the MCP backend and transform the result into a VS Code chat response.
  *
@@ -253,6 +296,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   const serverUrl = cfg.get<string>("serverUrl") ?? "";
   const token = cfg.get<string>("token") ?? "";
   const conversationHistory = new Map<string, string[]>();
+  const orchestrator = new Orchestrator();
 
   let cacheDir = "";
   try {
@@ -268,6 +312,87 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const tools: MCPTool[] = await fetchTools(serverUrl, token);
     const chat = vscode.chat.createChatParticipantExtensionApi("MyBusinessMCP");
     const disposables: vscode.Disposable[] = [];
+
+    const orchestratorCommand = chat.registerChatCommand("/relevant-data", {
+      title: "Relevant data orchestrator",
+      description: "Route questions across local agents using orchestration heuristics.",
+      handler: async () => {
+        const categories = orchestrator.listCategories();
+        const categoryPick = await vscode.window.showQuickPick(
+          categories.map((category) => ({
+            label: category.name,
+            description: category.description,
+            id: category.id
+          })),
+          {
+            title: "Select the category to analyse",
+            placeHolder: "Choose a category such as People or Departments",
+            ignoreFocusOut: true
+          }
+        );
+        if (!categoryPick) {
+          const cancelled = new vscode.MarkdownString("_Invocation cancelled._");
+          cancelled.isTrusted = true;
+          return cancelled;
+        }
+
+        const question = await vscode.window.showInputBox({
+          prompt: "What question do you want the orchestrator to solve?",
+          placeHolder: "e.g. Summarise schemas or list people with python skills",
+          ignoreFocusOut: true
+        });
+        if (!question) {
+          const cancelled = new vscode.MarkdownString("_Invocation cancelled._");
+          cancelled.isTrusted = true;
+          return cancelled;
+        }
+
+        const classification = orchestrator.classify(question);
+        let criteria: Record<string, unknown> | undefined;
+        if (classification.intent === "records") {
+          const criteriaInput = await vscode.window.showInputBox({
+            prompt: "Optional JSON criteria for the database query",
+            placeHolder: '{"skill": "python"}',
+            ignoreFocusOut: true
+          });
+          if (criteriaInput) {
+            try {
+              criteria = JSON.parse(criteriaInput);
+            } catch (error) {
+              const message = error instanceof Error ? error.message : String(error);
+              const markdown = new vscode.MarkdownString(`**Error:** Unable to parse criteria: ${message}`);
+              markdown.isTrusted = true;
+              return markdown;
+            }
+          }
+        }
+
+        const response = await orchestrator.handle({
+          topic: categoryPick.id,
+          question,
+          criteria
+        });
+        return renderOrchestration(response);
+      }
+    });
+
+    const orchestratorMention = chat.registerChatMention("@relevant-data", {
+      title: "Relevant data orchestrator",
+      description: "Use 'topic::question' or 'topic::{}::question' to provide context.",
+      handler: async (message: string) => {
+        const parsed = parseMentionMessage(message);
+        if (parsed.error) {
+          const markdown = new vscode.MarkdownString(`**Error:** ${parsed.error}`);
+          markdown.isTrusted = true;
+          return markdown;
+        }
+        const { topic, question, criteria } = parsed;
+        const response = await orchestrator.handle({ topic, question, criteria });
+        return renderOrchestration(response);
+      }
+    });
+
+    disposables.push(orchestratorCommand, orchestratorMention);
 
     for (const tool of tools) {
       const slash = `/${tool.name}`;

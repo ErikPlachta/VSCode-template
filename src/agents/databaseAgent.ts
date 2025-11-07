@@ -8,6 +8,7 @@
 
 import * as crypto from "crypto";
 import {
+  deleteSharedCacheEntry,
   ensureCacheDirectory,
   readSharedCacheEntry,
   SharedCacheEntry,
@@ -222,6 +223,23 @@ export class DatabaseAgent {
   }
 
   /**
+   * Execute a query against any category by identifier or alias.
+   *
+   * @param {string} topicOrId Category identifier or alias to query.
+   * @param {Record<string, unknown>} [criteria] Filter parameters applied to the category.
+   * @param {QueryOptions} [options] Query execution options.
+   * @returns {Promise<CategoryRecord[]>} Matching records from the category.
+   */
+  async queryCategory(
+    topicOrId: string,
+    criteria: Record<string, unknown> = {},
+    options?: QueryOptions
+  ): Promise<CategoryRecord[]> {
+    const category = this.manager.getCategory(topicOrId);
+    return this.executeQuery(category.id, criteria, options);
+  }
+
+  /**
    * Execute a saved query blueprint from the relevant-data repository and
    * return local matches that satisfy the provided criteria.
    *
@@ -274,25 +292,36 @@ export class DatabaseAgent {
       ? this.buildCacheKey(categoryId, normalisedCriteria, options.cacheKeyPrefix)
       : undefined;
 
-    if (cacheKey) {
-      const cacheDir = await this.cacheDirPromise;
-      const cached = await readSharedCacheEntry<CategoryRecord[]>(cacheDir, cacheKey);
-      if (cached) {
-        return cached.value;
-      }
-      const results = this.performFilter(categoryId, normalisedCriteria);
-      const entry: SharedCacheEntry<CategoryRecord[]> = {
-        key: cacheKey,
-        toolName: "database-agent",
-        timestamp: new Date().toISOString(),
-        value: results,
-        metadata: { categoryId, criteria: normalisedCriteria }
-      };
-      await storeSharedCacheEntry(cacheDir, entry);
-      return results;
+    if (!cacheKey) {
+      return this.performFilter(categoryId, normalisedCriteria);
     }
 
-    return this.performFilter(categoryId, normalisedCriteria);
+    const cacheDir = await this.cacheDirPromise;
+    const cached = await readSharedCacheEntry<CategoryRecord[]>(cacheDir, cacheKey);
+    const currentHash = this.manager.getCategoryRecordHash(categoryId);
+    if (cached?.metadata?.recordHash === currentHash) {
+      return cached.value;
+    }
+
+    if (cached) {
+      await deleteSharedCacheEntry(cacheDir, cacheKey);
+    }
+
+    const results = this.performFilter(categoryId, normalisedCriteria);
+    const entry: SharedCacheEntry<CategoryRecord[]> = {
+      key: cacheKey,
+      toolName: "database-agent",
+      timestamp: new Date().toISOString(),
+      value: results,
+      metadata: {
+        categoryId,
+        criteria: normalisedCriteria,
+        recordHash: currentHash,
+        datasetFingerprint: this.manager.getDatasetFingerprint()
+      }
+    };
+    await storeSharedCacheEntry(cacheDir, entry);
+    return results;
   }
 
   /**
