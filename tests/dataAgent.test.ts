@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Tests covering the {@link DataAgent} high-level behaviours.
+ *
+ * @module tests/dataAgent.test
+ */
+
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
@@ -19,11 +25,19 @@ jest.mock(
   { virtual: true }
 );
 
+/** Test suite verifying data agent orchestration helpers. */
 describe("DataAgent", () => {
   beforeEach(() => {
     workspaceFoldersMock = undefined;
   });
 
+  /**
+   * Construct an agent with isolated cache directories for testing.
+   *
+   * @returns {Promise<{ agent: DataAgent; manager: RelevantDataManagerAgent; database: DatabaseAgent }>} Aggregated dependencies.
+   * @example
+   * const { agent } = await createAgent();
+   */
   async function createAgent(): Promise<{ agent: DataAgent; manager: RelevantDataManagerAgent; database: DatabaseAgent }> {
     const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), "data-agent-test-"));
     const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
@@ -75,5 +89,14 @@ describe("DataAgent", () => {
   it("exposes the underlying database agent", async () => {
     const { agent, database } = await createAgent();
     expect(agent.getDatabaseAgent()).toBe(database);
+  });
+
+  it("returns a toolkit bundle for a category", async () => {
+    const { agent } = await createAgent();
+    const toolkit = agent.getCategoryToolkit("departments");
+    expect(toolkit.folder.root).toBe("relevant-data/departments");
+    expect(toolkit.schemas.length).toBeGreaterThan(0);
+    expect(toolkit.tests.map((test) => test.name)).toContain("Validate department schema");
+    expect(toolkit.queries.map((query) => query.name)).toContain("List departments");
   });
 });
