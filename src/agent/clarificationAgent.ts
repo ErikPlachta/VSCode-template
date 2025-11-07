@@ -2,11 +2,11 @@
  * @file Clarification agent for handling ambiguous user requests and guiding users toward actionable queries.
  */
 
-import { getAgentMetadata } from "@mcp/agentManifest";
+import { getAgentMetadata } from "@mcp/config/agentManifest";
 import { KnowledgeBase, KnowledgeHit } from "@mcp/knowledgeBase";
 import { renderClarificationPrompt } from "@mcp/prompts";
 import { createInvocationLogger } from "@mcp/telemetry";
-import { ClarificationAgentProfile } from "@mcp/agentProfiles";
+import { ClarificationAgentProfile } from "@mcp/config/agentProfiles";
 
 /**
  * Input parameters for the clarification agent.

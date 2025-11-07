@@ -9,7 +9,7 @@ import {
   DataAgentProfile,
   DatabaseAgentProfile,
   RelevantDataManagerAgentProfile,
-} from "@mcp/agentProfiles";
+} from "@mcp/config/agentProfiles";
 
 /**
  * Description of an agent's shared responsibilities and boundaries.

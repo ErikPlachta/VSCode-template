@@ -2,7 +2,7 @@
  * @file index implementation for prompts module
  */
 
-import type { AgentCapabilityMetadata } from "@mcp/agentManifest";
+import type { AgentCapabilityMetadata } from "@mcp/config/agentManifest";
 
 export interface EscalationPromptOptions {
   topic?: string;

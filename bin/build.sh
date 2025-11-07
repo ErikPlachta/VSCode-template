@@ -163,14 +163,14 @@ stage_validate_config() {
     cd "$PROJECT_ROOT"
     
     # Check if config file exists
-    if [[ ! -f "bin/mcp.config.json" ]]; then
-        log_error "Configuration file not found: bin/mcp.config.json"
+    if [[ ! -f "src/mcp.config.json" ]]; then
+        log_error "Configuration file not found: src/mcp.config.json"
         exit 1
     fi
     
     # Validate JSON syntax
-    if ! json_pp < "bin/mcp.config.json" > /dev/null 2>&1; then
-        log_error "Invalid JSON syntax in bin/mcp.config.json"
+    if ! json_pp < "src/mcp.config.json" > /dev/null 2>&1; then
+        log_error "Invalid JSON syntax in src/mcp.config.json"
         exit 1
     fi
     

@@ -102,7 +102,7 @@ describe("DataAgent", () => {
   it("returns a toolkit bundle for a category", async () => {
     const { agent } = await createAgent();
     const toolkit = agent.getCategoryToolkit("departments");
-    expect(toolkit.folder.root).toBe("bin/data/departments");
+    expect(toolkit.folder.root).toBe("src/businessData/departments");
     expect(toolkit.schemas.length).toBeGreaterThan(0);
     expect(toolkit.validation.status).toBe("pass");
     expect(toolkit.validation.issues.length).toBeGreaterThanOrEqual(0);

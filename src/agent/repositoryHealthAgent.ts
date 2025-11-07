@@ -199,7 +199,7 @@ export class RepositoryHealthAgent {
    * ```
    */
   public static async createFromDisk(
-    configPath: string = "bin/mcp.config.json"
+    configPath: string = "src/mcp.config.json"
   ): Promise<RepositoryHealthAgent> {
     const config: AgentConfig = await RepositoryHealthAgent.loadConfig(
       configPath

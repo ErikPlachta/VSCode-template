@@ -365,7 +365,7 @@ Common issues and solutions:
 
 **Tool Execution Failures:**
 
-- Verify data files exist in `bin/data/` directory
+- Verify data files exist in `src/businessData/` directory
 - Check agent dependencies and imports
 - Review tool parameter validation
 
@@ -396,4 +396,3 @@ For stdio mode (current implementation), only `autoRegister` and `registerServer
 - **File System Access**: Server only accesses designated data directories
 - **Process Isolation**: Runs in separate Node.js process from VS Code extension
 - **Error Information**: Error responses avoid exposing sensitive system information
-

@@ -13,8 +13,8 @@ import {
   DataAgentProfile,
   DatabaseAgentProfile,
   RelevantDataManagerAgentProfile,
-} from "@mcp/agentProfiles";
-import { agentManifest, getAgentMetadata } from "@mcp/agentManifest";
+} from "@mcp/config/agentProfiles";
+import { agentManifest, getAgentMetadata } from "@mcp/config/agentManifest";
 import {
   renderClassificationSummary,
   renderEscalationPrompt,

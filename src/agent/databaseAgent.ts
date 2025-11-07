@@ -23,7 +23,7 @@ import {
 } from "@agent/relevantDataManagerAgent";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { validateCategorySchemas } from "@mcp/schemaUtils";
-import { DatabaseAgentProfile } from "@mcp/agentProfiles";
+import { DatabaseAgentProfile } from "@mcp/config/agentProfiles";
 
 type BaseQuery = Record<string, unknown>;
 

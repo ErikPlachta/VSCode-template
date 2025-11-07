@@ -24,7 +24,7 @@ import {
 } from "@agent/relevantDataManagerAgent";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { detectDuplicateSchemas } from "@mcp/schemaUtils";
-import { DataAgentProfile } from "@mcp/agentProfiles";
+import { DataAgentProfile } from "@mcp/config/agentProfiles";
 
 /**
  * Summary of a topic including schemas, examples, and queries.

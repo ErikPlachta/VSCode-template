@@ -69,7 +69,7 @@ export class ConfigurationLoader {
    *
    * @param configPath-  - Path to the configuration file.
    */
-  constructor(configPath: string = "bin/mcp.config.json") {
+  constructor(configPath: string = "src/mcp.config.json") {
     this.configPath = path.resolve(configPath);
   }
 

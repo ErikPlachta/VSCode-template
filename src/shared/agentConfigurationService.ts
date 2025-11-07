@@ -7,7 +7,7 @@ import type {
   AgentDefinition,
   ApplicationConfig,
 } from "../types/applicationConfig";
-import type { AgentIdentifier } from "@mcp/agentProfiles";
+import type { AgentIdentifier } from "@mcp/config/agentProfiles";
 
 /**
  * Service for managing agent configurations and metadata.

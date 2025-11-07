@@ -127,8 +127,8 @@ call :log_info "Validating mcp.config.json..."
 
 cd /d "%PROJECT_ROOT%"
 
-if not exist "bin\mcp.config.json" (
-    call :log_error "Configuration file not found: bin\mcp.config.json"
+if not exist "src\mcp.config.json" (
+    call :log_error "Configuration file not found: src\mcp.config.json"
     exit /b 1
 )
 

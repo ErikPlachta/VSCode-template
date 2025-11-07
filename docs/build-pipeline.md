@@ -26,7 +26,7 @@ The build pipeline is responsible for:
 
 ### Configuration Files
 
-- `bin/mcp.config.json` - Application configuration
+- `src/mcp.config.json` - Application configuration
 - `package.json` - Node.js project configuration
 - `tsconfig.json` - TypeScript compilation settings
 - `jest.config.js` - Testing configuration
@@ -34,7 +34,7 @@ The build pipeline is responsible for:
 ### Source Code
 
 - `src/**/*.ts` - TypeScript source files
-- `bin/data/**/*.json` - Category data files
+- `src/businessData/**/*.json` - Category data files
 - `docs/**/*.md` - Documentation files
 
 ## Outputs

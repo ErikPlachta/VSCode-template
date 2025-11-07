@@ -33,7 +33,7 @@ const fileDescriptions: Record<string, string> = {
   "src/types/applicationConfig.ts":
     "Application configuration type definitions",
   "src/types/external.d.ts": "External library type declarations",
-  "src/vscode-chat.d.ts": "VS Code chat API type declarations",
+  "src/types/vscode-chat.d.ts": "VS Code chat API type declarations",
 };
 
 /**
@@ -118,7 +118,7 @@ async function main(): Promise<void> {
     "src/shared/configurationLoader.ts",
     "src/types/applicationConfig.ts",
     "src/types/external.d.ts",
-    "src/vscode-chat.d.ts",
+    "src/types/vscode-chat.d.ts",
   ];
 
   let fixedCount = 0;

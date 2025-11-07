@@ -39,7 +39,7 @@ export class TemplateProcessor {
    *
    * @param {string} configPath - Path to the MCP configuration file.
    */
-  constructor(configPath: string = "bin/mcp.config.json") {
+  constructor(configPath: string = "src/mcp.config.json") {
     this.config = this.loadConfig(configPath);
   }
 
@@ -49,7 +49,9 @@ export class TemplateProcessor {
    * @param {string} dataDirectory - Directory containing category data.
    * @returns {Promise<void>} Promise that resolves when processing is complete.
    */
-  async processTemplates(dataDirectory: string = "bin/data"): Promise<void> {
+  async processTemplates(
+    dataDirectory: string = "src/businessData"
+  ): Promise<void> {
     const categoryFiles = await fg("*/category.json", {
       cwd: dataDirectory,
       absolute: true,
