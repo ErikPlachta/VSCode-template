@@ -24,10 +24,10 @@ async function runHealthCheck(): Promise<void> {
 
   for (const check of report.checks) {
     const status: string = check.passed ? 'PASSED' : 'FAILED';
-    // eslint-disable-next-line no-console -- Health summaries must be visible in CI logs.
+     
     console.log(`[${status}] ${check.name}`);
     for (const message of check.messages) {
-      // eslint-disable-next-line no-console -- Health summaries must be visible in CI logs.
+       
       console.log(`  - ${message}`);
     }
   }
@@ -40,7 +40,7 @@ async function runHealthCheck(): Promise<void> {
 }
 
 void runHealthCheck().catch((error: unknown) => {
-  // eslint-disable-next-line no-console -- Health summaries must be visible in CI logs.
+   
   console.error('Repository health check encountered an unrecoverable error.', error);
   process.exitCode = 1;
 });

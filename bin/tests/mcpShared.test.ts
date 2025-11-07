@@ -3,17 +3,20 @@ import {
   ClarificationAgentProfile,
   DataAgentProfile,
   DatabaseAgentProfile,
-  RelevantDataManagerAgentProfile
+  RelevantDataManagerAgentProfile,
 } from "../../src/mcp/agentProfiles";
 import { renderEscalationPrompt } from "../../src/mcp/prompts";
-import { createInvocationLogger, InvocationEvent } from "../../src/mcp/telemetry";
+import {
+  createInvocationLogger,
+  InvocationEvent,
+} from "../../src/mcp/telemetry";
 import {
   detectDuplicateSchemas,
-  validateCategorySchemas
+  validateCategorySchemas,
 } from "../../src/mcp/schemaUtils";
 import { KnowledgeBase } from "../../src/mcp/knowledgeBase";
-import { ClarificationAgent } from "../../src/agents/clarificationAgent";
-import type { BusinessCategory } from "../../src/agents/relevantDataManagerAgent";
+import { ClarificationAgent } from "../../src/agent/clarificationAgent";
+import type { BusinessCategory } from "../../src/agent/relevantDataManagerAgent";
 
 describe("Shared MCP utilities", () => {
   it("exposes manifest metadata for every agent", () => {
@@ -23,7 +26,7 @@ describe("Shared MCP utilities", () => {
         RelevantDataManagerAgentProfile.id,
         DatabaseAgentProfile.id,
         DataAgentProfile.id,
-        ClarificationAgentProfile.id
+        ClarificationAgentProfile.id,
       ])
     );
     const metadata = getAgentMetadata(DatabaseAgentProfile.id);
@@ -37,7 +40,7 @@ describe("Shared MCP utilities", () => {
       topic: "people",
       manifest,
       missingSignals: ["include relationship context"],
-      additionalGuidance: "Share the access level you expect."
+      additionalGuidance: "Share the access level you expect.",
     });
     expect(prompt).toContain("Clarification Agent");
     expect(prompt).toContain("people");
@@ -57,7 +60,10 @@ describe("Shared MCP utilities", () => {
       })
     ).rejects.toThrow("boom");
     expect(events).toHaveLength(2);
-    expect(events[0]).toMatchObject({ status: "success", operation: "success" });
+    expect(events[0]).toMatchObject({
+      status: "success",
+      operation: "success",
+    });
     expect(events[1]).toMatchObject({ status: "error", operation: "failure" });
     expect(events[1].error?.message).toBe("boom");
   });
@@ -79,7 +85,7 @@ describe("Shared MCP utilities", () => {
           schemaFiles: [],
           typeFiles: [],
           examplesDir: "",
-          queriesDir: ""
+          queriesDir: "",
         },
         relationships: [
           {
@@ -87,8 +93,8 @@ describe("Shared MCP utilities", () => {
             targetCategory: "category-b",
             viaField: "id",
             cardinality: "one",
-            description: ""
-          }
+            description: "",
+          },
         ],
         orchestration: {
           summary: "",
@@ -96,23 +102,25 @@ describe("Shared MCP utilities", () => {
           agents: {
             relevantDataManager: { focus: "", signals: [], promptStarters: [] },
             databaseAgent: { focus: "", signals: [], promptStarters: [] },
-            dataAgent: { focus: "", signals: [], promptStarters: [] }
-          }
-        }
+            dataAgent: { focus: "", signals: [], promptStarters: [] },
+          },
+        },
       },
       schemas: [
         { name: "Record", description: "", schema: {} },
-        { name: "record", description: "", schema: {} }
+        { name: "record", description: "", schema: {} },
       ],
       types: [],
       examples: [],
       queries: [],
       records: [],
-      validation: { checkedAt: "", status: "pass", issues: [] }
+      validation: { checkedAt: "", status: "pass", issues: [] },
     };
     const summary = validateCategorySchemas([category]);
     expect(summary.duplicateSchemaNames).toContain("record");
-    expect(summary.missingRelationships[0].relationship.targetCategory).toBe("category-b");
+    expect(summary.missingRelationships[0].relationship.targetCategory).toBe(
+      "category-b"
+    );
     const duplicates = detectDuplicateSchemas(category.schemas);
     expect(duplicates).toContain("record");
   });
@@ -120,8 +128,12 @@ describe("Shared MCP utilities", () => {
   it("queries the knowledge base for relevant snippets", () => {
     const knowledge = new KnowledgeBase();
     knowledge.indexDocuments([
-      { id: "1", title: "Schema guide", content: "Schema relationships for departments." },
-      { id: "2", title: "Runbooks", content: "Operational steps." }
+      {
+        id: "1",
+        title: "Schema guide",
+        content: "Schema relationships for departments.",
+      },
+      { id: "2", title: "Runbooks", content: "Operational steps." },
     ]);
     const hits = knowledge.query("departments schema", 1);
     expect(hits).toHaveLength(1);
@@ -132,16 +144,19 @@ describe("Shared MCP utilities", () => {
   it("uses clarification agent to craft follow-up prompts", async () => {
     const agent = new ClarificationAgent();
     agent.loadKnowledge([
-      { id: "kb", title: "Metadata", content: "Schemas describe fields and relationships." }
+      {
+        id: "kb",
+        title: "Metadata",
+        content: "Schemas describe fields and relationships.",
+      },
     ]);
     const response = await agent.clarify({
       question: "Need schema details",
       topic: "people",
       missingSignals: ["include schema names"],
-      candidateAgents: [RelevantDataManagerAgentProfile.id]
+      candidateAgents: [RelevantDataManagerAgentProfile.id],
     });
     expect(response.prompt).toContain("Relevant Data Manager");
     expect(response.knowledgeSnippets[0].title).toBe("Metadata");
   });
 });
-

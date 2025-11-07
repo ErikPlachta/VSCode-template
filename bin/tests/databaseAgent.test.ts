@@ -1,8 +1,8 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { DatabaseAgent } from "../../src/agents/databaseAgent";
-import { RelevantDataManagerAgent } from "../../src/agents/relevantDataManagerAgent";
+import { DatabaseAgent } from "../../src/agent/databaseAgent";
+import { RelevantDataManagerAgent } from "../../src/agent/relevantDataManagerAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -12,8 +12,8 @@ jest.mock(
     workspace: {
       get workspaceFolders() {
         return workspaceFoldersMock;
-      }
-    }
+      },
+    },
   }),
   { virtual: true }
 );
@@ -23,8 +23,14 @@ describe("DatabaseAgent", () => {
     workspaceFoldersMock = undefined;
   });
 
-  async function createAgents(): Promise<{ manager: RelevantDataManagerAgent; database: DatabaseAgent; cacheDir: string }> {
-    const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), "database-agent-test-"));
+  async function createAgents(): Promise<{
+    manager: RelevantDataManagerAgent;
+    database: DatabaseAgent;
+    cacheDir: string;
+  }> {
+    const cacheDir = await fs.mkdtemp(
+      path.join(os.tmpdir(), "database-agent-test-")
+    );
     const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
     const database = new DatabaseAgent(manager, Promise.resolve(cacheDir));
     return { manager, database, cacheDir };
@@ -32,14 +38,19 @@ describe("DatabaseAgent", () => {
 
   it("filters people by skill and application access", async () => {
     const { database } = await createAgents();
-    const results = await database.queryPeople({ skill: "python", applicationId: "app-aurora" });
+    const results = await database.queryPeople({
+      skill: "python",
+      applicationId: "app-aurora",
+    });
     const ids = results.map((record) => record.id);
     expect(ids).toEqual(["person-001"]);
   });
 
   it("filters departments by related systems", async () => {
     const { database } = await createAgents();
-    const results = await database.queryDepartments({ applicationId: "app-foundry" });
+    const results = await database.queryDepartments({
+      applicationId: "app-foundry",
+    });
     expect(results.map((record) => record.id)).toEqual(["dept-platform"]);
   });
 
@@ -48,9 +59,13 @@ describe("DatabaseAgent", () => {
     const sharedDir = path.join(cacheDir, "shared");
     const before = await fs.readdir(sharedDir).catch(() => []);
 
-    const { blueprint, results } = await database.runSavedQuery("applications", "Fetch critical applications", {
-      criticality: "high"
-    });
+    const { blueprint, results } = await database.runSavedQuery(
+      "applications",
+      "Fetch critical applications",
+      {
+        criticality: "high",
+      }
+    );
 
     expect(blueprint.samplePayload.endpoint).toContain("cmdb.example.com");
     expect(results.length).toBeGreaterThan(0);
@@ -61,15 +76,26 @@ describe("DatabaseAgent", () => {
 
   it("retrieves policy coverage for a department", async () => {
     const { database } = await createAgents();
-    const policies = await database.queryPolicies({ ownerDepartmentId: "dept-platform" });
-    expect(policies.map((policy) => policy.id)).toEqual(["policy-platform-standards"]);
+    const policies = await database.queryPolicies({
+      ownerDepartmentId: "dept-platform",
+    });
+    expect(policies.map((policy) => policy.id)).toEqual([
+      "policy-platform-standards",
+    ]);
   });
 
   it("retrieves resources bound to an application", async () => {
     const { database } = await createAgents();
-    const resources = await database.queryResources({ applicationId: "app-aurora" });
+    const resources = await database.queryResources({
+      applicationId: "app-aurora",
+    });
     const ids = resources.map((resource) => resource.id);
-    expect(ids).toEqual(expect.arrayContaining(["resource-analytics-playbook", "resource-data-handbook"]));
+    expect(ids).toEqual(
+      expect.arrayContaining([
+        "resource-analytics-playbook",
+        "resource-data-handbook",
+      ])
+    );
   });
 
   it("refreshes cached results when record hashes change", async () => {
@@ -89,6 +115,8 @@ describe("DatabaseAgent", () => {
 
     await database.queryCategory("people", { departmentId: "dept-analytics" });
     const updatedEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
-    expect(updatedEntry.metadata?.recordHash).not.toEqual(initialEntry.metadata.recordHash);
+    expect(updatedEntry.metadata?.recordHash).not.toEqual(
+      initialEntry.metadata.recordHash
+    );
   });
 });

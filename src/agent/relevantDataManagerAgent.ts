@@ -5,7 +5,7 @@
  * mirrors a repository folder structure complete with schemas, type
  * definitions, example datasets, validation reports, and remote query blueprints.
  *
- * @module agents/relevantDataManagerAgent
+ * @module agent/relevantDataManagerAgent
  */
 
 import Ajv, { ErrorObject, ValidateFunction } from "ajv";
@@ -16,7 +16,7 @@ import {
   ensureCacheDirectory,
   readSharedCacheEntry,
   SharedCacheEntry,
-  storeSharedCacheEntry
+  storeSharedCacheEntry,
 } from "../extension/mcpCache";
 import { createInvocationLogger } from "../mcp/telemetry";
 import { RelevantDataManagerAgentProfile } from "../mcp/agentProfiles";
@@ -147,7 +147,11 @@ export interface CategorySummary {
 }
 
 /** Minimal representation of a record stored under a category. */
-export type CategoryRecord = Record<string, unknown> & { id: string; name?: string; title?: string };
+export type CategoryRecord = Record<string, unknown> & {
+  id: string;
+  name?: string;
+  title?: string;
+};
 
 /** Unique identifier for a category in the repository. */
 export type CategoryId = string;
@@ -343,53 +347,100 @@ function parseTypeSchema(value: unknown, context: string): TypeSchema {
   const base = value as { kind?: string };
   switch (base.kind) {
     case "primitive": {
-      if (!("name" in base) || typeof (base as { name?: unknown }).name !== "string") {
+      if (
+        !("name" in base) ||
+        typeof (base as { name?: unknown }).name !== "string"
+      ) {
         throw new Error(`Primitive type for ${context} must declare a name.`);
       }
       const name = (base as { name: string }).name as PrimitiveTypeName;
-      const allowed: PrimitiveTypeName[] = ["str", "int", "float", "bool", "datetime"];
+      const allowed: PrimitiveTypeName[] = [
+        "str",
+        "int",
+        "float",
+        "bool",
+        "datetime",
+      ];
       if (!allowed.includes(name)) {
-        throw new Error(`Primitive type for ${context} must be one of ${allowed.join(", ")}.`);
+        throw new Error(
+          `Primitive type for ${context} must be one of ${allowed.join(", ")}.`
+        );
       }
       return { kind: "primitive", name };
     }
     case "optional": {
       if (!("value" in base)) {
-        throw new Error(`Optional type for ${context} must declare an inner value.`);
+        throw new Error(
+          `Optional type for ${context} must declare an inner value.`
+        );
       }
-      return { kind: "optional", value: parseTypeSchema((base as { value: unknown }).value, `${context}.value`) };
+      return {
+        kind: "optional",
+        value: parseTypeSchema(
+          (base as { value: unknown }).value,
+          `${context}.value`
+        ),
+      };
     }
     case "list": {
       if (!("element" in base)) {
-        throw new Error(`List type for ${context} must declare an element schema.`);
+        throw new Error(
+          `List type for ${context} must declare an element schema.`
+        );
       }
-      return { kind: "list", element: parseTypeSchema((base as { element: unknown }).element, `${context}.element`) };
+      return {
+        kind: "list",
+        element: parseTypeSchema(
+          (base as { element: unknown }).element,
+          `${context}.element`
+        ),
+      };
     }
     case "literal": {
       if (!("value" in base)) {
         throw new Error(`Literal type for ${context} must declare a value.`);
       }
-      return { kind: "literal", value: (base as { value: unknown }).value as string | number | boolean | null };
+      return {
+        kind: "literal",
+        value: (base as { value: unknown }).value as
+          | string
+          | number
+          | boolean
+          | null,
+      };
     }
     case "enum": {
       const rawValues = (base as { values?: unknown }).values;
       if (!Array.isArray(rawValues) || rawValues.length === 0) {
-        throw new Error(`Enum type for ${context} must declare at least one value.`);
+        throw new Error(
+          `Enum type for ${context} must declare at least one value.`
+        );
       }
       for (const entry of rawValues) {
         if (!["string", "number", "boolean"].includes(typeof entry)) {
-          throw new Error(`Enum values for ${context} must be strings, numbers, or booleans.`);
+          throw new Error(
+            `Enum values for ${context} must be strings, numbers, or booleans.`
+          );
         }
       }
-      return { kind: "enum", values: rawValues as Array<string | number | boolean> };
+      return {
+        kind: "enum",
+        values: rawValues as Array<string | number | boolean>,
+      };
     }
     case "typedDict": {
       const rawFields = (base as { fields?: unknown }).fields;
       if (!Array.isArray(rawFields) || rawFields.length === 0) {
-        throw new Error(`TypedDict for ${context} must include at least one field.`);
+        throw new Error(
+          `TypedDict for ${context} must include at least one field.`
+        );
       }
       const fields: TypedDictField[] = rawFields.map((rawField, index) => {
-        if (!rawField || typeof rawField !== "object" || Array.isArray(rawField)) {
+        if (
+          !rawField ||
+          typeof rawField !== "object" ||
+          Array.isArray(rawField)
+        ) {
           throw new Error(`Invalid field at index ${index} for ${context}.`);
         }
         const field = rawField as {
@@ -401,24 +452,39 @@ function parseTypeSchema(value: unknown, context: string): TypeSchema {
         if (typeof field.name !== "string" || field.name.trim() === "") {
           throw new Error(`Field ${index} for ${context} must include a name.`);
         }
-        const fieldType = parseTypeSchema(field.type, `${context}.${field.name}`);
-        if (field.required !== undefined && typeof field.required !== "boolean") {
-          throw new Error(`Field '${field.name}' in ${context} has an invalid required value.`);
+        const fieldType = parseTypeSchema(
+          field.type,
+          `${context}.${field.name}`
+        );
+        if (
+          field.required !== undefined &&
+          typeof field.required !== "boolean"
+        ) {
+          throw new Error(
+            `Field '${field.name}' in ${context} has an invalid required value.`
+          );
         }
-        if (field.description !== undefined && typeof field.description !== "string") {
-          throw new Error(`Field '${field.name}' in ${context} has an invalid description.`);
+        if (
+          field.description !== undefined &&
+          typeof field.description !== "string"
+        ) {
+          throw new Error(
+            `Field '${field.name}' in ${context} has an invalid description.`
+          );
         }
         return {
           name: field.name,
           type: fieldType,
           required: field.required as boolean | undefined,
-          description: field.description as string | undefined
+          description: field.description as string | undefined,
         };
       });
       return { kind: "typedDict", fields };
     }
     default:
-      throw new Error(`Unknown type schema kind '${String(base.kind)}' for ${context}.`);
+      throw new Error(
+        `Unknown type schema kind '${String(base.kind)}' for ${context}.`
+      );
   }
 }
 
@@ -442,11 +508,16 @@ export class RelevantDataManagerAgent {
   private readonly categories: Map<CategoryId, BusinessCategory>;
   private readonly lookupIndex: Map<string, BusinessCategory>;
   private readonly relationshipDefinitions: RelationshipDefinition[];
-  private readonly relationshipsBySource: Map<CategoryId, RelationshipDefinition[]>;
+  private readonly relationshipsBySource: Map<
+    CategoryId,
+    RelationshipDefinition[]
+  >;
   private readonly consolidatedIndex: DatasetCatalogueEntry[];
   private readonly datasetFingerprint: string;
   private readonly ajv: Ajv;
-  private readonly telemetry = createInvocationLogger(RelevantDataManagerAgentProfile.id);
+  private readonly telemetry = createInvocationLogger(
+    RelevantDataManagerAgentProfile.id
+  );
 
   constructor(cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
@@ -456,7 +527,9 @@ export class RelevantDataManagerAgent {
     this.categories = dataset.categories;
     this.lookupIndex = dataset.lookupIndex;
     this.relationshipDefinitions = dataset.relationships;
-    this.relationshipsBySource = this.groupRelationshipsBySource(dataset.relationships);
+    this.relationshipsBySource = this.groupRelationshipsBySource(
+      dataset.relationships
+    );
     this.consolidatedIndex = dataset.consolidatedIndex;
     this.datasetFingerprint = dataset.fingerprint;
     void this.persistConsolidatedIndex();
@@ -467,7 +540,7 @@ export class RelevantDataManagerAgent {
     return Array.from(this.categories.values()).map((category) => ({
       id: category.id,
       name: category.name,
-      description: category.description
+      description: category.description,
     }));
   }
 
@@ -553,7 +626,11 @@ export class RelevantDataManagerAgent {
     matchingFields: string[];
   }> {
     const needle = keyword.trim().toLowerCase();
-    const matches: Array<{ categoryId: CategoryId; record: CategoryRecord; matchingFields: string[] }> = [];
+    const matches: Array<{
+      categoryId: CategoryId;
+      record: CategoryRecord;
+      matchingFields: string[];
+    }> = [];
     if (!needle) {
       return matches;
     }
@@ -564,16 +641,29 @@ export class RelevantDataManagerAgent {
           if (value == null) {
             continue;
           }
-          if (typeof value === "string" && value.toLowerCase().includes(needle)) {
+          if (
+            typeof value === "string" &&
+            value.toLowerCase().includes(needle)
+          ) {
             matchedFields.push(field);
             continue;
           }
-          if (Array.isArray(value) && value.some((item) => typeof item === "string" && item.toLowerCase().includes(needle))) {
+          if (
+            Array.isArray(value) &&
+            value.some(
+              (item) =>
+                typeof item === "string" && item.toLowerCase().includes(needle)
+            )
+          ) {
             matchedFields.push(field);
           }
         }
         if (matchedFields.length > 0) {
-          matches.push({ categoryId: category.id, record, matchingFields: matchedFields });
+          matches.push({
+            categoryId: category.id,
+            record,
+            matchingFields: matchedFields,
+          });
         }
       }
     }
@@ -587,7 +677,10 @@ export class RelevantDataManagerAgent {
       const cacheKey = `relevant-data:${category.id}:snapshot`;
       const cacheDir = await this.cacheDirPromise;
       const currentHash = this.getCategoryRecordHash(category.id);
-      const cached = await readSharedCacheEntry<CategorySnapshot>(cacheDir, cacheKey);
+      const cached = await readSharedCacheEntry<CategorySnapshot>(
+        cacheDir,
+        cacheKey
+      );
       if (cached?.metadata?.recordHash === currentHash) {
         return cached.value;
       }
@@ -600,7 +693,7 @@ export class RelevantDataManagerAgent {
         typeNames: category.types.map((typeDef) => typeDef.name),
         queryNames: category.queries.map((query) => query.name),
         exampleFiles: category.examples.map((example) => example.file),
-        folder: category.config.folder
+        folder: category.config.folder,
       };
       const entry: SharedCacheEntry<CategorySnapshot> = {
         key: cacheKey,
@@ -608,8 +701,8 @@ export class RelevantDataManagerAgent {
         timestamp: new Date().toISOString(),
         value: snapshot,
         metadata: {
-          recordHash: currentHash
-        }
+          recordHash: currentHash,
+        },
       };
       await storeSharedCacheEntry(cacheDir, entry);
       return snapshot;
@@ -621,7 +714,9 @@ export class RelevantDataManagerAgent {
     const category = this.getCategory(topicOrId);
     const record = this.getRecord(category.id, recordId);
     if (!record) {
-      throw new Error(`Record ${recordId} not found in category ${category.id}`);
+      throw new Error(
+        `Record ${recordId} not found in category ${category.id}`
+      );
     }
     const connections: EntityConnections["connections"] = [];
     const relationshipRules = this.relationshipsBySource.get(category.id) ?? [];
@@ -637,7 +732,7 @@ export class RelevantDataManagerAgent {
       connections.push({
         relationship: relationship.relationshipName,
         targetCategory: relationship.targetCategory,
-        records: relatedRecords
+        records: relatedRecords,
       });
     }
     return { categoryId: category.id, recordId, connections };
@@ -657,14 +752,19 @@ export class RelevantDataManagerAgent {
     const relationships: RelationshipDefinition[] = [];
     const consolidatedIndex: DatasetCatalogueEntry[] = [];
 
-    const entries = fs.readdirSync(this.dataRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory());
+    const entries = fs
+      .readdirSync(this.dataRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory());
     if (entries.length === 0) {
-      throw new Error(`No category folders were found inside '${this.dataRoot}'.`);
+      throw new Error(
+        `No category folders were found inside '${this.dataRoot}'.`
+      );
     }
 
     for (const entry of entries) {
       const categoryDir = path.join(this.dataRoot, entry.name);
-      const { category, relationshipDefinitions } = this.loadCategory(categoryDir);
+      const { category, relationshipDefinitions } =
+        this.loadCategory(categoryDir);
       categories.set(category.id, category);
       consolidatedIndex.push(this.createCatalogueEntry(category));
       relationships.push(...relationshipDefinitions);
@@ -680,27 +780,55 @@ export class RelevantDataManagerAgent {
       .update(JSON.stringify(consolidatedIndex))
       .digest("hex");
 
-    return { categories, lookupIndex, relationships, consolidatedIndex, fingerprint };
+    return {
+      categories,
+      lookupIndex,
+      relationships,
+      consolidatedIndex,
+      fingerprint,
+    };
   }
 
-  private loadCategory(categoryDir: string): { category: BusinessCategory; relationshipDefinitions: RelationshipDefinition[] } {
+  private loadCategory(categoryDir: string): {
+    category: BusinessCategory;
+    relationshipDefinitions: RelationshipDefinition[];
+  } {
     const configPath = path.join(categoryDir, "category.json");
     if (!fs.existsSync(configPath)) {
       throw new Error(`Missing category.json inside '${categoryDir}'.`);
     }
-    const metadata = this.loadJsonFile<RawCategoryMetadata>(configPath, `metadata for ${categoryDir}`);
+    const metadata = this.loadJsonFile<RawCategoryMetadata>(
+      configPath,
+      `metadata for ${categoryDir}`
+    );
     if (!metadata.id || !metadata.name || !metadata.description) {
-      throw new Error(`Category metadata at '${configPath}' is missing required fields.`);
+      throw new Error(
+        `Category metadata at '${configPath}' is missing required fields.`
+      );
     }
     const folder = this.buildFolderBlueprint(categoryDir, configPath);
-    const orchestration = this.normaliseOrchestrationConfig(metadata.config.orchestration, configPath);
+    const orchestration = this.normaliseOrchestrationConfig(
+      metadata.config.orchestration,
+      configPath
+    );
     const schemas = this.loadSchemas(categoryDir);
     const typeDefinitions = this.loadTypeDefinitions(categoryDir);
     const examples = this.loadExamples(categoryDir);
     const queries = this.loadQueries(categoryDir);
-    const { descriptions, definitions } = this.loadRelationships(categoryDir, metadata.id);
-    const records = this.loadRecords(categoryDir, metadata.id, metadata.config.requirements);
-    const validation = this.validateCategoryRecords(schemas, records, definitions);
+    const { descriptions, definitions } = this.loadRelationships(
+      categoryDir,
+      metadata.id
+    );
+    const records = this.loadRecords(
+      categoryDir,
+      metadata.id,
+      metadata.config.requirements
+    );
+    const validation = this.validateCategoryRecords(
+      schemas,
+      records,
+      definitions
+    );
 
     const category: BusinessCategory = {
       id: metadata.id,
@@ -715,14 +843,14 @@ export class RelevantDataManagerAgent {
         folder,
         requirements: metadata.config.requirements,
         relationships: descriptions,
-        orchestration
+        orchestration,
       },
       schemas,
       types: typeDefinitions,
       examples,
       queries,
       records,
-      validation
+      validation,
     };
 
     if (metadata.config.requirements?.requiredRelationshipFields) {
@@ -743,11 +871,20 @@ export class RelevantDataManagerAgent {
     if (!raw) {
       throw new Error(`Missing orchestration guidance inside '${context}'.`);
     }
-    const summary = this.ensureString(raw.summary, `${context} orchestration.summary`);
-    const signals = this.ensureStringArray(raw.signals, `${context} orchestration.signals`);
+    const summary = this.ensureString(
+      raw.summary,
+      `${context} orchestration.summary`
+    );
+    const signals = this.ensureStringArray(
+      raw.signals,
+      `${context} orchestration.signals`
+    );
     const escalateWhen =
       raw.escalateWhen !== undefined
-        ? this.ensureStringArray(raw.escalateWhen, `${context} orchestration.escalateWhen`)
+        ? this.ensureStringArray(
+            raw.escalateWhen,
+            `${context} orchestration.escalateWhen`
+          )
         : undefined;
     const agents = raw.agents;
     if (!agents) {
@@ -758,10 +895,22 @@ export class RelevantDataManagerAgent {
       signals,
       escalateWhen,
       agents: {
-        relevantDataManager: this.normaliseAgentGuidance(agents.relevantDataManager, "relevantDataManager", context),
-        databaseAgent: this.normaliseAgentGuidance(agents.databaseAgent, "databaseAgent", context),
-        dataAgent: this.normaliseAgentGuidance(agents.dataAgent, "dataAgent", context)
-      }
+        relevantDataManager: this.normaliseAgentGuidance(
+          agents.relevantDataManager,
+          "relevantDataManager",
+          context
+        ),
+        databaseAgent: this.normaliseAgentGuidance(
+          agents.databaseAgent,
+          "databaseAgent",
+          context
+        ),
+        dataAgent: this.normaliseAgentGuidance(
+          agents.dataAgent,
+          "dataAgent",
+          context
+        ),
+      },
     };
   }
 
@@ -771,15 +920,23 @@ export class RelevantDataManagerAgent {
     context: string
   ): AgentOrchestrationGuidance {
     if (!raw) {
-      throw new Error(`Missing orchestration.agents.${String(agentKey)} inside '${context}'.`);
+      throw new Error(
+        `Missing orchestration.agents.${String(agentKey)} inside '${context}'.`
+      );
     }
     return {
-      focus: this.ensureString(raw.focus, `${context} orchestration.agents.${String(agentKey)}.focus`),
-      signals: this.ensureStringArray(raw.signals, `${context} orchestration.agents.${String(agentKey)}.signals`),
+      focus: this.ensureString(
+        raw.focus,
+        `${context} orchestration.agents.${String(agentKey)}.focus`
+      ),
+      signals: this.ensureStringArray(
+        raw.signals,
+        `${context} orchestration.agents.${String(agentKey)}.signals`
+      ),
       promptStarters: this.ensureStringArray(
         raw.promptStarters,
         `${context} orchestration.agents.${String(agentKey)}.promptStarters`
-      )
+      ),
     };
   }
 
@@ -804,16 +961,23 @@ export class RelevantDataManagerAgent {
       }
       const trimmed = entry.trim();
       if (!trimmed) {
-        throw new Error(`Expected ${context}[${index}] to be a non-empty string.`);
+        throw new Error(
+          `Expected ${context}[${index}] to be a non-empty string.`
+        );
       }
       return trimmed;
     });
   }
 
-  private buildFolderBlueprint(categoryDir: string, configPath: string): FolderBlueprint {
+  private buildFolderBlueprint(
+    categoryDir: string,
+    configPath: string
+  ): FolderBlueprint {
     const schemasDir = this.requireDirectory(path.join(categoryDir, "schemas"));
     const typesDir = this.requireDirectory(path.join(categoryDir, "types"));
-    const examplesDir = this.requireDirectory(path.join(categoryDir, "examples"));
+    const examplesDir = this.requireDirectory(
+      path.join(categoryDir, "examples")
+    );
     const queriesDir = this.requireDirectory(path.join(categoryDir, "queries"));
 
     return {
@@ -822,7 +986,7 @@ export class RelevantDataManagerAgent {
       schemaFiles: this.collectFiles(schemasDir, [".json"]),
       typeFiles: this.collectFiles(typesDir, [".json"]),
       examplesDir: toPosixPath(path.relative(process.cwd(), examplesDir)),
-      queriesDir: toPosixPath(path.relative(process.cwd(), queriesDir))
+      queriesDir: toPosixPath(path.relative(process.cwd(), queriesDir)),
     };
   }
 
@@ -836,14 +1000,24 @@ export class RelevantDataManagerAgent {
   private collectFiles(targetDir: string, extensions: string[]): string[] {
     return fs
       .readdirSync(targetDir, { withFileTypes: true })
-      .filter((entry) => entry.isFile() && extensions.includes(path.extname(entry.name)))
-      .map((entry) => toPosixPath(path.relative(process.cwd(), path.join(targetDir, entry.name))));
+      .filter(
+        (entry) =>
+          entry.isFile() && extensions.includes(path.extname(entry.name))
+      )
+      .map((entry) =>
+        toPosixPath(
+          path.relative(process.cwd(), path.join(targetDir, entry.name))
+        )
+      );
   }
 
   private loadSchemas(categoryDir: string): CategorySchema[] {
     const target = path.join(categoryDir, "schemas");
     return this.collectFiles(target, [".json"]).map((file) => {
-      const schema = this.loadJsonFile<RawSchemaFile>(path.join(process.cwd(), file), `schema '${file}'`);
+      const schema = this.loadJsonFile<RawSchemaFile>(
+        path.join(process.cwd(), file),
+        `schema '${file}'`
+      );
       if (!schema.name || !schema.description || !schema.schema) {
         throw new Error(`Schema file '${file}' is missing required fields.`);
       }
@@ -854,11 +1028,19 @@ export class RelevantDataManagerAgent {
   private loadTypeDefinitions(categoryDir: string): TypeDefinition[] {
     const target = path.join(categoryDir, "types");
     return this.collectFiles(target, [".json"]).map((file) => {
-      const typeFile = this.loadJsonFile<RawTypeFile>(path.join(process.cwd(), file), `type definition '${file}'`);
+      const typeFile = this.loadJsonFile<RawTypeFile>(
+        path.join(process.cwd(), file),
+        `type definition '${file}'`
+      );
       if (!typeFile.name || !typeFile.description) {
-        throw new Error(`Type definition file '${file}' is missing required fields.`);
+        throw new Error(
+          `Type definition file '${file}' is missing required fields.`
+        );
       }
-      const schema = parseTypeSchema(typeFile.schema, `type definition '${file}'`);
+      const schema = parseTypeSchema(
+        typeFile.schema,
+        `type definition '${file}'`
+      );
       return { name: typeFile.name, description: typeFile.description, schema };
     });
   }
@@ -866,7 +1048,10 @@ export class RelevantDataManagerAgent {
   private loadExamples(categoryDir: string): ExampleDataset[] {
     const target = path.join(categoryDir, "examples");
     return this.collectFiles(target, [".json"]).map((file) => {
-      const example = this.loadJsonFile<RawExampleFile>(path.join(process.cwd(), file), `example '${file}'`);
+      const example = this.loadJsonFile<RawExampleFile>(
+        path.join(process.cwd(), file),
+        `example '${file}'`
+      );
       if (!example.description || !example.sample) {
         throw new Error(`Example file '${file}' is missing required fields.`);
       }
@@ -880,10 +1065,14 @@ export class RelevantDataManagerAgent {
     relationshipDefinitions: RelationshipDefinition[]
   ): DataValidationReport {
     const issues: DataValidationIssue[] = [];
-    const validators: Array<{ schema: string; validate: ValidateFunction }> = [];
+    const validators: Array<{ schema: string; validate: ValidateFunction }> =
+      [];
     for (const schema of schemas) {
       try {
-        validators.push({ schema: schema.name, validate: this.ajv.compile(schema.schema) });
+        validators.push({
+          schema: schema.name,
+          validate: this.ajv.compile(schema.schema),
+        });
       } catch (error) {
         issues.push({
           recordId: "__schema__",
@@ -914,7 +1103,9 @@ export class RelevantDataManagerAgent {
         issues.push({
           recordId: record.id,
           schema: validators[0]?.schema,
-          message: errorsBySchema.join(" | ") || "Record does not conform to declared schemas.",
+          message:
+            errorsBySchema.join(" | ") ||
+            "Record does not conform to declared schemas.",
           type: "schema",
         });
       }
@@ -944,7 +1135,10 @@ export class RelevantDataManagerAgent {
   private loadQueries(categoryDir: string): RemoteQueryBlueprint[] {
     const target = path.join(categoryDir, "queries");
     return this.collectFiles(target, [".json"]).map((file) => {
-      const query = this.loadJsonFile<RawQueryFile>(path.join(process.cwd(), file), `query '${file}'`);
+      const query = this.loadJsonFile<RawQueryFile>(
+        path.join(process.cwd(), file),
+        `query '${file}'`
+      );
       if (!query.name || !query.samplePayload) {
         throw new Error(`Query file '${file}' is missing required fields.`);
       }
@@ -962,7 +1156,9 @@ export class RelevantDataManagerAgent {
       const relationshipIssues: DataValidationIssue[] = [];
       for (const record of category.records) {
         for (const rule of rules) {
-          const values = this.normaliseRelationshipValues(record[rule.sourceField]);
+          const values = this.normaliseRelationshipValues(
+            record[rule.sourceField]
+          );
           if (values.length === 0) {
             continue;
           }
@@ -991,7 +1187,10 @@ export class RelevantDataManagerAgent {
           }
         }
       }
-      const mergedIssues = [...category.validation.issues, ...relationshipIssues];
+      const mergedIssues = [
+        ...category.validation.issues,
+        ...relationshipIssues,
+      ];
       category.validation = {
         checkedAt: new Date().toISOString(),
         status: mergedIssues.length === 0 ? "pass" : "fail",
@@ -1009,48 +1208,74 @@ export class RelevantDataManagerAgent {
     if (!fs.existsSync(recordsPath)) {
       throw new Error(`Missing records.json for category '${categoryId}'.`);
     }
-    const raw = this.loadJsonFile<unknown[]>(recordsPath, `records for ${categoryId}`);
+    const raw = this.loadJsonFile<unknown[]>(
+      recordsPath,
+      `records for ${categoryId}`
+    );
     if (!Array.isArray(raw)) {
       throw new Error(`Records at '${recordsPath}' must be an array.`);
     }
     const records: CategoryRecord[] = [];
     for (const entry of raw) {
       if (!entry || typeof entry !== "object") {
-        throw new Error(`Invalid record encountered for category '${categoryId}'.`);
+        throw new Error(
+          `Invalid record encountered for category '${categoryId}'.`
+        );
       }
       const record = entry as CategoryRecord;
       if (typeof record.id !== "string" || record.id.trim() === "") {
         throw new Error(`Record in category '${categoryId}' is missing an id.`);
       }
       if (requirements?.requiredRecordFields) {
-        this.assertRequiredFields(record, requirements.requiredRecordFields, `record ${record.id}`);
+        this.assertRequiredFields(
+          record,
+          requirements.requiredRecordFields,
+          `record ${record.id}`
+        );
       }
       records.push(record);
     }
     return records;
   }
 
-  private loadRelationships(categoryDir: string, categoryId: string): RelationshipLoadResult {
+  private loadRelationships(
+    categoryDir: string,
+    categoryId: string
+  ): RelationshipLoadResult {
     const relationshipsPath = path.join(categoryDir, "relationships.json");
     if (!fs.existsSync(relationshipsPath)) {
-      throw new Error(`Missing relationships.json for category '${categoryId}'.`);
+      throw new Error(
+        `Missing relationships.json for category '${categoryId}'.`
+      );
     }
-    const raw = this.loadJsonFile<RawRelationshipEntry[]>(relationshipsPath, `relationships for ${categoryId}`);
+    const raw = this.loadJsonFile<RawRelationshipEntry[]>(
+      relationshipsPath,
+      `relationships for ${categoryId}`
+    );
     if (!Array.isArray(raw) || raw.length === 0) {
-      throw new Error(`Relationships at '${relationshipsPath}' must be a non-empty array.`);
+      throw new Error(
+        `Relationships at '${relationshipsPath}' must be a non-empty array.`
+      );
     }
     const descriptions: RelationshipDescription[] = [];
     const definitions: RelationshipDefinition[] = [];
     for (const relationship of raw) {
-      if (!relationship.key || !relationship.name || !relationship.sourceField || !relationship.targetField) {
-        throw new Error(`Relationship entry in '${relationshipsPath}' is missing required fields.`);
+      if (
+        !relationship.key ||
+        !relationship.name ||
+        !relationship.sourceField ||
+        !relationship.targetField
+      ) {
+        throw new Error(
+          `Relationship entry in '${relationshipsPath}' is missing required fields.`
+        );
       }
       descriptions.push({
         name: relationship.name,
         targetCategory: relationship.targetCategory,
         viaField: relationship.sourceField,
         cardinality: relationship.cardinality,
-        description: relationship.description
+        description: relationship.description,
       });
       definitions.push({
         sourceCategory: categoryId,
@@ -1058,13 +1283,17 @@ export class RelevantDataManagerAgent {
         relationshipName: relationship.key,
         sourceField: relationship.sourceField,
         targetField: relationship.targetField,
-        cardinality: relationship.cardinality
+        cardinality: relationship.cardinality,
       });
     }
     return { descriptions, definitions };
   }
 
-  private assertRequiredFields(record: CategoryRecord, fields: string[], context: string): void {
+  private assertRequiredFields(
+    record: CategoryRecord,
+    fields: string[],
+    context: string
+  ): void {
     for (const field of fields) {
       if (!(field in record)) {
         throw new Error(`Field '${field}' is required on ${context}.`);
@@ -1072,16 +1301,26 @@ export class RelevantDataManagerAgent {
     }
   }
 
-  private assertRelationshipCoverage(fields: string[], relationships: RelationshipDefinition[], context: string): void {
-    const covered = new Set(relationships.map((relationship) => relationship.sourceField));
+  private assertRelationshipCoverage(
+    fields: string[],
+    relationships: RelationshipDefinition[],
+    context: string
+  ): void {
+    const covered = new Set(
+      relationships.map((relationship) => relationship.sourceField)
+    );
     for (const field of fields) {
       if (!covered.has(field)) {
-        throw new Error(`Relationship coverage for field '${field}' was not declared in ${context}.`);
+        throw new Error(
+          `Relationship coverage for field '${field}' was not declared in ${context}.`
+        );
       }
     }
   }
 
-  private groupRelationshipsBySource(relations: RelationshipDefinition[]): Map<CategoryId, RelationshipDefinition[]> {
+  private groupRelationshipsBySource(
+    relations: RelationshipDefinition[]
+  ): Map<CategoryId, RelationshipDefinition[]> {
     const map = new Map<CategoryId, RelationshipDefinition[]>();
     for (const relationship of relations) {
       const existing = map.get(relationship.sourceCategory) ?? [];
@@ -1107,7 +1346,7 @@ export class RelevantDataManagerAgent {
           toolName: RelevantDataManagerAgentProfile.id,
           timestamp: new Date().toISOString(),
           value: this.consolidatedIndex,
-          metadata: { fingerprint: this.datasetFingerprint }
+          metadata: { fingerprint: this.datasetFingerprint },
         };
         await storeSharedCacheEntry(cacheDir, entry);
       } catch (error) {
@@ -1116,7 +1355,9 @@ export class RelevantDataManagerAgent {
     });
   }
 
-  private createCatalogueEntry(category: BusinessCategory): DatasetCatalogueEntry {
+  private createCatalogueEntry(
+    category: BusinessCategory
+  ): DatasetCatalogueEntry {
     return {
       id: category.id,
       name: category.name,
@@ -1127,21 +1368,31 @@ export class RelevantDataManagerAgent {
         name: relationship.name,
         targetCategory: relationship.targetCategory,
         viaField: relationship.viaField,
-        cardinality: relationship.cardinality
+        cardinality: relationship.cardinality,
       })),
       schemaNames: category.schemas.map((schema) => schema.name),
-      requirements: category.config.requirements
+      requirements: category.config.requirements,
     };
   }
 
   private hashRecords(records: CategoryRecord[]): string {
     const normalised = records.map((record) =>
-      Object.fromEntries(Object.entries(record).sort(([left], [right]) => left.localeCompare(right)))
+      Object.fromEntries(
+        Object.entries(record).sort(([left], [right]) =>
+          left.localeCompare(right)
+        )
+      )
     );
-    return crypto.createHash("sha1").update(JSON.stringify(normalised)).digest("hex");
+    return crypto
+      .createHash("sha1")
+      .update(JSON.stringify(normalised))
+      .digest("hex");
   }
 
-  private resolveTargets(relationship: RelationshipDefinition, value: unknown): CategoryRecord[] {
+  private resolveTargets(
+    relationship: RelationshipDefinition,
+    value: unknown
+  ): CategoryRecord[] {
     const targetCategory = this.categories.get(relationship.targetCategory);
     if (!targetCategory) {
       return [];
@@ -1151,14 +1402,19 @@ export class RelevantDataManagerAgent {
       return [];
     }
     return targetCategory.records.filter((record) =>
-      values.some((expected) => this.hasMatchingRecordValue(record, relationship.targetField, expected))
+      values.some((expected) =>
+        this.hasMatchingRecordValue(record, relationship.targetField, expected)
+      )
     );
   }
 
   private normaliseRelationshipValues(value: unknown): string[] {
     if (Array.isArray(value)) {
       return value
-        .filter((item): item is string | number => typeof item === "string" || typeof item === "number")
+        .filter(
+          (item): item is string | number =>
+            typeof item === "string" || typeof item === "number"
+        )
         .map((item) => String(item).trim())
         .filter((item) => item.length > 0);
     }
@@ -1169,7 +1425,11 @@ export class RelevantDataManagerAgent {
     return [];
   }
 
-  private hasMatchingRecordValue(record: CategoryRecord, field: string, expected: string): boolean {
+  private hasMatchingRecordValue(
+    record: CategoryRecord,
+    field: string,
+    expected: string
+  ): boolean {
     const targetValue = record[field];
     if (targetValue == null) {
       return false;
@@ -1180,7 +1440,9 @@ export class RelevantDataManagerAgent {
     return String(targetValue) === expected;
   }
 
-  private formatAjvErrors(errors: ErrorObject[] | null | undefined): string | undefined {
+  private formatAjvErrors(
+    errors: ErrorObject[] | null | undefined
+  ): string | undefined {
     if (!errors || errors.length === 0) {
       return undefined;
     }
@@ -1204,7 +1466,11 @@ export class RelevantDataManagerAgent {
     try {
       return JSON.parse(raw) as T;
     } catch (error) {
-      throw new Error(`Unable to parse ${context} at '${filePath}': ${(error as Error).message}`);
+      throw new Error(
+        `Unable to parse ${context} at '${filePath}': ${
+          (error as Error).message
+        }`
+      );
     }
   }
 }

@@ -350,7 +350,7 @@ export function createMcpServer(
   });
 
   server.listen(port, () => {
-    // eslint-disable-next-line no-console
+     
     console.log(`MCP mock server listening on http://localhost:${port}`);
   });
 

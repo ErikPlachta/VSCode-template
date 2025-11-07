@@ -95,7 +95,7 @@ export async function removeRegistration(id: string): Promise<string> {
     current.servers &&
     Object.prototype.hasOwnProperty.call(current.servers, id)
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+     
     delete (current.servers as Record<string, unknown>)[id];
     await writeMcpConfig(configPath, current);
   }

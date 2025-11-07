@@ -24,7 +24,9 @@ export class KnowledgeBase {
   }
 
   query(term: string, limit = 3): KnowledgeHit[] {
-    const keywords = new Set((term.toLowerCase().match(/\b[\w-]{3,}\b/g) ?? []).map((token) => token));
+    const keywords = new Set(
+      (term.toLowerCase().match(/\b[\w-]{3,}\b/g) ?? []).map((token) => token)
+    );
     const hits: KnowledgeHit[] = [];
     this.documents.forEach((document) => {
       const text = `${document.title} ${document.content}`.toLowerCase();
@@ -38,18 +40,16 @@ export class KnowledgeBase {
         hits.push({
           id: document.id,
           title: document.title,
-          summary: summarise(document.content),
-          score
+          summary: summarize(document.content),
+          score,
         });
       }
     });
-    return hits
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit);
+    return hits.sort((a, b) => b.score - a.score).slice(0, limit);
   }
 }
 
-function summarise(content: string, maxLength = 160): string {
+function summarize(content: string, maxLength = 160): string {
   const trimmed = content.replace(/\s+/g, " ").trim();
   if (trimmed.length <= maxLength) {
     return trimmed;
@@ -58,4 +58,3 @@ function summarise(content: string, maxLength = 160): string {
   const lastSpace = snippet.lastIndexOf(" ");
   return `${snippet.slice(0, lastSpace > 0 ? lastSpace : maxLength)}…`;
 }
-

@@ -3,7 +3,7 @@
  * between business categories and produces insights that orchestration logic
  * can feed to other MCP tools.
  *
- * @module agents/dataAgent
+ * @module agent/dataAgent
  */
 
 import { DatabaseAgent } from "./databaseAgent";
@@ -19,7 +19,7 @@ import {
   TypeDefinition,
   RelationshipDescription,
   RelevantDataManagerAgent,
-  RemoteQueryBlueprint
+  RemoteQueryBlueprint,
 } from "./relevantDataManagerAgent";
 import { createInvocationLogger } from "../mcp/telemetry";
 import { detectDuplicateSchemas } from "../mcp/schemaUtils";
@@ -180,7 +180,10 @@ export class DataAgent {
    * @param {RelevantDataManagerAgent} [manager] Optional manager responsible for dataset access.
    * @param {DatabaseAgent} [databaseAgent] Optional database agent instance to reuse.
    */
-  constructor(manager?: RelevantDataManagerAgent, databaseAgent?: DatabaseAgent) {
+  constructor(
+    manager?: RelevantDataManagerAgent,
+    databaseAgent?: DatabaseAgent
+  ) {
     this.manager = manager ?? new RelevantDataManagerAgent();
     this.database = databaseAgent ?? new DatabaseAgent(this.manager);
   }
@@ -195,9 +198,9 @@ export class DataAgent {
   }
 
   /**
-   * Summarise a topic including schema references and highlight data.
+   * summarize a topic including schema references and highlight data.
    *
-   * @param {string} topic Category identifier or alias to summarise.
+   * @param {string} topic Category identifier or alias to summarize.
    * @returns {Promise<TopicOverview>} Snapshot of the category and related artefacts.
    * @throws {UnknownCategoryError} When the topic cannot be resolved.
    * @example
@@ -212,7 +215,9 @@ export class DataAgent {
       const duplicateSchemas = detectDuplicateSchemas(category.schemas);
       if (duplicateSchemas.length) {
         throw new Error(
-          `Duplicate schema definitions detected for ${category.id}: ${duplicateSchemas.join(", ")}`
+          `Duplicate schema definitions detected for ${
+            category.id
+          }: ${duplicateSchemas.join(", ")}`
         );
       }
       const snapshot = await this.manager.getOrCreateSnapshot(category.id);
@@ -225,7 +230,7 @@ export class DataAgent {
         examples: category.examples,
         queries: category.queries,
         highlightRecords,
-        validation: category.validation
+        validation: category.validation,
       };
     });
   }
@@ -243,24 +248,36 @@ export class DataAgent {
    * connections.connections.forEach((link) => console.log(link.relationship));
    * ```
    */
-  async mapTopicConnections(topic: string, recordId?: string): Promise<TopicConnections> {
+  async mapTopicConnections(
+    topic: string,
+    recordId?: string
+  ): Promise<TopicConnections> {
     return this.telemetry("mapTopicConnections", async () => {
       const category = this.manager.getCategory(topic);
       const focusRecord = recordId
         ? this.manager.getRecord(category.id, recordId)
         : category.records[0];
       if (!focusRecord) {
-        throw new Error(`No record found in category ${category.id} to analyse.`);
+        throw new Error(
+          `No record found in category ${category.id} to analyse.`
+        );
       }
-      const connections = this.manager.getEntityConnections(category.id, focusRecord.id);
+      const connections = this.manager.getEntityConnections(
+        category.id,
+        focusRecord.id
+      );
       const narrative = connections.connections.map((entry) => {
-        const names = entry.records.map((record) => this.getRecordDisplayName(record));
-        return `${this.getRecordDisplayName(focusRecord)} → ${entry.relationship}: ${names.join(", ")}`;
+        const names = entry.records.map((record) =>
+          this.getRecordDisplayName(record)
+        );
+        return `${this.getRecordDisplayName(focusRecord)} → ${
+          entry.relationship
+        }: ${names.join(", ")}`;
       });
       return {
         focus: { categoryId: category.id, record: focusRecord },
         connections: connections.connections,
-        narrative
+        narrative,
       };
     });
   }
@@ -278,34 +295,43 @@ export class DataAgent {
    * console.log(plan.steps.map((step) => step.title));
    * ```
    */
-  async buildExplorationPlan(topic: string, question: string): Promise<ExplorationPlan> {
+  async buildExplorationPlan(
+    topic: string,
+    question: string
+  ): Promise<ExplorationPlan> {
     return this.telemetry("buildExplorationPlan", async () => {
       const category = this.manager.getCategory(topic);
       const overview = await this.getTopicOverview(category.id);
       const supportingResources = this.collectSupportingResources(category.id);
-      const steps: ExplorationStep[] = overview.relationships.map((relationship) => {
-        const relatedCategory = this.manager.getCategory(relationship.targetCategory);
-        const schemaHint = relatedCategory.config.folder.schemaFiles.length
-          ? `Inspect schemas: ${relatedCategory.config.folder.schemaFiles.join(", ")}`
-          : undefined;
-        return {
-          title: `Analyse ${relationship.name}`,
-          description: relationship.description,
-          recommendedCategory: relatedCategory.id,
-          hints: [
-            schemaHint,
-            `Use databaseAgent to query ${relatedCategory.name} by '${relationship.viaField}'.`
-          ].filter((hint): hint is string => Boolean(hint))
-        };
-      });
+      const steps: ExplorationStep[] = overview.relationships.map(
+        (relationship) => {
+          const relatedCategory = this.manager.getCategory(
+            relationship.targetCategory
+          );
+          const schemaHint = relatedCategory.config.folder.schemaFiles.length
+            ? `Inspect schemas: ${relatedCategory.config.folder.schemaFiles.join(
+                ", "
+              )}`
+            : undefined;
+          return {
+            title: `Analyze ${relationship.name}`,
+            description: relationship.description,
+            recommendedCategory: relatedCategory.id,
+            hints: [
+              schemaHint,
+              `Use databaseAgent to query ${relatedCategory.name} by '${relationship.viaField}'.`,
+            ].filter((hint): hint is string => Boolean(hint)),
+          };
+        }
+      );
       steps.push({
         title: "Review examples and validation",
         description: `Use the example datasets and validation summary under ${category.config.folder.root} to understand data quality considerations before making changes.`,
         recommendedCategory: category.id,
         hints: [
           ...category.examples.map((example) => `Example: ${example.file}`),
-          `Validation status: ${category.validation.status}`
-        ]
+          `Validation status: ${category.validation.status}`,
+        ],
       });
 
       return {
@@ -313,7 +339,7 @@ export class DataAgent {
         question,
         steps,
         recommendedQueries: overview.queries.map((query) => query.name),
-        supportingResources
+        supportingResources,
       };
     });
   }
@@ -341,12 +367,22 @@ export class DataAgent {
     return this.telemetry("findCrossTopicConnection", async () => {
       const sourceCategory = this.manager.getCategory(sourceTopic);
       const targetCategory = this.manager.getCategory(targetTopic);
-      const focusRecord = this.manager.getRecord(sourceCategory.id, sourceRecordId);
+      const focusRecord = this.manager.getRecord(
+        sourceCategory.id,
+        sourceRecordId
+      );
       if (!focusRecord) {
-        throw new Error(`Record ${sourceRecordId} not found for category ${sourceCategory.id}`);
+        throw new Error(
+          `Record ${sourceRecordId} not found for category ${sourceCategory.id}`
+        );
       }
-      const connections = this.manager.getEntityConnections(sourceCategory.id, focusRecord.id);
-      const connection = connections.connections.find((entry) => entry.targetCategory === targetCategory.id);
+      const connections = this.manager.getEntityConnections(
+        sourceCategory.id,
+        focusRecord.id
+      );
+      const connection = connections.connections.find(
+        (entry) => entry.targetCategory === targetCategory.id
+      );
       if (!connection) {
         return undefined;
       }
@@ -354,7 +390,7 @@ export class DataAgent {
         sourceRecord: focusRecord,
         targetCategory: targetCategory.id,
         relationship: connection.relationship,
-        relatedRecords: connection.records
+        relatedRecords: connection.records,
       };
     });
   }
@@ -375,7 +411,7 @@ export class DataAgent {
       categoryId: match.categoryId,
       recordId: match.record.id,
       displayName: this.getRecordDisplayName(match.record),
-      matchingFields: match.matchingFields
+      matchingFields: match.matchingFields,
     }));
   }
 
@@ -403,7 +439,7 @@ export class DataAgent {
       types: category.types,
       examples: category.examples,
       validation: category.validation,
-      queries: category.queries
+      queries: category.queries,
     };
   }
 
@@ -413,19 +449,24 @@ export class DataAgent {
    * @param {CategoryId} categoryId Category used to source supporting artefacts.
    * @returns {Array<{categoryId: CategoryId, ids: string[]}>} Related record references including neighbouring categories.
    */
-  private collectSupportingResources(categoryId: CategoryId): Array<{ categoryId: CategoryId; ids: string[] }> {
+  private collectSupportingResources(
+    categoryId: CategoryId
+  ): Array<{ categoryId: CategoryId; ids: string[] }> {
     const category = this.manager.getCategory(categoryId);
     const focusRecord = category.records[0];
     const resources: Array<{ categoryId: CategoryId; ids: string[] }> = [
       {
         categoryId: category.id,
-        ids: category.records.slice(0, 2).map((record) => record.id)
-      }
+        ids: category.records.slice(0, 2).map((record) => record.id),
+      },
     ];
     if (!focusRecord) {
       return resources;
     }
-    const connections = this.manager.getEntityConnections(category.id, focusRecord.id);
+    const connections = this.manager.getEntityConnections(
+      category.id,
+      focusRecord.id
+    );
     for (const connection of connections.connections) {
       const ids = connection.records.slice(0, 2).map((record) => record.id);
       if (ids.length === 0) {
@@ -457,7 +498,7 @@ export class DataAgent {
  * @returns {DataAgent} Freshly constructed data agent.
  * @example
  * ```ts
- * import { createDataAgent } from "./agents/dataAgent";
+ * import { createDataAgent } from "./agent/dataAgent";
  * const agent = createDataAgent();
  * ```
  */

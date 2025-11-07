@@ -10,7 +10,11 @@
     "access": "Published to the entire company by default.",
     "requirements": {
       "requiredRecordFields": ["id", "name", "departmentId", "type"],
-      "requiredRelationshipFields": ["departmentId", "linkedPolicyIds", "applicationIds"],
+      "requiredRelationshipFields": [
+        "departmentId",
+        "linkedPolicyIds",
+        "applicationIds"
+      ],
       "notes": [
         "Resources should reference owning policies and supported applications."
       ]
@@ -36,7 +40,7 @@
           ],
           "promptStarters": [
             "Relevant data manager, list the required metadata for a resource record.",
-            "Relevant data manager, summarise the policies and applications linked to `<resource>`.",
+            "Relevant data manager, summarize the policies and applications linked to `<resource>`.",
             "Relevant data manager, walk me through the folder structure for the resources dataset."
           ]
         },

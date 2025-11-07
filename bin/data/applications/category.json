@@ -9,8 +9,17 @@
     "updateCadence": "Change management board weekly updates.",
     "access": "Engineering and IT stakeholders.",
     "requirements": {
-      "requiredRecordFields": ["id", "name", "ownerDepartmentId", "criticality"],
-      "requiredRelationshipFields": ["ownerDepartmentId", "relatedPolicyIds", "resourceIds"],
+      "requiredRecordFields": [
+        "id",
+        "name",
+        "ownerDepartmentId",
+        "criticality"
+      ],
+      "requiredRelationshipFields": [
+        "ownerDepartmentId",
+        "relatedPolicyIds",
+        "resourceIds"
+      ],
       "notes": [
         "Applications must declare an accountable department and policy coverage."
       ]
@@ -36,7 +45,7 @@
           ],
           "promptStarters": [
             "Relevant data manager, list the required metadata and relationships for `<application>`.",
-            "Relevant data manager, summarise the policies and resources linked to `<application>`.",
+            "Relevant data manager, summarize the policies and resources linked to `<application>`.",
             "Relevant data manager, describe the folder blueprint for the applications dataset."
           ]
         },

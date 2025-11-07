@@ -2,8 +2,8 @@ import type {
   BusinessCategory,
   CategoryId,
   RelationshipDescription,
-  CategorySchema
-} from "../agents/relevantDataManagerAgent";
+  CategorySchema,
+} from "../agent/relevantDataManagerAgent";
 
 export interface RelationshipIntegrityIssue {
   categoryId: CategoryId;
@@ -46,7 +46,7 @@ export function validateRelationships(
         issues.push({
           categoryId: category.id,
           relationship,
-          reason: `Missing target category '${relationship.targetCategory}'`
+          reason: `Missing target category '${relationship.targetCategory}'`,
         });
       }
     });
@@ -54,11 +54,12 @@ export function validateRelationships(
   return issues;
 }
 
-export function validateCategorySchemas(categories: BusinessCategory[]): SchemaValidationSummary {
+export function validateCategorySchemas(
+  categories: BusinessCategory[]
+): SchemaValidationSummary {
   const missingRelationships = validateRelationships(categories);
   const duplicateSchemaNames = categories
     .flatMap((category) => detectDuplicateSchemas(category.schemas))
     .filter((value, index, array) => array.indexOf(value) === index);
   return { missingRelationships, duplicateSchemaNames };
 }
-

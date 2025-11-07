@@ -23,7 +23,7 @@ async function runJsonValidation(): Promise<void> {
   const result = await agent.validateJsonSchemas();
   if (!result.passed) {
     for (const message of result.messages) {
-      // eslint-disable-next-line no-console -- Explicit reporting for CI logs.
+       
       console.error(message);
     }
     process.exitCode = 1;
@@ -31,7 +31,7 @@ async function runJsonValidation(): Promise<void> {
 }
 
 void runJsonValidation().catch((error: unknown) => {
-  // eslint-disable-next-line no-console -- Explicit reporting for CI logs.
+   
   console.error('JSON validation encountered an unrecoverable error.', error);
   process.exitCode = 1;
 });

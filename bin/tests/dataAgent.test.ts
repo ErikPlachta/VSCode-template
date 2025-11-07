@@ -1,9 +1,9 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { DataAgent } from "../../src/agents/dataAgent";
-import { DatabaseAgent } from "../../src/agents/databaseAgent";
-import { RelevantDataManagerAgent } from "../../src/agents/relevantDataManagerAgent";
+import { DataAgent } from "../../src/agent/dataAgent";
+import { DatabaseAgent } from "../../src/agent/databaseAgent";
+import { RelevantDataManagerAgent } from "../../src/agent/relevantDataManagerAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -38,7 +38,7 @@ describe("DataAgent", () => {
     return { agent, manager, database };
   }
 
-  it("summarises topics with highlights", async () => {
+  it("summarizes topics with highlights", async () => {
     const { agent } = await createAgent();
     const overview = await agent.getTopicOverview("people");
     expect(overview.snapshot.id).toBe("people");

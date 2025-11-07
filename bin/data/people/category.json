@@ -10,7 +10,12 @@
     "access": "All employees can view contact and role data.",
     "requirements": {
       "requiredRecordFields": ["id", "name", "departmentId", "skills"],
-      "requiredRelationshipFields": ["departmentId", "applicationIds", "policyAcks", "resourceIds"],
+      "requiredRelationshipFields": [
+        "departmentId",
+        "applicationIds",
+        "policyAcks",
+        "resourceIds"
+      ],
       "notes": [
         "People must link to a department and at least one policy acknowledgement."
       ]
@@ -61,7 +66,7 @@
             "A new hire needs an introduction to the experts supporting an initiative."
           ],
           "promptStarters": [
-            "Data agent, summarise the skills coverage for `<department>` and highlight gaps.",
+            "Data agent, summarize the skills coverage for `<department>` and highlight gaps.",
             "Data agent, draft an introduction to the team supporting `<application>`.",
             "Data agent, recommend staffing for `<initiative>` based on people and department data."
           ]

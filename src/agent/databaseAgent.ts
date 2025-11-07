@@ -3,7 +3,7 @@
  * relevant-data workspace as if it were backed by persistent stores. The agent
  * focuses on structured retrieval with filtering, joins, and saved queries.
  *
- * @module agents/databaseAgent
+ * @module agent/databaseAgent
  */
 
 import * as crypto from "crypto";
@@ -12,13 +12,13 @@ import {
   ensureCacheDirectory,
   readSharedCacheEntry,
   SharedCacheEntry,
-  storeSharedCacheEntry
+  storeSharedCacheEntry,
 } from "../extension/mcpCache";
 import {
   CategoryId,
   CategoryRecord,
   RelevantDataManagerAgent,
-  RemoteQueryBlueprint
+  RemoteQueryBlueprint,
 } from "./relevantDataManagerAgent";
 import { createInvocationLogger } from "../mcp/telemetry";
 import { validateCategorySchemas } from "../mcp/schemaUtils";
@@ -30,22 +30,22 @@ const CRITERIA_FIELD_ALIASES: Record<CategoryId, Record<string, string>> = {
   people: {
     skill: "skills",
     applicationId: "applicationIds",
-    policyId: "policyAcks"
+    policyId: "policyAcks",
   },
   departments: {
     applicationId: "applicationIds",
-    policyId: "policyIds"
+    policyId: "policyIds",
   },
   applications: {
-    policyId: "relatedPolicyIds"
+    policyId: "relatedPolicyIds",
   },
   companyPolicies: {
-    applicationId: "applicationIds"
+    applicationId: "applicationIds",
   },
   companyResources: {
     applicationId: "applicationIds",
-    policyId: "linkedPolicyIds"
-  }
+    policyId: "linkedPolicyIds",
+  },
 };
 
 /**
@@ -167,11 +167,19 @@ export class DatabaseAgent {
    * @param {RelevantDataManagerAgent} manager Data manager providing dataset access.
    * @param {Promise<string>} [cacheDirPromise] Optional override for the cache directory resolution.
    */
-  constructor(private readonly manager: RelevantDataManagerAgent, cacheDirPromise?: Promise<string>) {
+  constructor(
+    private readonly manager: RelevantDataManagerAgent,
+    cacheDirPromise?: Promise<string>
+  ) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
-    const categories = this.manager.listCategories().map((entry) => this.manager.getCategory(entry.id));
+    const categories = this.manager
+      .listCategories()
+      .map((entry) => this.manager.getCategory(entry.id));
     const schemaSummary = validateCategorySchemas(categories);
-    if (schemaSummary.missingRelationships.length || schemaSummary.duplicateSchemaNames.length) {
+    if (
+      schemaSummary.missingRelationships.length ||
+      schemaSummary.duplicateSchemaNames.length
+    ) {
       console.warn(
         "[database-agent] Schema integrity issues detected",
         schemaSummary
@@ -186,7 +194,10 @@ export class DatabaseAgent {
    * @param {QueryOptions} [options] Query execution options.
    * @returns {Promise<CategoryRecord[]>} Matching people records.
    */
-  async queryPeople(criteria: PeopleQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
+  async queryPeople(
+    criteria: PeopleQuery = {},
+    options?: QueryOptions
+  ): Promise<CategoryRecord[]> {
     return this.executeQuery("people", criteria, options);
   }
 
@@ -197,7 +208,10 @@ export class DatabaseAgent {
    * @param {QueryOptions} [options] Query execution options.
    * @returns {Promise<CategoryRecord[]>} Matching department records.
    */
-  async queryDepartments(criteria: DepartmentQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
+  async queryDepartments(
+    criteria: DepartmentQuery = {},
+    options?: QueryOptions
+  ): Promise<CategoryRecord[]> {
     return this.executeQuery("departments", criteria, options);
   }
 
@@ -208,7 +222,10 @@ export class DatabaseAgent {
    * @param {QueryOptions} [options] Query execution options.
    * @returns {Promise<CategoryRecord[]>} Matching application records.
    */
-  async queryApplications(criteria: ApplicationQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
+  async queryApplications(
+    criteria: ApplicationQuery = {},
+    options?: QueryOptions
+  ): Promise<CategoryRecord[]> {
     return this.executeQuery("applications", criteria, options);
   }
 
@@ -219,7 +236,10 @@ export class DatabaseAgent {
    * @param {QueryOptions} [options] Query execution options.
    * @returns {Promise<CategoryRecord[]>} Matching policy records.
    */
-  async queryPolicies(criteria: PolicyQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
+  async queryPolicies(
+    criteria: PolicyQuery = {},
+    options?: QueryOptions
+  ): Promise<CategoryRecord[]> {
     return this.executeQuery("companyPolicies", criteria, options);
   }
 
@@ -230,7 +250,10 @@ export class DatabaseAgent {
    * @param {QueryOptions} [options] Query execution options.
    * @returns {Promise<CategoryRecord[]>} Matching resource records.
    */
-  async queryResources(criteria: ResourceQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
+  async queryResources(
+    criteria: ResourceQuery = {},
+    options?: QueryOptions
+  ): Promise<CategoryRecord[]> {
     return this.executeQuery("companyResources", criteria, options);
   }
 
@@ -274,13 +297,17 @@ export class DatabaseAgent {
     options?: QueryOptions
   ): Promise<SavedQueryResult> {
     const category = this.manager.getCategory(topicOrId);
-    const blueprint = category.queries.find((entry) => entry.name.toLowerCase() === queryName.toLowerCase());
+    const blueprint = category.queries.find(
+      (entry) => entry.name.toLowerCase() === queryName.toLowerCase()
+    );
     if (!blueprint) {
-      throw new Error(`Unknown query '${queryName}' for category '${category.name}'`);
+      throw new Error(
+        `Unknown query '${queryName}' for category '${category.name}'`
+      );
     }
     const results = await this.executeQuery(category.id, criteria, {
       cacheKeyPrefix: `saved-query:${category.id}:${blueprint.name}`,
-      ...options
+      ...options,
     });
     return { blueprint, results };
   }
@@ -304,7 +331,11 @@ export class DatabaseAgent {
         const normalisedCriteria = this.normaliseCriteria(criteria);
         const useCache = options.useCache ?? true;
         const cacheKey = useCache
-          ? this.buildCacheKey(categoryId, normalisedCriteria, options.cacheKeyPrefix)
+          ? this.buildCacheKey(
+              categoryId,
+              normalisedCriteria,
+              options.cacheKeyPrefix
+            )
           : undefined;
 
         if (!cacheKey) {
@@ -312,7 +343,10 @@ export class DatabaseAgent {
         }
 
         const cacheDir = await this.cacheDirPromise;
-        const cached = await readSharedCacheEntry<CategoryRecord[]>(cacheDir, cacheKey);
+        const cached = await readSharedCacheEntry<CategoryRecord[]>(
+          cacheDir,
+          cacheKey
+        );
         const currentHash = this.manager.getCategoryRecordHash(categoryId);
         if (cached?.metadata?.recordHash === currentHash) {
           return cached.value;
@@ -332,8 +366,8 @@ export class DatabaseAgent {
             categoryId,
             criteria: normalisedCriteria,
             recordHash: currentHash,
-            datasetFingerprint: this.manager.getDatasetFingerprint()
-          }
+            datasetFingerprint: this.manager.getDatasetFingerprint(),
+          },
         };
         await storeSharedCacheEntry(cacheDir, entry);
         return results;
@@ -349,10 +383,15 @@ export class DatabaseAgent {
    * @param {Record<string, unknown>} criteria Filter criteria after aliasing.
    * @returns {CategoryRecord[]} Records that satisfy the criteria.
    */
-  private performFilter(categoryId: CategoryId, criteria: Record<string, unknown>): CategoryRecord[] {
+  private performFilter(
+    categoryId: CategoryId,
+    criteria: Record<string, unknown>
+  ): CategoryRecord[] {
     const records = this.manager.getRecords(categoryId);
     const remappedCriteria = this.applyAliases(categoryId, criteria);
-    return records.filter((record) => this.matchesCriteria(record, remappedCriteria));
+    return records.filter((record) =>
+      this.matchesCriteria(record, remappedCriteria)
+    );
   }
 
   /**
@@ -362,12 +401,18 @@ export class DatabaseAgent {
    * @param {Record<string, unknown>} criteria Original filter criteria supplied by the user.
    * @returns {Record<string, unknown>} Criteria with keys remapped to dataset fields.
    */
-  private applyAliases(categoryId: CategoryId, criteria: Record<string, unknown>): Record<string, unknown> {
+  private applyAliases(
+    categoryId: CategoryId,
+    criteria: Record<string, unknown>
+  ): Record<string, unknown> {
     const aliases = CRITERIA_FIELD_ALIASES[categoryId] ?? {};
-    return Object.entries(criteria).reduce<Record<string, unknown>>((acc, [key, value]) => {
-      acc[aliases[key] ?? key] = value;
-      return acc;
-    }, {});
+    return Object.entries(criteria).reduce<Record<string, unknown>>(
+      (acc, [key, value]) => {
+        acc[aliases[key] ?? key] = value;
+        return acc;
+      },
+      {}
+    );
   }
 
   /**
@@ -376,14 +421,18 @@ export class DatabaseAgent {
    * @param {Record<string, unknown>} criteria Filter criteria supplied by callers.
    * @returns {Record<string, unknown>} Criteria stripped of empty values and with consistent casing.
    */
-  private normaliseCriteria(criteria: Record<string, unknown>): Record<string, unknown> {
+  private normaliseCriteria(
+    criteria: Record<string, unknown>
+  ): Record<string, unknown> {
     const result: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(criteria)) {
       if (value === undefined || value === "") {
         continue;
       }
       if (Array.isArray(value)) {
-        result[key] = value.filter((item) => item !== undefined && item !== null).map((item) => this.normaliseValue(item));
+        result[key] = value
+          .filter((item) => item !== undefined && item !== null)
+          .map((item) => this.normaliseValue(item));
         continue;
       }
       result[key] = this.normaliseValue(value);
@@ -420,7 +469,10 @@ export class DatabaseAgent {
    * @param {Record<string, unknown>} criteria Normalised comparison values.
    * @returns {boolean} `true` when the record matches all filters.
    */
-  private matchesCriteria(record: CategoryRecord, criteria: Record<string, unknown>): boolean {
+  private matchesCriteria(
+    record: CategoryRecord,
+    criteria: Record<string, unknown>
+  ): boolean {
     for (const [key, expected] of Object.entries(criteria)) {
       const actual = record[key];
       if (!this.valueMatches(actual, expected)) {
@@ -443,7 +495,9 @@ export class DatabaseAgent {
     }
     if (typeof expected === "string") {
       if (Array.isArray(actual)) {
-        return actual.some((item) => typeof item === "string" && item.toLowerCase() === expected);
+        return actual.some(
+          (item) => typeof item === "string" && item.toLowerCase() === expected
+        );
       }
       if (typeof actual !== "string") {
         return false;
@@ -457,7 +511,9 @@ export class DatabaseAgent {
       const expectedValues = expected.map((item) =>
         typeof item === "string" ? item : String(item).toLowerCase()
       );
-      const actualValues = actual.map((item) => (typeof item === "string" ? item.toLowerCase() : String(item)));
+      const actualValues = actual.map((item) =>
+        typeof item === "string" ? item.toLowerCase() : String(item)
+      );
       return expectedValues.every((value) => actualValues.includes(value));
     }
     if (typeof expected === "number" || typeof expected === "boolean") {
@@ -482,7 +538,11 @@ export class DatabaseAgent {
    * @param {string} [prefix="query"] Cache key prefix.
    * @returns {string} Hash-based cache key.
    */
-  private buildCacheKey(categoryId: CategoryId, criteria: Record<string, unknown>, prefix = "query"): string {
+  private buildCacheKey(
+    categoryId: CategoryId,
+    criteria: Record<string, unknown>,
+    prefix = "query"
+  ): string {
     const serialised = JSON.stringify(this.sortObject(criteria));
     const digest = crypto.createHash("sha1").update(serialised).digest("hex");
     return `${prefix}:${categoryId}:${digest}`;
@@ -521,6 +581,8 @@ export class DatabaseAgent {
  * const policies = await agent.queryPolicies({ category: "security" });
  * ```
  */
-export function createDatabaseAgent(manager?: RelevantDataManagerAgent): DatabaseAgent {
+export function createDatabaseAgent(
+  manager?: RelevantDataManagerAgent
+): DatabaseAgent {
   return new DatabaseAgent(manager ?? new RelevantDataManagerAgent());
 }

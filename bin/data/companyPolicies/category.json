@@ -10,7 +10,11 @@
     "access": "All employees. Approvals handled via Governance & Risk.",
     "requirements": {
       "requiredRecordFields": ["id", "title", "ownerDepartmentId"],
-      "requiredRelationshipFields": ["ownerDepartmentId", "applicationIds", "relatedResourceIds"],
+      "requiredRelationshipFields": [
+        "ownerDepartmentId",
+        "applicationIds",
+        "relatedResourceIds"
+      ],
       "notes": [
         "Policies should highlight the owning department and impacted resources."
       ]
@@ -36,7 +40,7 @@
           ],
           "promptStarters": [
             "Relevant data manager, list the required metadata for a new policy entry.",
-            "Relevant data manager, summarise the applications and resources governed by `<policy>`.",
+            "Relevant data manager, summarize the applications and resources governed by `<policy>`.",
             "Relevant data manager, point me to the schemas and examples for the policy dataset."
           ]
         },
@@ -61,7 +65,7 @@
             "The orchestrator is planning a roadmap or training guide using policy coverage."
           ],
           "promptStarters": [
-            "Data agent, summarise how `<department>` enforces `<policy>` across its applications.",
+            "Data agent, summarize how `<department>` enforces `<policy>` across its applications.",
             "Data agent, outline compliance risks for `<regulation>` based on current policy coverage.",
             "Data agent, draft onboarding guidance for new hires about `<policy area>`."
           ]

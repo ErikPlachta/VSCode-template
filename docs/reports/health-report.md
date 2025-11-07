@@ -4,14 +4,14 @@ summary: Automated validation status for documentation, schemas, and TypeScript 
 roles: ['quality-assurance', 'platform-engineering']
 associations: ['repository-health-agent']
 hierarchy: ['governance', 'quality', 'health-report']
-generatedAt: 2025-11-07T20:42:14.434Z
+generatedAt: 2025-11-07T21:26:29.384Z
 ---
 
 # Repository Compliance Health Report
 
 ## Summary
 
-- Generated at: 2025-11-07T20:42:14.434Z
+- Generated at: 2025-11-07T21:26:29.384Z
 - Overall status: PASSED
 
 ## Responsibilities

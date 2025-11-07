@@ -4,15 +4,14 @@
  * All source files must provide comprehensive docblocks per project standards.
  */
 
-import path from 'node:path';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { ESLint } from 'eslint';
-import Ajv, { ErrorObject } from 'ajv';
-import Ajv2020 from 'ajv/dist/2020';
-import addFormats from 'ajv-formats';
-import fg from 'fast-glob';
-import matter from 'gray-matter';
-
+import path from "node:path";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { ESLint } from "eslint";
+import Ajv, { ErrorObject } from "ajv";
+import Ajv2020 from "ajv/dist/2020";
+import addFormats from "ajv-formats";
+import fg from "fast-glob";
+import matter from "gray-matter";
 
 /**
  * Configuration contract for the repository health agent.
@@ -164,7 +163,7 @@ export class RepositoryHealthAgent {
       allErrors: true,
       strict: true,
       strictRequired: false,
-      allowUnionTypes: true
+      allowUnionTypes: true,
     });
     addFormats(this.ajv);
   }
@@ -183,7 +182,7 @@ export class RepositoryHealthAgent {
    */
   public static async loadConfig(configPath: string): Promise<AgentConfig> {
     const absolutePath: string = path.resolve(process.cwd(), configPath);
-    const rawContent: string = await readFile(absolutePath, 'utf8');
+    const rawContent: string = await readFile(absolutePath, "utf8");
     return JSON.parse(rawContent) as AgentConfig;
   }
 
@@ -199,8 +198,12 @@ export class RepositoryHealthAgent {
    * const agent = await RepositoryHealthAgent.createFromDisk();
    * ```
    */
-  public static async createFromDisk(configPath: string = 'bin/agent.config.json'): Promise<RepositoryHealthAgent> {
-    const config: AgentConfig = await RepositoryHealthAgent.loadConfig(configPath);
+  public static async createFromDisk(
+    configPath: string = "bin/agent.config.json"
+  ): Promise<RepositoryHealthAgent> {
+    const config: AgentConfig = await RepositoryHealthAgent.loadConfig(
+      configPath
+    );
     return new RepositoryHealthAgent(process.cwd(), config);
   }
 
@@ -227,7 +230,7 @@ export class RepositoryHealthAgent {
     return {
       generatedAt: new Date().toISOString(),
       passed,
-      checks
+      checks,
     };
   }
 
@@ -245,12 +248,11 @@ export class RepositoryHealthAgent {
   public async runTypescriptLint(): Promise<CheckResult> {
     const eslint: ESLint = new ESLint({
       cwd: this.baseDir,
-      extensions: ['.ts']
     });
     const results: ESLint.LintResult[] = await eslint.lintFiles([
-      ...this.config.typescript.include
+      ...this.config.typescript.include,
     ]);
-    const formatter = await eslint.loadFormatter('stylish');
+    const formatter = await eslint.loadFormatter("stylish");
     const resultText: string = await formatter.format(results);
     const errorCount: number = results.reduce(
       (accumulator: number, result: ESLint.LintResult) =>
@@ -259,9 +261,12 @@ export class RepositoryHealthAgent {
     );
 
     return {
-      name: 'TypeScript ESLint',
+      name: "TypeScript ESLint",
       passed: errorCount === 0,
-      messages: errorCount === 0 ? ['All TypeScript files contain required documentation.'] : [resultText]
+      messages:
+        errorCount === 0
+          ? ["All TypeScript files contain required documentation."]
+          : [resultText],
     };
   }
 
@@ -280,32 +285,40 @@ export class RepositoryHealthAgent {
     const findings: string[] = [];
 
     for (const rule of this.config.jsonSchemas) {
-      const files: string[] = await fg(rule.pattern, { cwd: this.baseDir, absolute: true });
+      const files: string[] = await fg(rule.pattern, {
+        cwd: this.baseDir,
+        absolute: true,
+      });
       if (files.length === 0) {
         findings.push(`No files matched pattern ${rule.pattern}.`);
         continue;
       }
 
       const schemaPath: string = path.resolve(this.baseDir, rule.schema);
-      const schemaContent: string = await readFile(schemaPath, 'utf8');
+      const schemaContent: string = await readFile(schemaPath, "utf8");
       const validate = this.ajv.compile(JSON.parse(schemaContent));
 
       for (const file of files) {
-        const fileContent: string = await readFile(file, 'utf8');
+        const fileContent: string = await readFile(file, "utf8");
         const data = JSON.parse(fileContent);
         const valid: boolean = validate(data) as boolean;
         if (!valid) {
           const relativePath: string = path.relative(this.baseDir, file);
-          const errorMessages: string = this.formatAjvErrors(validate.errors ?? []);
+          const errorMessages: string = this.formatAjvErrors(
+            validate.errors ?? []
+          );
           findings.push(`${relativePath}: ${errorMessages}`);
         }
       }
     }
 
     return {
-      name: 'JSON Schema Validation',
+      name: "JSON Schema Validation",
       passed: findings.length === 0,
-      messages: findings.length === 0 ? ['All JSON files satisfy their schemas.'] : findings
+      messages:
+        findings.length === 0
+          ? ["All JSON files satisfy their schemas."]
+          : findings,
     };
   }
 
@@ -322,14 +335,20 @@ export class RepositoryHealthAgent {
    */
   public async validateMarkdownDocuments(): Promise<CheckResult> {
     const include: string[] = [...this.config.markdown.include];
-    const ignore: string[] = this.config.markdown.exclude ? [...this.config.markdown.exclude] : [];
-    const files: string[] = await fg(include, { cwd: this.baseDir, absolute: true, ignore });
+    const ignore: string[] = this.config.markdown.exclude
+      ? [...this.config.markdown.exclude]
+      : [];
+    const files: string[] = await fg(include, {
+      cwd: this.baseDir,
+      absolute: true,
+      ignore,
+    });
     const diagnostics: MarkdownDiagnostic[] = [];
 
     for (const file of files) {
       const relativePath: string = path.relative(this.baseDir, file);
       const errors: string[] = [];
-      const raw: string = await readFile(file, 'utf8');
+      const raw: string = await readFile(file, "utf8");
       const parsed = matter(raw);
 
       for (const field of this.config.markdown.requiredFrontMatter) {
@@ -349,15 +368,20 @@ export class RepositoryHealthAgent {
       }
     }
 
-    const messages: string[] = diagnostics.map((diagnostic: MarkdownDiagnostic) => {
-      const joined: string = diagnostic.errors.join('; ');
-      return `${diagnostic.file}: ${joined}`;
-    });
+    const messages: string[] = diagnostics.map(
+      (diagnostic: MarkdownDiagnostic) => {
+        const joined: string = diagnostic.errors.join("; ");
+        return `${diagnostic.file}: ${joined}`;
+      }
+    );
 
     return {
-      name: 'Markdown Metadata',
+      name: "Markdown Metadata",
       passed: messages.length === 0,
-      messages: messages.length === 0 ? ['All Markdown documents include the mandated metadata.'] : messages
+      messages:
+        messages.length === 0
+          ? ["All Markdown documents include the mandated metadata."]
+          : messages,
     };
   }
 
@@ -375,7 +399,10 @@ export class RepositoryHealthAgent {
    * ```
    */
   public async writeReport(report: HealthReport): Promise<void> {
-    const outputPath: string = path.resolve(this.baseDir, this.config.report.output);
+    const outputPath: string = path.resolve(
+      this.baseDir,
+      this.config.report.output
+    );
     const outputDir: string = path.dirname(outputPath);
     await mkdir(outputDir, { recursive: true });
 
@@ -388,60 +415,70 @@ export class RepositoryHealthAgent {
       `hierarchy: ['governance', 'quality', 'health-report']`,
       `generatedAt: ${report.generatedAt}`,
       `---`,
-      '',
+      "",
       `# Repository Compliance Health Report`,
-      '',
+      "",
       `## Summary`,
-      '',
+      "",
       `- Generated at: ${report.generatedAt}`,
-      `- Overall status: ${report.passed ? 'PASSED' : 'FAILED'}`,
-      '',
+      `- Overall status: ${report.passed ? "PASSED" : "FAILED"}`,
+      "",
       `## Responsibilities`,
-      '',
+      "",
       `- Execute TypeScript linting to enforce doc coverage.`,
       `- Validate JSON schemas to maintain data integrity.`,
       `- Audit Markdown metadata for hierarchical governance.`,
-      '',
+      "",
       `## Inputs`,
-      '',
+      "",
       `- agent.config.json for configuration directives.`,
       `- JSON Schemas under the schemas directory.`,
       `- Repository TypeScript and Markdown sources.`,
-      '',
+      "",
       `## Outputs`,
-      '',
+      "",
       `- Compliance status for each enforcement area.`,
       `- Aggregated diagnostics for failing artefacts.`,
       `- Markdown report archived for auditability.`,
-      '',
+      "",
       `## Error Handling`,
-      '',
+      "",
       `- Exits with non-zero status when any check fails.`,
       `- Surfaces Ajv and ESLint diagnostics verbosely.`,
       `- Guides maintainers to remediation documentation.`,
-      '',
+      "",
       `## Examples`,
-      '',
+      "",
       `- npm run lint to enforce doc blocks prior to commit.`,
       `- npm run lint:json to vet dataset updates.`,
       `- npm run lint:docs to confirm metadata completeness.`,
-      '',
-      `## Check Results`
+      "",
+      `## Check Results`,
     ];
 
     for (const check of report.checks) {
-      lines.push('', `### ${check.name}`, '', `- Status: ${check.passed ? 'PASSED' : 'FAILED'}`);
+      lines.push(
+        "",
+        `### ${check.name}`,
+        "",
+        `- Status: ${check.passed ? "PASSED" : "FAILED"}`
+      );
       if (check.messages.length > 0) {
-        lines.push('', '#### Messages');
+        lines.push("", "#### Messages");
         for (const message of check.messages) {
           lines.push(`- ${message}`);
         }
       }
     }
 
-    lines.push('', '## Maintenance', '', '- Review failing checks before merging changes.');
+    lines.push(
+      "",
+      "## Maintenance",
+      "",
+      "- Review failing checks before merging changes."
+    );
 
-    await writeFile(outputPath, `${lines.join('\n')}\n`, 'utf8');
+    await writeFile(outputPath, `${lines.join("\n")}\n`, "utf8");
   }
 
   /**
@@ -457,14 +494,14 @@ export class RepositoryHealthAgent {
    */
   private formatAjvErrors(errors: ErrorObject[]): string {
     if (errors.length === 0) {
-      return 'Unknown schema validation error.';
+      return "Unknown schema validation error.";
     }
 
     return errors
       .map((error: ErrorObject) => {
-        const instancePath: string = error.instancePath || '(root)';
-        return `${instancePath} ${error.message ?? 'unknown issue'}`;
+        const instancePath: string = error.instancePath || "(root)";
+        return `${instancePath} ${error.message ?? "unknown issue"}`;
       })
-      .join('; ');
+      .join("; ");
   }
 }
