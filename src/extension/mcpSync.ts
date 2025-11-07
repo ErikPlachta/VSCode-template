@@ -6,12 +6,7 @@
  */
 
 import axios, { AxiosError } from "axios";
-import {
-  MCPInputSchema,
-  MCPListToolsResponse,
-  MCPProperty,
-  MCPTool
-} from "../shared/mcpTypes";
+import { MCPListToolsResponse, MCPProperty, MCPTool } from "../shared/mcpTypes";
 
 /**
  * Error wrapper that provides additional context for MCP failures.

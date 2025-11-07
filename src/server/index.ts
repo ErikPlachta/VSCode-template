@@ -4,7 +4,7 @@
  * extension can connect to a local endpoint during development.
  */
 
-import { createServer, IncomingMessage, ServerResponse } from "http";
+import { createServer, IncomingMessage, Server, ServerResponse } from "http";
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";
 import { MCPTool } from "../shared/mcpTypes";
@@ -235,7 +235,9 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise
   }
 }
 
-export function createMcpServer(port = Number(process.env.MCP_PORT ?? 3030)) {
+export function createMcpServer(
+  port = Number(process.env.MCP_PORT ?? 3030)
+): Server {
   const server = createServer((req, res) => {
     void handleRequest(req, res).catch((error) => {
       sendJson(res, {
