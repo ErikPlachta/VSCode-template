@@ -49,7 +49,7 @@ When the delete operation fails for reasons other than missing files.
 
 #### Defined in
 
-[src/mcpCache.ts:172](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpCache.ts#L172)
+[src/mcpCache.ts:172](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpCache.ts#L172)
 
 ___
 
@@ -81,7 +81,7 @@ const cacheDir = await ensureCacheDirectory();
 
 #### Defined in
 
-[src/mcpCache.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpCache.ts#L64)
+[src/mcpCache.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpCache.ts#L64)
 
 ___
 
@@ -115,7 +115,7 @@ When the directory cannot be read.
 
 #### Defined in
 
-[src/mcpCache.ts:141](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpCache.ts#L141)
+[src/mcpCache.ts:141](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpCache.ts#L141)
 
 ___
 
@@ -144,7 +144,7 @@ When the log file cannot be written.
 
 #### Defined in
 
-[src/mcpCache.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpCache.ts#L80)
+[src/mcpCache.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpCache.ts#L80)
 
 ___
 
@@ -179,7 +179,7 @@ When the file exists but cannot be read.
 
 #### Defined in
 
-[src/mcpCache.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpCache.ts#L115)
+[src/mcpCache.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpCache.ts#L115)
 
 ___
 
@@ -214,4 +214,4 @@ When the entry cannot be persisted.
 
 #### Defined in
 
-[src/mcpCache.ts:95](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpCache.ts#L95)
+[src/mcpCache.ts:95](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpCache.ts#L95)

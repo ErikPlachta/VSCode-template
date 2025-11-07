@@ -26,11 +26,9 @@ Snapshot persisted to the shared cache for quick lookups.
 
 • **description**: `string`
 
-Category description.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:237](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L237)
+[src/agents/relevantDataManagerAgent.ts:155](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L155)
 
 ___
 
@@ -38,11 +36,9 @@ ___
 
 • **exampleFiles**: `string`[]
 
-Example file paths.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:242](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L242)
+[src/agents/relevantDataManagerAgent.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L160)
 
 ___
 
@@ -50,23 +46,19 @@ ___
 
 • **folder**: [`FolderBlueprint`](agents_relevantDataManagerAgent.FolderBlueprint.md)
 
-Folder blueprint for the category.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:243](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L243)
+[src/agents/relevantDataManagerAgent.ts:161](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L161)
 
 ___
 
 ### id
 
-• **id**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
-
-Category identifier.
+• **id**: `string`
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:235](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L235)
+[src/agents/relevantDataManagerAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L153)
 
 ___
 
@@ -74,11 +66,9 @@ ___
 
 • **name**: `string`
 
-Category name.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:236](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L236)
+[src/agents/relevantDataManagerAgent.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L154)
 
 ___
 
@@ -86,11 +76,9 @@ ___
 
 • **pythonTypeNames**: `string`[]
 
-Names of Python types.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:240](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L240)
+[src/agents/relevantDataManagerAgent.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L158)
 
 ___
 
@@ -98,11 +86,9 @@ ___
 
 • **queryNames**: `string`[]
 
-Names of saved queries.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:241](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L241)
+[src/agents/relevantDataManagerAgent.ts:159](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L159)
 
 ___
 
@@ -110,11 +96,9 @@ ___
 
 • **recordCount**: `number`
 
-Number of records in the category.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:238](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L238)
+[src/agents/relevantDataManagerAgent.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L156)
 
 ___
 
@@ -122,8 +106,6 @@ ___
 
 • **schemaNames**: `string`[]
 
-Names of associated schemas.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:239](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L239)
+[src/agents/relevantDataManagerAgent.ts:157](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L157)

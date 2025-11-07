@@ -58,4 +58,4 @@ console.log(tools.length);
 
 #### Defined in
 
-[src/mcpSync.ts:129](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L129)
+[src/mcpSync.ts:129](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L129)

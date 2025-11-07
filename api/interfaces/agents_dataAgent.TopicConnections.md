@@ -18,13 +18,13 @@ Mapping of a record's connections to other categories.
 
 ### connections
 
-• **connections**: \{ `records`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[] ; `relationship`: `string` ; `targetCategory`: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)  }[]
+• **connections**: \{ `records`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[] ; `relationship`: `string` ; `targetCategory`: `string`  }[]
 
 List of resolved relationships.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:59](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L59)
+[src/agents/dataAgent.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L60)
 
 ___
 
@@ -38,12 +38,12 @@ Record that serves as the anchor for the exploration.
 
 | Name | Type |
 | :------ | :------ |
-| `categoryId` | [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid) |
+| `categoryId` | `string` |
 | `record` | [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord) |
 
 #### Defined in
 
-[src/agents/dataAgent.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L55)
+[src/agents/dataAgent.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L56)
 
 ___
 
@@ -55,4 +55,4 @@ Human-readable relationship statements for UI rendering.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L64)
+[src/agents/dataAgent.ts:65](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L65)

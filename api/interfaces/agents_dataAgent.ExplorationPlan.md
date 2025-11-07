@@ -26,7 +26,7 @@ End-user question that motivated the plan.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L79)
+[src/agents/dataAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L80)
 
 ___
 
@@ -38,7 +38,7 @@ Names of saved queries that can help answer the question.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L81)
+[src/agents/dataAgent.ts:82](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L82)
 
 ___
 
@@ -50,19 +50,19 @@ Ordered list of recommended analysis actions.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L80)
+[src/agents/dataAgent.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L81)
 
 ___
 
 ### supportingResources
 
-• **supportingResources**: \{ `categoryId`: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid) ; `ids`: `string`[]  }[]
+• **supportingResources**: \{ `categoryId`: `string` ; `ids`: `string`[]  }[]
 
 References to related records for quick access.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:82](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L82)
+[src/agents/dataAgent.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L83)
 
 ___
 
@@ -74,4 +74,4 @@ Canonical category identifier.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:78](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L78)
+[src/agents/dataAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L79)

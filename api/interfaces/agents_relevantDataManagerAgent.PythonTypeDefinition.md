@@ -20,11 +20,9 @@ Python typing hints that mirror the JSON schemas.
 
 • **definition**: `string`
 
-Python snippet defining the type.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:84](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L84)
+[src/agents/relevantDataManagerAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L80)
 
 ___
 
@@ -32,11 +30,9 @@ ___
 
 • **description**: `string`
 
-Summary for the type.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L83)
+[src/agents/relevantDataManagerAgent.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L79)
 
 ___
 
@@ -44,8 +40,6 @@ ___
 
 • **name**: `string`
 
-Type name.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:82](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L82)
+[src/agents/relevantDataManagerAgent.ts:78](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L78)

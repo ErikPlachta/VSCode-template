@@ -26,6 +26,7 @@ console.log(overview.schemas.map((schema) => schema.name));
 - [findCrossTopicConnection](agents_dataAgent.DataAgent.md#findcrosstopicconnection)
 - [getCategoryToolkit](agents_dataAgent.DataAgent.md#getcategorytoolkit)
 - [getDatabaseAgent](agents_dataAgent.DataAgent.md#getdatabaseagent)
+- [getDatasetCatalogue](agents_dataAgent.DataAgent.md#getdatasetcatalogue)
 - [getTopicOverview](agents_dataAgent.DataAgent.md#gettopicoverview)
 - [mapTopicConnections](agents_dataAgent.DataAgent.md#maptopicconnections)
 - [search](agents_dataAgent.DataAgent.md#search)
@@ -51,7 +52,7 @@ Create a new [DataAgent](agents_dataAgent.DataAgent.md).
 
 #### Defined in
 
-[src/agents/dataAgent.ts:176](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L176)
+[src/agents/dataAgent.ts:177](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L177)
 
 ## Methods
 
@@ -87,7 +88,7 @@ console.log(plan.steps.map((step) => step.title));
 
 #### Defined in
 
-[src/agents/dataAgent.ts:254](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L254)
+[src/agents/dataAgent.ts:264](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L264)
 
 ___
 
@@ -125,7 +126,7 @@ console.log(connection?.relationship);
 
 #### Defined in
 
-[src/agents/dataAgent.ts:305](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L305)
+[src/agents/dataAgent.ts:315](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L315)
 
 ___
 
@@ -153,7 +154,7 @@ When the category cannot be resolved.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:365](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L365)
+[src/agents/dataAgent.ts:375](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L375)
 
 ___
 
@@ -171,7 +172,25 @@ Database-like helper that exposes query primitives.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:354](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L354)
+[src/agents/dataAgent.ts:364](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L364)
+
+___
+
+### getDatasetCatalogue
+
+▸ **getDatasetCatalogue**(): [`DatasetCatalogueEntry`](../interfaces/agents_relevantDataManagerAgent.DatasetCatalogueEntry.md)[]
+
+Expose the consolidated dataset catalogue built from on-disk data sources.
+
+#### Returns
+
+[`DatasetCatalogueEntry`](../interfaces/agents_relevantDataManagerAgent.DatasetCatalogueEntry.md)[]
+
+Summaries for each category with key metadata.
+
+#### Defined in
+
+[src/agents/dataAgent.ts:187](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L187)
 
 ___
 
@@ -206,7 +225,7 @@ console.log(overview.examples[0]?.file);
 
 #### Defined in
 
-[src/agents/dataAgent.ts:193](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L193)
+[src/agents/dataAgent.ts:203](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L203)
 
 ___
 
@@ -242,7 +261,7 @@ connections.connections.forEach((link) => console.log(link.relationship));
 
 #### Defined in
 
-[src/agents/dataAgent.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L221)
+[src/agents/dataAgent.ts:231](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L231)
 
 ___
 
@@ -273,4 +292,4 @@ console.log(matches[0]?.displayName);
 
 #### Defined in
 
-[src/agents/dataAgent.ts:340](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L340)
+[src/agents/dataAgent.ts:350](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L350)

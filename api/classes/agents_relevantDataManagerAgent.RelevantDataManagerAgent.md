@@ -6,13 +6,6 @@
 
 Agent that manages the relevant-data workspace representation.
 
-**`Example`**
-
-```ts
-const manager = new RelevantDataManagerAgent();
-const categories = manager.listCategories();
-```
-
 ## Table of contents
 
 ### Constructors
@@ -24,6 +17,7 @@ const categories = manager.listCategories();
 - [getCategory](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getcategory)
 - [getCategoryConfig](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getcategoryconfig)
 - [getCategorySchemas](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getcategoryschemas)
+- [getDatasetCatalogue](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getdatasetcatalogue)
 - [getEntityConnections](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getentityconnections)
 - [getExamples](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getexamples)
 - [getFolderBlueprint](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md#getfolderblueprint)
@@ -42,13 +36,11 @@ const categories = manager.listCategories();
 
 • **new RelevantDataManagerAgent**(`cacheDirPromise?`): [`RelevantDataManagerAgent`](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md)
 
-Create a [RelevantDataManagerAgent](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md).
-
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `cacheDirPromise?` | `Promise`\<`string`\> | Optional promise that resolves to the cache directory path. |
+| Name | Type |
+| :------ | :------ |
+| `cacheDirPromise?` | `Promise`\<`string`\> |
 
 #### Returns
 
@@ -56,7 +48,7 @@ Create a [RelevantDataManagerAgent](agents_relevantDataManagerAgent.RelevantData
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1323](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1323)
+[src/agents/relevantDataManagerAgent.ts:288](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L288)
 
 ## Methods
 
@@ -68,23 +60,17 @@ Resolve a topic or identifier to the underlying category definition.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Identifier, human readable name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`BusinessCategory`](../interfaces/agents_relevantDataManagerAgent.BusinessCategory.md)
 
-Matching category definition.
-
-**`Throws`**
-
-When no category matches the provided value.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1347](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1347)
+[src/agents/relevantDataManagerAgent.ts:311](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L311)
 
 ___
 
@@ -96,15 +82,13 @@ Access category configuration metadata such as relationships.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 `Object`
-
-Category configuration metadata.
 
 | Name | Type |
 | :------ | :------ |
@@ -113,11 +97,12 @@ Category configuration metadata.
 | `primaryKeys` | `string`[] |
 | `purpose` | `string` |
 | `relationships` | [`RelationshipDescription`](../interfaces/agents_relevantDataManagerAgent.RelationshipDescription.md)[] |
+| `requirements?` | [`CategoryRequirements`](../interfaces/agents_relevantDataManagerAgent.CategoryRequirements.md) |
 | `updateCadence` | `string` |
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1376](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1376)
+[src/agents/relevantDataManagerAgent.ts:326](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L326)
 
 ___
 
@@ -129,19 +114,33 @@ Access the JSON schemas associated with a category.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`CategorySchema`](../interfaces/agents_relevantDataManagerAgent.CategorySchema.md)[]
 
-JSON schema descriptors.
+#### Defined in
+
+[src/agents/relevantDataManagerAgent.ts:331](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L331)
+
+___
+
+### getDatasetCatalogue
+
+▸ **getDatasetCatalogue**(): [`DatasetCatalogueEntry`](../interfaces/agents_relevantDataManagerAgent.DatasetCatalogueEntry.md)[]
+
+Expose the consolidated dataset catalogue built from the data directory.
+
+#### Returns
+
+[`DatasetCatalogueEntry`](../interfaces/agents_relevantDataManagerAgent.DatasetCatalogueEntry.md)[]
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1386](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1386)
+[src/agents/relevantDataManagerAgent.ts:460](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L460)
 
 ___
 
@@ -153,24 +152,18 @@ Resolve relationships for a given record across categories.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
-| `recordId` | `string` | Record identifier within the category. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
+| `recordId` | `string` |
 
 #### Returns
 
 [`EntityConnections`](../interfaces/agents_relevantDataManagerAgent.EntityConnections.md)
 
-Relationship graph for the record.
-
-**`Throws`**
-
-When the requested record cannot be found.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1538](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1538)
+[src/agents/relevantDataManagerAgent.ts:433](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L433)
 
 ___
 
@@ -178,24 +171,21 @@ ___
 
 ▸ **getExamples**(`topicOrId`): [`ExampleDataset`](../interfaces/agents_relevantDataManagerAgent.ExampleDataset.md)[]
 
-Fetch example datasets included inside the category folder. These help the
-orchestration layer generate realistic tool requests.
+Fetch example datasets included inside the category folder.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`ExampleDataset`](../interfaces/agents_relevantDataManagerAgent.ExampleDataset.md)[]
 
-Example dataset descriptors.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1407](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1407)
+[src/agents/relevantDataManagerAgent.ts:341](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L341)
 
 ___
 
@@ -207,19 +197,17 @@ Retrieve the folder blueprint for a given topic.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`FolderBlueprint`](../interfaces/agents_relevantDataManagerAgent.FolderBlueprint.md)
 
-Blueprint describing repository folder structure.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1366](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1366)
+[src/agents/relevantDataManagerAgent.ts:321](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L321)
 
 ___
 
@@ -231,19 +219,17 @@ Build a snapshot view of a category and persist it to the shared cache.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 `Promise`\<[`CategorySnapshot`](../interfaces/agents_relevantDataManagerAgent.CategorySnapshot.md)\>
 
-Snapshot summarising the category state.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1498](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1498)
+[src/agents/relevantDataManagerAgent.ts:400](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L400)
 
 ___
 
@@ -255,19 +241,17 @@ Retrieve Python type definitions provided as guidance for SDK authors.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`PythonTypeDefinition`](../interfaces/agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
 
-Python type hints.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1396](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1396)
+[src/agents/relevantDataManagerAgent.ts:336](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L336)
 
 ___
 
@@ -275,24 +259,21 @@ ___
 
 ▸ **getQueries**(`topicOrId`): [`RemoteQueryBlueprint`](../interfaces/agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)[]
 
-Retrieve query blueprints that demonstrate how to call the authoritative
-upstream system that owns the category data.
+Retrieve query blueprints that demonstrate how to call the authoritative upstream system.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`RemoteQueryBlueprint`](../interfaces/agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)[]
 
-Query blueprints.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1428](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1428)
+[src/agents/relevantDataManagerAgent.ts:351](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L351)
 
 ___
 
@@ -304,20 +285,18 @@ Retrieve a single record by identifier.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
-| `recordId` | `string` | Identifier of the record within the category. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
+| `recordId` | `string` |
 
 #### Returns
 
 `undefined` \| [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)
 
-Matching record when present.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1449](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1449)
+[src/agents/relevantDataManagerAgent.ts:361](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L361)
 
 ___
 
@@ -329,19 +308,17 @@ Return all records stored in the local mock dataset for a category.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]
 
-Stored records.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1438](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1438)
+[src/agents/relevantDataManagerAgent.ts:356](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L356)
 
 ___
 
@@ -353,19 +330,17 @@ List the unit/integration tests referenced by the category.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topicOrId` | `string` | Category identifier, name, or alias. |
+| Name | Type |
+| :------ | :------ |
+| `topicOrId` | `string` |
 
 #### Returns
 
 [`CategoryTestArtefact`](../interfaces/agents_relevantDataManagerAgent.CategoryTestArtefact.md)[]
 
-Test references.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1417](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1417)
+[src/agents/relevantDataManagerAgent.ts:346](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L346)
 
 ___
 
@@ -379,32 +354,28 @@ Enumerate the categories available to the MCP client.
 
 [`CategorySummary`](../interfaces/agents_relevantDataManagerAgent.CategorySummary.md)[]
 
-List of category identifiers, names, and descriptions.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1332](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1332)
+[src/agents/relevantDataManagerAgent.ts:302](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L302)
 
 ___
 
 ### searchAcrossCategories
 
-▸ **searchAcrossCategories**(`keyword`): \{ `categoryId`: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid) ; `matchingFields`: `string`[] ; `record`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)  }[]
+▸ **searchAcrossCategories**(`keyword`): \{ `categoryId`: `string` ; `matchingFields`: `string`[] ; `record`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)  }[]
 
 Perform a keyword search across every category.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `keyword` | `string` | Case-insensitive search string. |
+| Name | Type |
+| :------ | :------ |
+| `keyword` | `string` |
 
 #### Returns
 
-\{ `categoryId`: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid) ; `matchingFields`: `string`[] ; `record`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)  }[]
-
-Matching records with field context.
+\{ `categoryId`: `string` ; `matchingFields`: `string`[] ; `record`: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)  }[]
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1459](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1459)
+[src/agents/relevantDataManagerAgent.ts:366](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L366)

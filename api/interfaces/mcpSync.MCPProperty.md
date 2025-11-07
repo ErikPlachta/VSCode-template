@@ -28,7 +28,7 @@ Suggested default value supplied by the backend.
 
 #### Defined in
 
-[src/mcpSync.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L23)
+[src/mcpSync.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L23)
 
 ___
 
@@ -40,7 +40,7 @@ Human readable description for prompts and docs.
 
 #### Defined in
 
-[src/mcpSync.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L19)
+[src/mcpSync.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L19)
 
 ___
 
@@ -52,7 +52,7 @@ Static enumeration, if provided by the schema.
 
 #### Defined in
 
-[src/mcpSync.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L21)
+[src/mcpSync.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L21)
 
 ___
 
@@ -64,7 +64,7 @@ Nested item type for array arguments.
 
 #### Defined in
 
-[src/mcpSync.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L25)
+[src/mcpSync.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L25)
 
 ___
 
@@ -76,7 +76,7 @@ Argument identifier used when invoking the tool.
 
 #### Defined in
 
-[src/mcpSync.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L15)
+[src/mcpSync.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L15)
 
 ___
 
@@ -88,7 +88,7 @@ Whether the parameter is required.
 
 #### Defined in
 
-[src/mcpSync.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L27)
+[src/mcpSync.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L27)
 
 ___
 
@@ -100,4 +100,4 @@ Primitive type such as `string`, `number`, `boolean`, or `array`.
 
 #### Defined in
 
-[src/mcpSync.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/mcpSync.ts#L17)
+[src/mcpSync.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/mcpSync.ts#L17)

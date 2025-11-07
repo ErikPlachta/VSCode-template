@@ -20,10 +20,12 @@ hints, example datasets, tests, and remote query blueprints.
 ### Interfaces
 
 - [BusinessCategory](../interfaces/agents_relevantDataManagerAgent.BusinessCategory.md)
+- [CategoryRequirements](../interfaces/agents_relevantDataManagerAgent.CategoryRequirements.md)
 - [CategorySchema](../interfaces/agents_relevantDataManagerAgent.CategorySchema.md)
 - [CategorySnapshot](../interfaces/agents_relevantDataManagerAgent.CategorySnapshot.md)
 - [CategorySummary](../interfaces/agents_relevantDataManagerAgent.CategorySummary.md)
 - [CategoryTestArtefact](../interfaces/agents_relevantDataManagerAgent.CategoryTestArtefact.md)
+- [DatasetCatalogueEntry](../interfaces/agents_relevantDataManagerAgent.DatasetCatalogueEntry.md)
 - [EntityConnections](../interfaces/agents_relevantDataManagerAgent.EntityConnections.md)
 - [ExampleDataset](../interfaces/agents_relevantDataManagerAgent.ExampleDataset.md)
 - [FolderBlueprint](../interfaces/agents_relevantDataManagerAgent.FolderBlueprint.md)
@@ -36,10 +38,6 @@ hints, example datasets, tests, and remote query blueprints.
 - [CategoryId](agents_relevantDataManagerAgent.md#categoryid)
 - [CategoryRecord](agents_relevantDataManagerAgent.md#categoryrecord)
 
-### Variables
-
-- [MOCK\_RELEVANT\_DATASET](agents_relevantDataManagerAgent.md#mock_relevant_dataset)
-
 ### Functions
 
 - [createRelevantDataManagerAgent](agents_relevantDataManagerAgent.md#createrelevantdatamanageragent)
@@ -48,13 +46,13 @@ hints, example datasets, tests, and remote query blueprints.
 
 ### CategoryId
 
-Ƭ **CategoryId**: ``"departments"`` \| ``"people"`` \| ``"applications"`` \| ``"companyPolicies"`` \| ``"companyResources"``
+Ƭ **CategoryId**: `string`
 
-Unique identifier for each category in the mock repository.
+Unique identifier for a category in the repository.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L158)
+[src/agents/relevantDataManagerAgent.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L115)
 
 ___
 
@@ -66,19 +64,7 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L151)
-
-## Variables
-
-### MOCK\_RELEVANT\_DATASET
-
-• `Const` **MOCK\_RELEVANT\_DATASET**: `Record`\<[`CategoryId`](agents_relevantDataManagerAgent.md#categoryid), [`BusinessCategory`](../interfaces/agents_relevantDataManagerAgent.BusinessCategory.md)\>
-
-Static dataset that mimics the MCP relevant-data workspace.
-
-#### Defined in
-
-[src/agents/relevantDataManagerAgent.ts:257](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L257)
+[src/agents/relevantDataManagerAgent.ts:112](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L112)
 
 ## Functions
 
@@ -86,20 +72,10 @@ Static dataset that mimics the MCP relevant-data workspace.
 
 ▸ **createRelevantDataManagerAgent**(): [`RelevantDataManagerAgent`](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md)
 
-Factory helper that constructs a [RelevantDataManagerAgent](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md).
-
 #### Returns
 
 [`RelevantDataManagerAgent`](../classes/agents_relevantDataManagerAgent.RelevantDataManagerAgent.md)
 
-Configured manager instance.
-
-**`Example`**
-
-```ts
-const manager = createRelevantDataManagerAgent();
-```
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1621](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1621)
+[src/agents/relevantDataManagerAgent.ts:812](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L812)

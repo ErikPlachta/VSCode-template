@@ -6,12 +6,6 @@
 
 Error thrown when a caller references an unknown category.
 
-**`Example`**
-
-```ts
-throw new UnknownCategoryError("mystery");
-```
-
 ## Hierarchy
 
 - `Error`
@@ -44,9 +38,9 @@ throw new UnknownCategoryError("mystery");
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `topic` | `string` | Topic or identifier that could not be resolved. |
+| Name | Type |
+| :------ | :------ |
+| `topic` | `string` |
 
 #### Returns
 
@@ -58,7 +52,7 @@ Error.constructor
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1301](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L1301)
+[src/agents/relevantDataManagerAgent.ts:270](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L270)
 
 ## Properties
 

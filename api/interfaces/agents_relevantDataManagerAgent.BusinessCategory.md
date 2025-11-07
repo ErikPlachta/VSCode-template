@@ -28,19 +28,15 @@ Full configuration stored for each business category.
 
 • **aliases**: `string`[]
 
-Alternative names that can be used to reference the category.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:185](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L185)
+[src/agents/relevantDataManagerAgent.ts:122](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L122)
 
 ___
 
 ### config
 
 • **config**: `Object`
-
-Configuration metadata.
 
 #### Type declaration
 
@@ -51,11 +47,12 @@ Configuration metadata.
 | `primaryKeys` | `string`[] |
 | `purpose` | `string` |
 | `relationships` | [`RelationshipDescription`](agents_relevantDataManagerAgent.RelationshipDescription.md)[] |
+| `requirements?` | [`CategoryRequirements`](agents_relevantDataManagerAgent.CategoryRequirements.md) |
 | `updateCadence` | `string` |
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:186](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L186)
+[src/agents/relevantDataManagerAgent.ts:123](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L123)
 
 ___
 
@@ -63,11 +60,9 @@ ___
 
 • **description**: `string`
 
-Narrative summary of the category.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:184](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L184)
+[src/agents/relevantDataManagerAgent.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L121)
 
 ___
 
@@ -75,23 +70,19 @@ ___
 
 • **examples**: [`ExampleDataset`](agents_relevantDataManagerAgent.ExampleDataset.md)[]
 
-Example datasets.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:196](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L196)
+[src/agents/relevantDataManagerAgent.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L134)
 
 ___
 
 ### id
 
-• **id**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
-
-Category identifier.
+• **id**: `string`
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:182](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L182)
+[src/agents/relevantDataManagerAgent.ts:119](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L119)
 
 ___
 
@@ -99,11 +90,9 @@ ___
 
 • **name**: `string`
 
-Human readable category name.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:183](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L183)
+[src/agents/relevantDataManagerAgent.ts:120](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L120)
 
 ___
 
@@ -111,11 +100,9 @@ ___
 
 • **pythonTypes**: [`PythonTypeDefinition`](agents_relevantDataManagerAgent.PythonTypeDefinition.md)[]
 
-Python typing hints.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:195](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L195)
+[src/agents/relevantDataManagerAgent.ts:133](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L133)
 
 ___
 
@@ -123,11 +110,9 @@ ___
 
 • **queries**: [`RemoteQueryBlueprint`](agents_relevantDataManagerAgent.RemoteQueryBlueprint.md)[]
 
-Query blueprints.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:198](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L198)
+[src/agents/relevantDataManagerAgent.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L136)
 
 ___
 
@@ -135,11 +120,9 @@ ___
 
 • **records**: [`CategoryRecord`](../modules/agents_relevantDataManagerAgent.md#categoryrecord)[]
 
-Records stored under the category.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:199](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L199)
+[src/agents/relevantDataManagerAgent.ts:137](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L137)
 
 ___
 
@@ -147,11 +130,9 @@ ___
 
 • **schemas**: [`CategorySchema`](agents_relevantDataManagerAgent.CategorySchema.md)[]
 
-Associated JSON schemas.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L194)
+[src/agents/relevantDataManagerAgent.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L132)
 
 ___
 
@@ -159,8 +140,6 @@ ___
 
 • **tests**: [`CategoryTestArtefact`](agents_relevantDataManagerAgent.CategoryTestArtefact.md)[]
 
-Test references.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:197](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L197)
+[src/agents/relevantDataManagerAgent.ts:135](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L135)

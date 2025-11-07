@@ -20,11 +20,9 @@ Remote query blueprint associated with the category.
 
 • **description**: `string`
 
-Query description.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:125](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L125)
+[src/agents/relevantDataManagerAgent.ts:100](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L100)
 
 ___
 
@@ -32,11 +30,9 @@ ___
 
 • **name**: `string`
 
-Query name.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:124](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L124)
+[src/agents/relevantDataManagerAgent.ts:99](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L99)
 
 ___
 
@@ -44,8 +40,6 @@ ___
 
 • **samplePayload**: `Record`\<`string`, `unknown`\>
 
-Example payload for invoking the remote system.
-
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:126](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/relevantDataManagerAgent.ts#L126)
+[src/agents/relevantDataManagerAgent.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/relevantDataManagerAgent.ts#L101)

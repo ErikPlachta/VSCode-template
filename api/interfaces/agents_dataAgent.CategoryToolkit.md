@@ -27,7 +27,7 @@ Example datasets demonstrating data shape.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L151)
+[src/agents/dataAgent.ts:152](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L152)
 
 ___
 
@@ -39,7 +39,7 @@ Blueprint describing the folder layout for the category.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:148](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L148)
+[src/agents/dataAgent.ts:149](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L149)
 
 ___
 
@@ -51,7 +51,7 @@ Python typing hints for SDK implementers.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L150)
+[src/agents/dataAgent.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L151)
 
 ___
 
@@ -63,7 +63,7 @@ Remote query definitions that fetch authoritative data.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L153)
+[src/agents/dataAgent.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L154)
 
 ___
 
@@ -75,7 +75,7 @@ Schemas that define expected record structure.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:149](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L149)
+[src/agents/dataAgent.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L150)
 
 ___
 
@@ -87,4 +87,4 @@ Test artefacts to validate data assumptions.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:152](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L152)
+[src/agents/dataAgent.ts:153](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L153)

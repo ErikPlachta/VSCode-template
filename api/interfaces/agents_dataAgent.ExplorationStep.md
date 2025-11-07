@@ -25,7 +25,7 @@ Explanation of the action to take.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:99](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L99)
+[src/agents/dataAgent.ts:100](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L100)
 
 ___
 
@@ -37,19 +37,19 @@ Additional hints or nudges to guide investigation.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L101)
+[src/agents/dataAgent.ts:102](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L102)
 
 ___
 
 ### recommendedCategory
 
-• **recommendedCategory**: [`CategoryId`](../modules/agents_relevantDataManagerAgent.md#categoryid)
+• **recommendedCategory**: `string`
 
 Category that should be explored in this step.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:100](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L100)
+[src/agents/dataAgent.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L101)
 
 ___
 
@@ -61,4 +61,4 @@ Short step title.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/8a313d91ccb62295c1c7ec728031065ba0cad165/src/agents/dataAgent.ts#L98)
+[src/agents/dataAgent.ts:99](https://github.com/ErikPlachta/VSCode-template/blob/eeb646b9d32d2c20c6378d80bd96e761e0fa8136/src/agents/dataAgent.ts#L99)
