@@ -1,0 +1,19 @@
+{
+  "id": "companyResources",
+  "name": "Company Resources",
+  "description": "Knowledge base entries, playbooks, and runbooks.",
+  "aliases": ["resources", "knowledge base"],
+  "config": {
+    "purpose": "Provide reusable assets for onboarding and operations.",
+    "primaryKeys": ["id"],
+    "updateCadence": "Team-dependent; at least quarterly reviews.",
+    "access": "Published to the entire company by default.",
+    "requirements": {
+      "requiredRecordFields": ["id", "name", "departmentId", "type"],
+      "requiredRelationshipFields": ["departmentId", "linkedPolicyIds", "applicationIds"],
+      "notes": [
+        "Resources should reference owning policies and supported applications."
+      ]
+    }
+  }
+}

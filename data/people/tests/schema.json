@@ -1,0 +1,28 @@
+{
+  "name": "Validate person schema",
+  "description": "Ensure person records cover ownership, access, and compliance metadata.",
+  "runner": {
+    "language": "python",
+    "entrypoint": "data/people/tests/validate_schema.py",
+    "args": [
+      "--schema",
+      "data/people/schemas/person.json",
+      "--records",
+      "data/people/records.json"
+    ]
+  },
+  "inputs": {
+    "schema": "data/people/schemas/person.json",
+    "records": "data/people/records.json"
+  },
+  "expectations": [
+    {
+      "description": "People reference valid departments",
+      "successCriteria": "departmentId values map to entries in the departments dataset."
+    },
+    {
+      "description": "People reference valid applications",
+      "successCriteria": "applicationIds values map to application catalogue entries."
+    }
+  ]
+}

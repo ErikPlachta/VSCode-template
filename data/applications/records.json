@@ -1,0 +1,54 @@
+{
+  "app-aurora": {
+    "id": "app-aurora",
+    "name": "Aurora Lake",
+    "type": "data-platform",
+    "ownerDepartmentId": "dept-analytics",
+    "criticality": "high",
+    "relatedPolicyIds": [
+      "policy-data-handling"
+    ],
+    "resourceIds": [
+      "resource-analytics-playbook"
+    ]
+  },
+  "app-atlas": {
+    "id": "app-atlas",
+    "name": "Atlas Insights",
+    "type": "analytics",
+    "ownerDepartmentId": "dept-analytics",
+    "criticality": "medium",
+    "relatedPolicyIds": [
+      "policy-data-handling"
+    ],
+    "resourceIds": [
+      "resource-ml-handbook"
+    ]
+  },
+  "app-foundry": {
+    "id": "app-foundry",
+    "name": "Foundry Platform",
+    "type": "platform",
+    "ownerDepartmentId": "dept-platform",
+    "criticality": "high",
+    "relatedPolicyIds": [
+      "policy-platform-standards"
+    ],
+    "resourceIds": [
+      "resource-platform-runbook"
+    ]
+  },
+  "app-oracle": {
+    "id": "app-oracle",
+    "name": "Oracle ERP",
+    "type": "erp",
+    "ownerDepartmentId": "dept-operations",
+    "criticality": "high",
+    "relatedPolicyIds": [
+      "policy-remote-work"
+    ],
+    "resourceIds": [
+      "resource-operating-model"
+    ]
+  }
+}

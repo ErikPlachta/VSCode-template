@@ -1,0 +1,28 @@
+{
+  "name": "Validate resource schema",
+  "description": "Ensure enablement resources maintain connections to policies and applications.",
+  "runner": {
+    "language": "python",
+    "entrypoint": "data/companyResources/tests/validate_schema.py",
+    "args": [
+      "--schema",
+      "data/companyResources/schemas/resource.json",
+      "--records",
+      "data/companyResources/records.json"
+    ]
+  },
+  "inputs": {
+    "schema": "data/companyResources/schemas/resource.json",
+    "records": "data/companyResources/records.json"
+  },
+  "expectations": [
+    {
+      "description": "Resources linked to policies",
+      "successCriteria": "Each resource links to at least one policy identifier."
+    },
+    {
+      "description": "Resources linked to applications",
+      "successCriteria": "Each resource links to at least one application identifier."
+    }
+  ]
+}

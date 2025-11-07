@@ -1,0 +1,26 @@
+{
+  "name": "OrgChartNode",
+  "description": "Schema describing a node in the organisational chart.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/org-chart-node.json",
+    "title": "OrgChartNode",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Identifier for the node."
+      },
+      "parentId": {
+        "type": ["string", "null"],
+        "description": "Identifier of the parent node if present."
+      },
+      "label": {
+        "type": "string",
+        "description": "Display label for the node."
+      }
+    },
+    "required": ["id", "label"]
+  }
+}

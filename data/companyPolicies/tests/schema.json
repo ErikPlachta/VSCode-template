@@ -1,0 +1,28 @@
+{
+  "name": "Validate policy schema",
+  "description": "Ensure policy catalogue entries reference valid resources and applications.",
+  "runner": {
+    "language": "python",
+    "entrypoint": "data/companyPolicies/tests/validate_schema.py",
+    "args": [
+      "--schema",
+      "data/companyPolicies/schemas/policy.json",
+      "--records",
+      "data/companyPolicies/records.json"
+    ]
+  },
+  "inputs": {
+    "schema": "data/companyPolicies/schemas/policy.json",
+    "records": "data/companyPolicies/records.json"
+  },
+  "expectations": [
+    {
+      "description": "Policies reference valid resources",
+      "successCriteria": "All relatedResourceIds resolve to entries in the resources catalogue."
+    },
+    {
+      "description": "Policies reference valid applications",
+      "successCriteria": "All applicationIds exist in the applications dataset."
+    }
+  ]
+}

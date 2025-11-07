@@ -1,0 +1,20 @@
+{
+  "id": "departments",
+  "name": "Departments",
+  "description": "Organisational units, their missions, and leadership hierarchy.",
+  "aliases": ["dept", "org units", "teams"],
+  "config": {
+    "purpose": "Define the company's structure and accountability chains.",
+    "primaryKeys": ["id"],
+    "updateCadence": "Quarterly structure review with ad-hoc updates for reorganisations.",
+    "access": "All employees can view. Updates restricted to Strategy & Operations.",
+    "requirements": {
+      "requiredRecordFields": ["id", "name", "leadId", "description"],
+      "requiredRelationshipFields": ["leadId", "applicationIds", "policyIds", "resourceIds"],
+      "notes": [
+        "Records must surface accountable leaders.",
+        "Applications, policies, and resources should be linked for each department."
+      ]
+    }
+  }
+}

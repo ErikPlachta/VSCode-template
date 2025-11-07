@@ -1,0 +1,56 @@
+{
+  "name": "Resource",
+  "description": "Schema describing internal enablement resources.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/resource.json",
+    "title": "Resource",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier for the resource."
+      },
+      "name": {
+        "type": "string",
+        "description": "Resource title."
+      },
+      "type": {
+        "type": "string",
+        "description": "Kind of resource such as runbook or handbook."
+      },
+      "description": {
+        "type": "string",
+        "description": "Summary of the resource contents."
+      },
+      "departmentId": {
+        "type": "string",
+        "description": "Department that maintains the resource."
+      },
+      "linkedPolicyIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Policies linked to the resource."
+      },
+      "applicationIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Applications referencing the resource."
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "type",
+      "description",
+      "departmentId",
+      "linkedPolicyIds",
+      "applicationIds"
+    ]
+  }
+}

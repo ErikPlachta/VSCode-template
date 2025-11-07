@@ -1,0 +1,56 @@
+{
+  "name": "Policy",
+  "description": "Schema describing corporate policy metadata.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/policy.json",
+    "title": "Policy",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique policy identifier."
+      },
+      "title": {
+        "type": "string",
+        "description": "Policy title."
+      },
+      "category": {
+        "type": "string",
+        "description": "Policy classification or domain."
+      },
+      "summary": {
+        "type": "string",
+        "description": "Concise description of the policy focus."
+      },
+      "ownerDepartmentId": {
+        "type": "string",
+        "description": "Department responsible for the policy."
+      },
+      "relatedResourceIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Supporting resources referenced by the policy."
+      },
+      "applicationIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Applications that the policy governs."
+      }
+    },
+    "required": [
+      "id",
+      "title",
+      "category",
+      "summary",
+      "ownerDepartmentId",
+      "relatedResourceIds",
+      "applicationIds"
+    ]
+  }
+}

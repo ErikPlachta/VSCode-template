@@ -1,0 +1,19 @@
+{
+  "id": "people",
+  "name": "People",
+  "description": "Employee directory complete with capabilities and system access.",
+  "aliases": ["employees", "teammates", "staff"],
+  "config": {
+    "purpose": "Surface who can help, their skills, and reporting structure.",
+    "primaryKeys": ["id", "email"],
+    "updateCadence": "Nightly sync from HRIS with manual enrichment allowed.",
+    "access": "All employees can view contact and role data.",
+    "requirements": {
+      "requiredRecordFields": ["id", "name", "departmentId", "skills"],
+      "requiredRelationshipFields": ["departmentId", "applicationIds", "policyAcks", "resourceIds"],
+      "notes": [
+        "People must link to a department and at least one policy acknowledgement."
+      ]
+    }
+  }
+}

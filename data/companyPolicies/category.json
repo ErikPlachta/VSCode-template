@@ -1,0 +1,19 @@
+{
+  "id": "companyPolicies",
+  "name": "Company Policies",
+  "description": "Governance, compliance, and operating procedures.",
+  "aliases": ["policies", "standards"],
+  "config": {
+    "purpose": "Provide authoritative guidance for operations and compliance.",
+    "primaryKeys": ["id"],
+    "updateCadence": "Policy board monthly review.",
+    "access": "All employees. Approvals handled via Governance & Risk.",
+    "requirements": {
+      "requiredRecordFields": ["id", "title", "ownerDepartmentId"],
+      "requiredRelationshipFields": ["ownerDepartmentId", "applicationIds", "relatedResourceIds"],
+      "notes": [
+        "Policies should highlight the owning department and impacted resources."
+      ]
+    }
+  }
+}

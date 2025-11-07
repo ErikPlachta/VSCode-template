@@ -1,0 +1,82 @@
+{
+  "name": "Person",
+  "description": "Schema describing individual employee records.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/person.json",
+    "title": "Person",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique person identifier."
+      },
+      "name": {
+        "type": "string",
+        "description": "Full name of the person."
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "description": "Work email address."
+      },
+      "role": {
+        "type": "string",
+        "description": "Primary job role."
+      },
+      "departmentId": {
+        "type": "string",
+        "description": "Owning department identifier."
+      },
+      "managerId": {
+        "type": ["string", "null"],
+        "description": "Optional identifier for the person's manager."
+      },
+      "location": {
+        "type": "string",
+        "description": "Primary working location."
+      },
+      "skills": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Declared skills or competencies."
+      },
+      "applicationIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Applications the person has access to."
+      },
+      "policyAcks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Policy acknowledgement identifiers."
+      },
+      "resourceIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Resources the person frequently references."
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "email",
+      "role",
+      "departmentId",
+      "location",
+      "skills",
+      "applicationIds",
+      "policyAcks",
+      "resourceIds"
+    ]
+  }
+}

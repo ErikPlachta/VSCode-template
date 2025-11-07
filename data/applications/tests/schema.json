@@ -1,0 +1,24 @@
+{
+  "name": "Validate application schema",
+  "description": "Ensure application records conform to the published schema and critical metadata is present.",
+  "runner": {
+    "language": "python",
+    "entrypoint": "data/applications/tests/validate_schema.py",
+    "args": [
+      "--schema",
+      "data/applications/schemas/application.json",
+      "--records",
+      "data/applications/records.json"
+    ]
+  },
+  "inputs": {
+    "schema": "data/applications/schemas/application.json",
+    "records": "data/applications/records.json"
+  },
+  "expectations": [
+    {
+      "description": "All records match schema",
+      "successCriteria": "Validation completes without raising schema errors."
+    }
+  ]
+}

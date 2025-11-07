@@ -1,0 +1,28 @@
+{
+  "name": "Validate department schema",
+  "description": "Ensure department records expose hierarchy and ownership references.",
+  "runner": {
+    "language": "python",
+    "entrypoint": "data/departments/tests/validate_schema.py",
+    "args": [
+      "--schema",
+      "data/departments/schemas/department.json",
+      "--records",
+      "data/departments/records.json"
+    ]
+  },
+  "inputs": {
+    "schema": "data/departments/schemas/department.json",
+    "records": "data/departments/records.json"
+  },
+  "expectations": [
+    {
+      "description": "Departments reference valid leads",
+      "successCriteria": "leadId values must correspond to entries in the people dataset."
+    },
+    {
+      "description": "Hierarchy remains acyclic",
+      "successCriteria": "parentDepartmentId relationships form a valid tree structure."
+    }
+  ]
+}

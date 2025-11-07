@@ -1,0 +1,29 @@
+{
+  "name": "AccessProfile",
+  "description": "Schema describing the relationship between people and application access.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/access-profile.json",
+    "title": "AccessProfile",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "personId": {
+        "type": "string",
+        "description": "Identifier of the person granted access."
+      },
+      "applicationId": {
+        "type": "string",
+        "description": "Identifier of the application the access relates to."
+      },
+      "roles": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Named roles or permissions assigned within the application."
+      }
+    },
+    "required": ["personId", "applicationId", "roles"]
+  }
+}

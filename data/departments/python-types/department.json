@@ -1,0 +1,63 @@
+{
+  "name": "Department",
+  "description": "Schema describing organisational department records.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/department.json",
+    "title": "Department",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique department identifier."
+      },
+      "name": {
+        "type": "string",
+        "description": "Department display name."
+      },
+      "description": {
+        "type": "string",
+        "description": "Short summary of responsibilities."
+      },
+      "leadId": {
+        "type": "string",
+        "description": "Person id for the department lead."
+      },
+      "parentDepartmentId": {
+        "type": ["string", "null"],
+        "description": "Optional identifier for the parent department."
+      },
+      "applicationIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Applications owned by the department."
+      },
+      "policyIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Policies authored by the department."
+      },
+      "resourceIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Resources maintained by the department."
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "description",
+      "leadId",
+      "applicationIds",
+      "policyIds",
+      "resourceIds"
+    ]
+  }
+}

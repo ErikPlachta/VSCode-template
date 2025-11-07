@@ -1,0 +1,57 @@
+{
+  "name": "Application",
+  "description": "Schema describing the structure of an application record.",
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/application.json",
+    "title": "Application",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Stable identifier used across systems."
+      },
+      "name": {
+        "type": "string",
+        "description": "Human readable application name."
+      },
+      "type": {
+        "type": "string",
+        "description": "Category of application such as analytics or platform."
+      },
+      "ownerDepartmentId": {
+        "type": "string",
+        "description": "Department id accountable for the system."
+      },
+      "criticality": {
+        "type": "string",
+        "enum": ["low", "medium", "high"],
+        "description": "Operational impact rating for the system."
+      },
+      "relatedPolicyIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Policies governing the application."
+      },
+      "resourceIds": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Supporting resource identifiers for the application."
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "type",
+      "ownerDepartmentId",
+      "criticality",
+      "relatedPolicyIds",
+      "resourceIds"
+    ]
+  }
+}
