@@ -9,7 +9,7 @@
     "outDir": "out",
     "rootDir": "src",
     "skipLibCheck": true,
-    "types": ["node", "vscode", "jest", "eslint"]
+    "types": ["node", "vscode", "jest"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "out", "tests"]

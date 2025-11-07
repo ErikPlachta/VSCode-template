@@ -155,9 +155,9 @@ export async function listLocalTools(): Promise<MCPTool[]> {
 /**
  * Execute a local MCP tool implementation.
  *
- * @param name Tool identifier to run.
- * @param args Arguments supplied by the chat participant.
- * @returns Tool result payload.
+ * @param {string} name Tool identifier to run.
+ * @param {Record<string, unknown>} [args] Arguments supplied by the chat participant.
+ * @returns {Promise<unknown>} Tool result payload.
  * @throws {LocalToolError} When validation fails or the tool is unknown.
  */
 export async function invokeLocalTool(
