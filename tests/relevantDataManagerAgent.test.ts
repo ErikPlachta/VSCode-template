@@ -111,6 +111,14 @@ describe("RelevantDataManagerAgent", () => {
     expect(Array.isArray(report.issues)).toBe(true);
   });
 
+  it("surfaces orchestration guidance for each category", async () => {
+    const { manager } = await createManager();
+    const config = manager.getCategoryConfig("applications");
+    expect(config.orchestration.summary).toMatch(/applications/i);
+    expect(config.orchestration.signals.length).toBeGreaterThan(0);
+    expect(config.orchestration.agents.databaseAgent.promptStarters.length).toBeGreaterThan(0);
+  });
+
   it("throws when an unknown topic is requested", async () => {
     const { manager } = await createManager();
     expect(() => manager.getCategory("unknown"))
