@@ -57,7 +57,9 @@ function coerceValue(rawValue: string, property: MCPProperty): unknown {
  * @param tool Tool definition with input schema.
  * @returns User-provided arguments keyed by schema property name.
  */
-export async function promptForArgs(tool: MCPTool): Promise<Record<string, unknown>> {
+export async function promptForArgs(
+  tool: MCPTool
+): Promise<Record<string, unknown> | undefined> {
   const args: Record<string, unknown> = {};
   const props = tool.input_schema?.properties ?? {};
 
@@ -81,9 +83,9 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
           canPickMany: type === "array",
           ignoreFocusOut: true
         });
-        if (!selection) {
+        if (selection === undefined) {
           if (property.required) {
-            throw new Error(`A selection for "${key}" is required.`);
+            return undefined;
           }
           continue;
         }
@@ -101,9 +103,9 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
           placeHolder: prompt,
           ignoreFocusOut: true
         });
-        if (!pick) {
+        if (pick === undefined) {
           if (property.required) {
-            throw new Error(`A selection for "${key}" is required.`);
+            return undefined;
           }
           continue;
         }
@@ -118,7 +120,14 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
         value: String(property.default ?? "")
       });
 
-      if (!value) {
+      if (value === undefined) {
+        if (property.required) {
+          return undefined;
+        }
+        continue;
+      }
+
+      if (!value.trim()) {
         if (property.required) {
           throw new Error(`Missing required argument: ${key}`);
         }
@@ -129,7 +138,7 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       await vscode.window.showErrorMessage(message);
-      return {};
+      return undefined;
     }
   }
 

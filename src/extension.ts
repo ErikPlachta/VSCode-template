@@ -227,10 +227,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         description: tool.summary ?? tool.description,
         handler: async () => {
           const args = await promptForArgs(tool);
-          if (!Object.keys(args).length) {
-            const missing = new vscode.MarkdownString("**Error:** Missing arguments.");
-            missing.isTrusted = true;
-            return missing;
+          if (args === undefined) {
+            const cancelled = new vscode.MarkdownString("_Invocation cancelled._");
+            cancelled.isTrusted = true;
+            return cancelled;
           }
           const result = await invokeTool(
             tool,
@@ -283,7 +283,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
           return;
         }
         const args = await promptForArgs(selected.tool);
-        if (!Object.keys(args).length) {
+        if (args === undefined) {
+          vscode.window.showInformationMessage("Tool invocation cancelled.");
           return;
         }
         const result = await invokeTool(
