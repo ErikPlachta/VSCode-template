@@ -39,7 +39,7 @@ Remove a shared cache entry when it is no longer relevant.
 
 #### Defined in
 
-[src/mcpCache.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L136)
+[src/mcpCache.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L136)
 
 ___
 
@@ -59,7 +59,7 @@ local to the client, reducing storage pressure on the MCP backend.
 
 #### Defined in
 
-[src/mcpCache.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L55)
+[src/mcpCache.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L55)
 
 ___
 
@@ -87,7 +87,7 @@ Enumerate all cached artefacts currently stored on disk.
 
 #### Defined in
 
-[src/mcpCache.ts:110](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L110)
+[src/mcpCache.ts:110](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L110)
 
 ___
 
@@ -110,7 +110,7 @@ Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
 
 #### Defined in
 
-[src/mcpCache.ts:66](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L66)
+[src/mcpCache.ts:66](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L66)
 
 ___
 
@@ -139,7 +139,7 @@ Retrieve a shared cache entry by key.
 
 #### Defined in
 
-[src/mcpCache.ts:89](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L89)
+[src/mcpCache.ts:89](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L89)
 
 ___
 
@@ -168,4 +168,4 @@ Persist a shared cache entry that can be re-used by other MCP tools.
 
 #### Defined in
 
-[src/mcpCache.ts:75](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L75)
+[src/mcpCache.ts:75](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L75)

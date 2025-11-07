@@ -40,7 +40,7 @@ Agent offering database-style access patterns.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/databaseAgent.ts#L101)
+[src/agents/databaseAgent.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L101)
 
 ## Methods
 
@@ -63,7 +63,7 @@ Retrieve applications using ownership or criticality filters.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:116](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/databaseAgent.ts#L116)
+[src/agents/databaseAgent.ts:116](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L116)
 
 ___
 
@@ -86,7 +86,7 @@ Retrieve departments by parent, applications, or policies.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:111](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/databaseAgent.ts#L111)
+[src/agents/databaseAgent.ts:111](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L111)
 
 ___
 
@@ -109,7 +109,7 @@ Search for people using the structured directory dataset.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/databaseAgent.ts#L106)
+[src/agents/databaseAgent.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L106)
 
 ___
 
@@ -132,7 +132,7 @@ Retrieve policies by department, category, or application coverage.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/databaseAgent.ts#L121)
+[src/agents/databaseAgent.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L121)
 
 ___
 
@@ -155,7 +155,7 @@ Retrieve knowledge resources filtered by relationships.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:126](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/databaseAgent.ts#L126)
+[src/agents/databaseAgent.ts:126](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L126)
 
 ___
 
@@ -181,4 +181,4 @@ return local matches that satisfy the provided criteria.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/databaseAgent.ts#L134)
+[src/agents/databaseAgent.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/databaseAgent.ts#L134)

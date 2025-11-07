@@ -54,7 +54,7 @@ Error.constructor
 
 #### Defined in
 
-[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L70)
+[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L70)
 
 ## Properties
 
@@ -64,7 +64,7 @@ Error.constructor
 
 #### Defined in
 
-[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L70)
+[src/mcpSync.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L70)
 
 ___
 

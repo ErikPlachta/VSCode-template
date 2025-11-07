@@ -27,7 +27,7 @@ Rich description detailing the tool purpose.
 
 #### Defined in
 
-[src/mcpSync.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L47)
+[src/mcpSync.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L47)
 
 ___
 
@@ -39,7 +39,7 @@ JSON schema describing the tool arguments.
 
 #### Defined in
 
-[src/mcpSync.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L53)
+[src/mcpSync.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L53)
 
 ___
 
@@ -51,7 +51,7 @@ Machine-readable tool identifier.
 
 #### Defined in
 
-[src/mcpSync.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L43)
+[src/mcpSync.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L43)
 
 ___
 
@@ -63,7 +63,7 @@ Optional extended summary for reference content.
 
 #### Defined in
 
-[src/mcpSync.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L49)
+[src/mcpSync.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L49)
 
 ___
 
@@ -75,7 +75,7 @@ Optional category or tags provided by the MCP server.
 
 #### Defined in
 
-[src/mcpSync.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L51)
+[src/mcpSync.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L51)
 
 ___
 
@@ -87,4 +87,4 @@ Title displayed to VS Code users.
 
 #### Defined in
 
-[src/mcpSync.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpSync.ts#L45)
+[src/mcpSync.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpSync.ts#L45)

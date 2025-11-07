@@ -46,7 +46,7 @@ Unique identifier for each category in the mock repository.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L83)
+[src/agents/relevantDataManagerAgent.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L83)
 
 ___
 
@@ -58,7 +58,7 @@ Minimal representation of a record stored under a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L80)
+[src/agents/relevantDataManagerAgent.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L80)
 
 ## Variables
 
@@ -70,7 +70,7 @@ Static dataset that mimics the MCP relevant-data workspace.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:147](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L147)
+[src/agents/relevantDataManagerAgent.ts:147](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L147)
 
 ## Functions
 
@@ -84,4 +84,4 @@ Static dataset that mimics the MCP relevant-data workspace.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1399](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1399)
+[src/agents/relevantDataManagerAgent.ts:1399](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1399)

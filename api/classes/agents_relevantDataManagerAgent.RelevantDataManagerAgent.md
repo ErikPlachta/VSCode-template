@@ -47,7 +47,7 @@ Agent that manages the relevant-data workspace representation.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1190](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1190)
+[src/agents/relevantDataManagerAgent.ts:1190](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1190)
 
 ## Methods
 
@@ -69,7 +69,7 @@ Resolve a topic or identifier to the underlying category definition.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1204](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1204)
+[src/agents/relevantDataManagerAgent.ts:1204](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1204)
 
 ___
 
@@ -100,7 +100,7 @@ Access category configuration metadata such as relationships.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1223](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1223)
+[src/agents/relevantDataManagerAgent.ts:1223](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1223)
 
 ___
 
@@ -122,7 +122,7 @@ Access the JSON schemas associated with a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1228](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1228)
+[src/agents/relevantDataManagerAgent.ts:1228](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1228)
 
 ___
 
@@ -145,7 +145,7 @@ Resolve relationships for a given record across categories.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1336](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1336)
+[src/agents/relevantDataManagerAgent.ts:1336](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1336)
 
 ___
 
@@ -168,7 +168,7 @@ orchestration layer generate realistic tool requests.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1241](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1241)
+[src/agents/relevantDataManagerAgent.ts:1241](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1241)
 
 ___
 
@@ -190,7 +190,7 @@ Retrieve the folder blueprint for a given topic.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1218](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1218)
+[src/agents/relevantDataManagerAgent.ts:1218](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1218)
 
 ___
 
@@ -212,7 +212,7 @@ Build a snapshot view of a category and persist it to the shared cache.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1303](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1303)
+[src/agents/relevantDataManagerAgent.ts:1303](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1303)
 
 ___
 
@@ -234,7 +234,7 @@ Retrieve Python type definitions provided as guidance for SDK authors.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1233](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1233)
+[src/agents/relevantDataManagerAgent.ts:1233](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1233)
 
 ___
 
@@ -257,7 +257,7 @@ upstream system that owns the category data.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1254](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1254)
+[src/agents/relevantDataManagerAgent.ts:1254](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1254)
 
 ___
 
@@ -280,7 +280,7 @@ Retrieve a single record by identifier.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1264](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1264)
+[src/agents/relevantDataManagerAgent.ts:1264](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1264)
 
 ___
 
@@ -302,7 +302,7 @@ Return all records stored in the local mock dataset for a category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1259](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1259)
+[src/agents/relevantDataManagerAgent.ts:1259](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1259)
 
 ___
 
@@ -324,7 +324,7 @@ List the unit/integration tests referenced by the category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1246](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1246)
+[src/agents/relevantDataManagerAgent.ts:1246](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1246)
 
 ___
 
@@ -340,7 +340,7 @@ Enumerate the categories available to the MCP client.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1195](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1195)
+[src/agents/relevantDataManagerAgent.ts:1195](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1195)
 
 ___
 
@@ -362,4 +362,4 @@ Perform a keyword search across every category.
 
 #### Defined in
 
-[src/agents/relevantDataManagerAgent.ts:1269](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/relevantDataManagerAgent.ts#L1269)
+[src/agents/relevantDataManagerAgent.ts:1269](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/relevantDataManagerAgent.ts#L1269)

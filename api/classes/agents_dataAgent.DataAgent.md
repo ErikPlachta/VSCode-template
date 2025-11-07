@@ -16,6 +16,7 @@ Agent that understands data relationships between categories.
 
 - [buildExplorationPlan](agents_dataAgent.DataAgent.md#buildexplorationplan)
 - [findCrossTopicConnection](agents_dataAgent.DataAgent.md#findcrosstopicconnection)
+- [getCategoryToolkit](agents_dataAgent.DataAgent.md#getcategorytoolkit)
 - [getDatabaseAgent](agents_dataAgent.DataAgent.md#getdatabaseagent)
 - [getTopicOverview](agents_dataAgent.DataAgent.md#gettopicoverview)
 - [mapTopicConnections](agents_dataAgent.DataAgent.md#maptopicconnections)
@@ -40,7 +41,7 @@ Agent that understands data relationships between categories.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:86](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L86)
+[src/agents/dataAgent.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L98)
 
 ## Methods
 
@@ -63,7 +64,7 @@ Build an exploration plan for answering a specific user question.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:129](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L129)
+[src/agents/dataAgent.ts:141](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L141)
 
 ___
 
@@ -88,7 +89,29 @@ record via declared relationships.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:169](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L169)
+[src/agents/dataAgent.ts:181](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L181)
+
+___
+
+### getCategoryToolkit
+
+▸ **getCategoryToolkit**(`topic`): [`CategoryToolkit`](../interfaces/agents_dataAgent.CategoryToolkit.md)
+
+Gather the test, schema, and query artefacts for a category.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `topic` | `string` |
+
+#### Returns
+
+[`CategoryToolkit`](../interfaces/agents_dataAgent.CategoryToolkit.md)
+
+#### Defined in
+
+[src/agents/dataAgent.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L221)
 
 ___
 
@@ -104,7 +127,7 @@ Access to the underlying database agent for orchestration workflows.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:204](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L204)
+[src/agents/dataAgent.ts:216](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L216)
 
 ___
 
@@ -126,7 +149,7 @@ Summarise a topic including schema references and highlight data.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:92](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L92)
+[src/agents/dataAgent.ts:104](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L104)
 
 ___
 
@@ -149,7 +172,7 @@ Map the connections from a given record to other categories.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:108](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L108)
+[src/agents/dataAgent.ts:120](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L120)
 
 ___
 
@@ -171,4 +194,4 @@ Run a keyword search across every category.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L194)
+[src/agents/dataAgent.ts:206](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L206)

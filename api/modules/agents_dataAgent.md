@@ -10,6 +10,7 @@
 
 ### Interfaces
 
+- [CategoryToolkit](../interfaces/agents_dataAgent.CategoryToolkit.md)
 - [CrossTopicConnection](../interfaces/agents_dataAgent.CrossTopicConnection.md)
 - [ExplorationPlan](../interfaces/agents_dataAgent.ExplorationPlan.md)
 - [ExplorationStep](../interfaces/agents_dataAgent.ExplorationStep.md)
@@ -33,4 +34,4 @@
 
 #### Defined in
 
-[src/agents/dataAgent.ts:242](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/agents/dataAgent.ts#L242)
+[src/agents/dataAgent.ts:267](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/agents/dataAgent.ts#L267)

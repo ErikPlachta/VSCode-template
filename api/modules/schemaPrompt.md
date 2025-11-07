@@ -12,7 +12,7 @@
 
 ### promptForArgs
 
-▸ **promptForArgs**(`tool`): `Promise`\<`Record`\<`string`, `unknown`\>\>
+▸ **promptForArgs**(`tool`): `Promise`\<`Record`\<`string`, `unknown`\> \| `undefined`\>
 
 Prompts the user for all required tool arguments.
 
@@ -27,10 +27,10 @@ and booleans, plus validation for numbers and required fields.
 
 #### Returns
 
-`Promise`\<`Record`\<`string`, `unknown`\>\>
+`Promise`\<`Record`\<`string`, `unknown`\> \| `undefined`\>
 
 User-provided arguments keyed by schema property name.
 
 #### Defined in
 
-[src/schemaPrompt.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/schemaPrompt.ts#L60)
+[src/schemaPrompt.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/schemaPrompt.ts#L60)

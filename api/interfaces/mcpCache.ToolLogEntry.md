@@ -27,7 +27,7 @@ Arguments sent to the MCP server.
 
 #### Defined in
 
-[src/mcpCache.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L39)
+[src/mcpCache.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L39)
 
 ___
 
@@ -39,7 +39,7 @@ High-level conversation context that accompanied the request.
 
 #### Defined in
 
-[src/mcpCache.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L41)
+[src/mcpCache.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L41)
 
 ___
 
@@ -51,7 +51,7 @@ Human-readable error message when an invocation fails.
 
 #### Defined in
 
-[src/mcpCache.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L45)
+[src/mcpCache.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L45)
 
 ___
 
@@ -63,7 +63,7 @@ Raw payload returned by the server, if any.
 
 #### Defined in
 
-[src/mcpCache.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L43)
+[src/mcpCache.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L43)
 
 ___
 
@@ -75,7 +75,7 @@ ISO timestamp when the invocation took place.
 
 #### Defined in
 
-[src/mcpCache.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L35)
+[src/mcpCache.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L35)
 
 ___
 
@@ -87,4 +87,4 @@ Tool identifier that generated the log entry.
 
 #### Defined in
 
-[src/mcpCache.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/5380b1fac572540a316e76ef0d5cd06590a74558/src/mcpCache.ts#L37)
+[src/mcpCache.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/ab2acd92bf7619039c24f1f105bd13e718bc0d1f/src/mcpCache.ts#L37)
