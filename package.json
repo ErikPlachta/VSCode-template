@@ -14,7 +14,10 @@
   },
   "activationEvents": [
     "onStartupFinished",
-    "onCommand:mybusinessMCP.invokeTool"
+    "onCommand:mybusinessMCP.invokeTool",
+    "onCommand:mybusinessMCP.registerServer",
+    "onCommand:mybusinessMCP.unregisterServer",
+    "onChatParticipant:MyBusinessMCP"
   ],
   "main": "./out/extension/index.js",
   "contributes": {
@@ -22,6 +25,28 @@
       {
         "command": "mybusinessMCP.invokeTool",
         "title": "My Business MCP: Invoke Tool"
+      },
+      {
+        "command": "mybusinessMCP.registerServer",
+        "title": "My Business MCP: Register MCP Server"
+      },
+      {
+        "command": "mybusinessMCP.unregisterServer",
+        "title": "My Business MCP: Unregister MCP Server"
+      }
+    ],
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "mybusiness-local",
+        "label": "My Business Embedded Server"
+      }
+    ],
+    "chatParticipants": [
+      {
+        "id": "MyBusinessMCP",
+        "name": "mybusiness",
+        "description": "Access your business data including applications, departments, people, policies, and resources",
+        "isSticky": true
       }
     ],
     "configuration": {
@@ -29,12 +54,34 @@
       "properties": {
         "mybusinessMCP.serverUrl": {
           "type": "string",
-          "default": "https://your-domain.com/",
-          "description": "Base URL of the MCP server."
+          "default": "",
+          "description": "External MCP server URL (leave blank to use embedded)."
         },
         "mybusinessMCP.token": {
           "type": "string",
           "description": "Bearer token for MCP authentication."
+        },
+        "mybusinessMCP.autoRegister": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically register embedded server in global mcp.json."
+        },
+        "mybusinessMCP.port": {
+          "type": "number",
+          "default": 39200,
+          "minimum": 1024,
+          "maximum": 65535,
+          "description": "Port for embedded HTTP JSON-RPC server."
+        },
+        "mybusinessMCP.registerServerId": {
+          "type": "string",
+          "default": "mybusiness",
+          "description": "Server id key used inside mcp.json 'servers' object."
+        },
+        "mybusinessMCP.includeAuthHeader": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include Authorization header metadata when registering HTTP server in mcp.json."
         }
       }
     }
@@ -64,7 +111,7 @@
     "@types/vscode": "^1.90.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
-    "@vscode/vsce": "^2.32.0",
+    "@vscode/vsce": "^3.7.0",
     "eslint": "^8.57.1",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-jsdoc": "^46.9.1",

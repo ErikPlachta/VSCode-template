@@ -1,7 +1,24 @@
-node_modules
-src
-tests
+# Exclude source and dev-only files from the VSIX
+src/
+tests/
+coverage/
+docs/
+schemas/
+.github/
+.vscode/
+
+# Config and metadata not needed at runtime
 tsconfig.json
-.eslintrc.json
 jest.config.js
 typedoc.json
+.eslintrc.json
+.vscodeignore
+.gitignore
+.gitattributes
+
+# Keep node_modules so runtime dependencies are included
+# node_modules/
+
+# Optional: exclude repo-only artifacts (keep README and LICENSE for marketplace)
+*.code-workspace
+# agent.config.json

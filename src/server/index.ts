@@ -38,7 +38,9 @@ async function loadJson<T>(...segments: string[]): Promise<T> {
   return JSON.parse(raw) as T;
 }
 
-async function loadOptionalJson<T>(...segments: string[]): Promise<T | undefined> {
+async function loadOptionalJson<T>(
+  ...segments: string[]
+): Promise<T | undefined> {
   try {
     return await loadJson<T>(...segments);
   } catch (error) {
@@ -49,7 +51,10 @@ async function loadOptionalJson<T>(...segments: string[]): Promise<T | undefined
   }
 }
 
-async function loadJsonCollection(categoryId: string, folder: string): Promise<unknown[]> {
+async function loadJsonCollection(
+  categoryId: string,
+  folder: string
+): Promise<unknown[]> {
   try {
     const directory = path.join(DATA_ROOT, categoryId, folder);
     const entries = await readdir(directory);
@@ -68,19 +73,20 @@ async function loadJsonCollection(categoryId: string, folder: string): Promise<u
 }
 
 async function describeCategory(categoryId: string): Promise<unknown> {
-  const [category, relationships, schemas, examples, queries] = await Promise.all([
-    loadJson<Record<string, unknown>>(categoryId, "category.json"),
-    loadOptionalJson<unknown[]>(categoryId, "relationships.json"),
-    loadJsonCollection(categoryId, "schemas"),
-    loadJsonCollection(categoryId, "examples"),
-    loadJsonCollection(categoryId, "queries")
-  ]);
+  const [category, relationships, schemas, examples, queries] =
+    await Promise.all([
+      loadJson<Record<string, unknown>>(categoryId, "category.json"),
+      loadOptionalJson<unknown[]>(categoryId, "relationships.json"),
+      loadJsonCollection(categoryId, "schemas"),
+      loadJsonCollection(categoryId, "examples"),
+      loadJsonCollection(categoryId, "queries"),
+    ]);
   return {
     category,
     relationships: relationships ?? [],
     schemas,
     examples,
-    queries
+    queries,
   };
 }
 
@@ -88,8 +94,13 @@ async function searchRecords(
   categoryId: string,
   filters: Record<string, unknown> = {}
 ): Promise<unknown[]> {
-  const records = await loadJson<Record<string, unknown>[]>(categoryId, "records.json");
-  const activeFilters = Object.entries(filters).filter(([, value]) => value !== undefined && value !== "");
+  const records = await loadJson<Record<string, unknown>[]>(
+    categoryId,
+    "records.json"
+  );
+  const activeFilters = Object.entries(filters).filter(
+    ([, value]) => value !== undefined && value !== ""
+  );
   if (activeFilters.length === 0) {
     return records;
   }
@@ -118,10 +129,10 @@ const tools: MCPTool[] = [
           name: "categoryId",
           type: "string",
           description: "Identifier of the category to describe.",
-          required: true
-        }
-      }
-    }
+          required: true,
+        },
+      },
+    },
   },
   {
     name: "relevant-data.searchRecords",
@@ -136,19 +147,23 @@ const tools: MCPTool[] = [
           name: "categoryId",
           type: "string",
           description: "Identifier of the category to query.",
-          required: true
+          required: true,
         },
         filters: {
           name: "filters",
           type: "object",
-          description: "Map of field names to equality values used when filtering records."
-        }
-      }
-    }
-  }
+          description:
+            "Map of field names to equality values used when filtering records.",
+        },
+      },
+    },
+  },
 ];
 
-async function handleInvoke(name: string, args: Record<string, unknown> = {}): Promise<unknown> {
+async function handleInvoke(
+  name: string,
+  args: Record<string, unknown> = {}
+): Promise<unknown> {
   switch (name) {
     case "relevant-data.describeCategory": {
       const categoryId = String(args.categoryId ?? "");
@@ -162,7 +177,8 @@ async function handleInvoke(name: string, args: Record<string, unknown> = {}): P
       if (!categoryId) {
         throw new Error("'categoryId' is required.");
       }
-      const filters = (args.filters as Record<string, unknown> | undefined) ?? {};
+      const filters =
+        (args.filters as Record<string, unknown> | undefined) ?? {};
       return searchRecords(categoryId, filters);
     }
     default:
@@ -175,9 +191,12 @@ function sendJson(res: ServerResponse, response: JsonRpcResponse): void {
   res.end(JSON.stringify(response));
 }
 
-async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
+async function handleRequest(
+  req: IncomingMessage,
+  res: ServerResponse
+): Promise<void> {
   if (req.method !== "POST") {
-    res.writeHead(405, { "Allow": "POST" });
+    res.writeHead(405, { Allow: "POST" });
     res.end();
     return;
   }
@@ -193,13 +212,21 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise
     sendJson(res, {
       jsonrpc: "2.0",
       id: null,
-      error: { code: -32700, message: "Invalid JSON", data: (error as Error).message }
+      error: {
+        code: -32700,
+        message: "Invalid JSON",
+        data: (error as Error).message,
+      },
     });
     return;
   }
 
   if (payload.method === "listTools") {
-    sendJson(res, { jsonrpc: "2.0", id: payload.id ?? null, result: { tools } });
+    sendJson(res, {
+      jsonrpc: "2.0",
+      id: payload.id ?? null,
+      result: { tools },
+    });
     return;
   }
 
@@ -207,7 +234,7 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise
     sendJson(res, {
       jsonrpc: "2.0",
       id: payload.id ?? null,
-      error: { code: -32601, message: `Unknown method: ${payload.method}` }
+      error: { code: -32601, message: `Unknown method: ${payload.method}` },
     });
     return;
   }
@@ -218,19 +245,23 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise
     sendJson(res, {
       jsonrpc: "2.0",
       id: payload.id ?? null,
-      error: { code: -32602, message: "Tool name is required" }
+      error: { code: -32602, message: "Tool name is required" },
     });
     return;
   }
 
   try {
     const result = await handleInvoke(toolName, params.arguments ?? {});
-    sendJson(res, { jsonrpc: "2.0", id: payload.id ?? null, result: { content: result } });
+    sendJson(res, {
+      jsonrpc: "2.0",
+      id: payload.id ?? null,
+      result: { content: result },
+    });
   } catch (error) {
     sendJson(res, {
       jsonrpc: "2.0",
       id: payload.id ?? null,
-      error: { code: -32000, message: (error as Error).message }
+      error: { code: -32000, message: (error as Error).message },
     });
   }
 }
@@ -243,7 +274,11 @@ export function createMcpServer(
       sendJson(res, {
         jsonrpc: "2.0",
         id: null,
-        error: { code: -32603, message: "Internal error", data: (error as Error).message }
+        error: {
+          code: -32603,
+          message: "Internal error",
+          data: (error as Error).message,
+        },
       });
     });
   });
@@ -257,4 +292,4 @@ if (require.main === module) {
   createMcpServer();
 }
 
-export { tools };
+export { tools, handleRequest };

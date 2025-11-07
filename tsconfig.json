@@ -11,6 +11,6 @@
     "skipLibCheck": true,
     "types": ["node", "vscode", "jest", "eslint"]
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "out", "tests"]
+  "include": ["src", "src"],
+  "exclude": ["node_modules", "out", "testbin/tests
 }
