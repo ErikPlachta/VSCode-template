@@ -1,0 +1,5 @@
+{
+  "name": "Policy",
+  "description": "TypedDict for policy metadata.",
+  "definition": "\"\"\"class Policy(TypedDict):\n    id: str\n    title: str\n    category: str\n    summary: str\n    ownerDepartmentId: str\n    relatedResourceIds: List[str]\n    applicationIds: List[str]\n\"\"\""
+}

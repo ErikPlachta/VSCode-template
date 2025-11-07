@@ -1,0 +1,5 @@
+{
+  "name": "Person",
+  "description": "TypedDict for the person schema.",
+  "definition": "\"\"\"class Person(TypedDict):\n    id: str\n    name: str\n    email: str\n    role: str\n    departmentId: str\n    managerId: Optional[str]\n    location: str\n    skills: List[str]\n    applicationIds: List[str]\n    policyAcks: List[str]\n    resourceIds: List[str]\n\"\"\""
+}

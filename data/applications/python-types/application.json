@@ -1,0 +1,5 @@
+{
+  "name": "Application",
+  "description": "TypedDict for application metadata.",
+  "definition": "\"\"\"class Application(TypedDict):\n    id: str\n    name: str\n    type: str\n    ownerDepartmentId: str\n    criticality: Literal['low', 'medium', 'high']\n    relatedPolicyIds: List[str]\n    resourceIds: List[str]\n\"\"\""
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Validate resource schema",
+  "description": "Ensures relationships with policies and applications exist.",
+  "command": "pytest data/companyResources/tests/test_schema.py"
+}

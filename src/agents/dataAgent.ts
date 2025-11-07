@@ -14,6 +14,7 @@ import {
   CategorySnapshot,
   ExampleDataset,
   CategoryTestArtefact,
+  DatasetCatalogueEntry,
   FolderBlueprint,
   PythonTypeDefinition,
   RelationshipDescription,
@@ -176,6 +177,15 @@ export class DataAgent {
   constructor(manager?: RelevantDataManagerAgent, databaseAgent?: DatabaseAgent) {
     this.manager = manager ?? new RelevantDataManagerAgent();
     this.database = databaseAgent ?? new DatabaseAgent(this.manager);
+  }
+
+  /**
+   * Expose the consolidated dataset catalogue built from on-disk data sources.
+   *
+   * @returns {DatasetCatalogueEntry[]} Summaries for each category with key metadata.
+   */
+  getDatasetCatalogue(): DatasetCatalogueEntry[] {
+    return this.manager.getDatasetCatalogue();
   }
 
   /**

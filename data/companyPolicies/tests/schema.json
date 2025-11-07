@@ -1,0 +1,5 @@
+{
+  "name": "Validate policy schema",
+  "description": "Ensures critical relationships are maintained.",
+  "command": "pytest data/companyPolicies/tests/test_schema.py"
+}

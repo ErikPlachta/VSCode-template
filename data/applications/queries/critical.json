@@ -1,0 +1,13 @@
+{
+  "name": "Fetch critical applications",
+  "description": "Retrieve all high criticality systems from the CMDB.",
+  "samplePayload": {
+    "endpoint": "https://cmdb.example.com/api/applications",
+    "method": "POST",
+    "body": {
+      "filter": {
+        "criticality": "high"
+      }
+    }
+  }
+}
