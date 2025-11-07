@@ -71,4 +71,24 @@ describe("DatabaseAgent", () => {
     const ids = resources.map((resource) => resource.id);
     expect(ids).toEqual(expect.arrayContaining(["resource-analytics-playbook", "resource-data-handbook"]));
   });
+
+  it("refreshes cached results when record hashes change", async () => {
+    const { database, manager, cacheDir } = await createAgents();
+    const sharedDir = path.join(cacheDir, "shared");
+
+    await database.queryCategory("people", { departmentId: "dept-analytics" });
+    const cacheFiles = await fs.readdir(sharedDir);
+    expect(cacheFiles.length).toBeGreaterThan(0);
+    const cachePath = path.join(sharedDir, cacheFiles[0]);
+    const initialEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
+    expect(initialEntry.metadata?.recordHash).toBeDefined();
+
+    const category = manager.getCategory("people");
+    const clone = { ...category.records[0], id: "person-temp" };
+    category.records.push(clone);
+
+    await database.queryCategory("people", { departmentId: "dept-analytics" });
+    const updatedEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
+    expect(updatedEntry.metadata?.recordHash).not.toEqual(initialEntry.metadata.recordHash);
+  });
 });

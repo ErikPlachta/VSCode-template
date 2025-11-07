@@ -61,6 +61,22 @@ describe("RelevantDataManagerAgent", () => {
     expect(cacheExists).toBe(true);
   });
 
+  it("refreshes snapshots when record hashes change", async () => {
+    const { manager, cacheDir } = await createManager();
+    const snapshot = await manager.getOrCreateSnapshot("people");
+    const cachePath = path.join(cacheDir, "shared", "relevant-data_people_snapshot.json");
+    const initialEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
+
+    const category = manager.getCategory("people");
+    const clone = { ...category.records[0], id: "person-temp" };
+    category.records.push(clone);
+
+    const refreshed = await manager.getOrCreateSnapshot("people");
+    expect(refreshed.recordCount).toBe(snapshot.recordCount + 1);
+    const updatedEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
+    expect(updatedEntry.metadata?.recordHash).not.toEqual(initialEntry.metadata.recordHash);
+  });
+
   it("persists a consolidated catalogue cache", async () => {
     const { manager, cacheDir } = await createManager();
     const cataloguePath = path.join(cacheDir, "shared", "relevant-data_catalogue.json");

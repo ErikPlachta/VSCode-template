@@ -3,6 +3,23 @@ import * as mcpSync from "../src/mcpSync";
 import * as mcpCache from "../src/mcpCache";
 import * as schemaPrompt from "../src/schemaPrompt";
 
+jest.mock("../src/agents/orchestrator", () => ({
+  Orchestrator: jest.fn(() => ({
+    listCategories: jest.fn(() => [
+      { id: "people", name: "People", description: "All employees" }
+    ]),
+    classify: jest.fn(() => ({ intent: "metadata", rationale: "mock" })),
+    handle: jest.fn(async () => ({
+      intent: "metadata",
+      agent: "relevant-data-manager",
+      summary: "mock summary",
+      rationale: "mock",
+      payload: {},
+      markdown: "Mock orchestrator response"
+    }))
+  }))
+}));
+
 jest.mock("vscode", () => {
   const registerChatCommand = jest.fn(() => ({ dispose: jest.fn() }));
   const registerChatMention = jest.fn(() => ({ dispose: jest.fn() }));

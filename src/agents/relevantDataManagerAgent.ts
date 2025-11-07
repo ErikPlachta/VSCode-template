@@ -518,6 +518,26 @@ export class RelevantDataManagerAgent {
     return this.getCategory(topicOrId).records;
   }
 
+  /**
+   * Compute a deterministic hash of the records for change detection.
+   *
+   * @param {string} topicOrId Category identifier or alias whose records should be hashed.
+   * @returns {string} SHA-1 hash representing the current record contents.
+   */
+  getCategoryRecordHash(topicOrId: string): string {
+    const category = this.getCategory(topicOrId);
+    return this.hashRecords(category.records);
+  }
+
+  /**
+   * Expose the dataset fingerprint used to detect catalogue changes.
+   *
+   * @returns {string} SHA-1 fingerprint of the consolidated dataset catalogue.
+   */
+  getDatasetFingerprint(): string {
+    return this.datasetFingerprint;
+  }
+
   /** Retrieve a single record by identifier. */
   getRecord(topicOrId: string, recordId: string): CategoryRecord | undefined {
     return this.getRecords(topicOrId).find((record) => record.id === recordId);
@@ -562,8 +582,9 @@ export class RelevantDataManagerAgent {
     const category = this.getCategory(topicOrId);
     const cacheKey = `relevant-data:${category.id}:snapshot`;
     const cacheDir = await this.cacheDirPromise;
+    const currentHash = this.getCategoryRecordHash(category.id);
     const cached = await readSharedCacheEntry<CategorySnapshot>(cacheDir, cacheKey);
-    if (cached) {
+    if (cached?.metadata?.recordHash === currentHash) {
       return cached.value;
     }
     const snapshot: CategorySnapshot = {
@@ -583,7 +604,7 @@ export class RelevantDataManagerAgent {
       timestamp: new Date().toISOString(),
       value: snapshot,
       metadata: {
-        recordHash: this.hashRecords(category.records)
+        recordHash: currentHash
       }
     };
     await storeSharedCacheEntry(cacheDir, entry);
