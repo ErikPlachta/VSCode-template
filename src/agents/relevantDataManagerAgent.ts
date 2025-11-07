@@ -18,6 +18,8 @@ import {
   SharedCacheEntry,
   storeSharedCacheEntry
 } from "../mcpCache";
+import { createInvocationLogger } from "../mcp/telemetry";
+import { RelevantDataManagerAgentProfile } from "../mcp/agentProfiles";
 
 /**
  * Description for how a category folder is organised.
@@ -444,6 +446,7 @@ export class RelevantDataManagerAgent {
   private readonly consolidatedIndex: DatasetCatalogueEntry[];
   private readonly datasetFingerprint: string;
   private readonly ajv: Ajv;
+  private readonly telemetry = createInvocationLogger(RelevantDataManagerAgentProfile.id);
 
   constructor(cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
@@ -579,36 +582,38 @@ export class RelevantDataManagerAgent {
 
   /** Build a snapshot view of a category and persist it to the shared cache. */
   async getOrCreateSnapshot(topicOrId: string): Promise<CategorySnapshot> {
-    const category = this.getCategory(topicOrId);
-    const cacheKey = `relevant-data:${category.id}:snapshot`;
-    const cacheDir = await this.cacheDirPromise;
-    const currentHash = this.getCategoryRecordHash(category.id);
-    const cached = await readSharedCacheEntry<CategorySnapshot>(cacheDir, cacheKey);
-    if (cached?.metadata?.recordHash === currentHash) {
-      return cached.value;
-    }
-    const snapshot: CategorySnapshot = {
-      id: category.id,
-      name: category.name,
-      description: category.description,
-      recordCount: category.records.length,
-      schemaNames: category.schemas.map((schema) => schema.name),
-      typeNames: category.types.map((typeDef) => typeDef.name),
-      queryNames: category.queries.map((query) => query.name),
-      exampleFiles: category.examples.map((example) => example.file),
-      folder: category.config.folder
-    };
-    const entry: SharedCacheEntry<CategorySnapshot> = {
-      key: cacheKey,
-      toolName: "relevant-data-manager",
-      timestamp: new Date().toISOString(),
-      value: snapshot,
-      metadata: {
-        recordHash: currentHash
+    return this.telemetry("getOrCreateSnapshot", async () => {
+      const category = this.getCategory(topicOrId);
+      const cacheKey = `relevant-data:${category.id}:snapshot`;
+      const cacheDir = await this.cacheDirPromise;
+      const currentHash = this.getCategoryRecordHash(category.id);
+      const cached = await readSharedCacheEntry<CategorySnapshot>(cacheDir, cacheKey);
+      if (cached?.metadata?.recordHash === currentHash) {
+        return cached.value;
       }
-    };
-    await storeSharedCacheEntry(cacheDir, entry);
-    return snapshot;
+      const snapshot: CategorySnapshot = {
+        id: category.id,
+        name: category.name,
+        description: category.description,
+        recordCount: category.records.length,
+        schemaNames: category.schemas.map((schema) => schema.name),
+        typeNames: category.types.map((typeDef) => typeDef.name),
+        queryNames: category.queries.map((query) => query.name),
+        exampleFiles: category.examples.map((example) => example.file),
+        folder: category.config.folder
+      };
+      const entry: SharedCacheEntry<CategorySnapshot> = {
+        key: cacheKey,
+        toolName: RelevantDataManagerAgentProfile.id,
+        timestamp: new Date().toISOString(),
+        value: snapshot,
+        metadata: {
+          recordHash: currentHash
+        }
+      };
+      await storeSharedCacheEntry(cacheDir, entry);
+      return snapshot;
+    });
   }
 
   /** Resolve relationships for a given record across categories. */
@@ -1087,24 +1092,28 @@ export class RelevantDataManagerAgent {
   }
 
   private async persistConsolidatedIndex(): Promise<void> {
-    try {
-      const cacheDir = await this.cacheDirPromise;
-      const cached = await readSharedCacheEntry<DatasetCatalogueEntry[]>(cacheDir, CONSOLIDATED_INDEX_CACHE_KEY);
-      if (cached?.metadata?.fingerprint === this.datasetFingerprint) {
-        return;
+    await this.telemetry("persistConsolidatedIndex", async () => {
+      try {
+        const cacheDir = await this.cacheDirPromise;
+        const cached = await readSharedCacheEntry<DatasetCatalogueEntry[]>(
+          cacheDir,
+          CONSOLIDATED_INDEX_CACHE_KEY
+        );
+        if (cached?.metadata?.fingerprint === this.datasetFingerprint) {
+          return;
+        }
+        const entry: SharedCacheEntry<DatasetCatalogueEntry[]> = {
+          key: CONSOLIDATED_INDEX_CACHE_KEY,
+          toolName: RelevantDataManagerAgentProfile.id,
+          timestamp: new Date().toISOString(),
+          value: this.consolidatedIndex,
+          metadata: { fingerprint: this.datasetFingerprint }
+        };
+        await storeSharedCacheEntry(cacheDir, entry);
+      } catch (error) {
+        console.warn("Failed to persist consolidated dataset index", error);
       }
-      const entry: SharedCacheEntry<DatasetCatalogueEntry[]> = {
-        key: CONSOLIDATED_INDEX_CACHE_KEY,
-        toolName: "relevant-data-manager",
-        timestamp: new Date().toISOString(),
-        value: this.consolidatedIndex,
-        metadata: { fingerprint: this.datasetFingerprint }
-      };
-      await storeSharedCacheEntry(cacheDir, entry);
-    } catch (error) {
-      // Swallow cache persistence errors to avoid breaking caller flows.
-      console.warn("Failed to persist consolidated dataset index", error);
-    }
+    });
   }
 
   private createCatalogueEntry(category: BusinessCategory): DatasetCatalogueEntry {
