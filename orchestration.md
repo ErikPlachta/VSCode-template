@@ -1,153 +1,59 @@
-# Orchestrator Architecture Overview
+---
+title: Orchestrator Architecture Overview
+summary: Comprehensive blueprint for coordinating MCP tool discovery, routing, and responses inside VS Code.
+roles:
+  - orchestration-engineer
+  - developer-experience
+associations:
+  - repository-health-agent
+  - mcp-sync
+hierarchy:
+  - platform
+  - orchestration
+  - operations
+---
 
-This document explains how the My Business MCP VS Code extension orchestrates tools that are exposed by your Model Context Protocol (MCP) server. It covers runtime discovery, input collection, invocation, response rendering, and local logging so contributors can confidently extend the workflow.
+## Summary
 
-## 1. Dynamic tool discovery
+The orchestrator governs how the My Business MCP VS Code extension discovers tools, gathers inputs, and delivers responses. It ensures every interaction across discovery, invocation, logging, and user feedback adheres to governed pathways so that engineers can safely extend workflows.
 
-1. `fetchTools` (`src/mcpSync.ts`) issues a JSON-RPC `listTools` call when the extension activates.
-2. The response is normalised to enrich each tool with:
-   - Schema-aware property metadata (type, defaults, required flags, enums).
-   - Optional summary and tag information.
-3. Slash commands, mentions, and the automation command pull descriptions directly from the hydrated metadata, so enhancing the MCP server payload immediately improves the UX.
+## Responsibilities
 
-## 2. Adaptive argument prompts
+- Discover and register MCP tools dynamically at activation time.
+- Collect contextual inputs from users and supporting datasets to enrich tool invocations.
+- Route execution across specialised agents while maintaining traceability and logging.
+- Surface structured responses back to Copilot Chat with clear follow-up guidance.
 
-* `promptForArgs` (`src/schemaPrompt.ts`) inspects the JSON schema for each property and chooses the appropriate input primitive:
-  * Quick pick menus for booleans and enumerations.
-  * Validated number parsing for numeric fields.
-  * Comma-delimited parsing for arrays, including nested coercion.
-* Required fields surface descriptive validation errors, and defaults are pre-filled when provided by the server.
+## Inputs
 
-## 3. Context-aware invocation pipeline
+- MCP capability metadata loaded during activation and refresh cycles.
+- User prompts and clarification flows collected through chat interactions.
+- Data lake resources synchronised by the MCP sync pipeline.
+- Project configuration, including authentication tokens and server URLs.
 
-* Chat handlers (`src/extension.ts`) funnel both slash commands and mentions into a single `invokeTool` helper that:
-  1. Aggregates the last ten interaction summaries per tool to form a lightweight conversation context.
-  2. Attaches the context alongside the arguments when calling `invokeTool` on the MCP server.
-  3. Persists the rolling history so multi-turn orchestrations have immediate access to recent inputs and outputs.
+## Outputs
 
-## 4. Result rendering and resilience
+- Curated tool execution requests enriched with validated arguments.
+- User-facing responses rendered inside VS Code with contextual follow-ups.
+- Audit logs persisted locally for replay, troubleshooting, and reporting.
+- Signals for downstream documentation and quality agents to update health reports.
 
-* Successful responses are rendered as Markdown with the tool name, description, tags, and either prose or syntax-highlighted JSON blocks.
-* Errors from HTTP failures, JSON parsing, or MCP error payloads are surfaced with actionable text in chat and logged locally.
-* Each invocation records the request/response envelope (or error) to `.mcp-cache/invocations.jsonl`, preserving diagnostics while keeping storage client-side.
+## Error Handling
 
-## 5. Automation hooks
+- Retries tool discovery when the MCP server connection temporarily fails.
+- Surfaces actionable error prompts for missing context or invalid inputs.
+- Escalates to the repository health agent when required metadata is absent.
+- Captures diagnostics for CI visibility to block non-compliant merges.
 
-* The command palette entry **My Business MCP: Invoke Tool** lets users trigger orchestration without opening Copilot Chat.
-* The command reuses the same argument prompts and context-aware invocation path, ensuring consistent behaviour regardless of entry point.
+## Examples
 
-## 6. Local `.mcp-cache` directory
+- Running the data quality agent with full metadata coverage for people datasets.
+- Requesting a clarification agent workflow to gather missing policy acknowledgements.
+- Dispatching orchestration updates after a new MCP tool sync completes.
 
-* Created automatically in the active workspace root (or the user home directory as a fallback).
-* Stores JSON Lines logs that include timestamps, arguments, context snippets, and responses/error messages.
-* Safe to prune; the extension will recreate the directory on the next activation. Consider excluding it from source control (see `.gitignore`).
+## Maintenance
 
-### 6.1 Shared cache artefacts
+- Review orchestration logs weekly to confirm tool coverage and success rates.
+- Coordinate with the health agent team to refine validation thresholds.
+- Update authentication and routing configuration whenever MCP endpoints change.
 
-The cache directory now exposes a `shared/` sub-folder that stores JSON payloads generated by tools that wish to exchange data.
-
-* `storeSharedCacheEntry`/`readSharedCacheEntry`/`listSharedCacheEntries` (`src/mcpCache.ts`) manage the lifecycle of these artefacts.
-* Entries are keyed and timestamped so automations can discover prior results without holding full payloads in memory.
-* Consumers can safely delete entries via `deleteSharedCacheEntry` when information expires or should no longer influence orchestration.
-
-## 7. Testing and documentation
-
-* Jest unit tests cover metadata normalisation, schema prompting, cache behaviour, and activation wiring.
-* TypeDoc can generate API documentation from the comprehensive JSDoc comments embedded in the TypeScript sources.
-
-## 8. Modular multi-agent orchestration sandbox
-
-The mock orchestration environment now ships with three focused agents under `src/agents/` so the extension can compose richer, more realistic workflows:
-
-* **RelevantDataManagerAgent (`src/agents/relevantDataManagerAgent.ts`)** — models the MCP server's "relevant data" folder structure. Each business category (departments, people, applications, policies, resources) advertises folder blueprints, JSON schemas, Python type hints, example datasets, test artefacts, and remote query templates. The manager also exposes search and relationship traversal helpers while caching category snapshots on disk for quick reuse.
-* **DatabaseAgent (`src/agents/databaseAgent.ts`)** — offers database-style access to the dataset. Callers can filter people by skills or access, enumerate departments by the systems they own, inspect policy coverage, or run saved query blueprints. Results are cached in `.mcp-cache/shared` so parallel tools can reuse the same payloads without recomputation.
-* **DataAgent (`src/agents/dataAgent.ts`)** — stitches the categories together. It produces topic overviews, narrative connection maps, exploration plans for complex questions, and cross-topic link lookups. The agent relies on the manager for metadata and the database agent for structured retrieval, giving orchestration flows a single entry point for reasoning about the business graph.
-
-The shared dataset mirrors a realistic documentation repository with category-specific schemas, Python type definitions, curated examples, `config.json` metadata, and query definitions for remote services. Unit tests (`tests/relevantDataManagerAgent.test.ts`, `tests/databaseAgent.test.ts`, `tests/dataAgent.test.ts`) exercise the key behaviours so contributors can extend or refactor with confidence.
-
-## 9. Relevant data utilisation playbook
-
-The mock dataset is organised into five top-level categories under `data/`: `applications`, `companyPolicies`, `companyResources`, `departments`, and `people`. Each category follows a consistent structure—`category.json` for high-level metadata, `schemas/` and `types/` for validation guidance, `records.json` for canonical entries, `relationships.json` for cross-links, `examples/` with narrative walkthroughs, and `queries/` for remote lookups. The `config.orchestration` block inside each `category.json` now codifies routing cues, escalation triggers, and agent-specific prompt starters so the orchestrator can respond consistently without hard-coding heuristics. The following guidance helps each agent (and the orchestrator) ingest the dataset efficiently.
-
-### 9.1 RelevantDataManagerAgent
-
-**Primary goals**
-
-* Maintain an index of all category metadata and schemas so downstream agents understand what information exists and how it is structured.
-* Validate new or incoming records by checking against the schemas (`schemas/*.json`) and Python type hints (`types/*.py`).
-* Surface relationship maps (e.g., which departments own specific applications) to other agents.
-
-**How to use the dataset**
-
-1. Start with `category.json` to load descriptive tags, ownership, and update cadences.
-2. Cache parsed schemas and expose helper methods to answer questions like "which fields are required for a policy record?".
-3. Use `relationships.json` to build cross-category graphs that the DataAgent can traverse.
-4. Reference the `examples/` folder when providing usage snippets or onboarding guidance to human operators.
-
-**Prompt starters for the orchestrator**
-
-* "Relevant data manager, list the required fields for a new entry in `<category>` by reading its schema."
-* "Summarise the known relationships between departments and applications using your cached metadata."
-* "Provide the latest metadata snapshot for `<category>` so other agents can plan retrieval." 
-
-### 9.2 DatabaseAgent
-
-**Primary goals**
-
-* Execute structured lookups across `records.json` files to answer precise business questions.
-* Reuse saved filters in `queries/` and synchronise results with the shared cache for other agents.
-* Ensure referential integrity by cross-checking `relationships.json` when joining multiple categories.
-
-**How to use the dataset**
-
-1. Load `records.json` into queryable collections (e.g., arrays with typed accessors) for each category.
-2. Use the query blueprints in `queries/*.json` as starting points for common filters (skills, compliance, ownership, etc.).
-3. When responding with aggregated information, cite the originating records and include any relevant relationship context.
-4. Update `.mcp-cache/shared` with frequently requested slices (for example, "all resources used by the Marketing department") so the DataAgent can retrieve them quickly.
-
-**Prompt starters for the orchestrator**
-
-* "Database agent, filter the `people` records for staff with `<skill>` and return their departments and contact info."
-* "Run the saved query `<queryName>` from `<category>/queries` and summarise the results."
-* "Cross-reference policies and applications to list compliance owners for `<regulation>`."
-
-### 9.3 DataAgent
-
-**Primary goals**
-
-* Deliver narrative insights and cross-topic syntheses that draw on metadata, structured records, and saved cache entries.
-* Suggest investigative paths for multi-step questions by delegating to the other agents when necessary.
-* Provide human-readable explanations that reference the underlying datasets.
-
-**How to use the dataset**
-
-1. Gather context from the RelevantDataManagerAgent about available schemas and relationships before answering broad questions.
-2. Request filtered datasets from the DatabaseAgent instead of reimplementing raw queries.
-3. Combine structured results with `examples/` narratives to produce contextual summaries, onboarding guides, or scenario plans.
-4. When knowledge gaps appear, highlight which category or schema lacks the needed information so humans can prioritise updates.
-
-**Prompt starters for the orchestrator**
-
-* "Data agent, outline an onboarding brief for `<role>` using people, department, and policy data."
-* "Synthesize how `<department>` uses `<application>` and identify related resources or policies."
-* "Propose a research plan to evaluate `<business question>` and note which agents should be invoked at each step."
-
-### 9.4 Orchestrator decision flow
-
-When deciding which agent to invoke, follow this triage path:
-
-1. **Need metadata, schemas, or relationship maps?** Call the **RelevantDataManagerAgent**.
-2. **Need precise record-level answers or saved queries?** Call the **DatabaseAgent**.
-3. **Need narrative synthesis, planning, or multi-source insights?** Call the **DataAgent**.
-
-If the request spans multiple categories, begin with the RelevantDataManagerAgent to understand the available data, then delegate structured lookups to the DatabaseAgent, and finally use the DataAgent for end-user-friendly narratives.
-
-### 9.5 Escalation when uncertain
-
-If the orchestration logic cannot confidently map a user question to the above pathways (for example, ambiguous terminology or missing metadata), it must escalate by asking the LLM to confirm the intent. The orchestrator should prompt the LLM to:
-
-1. Clarify the user’s exact goal and any constraints (timeframe, format, scope).
-2. Suggest which dataset categories are likely relevant based on the clarified request.
-3. Identify whether additional human-provided data is required before proceeding.
-
-Only after receiving confirmation should the orchestrator resume the normal decision flow; otherwise, it should present the clarification request back to the user for validation.

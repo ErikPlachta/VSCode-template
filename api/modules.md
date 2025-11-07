@@ -6,6 +6,8 @@
 
 ### Modules
 
+- [agent/repositoryHealthAgent](modules/agent_repositoryHealthAgent.md)
+- [agent/runHealthCheck](modules/agent_runHealthCheck.md)
 - [agents/clarificationAgent](modules/agents_clarificationAgent.md)
 - [agents/dataAgent](modules/agents_dataAgent.md)
 - [agents/databaseAgent](modules/agents_databaseAgent.md)
@@ -21,4 +23,6 @@
 - [mcpCache](modules/mcpCache.md)
 - [mcpSync](modules/mcpSync.md)
 - [schemaPrompt](modules/schemaPrompt.md)
+- [tools/validateJson](modules/tools_validateJson.md)
+- [tools/validateMarkdown](modules/tools_validateMarkdown.md)
 - [vscode-chat](modules/vscode_chat.md)

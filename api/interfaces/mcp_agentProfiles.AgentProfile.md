@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:10](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentProfiles.ts#L10)
+[src/mcp/agentProfiles.ts:10](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentProfiles.ts#L10)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentProfiles.ts#L12)
+[src/mcp/agentProfiles.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentProfiles.ts#L12)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:8](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentProfiles.ts#L8)
+[src/mcp/agentProfiles.ts:8](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentProfiles.ts#L8)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentProfiles.ts#L11)
+[src/mcp/agentProfiles.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentProfiles.ts#L11)
 
 ___
 
@@ -62,4 +62,4 @@ ___
 
 #### Defined in
 
-[src/mcp/agentProfiles.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentProfiles.ts#L9)
+[src/mcp/agentProfiles.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentProfiles.ts#L9)

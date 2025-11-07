@@ -27,7 +27,7 @@ Manifest describing the capabilities of every agent.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentManifest.ts#L30)
+[src/mcp/agentManifest.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentManifest.ts#L30)
 
 ## Functions
 
@@ -49,7 +49,7 @@ Retrieve manifest metadata for a given agent identifier.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentManifest.ts#L52)
+[src/mcp/agentManifest.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentManifest.ts#L52)
 
 ___
 
@@ -65,4 +65,4 @@ Return all agent capability entries.
 
 #### Defined in
 
-[src/mcp/agentManifest.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/mcp/agentManifest.ts#L63)
+[src/mcp/agentManifest.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/mcp/agentManifest.ts#L63)

@@ -27,7 +27,7 @@ Example datasets demonstrating data shape.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:157](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L157)
+[src/agents/dataAgent.ts:157](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L157)
 
 ___
 
@@ -39,7 +39,7 @@ Blueprint describing the folder layout for the category.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L154)
+[src/agents/dataAgent.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L154)
 
 ___
 
@@ -51,7 +51,7 @@ Remote query definitions that fetch authoritative data.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:159](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L159)
+[src/agents/dataAgent.ts:159](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L159)
 
 ___
 
@@ -63,7 +63,7 @@ Schemas that define expected record structure.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:155](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L155)
+[src/agents/dataAgent.ts:155](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L155)
 
 ___
 
@@ -75,7 +75,7 @@ Structured typing hints for SDK implementers.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L156)
+[src/agents/dataAgent.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L156)
 
 ___
 
@@ -87,4 +87,4 @@ Validation summary for the category data.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L158)
+[src/agents/dataAgent.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/b0db9269b6afdcfc7febac5c85910ca1321f42af/src/agents/dataAgent.ts#L158)
