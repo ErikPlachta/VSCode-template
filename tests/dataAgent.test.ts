@@ -82,7 +82,8 @@ describe("DataAgent", () => {
     const toolkit = agent.getCategoryToolkit("departments");
     expect(toolkit.folder.root).toBe("data/departments");
     expect(toolkit.schemas.length).toBeGreaterThan(0);
-    expect(toolkit.tests.map((test) => test.name)).toContain("Validate department schema");
+    expect(toolkit.validation.status).toBe("pass");
+    expect(toolkit.validation.issues.length).toBeGreaterThanOrEqual(0);
     expect(toolkit.queries.map((query) => query.name)).toContain("List departments");
   });
 });

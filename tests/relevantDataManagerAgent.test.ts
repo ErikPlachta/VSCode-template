@@ -102,6 +102,15 @@ describe("RelevantDataManagerAgent", () => {
     expect(categories).toEqual(expect.arrayContaining(["departments", "people", "companyResources"]));
   });
 
+  it("provides type definitions and validation reports", async () => {
+    const { manager } = await createManager();
+    const types = manager.getTypeDefinitions("applications");
+    expect(types.length).toBeGreaterThan(0);
+    const report = manager.getValidationReport("applications");
+    expect(report.status).toBe("pass");
+    expect(Array.isArray(report.issues)).toBe(true);
+  });
+
   it("throws when an unknown topic is requested", async () => {
     const { manager } = await createManager();
     expect(() => manager.getCategory("unknown"))

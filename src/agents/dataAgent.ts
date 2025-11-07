@@ -13,10 +13,10 @@ import {
   CategorySchema,
   CategorySnapshot,
   ExampleDataset,
-  CategoryTestArtefact,
+  DataValidationReport,
   DatasetCatalogueEntry,
   FolderBlueprint,
-  PythonTypeDefinition,
+  TypeDefinition,
   RelationshipDescription,
   RelevantDataManagerAgent,
   RemoteQueryBlueprint
@@ -29,19 +29,21 @@ import {
  * @property {CategorySnapshot} snapshot Snapshot metadata persisted in the shared cache.
  * @property {RelationshipDescription[]} relationships Relationship definitions originating from the topic.
  * @property {CategorySchema[]} schemas JSON schema descriptors associated with the topic.
- * @property {PythonTypeDefinition[]} pythonTypes Python typing hints that mirror the schemas.
+ * @property {TypeDefinition[]} types Structured typing hints that mirror the schemas.
  * @property {ExampleDataset[]} examples Example datasets that illustrate typical records.
  * @property {RemoteQueryBlueprint[]} queries Remote query blueprints for the authoritative systems.
  * @property {CategoryRecord[]} highlightRecords Example records that should be highlighted to the user.
+ * @property {DataValidationReport} validation Validation summary describing data quality checks.
  */
 export interface TopicOverview {
   snapshot: CategorySnapshot;
   relationships: RelationshipDescription[];
   schemas: CategorySchema[];
-  pythonTypes: PythonTypeDefinition[];
+  types: TypeDefinition[];
   examples: ExampleDataset[];
   queries: RemoteQueryBlueprint[];
   highlightRecords: CategoryRecord[];
+  validation: DataValidationReport;
 }
 
 /**
@@ -140,17 +142,17 @@ export interface CrossTopicConnection {
  * @typedef {object} CategoryToolkit
  * @property {FolderBlueprint} folder Blueprint describing the folder layout for the category.
  * @property {CategorySchema[]} schemas Schemas that define expected record structure.
- * @property {PythonTypeDefinition[]} pythonTypes Python typing hints for SDK implementers.
+ * @property {TypeDefinition[]} types Structured typing hints for SDK implementers.
  * @property {ExampleDataset[]} examples Example datasets demonstrating data shape.
- * @property {CategoryTestArtefact[]} tests Test artefacts to validate data assumptions.
+ * @property {DataValidationReport} validation Validation summary for the category data.
  * @property {RemoteQueryBlueprint[]} queries Remote query definitions that fetch authoritative data.
  */
 export interface CategoryToolkit {
   folder: FolderBlueprint;
   schemas: CategorySchema[];
-  pythonTypes: PythonTypeDefinition[];
+  types: TypeDefinition[];
   examples: ExampleDataset[];
-  tests: CategoryTestArtefact[];
+  validation: DataValidationReport;
   queries: RemoteQueryBlueprint[];
 }
 
@@ -208,10 +210,11 @@ export class DataAgent {
       snapshot,
       relationships: category.config.relationships,
       schemas: category.schemas,
-      pythonTypes: category.pythonTypes,
+      types: category.types,
       examples: category.examples,
       queries: category.queries,
-      highlightRecords
+      highlightRecords,
+      validation: category.validation
     };
   }
 
@@ -280,12 +283,15 @@ export class DataAgent {
         ].filter((hint): hint is string => Boolean(hint))
       };
     });
-    // Add a final step encouraging tests/examples review for context.
+    // Add a final step encouraging validation and examples review for context.
     steps.push({
-      title: "Review examples and tests",
-      description: `Use the example datasets and tests under ${category.config.folder.root} to understand edge cases before making changes.`,
+      title: "Review examples and validation",
+      description: `Use the example datasets and validation summary under ${category.config.folder.root} to understand data quality considerations before making changes.`,
       recommendedCategory: category.id,
-      hints: category.examples.map((example) => `Example: ${example.file}`)
+      hints: [
+        ...category.examples.map((example) => `Example: ${example.file}`),
+        `Validation status: ${category.validation.status}`
+      ]
     });
 
     return {
@@ -377,9 +383,9 @@ export class DataAgent {
     return {
       folder: category.config.folder,
       schemas: category.schemas,
-      pythonTypes: category.pythonTypes,
+      types: category.types,
       examples: category.examples,
-      tests: category.tests,
+      validation: category.validation,
       queries: category.queries
     };
   }

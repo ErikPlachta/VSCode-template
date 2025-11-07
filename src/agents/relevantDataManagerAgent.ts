@@ -2,12 +2,13 @@
  * @fileoverview Agent responsible for managing the mock "relevant data"
  * workspace that MCP servers expose to users. The agent keeps a rich catalogue
  * of categories (departments, people, applications, policies, resources) that
- * mirrors a repository folder structure complete with schemas, python type
- * hints, example datasets, tests, and remote query blueprints.
+ * mirrors a repository folder structure complete with schemas, type
+ * definitions, example datasets, validation reports, and remote query blueprints.
  *
  * @module agents/relevantDataManagerAgent
  */
 
+import Ajv, { ErrorObject, ValidateFunction } from "ajv";
 import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
@@ -28,12 +29,10 @@ export interface FolderBlueprint {
   configFile: string;
   /** JSON schema file paths. */
   schemaFiles: string[];
-  /** Python typing hint file paths. */
-  pythonTypes: string[];
+  /** Structured type definition file paths. */
+  typeFiles: string[];
   /** Directory containing example datasets. */
   examplesDir: string;
-  /** Directory containing tests. */
-  testsDir: string;
   /** Directory containing query blueprints. */
   queriesDir: string;
 }
@@ -73,31 +72,31 @@ export interface CategorySchema {
   schema: Record<string, unknown>;
 }
 
-/** Supported Python type primitives within the schema definition. */
-export type PythonPrimitiveType = "str" | "int" | "float" | "bool" | "datetime";
+/** Supported primitive names within a type definition schema. */
+export type PrimitiveTypeName = "str" | "int" | "float" | "bool" | "datetime";
 
-/** JSON description for a Python type that can be materialised by an MCP server. */
-export type PythonTypeSchema =
-  | { kind: "primitive"; name: PythonPrimitiveType }
-  | { kind: "optional"; value: PythonTypeSchema }
-  | { kind: "list"; element: PythonTypeSchema }
+/** JSON description for a structured type that can be materialised by an MCP server. */
+export type TypeSchema =
+  | { kind: "primitive"; name: PrimitiveTypeName }
+  | { kind: "optional"; value: TypeSchema }
+  | { kind: "list"; element: TypeSchema }
   | { kind: "literal"; value: string | number | boolean | null }
   | { kind: "enum"; values: Array<string | number | boolean> }
-  | { kind: "typedDict"; fields: PythonTypedDictField[] };
+  | { kind: "typedDict"; fields: TypedDictField[] };
 
 /** Field description used within a TypedDict schema. */
-export interface PythonTypedDictField {
+export interface TypedDictField {
   name: string;
-  type: PythonTypeSchema;
+  type: TypeSchema;
   required?: boolean;
   description?: string;
 }
 
 /** Python typing hints that mirror the JSON schemas. */
-export interface PythonTypeDefinition {
+export interface TypeDefinition {
   name: string;
   description: string;
-  schema: PythonTypeSchema;
+  schema: TypeSchema;
 }
 
 /** Example dataset artefact hosted in the category folder. */
@@ -107,15 +106,28 @@ export interface ExampleDataset {
   sample: Record<string, unknown>;
 }
 
-/** Test artefact reference stored for the category. */
-export interface CategoryTestArtefact {
-  name: string;
-  description: string;
-  runtime: string;
-  entryPoint: string;
-  args: string[];
-  workingDirectory?: string;
-  environment?: Record<string, string>;
+/** Issue detected while validating the raw data set for a category. */
+export interface DataValidationIssue {
+  /** Identifier for the record that failed validation. */
+  recordId: string;
+  /** Optional schema name that triggered the error. */
+  schema?: string;
+  /** Field that failed validation if available. */
+  field?: string;
+  /** Detailed error message. */
+  message: string;
+  /** Type of validation that generated the issue. */
+  type: "schema" | "relationship";
+}
+
+/** Summary produced after normalising the dataset. */
+export interface DataValidationReport {
+  /** Timestamp when validation occurred. */
+  checkedAt: string;
+  /** Overall status for the category. */
+  status: "pass" | "fail";
+  /** Detailed issues encountered during validation. */
+  issues: DataValidationIssue[];
 }
 
 /** Remote query blueprint associated with the category. */
@@ -154,11 +166,11 @@ export interface BusinessCategory {
     relationships: RelationshipDescription[];
   };
   schemas: CategorySchema[];
-  pythonTypes: PythonTypeDefinition[];
+  types: TypeDefinition[];
   examples: ExampleDataset[];
-  tests: CategoryTestArtefact[];
   queries: RemoteQueryBlueprint[];
   records: CategoryRecord[];
+  validation: DataValidationReport;
 }
 
 /** Connections resolved for a specific record. */
@@ -179,7 +191,7 @@ export interface CategorySnapshot {
   description: string;
   recordCount: number;
   schemaNames: string[];
-  pythonTypeNames: string[];
+  typeNames: string[];
   queryNames: string[];
   exampleFiles: string[];
   folder: FolderBlueprint;
@@ -255,7 +267,7 @@ interface RawSchemaFile {
   schema: Record<string, unknown>;
 }
 
-interface RawPythonTypeFile {
+interface RawTypeFile {
   name: string;
   description: string;
   schema: unknown;
@@ -264,16 +276,6 @@ interface RawPythonTypeFile {
 interface RawExampleFile {
   description: string;
   sample: Record<string, unknown>;
-}
-
-interface RawTestFile {
-  name: string;
-  description: string;
-  runtime: string;
-  entryPoint: string;
-  args?: unknown;
-  workingDirectory?: string;
-  environment?: Record<string, unknown>;
 }
 
 interface RawQueryFile {
@@ -289,44 +291,45 @@ function toPosixPath(filePath: string): string {
   return filePath.split(path.sep).join("/");
 }
 
-function parsePythonTypeSchema(value: unknown, context: string): PythonTypeSchema {
+function parseTypeSchema(value: unknown, context: string): TypeSchema {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
-    throw new Error(`Invalid python type schema for ${context}.`);
+    throw new Error(`Invalid type schema for ${context}.`);
   }
   const base = value as { kind?: string };
   switch (base.kind) {
     case "primitive": {
-      const name = (base as { name?: unknown }).name;
-      const allowed: PythonPrimitiveType[] = ["str", "int", "float", "bool", "datetime"];
-      if (typeof name !== "string" || !allowed.includes(name as PythonPrimitiveType)) {
+      if (!("name" in base) || typeof (base as { name?: unknown }).name !== "string") {
+        throw new Error(`Primitive type for ${context} must declare a name.`);
+      }
+      const name = (base as { name: string }).name as PrimitiveTypeName;
+      const allowed: PrimitiveTypeName[] = ["str", "int", "float", "bool", "datetime"];
+      if (!allowed.includes(name)) {
         throw new Error(`Primitive type for ${context} must be one of ${allowed.join(", ")}.`);
       }
-      return { kind: "primitive", name: name as PythonPrimitiveType };
+      return { kind: "primitive", name };
     }
     case "optional": {
-      const inner = (base as { value?: unknown }).value;
-      if (inner === undefined) {
-        throw new Error(`Optional type for ${context} is missing a value definition.`);
+      if (!("value" in base)) {
+        throw new Error(`Optional type for ${context} must declare an inner value.`);
       }
-      return { kind: "optional", value: parsePythonTypeSchema(inner, `${context}.value`) };
+      return { kind: "optional", value: parseTypeSchema((base as { value: unknown }).value, `${context}.value`) };
     }
     case "list": {
-      const element = (base as { element?: unknown }).element;
-      if (element === undefined) {
-        throw new Error(`List type for ${context} is missing an element definition.`);
+      if (!("element" in base)) {
+        throw new Error(`List type for ${context} must declare an element schema.`);
       }
-      return { kind: "list", element: parsePythonTypeSchema(element, `${context}.element`) };
+      return { kind: "list", element: parseTypeSchema((base as { element: unknown }).element, `${context}.element`) };
     }
     case "literal": {
       if (!("value" in base)) {
-        throw new Error(`Literal type for ${context} must define a value.`);
+        throw new Error(`Literal type for ${context} must declare a value.`);
       }
       return { kind: "literal", value: (base as { value: unknown }).value as string | number | boolean | null };
     }
     case "enum": {
       const rawValues = (base as { values?: unknown }).values;
       if (!Array.isArray(rawValues) || rawValues.length === 0) {
-        throw new Error(`Enum type for ${context} must declare a non-empty values array.`);
+        throw new Error(`Enum type for ${context} must declare at least one value.`);
       }
       for (const entry of rawValues) {
         if (!["string", "number", "boolean"].includes(typeof entry)) {
@@ -340,7 +343,7 @@ function parsePythonTypeSchema(value: unknown, context: string): PythonTypeSchem
       if (!Array.isArray(rawFields) || rawFields.length === 0) {
         throw new Error(`TypedDict for ${context} must include at least one field.`);
       }
-      const fields: PythonTypedDictField[] = rawFields.map((rawField, index) => {
+      const fields: TypedDictField[] = rawFields.map((rawField, index) => {
         if (!rawField || typeof rawField !== "object" || Array.isArray(rawField)) {
           throw new Error(`Invalid field at index ${index} for ${context}.`);
         }
@@ -353,7 +356,7 @@ function parsePythonTypeSchema(value: unknown, context: string): PythonTypeSchem
         if (typeof field.name !== "string" || field.name.trim() === "") {
           throw new Error(`Field ${index} for ${context} must include a name.`);
         }
-        const fieldType = parsePythonTypeSchema(field.type, `${context}.${field.name}`);
+        const fieldType = parseTypeSchema(field.type, `${context}.${field.name}`);
         if (field.required !== undefined && typeof field.required !== "boolean") {
           throw new Error(`Field '${field.name}' in ${context} has an invalid required value.`);
         }
@@ -370,7 +373,7 @@ function parsePythonTypeSchema(value: unknown, context: string): PythonTypeSchem
       return { kind: "typedDict", fields };
     }
     default:
-      throw new Error(`Unknown python type schema kind '${String(base.kind)}' for ${context}.`);
+      throw new Error(`Unknown type schema kind '${String(base.kind)}' for ${context}.`);
   }
 }
 
@@ -397,10 +400,12 @@ export class RelevantDataManagerAgent {
   private readonly relationshipsBySource: Map<CategoryId, RelationshipDefinition[]>;
   private readonly consolidatedIndex: DatasetCatalogueEntry[];
   private readonly datasetFingerprint: string;
+  private readonly ajv: Ajv;
 
   constructor(cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
     this.dataRoot = process.env.VSCODE_TEMPLATE_DATA_ROOT ?? DEFAULT_DATA_ROOT;
+    this.ajv = new Ajv({ allErrors: true, strict: false });
     const dataset = this.loadDataset();
     this.categories = dataset.categories;
     this.lookupIndex = dataset.lookupIndex;
@@ -445,9 +450,9 @@ export class RelevantDataManagerAgent {
     return this.getCategory(topicOrId).schemas;
   }
 
-  /** Retrieve Python type definitions provided as guidance for SDK authors. */
-  getPythonTypes(topicOrId: string): PythonTypeDefinition[] {
-    return this.getCategory(topicOrId).pythonTypes;
+  /** Retrieve structured type definitions provided as guidance for SDK authors. */
+  getTypeDefinitions(topicOrId: string): TypeDefinition[] {
+    return this.getCategory(topicOrId).types;
   }
 
   /** Fetch example datasets included inside the category folder. */
@@ -455,9 +460,9 @@ export class RelevantDataManagerAgent {
     return this.getCategory(topicOrId).examples;
   }
 
-  /** List the unit/integration tests referenced by the category. */
-  getTests(topicOrId: string): CategoryTestArtefact[] {
-    return this.getCategory(topicOrId).tests;
+  /** Retrieve the validation report generated for the category data. */
+  getValidationReport(topicOrId: string): DataValidationReport {
+    return this.getCategory(topicOrId).validation;
   }
 
   /** Retrieve query blueprints that demonstrate how to call the authoritative upstream system. */
@@ -524,7 +529,7 @@ export class RelevantDataManagerAgent {
       description: category.description,
       recordCount: category.records.length,
       schemaNames: category.schemas.map((schema) => schema.name),
-      pythonTypeNames: category.pythonTypes.map((typeDef) => typeDef.name),
+      typeNames: category.types.map((typeDef) => typeDef.name),
       queryNames: category.queries.map((query) => query.name),
       exampleFiles: category.examples.map((example) => example.file),
       folder: category.config.folder
@@ -599,6 +604,8 @@ export class RelevantDataManagerAgent {
       }
     }
 
+    this.performRelationshipValidation(categories, relationships);
+
     const fingerprint = crypto
       .createHash("sha1")
       .update(JSON.stringify(consolidatedIndex))
@@ -618,12 +625,12 @@ export class RelevantDataManagerAgent {
     }
     const folder = this.buildFolderBlueprint(categoryDir, configPath);
     const schemas = this.loadSchemas(categoryDir);
-    const pythonTypes = this.loadPythonTypes(categoryDir);
+    const typeDefinitions = this.loadTypeDefinitions(categoryDir);
     const examples = this.loadExamples(categoryDir);
-    const tests = this.loadTests(categoryDir);
     const queries = this.loadQueries(categoryDir);
     const { descriptions, definitions } = this.loadRelationships(categoryDir, metadata.id);
     const records = this.loadRecords(categoryDir, metadata.id, metadata.config.requirements);
+    const validation = this.validateCategoryRecords(schemas, records, definitions);
 
     const category: BusinessCategory = {
       id: metadata.id,
@@ -640,11 +647,11 @@ export class RelevantDataManagerAgent {
         relationships: descriptions
       },
       schemas,
-      pythonTypes,
+      types: typeDefinitions,
       examples,
-      tests,
       queries,
-      records
+      records,
+      validation
     };
 
     if (metadata.config.requirements?.requiredRelationshipFields) {
@@ -660,18 +667,16 @@ export class RelevantDataManagerAgent {
 
   private buildFolderBlueprint(categoryDir: string, configPath: string): FolderBlueprint {
     const schemasDir = this.requireDirectory(path.join(categoryDir, "schemas"));
-    const pythonDir = this.requireDirectory(path.join(categoryDir, "python-types"));
+    const typesDir = this.requireDirectory(path.join(categoryDir, "types"));
     const examplesDir = this.requireDirectory(path.join(categoryDir, "examples"));
-    const testsDir = this.requireDirectory(path.join(categoryDir, "tests"));
     const queriesDir = this.requireDirectory(path.join(categoryDir, "queries"));
 
     return {
       root: toPosixPath(path.relative(process.cwd(), categoryDir)),
       configFile: toPosixPath(path.relative(process.cwd(), configPath)),
       schemaFiles: this.collectFiles(schemasDir, [".json"]),
-      pythonTypes: this.collectFiles(pythonDir, [".json"]),
+      typeFiles: this.collectFiles(typesDir, [".json"]),
       examplesDir: toPosixPath(path.relative(process.cwd(), examplesDir)),
-      testsDir: toPosixPath(path.relative(process.cwd(), testsDir)),
       queriesDir: toPosixPath(path.relative(process.cwd(), queriesDir))
     };
   }
@@ -701,14 +706,14 @@ export class RelevantDataManagerAgent {
     });
   }
 
-  private loadPythonTypes(categoryDir: string): PythonTypeDefinition[] {
-    const target = path.join(categoryDir, "python-types");
+  private loadTypeDefinitions(categoryDir: string): TypeDefinition[] {
+    const target = path.join(categoryDir, "types");
     return this.collectFiles(target, [".json"]).map((file) => {
-      const typeFile = this.loadJsonFile<RawPythonTypeFile>(path.join(process.cwd(), file), `python types '${file}'`);
+      const typeFile = this.loadJsonFile<RawTypeFile>(path.join(process.cwd(), file), `type definition '${file}'`);
       if (!typeFile.name || !typeFile.description) {
-        throw new Error(`Python type file '${file}' is missing required fields.`);
+        throw new Error(`Type definition file '${file}' is missing required fields.`);
       }
-      const schema = parsePythonTypeSchema(typeFile.schema, `python types '${file}'`);
+      const schema = parseTypeSchema(typeFile.schema, `type definition '${file}'`);
       return { name: typeFile.name, description: typeFile.description, schema };
     });
   }
@@ -724,65 +729,70 @@ export class RelevantDataManagerAgent {
     });
   }
 
-  private loadTests(categoryDir: string): CategoryTestArtefact[] {
-    const target = path.join(categoryDir, "tests");
-    return this.collectFiles(target, [".json"]).map((file) => {
-      const test = this.loadJsonFile<RawTestFile>(path.join(process.cwd(), file), `test '${file}'`);
-      return this.parseTestDefinition(test, file);
-    });
-  }
+  private validateCategoryRecords(
+    schemas: CategorySchema[],
+    records: CategoryRecord[],
+    relationshipDefinitions: RelationshipDefinition[]
+  ): DataValidationReport {
+    const issues: DataValidationIssue[] = [];
+    const validators: Array<{ schema: string; validate: ValidateFunction<unknown> }> = [];
+    for (const schema of schemas) {
+      try {
+        validators.push({ schema: schema.name, validate: this.ajv.compile(schema.schema) });
+      } catch (error) {
+        issues.push({
+          recordId: "__schema__",
+          schema: schema.name,
+          message: `Failed to compile schema: ${(error as Error).message}`,
+          type: "schema",
+        });
+      }
+    }
 
-  private parseTestDefinition(raw: RawTestFile, file: string): CategoryTestArtefact {
-    if (!raw.name || typeof raw.name !== "string") {
-      throw new Error(`Test file '${file}' is missing a name.`);
-    }
-    if (!raw.description || typeof raw.description !== "string") {
-      throw new Error(`Test file '${file}' is missing a description.`);
-    }
-    if (!raw.runtime || typeof raw.runtime !== "string") {
-      throw new Error(`Test file '${file}' is missing a runtime.`);
-    }
-    if (!raw.entryPoint || typeof raw.entryPoint !== "string") {
-      throw new Error(`Test file '${file}' is missing an entryPoint.`);
-    }
-    const args: string[] = [];
-    if (raw.args !== undefined) {
-      if (!Array.isArray(raw.args)) {
-        throw new Error(`Test file '${file}' must declare args as an array of strings.`);
+    for (const record of records) {
+      if (validators.length === 0) {
+        break;
       }
-      for (const value of raw.args) {
-        if (typeof value !== "string") {
-          throw new Error(`Test file '${file}' must declare args as an array of strings.`);
+      let matched = false;
+      const errorsBySchema: string[] = [];
+      for (const { schema, validate } of validators) {
+        if (validate(record)) {
+          matched = true;
+          break;
         }
-        args.push(value);
-      }
-    }
-    let workingDirectory: string | undefined;
-    if (raw.workingDirectory !== undefined) {
-      if (typeof raw.workingDirectory !== "string" || raw.workingDirectory.trim() === "") {
-        throw new Error(`Test file '${file}' has an invalid workingDirectory.`);
-      }
-      workingDirectory = toPosixPath(path.normalize(raw.workingDirectory));
-    }
-    let environment: Record<string, string> | undefined;
-    if (raw.environment) {
-      environment = {};
-      for (const [key, value] of Object.entries(raw.environment)) {
-        if (typeof value !== "string") {
-          throw new Error(`Environment variable '${key}' in test file '${file}' must be a string.`);
+        const details = this.formatAjvErrors(validate.errors);
+        if (details) {
+          errorsBySchema.push(`${schema}: ${details}`);
         }
-        environment[key] = value;
+      }
+      if (!matched) {
+        issues.push({
+          recordId: record.id,
+          schema: validators[0]?.schema,
+          message: errorsBySchema.join(" | ") || "Record does not conform to declared schemas.",
+          type: "schema",
+        });
+      }
+    }
+
+    // Ensure relationship source fields are present when required.
+    for (const definition of relationshipDefinitions) {
+      for (const record of records) {
+        if (!(definition.sourceField in record)) {
+          issues.push({
+            recordId: record.id,
+            field: definition.sourceField,
+            message: `Missing relationship field '${definition.sourceField}' for relationship '${definition.relationshipName}'.`,
+            type: "relationship",
+          });
+        }
       }
     }
 
     return {
-      name: raw.name,
-      description: raw.description,
-      runtime: raw.runtime,
-      entryPoint: raw.entryPoint,
-      args,
-      workingDirectory,
-      environment
+      checkedAt: new Date().toISOString(),
+      status: issues.length === 0 ? "pass" : "fail",
+      issues,
     };
   }
 
@@ -795,6 +805,54 @@ export class RelevantDataManagerAgent {
       }
       return query;
     });
+  }
+
+  private performRelationshipValidation(
+    categories: Map<CategoryId, BusinessCategory>,
+    relationships: RelationshipDefinition[]
+  ): void {
+    const bySource = this.groupRelationshipsBySource(relationships);
+    for (const category of categories.values()) {
+      const rules = bySource.get(category.id) ?? [];
+      const relationshipIssues: DataValidationIssue[] = [];
+      for (const record of category.records) {
+        for (const rule of rules) {
+          const values = this.normaliseRelationshipValues(record[rule.sourceField]);
+          if (values.length === 0) {
+            continue;
+          }
+          const targetCategory = categories.get(rule.targetCategory);
+          if (!targetCategory) {
+            relationshipIssues.push({
+              recordId: record.id,
+              field: rule.sourceField,
+              message: `Relationship '${rule.relationshipName}' references missing category '${rule.targetCategory}'.`,
+              type: "relationship",
+            });
+            continue;
+          }
+          for (const value of values) {
+            const hasMatch = targetCategory.records.some((candidate) =>
+              this.hasMatchingRecordValue(candidate, rule.targetField, value)
+            );
+            if (!hasMatch) {
+              relationshipIssues.push({
+                recordId: record.id,
+                field: rule.sourceField,
+                message: `Relationship '${rule.relationshipName}' value '${value}' does not match any '${rule.targetCategory}.${rule.targetField}'.`,
+                type: "relationship",
+              });
+            }
+          }
+        }
+      }
+      const mergedIssues = [...category.validation.issues, ...relationshipIssues];
+      category.validation = {
+        checkedAt: new Date().toISOString(),
+        status: mergedIssues.length === 0 ? "pass" : "fail",
+        issues: mergedIssues,
+      };
+    }
   }
 
   private loadRecords(
@@ -939,24 +997,52 @@ export class RelevantDataManagerAgent {
     if (!targetCategory) {
       return [];
     }
-    const values: string[] = Array.isArray(value)
-      ? value.filter((item): item is string => typeof item === "string").map((item) => item.trim())
-      : typeof value === "string" || typeof value === "number"
-      ? [String(value)]
-      : [];
+    const values = this.normaliseRelationshipValues(value);
     if (values.length === 0) {
       return [];
     }
-    return targetCategory.records.filter((record) => {
-      const targetValue = record[relationship.targetField];
-      if (targetValue == null) {
-        return false;
-      }
-      if (Array.isArray(targetValue)) {
-        return targetValue.some((item) => values.includes(String(item)));
-      }
-      return values.includes(String(targetValue));
-    });
+    return targetCategory.records.filter((record) =>
+      values.some((expected) => this.hasMatchingRecordValue(record, relationship.targetField, expected))
+    );
+  }
+
+  private normaliseRelationshipValues(value: unknown): string[] {
+    if (Array.isArray(value)) {
+      return value
+        .filter((item): item is string | number => typeof item === "string" || typeof item === "number")
+        .map((item) => String(item).trim())
+        .filter((item) => item.length > 0);
+    }
+    if (typeof value === "string" || typeof value === "number") {
+      const normalised = String(value).trim();
+      return normalised ? [normalised] : [];
+    }
+    return [];
+  }
+
+  private hasMatchingRecordValue(record: CategoryRecord, field: string, expected: string): boolean {
+    const targetValue = record[field];
+    if (targetValue == null) {
+      return false;
+    }
+    if (Array.isArray(targetValue)) {
+      return targetValue.some((item) => String(item) === expected);
+    }
+    return String(targetValue) === expected;
+  }
+
+  private formatAjvErrors(errors: ErrorObject[] | null | undefined): string | undefined {
+    if (!errors || errors.length === 0) {
+      return undefined;
+    }
+    return errors
+      .slice(0, 3)
+      .map((error) => {
+        const path = error.instancePath || error.schemaPath || "";
+        const message = error.message ?? "validation failed";
+        return path ? `${path}: ${message}` : message;
+      })
+      .join("; ");
   }
 
   private loadJsonFile<T>(filePath: string, context: string): T {
