@@ -50,7 +50,7 @@ Create a [DatabaseAgent](agents_databaseAgent.DatabaseAgent.md) instance.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:166](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L166)
+[src/agents/databaseAgent.ts:170](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L170)
 
 ## Methods
 
@@ -75,7 +75,7 @@ Matching application records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:199](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L199)
+[src/agents/databaseAgent.ts:211](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L211)
 
 ___
 
@@ -101,7 +101,7 @@ Matching records from the category.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:233](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L233)
+[src/agents/databaseAgent.ts:245](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L245)
 
 ___
 
@@ -126,7 +126,7 @@ Matching department records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:188](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L188)
+[src/agents/databaseAgent.ts:200](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L200)
 
 ___
 
@@ -151,7 +151,7 @@ Matching people records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:177](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L177)
+[src/agents/databaseAgent.ts:189](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L189)
 
 ___
 
@@ -176,7 +176,7 @@ Matching policy records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:210](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L210)
+[src/agents/databaseAgent.ts:222](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L222)
 
 ___
 
@@ -201,7 +201,7 @@ Matching resource records.
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L221)
+[src/agents/databaseAgent.ts:233](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L233)
 
 ___
 
@@ -240,4 +240,4 @@ console.log(saved.results.length);
 
 #### Defined in
 
-[src/agents/databaseAgent.ts:258](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/databaseAgent.ts#L258)
+[src/agents/databaseAgent.ts:270](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/databaseAgent.ts#L270)

@@ -25,7 +25,7 @@ Explanation of the action to take.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:102](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L102)
+[src/agents/dataAgent.ts:105](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L105)
 
 ___
 
@@ -37,7 +37,7 @@ Additional hints or nudges to guide investigation.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:104](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L104)
+[src/agents/dataAgent.ts:107](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L107)
 
 ___
 
@@ -49,7 +49,7 @@ Category that should be explored in this step.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:103](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L103)
+[src/agents/dataAgent.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L106)
 
 ___
 
@@ -61,4 +61,4 @@ Short step title.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L101)
+[src/agents/dataAgent.ts:104](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L104)

@@ -25,7 +25,7 @@ Category that contains the match.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:117](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L117)
+[src/agents/dataAgent.ts:120](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L120)
 
 ___
 
@@ -37,7 +37,7 @@ Friendly name rendered in UI surfaces.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:119](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L119)
+[src/agents/dataAgent.ts:122](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L122)
 
 ___
 
@@ -49,7 +49,7 @@ Fields that matched the search term.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:120](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L120)
+[src/agents/dataAgent.ts:123](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L123)
 
 ___
 
@@ -61,4 +61,4 @@ Identifier of the matching record.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:118](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L118)
+[src/agents/dataAgent.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L121)

@@ -51,4 +51,4 @@ const agent = createDataAgent();
 
 #### Defined in
 
-[src/agents/dataAgent.ts:447](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L447)
+[src/agents/dataAgent.ts:464](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L464)

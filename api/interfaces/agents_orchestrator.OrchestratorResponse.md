@@ -21,11 +21,11 @@ Result of orchestrating a question across the available agents.
 
 ### agent
 
-• **agent**: ``"relevant-data-manager"`` \| ``"database-agent"`` \| ``"data-agent"`` \| ``"orchestrator"``
+• **agent**: ``"relevant-data-manager"`` \| ``"database-agent"`` \| ``"data-agent"`` \| ``"clarification-agent"`` \| ``"orchestrator"``
 
 #### Defined in
 
-[src/agents/orchestrator.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L40)
+[src/agents/orchestrator.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L49)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[src/agents/orchestrator.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L39)
+[src/agents/orchestrator.ts:48](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L48)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[src/agents/orchestrator.ts:44](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L44)
+[src/agents/orchestrator.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L53)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[src/agents/orchestrator.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L43)
+[src/agents/orchestrator.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L52)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[src/agents/orchestrator.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L42)
+[src/agents/orchestrator.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L51)
 
 ___
 
@@ -75,4 +75,4 @@ ___
 
 #### Defined in
 
-[src/agents/orchestrator.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L41)
+[src/agents/orchestrator.ts:50](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L50)

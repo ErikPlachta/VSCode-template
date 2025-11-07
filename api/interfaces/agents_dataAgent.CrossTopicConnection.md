@@ -25,7 +25,7 @@ Records in the target category that satisfy the relationship.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L136)
+[src/agents/dataAgent.ts:139](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L139)
 
 ___
 
@@ -37,7 +37,7 @@ Human-readable name for the relationship.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:135](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L135)
+[src/agents/dataAgent.ts:138](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L138)
 
 ___
 
@@ -49,7 +49,7 @@ Record in the source category used to find links.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:133](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L133)
+[src/agents/dataAgent.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L136)
 
 ___
 
@@ -61,4 +61,4 @@ Category that was connected through a relationship.
 
 #### Defined in
 
-[src/agents/dataAgent.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/dataAgent.ts#L134)
+[src/agents/dataAgent.ts:137](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/dataAgent.ts#L137)

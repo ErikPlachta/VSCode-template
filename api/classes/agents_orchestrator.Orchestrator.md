@@ -24,7 +24,7 @@ user's intent and available context.
 
 ### constructor
 
-• **new Orchestrator**(`manager?`, `databaseAgent?`, `dataAgent?`): [`Orchestrator`](agents_orchestrator.Orchestrator.md)
+• **new Orchestrator**(`manager?`, `databaseAgent?`, `dataAgent?`, `clarificationAgent?`): [`Orchestrator`](agents_orchestrator.Orchestrator.md)
 
 #### Parameters
 
@@ -33,6 +33,7 @@ user's intent and available context.
 | `manager` | [`RelevantDataManagerAgent`](agents_relevantDataManagerAgent.RelevantDataManagerAgent.md) |
 | `databaseAgent?` | [`DatabaseAgent`](agents_databaseAgent.DatabaseAgent.md) |
 | `dataAgent?` | [`DataAgent`](agents_dataAgent.DataAgent.md) |
+| `clarificationAgent?` | [`ClarificationAgent`](agents_clarificationAgent.ClarificationAgent.md) |
 
 #### Returns
 
@@ -40,7 +41,7 @@ user's intent and available context.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L121)
+[src/agents/orchestrator.ts:138](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L138)
 
 ## Methods
 
@@ -65,7 +66,7 @@ Determine which agent should receive the question.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:142](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L142)
+[src/agents/orchestrator.ts:174](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L174)
 
 ___
 
@@ -87,7 +88,7 @@ Execute the orchestration flow for the supplied input.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:255](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L255)
+[src/agents/orchestrator.ts:339](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L339)
 
 ___
 
@@ -103,7 +104,7 @@ Return the consolidated dataset catalogue.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:137](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L137)
+[src/agents/orchestrator.ts:169](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L169)
 
 ___
 
@@ -119,4 +120,4 @@ List the categories known to the orchestrator.
 
 #### Defined in
 
-[src/agents/orchestrator.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/1621c024ed17d379711fc500ce8ea61554a34e57/src/agents/orchestrator.ts#L132)
+[src/agents/orchestrator.ts:164](https://github.com/ErikPlachta/VSCode-template/blob/f8ce84aa509d59a276456b2a18219a97608ad4c4/src/agents/orchestrator.ts#L164)
