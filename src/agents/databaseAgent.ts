@@ -2,6 +2,8 @@
  * @fileoverview Database-oriented agent that simulates querying the MCP
  * relevant-data workspace as if it were backed by persistent stores. The agent
  * focuses on structured retrieval with filtering, joins, and saved queries.
+ *
+ * @module agents/databaseAgent
  */
 
 import * as crypto from "crypto";
@@ -42,7 +44,13 @@ const CRITERIA_FIELD_ALIASES: Record<CategoryId, Record<string, string>> = {
   }
 };
 
-/** Optional knobs for database queries. */
+/**
+ * Optional knobs for database queries.
+ *
+ * @interface QueryOptions
+ * @property {boolean=} useCache - Whether the agent should cache the result in the shared cache.
+ * @property {string=} cacheKeyPrefix - Prefix used when building the shared cache key.
+ */
 export interface QueryOptions {
   /** Whether the agent should cache the result in the shared cache. */
   useCache?: boolean;
@@ -50,7 +58,11 @@ export interface QueryOptions {
   cacheKeyPrefix?: string;
 }
 
-/** Query filters used when searching for people. */
+/**
+ * Query filters used when searching for people.
+ *
+ * @interface PeopleQuery
+ */
 export interface PeopleQuery extends BaseQuery {
   departmentId?: string;
   skill?: string;
@@ -59,28 +71,44 @@ export interface PeopleQuery extends BaseQuery {
   policyId?: string;
 }
 
-/** Filters used to query departments. */
+/**
+ * Filters used to query departments.
+ *
+ * @interface DepartmentQuery
+ */
 export interface DepartmentQuery extends BaseQuery {
   parentDepartmentId?: string | null;
   policyId?: string;
   applicationId?: string;
 }
 
-/** Filters used to query applications. */
+/**
+ * Filters used to query applications.
+ *
+ * @interface ApplicationQuery
+ */
 export interface ApplicationQuery extends BaseQuery {
   ownerDepartmentId?: string;
   criticality?: "low" | "medium" | "high";
   policyId?: string;
 }
 
-/** Filters used to query policies. */
+/**
+ * Filters used to query policies.
+ *
+ * @interface PolicyQuery
+ */
 export interface PolicyQuery extends BaseQuery {
   ownerDepartmentId?: string;
   category?: string;
   applicationId?: string;
 }
 
-/** Filters used to query knowledge resources. */
+/**
+ * Filters used to query knowledge resources.
+ *
+ * @interface ResourceQuery
+ */
 export interface ResourceQuery extends BaseQuery {
   departmentId?: string;
   policyId?: string;
@@ -88,41 +116,104 @@ export interface ResourceQuery extends BaseQuery {
   type?: string;
 }
 
-/** Structure returned when executing a saved remote query blueprint. */
+/**
+ * Structure returned when executing a saved remote query blueprint.
+ *
+ * @interface SavedQueryResult
+ * @property {RemoteQueryBlueprint} blueprint - Blueprint metadata describing the query executed.
+ * @property {CategoryRecord[]} results - Records that satisfied the blueprint and criteria.
+ */
 export interface SavedQueryResult {
   blueprint: RemoteQueryBlueprint;
   results: CategoryRecord[];
 }
 
-/** Agent offering database-style access patterns. */
+/**
+ * Agent offering database-style access patterns.
+ *
+ * @example
+ * const agent = new DatabaseAgent(manager);
+ * const people = await agent.queryPeople({ departmentId: "sales" });
+ */
 export class DatabaseAgent {
   private readonly cacheDirPromise: Promise<string>;
 
+  /**
+   * Create a new database agent.
+   *
+   * @param {RelevantDataManagerAgent} manager - Data manager providing dataset access.
+   * @param {Promise<string>=} cacheDirPromise - Optional promise resolving to the cache directory.
+   */
   constructor(private readonly manager: RelevantDataManagerAgent, cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
   }
 
-  /** Search for people using the structured directory dataset. */
+  /**
+   * Search for people using the structured directory dataset.
+   *
+   * @param {PeopleQuery=} criteria - Optional filters limiting the result set.
+   * @param {QueryOptions=} options - Optional query execution flags.
+   * @returns {Promise<CategoryRecord[]>} Matching people records.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the underlying dataset cannot be resolved.
+   * @example
+   * const staff = await agent.queryPeople({ skill: "typescript" });
+   */
   async queryPeople(criteria: PeopleQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
     return this.executeQuery("people", criteria, options);
   }
 
-  /** Retrieve departments by parent, applications, or policies. */
+  /**
+   * Retrieve departments by parent, applications, or policies.
+   *
+   * @param {DepartmentQuery=} criteria - Filters to apply when searching departments.
+   * @param {QueryOptions=} options - Optional query execution flags.
+   * @returns {Promise<CategoryRecord[]>} Department records that match the criteria.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the underlying dataset cannot be resolved.
+   * @example
+   * const departments = await agent.queryDepartments({ parentDepartmentId: "hq" });
+   */
   async queryDepartments(criteria: DepartmentQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
     return this.executeQuery("departments", criteria, options);
   }
 
-  /** Retrieve applications using ownership or criticality filters. */
+  /**
+   * Retrieve applications using ownership or criticality filters.
+   *
+   * @param {ApplicationQuery=} criteria - Filters used to narrow down applications.
+   * @param {QueryOptions=} options - Optional query execution flags.
+   * @returns {Promise<CategoryRecord[]>} Application records.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the underlying dataset cannot be resolved.
+   * @example
+   * const apps = await agent.queryApplications({ criticality: "high" });
+   */
   async queryApplications(criteria: ApplicationQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
     return this.executeQuery("applications", criteria, options);
   }
 
-  /** Retrieve policies by department, category, or application coverage. */
+  /**
+   * Retrieve policies by department, category, or application coverage.
+   *
+   * @param {PolicyQuery=} criteria - Filters describing which policies to return.
+   * @param {QueryOptions=} options - Optional query execution flags.
+   * @returns {Promise<CategoryRecord[]>} Matching policy records.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the underlying dataset cannot be resolved.
+   * @example
+   * const policies = await agent.queryPolicies({ category: "security" });
+   */
   async queryPolicies(criteria: PolicyQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
     return this.executeQuery("companyPolicies", criteria, options);
   }
 
-  /** Retrieve knowledge resources filtered by relationships. */
+  /**
+   * Retrieve knowledge resources filtered by relationships.
+   *
+   * @param {ResourceQuery=} criteria - Filters describing the desired resources.
+   * @param {QueryOptions=} options - Optional query execution flags.
+   * @returns {Promise<CategoryRecord[]>} Knowledge resource records.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the underlying dataset cannot be resolved.
+   * @example
+   * const resources = await agent.queryResources({ type: "guide" });
+   */
   async queryResources(criteria: ResourceQuery = {}, options?: QueryOptions): Promise<CategoryRecord[]> {
     return this.executeQuery("companyResources", criteria, options);
   }
@@ -130,6 +221,16 @@ export class DatabaseAgent {
   /**
    * Execute a saved query blueprint from the relevant-data repository and
    * return local matches that satisfy the provided criteria.
+   *
+   * @param {string} topicOrId - Category name or identifier containing the blueprint.
+   * @param {string} queryName - Display name of the blueprint to execute.
+   * @param {Record<string, unknown>=} criteria - Additional filters applied during execution.
+   * @param {QueryOptions=} options - Optional query execution flags.
+   * @returns {Promise<SavedQueryResult>} Blueprint metadata and associated results.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the category cannot be resolved.
+   * @throws {Error} When the requested blueprint does not exist.
+   * @example
+   * const saved = await agent.runSavedQuery("people", "By Skill", { skill: "python" });
    */
   async runSavedQuery(
     topicOrId: string,
@@ -149,7 +250,17 @@ export class DatabaseAgent {
     return { blueprint, results };
   }
 
-  /** Execute an ad-hoc search across a category with optional caching. */
+  /**
+   * Execute an ad-hoc search across a category with optional caching.
+   *
+   * @param {CategoryId} categoryId - Category identifier to search within.
+   * @param {Record<string, unknown>} criteria - Normalised filter criteria.
+   * @param {QueryOptions=} options - Optional query execution flags.
+   * @returns {Promise<CategoryRecord[]>} Records matching the given criteria.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the category cannot be resolved.
+   * @example
+   * const results = await agent["executeQuery"]("people", { skill: "sql" });
+   */
   private async executeQuery(
     categoryId: CategoryId,
     criteria: Record<string, unknown>,
@@ -182,14 +293,31 @@ export class DatabaseAgent {
     return this.performFilter(categoryId, normalisedCriteria);
   }
 
-  /** Run the actual filtering logic against the dataset. */
+  /**
+   * Run the actual filtering logic against the dataset.
+   *
+   * @param {CategoryId} categoryId - Category identifier to search within.
+   * @param {Record<string, unknown>} criteria - Normalised filter criteria.
+   * @returns {CategoryRecord[]} Filtered records that match the criteria.
+   * @throws {import("./relevantDataManagerAgent").UnknownCategoryError} When the category cannot be resolved.
+   * @example
+   * const filtered = agent["performFilter"]("people", { skills: ["sql"] });
+   */
   private performFilter(categoryId: CategoryId, criteria: Record<string, unknown>): CategoryRecord[] {
     const records = this.manager.getRecords(categoryId);
     const remappedCriteria = this.applyAliases(categoryId, criteria);
     return records.filter((record) => this.matchesCriteria(record, remappedCriteria));
   }
 
-  /** Remap friendly filter keys to dataset field names. */
+  /**
+   * Remap friendly filter keys to dataset field names.
+   *
+   * @param {CategoryId} categoryId - Category identifier used to resolve aliases.
+   * @param {Record<string, unknown>} criteria - Filter criteria possibly using aliases.
+   * @returns {Record<string, unknown>} Criteria with canonical field names.
+   * @example
+   * const remapped = agent["applyAliases"]("people", { skill: "sql" });
+   */
   private applyAliases(categoryId: CategoryId, criteria: Record<string, unknown>): Record<string, unknown> {
     const aliases = CRITERIA_FIELD_ALIASES[categoryId] ?? {};
     return Object.entries(criteria).reduce<Record<string, unknown>>((acc, [key, value]) => {
@@ -198,7 +326,14 @@ export class DatabaseAgent {
     }, {});
   }
 
-  /** Normalise filter criteria for consistent caching and comparisons. */
+  /**
+   * Normalise filter criteria for consistent caching and comparisons.
+   *
+   * @param {Record<string, unknown>} criteria - Raw criteria supplied by the caller.
+   * @returns {Record<string, unknown>} Cleaned and normalised criteria.
+   * @example
+   * const normalised = agent["normaliseCriteria"]({ skill: " SQL " });
+   */
   private normaliseCriteria(criteria: Record<string, unknown>): Record<string, unknown> {
     const result: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(criteria)) {
@@ -214,7 +349,14 @@ export class DatabaseAgent {
     return result;
   }
 
-  /** Ensure a value is ready for comparisons (case normalisation, etc.). */
+  /**
+   * Ensure a value is ready for comparisons (case normalisation, etc.).
+   *
+   * @param {unknown} value - Input value requiring normalisation.
+   * @returns {unknown} Normalised value used during comparisons.
+   * @example
+   * const value = agent["normaliseValue"](" Example ");
+   */
   private normaliseValue(value: unknown): unknown {
     if (typeof value === "string") {
       return value.trim().toLowerCase();
@@ -231,7 +373,15 @@ export class DatabaseAgent {
     return value;
   }
 
-  /** Determine whether a record satisfies all criteria. */
+  /**
+   * Determine whether a record satisfies all criteria.
+   *
+   * @param {CategoryRecord} record - Record under evaluation.
+   * @param {Record<string, unknown>} criteria - Criteria to validate against.
+   * @returns {boolean} `true` when the record satisfies every condition.
+   * @example
+   * const isMatch = agent["matchesCriteria"](record, { skills: ["sql"] });
+   */
   private matchesCriteria(record: CategoryRecord, criteria: Record<string, unknown>): boolean {
     for (const [key, expected] of Object.entries(criteria)) {
       const actual = record[key];
@@ -242,7 +392,15 @@ export class DatabaseAgent {
     return true;
   }
 
-  /** Compare two values supporting arrays and case-insensitive strings. */
+  /**
+   * Compare two values supporting arrays and case-insensitive strings.
+   *
+   * @param {unknown} actual - Value sourced from the record.
+   * @param {unknown} expected - Value derived from the criteria.
+   * @returns {boolean} `true` when the values are considered equivalent.
+   * @example
+   * const matches = agent["valueMatches"](["SQL"], "sql");
+   */
   private valueMatches(actual: unknown, expected: unknown): boolean {
     if (expected == null) {
       return actual == null;
@@ -280,14 +438,30 @@ export class DatabaseAgent {
     return Object.is(actual, expected);
   }
 
-  /** Compute a deterministic cache key for query results. */
+  /**
+   * Compute a deterministic cache key for query results.
+   *
+   * @param {CategoryId} categoryId - Category identifier.
+   * @param {Record<string, unknown>} criteria - Normalised filter criteria.
+   * @param {string=} prefix - Optional cache key prefix.
+   * @returns {string} Deterministic cache key derived from the inputs.
+   * @example
+   * const key = agent["buildCacheKey"]("people", { skill: "sql" });
+   */
   private buildCacheKey(categoryId: CategoryId, criteria: Record<string, unknown>, prefix = "query"): string {
     const serialised = JSON.stringify(this.sortObject(criteria));
     const digest = crypto.createHash("sha1").update(serialised).digest("hex");
     return `${prefix}:${categoryId}:${digest}`;
   }
 
-  /** Recursively sort object keys to ensure stable cache keys. */
+  /**
+   * Recursively sort object keys to ensure stable cache keys.
+   *
+   * @param {unknown} value - Value that should have a stable serialisation order.
+   * @returns {unknown} Value with sorted object keys.
+   * @example
+   * const sorted = agent["sortObject"]({ b: 1, a: 2 });
+   */
   private sortObject(value: unknown): unknown {
     if (Array.isArray(value)) {
       return value.map((entry) => this.sortObject(entry));
@@ -304,6 +478,14 @@ export class DatabaseAgent {
   }
 }
 
+/**
+ * Factory helper that constructs a {@link DatabaseAgent} with a default manager.
+ *
+ * @param {RelevantDataManagerAgent=} manager - Optional data manager to reuse.
+ * @returns {DatabaseAgent} Database agent ready for use.
+ * @example
+ * const agent = createDatabaseAgent();
+ */
 export function createDatabaseAgent(manager?: RelevantDataManagerAgent): DatabaseAgent {
   return new DatabaseAgent(manager ?? new RelevantDataManagerAgent());
 }

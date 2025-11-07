@@ -4,6 +4,8 @@
  * of categories (departments, people, applications, policies, resources) that
  * mirrors a repository folder structure complete with schemas, python type
  * hints, example datasets, tests, and remote query blueprints.
+ *
+ * @module agents/relevantDataManagerAgent
  */
 
 import * as crypto from "crypto";
@@ -14,7 +16,18 @@ import {
   storeSharedCacheEntry
 } from "../mcpCache";
 
-/** Description for how a category folder is organised. */
+/**
+ * Description for how a category folder is organised.
+ *
+ * @interface FolderBlueprint
+ * @property {string} root - Root directory for the category artefacts.
+ * @property {string} configFile - Path to the configuration file controlling ingestion.
+ * @property {string[]} schemaFiles - Absolute or relative schema file paths.
+ * @property {string[]} pythonTypes - Python type files mirroring the schemas.
+ * @property {string} examplesDir - Directory containing example datasets.
+ * @property {string} testsDir - Directory containing test artefacts.
+ * @property {string} queriesDir - Directory containing query blueprints.
+ */
 export interface FolderBlueprint {
   root: string;
   configFile: string;
@@ -25,7 +38,16 @@ export interface FolderBlueprint {
   queriesDir: string;
 }
 
-/** High-level relationship metadata surfaced to consumers. */
+/**
+ * High-level relationship metadata surfaced to consumers.
+ *
+ * @interface RelationshipDescription
+ * @property {string} name - Descriptive name for the relationship.
+ * @property {CategoryId} targetCategory - Category referenced by the relationship.
+ * @property {string} viaField - Field on the source record linking to the target.
+ * @property {"one" | "many"} cardinality - Cardinality semantics of the relationship.
+ * @property {string} description - Human readable explanation of the relationship.
+ */
 export interface RelationshipDescription {
   name: string;
   targetCategory: CategoryId;
@@ -34,49 +56,95 @@ export interface RelationshipDescription {
   description: string;
 }
 
-/** JSON schema snippet stored alongside a category. */
+/**
+ * JSON schema snippet stored alongside a category.
+ *
+ * @interface CategorySchema
+ * @property {string} name - Schema display name.
+ * @property {string} description - Short description highlighting the schema purpose.
+ * @property {Record<string, unknown>} schema - JSON schema definition content.
+ */
 export interface CategorySchema {
   name: string;
   description: string;
   schema: Record<string, unknown>;
 }
 
-/** Python typing hints that mirror the JSON schemas. */
+/**
+ * Python typing hints that mirror the JSON schemas.
+ *
+ * @interface PythonTypeDefinition
+ * @property {string} name - Name of the Python type.
+ * @property {string} description - Explanation of when to use the type.
+ * @property {string} definition - Python source snippet defining the type.
+ */
 export interface PythonTypeDefinition {
   name: string;
   description: string;
   definition: string;
 }
 
-/** Example dataset artefact hosted in the category folder. */
+/**
+ * Example dataset artefact hosted in the category folder.
+ *
+ * @interface ExampleDataset
+ * @property {string} file - Relative path to the dataset file.
+ * @property {string} description - Summary of what the dataset demonstrates.
+ * @property {Record<string, unknown>} sample - Representative data sample.
+ */
 export interface ExampleDataset {
   file: string;
   description: string;
   sample: Record<string, unknown>;
 }
 
-/** Test artefact reference stored for the category. */
+/**
+ * Test artefact reference stored for the category.
+ *
+ * @interface CategoryTestArtefact
+ * @property {string} name - Test name or identifier.
+ * @property {string} description - Explanation of what the test covers.
+ * @property {string} command - Command used to execute the test.
+ */
 export interface CategoryTestArtefact {
   name: string;
   description: string;
   command: string;
 }
 
-/** Remote query blueprint associated with the category. */
+/**
+ * Remote query blueprint associated with the category.
+ *
+ * @interface RemoteQueryBlueprint
+ * @property {string} name - Human readable blueprint name.
+ * @property {string} description - Summary of the remote integration.
+ * @property {Record<string, unknown>} samplePayload - Example payload for orchestrating the query.
+ */
 export interface RemoteQueryBlueprint {
   name: string;
   description: string;
   samplePayload: Record<string, unknown>;
 }
 
-/** Summary returned when enumerating available categories. */
+/**
+ * Summary returned when enumerating available categories.
+ *
+ * @interface CategorySummary
+ * @property {CategoryId} id - Category identifier.
+ * @property {string} name - Display name for the category.
+ * @property {string} description - Description of the category contents.
+ */
 export interface CategorySummary {
   id: CategoryId;
   name: string;
   description: string;
 }
 
-/** Minimal representation of a record stored under a category. */
+/**
+ * Minimal representation of a record stored under a category.
+ *
+ * @typedef {Record<string, unknown> & { id: string; name?: string; title?: string }} CategoryRecord
+ */
 export type CategoryRecord = Record<string, unknown> & { id: string; name?: string; title?: string };
 
 /** Unique identifier for each category in the mock repository. */
@@ -87,7 +155,29 @@ export type CategoryId =
   | "companyPolicies"
   | "companyResources";
 
-/** Full configuration stored for each business category. */
+/**
+ * Full configuration stored for each business category.
+ *
+ * @interface BusinessCategory
+ * @property {CategoryId} id - Category identifier used throughout the dataset.
+ * @property {string} name - Human readable category name.
+ * @property {string} description - Summary describing the category purpose.
+ * @property {string[]} aliases - Alternative identifiers accepted by lookups.
+ * @property {{
+ *   purpose: string;
+ *   primaryKeys: string[];
+ *   updateCadence: string;
+ *   access: string;
+ *   folder: FolderBlueprint;
+ *   relationships: RelationshipDescription[];
+ * }} config - Metadata describing governance, storage, and relationships.
+ * @property {CategorySchema[]} schemas - Collection of JSON schemas.
+ * @property {PythonTypeDefinition[]} pythonTypes - Python type hints.
+ * @property {ExampleDataset[]} examples - Example datasets for the category.
+ * @property {CategoryTestArtefact[]} tests - Referenced test artefacts.
+ * @property {RemoteQueryBlueprint[]} queries - Remote query blueprints.
+ * @property {CategoryRecord[]} records - Mock records in the dataset.
+ */
 export interface BusinessCategory {
   id: CategoryId;
   name: string;
@@ -109,7 +199,15 @@ export interface BusinessCategory {
   records: CategoryRecord[];
 }
 
-/** Connections resolved for a specific record. */
+/**
+ * Connections resolved for a specific record.
+ *
+ * @interface EntityConnections
+ * @property {CategoryId} categoryId - Identifier of the source category.
+ * @property {string} recordId - Identifier of the source record.
+ * @property {Array<{ relationship: string; targetCategory: CategoryId; records: CategoryRecord[]; }>} connections -
+ * Related records grouped by relationship.
+ */
 export interface EntityConnections {
   categoryId: CategoryId;
   recordId: string;
@@ -120,7 +218,20 @@ export interface EntityConnections {
   }>;
 }
 
-/** Snapshot persisted to the shared cache for quick lookups. */
+/**
+ * Snapshot persisted to the shared cache for quick lookups.
+ *
+ * @interface CategorySnapshot
+ * @property {CategoryId} id - Category identifier.
+ * @property {string} name - Category display name.
+ * @property {string} description - Description for quick reference.
+ * @property {number} recordCount - Count of records captured in the snapshot.
+ * @property {string[]} schemaNames - List of schema names.
+ * @property {string[]} pythonTypeNames - List of Python type names.
+ * @property {string[]} queryNames - Names of remote query blueprints.
+ * @property {string[]} exampleFiles - Paths to example dataset files.
+ * @property {FolderBlueprint} folder - Folder blueprint metadata.
+ */
 export interface CategorySnapshot {
   id: CategoryId;
   name: string;
@@ -133,7 +244,17 @@ export interface CategorySnapshot {
   folder: FolderBlueprint;
 }
 
-/** Structure representing how different categories reference each other. */
+/**
+ * Structure representing how different categories reference each other.
+ *
+ * @interface RelationshipDefinition
+ * @property {CategoryId} sourceCategory - Category where the relationship starts.
+ * @property {CategoryId} targetCategory - Category the relationship points to.
+ * @property {string} relationshipName - Display name of the relationship.
+ * @property {string} sourceField - Field on the source record storing references.
+ * @property {string} targetField - Field on the target record used for matching.
+ * @property {"one" | "many"} cardinality - Cardinality semantics for navigation.
+ */
 interface RelationshipDefinition {
   sourceCategory: CategoryId;
   targetCategory: CategoryId;
@@ -1176,22 +1297,46 @@ const RELATIONSHIP_DEFINITIONS: RelationshipDefinition[] = [
   }
 ];
 
-/** Error thrown when a caller references an unknown category. */
+/**
+ * Error thrown when a caller references an unknown category.
+ */
 export class UnknownCategoryError extends Error {
+  /**
+   * Create a new error for a missing category.
+   *
+   * @param {string} topic - Topic identifier supplied by the caller.
+   */
   constructor(topic: string) {
     super(`Unknown category or topic: ${topic}`);
   }
 }
 
-/** Agent that manages the relevant-data workspace representation. */
+/**
+ * Agent that manages the relevant-data workspace representation.
+ *
+ * @example
+ * const manager = new RelevantDataManagerAgent();
+ * const categories = manager.listCategories();
+ */
 export class RelevantDataManagerAgent {
   private readonly cacheDirPromise: Promise<string>;
 
+  /**
+   * Create a new relevant data manager.
+   *
+   * @param {Promise<string>=} cacheDirPromise - Optional cache directory promise.
+   */
   constructor(cacheDirPromise?: Promise<string>) {
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
   }
 
-  /** Enumerate the categories available to the MCP client. */
+  /**
+   * Enumerate the categories available to the MCP client.
+   *
+   * @returns {CategorySummary[]} List of available categories.
+   * @example
+   * const categories = manager.listCategories();
+   */
   listCategories(): CategorySummary[] {
     return Object.values(BUSINESS_DATA).map((category) => ({
       id: category.id,
@@ -1200,7 +1345,15 @@ export class RelevantDataManagerAgent {
     }));
   }
 
-  /** Resolve a topic or identifier to the underlying category definition. */
+  /**
+   * Resolve a topic or identifier to the underlying category definition.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {BusinessCategory} Matching category metadata.
+   * @throws {UnknownCategoryError} When no matching category exists.
+   * @example
+   * const category = manager.getCategory("people");
+   */
   getCategory(topicOrId: string): BusinessCategory {
     const normalised = topicOrId.trim().toLowerCase();
     const category = Object.values(BUSINESS_DATA).find((entry) =>
@@ -1214,22 +1367,54 @@ export class RelevantDataManagerAgent {
     return category;
   }
 
-  /** Retrieve the folder blueprint for a given topic. */
+  /**
+   * Retrieve the folder blueprint for a given topic.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {FolderBlueprint} Folder structure metadata.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const folder = manager.getFolderBlueprint("people");
+   */
   getFolderBlueprint(topicOrId: string): FolderBlueprint {
     return this.getCategory(topicOrId).config.folder;
   }
 
-  /** Access category configuration metadata such as relationships. */
+  /**
+   * Access category configuration metadata such as relationships.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {BusinessCategory["config"]} Configuration metadata.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const config = manager.getCategoryConfig("people");
+   */
   getCategoryConfig(topicOrId: string): BusinessCategory["config"] {
     return this.getCategory(topicOrId).config;
   }
 
-  /** Access the JSON schemas associated with a category. */
+  /**
+   * Access the JSON schemas associated with a category.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {CategorySchema[]} Schema documents.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const schemas = manager.getCategorySchemas("applications");
+   */
   getCategorySchemas(topicOrId: string): CategorySchema[] {
     return this.getCategory(topicOrId).schemas;
   }
 
-  /** Retrieve Python type definitions provided as guidance for SDK authors. */
+  /**
+   * Retrieve Python type definitions provided as guidance for SDK authors.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {PythonTypeDefinition[]} Python typing hints.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const types = manager.getPythonTypes("companyPolicies");
+   */
   getPythonTypes(topicOrId: string): PythonTypeDefinition[] {
     return this.getCategory(topicOrId).pythonTypes;
   }
@@ -1237,12 +1422,26 @@ export class RelevantDataManagerAgent {
   /**
    * Fetch example datasets included inside the category folder. These help the
    * orchestration layer generate realistic tool requests.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {ExampleDataset[]} Example datasets illustrating data usage.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const examples = manager.getExamples("departments");
    */
   getExamples(topicOrId: string): ExampleDataset[] {
     return this.getCategory(topicOrId).examples;
   }
 
-  /** List the unit/integration tests referenced by the category. */
+  /**
+   * List the unit/integration tests referenced by the category.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {CategoryTestArtefact[]} Test references.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const tests = manager.getTests("people");
+   */
   getTests(topicOrId: string): CategoryTestArtefact[] {
     return this.getCategory(topicOrId).tests;
   }
@@ -1250,22 +1449,52 @@ export class RelevantDataManagerAgent {
   /**
    * Retrieve query blueprints that demonstrate how to call the authoritative
    * upstream system that owns the category data.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {RemoteQueryBlueprint[]} Query blueprints for remote calls.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const queries = manager.getQueries("applications");
    */
   getQueries(topicOrId: string): RemoteQueryBlueprint[] {
     return this.getCategory(topicOrId).queries;
   }
 
-  /** Return all records stored in the local mock dataset for a category. */
+  /**
+   * Return all records stored in the local mock dataset for a category.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {CategoryRecord[]} Records found in the dataset.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const records = manager.getRecords("people");
+   */
   getRecords(topicOrId: string): CategoryRecord[] {
     return this.getCategory(topicOrId).records;
   }
 
-  /** Retrieve a single record by identifier. */
+  /**
+   * Retrieve a single record by identifier.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @param {string} recordId - Identifier of the desired record.
+   * @returns {CategoryRecord | undefined} Matching record or undefined.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const record = manager.getRecord("people", "person-001");
+   */
   getRecord(topicOrId: string, recordId: string): CategoryRecord | undefined {
     return this.getRecords(topicOrId).find((record) => record.id === recordId);
   }
 
-  /** Perform a keyword search across every category. */
+  /**
+   * Perform a keyword search across every category.
+   *
+   * @param {string} keyword - Keyword to search for.
+   * @returns {Array<{ categoryId: CategoryId; record: CategoryRecord; matchingFields: string[]; }>} Matching results.
+   * @example
+   * const matches = manager.searchAcrossCategories("analytics");
+   */
   searchAcrossCategories(keyword: string): Array<{
     categoryId: CategoryId;
     record: CategoryRecord;
@@ -1299,7 +1528,15 @@ export class RelevantDataManagerAgent {
     return matches;
   }
 
-  /** Build a snapshot view of a category and persist it to the shared cache. */
+  /**
+   * Build a snapshot view of a category and persist it to the shared cache.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @returns {Promise<CategorySnapshot>} Snapshot metadata.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @example
+   * const snapshot = await manager.getOrCreateSnapshot("departments");
+   */
   async getOrCreateSnapshot(topicOrId: string): Promise<CategorySnapshot> {
     const category = this.getCategory(topicOrId);
     const cacheKey = `relevant-data:${category.id}:snapshot`;
@@ -1332,7 +1569,17 @@ export class RelevantDataManagerAgent {
     return snapshot;
   }
 
-  /** Resolve relationships for a given record across categories. */
+  /**
+   * Resolve relationships for a given record across categories.
+   *
+   * @param {string} topicOrId - Category identifier or alias.
+   * @param {string} recordId - Identifier of the source record.
+   * @returns {EntityConnections} Relationship details for the record.
+   * @throws {UnknownCategoryError} When the topic cannot be resolved.
+   * @throws {Error} When the source record is missing.
+   * @example
+   * const connections = manager.getEntityConnections("people", "person-001");
+   */
   getEntityConnections(topicOrId: string, recordId: string): EntityConnections {
     const category = this.getCategory(topicOrId);
     const record = this.getRecord(category.id, recordId);
@@ -1358,7 +1605,14 @@ export class RelevantDataManagerAgent {
     return { categoryId: category.id, recordId, connections };
   }
 
-  /** Compute a stable hash representing the current record state. */
+  /**
+   * Compute a stable hash representing the current record state.
+   *
+   * @param {CategoryRecord[]} records - Records to hash.
+   * @returns {string} SHA1 digest covering the records.
+   * @example
+   * const hash = manager["hashRecords"](manager.getRecords("people"));
+   */
   private hashRecords(records: CategoryRecord[]): string {
     const normalised = records.map((record) =>
       Object.fromEntries(Object.entries(record).sort(([left], [right]) => left.localeCompare(right)))
@@ -1366,7 +1620,15 @@ export class RelevantDataManagerAgent {
     return crypto.createHash("sha1").update(JSON.stringify(normalised)).digest("hex");
   }
 
-  /** Resolve related records for a relationship definition. */
+  /**
+   * Resolve related records for a relationship definition.
+   *
+   * @param {RelationshipDefinition} relationship - Relationship descriptor to evaluate.
+   * @param {unknown} value - Source value referencing target records.
+   * @returns {CategoryRecord[]} Target records satisfying the relationship.
+   * @example
+   * const targets = manager["resolveTargets"](definition, record.applicationIds);
+   */
   private resolveTargets(
     relationship: RelationshipDefinition,
     value: unknown
@@ -1396,8 +1658,20 @@ export class RelevantDataManagerAgent {
   }
 }
 
+/**
+ * Factory helper that constructs a {@link RelevantDataManagerAgent} using default configuration.
+ *
+ * @returns {RelevantDataManagerAgent} New manager instance.
+ * @example
+ * const manager = createRelevantDataManagerAgent();
+ */
 export function createRelevantDataManagerAgent(): RelevantDataManagerAgent {
   return new RelevantDataManagerAgent();
 }
 
+/**
+ * Exported mock dataset mirroring the relevant-data repository.
+ *
+ * @constant
+ */
 export { BUSINESS_DATA as MOCK_RELEVANT_DATASET };

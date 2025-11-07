@@ -1,11 +1,18 @@
 /**
  * @fileoverview Generates VS Code input prompts for MCP tool schemas.
+ *
+ * @module schemaPrompt
  */
 import * as vscode from "vscode";
 import { MCPProperty, MCPTool } from "./mcpSync";
 
 /**
  * Resolve the declared JSON schema type into a singular primitive string.
+ *
+ * @param {MCPProperty} property - Schema property that may declare multiple types.
+ * @returns {string} Normalised type string used for downstream coercion.
+ * @example
+ * const type = resolvePropertyType(property);
  */
 function resolvePropertyType(property: MCPProperty): string {
   if (!property.type) {
@@ -16,6 +23,13 @@ function resolvePropertyType(property: MCPProperty): string {
 
 /**
  * Convert user input to the correct JavaScript type based on the schema.
+ *
+ * @param {string} rawValue - String value captured from the user interface.
+ * @param {MCPProperty} property - Schema definition describing the expected type.
+ * @returns {unknown} Value coerced into the appropriate primitive or array.
+ * @throws {Error} When the provided input cannot be converted to the desired type.
+ * @example
+ * const value = coerceValue("42", { name: "count", type: "number" });
  */
 function coerceValue(rawValue: string, property: MCPProperty): unknown {
   const type = resolvePropertyType(property);
@@ -54,10 +68,15 @@ function coerceValue(rawValue: string, property: MCPProperty): unknown {
  * The prompt adapts to schema metadata by offering quick picks for enumerations
  * and booleans, plus validation for numbers and required fields.
  *
- * @param tool Tool definition with input schema.
- * @returns User-provided arguments keyed by schema property name.
+ * @param {MCPTool} tool - Tool definition with input schema.
+ * @returns {Promise<Record<string, unknown> | undefined>} User-provided arguments keyed by schema property name.
+ * @throws {Error} Propagates validation errors surfaced to the user interface.
+ * @example
+ * const args = await promptForArgs(tool);
  */
-export async function promptForArgs(tool: MCPTool): Promise<Record<string, unknown>> {
+export async function promptForArgs(
+  tool: MCPTool
+): Promise<Record<string, unknown> | undefined> {
   const args: Record<string, unknown> = {};
   const props = tool.input_schema?.properties ?? {};
 
@@ -81,9 +100,9 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
           canPickMany: type === "array",
           ignoreFocusOut: true
         });
-        if (!selection) {
+        if (selection === undefined) {
           if (property.required) {
-            throw new Error(`A selection for "${key}" is required.`);
+            return undefined;
           }
           continue;
         }
@@ -101,9 +120,9 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
           placeHolder: prompt,
           ignoreFocusOut: true
         });
-        if (!pick) {
+        if (pick === undefined) {
           if (property.required) {
-            throw new Error(`A selection for "${key}" is required.`);
+            return undefined;
           }
           continue;
         }
@@ -118,7 +137,14 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
         value: String(property.default ?? "")
       });
 
-      if (!value) {
+      if (value === undefined) {
+        if (property.required) {
+          return undefined;
+        }
+        continue;
+      }
+
+      if (!value.trim()) {
         if (property.required) {
           throw new Error(`Missing required argument: ${key}`);
         }
@@ -129,7 +155,7 @@ export async function promptForArgs(tool: MCPTool): Promise<Record<string, unkno
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       await vscode.window.showErrorMessage(message);
-      return {};
+      return undefined;
     }
   }
 
