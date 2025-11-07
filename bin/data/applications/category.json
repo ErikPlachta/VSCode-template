@@ -1,6 +1,6 @@
 {
-  "id": "applications",
-  "name": "Applications",
+  "id": "<application>",
+  "name": "<Application>",
   "description": "Internal platforms, SaaS tooling, and business systems.",
   "aliases": ["apps", "software", "systems"],
   "config": {
@@ -21,11 +21,11 @@
         "resourceIds"
       ],
       "notes": [
-        "Applications must declare an accountable department and policy coverage."
+        "<Application> must declare an accountable department and policy coverage."
       ]
     },
     "orchestration": {
-      "summary": "Applications data captures ownership, criticality, and dependencies so orchestration can steer system lifecycle decisions.",
+      "summary": "<Application> data captures ownership, criticality, and dependencies so orchestration can steer system lifecycle decisions.",
       "signals": [
         "Requests mention specific internal platforms, SaaS tools, or business systems.",
         "The user needs to confirm which department owns or governs an application.",
@@ -50,29 +50,29 @@
           ]
         },
         "databaseAgent": {
-          "focus": "Run targeted queries across application records for ownership, criticality, and compliance coverage.",
+          "focus": "Run targeted queries across <application> records for ownership, criticality, and compliance coverage.",
           "signals": [
-            "We need a list of applications filtered by department, tier, or compliance posture.",
-            "We must cross-reference policies or resources for multiple applications at once.",
-            "We are validating referential integrity between applications and other categories."
+            "We need a list of <application> filtered by department, tier, or compliance posture.",
+            "We must cross-reference policies or resources for multiple <application> at once.",
+            "We are validating referential integrity between <application> and other categories."
           ],
           "promptStarters": [
-            "Database agent, list all applications owned by `<department>` with their criticality levels.",
-            "Database agent, show applications missing policies covering `<standard>`.",
+            "Database agent, list all <application> owned by `<department>` with their criticality levels.",
+            "Database agent, show <application> missing policies covering `<standard>`.",
             "Database agent, cross-reference `<application>` with its supporting resources."
           ]
         },
         "dataAgent": {
-          "focus": "Provide narratives about how applications support the business and highlight risks or opportunities.",
+          "focus": "Provide narratives about how <application> support the business and highlight risks or opportunities.",
           "signals": [
-            "Stakeholders need an onboarding brief about application usage across departments.",
-            "Leaders want an explanation of how applications align with policies and resources.",
-            "The orchestrator must plan multi-step investigations that combine application data with other categories."
+            "Stakeholders need an onboarding brief about <application> usage across departments.",
+            "Leaders want an explanation of how <application> align with policies and resources.",
+            "The orchestrator must plan multi-step investigations that combine <application> data with other categories."
           ],
           "promptStarters": [
             "Data agent, craft an overview of how `<department>` relies on `<application>`.",
             "Data agent, highlight risks for `<application>` based on its criticality and policy coverage.",
-            "Data agent, propose a review plan for applications supporting `<business process>`."
+            "Data agent, propose a review plan for <application> supporting `<business process>`."
           ]
         }
       }

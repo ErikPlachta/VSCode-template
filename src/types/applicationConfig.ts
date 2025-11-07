@@ -1,0 +1,315 @@
+/**
+ * @fileoverview Application configuration types for comprehensive settings management.
+ */
+
+/**
+ * Environment-specific configuration settings.
+ */
+export interface EnvironmentConfig {
+  /** Enable debug mode for detailed logging and error reporting. */
+  debug: boolean;
+  /** Logging level for the environment. */
+  logLevel: "verbose" | "info" | "warn" | "error";
+  /** Enable hot reload for development. */
+  hotReload: boolean;
+  /** Use mock data instead of real data sources. */
+  mockData: boolean;
+}
+
+/**
+ * MCP server configuration settings.
+ */
+export interface McpServerConfig {
+  /** Protocol for MCP communication. */
+  protocol: "http" | "stdio" | "websocket";
+  /** Default port for HTTP server. */
+  defaultPort: number;
+  /** Request timeout in milliseconds. */
+  timeout: number;
+  /** Number of retry attempts for failed requests. */
+  retries: number;
+  /** Embedded server settings. */
+  embedded: {
+    /** Enable embedded server mode. */
+    enabled: boolean;
+    /** Automatically start embedded server. */
+    autoStart: boolean;
+  };
+}
+
+/**
+ * MCP client configuration settings.
+ */
+export interface McpClientConfig {
+  /** Maximum number of concurrent requests. */
+  maxConcurrentRequests: number;
+  /** Request timeout in milliseconds. */
+  requestTimeout: number;
+  /** Delay between retry attempts in milliseconds. */
+  retryDelay: number;
+}
+
+/**
+ * Agent execution priority levels.
+ */
+export type AgentPriority = "high" | "medium" | "low";
+
+/**
+ * Agent profile configuration.
+ */
+export interface AgentProfile {
+  /** Execution priority for the agent. */
+  priority: AgentPriority;
+  /** Maximum execution timeout in milliseconds. */
+  timeout: number;
+  /** Enable caching for this agent. */
+  cacheEnabled?: boolean;
+}
+
+/**
+ * Global agent configuration settings.
+ */
+export interface AgentGlobalConfig {
+  /** Maximum execution time for any agent in milliseconds. */
+  maxExecutionTime: number;
+  /** Enable telemetry collection for agents. */
+  enableTelemetry: boolean;
+  /** Enable caching globally for agents. */
+  cacheEnabled: boolean;
+  /** Cache time-to-live in milliseconds. */
+  cacheTtl: number;
+}
+
+/**
+ * Data validation configuration.
+ */
+export interface DataValidationConfig {
+  /** Enable strict validation mode. */
+  strictMode: boolean;
+  /** Validate data on load. */
+  validateOnLoad: boolean;
+  /** Validate relationship integrity. */
+  validateRelationships: boolean;
+}
+
+/**
+ * Cache configuration settings.
+ */
+export interface CacheConfig {
+  /** Enable caching. */
+  enabled: boolean;
+  /** Cache directory path. */
+  directory: string;
+  /** Maximum cache size. */
+  maxSize: string;
+  /** Time-to-live for cached items in milliseconds. */
+  ttl: number;
+}
+
+/**
+ * Logging file configuration.
+ */
+export interface LoggingFileConfig {
+  /** Enable file logging. */
+  enabled: boolean;
+  /** Log file path. */
+  path: string;
+  /** Maximum file size before rotation. */
+  maxSize: string;
+  /** Maximum number of log files to keep. */
+  maxFiles: number;
+}
+
+/**
+ * Rate limiting configuration.
+ */
+export interface RateLimitConfig {
+  /** Enable rate limiting. */
+  enabled: boolean;
+  /** Time window in milliseconds. */
+  windowMs: number;
+  /** Maximum requests per window. */
+  maxRequests: number;
+}
+
+/**
+ * Performance monitoring configuration.
+ */
+export interface PerformanceMonitoringConfig {
+  /** Enable performance monitoring. */
+  enabled: boolean;
+  /** Sample rate for monitoring (0-1). */
+  sampleRate: number;
+}
+
+/**
+ * Memory management configuration.
+ */
+export interface MemoryConfig {
+  /** Maximum heap size. */
+  maxHeapSize: string;
+  /** Garbage collection threshold (0-1). */
+  gcThreshold: number;
+}
+
+/**
+ * Experimental features configuration.
+ */
+export interface ExperimentalConfig {
+  /** Enable advanced caching features. */
+  enableAdvancedCaching: boolean;
+  /** Enable parallel processing. */
+  enableParallelProcessing: boolean;
+  /** Enable streaming responses. */
+  enableStreamingResponses: boolean;
+}
+
+/**
+ * Extension features configuration.
+ */
+export interface ExtensionConfig {
+  /** Allow third-party extensions. */
+  allowThirdParty: boolean;
+  /** Run extensions in sandbox mode. */
+  sandboxMode: boolean;
+}
+
+/**
+ * JSON schema validation configuration.
+ */
+export interface JsonSchemaConfig {
+  /** File pattern to match. */
+  pattern: string;
+  /** Path to JSON schema file. */
+  schema: string;
+  /** Human-readable description of validation purpose. */
+  description: string;
+}
+
+/**
+ * Markdown validation configuration.
+ */
+export interface MarkdownConfig {
+  /** File patterns to include in validation. */
+  include: string[];
+  /** File patterns to exclude from validation. */
+  exclude: string[];
+  /** Required front matter fields. */
+  requiredFrontMatter: string[];
+  /** Required section headings. */
+  requiredSections: string[];
+}
+
+/**
+ * Report generation configuration.
+ */
+export interface ReportConfig {
+  /** Output path for generated reports. */
+  output: string;
+}
+
+/**
+ * Comprehensive application configuration structure.
+ */
+export interface ApplicationConfig {
+  /** Application metadata and environment settings. */
+  application: {
+    /** Application name. */
+    name: string;
+    /** Application version. */
+    version: string;
+    /** Application description. */
+    description: string;
+    /** Environment-specific configurations. */
+    environments: {
+      development: EnvironmentConfig;
+      staging: EnvironmentConfig;
+      production: EnvironmentConfig;
+    };
+  };
+
+  /** MCP (Model Context Protocol) configuration. */
+  mcp: {
+    /** Server configuration settings. */
+    server: McpServerConfig;
+    /** Client configuration settings. */
+    client: McpClientConfig;
+  };
+
+  /** Agent configuration and profiles. */
+  agents: {
+    /** Global agent settings. */
+    global: AgentGlobalConfig;
+    /** Individual agent profiles. */
+    profiles: {
+      orchestrator: AgentProfile;
+      relevantDataManager: AgentProfile;
+      databaseAgent: AgentProfile;
+      dataAgent: AgentProfile;
+      clarificationAgent: AgentProfile;
+    };
+  };
+
+  /** Data management configuration. */
+  data: {
+    /** Available data categories. */
+    categories: string[];
+    /** Data validation settings. */
+    validation: DataValidationConfig;
+    /** Cache configuration. */
+    cache: CacheConfig;
+  };
+
+  /** TypeScript compilation settings. */
+  typescript: {
+    /** Files to include in compilation. */
+    include: string[];
+  };
+
+  /** JSON schema validation configurations. */
+  jsonSchemas: JsonSchemaConfig[];
+
+  /** Markdown validation configuration. */
+  markdown: MarkdownConfig;
+
+  /** Report generation configuration. */
+  report: ReportConfig;
+
+  /** Logging configuration. */
+  logging: {
+    /** Default log level. */
+    level: string;
+    /** Log output format. */
+    format: string;
+    /** Log output destinations. */
+    outputs: string[];
+    /** File logging configuration. */
+    file: LoggingFileConfig;
+  };
+
+  /** Security configuration. */
+  security: {
+    /** Enable CORS support. */
+    enableCORS: boolean;
+    /** Allowed origins for CORS. */
+    allowedOrigins: string[];
+    /** Rate limiting configuration. */
+    rateLimit: RateLimitConfig;
+  };
+
+  /** Performance configuration. */
+  performance: {
+    /** Performance monitoring settings. */
+    monitoring: PerformanceMonitoringConfig;
+    /** Memory management settings. */
+    memory: MemoryConfig;
+  };
+
+  /** Feature flags and experimental settings. */
+  features: {
+    /** Experimental features configuration. */
+    experimental: ExperimentalConfig;
+    /** Extension management configuration. */
+    extensions: ExtensionConfig;
+  };
+}

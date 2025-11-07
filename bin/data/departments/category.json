@@ -1,6 +1,6 @@
 {
-  "id": "departments",
-  "name": "Departments",
+  "id": "<department>",
+  "name": "<Department>",
   "description": "Organisational units, their missions, and leadership hierarchy.",
   "aliases": ["dept", "org units", "teams"],
   "config": {
@@ -22,40 +22,40 @@
       ]
     },
     "orchestration": {
-      "summary": "Department data anchors ownership, leadership, and cross-functional responsibilities.",
+      "summary": "<Department> data anchors ownership, leadership, and cross-functional responsibilities.",
       "signals": [
-        "Requests mention a team, department, or organisational responsibility.",
-        "The user needs to know which department owns an application, policy, or resource.",
-        "The task involves understanding leadership hierarchy or departmental missions."
+        "Requests mention a team, <department>, or organisational responsibility.",
+        "The user needs to know which <department> owns an application, policy, or resource.",
+        "The task involves understanding leadership hierarchy or <department> missions."
       ],
       "escalateWhen": [
-        "A department is referenced that is not represented in the current dataset.",
+        "A <department> is referenced that is not represented in the current dataset.",
         "The question requires real-time staffing, budgeting, or HR data beyond the records."
       ],
       "agents": {
         "relevantDataManager": {
-          "focus": "Clarify required metadata, leadership expectations, and connected assets for each department.",
+          "focus": "Clarify required metadata, leadership expectations, and connected assets for each <department>.",
           "signals": [
-            "We must collect fields needed to create or update a department record.",
-            "The orchestrator needs to understand how departments relate to applications, policies, or resources before querying.",
+            "We must collect fields needed to create or update a <department> record.",
+            "The orchestrator needs to understand how <department> relate to applications, policies, or resources before querying.",
             "Contributors are verifying the folder layout, schemas, or examples for organisational data."
           ],
           "promptStarters": [
-            "Relevant data manager, list the required metadata for a department entry.",
+            "Relevant data manager, list the required metadata for a <department> entry.",
             "Relevant data manager, describe the applications, policies, and resources linked to `<department>`.",
-            "Relevant data manager, outline the folder structure for the departments dataset."
+            "Relevant data manager, outline the folder structure for the <department> dataset."
           ]
         },
         "databaseAgent": {
-          "focus": "Answer structured questions about department ownership, leaders, and connected assets.",
+          "focus": "Answer structured questions about <department> ownership, leaders, and connected assets.",
           "signals": [
-            "We are filtering departments by the applications or policies they own.",
-            "Leaders need to see which resources belong to a department and who maintains them.",
-            "We are validating that each application or policy has an accountable department."
+            "We are filtering <department> by the applications or policies they own.",
+            "Leaders need to see which resources belong to a <department> and who maintains them.",
+            "We are validating that each application or policy has an accountable <department>."
           ],
           "promptStarters": [
-            "Database agent, list departments that own `<application>` and show their leaders.",
-            "Database agent, retrieve departments lacking linked resources.",
+            "Database agent, list <department> that own `<application>` and show their leaders.",
+            "Database agent, retrieve <department> lacking linked resources.",
             "Database agent, show the policies overseen by `<department>` with review cadences."
           ]
         },

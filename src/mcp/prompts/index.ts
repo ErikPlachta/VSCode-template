@@ -1,4 +1,4 @@
-import type { AgentCapabilityMetadata } from "../agentManifest";
+import type { AgentCapabilityMetadata } from "@mcp/agentManifest";
 
 export interface EscalationPromptOptions {
   topic?: string;
@@ -11,11 +11,13 @@ export function renderEscalationPrompt({
   topic,
   missingSignals,
   manifest,
-  additionalGuidance
+  additionalGuidance,
 }: EscalationPromptOptions): string {
   const lines: string[] = [];
   if (manifest) {
-    lines.push(`The ${manifest.title} handles ${manifest.description.toLowerCase()}.`);
+    lines.push(
+      `The ${manifest.title} handles ${manifest.description.toLowerCase()}.`
+    );
     if (manifest.escalateWhen.length) {
       lines.push(
         `It usually escalates when ${manifest.escalateWhen
@@ -48,11 +50,11 @@ export function renderClarificationPrompt({
   question,
   manifest,
   missingSignals,
-  knowledgeSnippets
+  knowledgeSnippets,
 }: ClarificationPromptOptions): string {
   const segments: string[] = [
     `The user asked: "${question.trim()}"`,
-    `${manifest.title} focuses on ${manifest.description.toLowerCase()}.`
+    `${manifest.title} focuses on ${manifest.description.toLowerCase()}.`,
   ];
   if (missingSignals?.length) {
     segments.push("Ask them to cover one of these signals:");
@@ -75,7 +77,7 @@ export interface ClassificationSummaryOptions {
 
 export function renderClassificationSummary({
   agent,
-  matchedSignals
+  matchedSignals,
 }: ClassificationSummaryOptions): string {
   const pieces = [`${agent.title}: ${agent.description}`];
   if (matchedSignals?.length) {
@@ -83,4 +85,3 @@ export function renderClassificationSummary({
   }
   return pieces.join(" | ");
 }
-

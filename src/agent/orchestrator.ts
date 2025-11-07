@@ -3,27 +3,27 @@
  * appropriate relevant-data agent.
  */
 
-import { DataAgent } from "./dataAgent";
-import { DatabaseAgent } from "./databaseAgent";
-import { ClarificationAgent } from "./clarificationAgent";
-import { RelevantDataManagerAgent } from "./relevantDataManagerAgent";
+import { DataAgent } from "@agent/dataAgent";
+import { DatabaseAgent } from "@agent/databaseAgent";
+import { ClarificationAgent } from "@agent/clarificationAgent";
+import { RelevantDataManagerAgent } from "@agent/relevantDataManagerAgent";
 import {
   ClarificationAgentProfile,
   DataAgentProfile,
   DatabaseAgentProfile,
   RelevantDataManagerAgentProfile,
-} from "../mcp/agentProfiles";
-import { agentManifest, getAgentMetadata } from "../mcp/agentManifest";
+} from "@mcp/agentProfiles";
+import { agentManifest, getAgentMetadata } from "@mcp/agentManifest";
 import {
   renderClassificationSummary,
   renderEscalationPrompt,
-} from "../mcp/prompts";
+} from "@mcp/prompts";
 import type {
   AgentOrchestrationGuidance,
   CategoryOrchestrationConfig,
   CategorySummary,
   DatasetCatalogueEntry,
-} from "./relevantDataManagerAgent";
+} from "@agent/relevantDataManagerAgent";
 
 /** List of supported orchestration intents. */
 export type OrchestratorIntent =

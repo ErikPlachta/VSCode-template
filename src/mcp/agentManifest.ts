@@ -3,8 +3,8 @@ import {
   ClarificationAgentProfile,
   DataAgentProfile,
   DatabaseAgentProfile,
-  RelevantDataManagerAgentProfile
-} from "./agentProfiles";
+  RelevantDataManagerAgentProfile,
+} from "@mcp/agentProfiles";
 
 /**
  * Description of an agent's shared responsibilities and boundaries.
@@ -30,26 +30,28 @@ export interface AgentCapabilityMetadata {
 export const agentManifest: Record<AgentIdentifier, AgentCapabilityMetadata> = {
   "relevant-data-manager": {
     ...RelevantDataManagerAgentProfile,
-    dependsOn: [ClarificationAgentProfile.id]
+    dependsOn: [ClarificationAgentProfile.id],
   },
   "database-agent": {
     ...DatabaseAgentProfile,
-    dependsOn: [RelevantDataManagerAgentProfile.id]
+    dependsOn: [RelevantDataManagerAgentProfile.id],
   },
   "data-agent": {
     ...DataAgentProfile,
-    dependsOn: [RelevantDataManagerAgentProfile.id, DatabaseAgentProfile.id]
+    dependsOn: [RelevantDataManagerAgentProfile.id, DatabaseAgentProfile.id],
   },
   "clarification-agent": {
     ...ClarificationAgentProfile,
-    dependsOn: [RelevantDataManagerAgentProfile.id]
-  }
+    dependsOn: [RelevantDataManagerAgentProfile.id],
+  },
 };
 
 /**
  * Retrieve manifest metadata for a given agent identifier.
  */
-export function getAgentMetadata(agentId: AgentIdentifier): AgentCapabilityMetadata {
+export function getAgentMetadata(
+  agentId: AgentIdentifier
+): AgentCapabilityMetadata {
   const metadata = agentManifest[agentId];
   if (!metadata) {
     throw new Error(`Unknown agent: ${agentId as string}`);
@@ -63,4 +65,3 @@ export function getAgentMetadata(agentId: AgentIdentifier): AgentCapabilityMetad
 export function listAgentCapabilities(): AgentCapabilityMetadata[] {
   return Object.values(agentManifest);
 }
-

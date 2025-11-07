@@ -17,9 +17,9 @@ import {
   readSharedCacheEntry,
   SharedCacheEntry,
   storeSharedCacheEntry,
-} from "../extension/mcpCache";
-import { createInvocationLogger } from "../mcp/telemetry";
-import { RelevantDataManagerAgentProfile } from "../mcp/agentProfiles";
+} from "@extension/mcpCache";
+import { createInvocationLogger } from "@mcp/telemetry";
+import { RelevantDataManagerAgentProfile } from "@mcp/agentProfiles";
 
 /**
  * Description for how a category folder is organised.

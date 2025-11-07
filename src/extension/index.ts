@@ -5,10 +5,10 @@
  */
 import * as vscode from "vscode";
 import * as path from "path";
-import { Orchestrator } from "../agent/orchestrator";
-import { startMCPServer, stopMCPServer } from "../server/embedded";
-import { fetchTools, MCPTool } from "./mcpSync";
-import { registerMcpProvider } from "./mcpProvider";
+import { Orchestrator } from "@agent/orchestrator";
+import { startMCPServer, stopMCPServer } from "@server/embedded";
+import { fetchTools, MCPTool } from "@extension/mcpSync";
+import { registerMcpProvider } from "@extension/mcpProvider";
 
 /**
  * Activates the extension, registering the chat participant.

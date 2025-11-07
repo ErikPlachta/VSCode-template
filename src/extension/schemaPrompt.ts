@@ -4,7 +4,7 @@
  * @module schemaPrompt
  */
 import * as vscode from "vscode";
-import { MCPProperty, MCPTool } from "./mcpSync";
+import { MCPProperty, MCPTool } from "@extension/mcpSync";
 
 /**
  * Resolve the declared JSON schema type into a singular primitive string.
@@ -49,7 +49,9 @@ function coerceValue(rawValue: string, property: MCPProperty): unknown {
         .map((item) => item.trim())
         .filter(Boolean);
       if (property.items) {
-        return items.map((value) => coerceValue(value, property.items as MCPProperty));
+        return items.map((value) =>
+          coerceValue(value, property.items as MCPProperty)
+        );
       }
       return items;
     }
@@ -98,7 +100,7 @@ export async function promptForArgs(
           title: `${tool.title} • ${key}`,
           placeHolder: prompt,
           canPickMany: type === "array",
-          ignoreFocusOut: true
+          ignoreFocusOut: true,
         });
         if (selection === undefined) {
           if (property.required) {
@@ -118,7 +120,7 @@ export async function promptForArgs(
         const pick = await vscode.window.showQuickPick(["true", "false"], {
           title: `${tool.title} • ${key}`,
           placeHolder: prompt,
-          ignoreFocusOut: true
+          ignoreFocusOut: true,
         });
         if (pick === undefined) {
           if (property.required) {
@@ -134,7 +136,7 @@ export async function promptForArgs(
         title: `${tool.title} • ${key}`,
         prompt,
         ignoreFocusOut: true,
-        value: String(property.default ?? "")
+        value: String(property.default ?? ""),
       });
 
       if (value === undefined) {

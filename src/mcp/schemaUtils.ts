@@ -3,7 +3,7 @@ import type {
   CategoryId,
   RelationshipDescription,
   CategorySchema,
-} from "../agent/relevantDataManagerAgent";
+} from "@agent/relevantDataManagerAgent";
 
 export interface RelationshipIntegrityIssue {
   categoryId: CategoryId;

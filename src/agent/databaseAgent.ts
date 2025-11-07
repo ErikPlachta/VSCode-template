@@ -13,16 +13,16 @@ import {
   readSharedCacheEntry,
   SharedCacheEntry,
   storeSharedCacheEntry,
-} from "../extension/mcpCache";
+} from "@extension/mcpCache";
 import {
   CategoryId,
   CategoryRecord,
   RelevantDataManagerAgent,
   RemoteQueryBlueprint,
-} from "./relevantDataManagerAgent";
-import { createInvocationLogger } from "../mcp/telemetry";
-import { validateCategorySchemas } from "../mcp/schemaUtils";
-import { DatabaseAgentProfile } from "../mcp/agentProfiles";
+} from "@agent/relevantDataManagerAgent";
+import { createInvocationLogger } from "@mcp/telemetry";
+import { validateCategorySchemas } from "@mcp/schemaUtils";
+import { DatabaseAgentProfile } from "@mcp/agentProfiles";
 
 type BaseQuery = Record<string, unknown>;
 

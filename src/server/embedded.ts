@@ -5,8 +5,8 @@
 
 import { createServer, Server } from "http";
 import { AddressInfo } from "net";
-import { handleRequest } from "./index";
-import { createMcpServer } from "./index";
+import { handleRequest } from "@server/index";
+import { createMcpServer } from "@server/index";
 
 let serverInstance: Server | null = null;
 let serverPort: number | null = null;

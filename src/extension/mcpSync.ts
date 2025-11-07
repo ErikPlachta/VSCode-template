@@ -6,7 +6,7 @@
  */
 
 import axios, { AxiosError } from "axios";
-import { MCPListToolsResponse, MCPProperty, MCPTool } from "../shared/mcpTypes";
+import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
 
 /**
  * Error wrapper that provides additional context for MCP failures.
@@ -44,15 +44,15 @@ function normaliseTool(tool: MCPTool): MCPTool {
     properties[key] = {
       ...(value as MCPProperty),
       name: key,
-      required: required.has(key)
+      required: required.has(key),
     };
   }
   return {
     ...tool,
     input_schema: {
       ...tool.input_schema,
-      properties
-    }
+      properties,
+    },
   };
 }
 
@@ -77,14 +77,21 @@ export async function fetchTools(
     throw new MCPDiscoveryError("The MCP server URL is not configured.");
   }
 
-  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
   if (token) headers["Authorization"] = `Bearer ${token}`;
-  const payload = { jsonrpc: "2.0", id: Date.now(), method: "listTools", params: {} };
+  const payload = {
+    jsonrpc: "2.0",
+    id: Date.now(),
+    method: "listTools",
+    params: {},
+  };
 
   try {
     const res = await axios.post<MCPListToolsResponse>(serverUrl, payload, {
       headers,
-      timeout: 15000
+      timeout: 15000,
     });
     if (res.data?.error) {
       throw new MCPDiscoveryError(
@@ -106,4 +113,9 @@ export async function fetchTools(
   }
 }
 
-export type { MCPInputSchema, MCPListToolsResponse, MCPProperty, MCPTool } from "../shared/mcpTypes";
+export type {
+  MCPInputSchema,
+  MCPListToolsResponse,
+  MCPProperty,
+  MCPTool,
+} from "@shared/mcpTypes";

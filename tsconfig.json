@@ -1,17 +1,28 @@
 {
   "compilerOptions": {
     "target": "es2021",
-    "module": "node16",
-    "moduleResolution": "node16",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "lib": ["es2021"],
     "strict": true,
     "esModuleInterop": true,
     "outDir": "out",
-    "rootDir": "src",
+    "rootDir": ".",
     "skipLibCheck": true,
-    "types": ["node", "vscode", "jest", "eslint"]
+    "types": ["node", "vscode", "jest", "eslint"],
+    "baseUrl": ".",
+    "paths": {
+      "@agent/*": ["src/agent/*"],
+      "@extension/*": ["src/extension/*"],
+      "@mcp/*": ["src/mcp/*"],
+      "@server/*": ["src/server/*"],
+      "@shared/*": ["src/shared/*"],
+      "@tools/*": ["src/tools/*"],
+      "@types/*": ["src/types/*"],
+      "@bin/*": ["bin/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "bin"],
   "exclude": [
     "node_modules",
     "out",

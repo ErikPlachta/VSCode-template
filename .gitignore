@@ -3,3 +3,8 @@ node_modules/
 coverage/
 out/
 tests/**/*.js
+
+# Environment configuration
+.env
+.env.local
+.env.*.local

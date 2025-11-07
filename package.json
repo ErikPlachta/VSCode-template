@@ -3,7 +3,7 @@
   "displayName": "My Business MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",
-  "publisher": "myorg",
+  "publisher": "ErikPlachta",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,40 +17,40 @@
     "onCommand:mybusinessMCP.invokeTool",
     "onCommand:mybusinessMCP.registerServer",
     "onCommand:mybusinessMCP.unregisterServer",
-    "onChatParticipant:MyBusinessMCP"
+    "onChatParticipant:MybusinessMCP"
   ],
   "main": "./out/extension/index.js",
   "contributes": {
     "commands": [
       {
         "command": "mybusinessMCP.invokeTool",
-        "title": "My Business MCP: Invoke Tool"
+        "title": "My Business MCP Extension: Invoke Tool"
       },
       {
         "command": "mybusinessMCP.registerServer",
-        "title": "My Business MCP: Register MCP Server"
+        "title": "My Business MCP Extension: Register MCP Server"
       },
       {
         "command": "mybusinessMCP.unregisterServer",
-        "title": "My Business MCP: Unregister MCP Server"
+        "title": "My Business MCP Extension: Unregister MCP Server"
       }
     ],
     "mcpServerDefinitionProviders": [
       {
         "id": "mybusiness-local",
-        "label": "My Business Embedded Server"
+        "label": "My Business MCP Extension Embedded Server"
       }
     ],
     "chatParticipants": [
       {
-        "id": "MyBusinessMCP",
+        "id": "MybusinessMCP",
         "name": "mybusiness",
         "description": "Access your business data including applications, departments, people, policies, and resources",
         "isSticky": true
       }
     ],
     "configuration": {
-      "title": "My Business MCP Settings",
+      "title": "My Business MCP Extension Settings",
       "properties": {
         "mybusinessMCP.serverUrl": {
           "type": "string",
@@ -76,7 +76,7 @@
         "mybusinessMCP.registerServerId": {
           "type": "string",
           "default": "mybusiness",
-          "description": "Server id key used inside mcp.json 'servers' object."
+          "description": "Server id key used inside mcp.json servers object."
         },
         "mybusinessMCP.includeAuthHeader": {
           "type": "boolean",
@@ -87,6 +87,9 @@
     }
   },
   "scripts": {
+    "config": "npm run compile -- --pretty false && node ./out/bin/tools/updatePackageConfig.js",
+    "prebuild": "npm run config",
+    "build": "npm run compile",
     "lint": "eslint \"src/**/*.ts\" --max-warnings=0",
     "lint:json": "npm run compile -- --pretty false && node ./out/tools/validateJson.js",
     "lint:docs": "npm run compile -- --pretty false && node ./out/tools/validateMarkdown.js",
@@ -94,7 +97,7 @@
     "test": "jest --runInBand --ci",
     "docs": "typedoc",
     "compile": "tsc -p ./",
-    "package": "npx vsce package",
+    "package": "npm run build && npx vsce package",
     "install": "code --install-extension mybusiness-mcp-extension-1.0.0.vsix",
     "server": "npm run compile -- --pretty false && node ./out/server/index.js"
   },
@@ -106,6 +109,7 @@
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/eslint": "^9.6.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.10.0",
@@ -113,6 +117,7 @@
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
     "@vscode/vsce": "^3.2.0",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.1",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-jsdoc": "^61.1.12",

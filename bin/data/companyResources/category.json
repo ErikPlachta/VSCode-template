@@ -1,6 +1,6 @@
 {
-  "id": "companyResources",
-  "name": "Company Resources",
+  "id": "<companyResource>",
+  "name": "<Company Resource>",
   "description": "Knowledge base entries, playbooks, and runbooks.",
   "aliases": ["resources", "knowledge base"],
   "config": {
@@ -16,11 +16,11 @@
         "applicationIds"
       ],
       "notes": [
-        "Resources should reference owning policies and supported applications."
+        "<Resource> should reference owning policies and supported applications."
       ]
     },
     "orchestration": {
-      "summary": "Resource records connect playbooks and guides to the departments, applications, and policies they support.",
+      "summary": "<Resource> records connect playbooks and guides to the departments, applications, and policies they support.",
       "signals": [
         "Requests mention runbooks, onboarding guides, or internal knowledge base assets.",
         "The user needs supporting material for an application, policy, or department.",

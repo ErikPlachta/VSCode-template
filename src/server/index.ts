@@ -7,7 +7,7 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";
-import { MCPTool } from "../shared/mcpTypes";
+import { MCPTool } from "@shared/mcpTypes";
 
 interface JsonRpcRequest {
   jsonrpc: string;
@@ -350,7 +350,6 @@ export function createMcpServer(
   });
 
   server.listen(port, () => {
-     
     console.log(`MCP mock server listening on http://localhost:${port}`);
   });
 

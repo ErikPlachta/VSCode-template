@@ -6,7 +6,7 @@
  * @module agent/dataAgent
  */
 
-import { DatabaseAgent } from "./databaseAgent";
+import { DatabaseAgent } from "@agent/databaseAgent";
 import {
   CategoryId,
   CategoryRecord,
@@ -20,10 +20,10 @@ import {
   RelationshipDescription,
   RelevantDataManagerAgent,
   RemoteQueryBlueprint,
-} from "./relevantDataManagerAgent";
-import { createInvocationLogger } from "../mcp/telemetry";
-import { detectDuplicateSchemas } from "../mcp/schemaUtils";
-import { DataAgentProfile } from "../mcp/agentProfiles";
+} from "@agent/relevantDataManagerAgent";
+import { createInvocationLogger } from "@mcp/telemetry";
+import { detectDuplicateSchemas } from "@mcp/schemaUtils";
+import { DataAgentProfile } from "@mcp/agentProfiles";
 
 /**
  * Summary of a topic including schemas, examples, and queries.
@@ -498,7 +498,7 @@ export class DataAgent {
  * @returns {DataAgent} Freshly constructed data agent.
  * @example
  * ```ts
- * import { createDataAgent } from "./agent/dataAgent";
+ * import { createDataAgent } from "@agent/dataAgent";
  * const agent = createDataAgent();
  * ```
  */

@@ -4,8 +4,8 @@
  * All source files must provide comprehensive docblocks per project standards.
  */
 
-import process from 'node:process';
-import { RepositoryHealthAgent } from '../agent/repositoryHealthAgent';
+import process from "node:process";
+import { RepositoryHealthAgent } from "@agent/repositoryHealthAgent";
 
 /**
  * Validate Markdown metadata and structural requirements.
@@ -19,11 +19,11 @@ import { RepositoryHealthAgent } from '../agent/repositoryHealthAgent';
  * ```
  */
 async function runMarkdownValidation(): Promise<void> {
-  const agent: RepositoryHealthAgent = await RepositoryHealthAgent.createFromDisk();
+  const agent: RepositoryHealthAgent =
+    await RepositoryHealthAgent.createFromDisk();
   const result = await agent.validateMarkdownDocuments();
   if (!result.passed) {
     for (const message of result.messages) {
-       
       console.error(message);
     }
     process.exitCode = 1;
@@ -31,7 +31,9 @@ async function runMarkdownValidation(): Promise<void> {
 }
 
 void runMarkdownValidation().catch((error: unknown) => {
-   
-  console.error('Markdown validation encountered an unrecoverable error.', error);
+  console.error(
+    "Markdown validation encountered an unrecoverable error.",
+    error
+  );
   process.exitCode = 1;
 });

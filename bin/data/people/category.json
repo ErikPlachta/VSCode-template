@@ -1,6 +1,6 @@
 {
-  "id": "people",
-  "name": "People",
+  "id": "<people>",
+  "name": "<People>",
   "description": "Employee directory complete with capabilities and system access.",
   "aliases": ["employees", "teammates", "staff"],
   "config": {
@@ -17,11 +17,11 @@
         "resourceIds"
       ],
       "notes": [
-        "People must link to a department and at least one policy acknowledgement."
+        "<People> must link to a department and at least one policy acknowledgement."
       ]
     },
     "orchestration": {
-      "summary": "People data links employees to their departments, skills, and system responsibilities.",
+      "summary": "<People> data links employees to their departments, skills, and system responsibilities.",
       "signals": [
         "Requests mention individuals, roles, capabilities, or contact information.",
         "The user needs to know who supports an application, resource, or policy.",

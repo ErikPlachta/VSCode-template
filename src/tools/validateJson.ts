@@ -4,8 +4,8 @@
  * All source files must provide comprehensive docblocks per project standards.
  */
 
-import process from 'node:process';
-import { RepositoryHealthAgent } from '../agent/repositoryHealthAgent';
+import process from "node:process";
+import { RepositoryHealthAgent } from "@agent/repositoryHealthAgent";
 
 /**
  * Execute JSON schema validation using the repository health agent.
@@ -19,11 +19,11 @@ import { RepositoryHealthAgent } from '../agent/repositoryHealthAgent';
  * ```
  */
 async function runJsonValidation(): Promise<void> {
-  const agent: RepositoryHealthAgent = await RepositoryHealthAgent.createFromDisk();
+  const agent: RepositoryHealthAgent =
+    await RepositoryHealthAgent.createFromDisk();
   const result = await agent.validateJsonSchemas();
   if (!result.passed) {
     for (const message of result.messages) {
-       
       console.error(message);
     }
     process.exitCode = 1;
@@ -31,7 +31,6 @@ async function runJsonValidation(): Promise<void> {
 }
 
 void runJsonValidation().catch((error: unknown) => {
-   
-  console.error('JSON validation encountered an unrecoverable error.', error);
+  console.error("JSON validation encountered an unrecoverable error.", error);
   process.exitCode = 1;
 });
