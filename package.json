@@ -31,7 +31,7 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
-    "test": "jest",
+    "test": "cross-env CI=true jest --runInBand",
     "docs": "typedoc",
     "package": "vsce package"
   },
@@ -47,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "typedoc": "^0.25.0",
     "typedoc-plugin-markdown": "^3.16.0",
-    "@types/node": "^20.16.5"
+    "@types/node": "^20.16.5",
+    "cross-env": "^10.1.0"
   }
 }
