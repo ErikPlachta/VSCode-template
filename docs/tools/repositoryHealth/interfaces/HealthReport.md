@@ -1,20 +1,3 @@
----
-title: Health Report
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
@@ -23,7 +6,7 @@ hierarchy:
 
 # Interface: HealthReport
 
-Defined in: src/tools/repositoryHealth.ts:49
+Defined in: [src/tools/repositoryHealth.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L52)
 
 Aggregate report describing every compliance check outcome.
 
@@ -33,7 +16,7 @@ Aggregate report describing every compliance check outcome.
 
 > `readonly` **checks**: readonly [`CheckResult`](CheckResult.md)[]
 
-Defined in: src/tools/repositoryHealth.ts:52
+Defined in: [src/tools/repositoryHealth.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L55)
 
 ***
 
@@ -41,7 +24,7 @@ Defined in: src/tools/repositoryHealth.ts:52
 
 > `readonly` **generatedAt**: `string`
 
-Defined in: src/tools/repositoryHealth.ts:50
+Defined in: [src/tools/repositoryHealth.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L53)
 
 ***
 
@@ -49,33 +32,4 @@ Defined in: src/tools/repositoryHealth.ts:50
 
 > `readonly` **passed**: `boolean`
 
-Defined in: src/tools/repositoryHealth.ts:51
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/tools/repositoryHealth.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L54)

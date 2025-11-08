@@ -1,30 +1,14 @@
----
-title: Classification Summary Options
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/prompts](../README.md) / ClassificationSummaryOptions
 
 # Interface: ClassificationSummaryOptions
 
-Defined in: [src/mcp/prompts/index.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L79)
+Defined in: [src/mcp/prompts/index.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/prompts/index.ts#L123)
+
+ClassificationSummaryOptions interface.
 
 ## Properties
 
@@ -32,40 +16,12 @@ Defined in: [src/mcp/prompts/index.ts:79](https://github.com/ErikPlachta/vscode-
 
 > **agent**: [`AgentCapabilityMetadata`](../../config/agentManifest/interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/prompts/index.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L80)
+Defined in: [src/mcp/prompts/index.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/prompts/index.ts#L124)
 
----
+***
 
 ### matchedSignals?
 
 > `optional` **matchedSignals**: `string`[]
 
-Defined in: [src/mcp/prompts/index.ts:81](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L81)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/mcp/prompts/index.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/prompts/index.ts#L125)

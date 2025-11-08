@@ -1,30 +1,12 @@
----
-title: Performance Monitor
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
 
 # Class: PerformanceMonitor
 
-Defined in: [src/shared/analyticsIntegration.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L144)
+Defined in: [src/shared/analyticsIntegration.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L158)
 
 Performance monitoring utility for critical operations.
 
@@ -34,7 +16,7 @@ Performance monitoring utility for critical operations.
 
 > **new PerformanceMonitor**(): `PerformanceMonitor`
 
-Defined in: [src/shared/analyticsIntegration.ts:150](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L150)
+Defined in: [src/shared/analyticsIntegration.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L166)
 
 Creates a new performance monitor instance.
 
@@ -42,13 +24,15 @@ Creates a new performance monitor instance.
 
 `PerformanceMonitor`
 
+- TODO: describe return value.
+
 ## Methods
 
 ### monitorDatabaseQuery()
 
 > **monitorDatabaseQuery**\<`T`\>(`queryType`, `query`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L162)
+Defined in: [src/shared/analyticsIntegration.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L185)
 
 Monitors the performance of a database query operation.
 
@@ -64,11 +48,17 @@ Monitors the performance of a database query operation.
 
 `string`
 
+queryType parameter.
+
 ##### query
 
 () => `Promise`\<`T`\>
 
+query parameter.
+
 ##### options
+
+options parameter.
 
 ###### category?
 
@@ -82,15 +72,15 @@ Monitors the performance of a database query operation.
 
 `Promise`\<`T`\>
 
-- Promise resolving to query result.
+- TODO: describe return value.
 
----
+***
 
 ### monitorDataProcessing()
 
 > **monitorDataProcessing**\<`T`\>(`operationType`, `processor`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L188)
+Defined in: [src/shared/analyticsIntegration.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L218)
 
 Monitors data processing operations.
 
@@ -106,11 +96,17 @@ Monitors data processing operations.
 
 `string`
 
+operationType parameter.
+
 ##### processor
 
 () => `Promise`\<`T`\>
 
+processor parameter.
+
 ##### options
+
+options parameter.
 
 ###### category?
 
@@ -124,15 +120,15 @@ Monitors data processing operations.
 
 `Promise`\<`T`\>
 
-- Promise resolving to processing result.
+- TODO: describe return value.
 
----
+***
 
 ### monitorOrchestration()
 
 > **monitorOrchestration**\<`T`\>(`decision`, `orchestration`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:219](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L219)
+Defined in: [src/shared/analyticsIntegration.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L256)
 
 Monitors orchestration decisions and routing.
 
@@ -148,11 +144,17 @@ Monitors orchestration decisions and routing.
 
 `string`
 
+decision parameter.
+
 ##### orchestration
 
 () => `Promise`\<`T`\>
 
+orchestration parameter.
+
 ##### options
+
+options parameter.
 
 ###### agentCount?
 
@@ -166,32 +168,4 @@ Monitors orchestration decisions and routing.
 
 `Promise`\<`T`\>
 
-- Promise resolving to orchestration result.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

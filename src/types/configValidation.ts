@@ -238,6 +238,10 @@ function validateConfigurationSections(
     case "relevant-data-manager":
       validateRelevantDataManagerConfig(config, errors, warnings);
       break;
+    case "user-context":
+      // user-context is a rename/alias of relevant-data-manager; reuse validation
+      validateRelevantDataManagerConfig(config, errors, warnings);
+      break;
     default:
       warnings.push({
         level: "warning",

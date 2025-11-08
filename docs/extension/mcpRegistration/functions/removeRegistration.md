@@ -1,24 +1,6 @@
----
-title: Remove Registration
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [extension/mcpRegistration](../README.md) / removeRegistration
 
@@ -26,7 +8,7 @@ hierarchy:
 
 > **removeRegistration**(`id`): `Promise`\<`string`\>
 
-Defined in: [src/extension/mcpRegistration.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpRegistration.ts#L91)
+Defined in: [src/extension/mcpRegistration.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpRegistration.ts#L124)
 
 Remove our server entry from mcp.json if present.
 
@@ -36,34 +18,10 @@ Remove our server entry from mcp.json if present.
 
 `string`
 
+id parameter.
+
 ## Returns
 
 `Promise`\<`string`\>
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

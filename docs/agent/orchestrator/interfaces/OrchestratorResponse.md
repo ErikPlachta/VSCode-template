@@ -1,30 +1,12 @@
----
-title: Orchestrator Response
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / OrchestratorResponse
 
 # Interface: OrchestratorResponse
 
-Defined in: [src/agent/orchestrator/index.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L29)
+Defined in: [src/agent/orchestrator/index.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L36)
 
 Result of orchestrating a question across the available agents.
 
@@ -34,72 +16,44 @@ Result of orchestrating a question across the available agents.
 
 > **agent**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L31)
+Defined in: [src/agent/orchestrator/index.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L38)
 
----
+***
 
 ### intent
 
 > **intent**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L30)
+Defined in: [src/agent/orchestrator/index.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L37)
 
----
+***
 
 ### markdown
 
 > **markdown**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L35)
+Defined in: [src/agent/orchestrator/index.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L42)
 
----
+***
 
 ### payload
 
 > **payload**: `unknown`
 
-Defined in: [src/agent/orchestrator/index.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L34)
+Defined in: [src/agent/orchestrator/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L41)
 
----
+***
 
 ### rationale
 
 > **rationale**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L33)
+Defined in: [src/agent/orchestrator/index.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L40)
 
----
+***
 
 ### summary
 
 > **summary**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L32)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/agent/orchestrator/index.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L39)

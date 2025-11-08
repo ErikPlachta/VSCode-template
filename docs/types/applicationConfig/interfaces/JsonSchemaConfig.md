@@ -1,30 +1,12 @@
----
-title: Json Schema Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / JsonSchemaConfig
 
 # Interface: JsonSchemaConfig
 
-Defined in: [src/types/applicationConfig.ts:236](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L236)
+Defined in: [src/types/applicationConfig.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L251)
 
 JSON schema validation configuration.
 
@@ -34,54 +16,26 @@ JSON schema validation configuration.
 
 > **description**: `string`
 
-Defined in: [src/types/applicationConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L242)
+Defined in: [src/types/applicationConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L257)
 
 Human-readable description of validation purpose.
 
----
+***
 
 ### pattern
 
 > **pattern**: `string`
 
-Defined in: [src/types/applicationConfig.ts:238](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L238)
+Defined in: [src/types/applicationConfig.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L253)
 
 File pattern to match.
 
----
+***
 
 ### schema
 
 > **schema**: `string`
 
-Defined in: [src/types/applicationConfig.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L240)
+Defined in: [src/types/applicationConfig.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L255)
 
 Path to JSON schema file.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

@@ -1,30 +1,12 @@
----
-title: Orchestrator
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / Orchestrator
 
 # Class: Orchestrator
 
-Defined in: [src/agent/orchestrator/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L41)
+Defined in: [src/agent/orchestrator/index.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L48)
 
 Configuration-driven orchestrator that routes questions to appropriate agents
 
@@ -34,7 +16,9 @@ Configuration-driven orchestrator that routes questions to appropriate agents
 
 > **new Orchestrator**(`config?`): `Orchestrator`
 
-Defined in: [src/agent/orchestrator/index.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L50)
+Defined in: [src/agent/orchestrator/index.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L63)
+
+constructor function.
 
 #### Parameters
 
@@ -42,9 +26,13 @@ Defined in: [src/agent/orchestrator/index.ts:50](https://github.com/ErikPlachta/
 
 [`OrchestratorConfig`](../config/classes/OrchestratorConfig.md)
 
+config parameter.
+
 #### Returns
 
 `Orchestrator`
+
+- TODO: describe return value.
 
 ## Methods
 
@@ -52,18 +40,21 @@ Defined in: [src/agent/orchestrator/index.ts:50](https://github.com/ErikPlachta/
 
 > **classify**(`questionOrInput`, `context?`): [`OrchestratorClassification`](../interfaces/OrchestratorClassification.md)
 
-Defined in: [src/agent/orchestrator/index.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L123)
+Defined in: [src/agent/orchestrator/index.ts:152](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L152)
 
 Classify intent using configuration-driven approach.
-Supports both new signature (single input object) and legacy signature (question + context).
 
 #### Parameters
 
 ##### questionOrInput
 
+questionOrInput parameter.
+
 `string` | [`OrchestratorInput`](../interfaces/OrchestratorInput.md)
 
 ##### context?
+
+context parameter.
 
 ###### topic?
 
@@ -73,13 +64,15 @@ Supports both new signature (single input object) and legacy signature (question
 
 [`OrchestratorClassification`](../interfaces/OrchestratorClassification.md)
 
----
+- TODO: describe return value.
+
+***
 
 ### getConfig()
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L80)
+Defined in: [src/agent/orchestrator/index.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L98)
 
 Get public configuration
 
@@ -87,43 +80,31 @@ Get public configuration
 
 `Partial`\<[`AgentConfigDefinition`](../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
----
+- TODO: describe return value.
+
+***
 
 ### getCurrentConfig()
 
-> **getCurrentConfig**(): `object`
+> **getCurrentConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/orchestrator/index.ts:390](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L390)
+Defined in: [src/agent/orchestrator/index.ts:426](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L426)
 
 Get current configuration
 
 #### Returns
 
-`object`
+`Record`\<`string`, `unknown`\>
 
-##### intentAgentMap
+- TODO: describe return value.
 
-> **intentAgentMap**: `Record`\<`string`, `string`\>
-
-##### scoringWeights
-
-> **scoringWeights**: `any`
-
-##### stopWordsCount
-
-> **stopWordsCount**: `number`
-
-##### supportedIntents
-
-> **supportedIntents**: `string`[]
-
----
+***
 
 ### getSupportedIntents()
 
 > **getSupportedIntents**(): `string`[]
 
-Defined in: [src/agent/orchestrator/index.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L87)
+Defined in: [src/agent/orchestrator/index.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L107)
 
 Get supported intents
 
@@ -131,16 +112,17 @@ Get supported intents
 
 `string`[]
 
----
+- TODO: describe return value.
+
+***
 
 ### handle()
 
 > **handle**(`input`): `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:318](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L318)
+Defined in: [src/agent/orchestrator/index.ts:353](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L353)
 
 Handle user requests by classifying intent and routing to appropriate agents.
-This is the main entry point used by the VS Code extension.
 
 #### Parameters
 
@@ -148,21 +130,21 @@ This is the main entry point used by the VS Code extension.
 
 [`OrchestratorInput`](../interfaces/OrchestratorInput.md)
 
-User request with question and optional context
+input parameter.
 
 #### Returns
 
 `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-- Response with routing decision and agent output
+- TODO: describe return value.
 
----
+***
 
 ### route()
 
 > **route**(`input`): `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L221)
+Defined in: [src/agent/orchestrator/index.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L253)
 
 Route request using configuration (simplified for now - delegates to original implementation)
 
@@ -172,17 +154,21 @@ Route request using configuration (simplified for now - delegates to original im
 
 [`OrchestratorInput`](../interfaces/OrchestratorInput.md)
 
+input parameter.
+
 #### Returns
 
 `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
----
+- TODO: describe return value.
+
+***
 
 ### createFromConfig()
 
 > `static` **createFromConfig**(`configPath?`): `Promise`\<`Orchestrator`\>
 
-Defined in: [src/agent/orchestrator/index.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L63)
+Defined in: [src/agent/orchestrator/index.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L79)
 
 Create orchestrator instance with configuration loaded from file
 
@@ -192,34 +178,10 @@ Create orchestrator instance with configuration loaded from file
 
 `string`
 
+configPath parameter.
+
 #### Returns
 
 `Promise`\<`Orchestrator`\>
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

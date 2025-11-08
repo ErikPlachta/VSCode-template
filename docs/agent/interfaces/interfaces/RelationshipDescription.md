@@ -1,30 +1,14 @@
----
-title: Relationship Description
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / RelationshipDescription
 
 # Interface: RelationshipDescription
 
-Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L130)
+Defined in: [src/agent/interfaces.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L158)
+
+Describes a relationship between business data categories.
 
 ## Properties
 
@@ -32,56 +16,28 @@ Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/vscode-
 
 > **description**: `string`
 
-Defined in: [src/agent/interfaces.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L132)
+Defined in: [src/agent/interfaces.ts:160](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L160)
 
----
+***
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/agent/interfaces.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L131)
+Defined in: [src/agent/interfaces.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L159)
 
----
+***
 
 ### targetCategory
 
 > **targetCategory**: `string`
 
-Defined in: [src/agent/interfaces.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L133)
+Defined in: [src/agent/interfaces.ts:161](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L161)
 
----
+***
 
 ### viaField
 
 > **viaField**: `string`
 
-Defined in: [src/agent/interfaces.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L134)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/agent/interfaces.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L162)

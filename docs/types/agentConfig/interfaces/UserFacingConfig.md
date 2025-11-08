@@ -1,30 +1,12 @@
----
-title: User Facing Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / UserFacingConfig
 
 # Interface: UserFacingConfig
 
-Defined in: [src/types/agentConfig.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L97)
+Defined in: [src/types/agentConfig.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L101)
 
 User-facing metadata
 
@@ -34,56 +16,28 @@ User-facing metadata
 
 > `optional` **exampleQueries**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L100)
+Defined in: [src/types/agentConfig.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L104)
 
----
+***
 
 ### friendlyDescription?
 
 > `optional` **friendlyDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L98)
+Defined in: [src/types/agentConfig.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L102)
 
----
+***
 
 ### helpText?
 
 > `optional` **helpText**: `string`
 
-Defined in: [src/types/agentConfig.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L101)
+Defined in: [src/types/agentConfig.ts:105](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L105)
 
----
+***
 
 ### useWhen?
 
 > `optional` **useWhen**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L99)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L103)

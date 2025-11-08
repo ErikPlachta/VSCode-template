@@ -1,20 +1,3 @@
----
-title: Run Health Check
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
@@ -25,7 +8,7 @@ hierarchy:
 
 > **runHealthCheck**(): `Promise`\<`void`\>
 
-Defined in: src/tools/repositoryHealth.ts:376
+Defined in: [src/tools/repositoryHealth.ts:384](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L384)
 
 CLI-friendly runner that executes all checks and writes the report.
 
@@ -33,33 +16,4 @@ CLI-friendly runner that executes all checks and writes the report.
 
 `Promise`\<`void`\>
 
-- Resolves on completion.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

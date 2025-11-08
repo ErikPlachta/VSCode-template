@@ -1,30 +1,12 @@
----
-title: Data Validation Issue
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / DataValidationIssue
 
 # Interface: DataValidationIssue
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L113)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L131)
 
 Issue detected while validating the raw data set for a category.
 
@@ -34,74 +16,46 @@ Issue detected while validating the raw data set for a category.
 
 > `optional` **field**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:119](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L119)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L137)
 
 Field that failed validation if available.
 
----
+***
 
 ### message
 
 > **message**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:121](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L121)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:139](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L139)
 
 Detailed error message.
 
----
+***
 
 ### recordId
 
 > **recordId**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L115)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L133)
 
 Identifier for the record that failed validation.
 
----
+***
 
 ### schema?
 
 > `optional` **schema**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L117)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:135](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L135)
 
 Optional schema name that triggered the error.
 
----
+***
 
 ### type
 
 > **type**: `"schema"` \| `"relationship"`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L123)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:141](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L141)
 
 Type of validation that generated the issue.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

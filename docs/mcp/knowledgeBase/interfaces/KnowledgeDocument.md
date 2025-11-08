@@ -1,30 +1,14 @@
----
-title: Knowledge Document
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeDocument
 
 # Interface: KnowledgeDocument
 
-Defined in: [src/mcp/knowledgeBase.ts:5](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L5)
+Defined in: [src/mcp/knowledgeBase.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L9)
+
+KnowledgeDocument interface.
 
 ## Properties
 
@@ -32,56 +16,28 @@ Defined in: [src/mcp/knowledgeBase.ts:5](https://github.com/ErikPlachta/vscode-e
 
 > **content**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L8)
+Defined in: [src/mcp/knowledgeBase.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L12)
 
----
+***
 
 ### id
 
 > **id**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:6](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L6)
+Defined in: [src/mcp/knowledgeBase.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L10)
 
----
+***
 
 ### tags?
 
 > `optional` **tags**: `string`[]
 
-Defined in: [src/mcp/knowledgeBase.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L9)
+Defined in: [src/mcp/knowledgeBase.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L13)
 
----
+***
 
 ### title
 
 > **title**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:7](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L7)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/mcp/knowledgeBase.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L11)

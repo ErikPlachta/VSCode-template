@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
@@ -23,35 +6,13 @@ hierarchy:
 
 # agent/dataAgent/agent.config
 
+Data Agent Configuration
+
+Defines all settings for the data agent, which specializes in generating insights,
+building exploration plans, and mapping relationships between business categories.
+Acts as an analytical engine that discovers patterns, connections, and actionable
+insights from business data across multiple categories.
+
 ## Variables
 
 - [dataAgentConfig](variables/dataAgentConfig.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

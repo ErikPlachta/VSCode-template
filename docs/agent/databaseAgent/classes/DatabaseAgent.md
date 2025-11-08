@@ -1,35 +1,16 @@
----
-title: Database Agent
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/databaseAgent](../README.md) / DatabaseAgent
 
 # Class: DatabaseAgent
 
-Defined in: [src/agent/databaseAgent/index.ts:77](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L77)
+Defined in: [src/agent/databaseAgent/index.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L89)
 
 Generic database agent that can query any structured data without hard-coded assumptions.
 
 The agent is completely data-agnostic and receives all necessary context from the orchestrator:
-
 - Data sources with their records and schemas
 - Field aliases for flexible querying
 - Query criteria as generic key-value pairs
@@ -42,8 +23,8 @@ const dataSources = [
     id: "employees",
     name: "Employee Directory",
     records: employeeData,
-    fieldAliases: { skill: "skills", dept: "departmentId" },
-  },
+    fieldAliases: { "skill": "skills", "dept": "departmentId" }
+  }
 ];
 
 const agent = new DatabaseAgent(dataSources, cacheDirectory);
@@ -56,7 +37,7 @@ const results = await agent.executeQuery("employees", { skill: "javascript" });
 
 > **new DatabaseAgent**(`dataSources`, `cacheDirectory`, `_config?`): `DatabaseAgent`
 
-Defined in: [src/agent/databaseAgent/index.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L91)
+Defined in: [src/agent/databaseAgent/index.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L104)
 
 Creates a new DatabaseAgent instance.
 
@@ -66,23 +47,25 @@ Creates a new DatabaseAgent instance.
 
 [`DataSource`](../interfaces/DataSource.md)[]
 
-Array of data sources to query against
+dataSources parameter.
 
 ##### cacheDirectory
 
 `Promise`\<`string`\>
 
-Promise resolving to cache directory path
+cacheDirectory parameter.
 
 ##### \_config?
 
 `Partial`\<[`DatabaseAgentConfig`](../config/classes/DatabaseAgentConfig.md)\>
 
-Optional configuration for the agent (currently ignored; config driven by typed defaults)
+_config parameter.
 
 #### Returns
 
 `DatabaseAgent`
+
+- TODO: describe return value.
 
 ## Methods
 
@@ -90,7 +73,7 @@ Optional configuration for the agent (currently ignored; config driven by typed 
 
 > **clearCache**(`categoryId`): `Promise`\<`void`\>
 
-Defined in: [src/agent/databaseAgent/index.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L214)
+Defined in: [src/agent/databaseAgent/index.ts:219](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L219)
 
 Clears cached results for a specific category.
 
@@ -100,21 +83,21 @@ Clears cached results for a specific category.
 
 `string`
 
-Category to clear cache for
+categoryId parameter.
 
 #### Returns
 
 `Promise`\<`void`\>
 
-- Resolves when cache clear telemetry completes
+- TODO: describe return value.
 
----
+***
 
 ### executeQuery()
 
 > **executeQuery**(`categoryId`, `criteria`, `options`): `Promise`\<[`CategoryRecord`](../interfaces/CategoryRecord.md)[]\>
 
-Defined in: [src/agent/databaseAgent/index.ts:120](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L120)
+Defined in: [src/agent/databaseAgent/index.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L125)
 
 Executes a generic query against any data source.
 
@@ -124,43 +107,37 @@ Executes a generic query against any data source.
 
 `string`
 
-Identifier of the data source to query
+categoryId parameter.
 
 ##### criteria
 
 `Record`\<`string`, `unknown`\> = `{}`
 
-Query criteria as key-value pairs
+criteria parameter.
 
 ##### options
 
 [`QueryOptions`](../interfaces/QueryOptions.md) = `{}`
 
-Optional query configuration
+options parameter.
 
 #### Returns
 
 `Promise`\<[`CategoryRecord`](../interfaces/CategoryRecord.md)[]\>
 
-- Promise resolving to matching records
+- TODO: describe return value.
 
-#### Example
+#### Throws
 
-```typescript
-// Query any data source with any criteria
-const results = await agent.executeQuery("products", {
-  category: "electronics",
-  price: { $lt: 1000 },
-});
-```
+- May throw an error.
 
----
+***
 
 ### getAvailableCategories()
 
 > **getAvailableCategories**(): `string`[]
 
-Defined in: [src/agent/databaseAgent/index.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L194)
+Defined in: [src/agent/databaseAgent/index.ts:199](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L199)
 
 Gets available data sources.
 
@@ -168,15 +145,15 @@ Gets available data sources.
 
 `string`[]
 
-- Array of category IDs that can be queried
+- TODO: describe return value.
 
----
+***
 
 ### getCategoryInfo()
 
 > **getCategoryInfo**(`categoryId`): [`DataSource`](../interfaces/DataSource.md) \| `undefined`
 
-Defined in: [src/agent/databaseAgent/index.ts:204](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L204)
+Defined in: [src/agent/databaseAgent/index.ts:209](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L209)
 
 Gets metadata for a specific data source.
 
@@ -186,38 +163,10 @@ Gets metadata for a specific data source.
 
 `string`
 
-Category to get info for
+categoryId parameter.
 
 #### Returns
 
 [`DataSource`](../interfaces/DataSource.md) \| `undefined`
 
-- Data source metadata or undefined if not found
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

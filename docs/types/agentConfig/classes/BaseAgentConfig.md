@@ -1,30 +1,12 @@
----
-title: Base Agent Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / BaseAgentConfig
 
 # Abstract Class: BaseAgentConfig
 
-Defined in: [src/types/agentConfig.ts:468](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L468)
+Defined in: [src/types/agentConfig.ts:481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L481)
 
 Base class for agent configuration management
 
@@ -42,7 +24,9 @@ Base class for agent configuration management
 
 > **new BaseAgentConfig**(`config`): `BaseAgentConfig`
 
-Defined in: [src/types/agentConfig.ts:471](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L471)
+Defined in: [src/types/agentConfig.ts:490](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L490)
+
+constructor function.
 
 #### Parameters
 
@@ -50,9 +34,13 @@ Defined in: [src/types/agentConfig.ts:471](https://github.com/ErikPlachta/vscode
 
 [`AgentConfigDefinition`](../interfaces/AgentConfigDefinition.md)
 
+config parameter.
+
 #### Returns
 
 `BaseAgentConfig`
+
+- TODO: describe return value.
 
 ## Methods
 
@@ -60,7 +48,7 @@ Defined in: [src/types/agentConfig.ts:471](https://github.com/ErikPlachta/vscode
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:516](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L516)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L545)
 
 Get application-facing configuration
 
@@ -68,13 +56,15 @@ Get application-facing configuration
 
 [`ApplicationFacingConfig`](../interfaces/ApplicationFacingConfig.md) \| `undefined`
 
----
+- TODO: describe return value.
+
+***
 
 ### getConfig()
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:478](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L478)
+Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L499)
 
 Get public-facing configuration (user and some application details)
 
@@ -82,13 +72,15 @@ Get public-facing configuration (user and some application details)
 
 `Partial`\<[`AgentConfigDefinition`](../interfaces/AgentConfigDefinition.md)\>
 
----
+- TODO: describe return value.
+
+***
 
 ### getConfigId()
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:523](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L523)
+Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L554)
 
 Get configuration schema ID
 
@@ -96,13 +88,15 @@ Get configuration schema ID
 
 `string`
 
----
+- TODO: describe return value.
+
+***
 
 ### getExecutionConfig()
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:502](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L502)
+Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L527)
 
 Get execution configuration
 
@@ -110,13 +104,15 @@ Get execution configuration
 
 [`ExecutionConfig`](../interfaces/ExecutionConfig.md) \| `undefined`
 
----
+- TODO: describe return value.
+
+***
 
 ### getUserFacingConfig()
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:509](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L509)
+Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L536)
 
 Get user-facing configuration
 
@@ -124,30 +120,4 @@ Get user-facing configuration
 
 [`UserFacingConfig`](../interfaces/UserFacingConfig.md) \| `undefined`
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

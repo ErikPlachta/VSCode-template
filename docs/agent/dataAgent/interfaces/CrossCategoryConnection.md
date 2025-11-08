@@ -1,30 +1,14 @@
----
-title: Cross Category Connection
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / CrossCategoryConnection
 
 # Interface: CrossCategoryConnection
 
-Defined in: [src/agent/dataAgent/index.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L80)
+Defined in: [src/agent/dataAgent/index.ts:119](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L119)
+
+CrossCategoryConnection interface.
 
 ## Properties
 
@@ -32,64 +16,36 @@ Defined in: [src/agent/dataAgent/index.ts:80](https://github.com/ErikPlachta/vsc
 
 > **connectionType**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L83)
+Defined in: [src/agent/dataAgent/index.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L122)
 
----
+***
 
 ### description
 
 > **description**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L85)
+Defined in: [src/agent/dataAgent/index.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L124)
 
----
+***
 
 ### sourceCategory
 
 > **sourceCategory**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:81](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L81)
+Defined in: [src/agent/dataAgent/index.ts:120](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L120)
 
----
+***
 
 ### strength
 
 > **strength**: `number`
 
-Defined in: [src/agent/dataAgent/index.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L84)
+Defined in: [src/agent/dataAgent/index.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L123)
 
----
+***
 
 ### targetCategory
 
 > **targetCategory**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L82)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/agent/dataAgent/index.ts:121](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L121)

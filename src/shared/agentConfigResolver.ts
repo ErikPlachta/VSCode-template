@@ -44,6 +44,7 @@ function normalizeAgentId(input: string): AgentIdentifier {
   if (
     input === "orchestrator" ||
     input === "relevant-data-manager" ||
+    input === "user-context" ||
     input === "database-agent" ||
     input === "data-agent" ||
     input === "clarification-agent"
@@ -53,6 +54,7 @@ function normalizeAgentId(input: string): AgentIdentifier {
   // Common legacy/camel variants
   const map: Record<string, AgentIdentifier> = {
     relevantDataManager: "relevant-data-manager",
+    userContext: "user-context",
     databaseAgent: "database-agent",
     dataAgent: "data-agent",
     clarificationAgent: "clarification-agent",

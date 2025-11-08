@@ -1,24 +1,6 @@
----
-title: Validate Agent Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / validateAgentConfig
 
@@ -26,7 +8,7 @@ hierarchy:
 
 > **validateAgentConfig**(`config`): [`ValidationResult`](../interfaces/ValidationResult.md)
 
-Defined in: [src/types/configValidation.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L58)
+Defined in: [src/types/configValidation.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/configValidation.ts#L64)
 
 Comprehensive validation function for agent configurations
 
@@ -36,34 +18,10 @@ Comprehensive validation function for agent configurations
 
 `unknown`
 
+config parameter.
+
 ## Returns
 
 [`ValidationResult`](../interfaces/ValidationResult.md)
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

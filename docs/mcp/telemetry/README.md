@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
 ***
@@ -23,7 +6,9 @@ hierarchy:
 
 # mcp/telemetry
 
-telemetry implementation for mcp module
+telemetry implementation for mcp module.
+Captures timing, success/error status, and lightweight metadata for
+agent and tool invocations to aid debugging and performance analysis.
 
 ## Interfaces
 
@@ -34,32 +19,3 @@ telemetry implementation for mcp module
 ## Functions
 
 - [createInvocationLogger](functions/createInvocationLogger.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

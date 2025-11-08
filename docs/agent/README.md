@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../README.md)
 
 ***
@@ -51,49 +34,49 @@ Re-exports [AgentProfile](../mcp/config/unifiedAgentConfig/type-aliases/AgentPro
 
 ### AgentRequest
 
-Re-exports [AgentRequest](interfaces/interfaces/AgentRequest.md)
+Re-exports [AgentRequest](../types/interfaces/interfaces/AgentRequest.md)
 
 ***
 
 ### AgentResponse
 
-Re-exports [AgentResponse](interfaces/interfaces/AgentResponse.md)
+Re-exports [AgentResponse](../types/interfaces/interfaces/AgentResponse.md)
 
 ***
 
 ### AnalysisInput
 
-Re-exports [AnalysisInput](interfaces/interfaces/AnalysisInput.md)
+Re-exports [AnalysisInput](../types/interfaces/interfaces/AnalysisInput.md)
 
 ***
 
 ### BusinessDataCatalogue
 
-Re-exports [BusinessDataCatalogue](interfaces/interfaces/BusinessDataCatalogue.md)
+Re-exports [BusinessDataCatalogue](../types/interfaces/interfaces/BusinessDataCatalogue.md)
 
 ***
 
 ### CategoryId
 
-Re-exports [CategoryId](interfaces/type-aliases/CategoryId.md)
+Re-exports [CategoryId](../types/interfaces/type-aliases/CategoryId.md)
 
 ***
 
 ### CategoryInfo
 
-Re-exports [CategoryInfo](interfaces/interfaces/CategoryInfo.md)
+Re-exports [CategoryInfo](../types/interfaces/interfaces/CategoryInfo.md)
 
 ***
 
 ### CategoryRecord
 
-Re-exports [CategoryRecord](interfaces/interfaces/CategoryRecord.md)
+Re-exports [CategoryRecord](../types/interfaces/interfaces/CategoryRecord.md)
 
 ***
 
 ### CategorySchema
 
-Re-exports [CategorySchema](interfaces/interfaces/CategorySchema.md)
+Re-exports [CategorySchema](../types/interfaces/interfaces/CategorySchema.md)
 
 ***
 
@@ -105,7 +88,7 @@ Re-exports [ClarificationAgent](clarificationAgent/classes/ClarificationAgent.md
 
 ### ClarificationAgentInterface
 
-Re-exports [ClarificationAgentInterface](interfaces/interfaces/ClarificationAgentInterface.md)
+Re-exports [ClarificationAgentInterface](../types/interfaces/interfaces/ClarificationAgentInterface.md)
 
 ***
 
@@ -117,19 +100,19 @@ Re-exports [ClarificationAgentProfile](../mcp/config/unifiedAgentConfig/variable
 
 ### ClarificationInput
 
-Re-exports [ClarificationInput](interfaces/interfaces/ClarificationInput.md)
+Re-exports [ClarificationInput](../types/interfaces/interfaces/ClarificationInput.md)
 
 ***
 
 ### ClarificationResponse
 
-Re-exports [ClarificationResponse](interfaces/interfaces/ClarificationResponse.md)
+Re-exports [ClarificationResponse](../types/interfaces/interfaces/ClarificationResponse.md)
 
 ***
 
 ### CrossCategoryConnection
 
-Re-exports [CrossCategoryConnection](interfaces/interfaces/CrossCategoryConnection.md)
+Re-exports [CrossCategoryConnection](../types/interfaces/interfaces/CrossCategoryConnection.md)
 
 ***
 
@@ -141,7 +124,7 @@ Re-exports [DataAgent](dataAgent/classes/DataAgent.md)
 
 ### DataAgentInterface
 
-Re-exports [DataAgentInterface](interfaces/interfaces/DataAgentInterface.md)
+Re-exports [DataAgentInterface](../types/interfaces/interfaces/DataAgentInterface.md)
 
 ***
 
@@ -159,7 +142,7 @@ Re-exports [DatabaseAgent](databaseAgent/classes/DatabaseAgent.md)
 
 ### DatabaseAgentInterface
 
-Re-exports [DatabaseAgentInterface](interfaces/interfaces/DatabaseAgentInterface.md)
+Re-exports [DatabaseAgentInterface](../types/interfaces/interfaces/DatabaseAgentInterface.md)
 
 ***
 
@@ -171,25 +154,25 @@ Re-exports [DatabaseAgentProfile](../mcp/config/unifiedAgentConfig/variables/Dat
 
 ### DataInsight
 
-Re-exports [DataInsight](interfaces/interfaces/DataInsight.md)
+Re-exports [DataInsight](../types/interfaces/interfaces/DataInsight.md)
 
 ***
 
 ### DataSource
 
-Re-exports [DataSource](interfaces/interfaces/DataSource.md)
+Re-exports [DataSource](../types/interfaces/interfaces/DataSource.md)
 
 ***
 
 ### ExplorationPlan
 
-Re-exports [ExplorationPlan](interfaces/interfaces/ExplorationPlan.md)
+Re-exports [ExplorationPlan](../types/interfaces/interfaces/ExplorationPlan.md)
 
 ***
 
 ### ExplorationStep
 
-Re-exports [ExplorationStep](interfaces/interfaces/ExplorationStep.md)
+Re-exports [ExplorationStep](../types/interfaces/interfaces/ExplorationStep.md)
 
 ***
 
@@ -201,7 +184,7 @@ Re-exports [getAgentConfigurationService](../shared/agentConfigurationService/fu
 
 ### KnowledgeSnippet
 
-Re-exports [KnowledgeSnippet](interfaces/interfaces/KnowledgeSnippet.md)
+Re-exports [KnowledgeSnippet](../types/interfaces/interfaces/KnowledgeSnippet.md)
 
 ***
 
@@ -213,7 +196,7 @@ Re-exports [KnownAgentProfile](../mcp/config/unifiedAgentConfig/type-aliases/Kno
 
 ### OrchestrationWorkflow
 
-Re-exports [OrchestrationWorkflow](interfaces/interfaces/OrchestrationWorkflow.md)
+Re-exports [OrchestrationWorkflow](../types/interfaces/interfaces/OrchestrationWorkflow.md)
 
 ***
 
@@ -231,13 +214,13 @@ Re-exports [OrchestratorProfile](../mcp/config/unifiedAgentConfig/variables/Orch
 
 ### QueryResult
 
-Re-exports [QueryResult](interfaces/interfaces/QueryResult.md)
+Re-exports [QueryResult](../types/interfaces/interfaces/QueryResult.md)
 
 ***
 
 ### RelationshipDescription
 
-Re-exports [RelationshipDescription](interfaces/interfaces/RelationshipDescription.md)
+Re-exports [RelationshipDescription](../types/interfaces/interfaces/RelationshipDescription.md)
 
 ***
 
@@ -255,7 +238,7 @@ Re-exports [RelevantDataManagerAgentProfile](../mcp/config/unifiedAgentConfig/va
 
 ### RelevantDataManagerInterface
 
-Re-exports [RelevantDataManagerInterface](interfaces/interfaces/RelevantDataManagerInterface.md)
+Re-exports [RelevantDataManagerInterface](../types/interfaces/interfaces/RelevantDataManagerInterface.md)
 
 ***
 
@@ -267,39 +250,22 @@ Re-exports [RepositoryHealthAgent](../tools/repositoryHealth/classes/RepositoryH
 
 ### TopicSearchResult
 
-Re-exports [TopicSearchResult](interfaces/interfaces/TopicSearchResult.md)
+Re-exports [TopicSearchResult](../types/interfaces/interfaces/TopicSearchResult.md)
+
+***
+
+### UserContextCatalogue
+
+Re-exports [UserContextCatalogue](../types/interfaces/type-aliases/UserContextCatalogue.md)
+
+***
+
+### UserContextManagerInterface
+
+Re-exports [UserContextManagerInterface](../types/interfaces/interfaces/UserContextManagerInterface.md)
 
 ***
 
 ### ValidationResult
 
-Re-exports [ValidationResult](interfaces/interfaces/ValidationResult.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Re-exports [ValidationResult](../types/interfaces/interfaces/ValidationResult.md)

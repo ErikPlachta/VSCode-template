@@ -1,30 +1,12 @@
----
-title: Agent Usage Analytics
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/agentAnalytics](../README.md) / AgentUsageAnalytics
 
 # Class: AgentUsageAnalytics
 
-Defined in: [src/shared/agentAnalytics.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L118)
+Defined in: [src/shared/agentAnalytics.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L122)
 
 Agent usage analytics collector and processor.
 
@@ -34,7 +16,7 @@ Agent usage analytics collector and processor.
 
 > **new AgentUsageAnalytics**(`config`): `AgentUsageAnalytics`
 
-Defined in: [src/shared/agentAnalytics.ts:128](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L128)
+Defined in: [src/shared/agentAnalytics.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L133)
 
 Creates a new analytics collector instance.
 
@@ -44,9 +26,13 @@ Creates a new analytics collector instance.
 
 [`AnalyticsConfig`](../interfaces/AnalyticsConfig.md)
 
+config parameter.
+
 #### Returns
 
 `AgentUsageAnalytics`
+
+- TODO: describe return value.
 
 ## Methods
 
@@ -54,7 +40,7 @@ Creates a new analytics collector instance.
 
 > **clearData**(): `void`
 
-Defined in: [src/shared/agentAnalytics.ts:364](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L364)
+Defined in: [src/shared/agentAnalytics.ts:377](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L377)
 
 Clears all collected analytics data.
 
@@ -62,13 +48,13 @@ Clears all collected analytics data.
 
 `void`
 
-- ***
+***
 
 ### exportData()
 
 > **exportData**(`since?`): [`AgentUsageEvent`](../interfaces/AgentUsageEvent.md)[]
 
-Defined in: [src/shared/agentAnalytics.ts:356](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L356)
+Defined in: [src/shared/agentAnalytics.ts:369](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L369)
 
 Exports analytics data for external analysis.
 
@@ -78,19 +64,21 @@ Exports analytics data for external analysis.
 
 `Date`
 
+since parameter.
+
 #### Returns
 
 [`AgentUsageEvent`](../interfaces/AgentUsageEvent.md)[]
 
-- Array of usage events.
+- TODO: describe return value.
 
----
+***
 
 ### generateSummary()
 
 > **generateSummary**(`since?`): [`UsageAnalyticsSummary`](../interfaces/UsageAnalyticsSummary.md)
 
-Defined in: [src/shared/agentAnalytics.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L285)
+Defined in: [src/shared/agentAnalytics.ts:298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L298)
 
 Generates comprehensive usage analytics summary.
 
@@ -100,19 +88,21 @@ Generates comprehensive usage analytics summary.
 
 `Date`
 
+since parameter.
+
 #### Returns
 
 [`UsageAnalyticsSummary`](../interfaces/UsageAnalyticsSummary.md)
 
-- Comprehensive analytics summary.
+- TODO: describe return value.
 
----
+***
 
 ### getAgentStats()
 
 > **getAgentStats**(`agentName`, `since?`): [`AgentUsageStats`](../interfaces/AgentUsageStats.md) \| `null`
 
-Defined in: [src/shared/agentAnalytics.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L228)
+Defined in: [src/shared/agentAnalytics.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L241)
 
 Generates usage statistics for a specific agent.
 
@@ -122,23 +112,27 @@ Generates usage statistics for a specific agent.
 
 `string`
 
+agentName parameter.
+
 ##### since?
 
 `Date`
+
+since parameter.
 
 #### Returns
 
 [`AgentUsageStats`](../interfaces/AgentUsageStats.md) \| `null`
 
-- Agent statistics or null if no data found.
+- TODO: describe return value.
 
----
+***
 
 ### recordEvent()
 
 > **recordEvent**(`event`): `void`
 
-Defined in: [src/shared/agentAnalytics.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L137)
+Defined in: [src/shared/agentAnalytics.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L142)
 
 Records an agent usage event.
 
@@ -148,17 +142,19 @@ Records an agent usage event.
 
 `Partial`\<[`AgentUsageEvent`](../interfaces/AgentUsageEvent.md)\>
 
+event parameter.
+
 #### Returns
 
 `void`
 
-- ***
+***
 
 ### trackExecution()
 
 > **trackExecution**\<`T`\>(`agentName`, `method`, `execution`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/agentAnalytics.ts:178](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L178)
+Defined in: [src/shared/agentAnalytics.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentAnalytics.ts#L191)
 
 Tracks the execution of an agent method with automatic timing.
 
@@ -174,15 +170,23 @@ Tracks the execution of an agent method with automatic timing.
 
 `string`
 
+agentName parameter.
+
 ##### method
 
 `string`
+
+method parameter.
 
 ##### execution
 
 () => `Promise`\<`T`\>
 
+execution parameter.
+
 ##### options
+
+options parameter.
 
 ###### metadata?
 
@@ -196,32 +200,8 @@ Tracks the execution of an agent method with automatic timing.
 
 `Promise`\<`T`\>
 
-- Promise resolving to the execution result.
+- TODO: describe return value.
 
-## Summary
+#### Throws
 
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- May throw an error.

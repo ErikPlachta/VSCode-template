@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 **mybusiness-mcp-extension v1.0.0**
 
 ***
@@ -58,7 +41,7 @@ The repository includes a **Repository Health Agent** (`src/tools/repositoryHeal
 - `npm run lint` ensures every TypeScript file includes exhaustive docblocks, examples, and error documentation.
 - `npm run lint:json` validates dataset records, relationships, and category metadata against centrally managed JSON Schemas.
 - `npm run lint:docs` audits Markdown content for mandatory front matter and hierarchical sections.
-- `npm run health:report` executes the full suite and writes an aggregated report to [`docs/reports/health-report.md`](docs/reports/health-report.md).
+- `npm run health:report` executes the full suite and writes an aggregated report to [`docs/reports/health-report.md`](_media/health-report.md).
 
 Refer to [`docs/build-pipeline.md`](docs/build-pipeline.md) for pipeline details and [`docs/agents/repository-health-agent.md`](docs/agents/repository-health-agent.md) for agent behaviour.
 
@@ -105,32 +88,3 @@ npm run package     # build VSIX package
 ---
 
 **End of Prompt — `mybusiness-mcp-extension`**
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

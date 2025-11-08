@@ -1,59 +1,13 @@
----
-title: Agent Configurations
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / agentConfigurations
 
 # Variable: agentConfigurations
 
-> `const` **agentConfigurations**: `Record`\<[`AgentIdentifier`](../type-aliases/AgentIdentifier.md), [`UnifiedAgentConfig`](../interfaces/UnifiedAgentConfig.md)\>
+> `const` **agentConfigurations**: `Record`\<`string`, [`UnifiedAgentConfig`](../interfaces/UnifiedAgentConfig.md)\>
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L86)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/config/unifiedAgentConfig.ts#L91)
 
 Central agent configuration registry
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

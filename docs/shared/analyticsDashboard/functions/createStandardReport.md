@@ -1,24 +1,6 @@
----
-title: Create Standard Report
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsDashboard](../README.md) / createStandardReport
 
@@ -26,7 +8,7 @@ hierarchy:
 
 > **createStandardReport**(`summary`, `startDate`, `endDate`): `string`
 
-Defined in: [src/shared/analyticsDashboard.ts:339](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L339)
+Defined in: [src/shared/analyticsDashboard.ts:341](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsDashboard.ts#L341)
 
 Creates a standard analytics report with default options.
 
@@ -36,44 +18,22 @@ Creates a standard analytics report with default options.
 
 [`UsageAnalyticsSummary`](../../agentAnalytics/interfaces/UsageAnalyticsSummary.md)
 
+summary parameter.
+
 ### startDate
 
 `Date`
+
+startDate parameter.
 
 ### endDate
 
 `Date`
 
+endDate parameter.
+
 ## Returns
 
 `string`
 
-- Generated Markdown report.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

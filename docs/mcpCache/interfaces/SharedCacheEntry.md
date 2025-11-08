@@ -1,33 +1,14 @@
----
-title: Shared Cache Entry
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / SharedCacheEntry
 
 # Interface: SharedCacheEntry\<T\>
 
-Defined in: [src/extension/mcpCache.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L19)
+Defined in: [src/extension/mcpCache.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L20)
 
 Minimal representation of a cached artefact that can be exchanged across
-MCP tools.
 
 ## Type Parameters
 
@@ -41,74 +22,46 @@ MCP tools.
 
 > **key**: `string`
 
-Defined in: [src/extension/mcpCache.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L21)
+Defined in: [src/extension/mcpCache.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L22)
 
 Uniquely identifies the record on disk.
 
----
+***
 
 ### metadata?
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/extension/mcpCache.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L29)
+Defined in: [src/extension/mcpCache.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L30)
 
 Optional metadata hints for downstream orchestration.
 
----
+***
 
 ### timestamp
 
 > **timestamp**: `string`
 
-Defined in: [src/extension/mcpCache.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L25)
+Defined in: [src/extension/mcpCache.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L26)
 
 Timestamp recorded when the value was persisted.
 
----
+***
 
 ### toolName
 
 > **toolName**: `string`
 
-Defined in: [src/extension/mcpCache.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L23)
+Defined in: [src/extension/mcpCache.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L24)
 
 Name of the tool that produced the cached payload.
 
----
+***
 
 ### value
 
 > **value**: `T`
 
-Defined in: [src/extension/mcpCache.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L27)
+Defined in: [src/extension/mcpCache.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L28)
 
 Arbitrary payload produced by the tool.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

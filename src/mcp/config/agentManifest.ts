@@ -33,12 +33,17 @@ export interface AgentCapabilityMetadata {
 /**
  * Manifest describing the capabilities of every agent.
  */
-export const agentManifest: Record<AgentIdentifier, AgentCapabilityMetadata> = {
+export const agentManifest: Record<string, AgentCapabilityMetadata> = {
   orchestrator: {
     ...OrchestratorProfile,
     dependsOn: [ClarificationAgentProfile.id],
   },
   "relevant-data-manager": {
+    ...RelevantDataManagerAgentProfile,
+    dependsOn: [ClarificationAgentProfile.id],
+  },
+  // Alias for migration: user-context maps to the same profile as relevant-data-manager
+  "user-context": {
     ...RelevantDataManagerAgentProfile,
     dependsOn: [ClarificationAgentProfile.id],
   },

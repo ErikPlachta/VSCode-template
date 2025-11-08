@@ -1,30 +1,12 @@
----
-title: Type Definition
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / TypeDefinition
 
 # Interface: TypeDefinition
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L99)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L111)
 
 Python typing hints that mirror the JSON schemas.
 
@@ -34,48 +16,20 @@ Python typing hints that mirror the JSON schemas.
 
 > **description**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L101)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L113)
 
----
+***
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L100)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L112)
 
----
+***
 
 ### schema
 
 > **schema**: [`TypeSchema`](../type-aliases/TypeSchema.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L102)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L114)

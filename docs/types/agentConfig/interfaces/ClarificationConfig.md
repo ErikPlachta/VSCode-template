@@ -1,30 +1,12 @@
----
-title: Clarification Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ClarificationConfig
 
 # Interface: ClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:260](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L260)
+Defined in: [src/types/agentConfig.ts:271](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L271)
 
 Clarification agent-specific configuration
 
@@ -34,7 +16,7 @@ Clarification agent-specific configuration
 
 > `optional` **contextAnalysis**: `object`
 
-Defined in: [src/types/agentConfig.ts:296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L296)
+Defined in: [src/types/agentConfig.ts:307](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L307)
 
 #### contextConfidenceThreshold?
 
@@ -56,13 +38,13 @@ Defined in: [src/types/agentConfig.ts:296](https://github.com/ErikPlachta/vscode
 
 > `optional` **suggestQueryStructure**: `boolean`
 
----
+***
 
 ### escalation
 
 > **escalation**: `object`
 
-Defined in: [src/types/agentConfig.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L274)
+Defined in: [src/types/agentConfig.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L285)
 
 #### clarificationTimeWindow?
 
@@ -84,13 +66,13 @@ Defined in: [src/types/agentConfig.ts:274](https://github.com/ErikPlachta/vscode
 
 > `optional` **suggestHumanSupportAfterMaxRounds**: `boolean`
 
----
+***
 
 ### guidance
 
 > **guidance**: `object`
 
-Defined in: [src/types/agentConfig.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L261)
+Defined in: [src/types/agentConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L272)
 
 #### guidanceTypes?
 
@@ -132,13 +114,13 @@ Defined in: [src/types/agentConfig.ts:261](https://github.com/ErikPlachta/vscode
 
 > `optional` **suggestAlternativePhrasings**: `boolean`
 
----
+***
 
 ### knowledgeBase
 
 > **knowledgeBase**: `object`
 
-Defined in: [src/types/agentConfig.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L281)
+Defined in: [src/types/agentConfig.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L292)
 
 #### enableKnowledgeRanking?
 
@@ -164,13 +146,13 @@ Defined in: [src/types/agentConfig.ts:281](https://github.com/ErikPlachta/vscode
 
 > **relevanceThreshold**: `number`
 
----
+***
 
 ### performance?
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:303](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L303)
+Defined in: [src/types/agentConfig.ts:314](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L314)
 
 #### enableParallelProcessing?
 
@@ -192,13 +174,13 @@ Defined in: [src/types/agentConfig.ts:303](https://github.com/ErikPlachta/vscode
 
 > `optional` **responseCacheTTL**: `number`
 
----
+***
 
 ### routing?
 
 > `optional` **routing**: `object`
 
-Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L289)
+Defined in: [src/types/agentConfig.ts:300](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L300)
 
 #### analyzeMissingSignals?
 
@@ -219,31 +201,3 @@ Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/vscode
 #### suggestAlternativeAgents?
 
 > `optional` **suggestAlternativeAgents**: `boolean`
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

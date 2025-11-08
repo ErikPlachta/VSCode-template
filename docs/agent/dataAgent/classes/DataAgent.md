@@ -1,30 +1,12 @@
----
-title: Data Agent
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / DataAgent
 
 # Class: DataAgent
 
-Defined in: [src/agent/dataAgent/index.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L99)
+Defined in: [src/agent/dataAgent/index.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L138)
 
 Agent that analyzes data and generates insights.
 Focuses purely on data analysis without managing other agents or data sources.
@@ -34,7 +16,7 @@ Focuses purely on data analysis without managing other agents or data sources.
 ```ts
 const agent = new DataAgent();
 const insights = await agent.analyzeData(analysisInput);
-console.log(insights.map((insight) => insight.description));
+console.log(insights.map(insight => insight.description));
 ```
 
 ## Constructors
@@ -43,7 +25,7 @@ console.log(insights.map((insight) => insight.description));
 
 > **new DataAgent**(): `DataAgent`
 
-Defined in: [src/agent/dataAgent/index.ts:106](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L106)
+Defined in: [src/agent/dataAgent/index.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L147)
 
 Create a new DataAgent.
 
@@ -51,13 +33,15 @@ Create a new DataAgent.
 
 `DataAgent`
 
+- TODO: describe return value.
+
 ## Methods
 
 ### analyzeConnection()
 
 > **analyzeConnection**(`sourceData`, `targetData`, `relationship`): `Promise`\<[`CrossCategoryConnection`](../interfaces/CrossCategoryConnection.md)\>
 
-Defined in: [src/agent/dataAgent/index.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L221)
+Defined in: [src/agent/dataAgent/index.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L262)
 
 Analyze relationships between categories.
 
@@ -67,33 +51,33 @@ Analyze relationships between categories.
 
 [`AnalysisInput`](../interfaces/AnalysisInput.md)
 
-Source category data.
+sourceData parameter.
 
 ##### targetData
 
 [`AnalysisInput`](../interfaces/AnalysisInput.md)
 
-Target category data.
+targetData parameter.
 
 ##### relationship
 
 [`RelationshipDescription`](../interfaces/RelationshipDescription.md)
 
-Relationship definition.
+relationship parameter.
 
 #### Returns
 
 `Promise`\<[`CrossCategoryConnection`](../interfaces/CrossCategoryConnection.md)\>
 
-- Cross-category connection analysis.
+- TODO: describe return value.
 
----
+***
 
 ### analyzeData()
 
 > **analyzeData**(`input`): `Promise`\<[`DataInsight`](../interfaces/DataInsight.md)[]\>
 
-Defined in: [src/agent/dataAgent/index.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L116)
+Defined in: [src/agent/dataAgent/index.ts:157](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L157)
 
 Analyze data and generate insights.
 
@@ -103,21 +87,21 @@ Analyze data and generate insights.
 
 [`AnalysisInput`](../interfaces/AnalysisInput.md)
 
-Data to analyze including records, schemas, and relationships.
+input parameter.
 
 #### Returns
 
 `Promise`\<[`DataInsight`](../interfaces/DataInsight.md)[]\>
 
-- Promise resolving to array of generated insights.
+- TODO: describe return value.
 
----
+***
 
 ### generateExplorationPlan()
 
 > **generateExplorationPlan**(`categoryId`, `question`, `availableData`): `Promise`\<[`ExplorationPlan`](../interfaces/ExplorationPlan.md)\>
 
-Defined in: [src/agent/dataAgent/index.ts:163](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L163)
+Defined in: [src/agent/dataAgent/index.ts:204](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L204)
 
 Generate an exploration plan for data analysis.
 
@@ -127,33 +111,33 @@ Generate an exploration plan for data analysis.
 
 `string`
 
-Category to create plan for.
+categoryId parameter.
 
 ##### question
 
 `string`
 
-Specific question to answer.
+question parameter.
 
 ##### availableData
 
 [`AnalysisInput`](../interfaces/AnalysisInput.md)
 
-Available data for analysis.
+availableData parameter.
 
 #### Returns
 
 `Promise`\<[`ExplorationPlan`](../interfaces/ExplorationPlan.md)\>
 
-- Exploration plan with recommended steps.
+- TODO: describe return value.
 
----
+***
 
 ### searchData()
 
 > **searchData**(`keyword`, `data`): [`TopicSearchResult`](../interfaces/TopicSearchResult.md)[]
 
-Defined in: [src/agent/dataAgent/index.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L251)
+Defined in: [src/agent/dataAgent/index.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L292)
 
 Search for patterns in data records.
 
@@ -163,44 +147,16 @@ Search for patterns in data records.
 
 `string`
 
-Search term.
+keyword parameter.
 
 ##### data
 
 [`AnalysisInput`](../interfaces/AnalysisInput.md)[]
 
-Data to search through.
+data parameter.
 
 #### Returns
 
 [`TopicSearchResult`](../interfaces/TopicSearchResult.md)[]
 
-- Search results with relevance scoring.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

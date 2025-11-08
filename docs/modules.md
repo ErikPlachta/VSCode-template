@@ -1,20 +1,3 @@
----
-title: Modules
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](README.md)
 
 ***
@@ -40,6 +23,9 @@ hierarchy:
 - [agent/relevantDataManagerAgent](agent/relevantDataManagerAgent/README.md)
 - [agent/relevantDataManagerAgent/agent.config](agent/relevantDataManagerAgent/agent.config/README.md)
 - [agent/relevantDataManagerAgent/config](agent/relevantDataManagerAgent/config/README.md)
+- [agent/userContextAgent](agent/userContextAgent/README.md)
+- [agent/userContextAgent/agent.config](agent/userContextAgent/agent.config/README.md)
+- [agent/userContextAgent/config](agent/userContextAgent/config/README.md)
 - [config/application.config](config/application.config/README.md)
 - [extension](extension/README.md)
 - [extension/mcpProvider](extension/mcpProvider/README.md)
@@ -65,6 +51,7 @@ hierarchy:
 - [shared/configurationLoader](shared/configurationLoader/README.md)
 - [shared/mcpTypes](shared/mcpTypes/README.md)
 - [tools/augmentTypedoc](tools/augmentTypedoc/README.md)
+- [tools/enhanceJSDoc](tools/enhanceJSDoc/README.md)
 - [tools/repositoryHealth](tools/repositoryHealth/README.md)
 - [tools/validateJson](tools/validateJson/README.md)
 - [tools/validateMarkdown](tools/validateMarkdown/README.md)
@@ -73,33 +60,5 @@ hierarchy:
 - [types/configRegistry](types/configRegistry/README.md)
 - [types/configValidation](types/configValidation/README.md)
 - [types/external](types/external/README.md)
+- [types/interfaces](types/interfaces/README.md)
 - [types/vscode-chat](types/vscode-chat/README.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

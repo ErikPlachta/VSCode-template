@@ -1,30 +1,12 @@
----
-title: Data Validation Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / DataValidationConfig
 
 # Interface: DataValidationConfig
 
-Defined in: [src/types/applicationConfig.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L142)
+Defined in: [src/types/applicationConfig.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L149)
 
 Data validation configuration.
 
@@ -34,54 +16,26 @@ Data validation configuration.
 
 > **strictMode**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L144)
+Defined in: [src/types/applicationConfig.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L151)
 
 Enable strict validation mode.
 
----
+***
 
 ### validateOnLoad
 
 > **validateOnLoad**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:146](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L146)
+Defined in: [src/types/applicationConfig.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L153)
 
 Validate data on load.
 
----
+***
 
 ### validateRelationships
 
 > **validateRelationships**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:148](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L148)
+Defined in: [src/types/applicationConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L155)
 
 Validate relationship integrity.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

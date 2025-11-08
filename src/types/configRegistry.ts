@@ -35,6 +35,8 @@ export const CONFIG_IDS = {
 
   /** Relevant data manager agent configuration schema */
   RELEVANT_DATA_MANAGER: "agent.relevant-data-manager.v1.0.0",
+  /** User Context (renamed) agent configuration schema - alias of relevant-data-manager */
+  USER_CONTEXT: "agent.user-context.v1.0.0",
 
   /** Repository health agent configuration schema */
   REPOSITORY_HEALTH: "agent.repository-health.v1.0.0",
@@ -136,6 +138,20 @@ export const CONFIG_REGISTRY: Record<string, ConfigMetadata> = {
     createdDate: "2025-11-07",
     breakingChanges: [],
     migrationNotes: [],
+  },
+
+  [CONFIG_IDS.USER_CONTEXT]: {
+    id: CONFIG_IDS.USER_CONTEXT,
+    name: "User Context Configuration",
+    version: { major: 1, minor: 0, patch: 0 },
+    description:
+      "Alias configuration schema for user-context (renamed from relevant-data-manager)",
+    agentType: "user-context",
+    createdDate: "2025-11-08",
+    breakingChanges: [],
+    migrationNotes: [
+      "User Context is an alias to Relevant Data Manager during migration. Update runtime configs to prefer 'user-context'.",
+    ],
   },
 
   [CONFIG_IDS.REPOSITORY_HEALTH]: {

@@ -1,39 +1,14 @@
----
-title: Orchestration Workflow
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / OrchestrationWorkflow
 
 # Interface: OrchestrationWorkflow
 
-Defined in: [src/agent/interfaces.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L241)
+Defined in: [src/agent/interfaces.ts:289](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L289)
 
 Orchestrator workflow for handling user requests:
-
-1. Parse user input and classify intent
-2. If ambiguous -> ClarificationAgent
-3. If data needed -> RelevantDataManagerAgent (for schemas/metadata)
-4. If query needed -> DatabaseAgent (for data retrieval)
-5. If analysis needed -> DataAgent (for insights)
-6. Coordinate results and respond to user
 
 ## Properties
 
@@ -41,72 +16,44 @@ Orchestrator workflow for handling user requests:
 
 > **agentRequests**: [`AgentRequest`](AgentRequest.md)[]
 
-Defined in: [src/agent/interfaces.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L245)
+Defined in: [src/agent/interfaces.ts:293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L293)
 
----
+***
 
 ### agentResponses
 
 > **agentResponses**: [`AgentResponse`](AgentResponse.md)\<`unknown`\>[]
 
-Defined in: [src/agent/interfaces.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L246)
+Defined in: [src/agent/interfaces.ts:294](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L294)
 
----
+***
 
 ### classifiedIntent
 
 > **classifiedIntent**: `string`
 
-Defined in: [src/agent/interfaces.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L243)
+Defined in: [src/agent/interfaces.ts:291](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L291)
 
----
+***
 
 ### finalResponse
 
 > **finalResponse**: `string`
 
-Defined in: [src/agent/interfaces.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L247)
+Defined in: [src/agent/interfaces.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L295)
 
----
+***
 
 ### requiredAgents
 
 > **requiredAgents**: `string`[]
 
-Defined in: [src/agent/interfaces.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L244)
+Defined in: [src/agent/interfaces.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L292)
 
----
+***
 
 ### userQuery
 
 > **userQuery**: `string`
 
-Defined in: [src/agent/interfaces.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L242)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/agent/interfaces.ts:290](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L290)

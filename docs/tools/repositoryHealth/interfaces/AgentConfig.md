@@ -1,20 +1,3 @@
----
-title: Agent Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
@@ -23,7 +6,7 @@ hierarchy:
 
 # Interface: AgentConfig
 
-Defined in: src/tools/repositoryHealth.ts:21
+Defined in: [src/tools/repositoryHealth.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L22)
 
 Configuration contract for the repository health agent.
 
@@ -33,7 +16,7 @@ Configuration contract for the repository health agent.
 
 > `readonly` **jsonSchemas**: readonly `object`[]
 
-Defined in: src/tools/repositoryHealth.ts:23
+Defined in: [src/tools/repositoryHealth.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L24)
 
 ***
 
@@ -41,7 +24,7 @@ Defined in: src/tools/repositoryHealth.ts:23
 
 > `readonly` **markdown**: `object`
 
-Defined in: src/tools/repositoryHealth.ts:28
+Defined in: [src/tools/repositoryHealth.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L29)
 
 #### exclude?
 
@@ -65,7 +48,7 @@ Defined in: src/tools/repositoryHealth.ts:28
 
 > `readonly` **report**: `object`
 
-Defined in: src/tools/repositoryHealth.ts:34
+Defined in: [src/tools/repositoryHealth.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L35)
 
 #### output
 
@@ -77,37 +60,8 @@ Defined in: src/tools/repositoryHealth.ts:34
 
 > `readonly` **typescript**: `object`
 
-Defined in: src/tools/repositoryHealth.ts:22
+Defined in: [src/tools/repositoryHealth.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/tools/repositoryHealth.ts#L23)
 
 #### include
 
 > `readonly` **include**: readonly `string`[]
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

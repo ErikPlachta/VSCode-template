@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
@@ -23,35 +6,14 @@ hierarchy:
 
 # agent/databaseAgent/agent.config
 
+Database Agent Configuration
+
+Defines all settings for the database agent which handles structured data retrieval
+with filtering, joins, and query optimization. Functions as a query engine that
+simulates database operations over the MCP relevant-data workspace, providing
+structured access to business category data including filtering and relationship
+traversal capabilities.
+
 ## Variables
 
 - [databaseAgentConfig](variables/databaseAgentConfig.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

@@ -1,59 +1,13 @@
----
-title: Config Id
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / ConfigId
 
 # Type Alias: ConfigId
 
-> **ConfigId** = _typeof_ [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\[keyof _typeof_ [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\]
+> **ConfigId** = *typeof* [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\[keyof *typeof* [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\]
 
-Defined in: [src/types/configRegistry.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L220)
+Defined in: [src/types/configRegistry.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/configRegistry.ts#L253)
 
 Type-safe way to reference configuration IDs
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

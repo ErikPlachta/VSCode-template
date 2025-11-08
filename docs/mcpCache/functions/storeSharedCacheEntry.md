@@ -1,24 +1,6 @@
----
-title: Store Shared Cache Entry
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / storeSharedCacheEntry
 
@@ -26,7 +8,7 @@ hierarchy:
 
 > **storeSharedCacheEntry**\<`T`\>(`cacheDir`, `entry`): `Promise`\<`void`\>
 
-Defined in: [src/extension/mcpCache.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L98)
+Defined in: [src/extension/mcpCache.ts:90](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L90)
 
 Persist a shared cache entry that can be re-used by other MCP tools.
 
@@ -42,48 +24,16 @@ Persist a shared cache entry that can be re-used by other MCP tools.
 
 `string`
 
-Directory returned by [ensureCacheDirectory](ensureCacheDirectory.md).
+cacheDir parameter.
 
 ### entry
 
 [`SharedCacheEntry`](../interfaces/SharedCacheEntry.md)\<`T`\>
 
-Payload to store on disk.
+entry parameter.
 
 ## Returns
 
 `Promise`\<`void`\>
 
-- Resolves when the entry has been written.
-
-## Throws
-
-- When the entry cannot be persisted.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

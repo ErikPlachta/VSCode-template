@@ -1,24 +1,6 @@
----
-title: Track Agent Execution
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / trackAgentExecution
 
@@ -26,7 +8,7 @@ hierarchy:
 
 > **trackAgentExecution**(`agentName`, `methodName?`): \<`T`\>(`target`, `propertyKey`, `descriptor`) => `void`
 
-Defined in: [src/shared/analyticsIntegration.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L15)
+Defined in: [src/shared/analyticsIntegration.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L15)
 
 Decorator function for automatic analytics tracking on agent methods.
 
@@ -36,13 +18,17 @@ Decorator function for automatic analytics tracking on agent methods.
 
 `string`
 
+agentName parameter.
+
 ### methodName?
 
 `string`
 
+methodName parameter.
+
 ## Returns
 
-- Method decorator function.
+- TODO: describe return value.
 
 > \<`T`\>(`target`, `propertyKey`, `descriptor`): `void`
 
@@ -50,7 +36,7 @@ Decorator function for automatic analytics tracking on agent methods.
 
 #### T
 
-`T` _extends_ (...`args`) => `Promise`\<`any`\>
+`T` *extends* (...`args`) => `Promise`\<`any`\>
 
 ### Parameters
 
@@ -69,31 +55,3 @@ Decorator function for automatic analytics tracking on agent methods.
 ### Returns
 
 `void`
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

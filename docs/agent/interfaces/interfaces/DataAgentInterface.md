@@ -1,30 +1,14 @@
----
-title: Data Agent Interface
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / DataAgentInterface
 
 # Interface: DataAgentInterface
 
-Defined in: [src/agent/interfaces.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L102)
+Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L130)
+
+Interface for data agents that handle data analysis and insight generation operations.
 
 ## Methods
 
@@ -32,7 +16,7 @@ Defined in: [src/agent/interfaces.ts:102](https://github.com/ErikPlachta/vscode-
 
 > **analyzeConnection**(`sourceData`, `targetData`, `relationship`): `Promise`\<[`CrossCategoryConnection`](CrossCategoryConnection.md)\>
 
-Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L109)
+Defined in: [src/agent/interfaces.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L137)
 
 #### Parameters
 
@@ -52,13 +36,13 @@ Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/vscode-
 
 `Promise`\<[`CrossCategoryConnection`](CrossCategoryConnection.md)\>
 
----
+***
 
 ### analyzeData()
 
 > **analyzeData**(`input`): `Promise`\<[`DataInsight`](DataInsight.md)[]\>
 
-Defined in: [src/agent/interfaces.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L103)
+Defined in: [src/agent/interfaces.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L131)
 
 #### Parameters
 
@@ -70,13 +54,13 @@ Defined in: [src/agent/interfaces.ts:103](https://github.com/ErikPlachta/vscode-
 
 `Promise`\<[`DataInsight`](DataInsight.md)[]\>
 
----
+***
 
 ### generateExplorationPlan()
 
 > **generateExplorationPlan**(`categoryId`, `question`, `availableData`): `Promise`\<[`ExplorationPlan`](ExplorationPlan.md)\>
 
-Defined in: [src/agent/interfaces.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L104)
+Defined in: [src/agent/interfaces.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L132)
 
 #### Parameters
 
@@ -96,13 +80,13 @@ Defined in: [src/agent/interfaces.ts:104](https://github.com/ErikPlachta/vscode-
 
 `Promise`\<[`ExplorationPlan`](ExplorationPlan.md)\>
 
----
+***
 
 ### searchData()
 
 > **searchData**(`keyword`, `data`): [`TopicSearchResult`](TopicSearchResult.md)[]
 
-Defined in: [src/agent/interfaces.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L114)
+Defined in: [src/agent/interfaces.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L142)
 
 #### Parameters
 
@@ -117,31 +101,3 @@ Defined in: [src/agent/interfaces.ts:114](https://github.com/ErikPlachta/vscode-
 #### Returns
 
 [`TopicSearchResult`](TopicSearchResult.md)[]
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

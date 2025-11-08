@@ -1,30 +1,12 @@
----
-title: Mcp Client Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / McpClientConfig
 
 # Interface: McpClientConfig
 
-Defined in: [src/types/applicationConfig.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L43)
+Defined in: [src/types/applicationConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L46)
 
 MCP client configuration settings.
 
@@ -34,54 +16,26 @@ MCP client configuration settings.
 
 > **maxConcurrentRequests**: `number`
 
-Defined in: [src/types/applicationConfig.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L45)
+Defined in: [src/types/applicationConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L48)
 
 Maximum number of concurrent requests.
 
----
+***
 
 ### requestTimeout
 
 > **requestTimeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L47)
+Defined in: [src/types/applicationConfig.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L50)
 
 Request timeout in milliseconds.
 
----
+***
 
 ### retryDelay
 
 > **retryDelay**: `number`
 
-Defined in: [src/types/applicationConfig.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L49)
+Defined in: [src/types/applicationConfig.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L52)
 
 Delay between retry attempts in milliseconds.
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

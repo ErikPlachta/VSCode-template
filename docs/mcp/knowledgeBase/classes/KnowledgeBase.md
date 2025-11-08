@@ -1,30 +1,12 @@
----
-title: Knowledge Base
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeBase
 
 # Class: KnowledgeBase
 
-Defined in: [src/mcp/knowledgeBase.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L19)
+Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L30)
 
 ## Constructors
 
@@ -42,7 +24,9 @@ Defined in: [src/mcp/knowledgeBase.ts:19](https://github.com/ErikPlachta/vscode-
 
 > **indexDocument**(`document`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L22)
+Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L38)
+
+indexDocument function.
 
 #### Parameters
 
@@ -50,17 +34,21 @@ Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/vscode-
 
 [`KnowledgeDocument`](../interfaces/KnowledgeDocument.md)
 
+document parameter.
+
 #### Returns
 
 `void`
 
----
+***
 
 ### indexDocuments()
 
 > **indexDocuments**(`documents`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L26)
+Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L47)
+
+indexDocuments function.
 
 #### Parameters
 
@@ -68,17 +56,21 @@ Defined in: [src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/vscode-
 
 [`KnowledgeDocument`](../interfaces/KnowledgeDocument.md)[]
 
+documents parameter.
+
 #### Returns
 
 `void`
 
----
+***
 
 ### query()
 
 > **query**(`term`, `limit`): [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L30)
+Defined in: [src/mcp/knowledgeBase.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L58)
+
+query function.
 
 #### Parameters
 
@@ -86,38 +78,16 @@ Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-
 
 `string`
 
+term parameter.
+
 ##### limit
 
 `number` = `3`
+
+limit parameter.
 
 #### Returns
 
 [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
@@ -23,35 +6,13 @@ hierarchy:
 
 # agent/clarificationAgent/agent.config
 
+Clarification Agent Configuration
+
+Defines all settings for the clarification agent, which handles ambiguous user
+requests and provides guidance to help users formulate better queries. This agent
+serves as a fallback when user queries cannot be routed to specialized agents,
+offering helpful guidance and context to improve query quality and user experience.
+
 ## Variables
 
 - [clarificationAgentConfig](variables/clarificationAgentConfig.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

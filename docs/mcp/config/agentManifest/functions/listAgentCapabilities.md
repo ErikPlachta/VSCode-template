@@ -1,24 +1,6 @@
----
-title: List Agent Capabilities
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/agentManifest](../README.md) / listAgentCapabilities
 
@@ -26,7 +8,7 @@ hierarchy:
 
 > **listAgentCapabilities**(): [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)[]
 
-Defined in: [src/mcp/config/agentManifest.ts:74](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/agentManifest.ts#L74)
+Defined in: [src/mcp/config/agentManifest.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/config/agentManifest.ts#L86)
 
 Return all agent capability entries.
 
@@ -34,30 +16,4 @@ Return all agent capability entries.
 
 [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)[]
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- TODO: describe return value.

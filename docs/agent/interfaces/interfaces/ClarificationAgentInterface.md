@@ -1,30 +1,14 @@
----
-title: Clarification Agent Interface
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / ClarificationAgentInterface
 
 # Interface: ClarificationAgentInterface
 
-Defined in: [src/agent/interfaces.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L189)
+Defined in: [src/agent/interfaces.ts:237](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L237)
+
+Interface for agents that handle clarification of ambiguous user requests.
 
 ## Methods
 
@@ -32,7 +16,7 @@ Defined in: [src/agent/interfaces.ts:189](https://github.com/ErikPlachta/vscode-
 
 > **clarify**(`input`): `Promise`\<[`ClarificationResponse`](ClarificationResponse.md)\>
 
-Defined in: [src/agent/interfaces.ts:190](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L190)
+Defined in: [src/agent/interfaces.ts:238](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L238)
 
 #### Parameters
 
@@ -43,31 +27,3 @@ Defined in: [src/agent/interfaces.ts:190](https://github.com/ErikPlachta/vscode-
 #### Returns
 
 `Promise`\<[`ClarificationResponse`](ClarificationResponse.md)\>
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

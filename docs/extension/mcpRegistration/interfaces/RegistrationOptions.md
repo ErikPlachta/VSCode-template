@@ -1,30 +1,14 @@
----
-title: Registration Options
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [extension/mcpRegistration](../README.md) / RegistrationOptions
 
 # Interface: RegistrationOptions
 
-Defined in: [src/extension/mcpRegistration.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpRegistration.ts#L59)
+Defined in: [src/extension/mcpRegistration.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpRegistration.ts#L86)
+
+RegistrationOptions interface.
 
 ## Properties
 
@@ -32,56 +16,28 @@ Defined in: [src/extension/mcpRegistration.ts:59](https://github.com/ErikPlachta
 
 > **id**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpRegistration.ts#L60)
+Defined in: [src/extension/mcpRegistration.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpRegistration.ts#L87)
 
----
+***
 
 ### includeAuthHeader?
 
 > `optional` **includeAuthHeader**: `boolean`
 
-Defined in: [src/extension/mcpRegistration.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpRegistration.ts#L62)
+Defined in: [src/extension/mcpRegistration.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpRegistration.ts#L89)
 
----
+***
 
 ### token?
 
 > `optional` **token**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpRegistration.ts#L63)
+Defined in: [src/extension/mcpRegistration.ts:90](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpRegistration.ts#L90)
 
----
+***
 
 ### url
 
 > **url**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpRegistration.ts#L61)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/extension/mcpRegistration.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpRegistration.ts#L88)

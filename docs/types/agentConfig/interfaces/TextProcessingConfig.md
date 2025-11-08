@@ -1,30 +1,12 @@
----
-title: Text Processing Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / TextProcessingConfig
 
 # Interface: TextProcessingConfig
 
-Defined in: [src/types/agentConfig.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L28)
+Defined in: [src/types/agentConfig.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L31)
 
 Text processing configuration
 
@@ -34,15 +16,15 @@ Text processing configuration
 
 > **minimumKeywordLength**: `number`
 
-Defined in: [src/types/agentConfig.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L30)
+Defined in: [src/types/agentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L33)
 
----
+***
 
 ### scoringWeights
 
 > **scoringWeights**: `object`
 
-Defined in: [src/types/agentConfig.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L31)
+Defined in: [src/types/agentConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L34)
 
 #### focusMatch
 
@@ -56,38 +38,10 @@ Defined in: [src/types/agentConfig.ts:31](https://github.com/ErikPlachta/vscode-
 
 > **signalMatch**: `number`
 
----
+***
 
 ### stopWords
 
 > **stopWords**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L29)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L32)

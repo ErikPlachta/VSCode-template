@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
@@ -23,35 +6,13 @@ hierarchy:
 
 # agent/relevantDataManagerAgent/agent.config
 
+Relevant Data Manager Agent Configuration
+
+Defines the settings for the relevant data manager agent, which handles metadata
+management, schema validation, and category orchestration for the business data
+workspace. Acts as the foundational data layer, managing categories, schemas,
+relationships, and data quality across the entire system.
+
 ## Variables
 
 - [relevantDataManagerAgentConfig](variables/relevantDataManagerAgentConfig.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

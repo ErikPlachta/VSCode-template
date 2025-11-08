@@ -1,30 +1,14 @@
----
-title: Exploration Plan
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / ExplorationPlan
 
 # Interface: ExplorationPlan
 
-Defined in: [src/agent/dataAgent/index.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L55)
+Defined in: [src/agent/dataAgent/index.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L82)
+
+ExplorationPlan interface.
 
 ## Properties
 
@@ -32,31 +16,31 @@ Defined in: [src/agent/dataAgent/index.ts:55](https://github.com/ErikPlachta/vsc
 
 > **question**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L57)
+Defined in: [src/agent/dataAgent/index.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L84)
 
----
+***
 
 ### recommendedQueries
 
 > **recommendedQueries**: `string`[]
 
-Defined in: [src/agent/dataAgent/index.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L59)
+Defined in: [src/agent/dataAgent/index.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L86)
 
----
+***
 
 ### steps
 
 > **steps**: [`ExplorationStep`](ExplorationStep.md)[]
 
-Defined in: [src/agent/dataAgent/index.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L58)
+Defined in: [src/agent/dataAgent/index.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L85)
 
----
+***
 
 ### supportingResources
 
 > **supportingResources**: `object`[]
 
-Defined in: [src/agent/dataAgent/index.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L60)
+Defined in: [src/agent/dataAgent/index.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L87)
 
 #### categoryId
 
@@ -66,38 +50,10 @@ Defined in: [src/agent/dataAgent/index.ts:60](https://github.com/ErikPlachta/vsc
 
 > **ids**: `string`[]
 
----
+***
 
 ### topic
 
 > **topic**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L56)
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/agent/dataAgent/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L83)

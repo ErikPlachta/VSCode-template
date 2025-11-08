@@ -318,6 +318,7 @@ export interface ApplicationConfig {
     definitions: {
       orchestrator: AgentDefinition;
       relevantDataManager: AgentDefinition;
+      userContext?: AgentDefinition;
       databaseAgent: AgentDefinition;
       dataAgent: AgentDefinition;
       clarificationAgent: AgentDefinition;
@@ -326,6 +327,7 @@ export interface ApplicationConfig {
     profiles: {
       orchestrator: AgentProfile;
       relevantDataManager: AgentProfile;
+      userContext?: AgentProfile;
       databaseAgent: AgentProfile;
       dataAgent: AgentProfile;
       clarificationAgent: AgentProfile;

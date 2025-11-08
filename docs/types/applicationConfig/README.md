@@ -1,20 +1,3 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
 ***
@@ -23,7 +6,9 @@ hierarchy:
 
 # types/applicationConfig
 
-Application configuration types for comprehensive settings management.
+applicationConfig definitions for types module.
+Strongly typed configuration primitives for environment, MCP server/client,
+agent metadata, performance characteristics, and validation scaffolding.
 
 ## Interfaces
 
@@ -49,32 +34,3 @@ Application configuration types for comprehensive settings management.
 ## Type Aliases
 
 - [AgentPriority](type-aliases/AgentPriority.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

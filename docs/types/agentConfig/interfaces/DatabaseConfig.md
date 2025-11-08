@@ -1,30 +1,12 @@
----
-title: Database Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
----
+***
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / DatabaseConfig
 
 # Interface: DatabaseConfig
 
-Defined in: [src/types/agentConfig.ts:145](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L145)
+Defined in: [src/types/agentConfig.ts:154](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L154)
 
 Database agent-specific configuration
 
@@ -34,15 +16,15 @@ Database agent-specific configuration
 
 > **fieldAliases**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [src/types/agentConfig.ts:146](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L146)
+Defined in: [src/types/agentConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L155)
 
----
+***
 
 ### operations
 
 > **operations**: `object`
 
-Defined in: [src/types/agentConfig.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L172)
+Defined in: [src/types/agentConfig.ts:181](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L181)
 
 #### aggregation
 
@@ -92,13 +74,13 @@ Defined in: [src/types/agentConfig.ts:172](https://github.com/ErikPlachta/vscode
 
 > **supportedJoinTypes**: `string`[]
 
----
+***
 
 ### performance
 
 > **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L147)
+Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L156)
 
 #### caching
 
@@ -136,13 +118,13 @@ Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/vscode
 
 > **queryTimeout**: `number`
 
----
+***
 
 ### validation
 
 > **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:160](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L160)
+Defined in: [src/types/agentConfig.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L169)
 
 #### integrityChecks
 
@@ -175,31 +157,3 @@ Defined in: [src/types/agentConfig.ts:160](https://github.com/ErikPlachta/vscode
 ##### schemaValidation.enableStrictValidation
 
 > **enableStrictValidation**: `boolean`
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
