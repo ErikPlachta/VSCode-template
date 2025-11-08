@@ -65,21 +65,21 @@ export class ConfigurationLoader {
   private configPath: string;
 
     /**
- * Creates a new configuration loader instance.
- *
- * @param {string} configPath - configPath parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+     * Creates a new configuration loader instance.
+     *
+     * @param {string} configPath - configPath parameter.
+     * @returns {unknown} - TODO: describe return value.
+     */
 constructor(configPath: string = "src/mcp.config.json") {
     this.configPath = path.resolve(configPath);
   }
 
     /**
- * Loads and validates the application configuration.
- *
- * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Loads and validates the application configuration.
+     *
+     * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 async loadConfig(): Promise<ApplicationConfig> {
     if (this.config) {
       return this.config;
@@ -113,10 +113,10 @@ async loadConfig(): Promise<ApplicationConfig> {
   }
 
     /**
- * Attempts to load the compiled JS for TS application config.
- *
- * @returns {Promise<ApplicationConfig | null>} - TODO: describe return value.
- */
+     * Attempts to load the compiled JS for TS application config.
+     *
+     * @returns {Promise<ApplicationConfig | null>} - TODO: describe return value.
+     */
 private async tryLoadTsConfig(): Promise<ApplicationConfig | null> {
     try {
       const compiledPath = path.resolve(
@@ -140,12 +140,12 @@ private async tryLoadTsConfig(): Promise<ApplicationConfig | null> {
   }
 
     /**
- * Gets configuration for the current environment.
- *
- * @param {string} environment - environment parameter.
- * @returns {Promise<EnvironmentConfig>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Gets configuration for the current environment.
+     *
+     * @param {string} environment - environment parameter.
+     * @returns {Promise<EnvironmentConfig>} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 async getEnvironmentConfig(
     environment: string = "development"
   ): Promise<EnvironmentConfig> {
@@ -165,12 +165,12 @@ async getEnvironmentConfig(
   }
 
     /**
- * Gets agent-specific configuration.
- *
- * @param {string} agentName - agentName parameter.
- * @returns {Promise<Record<string, unknown>>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Gets agent-specific configuration.
+     *
+     * @param {string} agentName - agentName parameter.
+     * @returns {Promise<Record<string, unknown>>} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 async getAgentConfig(agentName: string): Promise<Record<string, unknown>> {
     const config = await this.loadConfig();
 
@@ -187,21 +187,21 @@ async getAgentConfig(agentName: string): Promise<Record<string, unknown>> {
   }
 
     /**
- * Reloads configuration from disk.
- *
- * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
- */
+     * Reloads configuration from disk.
+     *
+     * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
+     */
 async reloadConfig(): Promise<ApplicationConfig> {
     this.config = null;
     return this.loadConfig();
   }
 
     /**
- * Merges loaded configuration with default values.
- *
- * @param {ApplicationConfig} loadedConfig - loadedConfig parameter.
- * @returns {ApplicationConfig} - TODO: describe return value.
- */
+     * Merges loaded configuration with default values.
+     *
+     * @param {ApplicationConfig} loadedConfig - loadedConfig parameter.
+     * @returns {ApplicationConfig} - TODO: describe return value.
+     */
 private mergeWithDefaults(
     loadedConfig: ApplicationConfig
   ): ApplicationConfig {
@@ -221,12 +221,12 @@ private mergeWithDefaults(
   }
 
     /**
- * Validates configuration structure and required fields.
- *
- * @param {ApplicationConfig} config - config parameter.
- * @returns {boolean} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Validates configuration structure and required fields.
+     *
+     * @param {ApplicationConfig} config - config parameter.
+     * @returns {boolean} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private validateConfig(config: ApplicationConfig): boolean {
     // Basic validation - could be enhanced with JSON schema validation
     if (!config.application?.name) {

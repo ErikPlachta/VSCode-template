@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../modules.md) / [mcpSync](../README.md) / fetchTools
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **fetchTools**(`serverUrl`, `token?`): `Promise`\<[`MCPTool`](../../shared/mcpTypes/interfaces/MCPTool.md)[]\>
 
-Defined in: [src/extension/mcpSync.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpSync.ts#L72)
+Defined in: [src/extension/mcpSync.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpSync.ts#L72)
 
 Fetch all available MCP tools from the configured server.
 
@@ -59,7 +60,6 @@ Optional Bearer token.
 const tools = await fetchTools("https://mcp.example.com", "token");
 console.log(tools.length);
 ```
-
 
 ## Summary
 

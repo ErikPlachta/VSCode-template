@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / CrossCategoryConnection
 
 # Interface: CrossCategoryConnection
 
-Defined in: [src/agent/dataAgent/index.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L80)
+Defined in: [src/agent/dataAgent/index.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L80)
 
 ## Properties
 
@@ -31,40 +32,39 @@ Defined in: [src/agent/dataAgent/index.ts:80](https://github.com/ErikPlachta/VSC
 
 > **connectionType**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L83)
+Defined in: [src/agent/dataAgent/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L83)
 
-***
+---
 
 ### description
 
 > **description**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:85](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L85)
+Defined in: [src/agent/dataAgent/index.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L85)
 
-***
+---
 
 ### sourceCategory
 
 > **sourceCategory**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:81](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L81)
+Defined in: [src/agent/dataAgent/index.ts:81](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L81)
 
-***
+---
 
 ### strength
 
 > **strength**: `number`
 
-Defined in: [src/agent/dataAgent/index.ts:84](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L84)
+Defined in: [src/agent/dataAgent/index.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L84)
 
-***
+---
 
 ### targetCategory
 
 > **targetCategory**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:82](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L82)
-
+Defined in: [src/agent/dataAgent/index.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L82)
 
 ## Summary
 

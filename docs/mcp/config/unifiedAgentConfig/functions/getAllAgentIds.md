@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / getAllAgentIds
 
@@ -25,12 +26,11 @@ hierarchy:
 
 > **getAllAgentIds**(): [`AgentIdentifier`](../type-aliases/AgentIdentifier.md)[]
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:474](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L474)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:474](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L474)
 
 ## Returns
 
 [`AgentIdentifier`](../type-aliases/AgentIdentifier.md)[]
-
 
 ## Summary
 

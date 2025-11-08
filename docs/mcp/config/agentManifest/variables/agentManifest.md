@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/agentManifest](../README.md) / agentManifest
 
@@ -25,10 +26,9 @@ hierarchy:
 
 > `const` **agentManifest**: `Record`\<[`AgentIdentifier`](../../unifiedAgentConfig/type-aliases/AgentIdentifier.md), [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)\>
 
-Defined in: [src/mcp/config/agentManifest.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/agentManifest.ts#L35)
+Defined in: [src/mcp/config/agentManifest.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/agentManifest.ts#L35)
 
 Manifest describing the capabilities of every agent.
-
 
 ## Summary
 

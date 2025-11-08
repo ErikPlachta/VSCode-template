@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / MarkdownConfig
 
 # Interface: MarkdownConfig
 
-Defined in: [src/types/applicationConfig.ts:248](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L248)
+Defined in: [src/types/applicationConfig.ts:248](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L248)
 
 Markdown validation configuration.
 
@@ -33,40 +34,39 @@ Markdown validation configuration.
 
 > **exclude**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:252](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L252)
+Defined in: [src/types/applicationConfig.ts:252](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L252)
 
 File patterns to exclude from validation.
 
-***
+---
 
 ### include
 
 > **include**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:250](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L250)
+Defined in: [src/types/applicationConfig.ts:250](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L250)
 
 File patterns to include in validation.
 
-***
+---
 
 ### requiredFrontMatter
 
 > **requiredFrontMatter**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:254](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L254)
+Defined in: [src/types/applicationConfig.ts:254](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L254)
 
 Required front matter fields.
 
-***
+---
 
 ### requiredSections
 
 > **requiredSections**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:256](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L256)
+Defined in: [src/types/applicationConfig.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L256)
 
 Required section headings.
-
 
 ## Summary
 

@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [types/external](../../README.md) / [gray-matter](../README.md) / default
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **default**\<`T`\>(`input`, `options?`): [`GrayMatterFile`](../interfaces/GrayMatterFile.md)\<`T`\>
 
-Defined in: [src/types/external.d.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/external.d.ts#L37)
+Defined in: [src/types/external.d.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/external.d.ts#L37)
 
 ## Type Parameters
 
@@ -46,7 +47,6 @@ Defined in: [src/types/external.d.ts:37](https://github.com/ErikPlachta/VSCode-t
 ## Returns
 
 [`GrayMatterFile`](../interfaces/GrayMatterFile.md)\<`T`\>
-
 
 ## Summary
 

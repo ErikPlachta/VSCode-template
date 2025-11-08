@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / validateAgentConfig
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **validateAgentConfig**(`config`): [`ValidationResult`](../interfaces/ValidationResult.md)
 
-Defined in: [src/types/configValidation.ts:58](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L58)
+Defined in: [src/types/configValidation.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L58)
 
 Comprehensive validation function for agent configurations
 
@@ -38,7 +39,6 @@ Comprehensive validation function for agent configurations
 ## Returns
 
 [`ValidationResult`](../interfaces/ValidationResult.md)
-
 
 ## Summary
 

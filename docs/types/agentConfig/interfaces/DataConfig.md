@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / DataConfig
 
 # Interface: DataConfig
 
-Defined in: [src/types/agentConfig.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L194)
+Defined in: [src/types/agentConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L194)
 
 Data agent-specific configuration
 
@@ -33,7 +34,7 @@ Data agent-specific configuration
 
 > **analysis**: `object`
 
-Defined in: [src/types/agentConfig.ts:195](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L195)
+Defined in: [src/types/agentConfig.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L195)
 
 #### crossCategoryAnalysis
 
@@ -75,13 +76,13 @@ Defined in: [src/types/agentConfig.ts:195](https://github.com/ErikPlachta/VSCode
 
 > `optional` **maxSupportingRecords**: `number`
 
-***
+---
 
 ### exploration
 
 > **exploration**: `object`
 
-Defined in: [src/types/agentConfig.ts:213](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L213)
+Defined in: [src/types/agentConfig.ts:213](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L213)
 
 #### enableAutomaticPlanGeneration
 
@@ -115,13 +116,13 @@ Defined in: [src/types/agentConfig.ts:213](https://github.com/ErikPlachta/VSCode
 
 > **planComplexityLimit**: `"high"` \| `"medium"` \| `"low"`
 
-***
+---
 
 ### performance?
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L247)
+Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L247)
 
 #### analysisTimeout?
 
@@ -147,13 +148,13 @@ Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/VSCode
 
 > `optional` **topicOverviewCacheTTL**: `number`
 
-***
+---
 
 ### quality?
 
 > `optional` **quality**: `object`
 
-Defined in: [src/types/agentConfig.ts:207](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L207)
+Defined in: [src/types/agentConfig.ts:207](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L207)
 
 #### anomalyDetectionEnabled?
 
@@ -171,13 +172,13 @@ Defined in: [src/types/agentConfig.ts:207](https://github.com/ErikPlachta/VSCode
 
 > `optional` **missingFieldThreshold**: `number`
 
-***
+---
 
 ### relationships
 
 > **relationships**: `object`
 
-Defined in: [src/types/agentConfig.ts:223](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L223)
+Defined in: [src/types/agentConfig.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L223)
 
 #### enableImpactAssessment?
 
@@ -207,13 +208,13 @@ Defined in: [src/types/agentConfig.ts:223](https://github.com/ErikPlachta/VSCode
 
 > `optional` **relationshipTypes**: `string`[]
 
-***
+---
 
 ### search?
 
 > `optional` **search**: `object`
 
-Defined in: [src/types/agentConfig.ts:232](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L232)
+Defined in: [src/types/agentConfig.ts:232](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L232)
 
 #### enableCategoryFiltering?
 
@@ -239,13 +240,13 @@ Defined in: [src/types/agentConfig.ts:232](https://github.com/ErikPlachta/VSCode
 
 > `optional` **searchTimeout**: `number`
 
-***
+---
 
 ### synthesis?
 
 > `optional` **synthesis**: `object`
 
-Defined in: [src/types/agentConfig.ts:240](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L240)
+Defined in: [src/types/agentConfig.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L240)
 
 #### enableMultiSourceSynthesis?
 
@@ -266,7 +267,6 @@ Defined in: [src/types/agentConfig.ts:240](https://github.com/ErikPlachta/VSCode
 #### synthesisConfidenceThreshold?
 
 > `optional` **synthesisConfidenceThreshold**: `number`
-
 
 ## Summary
 

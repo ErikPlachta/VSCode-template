@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / AgentPriority
 
@@ -25,10 +26,9 @@ hierarchy:
 
 > **AgentPriority** = `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/types/applicationConfig.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L55)
+Defined in: [src/types/applicationConfig.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L55)
 
 Agent execution priority levels.
-
 
 ## Summary
 

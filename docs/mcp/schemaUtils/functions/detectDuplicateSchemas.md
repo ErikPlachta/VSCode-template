@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/schemaUtils](../README.md) / detectDuplicateSchemas
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **detectDuplicateSchemas**(`schemas`): `string`[]
 
-Defined in: [src/mcp/schemaUtils.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L27)
+Defined in: [src/mcp/schemaUtils.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L27)
 
 ## Parameters
 
@@ -36,7 +37,6 @@ Defined in: [src/mcp/schemaUtils.ts:27](https://github.com/ErikPlachta/VSCode-te
 ## Returns
 
 `string`[]
-
 
 ## Summary
 

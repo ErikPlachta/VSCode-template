@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / createRelevantDataManagerAgent
 
@@ -25,12 +26,11 @@ hierarchy:
 
 > **createRelevantDataManagerAgent**(): [`RelevantDataManagerAgent`](../classes/RelevantDataManagerAgent.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:1481](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L1481)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:1481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L1481)
 
 ## Returns
 
 [`RelevantDataManagerAgent`](../classes/RelevantDataManagerAgent.md)
-
 
 ## Summary
 

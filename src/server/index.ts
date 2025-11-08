@@ -589,10 +589,10 @@ function startStdioServer(): void {
   // Log to stderr to avoid interfering with stdout JSON-RPC communication
   const log =
         /**
- * log function.
- *
- * @param {string} message - message parameter.
- */
+         * log function.
+         *
+         * @param {string} message - message parameter.
+         */
 (message: string): void => {
       console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
     };

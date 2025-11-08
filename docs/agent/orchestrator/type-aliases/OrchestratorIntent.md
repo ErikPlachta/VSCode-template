@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / OrchestratorIntent
 
@@ -25,10 +26,9 @@ hierarchy:
 
 > **OrchestratorIntent** = `string`
 
-Defined in: [src/agent/orchestrator/index.ts:8](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L8)
+Defined in: [src/agent/orchestrator/index.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L8)
 
 List of supported orchestration intents (from configuration).
-
 
 ## Summary
 

@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / AgentRequest
 
 # Interface: AgentRequest
 
-Defined in: [src/agent/interfaces.ts:218](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L218)
+Defined in: [src/agent/interfaces.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L218)
 
 ======================================
 ORCHESTRATOR COORDINATION TYPES
@@ -35,24 +36,23 @@ ORCHESTRATOR COORDINATION TYPES
 
 > **agentType**: `"database"` \| `"data"` \| `"relevantDataManager"` \| `"clarification"`
 
-Defined in: [src/agent/interfaces.ts:219](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L219)
+Defined in: [src/agent/interfaces.ts:219](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L219)
 
-***
+---
 
 ### operation
 
 > **operation**: `string`
 
-Defined in: [src/agent/interfaces.ts:220](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L220)
+Defined in: [src/agent/interfaces.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L220)
 
-***
+---
 
 ### parameters
 
 > **parameters**: `unknown`
 
-Defined in: [src/agent/interfaces.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L221)
-
+Defined in: [src/agent/interfaces.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L221)
 
 ## Summary
 

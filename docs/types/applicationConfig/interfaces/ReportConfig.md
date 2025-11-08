@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / ReportConfig
 
 # Interface: ReportConfig
 
-Defined in: [src/types/applicationConfig.ts:262](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L262)
+Defined in: [src/types/applicationConfig.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L262)
 
 Report generation configuration.
 
@@ -33,10 +34,9 @@ Report generation configuration.
 
 > **output**: `string`
 
-Defined in: [src/types/applicationConfig.ts:264](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L264)
+Defined in: [src/types/applicationConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L264)
 
 Output path for generated reports.
-
 
 ## Summary
 

@@ -273,7 +273,6 @@ export interface AgentRequest {
  * AgentResponse interface.
  *
  * @template T
- *
  */
 export interface AgentResponse<T = unknown> {
   success: boolean;

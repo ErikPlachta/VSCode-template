@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / DataAgent
 
 # Class: DataAgent
 
-Defined in: [src/agent/dataAgent/index.ts:99](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L99)
+Defined in: [src/agent/dataAgent/index.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L99)
 
 Agent that analyzes data and generates insights.
 Focuses purely on data analysis without managing other agents or data sources.
@@ -33,7 +34,7 @@ Focuses purely on data analysis without managing other agents or data sources.
 ```ts
 const agent = new DataAgent();
 const insights = await agent.analyzeData(analysisInput);
-console.log(insights.map(insight => insight.description));
+console.log(insights.map((insight) => insight.description));
 ```
 
 ## Constructors
@@ -42,7 +43,7 @@ console.log(insights.map(insight => insight.description));
 
 > **new DataAgent**(): `DataAgent`
 
-Defined in: [src/agent/dataAgent/index.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L106)
+Defined in: [src/agent/dataAgent/index.ts:106](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L106)
 
 Create a new DataAgent.
 
@@ -56,7 +57,7 @@ Create a new DataAgent.
 
 > **analyzeConnection**(`sourceData`, `targetData`, `relationship`): `Promise`\<[`CrossCategoryConnection`](../interfaces/CrossCategoryConnection.md)\>
 
-Defined in: [src/agent/dataAgent/index.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L221)
+Defined in: [src/agent/dataAgent/index.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L221)
 
 Analyze relationships between categories.
 
@@ -86,13 +87,13 @@ Relationship definition.
 
 - Cross-category connection analysis.
 
-***
+---
 
 ### analyzeData()
 
 > **analyzeData**(`input`): `Promise`\<[`DataInsight`](../interfaces/DataInsight.md)[]\>
 
-Defined in: [src/agent/dataAgent/index.ts:116](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L116)
+Defined in: [src/agent/dataAgent/index.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L116)
 
 Analyze data and generate insights.
 
@@ -110,13 +111,13 @@ Data to analyze including records, schemas, and relationships.
 
 - Promise resolving to array of generated insights.
 
-***
+---
 
 ### generateExplorationPlan()
 
 > **generateExplorationPlan**(`categoryId`, `question`, `availableData`): `Promise`\<[`ExplorationPlan`](../interfaces/ExplorationPlan.md)\>
 
-Defined in: [src/agent/dataAgent/index.ts:163](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L163)
+Defined in: [src/agent/dataAgent/index.ts:163](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L163)
 
 Generate an exploration plan for data analysis.
 
@@ -146,13 +147,13 @@ Available data for analysis.
 
 - Exploration plan with recommended steps.
 
-***
+---
 
 ### searchData()
 
 > **searchData**(`keyword`, `data`): [`TopicSearchResult`](../interfaces/TopicSearchResult.md)[]
 
-Defined in: [src/agent/dataAgent/index.ts:251](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L251)
+Defined in: [src/agent/dataAgent/index.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L251)
 
 Search for patterns in data records.
 
@@ -175,7 +176,6 @@ Data to search through.
 [`TopicSearchResult`](../interfaces/TopicSearchResult.md)[]
 
 - Search results with relevance scoring.
-
 
 ## Summary
 

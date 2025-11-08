@@ -21,6 +21,10 @@ export function trackAgentExecution(agentName: string, methodName?: string) {
     const originalMethod = descriptor.value as T;
     const actualMethodName = methodName || propertyKey;
 
+    /**
+     *
+     * @param {...any} args
+     */
     descriptor.value = async function (...args: any[]): Promise<any> {
       const analytics = getAnalytics();
 
@@ -47,29 +51,31 @@ export abstract class TrackedAgent {
   protected agentName: string;
 
     /**
- * Creates a new tracked agent instance.
- *
- * @param {string} agentName - agentName parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+     * Creates a new tracked agent instance.
+     *
+     * @param {string} agentName - agentName parameter.
+     * @returns {unknown} - TODO: describe return value.
+     */
 constructor(agentName: string) {
     this.agentName = agentName;
     this.analytics = getAnalytics();
   }
 
     /**
- * Executes a tracked operation with automatic analytics recording.
- *
- * @template T
- *
- * @param {string} operationName - operationName parameter.
- * @param {() => Promise<T>} operation - operation parameter.
- * @param {{
+     * Executes a tracked operation with automatic analytics recording.
+     *
+     * @template T
+     *
+     * @param {string} operationName - operationName parameter.
+     * @param {() => Promise<T>} operation - operation parameter.
+     * @param {{
       userId?: string;
       metadata?: Record<string, any>;
     }} options - options parameter.
- * @returns {Promise<T>} - TODO: describe return value.
- */
+     * @param options.userId
+     * @param options.metadata
+     * @returns {Promise<T>} - TODO: describe return value.
+     */
 protected async executeTracked<T>(
     operationName: string,
     operation: () => Promise<T>,
@@ -87,11 +93,11 @@ protected async executeTracked<T>(
   }
 
     /**
- * Records a custom analytics event.
- *
- * @param {string} method - method parameter.
- * @param {Record<string, any>} eventData - eventData parameter.
- */
+     * Records a custom analytics event.
+     *
+     * @param {string} method - method parameter.
+     * @param {Record<string, any>} eventData - eventData parameter.
+     */
 protected recordEvent(
     method: string,
     eventData: Record<string, any> = {}
@@ -104,11 +110,11 @@ protected recordEvent(
   }
 
     /**
- * Gets analytics statistics for this agent.
- *
- * @param {Date} since - since parameter.
- * @returns {any | null} - TODO: describe return value.
- */
+     * Gets analytics statistics for this agent.
+     *
+     * @param {Date} since - since parameter.
+     * @returns {any | null} - TODO: describe return value.
+     */
 getStats(since?: Date): any | null {
     return this.analytics.getAgentStats(this.agentName, since);
   }
@@ -153,27 +159,29 @@ export class PerformanceMonitor {
   private analytics: AgentUsageAnalytics;
 
     /**
- * Creates a new performance monitor instance.
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Creates a new performance monitor instance.
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 constructor() {
     this.analytics = getAnalytics();
   }
 
     /**
- * Monitors the performance of a database query operation.
- *
- * @template T
- *
- * @param {string} queryType - queryType parameter.
- * @param {() => Promise<T>} query - query parameter.
- * @param {{
+     * Monitors the performance of a database query operation.
+     *
+     * @template T
+     *
+     * @param {string} queryType - queryType parameter.
+     * @param {() => Promise<T>} query - query parameter.
+     * @param {{
       category?: string;
       filters?: Record<string, any>;
     }} options - options parameter.
- * @returns {Promise<T>} - TODO: describe return value.
- */
+     * @param options.category
+     * @param options.filters
+     * @returns {Promise<T>} - TODO: describe return value.
+     */
 async monitorDatabaseQuery<T>(
     queryType: string,
     query: () => Promise<T>,
@@ -193,18 +201,20 @@ async monitorDatabaseQuery<T>(
   }
 
     /**
- * Monitors data processing operations.
- *
- * @template T
- *
- * @param {string} operationType - operationType parameter.
- * @param {() => Promise<T>} processor - processor parameter.
- * @param {{
+     * Monitors data processing operations.
+     *
+     * @template T
+     *
+     * @param {string} operationType - operationType parameter.
+     * @param {() => Promise<T>} processor - processor parameter.
+     * @param {{
       inputSize?: number;
       category?: string;
     }} options - options parameter.
- * @returns {Promise<T>} - TODO: describe return value.
- */
+     * @param options.inputSize
+     * @param options.category
+     * @returns {Promise<T>} - TODO: describe return value.
+     */
 async monitorDataProcessing<T>(
     operationType: string,
     processor: () => Promise<T>,
@@ -229,18 +239,20 @@ async monitorDataProcessing<T>(
   }
 
     /**
- * Monitors orchestration decisions and routing.
- *
- * @template T
- *
- * @param {string} decision - decision parameter.
- * @param {() => Promise<T>} orchestration - orchestration parameter.
- * @param {{
+     * Monitors orchestration decisions and routing.
+     *
+     * @template T
+     *
+     * @param {string} decision - decision parameter.
+     * @param {() => Promise<T>} orchestration - orchestration parameter.
+     * @param {{
       intent?: string;
       agentCount?: number;
     }} options - options parameter.
- * @returns {Promise<T>} - TODO: describe return value.
- */
+     * @param options.intent
+     * @param options.agentCount
+     * @returns {Promise<T>} - TODO: describe return value.
+     */
 async monitorOrchestration<T>(
     decision: string,
     orchestration: () => Promise<T>,

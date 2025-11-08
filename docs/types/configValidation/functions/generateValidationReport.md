@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / generateValidationReport
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **generateValidationReport**(`result`): `string`
 
-Defined in: [src/types/configValidation.ts:404](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L404)
+Defined in: [src/types/configValidation.ts:404](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L404)
 
 Generate a validation report for display
 
@@ -38,7 +39,6 @@ Generate a validation report for display
 ## Returns
 
 `string`
-
 
 ## Summary
 

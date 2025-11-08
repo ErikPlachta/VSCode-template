@@ -15,19 +15,20 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/telemetry](../README.md) / InvocationWrapper
 
 # Interface: InvocationWrapper()
 
-Defined in: [src/mcp/telemetry.ts:34](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L34)
+Defined in: [src/mcp/telemetry.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L34)
 
 > **InvocationWrapper**\<`T`\>(`operation`, `fn`, `metadata?`): `Promise`\<`T`\>
 
-Defined in: [src/mcp/telemetry.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L35)
+Defined in: [src/mcp/telemetry.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L35)
 
 ## Type Parameters
 
@@ -52,7 +53,6 @@ Defined in: [src/mcp/telemetry.ts:35](https://github.com/ErikPlachta/VSCode-temp
 ## Returns
 
 `Promise`\<`T`\>
-
 
 ## Summary
 

@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / PrimitiveTypeName
 
@@ -25,10 +26,9 @@ hierarchy:
 
 > **PrimitiveTypeName** = `"str"` \| `"int"` \| `"float"` \| `"bool"` \| `"datetime"`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L79)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L79)
 
 Supported primitive names within a type definition schema.
-
 
 ## Summary
 

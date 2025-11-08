@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / CategorySchema
 
 # Interface: CategorySchema
 
-Defined in: [src/agent/interfaces.ts:125](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L125)
+Defined in: [src/agent/interfaces.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L125)
 
 ======================================
 RELEVANT DATA MANAGER INTERFACE
@@ -37,16 +38,15 @@ Responsibility: Schema management and business context
 
 > **name**: `string`
 
-Defined in: [src/agent/interfaces.ts:126](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L126)
+Defined in: [src/agent/interfaces.ts:126](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L126)
 
-***
+---
 
 ### schema
 
 > **schema**: `unknown`
 
-Defined in: [src/agent/interfaces.ts:127](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L127)
-
+Defined in: [src/agent/interfaces.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L127)
 
 ## Summary
 

@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / AgentGlobalConfig
 
 # Interface: AgentGlobalConfig
 
-Defined in: [src/types/applicationConfig.ts:128](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L128)
+Defined in: [src/types/applicationConfig.ts:128](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L128)
 
 Global agent configuration settings.
 
@@ -33,40 +34,39 @@ Global agent configuration settings.
 
 > **cacheEnabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L134)
+Defined in: [src/types/applicationConfig.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L134)
 
 Enable caching globally for agents.
 
-***
+---
 
 ### cacheTtl
 
 > **cacheTtl**: `number`
 
-Defined in: [src/types/applicationConfig.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L136)
+Defined in: [src/types/applicationConfig.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L136)
 
 Cache time-to-live in milliseconds.
 
-***
+---
 
 ### enableTelemetry
 
 > **enableTelemetry**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L132)
+Defined in: [src/types/applicationConfig.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L132)
 
 Enable telemetry collection for agents.
 
-***
+---
 
 ### maxExecutionTime
 
 > **maxExecutionTime**: `number`
 
-Defined in: [src/types/applicationConfig.ts:130](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L130)
+Defined in: [src/types/applicationConfig.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L130)
 
 Maximum execution time for any agent in milliseconds.
-
 
 ## Summary
 

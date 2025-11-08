@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/agentManifest](../README.md) / getAgentMetadata
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **getAgentMetadata**(`agentId`): [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/config/agentManifest.ts:61](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/agentManifest.ts#L61)
+Defined in: [src/mcp/config/agentManifest.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/agentManifest.ts#L61)
 
 Retrieve manifest metadata for a given agent identifier.
 
@@ -38,7 +39,6 @@ Retrieve manifest metadata for a given agent identifier.
 ## Returns
 
 [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)
-
 
 ## Summary
 

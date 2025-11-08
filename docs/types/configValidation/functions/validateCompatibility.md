@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / validateCompatibility
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **validateCompatibility**(`config1`, `config2`): [`ValidationResult`](../interfaces/ValidationResult.md)
 
-Defined in: [src/types/configValidation.ts:367](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L367)
+Defined in: [src/types/configValidation.ts:367](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L367)
 
 Validate configuration compatibility between different versions
 
@@ -42,7 +43,6 @@ Validate configuration compatibility between different versions
 ## Returns
 
 [`ValidationResult`](../interfaces/ValidationResult.md)
-
 
 ## Summary
 

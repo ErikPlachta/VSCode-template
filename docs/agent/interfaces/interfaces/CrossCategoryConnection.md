@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / CrossCategoryConnection
 
 # Interface: CrossCategoryConnection
 
-Defined in: [src/agent/interfaces.ts:94](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L94)
+Defined in: [src/agent/interfaces.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L94)
 
 ## Properties
 
@@ -31,40 +32,39 @@ Defined in: [src/agent/interfaces.ts:94](https://github.com/ErikPlachta/VSCode-t
 
 > **connectionType**: `string`
 
-Defined in: [src/agent/interfaces.ts:97](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L97)
+Defined in: [src/agent/interfaces.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L97)
 
-***
+---
 
 ### description
 
 > **description**: `string`
 
-Defined in: [src/agent/interfaces.ts:99](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L99)
+Defined in: [src/agent/interfaces.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L99)
 
-***
+---
 
 ### sourceCategory
 
 > **sourceCategory**: `string`
 
-Defined in: [src/agent/interfaces.ts:95](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L95)
+Defined in: [src/agent/interfaces.ts:95](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L95)
 
-***
+---
 
 ### strength
 
 > **strength**: `number`
 
-Defined in: [src/agent/interfaces.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L98)
+Defined in: [src/agent/interfaces.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L98)
 
-***
+---
 
 ### targetCategory
 
 > **targetCategory**: `string`
 
-Defined in: [src/agent/interfaces.ts:96](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L96)
-
+Defined in: [src/agent/interfaces.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L96)
 
 ## Summary
 

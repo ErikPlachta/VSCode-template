@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [agent/clarificationAgent/agent.config](../README.md) / clarificationAgentConfig
 
@@ -25,14 +26,13 @@ hierarchy:
 
 > `const` **clarificationAgentConfig**: [`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)
 
-Defined in: [src/agent/clarificationAgent/agent.config.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/agent.config.ts#L22)
+Defined in: [src/agent/clarificationAgent/agent.config.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/agent.config.ts#L22)
 
 Complete configuration for the Clarification Agent
 
 The clarification agent specializes in handling unclear or ambiguous requests,
 providing users with guidance, examples, and context to help them ask better
 questions and get more useful results from the system.
-
 
 ## Summary
 

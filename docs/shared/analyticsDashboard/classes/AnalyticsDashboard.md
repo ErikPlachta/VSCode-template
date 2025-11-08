@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsDashboard](../README.md) / AnalyticsDashboard
 
 # Class: AnalyticsDashboard
 
-Defined in: [src/shared/analyticsDashboard.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L37)
+Defined in: [src/shared/analyticsDashboard.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L37)
 
 Analytics dashboard for generating usage reports and insights.
 
@@ -43,7 +44,7 @@ Analytics dashboard for generating usage reports and insights.
 
 > **generateRecommendations**(`summary`): `string`[]
 
-Defined in: [src/shared/analyticsDashboard.ts:67](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L67)
+Defined in: [src/shared/analyticsDashboard.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L67)
 
 Generates performance recommendations based on analytics data.
 
@@ -59,13 +60,13 @@ Generates performance recommendations based on analytics data.
 
 - Array of performance recommendations.
 
-***
+---
 
 ### generateReport()
 
 > **generateReport**(`summary`, `options`): `string`
 
-Defined in: [src/shared/analyticsDashboard.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L45)
+Defined in: [src/shared/analyticsDashboard.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L45)
 
 Generates a comprehensive analytics report.
 
@@ -84,7 +85,6 @@ Generates a comprehensive analytics report.
 `string`
 
 - Generated report content.
-
 
 ## Summary
 

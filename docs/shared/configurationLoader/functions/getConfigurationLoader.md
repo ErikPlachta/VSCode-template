@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/configurationLoader](../README.md) / getConfigurationLoader
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **getConfigurationLoader**(`configPath?`): [`ConfigurationLoader`](../classes/ConfigurationLoader.md)
 
-Defined in: [src/shared/configurationLoader.ts:255](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L255)
+Defined in: [src/shared/configurationLoader.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L255)
 
 Gets the global configuration loader instance.
 
@@ -40,7 +41,6 @@ Gets the global configuration loader instance.
 [`ConfigurationLoader`](../classes/ConfigurationLoader.md)
 
 - Configuration loader instance.
-
 
 ## Summary
 

@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / DataSource
 
 # Interface: DataSource
 
-Defined in: [src/agent/interfaces.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L25)
+Defined in: [src/agent/interfaces.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L25)
 
 ======================================
 DATABASE AGENT INTERFACE
@@ -37,32 +38,31 @@ Responsibility: Data retrieval only
 
 > **id**: `string`
 
-Defined in: [src/agent/interfaces.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L26)
+Defined in: [src/agent/interfaces.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L26)
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/agent/interfaces.ts:27](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L27)
+Defined in: [src/agent/interfaces.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L27)
 
-***
+---
 
 ### records
 
 > **records**: [`CategoryRecord`](CategoryRecord.md)[]
 
-Defined in: [src/agent/interfaces.ts:28](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L28)
+Defined in: [src/agent/interfaces.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L28)
 
-***
+---
 
 ### schema?
 
 > `optional` **schema**: `unknown`
 
-Defined in: [src/agent/interfaces.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L29)
-
+Defined in: [src/agent/interfaces.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L29)
 
 ## Summary
 

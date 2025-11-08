@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / createDataAgent
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **createDataAgent**(): [`DataAgent`](../classes/DataAgent.md)
 
-Defined in: [src/agent/dataAgent/index.ts:414](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L414)
+Defined in: [src/agent/dataAgent/index.ts:414](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L414)
 
 Factory function that creates a [DataAgent](../classes/DataAgent.md) with default configuration.
 
@@ -41,7 +42,6 @@ Factory function that creates a [DataAgent](../classes/DataAgent.md) with defaul
 import { createDataAgent } from "@agent/dataAgent";
 const agent = createDataAgent();
 ```
-
 
 ## Summary
 

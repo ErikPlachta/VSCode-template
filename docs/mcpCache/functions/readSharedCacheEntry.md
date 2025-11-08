@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / readSharedCacheEntry
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **readSharedCacheEntry**\<`T`\>(`cacheDir`, `key`): `Promise`\<[`SharedCacheEntry`](../interfaces/SharedCacheEntry.md)\<`T`\> \| `undefined`\>
 
-Defined in: [src/extension/mcpCache.ts:118](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L118)
+Defined in: [src/extension/mcpCache.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L118)
 
 Retrieve a shared cache entry by key.
 
@@ -58,7 +59,6 @@ Unique cache entry key.
 ## Throws
 
 - When the file exists but cannot be read.
-
 
 ## Summary
 

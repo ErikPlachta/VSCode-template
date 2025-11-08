@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / performanceMonitor
 
@@ -25,10 +26,9 @@ hierarchy:
 
 > `const` **performanceMonitor**: [`PerformanceMonitor`](../classes/PerformanceMonitor.md)
 
-Defined in: [src/shared/analyticsIntegration.ts:312](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L312)
+Defined in: [src/shared/analyticsIntegration.ts:312](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L312)
 
 Global performance monitor instance.
-
 
 ## Summary
 

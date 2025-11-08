@@ -125,20 +125,20 @@ export class AgentUsageAnalytics {
   private eventCounter = 0;
 
     /**
- * Creates a new analytics collector instance.
- *
- * @param {AnalyticsConfig} config - config parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+     * Creates a new analytics collector instance.
+     *
+     * @param {AnalyticsConfig} config - config parameter.
+     * @returns {unknown} - TODO: describe return value.
+     */
 constructor(config: AnalyticsConfig) {
     this.config = config;
   }
 
     /**
- * Records an agent usage event.
- *
- * @param {Partial<AgentUsageEvent>} event - event parameter.
- */
+     * Records an agent usage event.
+     *
+     * @param {Partial<AgentUsageEvent>} event - event parameter.
+     */
 recordEvent(event: Partial<AgentUsageEvent>): void {
     if (!this.config.enabled) {
       return;
@@ -172,20 +172,22 @@ recordEvent(event: Partial<AgentUsageEvent>): void {
   }
 
     /**
- * Tracks the execution of an agent method with automatic timing.
- *
- * @template T
- *
- * @param {string} agentName - agentName parameter.
- * @param {string} method - method parameter.
- * @param {() => Promise<T>} execution - execution parameter.
- * @param {{
+     * Tracks the execution of an agent method with automatic timing.
+     *
+     * @template T
+     *
+     * @param {string} agentName - agentName parameter.
+     * @param {string} method - method parameter.
+     * @param {() => Promise<T>} execution - execution parameter.
+     * @param {{
       userId?: string;
       metadata?: Record<string, any>;
     }} options - options parameter.
- * @returns {Promise<T>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * @param options.userId
+     * @param options.metadata
+     * @returns {Promise<T>} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 async trackExecution<T>(
     agentName: string,
     method: string,
@@ -230,12 +232,12 @@ async trackExecution<T>(
   }
 
     /**
- * Generates usage statistics for a specific agent.
- *
- * @param {string} agentName - agentName parameter.
- * @param {Date} since - since parameter.
- * @returns {AgentUsageStats | null} - TODO: describe return value.
- */
+     * Generates usage statistics for a specific agent.
+     *
+     * @param {string} agentName - agentName parameter.
+     * @param {Date} since - since parameter.
+     * @returns {AgentUsageStats | null} - TODO: describe return value.
+     */
 getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
     const agentEvents = this.events.filter((event) => {
       if (event.agentName !== agentName) return false;
@@ -288,11 +290,11 @@ getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
   }
 
     /**
- * Generates comprehensive usage analytics summary.
- *
- * @param {Date} since - since parameter.
- * @returns {UsageAnalyticsSummary} - TODO: describe return value.
- */
+     * Generates comprehensive usage analytics summary.
+     *
+     * @param {Date} since - since parameter.
+     * @returns {UsageAnalyticsSummary} - TODO: describe return value.
+     */
 generateSummary(since?: Date): UsageAnalyticsSummary {
     const filteredEvents = this.events.filter(
       (event) => !since || event.timestamp >= since
@@ -359,37 +361,37 @@ generateSummary(since?: Date): UsageAnalyticsSummary {
   }
 
     /**
- * Exports analytics data for external analysis.
- *
- * @param {Date} since - since parameter.
- * @returns {AgentUsageEvent[]} - TODO: describe return value.
- */
+     * Exports analytics data for external analysis.
+     *
+     * @param {Date} since - since parameter.
+     * @returns {AgentUsageEvent[]} - TODO: describe return value.
+     */
 exportData(since?: Date): AgentUsageEvent[] {
     return this.events.filter((event) => !since || event.timestamp >= since);
   }
 
     /**
- * Clears all collected analytics data.
- *
- */
+     * Clears all collected analytics data.
+     *
+     */
 clearData(): void {
     this.events = [];
     this.eventCounter = 0;
   }
 
     /**
- * Generates a unique event identifier.
- *
- * @returns {string} - TODO: describe return value.
- */
+     * Generates a unique event identifier.
+     *
+     * @returns {string} - TODO: describe return value.
+     */
 private generateEventId(): string {
     return `event_${Date.now()}_${++this.eventCounter}`;
   }
 
     /**
- * Enforces retention policy by removing old events.
- *
- */
+     * Enforces retention policy by removing old events.
+     *
+     */
 private enforceRetention(): void {
     const now = Date.now();
     const cutoffTime = now - this.config.retentionPeriod;
@@ -406,10 +408,10 @@ private enforceRetention(): void {
   }
 
     /**
- * Persists an event to storage (placeholder implementation).
- *
- * @param {AgentUsageEvent} event - event parameter.
- */
+     * Persists an event to storage (placeholder implementation).
+     *
+     * @param {AgentUsageEvent} event - event parameter.
+     */
 private persistEvent(event: AgentUsageEvent): void {
     // Placeholder for persistent storage implementation
     // Could write to file, database, or external analytics service
@@ -417,11 +419,11 @@ private persistEvent(event: AgentUsageEvent): void {
   }
 
     /**
- * Estimates the size of data in bytes.
- *
- * @param {any} data - data parameter.
- * @returns {number} - TODO: describe return value.
- */
+     * Estimates the size of data in bytes.
+     *
+     * @param {any} data - data parameter.
+     * @returns {number} - TODO: describe return value.
+     */
 private estimateSize(data: any): number {
     try {
       return JSON.stringify(data).length * 2; // Rough estimate for UTF-16

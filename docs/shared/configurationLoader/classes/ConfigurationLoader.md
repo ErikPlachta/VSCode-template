@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/configurationLoader](../README.md) / ConfigurationLoader
 
 # Class: ConfigurationLoader
 
-Defined in: [src/shared/configurationLoader.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L64)
+Defined in: [src/shared/configurationLoader.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L64)
 
 Configuration loader class for managing application settings.
 
@@ -33,7 +34,7 @@ Configuration loader class for managing application settings.
 
 > **new ConfigurationLoader**(`configPath`): `ConfigurationLoader`
 
-Defined in: [src/shared/configurationLoader.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L73)
+Defined in: [src/shared/configurationLoader.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L73)
 
 Creates a new configuration loader instance.
 
@@ -53,7 +54,7 @@ Creates a new configuration loader instance.
 
 > **getAgentConfig**(`agentName`): `Promise`\<`any`\>
 
-Defined in: [src/shared/configurationLoader.ts:174](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L174)
+Defined in: [src/shared/configurationLoader.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L174)
 
 Gets agent-specific configuration.
 
@@ -73,13 +74,13 @@ Gets agent-specific configuration.
 
 - When agent configuration cannot be found.
 
-***
+---
 
 ### getEnvironmentConfig()
 
 > **getEnvironmentConfig**(`environment`): `Promise`\<[`EnvironmentConfig`](../../../types/applicationConfig/interfaces/EnvironmentConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:149](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L149)
+Defined in: [src/shared/configurationLoader.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L149)
 
 Gets configuration for the current environment.
 
@@ -99,13 +100,13 @@ Gets configuration for the current environment.
 
 - When environment is not found or configuration cannot be loaded.
 
-***
+---
 
 ### loadConfig()
 
 > **loadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L83)
+Defined in: [src/shared/configurationLoader.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L83)
 
 Loads and validates the application configuration.
 
@@ -119,13 +120,13 @@ Loads and validates the application configuration.
 
 - When configuration file cannot be loaded or is invalid.
 
-***
+---
 
 ### reloadConfig()
 
 > **reloadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L194)
+Defined in: [src/shared/configurationLoader.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L194)
 
 Reloads configuration from disk.
 
@@ -134,7 +135,6 @@ Reloads configuration from disk.
 `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
 - Promise resolving to reloaded configuration.
-
 
 ## Summary
 

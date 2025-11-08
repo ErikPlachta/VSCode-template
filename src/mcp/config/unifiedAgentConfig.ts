@@ -460,11 +460,11 @@ export const agentConfigurations: Record<AgentIdentifier, UnifiedAgentConfig> =
  * Utility functions for accessing specific aspects of agent configurations
  */
 export const getOrchestrationProfile = /**
- * getOrchestrationProfile function.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {OrchestrationProfile} - TODO: describe return value.
- */
+                                        * getOrchestrationProfile function.
+                                        *
+                                        * @param {AgentIdentifier} agentId - agentId parameter.
+                                        * @returns {OrchestrationProfile} - TODO: describe return value.
+                                        */
 (
   agentId: AgentIdentifier
 ): OrchestrationProfile => {
@@ -472,11 +472,11 @@ export const getOrchestrationProfile = /**
 };
 
 export const getExecutionProfile = /**
- * getExecutionProfile function.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {ExecutionProfile} - TODO: describe return value.
- */
+                                    * getExecutionProfile function.
+                                    *
+                                    * @param {AgentIdentifier} agentId - agentId parameter.
+                                    * @returns {ExecutionProfile} - TODO: describe return value.
+                                    */
 (
   agentId: AgentIdentifier
 ): ExecutionProfile => {
@@ -484,20 +484,20 @@ export const getExecutionProfile = /**
 };
 
 export const getRichMetadata = /**
- * getRichMetadata function.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {RichMetadata} - TODO: describe return value.
- */
+                                * getRichMetadata function.
+                                *
+                                * @param {AgentIdentifier} agentId - agentId parameter.
+                                * @returns {RichMetadata} - TODO: describe return value.
+                                */
 (agentId: AgentIdentifier): RichMetadata => {
   return agentConfigurations[agentId].metadata;
 };
 
 export const getAllAgentIds = /**
- * getAllAgentIds function.
- *
- * @returns {AgentIdentifier[]} - TODO: describe return value.
- */
+                               * getAllAgentIds function.
+                               *
+                               * @returns {AgentIdentifier[]} - TODO: describe return value.
+                               */
 (): AgentIdentifier[] => {
   return Object.keys(agentConfigurations) as AgentIdentifier[];
 };
@@ -514,5 +514,11 @@ export const ClarificationAgentProfile =
   agentConfigurations["clarification-agent"].orchestration;
 
 // Type exports for backward compatibility
+/**
+ *
+ */
 export type AgentProfile = OrchestrationProfile;
+/**
+ *
+ */
 export type KnownAgentProfile = OrchestrationProfile;

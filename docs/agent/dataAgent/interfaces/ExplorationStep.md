@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / ExplorationStep
 
 # Interface: ExplorationStep
 
-Defined in: [src/agent/dataAgent/index.ts:66](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L66)
+Defined in: [src/agent/dataAgent/index.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L66)
 
 ## Properties
 
@@ -31,32 +32,31 @@ Defined in: [src/agent/dataAgent/index.ts:66](https://github.com/ErikPlachta/VSC
 
 > **description**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:68](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L68)
+Defined in: [src/agent/dataAgent/index.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L68)
 
-***
+---
 
 ### hints
 
 > **hints**: `string`[]
 
-Defined in: [src/agent/dataAgent/index.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L70)
+Defined in: [src/agent/dataAgent/index.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L70)
 
-***
+---
 
 ### recommendedCategory
 
 > **recommendedCategory**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:69](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L69)
+Defined in: [src/agent/dataAgent/index.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L69)
 
-***
+---
 
 ### title
 
 > **title**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:67](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L67)
-
+Defined in: [src/agent/dataAgent/index.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L67)
 
 ## Summary
 

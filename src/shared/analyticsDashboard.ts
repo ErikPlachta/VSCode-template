@@ -37,13 +37,13 @@ export interface ReportOptions {
  */
 export class AnalyticsDashboard {
     /**
- * Generates a comprehensive analytics report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Generates a comprehensive analytics report.
+     *
+     * @param {UsageAnalyticsSummary} summary - summary parameter.
+     * @param {ReportOptions} options - options parameter.
+     * @returns {string} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 generateReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
@@ -61,11 +61,11 @@ generateReport(
   }
 
     /**
- * Generates performance recommendations based on analytics data.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @returns {string[]} - TODO: describe return value.
- */
+     * Generates performance recommendations based on analytics data.
+     *
+     * @param {UsageAnalyticsSummary} summary - summary parameter.
+     * @returns {string[]} - TODO: describe return value.
+     */
 generateRecommendations(summary: UsageAnalyticsSummary): string[] {
     const recommendations: string[] = [];
 
@@ -141,12 +141,12 @@ generateRecommendations(summary: UsageAnalyticsSummary): string[] {
   }
 
     /**
- * Generates a Markdown format report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- */
+     * Generates a Markdown format report.
+     *
+     * @param {UsageAnalyticsSummary} summary - summary parameter.
+     * @param {ReportOptions} options - options parameter.
+     * @returns {string} - TODO: describe return value.
+     */
 private generateMarkdownReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
@@ -257,12 +257,12 @@ private generateMarkdownReport(
   }
 
     /**
- * Generates a JSON format report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- */
+     * Generates a JSON format report.
+     *
+     * @param {UsageAnalyticsSummary} summary - summary parameter.
+     * @param {ReportOptions} options - options parameter.
+     * @returns {string} - TODO: describe return value.
+     */
 private generateJsonReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
@@ -291,12 +291,12 @@ private generateJsonReport(
   }
 
     /**
- * Generates a CSV format report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- */
+     * Generates a CSV format report.
+     *
+     * @param {UsageAnalyticsSummary} summary - summary parameter.
+     * @param {ReportOptions} options - options parameter.
+     * @returns {string} - TODO: describe return value.
+     */
 private generateCsvReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions

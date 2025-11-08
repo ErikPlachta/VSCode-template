@@ -24,34 +24,37 @@ export interface KnowledgeHit {
   score: number;
 }
 
+/**
+ *
+ */
 export class KnowledgeBase {
   private readonly documents = new Map<string, KnowledgeDocument>();
 
     /**
- * indexDocument function.
- *
- * @param {KnowledgeDocument} document - document parameter.
- */
+     * indexDocument function.
+     *
+     * @param {KnowledgeDocument} document - document parameter.
+     */
 indexDocument(document: KnowledgeDocument): void {
     this.documents.set(document.id, document);
   }
 
     /**
- * indexDocuments function.
- *
- * @param {KnowledgeDocument[]} documents - documents parameter.
- */
+     * indexDocuments function.
+     *
+     * @param {KnowledgeDocument[]} documents - documents parameter.
+     */
 indexDocuments(documents: KnowledgeDocument[]): void {
     documents.forEach((document) => this.indexDocument(document));
   }
 
     /**
- * query function.
- *
- * @param {string} term - term parameter.
- * @param {unknown} limit - limit parameter.
- * @returns {KnowledgeHit[]} - TODO: describe return value.
- */
+     * query function.
+     *
+     * @param {string} term - term parameter.
+     * @param {unknown} limit - limit parameter.
+     * @returns {KnowledgeHit[]} - TODO: describe return value.
+     */
 query(term: string, limit = 3): KnowledgeHit[] {
     const keywords = new Set(
       (term.toLowerCase().match(/\b[\w-]{3,}\b/g) ?? []).map((token) => token)

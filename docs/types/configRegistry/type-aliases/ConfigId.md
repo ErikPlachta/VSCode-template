@@ -15,20 +15,20 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / ConfigId
 
 # Type Alias: ConfigId
 
-> **ConfigId** = *typeof* [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\[keyof *typeof* [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\]
+> **ConfigId** = _typeof_ [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\[keyof _typeof_ [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\]
 
-Defined in: [src/types/configRegistry.ts:220](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L220)
+Defined in: [src/types/configRegistry.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L220)
 
 Type-safe way to reference configuration IDs
-
 
 ## Summary
 

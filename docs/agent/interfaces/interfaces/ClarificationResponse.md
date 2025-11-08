@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / ClarificationResponse
 
 # Interface: ClarificationResponse
 
-Defined in: [src/agent/interfaces.ts:179](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L179)
+Defined in: [src/agent/interfaces.ts:179](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L179)
 
 ## Properties
 
@@ -31,16 +32,15 @@ Defined in: [src/agent/interfaces.ts:179](https://github.com/ErikPlachta/VSCode-
 
 > **knowledgeSnippets**: [`KnowledgeSnippet`](KnowledgeSnippet.md)[]
 
-Defined in: [src/agent/interfaces.ts:181](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L181)
+Defined in: [src/agent/interfaces.ts:181](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L181)
 
-***
+---
 
 ### prompt
 
 > **prompt**: `string`
 
-Defined in: [src/agent/interfaces.ts:180](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L180)
-
+Defined in: [src/agent/interfaces.ts:180](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L180)
 
 ## Summary
 

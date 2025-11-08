@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / RelevantDataManagerAgent
 
 # Class: RelevantDataManagerAgent
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:506](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L506)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:506](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L506)
 
 Agent that manages the relevant-data workspace representation.
 
@@ -33,7 +34,7 @@ Agent that manages the relevant-data workspace representation.
 
 > **new RelevantDataManagerAgent**(`cacheDirPromise?`): `RelevantDataManagerAgent`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:524](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L524)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:524](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L524)
 
 #### Parameters
 
@@ -51,7 +52,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:524](https://github.com
 
 > **getCategory**(`topicOrId`): [`BusinessCategory`](../interfaces/BusinessCategory.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:551](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L551)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:551](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L551)
 
 Resolve a topic or identifier to the underlying category definition.
 
@@ -65,13 +66,13 @@ Resolve a topic or identifier to the underlying category definition.
 
 [`BusinessCategory`](../interfaces/BusinessCategory.md)
 
-***
+---
 
 ### getCategoryConfig()
 
 > **getCategoryConfig**(`topicOrId`): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:566](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L566)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:566](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L566)
 
 Access category configuration metadata such as relationships.
 
@@ -117,13 +118,13 @@ Access category configuration metadata such as relationships.
 
 > **updateCadence**: `string`
 
-***
+---
 
 ### getCategoryRecordHash()
 
 > **getCategoryRecordHash**(`topicOrId`): `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:606](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L606)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:606](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L606)
 
 Compute a deterministic hash of the records for change detection.
 
@@ -141,13 +142,13 @@ Category identifier or alias whose records should be hashed.
 
 - SHA-1 hash representing the current record contents.
 
-***
+---
 
 ### getCategorySchemas()
 
 > **getCategorySchemas**(`topicOrId`): [`CategorySchema`](../interfaces/CategorySchema.md)[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:571](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L571)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:571](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L571)
 
 Access the JSON schemas associated with a category.
 
@@ -161,13 +162,13 @@ Access the JSON schemas associated with a category.
 
 [`CategorySchema`](../interfaces/CategorySchema.md)[]
 
-***
+---
 
 ### getDatasetCatalogue()
 
 > **getDatasetCatalogue**(): [`DatasetCatalogueEntry`](../interfaces/DatasetCatalogueEntry.md)[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:745](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L745)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:745](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L745)
 
 Expose the consolidated dataset catalogue built from the data directory.
 
@@ -175,13 +176,13 @@ Expose the consolidated dataset catalogue built from the data directory.
 
 [`DatasetCatalogueEntry`](../interfaces/DatasetCatalogueEntry.md)[]
 
-***
+---
 
 ### getDatasetFingerprint()
 
 > **getDatasetFingerprint**(): `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:616](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L616)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:616](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L616)
 
 Expose the dataset fingerprint used to detect catalogue changes.
 
@@ -191,13 +192,13 @@ Expose the dataset fingerprint used to detect catalogue changes.
 
 - SHA-1 fingerprint of the consolidated dataset catalogue.
 
-***
+---
 
 ### getEntityConnections()
 
 > **getEntityConnections**(`topicOrId`, `recordId`): [`EntityConnections`](../interfaces/EntityConnections.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:716](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L716)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:716](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L716)
 
 Resolve relationships for a given record across categories.
 
@@ -215,13 +216,13 @@ Resolve relationships for a given record across categories.
 
 [`EntityConnections`](../interfaces/EntityConnections.md)
 
-***
+---
 
 ### getExamples()
 
 > **getExamples**(`topicOrId`): [`ExampleDataset`](../interfaces/ExampleDataset.md)[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:581](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L581)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:581](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L581)
 
 Fetch example datasets included inside the category folder.
 
@@ -235,13 +236,13 @@ Fetch example datasets included inside the category folder.
 
 [`ExampleDataset`](../interfaces/ExampleDataset.md)[]
 
-***
+---
 
 ### getFolderBlueprint()
 
 > **getFolderBlueprint**(`topicOrId`): [`FolderBlueprint`](../interfaces/FolderBlueprint.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:561](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L561)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:561](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L561)
 
 Retrieve the folder blueprint for a given topic.
 
@@ -255,13 +256,13 @@ Retrieve the folder blueprint for a given topic.
 
 [`FolderBlueprint`](../interfaces/FolderBlueprint.md)
 
-***
+---
 
 ### getOrCreateSnapshot()
 
 > **getOrCreateSnapshot**(`topicOrId`): `Promise`\<[`CategorySnapshot`](../interfaces/CategorySnapshot.md)\>
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:677](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L677)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:677](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L677)
 
 Build a snapshot view of a category and persist it to the shared cache.
 
@@ -275,13 +276,13 @@ Build a snapshot view of a category and persist it to the shared cache.
 
 `Promise`\<[`CategorySnapshot`](../interfaces/CategorySnapshot.md)\>
 
-***
+---
 
 ### getQueries()
 
 > **getQueries**(`topicOrId`): [`RemoteQueryBlueprint`](../interfaces/RemoteQueryBlueprint.md)[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:591](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L591)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:591](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L591)
 
 Retrieve query blueprints that demonstrate how to call the authoritative upstream system.
 
@@ -295,13 +296,13 @@ Retrieve query blueprints that demonstrate how to call the authoritative upstrea
 
 [`RemoteQueryBlueprint`](../interfaces/RemoteQueryBlueprint.md)[]
 
-***
+---
 
 ### getRecord()
 
 > **getRecord**(`topicOrId`, `recordId`): [`CategoryRecord`](../type-aliases/CategoryRecord.md) \| `undefined`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:621](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L621)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:621](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L621)
 
 Retrieve a single record by identifier.
 
@@ -319,13 +320,13 @@ Retrieve a single record by identifier.
 
 [`CategoryRecord`](../type-aliases/CategoryRecord.md) \| `undefined`
 
-***
+---
 
 ### getRecords()
 
 > **getRecords**(`topicOrId`): [`CategoryRecord`](../type-aliases/CategoryRecord.md)[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:596](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L596)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:596](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L596)
 
 Return all records stored in the local mock dataset for a category.
 
@@ -339,13 +340,13 @@ Return all records stored in the local mock dataset for a category.
 
 [`CategoryRecord`](../type-aliases/CategoryRecord.md)[]
 
-***
+---
 
 ### getTypeDefinitions()
 
 > **getTypeDefinitions**(`topicOrId`): [`TypeDefinition`](../interfaces/TypeDefinition.md)[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:576](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L576)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:576](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L576)
 
 Retrieve structured type definitions provided as guidance for SDK authors.
 
@@ -359,13 +360,13 @@ Retrieve structured type definitions provided as guidance for SDK authors.
 
 [`TypeDefinition`](../interfaces/TypeDefinition.md)[]
 
-***
+---
 
 ### getValidationReport()
 
 > **getValidationReport**(`topicOrId`): [`DataValidationReport`](../interfaces/DataValidationReport.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:586](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L586)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:586](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L586)
 
 Retrieve the validation report generated for the category data.
 
@@ -379,13 +380,13 @@ Retrieve the validation report generated for the category data.
 
 [`DataValidationReport`](../interfaces/DataValidationReport.md)
 
-***
+---
 
 ### listCategories()
 
 > **listCategories**(): [`CategorySummary`](../interfaces/CategorySummary.md)[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:542](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L542)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:542](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L542)
 
 Enumerate the categories available to the MCP client.
 
@@ -393,13 +394,13 @@ Enumerate the categories available to the MCP client.
 
 [`CategorySummary`](../interfaces/CategorySummary.md)[]
 
-***
+---
 
 ### searchAcrossCategories()
 
 > **searchAcrossCategories**(`keyword`): `object`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:626](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L626)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:626](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L626)
 
 Perform a keyword search across every category.
 
@@ -412,7 +413,6 @@ Perform a keyword search across every category.
 #### Returns
 
 `object`[]
-
 
 ## Summary
 

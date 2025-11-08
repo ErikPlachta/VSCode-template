@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / DataAgentInterface
 
 # Interface: DataAgentInterface
 
-Defined in: [src/agent/interfaces.ts:102](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L102)
+Defined in: [src/agent/interfaces.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L102)
 
 ## Methods
 
@@ -31,7 +32,7 @@ Defined in: [src/agent/interfaces.ts:102](https://github.com/ErikPlachta/VSCode-
 
 > **analyzeConnection**(`sourceData`, `targetData`, `relationship`): `Promise`\<[`CrossCategoryConnection`](CrossCategoryConnection.md)\>
 
-Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L109)
+Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L109)
 
 #### Parameters
 
@@ -51,13 +52,13 @@ Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/VSCode-
 
 `Promise`\<[`CrossCategoryConnection`](CrossCategoryConnection.md)\>
 
-***
+---
 
 ### analyzeData()
 
 > **analyzeData**(`input`): `Promise`\<[`DataInsight`](DataInsight.md)[]\>
 
-Defined in: [src/agent/interfaces.ts:103](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L103)
+Defined in: [src/agent/interfaces.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L103)
 
 #### Parameters
 
@@ -69,13 +70,13 @@ Defined in: [src/agent/interfaces.ts:103](https://github.com/ErikPlachta/VSCode-
 
 `Promise`\<[`DataInsight`](DataInsight.md)[]\>
 
-***
+---
 
 ### generateExplorationPlan()
 
 > **generateExplorationPlan**(`categoryId`, `question`, `availableData`): `Promise`\<[`ExplorationPlan`](ExplorationPlan.md)\>
 
-Defined in: [src/agent/interfaces.ts:104](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L104)
+Defined in: [src/agent/interfaces.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L104)
 
 #### Parameters
 
@@ -95,13 +96,13 @@ Defined in: [src/agent/interfaces.ts:104](https://github.com/ErikPlachta/VSCode-
 
 `Promise`\<[`ExplorationPlan`](ExplorationPlan.md)\>
 
-***
+---
 
 ### searchData()
 
 > **searchData**(`keyword`, `data`): [`TopicSearchResult`](TopicSearchResult.md)[]
 
-Defined in: [src/agent/interfaces.ts:114](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L114)
+Defined in: [src/agent/interfaces.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L114)
 
 #### Parameters
 
@@ -116,7 +117,6 @@ Defined in: [src/agent/interfaces.ts:114](https://github.com/ErikPlachta/VSCode-
 #### Returns
 
 [`TopicSearchResult`](TopicSearchResult.md)[]
-
 
 ## Summary
 

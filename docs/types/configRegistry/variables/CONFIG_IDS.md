@@ -15,42 +15,44 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG\_IDS
+[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG_IDS
 
-# Variable: CONFIG\_IDS
+# Variable: CONFIG_IDS
 
-> `const` **CONFIG\_IDS**: `object`
+> `const` **CONFIG_IDS**: `object`
 
-Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L23)
+Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L23)
 
 Configuration ID format: agent.{agentType}.v{major}.{minor}.{patch}
 
 Examples:
+
 - agent.orchestrator.v1.0.0
 - agent.database.v1.2.0
 - agent.clarification.v2.0.0
 
 ## Type Declaration
 
-### CLARIFICATION\_AGENT
+### CLARIFICATION_AGENT
 
-> `readonly` **CLARIFICATION\_AGENT**: `"agent.clarification.v1.0.0"` = `"agent.clarification.v1.0.0"`
+> `readonly` **CLARIFICATION_AGENT**: `"agent.clarification.v1.0.0"` = `"agent.clarification.v1.0.0"`
 
 Clarification agent configuration schema
 
-### DATA\_AGENT
+### DATA_AGENT
 
-> `readonly` **DATA\_AGENT**: `"agent.data.v1.0.0"` = `"agent.data.v1.0.0"`
+> `readonly` **DATA_AGENT**: `"agent.data.v1.0.0"` = `"agent.data.v1.0.0"`
 
 Data agent configuration schema
 
-### DATABASE\_AGENT
+### DATABASE_AGENT
 
-> `readonly` **DATABASE\_AGENT**: `"agent.database.v1.0.0"` = `"agent.database.v1.0.0"`
+> `readonly` **DATABASE_AGENT**: `"agent.database.v1.0.0"` = `"agent.database.v1.0.0"`
 
 Database agent configuration schema
 
@@ -60,18 +62,17 @@ Database agent configuration schema
 
 Orchestrator agent configuration schema
 
-### RELEVANT\_DATA\_MANAGER
+### RELEVANT_DATA_MANAGER
 
-> `readonly` **RELEVANT\_DATA\_MANAGER**: `"agent.relevant-data-manager.v1.0.0"` = `"agent.relevant-data-manager.v1.0.0"`
+> `readonly` **RELEVANT_DATA_MANAGER**: `"agent.relevant-data-manager.v1.0.0"` = `"agent.relevant-data-manager.v1.0.0"`
 
 Relevant data manager agent configuration schema
 
-### REPOSITORY\_HEALTH
+### REPOSITORY_HEALTH
 
-> `readonly` **REPOSITORY\_HEALTH**: `"agent.repository-health.v1.0.0"` = `"agent.repository-health.v1.0.0"`
+> `readonly` **REPOSITORY_HEALTH**: `"agent.repository-health.v1.0.0"` = `"agent.repository-health.v1.0.0"`
 
 Repository health agent configuration schema
-
 
 ## Summary
 

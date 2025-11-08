@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ClarificationConfig
 
 # Interface: ClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:260](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L260)
+Defined in: [src/types/agentConfig.ts:260](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L260)
 
 Clarification agent-specific configuration
 
@@ -33,7 +34,7 @@ Clarification agent-specific configuration
 
 > `optional` **contextAnalysis**: `object`
 
-Defined in: [src/types/agentConfig.ts:296](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L296)
+Defined in: [src/types/agentConfig.ts:296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L296)
 
 #### contextConfidenceThreshold?
 
@@ -55,13 +56,13 @@ Defined in: [src/types/agentConfig.ts:296](https://github.com/ErikPlachta/VSCode
 
 > `optional` **suggestQueryStructure**: `boolean`
 
-***
+---
 
 ### escalation
 
 > **escalation**: `object`
 
-Defined in: [src/types/agentConfig.ts:274](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L274)
+Defined in: [src/types/agentConfig.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L274)
 
 #### clarificationTimeWindow?
 
@@ -83,13 +84,13 @@ Defined in: [src/types/agentConfig.ts:274](https://github.com/ErikPlachta/VSCode
 
 > `optional` **suggestHumanSupportAfterMaxRounds**: `boolean`
 
-***
+---
 
 ### guidance
 
 > **guidance**: `object`
 
-Defined in: [src/types/agentConfig.ts:261](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L261)
+Defined in: [src/types/agentConfig.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L261)
 
 #### guidanceTypes?
 
@@ -131,13 +132,13 @@ Defined in: [src/types/agentConfig.ts:261](https://github.com/ErikPlachta/VSCode
 
 > `optional` **suggestAlternativePhrasings**: `boolean`
 
-***
+---
 
 ### knowledgeBase
 
 > **knowledgeBase**: `object`
 
-Defined in: [src/types/agentConfig.ts:281](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L281)
+Defined in: [src/types/agentConfig.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L281)
 
 #### enableKnowledgeRanking?
 
@@ -163,13 +164,13 @@ Defined in: [src/types/agentConfig.ts:281](https://github.com/ErikPlachta/VSCode
 
 > **relevanceThreshold**: `number`
 
-***
+---
 
 ### performance?
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:303](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L303)
+Defined in: [src/types/agentConfig.ts:303](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L303)
 
 #### enableParallelProcessing?
 
@@ -191,13 +192,13 @@ Defined in: [src/types/agentConfig.ts:303](https://github.com/ErikPlachta/VSCode
 
 > `optional` **responseCacheTTL**: `number`
 
-***
+---
 
 ### routing?
 
 > `optional` **routing**: `object`
 
-Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L289)
+Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L289)
 
 #### analyzeMissingSignals?
 
@@ -218,7 +219,6 @@ Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/VSCode
 #### suggestAlternativeAgents?
 
 > `optional` **suggestAlternativeAgents**: `boolean`
-
 
 ## Summary
 

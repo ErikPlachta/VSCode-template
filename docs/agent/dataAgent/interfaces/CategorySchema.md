@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / CategorySchema
 
 # Interface: CategorySchema
 
-Defined in: [src/agent/dataAgent/index.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L22)
+Defined in: [src/agent/dataAgent/index.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L22)
 
 ## Properties
 
@@ -31,16 +32,15 @@ Defined in: [src/agent/dataAgent/index.ts:22](https://github.com/ErikPlachta/VSC
 
 > **name**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L23)
+Defined in: [src/agent/dataAgent/index.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L23)
 
-***
+---
 
 ### schema
 
 > **schema**: `unknown`
 
-Defined in: [src/agent/dataAgent/index.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L24)
-
+Defined in: [src/agent/dataAgent/index.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L24)
 
 ## Summary
 

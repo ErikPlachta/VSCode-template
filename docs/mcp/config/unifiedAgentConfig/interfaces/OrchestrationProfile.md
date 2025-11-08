@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / OrchestrationProfile
 
 # Interface: OrchestrationProfile
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L18)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L18)
 
 Lightweight agent profile for orchestration logic
 
@@ -33,40 +34,39 @@ Lightweight agent profile for orchestration logic
 
 > `readonly` **description**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L21)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L21)
 
-***
+---
 
 ### escalateWhen
 
 > `readonly` **escalateWhen**: `string`[]
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L23)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L23)
 
-***
+---
 
 ### id
 
 > `readonly` **id**: [`AgentIdentifier`](../type-aliases/AgentIdentifier.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L19)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L19)
 
-***
+---
 
 ### primarySignals
 
 > `readonly` **primarySignals**: `string`[]
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L22)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L22)
 
-***
+---
 
 ### title
 
 > `readonly` **title**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:20](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L20)
-
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L20)
 
 ## Summary
 

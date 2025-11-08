@@ -157,6 +157,8 @@ export const CONFIG_REGISTRY: Record<string, ConfigMetadata> = {
 export const ConfigUtils = {
   /**
    * Validate that a configuration ID exists in the registry
+   *
+   * @param configId
    */
   isValidConfigId(configId: string): boolean {
     return configId in CONFIG_REGISTRY;
@@ -164,6 +166,8 @@ export const ConfigUtils = {
 
   /**
    * Get metadata for a configuration ID
+   *
+   * @param configId
    */
   getMetadata(configId: string): ConfigMetadata | undefined {
     return CONFIG_REGISTRY[configId];
@@ -171,6 +175,8 @@ export const ConfigUtils = {
 
   /**
    * Parse version information from a configuration ID
+   *
+   * @param configId
    */
   parseVersion(
     configId: string
@@ -181,6 +187,9 @@ export const ConfigUtils = {
 
   /**
    * Check if two configuration IDs are compatible (same agent type, compatible version)
+   *
+   * @param configId1
+   * @param configId2
    */
   areCompatible(configId1: string, configId2: string): boolean {
     const meta1 = this.getMetadata(configId1);
@@ -195,6 +204,8 @@ export const ConfigUtils = {
 
   /**
    * Get all configuration IDs for a specific agent type
+   *
+   * @param agentType
    */
   getConfigsForAgent(agentType: string): string[] {
     return Object.keys(CONFIG_REGISTRY).filter(
@@ -204,6 +215,11 @@ export const ConfigUtils = {
 
   /**
    * Generate a new configuration ID for an agent type and version
+   *
+   * @param agentType
+   * @param major
+   * @param minor
+   * @param patch
    */
   generateConfigId(
     agentType: string,
@@ -224,6 +240,7 @@ export type ConfigId = (typeof CONFIG_IDS)[keyof typeof CONFIG_IDS];
  * Validation function for configuration objects
  *
  * @param {{ $configId?: string }} config - config parameter.
+ * @param config.$configId
  * @returns {boolean} - TODO: describe return value.
  */
 export function validateConfig(config: { $configId?: string }): boolean {

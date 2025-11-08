@@ -23,6 +23,9 @@ export function registerMcpProvider(
     "mybusiness-local",
     {
       onDidChangeMcpServerDefinitions: emitter.event,
+      /**
+       *
+       */
       provideMcpServerDefinitions: async () => {
         // Provide a stdio server definition that runs our Node.js server
         const extensionPath = context.extensionPath;

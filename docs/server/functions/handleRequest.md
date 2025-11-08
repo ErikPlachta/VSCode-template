@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../modules.md) / [server](../README.md) / handleRequest
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **handleRequest**(`req`, `res`): `Promise`\<`void`\>
 
-Defined in: [src/server/index.ts:198](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/server/index.ts#L198)
+Defined in: [src/server/index.ts:198](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/server/index.ts#L198)
 
 ## Parameters
 
@@ -40,7 +41,6 @@ Defined in: [src/server/index.ts:198](https://github.com/ErikPlachta/VSCode-temp
 ## Returns
 
 `Promise`\<`void`\>
-
 
 ## Summary
 

@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [agent/dataAgent/agent.config](../README.md) / dataAgentConfig
 
@@ -25,14 +26,13 @@ hierarchy:
 
 > `const` **dataAgentConfig**: [`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)
 
-Defined in: [src/agent/dataAgent/agent.config.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/agent.config.ts#L22)
+Defined in: [src/agent/dataAgent/agent.config.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/agent.config.ts#L22)
 
 Complete configuration for the Data Agent
 
 The data agent excels at high-level analysis, insight generation, and strategic
 data exploration planning. It helps users understand complex relationships
 and discover actionable patterns in their business data.
-
 
 ## Summary
 

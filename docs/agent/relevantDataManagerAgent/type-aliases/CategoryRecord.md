@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / CategoryRecord
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **CategoryRecord** = `Record`\<`string`, `unknown`\> & `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:151](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L151)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L151)
 
 Minimal representation of a record stored under a category.
 
@@ -42,7 +43,6 @@ Minimal representation of a record stored under a category.
 ### title?
 
 > `optional` **title**: `string`
-
 
 ## Summary
 

@@ -94,13 +94,13 @@ export class DatabaseAgent {
   private readonly config: DatabaseAgentConfig;
 
     /**
- * Creates a new DatabaseAgent instance.
- *
- * @param {DataSource[]} dataSources - dataSources parameter.
- * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
- * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+     * Creates a new DatabaseAgent instance.
+     *
+     * @param {DataSource[]} dataSources - dataSources parameter.
+     * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
+     * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
+     * @returns {unknown} - TODO: describe return value.
+     */
 constructor(
     dataSources: DataSource[],
     cacheDirectory: Promise<string>,
@@ -114,14 +114,14 @@ constructor(
   }
 
     /**
- * Executes a generic query against any data source.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @param {Record<string, unknown>} criteria - criteria parameter.
- * @param {QueryOptions} options - options parameter.
- * @returns {Promise<CategoryRecord[]>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Executes a generic query against any data source.
+     *
+     * @param {CategoryId} categoryId - categoryId parameter.
+     * @param {Record<string, unknown>} criteria - criteria parameter.
+     * @param {QueryOptions} options - options parameter.
+     * @returns {Promise<CategoryRecord[]>} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 async executeQuery(
     categoryId: CategoryId,
     criteria: Record<string, unknown> = {},
@@ -192,30 +192,30 @@ async executeQuery(
   }
 
     /**
- * Gets available data sources.
- *
- * @returns {CategoryId[]} - TODO: describe return value.
- */
+     * Gets available data sources.
+     *
+     * @returns {CategoryId[]} - TODO: describe return value.
+     */
 getAvailableCategories(): CategoryId[] {
     return Array.from(this.dataSources.keys());
   }
 
     /**
- * Gets metadata for a specific data source.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {DataSource | undefined} - TODO: describe return value.
- */
+     * Gets metadata for a specific data source.
+     *
+     * @param {CategoryId} categoryId - categoryId parameter.
+     * @returns {DataSource | undefined} - TODO: describe return value.
+     */
 getCategoryInfo(categoryId: CategoryId): DataSource | undefined {
     return this.dataSources.get(categoryId);
   }
 
     /**
- * Clears cached results for a specific category.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {Promise<void>} - TODO: describe return value.
- */
+     * Clears cached results for a specific category.
+     *
+     * @param {CategoryId} categoryId - categoryId parameter.
+     * @returns {Promise<void>} - TODO: describe return value.
+     */
 async clearCache(categoryId: CategoryId): Promise<void> {
     const cacheDir = await this.cacheDirectory;
     const pattern = this.buildCacheKey(categoryId, {});
@@ -225,12 +225,12 @@ async clearCache(categoryId: CategoryId): Promise<void> {
   }
 
     /**
- * Filters records based on generic criteria.
- *
- * @param {DataSource} dataSource - dataSource parameter.
- * @param {Record<string, unknown>} criteria - criteria parameter.
- * @returns {CategoryRecord[]} - TODO: describe return value.
- */
+     * Filters records based on generic criteria.
+     *
+     * @param {DataSource} dataSource - dataSource parameter.
+     * @param {Record<string, unknown>} criteria - criteria parameter.
+     * @returns {CategoryRecord[]} - TODO: describe return value.
+     */
 private filterRecords(
     dataSource: DataSource,
     criteria: Record<string, unknown>
@@ -251,13 +251,13 @@ private filterRecords(
   }
 
     /**
- * Checks if a record matches specific criteria.
- *
- * @param {CategoryRecord} record - record parameter.
- * @param {string} field - field parameter.
- * @param {unknown} value - value parameter.
- * @returns {boolean} - TODO: describe return value.
- */
+     * Checks if a record matches specific criteria.
+     *
+     * @param {CategoryRecord} record - record parameter.
+     * @param {string} field - field parameter.
+     * @param {unknown} value - value parameter.
+     * @returns {boolean} - TODO: describe return value.
+     */
 private matchesCriteria(
     record: CategoryRecord,
     field: string,
@@ -353,13 +353,13 @@ private matchesCriteria(
   }
 
     /**
- * Builds a stable cache key for a query.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @param {Record<string, unknown>} criteria - criteria parameter.
- * @param {string} prefix - prefix parameter.
- * @returns {string} - TODO: describe return value.
- */
+     * Builds a stable cache key for a query.
+     *
+     * @param {CategoryId} categoryId - categoryId parameter.
+     * @param {Record<string, unknown>} criteria - criteria parameter.
+     * @param {string} prefix - prefix parameter.
+     * @returns {string} - TODO: describe return value.
+     */
 private buildCacheKey(
     categoryId: CategoryId,
     criteria: Record<string, unknown>,
@@ -385,11 +385,11 @@ private buildCacheKey(
   }
 
     /**
- * Retrieves cached query result.
- *
- * @param {string} cacheKey - cacheKey parameter.
- * @returns {Promise<CategoryRecord[] | null>} - TODO: describe return value.
- */
+     * Retrieves cached query result.
+     *
+     * @param {string} cacheKey - cacheKey parameter.
+     * @returns {Promise<CategoryRecord[] | null>} - TODO: describe return value.
+     */
 private async getCachedResult(
     cacheKey: string
   ): Promise<CategoryRecord[] | null> {
@@ -406,12 +406,12 @@ private async getCachedResult(
   }
 
     /**
- * Stores query result in cache.
- *
- * @param {string} cacheKey - cacheKey parameter.
- * @param {CategoryRecord[]} results - results parameter.
- * @returns {Promise<void>} - TODO: describe return value.
- */
+     * Stores query result in cache.
+     *
+     * @param {string} cacheKey - cacheKey parameter.
+     * @param {CategoryRecord[]} results - results parameter.
+     * @returns {Promise<void>} - TODO: describe return value.
+     */
 private async cacheResult(
     cacheKey: string,
     results: CategoryRecord[]

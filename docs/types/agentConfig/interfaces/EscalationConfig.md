@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / EscalationConfig
 
 # Interface: EscalationConfig
 
-Defined in: [src/types/agentConfig.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L41)
+Defined in: [src/types/agentConfig.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L41)
 
 Escalation configuration
 
@@ -33,32 +34,31 @@ Escalation configuration
 
 > **conditions**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L42)
+Defined in: [src/types/agentConfig.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L42)
 
-***
+---
 
 ### fallbackAgent
 
 > **fallbackAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L43)
+Defined in: [src/types/agentConfig.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L43)
 
-***
+---
 
 ### maxRetries
 
 > **maxRetries**: `number`
 
-Defined in: [src/types/agentConfig.ts:44](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L44)
+Defined in: [src/types/agentConfig.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L44)
 
-***
+---
 
 ### vaguePhrases?
 
 > `optional` **vaguePhrases**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L45)
-
+Defined in: [src/types/agentConfig.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L45)
 
 ## Summary
 

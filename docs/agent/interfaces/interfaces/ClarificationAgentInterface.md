@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / ClarificationAgentInterface
 
 # Interface: ClarificationAgentInterface
 
-Defined in: [src/agent/interfaces.ts:189](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L189)
+Defined in: [src/agent/interfaces.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L189)
 
 ## Methods
 
@@ -31,7 +32,7 @@ Defined in: [src/agent/interfaces.ts:189](https://github.com/ErikPlachta/VSCode-
 
 > **clarify**(`input`): `Promise`\<[`ClarificationResponse`](ClarificationResponse.md)\>
 
-Defined in: [src/agent/interfaces.ts:190](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L190)
+Defined in: [src/agent/interfaces.ts:190](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L190)
 
 #### Parameters
 
@@ -42,7 +43,6 @@ Defined in: [src/agent/interfaces.ts:190](https://github.com/ErikPlachta/VSCode-
 #### Returns
 
 `Promise`\<[`ClarificationResponse`](ClarificationResponse.md)\>
-
 
 ## Summary
 

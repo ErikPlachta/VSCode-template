@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/prompts](../README.md) / ClarificationPromptOptions
 
 # Interface: ClarificationPromptOptions
 
-Defined in: [src/mcp/prompts/index.ts:48](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L48)
+Defined in: [src/mcp/prompts/index.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L48)
 
 ## Properties
 
@@ -31,7 +32,7 @@ Defined in: [src/mcp/prompts/index.ts:48](https://github.com/ErikPlachta/VSCode-
 
 > `optional` **knowledgeSnippets**: `object`[]
 
-Defined in: [src/mcp/prompts/index.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L52)
+Defined in: [src/mcp/prompts/index.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L52)
 
 #### source
 
@@ -41,30 +42,29 @@ Defined in: [src/mcp/prompts/index.ts:52](https://github.com/ErikPlachta/VSCode-
 
 > **summary**: `string`
 
-***
+---
 
 ### manifest
 
 > **manifest**: [`AgentCapabilityMetadata`](../../config/agentManifest/interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/prompts/index.ts:50](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L50)
+Defined in: [src/mcp/prompts/index.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L50)
 
-***
+---
 
 ### missingSignals?
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/mcp/prompts/index.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L51)
+Defined in: [src/mcp/prompts/index.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L51)
 
-***
+---
 
 ### question
 
 > **question**: `string`
 
-Defined in: [src/mcp/prompts/index.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L49)
-
+Defined in: [src/mcp/prompts/index.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L49)
 
 ## Summary
 

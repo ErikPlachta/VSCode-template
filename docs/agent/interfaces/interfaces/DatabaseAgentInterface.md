@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / DatabaseAgentInterface
 
 # Interface: DatabaseAgentInterface
 
-Defined in: [src/agent/interfaces.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L39)
+Defined in: [src/agent/interfaces.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L39)
 
 ## Methods
 
@@ -31,7 +32,7 @@ Defined in: [src/agent/interfaces.ts:39](https://github.com/ErikPlachta/VSCode-t
 
 > **executeQuery**(`categoryId`, `criteria`, `options?`): `Promise`\<[`CategoryRecord`](CategoryRecord.md)[]\>
 
-Defined in: [src/agent/interfaces.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L40)
+Defined in: [src/agent/interfaces.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L40)
 
 #### Parameters
 
@@ -56,7 +57,6 @@ Defined in: [src/agent/interfaces.ts:40](https://github.com/ErikPlachta/VSCode-t
 #### Returns
 
 `Promise`\<[`CategoryRecord`](CategoryRecord.md)[]\>
-
 
 ## Summary
 

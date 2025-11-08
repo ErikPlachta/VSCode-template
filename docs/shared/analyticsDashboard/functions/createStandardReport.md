@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsDashboard](../README.md) / createStandardReport
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **createStandardReport**(`summary`, `startDate`, `endDate`): `string`
 
-Defined in: [src/shared/analyticsDashboard.ts:339](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L339)
+Defined in: [src/shared/analyticsDashboard.ts:339](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsDashboard.ts#L339)
 
 Creates a standard analytics report with default options.
 
@@ -48,7 +49,6 @@ Creates a standard analytics report with default options.
 `string`
 
 - Generated Markdown report.
-
 
 ## Summary
 

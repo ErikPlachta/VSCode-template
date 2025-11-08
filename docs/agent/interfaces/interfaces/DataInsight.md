@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / DataInsight
 
 # Interface: DataInsight
 
-Defined in: [src/agent/interfaces.ts:62](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L62)
+Defined in: [src/agent/interfaces.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L62)
 
 ## Properties
 
@@ -31,40 +32,39 @@ Defined in: [src/agent/interfaces.ts:62](https://github.com/ErikPlachta/VSCode-t
 
 > `optional` **affectedRecords**: `string`[]
 
-Defined in: [src/agent/interfaces.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L73)
+Defined in: [src/agent/interfaces.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L73)
 
-***
+---
 
 ### category
 
 > **category**: `string`
 
-Defined in: [src/agent/interfaces.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L72)
+Defined in: [src/agent/interfaces.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L72)
 
-***
+---
 
 ### confidence
 
 > **confidence**: `number`
 
-Defined in: [src/agent/interfaces.ts:71](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L71)
+Defined in: [src/agent/interfaces.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L71)
 
-***
+---
 
 ### description
 
 > **description**: `string`
 
-Defined in: [src/agent/interfaces.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L70)
+Defined in: [src/agent/interfaces.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L70)
 
-***
+---
 
 ### type
 
 > **type**: `"pattern"` \| `"anomaly"` \| `"correlation"` \| `"trend"` \| `"opportunity"` \| `"risk"`
 
-Defined in: [src/agent/interfaces.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L63)
-
+Defined in: [src/agent/interfaces.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L63)
 
 ## Summary
 

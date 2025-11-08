@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / CategoryRecord
 
 # Interface: CategoryRecord
 
-Defined in: [src/agent/interfaces.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L12)
+Defined in: [src/agent/interfaces.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L12)
 
 ## Indexable
 
@@ -35,8 +36,7 @@ Defined in: [src/agent/interfaces.ts:12](https://github.com/ErikPlachta/VSCode-t
 
 > **id**: `string`
 
-Defined in: [src/agent/interfaces.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L13)
-
+Defined in: [src/agent/interfaces.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L13)
 
 ## Summary
 

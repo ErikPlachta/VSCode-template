@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/prompts](../README.md) / EscalationPromptOptions
 
 # Interface: EscalationPromptOptions
 
-Defined in: [src/mcp/prompts/index.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L9)
+Defined in: [src/mcp/prompts/index.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L9)
 
 ## Properties
 
@@ -31,32 +32,31 @@ Defined in: [src/mcp/prompts/index.ts:9](https://github.com/ErikPlachta/VSCode-t
 
 > `optional` **additionalGuidance**: `string`
 
-Defined in: [src/mcp/prompts/index.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L13)
+Defined in: [src/mcp/prompts/index.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L13)
 
-***
+---
 
 ### manifest?
 
 > `optional` **manifest**: [`AgentCapabilityMetadata`](../../config/agentManifest/interfaces/AgentCapabilityMetadata.md) \| `null`
 
-Defined in: [src/mcp/prompts/index.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L12)
+Defined in: [src/mcp/prompts/index.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L12)
 
-***
+---
 
 ### missingSignals?
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/mcp/prompts/index.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L11)
+Defined in: [src/mcp/prompts/index.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L11)
 
-***
+---
 
 ### topic?
 
 > `optional` **topic**: `string`
 
-Defined in: [src/mcp/prompts/index.ts:10](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L10)
-
+Defined in: [src/mcp/prompts/index.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L10)
 
 ## Summary
 

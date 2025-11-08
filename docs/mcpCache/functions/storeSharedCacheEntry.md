@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / storeSharedCacheEntry
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **storeSharedCacheEntry**\<`T`\>(`cacheDir`, `entry`): `Promise`\<`void`\>
 
-Defined in: [src/extension/mcpCache.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L98)
+Defined in: [src/extension/mcpCache.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L98)
 
 Persist a shared cache entry that can be re-used by other MCP tools.
 
@@ -58,7 +59,6 @@ Payload to store on disk.
 ## Throws
 
 - When the entry cannot be persisted.
-
 
 ## Summary
 

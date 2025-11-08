@@ -26,7 +26,7 @@ hierarchy:
 
 > **NormalizeSchemaName**(`name`): `string`
 
-Defined in: [src/mcp/schemaUtils.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L23)
+Defined in: [src/mcp/schemaUtils.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L23)
 
 ## Parameters
 

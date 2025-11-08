@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / DataValidationIssue
 
 # Interface: DataValidationIssue
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:113](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L113)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L113)
 
 Issue detected while validating the raw data set for a category.
 
@@ -33,50 +34,49 @@ Issue detected while validating the raw data set for a category.
 
 > `optional` **field**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:119](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L119)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:119](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L119)
 
 Field that failed validation if available.
 
-***
+---
 
 ### message
 
 > **message**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:121](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L121)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:121](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L121)
 
 Detailed error message.
 
-***
+---
 
 ### recordId
 
 > **recordId**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:115](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L115)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L115)
 
 Identifier for the record that failed validation.
 
-***
+---
 
 ### schema?
 
 > `optional` **schema**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:117](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L117)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L117)
 
 Optional schema name that triggered the error.
 
-***
+---
 
 ### type
 
 > **type**: `"schema"` \| `"relationship"`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:123](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L123)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L123)
 
 Type of validation that generated the issue.
-
 
 ## Summary
 

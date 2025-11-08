@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [agent/relevantDataManagerAgent/agent.config](../README.md) / relevantDataManagerAgentConfig
 
@@ -25,14 +26,13 @@ hierarchy:
 
 > `const` **relevantDataManagerAgentConfig**: [`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/agent.config.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/agent.config.ts#L22)
+Defined in: [src/agent/relevantDataManagerAgent/agent.config.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/agent.config.ts#L22)
 
 Complete configuration for the Relevant Data Manager Agent
 
 The relevant data manager is responsible for the core data infrastructure,
 maintaining category definitions, schema validation, data quality, and
 serving as the source of truth for all business data metadata.
-
 
 ## Summary
 

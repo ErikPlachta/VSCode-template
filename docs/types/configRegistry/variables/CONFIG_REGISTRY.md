@@ -15,20 +15,20 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG\_REGISTRY
+[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG_REGISTRY
 
-# Variable: CONFIG\_REGISTRY
+# Variable: CONFIG_REGISTRY
 
-> `const` **CONFIG\_REGISTRY**: `Record`\<`string`, [`ConfigMetadata`](../interfaces/ConfigMetadata.md)\>
+> `const` **CONFIG_REGISTRY**: `Record`\<`string`, [`ConfigMetadata`](../interfaces/ConfigMetadata.md)\>
 
-Defined in: [src/types/configRegistry.ts:79](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L79)
+Defined in: [src/types/configRegistry.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L79)
 
 Registry of all configuration metadata
-
 
 ## Summary
 

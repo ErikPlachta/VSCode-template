@@ -70,6 +70,24 @@ These notes teach AI coding agents how to work productively in this workspace. K
 
 ## Useful agent calls
 
+## Session continuity & changelog usage
+
+Use the root `CHANGELOG.md` as the authoritative resume pointer for Copilot Chat–managed engineering work. At session start:
+
+1. Read the `[Unreleased]` section.
+2. Ask the user whether to proceed with the top items (Planned) or re-prioritize.
+3. When completing an item, move details from `[Unreleased]` into a dated release section and ensure build/lint/tests pass before marking it done.
+4. Log new requests under `[Unreleased]` → Planned with concise scope notes and referenced file paths.
+5. Prefer incremental updates; avoid rewriting unrelated historical entries.
+
+Changelog grouping guide:
+
+- Planned: upcoming tasks not started.
+- Changed/Added/Fixed/Docs: in-progress or completed but not yet released.
+- Dated section: finalized, verified changes.
+
+Agents should prompt: “Resume from top Planned item or adjust priorities?” when ambiguity exists.
+
 - Quick metadata: `RelevantDataManagerAgent.getOrCreateSnapshot(topic)`.
 - Query records: `DatabaseAgent.executeQuery(categoryId, criteria, { useCache: true })`.
 - Shared cache: `ensureCacheDirectory()` + `storeSharedCacheEntry/readSharedCacheEntry` in `src/extension/mcpCache.ts`.

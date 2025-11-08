@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / AgentDefinition
 
 # Interface: AgentDefinition
 
-Defined in: [src/types/applicationConfig.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L60)
+Defined in: [src/types/applicationConfig.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L60)
 
 Agent definition with comprehensive metadata.
 
@@ -33,7 +34,7 @@ Agent definition with comprehensive metadata.
 
 > `optional` **applicationFacing**: `object`
 
-Defined in: [src/types/applicationConfig.ts:87](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L87)
+Defined in: [src/types/applicationConfig.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L87)
 
 Application-facing metadata for improved logging/logic.
 
@@ -103,83 +104,83 @@ Performance characteristics.
 
 Detailed technical description.
 
-***
+---
 
 ### capabilities
 
 > **capabilities**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L72)
+Defined in: [src/types/applicationConfig.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L72)
 
 List of capabilities this agent provides.
 
-***
+---
 
 ### className
 
 > **className**: `string`
 
-Defined in: [src/types/applicationConfig.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L70)
+Defined in: [src/types/applicationConfig.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L70)
 
 Class name used for instantiation.
 
-***
+---
 
 ### description
 
 > **description**: `string`
 
-Defined in: [src/types/applicationConfig.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L64)
+Defined in: [src/types/applicationConfig.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L64)
 
 Human-readable description of agent purpose.
 
-***
+---
 
 ### displayName
 
 > **displayName**: `string`
 
-Defined in: [src/types/applicationConfig.ts:68](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L68)
+Defined in: [src/types/applicationConfig.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L68)
 
 Formal display name for user interfaces.
 
-***
+---
 
 ### label
 
 > **label**: `string`
 
-Defined in: [src/types/applicationConfig.ts:66](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L66)
+Defined in: [src/types/applicationConfig.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L66)
 
 Short label for UI display and templates.
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/types/applicationConfig.ts:62](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L62)
+Defined in: [src/types/applicationConfig.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L62)
 
 Technical name used in code/imports.
 
-***
+---
 
 ### responsibility
 
 > **responsibility**: `string`
 
-Defined in: [src/types/applicationConfig.ts:74](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L74)
+Defined in: [src/types/applicationConfig.ts:74](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L74)
 
 Primary responsibility summary.
 
-***
+---
 
 ### userFacing?
 
 > `optional` **userFacing**: `object`
 
-Defined in: [src/types/applicationConfig.ts:76](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L76)
+Defined in: [src/types/applicationConfig.ts:76](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L76)
 
 User-facing metadata for enhanced UX.
 
@@ -206,7 +207,6 @@ Help text for users.
 > `optional` **useWhen**: `string`[]
 
 When users should use this agent.
-
 
 ## Summary
 

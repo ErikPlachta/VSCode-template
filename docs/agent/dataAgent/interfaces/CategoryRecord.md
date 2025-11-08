@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / CategoryRecord
 
 # Interface: CategoryRecord
 
-Defined in: [src/agent/dataAgent/index.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L17)
+Defined in: [src/agent/dataAgent/index.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L17)
 
 ## Indexable
 
@@ -35,8 +36,7 @@ Defined in: [src/agent/dataAgent/index.ts:17](https://github.com/ErikPlachta/VSC
 
 > **id**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L18)
-
+Defined in: [src/agent/dataAgent/index.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L18)
 
 ## Summary
 

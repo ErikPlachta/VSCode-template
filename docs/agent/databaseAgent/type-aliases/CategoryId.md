@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/databaseAgent](../README.md) / CategoryId
 
@@ -25,10 +26,9 @@ hierarchy:
 
 > **CategoryId** = `string`
 
-Defined in: [src/agent/databaseAgent/index.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L22)
+Defined in: [src/agent/databaseAgent/index.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L22)
 
 Identifier for a generic category or data source.
-
 
 ## Summary
 

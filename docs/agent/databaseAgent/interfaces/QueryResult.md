@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/databaseAgent](../README.md) / QueryResult
 
 # Interface: QueryResult
 
-Defined in: [src/agent/databaseAgent/index.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L41)
+Defined in: [src/agent/databaseAgent/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L41)
 
 Result metadata returned after executing a query.
 
@@ -33,32 +34,31 @@ Result metadata returned after executing a query.
 
 > **cached**: `boolean`
 
-Defined in: [src/agent/databaseAgent/index.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L45)
+Defined in: [src/agent/databaseAgent/index.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L45)
 
-***
+---
 
 ### categoryId
 
 > **categoryId**: `string`
 
-Defined in: [src/agent/databaseAgent/index.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L42)
+Defined in: [src/agent/databaseAgent/index.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L42)
 
-***
+---
 
 ### records
 
 > **records**: [`CategoryRecord`](CategoryRecord.md)[]
 
-Defined in: [src/agent/databaseAgent/index.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L43)
+Defined in: [src/agent/databaseAgent/index.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L43)
 
-***
+---
 
 ### totalCount
 
 > **totalCount**: `number`
 
-Defined in: [src/agent/databaseAgent/index.ts:44](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L44)
-
+Defined in: [src/agent/databaseAgent/index.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L44)
 
 ## Summary
 

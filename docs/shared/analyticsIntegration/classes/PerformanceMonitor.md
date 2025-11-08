@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
 
 # Class: PerformanceMonitor
 
-Defined in: [src/shared/analyticsIntegration.ts:144](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L144)
+Defined in: [src/shared/analyticsIntegration.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L144)
 
 Performance monitoring utility for critical operations.
 
@@ -33,7 +34,7 @@ Performance monitoring utility for critical operations.
 
 > **new PerformanceMonitor**(): `PerformanceMonitor`
 
-Defined in: [src/shared/analyticsIntegration.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L150)
+Defined in: [src/shared/analyticsIntegration.ts:150](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L150)
 
 Creates a new performance monitor instance.
 
@@ -47,7 +48,7 @@ Creates a new performance monitor instance.
 
 > **monitorDatabaseQuery**\<`T`\>(`queryType`, `query`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:162](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L162)
+Defined in: [src/shared/analyticsIntegration.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L162)
 
 Monitors the performance of a database query operation.
 
@@ -83,13 +84,13 @@ Monitors the performance of a database query operation.
 
 - Promise resolving to query result.
 
-***
+---
 
 ### monitorDataProcessing()
 
 > **monitorDataProcessing**\<`T`\>(`operationType`, `processor`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L188)
+Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L188)
 
 Monitors data processing operations.
 
@@ -125,13 +126,13 @@ Monitors data processing operations.
 
 - Promise resolving to processing result.
 
-***
+---
 
 ### monitorOrchestration()
 
 > **monitorOrchestration**\<`T`\>(`decision`, `orchestration`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:219](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L219)
+Defined in: [src/shared/analyticsIntegration.ts:219](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L219)
 
 Monitors orchestration decisions and routing.
 
@@ -166,7 +167,6 @@ Monitors orchestration decisions and routing.
 `Promise`\<`T`\>
 
 - Promise resolving to orchestration result.
-
 
 ## Summary
 

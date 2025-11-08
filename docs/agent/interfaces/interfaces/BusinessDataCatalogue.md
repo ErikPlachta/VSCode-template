@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / BusinessDataCatalogue
 
 # Interface: BusinessDataCatalogue
 
-Defined in: [src/agent/interfaces.ts:137](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L137)
+Defined in: [src/agent/interfaces.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L137)
 
 ## Properties
 
@@ -31,32 +32,31 @@ Defined in: [src/agent/interfaces.ts:137](https://github.com/ErikPlachta/VSCode-
 
 > **categories**: [`CategoryInfo`](CategoryInfo.md)[]
 
-Defined in: [src/agent/interfaces.ts:138](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L138)
+Defined in: [src/agent/interfaces.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L138)
 
-***
+---
 
 ### lastUpdated
 
 > **lastUpdated**: `string`
 
-Defined in: [src/agent/interfaces.ts:141](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L141)
+Defined in: [src/agent/interfaces.ts:141](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L141)
 
-***
+---
 
 ### relationships
 
 > **relationships**: [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/agent/interfaces.ts:139](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L139)
+Defined in: [src/agent/interfaces.ts:139](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L139)
 
-***
+---
 
 ### schemas
 
 > **schemas**: [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/agent/interfaces.ts:140](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L140)
-
+Defined in: [src/agent/interfaces.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L140)
 
 ## Summary
 

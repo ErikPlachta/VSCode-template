@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeBase
 
 # Class: KnowledgeBase
 
-Defined in: [src/mcp/knowledgeBase.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L19)
+Defined in: [src/mcp/knowledgeBase.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L19)
 
 ## Constructors
 
@@ -41,7 +42,7 @@ Defined in: [src/mcp/knowledgeBase.ts:19](https://github.com/ErikPlachta/VSCode-
 
 > **indexDocument**(`document`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L22)
+Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L22)
 
 #### Parameters
 
@@ -53,13 +54,13 @@ Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/VSCode-
 
 `void`
 
-***
+---
 
 ### indexDocuments()
 
 > **indexDocuments**(`documents`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L26)
+Defined in: [src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L26)
 
 #### Parameters
 
@@ -71,13 +72,13 @@ Defined in: [src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/VSCode-
 
 `void`
 
-***
+---
 
 ### query()
 
 > **query**(`term`, `limit`): [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L30)
+Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L30)
 
 #### Parameters
 
@@ -92,7 +93,6 @@ Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/VSCode-
 #### Returns
 
 [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
-
 
 ## Summary
 

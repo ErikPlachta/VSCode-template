@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/databaseAgent](../README.md) / createDatabaseAgent
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **createDatabaseAgent**(`dataSources`, `cacheDirectory`, `config?`): [`DatabaseAgent`](../classes/DatabaseAgent.md)
 
-Defined in: [src/agent/databaseAgent/index.ts:446](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L446)
+Defined in: [src/agent/databaseAgent/index.ts:446](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L446)
 
 Creates a new DatabaseAgent instance with the provided data sources.
 
@@ -54,7 +55,6 @@ Optional agent configuration
 [`DatabaseAgent`](../classes/DatabaseAgent.md)
 
 - New DatabaseAgent instance
-
 
 ## Summary
 

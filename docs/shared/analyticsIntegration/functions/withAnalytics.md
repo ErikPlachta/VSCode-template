@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / withAnalytics
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **withAnalytics**\<`T`\>(`agentName`, `methodName`, `handler`): `T`
 
-Defined in: [src/shared/analyticsIntegration.ts:119](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L119)
+Defined in: [src/shared/analyticsIntegration.ts:119](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L119)
 
 Analytics middleware for MCP method invocations.
 
@@ -33,7 +34,7 @@ Analytics middleware for MCP method invocations.
 
 ### T
 
-`T` *extends* (...`args`) => `Promise`\<`any`\>
+`T` _extends_ (...`args`) => `Promise`\<`any`\>
 
 ## Parameters
 
@@ -54,7 +55,6 @@ Analytics middleware for MCP method invocations.
 `T`
 
 - Wrapped handler with analytics tracking.
-
 
 ## Summary
 

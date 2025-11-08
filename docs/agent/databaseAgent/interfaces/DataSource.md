@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/databaseAgent](../README.md) / DataSource
 
 # Interface: DataSource
 
-Defined in: [src/agent/databaseAgent/index.ts:31](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L31)
+Defined in: [src/agent/databaseAgent/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L31)
 
 Definition for a data source the agent can query.
 
@@ -33,42 +34,41 @@ Definition for a data source the agent can query.
 
 > `optional` **fieldAliases**: `Record`\<`string`, `string`\>
 
-Defined in: [src/agent/databaseAgent/index.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L37)
+Defined in: [src/agent/databaseAgent/index.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L37)
 
 Optional field mapping for this data source
 
-***
+---
 
 ### id
 
 > **id**: `string`
 
-Defined in: [src/agent/databaseAgent/index.ts:32](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L32)
+Defined in: [src/agent/databaseAgent/index.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L32)
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/agent/databaseAgent/index.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L33)
+Defined in: [src/agent/databaseAgent/index.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L33)
 
-***
+---
 
 ### records
 
 > **records**: [`CategoryRecord`](CategoryRecord.md)[]
 
-Defined in: [src/agent/databaseAgent/index.ts:34](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L34)
+Defined in: [src/agent/databaseAgent/index.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L34)
 
-***
+---
 
 ### schema?
 
 > `optional` **schema**: `unknown`
 
-Defined in: [src/agent/databaseAgent/index.ts:35](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L35)
-
+Defined in: [src/agent/databaseAgent/index.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/databaseAgent/index.ts#L35)
 
 ## Summary
 

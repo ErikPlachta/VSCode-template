@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [agent/dataAgent/config](../README.md) / DataAgentConfig
 
 # Class: DataAgentConfig
 
-Defined in: [src/agent/dataAgent/config.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L19)
+Defined in: [src/agent/dataAgent/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L19)
 
 Data agent-specific configuration class
 
@@ -37,7 +38,7 @@ Data agent-specific configuration class
 
 > **new DataAgentConfig**(`config?`): `DataAgentConfig`
 
-Defined in: [src/agent/dataAgent/config.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L22)
+Defined in: [src/agent/dataAgent/config.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L22)
 
 #### Parameters
 
@@ -59,7 +60,7 @@ Defined in: [src/agent/dataAgent/config.ts:22](https://github.com/ErikPlachta/VS
 
 > **getAnalysisConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L40)
+Defined in: [src/agent/dataAgent/config.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L40)
 
 Get analysis configuration
 
@@ -107,13 +108,13 @@ Get analysis configuration
 
 > `optional` **maxSupportingRecords**: `number`
 
-***
+---
 
 ### getAnalysisTimeout()
 
 > **getAnalysisTimeout**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:271](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L271)
+Defined in: [src/agent/dataAgent/config.ts:271](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L271)
 
 Get analysis timeout in milliseconds
 
@@ -121,13 +122,13 @@ Get analysis timeout in milliseconds
 
 `number`
 
-***
+---
 
 ### getApplicationFacingConfig()
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../../../../types/agentConfig/interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:516](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L516)
+Defined in: [src/types/agentConfig.ts:516](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L516)
 
 Get application-facing configuration
 
@@ -139,13 +140,13 @@ Get application-facing configuration
 
 [`BaseAgentConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md).[`getApplicationFacingConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md#getapplicationfacingconfig)
 
-***
+---
 
 ### getConfig()
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:478](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L478)
+Defined in: [src/types/agentConfig.ts:478](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L478)
 
 Get public-facing configuration (user and some application details)
 
@@ -157,13 +158,13 @@ Get public-facing configuration (user and some application details)
 
 [`BaseAgentConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md).[`getConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md#getconfig)
 
-***
+---
 
 ### getConfigId()
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:523](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L523)
+Defined in: [src/types/agentConfig.ts:523](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L523)
 
 Get configuration schema ID
 
@@ -175,13 +176,13 @@ Get configuration schema ID
 
 [`BaseAgentConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md).[`getConfigId`](../../../../types/agentConfig/classes/BaseAgentConfig.md#getconfigid)
 
-***
+---
 
 ### getErrorHandlingConfig()
 
 > **getErrorHandlingConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:293](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L293)
+Defined in: [src/agent/dataAgent/config.ts:293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L293)
 
 Get error handling configuration
 
@@ -213,13 +214,13 @@ Get error handling configuration
 
 > **retryDelay**: `number`
 
-***
+---
 
 ### getExecutionConfig()
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../../../../types/agentConfig/interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:502](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L502)
+Defined in: [src/types/agentConfig.ts:502](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L502)
 
 Get execution configuration
 
@@ -231,13 +232,13 @@ Get execution configuration
 
 [`BaseAgentConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md).[`getExecutionConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md#getexecutionconfig)
 
-***
+---
 
 ### getExplorationConfig()
 
 > **getExplorationConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:67](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L67)
+Defined in: [src/agent/dataAgent/config.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L67)
 
 Get exploration configuration
 
@@ -277,13 +278,13 @@ Get exploration configuration
 
 > **planComplexityLimit**: `"high"` \| `"medium"` \| `"low"`
 
-***
+---
 
 ### getExplorationPriorities()
 
 > **getExplorationPriorities**(): `string`[]
 
-Defined in: [src/agent/dataAgent/config.ts:240](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L240)
+Defined in: [src/agent/dataAgent/config.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L240)
 
 Get exploration priorities
 
@@ -291,13 +292,13 @@ Get exploration priorities
 
 `string`[]
 
-***
+---
 
 ### getInsightCategories()
 
 > **getInsightCategories**(): `string`[]
 
-Defined in: [src/agent/dataAgent/config.ts:224](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L224)
+Defined in: [src/agent/dataAgent/config.ts:224](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L224)
 
 Get insight categories to focus on
 
@@ -305,13 +306,13 @@ Get insight categories to focus on
 
 `string`[]
 
-***
+---
 
 ### getInsightConfidenceThreshold()
 
 > **getInsightConfidenceThreshold**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:196](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L196)
+Defined in: [src/agent/dataAgent/config.ts:196](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L196)
 
 Get insight confidence threshold
 
@@ -319,13 +320,13 @@ Get insight confidence threshold
 
 `number`
 
-***
+---
 
 ### getMaxExplorationSteps()
 
 > **getMaxExplorationSteps**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:175](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L175)
+Defined in: [src/agent/dataAgent/config.ts:175](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L175)
 
 Get maximum exploration steps
 
@@ -333,13 +334,13 @@ Get maximum exploration steps
 
 `number`
 
-***
+---
 
 ### getMaxInsightDepth()
 
 > **getMaxInsightDepth**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:168](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L168)
+Defined in: [src/agent/dataAgent/config.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L168)
 
 Get maximum insight depth
 
@@ -347,13 +348,13 @@ Get maximum insight depth
 
 `number`
 
-***
+---
 
 ### getMaxInsightsPerAnalysis()
 
 > **getMaxInsightsPerAnalysis**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:210](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L210)
+Defined in: [src/agent/dataAgent/config.ts:210](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L210)
 
 Get maximum insights per analysis
 
@@ -361,13 +362,13 @@ Get maximum insights per analysis
 
 `number`
 
-***
+---
 
 ### getMaxRelationshipDepth()
 
 > **getMaxRelationshipDepth**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:182](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L182)
+Defined in: [src/agent/dataAgent/config.ts:182](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L182)
 
 Get maximum relationship depth
 
@@ -375,13 +376,13 @@ Get maximum relationship depth
 
 `number`
 
-***
+---
 
 ### getMaxRelationshipsPerAnalysis()
 
 > **getMaxRelationshipsPerAnalysis**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:217](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L217)
+Defined in: [src/agent/dataAgent/config.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L217)
 
 Get maximum relationships per analysis
 
@@ -389,13 +390,13 @@ Get maximum relationships per analysis
 
 `number`
 
-***
+---
 
 ### getPerformanceConfig()
 
 > **getPerformanceConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:108](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L108)
+Defined in: [src/agent/dataAgent/config.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L108)
 
 Get performance configuration
 
@@ -427,13 +428,13 @@ Get performance configuration
 
 > `optional` **topicOverviewCacheTTL**: `number`
 
-***
+---
 
 ### getPlanComplexityLimit()
 
 > **getPlanComplexityLimit**(): `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/agent/dataAgent/config.ts:189](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L189)
+Defined in: [src/agent/dataAgent/config.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L189)
 
 Get plan complexity limit
 
@@ -441,13 +442,13 @@ Get plan complexity limit
 
 `"high"` \| `"medium"` \| `"low"`
 
-***
+---
 
 ### getQualityConfig()
 
 > **getQualityConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L53)
+Defined in: [src/agent/dataAgent/config.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L53)
 
 Get quality configuration
 
@@ -471,13 +472,13 @@ Get quality configuration
 
 > `optional` **missingFieldThreshold**: `number`
 
-***
+---
 
 ### getRelationshipsConfig()
 
 > **getRelationshipsConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L80)
+Defined in: [src/agent/dataAgent/config.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L80)
 
 Get relationships configuration
 
@@ -513,13 +514,13 @@ Get relationships configuration
 
 > `optional` **relationshipTypes**: `string`[]
 
-***
+---
 
 ### getRelationshipStrengthThreshold()
 
 > **getRelationshipStrengthThreshold**(): `number`
 
-Defined in: [src/agent/dataAgent/config.ts:203](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L203)
+Defined in: [src/agent/dataAgent/config.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L203)
 
 Get relationship strength threshold
 
@@ -527,13 +528,13 @@ Get relationship strength threshold
 
 `number`
 
-***
+---
 
 ### getRelationshipTypes()
 
 > **getRelationshipTypes**(): `string`[]
 
-Defined in: [src/agent/dataAgent/config.ts:255](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L255)
+Defined in: [src/agent/dataAgent/config.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L255)
 
 Get relationship types to track
 
@@ -541,13 +542,13 @@ Get relationship types to track
 
 `string`[]
 
-***
+---
 
 ### getSearchConfig()
 
 > **getSearchConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:124](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L124)
+Defined in: [src/agent/dataAgent/config.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L124)
 
 Get search configuration
 
@@ -579,13 +580,13 @@ Get search configuration
 
 > `optional` **searchTimeout**: `number`
 
-***
+---
 
 ### getSynthesisConfig()
 
 > **getSynthesisConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:93](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L93)
+Defined in: [src/agent/dataAgent/config.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L93)
 
 Get synthesis configuration
 
@@ -613,13 +614,13 @@ Get synthesis configuration
 
 > `optional` **synthesisConfidenceThreshold**: `number`
 
-***
+---
 
 ### getTelemetryConfig()
 
 > **getTelemetryConfig**(): `object`
 
-Defined in: [src/agent/dataAgent/config.ts:278](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L278)
+Defined in: [src/agent/dataAgent/config.ts:278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L278)
 
 Get telemetry configuration
 
@@ -651,13 +652,13 @@ Get telemetry configuration
 
 > **trackRelationshipMetrics**: `boolean`
 
-***
+---
 
 ### getUserFacingConfig()
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../../../../types/agentConfig/interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:509](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L509)
+Defined in: [src/types/agentConfig.ts:509](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L509)
 
 Get user-facing configuration
 
@@ -669,13 +670,13 @@ Get user-facing configuration
 
 [`BaseAgentConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md).[`getUserFacingConfig`](../../../../types/agentConfig/classes/BaseAgentConfig.md#getuserfacingconfig)
 
-***
+---
 
 ### isAutomaticPlanGenerationEnabled()
 
 > **isAutomaticPlanGenerationEnabled**(): `boolean`
 
-Defined in: [src/agent/dataAgent/config.ts:161](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L161)
+Defined in: [src/agent/dataAgent/config.ts:161](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L161)
 
 Check if automatic plan generation is enabled
 
@@ -683,13 +684,13 @@ Check if automatic plan generation is enabled
 
 `boolean`
 
-***
+---
 
 ### isCrossCategoryAnalysisEnabled()
 
 > **isCrossCategoryAnalysisEnabled**(): `boolean`
 
-Defined in: [src/agent/dataAgent/config.ts:147](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L147)
+Defined in: [src/agent/dataAgent/config.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L147)
 
 Check if cross-category analysis is enabled
 
@@ -697,13 +698,13 @@ Check if cross-category analysis is enabled
 
 `boolean`
 
-***
+---
 
 ### isInsightGenerationEnabled()
 
 > **isInsightGenerationEnabled**(): `boolean`
 
-Defined in: [src/agent/dataAgent/config.ts:140](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L140)
+Defined in: [src/agent/dataAgent/config.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L140)
 
 Check if insight generation is enabled
 
@@ -711,20 +712,19 @@ Check if insight generation is enabled
 
 `boolean`
 
-***
+---
 
 ### isRelationshipMappingEnabled()
 
 > **isRelationshipMappingEnabled**(): `boolean`
 
-Defined in: [src/agent/dataAgent/config.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L154)
+Defined in: [src/agent/dataAgent/config.ts:154](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/config.ts#L154)
 
 Check if relationship mapping is enabled
 
 #### Returns
 
 `boolean`
-
 
 ## Summary
 

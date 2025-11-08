@@ -37,6 +37,9 @@ export async function activate(
 
       // Register cleanup when extension is deactivated
       context.subscriptions.push({
+        /**
+         *
+         */
         dispose: async () => {
           await stopMCPServer();
         },
@@ -58,14 +61,14 @@ export async function activate(
 
     // Create a proper chat request handler
     const chatHandler: vscode.ChatRequestHandler = /**
- * chatHandler function.
- *
- * @param {vscode.ChatRequest} request - request parameter.
- * @param {vscode.ChatContext} _context - _context parameter.
- * @param {vscode.ChatResponseStream} stream - stream parameter.
- * @param {vscode.CancellationToken} _cancellationToken - _cancellationToken parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+                                                    * chatHandler function.
+                                                    *
+                                                    * @param {vscode.ChatRequest} request - request parameter.
+                                                    * @param {vscode.ChatContext} _context - _context parameter.
+                                                    * @param {vscode.ChatResponseStream} stream - stream parameter.
+                                                    * @param {vscode.CancellationToken} _cancellationToken - _cancellationToken parameter.
+                                                    * @returns {unknown} - TODO: describe return value.
+                                                    */
 async (
       request: vscode.ChatRequest,
       _context: vscode.ChatContext,

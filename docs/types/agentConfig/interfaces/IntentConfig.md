@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / IntentConfig
 
 # Interface: IntentConfig
 
-Defined in: [src/types/agentConfig.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L18)
+Defined in: [src/types/agentConfig.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L18)
 
 Intent configuration for orchestration
 
@@ -33,32 +34,31 @@ Intent configuration for orchestration
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:20](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L20)
+Defined in: [src/types/agentConfig.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L20)
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L19)
+Defined in: [src/types/agentConfig.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L19)
 
-***
+---
 
 ### signals?
 
 > `optional` **signals**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L22)
+Defined in: [src/types/agentConfig.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L22)
 
-***
+---
 
 ### targetAgent
 
 > **targetAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L21)
-
+Defined in: [src/types/agentConfig.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L21)
 
 ## Summary
 

@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / DatabaseConfig
 
 # Interface: DatabaseConfig
 
-Defined in: [src/types/agentConfig.ts:145](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L145)
+Defined in: [src/types/agentConfig.ts:145](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L145)
 
 Database agent-specific configuration
 
@@ -33,15 +34,15 @@ Database agent-specific configuration
 
 > **fieldAliases**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [src/types/agentConfig.ts:146](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L146)
+Defined in: [src/types/agentConfig.ts:146](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L146)
 
-***
+---
 
 ### operations
 
 > **operations**: `object`
 
-Defined in: [src/types/agentConfig.ts:172](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L172)
+Defined in: [src/types/agentConfig.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L172)
 
 #### aggregation
 
@@ -91,13 +92,13 @@ Defined in: [src/types/agentConfig.ts:172](https://github.com/ErikPlachta/VSCode
 
 > **supportedJoinTypes**: `string`[]
 
-***
+---
 
 ### performance
 
 > **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L147)
+Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L147)
 
 #### caching
 
@@ -135,13 +136,13 @@ Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/VSCode
 
 > **queryTimeout**: `number`
 
-***
+---
 
 ### validation
 
 > **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L160)
+Defined in: [src/types/agentConfig.ts:160](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L160)
 
 #### integrityChecks
 
@@ -174,7 +175,6 @@ Defined in: [src/types/agentConfig.ts:160](https://github.com/ErikPlachta/VSCode
 ##### schemaValidation.enableStrictValidation
 
 > **enableStrictValidation**: `boolean`
-
 
 ## Summary
 

@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / validateConfig
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **validateConfig**(`config`): `boolean`
 
-Defined in: [src/types/configRegistry.ts:225](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L225)
+Defined in: [src/types/configRegistry.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L225)
 
 Validation function for configuration objects
 
@@ -40,7 +41,6 @@ Validation function for configuration objects
 ## Returns
 
 `boolean`
-
 
 ## Summary
 

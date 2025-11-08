@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / scheduleAnalyticsReports
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **scheduleAnalyticsReports**(`intervalMs`, `outputPath`): `Timeout`
 
-Defined in: [src/shared/analyticsIntegration.ts:279](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L279)
+Defined in: [src/shared/analyticsIntegration.ts:279](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L279)
 
 Creates a scheduled analytics report generator.
 
@@ -44,7 +45,6 @@ Creates a scheduled analytics report generator.
 `Timeout`
 
 - Timer for the scheduled reports.
-
 
 ## Summary
 

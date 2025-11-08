@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/clarificationAgent](../README.md) / ClarificationAgent
 
 # Class: ClarificationAgent
 
-Defined in: [src/agent/clarificationAgent/index.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L41)
+Defined in: [src/agent/clarificationAgent/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L41)
 
 Agent responsible for handling ambiguous user requests and providing clarification guidance.
 
@@ -33,7 +34,7 @@ Agent responsible for handling ambiguous user requests and providing clarificati
 
 > **new ClarificationAgent**(`knowledgeBase?`): `ClarificationAgent`
 
-Defined in: [src/agent/clarificationAgent/index.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L56)
+Defined in: [src/agent/clarificationAgent/index.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L56)
 
 Creates a new clarification agent instance.
 
@@ -55,7 +56,7 @@ Optional knowledge base instance, creates new one if not provided.
 
 > **clarify**(`input`): `Promise`\<[`ClarificationResponse`](../interfaces/ClarificationResponse.md)\>
 
-Defined in: [src/agent/clarificationAgent/index.ts:78](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L78)
+Defined in: [src/agent/clarificationAgent/index.ts:78](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L78)
 
 Generates clarification guidance for ambiguous user requests.
 
@@ -73,13 +74,13 @@ The clarification request containing question and context.
 
 - Promise resolving to clarification response with guidance and context.
 
-***
+---
 
 ### loadKnowledge()
 
 > **loadKnowledge**(`documents`): `void`
 
-Defined in: [src/agent/clarificationAgent/index.ts:66](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L66)
+Defined in: [src/agent/clarificationAgent/index.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/clarificationAgent/index.ts#L66)
 
 Loads documents into the knowledge base for context retrieval.
 
@@ -94,7 +95,6 @@ The documents to index in the knowledge base.
 #### Returns
 
 `void`
-
 
 ## Summary
 

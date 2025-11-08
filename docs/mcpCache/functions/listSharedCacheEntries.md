@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / listSharedCacheEntries
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **listSharedCacheEntries**\<`T`\>(`cacheDir`): `Promise`\<[`SharedCacheEntry`](../interfaces/SharedCacheEntry.md)\<`T`\>[]\>
 
-Defined in: [src/extension/mcpCache.ts:144](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L144)
+Defined in: [src/extension/mcpCache.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpCache.ts#L144)
 
 Enumerate all cached artifacts currently stored on disk.
 
@@ -52,7 +53,6 @@ Directory returned by [ensureCacheDirectory](ensureCacheDirectory.md).
 ## Throws
 
 - When the directory cannot be read.
-
 
 ## Summary
 

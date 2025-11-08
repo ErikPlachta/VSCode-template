@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / CategoryOrchestrationConfig
 
 # Interface: CategoryOrchestrationConfig
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:170](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L170)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L170)
 
 ## Properties
 
@@ -31,7 +32,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:170](https://github.com
 
 > **agents**: `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:178](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L178)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:178](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L178)
 
 Agent-specific routing guidance.
 
@@ -47,36 +48,35 @@ Agent-specific routing guidance.
 
 > **relevantDataManager**: [`AgentOrchestrationGuidance`](AgentOrchestrationGuidance.md)
 
-***
+---
 
 ### escalateWhen?
 
 > `optional` **escalateWhen**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:176](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L176)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L176)
 
 Situations where orchestration should escalate for clarification.
 
-***
+---
 
 ### signals
 
 > **signals**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:174](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L174)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L174)
 
 Triggers that indicate the category is relevant to the request.
 
-***
+---
 
 ### summary
 
 > **summary**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:172](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L172)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L172)
 
 High-level framing of how orchestration should leverage the category.
-
 
 ## Summary
 

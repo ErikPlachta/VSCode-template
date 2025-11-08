@@ -20,12 +20,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
   private relevantDataManagerConfig: RelevantDataManagerConfig;
 
   /**
- * constructor function.
- *
- * @param {AgentConfigDefinition} config - config parameter.
- * @returns {unknown} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+   * constructor function.
+   *
+   * @param {AgentConfigDefinition} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
 constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || relevantDataManagerAgentConfig;
@@ -45,10 +45,10 @@ constructor(config?: AgentConfigDefinition) {
   }
 
     /**
- * Get metadata management configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get metadata management configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getMetadataConfig() {
     return (
       this.relevantDataManagerConfig.metadata || {
@@ -60,10 +60,10 @@ public getMetadataConfig() {
   }
 
     /**
- * Get caching configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get caching configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getCachingConfig() {
     return (
       this.relevantDataManagerConfig.caching || {
@@ -75,10 +75,10 @@ public getCachingConfig() {
   }
 
     /**
- * Get validation configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get validation configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getValidationConfig() {
     return (
       this.relevantDataManagerConfig.validation || {
@@ -90,10 +90,10 @@ public getValidationConfig() {
   }
 
     /**
- * Get schema management configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get schema management configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getSchemaManagementConfig() {
     return (
       this.relevantDataManagerConfig.schemaManagement || {
@@ -109,10 +109,10 @@ public getSchemaManagementConfig() {
   }
 
     /**
- * Get relationships configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get relationships configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getRelationshipsConfig() {
     return (
       this.relevantDataManagerConfig.relationships || {
@@ -133,10 +133,10 @@ public getRelationshipsConfig() {
   }
 
     /**
- * Get data management configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get data management configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getDataManagementConfig() {
     return (
       this.relevantDataManagerConfig.dataManagement || {
@@ -152,10 +152,10 @@ public getDataManagementConfig() {
   }
 
     /**
- * Get performance configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get performance configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getPerformanceConfig() {
     return (
       this.relevantDataManagerConfig.performance || {
@@ -169,55 +169,55 @@ public getPerformanceConfig() {
   }
 
     /**
- * Check if schema validation is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if schema validation is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isSchemaValidationEnabled(): boolean {
     return this.getMetadataConfig().enableSchemaValidation;
   }
 
     /**
- * Check if data quality enforcement is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if data quality enforcement is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isDataQualityEnforced(): boolean {
     return this.getMetadataConfig().enforceDataQuality;
   }
 
     /**
- * Check if data lineage tracking is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if data lineage tracking is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isDataLineageTrackingEnabled(): boolean {
     return this.getMetadataConfig().trackDataLineage;
   }
 
     /**
- * Check if snapshot caching is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if snapshot caching is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isSnapshotCachingEnabled(): boolean {
     return this.getCachingConfig().enableSnapshotCaching;
   }
 
     /**
- * Check if strict validation mode is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if strict validation mode is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isStrictModeEnabled(): boolean {
     return this.getValidationConfig().strictModeEnabled;
   }
 
     /**
- * Get supported business categories
- *
- * @returns {string[]} - TODO: describe return value.
- */
+     * Get supported business categories
+     *
+     * @returns {string[]} - TODO: describe return value.
+     */
 public getSupportedCategories(): string[] {
     return (
       this.getMetadataConfig().supportedCategories ?? [
@@ -231,10 +231,10 @@ public getSupportedCategories(): string[] {
   }
 
     /**
- * Get required category files configuration
- *
- * @returns {Record<string, string>} - TODO: describe return value.
- */
+     * Get required category files configuration
+     *
+     * @returns {Record<string, string>} - TODO: describe return value.
+     */
 public getRequiredCategoryFiles(): Record<string, string> {
     return (
       this.getMetadataConfig().requiredCategoryFiles ?? {
@@ -246,10 +246,10 @@ public getRequiredCategoryFiles(): Record<string, string> {
   }
 
     /**
- * Get required directories configuration
- *
- * @returns {Record<string, string>} - TODO: describe return value.
- */
+     * Get required directories configuration
+     *
+     * @returns {Record<string, string>} - TODO: describe return value.
+     */
 public getRequiredDirectories(): Record<string, string> {
     return (
       this.getMetadataConfig().requiredDirectories ?? {
@@ -262,46 +262,46 @@ public getRequiredDirectories(): Record<string, string> {
   }
 
     /**
- * Get snapshot cache TTL in milliseconds
- *
- * @returns {number} - TODO: describe return value.
- */
+     * Get snapshot cache TTL in milliseconds
+     *
+     * @returns {number} - TODO: describe return value.
+     */
 public getSnapshotTTL(): number {
     return this.getCachingConfig().snapshotTTL;
   }
 
     /**
- * Get maximum cached snapshots
- *
- * @returns {number} - TODO: describe return value.
- */
+     * Get maximum cached snapshots
+     *
+     * @returns {number} - TODO: describe return value.
+     */
 public getMaxCachedSnapshots(): number {
     return this.getCachingConfig().maxCachedSnapshots;
   }
 
     /**
- * Get validation timeout in milliseconds
- *
- * @returns {number} - TODO: describe return value.
- */
+     * Get validation timeout in milliseconds
+     *
+     * @returns {number} - TODO: describe return value.
+     */
 public getValidationTimeout(): number {
     return this.getValidationConfig().validationTimeout;
   }
 
     /**
- * Get maximum schema file size in bytes
- *
- * @returns {number} - TODO: describe return value.
- */
+     * Get maximum schema file size in bytes
+     *
+     * @returns {number} - TODO: describe return value.
+     */
 public getMaxSchemaFileSize(): number {
     return this.getSchemaManagementConfig().maxSchemaFileSize ?? 1024 * 1024;
   }
 
     /**
- * Get supported schema formats
- *
- * @returns {string[]} - TODO: describe return value.
- */
+     * Get supported schema formats
+     *
+     * @returns {string[]} - TODO: describe return value.
+     */
 public getSupportedSchemaFormats(): string[] {
     return (
       this.getSchemaManagementConfig().supportedSchemaFormats ?? [
@@ -312,10 +312,10 @@ public getSupportedSchemaFormats(): string[] {
   }
 
     /**
- * Get relationship types to track
- *
- * @returns {string[]} - TODO: describe return value.
- */
+     * Get relationship types to track
+     *
+     * @returns {string[]} - TODO: describe return value.
+     */
 public getRelationshipTypes(): string[] {
     return (
       this.getRelationshipsConfig().relationshipTypes ?? [
@@ -329,73 +329,73 @@ public getRelationshipTypes(): string[] {
   }
 
     /**
- * Get maximum relationship traversal depth
- *
- * @returns {number} - TODO: describe return value.
- */
+     * Get maximum relationship traversal depth
+     *
+     * @returns {number} - TODO: describe return value.
+     */
 public getMaxTraversalDepth(): number {
     return this.getRelationshipsConfig().maxTraversalDepth ?? 5;
   }
 
     /**
- * Get validation library to use
- *
- * @returns {string} - TODO: describe return value.
- */
+     * Get validation library to use
+     *
+     * @returns {string} - TODO: describe return value.
+     */
 public getValidationLibrary(): string {
     return this.getSchemaManagementConfig().validationLibrary ?? "ajv";
   }
 
     /**
- * Check if partial validation is allowed
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if partial validation is allowed
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isPartialValidationAllowed(): boolean {
     return this.getValidationConfig().allowPartialValidation ?? false;
   }
 
     /**
- * Check if folder structure validation is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if folder structure validation is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isFolderStructureValidationEnabled(): boolean {
     return this.getMetadataConfig().validateFolderStructure ?? true;
   }
 
     /**
- * Check if AJV validation is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if AJV validation is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isAjvValidationEnabled(): boolean {
     return this.getValidationConfig().enableAjvValidation ?? true;
   }
 
     /**
- * Check if relationship references should be validated
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if relationship references should be validated
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public shouldValidateRelationshipReferences(): boolean {
     return this.getRelationshipsConfig().validateReferences ?? true;
   }
 
     /**
- * Check if circular references should be detected
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if circular references should be detected
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public shouldDetectCircularReferences(): boolean {
     return this.getRelationshipsConfig().detectCircularReferences ?? true;
   }
 
     /**
- * Get telemetry configuration
- *
- * @returns {Record<string, unknown>} - TODO: describe return value.
- */
+     * Get telemetry configuration
+     *
+     * @returns {Record<string, unknown>} - TODO: describe return value.
+     */
 public getTelemetryConfig(): Record<string, unknown>  {
     return {
       logQueries: this.config.telemetry?.logQueries ?? true,
@@ -411,10 +411,10 @@ public getTelemetryConfig(): Record<string, unknown>  {
   }
 
     /**
- * Get error handling configuration
- *
- * @returns {Record<string, unknown>} - TODO: describe return value.
- */
+     * Get error handling configuration
+     *
+     * @returns {Record<string, unknown>} - TODO: describe return value.
+     */
 public getErrorHandlingConfig(): Record<string, unknown>  {
     return {
       maxRetries: this.config.errorHandling?.maxRetries ?? 3,

@@ -51,21 +51,21 @@ export class ClarificationAgent {
   private readonly config: ClarificationAgentConfig;
 
     /**
- * Creates a new clarification agent instance.
- *
- * @param {KnowledgeBase} knowledgeBase - knowledgeBase parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+     * Creates a new clarification agent instance.
+     *
+     * @param {KnowledgeBase} knowledgeBase - knowledgeBase parameter.
+     * @returns {unknown} - TODO: describe return value.
+     */
 constructor(knowledgeBase?: KnowledgeBase) {
     this.config = new ClarificationAgentConfig();
     this.knowledgeBase = knowledgeBase ?? new KnowledgeBase();
   }
 
     /**
- * Loads documents into the knowledge base for context retrieval.
- *
- * @param {Parameters<KnowledgeBase["indexDocuments"]>[0]} documents - documents parameter.
- */
+     * Loads documents into the knowledge base for context retrieval.
+     *
+     * @param {Parameters<KnowledgeBase["indexDocuments"]>[0]} documents - documents parameter.
+     */
 loadKnowledge(
     documents: Parameters<KnowledgeBase["indexDocuments"]>[0]
   ): void {
@@ -73,11 +73,11 @@ loadKnowledge(
   }
 
     /**
- * Generates clarification guidance for ambiguous user requests.
- *
- * @param {ClarificationAgentInput} input - input parameter.
- * @returns {Promise<ClarificationResponse>} - TODO: describe return value.
- */
+     * Generates clarification guidance for ambiguous user requests.
+     *
+     * @param {ClarificationAgentInput} input - input parameter.
+     * @returns {Promise<ClarificationResponse>} - TODO: describe return value.
+     */
 async clarify(
     input: ClarificationAgentInput
   ): Promise<ClarificationResponse> {

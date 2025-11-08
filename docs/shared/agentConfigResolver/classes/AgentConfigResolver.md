@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/agentConfigResolver](../README.md) / AgentConfigResolver
 
 # Class: AgentConfigResolver
 
-Defined in: [src/shared/agentConfigResolver.ts:61](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L61)
+Defined in: [src/shared/agentConfigResolver.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L61)
 
 ## Constructors
 
@@ -31,7 +32,7 @@ Defined in: [src/shared/agentConfigResolver.ts:61](https://github.com/ErikPlacht
 
 > **new AgentConfigResolver**(`configPath`): `AgentConfigResolver`
 
-Defined in: [src/shared/agentConfigResolver.ts:62](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L62)
+Defined in: [src/shared/agentConfigResolver.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L62)
 
 #### Parameters
 
@@ -49,7 +50,7 @@ Defined in: [src/shared/agentConfigResolver.ts:62](https://github.com/ErikPlacht
 
 > **getEffectiveExecutionProfile**(`agentId`): `Promise`\<[`EffectiveExecutionProfile`](../interfaces/EffectiveExecutionProfile.md)\>
 
-Defined in: [src/shared/agentConfigResolver.ts:68](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L68)
+Defined in: [src/shared/agentConfigResolver.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L68)
 
 Returns the effective execution profile for an agent after applying runtime overrides.
 Enforces global constraints (e.g., maxExecutionTime).
@@ -63,7 +64,6 @@ Enforces global constraints (e.g., maxExecutionTime).
 #### Returns
 
 `Promise`\<[`EffectiveExecutionProfile`](../interfaces/EffectiveExecutionProfile.md)\>
-
 
 ## Summary
 

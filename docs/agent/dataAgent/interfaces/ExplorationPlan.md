@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / ExplorationPlan
 
 # Interface: ExplorationPlan
 
-Defined in: [src/agent/dataAgent/index.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L55)
+Defined in: [src/agent/dataAgent/index.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L55)
 
 ## Properties
 
@@ -31,31 +32,31 @@ Defined in: [src/agent/dataAgent/index.ts:55](https://github.com/ErikPlachta/VSC
 
 > **question**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:57](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L57)
+Defined in: [src/agent/dataAgent/index.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L57)
 
-***
+---
 
 ### recommendedQueries
 
 > **recommendedQueries**: `string`[]
 
-Defined in: [src/agent/dataAgent/index.ts:59](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L59)
+Defined in: [src/agent/dataAgent/index.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L59)
 
-***
+---
 
 ### steps
 
 > **steps**: [`ExplorationStep`](ExplorationStep.md)[]
 
-Defined in: [src/agent/dataAgent/index.ts:58](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L58)
+Defined in: [src/agent/dataAgent/index.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L58)
 
-***
+---
 
 ### supportingResources
 
 > **supportingResources**: `object`[]
 
-Defined in: [src/agent/dataAgent/index.ts:60](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L60)
+Defined in: [src/agent/dataAgent/index.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L60)
 
 #### categoryId
 
@@ -65,14 +66,13 @@ Defined in: [src/agent/dataAgent/index.ts:60](https://github.com/ErikPlachta/VSC
 
 > **ids**: `string`[]
 
-***
+---
 
 ### topic
 
 > **topic**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L56)
-
+Defined in: [src/agent/dataAgent/index.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/dataAgent/index.ts#L56)
 
 ## Summary
 

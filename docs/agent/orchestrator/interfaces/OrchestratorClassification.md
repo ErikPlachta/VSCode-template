@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / OrchestratorClassification
 
 # Interface: OrchestratorClassification
 
-Defined in: [src/agent/orchestrator/index.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L11)
+Defined in: [src/agent/orchestrator/index.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L11)
 
 Classification metadata returned before executing a task.
 
@@ -33,40 +34,39 @@ Classification metadata returned before executing a task.
 
 > `optional` **escalationPrompt**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:14](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L14)
+Defined in: [src/agent/orchestrator/index.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L14)
 
-***
+---
 
 ### intent
 
 > **intent**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L12)
+Defined in: [src/agent/orchestrator/index.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L12)
 
-***
+---
 
 ### matchedSignals?
 
 > `optional` **matchedSignals**: `string`[]
 
-Defined in: [src/agent/orchestrator/index.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L15)
+Defined in: [src/agent/orchestrator/index.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L15)
 
-***
+---
 
 ### missingSignals?
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/agent/orchestrator/index.ts:16](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L16)
+Defined in: [src/agent/orchestrator/index.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L16)
 
-***
+---
 
 ### rationale
 
 > **rationale**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L13)
-
+Defined in: [src/agent/orchestrator/index.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L13)
 
 ## Summary
 

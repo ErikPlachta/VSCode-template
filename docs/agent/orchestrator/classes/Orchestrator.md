@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / Orchestrator
 
 # Class: Orchestrator
 
-Defined in: [src/agent/orchestrator/index.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L41)
+Defined in: [src/agent/orchestrator/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L41)
 
 Configuration-driven orchestrator that routes questions to appropriate agents
 
@@ -33,7 +34,7 @@ Configuration-driven orchestrator that routes questions to appropriate agents
 
 > **new Orchestrator**(`config?`): `Orchestrator`
 
-Defined in: [src/agent/orchestrator/index.ts:50](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L50)
+Defined in: [src/agent/orchestrator/index.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L50)
 
 #### Parameters
 
@@ -51,7 +52,7 @@ Defined in: [src/agent/orchestrator/index.ts:50](https://github.com/ErikPlachta/
 
 > **classify**(`questionOrInput`, `context?`): [`OrchestratorClassification`](../interfaces/OrchestratorClassification.md)
 
-Defined in: [src/agent/orchestrator/index.ts:123](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L123)
+Defined in: [src/agent/orchestrator/index.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L123)
 
 Classify intent using configuration-driven approach.
 Supports both new signature (single input object) and legacy signature (question + context).
@@ -72,13 +73,13 @@ Supports both new signature (single input object) and legacy signature (question
 
 [`OrchestratorClassification`](../interfaces/OrchestratorClassification.md)
 
-***
+---
 
 ### getConfig()
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:80](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L80)
+Defined in: [src/agent/orchestrator/index.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L80)
 
 Get public configuration
 
@@ -86,13 +87,13 @@ Get public configuration
 
 `Partial`\<[`AgentConfigDefinition`](../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-***
+---
 
 ### getCurrentConfig()
 
 > **getCurrentConfig**(): `object`
 
-Defined in: [src/agent/orchestrator/index.ts:390](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L390)
+Defined in: [src/agent/orchestrator/index.ts:390](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L390)
 
 Get current configuration
 
@@ -116,13 +117,13 @@ Get current configuration
 
 > **supportedIntents**: `string`[]
 
-***
+---
 
 ### getSupportedIntents()
 
 > **getSupportedIntents**(): `string`[]
 
-Defined in: [src/agent/orchestrator/index.ts:87](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L87)
+Defined in: [src/agent/orchestrator/index.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L87)
 
 Get supported intents
 
@@ -130,13 +131,13 @@ Get supported intents
 
 `string`[]
 
-***
+---
 
 ### handle()
 
 > **handle**(`input`): `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:318](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L318)
+Defined in: [src/agent/orchestrator/index.ts:318](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L318)
 
 Handle user requests by classifying intent and routing to appropriate agents.
 This is the main entry point used by the VS Code extension.
@@ -155,13 +156,13 @@ User request with question and optional context
 
 - Response with routing decision and agent output
 
-***
+---
 
 ### route()
 
 > **route**(`input`): `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L221)
+Defined in: [src/agent/orchestrator/index.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L221)
 
 Route request using configuration (simplified for now - delegates to original implementation)
 
@@ -175,13 +176,13 @@ Route request using configuration (simplified for now - delegates to original im
 
 `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-***
+---
 
 ### createFromConfig()
 
 > `static` **createFromConfig**(`configPath?`): `Promise`\<`Orchestrator`\>
 
-Defined in: [src/agent/orchestrator/index.ts:63](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L63)
+Defined in: [src/agent/orchestrator/index.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/orchestrator/index.ts#L63)
 
 Create orchestrator instance with configuration loaded from file
 
@@ -194,7 +195,6 @@ Create orchestrator instance with configuration loaded from file
 #### Returns
 
 `Promise`\<`Orchestrator`\>
-
 
 ## Summary
 

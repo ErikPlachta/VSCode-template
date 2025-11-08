@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / CategorySnapshot
 
 # Interface: CategorySnapshot
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:220](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L220)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L220)
 
 Snapshot persisted to the shared cache for quick lookups.
 
@@ -33,72 +34,71 @@ Snapshot persisted to the shared cache for quick lookups.
 
 > **description**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:223](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L223)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L223)
 
-***
+---
 
 ### exampleFiles
 
 > **exampleFiles**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:228](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L228)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L228)
 
-***
+---
 
 ### folder
 
 > **folder**: [`FolderBlueprint`](FolderBlueprint.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:229](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L229)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L229)
 
-***
+---
 
 ### id
 
 > **id**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:221](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L221)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L221)
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:222](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L222)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:222](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L222)
 
-***
+---
 
 ### queryNames
 
 > **queryNames**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:227](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L227)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L227)
 
-***
+---
 
 ### recordCount
 
 > **recordCount**: `number`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:224](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L224)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:224](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L224)
 
-***
+---
 
 ### schemaNames
 
 > **schemaNames**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:225](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L225)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L225)
 
-***
+---
 
 ### typeNames
 
 > **typeNames**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:226](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L226)
-
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/relevantDataManagerAgent/index.ts#L226)
 
 ## Summary
 

@@ -15,17 +15,19 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / OrchestrationWorkflow
 
 # Interface: OrchestrationWorkflow
 
-Defined in: [src/agent/interfaces.ts:241](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L241)
+Defined in: [src/agent/interfaces.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L241)
 
 Orchestrator workflow for handling user requests:
+
 1. Parse user input and classify intent
 2. If ambiguous -> ClarificationAgent
 3. If data needed -> RelevantDataManagerAgent (for schemas/metadata)
@@ -39,48 +41,47 @@ Orchestrator workflow for handling user requests:
 
 > **agentRequests**: [`AgentRequest`](AgentRequest.md)[]
 
-Defined in: [src/agent/interfaces.ts:245](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L245)
+Defined in: [src/agent/interfaces.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L245)
 
-***
+---
 
 ### agentResponses
 
 > **agentResponses**: [`AgentResponse`](AgentResponse.md)\<`unknown`\>[]
 
-Defined in: [src/agent/interfaces.ts:246](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L246)
+Defined in: [src/agent/interfaces.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L246)
 
-***
+---
 
 ### classifiedIntent
 
 > **classifiedIntent**: `string`
 
-Defined in: [src/agent/interfaces.ts:243](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L243)
+Defined in: [src/agent/interfaces.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L243)
 
-***
+---
 
 ### finalResponse
 
 > **finalResponse**: `string`
 
-Defined in: [src/agent/interfaces.ts:247](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L247)
+Defined in: [src/agent/interfaces.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L247)
 
-***
+---
 
 ### requiredAgents
 
 > **requiredAgents**: `string`[]
 
-Defined in: [src/agent/interfaces.ts:244](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L244)
+Defined in: [src/agent/interfaces.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L244)
 
-***
+---
 
 ### userQuery
 
 > **userQuery**: `string`
 
-Defined in: [src/agent/interfaces.ts:242](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L242)
-
+Defined in: [src/agent/interfaces.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L242)
 
 ## Summary
 

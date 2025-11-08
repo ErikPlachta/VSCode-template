@@ -20,12 +20,12 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
   private databaseConfig: DatabaseConfig;
 
   /**
- * constructor function.
- *
- * @param {AgentConfigDefinition} config - config parameter.
- * @returns {unknown} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+   * constructor function.
+   *
+   * @param {AgentConfigDefinition} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
 constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || databaseAgentConfig;
@@ -42,29 +42,29 @@ constructor(config?: AgentConfigDefinition) {
   }
 
     /**
- * Get field aliases for a specific category
- *
- * @param {string} category - category parameter.
- * @returns {Record<string, string>} - TODO: describe return value.
- */
+     * Get field aliases for a specific category
+     *
+     * @param {string} category - category parameter.
+     * @returns {Record<string, string>} - TODO: describe return value.
+     */
 public getFieldAliases(category: string): Record<string, string> {
     return this.databaseConfig.fieldAliases?.[category] || {};
   }
 
     /**
- * Get all field aliases
- *
- * @returns {Record<string, Record<string, string>>} - TODO: describe return value.
- */
+     * Get all field aliases
+     *
+     * @returns {Record<string, Record<string, string>>} - TODO: describe return value.
+     */
 public getAllFieldAliases(): Record<string, Record<string, string>> {
     return this.databaseConfig.fieldAliases || {};
   }
 
     /**
- * Get caching configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get caching configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getCachingConfig() {
     return (
       this.databaseConfig.performance?.caching || {
@@ -77,10 +77,10 @@ public getCachingConfig() {
   }
 
     /**
- * Get query limits configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get query limits configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getQueryLimits() {
     return (
       this.databaseConfig.performance?.limits || {
@@ -92,10 +92,10 @@ public getQueryLimits() {
   }
 
     /**
- * Get schema validation settings
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get schema validation settings
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getSchemaValidation() {
     return (
       this.databaseConfig.validation?.schemaValidation || {
@@ -107,10 +107,10 @@ public getSchemaValidation() {
   }
 
     /**
- * Get integrity check settings
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get integrity check settings
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getIntegrityChecks() {
     return (
       this.databaseConfig.validation?.integrityChecks || {
@@ -122,10 +122,10 @@ public getIntegrityChecks() {
   }
 
     /**
- * Get supported filter operators
- *
- * @returns {string[]} - TODO: describe return value.
- */
+     * Get supported filter operators
+     *
+     * @returns {string[]} - TODO: describe return value.
+     */
 public getFilterOperators(): string[] {
     return (
       this.databaseConfig.operations?.filtering?.operators || [
@@ -145,10 +145,10 @@ public getFilterOperators(): string[] {
   }
 
     /**
- * Get filtering configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get filtering configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getFilteringConfig() {
     return (
       this.databaseConfig.operations?.filtering || {
@@ -172,10 +172,10 @@ public getFilteringConfig() {
   }
 
     /**
- * Get join operation configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get join operation configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getJoinConfig() {
     return (
       this.databaseConfig.operations?.joins || {
@@ -187,10 +187,10 @@ public getJoinConfig() {
   }
 
     /**
- * Get aggregation configuration
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Get aggregation configuration
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 public getAggregationConfig() {
     return (
       this.databaseConfig.operations?.aggregation || {
@@ -202,10 +202,10 @@ public getAggregationConfig() {
   }
 
     /**
- * Get telemetry configuration
- *
- * @returns {Record<string, unknown>} - TODO: describe return value.
- */
+     * Get telemetry configuration
+     *
+     * @returns {Record<string, unknown>} - TODO: describe return value.
+     */
 public getTelemetryConfig(): Record<string, unknown>  {
     return {
       logQueries: this.config.telemetry?.logQueries ?? true,
@@ -216,10 +216,10 @@ public getTelemetryConfig(): Record<string, unknown>  {
   }
 
     /**
- * Get error handling configuration
- *
- * @returns {Record<string, unknown>} - TODO: describe return value.
- */
+     * Get error handling configuration
+     *
+     * @returns {Record<string, unknown>} - TODO: describe return value.
+     */
 public getErrorHandlingConfig(): Record<string, unknown>  {
     return {
       maxRetries: this.config.errorHandling?.maxRetries ?? 3,
@@ -231,55 +231,55 @@ public getErrorHandlingConfig(): Record<string, unknown>  {
   }
 
     /**
- * Check if caching is enabled by default
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if caching is enabled by default
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isCachingEnabled(): boolean {
     return this.getCachingConfig().enabledByDefault;
   }
 
     /**
- * Check if strict validation is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if strict validation is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isStrictValidationEnabled(): boolean {
     return this.getSchemaValidation().enableStrictValidation;
   }
 
     /**
- * Check if auto alias transformation is enabled
- *
- * @returns {boolean} - TODO: describe return value.
- */
+     * Check if auto alias transformation is enabled
+     *
+     * @returns {boolean} - TODO: describe return value.
+     */
 public isAutoAliasTransformEnabled(): boolean {
     return this.getSchemaValidation().autoTransformAliases;
   }
 
     /**
- * Get default cache key prefix
- *
- * @returns {string} - TODO: describe return value.
- */
+     * Get default cache key prefix
+     *
+     * @returns {string} - TODO: describe return value.
+     */
 public getDefaultCacheKeyPrefix(): string {
     return this.getCachingConfig().defaultKeyPrefix;
   }
 
     /**
- * Get maximum result size for queries
- *
- * @returns {number} - TODO: describe return value.
- */
+     * Get maximum result size for queries
+     *
+     * @returns {number} - TODO: describe return value.
+     */
 public getMaxResultSize(): number {
     return this.getQueryLimits().maxResultSize;
   }
 
     /**
- * Get query timeout in milliseconds
- *
- * @returns {number} - TODO: describe return value.
- */
+     * Get query timeout in milliseconds
+     *
+     * @returns {number} - TODO: describe return value.
+     */
 public getQueryTimeout(): number {
     return this.getQueryLimits().queryTimeout;
   }

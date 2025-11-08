@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/prompts](../README.md) / renderClarificationPrompt
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **renderClarificationPrompt**(`__namedParameters`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L55)
+Defined in: [src/mcp/prompts/index.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/prompts/index.ts#L55)
 
 ## Parameters
 
@@ -36,7 +37,6 @@ Defined in: [src/mcp/prompts/index.ts:55](https://github.com/ErikPlachta/VSCode-
 ## Returns
 
 `string`
-
 
 ## Summary
 

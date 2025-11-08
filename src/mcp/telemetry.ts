@@ -25,12 +25,15 @@ export interface InvocationLogger {
   log(event: InvocationEvent): void;
 }
 
+/**
+ *
+ */
 class ConsoleInvocationLogger implements InvocationLogger {
     /**
- * log function.
- *
- * @param {InvocationEvent} event - event parameter.
- */
+     * log function.
+     *
+     * @param {InvocationEvent} event - event parameter.
+     */
 log(event: InvocationEvent): void {
     if (process.env.JEST_WORKER_ID) {
       return;

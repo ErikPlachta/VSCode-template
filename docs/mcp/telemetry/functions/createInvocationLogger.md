@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [mcp/telemetry](../README.md) / createInvocationLogger
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **createInvocationLogger**(`agent`, `logger`): [`InvocationWrapper`](../interfaces/InvocationWrapper.md)
 
-Defined in: [src/mcp/telemetry.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L41)
+Defined in: [src/mcp/telemetry.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L41)
 
 Create a helper that wraps asynchronous operations and emits telemetry events.
 
@@ -42,7 +43,6 @@ Create a helper that wraps asynchronous operations and emits telemetry events.
 ## Returns
 
 [`InvocationWrapper`](../interfaces/InvocationWrapper.md)
-
 
 ## Summary
 

@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [server/embedded](../README.md) / startMCPServer
 
@@ -25,7 +26,7 @@ hierarchy:
 
 > **startMCPServer**(`port?`): `Promise`\<`string`\>
 
-Defined in: [src/server/embedded.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/server/embedded.ts#L18)
+Defined in: [src/server/embedded.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/server/embedded.ts#L18)
 
 Start the embedded MCP server on an available port.
 
@@ -40,7 +41,6 @@ Start the embedded MCP server on an available port.
 `Promise`\<`string`\>
 
 - Promise that resolves to the server URL
-
 
 ## Summary
 

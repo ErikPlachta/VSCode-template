@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [shared/mcpTypes](../README.md) / MCPProperty
 
 # Interface: MCPProperty
 
-Defined in: [src/shared/mcpTypes.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L11)
+Defined in: [src/shared/mcpTypes.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L11)
 
 JSON schema fragment describing a tool argument.
 
@@ -33,70 +34,69 @@ JSON schema fragment describing a tool argument.
 
 > `optional` **default**: `unknown`
 
-Defined in: [src/shared/mcpTypes.ts:21](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L21)
+Defined in: [src/shared/mcpTypes.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L21)
 
 Suggested default value supplied by the backend.
 
-***
+---
 
 ### description?
 
 > `optional` **description**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L17)
+Defined in: [src/shared/mcpTypes.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L17)
 
 Human readable description for prompts and docs.
 
-***
+---
 
 ### enum?
 
 > `optional` **enum**: `string`[]
 
-Defined in: [src/shared/mcpTypes.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L19)
+Defined in: [src/shared/mcpTypes.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L19)
 
 Static enumeration, if provided by the schema.
 
-***
+---
 
 ### items?
 
 > `optional` **items**: `MCPProperty`
 
-Defined in: [src/shared/mcpTypes.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L23)
+Defined in: [src/shared/mcpTypes.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L23)
 
 Nested item type for array arguments.
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L13)
+Defined in: [src/shared/mcpTypes.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L13)
 
 Argument identifier used when invoking the tool.
 
-***
+---
 
 ### required?
 
 > `optional` **required**: `boolean`
 
-Defined in: [src/shared/mcpTypes.ts:25](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L25)
+Defined in: [src/shared/mcpTypes.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L25)
 
 Whether the parameter is required.
 
-***
+---
 
 ### type?
 
 > `optional` **type**: `string` \| `string`[]
 
-Defined in: [src/shared/mcpTypes.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L15)
+Defined in: [src/shared/mcpTypes.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L15)
 
 Primitive type such as `string`, `number`, `boolean`, or `array`.
-
 
 ## Summary
 

@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / CacheConfig
 
 # Interface: CacheConfig
 
-Defined in: [src/types/applicationConfig.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L154)
+Defined in: [src/types/applicationConfig.ts:154](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L154)
 
 Cache configuration settings.
 
@@ -33,40 +34,39 @@ Cache configuration settings.
 
 > **directory**: `string`
 
-Defined in: [src/types/applicationConfig.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L158)
+Defined in: [src/types/applicationConfig.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L158)
 
 Cache directory path.
 
-***
+---
 
 ### enabled
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L156)
+Defined in: [src/types/applicationConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L156)
 
 Enable caching.
 
-***
+---
 
 ### maxSize
 
 > **maxSize**: `string`
 
-Defined in: [src/types/applicationConfig.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L160)
+Defined in: [src/types/applicationConfig.ts:160](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L160)
 
 Maximum cache size.
 
-***
+---
 
 ### ttl
 
 > **ttl**: `number`
 
-Defined in: [src/types/applicationConfig.ts:162](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L162)
+Defined in: [src/types/applicationConfig.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L162)
 
 Time-to-live for cached items in milliseconds.
-
 
 ## Summary
 

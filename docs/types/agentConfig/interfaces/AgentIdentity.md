@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / AgentIdentity
 
 # Interface: AgentIdentity
 
-Defined in: [src/types/agentConfig.ts:8](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L8)
+Defined in: [src/types/agentConfig.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L8)
 
 Basic agent identity and metadata
 
@@ -33,32 +34,31 @@ Basic agent identity and metadata
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L12)
+Defined in: [src/types/agentConfig.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L12)
 
-***
+---
 
 ### id
 
 > **id**: `string`
 
-Defined in: [src/types/agentConfig.ts:9](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L9)
+Defined in: [src/types/agentConfig.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L9)
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:10](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L10)
+Defined in: [src/types/agentConfig.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L10)
 
-***
+---
 
 ### version
 
 > **version**: `string`
 
-Defined in: [src/types/agentConfig.ts:11](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L11)
-
+Defined in: [src/types/agentConfig.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L11)
 
 ## Summary
 

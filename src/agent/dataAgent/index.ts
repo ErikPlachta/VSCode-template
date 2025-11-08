@@ -12,6 +12,9 @@ import { DataAgentProfile } from "@mcp/config/agentProfiles";
 import { DataAgentConfig } from "./config";
 
 // Define core data types without importing from other agents
+/**
+ *
+ */
 export type CategoryId = string;
 
 /**
@@ -137,20 +140,20 @@ export class DataAgent {
   private readonly config: DataAgentConfig;
 
     /**
- * Create a new {@link DataAgent}.
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Create a new {@link DataAgent}.
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 constructor() {
     this.config = new DataAgentConfig();
   }
 
     /**
- * Analyze data and generate insights.
- *
- * @param {AnalysisInput} input - input parameter.
- * @returns {Promise<DataInsight[]>} - TODO: describe return value.
- */
+     * Analyze data and generate insights.
+     *
+     * @param {AnalysisInput} input - input parameter.
+     * @returns {Promise<DataInsight[]>} - TODO: describe return value.
+     */
 async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     return this.telemetry("analyzeData", async () => {
       const analysisConfig = this.config.getAnalysisConfig();
@@ -191,13 +194,13 @@ async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
   }
 
     /**
- * Generate an exploration plan for data analysis.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @param {string} question - question parameter.
- * @param {AnalysisInput} availableData - availableData parameter.
- * @returns {Promise<ExplorationPlan>} - TODO: describe return value.
- */
+     * Generate an exploration plan for data analysis.
+     *
+     * @param {CategoryId} categoryId - categoryId parameter.
+     * @param {string} question - question parameter.
+     * @param {AnalysisInput} availableData - availableData parameter.
+     * @returns {Promise<ExplorationPlan>} - TODO: describe return value.
+     */
 async generateExplorationPlan(
     categoryId: CategoryId,
     question: string,
@@ -249,13 +252,13 @@ async generateExplorationPlan(
   }
 
     /**
- * Analyze relationships between categories.
- *
- * @param {AnalysisInput} sourceData - sourceData parameter.
- * @param {AnalysisInput} targetData - targetData parameter.
- * @param {RelationshipDescription} relationship - relationship parameter.
- * @returns {Promise<CrossCategoryConnection>} - TODO: describe return value.
- */
+     * Analyze relationships between categories.
+     *
+     * @param {AnalysisInput} sourceData - sourceData parameter.
+     * @param {AnalysisInput} targetData - targetData parameter.
+     * @param {RelationshipDescription} relationship - relationship parameter.
+     * @returns {Promise<CrossCategoryConnection>} - TODO: describe return value.
+     */
 async analyzeConnection(
     sourceData: AnalysisInput,
     targetData: AnalysisInput,
@@ -280,12 +283,12 @@ async analyzeConnection(
   }
 
     /**
- * Search for patterns in data records.
- *
- * @param {string} keyword - keyword parameter.
- * @param {AnalysisInput[]} data - data parameter.
- * @returns {TopicSearchResult[]} - TODO: describe return value.
- */
+     * Search for patterns in data records.
+     *
+     * @param {string} keyword - keyword parameter.
+     * @param {AnalysisInput[]} data - data parameter.
+     * @returns {TopicSearchResult[]} - TODO: describe return value.
+     */
 searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
     const searchConfig = this.config.getSearchConfig();
     const results: TopicSearchResult[] = [];
@@ -319,12 +322,12 @@ searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
   }
 
     /**
- * Detect patterns in data records.
- *
- * @param {CategoryRecord[]} records - records parameter.
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {DataInsight[]} - TODO: describe return value.
- */
+     * Detect patterns in data records.
+     *
+     * @param {CategoryRecord[]} records - records parameter.
+     * @param {CategoryId} categoryId - categoryId parameter.
+     * @returns {DataInsight[]} - TODO: describe return value.
+     */
 private detectPatterns(
     records: CategoryRecord[],
     categoryId: CategoryId
@@ -359,12 +362,12 @@ private detectPatterns(
   }
 
     /**
- * Detect anomalies in data records.
- *
- * @param {CategoryRecord[]} records - records parameter.
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {DataInsight[]} - TODO: describe return value.
- */
+     * Detect anomalies in data records.
+     *
+     * @param {CategoryRecord[]} records - records parameter.
+     * @param {CategoryId} categoryId - categoryId parameter.
+     * @returns {DataInsight[]} - TODO: describe return value.
+     */
 private detectAnomalies(
     records: CategoryRecord[],
     categoryId: CategoryId
@@ -404,11 +407,11 @@ private detectAnomalies(
   }
 
     /**
- * Analyze relationships for insights.
- *
- * @param {RelationshipDescription[]} relationships - relationships parameter.
- * @returns {DataInsight[]} - TODO: describe return value.
- */
+     * Analyze relationships for insights.
+     *
+     * @param {RelationshipDescription[]} relationships - relationships parameter.
+     * @returns {DataInsight[]} - TODO: describe return value.
+     */
 private analyzeRelationships(
     relationships: RelationshipDescription[]
   ): DataInsight[] {
@@ -427,11 +430,11 @@ private analyzeRelationships(
   }
 
     /**
- * Get display name for a record.
- *
- * @param {CategoryRecord} record - record parameter.
- * @returns {string} - TODO: describe return value.
- */
+     * Get display name for a record.
+     *
+     * @param {CategoryRecord} record - record parameter.
+     * @returns {string} - TODO: describe return value.
+     */
 private getRecordDisplayName(record: CategoryRecord): string {
     return (
       (typeof record.name === "string" && record.name) ||

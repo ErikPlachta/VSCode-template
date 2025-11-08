@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / RelationshipDescription
 
 # Interface: RelationshipDescription
 
-Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L130)
+Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L130)
 
 ## Properties
 
@@ -31,32 +32,31 @@ Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/VSCode-
 
 > **description**: `string`
 
-Defined in: [src/agent/interfaces.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L132)
+Defined in: [src/agent/interfaces.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L132)
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/agent/interfaces.ts:131](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L131)
+Defined in: [src/agent/interfaces.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L131)
 
-***
+---
 
 ### targetCategory
 
 > **targetCategory**: `string`
 
-Defined in: [src/agent/interfaces.ts:133](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L133)
+Defined in: [src/agent/interfaces.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L133)
 
-***
+---
 
 ### viaField
 
 > **viaField**: `string`
 
-Defined in: [src/agent/interfaces.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L134)
-
+Defined in: [src/agent/interfaces.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/agent/interfaces.ts#L134)
 
 ## Summary
 

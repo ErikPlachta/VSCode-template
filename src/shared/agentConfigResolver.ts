@@ -83,21 +83,24 @@ export interface EffectiveExecutionProfile {
   cacheEnabled?: boolean;
 }
 
+/**
+ *
+ */
 export class AgentConfigResolver {
   /**
- * constructor function.
- *
- * @param {string} configPath - configPath parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+   * constructor function.
+   *
+   * @param {string} configPath - configPath parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
 constructor(private readonly configPath: string = "src/mcp.config.json") {}
 
     /**
- * Returns the effective execution profile for an agent after applying runtime overrides.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<EffectiveExecutionProfile>} - TODO: describe return value.
- */
+     * Returns the effective execution profile for an agent after applying runtime overrides.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<EffectiveExecutionProfile>} - TODO: describe return value.
+     */
 async getEffectiveExecutionProfile(
     agentId: AgentIdentifier
   ): Promise<EffectiveExecutionProfile> {

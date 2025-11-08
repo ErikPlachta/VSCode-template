@@ -606,11 +606,11 @@ function NormalizeLookupKey(value: string): string {
 /** Error thrown when a caller references an unknown category. */
 export class UnknownCategoryError extends Error {
   /**
- * constructor function.
- *
- * @param {string} topic - topic parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+   * constructor function.
+   *
+   * @param {string} topic - topic parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
 constructor(topic: string) {
     super(`Unknown category or topic: ${topic}`);
   }
@@ -638,11 +638,11 @@ export class RelevantDataManagerAgent {
   private readonly config: RelevantDataManagerAgentConfig;
 
   /**
- * constructor function.
- *
- * @param {Promise<string>} cacheDirPromise - cacheDirPromise parameter.
- * @returns {unknown} - TODO: describe return value.
- */
+   * constructor function.
+   *
+   * @param {Promise<string>} cacheDirPromise - cacheDirPromise parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
 constructor(cacheDirPromise?: Promise<string>) {
     this.config = new RelevantDataManagerAgentConfig();
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
@@ -661,10 +661,10 @@ constructor(cacheDirPromise?: Promise<string>) {
   }
 
     /**
- * Enumerate the categories available to the MCP client.
- *
- * @returns {CategorySummary[]} - TODO: describe return value.
- */
+     * Enumerate the categories available to the MCP client.
+     *
+     * @returns {CategorySummary[]} - TODO: describe return value.
+     */
 listCategories(): CategorySummary[] {
     return Array.from(this.categories.values()).map((category) => ({
       id: category.id,
@@ -674,12 +674,12 @@ listCategories(): CategorySummary[] {
   }
 
     /**
- * Resolve a topic or identifier to the underlying category definition.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {BusinessCategory} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Resolve a topic or identifier to the underlying category definition.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {BusinessCategory} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 getCategory(topicOrId: string): BusinessCategory {
     const key = NormalizeLookupKey(topicOrId);
     const category = this.lookupIndex.get(key);
@@ -690,126 +690,126 @@ getCategory(topicOrId: string): BusinessCategory {
   }
 
     /**
- * Retrieve the folder blueprint for a given topic.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {FolderBlueprint} - TODO: describe return value.
- */
+     * Retrieve the folder blueprint for a given topic.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {FolderBlueprint} - TODO: describe return value.
+     */
 getFolderBlueprint(topicOrId: string): FolderBlueprint {
     return this.getCategory(topicOrId).config.folder;
   }
 
     /**
- * Access category configuration metadata such as relationships.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {BusinessCategory["config"]} - TODO: describe return value.
- */
+     * Access category configuration metadata such as relationships.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {BusinessCategory["config"]} - TODO: describe return value.
+     */
 getCategoryConfig(topicOrId: string): BusinessCategory["config"] {
     return this.getCategory(topicOrId).config;
   }
 
     /**
- * Access the JSON schemas associated with a category.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {CategorySchema[]} - TODO: describe return value.
- */
+     * Access the JSON schemas associated with a category.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {CategorySchema[]} - TODO: describe return value.
+     */
 getCategorySchemas(topicOrId: string): CategorySchema[] {
     return this.getCategory(topicOrId).schemas;
   }
 
     /**
- * Retrieve structured type definitions provided as guidance for SDK authors.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {TypeDefinition[]} - TODO: describe return value.
- */
+     * Retrieve structured type definitions provided as guidance for SDK authors.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {TypeDefinition[]} - TODO: describe return value.
+     */
 getTypeDefinitions(topicOrId: string): TypeDefinition[] {
     return this.getCategory(topicOrId).types;
   }
 
     /**
- * Fetch example datasets included inside the category folder.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {ExampleDataset[]} - TODO: describe return value.
- */
+     * Fetch example datasets included inside the category folder.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {ExampleDataset[]} - TODO: describe return value.
+     */
 getExamples(topicOrId: string): ExampleDataset[] {
     return this.getCategory(topicOrId).examples;
   }
 
     /**
- * Retrieve the validation report generated for the category data.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {DataValidationReport} - TODO: describe return value.
- */
+     * Retrieve the validation report generated for the category data.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {DataValidationReport} - TODO: describe return value.
+     */
 getValidationReport(topicOrId: string): DataValidationReport {
     return this.getCategory(topicOrId).validation;
   }
 
     /**
- * Retrieve query blueprints that demonstrate how to call the authoritative upstream system.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {RemoteQueryBlueprint[]} - TODO: describe return value.
- */
+     * Retrieve query blueprints that demonstrate how to call the authoritative upstream system.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {RemoteQueryBlueprint[]} - TODO: describe return value.
+     */
 getQueries(topicOrId: string): RemoteQueryBlueprint[] {
     return this.getCategory(topicOrId).queries;
   }
 
     /**
- * Return all records stored in the local mock dataset for a category.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {CategoryRecord[]} - TODO: describe return value.
- */
+     * Return all records stored in the local mock dataset for a category.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {CategoryRecord[]} - TODO: describe return value.
+     */
 getRecords(topicOrId: string): CategoryRecord[] {
     return this.getCategory(topicOrId).records;
   }
 
     /**
- * Compute a deterministic hash of the records for change detection.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {string} - TODO: describe return value.
- */
+     * Compute a deterministic hash of the records for change detection.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {string} - TODO: describe return value.
+     */
 getCategoryRecordHash(topicOrId: string): string {
     const category = this.getCategory(topicOrId);
     return this.hashRecords(category.records);
   }
 
     /**
- * Expose the dataset fingerprint used to detect catalogue changes.
- *
- * @returns {string} - TODO: describe return value.
- */
+     * Expose the dataset fingerprint used to detect catalogue changes.
+     *
+     * @returns {string} - TODO: describe return value.
+     */
 getDatasetFingerprint(): string {
     return this.datasetFingerprint;
   }
 
     /**
- * Retrieve a single record by identifier.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @param {string} recordId - recordId parameter.
- * @returns {CategoryRecord | undefined} - TODO: describe return value.
- */
+     * Retrieve a single record by identifier.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @param {string} recordId - recordId parameter.
+     * @returns {CategoryRecord | undefined} - TODO: describe return value.
+     */
 getRecord(topicOrId: string, recordId: string): CategoryRecord | undefined {
     return this.getRecords(topicOrId).find((record) => record.id === recordId);
   }
 
     /**
- * Perform a keyword search across every category.
- *
- * @param {string} keyword - keyword parameter.
- * @returns {Array<{
+     * Perform a keyword search across every category.
+     *
+     * @param {string} keyword - keyword parameter.
+     * @returns {Array<{
     categoryId: CategoryId;
     record: CategoryRecord;
     matchingFields: string[];
   }>} - TODO: describe return value.
- */
+     */
 searchAcrossCategories(keyword: string): Array<{
     categoryId: CategoryId;
     record: CategoryRecord;
@@ -861,11 +861,11 @@ searchAcrossCategories(keyword: string): Array<{
   }
 
     /**
- * Build a snapshot view of a category and persist it to the shared cache.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @returns {Promise<CategorySnapshot>} - TODO: describe return value.
- */
+     * Build a snapshot view of a category and persist it to the shared cache.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @returns {Promise<CategorySnapshot>} - TODO: describe return value.
+     */
 async getOrCreateSnapshot(topicOrId: string): Promise<CategorySnapshot> {
     return this.telemetry("getOrCreateSnapshot", async () => {
       const category = this.getCategory(topicOrId);
@@ -905,13 +905,13 @@ async getOrCreateSnapshot(topicOrId: string): Promise<CategorySnapshot> {
   }
 
     /**
- * Resolve relationships for a given record across categories.
- *
- * @param {string} topicOrId - topicOrId parameter.
- * @param {string} recordId - recordId parameter.
- * @returns {EntityConnections} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Resolve relationships for a given record across categories.
+     *
+     * @param {string} topicOrId - topicOrId parameter.
+     * @param {string} recordId - recordId parameter.
+     * @returns {EntityConnections} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 getEntityConnections(topicOrId: string, recordId: string): EntityConnections {
     const category = this.getCategory(topicOrId);
     const record = this.getRecord(category.id, recordId);
@@ -941,20 +941,20 @@ getEntityConnections(topicOrId: string, recordId: string): EntityConnections {
   }
 
     /**
- * Expose the consolidated dataset catalogue built from the data directory.
- *
- * @returns {DatasetCatalogueEntry[]} - TODO: describe return value.
- */
+     * Expose the consolidated dataset catalogue built from the data directory.
+     *
+     * @returns {DatasetCatalogueEntry[]} - TODO: describe return value.
+     */
 getDatasetCatalogue(): DatasetCatalogueEntry[] {
     return this.consolidatedIndex;
   }
 
     /**
- * loadDataset function.
- *
- * @returns {LoadedDataset} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadDataset function.
+     *
+     * @returns {LoadedDataset} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadDataset(): LoadedDataset {
     if (!fs.existsSync(this.dataRoot)) {
       throw new Error(`Data directory '${this.dataRoot}' does not exist.`);
@@ -1002,15 +1002,15 @@ private loadDataset(): LoadedDataset {
   }
 
     /**
- * loadCategory function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @returns {{
+     * loadCategory function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @returns {{
     category: BusinessCategory;
     relationshipDefinitions: RelationshipDefinition[];
   }} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * @throws {Error} - May throw an error.
+     */
 private loadCategory(categoryDir: string): {
     category: BusinessCategory;
     relationshipDefinitions: RelationshipDefinition[];
@@ -1087,13 +1087,13 @@ private loadCategory(categoryDir: string): {
   }
 
     /**
- * NormalizeOrchestrationConfig function.
- *
- * @param {RawOrchestrationConfig | undefined} raw - raw parameter.
- * @param {string} context - context parameter.
- * @returns {CategoryOrchestrationConfig} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * NormalizeOrchestrationConfig function.
+     *
+     * @param {RawOrchestrationConfig | undefined} raw - raw parameter.
+     * @param {string} context - context parameter.
+     * @returns {CategoryOrchestrationConfig} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private NormalizeOrchestrationConfig(
     raw: RawOrchestrationConfig | undefined,
     context: string
@@ -1145,14 +1145,14 @@ private NormalizeOrchestrationConfig(
   }
 
     /**
- * NormalizeAgentGuidance function.
- *
- * @param {RawAgentOrchestrationGuidance | undefined} raw - raw parameter.
- * @param {keyof CategoryOrchestrationConfig["agents"]} agentKey - agentKey parameter.
- * @param {string} context - context parameter.
- * @returns {AgentOrchestrationGuidance} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * NormalizeAgentGuidance function.
+     *
+     * @param {RawAgentOrchestrationGuidance | undefined} raw - raw parameter.
+     * @param {keyof CategoryOrchestrationConfig["agents"]} agentKey - agentKey parameter.
+     * @param {string} context - context parameter.
+     * @returns {AgentOrchestrationGuidance} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private NormalizeAgentGuidance(
     raw: RawAgentOrchestrationGuidance | undefined,
     agentKey: keyof CategoryOrchestrationConfig["agents"],
@@ -1180,13 +1180,13 @@ private NormalizeAgentGuidance(
   }
 
     /**
- * ensureString function.
- *
- * @param {unknown} value - value parameter.
- * @param {string} context - context parameter.
- * @returns {string} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * ensureString function.
+     *
+     * @param {unknown} value - value parameter.
+     * @param {string} context - context parameter.
+     * @returns {string} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private ensureString(value: unknown, context: string): string {
     if (typeof value !== "string") {
       throw new Error(`Expected ${context} to be a string.`);
@@ -1199,13 +1199,13 @@ private ensureString(value: unknown, context: string): string {
   }
 
     /**
- * ensureStringArray function.
- *
- * @param {unknown} value - value parameter.
- * @param {string} context - context parameter.
- * @returns {string[]} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * ensureStringArray function.
+     *
+     * @param {unknown} value - value parameter.
+     * @param {string} context - context parameter.
+     * @returns {string[]} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private ensureStringArray(value: unknown, context: string): string[] {
     if (!Array.isArray(value) || value.length === 0) {
       throw new Error(`Expected ${context} to be a non-empty string array.`);
@@ -1225,12 +1225,12 @@ private ensureStringArray(value: unknown, context: string): string[] {
   }
 
     /**
- * buildFolderBlueprint function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @param {string} configPath - configPath parameter.
- * @returns {FolderBlueprint} - TODO: describe return value.
- */
+     * buildFolderBlueprint function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @param {string} configPath - configPath parameter.
+     * @returns {FolderBlueprint} - TODO: describe return value.
+     */
 private buildFolderBlueprint(
     categoryDir: string,
     configPath: string
@@ -1253,12 +1253,12 @@ private buildFolderBlueprint(
   }
 
     /**
- * requireDirectory function.
- *
- * @param {string} target - target parameter.
- * @returns {string} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * requireDirectory function.
+     *
+     * @param {string} target - target parameter.
+     * @returns {string} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private requireDirectory(target: string): string {
     if (!fs.existsSync(target) || !fs.statSync(target).isDirectory()) {
       throw new Error(`Expected directory '${target}' to exist.`);
@@ -1267,12 +1267,12 @@ private requireDirectory(target: string): string {
   }
 
     /**
- * collectFiles function.
- *
- * @param {string} targetDir - targetDir parameter.
- * @param {string[]} extensions - extensions parameter.
- * @returns {string[]} - TODO: describe return value.
- */
+     * collectFiles function.
+     *
+     * @param {string} targetDir - targetDir parameter.
+     * @param {string[]} extensions - extensions parameter.
+     * @returns {string[]} - TODO: describe return value.
+     */
 private collectFiles(targetDir: string, extensions: string[]): string[] {
     return fs
       .readdirSync(targetDir, { withFileTypes: true })
@@ -1288,12 +1288,12 @@ private collectFiles(targetDir: string, extensions: string[]): string[] {
   }
 
     /**
- * loadSchemas function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @returns {CategorySchema[]} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadSchemas function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @returns {CategorySchema[]} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadSchemas(categoryDir: string): CategorySchema[] {
     const target = path.join(categoryDir, "schemas");
     return this.collectFiles(target, [".json"]).map((file) => {
@@ -1309,12 +1309,12 @@ private loadSchemas(categoryDir: string): CategorySchema[] {
   }
 
     /**
- * loadTypeDefinitions function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @returns {TypeDefinition[]} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadTypeDefinitions function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @returns {TypeDefinition[]} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadTypeDefinitions(categoryDir: string): TypeDefinition[] {
     const target = path.join(categoryDir, "types");
     return this.collectFiles(target, [".json"]).map((file) => {
@@ -1336,12 +1336,12 @@ private loadTypeDefinitions(categoryDir: string): TypeDefinition[] {
   }
 
     /**
- * loadExamples function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @returns {ExampleDataset[]} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadExamples function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @returns {ExampleDataset[]} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadExamples(categoryDir: string): ExampleDataset[] {
     const target = path.join(categoryDir, "examples");
     return this.collectFiles(target, [".json"]).map((file) => {
@@ -1357,13 +1357,13 @@ private loadExamples(categoryDir: string): ExampleDataset[] {
   }
 
     /**
- * validateCategoryRecords function.
- *
- * @param {CategorySchema[]} schemas - schemas parameter.
- * @param {CategoryRecord[]} records - records parameter.
- * @param {RelationshipDefinition[]} relationshipDefinitions - relationshipDefinitions parameter.
- * @returns {DataValidationReport} - TODO: describe return value.
- */
+     * validateCategoryRecords function.
+     *
+     * @param {CategorySchema[]} schemas - schemas parameter.
+     * @param {CategoryRecord[]} records - records parameter.
+     * @param {RelationshipDefinition[]} relationshipDefinitions - relationshipDefinitions parameter.
+     * @returns {DataValidationReport} - TODO: describe return value.
+     */
 private validateCategoryRecords(
     schemas: CategorySchema[],
     records: CategoryRecord[],
@@ -1438,12 +1438,12 @@ private validateCategoryRecords(
   }
 
     /**
- * loadQueries function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @returns {RemoteQueryBlueprint[]} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadQueries function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @returns {RemoteQueryBlueprint[]} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadQueries(categoryDir: string): RemoteQueryBlueprint[] {
     const target = path.join(categoryDir, "queries");
     return this.collectFiles(target, [".json"]).map((file) => {
@@ -1459,11 +1459,11 @@ private loadQueries(categoryDir: string): RemoteQueryBlueprint[] {
   }
 
     /**
- * performRelationshipValidation function.
- *
- * @param {Map<CategoryId, BusinessCategory>} categories - categories parameter.
- * @param {RelationshipDefinition[]} relationships - relationships parameter.
- */
+     * performRelationshipValidation function.
+     *
+     * @param {Map<CategoryId, BusinessCategory>} categories - categories parameter.
+     * @param {RelationshipDefinition[]} relationships - relationships parameter.
+     */
 private performRelationshipValidation(
     categories: Map<CategoryId, BusinessCategory>,
     relationships: RelationshipDefinition[]
@@ -1518,14 +1518,14 @@ private performRelationshipValidation(
   }
 
     /**
- * loadRecords function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @param {string} categoryId - categoryId parameter.
- * @param {CategoryRequirements} requirements - requirements parameter.
- * @returns {CategoryRecord[]} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadRecords function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @param {string} categoryId - categoryId parameter.
+     * @param {CategoryRequirements} requirements - requirements parameter.
+     * @returns {CategoryRecord[]} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadRecords(
     categoryDir: string,
     categoryId: string,
@@ -1566,13 +1566,13 @@ private loadRecords(
   }
 
     /**
- * loadRelationships function.
- *
- * @param {string} categoryDir - categoryDir parameter.
- * @param {string} categoryId - categoryId parameter.
- * @returns {RelationshipLoadResult} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadRelationships function.
+     *
+     * @param {string} categoryDir - categoryDir parameter.
+     * @param {string} categoryId - categoryId parameter.
+     * @returns {RelationshipLoadResult} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadRelationships(
     categoryDir: string,
     categoryId: string
@@ -1625,13 +1625,13 @@ private loadRelationships(
   }
 
     /**
- * assertRequiredFields function.
- *
- * @param {CategoryRecord} record - record parameter.
- * @param {string[]} fields - fields parameter.
- * @param {string} context - context parameter.
- * @throws {Error} - May throw an error.
- */
+     * assertRequiredFields function.
+     *
+     * @param {CategoryRecord} record - record parameter.
+     * @param {string[]} fields - fields parameter.
+     * @param {string} context - context parameter.
+     * @throws {Error} - May throw an error.
+     */
 private assertRequiredFields(
     record: CategoryRecord,
     fields: string[],
@@ -1645,13 +1645,13 @@ private assertRequiredFields(
   }
 
     /**
- * assertRelationshipCoverage function.
- *
- * @param {string[]} fields - fields parameter.
- * @param {RelationshipDefinition[]} relationships - relationships parameter.
- * @param {string} context - context parameter.
- * @throws {Error} - May throw an error.
- */
+     * assertRelationshipCoverage function.
+     *
+     * @param {string[]} fields - fields parameter.
+     * @param {RelationshipDefinition[]} relationships - relationships parameter.
+     * @param {string} context - context parameter.
+     * @throws {Error} - May throw an error.
+     */
 private assertRelationshipCoverage(
     fields: string[],
     relationships: RelationshipDefinition[],
@@ -1670,11 +1670,11 @@ private assertRelationshipCoverage(
   }
 
     /**
- * groupRelationshipsBySource function.
- *
- * @param {RelationshipDefinition[]} relations - relations parameter.
- * @returns {Map<CategoryId, RelationshipDefinition[]>} - TODO: describe return value.
- */
+     * groupRelationshipsBySource function.
+     *
+     * @param {RelationshipDefinition[]} relations - relations parameter.
+     * @returns {Map<CategoryId, RelationshipDefinition[]>} - TODO: describe return value.
+     */
 private groupRelationshipsBySource(
     relations: RelationshipDefinition[]
   ): Map<CategoryId, RelationshipDefinition[]> {
@@ -1688,10 +1688,10 @@ private groupRelationshipsBySource(
   }
 
     /**
- * persistConsolidatedIndex function.
- *
- * @returns {Promise<void>} - TODO: describe return value.
- */
+     * persistConsolidatedIndex function.
+     *
+     * @returns {Promise<void>} - TODO: describe return value.
+     */
 private async persistConsolidatedIndex(): Promise<void> {
     await this.telemetry("persistConsolidatedIndex", async () => {
       try {
@@ -1718,11 +1718,11 @@ private async persistConsolidatedIndex(): Promise<void> {
   }
 
     /**
- * createCatalogueEntry function.
- *
- * @param {BusinessCategory} category - category parameter.
- * @returns {DatasetCatalogueEntry} - TODO: describe return value.
- */
+     * createCatalogueEntry function.
+     *
+     * @param {BusinessCategory} category - category parameter.
+     * @returns {DatasetCatalogueEntry} - TODO: describe return value.
+     */
 private createCatalogueEntry(
     category: BusinessCategory
   ): DatasetCatalogueEntry {
@@ -1744,11 +1744,11 @@ private createCatalogueEntry(
   }
 
     /**
- * hashRecords function.
- *
- * @param {CategoryRecord[]} records - records parameter.
- * @returns {string} - TODO: describe return value.
- */
+     * hashRecords function.
+     *
+     * @param {CategoryRecord[]} records - records parameter.
+     * @returns {string} - TODO: describe return value.
+     */
 private hashRecords(records: CategoryRecord[]): string {
     const Normalized = records.map((record) =>
       Object.fromEntries(
@@ -1764,12 +1764,12 @@ private hashRecords(records: CategoryRecord[]): string {
   }
 
     /**
- * resolveTargets function.
- *
- * @param {RelationshipDefinition} relationship - relationship parameter.
- * @param {unknown} value - value parameter.
- * @returns {CategoryRecord[]} - TODO: describe return value.
- */
+     * resolveTargets function.
+     *
+     * @param {RelationshipDefinition} relationship - relationship parameter.
+     * @param {unknown} value - value parameter.
+     * @returns {CategoryRecord[]} - TODO: describe return value.
+     */
 private resolveTargets(
     relationship: RelationshipDefinition,
     value: unknown
@@ -1790,11 +1790,11 @@ private resolveTargets(
   }
 
     /**
- * NormalizeRelationshipValues function.
- *
- * @param {unknown} value - value parameter.
- * @returns {string[]} - TODO: describe return value.
- */
+     * NormalizeRelationshipValues function.
+     *
+     * @param {unknown} value - value parameter.
+     * @returns {string[]} - TODO: describe return value.
+     */
 private NormalizeRelationshipValues(value: unknown): string[] {
     if (Array.isArray(value)) {
       return value
@@ -1813,13 +1813,13 @@ private NormalizeRelationshipValues(value: unknown): string[] {
   }
 
     /**
- * hasMatchingRecordValue function.
- *
- * @param {CategoryRecord} record - record parameter.
- * @param {string} field - field parameter.
- * @param {string} expected - expected parameter.
- * @returns {boolean} - TODO: describe return value.
- */
+     * hasMatchingRecordValue function.
+     *
+     * @param {CategoryRecord} record - record parameter.
+     * @param {string} field - field parameter.
+     * @param {string} expected - expected parameter.
+     * @returns {boolean} - TODO: describe return value.
+     */
 private hasMatchingRecordValue(
     record: CategoryRecord,
     field: string,
@@ -1836,11 +1836,11 @@ private hasMatchingRecordValue(
   }
 
     /**
- * formatAjvErrors function.
- *
- * @param {ErrorObject[] | null | undefined} errors - errors parameter.
- * @returns {string | undefined} - TODO: describe return value.
- */
+     * formatAjvErrors function.
+     *
+     * @param {ErrorObject[] | null | undefined} errors - errors parameter.
+     * @returns {string | undefined} - TODO: describe return value.
+     */
 private formatAjvErrors(
     errors: ErrorObject[] | null | undefined
   ): string | undefined {
@@ -1863,15 +1863,15 @@ private formatAjvErrors(
   }
 
     /**
- * loadJsonFile function.
- *
- * @template T
- *
- * @param {string} filePath - filePath parameter.
- * @param {string} context - context parameter.
- * @returns {T} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * loadJsonFile function.
+     *
+     * @template T
+     *
+     * @param {string} filePath - filePath parameter.
+     * @param {string} context - context parameter.
+     * @returns {T} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 private loadJsonFile<T>(filePath: string, context: string): T {
     const raw = fs.readFileSync(filePath, "utf8");
     try {

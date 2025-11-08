@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / DataValidationConfig
 
 # Interface: DataValidationConfig
 
-Defined in: [src/types/applicationConfig.ts:142](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L142)
+Defined in: [src/types/applicationConfig.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L142)
 
 Data validation configuration.
 
@@ -33,30 +34,29 @@ Data validation configuration.
 
 > **strictMode**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:144](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L144)
+Defined in: [src/types/applicationConfig.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L144)
 
 Enable strict validation mode.
 
-***
+---
 
 ### validateOnLoad
 
 > **validateOnLoad**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:146](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L146)
+Defined in: [src/types/applicationConfig.ts:146](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L146)
 
 Validate data on load.
 
-***
+---
 
 ### validateRelationships
 
 > **validateRelationships**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:148](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L148)
+Defined in: [src/types/applicationConfig.ts:148](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L148)
 
 Validate relationship integrity.
-
 
 ## Summary
 

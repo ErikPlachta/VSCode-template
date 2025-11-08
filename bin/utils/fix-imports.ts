@@ -4,7 +4,7 @@
  * This script helps update import statements throughout the project when files
  * are moved or when switching from relative to absolute imports.
  *
- * @author VSCode-template project
+ * @author vscode-extension-mcp-server project
  * @since 1.0.0
  */
 

@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / RichMetadata
 
 # Interface: RichMetadata
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:38](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L38)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L38)
 
 Rich metadata for user and application interfaces
 
@@ -33,7 +34,7 @@ Rich metadata for user and application interfaces
 
 > **applicationFacing**: `object`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L51)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L51)
 
 #### dependencies
 
@@ -63,13 +64,13 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPla
 
 > **alertThresholds**: `object`
 
-##### monitoring.alertThresholds.error\_rate\_percent
+##### monitoring.alertThresholds.error_rate_percent
 
-> **error\_rate\_percent**: `number`
+> **error_rate_percent**: `number`
 
-##### monitoring.alertThresholds.response\_time\_ms
+##### monitoring.alertThresholds.response_time_ms
 
-> **response\_time\_ms**: `number`
+> **response_time_ms**: `number`
 
 ##### monitoring.metricsToTrack
 
@@ -95,61 +96,61 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPla
 
 > **technicalDescription**: `string`
 
-***
+---
 
 ### capabilities
 
 > **capabilities**: `string`[]
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L43)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L43)
 
-***
+---
 
 ### className
 
 > **className**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L42)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L42)
 
-***
+---
 
 ### displayName
 
 > **displayName**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L41)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L41)
 
-***
+---
 
 ### label
 
 > **label**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L40)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L40)
 
-***
+---
 
 ### name
 
 > **name**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L39)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L39)
 
-***
+---
 
 ### responsibility
 
 > **responsibility**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:44](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L44)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L44)
 
-***
+---
 
 ### userFacing
 
 > **userFacing**: `object`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L45)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L45)
 
 #### exampleQueries
 
@@ -166,7 +167,6 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:45](https://github.com/ErikPla
 #### useWhen
 
 > **useWhen**: `string`[]
-
 
 ## Summary
 

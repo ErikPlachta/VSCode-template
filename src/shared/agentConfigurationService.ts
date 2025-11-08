@@ -17,17 +17,17 @@ export class AgentConfigurationService {
   private static instance: AgentConfigurationService | null = null;
 
     /**
- * Private constructor for singleton pattern.
- *
- * @returns {unknown} - TODO: describe return value.
- */
+     * Private constructor for singleton pattern.
+     *
+     * @returns {unknown} - TODO: describe return value.
+     */
 private constructor() {}
 
     /**
- * Gets the singleton instance of the agent configuration service.
- *
- * @returns {AgentConfigurationService} - TODO: describe return value.
- */
+     * Gets the singleton instance of the agent configuration service.
+     *
+     * @returns {AgentConfigurationService} - TODO: describe return value.
+     */
 public static getInstance(): AgentConfigurationService {
     if (!this.instance) {
       this.instance = new AgentConfigurationService();
@@ -36,10 +36,10 @@ public static getInstance(): AgentConfigurationService {
   }
 
     /**
- * Loads the application configuration if not already loaded.
- *
- * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
- */
+     * Loads the application configuration if not already loaded.
+     *
+     * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
+     */
 private async ensureConfigLoaded(): Promise<ApplicationConfig> {
     if (!this.config) {
       this.config = await loadApplicationConfig();
@@ -48,12 +48,12 @@ private async ensureConfigLoaded(): Promise<ApplicationConfig> {
   }
 
     /**
- * Gets the agent definition for the specified agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<AgentDefinition>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
+     * Gets the agent definition for the specified agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<AgentDefinition>} - TODO: describe return value.
+     * @throws {Error} - May throw an error.
+     */
 public async getAgentDefinition(
     agentId: AgentIdentifier
   ): Promise<AgentDefinition> {
@@ -90,12 +90,12 @@ public async getAgentDefinition(
   }
 
     /**
- * Gets all agent definitions.
- *
- * @returns {Promise<
+     * Gets all agent definitions.
+     *
+     * @returns {Promise<
     Record<string, AgentDefinition>
   >} - TODO: describe return value.
- */
+     */
 public async getAllAgentDefinitions(): Promise<
     Record<string, AgentDefinition>
   > {
@@ -111,11 +111,11 @@ public async getAllAgentDefinitions(): Promise<
   }
 
     /**
- * Gets user-facing information for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<AgentDefinition["userFacing"] | null>} - TODO: describe return value.
- */
+     * Gets user-facing information for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<AgentDefinition["userFacing"] | null>} - TODO: describe return value.
+     */
 public async getUserFacingInfo(
     agentId: AgentIdentifier
   ): Promise<AgentDefinition["userFacing"] | null> {
@@ -124,11 +124,11 @@ public async getUserFacingInfo(
   }
 
     /**
- * Gets application-facing information for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<AgentDefinition["applicationFacing"] | null>} - TODO: describe return value.
- */
+     * Gets application-facing information for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<AgentDefinition["applicationFacing"] | null>} - TODO: describe return value.
+     */
 public async getApplicationFacingInfo(
     agentId: AgentIdentifier
   ): Promise<AgentDefinition["applicationFacing"] | null> {
@@ -137,22 +137,22 @@ public async getApplicationFacingInfo(
   }
 
     /**
- * Gets the display name for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<string>} - TODO: describe return value.
- */
+     * Gets the display name for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<string>} - TODO: describe return value.
+     */
 public async getAgentDisplayName(agentId: AgentIdentifier): Promise<string> {
     const definition = await this.getAgentDefinition(agentId);
     return definition.displayName;
   }
 
     /**
- * Gets the capabilities for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<string[]>} - TODO: describe return value.
- */
+     * Gets the capabilities for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<string[]>} - TODO: describe return value.
+     */
 public async getAgentCapabilities(
     agentId: AgentIdentifier
   ): Promise<string[]> {
@@ -161,12 +161,12 @@ public async getAgentCapabilities(
   }
 
     /**
- * Checks if an agent has a specific capability.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @param {string} capability - capability parameter.
- * @returns {Promise<boolean>} - TODO: describe return value.
- */
+     * Checks if an agent has a specific capability.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @param {string} capability - capability parameter.
+     * @returns {Promise<boolean>} - TODO: describe return value.
+     */
 public async hasCapability(
     agentId: AgentIdentifier,
     capability: string
@@ -176,11 +176,11 @@ public async hasCapability(
   }
 
     /**
- * Gets agents that have a specific capability.
- *
- * @param {string} capability - capability parameter.
- * @returns {Promise<AgentIdentifier[]>} - TODO: describe return value.
- */
+     * Gets agents that have a specific capability.
+     *
+     * @param {string} capability - capability parameter.
+     * @returns {Promise<AgentIdentifier[]>} - TODO: describe return value.
+     */
 public async getAgentsWithCapability(
     capability: string
   ): Promise<AgentIdentifier[]> {
@@ -199,11 +199,11 @@ public async getAgentsWithCapability(
   }
 
     /**
- * Gets friendly description for user interfaces.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<string>} - TODO: describe return value.
- */
+     * Gets friendly description for user interfaces.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<string>} - TODO: describe return value.
+     */
 public async getFriendlyDescription(
     agentId: AgentIdentifier
   ): Promise<string> {
@@ -212,24 +212,24 @@ public async getFriendlyDescription(
   }
 
     /**
- * Gets example queries for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<string[]>} - TODO: describe return value.
- */
+     * Gets example queries for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<string[]>} - TODO: describe return value.
+     */
 public async getExampleQueries(agentId: AgentIdentifier): Promise<string[]> {
     const definition = await this.getAgentDefinition(agentId);
     return definition.userFacing?.exampleQueries || [];
   }
 
     /**
- * Gets monitoring configuration for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<
+     * Gets monitoring configuration for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<
     NonNullable<AgentDefinition["applicationFacing"]>["monitoring"] | null
   >} - TODO: describe return value.
- */
+     */
 public async getMonitoringConfig(
     agentId: AgentIdentifier
   ): Promise<
@@ -240,13 +240,13 @@ public async getMonitoringConfig(
   }
 
     /**
- * Gets performance characteristics for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<
+     * Gets performance characteristics for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<
     NonNullable<AgentDefinition["applicationFacing"]>["performance"] | null
   >} - TODO: describe return value.
- */
+     */
 public async getPerformanceConfig(
     agentId: AgentIdentifier
   ): Promise<
@@ -257,13 +257,13 @@ public async getPerformanceConfig(
   }
 
     /**
- * Gets error handling configuration for an agent.
- *
- * @param {AgentIdentifier} agentId - agentId parameter.
- * @returns {Promise<
+     * Gets error handling configuration for an agent.
+     *
+     * @param {AgentIdentifier} agentId - agentId parameter.
+     * @returns {Promise<
     NonNullable<AgentDefinition["applicationFacing"]>["errorHandling"] | null
   >} - TODO: describe return value.
- */
+     */
 public async getErrorHandlingConfig(
     agentId: AgentIdentifier
   ): Promise<
@@ -274,10 +274,10 @@ public async getErrorHandlingConfig(
   }
 
     /**
- * Reloads the configuration from disk.
- *
- * @returns {Promise<void>} - TODO: describe return value.
- */
+     * Reloads the configuration from disk.
+     *
+     * @returns {Promise<void>} - TODO: describe return value.
+     */
 public async reloadConfiguration(): Promise<void> {
     this.config = null;
     await this.ensureConfigLoaded();
