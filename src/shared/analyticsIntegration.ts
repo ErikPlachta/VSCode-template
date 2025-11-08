@@ -1,5 +1,5 @@
 /**
- * @fileoverview Integration utilities for adding analytics tracking to existing agents.
+ * @packageDocumentation Integration utilities for adding analytics tracking to existing agents.
  */
 
 import { getAnalytics, type AgentUsageAnalytics } from "./agentAnalytics";
@@ -8,8 +8,8 @@ import { loadApplicationConfig } from "./configurationLoader";
 /**
  * Decorator function for automatic analytics tracking on agent methods.
  *
- * @param agentName-  - Name of the agent class.
- * @param methodName-  - Name of the method being tracked.
+ * @param agentNam - e-  - Name of the agent class.
+ * @param methodNam - e-  - Name of the method being tracked.
  * @returns - Method decorator function.
  */
 export function trackAgentExecution(agentName: string, methodName?: string) {
@@ -49,7 +49,7 @@ export abstract class TrackedAgent {
   /**
    * Creates a new tracked agent instance.
    *
-   * @param agentName-  - Name of the agent for analytics tracking.
+   * @param agentNam - e-  - Name of the agent for analytics tracking.
    */
   constructor(agentName: string) {
     this.agentName = agentName;
@@ -59,9 +59,9 @@ export abstract class TrackedAgent {
   /**
    * Executes a tracked operation with automatic analytics recording.
    *
-   * @param operationName-  - Name of the operation being performed.
-   * @param operation-  - Operation function to execute.
-   * @param options-  - Additional tracking options.
+   * @param operationNam - e-  - Name of the operation being performed.
+   * @param operatio - n-  - Operation function to execute.
+   * @param option - s-  - Additional tracking options.
    * @returns - Promise resolving to operation result.
    */
   protected async executeTracked<T>(
@@ -83,8 +83,8 @@ export abstract class TrackedAgent {
   /**
    * Records a custom analytics event.
    *
-   * @param method-  - Method name for the event.
-   * @param eventData-  - Additional event data.
+   * @param metho - d-  - Method name for the event.
+   * @param eventDat - a-  - Additional event data.
    * @returns - */
   protected recordEvent(
     method: string,
@@ -100,7 +100,7 @@ export abstract class TrackedAgent {
   /**
    * Gets analytics statistics for this agent.
    *
-   * @param since-  - Optional start date for filtering.
+   * @param sinc - e-  - Optional start date for filtering.
    * @returns - Agent statistics or null if no data.
    */
   getStats(since?: Date): any | null {
@@ -111,9 +111,9 @@ export abstract class TrackedAgent {
 /**
  * Analytics middleware for MCP method invocations.
  *
- * @param agentName-  - Name of the agent.
- * @param methodName-  - Name of the MCP method.
- * @param handler-  - Original method handler.
+ * @param agentNam - e-  - Name of the agent.
+ * @param methodNam - e-  - Name of the MCP method.
+ * @param handle - r-  - Original method handler.
  * @returns - Wrapped handler with analytics tracking.
  */
 export function withAnalytics<T extends (...args: any[]) => Promise<any>>(
@@ -154,9 +154,9 @@ export class PerformanceMonitor {
   /**
    * Monitors the performance of a database query operation.
    *
-   * @param queryType-  - Type of database query.
-   * @param query-  - Query function to execute.
-   * @param options-  - Monitoring options.
+   * @param queryTyp - e-  - Type of database query.
+   * @param quer - y-  - Query function to execute.
+   * @param option - s-  - Monitoring options.
    * @returns - Promise resolving to query result.
    */
   async monitorDatabaseQuery<T>(
@@ -180,9 +180,9 @@ export class PerformanceMonitor {
   /**
    * Monitors data processing operations.
    *
-   * @param operationType-  - Type of data processing operation.
-   * @param processor-  - Processing function to execute.
-   * @param options-  - Monitoring options.
+   * @param operationTyp - e-  - Type of data processing operation.
+   * @param processo - r-  - Processing function to execute.
+   * @param option - s-  - Monitoring options.
    * @returns - Promise resolving to processing result.
    */
   async monitorDataProcessing<T>(
@@ -211,9 +211,9 @@ export class PerformanceMonitor {
   /**
    * Monitors orchestration decisions and routing.
    *
-   * @param decision-  - Type of orchestration decision.
-   * @param orchestration-  - Orchestration function to execute.
-   * @param options-  - Monitoring options.
+   * @param decisio - n-  - Type of orchestration decision.
+   * @param orchestratio - n-  - Orchestration function to execute.
+   * @param option - s-  - Monitoring options.
    * @returns - Promise resolving to orchestration result.
    */
   async monitorOrchestration<T>(
@@ -272,8 +272,8 @@ export async function initializeAnalytics(): Promise<AgentUsageAnalytics> {
 /**
  * Creates a scheduled analytics report generator.
  *
- * @param intervalMs-  - Interval in milliseconds between reports.
- * @param outputPath-  - File path for report output.
+ * @param intervalM - s-  - Interval in milliseconds between reports.
+ * @param outputPat - h-  - File path for report output.
  * @returns - Timer for the scheduled reports.
  */
 export function scheduleAnalyticsReports(

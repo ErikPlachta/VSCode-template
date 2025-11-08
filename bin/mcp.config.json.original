@@ -412,7 +412,7 @@
   ],
   "markdown": {
     "include": ["docs/**/*.md"],
-    "exclude": ["docs/api/**"],
+    "exclude": ["docs//**"],
     "requiredFrontMatter": [
       "title",
       "summary",

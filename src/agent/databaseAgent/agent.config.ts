@@ -2,7 +2,7 @@ import type { AgentConfigDefinition } from "../../types/agentConfig";
 import { CONFIG_IDS } from "../../types/configRegistry";
 
 /**
- * @fileoverview Database Agent Configuration
+ * @packageDocumentation Database Agent Configuration
  *
  * This configuration defines all settings for the database agent, which handles
  * structured data retrieval with filtering, joins, and query optimization.

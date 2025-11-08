@@ -1,5 +1,5 @@
 /**
- * @fileoverview Generates VS Code input prompts for MCP tool schemas.
+ * @packageDocumentation Generates VS Code input prompts for MCP tool schemas.
  *
  * @module schemaPrompt
  */
@@ -9,7 +9,7 @@ import { MCPProperty, MCPTool } from "@extension/mcpSync";
 /**
  * Resolve the declared JSON schema type into a singular primitive string.
  *
- * @param property - Property descriptor sourced from the tool schema.
+ * @param property - - Property descriptor sourced from the tool schema.
  * @returns - Primitive type name such as `string`, `number`, `boolean`, or `array`.
  */
 function resolvePropertyType(property: MCPProperty): string {
@@ -22,8 +22,8 @@ function resolvePropertyType(property: MCPProperty): string {
 /**
  * Convert user input to the correct JavaScript type based on the schema.
  *
- * @param rawValue - Raw input provided by the user.
- * @param property - Schema descriptor for the argument.
+ * @param rawValue - - Raw input provided by the user.
+ * @param property - - Schema descriptor for the argument.
  * @returns - Coerced value ready for inclusion in the MCP payload.
  * @throws - When the value cannot be coerced, for example when a number is expected.
  */
@@ -66,7 +66,7 @@ function coerceValue(rawValue: string, property: MCPProperty): unknown {
  * The prompt adapts to schema metadata by offering quick picks for enumerations
  * and booleans, plus validation for numbers and required fields.
  *
- * @param tool - Tool definition with input schema.
+ * @param tool - - Tool definition with input schema.
  * @returns - User-provided arguments keyed by schema property name, or `undefined` when the prompt is cancelled.
  * @example
  * ```ts

@@ -1,17 +1,17 @@
 /**
- * @file Enforced documentation and metadata compliance.
+ * @packageDocumentation Enforced documentation and metadata compliance.
  *
- * All source files must provide comprehensive docblocks per project standards.
+ * All source files must provide comprehensive doc-blocks per project standards.
  */
 
 import process from "node:process";
-import { RepositoryHealthAgent } from "@agent/repositoryHealthAgent";
+import { RepositoryHealthAgent } from "./repositoryHealth";
 
 /**
  * Validate Markdown metadata and structural requirements.
  *
- * @returns - Promise that resolves when validation completes.
- * @throws - When validation fails unexpectedly.
+ * @returns {Promise<void>} - Promise that resolves when validation completes.
+ * @throws {Error} - When validation fails unexpectedly.
  *
  * @example
  * ```ts

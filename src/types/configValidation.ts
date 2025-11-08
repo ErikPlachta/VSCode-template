@@ -1,5 +1,5 @@
 /**
- * @file Configuration Validation Utilities
+ * @packageDocumentation Configuration Validation Utilities
  *
  * Provides comprehensive validation functions for agent configurations,
  * including schema validation, type checking, and business rule validation.

@@ -1,6 +1,6 @@
 /**
- * @file High-level data agent that analyzes data and produces insights.
- * @fileoverview Data agent that focuses purely on data analysis and insight generation.
+ * @packageDocumentation High-level data agent that analyzes data and produces insights.
+ * @packageDocumentation Data agent that focuses purely on data analysis and insight generation.
  * This agent does not manage other agents or data sources - it receives data as input
  * and returns analysis results.
  *
@@ -110,8 +110,8 @@ export class DataAgent {
   /**
    * Analyze data and generate insights.
    *
-   * @param input - Data to analyze including records, schemas, and relationships.
-   * @returns Promise resolving to array of generated insights.
+   * @param input - - Data to analyze including records, schemas, and relationships.
+   * @returns - Promise resolving to array of generated insights.
    */
   async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     return this.telemetry("analyzeData", async () => {
@@ -155,10 +155,10 @@ export class DataAgent {
   /**
    * Generate an exploration plan for data analysis.
    *
-   * @param categoryId - Category to create plan for.
-   * @param question - Specific question to answer.
-   * @param availableData - Available data for analysis.
-   * @returns Exploration plan with recommended steps.
+   * @param categoryId - - Category to create plan for.
+   * @param question - - Specific question to answer.
+   * @param availableData - - Available data for analysis.
+   * @returns - Exploration plan with recommended steps.
    */
   async generateExplorationPlan(
     categoryId: CategoryId,
@@ -213,10 +213,10 @@ export class DataAgent {
   /**
    * Analyze relationships between categories.
    *
-   * @param sourceData - Source category data.
-   * @param targetData - Target category data.
-   * @param relationship - Relationship definition.
-   * @returns Cross-category connection analysis.
+   * @param sourceData - - Source category data.
+   * @param targetData - - Target category data.
+   * @param relationship - - Relationship definition.
+   * @returns - Cross-category connection analysis.
    */
   async analyzeConnection(
     sourceData: AnalysisInput,
@@ -244,9 +244,9 @@ export class DataAgent {
   /**
    * Search for patterns in data records.
    *
-   * @param keyword - Search term.
-   * @param data - Data to search through.
-   * @returns Search results with relevance scoring.
+   * @param keyword - - Search term.
+   * @param data - - Data to search through.
+   * @returns - Search results with relevance scoring.
    */
   searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
     const searchConfig = this.config.getSearchConfig();
@@ -283,8 +283,8 @@ export class DataAgent {
   /**
    * Detect patterns in data records.
    *
-   * @param records - Records to analyze.
-   * @returns Array of pattern insights.
+   * @param records - - Records to analyze.
+   * @returns - Array of pattern insights.
    */
   private detectPatterns(
     records: CategoryRecord[],
@@ -322,8 +322,8 @@ export class DataAgent {
   /**
    * Detect anomalies in data records.
    *
-   * @param records - Records to analyze.
-   * @returns Array of anomaly insights.
+   * @param records - - Records to analyze.
+   * @returns - Array of anomaly insights.
    */
   private detectAnomalies(
     records: CategoryRecord[],
@@ -366,8 +366,8 @@ export class DataAgent {
   /**
    * Analyze relationships for insights.
    *
-   * @param relationships - Relationships to analyze.
-   * @returns Array of relationship insights.
+   * @param relationships - - Relationships to analyze.
+   * @returns - Array of relationship insights.
    */
   private analyzeRelationships(
     relationships: RelationshipDescription[]
@@ -389,8 +389,8 @@ export class DataAgent {
   /**
    * Get display name for a record.
    *
-   * @param record - Record to get display name for.
-   * @returns Human-readable display name.
+   * @param record - - Record to get display name for.
+   * @returns - Human-readable display name.
    */
   private getRecordDisplayName(record: CategoryRecord): string {
     return (

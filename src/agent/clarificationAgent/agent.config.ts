@@ -2,7 +2,7 @@ import type { AgentConfigDefinition } from "../../types/agentConfig";
 import { CONFIG_IDS } from "../../types/configRegistry";
 
 /**
- * @fileoverview Clarification Agent Configuration
+ * @packageDocumentation Clarification Agent Configuration
  *
  * This configuration defines all settings for the clarification agent, which handles
  * ambiguous user requests and provides guidance to help users formulate better queries.

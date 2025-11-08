@@ -1,5 +1,5 @@
 /**
- * @file TypeScript types for individual agent configurations
+ * @packageDocumentation TypeScript types for individual agent configurations
  */
 
 /**

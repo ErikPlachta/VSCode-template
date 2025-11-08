@@ -2,6 +2,10 @@
  * Canonical TypeScript application configuration.
  * Mirrors the current mcp.config.json content to enable typed, single-source config.
  */
+/**
+ * @packageDocumentation application.config implementation for config module
+ */
+
 import type { ApplicationConfig } from "../types/applicationConfig";
 
 // Note: We cast to ApplicationConfig to avoid strict excess property checks while
@@ -130,7 +134,7 @@ export const applicationConfig: ApplicationConfig = {
   ],
   markdown: {
     include: ["docs/**/*.md"],
-    exclude: ["docs/api/**"],
+    exclude: ["docs/**"],
     requiredFrontMatter: [
       "title",
       "summary",

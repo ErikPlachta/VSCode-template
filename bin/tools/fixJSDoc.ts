@@ -1,5 +1,5 @@
 /**
- * @file Automated JSDoc fixer for common violations.
+ * @packageDocumentation Automated JSDoc fixer for common violations.
  */
 
 import * as fs from "fs";
@@ -12,7 +12,7 @@ interface JSDocFix {
 }
 
 const jsdocFixes: JSDocFix[] = [
-  // Fix @param descriptions missing hyphens
+  // Normalize @param descriptions to include a hyphen between the name and description
   {
     pattern: /(@param\s+\{[^}]+\}\s*\[[^\]]+\]\s*)([^-\n])/g,
     replacement: "$1- $2",
@@ -28,23 +28,34 @@ const jsdocFixes: JSDocFix[] = [
     replacement: "$1- $2",
     description: "Add hyphen to simple @param",
   },
-  // Remove type annotations in @param
+  // Fix malformed param names that accidentally include a trailing hyphen (e.g., @param config- ...)
   {
-    pattern: /@param\s+\{[^}]+\}\s*(\[[^\]]+\]|\w+)/g,
-    replacement: "@param $1",
-    description: "Remove type from @param",
+    pattern: /@param\s+(\{[^}]+\}\s+)?([A-Za-z_$][\w.$]*)-(\s*)/g,
+    replacement: "@param $1$2 - ",
+    description: "Normalize @param name with stray hyphen",
   },
-  // Fix @returns missing hyphens and type annotations
+  // Fix @returns description to include a hyphen before text (keep type if present)
   {
-    pattern: /@returns\s+\{[^}]+\}\s*([^-\n])/g,
-    replacement: "@returns - $1",
-    description: "Fix @returns with type",
+    pattern: /(@returns\s+(?:\{[^}]+\}\s*)?)([^-\s\n])/g,
+    replacement: "$1- $2",
+    description: "Ensure @returns description prefixed by hyphen",
   },
-  // Fix @throws missing hyphens and type annotations
+  // Fix @throws description to include a hyphen (keep type if present)
   {
-    pattern: /@throws\s+\{[^}]+\}\s*([^-\n])/g,
-    replacement: "@throws - $1",
-    description: "Fix @throws with type",
+    pattern: /(@throws\s+(?:\{[^}]+\}\s*)?)([^-\s\n])/g,
+    replacement: "$1- $2",
+    description: "Ensure @throws description prefixed by hyphen",
+  },
+  // Replace non-standard file overview tags with @packageDocumentation
+  {
+    pattern: /@fileoverview/g,
+    replacement: "@packageDocumentation",
+    description: "Replace @fileoverview with @packageDocumentation",
+  },
+  {
+    pattern: /@file(\b)/g,
+    replacement: "@packageDocumentation",
+    description: "Replace @file with @packageDocumentation",
   },
 ];
 
@@ -92,14 +103,18 @@ function fixJSDoc(content: string): { content: string; fixes: string[] } {
 }
 
 /**
- * Adds @file tags to files that are missing them.
+ * Adds a @packageDocumentation doc block if none exists.
  * @param content - Original file content.
  * @param filePath - Path to the file for generating description.
- * @returns Content with @file tag added if needed.
+ * @returns Content with @packageDocumentation tag added if needed.
  */
 function addFileTag(content: string, filePath: string): string {
-  // Check if already has @file tag
-  if (content.includes("@file")) {
+  // If already has a package-level documentation tag, don't add another
+  if (content.includes("@packageDocumentation")) {
+    return content;
+  }
+  // If it has legacy @file or @fileoverview, let regex transforms handle
+  if (content.includes("@file") || content.includes("@fileoverview")) {
     return content;
   }
 
@@ -108,7 +123,7 @@ function addFileTag(content: string, filePath: string): string {
   const dirName = path.dirname(filePath).split(path.sep).pop();
 
   const description = `${fileName} implementation for ${dirName} module`;
-  const fileTag = `/**\n * @file ${description}\n */\n\n`;
+  const fileTag = `/**\n * @packageDocumentation ${description}\n */\n\n`;
 
   // If file starts with imports, add before them
   if (content.trim().startsWith("import")) {
@@ -129,8 +144,8 @@ function addFileTag(content: string, filePath: string): string {
  * Main function to fix JSDoc issues in TypeScript files.
  */
 async function main(): Promise<void> {
-  // Go up from out/bin/tools to root, then to src  
-  const srcDir = path.resolve(__dirname, '../../../src');
+  // Go up from out/bin/tools to root, then to src
+  const srcDir = path.resolve(__dirname, "../../../src");
   console.log(`Looking for files in: ${srcDir}`);
 
   if (!fs.existsSync(srcDir)) {
@@ -148,7 +163,7 @@ async function main(): Promise<void> {
   for (const filePath of tsFiles) {
     const content = fs.readFileSync(filePath, "utf8");
 
-    // Add @file tag if missing
+    // Add @packageDocumentation tag if missing
     let fixedContent = addFileTag(content, filePath);
 
     // Apply JSDoc fixes
@@ -173,5 +188,6 @@ async function main(): Promise<void> {
 }
 
 if (require.main === module) {
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   main().catch(console.error);
 }

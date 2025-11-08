@@ -1,5 +1,5 @@
 /**
- * @file agentManifest implementation for mcp module
+ * @packageDocumentation agentManifest implementation for mcp module
  */
 
 import {

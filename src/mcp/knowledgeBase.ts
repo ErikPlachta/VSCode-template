@@ -1,5 +1,5 @@
 /**
- * @file knowledgeBase implementation for mcp module
+ * @packageDocumentation knowledgeBase implementation for mcp module
  */
 
 export interface KnowledgeDocument {

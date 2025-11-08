@@ -1,5 +1,5 @@
 /**
- * @file Database agent configuration management using TypeScript-based config
+ * @packageDocumentation Database agent configuration management using TypeScript-based config
  */
 
 import {

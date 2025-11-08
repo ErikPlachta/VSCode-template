@@ -1,5 +1,5 @@
 /**
- * @fileoverview Entry point for MyBusiness MCP VS Code extension.
+ * @packageDocumentation Entry point for MyBusiness MCP VS Code extension.
  *
  * @module extension
  */

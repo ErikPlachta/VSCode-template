@@ -123,17 +123,26 @@ goto :eof
 
 :stage_validate_config
 call :log_stage "CONFIG VALIDATION"
-call :log_info "Validating mcp.config.json..."
-
 cd /d "%PROJECT_ROOT%"
 
+if exist "src\config\application.config.ts" (
+    call :log_info "Validating application.config.ts via TypeScript compilation..."
+    call npm run compile >NUL 2>&1
+    if errorlevel 1 (
+        call :log_error "TypeScript compilation failed; application.config.ts invalid or other TS errors present"
+        exit /b 1
+    )
+    call :log_success "Typed application configuration validated"
+    goto :eof
+)
+
+call :log_info "Validating legacy mcp.config.json..."
 if not exist "src\mcp.config.json" (
     call :log_error "Configuration file not found: src\mcp.config.json"
     exit /b 1
 )
-
-REM Basic JSON validation (Windows doesn't have json_pp by default)
-call :log_success "Configuration validation completed"
+REM Basic JSON existence check (Windows lacks json_pp); rely on later schema linting for structure
+call :log_success "Legacy JSON configuration validated"
 goto :eof
 
 :stage_lint_json

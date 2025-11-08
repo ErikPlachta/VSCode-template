@@ -1,5 +1,5 @@
 /**
- * @file Enhanced agent configuration service for loading and managing agent definitions.
+ * @packageDocumentation Enhanced agent configuration service for loading and managing agent definitions.
  */
 
 import { loadApplicationConfig } from "@shared/configurationLoader";
@@ -24,7 +24,7 @@ export class AgentConfigurationService {
   /**
    * Gets the singleton instance of the agent configuration service.
    *
-   * @returns The singleton instance.
+   * @returns - The singleton instance.
    */
   public static getInstance(): AgentConfigurationService {
     if (!this.instance) {
@@ -36,7 +36,7 @@ export class AgentConfigurationService {
   /**
    * Loads the application configuration if not already loaded.
    *
-   * @returns Promise resolving to the application configuration.
+   * @returns - Promise resolving to the application configuration.
    */
   private async ensureConfigLoaded(): Promise<ApplicationConfig> {
     if (!this.config) {
@@ -48,9 +48,9 @@ export class AgentConfigurationService {
   /**
    * Gets the agent definition for the specified agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns The agent definition.
-   * @throws Error if agent not found.
+   * @param agentId - - The agent identifier.
+   * @returns - The agent definition.
+   * @throws - Error if agent not found.
    */
   public async getAgentDefinition(
     agentId: AgentIdentifier
@@ -90,7 +90,7 @@ export class AgentConfigurationService {
   /**
    * Gets all agent definitions.
    *
-   * @returns Promise resolving to map of agent definitions.
+   * @returns - Promise resolving to map of agent definitions.
    */
   public async getAllAgentDefinitions(): Promise<
     Record<string, AgentDefinition>
@@ -109,8 +109,8 @@ export class AgentConfigurationService {
   /**
    * Gets user-facing information for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns User-facing metadata or null if not available.
+   * @param agentId - - The agent identifier.
+   * @returns - User-facing metadata or null if not available.
    */
   public async getUserFacingInfo(
     agentId: AgentIdentifier
@@ -122,8 +122,8 @@ export class AgentConfigurationService {
   /**
    * Gets application-facing information for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns Application-facing metadata or null if not available.
+   * @param agentId - - The agent identifier.
+   * @returns - Application-facing metadata or null if not available.
    */
   public async getApplicationFacingInfo(
     agentId: AgentIdentifier
@@ -135,8 +135,8 @@ export class AgentConfigurationService {
   /**
    * Gets the display name for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns The display name.
+   * @param agentId - - The agent identifier.
+   * @returns - The display name.
    */
   public async getAgentDisplayName(agentId: AgentIdentifier): Promise<string> {
     const definition = await this.getAgentDefinition(agentId);
@@ -146,8 +146,8 @@ export class AgentConfigurationService {
   /**
    * Gets the capabilities for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns Array of capability strings.
+   * @param agentId - - The agent identifier.
+   * @returns - Array of capability strings.
    */
   public async getAgentCapabilities(
     agentId: AgentIdentifier
@@ -159,9 +159,9 @@ export class AgentConfigurationService {
   /**
    * Checks if an agent has a specific capability.
    *
-   * @param agentId - The agent identifier.
-   * @param capability - The capability to check.
-   * @returns Promise resolving to true if agent has the capability.
+   * @param agentId - - The agent identifier.
+   * @param capability - - The capability to check.
+   * @returns - Promise resolving to true if agent has the capability.
    */
   public async hasCapability(
     agentId: AgentIdentifier,
@@ -174,8 +174,8 @@ export class AgentConfigurationService {
   /**
    * Gets agents that have a specific capability.
    *
-   * @param capability - The capability to search for.
-   * @returns Promise resolving to array of agent identifiers.
+   * @param capability - - The capability to search for.
+   * @returns - Promise resolving to array of agent identifiers.
    */
   public async getAgentsWithCapability(
     capability: string
@@ -197,8 +197,8 @@ export class AgentConfigurationService {
   /**
    * Gets friendly description for user interfaces.
    *
-   * @param agentId - The agent identifier.
-   * @returns User-friendly description or fallback to technical description.
+   * @param agentId - - The agent identifier.
+   * @returns - User-friendly description or fallback to technical description.
    */
   public async getFriendlyDescription(
     agentId: AgentIdentifier
@@ -210,8 +210,8 @@ export class AgentConfigurationService {
   /**
    * Gets example queries for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns Array of example query strings.
+   * @param agentId - - The agent identifier.
+   * @returns - Array of example query strings.
    */
   public async getExampleQueries(agentId: AgentIdentifier): Promise<string[]> {
     const definition = await this.getAgentDefinition(agentId);
@@ -221,8 +221,8 @@ export class AgentConfigurationService {
   /**
    * Gets monitoring configuration for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns Monitoring configuration or null if not available.
+   * @param agentId - - The agent identifier.
+   * @returns - Monitoring configuration or null if not available.
    */
   public async getMonitoringConfig(
     agentId: AgentIdentifier
@@ -236,8 +236,8 @@ export class AgentConfigurationService {
   /**
    * Gets performance characteristics for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns Performance configuration or null if not available.
+   * @param agentId - - The agent identifier.
+   * @returns - Performance configuration or null if not available.
    */
   public async getPerformanceConfig(
     agentId: AgentIdentifier
@@ -251,8 +251,8 @@ export class AgentConfigurationService {
   /**
    * Gets error handling configuration for an agent.
    *
-   * @param agentId - The agent identifier.
-   * @returns Error handling configuration or null if not available.
+   * @param agentId - - The agent identifier.
+   * @returns - Error handling configuration or null if not available.
    */
   public async getErrorHandlingConfig(
     agentId: AgentIdentifier
@@ -275,7 +275,7 @@ export class AgentConfigurationService {
 /**
  * Gets the global agent configuration service instance.
  *
- * @returns The agent configuration service.
+ * @returns - The agent configuration service.
  */
 export function getAgentConfigurationService(): AgentConfigurationService {
   return AgentConfigurationService.getInstance();

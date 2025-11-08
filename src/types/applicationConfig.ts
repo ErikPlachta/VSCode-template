@@ -1,5 +1,5 @@
 /**
- * @fileoverview Application configuration types for comprehensive settings management.
+ * @packageDocumentation Application configuration types for comprehensive settings management.
  */
 
 /**

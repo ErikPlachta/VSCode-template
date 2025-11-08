@@ -1,5 +1,5 @@
 /**
- * @fileoverview Agent usage analytics system for tracking invocations and performance metrics.
+ * @packageDocumentation Agent usage analytics system for tracking invocations and performance metrics.
  */
 
 /**
@@ -123,7 +123,7 @@ export class AgentUsageAnalytics {
   /**
    * Creates a new analytics collector instance.
    *
-   * @param config-  - Analytics configuration.
+   * @param confi - g-  - Analytics configuration.
    */
   constructor(config: AnalyticsConfig) {
     this.config = config;
@@ -132,7 +132,7 @@ export class AgentUsageAnalytics {
   /**
    * Records an agent usage event.
    *
-   * @param event-  - Event data to record.
+   * @param even - t-  - Event data to record.
    * @returns - */
   recordEvent(event: Partial<AgentUsageEvent>): void {
     if (!this.config.enabled) {
@@ -169,10 +169,10 @@ export class AgentUsageAnalytics {
   /**
    * Tracks the execution of an agent method with automatic timing.
    *
-   * @param agentName-  - Name of the agent.
-   * @param method-  - Method being executed.
-   * @param execution-  - Function to execute and track.
-   * @param options-  - Additional tracking options.
+   * @param agentNam - e-  - Name of the agent.
+   * @param metho - d-  - Method being executed.
+   * @param executio - n-  - Function to execute and track.
+   * @param option - s-  - Additional tracking options.
    * @returns - Promise resolving to the execution result.
    */
   async trackExecution<T>(
@@ -221,8 +221,8 @@ export class AgentUsageAnalytics {
   /**
    * Generates usage statistics for a specific agent.
    *
-   * @param agentName-  - Name of the agent.
-   * @param since-  - Optional start date for filtering events.
+   * @param agentNam - e-  - Name of the agent.
+   * @param sinc - e-  - Optional start date for filtering events.
    * @returns - Agent statistics or null if no data found.
    */
   getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
@@ -279,7 +279,7 @@ export class AgentUsageAnalytics {
   /**
    * Generates comprehensive usage analytics summary.
    *
-   * @param since-  - Optional start date for filtering events.
+   * @param sinc - e-  - Optional start date for filtering events.
    * @returns - Comprehensive analytics summary.
    */
   generateSummary(since?: Date): UsageAnalyticsSummary {
@@ -350,7 +350,7 @@ export class AgentUsageAnalytics {
   /**
    * Exports analytics data for external analysis.
    *
-   * @param since-  - Optional start date for filtering events.
+   * @param sinc - e-  - Optional start date for filtering events.
    * @returns - Array of usage events.
    */
   exportData(since?: Date): AgentUsageEvent[] {
@@ -397,7 +397,7 @@ export class AgentUsageAnalytics {
   /**
    * Persists an event to storage (placeholder implementation).
    *
-   * @param event-  - Event to persist.
+   * @param even - t-  - Event to persist.
    * @returns - */
   private persistEvent(event: AgentUsageEvent): void {
     // Placeholder for persistent storage implementation
@@ -408,7 +408,7 @@ export class AgentUsageAnalytics {
   /**
    * Estimates the size of data in bytes.
    *
-   * @param data-  - Data to estimate size for.
+   * @param dat - a-  - Data to estimate size for.
    * @returns - Estimated size in bytes.
    */
   private estimateSize(data: any): number {
@@ -440,7 +440,7 @@ let globalAnalytics: AgentUsageAnalytics | null = null;
 /**
  * Gets the global analytics instance.
  *
- * @param config-  - Optional analytics configuration.
+ * @param confi - g-  - Optional analytics configuration.
  * @returns - Analytics instance.
  */
 export function getAnalytics(

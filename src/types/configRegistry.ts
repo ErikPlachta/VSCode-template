@@ -1,5 +1,5 @@
 /**
- * @file Configuration ID Registry - Central registry for all agent configuration schema IDs
+ * @packageDocumentation Configuration ID Registry - Central registry for all agent configuration schema IDs
  *
  * This file provides a centralized registry of unique configuration IDs (UIDs) for all
  * agent configurations. Instead of using file paths in schema references, each configuration

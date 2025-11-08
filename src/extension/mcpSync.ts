@@ -1,5 +1,5 @@
 /**
- * @fileoverview Fetches and normalises Model Context Protocol (MCP) tool
+ * @packageDocumentation Fetches and normalises Model Context Protocol (MCP) tool
  * definitions.
  *
  * @module mcpSync
@@ -18,7 +18,7 @@ import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
  */
 export class MCPDiscoveryError extends Error {
   /**
-   * @param message - Human-readable error message.
+   * @param message - - Human-readable error message.
    * @param [cause] - Optional root cause supplied by axios or the MCP server.
    */
   constructor(message: string, public readonly cause?: unknown) {
@@ -31,7 +31,7 @@ export class MCPDiscoveryError extends Error {
  * Normalise the tool properties by merging schema metadata so prompts can
  * surface richer descriptions.
  *
- * @param tool - Tool metadata as returned by the MCP server.
+ * @param tool - - Tool metadata as returned by the MCP server.
  * @returns - Tool with enriched `input_schema` metadata.
  */
 function normaliseTool(tool: MCPTool): MCPTool {
@@ -59,7 +59,7 @@ function normaliseTool(tool: MCPTool): MCPTool {
 /**
  * Fetch all available MCP tools from the configured server.
  *
- * @param serverUrl - Base URL of the MCP server.
+ * @param serverUrl - - Base URL of the MCP server.
  * @param [token] - Optional Bearer token.
  * @returns - Array of available MCP tools with enriched metadata.
  * @throws - When the server cannot be reached or returns an invalid payload.

@@ -1,5 +1,5 @@
 /**
- * @file Configuration-driven orchestrator implementation
+ * @packageDocumentation Configuration-driven orchestrator implementation
  */
 
 import { OrchestratorConfig } from "./config";
@@ -312,8 +312,8 @@ export class Orchestrator {
    * Handle user requests by classifying intent and routing to appropriate agents.
    * This is the main entry point used by the VS Code extension.
    *
-   * @param input - User request with question and optional context
-   * @returns Response with routing decision and agent output
+   * @param input - - User request with question and optional context
+   * @returns - Response with routing decision and agent output
    */
   async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
     try {
@@ -344,9 +344,9 @@ export class Orchestrator {
    * Format the orchestrator response for user-friendly display.
    *
    * @private
-   * @param response - Raw orchestrator response
-   * @param input - Original user input
-   * @returns Formatted markdown for display
+   * @param response - - Raw orchestrator response
+   * @param input - - Original user input
+   * @returns - Formatted markdown for display
    */
   private formatResponseForUser(
     response: OrchestratorResponse,

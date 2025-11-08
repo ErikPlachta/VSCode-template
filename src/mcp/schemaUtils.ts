@@ -1,5 +1,5 @@
 /**
- * @file schemaUtils implementation for mcp module
+ * @packageDocumentation schemaUtils implementation for mcp module
  */
 
 import type {

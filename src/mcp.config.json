@@ -48,7 +48,7 @@
       "cacheEnabled": true,
       "cacheTtl": 300000
     },
-  "configurationSource": "src/mcp/config/unifiedAgentConfig.ts",
+    "configurationSource": "src/mcp/config/unifiedAgentConfig.ts",
     "note": "Agent definitions have been moved to unifiedAgentConfig.ts for better maintainability and to eliminate duplication. This file now contains only runtime overrides.",
     "runtimeOverrides": {
       "orchestrator": {
@@ -135,7 +135,7 @@
   ],
   "markdown": {
     "include": ["docs/**/*.md"],
-    "exclude": ["docs/api/**"],
+    "exclude": ["docs//**"],
     "requiredFrontMatter": [
       "title",
       "summary",

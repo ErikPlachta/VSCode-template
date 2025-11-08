@@ -1,5 +1,5 @@
 /**
- * @file Orchestrator configuration management using TypeScript-based config
+ * @packageDocumentation Orchestrator configuration management using TypeScript-based config
  */
 
 import {

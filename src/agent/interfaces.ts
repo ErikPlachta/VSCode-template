@@ -1,5 +1,5 @@
 /**
- * @file Agent Interfaces for Orchestrator Communication
+ * @packageDocumentation Agent Interfaces for Orchestrator Communication
  *
  * This file defines the clean interfaces that the orchestrator agent uses
  * to communicate with specialized agents. Each agent has a distinct purpose

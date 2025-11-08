@@ -1,5 +1,5 @@
 /**
- * @fileoverview Agent responsible for managing the mock "relevant data"
+ * @packageDocumentation Agent responsible for managing the mock "relevant data"
  * workspace that MCP servers expose to users. The agent keeps a rich catalogue
  * of categories (departments, people, applications, policies, resources) that
  * mirrors a repository folder structure complete with schemas, type
@@ -600,7 +600,7 @@ export class RelevantDataManagerAgent {
   /**
    * Compute a deterministic hash of the records for change detection.
    *
-   * @param topicOrId - Category identifier or alias whose records should be hashed.
+   * @param topicOrId - - Category identifier or alias whose records should be hashed.
    * @returns - SHA-1 hash representing the current record contents.
    */
   getCategoryRecordHash(topicOrId: string): string {

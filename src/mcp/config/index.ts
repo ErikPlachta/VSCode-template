@@ -1,5 +1,5 @@
 /**
- * @file MCP configuration exports for centralized access
+ * @packageDocumentation MCP configuration exports for centralized access
  */
 
 // Re-export all configuration components

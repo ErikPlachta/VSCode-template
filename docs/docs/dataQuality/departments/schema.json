@@ -1,8 +1,0 @@
-{
-  "name": "Validate department schema",
-  "description": "Ensures config.json aligns with schema expectations.",
-  "runtime": "python",
-  "entryPoint": "pytest",
-  "args": ["tests/test_schema.py"],
-  "workingDirectory": "data/departments"
-}

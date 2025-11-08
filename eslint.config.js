@@ -47,6 +47,7 @@ export default [
         "error",
         { argsIgnorePattern: "^_" },
       ],
+      // Accept @packageDocumentation (preferred) or legacy @file/@fileoverview
       "jsdoc/require-file-overview": "error",
       "jsdoc/require-description": ["error", { descriptionStyle: "body" }],
       "jsdoc/require-param": "error",
@@ -81,8 +82,9 @@ export default [
       jsdoc: {
         mode: "typescript",
         tagNamePreference: {
-          file: "file",
-          fileoverview: "fileoverview",
+          file: "packageDocumentation",
+          fileoverview: "packageDocumentation",
+          packageDocumentation: "packageDocumentation",
         },
       },
     },

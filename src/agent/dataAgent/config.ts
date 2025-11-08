@@ -1,5 +1,5 @@
 /**
- * @file Data agent configuration management using TypeScript-based config
+ * @packageDocumentation Data agent configuration management using TypeScript-based config
  */
 
 import {

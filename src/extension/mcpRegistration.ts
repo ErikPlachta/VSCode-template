@@ -1,5 +1,5 @@
 /**
- * @fileoverview Utilities to register/unregister this extension's MCP server in the
+ * @packageDocumentation Utilities to register/unregister this extension's MCP server in the
  * user's global VS Code mcp.json so Copilot Chat can discover it.
  */
 import { promises as fs } from "fs";

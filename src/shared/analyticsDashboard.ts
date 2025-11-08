@@ -1,5 +1,5 @@
 /**
- * @fileoverview Analytics dashboard utilities for generating usage reports and visualizations.
+ * @packageDocumentation Analytics dashboard utilities for generating usage reports and visualizations.
  */
 
 import type { UsageAnalyticsSummary, AgentUsageStats } from "./agentAnalytics";
@@ -38,8 +38,8 @@ export class AnalyticsDashboard {
   /**
    * Generates a comprehensive analytics report.
    *
-   * @param summary-  - Analytics summary data.
-   * @param options-  - Report generation options.
+   * @param summar - y-  - Analytics summary data.
+   * @param option - s-  - Report generation options.
    * @returns - Generated report content.
    */
   generateReport(
@@ -61,7 +61,7 @@ export class AnalyticsDashboard {
   /**
    * Generates performance recommendations based on analytics data.
    *
-   * @param summary-  - Analytics summary data.
+   * @param summar - y-  - Analytics summary data.
    * @returns - Array of performance recommendations.
    */
   generateRecommendations(summary: UsageAnalyticsSummary): string[] {
@@ -141,8 +141,8 @@ export class AnalyticsDashboard {
   /**
    * Generates a Markdown format report.
    *
-   * @param summary-  - Analytics summary data.
-   * @param options-  - Report generation options.
+   * @param summar - y-  - Analytics summary data.
+   * @param option - s-  - Report generation options.
    * @returns - Markdown formatted report.
    */
   private generateMarkdownReport(
@@ -257,8 +257,8 @@ export class AnalyticsDashboard {
   /**
    * Generates a JSON format report.
    *
-   * @param summary-  - Analytics summary data.
-   * @param options-  - Report generation options.
+   * @param summar - y-  - Analytics summary data.
+   * @param option - s-  - Report generation options.
    * @returns - JSON formatted report.
    */
   private generateJsonReport(
@@ -291,8 +291,8 @@ export class AnalyticsDashboard {
   /**
    * Generates a CSV format report.
    *
-   * @param summary-  - Analytics summary data.
-   * @param options-  - Report generation options.
+   * @param summar - y-  - Analytics summary data.
+   * @param option - s-  - Report generation options.
    * @returns - CSV formatted report.
    */
   private generateCsvReport(
@@ -331,9 +331,9 @@ export class AnalyticsDashboard {
 /**
  * Creates a standard analytics report with default options.
  *
- * @param summary-  - Analytics summary data.
- * @param startDate-  - Start date for the report period.
- * @param endDate-  - End date for the report period.
+ * @param summar - y-  - Analytics summary data.
+ * @param startDat - e-  - Start date for the report period.
+ * @param endDat - e-  - End date for the report period.
  * @returns - Generated Markdown report.
  */
 export function createStandardReport(

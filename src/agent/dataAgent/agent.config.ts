@@ -2,7 +2,7 @@ import type { AgentConfigDefinition } from "../../types/agentConfig";
 import { CONFIG_IDS } from "../../types/configRegistry";
 
 /**
- * @fileoverview Data Agent Configuration
+ * @packageDocumentation Data Agent Configuration
  *
  * This configuration defines all settings for the data agent, which specializes in
  * generating insights, building exploration plans, and mapping relationships between

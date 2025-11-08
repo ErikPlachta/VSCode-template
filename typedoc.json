@@ -1,9 +1,15 @@
 {
   "entryPoints": ["src"],
   "entryPointStrategy": "expand",
-  "out": "docs/api",
+  "out": "docs",
   "includeVersion": true,
   "excludePrivate": true,
   "excludeProtected": true,
-  "plugin": ["typedoc-plugin-markdown"]
+  "exclude": ["**/*.old.ts"],
+  "plugin": ["typedoc-plugin-markdown"],
+  // Front matter is injected in a post-processing step (src/tools/augmentTypedoc.ts)
+  // so we keep this config focused on generation only.
+  // Avoid "API" wording: these docs describe internal extension & agent code.
+  "readme": "README.md",
+  "hideGenerator": true
 }

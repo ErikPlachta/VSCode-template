@@ -158,23 +158,30 @@ stage_clean() {
 
 stage_validate_config() {
     log_stage "CONFIG VALIDATION"
-    log_info "Validating mcp.config.json..."
-    
     cd "$PROJECT_ROOT"
-    
-    # Check if config file exists
+
+    # Prefer typed application config compiled by TypeScript; ensure it compiles
+    if [[ -f "src/config/application.config.ts" ]]; then
+        log_info "Validating application.config.ts via TypeScript compilation..."
+        npm run -s compile > /dev/null 2>&1 || {
+            log_error "TypeScript compilation failed; application.config.ts invalid or other TS errors present"
+            exit 1
+        }
+        log_success "Typed application configuration validated"
+        return
+    fi
+
+    # Legacy fallback: validate JSON if TS config not present
+    log_info "Validating legacy mcp.config.json..."
     if [[ ! -f "src/mcp.config.json" ]]; then
         log_error "Configuration file not found: src/mcp.config.json"
         exit 1
     fi
-    
-    # Validate JSON syntax
     if ! json_pp < "src/mcp.config.json" > /dev/null 2>&1; then
         log_error "Invalid JSON syntax in src/mcp.config.json"
         exit 1
     fi
-    
-    log_success "Configuration validation completed"
+    log_success "Legacy JSON configuration validated"
 }
 
 stage_lint_json() {

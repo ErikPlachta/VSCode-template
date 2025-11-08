@@ -5,7 +5,7 @@
  */
 
 /**
- * @file index implementation for server module
+ * @packageDocumentation index implementation for server module
  */
 
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";

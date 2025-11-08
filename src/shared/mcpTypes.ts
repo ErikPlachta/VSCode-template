@@ -4,7 +4,7 @@
  */
 
 /**
- * @file mcpTypes implementation for shared module
+ * @packageDocumentation mcpTypes implementation for shared module
  */
 
 /** JSON schema fragment describing a tool argument. */

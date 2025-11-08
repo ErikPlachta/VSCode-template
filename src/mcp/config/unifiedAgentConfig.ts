@@ -1,5 +1,5 @@
 /**
- * @file Unified agent configuration system that consolidates all agent-related settings
+ * @packageDocumentation Unified agent configuration system that consolidates all agent-related settings
  */
 
 /**
@@ -164,7 +164,7 @@ export const agentConfigurations: Record<AgentIdentifier, UnifiedAgentConfig> =
         id: "relevant-data-manager",
         title: "Relevant Data Manager",
         description:
-          "curates category metadata, schemas, and validation artefacts",
+          "curates category metadata, schemas, and validation artifacts",
         primarySignals: ["schema", "metadata", "catalogue", "snapshot"],
         escalateWhen: ["category folder is missing", "schema validation fails"],
       },

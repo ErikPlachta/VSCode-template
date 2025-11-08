@@ -1,5 +1,5 @@
 /**
- * @file agentProfiles implementation for mcp module
+ * @packageDocumentation agentProfiles implementation for mcp module
  * @deprecated This file is deprecated. Use unifiedAgentConfig.ts instead.
  * Kept for backward compatibility during transition period.
  */

@@ -1,5 +1,5 @@
 /**
- * @file Clarification agent configuration management using TypeScript-based config
+ * @packageDocumentation Clarification agent configuration management using TypeScript-based config
  */
 
 import {
@@ -79,6 +79,8 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
 
   /**
    * Get routing configuration
+   *
+   * @returns - The routing configuration object
    */
   public getRoutingConfig() {
     return (

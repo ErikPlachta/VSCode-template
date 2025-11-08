@@ -1,5 +1,5 @@
 /**
- * @file Orchestrator configuration using TypeScript for full type safety and documentation
+ * @packageDocumentation Orchestrator configuration using TypeScript for full type safety and documentation
  *
  * This configuration defines how the orchestrator agent behaves, including:
  * - Intent classification and routing logic

@@ -4,11 +4,7 @@ bin/tests/
 bin/utils/
 bin/schemas/
 coverage/
-docs/api/
-docs/architecture/
-docs/compliance/
-docs/dataQuality/
-docs/reports/
+docs/*
 .github/
 .vscode/
 .mcp-cache/

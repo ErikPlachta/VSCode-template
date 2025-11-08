@@ -2,7 +2,7 @@ import type { AgentConfigDefinition } from "../../types/agentConfig";
 import { CONFIG_IDS } from "../../types/configRegistry";
 
 /**
- * @fileoverview Relevant Data Manager Agent Configuration
+ * @packageDocumentation Relevant Data Manager Agent Configuration
  *
  * This configuration defines all settings for the relevant data manager agent, which
  * handles metadata management, schema validation, and category orchestration for

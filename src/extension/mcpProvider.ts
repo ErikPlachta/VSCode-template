@@ -1,5 +1,5 @@
 /**
- * @fileoverview MCP server definition provider integration.
+ * @packageDocumentation MCP server definition provider integration.
  */
 import * as vscode from "vscode";
 import * as path from "path";

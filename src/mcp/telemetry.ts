@@ -1,5 +1,5 @@
 /**
- * @file telemetry implementation for mcp module
+ * @packageDocumentation telemetry implementation for mcp module
  */
 
 export interface InvocationEvent {

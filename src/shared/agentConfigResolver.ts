@@ -1,5 +1,5 @@
 /**
- * @file Agent configuration resolver that merges unified agent config with MCP runtime overrides.
+ * @packageDocumentation Agent configuration resolver that merges unified agent config with MCP runtime overrides.
  */
 
 import path from "node:path";

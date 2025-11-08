@@ -1,5 +1,5 @@
 /**
- * @file Centralized exports for all agent implementations.
+ * @packageDocumentation Centralized exports for all agent implementations.
  *
  * This file exports properly isolated agents that follow single responsibility principle.
  * Each agent has a distinct purpose and does not depend on other agents.
@@ -17,7 +17,7 @@ export { Orchestrator } from "./orchestrator/";
 export { RelevantDataManagerAgent } from "./relevantDataManagerAgent/";
 
 // Health and maintenance agents
-export { RepositoryHealthAgent } from "./repositoryHealthAgent";
+export { RepositoryHealthAgent } from "../tools/repositoryHealth";
 
 // Re-export agent profiles for convenience
 export {

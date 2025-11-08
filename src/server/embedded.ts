@@ -1,5 +1,5 @@
 /**
- * @fileoverview Embedded MCP server for VS Code extension use.
+ * @packageDocumentation Embedded MCP server for VS Code extension use.
  * Starts the MCP server on a random available port for internal extension use.
  */
 

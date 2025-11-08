@@ -1,5 +1,5 @@
 /**
- * @file Clarification agent for handling ambiguous user requests and guiding users toward actionable queries.
+ * @packageDocumentation Clarification agent for handling ambiguous user requests and guiding users toward actionable queries.
  */
 
 import { getAgentMetadata } from "@mcp/config/agentManifest";
@@ -51,7 +51,7 @@ export class ClarificationAgent {
   /**
    * Creates a new clarification agent instance.
    *
-   * @param knowledgeBase - Optional knowledge base instance, creates new one if not provided.
+   * @param knowledgeBase - - Optional knowledge base instance, creates new one if not provided.
    */
   constructor(knowledgeBase?: KnowledgeBase) {
     this.config = new ClarificationAgentConfig();
@@ -61,7 +61,7 @@ export class ClarificationAgent {
   /**
    * Loads documents into the knowledge base for context retrieval.
    *
-   * @param documents - The documents to index in the knowledge base.
+   * @param documents - - The documents to index in the knowledge base.
    */
   loadKnowledge(
     documents: Parameters<KnowledgeBase["indexDocuments"]>[0]
@@ -72,8 +72,8 @@ export class ClarificationAgent {
   /**
    * Generates clarification guidance for ambiguous user requests.
    *
-   * @param input - The clarification request containing question and context.
-   * @returns Promise resolving to clarification response with guidance and context.
+   * @param input - - The clarification request containing question and context.
+   * @returns - Promise resolving to clarification response with guidance and context.
    */
   async clarify(
     input: ClarificationAgentInput

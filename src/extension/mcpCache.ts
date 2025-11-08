@@ -1,5 +1,5 @@
 /**
- * @fileoverview Utilities for managing the local `.mcp-cache` directory.
+ * @packageDocumentation Utilities for managing the local `.mcp-cache` directory.
  *
  * @module mcpCache
  */
@@ -72,12 +72,15 @@ export async function ensureCacheDirectory(): Promise<string> {
 /**
  * Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
  *
- * @param cacheDir - Directory returned by {@link ensureCacheDirectory}.
- * @param entry - Log entry to persist.
+ * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
+ * @param entry - - Log entry to persist.
  * @returns - Resolves when the entry has been appended.
  * @throws - When the log file cannot be written.
  */
-export async function logInvocation(cacheDir: string, entry: ToolLogEntry): Promise<void> {
+export async function logInvocation(
+  cacheDir: string,
+  entry: ToolLogEntry
+): Promise<void> {
   const target = path.join(cacheDir, "invocations.jsonl");
   const serialised = `${JSON.stringify(entry)}\n`;
   await fs.appendFile(target, serialised, "utf8");
@@ -87,8 +90,8 @@ export async function logInvocation(cacheDir: string, entry: ToolLogEntry): Prom
  * Persist a shared cache entry that can be re-used by other MCP tools.
  *
  * @template T
- * @param cacheDir - Directory returned by {@link ensureCacheDirectory}.
- * @param entry - Payload to store on disk.
+ * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
+ * @param entry - - Payload to store on disk.
  * @returns - Resolves when the entry has been written.
  * @throws - When the entry cannot be persisted.
  */
@@ -107,8 +110,8 @@ export async function storeSharedCacheEntry<T>(
  * Retrieve a shared cache entry by key.
  *
  * @template T
- * @param cacheDir - Directory returned by {@link ensureCacheDirectory}.
- * @param key - Unique cache entry key.
+ * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
+ * @param key - - Unique cache entry key.
  * @returns - Stored entry or `undefined` if not found.
  * @throws - When the file exists but cannot be read.
  */
@@ -131,10 +134,10 @@ export async function readSharedCacheEntry<T = unknown>(
 }
 
 /**
- * Enumerate all cached artefacts currently stored on disk.
+ * Enumerate all cached artifacts currently stored on disk.
  *
  * @template T
- * @param cacheDir - Directory returned by {@link ensureCacheDirectory}.
+ * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
  * @returns - Array of cached entries.
  * @throws - When the directory cannot be read.
  */
@@ -164,12 +167,15 @@ export async function listSharedCacheEntries<T = unknown>(
 /**
  * Remove a shared cache entry when it is no longer relevant.
  *
- * @param cacheDir - Directory returned by {@link ensureCacheDirectory}.
- * @param key - Cache entry key to delete.
+ * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
+ * @param key - - Cache entry key to delete.
  * @returns - Resolves when the entry has been removed or did not exist.
  * @throws - When the delete operation fails for reasons other than missing files.
  */
-export async function deleteSharedCacheEntry(cacheDir: string, key: string): Promise<void> {
+export async function deleteSharedCacheEntry(
+  cacheDir: string,
+  key: string
+): Promise<void> {
   const sharedDir = path.join(cacheDir, SHARED_CACHE_DIR);
   const fileName = `${sanitiseKey(key)}.json`;
   const target = path.join(sharedDir, fileName);
@@ -186,7 +192,7 @@ export async function deleteSharedCacheEntry(cacheDir: string, key: string): Pro
 /**
  * Normalise a cache key so it is safe for use as a file name.
  *
- * @param key - Arbitrary cache entry key.
+ * @param key - - Arbitrary cache entry key.
  * @returns - Sanitised key that can be used as a filename.
  */
 function sanitiseKey(key: string): string {

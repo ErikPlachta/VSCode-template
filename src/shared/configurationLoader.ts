@@ -1,5 +1,5 @@
 /**
- * @fileoverview Configuration loader and validator for application settings.
+ * @packageDocumentation Configuration loader and validator for application settings.
  */
 
 import fs from "node:fs";
@@ -68,7 +68,7 @@ export class ConfigurationLoader {
   /**
    * Creates a new configuration loader instance.
    *
-   * @param configPath-  - Path to the configuration file.
+   * @param configPat - h-  - Path to the configuration file.
    */
   constructor(configPath: string = "src/mcp.config.json") {
     this.configPath = path.resolve(configPath);
@@ -142,7 +142,7 @@ export class ConfigurationLoader {
   /**
    * Gets configuration for the current environment.
    *
-   * @param environment-  - Environment name (development, staging, production).
+   * @param environmen - t-  - Environment name (development, staging, production).
    * @returns - Promise resolving to environment-specific configuration.
    * @throws - When environment is not found or configuration cannot be loaded.
    */
@@ -167,7 +167,7 @@ export class ConfigurationLoader {
   /**
    * Gets agent-specific configuration.
    *
-   * @param agentName-  - Name of the agent.
+   * @param agentNam - e-  - Name of the agent.
    * @returns - Promise resolving to agent configuration.
    * @throws - When agent configuration cannot be found.
    */
@@ -199,7 +199,7 @@ export class ConfigurationLoader {
   /**
    * Merges loaded configuration with default values.
    *
-   * @param loadedConfig-  - Configuration loaded from file.
+   * @param loadedConfi - g-  - Configuration loaded from file.
    * @returns - Merged configuration with defaults applied.
    */
   private mergeWithDefaults(
@@ -223,7 +223,7 @@ export class ConfigurationLoader {
   /**
    * Validates configuration structure and required fields.
    *
-   * @param config-  - Configuration to validate.
+   * @param confi - g-  - Configuration to validate.
    * @returns - True if configuration is valid.
    * @throws - When configuration is invalid.
    */
@@ -249,7 +249,7 @@ let globalConfig: ConfigurationLoader | null = null;
 /**
  * Gets the global configuration loader instance.
  *
- * @param configPath-  - Optional path to configuration file.
+ * @param configPat - h-  - Optional path to configuration file.
  * @returns - Configuration loader instance.
  */
 export function getConfigurationLoader(
@@ -264,7 +264,7 @@ export function getConfigurationLoader(
 /**
  * Convenience function to load application configuration.
  *
- * @param configPath-  - Optional path to configuration file.
+ * @param configPat - h-  - Optional path to configuration file.
  * @returns - Promise resolving to application configuration.
  */
 export async function loadApplicationConfig(

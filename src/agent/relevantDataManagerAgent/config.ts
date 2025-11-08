@@ -1,5 +1,5 @@
 /**
- * @file Relevant Data Manager agent configuration management using TypeScript-based config
+ * @packageDocumentation Relevant Data Manager agent configuration management using TypeScript-based config
  */
 
 import {
