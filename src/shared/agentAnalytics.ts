@@ -123,17 +123,18 @@ export class AgentUsageAnalytics {
   /**
    * Creates a new analytics collector instance.
    *
-   * @param confi - g-  - Analytics configuration.
+   * @param confi - - g-  - Analytics configuration.
    */
   constructor(config: AnalyticsConfig) {
     this.config = config;
   }
 
   /**
-   * Records an agent usage event.
-   *
-   * @param even - t-  - Event data to record.
-   * @returns - */
+ * Records an agent usage event.
+ *
+ * @param event - - event parameter.
+ */
+
   recordEvent(event: Partial<AgentUsageEvent>): void {
     if (!this.config.enabled) {
       return;
@@ -167,14 +168,15 @@ export class AgentUsageAnalytics {
   }
 
   /**
-   * Tracks the execution of an agent method with automatic timing.
-   *
-   * @param agentNam - e-  - Name of the agent.
-   * @param metho - d-  - Method being executed.
-   * @param executio - n-  - Function to execute and track.
-   * @param option - s-  - Additional tracking options.
-   * @returns - Promise resolving to the execution result.
-   */
+ * Tracks the execution of an agent method with automatic timing.
+ *
+ * @param agentName - - agentName parameter.
+ * @param method - - method parameter.
+ * @param execution - - execution parameter.
+ * @param options - - options parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async trackExecution<T>(
     agentName: string,
     method: string,
@@ -219,12 +221,13 @@ export class AgentUsageAnalytics {
   }
 
   /**
-   * Generates usage statistics for a specific agent.
-   *
-   * @param agentNam - e-  - Name of the agent.
-   * @param sinc - e-  - Optional start date for filtering events.
-   * @returns - Agent statistics or null if no data found.
-   */
+ * Generates usage statistics for a specific agent.
+ *
+ * @param agentName - - agentName parameter.
+ * @param since - - since parameter.
+ * @returns - TODO: describe return value.
+ */
+
   getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
     const agentEvents = this.events.filter((event) => {
       if (event.agentName !== agentName) return false;
@@ -277,11 +280,12 @@ export class AgentUsageAnalytics {
   }
 
   /**
-   * Generates comprehensive usage analytics summary.
-   *
-   * @param sinc - e-  - Optional start date for filtering events.
-   * @returns - Comprehensive analytics summary.
-   */
+ * Generates comprehensive usage analytics summary.
+ *
+ * @param since - - since parameter.
+ * @returns - TODO: describe return value.
+ */
+
   generateSummary(since?: Date): UsageAnalyticsSummary {
     const filteredEvents = this.events.filter(
       (event) => !since || event.timestamp >= since
@@ -348,37 +352,41 @@ export class AgentUsageAnalytics {
   }
 
   /**
-   * Exports analytics data for external analysis.
-   *
-   * @param sinc - e-  - Optional start date for filtering events.
-   * @returns - Array of usage events.
-   */
+ * Exports analytics data for external analysis.
+ *
+ * @param since - - since parameter.
+ * @returns - TODO: describe return value.
+ */
+
   exportData(since?: Date): AgentUsageEvent[] {
     return this.events.filter((event) => !since || event.timestamp >= since);
   }
 
   /**
-   * Clears all collected analytics data.
-   *
-   * @returns - */
+ * Clears all collected analytics data.
+ *
+ */
+
   clearData(): void {
     this.events = [];
     this.eventCounter = 0;
   }
 
   /**
-   * Generates a unique event identifier.
-   *
-   * @returns - Unique event ID.
-   */
+ * Generates a unique event identifier.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   private generateEventId(): string {
     return `event_${Date.now()}_${++this.eventCounter}`;
   }
 
   /**
-   * Enforces retention policy by removing old events.
-   *
-   * @returns - */
+ * Enforces retention policy by removing old events.
+ *
+ */
+
   private enforceRetention(): void {
     const now = Date.now();
     const cutoffTime = now - this.config.retentionPeriod;
@@ -395,10 +403,11 @@ export class AgentUsageAnalytics {
   }
 
   /**
-   * Persists an event to storage (placeholder implementation).
-   *
-   * @param even - t-  - Event to persist.
-   * @returns - */
+ * Persists an event to storage (placeholder implementation).
+ *
+ * @param event - - event parameter.
+ */
+
   private persistEvent(event: AgentUsageEvent): void {
     // Placeholder for persistent storage implementation
     // Could write to file, database, or external analytics service
@@ -406,11 +415,12 @@ export class AgentUsageAnalytics {
   }
 
   /**
-   * Estimates the size of data in bytes.
-   *
-   * @param dat - a-  - Data to estimate size for.
-   * @returns - Estimated size in bytes.
-   */
+ * Estimates the size of data in bytes.
+ *
+ * @param data - - data parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private estimateSize(data: any): number {
     try {
       return JSON.stringify(data).length * 2; // Rough estimate for UTF-16
@@ -440,9 +450,10 @@ let globalAnalytics: AgentUsageAnalytics | null = null;
 /**
  * Gets the global analytics instance.
  *
- * @param confi - g-  - Optional analytics configuration.
- * @returns - Analytics instance.
+ * @param config - - config parameter.
+ * @returns - TODO: describe return value.
  */
+
 export function getAnalytics(
   config: AnalyticsConfig = DEFAULT_ANALYTICS_CONFIG
 ): AgentUsageAnalytics {

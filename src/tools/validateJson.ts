@@ -10,14 +10,9 @@ import { RepositoryHealthAgent } from "./repositoryHealth";
 /**
  * Execute JSON schema validation using the repository health agent.
  *
- * @returns {Promise<void>} - Promise that resolves when validation completes.
- * @throws {Error} - When validation fails unexpectedly.
- *
- * @example
- * ```ts
- * await runJsonValidation();
- * ```
+ * @returns - TODO: describe return value.
  */
+
 async function runJsonValidation(): Promise<void> {
   const agent: RepositoryHealthAgent =
     await RepositoryHealthAgent.createFromDisk();

@@ -40,11 +40,11 @@ const REQUIRED_SECTIONS = [
 
 /**
  * Ensure all required section headings exist in the document body.
- * Appends placeholder sections for any that are missing.
  *
- * @param {string} content - Current markdown body without front matter.
- * @returns {string} - Updated content including any missing sections.
+ * @param content - - content parameter.
+ * @returns - TODO: describe return value.
  */
+
 function ensureSections(content: string): string {
   let updated = content;
   for (const heading of REQUIRED_SECTIONS) {
@@ -59,9 +59,10 @@ function ensureSections(content: string): string {
 /**
  * Process a markdown file: ensure front matter and required sections.
  *
- * @param {string} file - Absolute path to markdown file to update.
- * @returns {Promise<void>} - Completion signal after processing.
+ * @param file - - file parameter.
+ * @returns - TODO: describe return value.
  */
+
 async function processFile(file: string): Promise<void> {
   const raw = await fs.readFile(file, "utf8");
   const parsed = matter(raw);
@@ -92,9 +93,10 @@ async function processFile(file: string): Promise<void> {
 /**
  * Derive a human-friendly title from the file path.
  *
- * @param {string} file - Absolute path of the file.
- * @returns {string} - Title-cased name.
+ * @param file - - file parameter.
+ * @returns - TODO: describe return value.
  */
+
 function deriveTitleFromPath(file: string): string {
   const base = path.basename(file, path.extname(file));
   // Convert camelCase / PascalCase / kebab-case to Title Case
@@ -109,8 +111,9 @@ function deriveTitleFromPath(file: string): string {
 /**
  * Entrypoint to augment all markdown files under docs/.
  *
- * @returns {Promise<void>} - Resolves once augmentation completes.
+ * @returns - TODO: describe return value.
  */
+
 async function run(): Promise<void> {
   const docsDir = path.resolve(process.cwd(), "docs");
   const files = await fg("**/*.md", { cwd: docsDir, absolute: true });

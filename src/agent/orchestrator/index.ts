@@ -58,8 +58,12 @@ export class Orchestrator {
   }
 
   /**
-   * Create orchestrator instance with configuration loaded from file
-   */
+ * Create orchestrator instance with configuration loaded from file
+ *
+ * @param configPath - - configPath parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public static async createFromConfig(
     configPath?: string
   ): Promise<Orchestrator> {
@@ -75,22 +79,32 @@ export class Orchestrator {
   }
 
   /**
-   * Get public configuration
-   */
+ * Get public configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getConfig() {
     return this.config.getConfig();
   }
 
   /**
-   * Get supported intents
-   */
+ * Get supported intents
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getSupportedIntents(): OrchestratorIntent[] {
     return this.config.getIntents();
   }
 
   /**
-   * Extract keywords from text using configuration
-   */
+ * Extract keywords from text using configuration
+ *
+ * @param text - - text parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private extractKeywords(text: string): string[] {
     const pattern = new RegExp(
       `\\b[a-z0-9]{${this.minimumKeywordLength},}\\b`,
@@ -101,10 +115,13 @@ export class Orchestrator {
   }
 
   /**
-   * Check if a question is too vague even if it matches an intent.
-   *
-   * @private
-   */
+ * Check if a question is too vague even if it matches an intent.
+ *
+ * @param question - - question parameter.
+ * @param intent - - intent parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private isQuestionTooVague(question: string, intent: string): boolean {
     const questionLower = question.toLowerCase().trim();
 
@@ -117,9 +134,13 @@ export class Orchestrator {
     );
   }
   /**
-   * Classify intent using configuration-driven approach.
-   * Supports both new signature (single input object) and legacy signature (question + context).
-   */
+ * Classify intent using configuration-driven approach.
+ *
+ * @param questionOrInput - - questionOrInput parameter.
+ * @param context - - context parameter.
+ * @returns - TODO: describe return value.
+ */
+
   classify(
     questionOrInput: string | OrchestratorInput,
     context?: { topic?: string }
@@ -216,8 +237,12 @@ export class Orchestrator {
   }
 
   /**
-   * Route request using configuration (simplified for now - delegates to original implementation)
-   */
+ * Route request using configuration (simplified for now - delegates to original implementation)
+ *
+ * @param input - - input parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
     const classification = this.classify(input);
 
@@ -243,10 +268,13 @@ export class Orchestrator {
   }
 
   /**
-   * Generate contextual summary for the response.
-   *
-   * @private
-   */
+ * Generate contextual summary for the response.
+ *
+ * @param classification - - classification parameter.
+ * @param input - - input parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private generateSummary(
     classification: OrchestratorClassification,
     input: OrchestratorInput
@@ -268,10 +296,13 @@ export class Orchestrator {
   }
 
   /**
-   * Generate appropriate payload for the response.
-   *
-   * @private
-   */
+ * Generate appropriate payload for the response.
+ *
+ * @param classification - - classification parameter.
+ * @param input - - input parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private generatePayload(
     classification: OrchestratorClassification,
     input: OrchestratorInput
@@ -309,12 +340,12 @@ export class Orchestrator {
   }
 
   /**
-   * Handle user requests by classifying intent and routing to appropriate agents.
-   * This is the main entry point used by the VS Code extension.
-   *
-   * @param input - - User request with question and optional context
-   * @returns - Response with routing decision and agent output
-   */
+ * Handle user requests by classifying intent and routing to appropriate agents.
+ *
+ * @param input - - input parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
     try {
       // Delegate to the existing route method
@@ -341,13 +372,13 @@ export class Orchestrator {
   }
 
   /**
-   * Format the orchestrator response for user-friendly display.
-   *
-   * @private
-   * @param response - - Raw orchestrator response
-   * @param input - - Original user input
-   * @returns - Formatted markdown for display
-   */
+ * Format the orchestrator response for user-friendly display.
+ *
+ * @param response - - response parameter.
+ * @param input - - input parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private formatResponseForUser(
     response: OrchestratorResponse,
     input: OrchestratorInput
@@ -385,8 +416,11 @@ export class Orchestrator {
   }
 
   /**
-   * Get current configuration
-   */
+ * Get current configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getCurrentConfig() {
     return {
       supportedIntents: this.getSupportedIntents(),

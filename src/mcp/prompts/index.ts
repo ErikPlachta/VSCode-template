@@ -13,6 +13,22 @@ export interface EscalationPromptOptions {
   additionalGuidance?: string;
 }
 
+/**
+ * renderEscalationPrompt function.
+ *
+ * @param {
+  topic,
+  missingSignals,
+  manifest,
+  additionalGuidance,
+} - {
+  topic,
+  missingSignals,
+  manifest,
+  additionalGuidance,
+} parameter.
+ * @returns - TODO: describe return value.
+ */
 export function renderEscalationPrompt({
   topic,
   missingSignals,
@@ -52,6 +68,22 @@ export interface ClarificationPromptOptions {
   knowledgeSnippets?: Array<{ source: string; summary: string }>;
 }
 
+/**
+ * renderClarificationPrompt function.
+ *
+ * @param {
+  question,
+  manifest,
+  missingSignals,
+  knowledgeSnippets,
+} - {
+  question,
+  manifest,
+  missingSignals,
+  knowledgeSnippets,
+} parameter.
+ * @returns - TODO: describe return value.
+ */
 export function renderClarificationPrompt({
   question,
   manifest,
@@ -81,6 +113,18 @@ export interface ClassificationSummaryOptions {
   matchedSignals?: string[];
 }
 
+/**
+ * renderClassificationSummary function.
+ *
+ * @param {
+  agent,
+  matchedSignals,
+} - {
+  agent,
+  matchedSignals,
+} parameter.
+ * @returns - TODO: describe return value.
+ */
 export function renderClassificationSummary({
   agent,
   matchedSignals,

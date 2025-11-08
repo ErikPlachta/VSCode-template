@@ -68,18 +68,18 @@ export class ConfigurationLoader {
   /**
    * Creates a new configuration loader instance.
    *
-   * @param configPat - h-  - Path to the configuration file.
+   * @param configPat - - h-  - Path to the configuration file.
    */
   constructor(configPath: string = "src/mcp.config.json") {
     this.configPath = path.resolve(configPath);
   }
 
   /**
-   * Loads and validates the application configuration.
-   *
-   * @returns - Promise resolving to the loaded configuration.
-   * @throws - When configuration file cannot be loaded or is invalid.
-   */
+ * Loads and validates the application configuration.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   async loadConfig(): Promise<ApplicationConfig> {
     if (this.config) {
       return this.config;
@@ -114,9 +114,11 @@ export class ConfigurationLoader {
   }
 
   /**
-   * Attempts to load the compiled JS for TS application config.
-   * Looks relative to compiled output directory.
-   */
+ * Attempts to load the compiled JS for TS application config.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   private async tryLoadTsConfig(): Promise<ApplicationConfig | null> {
     try {
       const compiledPath = path.resolve(
@@ -140,12 +142,12 @@ export class ConfigurationLoader {
   }
 
   /**
-   * Gets configuration for the current environment.
-   *
-   * @param environmen - t-  - Environment name (development, staging, production).
-   * @returns - Promise resolving to environment-specific configuration.
-   * @throws - When environment is not found or configuration cannot be loaded.
-   */
+ * Gets configuration for the current environment.
+ *
+ * @param environment - - environment parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async getEnvironmentConfig(
     environment: string = "development"
   ): Promise<EnvironmentConfig> {
@@ -165,12 +167,12 @@ export class ConfigurationLoader {
   }
 
   /**
-   * Gets agent-specific configuration.
-   *
-   * @param agentNam - e-  - Name of the agent.
-   * @returns - Promise resolving to agent configuration.
-   * @throws - When agent configuration cannot be found.
-   */
+ * Gets agent-specific configuration.
+ *
+ * @param agentName - - agentName parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async getAgentConfig(agentName: string): Promise<any> {
     const config = await this.loadConfig();
 
@@ -187,21 +189,23 @@ export class ConfigurationLoader {
   }
 
   /**
-   * Reloads configuration from disk.
-   *
-   * @returns - Promise resolving to reloaded configuration.
-   */
+ * Reloads configuration from disk.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   async reloadConfig(): Promise<ApplicationConfig> {
     this.config = null;
     return this.loadConfig();
   }
 
   /**
-   * Merges loaded configuration with default values.
-   *
-   * @param loadedConfi - g-  - Configuration loaded from file.
-   * @returns - Merged configuration with defaults applied.
-   */
+ * Merges loaded configuration with default values.
+ *
+ * @param loadedConfig - - loadedConfig parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private mergeWithDefaults(
     loadedConfig: ApplicationConfig
   ): ApplicationConfig {
@@ -221,12 +225,12 @@ export class ConfigurationLoader {
   }
 
   /**
-   * Validates configuration structure and required fields.
-   *
-   * @param confi - g-  - Configuration to validate.
-   * @returns - True if configuration is valid.
-   * @throws - When configuration is invalid.
-   */
+ * Validates configuration structure and required fields.
+ *
+ * @param config - - config parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private validateConfig(config: ApplicationConfig): boolean {
     // Basic validation - could be enhanced with JSON schema validation
     if (!config.application?.name) {
@@ -249,9 +253,10 @@ let globalConfig: ConfigurationLoader | null = null;
 /**
  * Gets the global configuration loader instance.
  *
- * @param configPat - h-  - Optional path to configuration file.
- * @returns - Configuration loader instance.
+ * @param configPath - - configPath parameter.
+ * @returns - TODO: describe return value.
  */
+
 export function getConfigurationLoader(
   configPath?: string
 ): ConfigurationLoader {
@@ -264,9 +269,10 @@ export function getConfigurationLoader(
 /**
  * Convenience function to load application configuration.
  *
- * @param configPat - h-  - Optional path to configuration file.
- * @returns - Promise resolving to application configuration.
+ * @param configPath - - configPath parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function loadApplicationConfig(
   configPath?: string
 ): Promise<ApplicationConfig> {

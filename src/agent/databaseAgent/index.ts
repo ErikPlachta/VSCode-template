@@ -84,9 +84,9 @@ export class DatabaseAgent {
   /**
    * Creates a new DatabaseAgent instance.
    *
-   * @param {DataSource[]} dataSources - - Array of data sources to query against
-   * @param {Promise<string>} cacheDirectory - - Promise resolving to cache directory path
-   * @param {Partial<DatabaseAgentConfig>} _config - - Optional configuration for the agent (currently ignored; config driven by typed defaults)
+   * @param {DataSource[]} dataSources - - - Array of data sources to query against
+   * @param {Promise<string>} cacheDirectory - - - Promise resolving to cache directory path
+   * @param {Partial<DatabaseAgentConfig>} _config - - - Optional configuration for the agent (currently ignored; config driven by typed defaults)
    */
   constructor(
     dataSources: DataSource[],
@@ -101,22 +101,14 @@ export class DatabaseAgent {
   }
 
   /**
-   * Executes a generic query against any data source.
-   *
-   * @param {CategoryId} categoryId - - Identifier of the data source to query
-   * @param {Record<string, unknown>} criteria - - Query criteria as key-value pairs
-   * @param {QueryOptions} options - - Optional query configuration
-   * @returns {Promise<CategoryRecord[]>} - Promise resolving to matching records
-   *
-   * @example
-   * ```typescript
-   * // Query any data source with any criteria
-   * const results = await agent.executeQuery("products", {
-   *   category: "electronics",
-   *   price: { $lt: 1000 }
-   * });
-   * ```
-   */
+ * Executes a generic query against any data source.
+ *
+ * @param categoryId - - categoryId parameter.
+ * @param criteria - - criteria parameter.
+ * @param options - - options parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async executeQuery(
     categoryId: CategoryId,
     criteria: Record<string, unknown> = {},
@@ -187,30 +179,33 @@ export class DatabaseAgent {
   }
 
   /**
-   * Gets available data sources.
-   *
-   * @returns {CategoryId[]} - Array of category IDs that can be queried
-   */
+ * Gets available data sources.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   getAvailableCategories(): CategoryId[] {
     return Array.from(this.dataSources.keys());
   }
 
   /**
-   * Gets metadata for a specific data source.
-   *
-   * @param {CategoryId} categoryId - - Category to get info for
-   * @returns {DataSource | undefined} - Data source metadata or undefined if not found
-   */
+ * Gets metadata for a specific data source.
+ *
+ * @param categoryId - - categoryId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   getCategoryInfo(categoryId: CategoryId): DataSource | undefined {
     return this.dataSources.get(categoryId);
   }
 
   /**
-   * Clears cached results for a specific category.
-   *
-   * @param {CategoryId} categoryId - - Category to clear cache for
-   * @returns {Promise<void>} - Resolves when cache clear telemetry completes
-   */
+ * Clears cached results for a specific category.
+ *
+ * @param categoryId - - categoryId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async clearCache(categoryId: CategoryId): Promise<void> {
     const cacheDir = await this.cacheDirectory;
     const pattern = this.buildCacheKey(categoryId, {});
@@ -220,13 +215,13 @@ export class DatabaseAgent {
   }
 
   /**
-   * Filters records based on generic criteria.
-   *
-   * @private
-   * @param {DataSource} dataSource - - Data source to filter
-   * @param {Record<string, unknown>} criteria - - Generic filter criteria
-   * @returns {CategoryRecord[]} - Filtered records
-   */
+ * Filters records based on generic criteria.
+ *
+ * @param dataSource - - dataSource parameter.
+ * @param criteria - - criteria parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private filterRecords(
     dataSource: DataSource,
     criteria: Record<string, unknown>
@@ -247,14 +242,14 @@ export class DatabaseAgent {
   }
 
   /**
-   * Checks if a record matches specific criteria.
-   *
-   * @private
-   * @param {CategoryRecord} record - - Record to check
-   * @param {string} field - - Field to check
-   * @param {unknown} value - - Expected value or complex criteria
-   * @returns {boolean} - True if record matches criteria
-   */
+ * Checks if a record matches specific criteria.
+ *
+ * @param record - - record parameter.
+ * @param field - - field parameter.
+ * @param value - - value parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private matchesCriteria(
     record: CategoryRecord,
     field: string,
@@ -350,14 +345,14 @@ export class DatabaseAgent {
   }
 
   /**
-   * Builds a stable cache key for a query.
-   *
-   * @private
-   * @param {CategoryId} categoryId - - Category being queried
-   * @param {Record<string, unknown>} criteria - - Query criteria
-   * @param {string} [prefix]-  - Optional cache key prefix
-   * @returns {string} - Cache key string
-   */
+ * Builds a stable cache key for a query.
+ *
+ * @param categoryId - - categoryId parameter.
+ * @param criteria - - criteria parameter.
+ * @param prefix - - prefix parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private buildCacheKey(
     categoryId: CategoryId,
     criteria: Record<string, unknown>,
@@ -383,12 +378,12 @@ export class DatabaseAgent {
   }
 
   /**
-   * Retrieves cached query result.
-   *
-   * @private
-   * @param {string} cacheKey - - Cache key to lookup
-   * @returns {Promise<CategoryRecord[] | null>} - Cached records or null if not found
-   */
+ * Retrieves cached query result.
+ *
+ * @param cacheKey - - cacheKey parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private async getCachedResult(
     cacheKey: string
   ): Promise<CategoryRecord[] | null> {
@@ -405,13 +400,13 @@ export class DatabaseAgent {
   }
 
   /**
-   * Stores query result in cache.
-   *
-   * @private
-   * @param {string} cacheKey - - Cache key for storage
-   * @param {CategoryRecord[]} results - - Results to cache
-   * @returns {Promise<void>} - Resolves when the cache write completes (best-effort)
-   */
+ * Stores query result in cache.
+ *
+ * @param cacheKey - - cacheKey parameter.
+ * @param results - - results parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private async cacheResult(
     cacheKey: string,
     results: CategoryRecord[]
@@ -438,11 +433,12 @@ export class DatabaseAgent {
 /**
  * Creates a new DatabaseAgent instance with the provided data sources.
  *
- * @param {DataSource[]} dataSources - - Data sources for the agent to query
- * @param {Promise<string>} cacheDirectory - - Cache directory path promise
- * @param {Partial<DatabaseAgentConfig>} config - - Optional agent configuration
- * @returns {DatabaseAgent} - New DatabaseAgent instance
+ * @param dataSources - - dataSources parameter.
+ * @param cacheDirectory - - cacheDirectory parameter.
+ * @param config - - config parameter.
+ * @returns - TODO: describe return value.
  */
+
 export function createDatabaseAgent(
   dataSources: DataSource[],
   cacheDirectory: Promise<string>,

@@ -13,8 +13,11 @@ let serverPort: number | null = null;
 
 /**
  * Start the embedded MCP server on an available port.
- * @returns - Promise that resolves to the server URL
+ *
+ * @param port - - port parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function startMCPServer(port?: number): Promise<string> {
   if (serverInstance) {
     return `http://localhost:${serverPort}`;
@@ -65,8 +68,10 @@ export async function startMCPServer(port?: number): Promise<string> {
 
 /**
  * Stop the embedded MCP server.
- * @returns - Promise that resolves when server is stopped
+ *
+ * @returns - TODO: describe return value.
  */
+
 export async function stopMCPServer(): Promise<void> {
   if (serverInstance) {
     return new Promise((resolve) => {

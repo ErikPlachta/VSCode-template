@@ -68,8 +68,8 @@ export class RepositoryHealthAgent {
   /**
    * Create a new health agent using the provided configuration.
    *
-   * @param {string} baseDir - - Repository root directory.
-   * @param {AgentConfig} config - - Parsed agent configuration contract.
+   * @param {string} baseDir - - - Repository root directory.
+   * @param {AgentConfig} config - - - Parsed agent configuration contract.
    */
   public constructor(baseDir: string, config: AgentConfig) {
     this.baseDir = baseDir;
@@ -84,11 +84,12 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Load configuration from typed application config, falling back to legacy JSON.
-   *
-   * @param {string} configPath - - Legacy JSON path used for fallback during migration.
-   * @returns {Promise<AgentConfig>} - Resolved agent configuration contract.
-   */
+ * Load configuration from typed application config, falling back to legacy JSON.
+ *
+ * @param configPath - - configPath parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public static async loadConfig(configPath: string): Promise<AgentConfig> {
     try {
       const app = await loadApplicationConfig();
@@ -109,11 +110,12 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Create an agent instance by reading the default configuration file or TS config.
-   *
-   * @param {string} configPath - - Optional custom path to the legacy configuration file.
-   * @returns {Promise<RepositoryHealthAgent>} - Instantiated repository health agent.
-   */
+ * Create an agent instance by reading the default configuration file or TS config.
+ *
+ * @param configPath - - configPath parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public static async createFromDisk(
     configPath: string = "src/mcp.config.json"
   ): Promise<RepositoryHealthAgent> {
@@ -124,20 +126,22 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Create an agent using an already materialized AgentConfig.
-   *
-   * @param {AgentConfig} config - - Agent configuration object.
-   * @returns {RepositoryHealthAgent} - Repository health agent using provided configuration.
-   */
+ * Create an agent using an already materialized AgentConfig.
+ *
+ * @param config - - config parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public static createFromConfig(config: AgentConfig): RepositoryHealthAgent {
     return new RepositoryHealthAgent(process.cwd(), config);
   }
 
   /**
-   * Execute every configured check and return a comprehensive report.
-   *
-   * @returns {Promise<HealthReport>} - Combined report of all checks.
-   */
+ * Execute every configured check and return a comprehensive report.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public async runAllChecks(): Promise<HealthReport> {
     const checks: CheckResult[] = [];
     checks.push(await this.runTypescriptLint());
@@ -148,10 +152,11 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Execute ESLint using project settings to ensure documentation coverage.
-   *
-   * @returns {Promise<CheckResult>} - Lint check outcome.
-   */
+ * Execute ESLint using project settings to ensure documentation coverage.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public async runTypescriptLint(): Promise<CheckResult> {
     const eslint: ESLint = new ESLint({ cwd: this.baseDir });
     const results: ESLint.LintResult[] = await eslint.lintFiles([
@@ -174,10 +179,11 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Validate JSON artifacts against defined schemas.
-   *
-   * @returns {Promise<CheckResult>} - JSON schema validation outcome.
-   */
+ * Validate JSON artifacts against defined schemas.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public async validateJsonSchemas(): Promise<CheckResult> {
     const findings: string[] = [];
     for (const rule of this.config.jsonSchemas) {
@@ -216,10 +222,11 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Validate Markdown documents for required metadata and content sections.
-   *
-   * @returns {Promise<CheckResult>} - Markdown validation outcome.
-   */
+ * Validate Markdown documents for required metadata and content sections.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public async validateMarkdownDocuments(): Promise<CheckResult> {
     const include: string[] = [...this.config.markdown.include];
     const ignore: string[] = this.config.markdown.exclude
@@ -265,11 +272,12 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Persist a markdown report summarizing the check outcomes.
-   *
-   * @param {HealthReport} report - - Generated report to persist.
-   * @returns {Promise<void>} - Completion signal after file write.
-   */
+ * Persist a markdown report summarizing the check outcomes.
+ *
+ * @param report - - report parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async writeReport(report: HealthReport): Promise<void> {
     const outputPath: string = path.resolve(
       this.baseDir,
@@ -350,11 +358,12 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Convert Ajv errors into a readable string.
-   *
-   * @param {ErrorObject[]} errors - - Ajv validation errors.
-   * @returns {string} - Human readable combined error message.
-   */
+ * Convert Ajv errors into a readable string.
+ *
+ * @param errors - - errors parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private formatAjvErrors(errors: ErrorObject[]): string {
     if (errors.length === 0) {
       return "Unknown schema validation error.";
@@ -371,8 +380,9 @@ export class RepositoryHealthAgent {
 /**
  * CLI-friendly runner that executes all checks and writes the report.
  *
- * @returns {Promise<void>} - Resolves on completion.
+ * @returns - TODO: describe return value.
  */
+
 export async function runHealthCheck(): Promise<void> {
   const agent: RepositoryHealthAgent =
     await RepositoryHealthAgent.createFromDisk();

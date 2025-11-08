@@ -36,12 +36,24 @@ const DATA_ROOT = process.env.VSCODE_TEMPLATE_DATA_ROOT
   ? path.resolve(process.env.VSCODE_TEMPLATE_DATA_ROOT)
   : path.join(__dirname, "..", "..", "bin", "data");
 
+/**
+ * loadJson function.
+ *
+ * @param segments - - segments parameter.
+ * @returns - TODO: describe return value.
+ */
 async function loadJson<T>(...segments: string[]): Promise<T> {
   const filePath = path.join(DATA_ROOT, ...segments);
   const raw = await readFile(filePath, "utf8");
   return JSON.parse(raw) as T;
 }
 
+/**
+ * loadOptionalJson function.
+ *
+ * @param segments - - segments parameter.
+ * @returns - TODO: describe return value.
+ */
 async function loadOptionalJson<T>(
   ...segments: string[]
 ): Promise<T | undefined> {
@@ -55,6 +67,13 @@ async function loadOptionalJson<T>(
   }
 }
 
+/**
+ * loadJsonCollection function.
+ *
+ * @param categoryId - - categoryId parameter.
+ * @param folder - - folder parameter.
+ * @returns - TODO: describe return value.
+ */
 async function loadJsonCollection(
   categoryId: string,
   folder: string
@@ -76,6 +95,12 @@ async function loadJsonCollection(
   }
 }
 
+/**
+ * describeCategory function.
+ *
+ * @param categoryId - - categoryId parameter.
+ * @returns - TODO: describe return value.
+ */
 async function describeCategory(categoryId: string): Promise<unknown> {
   const [category, relationships, schemas, examples, queries] =
     await Promise.all([
@@ -94,6 +119,13 @@ async function describeCategory(categoryId: string): Promise<unknown> {
   };
 }
 
+/**
+ * searchRecords function.
+ *
+ * @param categoryId - - categoryId parameter.
+ * @param filters - - filters parameter.
+ * @returns - TODO: describe return value.
+ */
 async function searchRecords(
   categoryId: string,
   filters: Record<string, unknown> = {}
@@ -164,6 +196,13 @@ const tools: MCPTool[] = [
   },
 ];
 
+/**
+ * handleInvoke function.
+ *
+ * @param name - - name parameter.
+ * @param args - - args parameter.
+ * @returns - TODO: describe return value.
+ */
 async function handleInvoke(
   name: string,
   args: Record<string, unknown> = {}
@@ -190,11 +229,24 @@ async function handleInvoke(
   }
 }
 
+/**
+ * sendJson function.
+ *
+ * @param res - - res parameter.
+ * @param response - - response parameter.
+ */
 function sendJson(res: ServerResponse, response: JsonRpcResponse): void {
   res.writeHead(200, { "Content-Type": "application/json" });
   res.end(JSON.stringify(response));
 }
 
+/**
+ * handleRequest function.
+ *
+ * @param req - - req parameter.
+ * @param res - - res parameter.
+ * @returns - TODO: describe return value.
+ */
 async function handleRequest(
   req: IncomingMessage,
   res: ServerResponse
@@ -336,6 +388,12 @@ async function handleRequest(
   }
 }
 
+/**
+ * createMcpServer function.
+ *
+ * @param port - - port parameter.
+ * @returns - TODO: describe return value.
+ */
 export function createMcpServer(
   port = Number(process.env.MCP_PORT ?? 3030)
 ): Server {
@@ -362,7 +420,11 @@ export function createMcpServer(
 
 /**
  * Handle JSON-RPC message processing for MCP protocol.
+ *
+ * @param message - - message parameter.
+ * @returns - TODO: describe return value.
  */
+
 async function handleJsonRpcMessage(
   message: JsonRpcRequest
 ): Promise<JsonRpcResponse> {
@@ -500,7 +562,9 @@ async function handleJsonRpcMessage(
 
 /**
  * Start a stdio MCP server that communicates via stdin/stdout.
+ *
  */
+
 function startStdioServer(): void {
   let buffer = "";
   let isInitialized = false;

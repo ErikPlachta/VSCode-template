@@ -19,15 +19,32 @@ export interface KnowledgeHit {
 export class KnowledgeBase {
   private readonly documents = new Map<string, KnowledgeDocument>();
 
-  indexDocument(document: KnowledgeDocument): void {
+  /**
+ * indexDocument function.
+ *
+ * @param document - - document parameter.
+ */
+indexDocument(document: KnowledgeDocument): void {
     this.documents.set(document.id, document);
   }
 
-  indexDocuments(documents: KnowledgeDocument[]): void {
+  /**
+ * indexDocuments function.
+ *
+ * @param documents - - documents parameter.
+ */
+indexDocuments(documents: KnowledgeDocument[]): void {
     documents.forEach((document) => this.indexDocument(document));
   }
 
-  query(term: string, limit = 3): KnowledgeHit[] {
+  /**
+ * query function.
+ *
+ * @param term - - term parameter.
+ * @param limit - - limit parameter.
+ * @returns - TODO: describe return value.
+ */
+query(term: string, limit = 3): KnowledgeHit[] {
     const keywords = new Set(
       (term.toLowerCase().match(/\b[\w-]{3,}\b/g) ?? []).map((token) => token)
     );
@@ -53,6 +70,13 @@ export class KnowledgeBase {
   }
 }
 
+/**
+ * summarize function.
+ *
+ * @param content - - content parameter.
+ * @param maxLength - - maxLength parameter.
+ * @returns - TODO: describe return value.
+ */
 function summarize(content: string, maxLength = 160): string {
   const trimmed = content.replace(/\s+/g, " ").trim();
   if (trimmed.length <= maxLength) {

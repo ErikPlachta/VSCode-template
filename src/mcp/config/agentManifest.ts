@@ -57,7 +57,11 @@ export const agentManifest: Record<AgentIdentifier, AgentCapabilityMetadata> = {
 
 /**
  * Retrieve manifest metadata for a given agent identifier.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
  */
+
 export function getAgentMetadata(
   agentId: AgentIdentifier
 ): AgentCapabilityMetadata {
@@ -70,7 +74,10 @@ export function getAgentMetadata(
 
 /**
  * Return all agent capability entries.
+ *
+ * @returns - TODO: describe return value.
  */
+
 export function listAgentCapabilities(): AgentCapabilityMetadata[] {
   return Object.values(agentManifest);
 }

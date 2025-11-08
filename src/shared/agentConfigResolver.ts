@@ -24,6 +24,12 @@ interface RuntimeOverrides {
   };
 }
 
+/**
+ * normalizeAgentId function.
+ *
+ * @param input - - input parameter.
+ * @returns - TODO: describe return value.
+ */
 function normalizeAgentId(input: string): AgentIdentifier {
   // Already canonical
   if (
@@ -48,6 +54,12 @@ function normalizeAgentId(input: string): AgentIdentifier {
   throw new Error(`Unknown agent identifier '${input}'. Use canonical ids.`);
 }
 
+/**
+ * isValidPriority function.
+ *
+ * @param p - - p parameter.
+ * @returns - TODO: describe return value.
+ */
 function isValidPriority(p?: string): p is Priority {
   return p === "high" || p === "medium" || p === "low";
 }
@@ -62,9 +74,12 @@ export class AgentConfigResolver {
   constructor(private readonly configPath: string = "src/mcp.config.json") {}
 
   /**
-   * Returns the effective execution profile for an agent after applying runtime overrides.
-   * Enforces global constraints (e.g., maxExecutionTime).
-   */
+ * Returns the effective execution profile for an agent after applying runtime overrides.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   async getEffectiveExecutionProfile(
     agentId: AgentIdentifier
   ): Promise<EffectiveExecutionProfile> {

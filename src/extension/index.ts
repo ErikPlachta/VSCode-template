@@ -12,7 +12,11 @@ import { registerMcpProvider } from "@extension/mcpProvider";
 
 /**
  * Activates the extension, registering the chat participant.
+ *
+ * @param context - - context parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function activate(
   context: vscode.ExtensionContext
 ): Promise<void> {
@@ -148,5 +152,7 @@ export async function activate(
 
 /**
  * Deactivates the extension.
+ *
  */
+
 export function deactivate(): void {}

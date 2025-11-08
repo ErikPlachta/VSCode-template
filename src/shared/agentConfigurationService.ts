@@ -22,10 +22,11 @@ export class AgentConfigurationService {
   private constructor() {}
 
   /**
-   * Gets the singleton instance of the agent configuration service.
-   *
-   * @returns - The singleton instance.
-   */
+ * Gets the singleton instance of the agent configuration service.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public static getInstance(): AgentConfigurationService {
     if (!this.instance) {
       this.instance = new AgentConfigurationService();
@@ -34,10 +35,11 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Loads the application configuration if not already loaded.
-   *
-   * @returns - Promise resolving to the application configuration.
-   */
+ * Loads the application configuration if not already loaded.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   private async ensureConfigLoaded(): Promise<ApplicationConfig> {
     if (!this.config) {
       this.config = await loadApplicationConfig();
@@ -46,12 +48,12 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets the agent definition for the specified agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - The agent definition.
-   * @throws - Error if agent not found.
-   */
+ * Gets the agent definition for the specified agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getAgentDefinition(
     agentId: AgentIdentifier
   ): Promise<AgentDefinition> {
@@ -88,10 +90,11 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets all agent definitions.
-   *
-   * @returns - Promise resolving to map of agent definitions.
-   */
+ * Gets all agent definitions.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public async getAllAgentDefinitions(): Promise<
     Record<string, AgentDefinition>
   > {
@@ -107,11 +110,12 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets user-facing information for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - User-facing metadata or null if not available.
-   */
+ * Gets user-facing information for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getUserFacingInfo(
     agentId: AgentIdentifier
   ): Promise<AgentDefinition["userFacing"] | null> {
@@ -120,11 +124,12 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets application-facing information for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - Application-facing metadata or null if not available.
-   */
+ * Gets application-facing information for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getApplicationFacingInfo(
     agentId: AgentIdentifier
   ): Promise<AgentDefinition["applicationFacing"] | null> {
@@ -133,22 +138,24 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets the display name for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - The display name.
-   */
+ * Gets the display name for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getAgentDisplayName(agentId: AgentIdentifier): Promise<string> {
     const definition = await this.getAgentDefinition(agentId);
     return definition.displayName;
   }
 
   /**
-   * Gets the capabilities for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - Array of capability strings.
-   */
+ * Gets the capabilities for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getAgentCapabilities(
     agentId: AgentIdentifier
   ): Promise<string[]> {
@@ -157,12 +164,13 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Checks if an agent has a specific capability.
-   *
-   * @param agentId - - The agent identifier.
-   * @param capability - - The capability to check.
-   * @returns - Promise resolving to true if agent has the capability.
-   */
+ * Checks if an agent has a specific capability.
+ *
+ * @param agentId - - agentId parameter.
+ * @param capability - - capability parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async hasCapability(
     agentId: AgentIdentifier,
     capability: string
@@ -172,11 +180,12 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets agents that have a specific capability.
-   *
-   * @param capability - - The capability to search for.
-   * @returns - Promise resolving to array of agent identifiers.
-   */
+ * Gets agents that have a specific capability.
+ *
+ * @param capability - - capability parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getAgentsWithCapability(
     capability: string
   ): Promise<AgentIdentifier[]> {
@@ -195,11 +204,12 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets friendly description for user interfaces.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - User-friendly description or fallback to technical description.
-   */
+ * Gets friendly description for user interfaces.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getFriendlyDescription(
     agentId: AgentIdentifier
   ): Promise<string> {
@@ -208,22 +218,24 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets example queries for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - Array of example query strings.
-   */
+ * Gets example queries for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getExampleQueries(agentId: AgentIdentifier): Promise<string[]> {
     const definition = await this.getAgentDefinition(agentId);
     return definition.userFacing?.exampleQueries || [];
   }
 
   /**
-   * Gets monitoring configuration for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - Monitoring configuration or null if not available.
-   */
+ * Gets monitoring configuration for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getMonitoringConfig(
     agentId: AgentIdentifier
   ): Promise<
@@ -234,11 +246,12 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets performance characteristics for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - Performance configuration or null if not available.
-   */
+ * Gets performance characteristics for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getPerformanceConfig(
     agentId: AgentIdentifier
   ): Promise<
@@ -249,11 +262,12 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Gets error handling configuration for an agent.
-   *
-   * @param agentId - - The agent identifier.
-   * @returns - Error handling configuration or null if not available.
-   */
+ * Gets error handling configuration for an agent.
+ *
+ * @param agentId - - agentId parameter.
+ * @returns - TODO: describe return value.
+ */
+
   public async getErrorHandlingConfig(
     agentId: AgentIdentifier
   ): Promise<
@@ -264,8 +278,11 @@ export class AgentConfigurationService {
   }
 
   /**
-   * Reloads the configuration from disk.
-   */
+ * Reloads the configuration from disk.
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public async reloadConfiguration(): Promise<void> {
     this.config = null;
     await this.ensureConfigLoaded();
@@ -275,8 +292,9 @@ export class AgentConfigurationService {
 /**
  * Gets the global agent configuration service instance.
  *
- * @returns - The agent configuration service.
+ * @returns - TODO: describe return value.
  */
+
 export function getAgentConfigurationService(): AgentConfigurationService {
   return AgentConfigurationService.getInstance();
 }

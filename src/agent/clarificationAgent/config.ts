@@ -36,8 +36,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get guidance configuration
-   */
+ * Get guidance configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getGuidanceConfig() {
     return (
       this.clarificationConfig.guidance || {
@@ -49,8 +52,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get escalation configuration
-   */
+ * Get escalation configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getEscalationConfig() {
     return (
       this.clarificationConfig.escalation || {
@@ -65,8 +71,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get knowledge base configuration
-   */
+ * Get knowledge base configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getKnowledgeBaseConfig() {
     return (
       this.clarificationConfig.knowledgeBase || {
@@ -78,10 +87,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get routing configuration
-   *
-   * @returns - The routing configuration object
-   */
+ * Get routing configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getRoutingConfig() {
     return (
       this.clarificationConfig.routing || {
@@ -95,8 +105,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get context analysis configuration
-   */
+ * Get context analysis configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getContextAnalysisConfig() {
     return (
       this.clarificationConfig.contextAnalysis || {
@@ -110,8 +123,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get performance configuration
-   */
+ * Get performance configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getPerformanceConfig() {
     return (
       this.clarificationConfig.performance || {
@@ -125,92 +141,131 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get maximum suggestions to provide
-   */
+ * Get maximum suggestions to provide
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getMaxSuggestions(): number {
     return this.getGuidanceConfig().maxSuggestions;
   }
 
   /**
-   * Get maximum knowledge snippets
-   */
+ * Get maximum knowledge snippets
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getMaxKnowledgeSnippets(): number {
     return this.getKnowledgeBaseConfig().maxKnowledgeSnippets;
   }
 
   /**
-   * Get relevance threshold for knowledge snippets
-   */
+ * Get relevance threshold for knowledge snippets
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getRelevanceThreshold(): number {
     return this.getKnowledgeBaseConfig().relevanceThreshold;
   }
 
   /**
-   * Get escalation threshold
-   */
+ * Get escalation threshold
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getEscalationThreshold(): number {
     return this.getEscalationConfig().escalationThreshold;
   }
 
   /**
-   * Get maximum clarification rounds
-   */
+ * Get maximum clarification rounds
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getMaxClarificationRounds(): number {
     return this.getEscalationConfig().maxClarificationRounds;
   }
 
   /**
-   * Check if knowledge search is enabled
-   */
+ * Check if knowledge search is enabled
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public isKnowledgeSearchEnabled(): boolean {
     return this.getKnowledgeBaseConfig().enableKnowledgeSearch;
   }
 
   /**
-   * Check if category examples should be included
-   */
+ * Check if category examples should be included
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public shouldIncludeCategoryExamples(): boolean {
     return this.getGuidanceConfig().includeCategoryExamples;
   }
 
   /**
-   * Check if query templates should be included
-   */
+ * Check if query templates should be included
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public shouldIncludeQueryTemplates(): boolean {
     return this.getGuidanceConfig().includeQueryTemplates;
   }
 
   /**
-   * Check if alternative phrasings should be suggested
-   */
+ * Check if alternative phrasings should be suggested
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public shouldSuggestAlternativePhrasings(): boolean {
     return this.getGuidanceConfig().suggestAlternativePhrasings ?? true;
   }
 
   /**
-   * Check if missing signals should be analyzed
-   */
+ * Check if missing signals should be analyzed
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public shouldAnalyzeMissingSignals(): boolean {
     return this.getRoutingConfig().analyzeMissingSignals ?? true;
   }
 
   /**
-   * Check if alternative agents should be suggested
-   */
+ * Check if alternative agents should be suggested
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public shouldSuggestAlternativeAgents(): boolean {
     return this.getRoutingConfig().suggestAlternativeAgents ?? true;
   }
 
   /**
-   * Get fallback strategies
-   */
+ * Get fallback strategies
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getFallbackStrategies(): string[] {
     return this.getEscalationConfig().fallbackStrategies;
   }
 
   /**
-   * Get guidance types to provide
-   */
+ * Get guidance types to provide
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getGuidanceTypes(): string[] {
     return (
       this.getGuidanceConfig().guidanceTypes ?? [
@@ -224,8 +279,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get knowledge sources to search
-   */
+ * Get knowledge sources to search
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getKnowledgeSources(): string[] {
     return (
       this.getKnowledgeBaseConfig().knowledgeSources ?? [
@@ -239,8 +297,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get response style configuration
-   */
+ * Get response style configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getResponseStyle() {
     return (
       this.getGuidanceConfig().responseStyle ?? {
@@ -253,22 +314,31 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get knowledge search timeout
-   */
+ * Get knowledge search timeout
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getKnowledgeSearchTimeout(): number {
     return this.getKnowledgeBaseConfig().knowledgeSearchTimeout ?? 3000;
   }
 
   /**
-   * Get maximum response time
-   */
+ * Get maximum response time
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getMaxResponseTime(): number {
     return this.getPerformanceConfig().maxResponseTime ?? 5000;
   }
 
   /**
-   * Get telemetry configuration
-   */
+ * Get telemetry configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getTelemetryConfig() {
     return {
       logQueries: this.config.telemetry?.logQueries ?? true,
@@ -283,8 +353,11 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   }
 
   /**
-   * Get error handling configuration
-   */
+ * Get error handling configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getErrorHandlingConfig() {
     return {
       maxRetries: this.config.errorHandling?.maxRetries ?? 1,

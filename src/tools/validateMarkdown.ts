@@ -10,14 +10,9 @@ import { RepositoryHealthAgent } from "./repositoryHealth";
 /**
  * Validate Markdown metadata and structural requirements.
  *
- * @returns {Promise<void>} - Promise that resolves when validation completes.
- * @throws {Error} - When validation fails unexpectedly.
- *
- * @example
- * ```ts
- * await runMarkdownValidation();
- * ```
+ * @returns - TODO: describe return value.
  */
+
 async function runMarkdownValidation(): Promise<void> {
   const agent: RepositoryHealthAgent =
     await RepositoryHealthAgent.createFromDisk();

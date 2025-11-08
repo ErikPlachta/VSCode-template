@@ -18,7 +18,12 @@ export interface InvocationLogger {
 }
 
 class ConsoleInvocationLogger implements InvocationLogger {
-  log(event: InvocationEvent): void {
+  /**
+ * log function.
+ *
+ * @param event - - event parameter.
+ */
+log(event: InvocationEvent): void {
     if (process.env.JEST_WORKER_ID) {
       return;
     }
@@ -37,7 +42,12 @@ export interface InvocationWrapper {
 
 /**
  * Create a helper that wraps asynchronous operations and emits telemetry events.
+ *
+ * @param agent - - agent parameter.
+ * @param logger - - logger parameter.
+ * @returns - TODO: describe return value.
  */
+
 export function createInvocationLogger(agent: string, logger: InvocationLogger = new ConsoleInvocationLogger()): InvocationWrapper {
   return async <T>(operation: string, fn: () => Promise<T>, metadata?: Record<string, unknown>): Promise<T> => {
     const startedAt = Date.now();

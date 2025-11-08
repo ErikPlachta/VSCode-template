@@ -18,7 +18,7 @@ import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
  */
 export class MCPDiscoveryError extends Error {
   /**
-   * @param message - - Human-readable error message.
+   * @param message - - - Human-readable error message.
    * @param [cause] - Optional root cause supplied by axios or the MCP server.
    */
   constructor(message: string, public readonly cause?: unknown) {
@@ -29,11 +29,11 @@ export class MCPDiscoveryError extends Error {
 
 /**
  * Normalise the tool properties by merging schema metadata so prompts can
- * surface richer descriptions.
  *
- * @param tool - - Tool metadata as returned by the MCP server.
- * @returns - Tool with enriched `input_schema` metadata.
+ * @param tool - - tool parameter.
+ * @returns - TODO: describe return value.
  */
+
 function normaliseTool(tool: MCPTool): MCPTool {
   if (!tool.input_schema?.properties) {
     return tool;
@@ -59,16 +59,11 @@ function normaliseTool(tool: MCPTool): MCPTool {
 /**
  * Fetch all available MCP tools from the configured server.
  *
- * @param serverUrl - - Base URL of the MCP server.
- * @param [token] - Optional Bearer token.
- * @returns - Array of available MCP tools with enriched metadata.
- * @throws - When the server cannot be reached or returns an invalid payload.
- * @example
- * ```ts
- * const tools = await fetchTools("https://mcp.example.com", "token");
- * console.log(tools.length);
- * ```
+ * @param serverUrl - - serverUrl parameter.
+ * @param token - - token parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function fetchTools(
   serverUrl: string,
   token?: string

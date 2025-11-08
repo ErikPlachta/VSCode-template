@@ -11,6 +11,11 @@ interface McpConfig {
   servers: Record<string, unknown>;
 }
 
+/**
+ * getMcpConfigPath function.
+ *
+ * @returns - TODO: describe return value.
+ */
 function getMcpConfigPath(): string {
   // Try to resolve platform-specific default for VS Code stable
   const platform = process.platform;
@@ -33,6 +38,12 @@ function getMcpConfigPath(): string {
   return path.join(os.homedir(), ".config", "Code", "User", "mcp.json");
 }
 
+/**
+ * readMcpConfig function.
+ *
+ * @param filePath - - filePath parameter.
+ * @returns - TODO: describe return value.
+ */
 async function readMcpConfig(filePath: string): Promise<McpConfig> {
   try {
     const raw = await fs.readFile(filePath, "utf8");
@@ -47,6 +58,13 @@ async function readMcpConfig(filePath: string): Promise<McpConfig> {
   }
 }
 
+/**
+ * writeMcpConfig function.
+ *
+ * @param filePath - - filePath parameter.
+ * @param config - - config parameter.
+ * @returns - TODO: describe return value.
+ */
 async function writeMcpConfig(
   filePath: string,
   config: McpConfig
@@ -65,7 +83,11 @@ export interface RegistrationOptions {
 
 /**
  * Ensure an HTTP JSON-RPC server entry exists in mcp.json for Copilot Chat.
+ *
+ * @param opts - - opts parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function ensureRegistration(
   opts: RegistrationOptions
 ): Promise<string> {
@@ -87,7 +109,11 @@ export async function ensureRegistration(
 
 /**
  * Remove our server entry from mcp.json if present.
+ *
+ * @param id - - id parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function removeRegistration(id: string): Promise<string> {
   const configPath = getMcpConfigPath();
   const current = await readMcpConfig(configPath);

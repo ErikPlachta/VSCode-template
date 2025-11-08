@@ -36,12 +36,13 @@ export interface ReportOptions {
  */
 export class AnalyticsDashboard {
   /**
-   * Generates a comprehensive analytics report.
-   *
-   * @param summar - y-  - Analytics summary data.
-   * @param option - s-  - Report generation options.
-   * @returns - Generated report content.
-   */
+ * Generates a comprehensive analytics report.
+ *
+ * @param summary - - summary parameter.
+ * @param options - - options parameter.
+ * @returns - TODO: describe return value.
+ */
+
   generateReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
@@ -59,11 +60,12 @@ export class AnalyticsDashboard {
   }
 
   /**
-   * Generates performance recommendations based on analytics data.
-   *
-   * @param summar - y-  - Analytics summary data.
-   * @returns - Array of performance recommendations.
-   */
+ * Generates performance recommendations based on analytics data.
+ *
+ * @param summary - - summary parameter.
+ * @returns - TODO: describe return value.
+ */
+
   generateRecommendations(summary: UsageAnalyticsSummary): string[] {
     const recommendations: string[] = [];
 
@@ -139,12 +141,13 @@ export class AnalyticsDashboard {
   }
 
   /**
-   * Generates a Markdown format report.
-   *
-   * @param summar - y-  - Analytics summary data.
-   * @param option - s-  - Report generation options.
-   * @returns - Markdown formatted report.
-   */
+ * Generates a Markdown format report.
+ *
+ * @param summary - - summary parameter.
+ * @param options - - options parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private generateMarkdownReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
@@ -255,12 +258,13 @@ export class AnalyticsDashboard {
   }
 
   /**
-   * Generates a JSON format report.
-   *
-   * @param summar - y-  - Analytics summary data.
-   * @param option - s-  - Report generation options.
-   * @returns - JSON formatted report.
-   */
+ * Generates a JSON format report.
+ *
+ * @param summary - - summary parameter.
+ * @param options - - options parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private generateJsonReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
@@ -289,12 +293,13 @@ export class AnalyticsDashboard {
   }
 
   /**
-   * Generates a CSV format report.
-   *
-   * @param summar - y-  - Analytics summary data.
-   * @param option - s-  - Report generation options.
-   * @returns - CSV formatted report.
-   */
+ * Generates a CSV format report.
+ *
+ * @param summary - - summary parameter.
+ * @param options - - options parameter.
+ * @returns - TODO: describe return value.
+ */
+
   private generateCsvReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
@@ -331,11 +336,12 @@ export class AnalyticsDashboard {
 /**
  * Creates a standard analytics report with default options.
  *
- * @param summar - y-  - Analytics summary data.
- * @param startDat - e-  - Start date for the report period.
- * @param endDat - e-  - End date for the report period.
- * @returns - Generated Markdown report.
+ * @param summary - - summary parameter.
+ * @param startDate - - startDate parameter.
+ * @param endDate - - endDate parameter.
+ * @returns - TODO: describe return value.
  */
+
 export function createStandardReport(
   summary: UsageAnalyticsSummary,
   startDate: Date,

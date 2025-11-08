@@ -50,17 +50,9 @@ export interface ToolLogEntry {
 /**
  * Ensure the workspace has a `.mcp-cache` directory and return its path.
  *
- * The directory is created in the current workspace when available, otherwise
- * the user's home directory is used as a fallback. This keeps diagnostic logs
- * local to the client, reducing storage pressure on the MCP backend.
- *
- * @returns - Absolute path to the cache directory.
- * @throws - When the directory cannot be created.
- * @example
- * ```ts
- * const cacheDir = await ensureCacheDirectory();
- * ```
+ * @returns - TODO: describe return value.
  */
+
 export async function ensureCacheDirectory(): Promise<string> {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
   const basePath = workspaceRoot ?? os.homedir();
@@ -72,11 +64,11 @@ export async function ensureCacheDirectory(): Promise<string> {
 /**
  * Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
  *
- * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
- * @param entry - - Log entry to persist.
- * @returns - Resolves when the entry has been appended.
- * @throws - When the log file cannot be written.
+ * @param cacheDir - - cacheDir parameter.
+ * @param entry - - entry parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function logInvocation(
   cacheDir: string,
   entry: ToolLogEntry
@@ -89,12 +81,11 @@ export async function logInvocation(
 /**
  * Persist a shared cache entry that can be re-used by other MCP tools.
  *
- * @template T
- * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
- * @param entry - - Payload to store on disk.
- * @returns - Resolves when the entry has been written.
- * @throws - When the entry cannot be persisted.
+ * @param cacheDir - - cacheDir parameter.
+ * @param entry - - entry parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function storeSharedCacheEntry<T>(
   cacheDir: string,
   entry: SharedCacheEntry<T>
@@ -109,12 +100,11 @@ export async function storeSharedCacheEntry<T>(
 /**
  * Retrieve a shared cache entry by key.
  *
- * @template T
- * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
- * @param key - - Unique cache entry key.
- * @returns - Stored entry or `undefined` if not found.
- * @throws - When the file exists but cannot be read.
+ * @param cacheDir - - cacheDir parameter.
+ * @param key - - key parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function readSharedCacheEntry<T = unknown>(
   cacheDir: string,
   key: string
@@ -136,11 +126,10 @@ export async function readSharedCacheEntry<T = unknown>(
 /**
  * Enumerate all cached artifacts currently stored on disk.
  *
- * @template T
- * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
- * @returns - Array of cached entries.
- * @throws - When the directory cannot be read.
+ * @param cacheDir - - cacheDir parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function listSharedCacheEntries<T = unknown>(
   cacheDir: string
 ): Promise<SharedCacheEntry<T>[]> {
@@ -167,11 +156,11 @@ export async function listSharedCacheEntries<T = unknown>(
 /**
  * Remove a shared cache entry when it is no longer relevant.
  *
- * @param cacheDir - - Directory returned by {@link ensureCacheDirectory}.
- * @param key - - Cache entry key to delete.
- * @returns - Resolves when the entry has been removed or did not exist.
- * @throws - When the delete operation fails for reasons other than missing files.
+ * @param cacheDir - - cacheDir parameter.
+ * @param key - - key parameter.
+ * @returns - TODO: describe return value.
  */
+
 export async function deleteSharedCacheEntry(
   cacheDir: string,
   key: string
@@ -192,9 +181,10 @@ export async function deleteSharedCacheEntry(
 /**
  * Normalise a cache key so it is safe for use as a file name.
  *
- * @param key - - Arbitrary cache entry key.
- * @returns - Sanitised key that can be used as a filename.
+ * @param key - - key parameter.
+ * @returns - TODO: describe return value.
  */
+
 function sanitiseKey(key: string): string {
   return key.replace(/[^a-z0-9-_]+/gi, "_");
 }

@@ -473,8 +473,11 @@ export abstract class BaseAgentConfig {
   }
 
   /**
-   * Get public-facing configuration (user and some application details)
-   */
+ * Get public-facing configuration (user and some application details)
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getConfig(): Partial<AgentConfigDefinition> {
     return {
       $configId: this.config.$configId,
@@ -490,36 +493,51 @@ export abstract class BaseAgentConfig {
   }
 
   /**
-   * Get complete configuration (private method for internal use)
-   */
+ * Get complete configuration (private method for internal use)
+ *
+ * @returns - TODO: describe return value.
+ */
+
   protected _getConfig(): AgentConfigDefinition {
     return this.config;
   }
 
   /**
-   * Get execution configuration
-   */
+ * Get execution configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getExecutionConfig(): ExecutionConfig | undefined {
     return this.config.execution;
   }
 
   /**
-   * Get user-facing configuration
-   */
+ * Get user-facing configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getUserFacingConfig(): UserFacingConfig | undefined {
     return this.config.userFacing;
   }
 
   /**
-   * Get application-facing configuration
-   */
+ * Get application-facing configuration
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getApplicationFacingConfig(): ApplicationFacingConfig | undefined {
     return this.config.applicationFacing;
   }
 
   /**
-   * Get configuration schema ID
-   */
+ * Get configuration schema ID
+ *
+ * @returns - TODO: describe return value.
+ */
+
   public getConfigId(): string {
     return this.config.$configId;
   }

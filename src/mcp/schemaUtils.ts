@@ -20,10 +20,22 @@ export interface SchemaValidationSummary {
   duplicateSchemaNames: string[];
 }
 
+/**
+ * normaliseSchemaName function.
+ *
+ * @param name - - name parameter.
+ * @returns - TODO: describe return value.
+ */
 export function normaliseSchemaName(name: string): string {
   return name.trim().toLowerCase();
 }
 
+/**
+ * detectDuplicateSchemas function.
+ *
+ * @param schemas - - schemas parameter.
+ * @returns - TODO: describe return value.
+ */
 export function detectDuplicateSchemas(schemas: CategorySchema[]): string[] {
   const seen = new Map<string, number>();
   const duplicates: string[] = [];
@@ -38,6 +50,12 @@ export function detectDuplicateSchemas(schemas: CategorySchema[]): string[] {
   return duplicates;
 }
 
+/**
+ * validateRelationships function.
+ *
+ * @param categories - - categories parameter.
+ * @returns - TODO: describe return value.
+ */
 export function validateRelationships(
   categories: BusinessCategory[]
 ): RelationshipIntegrityIssue[] {
@@ -58,6 +76,12 @@ export function validateRelationships(
   return issues;
 }
 
+/**
+ * validateCategorySchemas function.
+ *
+ * @param categories - - categories parameter.
+ * @returns - TODO: describe return value.
+ */
 export function validateCategorySchemas(
   categories: BusinessCategory[]
 ): SchemaValidationSummary {
