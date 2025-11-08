@@ -20,6 +20,7 @@ import {
 } from "@extension/mcpCache";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { RelevantDataManagerAgentProfile } from "@mcp/config/agentProfiles";
+import { RelevantDataManagerAgentConfig } from "./config";
 
 /**
  * Description for how a category folder is organised.
@@ -518,8 +519,10 @@ export class RelevantDataManagerAgent {
   private readonly telemetry = createInvocationLogger(
     RelevantDataManagerAgentProfile.id
   );
+  private readonly config: RelevantDataManagerAgentConfig;
 
   constructor(cacheDirPromise?: Promise<string>) {
+    this.config = new RelevantDataManagerAgentConfig();
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
     this.dataRoot = process.env.VSCODE_TEMPLATE_DATA_ROOT ?? DEFAULT_DATA_ROOT;
     this.ajv = new Ajv({ allErrors: true });
@@ -1478,3 +1481,7 @@ export class RelevantDataManagerAgent {
 export function createRelevantDataManagerAgent(): RelevantDataManagerAgent {
   return new RelevantDataManagerAgent();
 }
+
+// Export configuration types and instances for external use
+export { RelevantDataManagerAgentConfig } from "./config";
+export { relevantDataManagerAgentConfig } from "./agent.config";

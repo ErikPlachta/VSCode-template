@@ -7,24 +7,77 @@
  * @module agent/dataAgent
  */
 
-import { DatabaseAgent } from "@agent/databaseAgent";
-import {
-  CategoryId,
-  CategoryRecord,
-  CategorySchema,
-  CategorySnapshot,
-  ExampleDataset,
-  DataValidationReport,
-  DatasetCatalogueEntry,
-  FolderBlueprint,
-  TypeDefinition,
-  RelationshipDescription,
-  RelevantDataManagerAgent,
-  RemoteQueryBlueprint,
-} from "@agent/relevantDataManagerAgent";
 import { createInvocationLogger } from "@mcp/telemetry";
-import { detectDuplicateSchemas } from "@mcp/schemaUtils";
 import { DataAgentProfile } from "@mcp/config/agentProfiles";
+import { DataAgentConfig } from "./config";
+
+// Define core data types without importing from other agents
+export type CategoryId =
+  | "applications"
+  | "companyPolicies"
+  | "companyResources"
+  | "departments"
+  | "people";
+
+export interface CategoryRecord {
+  id: string;
+  name?: string;
+  title?: string;
+  [key: string]: unknown;
+}
+
+export interface CategorySchema {
+  name: string;
+  schema: unknown;
+}
+
+export interface CategorySnapshot {
+  id: CategoryId;
+  name: string;
+  recordCount: number;
+  lastModified: string;
+}
+
+export interface DataValidationReport {
+  status: "valid" | "warning" | "error";
+  issues: string[];
+}
+
+export interface RelationshipDescription {
+  name: string;
+  description: string;
+  targetCategory: CategoryId;
+  viaField: string;
+}
+
+export interface AnalysisInput {
+  categoryId: CategoryId;
+  records: CategoryRecord[];
+  schemas?: CategorySchema[];
+  relationships?: RelationshipDescription[];
+}
+
+export interface DataInsight {
+  type:
+    | "pattern"
+    | "anomaly"
+    | "correlation"
+    | "trend"
+    | "opportunity"
+    | "risk";
+  description: string;
+  confidence: number;
+  category: CategoryId;
+  affectedRecords?: string[];
+}
+
+export interface CrossCategoryConnection {
+  sourceCategory: CategoryId;
+  targetCategory: CategoryId;
+  connectionType: string;
+  strength: number;
+  description: string;
+}
 
 /**
  * Summary of a topic including schemas, examples, and queries.
@@ -174,6 +227,7 @@ export class DataAgent {
   private readonly manager: RelevantDataManagerAgent;
   private readonly database: DatabaseAgent;
   private readonly telemetry = createInvocationLogger(DataAgentProfile.id);
+  private readonly config: DataAgentConfig;
 
   /**
    * Create a new {@link DataAgent}.
@@ -185,6 +239,7 @@ export class DataAgent {
     manager?: RelevantDataManagerAgent,
     databaseAgent?: DatabaseAgent
   ) {
+    this.config = new DataAgentConfig();
     this.manager = manager ?? new RelevantDataManagerAgent();
     this.database = databaseAgent ?? new DatabaseAgent(this.manager);
   }
@@ -222,7 +277,9 @@ export class DataAgent {
         );
       }
       const snapshot = await this.manager.getOrCreateSnapshot(category.id);
-      const highlightRecords = category.records.slice(0, 3);
+      const highlightLimit =
+        this.config.getAnalysisConfig().highlightRecordLimit;
+      const highlightRecords = category.records.slice(0, highlightLimit);
       return {
         snapshot,
         relationships: category.config.relationships,
@@ -304,6 +361,8 @@ export class DataAgent {
       const category = this.manager.getCategory(topic);
       const overview = await this.getTopicOverview(category.id);
       const supportingResources = this.collectSupportingResources(category.id);
+      const analysisConfig = this.config.getAnalysisConfig();
+
       const steps: ExplorationStep[] = overview.relationships.map(
         (relationship) => {
           const relatedCategory = this.manager.getCategory(
@@ -325,12 +384,15 @@ export class DataAgent {
           };
         }
       );
+
       steps.push({
         title: "Review examples and validation",
         description: `Use the example datasets and validation summary under ${category.config.folder.root} to understand data quality considerations before making changes.`,
         recommendedCategory: category.id,
         hints: [
-          ...category.examples.map((example) => `Example: ${example.file}`),
+          ...category.examples
+            .slice(0, analysisConfig.maxExampleHints)
+            .map((example) => `Example: ${example.file}`),
           `Validation status: ${category.validation.status}`,
         ],
       });
@@ -408,7 +470,11 @@ export class DataAgent {
    * ```
    */
   search(keyword: string): TopicSearchResult[] {
-    return this.manager.searchAcrossCategories(keyword).map((match) => ({
+    const searchConfig = this.config.getSearchConfig();
+    const results = this.manager.searchAcrossCategories(keyword);
+
+    // Apply configuration limits
+    return results.slice(0, searchConfig.maxResults).map((match) => ({
       categoryId: match.categoryId,
       recordId: match.record.id,
       displayName: this.getRecordDisplayName(match.record),
@@ -454,27 +520,37 @@ export class DataAgent {
     categoryId: CategoryId
   ): Array<{ categoryId: CategoryId; ids: string[] }> {
     const category = this.manager.getCategory(categoryId);
+    const analysisConfig = this.config.getAnalysisConfig();
     const focusRecord = category.records[0];
+
     const resources: Array<{ categoryId: CategoryId; ids: string[] }> = [
       {
         categoryId: category.id,
-        ids: category.records.slice(0, 2).map((record) => record.id),
+        ids: category.records
+          .slice(0, analysisConfig.maxSupportingRecords)
+          .map((record) => record.id),
       },
     ];
+
     if (!focusRecord) {
       return resources;
     }
+
     const connections = this.manager.getEntityConnections(
       category.id,
       focusRecord.id
     );
+
     for (const connection of connections.connections) {
-      const ids = connection.records.slice(0, 2).map((record) => record.id);
+      const ids = connection.records
+        .slice(0, analysisConfig.maxSupportingRecords)
+        .map((record) => record.id);
       if (ids.length === 0) {
         continue;
       }
       resources.push({ categoryId: connection.targetCategory, ids });
     }
+
     return resources;
   }
 
@@ -506,3 +582,7 @@ export class DataAgent {
 export function createDataAgent(): DataAgent {
   return new DataAgent();
 }
+
+// Export configuration types and instances for external use
+export { DataAgentConfig } from "./config";
+export { dataAgentConfig } from "./agent.config";

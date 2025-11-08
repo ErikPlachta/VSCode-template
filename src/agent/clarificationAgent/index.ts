@@ -7,6 +7,7 @@ import { KnowledgeBase, KnowledgeHit } from "@mcp/knowledgeBase";
 import { renderClarificationPrompt } from "@mcp/prompts";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { ClarificationAgentProfile } from "@mcp/config/agentProfiles";
+import { ClarificationAgentConfig } from "./config";
 
 /**
  * Input parameters for the clarification agent.
@@ -44,6 +45,8 @@ export class ClarificationAgent {
   private readonly telemetry = createInvocationLogger(
     ClarificationAgentProfile.id
   );
+  /** Configuration for the clarification agent. */
+  private readonly config: ClarificationAgentConfig;
 
   /**
    * Creates a new clarification agent instance.
@@ -51,6 +54,7 @@ export class ClarificationAgent {
    * @param knowledgeBase - Optional knowledge base instance, creates new one if not provided.
    */
   constructor(knowledgeBase?: KnowledgeBase) {
+    this.config = new ClarificationAgentConfig();
     this.knowledgeBase = knowledgeBase ?? new KnowledgeBase();
   }
 
@@ -92,3 +96,7 @@ export class ClarificationAgent {
     });
   }
 }
+
+// Export configuration types and instances for external use
+export { ClarificationAgentConfig } from "./config";
+export { clarificationAgentConfig } from "./agent.config";

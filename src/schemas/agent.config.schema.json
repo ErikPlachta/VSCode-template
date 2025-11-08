@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agent Configuration Schema",
+  "description": "Schema for individual agent configuration files",
+  "type": "object",
+  "required": ["agent", "execution"],
+  "properties": {
+    "agent": {
+      "type": "object",
+      "description": "Basic agent identity and metadata",
+      "required": ["id", "name", "version", "description"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique agent identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable agent name"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semantic version of the agent"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of agent purpose"
+        }
+      }
+    },
+    "orchestration": {
+      "type": "object",
+      "description": "Configuration specific to orchestration logic",
+      "properties": {
+        "intents": {
+          "type": "object",
+          "description": "Supported intents and their configurations",
+          "patternProperties": {
+            "^[a-z][a-zA-Z0-9]*$": {
+              "type": "object",
+              "required": ["name", "description", "targetAgent"],
+              "properties": {
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "targetAgent": { "type": "string" },
+                "signals": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "textProcessing": {
+          "type": "object",
+          "properties": {
+            "stopWords": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "minimumKeywordLength": { "type": "integer" },
+            "scoringWeights": {
+              "type": "object",
+              "properties": {
+                "signalMatch": { "type": "number" },
+                "focusMatch": { "type": "number" },
+                "promptStarterMatch": { "type": "number" }
+              }
+            }
+          }
+        },
+        "escalation": {
+          "type": "object",
+          "properties": {
+            "conditions": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "fallbackAgent": { "type": "string" },
+            "maxRetries": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "description": "Runtime execution configuration",
+      "required": ["priority", "timeout"],
+      "properties": {
+        "priority": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "timeout": {
+          "type": "integer",
+          "minimum": 100
+        },
+        "cacheEnabled": { "type": "boolean" },
+        "retryStrategy": {
+          "type": "string",
+          "enum": ["none", "fixed", "exponential"]
+        },
+        "maxRetries": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "userFacing": {
+      "type": "object",
+      "description": "User interface metadata",
+      "properties": {
+        "friendlyDescription": { "type": "string" },
+        "useWhen": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "exampleQueries": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "helpText": { "type": "string" }
+      }
+    },
+    "applicationFacing": {
+      "type": "object",
+      "description": "Internal application metadata",
+      "properties": {
+        "technicalDescription": { "type": "string" },
+        "dependencies": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "performance": {
+          "type": "object",
+          "properties": {
+            "expectedResponseTime": { "type": "integer" },
+            "memoryUsage": {
+              "type": "string",
+              "enum": ["low", "medium", "high"]
+            },
+            "complexity": {
+              "type": "string",
+              "enum": ["low", "medium", "high"]
+            }
+          }
+        },
+        "errorHandling": {
+          "type": "object",
+          "properties": {
+            "retryStrategy": {
+              "type": "string",
+              "enum": ["none", "fixed", "exponential"]
+            },
+            "maxRetries": { "type": "integer" },
+            "fallbackAgent": { "type": "string" }
+          }
+        },
+        "monitoring": {
+          "type": "object",
+          "properties": {
+            "metricsToTrack": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "alertThresholds": {
+              "type": "object",
+              "patternProperties": {
+                "^[a-z_]+$": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
