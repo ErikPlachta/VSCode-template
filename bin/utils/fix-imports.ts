@@ -227,6 +227,8 @@ export async function fixImports(
  * Command-line interface for the import fixing utility.
  *
  * Runs predefined import transformations commonly needed in this project.
+ *
+ * TODO: Update so these are pulled from a config file or CLI args, not hard-coded here. If hard-coded in file is the smartest solution, make it a global object at top of file so it's easier to find and edit.
  */
 export async function runImportFixer(): Promise<void> {
   console.log("🚀 Starting import path fixes...\n");

@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / [mcpSync](../README.md) / MCPDiscoveryError
+[myBusiness-mcp-extension](../../modules.md) / [mcpSync](../README.md) / MCPDiscoveryError
 
 # Class: MCPDiscoveryError
 
-Defined in: [src/extension/mcpSync.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpSync.ts#L19)
+Defined in: [src/extension/mcpSync.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpSync.ts#L19)
 
 Error wrapper that provides additional context for MCP failures.
 
@@ -26,7 +26,7 @@ throw new MCPDiscoveryError("Unable to list tools");
 
 > **new MCPDiscoveryError**(`message`, `cause?`): `MCPDiscoveryError`
 
-Defined in: [src/extension/mcpSync.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpSync.ts#L27)
+Defined in: [src/extension/mcpSync.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpSync.ts#L27)
 
 constructor function.
 
@@ -60,7 +60,7 @@ cause parameter.
 
 > `readonly` `optional` **cause**: `unknown`
 
-Defined in: [src/extension/mcpSync.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpSync.ts#L27)
+Defined in: [src/extension/mcpSync.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpSync.ts#L27)
 
 cause parameter.
 

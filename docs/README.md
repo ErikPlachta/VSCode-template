@@ -1,4 +1,4 @@
-**mybusiness-mcp-extension v1.0.0**
+**myBusiness-mcp-extension v1.0.0**
 
 ***
 
@@ -41,7 +41,7 @@ The repository includes a **Repository Health Agent** (`src/tools/repositoryHeal
 - `npm run lint` ensures every TypeScript file includes exhaustive docblocks, examples, and error documentation.
 - `npm run lint:json` validates dataset records, relationships, and category metadata against centrally managed JSON Schemas.
 - `npm run lint:docs` audits Markdown content for mandatory front matter and hierarchical sections.
-- `npm run health:report` executes the full suite and writes an aggregated report to [`docs/reports/health-report.md`](_media/health-report.md).
+- `npm run health:report` executes the full suite and writes an aggregated report to [`docs/reports/health-report.md`](docs/reports/health-report.md).
 
 Refer to [`docs/build-pipeline.md`](docs/build-pipeline.md) for pipeline details and [`docs/agents/repository-health-agent.md`](docs/agents/repository-health-agent.md) for agent behaviour.
 

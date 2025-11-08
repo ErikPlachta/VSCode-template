@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / PerformanceMonitoringConfig
+[myBusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / PerformanceMonitoringConfig
 
 # Interface: PerformanceMonitoringConfig
 
-Defined in: [src/types/applicationConfig.ts:205](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L205)
+Defined in: [src/types/applicationConfig.ts:205](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L205)
 
 Performance monitoring configuration.
 
@@ -16,7 +16,7 @@ Performance monitoring configuration.
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:207](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L207)
+Defined in: [src/types/applicationConfig.ts:207](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L207)
 
 Enable performance monitoring.
 
@@ -26,6 +26,6 @@ Enable performance monitoring.
 
 > **sampleRate**: `number`
 
-Defined in: [src/types/applicationConfig.ts:209](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L209)
+Defined in: [src/types/applicationConfig.ts:209](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L209)
 
 Sample rate for monitoring (0-1).

@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / listSharedCacheEntries
+[myBusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / listSharedCacheEntries
 
 # Function: listSharedCacheEntries()
 
 > **listSharedCacheEntries**\<`T`\>(`cacheDir`): `Promise`\<[`SharedCacheEntry`](../interfaces/SharedCacheEntry.md)\<`T`\>[]\>
 
-Defined in: [src/extension/mcpCache.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L138)
+Defined in: [src/extension/mcpCache.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L138)
 
 Enumerate all cached artifacts currently stored on disk.
 

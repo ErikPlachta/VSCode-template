@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [agent/clarificationAgent/agent.config](../README.md) / clarificationAgentConfig
+[myBusiness-mcp-extension](../../../../modules.md) / [agent/clarificationAgent/agent.config](../README.md) / clarificationAgentConfig
 
 # Variable: clarificationAgentConfig
 
 > `const` **clarificationAgentConfig**: [`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)
 
-Defined in: [src/agent/clarificationAgent/agent.config.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/agent.config.ts#L20)
+Defined in: [src/agent/clarificationAgent/agent.config.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/agent.config.ts#L20)
 
 Complete configuration for the Clarification Agent
 

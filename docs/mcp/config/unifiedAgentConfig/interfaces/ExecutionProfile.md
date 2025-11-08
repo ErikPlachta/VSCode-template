@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / ExecutionProfile
+[myBusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / ExecutionProfile
 
 # Interface: ExecutionProfile
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/config/unifiedAgentConfig.ts#L32)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L32)
 
 Execution settings for runtime behavior
 
@@ -16,7 +16,7 @@ Execution settings for runtime behavior
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/config/unifiedAgentConfig.ts#L35)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L35)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:35](https://github.com/ErikPla
 
 > **priority**: `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/config/unifiedAgentConfig.ts#L33)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L33)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:33](https://github.com/ErikPla
 
 > **timeout**: `number`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/config/unifiedAgentConfig.ts#L34)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L34)

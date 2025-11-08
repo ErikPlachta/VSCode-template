@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / ExplorationStep
+[myBusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / ExplorationStep
 
 # Interface: ExplorationStep
 
-Defined in: [src/agent/dataAgent/index.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L97)
+Defined in: [src/agent/dataAgent/index.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L97)
 
 ExplorationStep interface.
 
@@ -16,7 +16,7 @@ ExplorationStep interface.
 
 > **description**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L99)
+Defined in: [src/agent/dataAgent/index.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L99)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/dataAgent/index.ts:99](https://github.com/ErikPlachta/vsc
 
 > **hints**: `string`[]
 
-Defined in: [src/agent/dataAgent/index.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L101)
+Defined in: [src/agent/dataAgent/index.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L101)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/agent/dataAgent/index.ts:101](https://github.com/ErikPlachta/vs
 
 > **recommendedCategory**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L100)
+Defined in: [src/agent/dataAgent/index.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L100)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/agent/dataAgent/index.ts:100](https://github.com/ErikPlachta/vs
 
 > **title**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L98)
+Defined in: [src/agent/dataAgent/index.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L98)

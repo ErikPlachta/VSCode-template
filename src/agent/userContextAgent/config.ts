@@ -6,5 +6,5 @@
  */
 
 export { RelevantDataManagerAgentConfig as UserContextAgentConfig } from "@agent/relevantDataManagerAgent/config";
-export type { RelevantDataManagerConfig as UserContextConfig } from "@types/agentConfig";
+export type { RelevantDataManagerConfig as UserContextConfig } from "@internal-types/agentConfig";
 export { userContextAgentConfig } from "@agent/userContextAgent/agent.config";

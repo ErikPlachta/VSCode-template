@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / Orchestrator
+[myBusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / Orchestrator
 
 # Class: Orchestrator
 
-Defined in: [src/agent/orchestrator/index.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L48)
+Defined in: [src/agent/orchestrator/index.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L48)
 
 Configuration-driven orchestrator that routes questions to appropriate agents
 
@@ -16,7 +16,7 @@ Configuration-driven orchestrator that routes questions to appropriate agents
 
 > **new Orchestrator**(`config?`): `Orchestrator`
 
-Defined in: [src/agent/orchestrator/index.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L63)
+Defined in: [src/agent/orchestrator/index.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L63)
 
 constructor function.
 
@@ -40,7 +40,7 @@ config parameter.
 
 > **classify**(`questionOrInput`, `context?`): [`OrchestratorClassification`](../interfaces/OrchestratorClassification.md)
 
-Defined in: [src/agent/orchestrator/index.ts:152](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L152)
+Defined in: [src/agent/orchestrator/index.ts:152](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L152)
 
 Classify intent using configuration-driven approach.
 
@@ -72,7 +72,7 @@ context parameter.
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L98)
+Defined in: [src/agent/orchestrator/index.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L98)
 
 Get public configuration
 
@@ -88,7 +88,7 @@ Get public configuration
 
 > **getCurrentConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/orchestrator/index.ts:426](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L426)
+Defined in: [src/agent/orchestrator/index.ts:426](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L426)
 
 Get current configuration
 
@@ -104,7 +104,7 @@ Get current configuration
 
 > **getSupportedIntents**(): `string`[]
 
-Defined in: [src/agent/orchestrator/index.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L107)
+Defined in: [src/agent/orchestrator/index.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L107)
 
 Get supported intents
 
@@ -120,7 +120,7 @@ Get supported intents
 
 > **handle**(`input`): `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:353](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L353)
+Defined in: [src/agent/orchestrator/index.ts:353](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L353)
 
 Handle user requests by classifying intent and routing to appropriate agents.
 
@@ -144,7 +144,7 @@ input parameter.
 
 > **route**(`input`): `Promise`\<[`OrchestratorResponse`](../interfaces/OrchestratorResponse.md)\>
 
-Defined in: [src/agent/orchestrator/index.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L253)
+Defined in: [src/agent/orchestrator/index.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L253)
 
 Route request using configuration (simplified for now - delegates to original implementation)
 
@@ -168,7 +168,7 @@ input parameter.
 
 > `static` **createFromConfig**(`configPath?`): `Promise`\<`Orchestrator`\>
 
-Defined in: [src/agent/orchestrator/index.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L79)
+Defined in: [src/agent/orchestrator/index.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L79)
 
 Create orchestrator instance with configuration loaded from file
 

@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/databaseAgent](../README.md) / DatabaseAgent
+[myBusiness-mcp-extension](../../../modules.md) / [agent/databaseAgent](../README.md) / DatabaseAgent
 
 # Class: DatabaseAgent
 
-Defined in: [src/agent/databaseAgent/index.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L89)
+Defined in: [src/agent/databaseAgent/index.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/index.ts#L89)
 
 Generic database agent that can query any structured data without hard-coded assumptions.
 
@@ -37,7 +37,7 @@ const results = await agent.executeQuery("employees", { skill: "javascript" });
 
 > **new DatabaseAgent**(`dataSources`, `cacheDirectory`, `_config?`): `DatabaseAgent`
 
-Defined in: [src/agent/databaseAgent/index.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L104)
+Defined in: [src/agent/databaseAgent/index.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/index.ts#L104)
 
 Creates a new DatabaseAgent instance.
 
@@ -73,7 +73,7 @@ _config parameter.
 
 > **clearCache**(`categoryId`): `Promise`\<`void`\>
 
-Defined in: [src/agent/databaseAgent/index.ts:219](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L219)
+Defined in: [src/agent/databaseAgent/index.ts:219](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/index.ts#L219)
 
 Clears cached results for a specific category.
 
@@ -97,7 +97,7 @@ categoryId parameter.
 
 > **executeQuery**(`categoryId`, `criteria`, `options`): `Promise`\<[`CategoryRecord`](../interfaces/CategoryRecord.md)[]\>
 
-Defined in: [src/agent/databaseAgent/index.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L125)
+Defined in: [src/agent/databaseAgent/index.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/index.ts#L125)
 
 Executes a generic query against any data source.
 
@@ -137,7 +137,7 @@ options parameter.
 
 > **getAvailableCategories**(): `string`[]
 
-Defined in: [src/agent/databaseAgent/index.ts:199](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L199)
+Defined in: [src/agent/databaseAgent/index.ts:199](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/index.ts#L199)
 
 Gets available data sources.
 
@@ -153,7 +153,7 @@ Gets available data sources.
 
 > **getCategoryInfo**(`categoryId`): [`DataSource`](../interfaces/DataSource.md) \| `undefined`
 
-Defined in: [src/agent/databaseAgent/index.ts:209](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/index.ts#L209)
+Defined in: [src/agent/databaseAgent/index.ts:209](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/index.ts#L209)
 
 Gets metadata for a specific data source.
 

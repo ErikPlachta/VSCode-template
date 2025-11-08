@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/mcpTypes](../README.md) / MCPInputSchema
+[myBusiness-mcp-extension](../../../modules.md) / [shared/mcpTypes](../README.md) / MCPInputSchema
 
 # Interface: MCPInputSchema
 
-Defined in: [src/shared/mcpTypes.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/mcpTypes.ts#L29)
+Defined in: [src/shared/mcpTypes.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/mcpTypes.ts#L29)
 
 Minimal JSON schema definition used by MCP tool payloads.
 
@@ -16,7 +16,7 @@ Minimal JSON schema definition used by MCP tool payloads.
 
 > `optional` **properties**: `Record`\<`string`, [`MCPProperty`](MCPProperty.md) & `Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/shared/mcpTypes.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/mcpTypes.ts#L31)
+Defined in: [src/shared/mcpTypes.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/mcpTypes.ts#L31)
 
 Map of argument names to property descriptors.
 
@@ -26,6 +26,6 @@ Map of argument names to property descriptors.
 
 > `optional` **required**: `string`[]
 
-Defined in: [src/shared/mcpTypes.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/mcpTypes.ts#L33)
+Defined in: [src/shared/mcpTypes.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/mcpTypes.ts#L33)
 
 List of keys that must be present.

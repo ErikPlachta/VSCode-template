@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / DataConfig
+[myBusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / DataConfig
 
 # Interface: DataConfig
 
-Defined in: [src/types/agentConfig.ts:204](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L204)
+Defined in: [src/types/agentConfig.ts:204](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L204)
 
 Data agent-specific configuration
 
@@ -16,7 +16,7 @@ Data agent-specific configuration
 
 > **analysis**: `object`
 
-Defined in: [src/types/agentConfig.ts:205](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L205)
+Defined in: [src/types/agentConfig.ts:205](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L205)
 
 #### crossCategoryAnalysis
 
@@ -64,7 +64,7 @@ Defined in: [src/types/agentConfig.ts:205](https://github.com/ErikPlachta/vscode
 
 > **exploration**: `object`
 
-Defined in: [src/types/agentConfig.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L223)
+Defined in: [src/types/agentConfig.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L223)
 
 #### enableAutomaticPlanGeneration
 
@@ -104,7 +104,7 @@ Defined in: [src/types/agentConfig.ts:223](https://github.com/ErikPlachta/vscode
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L257)
+Defined in: [src/types/agentConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L257)
 
 #### analysisTimeout?
 
@@ -136,7 +136,7 @@ Defined in: [src/types/agentConfig.ts:257](https://github.com/ErikPlachta/vscode
 
 > `optional` **quality**: `object`
 
-Defined in: [src/types/agentConfig.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L217)
+Defined in: [src/types/agentConfig.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L217)
 
 #### anomalyDetectionEnabled?
 
@@ -160,7 +160,7 @@ Defined in: [src/types/agentConfig.ts:217](https://github.com/ErikPlachta/vscode
 
 > **relationships**: `object`
 
-Defined in: [src/types/agentConfig.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L233)
+Defined in: [src/types/agentConfig.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L233)
 
 #### enableImpactAssessment?
 
@@ -196,7 +196,7 @@ Defined in: [src/types/agentConfig.ts:233](https://github.com/ErikPlachta/vscode
 
 > `optional` **search**: `object`
 
-Defined in: [src/types/agentConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L242)
+Defined in: [src/types/agentConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L242)
 
 #### enableCategoryFiltering?
 
@@ -228,7 +228,7 @@ Defined in: [src/types/agentConfig.ts:242](https://github.com/ErikPlachta/vscode
 
 > `optional` **synthesis**: `object`
 
-Defined in: [src/types/agentConfig.ts:250](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L250)
+Defined in: [src/types/agentConfig.ts:250](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L250)
 
 #### enableMultiSourceSynthesis?
 

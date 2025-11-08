@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / AgentOrchestrationGuidance
+[myBusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / AgentOrchestrationGuidance
 
 # Interface: AgentOrchestrationGuidance
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L191)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L191)
 
 Full configuration stored for each business category.
 
@@ -16,7 +16,7 @@ Full configuration stored for each business category.
 
 > **focus**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L193)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L193)
 
 Core responsibility for the agent when invoked for this category.
 
@@ -26,7 +26,7 @@ Core responsibility for the agent when invoked for this category.
 
 > **promptStarters**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:197](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L197)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:197](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L197)
 
 Prompt starters that the orchestrator can feed to the agent.
 
@@ -36,6 +36,6 @@ Prompt starters that the orchestrator can feed to the agent.
 
 > **signals**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L195)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L195)
 
 Signals that hint the orchestrator should route the request to this agent.

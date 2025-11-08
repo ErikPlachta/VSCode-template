@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [agent/clarificationAgent/config](../README.md) / ClarificationAgentConfig
+[myBusiness-mcp-extension](../../../../modules.md) / [agent/clarificationAgent/config](../README.md) / ClarificationAgentConfig
 
 # Class: ClarificationAgentConfig
 
-Defined in: [src/agent/clarificationAgent/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L19)
+Defined in: [src/agent/clarificationAgent/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L19)
 
 Clarification agent-specific configuration class
 
@@ -20,7 +20,7 @@ Clarification agent-specific configuration class
 
 > **new ClarificationAgentConfig**(`config?`): `ClarificationAgentConfig`
 
-Defined in: [src/agent/clarificationAgent/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L29)
+Defined in: [src/agent/clarificationAgent/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L29)
 
 constructor function.
 
@@ -52,7 +52,7 @@ config parameter.
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../../../../types/agentConfig/interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L545)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L545)
 
 Get application-facing configuration
 
@@ -72,7 +72,7 @@ Get application-facing configuration
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L499)
+Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L499)
 
 Get public-facing configuration (user and some application details)
 
@@ -92,7 +92,7 @@ Get public-facing configuration (user and some application details)
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L554)
+Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L554)
 
 Get configuration schema ID
 
@@ -112,7 +112,7 @@ Get configuration schema ID
 
 > **getContextAnalysisConfig**(): `object`
 
-Defined in: [src/agent/clarificationAgent/config.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L115)
+Defined in: [src/agent/clarificationAgent/config.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L115)
 
 Get context analysis configuration
 
@@ -148,7 +148,7 @@ Context inference and terminology handling settings.
 
 > **getErrorHandlingConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/clarificationAgent/config.ts:347](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L347)
+Defined in: [src/agent/clarificationAgent/config.ts:347](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L347)
 
 Get error handling configuration
 
@@ -164,7 +164,7 @@ Get error handling configuration
 
 > **getEscalationConfig**(): `object`
 
-Defined in: [src/agent/clarificationAgent/config.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L65)
+Defined in: [src/agent/clarificationAgent/config.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L65)
 
 Get escalation configuration
 
@@ -200,7 +200,7 @@ Escalation thresholds and fallback strategies.
 
 > **getEscalationThreshold**(): `number`
 
-Defined in: [src/agent/clarificationAgent/config.ts:180](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L180)
+Defined in: [src/agent/clarificationAgent/config.ts:180](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L180)
 
 Get escalation threshold
 
@@ -216,7 +216,7 @@ Get escalation threshold
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../../../../types/agentConfig/interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L527)
+Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L527)
 
 Get execution configuration
 
@@ -236,7 +236,7 @@ Get execution configuration
 
 > **getFallbackStrategies**(): `string`[]
 
-Defined in: [src/agent/clarificationAgent/config.ts:252](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L252)
+Defined in: [src/agent/clarificationAgent/config.ts:252](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L252)
 
 Get fallback strategies
 
@@ -252,7 +252,7 @@ Get fallback strategies
 
 > **getGuidanceConfig**(): `object`
 
-Defined in: [src/agent/clarificationAgent/config.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L50)
+Defined in: [src/agent/clarificationAgent/config.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L50)
 
 Get guidance configuration
 
@@ -308,7 +308,7 @@ Guidance settings including suggestion limits and style.
 
 > **getGuidanceTypes**(): `string`[]
 
-Defined in: [src/agent/clarificationAgent/config.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L261)
+Defined in: [src/agent/clarificationAgent/config.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L261)
 
 Get guidance types to provide
 
@@ -324,7 +324,7 @@ Get guidance types to provide
 
 > **getKnowledgeBaseConfig**(): `object`
 
-Defined in: [src/agent/clarificationAgent/config.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L83)
+Defined in: [src/agent/clarificationAgent/config.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L83)
 
 Get knowledge base configuration
 
@@ -364,7 +364,7 @@ Knowledge search limits and relevance thresholds.
 
 > **getKnowledgeSearchTimeout**(): `number`
 
-Defined in: [src/agent/clarificationAgent/config.ts:311](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L311)
+Defined in: [src/agent/clarificationAgent/config.ts:311](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L311)
 
 Get knowledge search timeout
 
@@ -380,7 +380,7 @@ Get knowledge search timeout
 
 > **getKnowledgeSources**(): `string`[]
 
-Defined in: [src/agent/clarificationAgent/config.ts:278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L278)
+Defined in: [src/agent/clarificationAgent/config.ts:278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L278)
 
 Get knowledge sources to search
 
@@ -396,7 +396,7 @@ Get knowledge sources to search
 
 > **getMaxClarificationRounds**(): `number`
 
-Defined in: [src/agent/clarificationAgent/config.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L189)
+Defined in: [src/agent/clarificationAgent/config.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L189)
 
 Get maximum clarification rounds
 
@@ -412,7 +412,7 @@ Get maximum clarification rounds
 
 > **getMaxKnowledgeSnippets**(): `number`
 
-Defined in: [src/agent/clarificationAgent/config.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L162)
+Defined in: [src/agent/clarificationAgent/config.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L162)
 
 Get maximum knowledge snippets
 
@@ -428,7 +428,7 @@ Get maximum knowledge snippets
 
 > **getMaxResponseTime**(): `number`
 
-Defined in: [src/agent/clarificationAgent/config.ts:320](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L320)
+Defined in: [src/agent/clarificationAgent/config.ts:320](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L320)
 
 Get maximum response time
 
@@ -444,7 +444,7 @@ Get maximum response time
 
 > **getMaxSuggestions**(): `number`
 
-Defined in: [src/agent/clarificationAgent/config.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L153)
+Defined in: [src/agent/clarificationAgent/config.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L153)
 
 Get maximum suggestions to provide
 
@@ -460,7 +460,7 @@ Get maximum suggestions to provide
 
 > **getPerformanceConfig**(): `object`
 
-Defined in: [src/agent/clarificationAgent/config.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L134)
+Defined in: [src/agent/clarificationAgent/config.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L134)
 
 Get performance configuration
 
@@ -496,7 +496,7 @@ Performance and caching related settings.
 
 > **getRelevanceThreshold**(): `number`
 
-Defined in: [src/agent/clarificationAgent/config.ts:171](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L171)
+Defined in: [src/agent/clarificationAgent/config.ts:171](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L171)
 
 Get relevance threshold for knowledge snippets
 
@@ -512,7 +512,7 @@ Get relevance threshold for knowledge snippets
 
 > **getResponseStyle**(): `object`
 
-Defined in: [src/agent/clarificationAgent/config.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L295)
+Defined in: [src/agent/clarificationAgent/config.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L295)
 
 Get response style configuration
 
@@ -544,7 +544,7 @@ Get response style configuration
 
 > **getRoutingConfig**(): `object`
 
-Defined in: [src/agent/clarificationAgent/config.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L98)
+Defined in: [src/agent/clarificationAgent/config.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L98)
 
 Get routing configuration
 
@@ -580,7 +580,7 @@ Routing behaviour including alternative agent suggestions.
 
 > **getTelemetryConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/clarificationAgent/config.ts:329](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L329)
+Defined in: [src/agent/clarificationAgent/config.ts:329](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L329)
 
 Get telemetry configuration
 
@@ -596,7 +596,7 @@ Get telemetry configuration
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../../../../types/agentConfig/interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L536)
+Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L536)
 
 Get user-facing configuration
 
@@ -616,7 +616,7 @@ Get user-facing configuration
 
 > **isKnowledgeSearchEnabled**(): `boolean`
 
-Defined in: [src/agent/clarificationAgent/config.ts:198](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L198)
+Defined in: [src/agent/clarificationAgent/config.ts:198](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L198)
 
 Check if knowledge search is enabled
 
@@ -632,7 +632,7 @@ Check if knowledge search is enabled
 
 > **shouldAnalyzeMissingSignals**(): `boolean`
 
-Defined in: [src/agent/clarificationAgent/config.ts:234](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L234)
+Defined in: [src/agent/clarificationAgent/config.ts:234](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L234)
 
 Check if missing signals should be analyzed
 
@@ -648,7 +648,7 @@ Check if missing signals should be analyzed
 
 > **shouldIncludeCategoryExamples**(): `boolean`
 
-Defined in: [src/agent/clarificationAgent/config.ts:207](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L207)
+Defined in: [src/agent/clarificationAgent/config.ts:207](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L207)
 
 Check if category examples should be included
 
@@ -664,7 +664,7 @@ Check if category examples should be included
 
 > **shouldIncludeQueryTemplates**(): `boolean`
 
-Defined in: [src/agent/clarificationAgent/config.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L216)
+Defined in: [src/agent/clarificationAgent/config.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L216)
 
 Check if query templates should be included
 
@@ -680,7 +680,7 @@ Check if query templates should be included
 
 > **shouldSuggestAlternativeAgents**(): `boolean`
 
-Defined in: [src/agent/clarificationAgent/config.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L243)
+Defined in: [src/agent/clarificationAgent/config.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L243)
 
 Check if alternative agents should be suggested
 
@@ -696,7 +696,7 @@ Check if alternative agents should be suggested
 
 > **shouldSuggestAlternativePhrasings**(): `boolean`
 
-Defined in: [src/agent/clarificationAgent/config.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/clarificationAgent/config.ts#L225)
+Defined in: [src/agent/clarificationAgent/config.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/clarificationAgent/config.ts#L225)
 
 Check if alternative phrasings should be suggested
 

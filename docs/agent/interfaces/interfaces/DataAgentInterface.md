@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / DataAgentInterface
+[myBusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / DataAgentInterface
 
 # Interface: DataAgentInterface
 
-Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L130)
+Defined in: [src/agent/interfaces.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L130)
 
 Interface for data agents that handle data analysis and insight generation operations.
 
@@ -16,7 +16,7 @@ Interface for data agents that handle data analysis and insight generation opera
 
 > **analyzeConnection**(`sourceData`, `targetData`, `relationship`): `Promise`\<[`CrossCategoryConnection`](CrossCategoryConnection.md)\>
 
-Defined in: [src/agent/interfaces.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L137)
+Defined in: [src/agent/interfaces.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L137)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [src/agent/interfaces.ts:137](https://github.com/ErikPlachta/vscode-
 
 > **analyzeData**(`input`): `Promise`\<[`DataInsight`](DataInsight.md)[]\>
 
-Defined in: [src/agent/interfaces.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L131)
+Defined in: [src/agent/interfaces.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L131)
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: [src/agent/interfaces.ts:131](https://github.com/ErikPlachta/vscode-
 
 > **generateExplorationPlan**(`categoryId`, `question`, `availableData`): `Promise`\<[`ExplorationPlan`](ExplorationPlan.md)\>
 
-Defined in: [src/agent/interfaces.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L132)
+Defined in: [src/agent/interfaces.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L132)
 
 #### Parameters
 
@@ -86,7 +86,7 @@ Defined in: [src/agent/interfaces.ts:132](https://github.com/ErikPlachta/vscode-
 
 > **searchData**(`keyword`, `data`): [`TopicSearchResult`](TopicSearchResult.md)[]
 
-Defined in: [src/agent/interfaces.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L142)
+Defined in: [src/agent/interfaces.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L142)
 
 #### Parameters
 

@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / FolderBlueprint
+[myBusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / FolderBlueprint
 
 # Interface: FolderBlueprint
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L29)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L29)
 
 Description for how a category folder is organised.
 
@@ -16,7 +16,7 @@ Description for how a category folder is organised.
 
 > **configFile**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L33)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L33)
 
 Path to the category configuration file.
 
@@ -26,7 +26,7 @@ Path to the category configuration file.
 
 > **examplesDir**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L39)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L39)
 
 Directory containing example datasets.
 
@@ -36,7 +36,7 @@ Directory containing example datasets.
 
 > **queriesDir**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L41)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L41)
 
 Directory containing query blueprints.
 
@@ -46,7 +46,7 @@ Directory containing query blueprints.
 
 > **root**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L31)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L31)
 
 Root directory for the category.
 
@@ -56,7 +56,7 @@ Root directory for the category.
 
 > **schemaFiles**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L35)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L35)
 
 JSON schema file paths.
 
@@ -66,6 +66,6 @@ JSON schema file paths.
 
 > **typeFiles**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L37)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L37)
 
 Structured type definition file paths.

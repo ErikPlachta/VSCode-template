@@ -5,8 +5,8 @@
  * including schema validation, type checking, and business rule validation.
  */
 
-import { AgentConfigDefinition } from "@types/agentConfig";
-import { ConfigUtils, CONFIG_REGISTRY } from "@types/configRegistry";
+import { AgentConfigDefinition } from "@internal-types/agentConfig";
+import { ConfigUtils, CONFIG_REGISTRY } from "@internal-types/configRegistry";
 
 /**
  * Validation result with detailed error information

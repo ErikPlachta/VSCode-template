@@ -7,7 +7,7 @@
  */
 
 // Clean interface definitions for orchestrator coordination (moved to types)
-export * from "@types/interfaces";
+export * from "@internal-types/interfaces";
 
 // Core agent implementations - each properly isolated
 export { ClarificationAgent } from "@agent/clarificationAgent";

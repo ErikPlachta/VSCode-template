@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / TopicSearchResult
+[myBusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / TopicSearchResult
 
 # Interface: TopicSearchResult
 
-Defined in: [src/agent/interfaces.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L255)
+Defined in: [src/agent/interfaces.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L255)
 
 Represents the result of a topic search operation.
 
@@ -16,7 +16,7 @@ Represents the result of a topic search operation.
 
 > **categoryId**: `string`
 
-Defined in: [src/agent/interfaces.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L256)
+Defined in: [src/agent/interfaces.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L256)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/interfaces.ts:256](https://github.com/ErikPlachta/vscode-
 
 > **displayName**: `string`
 
-Defined in: [src/agent/interfaces.ts:258](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L258)
+Defined in: [src/agent/interfaces.ts:258](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L258)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/agent/interfaces.ts:258](https://github.com/ErikPlachta/vscode-
 
 > **matchingFields**: `string`[]
 
-Defined in: [src/agent/interfaces.ts:259](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L259)
+Defined in: [src/agent/interfaces.ts:259](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L259)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/agent/interfaces.ts:259](https://github.com/ErikPlachta/vscode-
 
 > **recordId**: `string`
 
-Defined in: [src/agent/interfaces.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L257)
+Defined in: [src/agent/interfaces.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L257)

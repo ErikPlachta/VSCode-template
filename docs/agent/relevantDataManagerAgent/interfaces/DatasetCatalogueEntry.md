@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / DatasetCatalogueEntry
+[myBusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / DatasetCatalogueEntry
 
 # Interface: DatasetCatalogueEntry
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:280](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L280)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:280](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L280)
 
 Consolidated index entry persisted to the shared cache.
 
@@ -16,7 +16,7 @@ Consolidated index entry persisted to the shared cache.
 
 > **description**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L283)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L283)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:283](https://github.com
 
 > **id**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L281)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L281)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:281](https://github.com
 
 > **name**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:282](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L282)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:282](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L282)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:282](https://github.com
 
 > **primaryKeys**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L284)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L284)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:284](https://github.com
 
 > **recordIds**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L285)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L285)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:285](https://github.com
 
 > **relationships**: `object`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L286)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L286)
 
 #### cardinality
 
@@ -80,7 +80,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:286](https://github.com
 
 > `optional` **requirements**: [`CategoryRequirements`](CategoryRequirements.md)
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L293)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L293)
 
 ***
 
@@ -88,4 +88,4 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:293](https://github.com
 
 > **schemaNames**: `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L292)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L292)

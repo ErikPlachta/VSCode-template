@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / ValidationResult
+[myBusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / ValidationResult
 
 # Interface: ValidationResult
 
-Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/configValidation.ts#L15)
+Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/configValidation.ts#L15)
 
 Validation result with detailed error information
 
@@ -16,7 +16,7 @@ Validation result with detailed error information
 
 > **errors**: [`ValidationError`](ValidationError.md)[]
 
-Defined in: [src/types/configValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/configValidation.ts#L20)
+Defined in: [src/types/configValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/configValidation.ts#L20)
 
 List of validation errors found
 
@@ -26,7 +26,7 @@ List of validation errors found
 
 > **isValid**: `boolean`
 
-Defined in: [src/types/configValidation.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/configValidation.ts#L17)
+Defined in: [src/types/configValidation.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/configValidation.ts#L17)
 
 Whether validation passed
 
@@ -36,6 +36,6 @@ Whether validation passed
 
 > **warnings**: [`ValidationWarning`](ValidationWarning.md)[]
 
-Defined in: [src/types/configValidation.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/configValidation.ts#L23)
+Defined in: [src/types/configValidation.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/configValidation.ts#L23)
 
 List of validation warnings (non-blocking issues)

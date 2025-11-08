@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / ValidationResult
+[myBusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / ValidationResult
 
 # Interface: ValidationResult
 
-Defined in: [src/agent/interfaces.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L245)
+Defined in: [src/agent/interfaces.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L245)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/agent/interfaces.ts:245](https://github.com/ErikPlachta/vscode-
 
 > **errors**: `string`[]
 
-Defined in: [src/agent/interfaces.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L247)
+Defined in: [src/agent/interfaces.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L247)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/interfaces.ts:247](https://github.com/ErikPlachta/vscode-
 
 > **isValid**: `boolean`
 
-Defined in: [src/agent/interfaces.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L246)
+Defined in: [src/agent/interfaces.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L246)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/agent/interfaces.ts:246](https://github.com/ErikPlachta/vscode-
 
 > **warnings**: `string`[]
 
-Defined in: [src/agent/interfaces.ts:248](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L248)
+Defined in: [src/agent/interfaces.ts:248](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L248)

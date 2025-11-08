@@ -6,11 +6,11 @@ import {
   BaseAgentConfig,
   AgentConfigDefinition,
   OrchestrationConfig,
-} from "@types/agentConfig";
+} from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "@types/configValidation";
+} from "@internal-types/configValidation";
 import { orchestratorConfig } from "@agent/orchestrator/agent.config";
 
 /**
@@ -26,7 +26,7 @@ export class OrchestratorConfig extends BaseAgentConfig {
    * @returns {unknown} - TODO: describe return value.
    * @throws {Error} - May throw an error.
    */
-constructor(config?: AgentConfigDefinition) {
+  constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || orchestratorConfig;
 
@@ -41,51 +41,51 @@ constructor(config?: AgentConfigDefinition) {
     this.orchestrationConfig = this.config.orchestration || {};
   }
 
-    /**
-     * Get supported intents
-     *
-     * @returns {string[]} - TODO: describe return value.
-     */
-public getIntents(): string[] {
+  /**
+   * Get supported intents
+   *
+   * @returns {string[]} - TODO: describe return value.
+   */
+  public getIntents(): string[] {
     return Object.keys(this.orchestrationConfig.intents || {});
   }
 
-    /**
-     * Get intent configuration by name
-     *
-     * @param {string} intent - intent parameter.
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getIntentConfig(intent: string) {
+  /**
+   * Get intent configuration by name
+   *
+   * @param {string} intent - intent parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getIntentConfig(intent: string) {
     return this.orchestrationConfig.intents?.[intent];
   }
 
-    /**
-     * Get target agent for an intent
-     *
-     * @param {string} intent - intent parameter.
-     * @returns {string | undefined} - TODO: describe return value.
-     */
-public getTargetAgent(intent: string): string | undefined {
+  /**
+   * Get target agent for an intent
+   *
+   * @param {string} intent - intent parameter.
+   * @returns {string | undefined} - TODO: describe return value.
+   */
+  public getTargetAgent(intent: string): string | undefined {
     return this.orchestrationConfig.intents?.[intent]?.targetAgent;
   }
 
-    /**
-     * Get stop words for text processing
-     *
-     * @returns {Set<string>} - TODO: describe return value.
-     */
-public getStopWords(): Set<string> {
+  /**
+   * Get stop words for text processing
+   *
+   * @returns {Set<string>} - TODO: describe return value.
+   */
+  public getStopWords(): Set<string> {
     const stopWords = this.orchestrationConfig.textProcessing?.stopWords || [];
     return new Set(stopWords);
   }
 
-    /**
-     * Get scoring weights
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getScoringWeights() {
+  /**
+   * Get scoring weights
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getScoringWeights() {
     return (
       this.orchestrationConfig.textProcessing?.scoringWeights || {
         signalMatch: 2,
@@ -95,21 +95,21 @@ public getScoringWeights() {
     );
   }
 
-    /**
-     * Get minimum keyword length
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getMinimumKeywordLength(): number {
+  /**
+   * Get minimum keyword length
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getMinimumKeywordLength(): number {
     return this.orchestrationConfig.textProcessing?.minimumKeywordLength || 3;
   }
 
-    /**
-     * Get escalation configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getEscalationConfig() {
+  /**
+   * Get escalation configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getEscalationConfig() {
     return (
       this.orchestrationConfig.escalation || {
         conditions: [],
@@ -119,12 +119,12 @@ public getEscalationConfig() {
     );
   }
 
-    /**
-     * Get intent to agent mapping
-     *
-     * @returns {Record<string, string>} - TODO: describe return value.
-     */
-public getIntentAgentMap(): Record<string, string> {
+  /**
+   * Get intent to agent mapping
+   *
+   * @returns {Record<string, string>} - TODO: describe return value.
+   */
+  public getIntentAgentMap(): Record<string, string> {
     const intents = this.orchestrationConfig.intents || {};
     const mapping: Record<string, string> = {};
 
@@ -135,12 +135,12 @@ public getIntentAgentMap(): Record<string, string> {
     return mapping;
   }
 
-    /**
-     * Get vague phrases that should trigger clarification
-     *
-     * @returns {string[]} - TODO: describe return value.
-     */
-public getVaguePhrases(): string[] {
+  /**
+   * Get vague phrases that should trigger clarification
+   *
+   * @returns {string[]} - TODO: describe return value.
+   */
+  public getVaguePhrases(): string[] {
     return (
       this.orchestrationConfig.escalation?.vaguePhrases || [
         "list records",
@@ -154,24 +154,24 @@ public getVaguePhrases(): string[] {
     );
   }
 
-    /**
-     * Get fallback agent name
-     *
-     * @returns {string} - TODO: describe return value.
-     */
-public getFallbackAgent(): string {
+  /**
+   * Get fallback agent name
+   *
+   * @returns {string} - TODO: describe return value.
+   */
+  public getFallbackAgent(): string {
     return (
       this.orchestrationConfig.escalation?.fallbackAgent ||
       "clarification-agent"
     );
   }
 
-    /**
-     * Get configurable user-facing messages
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getMessages() {
+  /**
+   * Get configurable user-facing messages
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getMessages() {
     return (
       this.orchestrationConfig.messages || {
         noIntentDetected: "No clear intent detected from the question",
@@ -202,13 +202,13 @@ public getMessages() {
     );
   }
 
-    /**
-     * Load configuration from TypeScript config (preferred) or JSON fallback
-     *
-     * @param {string} configPath - configPath parameter.
-     * @returns {Promise<OrchestratorConfig>} - TODO: describe return value.
-     */
-public static async loadFromFile(
+  /**
+   * Load configuration from TypeScript config (preferred) or JSON fallback
+   *
+   * @param {string} configPath - configPath parameter.
+   * @returns {Promise<OrchestratorConfig>} - TODO: describe return value.
+   */
+  public static async loadFromFile(
     configPath?: string
   ): Promise<OrchestratorConfig> {
     // TypeScript config is the primary approach
@@ -232,12 +232,12 @@ public static async loadFromFile(
     }
   }
 
-    /**
-     * Create orchestrator configuration with defaults (uses TypeScript config)
-     *
-     * @returns {OrchestratorConfig} - TODO: describe return value.
-     */
-public static createDefault(): OrchestratorConfig {
+  /**
+   * Create orchestrator configuration with defaults (uses TypeScript config)
+   *
+   * @returns {OrchestratorConfig} - TODO: describe return value.
+   */
+  public static createDefault(): OrchestratorConfig {
     return new OrchestratorConfig(orchestratorConfig);
   }
 }

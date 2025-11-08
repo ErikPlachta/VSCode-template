@@ -7,7 +7,7 @@ import { pathToFileURL } from "url";
 import {
   type ApplicationConfig,
   type EnvironmentConfig,
-} from "@types/applicationConfig";
+} from "@internal-types/applicationConfig";
 
 /**
  * Default configuration values used as a base when merging a loaded config.
@@ -64,23 +64,23 @@ export class ConfigurationLoader {
   private config: ApplicationConfig | null = null;
   private configPath: string;
 
-    /**
-     * Creates a new configuration loader instance.
-     *
-     * @param {string} configPath - configPath parameter.
-     * @returns {unknown} - TODO: describe return value.
-     */
-constructor(configPath: string = "src/mcp.config.json") {
+  /**
+   * Creates a new configuration loader instance.
+   *
+   * @param {string} configPath - configPath parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+  constructor(configPath: string = "src/mcp.config.json") {
     this.configPath = path.resolve(configPath);
   }
 
-    /**
-     * Loads and validates the application configuration.
-     *
-     * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
-     * @throws {Error} - May throw an error.
-     */
-async loadConfig(): Promise<ApplicationConfig> {
+  /**
+   * Loads and validates the application configuration.
+   *
+   * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+  async loadConfig(): Promise<ApplicationConfig> {
     if (this.config) {
       return this.config;
     }
@@ -112,12 +112,12 @@ async loadConfig(): Promise<ApplicationConfig> {
     }
   }
 
-    /**
-     * Attempts to load the compiled JS for TS application config.
-     *
-     * @returns {Promise<ApplicationConfig | null>} - TODO: describe return value.
-     */
-private async tryLoadTsConfig(): Promise<ApplicationConfig | null> {
+  /**
+   * Attempts to load the compiled JS for TS application config.
+   *
+   * @returns {Promise<ApplicationConfig | null>} - TODO: describe return value.
+   */
+  private async tryLoadTsConfig(): Promise<ApplicationConfig | null> {
     try {
       const compiledPath = path.resolve(
         __dirname,
@@ -139,14 +139,14 @@ private async tryLoadTsConfig(): Promise<ApplicationConfig | null> {
     }
   }
 
-    /**
-     * Gets configuration for the current environment.
-     *
-     * @param {string} environment - environment parameter.
-     * @returns {Promise<EnvironmentConfig>} - TODO: describe return value.
-     * @throws {Error} - May throw an error.
-     */
-async getEnvironmentConfig(
+  /**
+   * Gets configuration for the current environment.
+   *
+   * @param {string} environment - environment parameter.
+   * @returns {Promise<EnvironmentConfig>} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+  async getEnvironmentConfig(
     environment: string = "development"
   ): Promise<EnvironmentConfig> {
     const config = await this.loadConfig();
@@ -164,14 +164,14 @@ async getEnvironmentConfig(
     return envConfig;
   }
 
-    /**
-     * Gets agent-specific configuration.
-     *
-     * @param {string} agentName - agentName parameter.
-     * @returns {Promise<Record<string, unknown>>} - TODO: describe return value.
-     * @throws {Error} - May throw an error.
-     */
-async getAgentConfig(agentName: string): Promise<Record<string, unknown>> {
+  /**
+   * Gets agent-specific configuration.
+   *
+   * @param {string} agentName - agentName parameter.
+   * @returns {Promise<Record<string, unknown>>} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+  async getAgentConfig(agentName: string): Promise<Record<string, unknown>> {
     const config = await this.loadConfig();
 
     const agentConfig =
@@ -186,23 +186,23 @@ async getAgentConfig(agentName: string): Promise<Record<string, unknown>> {
     };
   }
 
-    /**
-     * Reloads configuration from disk.
-     *
-     * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
-     */
-async reloadConfig(): Promise<ApplicationConfig> {
+  /**
+   * Reloads configuration from disk.
+   *
+   * @returns {Promise<ApplicationConfig>} - TODO: describe return value.
+   */
+  async reloadConfig(): Promise<ApplicationConfig> {
     this.config = null;
     return this.loadConfig();
   }
 
-    /**
-     * Merges loaded configuration with default values.
-     *
-     * @param {ApplicationConfig} loadedConfig - loadedConfig parameter.
-     * @returns {ApplicationConfig} - TODO: describe return value.
-     */
-private mergeWithDefaults(
+  /**
+   * Merges loaded configuration with default values.
+   *
+   * @param {ApplicationConfig} loadedConfig - loadedConfig parameter.
+   * @returns {ApplicationConfig} - TODO: describe return value.
+   */
+  private mergeWithDefaults(
     loadedConfig: ApplicationConfig
   ): ApplicationConfig {
     // Deep merge logic - for now, we'll use a simple approach
@@ -220,14 +220,14 @@ private mergeWithDefaults(
     } as ApplicationConfig;
   }
 
-    /**
-     * Validates configuration structure and required fields.
-     *
-     * @param {ApplicationConfig} config - config parameter.
-     * @returns {boolean} - TODO: describe return value.
-     * @throws {Error} - May throw an error.
-     */
-private validateConfig(config: ApplicationConfig): boolean {
+  /**
+   * Validates configuration structure and required fields.
+   *
+   * @param {ApplicationConfig} config - config parameter.
+   * @returns {boolean} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+  private validateConfig(config: ApplicationConfig): boolean {
     // Basic validation - could be enhanced with JSON schema validation
     if (!config.application?.name) {
       throw new Error("Application name is required in configuration");

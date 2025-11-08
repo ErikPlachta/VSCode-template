@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / ValidationResult
+[myBusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / ValidationResult
 
 # Interface: ValidationResult
 
-Defined in: [src/types/interfaces.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L261)
+Defined in: [src/types/interfaces.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L261)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/types/interfaces.ts:261](https://github.com/ErikPlachta/vscode-
 
 > **errors**: `string`[]
 
-Defined in: [src/types/interfaces.ts:263](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L263)
+Defined in: [src/types/interfaces.ts:263](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L263)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:263](https://github.com/ErikPlachta/vscode-
 
 > **isValid**: `boolean`
 
-Defined in: [src/types/interfaces.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L262)
+Defined in: [src/types/interfaces.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L262)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/interfaces.ts:262](https://github.com/ErikPlachta/vscode-
 
 > **warnings**: `string`[]
 
-Defined in: [src/types/interfaces.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L264)
+Defined in: [src/types/interfaces.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L264)

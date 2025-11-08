@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / RelevantDataManagerInterface
+[myBusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / RelevantDataManagerInterface
 
 # Interface: RelevantDataManagerInterface
 
-Defined in: [src/agent/interfaces.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L193)
+Defined in: [src/agent/interfaces.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L193)
 
 Interface for managing business data schemas, metadata, and relationships.
 
@@ -16,7 +16,7 @@ Interface for managing business data schemas, metadata, and relationships.
 
 > **getBusinessDataCatalogue**(): [`BusinessDataCatalogue`](BusinessDataCatalogue.md)
 
-Defined in: [src/agent/interfaces.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L194)
+Defined in: [src/agent/interfaces.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L194)
 
 #### Returns
 
@@ -28,7 +28,7 @@ Defined in: [src/agent/interfaces.ts:194](https://github.com/ErikPlachta/vscode-
 
 > **getCategoryInfo**(`categoryId`): [`CategoryInfo`](CategoryInfo.md)
 
-Defined in: [src/agent/interfaces.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L195)
+Defined in: [src/agent/interfaces.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L195)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [src/agent/interfaces.ts:195](https://github.com/ErikPlachta/vscode-
 
 > **getCategorySchema**(`categoryId`): [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/agent/interfaces.ts:196](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L196)
+Defined in: [src/agent/interfaces.ts:196](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L196)
 
 #### Parameters
 
@@ -64,7 +64,7 @@ Defined in: [src/agent/interfaces.ts:196](https://github.com/ErikPlachta/vscode-
 
 > **getRelationships**(`categoryId`): [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/agent/interfaces.ts:201](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L201)
+Defined in: [src/agent/interfaces.ts:201](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L201)
 
 #### Parameters
 
@@ -82,7 +82,7 @@ Defined in: [src/agent/interfaces.ts:201](https://github.com/ErikPlachta/vscode-
 
 > **validateCategoryData**(`categoryId`, `records`): [`ValidationResult`](ValidationResult.md)
 
-Defined in: [src/agent/interfaces.ts:197](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L197)
+Defined in: [src/agent/interfaces.ts:197](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L197)
 
 #### Parameters
 

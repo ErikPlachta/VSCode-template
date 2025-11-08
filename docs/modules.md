@@ -1,8 +1,8 @@
-[**mybusiness-mcp-extension v1.0.0**](README.md)
+[**myBusiness-mcp-extension v1.0.0**](README.md)
 
 ***
 
-# mybusiness-mcp-extension v1.0.0
+# myBusiness-mcp-extension v1.0.0
 
 ## Modules
 
@@ -51,7 +51,9 @@
 - [shared/configurationLoader](shared/configurationLoader/README.md)
 - [shared/mcpTypes](shared/mcpTypes/README.md)
 - [tools/augmentTypedoc](tools/augmentTypedoc/README.md)
+- [tools/convertRelativeImports](tools/convertRelativeImports/README.md)
 - [tools/enhanceJSDoc](tools/enhanceJSDoc/README.md)
+- [tools/postprocessDocs](tools/postprocessDocs/README.md)
 - [tools/repositoryHealth](tools/repositoryHealth/README.md)
 - [tools/validateJson](tools/validateJson/README.md)
 - [tools/validateMarkdown](tools/validateMarkdown/README.md)

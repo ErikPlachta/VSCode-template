@@ -6,7 +6,7 @@
  * @packageDocumentation application.config implementation for config module
  */
 
-import type { ApplicationConfig } from "@types/applicationConfig";
+import type { ApplicationConfig } from "@internal-types/applicationConfig";
 
 // Note: We cast to ApplicationConfig to avoid strict excess property checks while
 // we complete the migration away from the JSON-only shape.

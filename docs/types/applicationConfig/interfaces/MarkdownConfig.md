@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / MarkdownConfig
+[myBusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / MarkdownConfig
 
 # Interface: MarkdownConfig
 
-Defined in: [src/types/applicationConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L264)
+Defined in: [src/types/applicationConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L264)
 
 Markdown validation configuration.
 
@@ -16,7 +16,7 @@ Markdown validation configuration.
 
 > **exclude**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L268)
+Defined in: [src/types/applicationConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L268)
 
 File patterns to exclude from validation.
 
@@ -26,7 +26,7 @@ File patterns to exclude from validation.
 
 > **include**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L266)
+Defined in: [src/types/applicationConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L266)
 
 File patterns to include in validation.
 
@@ -36,7 +36,7 @@ File patterns to include in validation.
 
 > **requiredFrontMatter**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L270)
+Defined in: [src/types/applicationConfig.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L270)
 
 Required front matter fields.
 
@@ -46,6 +46,6 @@ Required front matter fields.
 
 > **requiredSections**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L272)
+Defined in: [src/types/applicationConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L272)
 
 Required section headings.

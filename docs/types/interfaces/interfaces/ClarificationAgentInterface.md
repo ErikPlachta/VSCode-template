@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / ClarificationAgentInterface
+[myBusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / ClarificationAgentInterface
 
 # Interface: ClarificationAgentInterface
 
-Defined in: [src/types/interfaces.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L253)
+Defined in: [src/types/interfaces.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L253)
 
 ClarificationAgentInterface interface.
 
@@ -16,7 +16,7 @@ ClarificationAgentInterface interface.
 
 > **clarify**(`input`): `Promise`\<[`ClarificationResponse`](ClarificationResponse.md)\>
 
-Defined in: [src/types/interfaces.ts:254](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L254)
+Defined in: [src/types/interfaces.ts:254](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L254)
 
 #### Parameters
 

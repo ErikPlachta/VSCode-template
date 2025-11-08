@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [agent/relevantDataManagerAgent/config](../README.md) / RelevantDataManagerAgentConfig
+[myBusiness-mcp-extension](../../../../modules.md) / [agent/relevantDataManagerAgent/config](../README.md) / RelevantDataManagerAgentConfig
 
 # Class: RelevantDataManagerAgentConfig
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L19)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L19)
 
 Relevant Data Manager agent-specific configuration class
 
@@ -20,7 +20,7 @@ Relevant Data Manager agent-specific configuration class
 
 > **new RelevantDataManagerAgentConfig**(`config?`): `RelevantDataManagerAgentConfig`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L29)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L29)
 
 constructor function.
 
@@ -52,7 +52,7 @@ config parameter.
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../../../../types/agentConfig/interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L545)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L545)
 
 Get application-facing configuration
 
@@ -72,7 +72,7 @@ Get application-facing configuration
 
 > **getCachingConfig**(): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L67)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L67)
 
 Get caching configuration
 
@@ -116,7 +116,7 @@ Get caching configuration
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L499)
+Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L499)
 
 Get public-facing configuration (user and some application details)
 
@@ -136,7 +136,7 @@ Get public-facing configuration (user and some application details)
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L554)
+Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L554)
 
 Get configuration schema ID
 
@@ -156,7 +156,7 @@ Get configuration schema ID
 
 > **getDataManagementConfig**(): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L140)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L140)
 
 Get data management configuration
 
@@ -200,7 +200,7 @@ Get data management configuration
 
 > **getErrorHandlingConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:418](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L418)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:418](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L418)
 
 Get error handling configuration
 
@@ -216,7 +216,7 @@ Get error handling configuration
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../../../../types/agentConfig/interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L527)
+Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L527)
 
 Get execution configuration
 
@@ -236,7 +236,7 @@ Get execution configuration
 
 > **getMaxCachedSnapshots**(): `number`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L278)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L278)
 
 Get maximum cached snapshots
 
@@ -252,7 +252,7 @@ Get maximum cached snapshots
 
 > **getMaxSchemaFileSize**(): `number`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L296)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L296)
 
 Get maximum schema file size in bytes
 
@@ -268,7 +268,7 @@ Get maximum schema file size in bytes
 
 > **getMaxTraversalDepth**(): `number`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:336](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L336)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:336](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L336)
 
 Get maximum relationship traversal depth
 
@@ -284,7 +284,7 @@ Get maximum relationship traversal depth
 
 > **getMetadataConfig**(): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L52)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L52)
 
 Get metadata management configuration
 
@@ -332,7 +332,7 @@ Get metadata management configuration
 
 > **getPerformanceConfig**(): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L159)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L159)
 
 Get performance configuration
 
@@ -368,7 +368,7 @@ Get performance configuration
 
 > **getRelationshipsConfig**(): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L116)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L116)
 
 Get relationships configuration
 
@@ -408,7 +408,7 @@ Get relationships configuration
 
 > **getRelationshipTypes**(): `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:319](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L319)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:319](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L319)
 
 Get relationship types to track
 
@@ -424,7 +424,7 @@ Get relationship types to track
 
 > **getRequiredCategoryFiles**(): `Record`\<`string`, `string`\>
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:238](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L238)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:238](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L238)
 
 Get required category files configuration
 
@@ -440,7 +440,7 @@ Get required category files configuration
 
 > **getRequiredDirectories**(): `Record`\<`string`, `string`\>
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L253)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L253)
 
 Get required directories configuration
 
@@ -456,7 +456,7 @@ Get required directories configuration
 
 > **getSchemaManagementConfig**(): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L97)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L97)
 
 Get schema management configuration
 
@@ -500,7 +500,7 @@ Get schema management configuration
 
 > **getSnapshotTTL**(): `number`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L269)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L269)
 
 Get snapshot cache TTL in milliseconds
 
@@ -516,7 +516,7 @@ Get snapshot cache TTL in milliseconds
 
 > **getSupportedCategories**(): `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L221)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:221](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L221)
 
 Get supported business categories
 
@@ -532,7 +532,7 @@ Get supported business categories
 
 > **getSupportedSchemaFormats**(): `string`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:305](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L305)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:305](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L305)
 
 Get supported schema formats
 
@@ -548,7 +548,7 @@ Get supported schema formats
 
 > **getTelemetryConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:399](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L399)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:399](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L399)
 
 Get telemetry configuration
 
@@ -564,7 +564,7 @@ Get telemetry configuration
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../../../../types/agentConfig/interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L536)
+Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L536)
 
 Get user-facing configuration
 
@@ -584,7 +584,7 @@ Get user-facing configuration
 
 > **getValidationConfig**(): `object`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L82)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L82)
 
 Get validation configuration
 
@@ -632,7 +632,7 @@ Get validation configuration
 
 > **getValidationLibrary**(): `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:345](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L345)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:345](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L345)
 
 Get validation library to use
 
@@ -648,7 +648,7 @@ Get validation library to use
 
 > **getValidationTimeout**(): `number`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L287)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L287)
 
 Get validation timeout in milliseconds
 
@@ -664,7 +664,7 @@ Get validation timeout in milliseconds
 
 > **isAjvValidationEnabled**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:372](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L372)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:372](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L372)
 
 Check if AJV validation is enabled
 
@@ -680,7 +680,7 @@ Check if AJV validation is enabled
 
 > **isDataLineageTrackingEnabled**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L194)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L194)
 
 Check if data lineage tracking is enabled
 
@@ -696,7 +696,7 @@ Check if data lineage tracking is enabled
 
 > **isDataQualityEnforced**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L185)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L185)
 
 Check if data quality enforcement is enabled
 
@@ -712,7 +712,7 @@ Check if data quality enforcement is enabled
 
 > **isFolderStructureValidationEnabled**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:363](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L363)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:363](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L363)
 
 Check if folder structure validation is enabled
 
@@ -728,7 +728,7 @@ Check if folder structure validation is enabled
 
 > **isPartialValidationAllowed**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:354](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L354)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:354](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L354)
 
 Check if partial validation is allowed
 
@@ -744,7 +744,7 @@ Check if partial validation is allowed
 
 > **isSchemaValidationEnabled**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L176)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L176)
 
 Check if schema validation is enabled
 
@@ -760,7 +760,7 @@ Check if schema validation is enabled
 
 > **isSnapshotCachingEnabled**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L203)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L203)
 
 Check if snapshot caching is enabled
 
@@ -776,7 +776,7 @@ Check if snapshot caching is enabled
 
 > **isStrictModeEnabled**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:212](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L212)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:212](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L212)
 
 Check if strict validation mode is enabled
 
@@ -792,7 +792,7 @@ Check if strict validation mode is enabled
 
 > **shouldDetectCircularReferences**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:390](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L390)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:390](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L390)
 
 Check if circular references should be detected
 
@@ -808,7 +808,7 @@ Check if circular references should be detected
 
 > **shouldValidateRelationshipReferences**(): `boolean`
 
-Defined in: [src/agent/relevantDataManagerAgent/config.ts:381](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/config.ts#L381)
+Defined in: [src/agent/relevantDataManagerAgent/config.ts:381](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/config.ts#L381)
 
 Check if relationship references should be validated
 

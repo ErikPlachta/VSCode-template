@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / EntityConnections
+[myBusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / EntityConnections
 
 # Interface: EntityConnections
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:250](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L250)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:250](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L250)
 
 Connections resolved for a specific record.
 
@@ -16,7 +16,7 @@ Connections resolved for a specific record.
 
 > **categoryId**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L251)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L251)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:251](https://github.com
 
 > **connections**: `object`[]
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L253)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L253)
 
 #### records
 
@@ -44,4 +44,4 @@ Defined in: [src/agent/relevantDataManagerAgent/index.ts:253](https://github.com
 
 > **recordId**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:252](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L252)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:252](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L252)

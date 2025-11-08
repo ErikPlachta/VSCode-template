@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [agent/orchestrator/config](../README.md) / OrchestratorConfig
+[myBusiness-mcp-extension](../../../../modules.md) / [agent/orchestrator/config](../README.md) / OrchestratorConfig
 
 # Class: OrchestratorConfig
 
-Defined in: [src/agent/orchestrator/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L19)
+Defined in: [src/agent/orchestrator/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L19)
 
 Orchestrator-specific configuration class
 
@@ -20,7 +20,7 @@ Orchestrator-specific configuration class
 
 > **new OrchestratorConfig**(`config?`): `OrchestratorConfig`
 
-Defined in: [src/agent/orchestrator/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L29)
+Defined in: [src/agent/orchestrator/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L29)
 
 constructor function.
 
@@ -52,7 +52,7 @@ config parameter.
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../../../../types/agentConfig/interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L545)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L545)
 
 Get application-facing configuration
 
@@ -72,7 +72,7 @@ Get application-facing configuration
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L499)
+Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L499)
 
 Get public-facing configuration (user and some application details)
 
@@ -92,7 +92,7 @@ Get public-facing configuration (user and some application details)
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L554)
+Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L554)
 
 Get configuration schema ID
 
@@ -112,7 +112,7 @@ Get configuration schema ID
 
 > **getEscalationConfig**(): [`EscalationConfig`](../../../../types/agentConfig/interfaces/EscalationConfig.md)
 
-Defined in: [src/agent/orchestrator/config.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L112)
+Defined in: [src/agent/orchestrator/config.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L112)
 
 Get escalation configuration
 
@@ -128,7 +128,7 @@ Get escalation configuration
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../../../../types/agentConfig/interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L527)
+Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L527)
 
 Get execution configuration
 
@@ -148,7 +148,7 @@ Get execution configuration
 
 > **getFallbackAgent**(): `string`
 
-Defined in: [src/agent/orchestrator/config.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L162)
+Defined in: [src/agent/orchestrator/config.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L162)
 
 Get fallback agent name
 
@@ -164,7 +164,7 @@ Get fallback agent name
 
 > **getIntentAgentMap**(): `Record`\<`string`, `string`\>
 
-Defined in: [src/agent/orchestrator/config.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L127)
+Defined in: [src/agent/orchestrator/config.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L127)
 
 Get intent to agent mapping
 
@@ -180,7 +180,7 @@ Get intent to agent mapping
 
 > **getIntentConfig**(`intent`): [`IntentConfig`](../../../../types/agentConfig/interfaces/IntentConfig.md) \| `undefined`
 
-Defined in: [src/agent/orchestrator/config.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L59)
+Defined in: [src/agent/orchestrator/config.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L59)
 
 Get intent configuration by name
 
@@ -204,7 +204,7 @@ intent parameter.
 
 > **getIntents**(): `string`[]
 
-Defined in: [src/agent/orchestrator/config.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L49)
+Defined in: [src/agent/orchestrator/config.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L49)
 
 Get supported intents
 
@@ -220,7 +220,7 @@ Get supported intents
 
 > **getMessages**(): `object`
 
-Defined in: [src/agent/orchestrator/config.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L174)
+Defined in: [src/agent/orchestrator/config.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L174)
 
 Get configurable user-facing messages
 
@@ -312,7 +312,7 @@ Get configurable user-facing messages
 
 > **getMinimumKeywordLength**(): `number`
 
-Defined in: [src/agent/orchestrator/config.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L103)
+Defined in: [src/agent/orchestrator/config.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L103)
 
 Get minimum keyword length
 
@@ -328,7 +328,7 @@ Get minimum keyword length
 
 > **getScoringWeights**(): `object`
 
-Defined in: [src/agent/orchestrator/config.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L88)
+Defined in: [src/agent/orchestrator/config.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L88)
 
 Get scoring weights
 
@@ -356,7 +356,7 @@ Get scoring weights
 
 > **getStopWords**(): `Set`\<`string`\>
 
-Defined in: [src/agent/orchestrator/config.ts:78](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L78)
+Defined in: [src/agent/orchestrator/config.ts:78](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L78)
 
 Get stop words for text processing
 
@@ -372,7 +372,7 @@ Get stop words for text processing
 
 > **getTargetAgent**(`intent`): `string` \| `undefined`
 
-Defined in: [src/agent/orchestrator/config.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L69)
+Defined in: [src/agent/orchestrator/config.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L69)
 
 Get target agent for an intent
 
@@ -396,7 +396,7 @@ intent parameter.
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../../../../types/agentConfig/interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L536)
+Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L536)
 
 Get user-facing configuration
 
@@ -416,7 +416,7 @@ Get user-facing configuration
 
 > **getVaguePhrases**(): `string`[]
 
-Defined in: [src/agent/orchestrator/config.ts:143](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L143)
+Defined in: [src/agent/orchestrator/config.ts:143](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L143)
 
 Get vague phrases that should trigger clarification
 
@@ -432,7 +432,7 @@ Get vague phrases that should trigger clarification
 
 > `static` **createDefault**(): `OrchestratorConfig`
 
-Defined in: [src/agent/orchestrator/config.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L240)
+Defined in: [src/agent/orchestrator/config.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L240)
 
 Create orchestrator configuration with defaults (uses TypeScript config)
 
@@ -448,7 +448,7 @@ Create orchestrator configuration with defaults (uses TypeScript config)
 
 > `static` **loadFromFile**(`configPath?`): `Promise`\<`OrchestratorConfig`\>
 
-Defined in: [src/agent/orchestrator/config.ts:211](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/config.ts#L211)
+Defined in: [src/agent/orchestrator/config.ts:211](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/config.ts#L211)
 
 Load configuration from TypeScript config (preferred) or JSON fallback
 

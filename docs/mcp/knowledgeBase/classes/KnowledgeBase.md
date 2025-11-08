@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeBase
+[myBusiness-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeBase
 
 # Class: KnowledgeBase
 
-Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L30)
+Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/knowledgeBase.ts#L30)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-
 
 > **indexDocument**(`document`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L38)
+Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/knowledgeBase.ts#L38)
 
 indexDocument function.
 
@@ -46,7 +46,7 @@ document parameter.
 
 > **indexDocuments**(`documents`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L47)
+Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/knowledgeBase.ts#L47)
 
 indexDocuments function.
 
@@ -68,7 +68,7 @@ documents parameter.
 
 > **query**(`term`, `limit`): [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/mcp/knowledgeBase.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/mcp/knowledgeBase.ts#L58)
+Defined in: [src/mcp/knowledgeBase.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/knowledgeBase.ts#L58)
 
 query function.
 

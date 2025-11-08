@@ -1,8 +1,8 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / agent/databaseAgent/agent.config
+[myBusiness-mcp-extension](../../../modules.md) / agent/databaseAgent/agent.config
 
 # agent/databaseAgent/agent.config
 

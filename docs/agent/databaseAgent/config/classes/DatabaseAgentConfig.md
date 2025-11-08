@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [agent/databaseAgent/config](../README.md) / DatabaseAgentConfig
+[myBusiness-mcp-extension](../../../../modules.md) / [agent/databaseAgent/config](../README.md) / DatabaseAgentConfig
 
 # Class: DatabaseAgentConfig
 
-Defined in: [src/agent/databaseAgent/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L19)
+Defined in: [src/agent/databaseAgent/config.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L19)
 
 Database agent-specific configuration class
 
@@ -20,7 +20,7 @@ Database agent-specific configuration class
 
 > **new DatabaseAgentConfig**(`config?`): `DatabaseAgentConfig`
 
-Defined in: [src/agent/databaseAgent/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L29)
+Defined in: [src/agent/databaseAgent/config.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L29)
 
 constructor function.
 
@@ -52,7 +52,7 @@ config parameter.
 
 > **getAggregationConfig**(): `object`
 
-Defined in: [src/agent/databaseAgent/config.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L194)
+Defined in: [src/agent/databaseAgent/config.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L194)
 
 Get aggregation configuration
 
@@ -80,7 +80,7 @@ Get aggregation configuration
 
 > **getAllFieldAliases**(): `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [src/agent/databaseAgent/config.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L59)
+Defined in: [src/agent/databaseAgent/config.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L59)
 
 Get all field aliases
 
@@ -96,7 +96,7 @@ Get all field aliases
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../../../../types/agentConfig/interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L545)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L545)
 
 Get application-facing configuration
 
@@ -116,7 +116,7 @@ Get application-facing configuration
 
 > **getCachingConfig**(): `object`
 
-Defined in: [src/agent/databaseAgent/config.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L68)
+Defined in: [src/agent/databaseAgent/config.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L68)
 
 Get caching configuration
 
@@ -148,7 +148,7 @@ Get caching configuration
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L499)
+Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L499)
 
 Get public-facing configuration (user and some application details)
 
@@ -168,7 +168,7 @@ Get public-facing configuration (user and some application details)
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L554)
+Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L554)
 
 Get configuration schema ID
 
@@ -188,7 +188,7 @@ Get configuration schema ID
 
 > **getDefaultCacheKeyPrefix**(): `string`
 
-Defined in: [src/agent/databaseAgent/config.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L265)
+Defined in: [src/agent/databaseAgent/config.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L265)
 
 Get default cache key prefix
 
@@ -204,7 +204,7 @@ Get default cache key prefix
 
 > **getErrorHandlingConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/databaseAgent/config.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L223)
+Defined in: [src/agent/databaseAgent/config.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L223)
 
 Get error handling configuration
 
@@ -220,7 +220,7 @@ Get error handling configuration
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../../../../types/agentConfig/interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L527)
+Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L527)
 
 Get execution configuration
 
@@ -240,7 +240,7 @@ Get execution configuration
 
 > **getFieldAliases**(`category`): `Record`\<`string`, `string`\>
 
-Defined in: [src/agent/databaseAgent/config.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L50)
+Defined in: [src/agent/databaseAgent/config.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L50)
 
 Get field aliases for a specific category
 
@@ -264,7 +264,7 @@ category parameter.
 
 > **getFilteringConfig**(): `object`
 
-Defined in: [src/agent/databaseAgent/config.ts:152](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L152)
+Defined in: [src/agent/databaseAgent/config.ts:152](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L152)
 
 Get filtering configuration
 
@@ -292,7 +292,7 @@ Get filtering configuration
 
 > **getFilterOperators**(): `string`[]
 
-Defined in: [src/agent/databaseAgent/config.ts:129](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L129)
+Defined in: [src/agent/databaseAgent/config.ts:129](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L129)
 
 Get supported filter operators
 
@@ -308,7 +308,7 @@ Get supported filter operators
 
 > **getIntegrityChecks**(): `object`
 
-Defined in: [src/agent/databaseAgent/config.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L114)
+Defined in: [src/agent/databaseAgent/config.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L114)
 
 Get integrity check settings
 
@@ -336,7 +336,7 @@ Get integrity check settings
 
 > **getJoinConfig**(): `object`
 
-Defined in: [src/agent/databaseAgent/config.ts:179](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L179)
+Defined in: [src/agent/databaseAgent/config.ts:179](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L179)
 
 Get join operation configuration
 
@@ -364,7 +364,7 @@ Get join operation configuration
 
 > **getMaxResultSize**(): `number`
 
-Defined in: [src/agent/databaseAgent/config.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L274)
+Defined in: [src/agent/databaseAgent/config.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L274)
 
 Get maximum result size for queries
 
@@ -380,7 +380,7 @@ Get maximum result size for queries
 
 > **getQueryLimits**(): `object`
 
-Defined in: [src/agent/databaseAgent/config.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L84)
+Defined in: [src/agent/databaseAgent/config.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L84)
 
 Get query limits configuration
 
@@ -408,7 +408,7 @@ Get query limits configuration
 
 > **getQueryTimeout**(): `number`
 
-Defined in: [src/agent/databaseAgent/config.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L283)
+Defined in: [src/agent/databaseAgent/config.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L283)
 
 Get query timeout in milliseconds
 
@@ -424,7 +424,7 @@ Get query timeout in milliseconds
 
 > **getSchemaValidation**(): `object`
 
-Defined in: [src/agent/databaseAgent/config.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L99)
+Defined in: [src/agent/databaseAgent/config.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L99)
 
 Get schema validation settings
 
@@ -452,7 +452,7 @@ Get schema validation settings
 
 > **getTelemetryConfig**(): `Record`\<`string`, `unknown`\>
 
-Defined in: [src/agent/databaseAgent/config.ts:209](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L209)
+Defined in: [src/agent/databaseAgent/config.ts:209](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L209)
 
 Get telemetry configuration
 
@@ -468,7 +468,7 @@ Get telemetry configuration
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../../../../types/agentConfig/interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L536)
+Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L536)
 
 Get user-facing configuration
 
@@ -488,7 +488,7 @@ Get user-facing configuration
 
 > **isAutoAliasTransformEnabled**(): `boolean`
 
-Defined in: [src/agent/databaseAgent/config.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L256)
+Defined in: [src/agent/databaseAgent/config.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L256)
 
 Check if auto alias transformation is enabled
 
@@ -504,7 +504,7 @@ Check if auto alias transformation is enabled
 
 > **isCachingEnabled**(): `boolean`
 
-Defined in: [src/agent/databaseAgent/config.ts:238](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L238)
+Defined in: [src/agent/databaseAgent/config.ts:238](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L238)
 
 Check if caching is enabled by default
 
@@ -520,7 +520,7 @@ Check if caching is enabled by default
 
 > **isStrictValidationEnabled**(): `boolean`
 
-Defined in: [src/agent/databaseAgent/config.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/config.ts#L247)
+Defined in: [src/agent/databaseAgent/config.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/config.ts#L247)
 
 Check if strict validation is enabled
 

@@ -1,8 +1,8 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / mcp/telemetry
+[myBusiness-mcp-extension](../../modules.md) / mcp/telemetry
 
 # mcp/telemetry
 

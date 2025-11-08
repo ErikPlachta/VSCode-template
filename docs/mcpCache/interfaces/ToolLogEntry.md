@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / ToolLogEntry
+[myBusiness-mcp-extension](../../modules.md) / [mcpCache](../README.md) / ToolLogEntry
 
 # Interface: ToolLogEntry
 
-Defined in: [src/extension/mcpCache.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L37)
+Defined in: [src/extension/mcpCache.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L37)
 
 Structure for log entries persisted inside `.mcp-cache`.
 
@@ -16,7 +16,7 @@ Structure for log entries persisted inside `.mcp-cache`.
 
 > **args**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/extension/mcpCache.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L43)
+Defined in: [src/extension/mcpCache.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L43)
 
 Arguments sent to the MCP server.
 
@@ -26,7 +26,7 @@ Arguments sent to the MCP server.
 
 > **context**: `string`[]
 
-Defined in: [src/extension/mcpCache.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L45)
+Defined in: [src/extension/mcpCache.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L45)
 
 High-level conversation context that accompanied the request.
 
@@ -36,7 +36,7 @@ High-level conversation context that accompanied the request.
 
 > `optional` **error**: `string`
 
-Defined in: [src/extension/mcpCache.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L49)
+Defined in: [src/extension/mcpCache.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L49)
 
 Human-readable error message when an invocation fails.
 
@@ -46,7 +46,7 @@ Human-readable error message when an invocation fails.
 
 > `optional` **response**: `unknown`
 
-Defined in: [src/extension/mcpCache.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L47)
+Defined in: [src/extension/mcpCache.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L47)
 
 Raw payload returned by the server, if any.
 
@@ -56,7 +56,7 @@ Raw payload returned by the server, if any.
 
 > **timestamp**: `string`
 
-Defined in: [src/extension/mcpCache.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L39)
+Defined in: [src/extension/mcpCache.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L39)
 
 ISO timestamp when the invocation took place.
 
@@ -66,6 +66,6 @@ ISO timestamp when the invocation took place.
 
 > **toolName**: `string`
 
-Defined in: [src/extension/mcpCache.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/extension/mcpCache.ts#L41)
+Defined in: [src/extension/mcpCache.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/extension/mcpCache.ts#L41)
 
 Tool identifier that generated the log entry.

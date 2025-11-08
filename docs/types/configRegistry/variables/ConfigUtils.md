@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / ConfigUtils
+[myBusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / ConfigUtils
 
 # Variable: ConfigUtils
 
 > `const` **ConfigUtils**: `object`
 
-Defined in: [src/types/configRegistry.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/configRegistry.ts#L173)
+Defined in: [src/types/configRegistry.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/configRegistry.ts#L173)
 
 Utility functions for working with configuration IDs
 

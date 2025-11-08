@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / DataAgent
+[myBusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / DataAgent
 
 # Class: DataAgent
 
-Defined in: [src/agent/dataAgent/index.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L138)
+Defined in: [src/agent/dataAgent/index.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L138)
 
 Agent that analyzes data and generates insights.
 Focuses purely on data analysis without managing other agents or data sources.
@@ -25,7 +25,7 @@ console.log(insights.map(insight => insight.description));
 
 > **new DataAgent**(): `DataAgent`
 
-Defined in: [src/agent/dataAgent/index.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L147)
+Defined in: [src/agent/dataAgent/index.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L147)
 
 Create a new DataAgent.
 
@@ -41,7 +41,7 @@ Create a new DataAgent.
 
 > **analyzeConnection**(`sourceData`, `targetData`, `relationship`): `Promise`\<[`CrossCategoryConnection`](../interfaces/CrossCategoryConnection.md)\>
 
-Defined in: [src/agent/dataAgent/index.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L262)
+Defined in: [src/agent/dataAgent/index.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L262)
 
 Analyze relationships between categories.
 
@@ -77,7 +77,7 @@ relationship parameter.
 
 > **analyzeData**(`input`): `Promise`\<[`DataInsight`](../interfaces/DataInsight.md)[]\>
 
-Defined in: [src/agent/dataAgent/index.ts:157](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L157)
+Defined in: [src/agent/dataAgent/index.ts:157](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L157)
 
 Analyze data and generate insights.
 
@@ -101,7 +101,7 @@ input parameter.
 
 > **generateExplorationPlan**(`categoryId`, `question`, `availableData`): `Promise`\<[`ExplorationPlan`](../interfaces/ExplorationPlan.md)\>
 
-Defined in: [src/agent/dataAgent/index.ts:204](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L204)
+Defined in: [src/agent/dataAgent/index.ts:204](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L204)
 
 Generate an exploration plan for data analysis.
 
@@ -137,7 +137,7 @@ availableData parameter.
 
 > **searchData**(`keyword`, `data`): [`TopicSearchResult`](../interfaces/TopicSearchResult.md)[]
 
-Defined in: [src/agent/dataAgent/index.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L292)
+Defined in: [src/agent/dataAgent/index.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L292)
 
 Search for patterns in data records.
 

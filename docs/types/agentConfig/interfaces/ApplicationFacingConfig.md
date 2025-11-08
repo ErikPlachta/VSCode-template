@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ApplicationFacingConfig
+[myBusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ApplicationFacingConfig
 
 # Interface: ApplicationFacingConfig
 
-Defined in: [src/types/agentConfig.ts:141](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L141)
+Defined in: [src/types/agentConfig.ts:141](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L141)
 
 Application-facing metadata
 
@@ -16,7 +16,7 @@ Application-facing metadata
 
 > `optional` **capabilities**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L144)
+Defined in: [src/types/agentConfig.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L144)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:144](https://github.com/ErikPlachta/vscode
 
 > `optional` **dependencies**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:143](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L143)
+Defined in: [src/types/agentConfig.ts:143](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L143)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:143](https://github.com/ErikPlachta/vscode
 
 > `optional` **errorHandling**: [`ErrorHandlingConfig`](ErrorHandlingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:146](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L146)
+Defined in: [src/types/agentConfig.ts:146](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L146)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:146](https://github.com/ErikPlachta/vscode
 
 > `optional` **monitoring**: [`MonitoringConfig`](MonitoringConfig.md)
 
-Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L147)
+Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L147)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/agentConfig.ts:147](https://github.com/ErikPlachta/vscode
 
 > `optional` **performance**: [`PerformanceConfig`](PerformanceConfig.md)
 
-Defined in: [src/types/agentConfig.ts:145](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L145)
+Defined in: [src/types/agentConfig.ts:145](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L145)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/types/agentConfig.ts:145](https://github.com/ErikPlachta/vscode
 
 > `optional` **technicalDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L142)
+Defined in: [src/types/agentConfig.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L142)

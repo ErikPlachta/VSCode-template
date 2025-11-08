@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
+[myBusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
 
 # Class: PerformanceMonitor
 
-Defined in: [src/shared/analyticsIntegration.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L158)
+Defined in: [src/shared/analyticsIntegration.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/analyticsIntegration.ts#L158)
 
 Performance monitoring utility for critical operations.
 
@@ -16,7 +16,7 @@ Performance monitoring utility for critical operations.
 
 > **new PerformanceMonitor**(): `PerformanceMonitor`
 
-Defined in: [src/shared/analyticsIntegration.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L166)
+Defined in: [src/shared/analyticsIntegration.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/analyticsIntegration.ts#L166)
 
 Creates a new performance monitor instance.
 
@@ -32,7 +32,7 @@ Creates a new performance monitor instance.
 
 > **monitorDatabaseQuery**\<`T`\>(`queryType`, `query`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L185)
+Defined in: [src/shared/analyticsIntegration.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/analyticsIntegration.ts#L185)
 
 Monitors the performance of a database query operation.
 
@@ -80,7 +80,7 @@ options parameter.
 
 > **monitorDataProcessing**\<`T`\>(`operationType`, `processor`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L218)
+Defined in: [src/shared/analyticsIntegration.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/analyticsIntegration.ts#L218)
 
 Monitors data processing operations.
 
@@ -128,7 +128,7 @@ options parameter.
 
 > **monitorOrchestration**\<`T`\>(`decision`, `orchestration`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/analyticsIntegration.ts#L256)
+Defined in: [src/shared/analyticsIntegration.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/analyticsIntegration.ts#L256)
 
 Monitors orchestration decisions and routing.
 

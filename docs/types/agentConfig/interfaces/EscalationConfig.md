@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / EscalationConfig
+[myBusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / EscalationConfig
 
 # Interface: EscalationConfig
 
-Defined in: [src/types/agentConfig.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L45)
+Defined in: [src/types/agentConfig.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L45)
 
 Escalation configuration
 
@@ -16,7 +16,7 @@ Escalation configuration
 
 > **conditions**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L46)
+Defined in: [src/types/agentConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L46)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:46](https://github.com/ErikPlachta/vscode-
 
 > **fallbackAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L47)
+Defined in: [src/types/agentConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L47)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:47](https://github.com/ErikPlachta/vscode-
 
 > **maxRetries**: `number`
 
-Defined in: [src/types/agentConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L48)
+Defined in: [src/types/agentConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L48)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:48](https://github.com/ErikPlachta/vscode-
 
 > `optional` **vaguePhrases**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/agentConfig.ts#L49)
+Defined in: [src/types/agentConfig.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/agentConfig.ts#L49)

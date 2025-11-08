@@ -14,8 +14,8 @@
  * - Ability to use computed values and imports
  */
 
-import type { AgentConfigDefinition } from "@types/agentConfig";
-import { CONFIG_IDS } from "@types/configRegistry";
+import type { AgentConfigDefinition } from "@internal-types/agentConfig";
+import { CONFIG_IDS } from "@internal-types/configRegistry";
 
 /**
  * Complete configuration for the Orchestrator agent.

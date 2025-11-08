@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / DataInsight
+[myBusiness-mcp-extension](../../../modules.md) / [agent/dataAgent](../README.md) / DataInsight
 
 # Interface: DataInsight
 
-Defined in: [src/agent/dataAgent/index.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L64)
+Defined in: [src/agent/dataAgent/index.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L64)
 
 DataInsight interface.
 
@@ -16,7 +16,7 @@ DataInsight interface.
 
 > `optional` **affectedRecords**: `string`[]
 
-Defined in: [src/agent/dataAgent/index.ts:75](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L75)
+Defined in: [src/agent/dataAgent/index.ts:75](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L75)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/dataAgent/index.ts:75](https://github.com/ErikPlachta/vsc
 
 > **category**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:74](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L74)
+Defined in: [src/agent/dataAgent/index.ts:74](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L74)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/agent/dataAgent/index.ts:74](https://github.com/ErikPlachta/vsc
 
 > **confidence**: `number`
 
-Defined in: [src/agent/dataAgent/index.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L73)
+Defined in: [src/agent/dataAgent/index.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L73)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/agent/dataAgent/index.ts:73](https://github.com/ErikPlachta/vsc
 
 > **description**: `string`
 
-Defined in: [src/agent/dataAgent/index.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L72)
+Defined in: [src/agent/dataAgent/index.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L72)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/agent/dataAgent/index.ts:72](https://github.com/ErikPlachta/vsc
 
 > **type**: `"pattern"` \| `"anomaly"` \| `"correlation"` \| `"trend"` \| `"opportunity"` \| `"risk"`
 
-Defined in: [src/agent/dataAgent/index.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/dataAgent/index.ts#L65)
+Defined in: [src/agent/dataAgent/index.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/dataAgent/index.ts#L65)

@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / DatabaseAgentInterface
+[myBusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / DatabaseAgentInterface
 
 # Interface: DatabaseAgentInterface
 
-Defined in: [src/types/interfaces.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L51)
+Defined in: [src/types/interfaces.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L51)
 
 Interface for database agents that handle data retrieval operations.
 
@@ -16,7 +16,7 @@ Interface for database agents that handle data retrieval operations.
 
 > **executeQuery**(`categoryId`, `criteria`, `options?`): `Promise`\<[`CategoryRecord`](CategoryRecord.md)[]\>
 
-Defined in: [src/types/interfaces.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/interfaces.ts#L52)
+Defined in: [src/types/interfaces.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/interfaces.ts#L52)
 
 #### Parameters
 

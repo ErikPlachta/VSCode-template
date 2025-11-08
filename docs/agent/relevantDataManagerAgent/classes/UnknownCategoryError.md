@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / UnknownCategoryError
+[myBusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / UnknownCategoryError
 
 # Class: UnknownCategoryError
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:607](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L607)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:607](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L607)
 
 Error thrown when a caller references an unknown category.
 
@@ -20,7 +20,7 @@ Error thrown when a caller references an unknown category.
 
 > **new UnknownCategoryError**(`topic`): `UnknownCategoryError`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:614](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L614)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:614](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L614)
 
 constructor function.
 

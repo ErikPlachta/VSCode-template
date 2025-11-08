@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/agentConfigurationService](../README.md) / AgentConfigurationService
+[myBusiness-mcp-extension](../../../modules.md) / [shared/agentConfigurationService](../README.md) / AgentConfigurationService
 
 # Class: AgentConfigurationService
 
-Defined in: [src/shared/agentConfigurationService.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L15)
+Defined in: [src/shared/agentConfigurationService.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L15)
 
 Service for managing agent configurations and metadata.
 
@@ -16,7 +16,7 @@ Service for managing agent configurations and metadata.
 
 > **getAgentCapabilities**(`agentId`): `Promise`\<`string`[]\>
 
-Defined in: [src/shared/agentConfigurationService.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L159)
+Defined in: [src/shared/agentConfigurationService.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L159)
 
 Gets the capabilities for an agent.
 
@@ -40,7 +40,7 @@ agentId parameter.
 
 > **getAgentDefinition**(`agentId`): `Promise`\<[`AgentDefinition`](../../../types/applicationConfig/interfaces/AgentDefinition.md)\>
 
-Defined in: [src/shared/agentConfigurationService.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L57)
+Defined in: [src/shared/agentConfigurationService.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L57)
 
 Gets the agent definition for the specified agent.
 
@@ -68,7 +68,7 @@ agentId parameter.
 
 > **getAgentDisplayName**(`agentId`): `Promise`\<`string`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:148](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L148)
+Defined in: [src/shared/agentConfigurationService.ts:148](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L148)
 
 Gets the display name for an agent.
 
@@ -92,7 +92,7 @@ agentId parameter.
 
 > **getAgentsWithCapability**(`capability`): `Promise`\<[`AgentIdentifier`](../../../mcp/config/unifiedAgentConfig/type-aliases/AgentIdentifier.md)[]\>
 
-Defined in: [src/shared/agentConfigurationService.ts:187](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L187)
+Defined in: [src/shared/agentConfigurationService.ts:187](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L187)
 
 Gets agents that have a specific capability.
 
@@ -116,7 +116,7 @@ capability parameter.
 
 > **getAllAgentDefinitions**(): `Promise`\<`Record`\<`string`, [`AgentDefinition`](../../../types/applicationConfig/interfaces/AgentDefinition.md)\>\>
 
-Defined in: [src/shared/agentConfigurationService.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L101)
+Defined in: [src/shared/agentConfigurationService.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L101)
 
 Gets all agent definitions.
 
@@ -132,7 +132,7 @@ Gets all agent definitions.
 
 > **getApplicationFacingInfo**(`agentId`): `Promise`\<\{ `dependencies?`: `string`[]; `errorHandling?`: \{ `fallbackAgent?`: `string`; `maxRetries?`: `number`; `retryStrategy?`: `"none"` \| `"fixed"` \| `"exponential"`; \}; `monitoring?`: \{ `alertThresholds?`: `Record`\<`string`, `number`\>; `healthCheckEndpoint?`: `string`; `metricsToTrack?`: `string`[]; \}; `performance?`: \{ `complexity?`: `"high"` \| `"medium"` \| `"low"`; `expectedResponseTime?`: `number`; `memoryUsage?`: `string`; \}; `technicalDescription?`: `string`; \} \| `null` \| `undefined`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:135](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L135)
+Defined in: [src/shared/agentConfigurationService.ts:135](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L135)
 
 Gets application-facing information for an agent.
 
@@ -156,7 +156,7 @@ agentId parameter.
 
 > **getErrorHandlingConfig**(`agentId`): `Promise`\<\{ `fallbackAgent?`: `string`; `maxRetries?`: `number`; `retryStrategy?`: `"none"` \| `"fixed"` \| `"exponential"`; \} \| `null` \| `undefined`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L270)
+Defined in: [src/shared/agentConfigurationService.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L270)
 
 Gets error handling configuration for an agent.
 
@@ -180,7 +180,7 @@ agentId parameter.
 
 > **getExampleQueries**(`agentId`): `Promise`\<`string`[]\>
 
-Defined in: [src/shared/agentConfigurationService.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L223)
+Defined in: [src/shared/agentConfigurationService.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L223)
 
 Gets example queries for an agent.
 
@@ -204,7 +204,7 @@ agentId parameter.
 
 > **getFriendlyDescription**(`agentId`): `Promise`\<`string`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:210](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L210)
+Defined in: [src/shared/agentConfigurationService.ts:210](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L210)
 
 Gets friendly description for user interfaces.
 
@@ -228,7 +228,7 @@ agentId parameter.
 
 > **getMonitoringConfig**(`agentId`): `Promise`\<\{ `alertThresholds?`: `Record`\<`string`, `number`\>; `healthCheckEndpoint?`: `string`; `metricsToTrack?`: `string`[]; \} \| `null` \| `undefined`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:236](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L236)
+Defined in: [src/shared/agentConfigurationService.ts:236](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L236)
 
 Gets monitoring configuration for an agent.
 
@@ -252,7 +252,7 @@ agentId parameter.
 
 > **getPerformanceConfig**(`agentId`): `Promise`\<\{ `complexity?`: `"high"` \| `"medium"` \| `"low"`; `expectedResponseTime?`: `number`; `memoryUsage?`: `string`; \} \| `null` \| `undefined`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L253)
+Defined in: [src/shared/agentConfigurationService.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L253)
 
 Gets performance characteristics for an agent.
 
@@ -276,7 +276,7 @@ agentId parameter.
 
 > **getUserFacingInfo**(`agentId`): `Promise`\<\{ `exampleQueries?`: `string`[]; `friendlyDescription?`: `string`; `helpText?`: `string`; `useWhen?`: `string`[]; \} \| `null` \| `undefined`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L122)
+Defined in: [src/shared/agentConfigurationService.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L122)
 
 Gets user-facing information for an agent.
 
@@ -300,7 +300,7 @@ agentId parameter.
 
 > **hasCapability**(`agentId`, `capability`): `Promise`\<`boolean`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L173)
+Defined in: [src/shared/agentConfigurationService.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L173)
 
 Checks if an agent has a specific capability.
 
@@ -330,7 +330,7 @@ capability parameter.
 
 > **reloadConfiguration**(): `Promise`\<`void`\>
 
-Defined in: [src/shared/agentConfigurationService.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L284)
+Defined in: [src/shared/agentConfigurationService.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L284)
 
 Reloads the configuration from disk.
 
@@ -346,7 +346,7 @@ Reloads the configuration from disk.
 
 > `static` **getInstance**(): `AgentConfigurationService`
 
-Defined in: [src/shared/agentConfigurationService.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/shared/agentConfigurationService.ts#L31)
+Defined in: [src/shared/agentConfigurationService.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/shared/agentConfigurationService.ts#L31)
 
 Gets the singleton instance of the agent configuration service.
 

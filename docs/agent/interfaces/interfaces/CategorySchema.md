@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / CategorySchema
+[myBusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / CategorySchema
 
 # Interface: CategorySchema
 
-Defined in: [src/agent/interfaces.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L149)
+Defined in: [src/agent/interfaces.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L149)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/agent/interfaces.ts:149](https://github.com/ErikPlachta/vscode-
 
 > **name**: `string`
 
-Defined in: [src/agent/interfaces.ts:150](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L150)
+Defined in: [src/agent/interfaces.ts:150](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L150)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/agent/interfaces.ts:150](https://github.com/ErikPlachta/vscode-
 
 > **schema**: `unknown`
 
-Defined in: [src/agent/interfaces.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L151)
+Defined in: [src/agent/interfaces.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L151)

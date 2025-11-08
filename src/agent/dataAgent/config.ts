@@ -6,11 +6,11 @@ import {
   BaseAgentConfig,
   AgentConfigDefinition,
   DataConfig,
-} from "@types/agentConfig";
+} from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "@types/configValidation";
+} from "@internal-types/configValidation";
 import { dataAgentConfig } from "@agent/dataAgent/agent.config";
 
 /**
@@ -26,7 +26,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    * @returns {unknown} - TODO: describe return value.
    * @throws {Error} - May throw an error.
    */
-constructor(config?: AgentConfigDefinition) {
+  constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || dataAgentConfig;
 
@@ -41,12 +41,12 @@ constructor(config?: AgentConfigDefinition) {
     this.dataConfig = this.config.data || ({} as DataConfig);
   }
 
-    /**
-     * Get analysis configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getAnalysisConfig() {
+  /**
+   * Get analysis configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getAnalysisConfig() {
     return (
       this.dataConfig.analysis || {
         enableInsightGeneration: true,
@@ -56,12 +56,12 @@ public getAnalysisConfig() {
     );
   }
 
-    /**
-     * Get quality configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getQualityConfig() {
+  /**
+   * Get quality configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getQualityConfig() {
     return (
       this.dataConfig.quality || {
         missingFieldThreshold: 0.1,
@@ -72,12 +72,12 @@ public getQualityConfig() {
     );
   }
 
-    /**
-     * Get exploration configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getExplorationConfig() {
+  /**
+   * Get exploration configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getExplorationConfig() {
     return (
       this.dataConfig.exploration || {
         maxExplorationSteps: 8,
@@ -87,12 +87,12 @@ public getExplorationConfig() {
     );
   }
 
-    /**
-     * Get relationships configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getRelationshipsConfig() {
+  /**
+   * Get relationships configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getRelationshipsConfig() {
     return (
       this.dataConfig.relationships || {
         enableRelationshipMapping: true,
@@ -102,12 +102,12 @@ public getRelationshipsConfig() {
     );
   }
 
-    /**
-     * Get synthesis configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getSynthesisConfig() {
+  /**
+   * Get synthesis configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getSynthesisConfig() {
     return (
       this.dataConfig.synthesis || {
         enableTopicOverviews: true,
@@ -119,12 +119,12 @@ public getSynthesisConfig() {
     );
   }
 
-    /**
-     * Get performance configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getPerformanceConfig() {
+  /**
+   * Get performance configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getPerformanceConfig() {
     return (
       this.dataConfig.performance || {
         enableTopicOverviewCaching: true,
@@ -137,12 +137,12 @@ public getPerformanceConfig() {
     );
   }
 
-    /**
-     * Get search configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getSearchConfig() {
+  /**
+   * Get search configuration
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public getSearchConfig() {
     return (
       this.dataConfig.search || {
         maxResults: 50,
@@ -155,120 +155,120 @@ public getSearchConfig() {
     );
   }
 
-    /**
-     * Check if insight generation is enabled
-     *
-     * @returns {boolean} - TODO: describe return value.
-     */
-public isInsightGenerationEnabled(): boolean {
+  /**
+   * Check if insight generation is enabled
+   *
+   * @returns {boolean} - TODO: describe return value.
+   */
+  public isInsightGenerationEnabled(): boolean {
     return this.getAnalysisConfig().enableInsightGeneration;
   }
 
-    /**
-     * Check if cross-category analysis is enabled
-     *
-     * @returns {boolean} - TODO: describe return value.
-     */
-public isCrossCategoryAnalysisEnabled(): boolean {
+  /**
+   * Check if cross-category analysis is enabled
+   *
+   * @returns {boolean} - TODO: describe return value.
+   */
+  public isCrossCategoryAnalysisEnabled(): boolean {
     return this.getAnalysisConfig().crossCategoryAnalysis;
   }
 
-    /**
-     * Check if relationship mapping is enabled
-     *
-     * @returns {boolean} - TODO: describe return value.
-     */
-public isRelationshipMappingEnabled(): boolean {
+  /**
+   * Check if relationship mapping is enabled
+   *
+   * @returns {boolean} - TODO: describe return value.
+   */
+  public isRelationshipMappingEnabled(): boolean {
     return this.getRelationshipsConfig().enableRelationshipMapping;
   }
 
-    /**
-     * Check if automatic plan generation is enabled
-     *
-     * @returns {boolean} - TODO: describe return value.
-     */
-public isAutomaticPlanGenerationEnabled(): boolean {
+  /**
+   * Check if automatic plan generation is enabled
+   *
+   * @returns {boolean} - TODO: describe return value.
+   */
+  public isAutomaticPlanGenerationEnabled(): boolean {
     return this.getExplorationConfig().enableAutomaticPlanGeneration;
   }
 
-    /**
-     * Get maximum insight depth
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getMaxInsightDepth(): number {
+  /**
+   * Get maximum insight depth
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getMaxInsightDepth(): number {
     return this.getAnalysisConfig().maxInsightDepth;
   }
 
-    /**
-     * Get maximum exploration steps
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getMaxExplorationSteps(): number {
+  /**
+   * Get maximum exploration steps
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getMaxExplorationSteps(): number {
     return this.getExplorationConfig().maxExplorationSteps;
   }
 
-    /**
-     * Get maximum relationship depth
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getMaxRelationshipDepth(): number {
+  /**
+   * Get maximum relationship depth
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getMaxRelationshipDepth(): number {
     return this.getRelationshipsConfig().maxRelationshipDepth;
   }
 
-    /**
-     * Get plan complexity limit
-     *
-     * @returns {"low" | "medium" | "high"} - TODO: describe return value.
-     */
-public getPlanComplexityLimit(): "low" | "medium" | "high" {
+  /**
+   * Get plan complexity limit
+   *
+   * @returns {"low" | "medium" | "high"} - TODO: describe return value.
+   */
+  public getPlanComplexityLimit(): "low" | "medium" | "high" {
     return this.getExplorationConfig().planComplexityLimit;
   }
 
-    /**
-     * Get insight confidence threshold
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getInsightConfidenceThreshold(): number {
+  /**
+   * Get insight confidence threshold
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getInsightConfidenceThreshold(): number {
     return this.getAnalysisConfig().insightConfidenceThreshold ?? 0.7;
   }
 
-    /**
-     * Get relationship strength threshold
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getRelationshipStrengthThreshold(): number {
+  /**
+   * Get relationship strength threshold
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getRelationshipStrengthThreshold(): number {
     return this.getRelationshipsConfig().relationshipStrengthThreshold ?? 0.3;
   }
 
-    /**
-     * Get maximum insights per analysis
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getMaxInsightsPerAnalysis(): number {
+  /**
+   * Get maximum insights per analysis
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getMaxInsightsPerAnalysis(): number {
     return this.getAnalysisConfig().maxInsightsPerAnalysis ?? 10;
   }
 
-    /**
-     * Get maximum relationships per analysis
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getMaxRelationshipsPerAnalysis(): number {
+  /**
+   * Get maximum relationships per analysis
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getMaxRelationshipsPerAnalysis(): number {
     return this.getRelationshipsConfig().maxRelationshipsPerAnalysis ?? 25;
   }
 
-    /**
-     * Get insight categories to focus on
-     *
-     * @returns {string[]} - TODO: describe return value.
-     */
-public getInsightCategories(): string[] {
+  /**
+   * Get insight categories to focus on
+   *
+   * @returns {string[]} - TODO: describe return value.
+   */
+  public getInsightCategories(): string[] {
     return (
       this.getAnalysisConfig().insightCategories ?? [
         "patterns",
@@ -281,12 +281,12 @@ public getInsightCategories(): string[] {
     );
   }
 
-    /**
-     * Get exploration priorities
-     *
-     * @returns {string[]} - TODO: describe return value.
-     */
-public getExplorationPriorities(): string[] {
+  /**
+   * Get exploration priorities
+   *
+   * @returns {string[]} - TODO: describe return value.
+   */
+  public getExplorationPriorities(): string[] {
     return (
       this.getExplorationConfig().explorationPriorities ?? [
         "people",
@@ -298,12 +298,12 @@ public getExplorationPriorities(): string[] {
     );
   }
 
-    /**
-     * Get relationship types to track
-     *
-     * @returns {string[]} - TODO: describe return value.
-     */
-public getRelationshipTypes(): string[] {
+  /**
+   * Get relationship types to track
+   *
+   * @returns {string[]} - TODO: describe return value.
+   */
+  public getRelationshipTypes(): string[] {
     return (
       this.getRelationshipsConfig().relationshipTypes ?? [
         "direct",
@@ -316,21 +316,21 @@ public getRelationshipTypes(): string[] {
     );
   }
 
-    /**
-     * Get analysis timeout in milliseconds
-     *
-     * @returns {number} - TODO: describe return value.
-     */
-public getAnalysisTimeout(): number {
+  /**
+   * Get analysis timeout in milliseconds
+   *
+   * @returns {number} - TODO: describe return value.
+   */
+  public getAnalysisTimeout(): number {
     return this.getPerformanceConfig().analysisTimeout ?? 60000;
   }
 
-    /**
-     * Get telemetry configuration
-     *
-     * @returns {Record<string, unknown>} - TODO: describe return value.
-     */
-public getTelemetryConfig(): Record<string, unknown>  {
+  /**
+   * Get telemetry configuration
+   *
+   * @returns {Record<string, unknown>} - TODO: describe return value.
+   */
+  public getTelemetryConfig(): Record<string, unknown> {
     return {
       logQueries: this.config.telemetry?.logQueries ?? true,
       logPerformance: this.config.telemetry?.logPerformance ?? true,
@@ -342,12 +342,12 @@ public getTelemetryConfig(): Record<string, unknown>  {
     };
   }
 
-    /**
-     * Get error handling configuration
-     *
-     * @returns {Record<string, unknown>} - TODO: describe return value.
-     */
-public getErrorHandlingConfig(): Record<string, unknown>  {
+  /**
+   * Get error handling configuration
+   *
+   * @returns {Record<string, unknown>} - TODO: describe return value.
+   */
+  public getErrorHandlingConfig(): Record<string, unknown> {
     return {
       maxRetries: this.config.errorHandling?.maxRetries ?? 2,
       retryDelay: this.config.errorHandling?.retryDelay ?? 2000,

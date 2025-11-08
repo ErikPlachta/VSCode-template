@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [agent/databaseAgent/agent.config](../README.md) / databaseAgentConfig
+[myBusiness-mcp-extension](../../../../modules.md) / [agent/databaseAgent/agent.config](../README.md) / databaseAgentConfig
 
 # Variable: databaseAgentConfig
 
 > `const` **databaseAgentConfig**: [`AgentConfigDefinition`](../../../../types/agentConfig/interfaces/AgentConfigDefinition.md)
 
-Defined in: [src/agent/databaseAgent/agent.config.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/databaseAgent/agent.config.ts#L21)
+Defined in: [src/agent/databaseAgent/agent.config.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/databaseAgent/agent.config.ts#L21)
 
 Complete configuration for the Database Agent
 

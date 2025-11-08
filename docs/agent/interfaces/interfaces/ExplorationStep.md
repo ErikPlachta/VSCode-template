@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / ExplorationStep
+[myBusiness-mcp-extension](../../../modules.md) / [agent/interfaces](../README.md) / ExplorationStep
 
 # Interface: ExplorationStep
 
-Defined in: [src/agent/interfaces.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L107)
+Defined in: [src/agent/interfaces.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L107)
 
 Represents a single step in a data exploration plan.
 
@@ -16,7 +16,7 @@ Represents a single step in a data exploration plan.
 
 > **description**: `string`
 
-Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L109)
+Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L109)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/interfaces.ts:109](https://github.com/ErikPlachta/vscode-
 
 > **hints**: `string`[]
 
-Defined in: [src/agent/interfaces.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L111)
+Defined in: [src/agent/interfaces.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L111)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/agent/interfaces.ts:111](https://github.com/ErikPlachta/vscode-
 
 > **recommendedCategory**: `string`
 
-Defined in: [src/agent/interfaces.ts:110](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L110)
+Defined in: [src/agent/interfaces.ts:110](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L110)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/agent/interfaces.ts:110](https://github.com/ErikPlachta/vscode-
 
 > **title**: `string`
 
-Defined in: [src/agent/interfaces.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/interfaces.ts#L108)
+Defined in: [src/agent/interfaces.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/interfaces.ts#L108)

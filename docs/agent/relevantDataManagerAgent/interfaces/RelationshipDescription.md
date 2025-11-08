@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / RelationshipDescription
+[myBusiness-mcp-extension](../../../modules.md) / [agent/relevantDataManagerAgent](../README.md) / RelationshipDescription
 
 # Interface: RelationshipDescription
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L48)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L48)
 
 High-level relationship metadata surfaced to consumers.
 
@@ -16,7 +16,7 @@ High-level relationship metadata surfaced to consumers.
 
 > **cardinality**: `"one"` \| `"many"`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L56)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L56)
 
 Expected cardinality of the relationship.
 
@@ -26,7 +26,7 @@ Expected cardinality of the relationship.
 
 > **description**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L58)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L58)
 
 Narrative description of the relationship.
 
@@ -36,7 +36,7 @@ Narrative description of the relationship.
 
 > **name**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L50)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L50)
 
 Relationship label.
 
@@ -46,7 +46,7 @@ Relationship label.
 
 > **targetCategory**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L52)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L52)
 
 Category on the other side of the relationship.
 
@@ -56,6 +56,6 @@ Category on the other side of the relationship.
 
 > **viaField**: `string`
 
-Defined in: [src/agent/relevantDataManagerAgent/index.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/relevantDataManagerAgent/index.ts#L54)
+Defined in: [src/agent/relevantDataManagerAgent/index.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/relevantDataManagerAgent/index.ts#L54)
 
 Field or property used to establish the link.

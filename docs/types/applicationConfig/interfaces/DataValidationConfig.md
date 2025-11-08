@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / DataValidationConfig
+[myBusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / DataValidationConfig
 
 # Interface: DataValidationConfig
 
-Defined in: [src/types/applicationConfig.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L149)
+Defined in: [src/types/applicationConfig.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L149)
 
 Data validation configuration.
 
@@ -16,7 +16,7 @@ Data validation configuration.
 
 > **strictMode**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L151)
+Defined in: [src/types/applicationConfig.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L151)
 
 Enable strict validation mode.
 
@@ -26,7 +26,7 @@ Enable strict validation mode.
 
 > **validateOnLoad**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L153)
+Defined in: [src/types/applicationConfig.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L153)
 
 Validate data on load.
 
@@ -36,6 +36,6 @@ Validate data on load.
 
 > **validateRelationships**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/types/applicationConfig.ts#L155)
+Defined in: [src/types/applicationConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L155)
 
 Validate relationship integrity.

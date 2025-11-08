@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**myBusiness-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / OrchestratorResponse
+[myBusiness-mcp-extension](../../../modules.md) / [agent/orchestrator](../README.md) / OrchestratorResponse
 
 # Interface: OrchestratorResponse
 
-Defined in: [src/agent/orchestrator/index.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L36)
+Defined in: [src/agent/orchestrator/index.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L36)
 
 Result of orchestrating a question across the available agents.
 
@@ -16,7 +16,7 @@ Result of orchestrating a question across the available agents.
 
 > **agent**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L38)
+Defined in: [src/agent/orchestrator/index.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L38)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/agent/orchestrator/index.ts:38](https://github.com/ErikPlachta/
 
 > **intent**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L37)
+Defined in: [src/agent/orchestrator/index.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L37)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/agent/orchestrator/index.ts:37](https://github.com/ErikPlachta/
 
 > **markdown**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L42)
+Defined in: [src/agent/orchestrator/index.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L42)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/agent/orchestrator/index.ts:42](https://github.com/ErikPlachta/
 
 > **payload**: `unknown`
 
-Defined in: [src/agent/orchestrator/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L41)
+Defined in: [src/agent/orchestrator/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L41)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/agent/orchestrator/index.ts:41](https://github.com/ErikPlachta/
 
 > **rationale**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L40)
+Defined in: [src/agent/orchestrator/index.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L40)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/agent/orchestrator/index.ts:40](https://github.com/ErikPlachta/
 
 > **summary**: `string`
 
-Defined in: [src/agent/orchestrator/index.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b47dd1cc6e72353ede5a30309909c9d48eecc60a/src/agent/orchestrator/index.ts#L39)
+Defined in: [src/agent/orchestrator/index.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/agent/orchestrator/index.ts#L39)

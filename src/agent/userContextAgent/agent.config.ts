@@ -7,8 +7,8 @@
  * exports can be removed.
  */
 
-import type { AgentConfigDefinition } from "@types/agentConfig";
-import { CONFIG_IDS } from "@types/configRegistry";
+import type { AgentConfigDefinition } from "@internal-types/agentConfig";
+import { CONFIG_IDS } from "@internal-types/configRegistry";
 import { relevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/agent.config";
 
 /**
