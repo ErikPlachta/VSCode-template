@@ -8,12 +8,16 @@ associations:
   - changelog
   - governance
   - automation
-hierarchy:
-  - root
-  - changelog
-  - compliance
----
-
+   - Full migration from `businessData` to `userContext` with backward-compatible layer (in progress).
+   - Replace remaining `relevantDataManagerAgent` imports with `userContextAgent` (pending final sweep and eventual deprecation removal).
+   - Resolve TypeDoc generation missing file warnings by adding referenced docs (`docs/build-pipeline.md`, `docs/agents/repository-health-agent.md`, `docs/orchestration.md`).
+   - Lint remediation: address 130+ outstanding ESLint errors (return types, JSDoc alignment, unused vars) – phase 1 targeting agent config getters.
+   - Health report integration improvements and repository health agent alias resolution.
+   - Enforce path alias imports (no relative paths) across codebase (rule + conversion complete).
+   - Consolidate developer-only scripts into `bin/utils` (completed) and remove `bin/tools` after CI update.
+   - Rename `@types/*` alias to `@internal-types/*` to resolve TypeDoc TS6137 errors (completed).
+   - Add docs post-processing (LF normalization + trailing newline) and `.gitattributes` for consistent EOL (completed; pending repository-wide renormalization commit).
+   - Source-based script execution using `tsx` (completed).
 ## Changelog
 
 All notable changes, requests, solutions, and goals driven via VS Code Copilot Chat are tracked here.
@@ -21,11 +25,19 @@ All notable changes, requests, solutions, and goals driven via VS Code Copilot C
 This file follows the Keep a Changelog format and uses semantic groupings under each release. Items that are planned or in progress live under Unreleased. When items complete, move them to a dated release section.
 
 ## How to use this file with Copilot Chat
+  - Added ESLint `no-restricted-imports` rule banning relative import paths.
+  - Implemented automated import conversion script and refactored configuration into constants.
+  - Added docs postprocessing script ensuring LF line endings & trailing newline across generated markdown.
+  - Introduced `.gitattributes` enforcing LF for source & docs.
+  - Added `tsx` dev dependency and updated package scripts to execute directly from source.
+  - Converted `@types/*` alias to `@internal-types/*` to unblock Typedoc.
+  - Moved dev-only tooling (`addFileTags`, `fixJSDoc`, `processTemplates`, `updatePackageConfig`, import utilities) into `bin/utils`.
+  - Generated documentation successfully post-alias rename (warnings limited to missing referenced markdown assets).
 
 - At the start of a session, read the Unreleased section and ask whether to resume from the top items or re-prioritize.
 - When creating a new task, add it to Unreleased under Planned.
 - When making changes, add entries under Added/Changed/Fixed/Docs as appropriate and reference the files you touched.
-- When a task is done and verified (build/lint/tests), move its notes from Unreleased to a new dated version section.
+  - Docs: PASS (Typedoc runs; 6 warnings for missing referenced docs remain).
 - Keep entries concise, action-oriented, and link to code paths (e.g., `src/agent/...`).
 
 ## [Unreleased]
@@ -35,10 +47,11 @@ This file follows the Keep a Changelog format and uses semantic groupings under 
 - Finish clarification agent config typing: add explicit return type for `getResponseStyle()` in `src/agent/clarificationAgent/config.ts`.
 - Orchestrator config & index: add return types, replace `any`, improve JSDoc; underscore unused variables in `src/agent/orchestrator/config.ts` and `src/agent/orchestrator/index.ts`.
 - Other agent configs: add explicit return types and refine JSDoc summaries.
-- Shared analytics modules: replace `any`, document nested `options.*`, convert `require()` to `import` in shared analytics modules.
-- Types layer (`src/types/configRegistry.ts`, `src/types/configValidation.ts`): fill missing @param/@returns, underscore unused params.
-- Prompts module: fix `jsdoc/valid-types` warnings in `src/mcp/prompts/index.ts`.
-- Refine `@throws` usage across constructors/load methods.
+   - Address outstanding ESLint errors in agent config files (add explicit return types) – prioritize getter functions flagged.
+   - Create missing referenced docs to remove TypeDoc warnings.
+   - Perform final sweep to replace legacy agent imports and plan deprecation removal.
+   - Add health report markdown assets to reduce warnings and update reporting script if needed.
+   - Run repository-wide EOL normalization commit.
 - Draft legacy config removal plan & deprecation warnings (`mcp.config.json`, loader).
 - Param name normalization scan & adjustments.
 - Final lint/compile/test sweep and repository health report.

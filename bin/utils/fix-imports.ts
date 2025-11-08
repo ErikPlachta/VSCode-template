@@ -12,6 +12,27 @@ import { promises as fs } from "fs";
 import { join, extname } from "path";
 
 /**
+ * Central configuration object for default import path rewrites.
+ *
+ * Adjust this object rather than editing logic in `runImportFixer`.
+ */
+const DEFAULT_IMPORT_REWRITE: ImportFixConfig = {
+  targetDirectory: join(process.cwd(), "src"),
+  transformations: [
+    { find: "../agents/", replace: "@agents/" },
+    { find: "../extension/", replace: "@extension/" },
+    { find: "../mcp/", replace: "@mcp/" },
+    { find: "../server/", replace: "@server/" },
+    { find: "../shared/", replace: "@shared/" },
+    { find: "../types/", replace: "@internal-types/" },
+    { find: "../tools/", replace: "@tools/" },
+    { find: "../agent/", replace: "@agent/" },
+  ],
+  extensions: [".ts"],
+  dryRun: false,
+};
+
+/**
  * Configuration interface for import path transformations.
  */
 interface ImportFixConfig {
@@ -227,27 +248,12 @@ export async function fixImports(
  * Command-line interface for the import fixing utility.
  *
  * Runs predefined import transformations commonly needed in this project.
- *
- * TODO: Update so these are pulled from a config file or CLI args, not hard-coded here. If hard-coded in file is the smartest solution, make it a global object at top of file so it's easier to find and edit.
  */
 export async function runImportFixer(): Promise<void> {
-  console.log("🚀 Starting import path fixes...\n");
-
-  // Fix relative imports to absolute imports in src directory
-  await fixImports({
-    targetDirectory: join(process.cwd(), "src"),
-    transformations: [
-      { find: "../agents/", replace: "@agents/" },
-      { find: "../extension/", replace: "@extension/" },
-      { find: "../mcp/", replace: "@mcp/" },
-      { find: "../server/", replace: "@server/" },
-      { find: "../shared/", replace: "@shared/" },
-      { find: "../types/", replace: "@types/" },
-      { find: "../tools/", replace: "@tools/" },
-      { find: "../agent/", replace: "@agent/" },
-    ],
-  });
-
+  console.log(
+    "🚀 Starting import path fixes using DEFAULT_IMPORT_REWRITE...\n"
+  );
+  await fixImports(DEFAULT_IMPORT_REWRITE);
   console.log("\n✅ Import fixing completed!");
 }
 

@@ -87,8 +87,8 @@
     }
   },
   "scripts": {
-    "config": "npm run compile -- --pretty false && node ./out/bin/tools/updatePackageConfig.js",
-    "templates": "npm run compile -- --pretty false && node ./out/bin/tools/processTemplates.js",
+    "config": "tsx bin/utils/updatePackageConfig.ts",
+    "templates": "tsx bin/utils/processTemplates.ts",
     "prebuild": "npm run config && npm run templates",
     "build": "npm run compile",
     "build:pipeline": "bash bin/build.sh",
