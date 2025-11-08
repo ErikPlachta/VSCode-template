@@ -7,7 +7,7 @@ import type {
   CategoryId,
   RelationshipDescription,
   CategorySchema,
-} from "@agent/relevantDataManagerAgent";
+} from "@agent/userContextAgent";
 
 /**
  * RelationshipIntegrityIssue interface.

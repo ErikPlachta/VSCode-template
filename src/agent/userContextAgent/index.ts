@@ -10,4 +10,11 @@
 
 export { RelevantDataManagerAgent as UserContextAgent } from "../relevantDataManagerAgent";
 export { createRelevantDataManagerAgent as createUserContextAgent } from "../relevantDataManagerAgent";
+// Re-export legacy types so consumers can switch import path without changes
+export type {
+  BusinessCategory,
+  CategoryId,
+  RelationshipDescription,
+  CategorySchema,
+} from "../relevantDataManagerAgent";
 export { UserContextAgentConfig, userContextAgentConfig } from "./config";
