@@ -20,7 +20,7 @@ import {
 } from "@extension/mcpCache";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { RelevantDataManagerAgentProfile } from "@mcp/config/agentProfiles";
-import { RelevantDataManagerAgentConfig } from "./config";
+import { RelevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/config";
 
 /**
  * Description for how a category folder is organised.
@@ -1896,5 +1896,5 @@ export function createRelevantDataManagerAgent(): RelevantDataManagerAgent {
 }
 
 // Export configuration types and instances for external use
-export { RelevantDataManagerAgentConfig } from "./config";
-export { relevantDataManagerAgentConfig } from "./agent.config";
+export { RelevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/config";
+export { relevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/agent.config";

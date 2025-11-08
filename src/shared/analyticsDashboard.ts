@@ -2,7 +2,7 @@
  * @packageDocumentation Analytics dashboard utilities for generating usage reports and visualizations.
  */
 
-import type { UsageAnalyticsSummary, AgentUsageStats } from "./agentAnalytics";
+import type { UsageAnalyticsSummary, AgentUsageStats } from "@shared/agentAnalytics";
 
 /**
  * Dashboard report section enumeration.

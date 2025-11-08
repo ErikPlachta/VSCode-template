@@ -7,8 +7,8 @@
  * offering helpful guidance and context to improve query quality and user experience.
  */
 
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
+import type { AgentConfigDefinition } from "@types/agentConfig";
+import { CONFIG_IDS } from "@types/configRegistry";
 
 /**
  * Complete configuration for the Clarification Agent

@@ -7,7 +7,7 @@ import { pathToFileURL } from "url";
 import {
   type ApplicationConfig,
   type EnvironmentConfig,
-} from "../types/applicationConfig";
+} from "@types/applicationConfig";
 
 /**
  * Default configuration values used as a base when merging a loaded config.

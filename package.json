@@ -1,9 +1,9 @@
 {
-  "name": "mybusiness-mcp-extension",
+  "name": "myBusiness-mcp-extension",
   "displayName": "My Business MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",
-  "publisher": "ErikPlachta",
+  "publisher": "myOrg",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "onCommand:mybusinessMCP.invokeTool",
     "onCommand:mybusinessMCP.registerServer",
     "onCommand:mybusinessMCP.unregisterServer",
-    "onChatParticipant:MybusinessMCP"
+    "onChatParticipant:MyBusinessMCP"
   ],
   "main": "./out/extension/index.js",
   "contributes": {
@@ -37,14 +37,14 @@
     ],
     "mcpServerDefinitionProviders": [
       {
-        "id": "mybusiness-local",
+        "id": "myBusiness-local",
         "label": "My Business MCP Extension Embedded Server"
       }
     ],
     "chatParticipants": [
       {
-        "id": "MybusinessMCP",
-        "name": "mybusiness",
+        "id": "MyBusinessMCP",
+        "name": "myBusiness",
         "description": "Access your business data including applications, departments, people, policies, and resources",
         "isSticky": true
       }
@@ -75,7 +75,7 @@
         },
         "mybusinessMCP.registerServerId": {
           "type": "string",
-          "default": "mybusiness",
+          "default": "myBusiness",
           "description": "Server id key used inside mcp.json servers object."
         },
         "mybusinessMCP.includeAuthHeader": {
@@ -102,7 +102,9 @@
     "lint:docs": "npm run compile -- --pretty false && node -r tsconfig-paths/register ./out/tools/validateMarkdown.js",
     "health:report": "npm run compile -- --pretty false && node -r tsconfig-paths/register ./out/src/tools/repositoryHealth.js",
     "test": "jest --runInBand --ci",
-    "docs": "typedoc",
+    "docs": "typedoc && npm run docs:fix",
+    "docs:fix": "npm run compile -- --pretty false && node -r tsconfig-paths/register ./out/src/tools/postprocessDocs.js",
+    "fix:imports": "npm run compile -- --pretty false && node -r tsconfig-paths/register ./out/src/tools/convertRelativeImports.js",
     "compile": "tsc -p ./",
     "package": "npm run build && npx vsce package",
     "install": "code --install-extension mybusiness-mcp-extension-1.0.0.vsix",

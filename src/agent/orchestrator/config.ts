@@ -6,12 +6,12 @@ import {
   BaseAgentConfig,
   AgentConfigDefinition,
   OrchestrationConfig,
-} from "../../types/agentConfig";
+} from "@types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "../../types/configValidation";
-import { orchestratorConfig } from "./agent.config";
+} from "@types/configValidation";
+import { orchestratorConfig } from "@agent/orchestrator/agent.config";
 
 /**
  * Orchestrator-specific configuration class

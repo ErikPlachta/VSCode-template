@@ -13,7 +13,7 @@ import Ajv2020 from "ajv/dist/2020";
 import addFormats from "ajv-formats";
 import fg from "fast-glob";
 import matter from "gray-matter";
-import { loadApplicationConfig } from "../shared/configurationLoader";
+import { loadApplicationConfig } from "@shared/configurationLoader";
 
 /**
  * Configuration contract for the repository health agent.

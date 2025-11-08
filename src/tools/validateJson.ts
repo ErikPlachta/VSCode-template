@@ -5,7 +5,7 @@
  */
 
 import process from "node:process";
-import { RepositoryHealthAgent } from "./repositoryHealth";
+import { RepositoryHealthAgent } from "@tools/repositoryHealth";
 
 /**
  * Execute JSON schema validation using the repository health agent.

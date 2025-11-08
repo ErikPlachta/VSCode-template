@@ -15,7 +15,7 @@ import {
 } from "@extension/mcpCache";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { DatabaseAgentProfile } from "@mcp/config/agentProfiles";
-import { DatabaseAgentConfig } from "./config";
+import { DatabaseAgentConfig } from "@agent/databaseAgent/config";
 
 // Generic types that work with any data structure
 /** Identifier for a generic category or data source. */

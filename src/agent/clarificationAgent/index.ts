@@ -7,7 +7,7 @@ import { KnowledgeBase, KnowledgeHit } from "@mcp/knowledgeBase";
 import { renderClarificationPrompt } from "@mcp/prompts";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { ClarificationAgentProfile } from "@mcp/config/agentProfiles";
-import { ClarificationAgentConfig } from "./config";
+import { ClarificationAgentConfig } from "@agent/clarificationAgent/config";
 
 /**
  * Input parameters for the clarification agent.
@@ -101,5 +101,5 @@ async clarify(
 }
 
 // Export configuration types and instances for external use
-export { ClarificationAgentConfig } from "./config";
-export { clarificationAgentConfig } from "./agent.config";
+export { ClarificationAgentConfig } from "@agent/clarificationAgent/config";
+export { clarificationAgentConfig } from "@agent/clarificationAgent/agent.config";

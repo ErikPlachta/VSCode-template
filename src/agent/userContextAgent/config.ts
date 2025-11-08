@@ -5,6 +5,6 @@
  * to preserve behavior while exposing the new name across imports.
  */
 
-export { RelevantDataManagerAgentConfig as UserContextAgentConfig } from "../relevantDataManagerAgent/config";
-export type { RelevantDataManagerConfig as UserContextConfig } from "../../types/agentConfig";
-export { userContextAgentConfig } from "./agent.config";
+export { RelevantDataManagerAgentConfig as UserContextAgentConfig } from "@agent/relevantDataManagerAgent/config";
+export type { RelevantDataManagerConfig as UserContextConfig } from "@types/agentConfig";
+export { userContextAgentConfig } from "@agent/userContextAgent/agent.config";

@@ -16,4 +16,4 @@ export {
   DatabaseAgentProfile,
   DataAgentProfile,
   ClarificationAgentProfile,
-} from "./unifiedAgentConfig";
+} from "@mcp/config/unifiedAgentConfig";

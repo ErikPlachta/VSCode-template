@@ -7,9 +7,9 @@
  * exports can be removed.
  */
 
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
-import { relevantDataManagerAgentConfig } from "../relevantDataManagerAgent/agent.config";
+import type { AgentConfigDefinition } from "@types/agentConfig";
+import { CONFIG_IDS } from "@types/configRegistry";
+import { relevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/agent.config";
 
 /**
  * User Context Agent configuration.

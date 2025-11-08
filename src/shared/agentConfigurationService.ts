@@ -6,7 +6,7 @@ import { loadApplicationConfig } from "@shared/configurationLoader";
 import type {
   AgentDefinition,
   ApplicationConfig,
-} from "../types/applicationConfig";
+} from "@types/applicationConfig";
 import type { AgentIdentifier } from "@mcp/config/agentProfiles";
 
 /**

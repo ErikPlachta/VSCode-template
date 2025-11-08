@@ -2,8 +2,8 @@
  * @packageDocumentation Integration utilities for adding analytics tracking to existing agents.
  */
 
-import { getAnalytics, type AgentUsageAnalytics } from "./agentAnalytics";
-import { loadApplicationConfig } from "./configurationLoader";
+import { getAnalytics, type AgentUsageAnalytics } from "@shared/agentAnalytics";
+import { loadApplicationConfig } from "@shared/configurationLoader";
 
 /**
  * Decorator function for automatic analytics tracking on agent methods.

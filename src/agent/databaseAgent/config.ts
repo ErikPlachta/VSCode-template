@@ -6,12 +6,12 @@ import {
   BaseAgentConfig,
   AgentConfigDefinition,
   DatabaseConfig,
-} from "../../types/agentConfig";
+} from "@types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "../../types/configValidation";
-import { databaseAgentConfig } from "./agent.config";
+} from "@types/configValidation";
+import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";
 
 /**
  * Database agent-specific configuration class

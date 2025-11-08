@@ -9,7 +9,7 @@
 
 import { createInvocationLogger } from "@mcp/telemetry";
 import { DataAgentProfile } from "@mcp/config/agentProfiles";
-import { DataAgentConfig } from "./config";
+import { DataAgentConfig } from "@agent/dataAgent/config";
 
 // Define core data types without importing from other agents
 /**
@@ -454,5 +454,5 @@ export function createDataAgent(): DataAgent {
 }
 
 // Export configuration types and instances for external use
-export { DataAgentConfig } from "./config";
-export { dataAgentConfig } from "./agent.config";
+export { DataAgentConfig } from "@agent/dataAgent/config";
+export { dataAgentConfig } from "@agent/dataAgent/agent.config";

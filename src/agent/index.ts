@@ -7,17 +7,17 @@
  */
 
 // Clean interface definitions for orchestrator coordination (moved to types)
-export * from "../types/interfaces";
+export * from "@types/interfaces";
 
 // Core agent implementations - each properly isolated
-export { ClarificationAgent } from "./clarificationAgent/";
-export { DataAgent } from "./dataAgent/";
-export { DatabaseAgent } from "./databaseAgent/";
-export { Orchestrator } from "./orchestrator/";
-export { RelevantDataManagerAgent } from "./relevantDataManagerAgent/";
+export { ClarificationAgent } from "@agent/clarificationAgent";
+export { DataAgent } from "@agent/dataAgent";
+export { DatabaseAgent } from "@agent/databaseAgent";
+export { Orchestrator } from "@agent/orchestrator";
+export { RelevantDataManagerAgent } from "@agent/relevantDataManagerAgent";
 
 // Health and maintenance agents
-export { RepositoryHealthAgent } from "../tools/repositoryHealth";
+export { RepositoryHealthAgent } from "@tools/repositoryHealth";
 
 // Re-export agent profiles for convenience
 export {

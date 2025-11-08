@@ -2,7 +2,7 @@
  * @packageDocumentation Configuration-driven orchestrator implementation
  */
 
-import { OrchestratorConfig } from "./config";
+import { OrchestratorConfig } from "@agent/orchestrator/config";
 
 /** List of supported orchestration intents (from configuration). */
 export type OrchestratorIntent = string;

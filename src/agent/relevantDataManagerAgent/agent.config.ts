@@ -7,8 +7,8 @@
  * relationships, and data quality across the entire system.
  */
 
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
+import type { AgentConfigDefinition } from "@types/agentConfig";
+import { CONFIG_IDS } from "@types/configRegistry";
 
 /**
  * Complete configuration for the Relevant Data Manager Agent

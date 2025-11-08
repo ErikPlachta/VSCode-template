@@ -6,12 +6,12 @@ import {
   BaseAgentConfig,
   AgentConfigDefinition,
   ClarificationConfig,
-} from "../../types/agentConfig";
+} from "@types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "../../types/configValidation";
-import { clarificationAgentConfig } from "./agent.config";
+} from "@types/configValidation";
+import { clarificationAgentConfig } from "@agent/clarificationAgent/agent.config";
 
 /**
  * Clarification agent-specific configuration class

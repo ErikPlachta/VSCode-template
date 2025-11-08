@@ -6,12 +6,12 @@ import {
   BaseAgentConfig,
   AgentConfigDefinition,
   DataConfig,
-} from "../../types/agentConfig";
+} from "@types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "../../types/configValidation";
-import { dataAgentConfig } from "./agent.config";
+} from "@types/configValidation";
+import { dataAgentConfig } from "@agent/dataAgent/agent.config";
 
 /**
  * Data agent-specific configuration class

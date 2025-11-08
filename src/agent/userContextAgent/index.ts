@@ -8,13 +8,13 @@
  * - New: `@agent/userContextAgent`
  */
 
-export { RelevantDataManagerAgent as UserContextAgent } from "../relevantDataManagerAgent";
-export { createRelevantDataManagerAgent as createUserContextAgent } from "../relevantDataManagerAgent";
+export { RelevantDataManagerAgent as UserContextAgent } from "@agent/relevantDataManagerAgent";
+export { createRelevantDataManagerAgent as createUserContextAgent } from "@agent/relevantDataManagerAgent";
 // Re-export legacy types so consumers can switch import path without changes
 export type {
   BusinessCategory,
   CategoryId,
   RelationshipDescription,
   CategorySchema,
-} from "../relevantDataManagerAgent";
-export { UserContextAgentConfig, userContextAgentConfig } from "./config";
+} from "@agent/relevantDataManagerAgent";
+export { UserContextAgentConfig, userContextAgentConfig } from "@agent/userContextAgent/config";
