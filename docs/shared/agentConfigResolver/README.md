@@ -16,6 +16,10 @@ Agent configuration resolver that merges unified agent config with MCP runtime o
 
 - [EffectiveExecutionProfile](interfaces/EffectiveExecutionProfile.md)
 
+## Type Aliases
+
+- [Priority](type-aliases/Priority.md)
+
 ## References
 
 ### default

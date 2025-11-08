@@ -8,6 +8,16 @@
 
 external.d implementation for types module
 
+## Type Aliases
+
+- [AddFormats](type-aliases/AddFormats.md)
+
 ## Variables
 
-- [default](variables/default.md)
+- [addFormats](variables/addFormats.md)
+
+## References
+
+### default
+
+Renames and re-exports [addFormats](variables/addFormats.md)

@@ -11,10 +11,16 @@ import { fetchTools, MCPTool } from "@extension/mcpSync";
 import { registerMcpProvider } from "@extension/mcpProvider";
 
 /**
- * Activates the extension, registering the chat participant.
+ * Activate the MyBusiness MCP extension.
  *
- * @param {vscode.ExtensionContext} context - context parameter.
- * @returns {Promise<void>} - TODO: describe return value.
+ * Responsibilities:
+ * - Optionally start the embedded MCP server (when no external serverUrl is configured).
+ * - Register the MCP provider for server discovery.
+ * - Register the chat participant that routes user prompts through the orchestrator.
+ * - Expose a command for manual tool invocation.
+ *
+ * @param {vscode.ExtensionContext} context - VS Code extension lifecycle context used for disposables.
+ * @returns {Promise<void>} Resolves when activation sequence has completed (server started, participant registered).
  */
 export async function activate(
   context: vscode.ExtensionContext
@@ -38,7 +44,9 @@ export async function activate(
       // Register cleanup when extension is deactivated
       context.subscriptions.push({
         /**
+         * Dispose handler to stop embedded MCP server when extension unloads.
          *
+         * @returns {Promise<void>} Resolves when server has stopped.
          */
         dispose: async () => {
           await stopMCPServer();
@@ -60,16 +68,16 @@ export async function activate(
     const tools: MCPTool[] = await fetchTools(serverUrl, token);
 
     // Create a proper chat request handler
-    const chatHandler: vscode.ChatRequestHandler = /**
-                                                    * chatHandler function.
-                                                    *
-                                                    * @param {vscode.ChatRequest} request - request parameter.
-                                                    * @param {vscode.ChatContext} _context - _context parameter.
-                                                    * @param {vscode.ChatResponseStream} stream - stream parameter.
-                                                    * @param {vscode.CancellationToken} _cancellationToken - _cancellationToken parameter.
-                                                    * @returns {unknown} - TODO: describe return value.
-                                                    */
-async (
+    /**
+     * Process a Copilot Chat request using the orchestrator.
+     *
+     * @param {vscode.ChatRequest} request - Incoming chat message payload.
+     * @param {vscode.ChatContext} _context - Conversation context (unused currently).
+     * @param {vscode.ChatResponseStream} stream - Streaming interface for incremental markdown responses.
+     * @param {vscode.CancellationToken} _cancellationToken - Cancellation token for long-running operations.
+     * @returns {Promise<void>} Resolves when response has been fully streamed.
+     */
+    const chatHandler: vscode.ChatRequestHandler = async (
       request: vscode.ChatRequest,
       _context: vscode.ChatContext,
       stream: vscode.ChatResponseStream,
@@ -162,7 +170,9 @@ async (
 }
 
 /**
- * Deactivates the extension.
- *
+ * Deactivate the extension.
+ * Currently a no-op because embedded server shutdown is handled via subscription dispose.
  */
-export function deactivate(): void {}
+export function deactivate(): void {
+  // Intentionally empty; resources cleaned up by disposables registered on activation.
+}

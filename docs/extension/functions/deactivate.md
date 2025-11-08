@@ -8,7 +8,7 @@
 
 > **deactivate**(): `void`
 
-Defined in: [src/extension/index.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/index.ts#L168)
+Defined in: [src/extension/index.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/extension/index.ts#L168)
 
 Deactivates the extension.
 

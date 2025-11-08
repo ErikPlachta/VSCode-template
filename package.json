@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "myBusiness-mcp-extension",
   "displayName": "My Business MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
@@ -102,8 +103,8 @@
     "lint:docs": "tsx bin/utils/validateMarkdown.ts",
     "health:report": "tsx src/tools/repositoryHealth.ts",
     "test": "jest --runInBand --ci",
-  "docs": "tsx bin/utils/cleanDocs.ts && typedoc && npm run docs:fix && npm run health:report && npm run docs:nav",
-  "docs:nav": "tsx bin/utils/buildDocsNav.ts",
+    "docs": "tsx bin/utils/cleanDocs.ts && typedoc && npm run docs:fix && npm run health:report && npm run docs:nav",
+    "docs:nav": "tsx bin/utils/buildDocsNav.ts",
     "docs:fix": "tsx bin/utils/postprocessDocs.ts",
     "fix:imports": "tsx bin/utils/convertRelativeImports.ts",
     "compile": "tsc -p ./",

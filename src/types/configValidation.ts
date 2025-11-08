@@ -6,7 +6,7 @@
  */
 
 import { AgentConfigDefinition } from "@internal-types/agentConfig";
-import { ConfigUtils, CONFIG_REGISTRY } from "@internal-types/configRegistry";
+import { ConfigUtils } from "@internal-types/configRegistry";
 
 /**
  * Validation result with detailed error information
@@ -257,12 +257,12 @@ function validateConfigurationSections(
  *
  * @param {Record<string, unknown>} config - config parameter.
  * @param {ValidationError[]} errors - errors parameter.
- * @param {ValidationWarning[]} warnings - warnings parameter.
+ * @param {ValidationWarning[]} _warnings - warnings parameter.
  */
 function validateOrchestratorConfig(
   config: Record<string, unknown>,
   errors: ValidationError[],
-  warnings: ValidationWarning[]
+  _warnings: ValidationWarning[]
 ): void {
   // Check for orchestration section first
   const orchestration = config.orchestration as
@@ -350,61 +350,63 @@ function validateOrchestratorConfig(
 }
 
 /**
- * Placeholder validation functions for other agent types
+ * Placeholder validation functions for other agent types.
+ * Parameters are intentionally unused until specialized validation is implemented.
  *
- * @param {Record<string, unknown>} config - config parameter.
- * @param {ValidationError[]} errors - errors parameter.
- * @param {ValidationWarning[]} warnings - warnings parameter.
+ * @param {Record<string, unknown>} _config - Configuration object to validate.
+ * @param {ValidationError[]} _errors - Array to push validation errors into.
+ * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
  */
 function validateDatabaseAgentConfig(
-  config: Record<string, unknown>,
-  errors: ValidationError[],
-  warnings: ValidationWarning[]
+  _config: Record<string, unknown>,
+  _errors: ValidationError[],
+  _warnings: ValidationWarning[]
 ): void {
   // TODO: Implement database agent specific validation
 }
 
 /**
- * validateDataAgentConfig function.
+ * Placeholder data-agent configuration validation.
  *
- * @param {Record<string, unknown>} config - config parameter.
- * @param {ValidationError[]} errors - errors parameter.
- * @param {ValidationWarning[]} warnings - warnings parameter.
+ * @param {Record<string, unknown>} _config - Configuration object to validate.
+ * @param {ValidationError[]} _errors - Array to push validation errors into.
+ * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
  */
 function validateDataAgentConfig(
-  config: Record<string, unknown>,
-  errors: ValidationError[],
-  warnings: ValidationWarning[]
+  _config: Record<string, unknown>,
+  _errors: ValidationError[],
+  _warnings: ValidationWarning[]
 ): void {
   // TODO: Implement data agent specific validation
 }
 
 /**
- * validateClarificationAgentConfig function.
+ * Placeholder clarification-agent configuration validation.
  *
- * @param {Record<string, unknown>} config - config parameter.
- * @param {ValidationError[]} errors - errors parameter.
- * @param {ValidationWarning[]} warnings - warnings parameter.
+ * @param {Record<string, unknown>} _config - Configuration object to validate.
+ * @param {ValidationError[]} _errors - Array to push validation errors into.
+ * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
  */
 function validateClarificationAgentConfig(
-  config: Record<string, unknown>,
-  errors: ValidationError[],
-  warnings: ValidationWarning[]
+  _config: Record<string, unknown>,
+  _errors: ValidationError[],
+  _warnings: ValidationWarning[]
 ): void {
   // TODO: Implement clarification agent specific validation
 }
 
 /**
- * validateRelevantDataManagerConfig function.
+ * Placeholder relevant-data-manager configuration validation.
+ * (Also reused for user-context alias.)
  *
- * @param {Record<string, unknown>} config - config parameter.
- * @param {ValidationError[]} errors - errors parameter.
- * @param {ValidationWarning[]} warnings - warnings parameter.
+ * @param {Record<string, unknown>} _config - Configuration object to validate.
+ * @param {ValidationError[]} _errors - Array to push validation errors into.
+ * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
  */
 function validateRelevantDataManagerConfig(
-  config: Record<string, unknown>,
-  errors: ValidationError[],
-  warnings: ValidationWarning[]
+  _config: Record<string, unknown>,
+  _errors: ValidationError[],
+  _warnings: ValidationWarning[]
 ): void {
   // TODO: Implement relevant data manager specific validation
 }

@@ -5,12 +5,13 @@ import * as vscode from "vscode";
 import * as path from "path";
 
 /**
- * registerMcpProvider function.
+ * Register a McpServerDefinitionProvider to let VS Code discover the embedded MCP server.
  *
- * @param {string} serverUrl - serverUrl parameter.
- * @param {string} token - token parameter.
- * @param {boolean} includeAuthHeader - includeAuthHeader parameter.
- * @param {vscode.ExtensionContext} context - context parameter.
+ * @param {string} serverUrl - MCP server URL (ignored for stdio definition but kept for future expansion).
+ * @param {string} token - Authentication token to use when contacting the server.
+ * @param {boolean} includeAuthHeader - Whether to include the auth token as an HTTP header.
+ * @param {vscode.ExtensionContext} context - Extension context for managing disposables.
+ * @returns {void} Nothing is returned; disposables are pushed to the provided context.
  */
 export function registerMcpProvider(
   serverUrl: string,
@@ -24,7 +25,9 @@ export function registerMcpProvider(
     {
       onDidChangeMcpServerDefinitions: emitter.event,
       /**
+       * Provide MCP server definitions to VS Code LM API for discovery.
        *
+       * @returns {Promise<vscode.McpStdioServerDefinition[]>} List of server definitions.
        */
       provideMcpServerDefinitions: async () => {
         // Provide a stdio server definition that runs our Node.js server

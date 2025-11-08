@@ -18,20 +18,14 @@ export interface EscalationPromptOptions {
 }
 
 /**
- * renderEscalationPrompt function.
+ * Renders an escalation prompt for clarification or routing.
  *
- * @param {EscalationPromptOptions} {
-  topic,
-  missingSignals,
-  manifest,
-  additionalGuidance,
-} - {
-  topic,
-  missingSignals,
-  manifest,
-  additionalGuidance,
-} parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {EscalationPromptOptions} options - Prompt construction options.
+ * @param {string} [options.topic] - Domain or category topic needing clarification.
+ * @param {string[]} [options.missingSignals] - Routing signals that were absent and should be highlighted.
+ * @param {AgentCapabilityMetadata | null} [options.manifest] - Capability manifest describing agent scope/escalation criteria.
+ * @param {string} [options.additionalGuidance] - Extra guidance text appended at end.
+ * @returns {string} Markdown-formatted escalation prompt.
  */
 export function renderEscalationPrompt({
   topic,
@@ -77,20 +71,14 @@ export interface ClarificationPromptOptions {
 }
 
 /**
- * renderClarificationPrompt function.
+ * Renders a clarification prompt to solicit more precise user input.
  *
- * @param {ClarificationPromptOptions} {
-  question,
-  manifest,
-  missingSignals,
-  knowledgeSnippets,
-} - {
-  question,
-  manifest,
-  missingSignals,
-  knowledgeSnippets,
-} parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {ClarificationPromptOptions} options - Prompt construction options.
+ * @param {string} options.question - Original user question text.
+ * @param {AgentCapabilityMetadata} options.manifest - Capability manifest describing agent scope.
+ * @param {string[]} [options.missingSignals] - Signals missing from the question to enumerate.
+ * @param {{ source: string; summary: string }[]} [options.knowledgeSnippets] - Optional background knowledge entries.
+ * @returns {string} Markdown-formatted clarification prompt.
  */
 export function renderClarificationPrompt({
   question,
@@ -126,16 +114,12 @@ export interface ClassificationSummaryOptions {
 }
 
 /**
- * renderClassificationSummary function.
+ * Renders a concise classification summary for logging or UI display.
  *
- * @param {ClassificationSummaryOptions} {
-  agent,
-  matchedSignals,
-} - {
-  agent,
-  matchedSignals,
-} parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {ClassificationSummaryOptions} options - Summary construction options.
+ * @param {AgentCapabilityMetadata} options.agent - Capability metadata for matched agent.
+ * @param {string[]} [options.matchedSignals] - Signals that contributed to the match.
+ * @returns {string} Summary string with matched signals appended when provided.
  */
 export function renderClassificationSummary({
   agent,

@@ -151,6 +151,7 @@ async function main(): Promise<void> {
   await updatePackageJson(config);
 }
 
-if (require.main === module) {
-  void main();
-}
+main().catch((error) => {
+  console.error("Failed to update package.json configuration:", error);
+  process.exit(1);
+});

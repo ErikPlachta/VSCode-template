@@ -2,15 +2,16 @@
  * @packageDocumentation Agent configuration resolver that merges unified agent config with MCP runtime overrides.
  */
 
-import path from "node:path";
 import { ConfigurationLoader } from "@shared/configurationLoader";
 import {
-  agentConfigurations,
   type AgentIdentifier,
   getExecutionProfile,
 } from "@mcp/config/unifiedAgentConfig";
 
-type Priority = "high" | "medium" | "low";
+/**
+ * Priority levels controlling execution ordering & resource consideration.
+ */
+export type Priority = "high" | "medium" | "low";
 
 /**
  * OverrideExecution interface.
@@ -26,11 +27,11 @@ interface OverrideExecution {
  * RuntimeOverrides interface.
  *
  */
-interface RuntimeOverrides {
-  [agentId: string]: {
-    execution?: OverrideExecution;
-  };
+interface RuntimeOverridesEntry {
+  execution?: OverrideExecution;
 }
+
+type RuntimeOverrides = Record<string, RuntimeOverridesEntry>;
 
 /**
  * normalizeAgentId function.
@@ -95,15 +96,15 @@ export class AgentConfigResolver {
    * @param {string} configPath - configPath parameter.
    * @returns {unknown} - TODO: describe return value.
    */
-constructor(private readonly configPath: string = "src/mcp.config.json") {}
+  constructor(private readonly configPath: string = "src/mcp.config.json") {}
 
-    /**
-     * Returns the effective execution profile for an agent after applying runtime overrides.
-     *
-     * @param {AgentIdentifier} agentId - agentId parameter.
-     * @returns {Promise<EffectiveExecutionProfile>} - TODO: describe return value.
-     */
-async getEffectiveExecutionProfile(
+  /**
+   * Returns the effective execution profile for an agent after applying runtime overrides.
+   *
+   * @param {AgentIdentifier} agentId - agentId parameter.
+   * @returns {Promise<EffectiveExecutionProfile>} - TODO: describe return value.
+   */
+  async getEffectiveExecutionProfile(
     agentId: AgentIdentifier
   ): Promise<EffectiveExecutionProfile> {
     const loader = new ConfigurationLoader(this.configPath);
@@ -114,7 +115,11 @@ async getEffectiveExecutionProfile(
 
     // Read overrides (if any)
     const overrides: RuntimeOverrides =
-      (appConfig as any)?.agents?.runtimeOverrides || {};
+      (
+        appConfig as unknown as {
+          agents?: { runtimeOverrides?: RuntimeOverrides };
+        }
+      ).agents?.runtimeOverrides || {};
 
     // Attempt direct key first; then try normalized variants, always yield execution object
     const rawOverride =
@@ -156,7 +161,7 @@ async getEffectiveExecutionProfile(
     }
 
     // Enforce global maxExecutionTime if present
-    const max = (appConfig as any)?.agents?.global?.maxExecutionTime;
+    const max = appConfig.agents.global.maxExecutionTime;
     if (typeof max === "number" && merged.timeout > max) {
       console.warn(
         `Agent ${agentId} timeout ${merged.timeout} exceeds maxExecutionTime ${max}; capping to ${max}.`

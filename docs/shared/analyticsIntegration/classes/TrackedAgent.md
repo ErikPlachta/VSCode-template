@@ -6,7 +6,7 @@
 
 # Abstract Class: TrackedAgent
 
-Defined in: [src/shared/analyticsIntegration.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/analyticsIntegration.ts#L49)
+Defined in: [src/shared/analyticsIntegration.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L49)
 
 Base class with built-in analytics tracking for agent implementations.
 
@@ -16,7 +16,7 @@ Base class with built-in analytics tracking for agent implementations.
 
 > **new TrackedAgent**(`agentName`): `TrackedAgent`
 
-Defined in: [src/shared/analyticsIntegration.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/analyticsIntegration.ts#L59)
+Defined in: [src/shared/analyticsIntegration.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L59)
 
 Creates a new tracked agent instance.
 
@@ -40,7 +40,7 @@ agentName parameter.
 
 > **getStats**(`since?`): `any`
 
-Defined in: [src/shared/analyticsIntegration.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/analyticsIntegration.ts#L118)
+Defined in: [src/shared/analyticsIntegration.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L118)
 
 Gets analytics statistics for this agent.
 

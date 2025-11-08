@@ -38,7 +38,7 @@ export interface AgentUsageEvent {
   /** User or session identifier. */
   userId?: string;
   /** Additional context metadata. */
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -116,6 +116,14 @@ export interface AnalyticsConfig {
   storageFile?: string;
 }
 
+/** Options for recording additional execution context. */
+export interface AnalyticsExecutionOptions {
+  /** Optional user/session identifier. */
+  userId?: string;
+  /** Arbitrary context for analytics enrichment. */
+  metadata?: Record<string, unknown>;
+}
+
 /**
  * Agent usage analytics collector and processor.
  */
@@ -124,22 +132,22 @@ export class AgentUsageAnalytics {
   private config: AnalyticsConfig;
   private eventCounter = 0;
 
-    /**
-     * Creates a new analytics collector instance.
-     *
-     * @param {AnalyticsConfig} config - config parameter.
-     * @returns {unknown} - TODO: describe return value.
-     */
-constructor(config: AnalyticsConfig) {
+  /**
+   * Creates a new analytics collector instance.
+   *
+   * @param {AnalyticsConfig} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+  constructor(config: AnalyticsConfig) {
     this.config = config;
   }
 
-    /**
-     * Records an agent usage event.
-     *
-     * @param {Partial<AgentUsageEvent>} event - event parameter.
-     */
-recordEvent(event: Partial<AgentUsageEvent>): void {
+  /**
+   * Records an agent usage event.
+   *
+   * @param {Partial<AgentUsageEvent>} event - event parameter.
+   */
+  recordEvent(event: Partial<AgentUsageEvent>): void {
     if (!this.config.enabled) {
       return;
     }
@@ -171,31 +179,22 @@ recordEvent(event: Partial<AgentUsageEvent>): void {
     }
   }
 
-    /**
-     * Tracks the execution of an agent method with automatic timing.
-     *
-     * @template T
-     *
-     * @param {string} agentName - agentName parameter.
-     * @param {string} method - method parameter.
-     * @param {() => Promise<T>} execution - execution parameter.
-     * @param {{
-      userId?: string;
-      metadata?: Record<string, any>;
-    }} options - options parameter.
-     * @param options.userId
-     * @param options.metadata
-     * @returns {Promise<T>} - TODO: describe return value.
-     * @throws {Error} - May throw an error.
-     */
-async trackExecution<T>(
+  /**
+   * Tracks the execution of an agent method with automatic timing.
+   *
+   * @template T
+   * @param {string} agentName - Name of the agent being executed.
+   * @param {string} method - Logical operation name.
+   * @param {() => Promise<T>} execution - Async function to execute and measure.
+   * @param {AnalyticsExecutionOptions} [options] - Optional user and context metadata to record.
+   * @returns {Promise<T>} Resolves with the result of the execution.
+   * @throws {Error} Propagates any error thrown by the execution.
+   */
+  async trackExecution<T>(
     agentName: string,
     method: string,
     execution: () => Promise<T>,
-    options: {
-      userId?: string;
-      metadata?: Record<string, any>;
-    } = {}
+    options: AnalyticsExecutionOptions = {}
   ): Promise<T> {
     const startTime = Date.now();
     const eventData: Partial<AgentUsageEvent> = {
@@ -231,14 +230,14 @@ async trackExecution<T>(
     }
   }
 
-    /**
-     * Generates usage statistics for a specific agent.
-     *
-     * @param {string} agentName - agentName parameter.
-     * @param {Date} since - since parameter.
-     * @returns {AgentUsageStats | null} - TODO: describe return value.
-     */
-getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
+  /**
+   * Generates usage statistics for a specific agent.
+   *
+   * @param {string} agentName - agentName parameter.
+   * @param {Date} since - since parameter.
+   * @returns {AgentUsageStats | null} - TODO: describe return value.
+   */
+  getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
     const agentEvents = this.events.filter((event) => {
       if (event.agentName !== agentName) return false;
       if (since && event.timestamp < since) return false;
@@ -263,10 +262,13 @@ getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
     );
 
     // Find most used method
-    const methodCounts = agentEvents.reduce((counts, event) => {
-      counts[event.method] = (counts[event.method] || 0) + 1;
-      return counts;
-    }, {} as Record<string, number>);
+    const methodCounts: Record<string, number> = agentEvents.reduce(
+      (counts: Record<string, number>, event) => {
+        counts[event.method] = (counts[event.method] || 0) + 1;
+        return counts;
+      },
+      {}
+    );
 
     const mostUsedMethod =
       Object.entries(methodCounts).sort(([, a], [, b]) => b - a)[0]?.[0] ||
@@ -289,13 +291,13 @@ getAgentStats(agentName: string, since?: Date): AgentUsageStats | null {
     };
   }
 
-    /**
-     * Generates comprehensive usage analytics summary.
-     *
-     * @param {Date} since - since parameter.
-     * @returns {UsageAnalyticsSummary} - TODO: describe return value.
-     */
-generateSummary(since?: Date): UsageAnalyticsSummary {
+  /**
+   * Generates comprehensive usage analytics summary.
+   *
+   * @param {Date} since - since parameter.
+   * @returns {UsageAnalyticsSummary} - TODO: describe return value.
+   */
+  generateSummary(since?: Date): UsageAnalyticsSummary {
     const filteredEvents = this.events.filter(
       (event) => !since || event.timestamp >= since
     );
@@ -331,10 +333,13 @@ generateSummary(since?: Date): UsageAnalyticsSummary {
       filteredEvents.length;
 
     // Find most used agent
-    const agentCounts = filteredEvents.reduce((counts, event) => {
-      counts[event.agentName] = (counts[event.agentName] || 0) + 1;
-      return counts;
-    }, {} as Record<string, number>);
+    const agentCounts: Record<string, number> = filteredEvents.reduce(
+      (counts: Record<string, number>, event) => {
+        counts[event.agentName] = (counts[event.agentName] || 0) + 1;
+        return counts;
+      },
+      {}
+    );
 
     const mostUsedAgent =
       Object.entries(agentCounts).sort(([, a], [, b]) => b - a)[0]?.[0] ||
@@ -360,39 +365,39 @@ generateSummary(since?: Date): UsageAnalyticsSummary {
     };
   }
 
-    /**
-     * Exports analytics data for external analysis.
-     *
-     * @param {Date} since - since parameter.
-     * @returns {AgentUsageEvent[]} - TODO: describe return value.
-     */
-exportData(since?: Date): AgentUsageEvent[] {
+  /**
+   * Exports analytics data for external analysis.
+   *
+   * @param {Date} since - since parameter.
+   * @returns {AgentUsageEvent[]} - TODO: describe return value.
+   */
+  exportData(since?: Date): AgentUsageEvent[] {
     return this.events.filter((event) => !since || event.timestamp >= since);
   }
 
-    /**
-     * Clears all collected analytics data.
-     *
-     */
-clearData(): void {
+  /**
+   * Clears all collected analytics data.
+   *
+   */
+  clearData(): void {
     this.events = [];
     this.eventCounter = 0;
   }
 
-    /**
-     * Generates a unique event identifier.
-     *
-     * @returns {string} - TODO: describe return value.
-     */
-private generateEventId(): string {
+  /**
+   * Generates a unique event identifier.
+   *
+   * @returns {string} - TODO: describe return value.
+   */
+  private generateEventId(): string {
     return `event_${Date.now()}_${++this.eventCounter}`;
   }
 
-    /**
-     * Enforces retention policy by removing old events.
-     *
-     */
-private enforceRetention(): void {
+  /**
+   * Enforces retention policy by removing old events.
+   *
+   */
+  private enforceRetention(): void {
     const now = Date.now();
     const cutoffTime = now - this.config.retentionPeriod;
 
@@ -407,24 +412,24 @@ private enforceRetention(): void {
     }
   }
 
-    /**
-     * Persists an event to storage (placeholder implementation).
-     *
-     * @param {AgentUsageEvent} event - event parameter.
-     */
-private persistEvent(event: AgentUsageEvent): void {
+  /**
+   * Persists an event to storage (placeholder implementation).
+   *
+   * @param {AgentUsageEvent} event - event parameter.
+   */
+  private persistEvent(event: AgentUsageEvent): void {
     // Placeholder for persistent storage implementation
     // Could write to file, database, or external analytics service
     console.log("Persisting event:", event.id);
   }
 
-    /**
-     * Estimates the size of data in bytes.
-     *
-     * @param {any} data - data parameter.
-     * @returns {number} - TODO: describe return value.
-     */
-private estimateSize(data: any): number {
+  /**
+   * Estimates the size of data in bytes.
+   *
+   * @param {unknown} data - Value to estimate serialized size for.
+   * @returns {number} Approximate byte length of the JSON-serialized value.
+   */
+  private estimateSize(data: unknown): number {
     try {
       return JSON.stringify(data).length * 2; // Rough estimate for UTF-16
     } catch {

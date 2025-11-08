@@ -8,6 +8,7 @@ docs/*
 .github/
 .vscode/
 .mcp-cache/
+.env
 
 # Config and metadata not needed at runtime
 tsconfig.json

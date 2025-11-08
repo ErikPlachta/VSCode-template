@@ -4,31 +4,79 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import fg from "fast-glob";
+
+interface AgentTemplateDefinition {
+  name: string;
+  description: string;
+  label: string;
+  displayName: string;
+  className: string;
+  capabilities: string[];
+  responsibility: string;
+}
 
 interface TemplateConfig {
   agents: {
-    definitions: Record<
-      string,
-      {
-        name: string;
-        description: string;
-        label: string;
-        displayName: string;
-        className: string;
-        capabilities: string[];
-        responsibility: string;
-      }
-    >;
+    definitions?: Record<string, AgentTemplateDefinition>;
     templateReplacements: Record<string, string>;
+    configurationSource?: string;
   };
 }
 
-export class TemplateProcessor {
-  private config: TemplateConfig;
+type UnifiedAgentConfigLike = {
+  metadata?: {
+    name?: string;
+    label?: string;
+    displayName?: string;
+    className?: string;
+    capabilities?: string[];
+    responsibility?: string;
+    userFacing?: {
+      friendlyDescription?: string;
+      helpText?: string;
+    };
+    applicationFacing?: {
+      technicalDescription?: string;
+    };
+  };
+};
 
-  constructor(configPath: string = "src/mcp.config.json") {
-    this.config = this.loadConfig(configPath);
+export class TemplateProcessor {
+  private static readonly AGENT_ALIASES: Record<string, string[]> = {
+    "relevant-data-manager": [
+      "relevantDataManager",
+      "userContext",
+      "user-context",
+    ],
+    "database-agent": ["databaseAgent"],
+    "data-agent": ["dataAgent"],
+    "clarification-agent": ["clarificationAgent"],
+  };
+
+  private config: TemplateConfig;
+  private agentDefinitions: Record<string, AgentTemplateDefinition>;
+
+  private constructor(
+    config: TemplateConfig,
+    agentDefinitions: Record<string, AgentTemplateDefinition>
+  ) {
+    this.config = config;
+    this.agentDefinitions = agentDefinitions;
+    this.config.agents.definitions =
+      this.withAliasDefinitions(agentDefinitions);
+  }
+
+  static async create(
+    configPath: string = "src/mcp.config.json"
+  ): Promise<TemplateProcessor> {
+    const config = await this.loadConfig(configPath);
+    const agentDefinitions = await this.loadAgentDefinitions(
+      config,
+      configPath
+    );
+    return new TemplateProcessor(config, agentDefinitions);
   }
 
   async processTemplates(
@@ -65,40 +113,195 @@ export class TemplateProcessor {
   }
 
   private resolveTemplateValue(templatePath: string): string {
-    const p = templatePath.replace(/^\{\{|\}\}$/g, "");
-    const parts = p.split(".");
-    let value: any = this.config;
-    for (const part of parts) {
-      if (value && typeof value === "object" && part in value) {
-        value = value[part];
+    const hasBraces =
+      templatePath.startsWith("{{") && templatePath.endsWith("}}");
+    if (!hasBraces) {
+      return templatePath;
+    }
+
+    const normalizedPath = templatePath.replace(/^\{\{|\}\}$/g, "");
+    const parts = normalizedPath.split(".");
+    let value: unknown = this.config as unknown;
+    for (let index = 0; index < parts.length; index += 1) {
+      const part = parts[index];
+      if (!value || typeof value !== "object") {
+        console.warn(`⚠️  Template path not found: ${normalizedPath}`);
+        return templatePath;
+      }
+
+      if (
+        index >= 2 &&
+        parts[index - 1] === "definitions" &&
+        typeof part === "string"
+      ) {
+        const canonical = this.findCanonicalAgentKey(part);
+        if (canonical && canonical in (value as Record<string, unknown>)) {
+          value = (value as Record<string, unknown>)[canonical];
+          continue;
+        }
+      }
+
+      if (part in (value as Record<string, unknown>)) {
+        value = (value as Record<string, unknown>)[part];
       } else {
-        console.warn(`⚠️  Template path not found: ${p}`);
+        console.warn(`⚠️  Template path not found: ${normalizedPath}`);
         return templatePath;
       }
     }
+
     return typeof value === "string" ? value : templatePath;
   }
 
-  private loadConfig(configPath: string): TemplateConfig {
-    const configContent = fs.readFileSync(path.resolve(configPath), "utf-8");
+  private findCanonicalAgentKey(alias: string): string | undefined {
+    if (this.agentDefinitions[alias]) {
+      return alias;
+    }
+
+    for (const [canonical, aliases] of Object.entries(
+      TemplateProcessor.AGENT_ALIASES
+    )) {
+      if (aliases.includes(alias)) return canonical;
+    }
+
+    return undefined;
+  }
+
+  private withAliasDefinitions(
+    definitions: Record<string, AgentTemplateDefinition>
+  ): Record<string, AgentTemplateDefinition> {
+    const augmented: Record<string, AgentTemplateDefinition> = {
+      ...definitions,
+    };
+
+    for (const [canonical, aliases] of Object.entries(
+      TemplateProcessor.AGENT_ALIASES
+    )) {
+      const definition = definitions[canonical];
+      if (!definition) continue;
+      for (const alias of aliases) {
+        augmented[alias] = definition;
+      }
+    }
+
+    return augmented;
+  }
+
+  private static async loadConfig(configPath: string): Promise<TemplateConfig> {
+    const configContent = await fs.promises.readFile(
+      path.resolve(configPath),
+      "utf-8"
+    );
     return JSON.parse(configContent) as TemplateConfig;
   }
 
-  validateConfig(): boolean {
-    const requiredAgents = [
-      "orchestrator",
-      "relevantDataManager",
-      "databaseAgent",
-      "dataAgent",
-      "clarificationAgent",
+  private static async loadAgentDefinitions(
+    config: TemplateConfig,
+    configPath: string
+  ): Promise<Record<string, AgentTemplateDefinition>> {
+    if (config.agents?.definitions) {
+      return config.agents.definitions;
+    }
+
+    const configurationSource = config.agents?.configurationSource;
+    if (!configurationSource) {
+      console.warn(
+        "⚠️  No configurationSource provided; agent definitions unavailable."
+      );
+      return {};
+    }
+
+    const absoluteConfigPath = path.resolve(configPath);
+    const candidateSources = [
+      path.resolve(configurationSource),
+      path.resolve(path.dirname(absoluteConfigPath), configurationSource),
     ];
-    const definedAgents = Object.keys(this.config.agents.definitions);
-    for (const agent of requiredAgents) {
-      if (!definedAgents.includes(agent)) {
+
+    const resolvedSource = candidateSources.find((candidate) =>
+      fs.existsSync(candidate)
+    );
+
+    if (!resolvedSource) {
+      console.warn(
+        `⚠️  Configuration source ${configurationSource} could not be resolved.`
+      );
+      return {};
+    }
+
+    try {
+      const moduleUrl = pathToFileURL(resolvedSource).href;
+      const importedModule = await import(moduleUrl);
+      const agentConfigurations:
+        | Record<string, UnifiedAgentConfigLike>
+        | undefined =
+        importedModule.agentConfigurations ??
+        importedModule.default?.agentConfigurations;
+
+      if (!agentConfigurations) {
+        console.warn(
+          `⚠️  Unable to locate agentConfigurations export in ${configurationSource}`
+        );
+        return {};
+      }
+
+      const definitions: Record<string, AgentTemplateDefinition> = {};
+      for (const [agentKey, configEntry] of Object.entries(
+        agentConfigurations
+      )) {
+        if (!configEntry || typeof configEntry !== "object") continue;
+        const metadata = (configEntry as UnifiedAgentConfigLike).metadata;
+        if (!metadata) continue;
+
+        definitions[agentKey] = {
+          name: metadata.name ?? agentKey,
+          label: metadata.label ?? metadata.name ?? agentKey,
+          displayName:
+            metadata.displayName ?? metadata.label ?? metadata.name ?? agentKey,
+          className: metadata.className ?? agentKey,
+          capabilities: metadata.capabilities ?? [],
+          responsibility: metadata.responsibility ?? "",
+          description:
+            metadata.responsibility ??
+            metadata.userFacing?.friendlyDescription ??
+            metadata.applicationFacing?.technicalDescription ??
+            metadata.userFacing?.helpText ??
+            metadata.className ??
+            agentKey,
+        };
+      }
+
+      return definitions;
+    } catch (error) {
+      console.error(
+        `❌ Failed to load agent definitions from ${configurationSource}:`,
+        error
+      );
+      return {};
+    }
+  }
+
+  validateConfig(): boolean {
+    const canonicalAgents = [
+      "orchestrator",
+      "relevant-data-manager",
+      "database-agent",
+      "data-agent",
+      "clarification-agent",
+    ];
+
+    if (Object.keys(this.agentDefinitions).length === 0) {
+      console.error(
+        "❌ No agent definitions available for template processing."
+      );
+      return false;
+    }
+
+    for (const agent of canonicalAgents) {
+      const definition = this.agentDefinitions[agent];
+      if (!definition) {
         console.error(`❌ Missing agent definition: ${agent}`);
         return false;
       }
-      const definition = this.config.agents.definitions[agent];
+
       const requiredFields = [
         "name",
         "description",
@@ -106,6 +309,7 @@ export class TemplateProcessor {
         "displayName",
         "className",
       ] as const;
+
       for (const field of requiredFields) {
         if (!definition[field]) {
           console.error(
@@ -115,6 +319,7 @@ export class TemplateProcessor {
         }
       }
     }
+
     console.log("✅ Template configuration is valid");
     return true;
   }
@@ -129,13 +334,13 @@ export class TemplateProcessor {
       "| Agent | Label | Display Name | Description |",
       "|-------|-------|--------------|-------------|"
     );
-    for (const [key, definition] of Object.entries(
-      this.config.agents.definitions
-    )) {
+
+    for (const [key, definition] of Object.entries(this.agentDefinitions)) {
       lines.push(
         `| ${key} | ${definition.label} | ${definition.displayName} | ${definition.description} |`
       );
     }
+
     lines.push(
       "",
       "## Template Replacements",
@@ -143,6 +348,7 @@ export class TemplateProcessor {
       "| Placeholder | Resolves To | Current Value |",
       "|-------------|-------------|---------------|"
     );
+
     for (const [placeholder, templatePath] of Object.entries(
       this.config.agents.templateReplacements
     )) {
@@ -151,12 +357,13 @@ export class TemplateProcessor {
         `| \`${placeholder}\` | \`${templatePath}\` | ${resolvedValue} |`
       );
     }
+
     return lines.join("\n");
   }
 }
 
 async function main(): Promise<void> {
-  const processor = new TemplateProcessor();
+  const processor = await TemplateProcessor.create();
   if (!processor.validateConfig()) process.exit(1);
   await processor.processTemplates();
   const report = processor.generateTemplateReport();
@@ -166,6 +373,7 @@ async function main(): Promise<void> {
   );
 }
 
-if (require.main === module) {
-  void main();
-}
+main().catch((error) => {
+  console.error("Failed to process templates:", error);
+  process.exit(1);
+});

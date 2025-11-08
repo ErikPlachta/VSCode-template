@@ -6,7 +6,7 @@
 
 # Interface: RegistrationOptions
 
-Defined in: [src/extension/mcpRegistration.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpRegistration.ts#L86)
+Defined in: [src/extension/mcpRegistration.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/extension/mcpRegistration.ts#L86)
 
 RegistrationOptions interface.
 
@@ -16,7 +16,7 @@ RegistrationOptions interface.
 
 > **id**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpRegistration.ts#L87)
+Defined in: [src/extension/mcpRegistration.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/extension/mcpRegistration.ts#L87)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/extension/mcpRegistration.ts:87](https://github.com/ErikPlachta
 
 > `optional` **includeAuthHeader**: `boolean`
 
-Defined in: [src/extension/mcpRegistration.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpRegistration.ts#L89)
+Defined in: [src/extension/mcpRegistration.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/extension/mcpRegistration.ts#L89)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/extension/mcpRegistration.ts:89](https://github.com/ErikPlachta
 
 > `optional` **token**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:90](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpRegistration.ts#L90)
+Defined in: [src/extension/mcpRegistration.ts:90](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/extension/mcpRegistration.ts#L90)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/extension/mcpRegistration.ts:90](https://github.com/ErikPlachta
 
 > **url**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpRegistration.ts#L88)
+Defined in: [src/extension/mcpRegistration.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/extension/mcpRegistration.ts#L88)

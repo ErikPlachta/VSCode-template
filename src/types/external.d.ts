@@ -4,11 +4,11 @@
 
 declare module "ajv-formats" {
   import type Ajv from "ajv";
-
-  type AddFormats = (ajv: Ajv) => Ajv;
-
+  /** Adds standard format validators (email, uri, etc.) to an Ajv instance. */
+  export type AddFormats = (ajv: Ajv) => Ajv;
   const addFormats: AddFormats;
   export default addFormats;
+  export { addFormats };
 }
 
 declare module "gray-matter" {

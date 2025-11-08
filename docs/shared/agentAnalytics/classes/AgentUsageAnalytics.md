@@ -6,7 +6,7 @@
 
 # Class: AgentUsageAnalytics
 
-Defined in: [src/shared/agentAnalytics.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L122)
+Defined in: [src/shared/agentAnalytics.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L122)
 
 Agent usage analytics collector and processor.
 
@@ -16,7 +16,7 @@ Agent usage analytics collector and processor.
 
 > **new AgentUsageAnalytics**(`config`): `AgentUsageAnalytics`
 
-Defined in: [src/shared/agentAnalytics.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L133)
+Defined in: [src/shared/agentAnalytics.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L133)
 
 Creates a new analytics collector instance.
 
@@ -40,7 +40,7 @@ config parameter.
 
 > **clearData**(): `void`
 
-Defined in: [src/shared/agentAnalytics.ts:377](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L377)
+Defined in: [src/shared/agentAnalytics.ts:377](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L377)
 
 Clears all collected analytics data.
 
@@ -54,7 +54,7 @@ Clears all collected analytics data.
 
 > **exportData**(`since?`): [`AgentUsageEvent`](../interfaces/AgentUsageEvent.md)[]
 
-Defined in: [src/shared/agentAnalytics.ts:369](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L369)
+Defined in: [src/shared/agentAnalytics.ts:369](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L369)
 
 Exports analytics data for external analysis.
 
@@ -78,7 +78,7 @@ since parameter.
 
 > **generateSummary**(`since?`): [`UsageAnalyticsSummary`](../interfaces/UsageAnalyticsSummary.md)
 
-Defined in: [src/shared/agentAnalytics.ts:298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L298)
+Defined in: [src/shared/agentAnalytics.ts:298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L298)
 
 Generates comprehensive usage analytics summary.
 
@@ -102,7 +102,7 @@ since parameter.
 
 > **getAgentStats**(`agentName`, `since?`): [`AgentUsageStats`](../interfaces/AgentUsageStats.md) \| `null`
 
-Defined in: [src/shared/agentAnalytics.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L241)
+Defined in: [src/shared/agentAnalytics.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L241)
 
 Generates usage statistics for a specific agent.
 
@@ -132,7 +132,7 @@ since parameter.
 
 > **recordEvent**(`event`): `void`
 
-Defined in: [src/shared/agentAnalytics.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L142)
+Defined in: [src/shared/agentAnalytics.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L142)
 
 Records an agent usage event.
 
@@ -154,7 +154,7 @@ event parameter.
 
 > **trackExecution**\<`T`\>(`agentName`, `method`, `execution`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/agentAnalytics.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/shared/agentAnalytics.ts#L191)
+Defined in: [src/shared/agentAnalytics.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentAnalytics.ts#L191)
 
 Tracks the execution of an agent method with automatic timing.
 

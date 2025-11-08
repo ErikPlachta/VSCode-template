@@ -6,7 +6,7 @@
 
 # Interface: BusinessDataCatalogue
 
-Defined in: [src/types/interfaces.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/interfaces.ts#L169)
+Defined in: [src/types/interfaces.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L169)
 
 BusinessDataCatalogue interface.
 
@@ -16,7 +16,7 @@ BusinessDataCatalogue interface.
 
 > **categories**: [`CategoryInfo`](CategoryInfo.md)[]
 
-Defined in: [src/types/interfaces.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/interfaces.ts#L170)
+Defined in: [src/types/interfaces.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L170)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:170](https://github.com/ErikPlachta/vscode-
 
 > **lastUpdated**: `string`
 
-Defined in: [src/types/interfaces.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/interfaces.ts#L173)
+Defined in: [src/types/interfaces.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L173)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:173](https://github.com/ErikPlachta/vscode-
 
 > **relationships**: [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/interfaces.ts:171](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/interfaces.ts#L171)
+Defined in: [src/types/interfaces.ts:171](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L171)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:171](https://github.com/ErikPlachta/vscode-
 
 > **schemas**: [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/types/interfaces.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/interfaces.ts#L172)
+Defined in: [src/types/interfaces.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L172)

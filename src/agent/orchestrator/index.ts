@@ -49,34 +49,42 @@ export class Orchestrator {
   private config: OrchestratorConfig;
   private stopWords: Set<string>;
   private intentAgentMap: Record<string, string>;
-  private scoringWeights: any;
+  private scoringWeights: {
+    signalMatch: number;
+    focusMatch: number;
+    promptStarterMatch: number;
+  };
   private minimumKeywordLength: number;
   private vaguePhrases: string[];
-  private messages: any;
+  private messages: Required<
+    NonNullable<ReturnType<OrchestratorConfig["getMessages"]>>
+  >;
 
   /**
-   * constructor function.
+   * Create an orchestrator using the provided configuration (or defaults).
    *
-   * @param {OrchestratorConfig} config - config parameter.
-   * @returns {unknown} - TODO: describe return value.
+   * @param {OrchestratorConfig} [config] - Optional pre-loaded configuration.
    */
-constructor(config?: OrchestratorConfig) {
+  constructor(config?: OrchestratorConfig) {
     this.config = config || OrchestratorConfig.createDefault();
     this.stopWords = this.config.getStopWords();
     this.intentAgentMap = this.config.getIntentAgentMap();
     this.scoringWeights = this.config.getScoringWeights();
     this.minimumKeywordLength = this.config.getMinimumKeywordLength();
     this.vaguePhrases = this.config.getVaguePhrases();
-    this.messages = this.config.getMessages();
+    // The configuration provides defaults for all message properties; cast to required shape for convenience.
+    this.messages = this.config.getMessages() as Required<
+      NonNullable<ReturnType<OrchestratorConfig["getMessages"]>>
+    >;
   }
 
-    /**
-     * Create orchestrator instance with configuration loaded from file
-     *
-     * @param {string} configPath - configPath parameter.
-     * @returns {Promise<Orchestrator>} - TODO: describe return value.
-     */
-public static async createFromConfig(
+  /**
+   * Load configuration from disk (TypeScript or JSON fallback) and create an orchestrator.
+   *
+   * @param {string} [configPath] - Optional path to a JSON config; when omitted uses TS defaults.
+   * @returns {Promise<Orchestrator>} Orchestrator instance.
+   */
+  public static async createFromConfig(
     configPath?: string
   ): Promise<Orchestrator> {
     try {
@@ -90,31 +98,31 @@ public static async createFromConfig(
     }
   }
 
-    /**
-     * Get public configuration
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-public getConfig() {
+  /**
+   * Get the underlying agent configuration structure.
+   *
+   * @returns {Record<string, unknown>} Raw public configuration object.
+   */
+  public getConfig(): Record<string, unknown> {
     return this.config.getConfig();
   }
 
-    /**
-     * Get supported intents
-     *
-     * @returns {OrchestratorIntent[]} - TODO: describe return value.
-     */
-public getSupportedIntents(): OrchestratorIntent[] {
+  /**
+   * List all supported intents configured for routing.
+   *
+   * @returns {OrchestratorIntent[]} Array of configured intent identifiers.
+   */
+  public getSupportedIntents(): OrchestratorIntent[] {
     return this.config.getIntents();
   }
 
-    /**
-     * Extract keywords from text using configuration
-     *
-     * @param {string} text - text parameter.
-     * @returns {string[]} - TODO: describe return value.
-     */
-private extractKeywords(text: string): string[] {
+  /**
+   * Extract keywords from text applying stop words and minimum length.
+   *
+   * @param {string} text - Source question text.
+   * @returns {string[]} Filtered keyword tokens.
+   */
+  private extractKeywords(text: string): string[] {
     const pattern = new RegExp(
       `\\b[a-z0-9]{${this.minimumKeywordLength},}\\b`,
       "g"
@@ -123,14 +131,14 @@ private extractKeywords(text: string): string[] {
     return matches.filter((token) => !this.stopWords.has(token));
   }
 
-    /**
-     * Check if a question is too vague even if it matches an intent.
-     *
-     * @param {string} question - question parameter.
-     * @param {string} intent - intent parameter.
-     * @returns {boolean} - TODO: describe return value.
-     */
-private isQuestionTooVague(question: string, intent: string): boolean {
+  /**
+   * Determine whether the input question lacks sufficient context.
+   *
+   * @param {string} question - User's raw question.
+   * @param {string} _intent - Candidate matched intent (unused, retained for future heuristics).
+   * @returns {boolean} True if clarification should be requested.
+   */
+  private isQuestionTooVague(question: string, _intent: string): boolean {
     const questionLower = question.toLowerCase().trim();
 
     // Use configured vague phrases instead of hard-coded array
@@ -141,15 +149,15 @@ private isQuestionTooVague(question: string, intent: string): boolean {
         questionLower.endsWith(" " + phrase)
     );
   }
-    /**
-     * Classify intent using configuration-driven approach.
-     *
-     * @param {string | OrchestratorInput} questionOrInput - questionOrInput parameter.
-     * @param {{ topic?: string }} context - context parameter.
-     * @param context.topic
-     * @returns {OrchestratorClassification} - TODO: describe return value.
-     */
-classify(
+  /**
+   * Classify intent for a question (legacy string or new structured input).
+   *
+   * @param {string | OrchestratorInput} questionOrInput - Raw question text or structured input.
+   * @param {{ topic?: string }} [context] - Legacy context object providing topic.
+   * @param {string} [context.topic] - Optional topic string used for classification context.
+   * @returns {OrchestratorClassification} Classification result (intent & rationale).
+   */
+  classify(
     questionOrInput: string | OrchestratorInput,
     context?: { topic?: string }
   ): OrchestratorClassification {
@@ -244,13 +252,13 @@ classify(
     };
   }
 
-    /**
-     * Route request using configuration (simplified for now - delegates to original implementation)
-     *
-     * @param {OrchestratorInput} input - input parameter.
-     * @returns {Promise<OrchestratorResponse>} - TODO: describe return value.
-     */
-async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
+  /**
+   * Route an input using configured intent/agent mappings.
+   *
+   * @param {OrchestratorInput} input - Structured user request.
+   * @returns {Promise<OrchestratorResponse>} Resolved routing response.
+   */
+  async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
     const classification = this.classify(input);
 
     // Create more contextual summary and payload
@@ -274,41 +282,53 @@ async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
     };
   }
 
-    /**
-     * Generate contextual summary for the response.
-     *
-     * @param {OrchestratorClassification} classification - classification parameter.
-     * @param {OrchestratorInput} input - input parameter.
-     * @returns {string} - TODO: describe return value.
-     */
-private generateSummary(
+  /**
+   * Create a concise summary describing the routing decision.
+   *
+   * @param {OrchestratorClassification} classification - Classification result.
+   * @param {OrchestratorInput} input - Original user input.
+   * @returns {string} Human readable summary.
+   */
+  private generateSummary(
     classification: OrchestratorClassification,
     input: OrchestratorInput
   ): string {
-    const topic = input.topic || this.messages.summaries.defaultTopic;
+    const rawSummaries = (this.messages.summaries ?? {}) as Record<
+      string,
+      unknown
+    >;
+    const defaultTopic =
+      (rawSummaries as { defaultTopic?: string }).defaultTopic ??
+      "the requested data";
+    const topic = input.topic ?? defaultTopic;
+    const metadata = (rawSummaries as { metadata?: string }).metadata ?? "";
+    const records = (rawSummaries as { records?: string }).records ?? "";
+    const insight = (rawSummaries as { insight?: string }).insight ?? "";
+    const clarification =
+      (rawSummaries as { clarification?: string }).clarification ?? "";
 
     switch (classification.intent) {
       case "metadata":
-        return this.messages.summaries.metadata.replace("{topic}", topic);
+        return metadata.replace("{topic}", topic);
       case "records":
-        return this.messages.summaries.records.replace("{topic}", topic);
+        return records.replace("{topic}", topic);
       case "insight":
-        return this.messages.summaries.insight.replace("{topic}", topic);
+        return insight.replace("{topic}", topic);
       case "clarification":
-        return this.messages.summaries.clarification;
+        return clarification;
       default:
         return `Routed to ${classification.intent}`;
     }
   }
 
-    /**
-     * Generate appropriate payload for the response.
-     *
-     * @param {OrchestratorClassification} classification - classification parameter.
-     * @param {OrchestratorInput} input - input parameter.
-     * @returns {unknown} - TODO: describe return value.
-     */
-private generatePayload(
+  /**
+   * Build structured payload tailored to the classified intent.
+   *
+   * @param {OrchestratorClassification} classification - Classification result.
+   * @param {OrchestratorInput} input - Original user input.
+   * @returns {unknown} Intent-specific payload object.
+   */
+  private generatePayload(
     classification: OrchestratorClassification,
     input: OrchestratorInput
   ): unknown {
@@ -344,13 +364,13 @@ private generatePayload(
     }
   }
 
-    /**
-     * Handle user requests by classifying intent and routing to appropriate agents.
-     *
-     * @param {OrchestratorInput} input - input parameter.
-     * @returns {Promise<OrchestratorResponse>} - TODO: describe return value.
-     */
-async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
+  /**
+   * High-level entry point wrapping classification + routing + formatting.
+   *
+   * @param {OrchestratorInput} input - Structured user request.
+   * @returns {Promise<OrchestratorResponse>} Final enriched response.
+   */
+  async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
     try {
       // Delegate to the existing route method
       const response = await this.route(input);
@@ -375,16 +395,16 @@ async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
     }
   }
 
-    /**
-     * Format the orchestrator response for user-friendly display.
-     *
-     * @param {OrchestratorResponse} response - response parameter.
-     * @param {OrchestratorInput} input - input parameter.
-     * @returns {string} - TODO: describe return value.
-     */
-private formatResponseForUser(
+  /**
+   * Convert internal routing response into markdown UX output.
+   *
+   * @param {OrchestratorResponse} response - Routing response.
+   * @param {OrchestratorInput} _input - Original user input (unused currently; reserved for future personalization).
+   * @returns {string} Markdown string for chat rendering.
+   */
+  private formatResponseForUser(
     response: OrchestratorResponse,
-    input: OrchestratorInput
+    _input: OrchestratorInput
   ): string {
     const sections: string[] = [];
 
@@ -405,25 +425,32 @@ private formatResponseForUser(
       sections.push(`*Routing to: ${response.agent}*`);
     }
 
-    // Add matched signals for transparency
-    const payload = response.payload as any;
-    if (payload?.classification?.matchedSignals?.length > 0) {
-      sections.push(
-        `**Matched keywords:** ${payload.classification.matchedSignals.join(
-          ", "
-        )}`
-      );
+    // Add matched signals for transparency (when available)
+    const payload = response.payload as unknown;
+    const hasClassification =
+      typeof payload === "object" &&
+      payload !== null &&
+      "classification" in (payload as Record<string, unknown>);
+    if (
+      hasClassification &&
+      ((payload as { classification?: OrchestratorClassification })
+        .classification?.matchedSignals?.length || 0) > 0
+    ) {
+      const matched = (
+        payload as { classification?: OrchestratorClassification }
+      ).classification?.matchedSignals as string[];
+      sections.push(`**Matched keywords:** ${matched.join(", ")}`);
     }
 
     return sections.join("\n\n");
   }
 
-    /**
-     * Get current configuration
-     *
-     * @returns {Record<string, unknown>} - TODO: describe return value.
-     */
-public getCurrentConfig(): Record<string, unknown>  {
+  /**
+   * Snapshot current high-level orchestrator settings for diagnostics.
+   *
+   * @returns {Record<string, unknown>} Diagnostic summary object.
+   */
+  public getCurrentConfig(): Record<string, unknown> {
     return {
       supportedIntents: this.getSupportedIntents(),
       intentAgentMap: this.intentAgentMap,

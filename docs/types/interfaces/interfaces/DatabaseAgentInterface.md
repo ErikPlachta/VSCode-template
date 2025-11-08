@@ -6,7 +6,7 @@
 
 # Interface: DatabaseAgentInterface
 
-Defined in: [src/types/interfaces.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/interfaces.ts#L51)
+Defined in: [src/types/interfaces.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L51)
 
 Interface for database agents that handle data retrieval operations.
 
@@ -16,7 +16,7 @@ Interface for database agents that handle data retrieval operations.
 
 > **executeQuery**(`categoryId`, `criteria`, `options?`): `Promise`\<[`CategoryRecord`](CategoryRecord.md)[]\>
 
-Defined in: [src/types/interfaces.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/interfaces.ts#L52)
+Defined in: [src/types/interfaces.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L52)
 
 #### Parameters
 

@@ -8,7 +8,7 @@
  */
 
 import type { AgentConfigDefinition } from "@internal-types/agentConfig";
-import { CONFIG_IDS } from "@internal-types/configRegistry";
+// Note: CONFIG_IDS imported previously but not used; remove to satisfy lint.
 import { relevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/agent.config";
 
 /**

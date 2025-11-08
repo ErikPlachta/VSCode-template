@@ -139,25 +139,25 @@ export class DataAgent {
   private readonly telemetry = createInvocationLogger(DataAgentProfile.id);
   private readonly config: DataAgentConfig;
 
-    /**
-     * Create a new {@link DataAgent}.
-     *
-     * @returns {unknown} - TODO: describe return value.
-     */
-constructor() {
+  /**
+   * Create a new {@link DataAgent}.
+   *
+   * @returns {unknown} - TODO: describe return value.
+   */
+  constructor() {
     this.config = new DataAgentConfig();
   }
 
-    /**
-     * Analyze data and generate insights.
-     *
-     * @param {AnalysisInput} input - input parameter.
-     * @returns {Promise<DataInsight[]>} - TODO: describe return value.
-     */
-async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
+  /**
+   * Analyze data and generate insights.
+   *
+   * @param {AnalysisInput} input - input parameter.
+   * @returns {Promise<DataInsight[]>} - TODO: describe return value.
+   */
+  async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     return this.telemetry("analyzeData", async () => {
       const analysisConfig = this.config.getAnalysisConfig();
-      const qualityConfig = this.config.getQualityConfig();
+      // Quality configuration is used in detectAnomalies; no need to fetch here.
       const insights: DataInsight[] = [];
 
       if (!analysisConfig.enableInsightGeneration) {
@@ -193,15 +193,15 @@ async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     });
   }
 
-    /**
-     * Generate an exploration plan for data analysis.
-     *
-     * @param {CategoryId} categoryId - categoryId parameter.
-     * @param {string} question - question parameter.
-     * @param {AnalysisInput} availableData - availableData parameter.
-     * @returns {Promise<ExplorationPlan>} - TODO: describe return value.
-     */
-async generateExplorationPlan(
+  /**
+   * Generate an exploration plan for data analysis.
+   *
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @param {string} question - question parameter.
+   * @param {AnalysisInput} availableData - availableData parameter.
+   * @returns {Promise<ExplorationPlan>} - TODO: describe return value.
+   */
+  async generateExplorationPlan(
     categoryId: CategoryId,
     question: string,
     availableData: AnalysisInput
@@ -251,15 +251,15 @@ async generateExplorationPlan(
     });
   }
 
-    /**
-     * Analyze relationships between categories.
-     *
-     * @param {AnalysisInput} sourceData - sourceData parameter.
-     * @param {AnalysisInput} targetData - targetData parameter.
-     * @param {RelationshipDescription} relationship - relationship parameter.
-     * @returns {Promise<CrossCategoryConnection>} - TODO: describe return value.
-     */
-async analyzeConnection(
+  /**
+   * Analyze relationships between categories.
+   *
+   * @param {AnalysisInput} sourceData - sourceData parameter.
+   * @param {AnalysisInput} targetData - targetData parameter.
+   * @param {RelationshipDescription} relationship - relationship parameter.
+   * @returns {Promise<CrossCategoryConnection>} - TODO: describe return value.
+   */
+  async analyzeConnection(
     sourceData: AnalysisInput,
     targetData: AnalysisInput,
     relationship: RelationshipDescription
@@ -282,14 +282,14 @@ async analyzeConnection(
     });
   }
 
-    /**
-     * Search for patterns in data records.
-     *
-     * @param {string} keyword - keyword parameter.
-     * @param {AnalysisInput[]} data - data parameter.
-     * @returns {TopicSearchResult[]} - TODO: describe return value.
-     */
-searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
+  /**
+   * Search for patterns in data records.
+   *
+   * @param {string} keyword - keyword parameter.
+   * @param {AnalysisInput[]} data - data parameter.
+   * @returns {TopicSearchResult[]} - TODO: describe return value.
+   */
+  searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
     const searchConfig = this.config.getSearchConfig();
     const results: TopicSearchResult[] = [];
 
@@ -321,14 +321,14 @@ searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
     return results.slice(0, searchConfig.maxResults || 50);
   }
 
-    /**
-     * Detect patterns in data records.
-     *
-     * @param {CategoryRecord[]} records - records parameter.
-     * @param {CategoryId} categoryId - categoryId parameter.
-     * @returns {DataInsight[]} - TODO: describe return value.
-     */
-private detectPatterns(
+  /**
+   * Detect patterns in data records.
+   *
+   * @param {CategoryRecord[]} records - records parameter.
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @returns {DataInsight[]} - TODO: describe return value.
+   */
+  private detectPatterns(
     records: CategoryRecord[],
     categoryId: CategoryId
   ): DataInsight[] {
@@ -361,14 +361,14 @@ private detectPatterns(
     return insights;
   }
 
-    /**
-     * Detect anomalies in data records.
-     *
-     * @param {CategoryRecord[]} records - records parameter.
-     * @param {CategoryId} categoryId - categoryId parameter.
-     * @returns {DataInsight[]} - TODO: describe return value.
-     */
-private detectAnomalies(
+  /**
+   * Detect anomalies in data records.
+   *
+   * @param {CategoryRecord[]} records - records parameter.
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @returns {DataInsight[]} - TODO: describe return value.
+   */
+  private detectAnomalies(
     records: CategoryRecord[],
     categoryId: CategoryId
   ): DataInsight[] {
@@ -383,7 +383,7 @@ private detectAnomalies(
 
     allFields.forEach((field) => {
       const missingCount = records.filter(
-        (record) => !record.hasOwnProperty(field)
+        (record) => !(field in record)
       ).length;
       if (
         missingCount > 0 &&
@@ -397,7 +397,7 @@ private detectAnomalies(
           confidence: missingCount / records.length,
           category: categoryId,
           affectedRecords: records
-            .filter((record) => !record.hasOwnProperty(field))
+            .filter((record) => !(field in record))
             .map((record) => record.id),
         });
       }
@@ -406,13 +406,13 @@ private detectAnomalies(
     return insights;
   }
 
-    /**
-     * Analyze relationships for insights.
-     *
-     * @param {RelationshipDescription[]} relationships - relationships parameter.
-     * @returns {DataInsight[]} - TODO: describe return value.
-     */
-private analyzeRelationships(
+  /**
+   * Analyze relationships for insights.
+   *
+   * @param {RelationshipDescription[]} relationships - relationships parameter.
+   * @returns {DataInsight[]} - TODO: describe return value.
+   */
+  private analyzeRelationships(
     relationships: RelationshipDescription[]
   ): DataInsight[] {
     const insights: DataInsight[] = [];
@@ -429,13 +429,13 @@ private analyzeRelationships(
     return insights;
   }
 
-    /**
-     * Get display name for a record.
-     *
-     * @param {CategoryRecord} record - record parameter.
-     * @returns {string} - TODO: describe return value.
-     */
-private getRecordDisplayName(record: CategoryRecord): string {
+  /**
+   * Get display name for a record.
+   *
+   * @param {CategoryRecord} record - record parameter.
+   * @returns {string} - TODO: describe return value.
+   */
+  private getRecordDisplayName(record: CategoryRecord): string {
     return (
       (typeof record.name === "string" && record.name) ||
       (typeof record.title === "string" && record.title) ||
