@@ -93,7 +93,7 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
   /**
    * Get routing configuration
    *
-   * @returns {NonNullable<ClarificationConfig['routing']>} Routing behaviour including alternative agent suggestions.
+   * @returns {NonNullable<ClarificationConfig['routing']>} Routing behavior including alternative agent suggestions.
    */
   public getRoutingConfig(): NonNullable<ClarificationConfig["routing"]> {
     return (
@@ -292,15 +292,27 @@ export class ClarificationAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getResponseStyle() {
-    return (
-      this.getGuidanceConfig().responseStyle ?? {
-        tone: "helpful",
-        formality: "friendly",
-        includeEncouragement: true,
-        maxResponseLength: 500,
-      }
-    );
+  public getResponseStyle(): {
+    tone: string;
+    formality: string;
+    includeEncouragement: boolean;
+    maxResponseLength: number;
+  } {
+    const style = this.getGuidanceConfig().responseStyle ?? {
+      tone: "helpful" as string,
+      formality: "friendly" as string,
+      includeEncouragement: true as boolean,
+      maxResponseLength: 500 as number,
+    };
+    return {
+      tone: style.tone ?? "helpful",
+      formality: style.formality ?? "friendly",
+      includeEncouragement:
+        style.includeEncouragement === undefined
+          ? true
+          : style.includeEncouragement,
+      maxResponseLength: style.maxResponseLength ?? 500,
+    };
   }
 
   /**

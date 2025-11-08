@@ -46,7 +46,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getAnalysisConfig() {
+  public getAnalysisConfig(): DataConfig["analysis"] {
     return (
       this.dataConfig.analysis || {
         enableInsightGeneration: true,
@@ -61,7 +61,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getQualityConfig() {
+  public getQualityConfig(): NonNullable<DataConfig["quality"]> {
     return (
       this.dataConfig.quality || {
         missingFieldThreshold: 0.1,
@@ -77,7 +77,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getExplorationConfig() {
+  public getExplorationConfig(): DataConfig["exploration"] {
     return (
       this.dataConfig.exploration || {
         maxExplorationSteps: 8,
@@ -92,7 +92,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getRelationshipsConfig() {
+  public getRelationshipsConfig(): DataConfig["relationships"] {
     return (
       this.dataConfig.relationships || {
         enableRelationshipMapping: true,
@@ -107,7 +107,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getSynthesisConfig() {
+  public getSynthesisConfig(): NonNullable<DataConfig["synthesis"]> {
     return (
       this.dataConfig.synthesis || {
         enableTopicOverviews: true,
@@ -124,7 +124,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getPerformanceConfig() {
+  public getPerformanceConfig(): NonNullable<DataConfig["performance"]> {
     return (
       this.dataConfig.performance || {
         enableTopicOverviewCaching: true,
@@ -142,7 +142,7 @@ export class DataAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getSearchConfig() {
+  public getSearchConfig(): NonNullable<DataConfig["search"]> {
     return (
       this.dataConfig.search || {
         maxResults: 50,

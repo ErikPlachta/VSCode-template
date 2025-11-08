@@ -6,15 +6,15 @@
 
 # Interface: InvocationWrapper()
 
-Defined in: [src/mcp/telemetry.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/telemetry.ts#L54)
+Defined in: [src/mcp/telemetry.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/telemetry.ts#L46)
 
-InvocationWrapper interface.
+Function signature returned by [createInvocationLogger](../functions/createInvocationLogger.md).
 
 > **InvocationWrapper**\<`T`\>(`operation`, `fn`, `metadata?`): `Promise`\<`T`\>
 
-Defined in: [src/mcp/telemetry.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/telemetry.ts#L55)
+Defined in: [src/mcp/telemetry.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/telemetry.ts#L47)
 
-InvocationWrapper interface.
+Function signature returned by [createInvocationLogger](../functions/createInvocationLogger.md).
 
 ## Type Parameters
 

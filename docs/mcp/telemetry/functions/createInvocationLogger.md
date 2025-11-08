@@ -8,7 +8,7 @@
 
 > **createInvocationLogger**(`agent`, `logger`): [`InvocationWrapper`](../interfaces/InvocationWrapper.md)
 
-Defined in: [src/mcp/telemetry.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/telemetry.ts#L70)
+Defined in: [src/mcp/telemetry.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/telemetry.ts#L63)
 
 Create a helper that wraps asynchronous operations and emits telemetry events.
 
@@ -18,20 +18,24 @@ Create a helper that wraps asynchronous operations and emits telemetry events.
 
 `string`
 
-agent parameter.
+Identifier of the calling agent/tool.
 
 ### logger
 
 [`InvocationLogger`](../interfaces/InvocationLogger.md) = `...`
 
-logger parameter.
+Destination for emitted events (defaults to console logger).
 
 ## Returns
 
 [`InvocationWrapper`](../interfaces/InvocationWrapper.md)
 
-- TODO: describe return value.
+Function that wraps async operations and records timing + status.
 
 ## Throws
 
-- May throw an error.
+Propagates any error thrown by the wrapped function after logging it.
+
+## See
+
+InvocationLogger

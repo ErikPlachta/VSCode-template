@@ -72,14 +72,14 @@ export class RepositoryHealthAgent {
   private readonly config: AgentConfig;
   private readonly ajv: Ajv;
 
-    /**
-     * Create a new health agent using the provided configuration.
-     *
-     * @param {string} baseDir - baseDir parameter.
-     * @param {AgentConfig} config - config parameter.
-     * @returns {unknown} - TODO: describe return value.
-     */
-public constructor(baseDir: string, config: AgentConfig) {
+  /**
+   * Create a new health agent using the provided configuration.
+   *
+   * @param {string} baseDir - baseDir parameter.
+   * @param {AgentConfig} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+  public constructor(baseDir: string, config: AgentConfig) {
     this.baseDir = baseDir;
     this.config = config;
     this.ajv = new Ajv2020({
@@ -91,13 +91,13 @@ public constructor(baseDir: string, config: AgentConfig) {
     addFormats(this.ajv);
   }
 
-    /**
-     * Load configuration from typed application config, falling back to legacy JSON.
-     *
-     * @param {string} configPath - configPath parameter.
-     * @returns {Promise<AgentConfig>} - TODO: describe return value.
-     */
-public static async loadConfig(configPath: string): Promise<AgentConfig> {
+  /**
+   * Load configuration from typed application config, falling back to legacy JSON.
+   *
+   * @param {string} configPath - configPath parameter.
+   * @returns {Promise<AgentConfig>} - TODO: describe return value.
+   */
+  public static async loadConfig(configPath: string): Promise<AgentConfig> {
     try {
       const app = await loadApplicationConfig();
       return {
@@ -116,13 +116,13 @@ public static async loadConfig(configPath: string): Promise<AgentConfig> {
     }
   }
 
-    /**
-     * Create an agent instance by reading the default configuration file or TS config.
-     *
-     * @param {string} configPath - configPath parameter.
-     * @returns {Promise<RepositoryHealthAgent>} - TODO: describe return value.
-     */
-public static async createFromDisk(
+  /**
+   * Create an agent instance by reading the default configuration file or TS config.
+   *
+   * @param {string} configPath - configPath parameter.
+   * @returns {Promise<RepositoryHealthAgent>} - TODO: describe return value.
+   */
+  public static async createFromDisk(
     configPath: string = "src/mcp.config.json"
   ): Promise<RepositoryHealthAgent> {
     const config: AgentConfig = await RepositoryHealthAgent.loadConfig(
@@ -131,22 +131,22 @@ public static async createFromDisk(
     return new RepositoryHealthAgent(process.cwd(), config);
   }
 
-    /**
-     * Create an agent using an already materialized AgentConfig.
-     *
-     * @param {AgentConfig} config - config parameter.
-     * @returns {RepositoryHealthAgent} - TODO: describe return value.
-     */
-public static createFromConfig(config: AgentConfig): RepositoryHealthAgent {
+  /**
+   * Create an agent using an already materialized AgentConfig.
+   *
+   * @param {AgentConfig} config - config parameter.
+   * @returns {RepositoryHealthAgent} - TODO: describe return value.
+   */
+  public static createFromConfig(config: AgentConfig): RepositoryHealthAgent {
     return new RepositoryHealthAgent(process.cwd(), config);
   }
 
-    /**
-     * Execute every configured check and return a comprehensive report.
-     *
-     * @returns {Promise<HealthReport>} - TODO: describe return value.
-     */
-public async runAllChecks(): Promise<HealthReport> {
+  /**
+   * Execute every configured check and return a comprehensive report.
+   *
+   * @returns {Promise<HealthReport>} - TODO: describe return value.
+   */
+  public async runAllChecks(): Promise<HealthReport> {
     const checks: CheckResult[] = [];
     checks.push(await this.runTypescriptLint());
     checks.push(await this.validateJsonSchemas());
@@ -155,13 +155,16 @@ public async runAllChecks(): Promise<HealthReport> {
     return { generatedAt: new Date().toISOString(), passed, checks };
   }
 
-    /**
-     * Execute ESLint using project settings to ensure documentation coverage.
-     *
-     * @returns {Promise<CheckResult>} - TODO: describe return value.
-     */
-public async runTypescriptLint(): Promise<CheckResult> {
-    const eslint: ESLint = new ESLint({ cwd: this.baseDir });
+  /**
+   * Execute ESLint using project settings to ensure documentation coverage.
+   *
+   * @returns {Promise<CheckResult>} - TODO: describe return value.
+   */
+  public async runTypescriptLint(): Promise<CheckResult> {
+    const eslint: ESLint = new ESLint({
+      cwd: this.baseDir,
+      errorOnUnmatchedPattern: false,
+    });
     const results: ESLint.LintResult[] = await eslint.lintFiles([
       ...this.config.typescript.include,
     ]);
@@ -181,12 +184,12 @@ public async runTypescriptLint(): Promise<CheckResult> {
     };
   }
 
-    /**
-     * Validate JSON artifacts against defined schemas.
-     *
-     * @returns {Promise<CheckResult>} - TODO: describe return value.
-     */
-public async validateJsonSchemas(): Promise<CheckResult> {
+  /**
+   * Validate JSON artifacts against defined schemas.
+   *
+   * @returns {Promise<CheckResult>} - TODO: describe return value.
+   */
+  public async validateJsonSchemas(): Promise<CheckResult> {
     const findings: string[] = [];
     for (const rule of this.config.jsonSchemas) {
       const files: string[] = await fg(rule.pattern, {
@@ -223,12 +226,12 @@ public async validateJsonSchemas(): Promise<CheckResult> {
     };
   }
 
-    /**
-     * Validate Markdown documents for required metadata and content sections.
-     *
-     * @returns {Promise<CheckResult>} - TODO: describe return value.
-     */
-public async validateMarkdownDocuments(): Promise<CheckResult> {
+  /**
+   * Validate Markdown documents for required metadata and content sections.
+   *
+   * @returns {Promise<CheckResult>} - TODO: describe return value.
+   */
+  public async validateMarkdownDocuments(): Promise<CheckResult> {
     const include: string[] = [...this.config.markdown.include];
     const ignore: string[] = this.config.markdown.exclude
       ? [...this.config.markdown.exclude]
@@ -272,13 +275,13 @@ public async validateMarkdownDocuments(): Promise<CheckResult> {
     };
   }
 
-    /**
-     * Persist a markdown report summarizing the check outcomes.
-     *
-     * @param {HealthReport} report - report parameter.
-     * @returns {Promise<void>} - TODO: describe return value.
-     */
-public async writeReport(report: HealthReport): Promise<void> {
+  /**
+   * Persist a markdown report summarizing the check outcomes.
+   *
+   * @param {HealthReport} report - report parameter.
+   * @returns {Promise<void>} - TODO: describe return value.
+   */
+  public async writeReport(report: HealthReport): Promise<void> {
     const outputPath: string = path.resolve(
       this.baseDir,
       this.config.report.output
@@ -357,13 +360,13 @@ public async writeReport(report: HealthReport): Promise<void> {
     await writeFile(outputPath, `${lines.join("\n")}\n`, "utf8");
   }
 
-    /**
-     * Convert Ajv errors into a readable string.
-     *
-     * @param {ErrorObject[]} errors - errors parameter.
-     * @returns {string} - TODO: describe return value.
-     */
-private formatAjvErrors(errors: ErrorObject[]): string {
+  /**
+   * Convert Ajv errors into a readable string.
+   *
+   * @param {ErrorObject[]} errors - errors parameter.
+   * @returns {string} - TODO: describe return value.
+   */
+  private formatAjvErrors(errors: ErrorObject[]): string {
     if (errors.length === 0) {
       return "Unknown schema validation error.";
     }

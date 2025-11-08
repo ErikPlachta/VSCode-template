@@ -6,7 +6,7 @@
 
 # Interface: OrchestrationProfile
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L20)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/config/unifiedAgentConfig.ts#L20)
 
 Lightweight agent profile for orchestration logic
 
@@ -16,7 +16,7 @@ Lightweight agent profile for orchestration logic
 
 > `readonly` **description**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L23)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/config/unifiedAgentConfig.ts#L23)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:23](https://github.com/ErikPla
 
 > `readonly` **escalateWhen**: `string`[]
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L25)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/config/unifiedAgentConfig.ts#L25)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:25](https://github.com/ErikPla
 
 > `readonly` **id**: [`AgentIdentifier`](../type-aliases/AgentIdentifier.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L21)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/config/unifiedAgentConfig.ts#L21)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:21](https://github.com/ErikPla
 
 > `readonly` **primarySignals**: `string`[]
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L24)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/config/unifiedAgentConfig.ts#L24)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:24](https://github.com/ErikPla
 
 > `readonly` **title**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/mcp/config/unifiedAgentConfig.ts#L22)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/config/unifiedAgentConfig.ts#L22)

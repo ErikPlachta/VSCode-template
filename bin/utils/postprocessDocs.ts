@@ -6,7 +6,7 @@
  */
 
 import path from "node:path";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import fg from "fast-glob";
 
 /**
@@ -50,6 +50,100 @@ async function run(): Promise<void> {
   console.log(
     `[docs:fix] Processed ${files.length} files; changed ${changed}.`
   );
+
+  // Collect generated pages for buildPipeline/orchestration/repositoryHealthAgent
+  // and copy directly into structured IA without creating root duplicates.
+  const generatedBase = path.join(docsDir, "docs");
+  const structuredPromotions: Array<{ src: string; dest: string }> = [
+    {
+      src: path.join(generatedBase, "buildPipeline", "README.md"),
+      dest: path.join(docsDir, "guides", "build-pipeline.md"),
+    },
+    {
+      src: path.join(generatedBase, "repositoryHealthAgent", "README.md"),
+      dest: path.join(
+        docsDir,
+        "reference",
+        "tools",
+        "repository-health-agent.md"
+      ),
+    },
+    {
+      src: path.join(generatedBase, "orchestration", "README.md"),
+      dest: path.join(docsDir, "concepts", "orchestration.md"),
+    },
+  ];
+  for (const { src, dest } of structuredPromotions) {
+    try {
+      const content = await readFile(src, "utf8");
+      await mkdir(path.dirname(dest), { recursive: true });
+      await writeFile(dest, content, "utf8");
+      await ensureTrailingNewlineAndLF(dest);
+      console.log(
+        `[docs:fix] Structured ${path.relative(
+          docsDir,
+          src
+        )} -> ${path.relative(docsDir, dest)}`
+      );
+    } catch (err) {
+      console.warn(
+        `[docs:fix] Skipped structured promotion for ${src}: ${String(
+          (err as Error).message
+        )}`
+      );
+    }
+  }
+
+  // Remove nested TypeDoc tree after promotion to avoid duplication (outlier)
+  try {
+    const nested = path.join(docsDir, "docs");
+    await fg(["**/*"], { cwd: nested });
+    // If it exists and we got here, we can safely remove it
+    const { rm } = await import("node:fs/promises");
+    await rm(nested, { recursive: true, force: true });
+    console.log(`[docs:fix] Removed nested docs subtree: ${nested}`);
+  } catch (e) {
+    // Best-effort cleanup; ignore if not present
+  }
+
+  // Diátaxis layout: copy curated pages into guides/, concepts/, reference/
+  const guidesDir = path.join(docsDir, "guides");
+  const conceptsDir = path.join(docsDir, "concepts");
+  const referenceDir = path.join(docsDir, "reference");
+  await mkdir(guidesDir, { recursive: true });
+  await mkdir(conceptsDir, { recursive: true });
+  await mkdir(path.join(referenceDir, "tools"), { recursive: true });
+
+  // Move modules.md into reference/api.md (no root duplicate)
+  try {
+    const modulesSrc = path.join(docsDir, "modules.md");
+    const modulesDst = path.join(referenceDir, "api.md");
+    const content = await readFile(modulesSrc, "utf8");
+    await writeFile(modulesDst, content, "utf8");
+    await ensureTrailingNewlineAndLF(modulesDst);
+    const { rm } = await import("node:fs/promises");
+    await rm(modulesSrc, { force: true });
+    console.log(`[docs:fix] Moved modules.md -> reference/api.md`);
+  } catch (err) {
+    // Skip if not present
+  }
+
+  // Remove obsolete root duplicates if any still exist
+  const rootDuplicates = [
+    path.join(docsDir, "build-pipeline.md"),
+    path.join(docsDir, "orchestration.md"),
+    path.join(docsDir, "agent"),
+    path.join(docsDir, "repository-health-agent.md"),
+  ];
+  const { rm } = await import("node:fs/promises");
+  for (const dup of rootDuplicates) {
+    try {
+      await rm(dup, { recursive: true, force: true });
+      console.log(`[docs:fix] Removed root duplicate/outlier: ${dup}`);
+    } catch {
+      /* ignore */
+    }
+  }
 }
 
 void run().catch((err: unknown) => {

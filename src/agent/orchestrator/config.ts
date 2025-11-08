@@ -6,6 +6,7 @@ import {
   BaseAgentConfig,
   AgentConfigDefinition,
   OrchestrationConfig,
+  IntentConfig,
 } from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
@@ -56,7 +57,7 @@ export class OrchestratorConfig extends BaseAgentConfig {
    * @param {string} intent - intent parameter.
    * @returns {unknown} - TODO: describe return value.
    */
-  public getIntentConfig(intent: string) {
+  public getIntentConfig(intent: string): IntentConfig | undefined {
     return this.orchestrationConfig.intents?.[intent];
   }
 
@@ -85,7 +86,11 @@ export class OrchestratorConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getScoringWeights() {
+  public getScoringWeights(): {
+    signalMatch: number;
+    focusMatch: number;
+    promptStarterMatch: number;
+  } {
     return (
       this.orchestrationConfig.textProcessing?.scoringWeights || {
         signalMatch: 2,
@@ -109,7 +114,7 @@ export class OrchestratorConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getEscalationConfig() {
+  public getEscalationConfig(): NonNullable<OrchestrationConfig["escalation"]> {
     return (
       this.orchestrationConfig.escalation || {
         conditions: [],
@@ -171,7 +176,7 @@ export class OrchestratorConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getMessages() {
+  public getMessages(): NonNullable<OrchestrationConfig["messages"]> {
     return (
       this.orchestrationConfig.messages || {
         noIntentDetected: "No clear intent detected from the question",
@@ -219,7 +224,6 @@ export class OrchestratorConfig extends BaseAgentConfig {
     // For backward compatibility, support JSON configs
     try {
       const fs = await import("fs");
-      const path = await import("path");
       const configData = fs.readFileSync(configPath, "utf-8");
       const config = JSON.parse(configData);
       return new OrchestratorConfig(config);

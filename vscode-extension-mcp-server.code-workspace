@@ -1,10 +1,10 @@
 {
   "folders": [
-	{
-		"path": "."
-	}
-],
+    {
+      "path": "."
+    }
+  ],
   "settings": {
-    "cSpell.words": ["mybusiness"]
+    "cSpell.words": ["docblocks", "mybusiness"]
   }
 }

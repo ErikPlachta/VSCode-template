@@ -55,7 +55,7 @@ export interface QueryResult {
 }
 
 /**
- * Optional knobs for query execution behaviour.
+ * Optional knobs for query execution behavior.
  *
  */
 export interface QueryOptions {
@@ -93,15 +93,15 @@ export class DatabaseAgent {
   private readonly profile: typeof DatabaseAgentProfile;
   private readonly config: DatabaseAgentConfig;
 
-    /**
-     * Creates a new DatabaseAgent instance.
-     *
-     * @param {DataSource[]} dataSources - dataSources parameter.
-     * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
-     * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
-     * @returns {unknown} - TODO: describe return value.
-     */
-constructor(
+  /**
+   * Creates a new DatabaseAgent instance.
+   *
+   * @param {DataSource[]} dataSources - dataSources parameter.
+   * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
+   * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+  constructor(
     dataSources: DataSource[],
     cacheDirectory: Promise<string>,
     _config?: Partial<DatabaseAgentConfig>
@@ -113,16 +113,16 @@ constructor(
     this.telemetry = createInvocationLogger(this.profile.id);
   }
 
-    /**
-     * Executes a generic query against any data source.
-     *
-     * @param {CategoryId} categoryId - categoryId parameter.
-     * @param {Record<string, unknown>} criteria - criteria parameter.
-     * @param {QueryOptions} options - options parameter.
-     * @returns {Promise<CategoryRecord[]>} - TODO: describe return value.
-     * @throws {Error} - May throw an error.
-     */
-async executeQuery(
+  /**
+   * Executes a generic query against any data source.
+   *
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @param {Record<string, unknown>} criteria - criteria parameter.
+   * @param {QueryOptions} options - options parameter.
+   * @returns {Promise<CategoryRecord[]>} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+  async executeQuery(
     categoryId: CategoryId,
     criteria: Record<string, unknown> = {},
     options: QueryOptions = {}
@@ -191,32 +191,32 @@ async executeQuery(
     }
   }
 
-    /**
-     * Gets available data sources.
-     *
-     * @returns {CategoryId[]} - TODO: describe return value.
-     */
-getAvailableCategories(): CategoryId[] {
+  /**
+   * Gets available data sources.
+   *
+   * @returns {CategoryId[]} - TODO: describe return value.
+   */
+  getAvailableCategories(): CategoryId[] {
     return Array.from(this.dataSources.keys());
   }
 
-    /**
-     * Gets metadata for a specific data source.
-     *
-     * @param {CategoryId} categoryId - categoryId parameter.
-     * @returns {DataSource | undefined} - TODO: describe return value.
-     */
-getCategoryInfo(categoryId: CategoryId): DataSource | undefined {
+  /**
+   * Gets metadata for a specific data source.
+   *
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @returns {DataSource | undefined} - TODO: describe return value.
+   */
+  getCategoryInfo(categoryId: CategoryId): DataSource | undefined {
     return this.dataSources.get(categoryId);
   }
 
-    /**
-     * Clears cached results for a specific category.
-     *
-     * @param {CategoryId} categoryId - categoryId parameter.
-     * @returns {Promise<void>} - TODO: describe return value.
-     */
-async clearCache(categoryId: CategoryId): Promise<void> {
+  /**
+   * Clears cached results for a specific category.
+   *
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @returns {Promise<void>} - TODO: describe return value.
+   */
+  async clearCache(categoryId: CategoryId): Promise<void> {
     const cacheDir = await this.cacheDirectory;
     const pattern = this.buildCacheKey(categoryId, {});
     // Note: This is a simplified implementation - in practice you'd want more sophisticated cache management
@@ -224,14 +224,14 @@ async clearCache(categoryId: CategoryId): Promise<void> {
     await this.telemetry("cacheCleared", async () => true, { categoryId });
   }
 
-    /**
-     * Filters records based on generic criteria.
-     *
-     * @param {DataSource} dataSource - dataSource parameter.
-     * @param {Record<string, unknown>} criteria - criteria parameter.
-     * @returns {CategoryRecord[]} - TODO: describe return value.
-     */
-private filterRecords(
+  /**
+   * Filters records based on generic criteria.
+   *
+   * @param {DataSource} dataSource - dataSource parameter.
+   * @param {Record<string, unknown>} criteria - criteria parameter.
+   * @returns {CategoryRecord[]} - TODO: describe return value.
+   */
+  private filterRecords(
     dataSource: DataSource,
     criteria: Record<string, unknown>
   ): CategoryRecord[] {
@@ -250,15 +250,15 @@ private filterRecords(
     });
   }
 
-    /**
-     * Checks if a record matches specific criteria.
-     *
-     * @param {CategoryRecord} record - record parameter.
-     * @param {string} field - field parameter.
-     * @param {unknown} value - value parameter.
-     * @returns {boolean} - TODO: describe return value.
-     */
-private matchesCriteria(
+  /**
+   * Checks if a record matches specific criteria.
+   *
+   * @param {CategoryRecord} record - record parameter.
+   * @param {string} field - field parameter.
+   * @param {unknown} value - value parameter.
+   * @returns {boolean} - TODO: describe return value.
+   */
+  private matchesCriteria(
     record: CategoryRecord,
     field: string,
     value: unknown
@@ -352,15 +352,15 @@ private matchesCriteria(
     return recordValue === value;
   }
 
-    /**
-     * Builds a stable cache key for a query.
-     *
-     * @param {CategoryId} categoryId - categoryId parameter.
-     * @param {Record<string, unknown>} criteria - criteria parameter.
-     * @param {string} prefix - prefix parameter.
-     * @returns {string} - TODO: describe return value.
-     */
-private buildCacheKey(
+  /**
+   * Builds a stable cache key for a query.
+   *
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @param {Record<string, unknown>} criteria - criteria parameter.
+   * @param {string} prefix - prefix parameter.
+   * @returns {string} - TODO: describe return value.
+   */
+  private buildCacheKey(
     categoryId: CategoryId,
     criteria: Record<string, unknown>,
     prefix?: string
@@ -384,13 +384,13 @@ private buildCacheKey(
     return parts.join(".");
   }
 
-    /**
-     * Retrieves cached query result.
-     *
-     * @param {string} cacheKey - cacheKey parameter.
-     * @returns {Promise<CategoryRecord[] | null>} - TODO: describe return value.
-     */
-private async getCachedResult(
+  /**
+   * Retrieves cached query result.
+   *
+   * @param {string} cacheKey - cacheKey parameter.
+   * @returns {Promise<CategoryRecord[] | null>} - TODO: describe return value.
+   */
+  private async getCachedResult(
     cacheKey: string
   ): Promise<CategoryRecord[] | null> {
     try {
@@ -405,14 +405,14 @@ private async getCachedResult(
     }
   }
 
-    /**
-     * Stores query result in cache.
-     *
-     * @param {string} cacheKey - cacheKey parameter.
-     * @param {CategoryRecord[]} results - results parameter.
-     * @returns {Promise<void>} - TODO: describe return value.
-     */
-private async cacheResult(
+  /**
+   * Stores query result in cache.
+   *
+   * @param {string} cacheKey - cacheKey parameter.
+   * @param {CategoryRecord[]} results - results parameter.
+   * @returns {Promise<void>} - TODO: describe return value.
+   */
+  private async cacheResult(
     cacheKey: string,
     results: CategoryRecord[]
   ): Promise<void> {

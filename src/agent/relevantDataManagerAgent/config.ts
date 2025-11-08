@@ -49,7 +49,7 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getMetadataConfig() {
+  public getMetadataConfig(): RelevantDataManagerConfig["metadata"] {
     return (
       this.relevantDataManagerConfig.metadata || {
         enableSchemaValidation: true,
@@ -64,7 +64,7 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getCachingConfig() {
+  public getCachingConfig(): RelevantDataManagerConfig["caching"] {
     return (
       this.relevantDataManagerConfig.caching || {
         enableSnapshotCaching: true,
@@ -79,7 +79,7 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getValidationConfig() {
+  public getValidationConfig(): RelevantDataManagerConfig["validation"] {
     return (
       this.relevantDataManagerConfig.validation || {
         strictModeEnabled: true,
@@ -94,7 +94,9 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getSchemaManagementConfig() {
+  public getSchemaManagementConfig(): NonNullable<
+    RelevantDataManagerConfig["schemaManagement"]
+  > {
     return (
       this.relevantDataManagerConfig.schemaManagement || {
         autoDetectSchemaChanges: true,
@@ -113,7 +115,9 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getRelationshipsConfig() {
+  public getRelationshipsConfig(): NonNullable<
+    RelevantDataManagerConfig["relationships"]
+  > {
     return (
       this.relevantDataManagerConfig.relationships || {
         enableAutoDiscovery: true,
@@ -137,7 +141,9 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getDataManagementConfig() {
+  public getDataManagementConfig(): NonNullable<
+    RelevantDataManagerConfig["dataManagement"]
+  > {
     return (
       this.relevantDataManagerConfig.dataManagement || {
         enableAutoRefresh: false,
@@ -156,7 +162,9 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getPerformanceConfig() {
+  public getPerformanceConfig(): NonNullable<
+    RelevantDataManagerConfig["performance"]
+  > {
     return (
       this.relevantDataManagerConfig.performance || {
         enableParallelProcessing: true,

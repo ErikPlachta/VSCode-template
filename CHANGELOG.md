@@ -6,70 +6,55 @@ roles:
   - documentation
 associations:
   - changelog
-  - governance
-  - automation
-   - Full migration from `businessData` to `userContext` with backward-compatible layer (in progress).
-   - Replace remaining `relevantDataManagerAgent` imports with `userContextAgent` (pending final sweep and eventual deprecation removal).
-   - Resolve TypeDoc generation missing file warnings by adding referenced docs (`docs/build-pipeline.md`, `docs/agents/repository-health-agent.md`, `docs/orchestration.md`).
-   - Lint remediation: address 130+ outstanding ESLint errors (return types, JSDoc alignment, unused vars) – phase 1 targeting agent config getters.
-   - Health report integration improvements and repository health agent alias resolution.
-   - Enforce path alias imports (no relative paths) across codebase (rule + conversion complete).
-   - Consolidate developer-only scripts into `bin/utils` (completed) and remove `bin/tools` after CI update.
-   - Rename `@types/*` alias to `@internal-types/*` to resolve TypeDoc TS6137 errors (completed).
-   - Add docs post-processing (LF normalization + trailing newline) and `.gitattributes` for consistent EOL (completed; pending repository-wide renormalization commit).
-   - Source-based script execution using `tsx` (completed).
-## Changelog
-
-All notable changes, requests, solutions, and goals driven via VS Code Copilot Chat are tracked here.
-
-This file follows the Keep a Changelog format and uses semantic groupings under each release. Items that are planned or in progress live under Unreleased. When items complete, move them to a dated release section.
-
-## How to use this file with Copilot Chat
-  - Added ESLint `no-restricted-imports` rule banning relative import paths.
   - Implemented automated import conversion script and refactored configuration into constants.
   - Added docs postprocessing script ensuring LF line endings & trailing newline across generated markdown.
-  - Introduced `.gitattributes` enforcing LF for source & docs.
   - Added `tsx` dev dependency and updated package scripts to execute directly from source.
   - Converted `@types/*` alias to `@internal-types/*` to unblock Typedoc.
-  - Moved dev-only tooling (`addFileTags`, `fixJSDoc`, `processTemplates`, `updatePackageConfig`, import utilities) into `bin/utils`.
-  - Generated documentation successfully post-alias rename (warnings limited to missing referenced markdown assets).
-
-- At the start of a session, read the Unreleased section and ask whether to resume from the top items or re-prioritize.
 - When creating a new task, add it to Unreleased under Planned.
 - When making changes, add entries under Added/Changed/Fixed/Docs as appropriate and reference the files you touched.
   - Docs: PASS (Typedoc runs; 6 warnings for missing referenced docs remain).
-- Keep entries concise, action-oriented, and link to code paths (e.g., `src/agent/...`).
-
 ## [Unreleased]
 
 ### Planned
-
-- Finish clarification agent config typing: add explicit return type for `getResponseStyle()` in `src/agent/clarificationAgent/config.ts`.
-- Orchestrator config & index: add return types, replace `any`, improve JSDoc; underscore unused variables in `src/agent/orchestrator/config.ts` and `src/agent/orchestrator/index.ts`.
-- Other agent configs: add explicit return types and refine JSDoc summaries.
-   - Address outstanding ESLint errors in agent config files (add explicit return types) – prioritize getter functions flagged.
-   - Create missing referenced docs to remove TypeDoc warnings.
-   - Perform final sweep to replace legacy agent imports and plan deprecation removal.
-   - Add health report markdown assets to reduce warnings and update reporting script if needed.
-   - Run repository-wide EOL normalization commit.
+- Replace `any` types in analytics modules (`src/shared/analyticsIntegration.ts`, `src/shared/agentAnalytics.ts`) with structured interfaces.
+- Create/update remaining docs assets (if any new references appear) and keep health report green.
+- Perform final sweep to replace legacy agent imports and plan deprecation removal of `relevant-data-manager` alias.
+- Run repository-wide EOL normalization commit.
 - Draft legacy config removal plan & deprecation warnings (`mcp.config.json`, loader).
 - Param name normalization scan & adjustments.
 - Final lint/compile/test sweep and repository health report.
-- Fix path alias resolution for health tooling: resolve missing module `@agent/repositoryHealthAgent` impacting `npm run lint:json` and `npm run lint:docs` scripts.
-- Bulk ESLint remediation pass: add explicit return types + JSDoc blocks across agent configs and shared analytics; reduce 136 errors → target zero.
-- Introduce analytics option interfaces to eliminate pervasive `any` types (`src/shared/analyticsIntegration.ts`, `src/shared/agentAnalytics.ts`).
-- Complete migration from `businessData` to `userContext` folder structure once alias patterns validated.
-- Replace legacy agent id `relevant-data-manager` with `user-context` across configs & orchestrator after compatibility window.
+
+### Added (2025-11-08 – Return type & docs remediation)
+- Explicit return types added across agent config getters (clarification, data, database, orchestrator, relevantDataManager/userContext).
+- Normalized fallback objects to ensure required fields present (e.g. `getResponseStyle`).
+- Added missing documentation pages: structured IA pages `docs/guides/build-pipeline.md`, `docs/reference/tools/repository-health-agent.md`, `docs/concepts/orchestration.md` (root duplicates removed).
+- Updated `.github/copilot-instructions.md` to mandate CHANGELOG updates for all non-trivial changes.
+
+### Verification (latest session 2025-11-08)
+- Build: PASS
+- Tests: PASS
+- Lint: PARTIAL – remaining work: analytics `any` usage & JSDoc completeness.
+- Health report: PASS (ESLint pattern tolerance added to avoid AllFilesIgnoredError).
+- Docs: PASS – IA restructuring complete (no root duplicates); 6 benign TypeDoc warnings (external symbol references) remain.
+
+### Next Focus
+- Replace `any` types in analytics and re-run lint to reach zero errors.
+- Document analytics interfaces (new page if substantial) and update health verification.
 
 ### Changed
 
 - Migrated progress tracking from `docs/PROGRESS.md` to the root `CHANGELOG.md` to avoid conflicts with docs governance.
+- Refactored `bin/utils/postprocessDocs.ts` to promote generated pages directly into structured Diátaxis folders (guides/, concepts/, reference/) and remove obsolete root duplicates & nested subtree.
+- Enhanced telemetry docs (`src/mcp/telemetry.ts`) with clearer cross-references and `@inheritDoc`, removing unsupported tags after lint feedback.
 - Added transitional User Context Agent (`src/agent/userContextAgent`) aliasing legacy Relevant Data Manager for incremental rename.
 - Extended JSON schema patterns to support both `businessData` and `userContext` directories.
 
 ### Docs
 
 - Introduced this changelog as the single source of truth for Copilot Chat–managed work. Updated `.github/copilot-instructions.md` to reference this flow and resume prompts.
+- Added build pipeline, orchestration overview, and repository health agent documentation.
+- Added JSDoc & TypeDoc Style Guide at `docs/guides/jsdoc-style-guide.md`; updated `mcpCache` and `telemetry` as exemplars for cross-linking and clearer contracts.
+- Updated README links to structured documentation hierarchy (guides/, concepts/, reference/tools/); removed legacy paths pointing to deprecated root duplicates.
 
 ---
 

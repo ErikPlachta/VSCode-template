@@ -1,7 +1,7 @@
 /**
  * @packageDocumentation Utilities for managing the local `.mcp-cache` directory.
  *
- * @module mcpCache
+ * Module for working with on-disk cache artefacts shared across tools and agents.
  */
 
 import { promises as fs } from "fs";
@@ -13,9 +13,9 @@ import * as vscode from "vscode";
 const SHARED_CACHE_DIR = "shared";
 
 /**
- * Minimal representation of a cached artefact that can be exchanged across
+ * Minimal representation of a cached artefact that can be exchanged across tools.
  *
- * @template T
+ * @template T - Payload type stored in the cache entry.
  */
 export interface SharedCacheEntry<T = unknown> {
   /** Uniquely identifies the record on disk. */
@@ -30,10 +30,7 @@ export interface SharedCacheEntry<T = unknown> {
   metadata?: Record<string, unknown>;
 }
 
-/**
- * Structure for log entries persisted inside `.mcp-cache`.
- *
- */
+/** Structure for log entries persisted inside `.mcp-cache`. */
 export interface ToolLogEntry {
   /** ISO timestamp when the invocation took place. */
   timestamp: string;
@@ -52,7 +49,7 @@ export interface ToolLogEntry {
 /**
  * Ensure the workspace has a `.mcp-cache` directory and return its path.
  *
- * @returns {Promise<string>} - TODO: describe return value.
+ * @returns {Promise<string>} - Absolute path to the cache directory.
  */
 export async function ensureCacheDirectory(): Promise<string> {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
@@ -65,9 +62,9 @@ export async function ensureCacheDirectory(): Promise<string> {
 /**
  * Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
  *
- * @param {string} cacheDir - cacheDir parameter.
- * @param {ToolLogEntry} entry - entry parameter.
- * @returns {Promise<void>} - TODO: describe return value.
+ * @param {string} cacheDir - Absolute path returned by {@link ensureCacheDirectory}.
+ * @param {ToolLogEntry} entry - Log payload to append as a JSON line.
+ * @returns {Promise<void>} Resolves when the entry is written.
  */
 export async function logInvocation(
   cacheDir: string,
@@ -81,11 +78,10 @@ export async function logInvocation(
 /**
  * Persist a shared cache entry that can be re-used by other MCP tools.
  *
- * @template T
- *
- * @param {string} cacheDir - cacheDir parameter.
- * @param {SharedCacheEntry<T>} entry - entry parameter.
- * @returns {Promise<void>} - TODO: describe return value.
+ * @template T - Payload type of the value being stored.
+ * @param {string} cacheDir - Absolute path returned by {@link ensureCacheDirectory}.
+ * @param {SharedCacheEntry} entry - Entry envelope to write.
+ * @returns {Promise<void>} Resolves when the entry is written.
  */
 export async function storeSharedCacheEntry<T>(
   cacheDir: string,
@@ -101,12 +97,11 @@ export async function storeSharedCacheEntry<T>(
 /**
  * Retrieve a shared cache entry by key.
  *
- * @template T
- *
- * @param {string} cacheDir - cacheDir parameter.
- * @param {string} key - key parameter.
- * @returns {Promise<SharedCacheEntry<T> | undefined>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
+ * @template T - Payload type previously stored with {@link storeSharedCacheEntry}.
+ * @param {string} cacheDir - Absolute path returned by {@link ensureCacheDirectory}.
+ * @param {string} key - Unique key identifying the entry.
+ * @returns {Promise<SharedCacheEntry | undefined>} The entry if present, otherwise undefined.
+ * @throws {Error} Propagates filesystem errors other than missing file.
  */
 export async function readSharedCacheEntry<T = unknown>(
   cacheDir: string,
@@ -127,13 +122,12 @@ export async function readSharedCacheEntry<T = unknown>(
 }
 
 /**
- * Enumerate all cached artifacts currently stored on disk.
+ * Enumerate all cached artefacts currently stored on disk.
  *
- * @template T
- *
- * @param {string} cacheDir - cacheDir parameter.
- * @returns {Promise<SharedCacheEntry<T>[]>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
+ * @template T - Payload type associated with entries.
+ * @param {string} cacheDir - Absolute path returned by {@link ensureCacheDirectory}.
+ * @returns {Promise<SharedCacheEntry[]>} Parsed entries found in the shared cache folder.
+ * @throws {Error} Propagates filesystem errors other than missing directory.
  */
 export async function listSharedCacheEntries<T = unknown>(
   cacheDir: string
@@ -161,10 +155,10 @@ export async function listSharedCacheEntries<T = unknown>(
 /**
  * Remove a shared cache entry when it is no longer relevant.
  *
- * @param {string} cacheDir - cacheDir parameter.
- * @param {string} key - key parameter.
- * @returns {Promise<void>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
+ * @param {string} cacheDir - Absolute path returned by {@link ensureCacheDirectory}.
+ * @param {string} key - Unique key identifying the entry.
+ * @returns {Promise<void>} Resolves whether or not the file existed.
+ * @throws {Error} Propagates filesystem errors other than missing file.
  */
 export async function deleteSharedCacheEntry(
   cacheDir: string,
@@ -186,8 +180,8 @@ export async function deleteSharedCacheEntry(
 /**
  * Normalize a cache key so it is safe for use as a file name.
  *
- * @param {string} key - key parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {string} key - Arbitrary key name to normalize.
+ * @returns {string} Normalized file-name-safe key.
  */
 function sanitizeKey(key: string): string {
   return key.replace(/[^a-z0-9-_]+/gi, "_");

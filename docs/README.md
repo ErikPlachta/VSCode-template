@@ -1,6 +1,6 @@
 **myBusiness-mcp-extension v1.0.0**
 
-***
+---
 
 # My Business MCP Extension
 
@@ -21,7 +21,7 @@
 | Component           | Location         | Purpose                                                                                                                |
 | ------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | **VSIX extension**  | `src/extension/` | Ships the VS Code client that registers commands, connects to an MCP endpoint, and renders responses in Copilot Chat.  |
-| **Agents**          | `src/agents/`    | Provide orchestration logic and reusable domain behaviours that power tool responses regardless of the transport.      |
+| **Agents**          | `src/agents/`    | Provide orchestration logic and reusable domain behaviors that power tool responses regardless of the transport.       |
 | **Mock MCP server** | `src/server/`    | Lightweight JSON-RPC server that exposes the sample datasets so the extension has a local endpoint during development. |
 
 The extension always communicates with an MCP server over HTTP(S). Installing the VSIX does **not** embed the backend logic; you must point the extension to a running MCP endpoint (for example the mock server included in this repository).
@@ -36,14 +36,14 @@ This compiles the TypeScript sources and starts a JSON-RPC server on `http://loc
 
 ## Compliance and Documentation Tooling
 
-The repository includes a **Repository Health Agent** (`src/tools/repositoryHealth.ts`) that coordinates linting, schema validation, and documentation audits. Its behaviour is driven by the typed application config [`src/config/application.config.ts`](config/application.config/README.md) with a temporary fallback to legacy `src/mcp.config.json` during the migration period. Supporting JSON Schemas live under [`src/schemas/`](_media/schemas).
+The repository includes a **Repository Health Agent** (`src/tools/repositoryHealth.ts`) that coordinates linting, schema validation, and documentation audits. Its behavior is driven by the typed application config [`src/config/application.config.ts`](config/application.config/README.md) with a temporary fallback to legacy `src/mcp.config.json` during the migration period. Supporting JSON Schemas live under [`src/schemas/`](_media/schemas).
 
-- `npm run lint` ensures every TypeScript file includes exhaustive docblocks, examples, and error documentation.
+- `npm run lint` ensures every TypeScript file includes exhaustive doc-blocs, examples, and error documentation.
 - `npm run lint:json` validates dataset records, relationships, and category metadata against centrally managed JSON Schemas.
 - `npm run lint:docs` audits Markdown content for mandatory front matter and hierarchical sections.
-- `npm run health:report` executes the full suite and writes an aggregated report to [`docs/reports/health-report.md`](docs/reports/health-report.md).
+- `npm run health:report` executes the full suite and writes an aggregated report to [`reports/health-report.md`](reports/health-report.md).
 
-Refer to [`docs/build-pipeline.md`](docs/build-pipeline.md) for pipeline details and [`docs/agents/repository-health-agent.md`](docs/agents/repository-health-agent.md) for agent behaviour.
+Refer to [`guides/build-pipeline.md`](guides/build-pipeline.md) for pipeline details and [`reference/tools/repository-health-agent.md`](reference/tools/repository-health-agent.md) for agent behavior.
 
 ## Commands
 
@@ -51,7 +51,7 @@ Refer to [`docs/build-pipeline.md`](docs/build-pipeline.md) for pipeline details
 - `@listProjects`
 - Command Palette → **My Business MCP: Invoke Tool**
 
-See [`docs/orchestration.md`](docs/orchestration.md) for a deep dive into the orchestration lifecycle, cache layout, and extension architecture.
+See [`concepts/orchestration.md`](concepts/orchestration.md) for a deep dive into the orchestration lifecycle, cache layout, and extension architecture.
 
 ## Scripts
 

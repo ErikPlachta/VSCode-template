@@ -8,4 +8,4 @@
 
 Enforced documentation and metadata compliance.
 
-All source files must provide comprehensive docblocks per project standards.
+All source files must provide comprehensive doc-blocs per project standards.

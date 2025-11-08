@@ -6,7 +6,7 @@
 
 # Interface: AgentGlobalConfig
 
-Defined in: [src/types/applicationConfig.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L134)
+Defined in: [src/types/applicationConfig.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L134)
 
 Global agent configuration settings.
 
@@ -16,7 +16,7 @@ Global agent configuration settings.
 
 > **cacheEnabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L140)
+Defined in: [src/types/applicationConfig.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L140)
 
 Enable caching globally for agents.
 
@@ -26,7 +26,7 @@ Enable caching globally for agents.
 
 > **cacheTtl**: `number`
 
-Defined in: [src/types/applicationConfig.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L142)
+Defined in: [src/types/applicationConfig.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L142)
 
 Cache time-to-live in milliseconds.
 
@@ -36,7 +36,7 @@ Cache time-to-live in milliseconds.
 
 > **enableTelemetry**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L138)
+Defined in: [src/types/applicationConfig.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L138)
 
 Enable telemetry collection for agents.
 
@@ -46,6 +46,6 @@ Enable telemetry collection for agents.
 
 > **maxExecutionTime**: `number`
 
-Defined in: [src/types/applicationConfig.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L136)
+Defined in: [src/types/applicationConfig.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L136)
 
 Maximum execution time for any agent in milliseconds.

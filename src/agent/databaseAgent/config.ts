@@ -65,7 +65,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getCachingConfig() {
+  public getCachingConfig(): DatabaseConfig["performance"]["caching"] {
     return (
       this.databaseConfig.performance?.caching || {
         enabledByDefault: true,
@@ -81,7 +81,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getQueryLimits() {
+  public getQueryLimits(): DatabaseConfig["performance"]["limits"] {
     return (
       this.databaseConfig.performance?.limits || {
         queryTimeout: 30000,
@@ -96,7 +96,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getSchemaValidation() {
+  public getSchemaValidation(): DatabaseConfig["validation"]["schemaValidation"] {
     return (
       this.databaseConfig.validation?.schemaValidation || {
         enableStrictValidation: true,
@@ -111,7 +111,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getIntegrityChecks() {
+  public getIntegrityChecks(): DatabaseConfig["validation"]["integrityChecks"] {
     return (
       this.databaseConfig.validation?.integrityChecks || {
         validateRelationships: true,
@@ -149,7 +149,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getFilteringConfig() {
+  public getFilteringConfig(): DatabaseConfig["operations"]["filtering"] {
     return (
       this.databaseConfig.operations?.filtering || {
         operators: [
@@ -176,7 +176,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getJoinConfig() {
+  public getJoinConfig(): DatabaseConfig["operations"]["joins"] {
     return (
       this.databaseConfig.operations?.joins || {
         supportedJoinTypes: ["inner", "left", "right"],
@@ -191,7 +191,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
    *
    * @returns {unknown} - TODO: describe return value.
    */
-  public getAggregationConfig() {
+  public getAggregationConfig(): DatabaseConfig["operations"]["aggregation"] {
     return (
       this.databaseConfig.operations?.aggregation || {
         functions: ["count", "sum", "avg", "min", "max", "distinct"],

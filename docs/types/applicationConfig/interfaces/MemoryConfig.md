@@ -6,7 +6,7 @@
 
 # Interface: MemoryConfig
 
-Defined in: [src/types/applicationConfig.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L216)
+Defined in: [src/types/applicationConfig.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L216)
 
 Memory management configuration.
 
@@ -16,7 +16,7 @@ Memory management configuration.
 
 > **gcThreshold**: `number`
 
-Defined in: [src/types/applicationConfig.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L220)
+Defined in: [src/types/applicationConfig.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L220)
 
 Garbage collection threshold (0-1).
 
@@ -26,6 +26,6 @@ Garbage collection threshold (0-1).
 
 > **maxHeapSize**: `string`
 
-Defined in: [src/types/applicationConfig.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L218)
+Defined in: [src/types/applicationConfig.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L218)
 
 Maximum heap size.

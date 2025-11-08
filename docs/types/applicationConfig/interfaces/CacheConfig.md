@@ -6,7 +6,7 @@
 
 # Interface: CacheConfig
 
-Defined in: [src/types/applicationConfig.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L162)
+Defined in: [src/types/applicationConfig.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L162)
 
 Cache configuration settings.
 
@@ -16,7 +16,7 @@ Cache configuration settings.
 
 > **directory**: `string`
 
-Defined in: [src/types/applicationConfig.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L166)
+Defined in: [src/types/applicationConfig.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L166)
 
 Cache directory path.
 
@@ -26,7 +26,7 @@ Cache directory path.
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:164](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L164)
+Defined in: [src/types/applicationConfig.ts:164](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L164)
 
 Enable caching.
 
@@ -36,7 +36,7 @@ Enable caching.
 
 > **maxSize**: `string`
 
-Defined in: [src/types/applicationConfig.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L168)
+Defined in: [src/types/applicationConfig.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L168)
 
 Maximum cache size.
 
@@ -46,6 +46,6 @@ Maximum cache size.
 
 > **ttl**: `number`
 
-Defined in: [src/types/applicationConfig.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b85aa84fc9f3a7305e615bf832d755c74a119ffd/src/types/applicationConfig.ts#L170)
+Defined in: [src/types/applicationConfig.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/applicationConfig.ts#L170)
 
 Time-to-live for cached items in milliseconds.
