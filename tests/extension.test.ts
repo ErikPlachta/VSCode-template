@@ -1,7 +1,7 @@
-import { activate } from "../../src/extension";
-import * as mcpSync from "../../src/extension/mcpSync";
-import * as mcpCache from "../../src/extension/mcpCache";
-import * as schemaPrompt from "../../src/extension/schemaPrompt";
+import { activate } from "../src/extension";
+import * as mcpSync from "../src/extension/mcpSync";
+import * as mcpCache from "../src/extension/mcpCache";
+import * as schemaPrompt from "../src/extension/schemaPrompt";
 
 jest.mock("../../src/agent/orchestrator", () => ({
   Orchestrator: jest.fn(() => ({

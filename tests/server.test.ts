@@ -1,4 +1,4 @@
-import { tools } from "../../src/server";
+import { tools } from "../src/server";
 
 describe("server", () => {
   it("exposes development tools for the MCP client", () => {

@@ -5,7 +5,7 @@ import {
   createRelevantDataManagerAgent,
   RelevantDataManagerAgent,
   UnknownCategoryError,
-} from "../../src/agent/relevantDataManagerAgent";
+} from "../src/agent/relevantDataManagerAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 

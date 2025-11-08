@@ -1,4 +1,4 @@
-import { Orchestrator } from "../../src/agent/orchestrator";
+import { Orchestrator } from "../src/agent/orchestrator";
 
 let workspaceFoldersMock: any[] | undefined;
 

@@ -1,6 +1,6 @@
 # Exclude source and dev-only files from the VSIX
 src/
-bin/tests/
+tests/
 bin/utils/
 bin/schemas/
 coverage/

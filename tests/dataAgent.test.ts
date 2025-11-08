@@ -1,9 +1,9 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { DataAgent } from "../../src/agent/dataAgent";
-import { DatabaseAgent } from "../../src/agent/databaseAgent";
-import { RelevantDataManagerAgent } from "../../src/agent/relevantDataManagerAgent";
+import { DataAgent } from "../src/agent/dataAgent";
+import { DatabaseAgent } from "../src/agent/databaseAgent";
+import { RelevantDataManagerAgent } from "../src/agent/relevantDataManagerAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 

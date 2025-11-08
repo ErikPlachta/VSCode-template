@@ -5,18 +5,15 @@ import {
   DatabaseAgentProfile,
   RelevantDataManagerAgentProfile,
 } from "../../src/mcp/agentProfiles";
-import { renderEscalationPrompt } from "../../src/mcp/prompts";
-import {
-  createInvocationLogger,
-  InvocationEvent,
-} from "../../src/mcp/telemetry";
+import { renderEscalationPrompt } from "../src/mcp/prompts";
+import { createInvocationLogger, InvocationEvent } from "../src/mcp/telemetry";
 import {
   detectDuplicateSchemas,
   validateCategorySchemas,
-} from "../../src/mcp/schemaUtils";
-import { KnowledgeBase } from "../../src/mcp/knowledgeBase";
-import { ClarificationAgent } from "../../src/agent/clarificationAgent";
-import type { BusinessCategory } from "../../src/agent/relevantDataManagerAgent";
+} from "../src/mcp/schemaUtils";
+import { KnowledgeBase } from "../src/mcp/knowledgeBase";
+import { ClarificationAgent } from "../src/agent/clarificationAgent";
+import type { BusinessCategory } from "../src/agent/relevantDataManagerAgent";
 
 describe("Shared MCP utilities", () => {
   it("exposes manifest metadata for every agent", () => {

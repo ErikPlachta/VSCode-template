@@ -2,15 +2,19 @@ const showInputBox = jest.fn();
 const showQuickPick = jest.fn();
 const showErrorMessage = jest.fn();
 
-jest.mock("vscode", () => ({
-  window: {
-    showInputBox,
-    showQuickPick,
-    showErrorMessage
-  }
-}), { virtual: true });
+jest.mock(
+  "vscode",
+  () => ({
+    window: {
+      showInputBox,
+      showQuickPick,
+      showErrorMessage,
+    },
+  }),
+  { virtual: true }
+);
 
-import { promptForArgs } from "../../src/extension/schemaPrompt";
+import { promptForArgs } from "../src/extension/schemaPrompt";
 
 describe("promptForArgs", () => {
   beforeEach(() => {
@@ -25,9 +29,9 @@ describe("promptForArgs", () => {
       title: "Mock",
       input_schema: {
         properties: {
-          metric_name: { description: "desc", required: true }
-        }
-      }
+          metric_name: { description: "desc", required: true },
+        },
+      },
     };
     const result = await promptForArgs(tool as any);
     expect(result).toBeDefined();
@@ -41,9 +45,9 @@ describe("promptForArgs", () => {
       title: "Mock",
       input_schema: {
         properties: {
-          count: { description: "desc", required: true, type: "number" }
-        }
-      }
+          count: { description: "desc", required: true, type: "number" },
+        },
+      },
     };
     const result = await promptForArgs(tool as any);
     expect(result).toBeDefined();
@@ -57,9 +61,9 @@ describe("promptForArgs", () => {
       title: "Mock",
       input_schema: {
         properties: {
-          enabled: { description: "desc", required: true, type: "boolean" }
-        }
-      }
+          enabled: { description: "desc", required: true, type: "boolean" },
+        },
+      },
     };
     const result = await promptForArgs(tool as any);
     expect(result).toBeDefined();
@@ -73,9 +77,9 @@ describe("promptForArgs", () => {
       title: "Mock",
       input_schema: {
         properties: {
-          enabled: { description: "desc", required: true, type: "boolean" }
-        }
-      }
+          enabled: { description: "desc", required: true, type: "boolean" },
+        },
+      },
     };
     const result = await promptForArgs(tool as any);
     expect(result).toBeUndefined();
@@ -86,8 +90,8 @@ describe("promptForArgs", () => {
     const tool = {
       title: "Mock",
       input_schema: {
-        properties: {}
-      }
+        properties: {},
+      },
     };
     const result = await promptForArgs(tool as any);
     expect(result).toEqual({});

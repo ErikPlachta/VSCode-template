@@ -145,7 +145,7 @@ function transformImports(
  * ```typescript
  * // Convert ../ to ../../ in test files (regex example)
  * const stats = await fixImports({
- *   targetDirectory: './bin/tests',
+ *   targetDirectory: './tests',
  *   transformations: [
  *     { find: '\\.\\./(?!\\.\\.)', replace: '../../', isRegex: true }
  *   ]

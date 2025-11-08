@@ -7,18 +7,22 @@ import {
   listSharedCacheEntries,
   logInvocation,
   readSharedCacheEntry,
-  storeSharedCacheEntry
-} from "../../src/extension/mcpCache";
+  storeSharedCacheEntry,
+} from "../src/extension/mcpCache";
 
 let workspaceFoldersMock: any[] | undefined;
 
-jest.mock("vscode", () => ({
-  workspace: {
-    get workspaceFolders() {
-      return workspaceFoldersMock;
-    }
-  }
-}), { virtual: true });
+jest.mock(
+  "vscode",
+  () => ({
+    workspace: {
+      get workspaceFolders() {
+        return workspaceFoldersMock;
+      },
+    },
+  }),
+  { virtual: true }
+);
 
 describe("mcpCache", () => {
   beforeEach(() => {
@@ -48,11 +52,14 @@ describe("mcpCache", () => {
       toolName: "demo",
       args: { query: "hello" },
       context: [],
-      response: { result: "ok" }
+      response: { result: "ok" },
     });
 
-    const contents = await fs.readFile(path.join(cacheDir, "invocations.jsonl"), "utf8");
-    expect(contents).toContain("\"toolName\":\"demo\"");
+    const contents = await fs.readFile(
+      path.join(cacheDir, "invocations.jsonl"),
+      "utf8"
+    );
+    expect(contents).toContain('"toolName":"demo"');
 
     await fs.rm(tempDir, { recursive: true, force: true });
   });
@@ -67,10 +74,13 @@ describe("mcpCache", () => {
       toolName: "demoTool",
       timestamp: "2024-01-01T00:00:00.000Z",
       value: { greeting: "hello" },
-      metadata: { source: "test" }
+      metadata: { source: "test" },
     });
 
-    const entry = await readSharedCacheEntry<{ greeting: string }>(cacheDir, "demo:123");
+    const entry = await readSharedCacheEntry<{ greeting: string }>(
+      cacheDir,
+      "demo:123"
+    );
     expect(entry?.value.greeting).toBe("hello");
     expect(entry?.metadata).toEqual({ source: "test" });
 

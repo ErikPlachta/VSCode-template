@@ -22,12 +22,19 @@
       "@bin/*": ["bin/*"]
     }
   },
-  "include": ["src", "bin"],
-  "exclude": [
-    "node_modules",
-    "out",
-    "bin/tests",
-    "jest.config.js",
-    "*.config.js"
-  ]
+  "include": [
+    "src",
+    "bin",
+    "tests/dataAgent.test.ts",
+    "tests/databaseAgent.test.ts",
+    "tests/extension.test.ts",
+    "tests/mcpCache.test.ts",
+    "tests/mcpShared.test.ts",
+    "tests/mcpSync.test.ts",
+    "tests/orchestrator.test.ts",
+    "tests/relevantDataManagerAgent.test.ts",
+    "tests/schemaPrompt.test.ts",
+    "tests/server.test.ts"
+  ],
+  "exclude": ["node_modules", "out", "tests", "jest.config.js", "*.config.js"]
 }
