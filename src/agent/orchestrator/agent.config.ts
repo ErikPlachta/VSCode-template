@@ -265,6 +265,50 @@ export const orchestratorConfig: AgentConfigDefinition = {
         "show information",
       ],
     },
+
+    /**
+     * Configurable user-facing messages for various orchestrator responses.
+     * These messages are presented to users in different scenarios.
+     */
+    messages: {
+      /** Message when no intent can be determined from the user's question */
+      noIntentDetected: "No clear intent detected from the question",
+
+      /** Prompt asking for more context when intent detection fails */
+      needMoreContext:
+        "I need more context to help you properly. Could you provide more details about what you're looking for?",
+
+      /** Prompt when question matches intent but lacks specificity */
+      questionTooVague:
+        "Your question is quite general. Could you provide more specific details about what you're looking for?",
+
+      /** Default missing signals hints for vague questions */
+      missingSignalsHint: ["specific context", "topic details"],
+
+      /** Generic error message when processing fails */
+      errorOccurred: "An error occurred while processing your request",
+
+      /** Summary templates for different intents */
+      summaries: {
+        metadata: "Providing metadata information about {topic}",
+        records: "Searching for {topic} records matching your criteria",
+        insight: "Analyzing {topic} data to generate insights",
+        clarification: "I need more information to help you properly",
+        defaultTopic: "the requested data",
+      },
+
+      /** Guidance messages for different agent routing scenarios */
+      guidance: {
+        metadata: "Retrieving category schemas and structure information",
+        recordsConnections: "Preparing to search across related categories",
+        recordsFiltering: "Filtering records based on your criteria",
+        insightPlan: ["Analyze data patterns", "Generate insights"],
+        insightOverview: "Creating data exploration strategy",
+        insightRecommendations: "Developing analytical recommendations",
+        clarificationPrompt:
+          "Please clarify what specific information you're looking for",
+      },
+    },
   },
 
   /**

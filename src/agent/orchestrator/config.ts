@@ -138,6 +138,40 @@ export class OrchestratorConfig extends BaseAgentConfig {
   }
 
   /**
+   * Get configurable user-facing messages
+   */
+  public getMessages() {
+    return (
+      this.orchestrationConfig.messages || {
+        noIntentDetected: "No clear intent detected from the question",
+        needMoreContext:
+          "I need more context to help you properly. Could you provide more details about what you're looking for?",
+        questionTooVague:
+          "Your question is quite general. Could you provide more specific details about what you're looking for?",
+        missingSignalsHint: ["specific context", "topic details"],
+        errorOccurred: "An error occurred while processing your request",
+        summaries: {
+          metadata: "Providing metadata information about {topic}",
+          records: "Searching for {topic} records matching your criteria",
+          insight: "Analyzing {topic} data to generate insights",
+          clarification: "I need more information to help you properly",
+          defaultTopic: "the requested data",
+        },
+        guidance: {
+          metadata: "Retrieving category schemas and structure information",
+          recordsConnections: "Preparing to search across related categories",
+          recordsFiltering: "Filtering records based on your criteria",
+          insightPlan: ["Analyze data patterns", "Generate insights"],
+          insightOverview: "Creating data exploration strategy",
+          insightRecommendations: "Developing analytical recommendations",
+          clarificationPrompt:
+            "Please clarify what specific information you're looking for",
+        },
+      }
+    );
+  }
+
+  /**
    * Load configuration from TypeScript config (preferred) or JSON fallback
    */
   public static async loadFromFile(

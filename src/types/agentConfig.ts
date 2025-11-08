@@ -48,10 +48,36 @@ export interface EscalationConfig {
 /**
  * Orchestration-specific configuration
  */
+/**
+ * Orchestration-specific configuration
+ */
 export interface OrchestrationConfig {
   intents?: Record<string, IntentConfig>;
   textProcessing?: TextProcessingConfig;
   escalation?: EscalationConfig;
+  messages?: {
+    noIntentDetected?: string;
+    needMoreContext?: string;
+    questionTooVague?: string;
+    missingSignalsHint?: string[];
+    errorOccurred?: string;
+    summaries?: {
+      metadata?: string;
+      records?: string;
+      insight?: string;
+      clarification?: string;
+      defaultTopic?: string;
+    };
+    guidance?: {
+      metadata?: string;
+      recordsConnections?: string;
+      recordsFiltering?: string;
+      insightPlan?: string[];
+      insightOverview?: string;
+      insightRecommendations?: string;
+      clarificationPrompt?: string;
+    };
+  };
 }
 
 /**

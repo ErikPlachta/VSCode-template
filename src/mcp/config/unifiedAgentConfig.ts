@@ -132,7 +132,8 @@ export const agentConfigurations: Record<AgentIdentifier, UnifiedAgentConfig> =
         applicationFacing: {
           technicalDescription:
             "Central routing agent that analyzes user intent and directs requests to appropriate specialized agents",
-          dependencies: ["clarificationAgent", "relevantDataManager"],
+          // Use canonical hyphenated agent identifiers for consistency
+          dependencies: ["clarification-agent", "relevant-data-manager"],
           performance: {
             expectedResponseTime: 500,
             memoryUsage: "low",
@@ -278,7 +279,7 @@ export const agentConfigurations: Record<AgentIdentifier, UnifiedAgentConfig> =
         applicationFacing: {
           technicalDescription:
             "Query execution agent that provides filtering and search capabilities across cached business records",
-          dependencies: ["relevantDataManager"],
+          dependencies: ["relevant-data-manager"],
           performance: {
             expectedResponseTime: 2000,
             memoryUsage: "high",
@@ -352,7 +353,7 @@ export const agentConfigurations: Record<AgentIdentifier, UnifiedAgentConfig> =
         applicationFacing: {
           technicalDescription:
             "Analytics and insight generation agent that creates exploration plans and synthesizes cross-category insights",
-          dependencies: ["databaseAgent", "relevantDataManager"],
+          dependencies: ["database-agent", "relevant-data-manager"],
           performance: {
             expectedResponseTime: 8000,
             memoryUsage: "high",

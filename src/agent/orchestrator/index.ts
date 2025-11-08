@@ -45,6 +45,7 @@ export class Orchestrator {
   private scoringWeights: any;
   private minimumKeywordLength: number;
   private vaguePhrases: string[];
+  private messages: any;
 
   constructor(config?: OrchestratorConfig) {
     this.config = config || OrchestratorConfig.createDefault();
@@ -53,6 +54,7 @@ export class Orchestrator {
     this.scoringWeights = this.config.getScoringWeights();
     this.minimumKeywordLength = this.config.getMinimumKeywordLength();
     this.vaguePhrases = this.config.getVaguePhrases();
+    this.messages = this.config.getMessages();
   }
 
   /**
@@ -187,9 +189,8 @@ export class Orchestrator {
     if (!bestMatch || bestMatch.score === 0) {
       return {
         intent: "clarification",
-        rationale: "No clear intent detected from the question",
-        escalationPrompt:
-          "I need more context to help you properly. Could you provide more details about what you're looking for?",
+        rationale: this.messages.noIntentDetected,
+        escalationPrompt: this.messages.needMoreContext,
         matchedSignals: [],
         missingSignals: [],
       };
@@ -200,10 +201,9 @@ export class Orchestrator {
       return {
         intent: "clarification",
         rationale: `Question matches ${bestMatch.intent} intent but lacks sufficient context`,
-        escalationPrompt:
-          "Your question is quite general. Could you provide more specific details about what you're looking for?",
+        escalationPrompt: this.messages.questionTooVague,
         matchedSignals: bestMatch.matches,
-        missingSignals: ["specific context", "topic details"],
+        missingSignals: this.messages.missingSignalsHint,
       };
     }
 
@@ -251,17 +251,17 @@ export class Orchestrator {
     classification: OrchestratorClassification,
     input: OrchestratorInput
   ): string {
-    const topic = input.topic || "the requested data";
+    const topic = input.topic || this.messages.summaries.defaultTopic;
 
     switch (classification.intent) {
       case "metadata":
-        return `Providing metadata information about ${topic}`;
+        return this.messages.summaries.metadata.replace("{topic}", topic);
       case "records":
-        return `Searching for ${topic} records matching your criteria`;
+        return this.messages.summaries.records.replace("{topic}", topic);
       case "insight":
-        return `Analyzing ${topic} data to generate insights`;
+        return this.messages.summaries.insight.replace("{topic}", topic);
       case "clarification":
-        return "I need more information to help you properly";
+        return this.messages.summaries.clarification;
       default:
         return `Routed to ${classification.intent}`;
     }
@@ -282,26 +282,26 @@ export class Orchestrator {
       case "metadata":
         return {
           ...basePayload,
-          guidance: "Retrieving category schemas and structure information",
+          guidance: this.messages.guidance.metadata,
           matchedSignals: classification.matchedSignals,
         };
       case "records":
         return {
           ...basePayload,
-          connections: "Preparing to search across related categories",
-          guidance: "Filtering records based on your criteria",
+          connections: this.messages.guidance.recordsConnections,
+          guidance: this.messages.guidance.recordsFiltering,
         };
       case "insight":
         return {
           ...basePayload,
-          plan: { steps: ["Analyze data patterns", "Generate insights"] },
-          overview: "Creating data exploration strategy",
-          guidance: "Developing analytical recommendations",
+          plan: { steps: this.messages.guidance.insightPlan },
+          overview: this.messages.guidance.insightOverview,
+          guidance: this.messages.guidance.insightRecommendations,
         };
       case "clarification":
         return {
           ...basePayload,
-          prompt: "Please clarify what specific information you're looking for",
+          prompt: this.messages.guidance.clarificationPrompt,
         };
       default:
         return basePayload;
@@ -330,7 +330,7 @@ export class Orchestrator {
       return {
         intent: "clarification",
         agent: this.config.getFallbackAgent(),
-        summary: "An error occurred while processing your request",
+        summary: this.messages.errorOccurred,
         rationale: error instanceof Error ? error.message : "Unknown error",
         payload: { error, input },
         markdown: `## Error\n\nI encountered an issue while processing your request: ${
