@@ -19,30 +19,30 @@ export interface KnowledgeHit {
 export class KnowledgeBase {
   private readonly documents = new Map<string, KnowledgeDocument>();
 
-  /**
+    /**
  * indexDocument function.
  *
- * @param document - - document parameter.
+ * @param {KnowledgeDocument} document - document parameter.
  */
 indexDocument(document: KnowledgeDocument): void {
     this.documents.set(document.id, document);
   }
 
-  /**
+    /**
  * indexDocuments function.
  *
- * @param documents - - documents parameter.
+ * @param {KnowledgeDocument[]} documents - documents parameter.
  */
 indexDocuments(documents: KnowledgeDocument[]): void {
     documents.forEach((document) => this.indexDocument(document));
   }
 
-  /**
+    /**
  * query function.
  *
- * @param term - - term parameter.
- * @param limit - - limit parameter.
- * @returns - TODO: describe return value.
+ * @param {string} term - term parameter.
+ * @param {unknown} limit - limit parameter.
+ * @returns {KnowledgeHit[]} - TODO: describe return value.
  */
 query(term: string, limit = 3): KnowledgeHit[] {
     const keywords = new Set(
@@ -73,9 +73,9 @@ query(term: string, limit = 3): KnowledgeHit[] {
 /**
  * summarize function.
  *
- * @param content - - content parameter.
- * @param maxLength - - maxLength parameter.
- * @returns - TODO: describe return value.
+ * @param {string} content - content parameter.
+ * @param {unknown} maxLength - maxLength parameter.
+ * @returns {string} - TODO: describe return value.
  */
 function summarize(content: string, maxLength = 160): string {
   const trimmed = content.replace(/\s+/g, " ").trim();

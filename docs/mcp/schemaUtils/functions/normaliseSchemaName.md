@@ -1,5 +1,5 @@
 ---
-title: Normalise Schema Name
+title: Normalize Schema Name
 summary: >-
   Generated internal code documentation for extension, agents, and server
   modules.
@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../../README.md)
 
-***
+---
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/schemaUtils](../README.md) / normaliseSchemaName
+[mybusiness-mcp-extension](../../../modules.md) / [mcp/schemaUtils](../README.md) / NormalizeSchemaName
 
-# Function: normaliseSchemaName()
+# Function: NormalizeSchemaName()
 
-> **normaliseSchemaName**(`name`): `string`
+> **NormalizeSchemaName**(`name`): `string`
 
 Defined in: [src/mcp/schemaUtils.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L23)
 
@@ -36,7 +37,6 @@ Defined in: [src/mcp/schemaUtils.ts:23](https://github.com/ErikPlachta/VSCode-te
 ## Returns
 
 `string`
-
 
 ## Summary
 

@@ -35,15 +35,15 @@ export interface ReportOptions {
  * Analytics dashboard for generating usage reports and insights.
  */
 export class AnalyticsDashboard {
-  /**
+    /**
  * Generates a comprehensive analytics report.
  *
- * @param summary - - summary parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {UsageAnalyticsSummary} summary - summary parameter.
+ * @param {ReportOptions} options - options parameter.
+ * @returns {string} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
-  generateReport(
+generateReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
   ): string {
@@ -59,14 +59,13 @@ export class AnalyticsDashboard {
     }
   }
 
-  /**
+    /**
  * Generates performance recommendations based on analytics data.
  *
- * @param summary - - summary parameter.
- * @returns - TODO: describe return value.
+ * @param {UsageAnalyticsSummary} summary - summary parameter.
+ * @returns {string[]} - TODO: describe return value.
  */
-
-  generateRecommendations(summary: UsageAnalyticsSummary): string[] {
+generateRecommendations(summary: UsageAnalyticsSummary): string[] {
     const recommendations: string[] = [];
 
     // Overall success rate recommendations
@@ -140,15 +139,14 @@ export class AnalyticsDashboard {
     return recommendations;
   }
 
-  /**
+    /**
  * Generates a Markdown format report.
  *
- * @param summary - - summary parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {UsageAnalyticsSummary} summary - summary parameter.
+ * @param {ReportOptions} options - options parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-  private generateMarkdownReport(
+private generateMarkdownReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
   ): string {
@@ -257,15 +255,14 @@ export class AnalyticsDashboard {
     return lines.join("\n");
   }
 
-  /**
+    /**
  * Generates a JSON format report.
  *
- * @param summary - - summary parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {UsageAnalyticsSummary} summary - summary parameter.
+ * @param {ReportOptions} options - options parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-  private generateJsonReport(
+private generateJsonReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
   ): string {
@@ -292,15 +289,14 @@ export class AnalyticsDashboard {
     return JSON.stringify(report, null, 2);
   }
 
-  /**
+    /**
  * Generates a CSV format report.
  *
- * @param summary - - summary parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {UsageAnalyticsSummary} summary - summary parameter.
+ * @param {ReportOptions} options - options parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-  private generateCsvReport(
+private generateCsvReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
   ): string {
@@ -336,12 +332,11 @@ export class AnalyticsDashboard {
 /**
  * Creates a standard analytics report with default options.
  *
- * @param summary - - summary parameter.
- * @param startDate - - startDate parameter.
- * @param endDate - - endDate parameter.
- * @returns - TODO: describe return value.
+ * @param {UsageAnalyticsSummary} summary - summary parameter.
+ * @param {Date} startDate - startDate parameter.
+ * @param {Date} endDate - endDate parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
 export function createStandardReport(
   summary: UsageAnalyticsSummary,
   startDate: Date,

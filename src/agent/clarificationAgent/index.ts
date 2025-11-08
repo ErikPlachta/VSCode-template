@@ -51,33 +51,31 @@ export class ClarificationAgent {
   /**
    * Creates a new clarification agent instance.
    *
-   * @param knowledgeBase - - - Optional knowledge base instance, creates new one if not provided.
+   * @param knowledgeBase - - - - - Optional knowledge base instance, creates new one if not provided.
    */
   constructor(knowledgeBase?: KnowledgeBase) {
     this.config = new ClarificationAgentConfig();
     this.knowledgeBase = knowledgeBase ?? new KnowledgeBase();
   }
 
-  /**
+    /**
  * Loads documents into the knowledge base for context retrieval.
  *
- * @param documents - - documents parameter.
+ * @param {Parameters<KnowledgeBase["indexDocuments"]>[0]} documents - documents parameter.
  */
-
-  loadKnowledge(
+loadKnowledge(
     documents: Parameters<KnowledgeBase["indexDocuments"]>[0]
   ): void {
     this.knowledgeBase.indexDocuments(documents);
   }
 
-  /**
+    /**
  * Generates clarification guidance for ambiguous user requests.
  *
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {ClarificationAgentInput} input - input parameter.
+ * @returns {Promise<ClarificationResponse>} - TODO: describe return value.
  */
-
-  async clarify(
+async clarify(
     input: ClarificationAgentInput
   ): Promise<ClarificationResponse> {
     return this.telemetry("clarify", async () => {

@@ -1,16 +1,14 @@
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
-
 /**
  * @packageDocumentation Data Agent Configuration
  *
- * This configuration defines all settings for the data agent, which specializes in
- * generating insights, building exploration plans, and mapping relationships between
- * business categories.
- *
- * The data agent serves as an analytical engine that discovers patterns, connections,
- * and actionable insights from business data across multiple categories.
+ * Defines all settings for the data agent, which specializes in generating insights,
+ * building exploration plans, and mapping relationships between business categories.
+ * Acts as an analytical engine that discovers patterns, connections, and actionable
+ * insights from business data across multiple categories.
  */
+
+import type { AgentConfigDefinition } from "../../types/agentConfig";
+import { CONFIG_IDS } from "../../types/configRegistry";
 
 /**
  * Complete configuration for the Data Agent

@@ -15,9 +15,10 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../../modules.md) / mcp/schemaUtils
 
@@ -33,10 +34,9 @@ schemaUtils implementation for mcp module
 ## Functions
 
 - [detectDuplicateSchemas](functions/detectDuplicateSchemas.md)
-- [normaliseSchemaName](functions/normaliseSchemaName.md)
+- [NormalizeSchemaName](functions/NormalizeSchemaName.md)
 - [validateCategorySchemas](functions/validateCategorySchemas.md)
 - [validateRelationships](functions/validateRelationships.md)
-
 
 ## Summary
 

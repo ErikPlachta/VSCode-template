@@ -9,10 +9,9 @@ import { MCPProperty, MCPTool } from "@extension/mcpSync";
 /**
  * Resolve the declared JSON schema type into a singular primitive string.
  *
- * @param property - - property parameter.
- * @returns - TODO: describe return value.
+ * @param {MCPProperty} property - property parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
 function resolvePropertyType(property: MCPProperty): string {
   if (!property.type) {
     return "string";
@@ -23,11 +22,11 @@ function resolvePropertyType(property: MCPProperty): string {
 /**
  * Convert user input to the correct JavaScript type based on the schema.
  *
- * @param rawValue - - rawValue parameter.
- * @param property - - property parameter.
- * @returns - TODO: describe return value.
+ * @param {string} rawValue - rawValue parameter.
+ * @param {MCPProperty} property - property parameter.
+ * @returns {unknown} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
 function coerceValue(rawValue: string, property: MCPProperty): unknown {
   const type = resolvePropertyType(property);
   switch (type) {
@@ -64,10 +63,10 @@ function coerceValue(rawValue: string, property: MCPProperty): unknown {
 /**
  * Prompts the user for all required tool arguments.
  *
- * @param tool - - tool parameter.
- * @returns - TODO: describe return value.
+ * @param {MCPTool} tool - tool parameter.
+ * @returns {Promise<Record<string, unknown> | undefined>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
 export async function promptForArgs(
   tool: MCPTool
 ): Promise<Record<string, unknown> | undefined> {

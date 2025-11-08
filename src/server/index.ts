@@ -39,8 +39,8 @@ const DATA_ROOT = process.env.VSCODE_TEMPLATE_DATA_ROOT
 /**
  * loadJson function.
  *
- * @param segments - - segments parameter.
- * @returns - TODO: describe return value.
+ * @param {string[]} segments - segments parameter.
+ * @returns {Promise<T>} - TODO: describe return value.
  */
 async function loadJson<T>(...segments: string[]): Promise<T> {
   const filePath = path.join(DATA_ROOT, ...segments);
@@ -51,8 +51,9 @@ async function loadJson<T>(...segments: string[]): Promise<T> {
 /**
  * loadOptionalJson function.
  *
- * @param segments - - segments parameter.
- * @returns - TODO: describe return value.
+ * @param {string[]} segments - segments parameter.
+ * @returns {Promise<T | undefined>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 async function loadOptionalJson<T>(
   ...segments: string[]
@@ -70,9 +71,10 @@ async function loadOptionalJson<T>(
 /**
  * loadJsonCollection function.
  *
- * @param categoryId - - categoryId parameter.
- * @param folder - - folder parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryId - categoryId parameter.
+ * @param {string} folder - folder parameter.
+ * @returns {Promise<unknown[]>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 async function loadJsonCollection(
   categoryId: string,
@@ -98,8 +100,8 @@ async function loadJsonCollection(
 /**
  * describeCategory function.
  *
- * @param categoryId - - categoryId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryId - categoryId parameter.
+ * @returns {Promise<unknown>} - TODO: describe return value.
  */
 async function describeCategory(categoryId: string): Promise<unknown> {
   const [category, relationships, schemas, examples, queries] =
@@ -122,9 +124,9 @@ async function describeCategory(categoryId: string): Promise<unknown> {
 /**
  * searchRecords function.
  *
- * @param categoryId - - categoryId parameter.
- * @param filters - - filters parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryId - categoryId parameter.
+ * @param {Record<string, unknown>} filters - filters parameter.
+ * @returns {Promise<unknown[]>} - TODO: describe return value.
  */
 async function searchRecords(
   categoryId: string,
@@ -199,9 +201,10 @@ const tools: MCPTool[] = [
 /**
  * handleInvoke function.
  *
- * @param name - - name parameter.
- * @param args - - args parameter.
- * @returns - TODO: describe return value.
+ * @param {string} name - name parameter.
+ * @param {Record<string, unknown>} args - args parameter.
+ * @returns {Promise<unknown>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 async function handleInvoke(
   name: string,
@@ -232,8 +235,8 @@ async function handleInvoke(
 /**
  * sendJson function.
  *
- * @param res - - res parameter.
- * @param response - - response parameter.
+ * @param {ServerResponse} res - res parameter.
+ * @param {JsonRpcResponse} response - response parameter.
  */
 function sendJson(res: ServerResponse, response: JsonRpcResponse): void {
   res.writeHead(200, { "Content-Type": "application/json" });
@@ -243,9 +246,9 @@ function sendJson(res: ServerResponse, response: JsonRpcResponse): void {
 /**
  * handleRequest function.
  *
- * @param req - - req parameter.
- * @param res - - res parameter.
- * @returns - TODO: describe return value.
+ * @param {IncomingMessage} req - req parameter.
+ * @param {ServerResponse} res - res parameter.
+ * @returns {Promise<void>} - TODO: describe return value.
  */
 async function handleRequest(
   req: IncomingMessage,
@@ -391,8 +394,8 @@ async function handleRequest(
 /**
  * createMcpServer function.
  *
- * @param port - - port parameter.
- * @returns - TODO: describe return value.
+ * @param {unknown} port - port parameter.
+ * @returns {Server} - TODO: describe return value.
  */
 export function createMcpServer(
   port = Number(process.env.MCP_PORT ?? 3030)
@@ -421,10 +424,9 @@ export function createMcpServer(
 /**
  * Handle JSON-RPC message processing for MCP protocol.
  *
- * @param message - - message parameter.
- * @returns - TODO: describe return value.
+ * @param {JsonRpcRequest} message - message parameter.
+ * @returns {Promise<JsonRpcResponse>} - TODO: describe return value.
  */
-
 async function handleJsonRpcMessage(
   message: JsonRpcRequest
 ): Promise<JsonRpcResponse> {
@@ -564,15 +566,20 @@ async function handleJsonRpcMessage(
  * Start a stdio MCP server that communicates via stdin/stdout.
  *
  */
-
 function startStdioServer(): void {
   let buffer = "";
   let isInitialized = false;
 
   // Log to stderr to avoid interfering with stdout JSON-RPC communication
-  const log = (message: string): void => {
-    console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
-  };
+  const log =
+        /**
+ * log function.
+ *
+ * @param {string} message - message parameter.
+ */
+(message: string): void => {
+      console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
+    };
 
   log("MCP stdio server starting...");
 

@@ -8,7 +8,7 @@ describe("fetchTools", () => {
     (axios.post as jest.Mock).mockReset();
   });
 
-  it("normalises tool schemas and required metadata", async () => {
+  it("Normalizes tool schemas and required metadata", async () => {
     (axios.post as jest.Mock).mockResolvedValueOnce({
       data: {
         result: {
@@ -19,14 +19,14 @@ describe("fetchTools", () => {
               description: "desc",
               input_schema: {
                 properties: {
-                  metric: { description: "Metric", type: "string" }
+                  metric: { description: "Metric", type: "string" },
                 },
-                required: ["metric"]
-              }
-            }
-          ]
-        }
-      }
+                required: ["metric"],
+              },
+            },
+          ],
+        },
+      },
     });
 
     const result = await fetchTools("https://example.com");

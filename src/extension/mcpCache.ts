@@ -50,9 +50,8 @@ export interface ToolLogEntry {
 /**
  * Ensure the workspace has a `.mcp-cache` directory and return its path.
  *
- * @returns - TODO: describe return value.
+ * @returns {Promise<string>} - TODO: describe return value.
  */
-
 export async function ensureCacheDirectory(): Promise<string> {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
   const basePath = workspaceRoot ?? os.homedir();
@@ -64,11 +63,10 @@ export async function ensureCacheDirectory(): Promise<string> {
 /**
  * Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
  *
- * @param cacheDir - - cacheDir parameter.
- * @param entry - - entry parameter.
- * @returns - TODO: describe return value.
+ * @param {string} cacheDir - cacheDir parameter.
+ * @param {ToolLogEntry} entry - entry parameter.
+ * @returns {Promise<void>} - TODO: describe return value.
  */
-
 export async function logInvocation(
   cacheDir: string,
   entry: ToolLogEntry
@@ -81,18 +79,17 @@ export async function logInvocation(
 /**
  * Persist a shared cache entry that can be re-used by other MCP tools.
  *
- * @param cacheDir - - cacheDir parameter.
- * @param entry - - entry parameter.
- * @returns - TODO: describe return value.
+ * @param {string} cacheDir - cacheDir parameter.
+ * @param {SharedCacheEntry<T>} entry - entry parameter.
+ * @returns {Promise<void>} - TODO: describe return value.
  */
-
 export async function storeSharedCacheEntry<T>(
   cacheDir: string,
   entry: SharedCacheEntry<T>
 ): Promise<void> {
   const sharedDir = path.join(cacheDir, SHARED_CACHE_DIR);
   await fs.mkdir(sharedDir, { recursive: true });
-  const fileName = `${sanitiseKey(entry.key)}.json`;
+  const fileName = `${sanitizeKey(entry.key)}.json`;
   const target = path.join(sharedDir, fileName);
   await fs.writeFile(target, JSON.stringify(entry, null, 2), "utf8");
 }
@@ -100,17 +97,17 @@ export async function storeSharedCacheEntry<T>(
 /**
  * Retrieve a shared cache entry by key.
  *
- * @param cacheDir - - cacheDir parameter.
- * @param key - - key parameter.
- * @returns - TODO: describe return value.
+ * @param {string} cacheDir - cacheDir parameter.
+ * @param {string} key - key parameter.
+ * @returns {Promise<SharedCacheEntry<T> | undefined>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
 export async function readSharedCacheEntry<T = unknown>(
   cacheDir: string,
   key: string
 ): Promise<SharedCacheEntry<T> | undefined> {
   const sharedDir = path.join(cacheDir, SHARED_CACHE_DIR);
-  const fileName = `${sanitiseKey(key)}.json`;
+  const fileName = `${sanitizeKey(key)}.json`;
   const target = path.join(sharedDir, fileName);
   try {
     const raw = await fs.readFile(target, "utf8");
@@ -126,10 +123,10 @@ export async function readSharedCacheEntry<T = unknown>(
 /**
  * Enumerate all cached artifacts currently stored on disk.
  *
- * @param cacheDir - - cacheDir parameter.
- * @returns - TODO: describe return value.
+ * @param {string} cacheDir - cacheDir parameter.
+ * @returns {Promise<SharedCacheEntry<T>[]>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
 export async function listSharedCacheEntries<T = unknown>(
   cacheDir: string
 ): Promise<SharedCacheEntry<T>[]> {
@@ -156,17 +153,17 @@ export async function listSharedCacheEntries<T = unknown>(
 /**
  * Remove a shared cache entry when it is no longer relevant.
  *
- * @param cacheDir - - cacheDir parameter.
- * @param key - - key parameter.
- * @returns - TODO: describe return value.
+ * @param {string} cacheDir - cacheDir parameter.
+ * @param {string} key - key parameter.
+ * @returns {Promise<void>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
 export async function deleteSharedCacheEntry(
   cacheDir: string,
   key: string
 ): Promise<void> {
   const sharedDir = path.join(cacheDir, SHARED_CACHE_DIR);
-  const fileName = `${sanitiseKey(key)}.json`;
+  const fileName = `${sanitizeKey(key)}.json`;
   const target = path.join(sharedDir, fileName);
   try {
     await fs.unlink(target);
@@ -179,12 +176,11 @@ export async function deleteSharedCacheEntry(
 }
 
 /**
- * Normalise a cache key so it is safe for use as a file name.
+ * Normalize a cache key so it is safe for use as a file name.
  *
- * @param key - - key parameter.
- * @returns - TODO: describe return value.
+ * @param {string} key - key parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-function sanitiseKey(key: string): string {
+function sanitizeKey(key: string): string {
   return key.replace(/[^a-z0-9-_]+/gi, "_");
 }

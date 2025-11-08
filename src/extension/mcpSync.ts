@@ -1,5 +1,5 @@
 /**
- * @packageDocumentation Fetches and normalises Model Context Protocol (MCP) tool
+ * @packageDocumentation Fetches and Normalizes Model Context Protocol (MCP) tool
  * definitions.
  *
  * @module mcpSync
@@ -18,7 +18,7 @@ import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
  */
 export class MCPDiscoveryError extends Error {
   /**
-   * @param message - - - Human-readable error message.
+   * @param message - - - - - Human-readable error message.
    * @param [cause] - Optional root cause supplied by axios or the MCP server.
    */
   constructor(message: string, public readonly cause?: unknown) {
@@ -28,13 +28,12 @@ export class MCPDiscoveryError extends Error {
 }
 
 /**
- * Normalise the tool properties by merging schema metadata so prompts can
+ * Normalize the tool properties by merging schema metadata so prompts can
  *
- * @param tool - - tool parameter.
- * @returns - TODO: describe return value.
+ * @param {MCPTool} tool - tool parameter.
+ * @returns {MCPTool} - TODO: describe return value.
  */
-
-function normaliseTool(tool: MCPTool): MCPTool {
+function NormalizeTool(tool: MCPTool): MCPTool {
   if (!tool.input_schema?.properties) {
     return tool;
   }
@@ -59,11 +58,11 @@ function normaliseTool(tool: MCPTool): MCPTool {
 /**
  * Fetch all available MCP tools from the configured server.
  *
- * @param serverUrl - - serverUrl parameter.
- * @param token - - token parameter.
- * @returns - TODO: describe return value.
+ * @param {string} serverUrl - serverUrl parameter.
+ * @param {string} token - token parameter.
+ * @returns {Promise<MCPTool[]>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
 export async function fetchTools(
   serverUrl: string,
   token?: string
@@ -95,7 +94,7 @@ export async function fetchTools(
       );
     }
     const tools = res.data?.result?.tools ?? [];
-    return tools.map(normaliseTool);
+    return tools.map(NormalizeTool);
   } catch (error) {
     if (error instanceof MCPDiscoveryError) {
       throw error;

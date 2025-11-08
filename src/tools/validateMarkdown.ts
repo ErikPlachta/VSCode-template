@@ -10,9 +10,8 @@ import { RepositoryHealthAgent } from "./repositoryHealth";
 /**
  * Validate Markdown metadata and structural requirements.
  *
- * @returns - TODO: describe return value.
+ * @returns {Promise<void>} - TODO: describe return value.
  */
-
 async function runMarkdownValidation(): Promise<void> {
   const agent: RepositoryHealthAgent =
     await RepositoryHealthAgent.createFromDisk();

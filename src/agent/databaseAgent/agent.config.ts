@@ -1,16 +1,15 @@
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
-
 /**
  * @packageDocumentation Database Agent Configuration
  *
- * This configuration defines all settings for the database agent, which handles
- * structured data retrieval with filtering, joins, and query optimization.
- *
- * The database agent serves as a query engine that simulates database operations
- * over the MCP relevant-data workspace, providing structured access to business
- * category data with full filtering and relationship traversal capabilities.
+ * Defines all settings for the database agent which handles structured data retrieval
+ * with filtering, joins, and query optimization. Functions as a query engine that
+ * simulates database operations over the MCP relevant-data workspace, providing
+ * structured access to business category data including filtering and relationship
+ * traversal capabilities.
  */
+
+import type { AgentConfigDefinition } from "../../types/agentConfig";
+import { CONFIG_IDS } from "../../types/configRegistry";
 
 /**
  * Complete configuration for the Database Agent

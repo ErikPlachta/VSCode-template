@@ -222,10 +222,9 @@ export type ConfigId = (typeof CONFIG_IDS)[keyof typeof CONFIG_IDS];
 /**
  * Validation function for configuration objects
  *
- * @param config - - config parameter.
- * @returns - TODO: describe return value.
+ * @param {{ $configId?: string }} config - config parameter.
+ * @returns {boolean} - TODO: describe return value.
  */
-
 export function validateConfig(config: { $configId?: string }): boolean {
   if (!config.$configId) {
     console.error("Configuration missing $configId field");

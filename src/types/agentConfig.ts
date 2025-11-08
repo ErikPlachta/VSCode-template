@@ -472,13 +472,12 @@ export abstract class BaseAgentConfig {
     this.config = config;
   }
 
-  /**
+    /**
  * Get public-facing configuration (user and some application details)
  *
- * @returns - TODO: describe return value.
+ * @returns {Partial<AgentConfigDefinition>} - TODO: describe return value.
  */
-
-  public getConfig(): Partial<AgentConfigDefinition> {
+public getConfig(): Partial<AgentConfigDefinition> {
     return {
       $configId: this.config.$configId,
       agent: this.config.agent,
@@ -492,53 +491,48 @@ export abstract class BaseAgentConfig {
     };
   }
 
-  /**
+    /**
  * Get complete configuration (private method for internal use)
  *
- * @returns - TODO: describe return value.
+ * @returns {AgentConfigDefinition} - TODO: describe return value.
  */
-
-  protected _getConfig(): AgentConfigDefinition {
+protected _getConfig(): AgentConfigDefinition {
     return this.config;
   }
 
-  /**
+    /**
  * Get execution configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {ExecutionConfig | undefined} - TODO: describe return value.
  */
-
-  public getExecutionConfig(): ExecutionConfig | undefined {
+public getExecutionConfig(): ExecutionConfig | undefined {
     return this.config.execution;
   }
 
-  /**
+    /**
  * Get user-facing configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {UserFacingConfig | undefined} - TODO: describe return value.
  */
-
-  public getUserFacingConfig(): UserFacingConfig | undefined {
+public getUserFacingConfig(): UserFacingConfig | undefined {
     return this.config.userFacing;
   }
 
-  /**
+    /**
  * Get application-facing configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {ApplicationFacingConfig | undefined} - TODO: describe return value.
  */
-
-  public getApplicationFacingConfig(): ApplicationFacingConfig | undefined {
+public getApplicationFacingConfig(): ApplicationFacingConfig | undefined {
     return this.config.applicationFacing;
   }
 
-  /**
+    /**
  * Get configuration schema ID
  *
- * @returns - TODO: describe return value.
+ * @returns {string} - TODO: describe return value.
  */
-
-  public getConfigId(): string {
+public getConfigId(): string {
     return this.config.$configId;
   }
 }

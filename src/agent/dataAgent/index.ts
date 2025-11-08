@@ -107,14 +107,13 @@ export class DataAgent {
     this.config = new DataAgentConfig();
   }
 
-  /**
+    /**
  * Analyze data and generate insights.
  *
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {AnalysisInput} input - input parameter.
+ * @returns {Promise<DataInsight[]>} - TODO: describe return value.
  */
-
-  async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
+async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     return this.telemetry("analyzeData", async () => {
       const analysisConfig = this.config.getAnalysisConfig();
       const qualityConfig = this.config.getQualityConfig();
@@ -153,16 +152,15 @@ export class DataAgent {
     });
   }
 
-  /**
+    /**
  * Generate an exploration plan for data analysis.
  *
- * @param categoryId - - categoryId parameter.
- * @param question - - question parameter.
- * @param availableData - - availableData parameter.
- * @returns - TODO: describe return value.
+ * @param {CategoryId} categoryId - categoryId parameter.
+ * @param {string} question - question parameter.
+ * @param {AnalysisInput} availableData - availableData parameter.
+ * @returns {Promise<ExplorationPlan>} - TODO: describe return value.
  */
-
-  async generateExplorationPlan(
+async generateExplorationPlan(
     categoryId: CategoryId,
     question: string,
     availableData: AnalysisInput
@@ -212,16 +210,15 @@ export class DataAgent {
     });
   }
 
-  /**
+    /**
  * Analyze relationships between categories.
  *
- * @param sourceData - - sourceData parameter.
- * @param targetData - - targetData parameter.
- * @param relationship - - relationship parameter.
- * @returns - TODO: describe return value.
+ * @param {AnalysisInput} sourceData - sourceData parameter.
+ * @param {AnalysisInput} targetData - targetData parameter.
+ * @param {RelationshipDescription} relationship - relationship parameter.
+ * @returns {Promise<CrossCategoryConnection>} - TODO: describe return value.
  */
-
-  async analyzeConnection(
+async analyzeConnection(
     sourceData: AnalysisInput,
     targetData: AnalysisInput,
     relationship: RelationshipDescription
@@ -244,15 +241,14 @@ export class DataAgent {
     });
   }
 
-  /**
+    /**
  * Search for patterns in data records.
  *
- * @param keyword - - keyword parameter.
- * @param data - - data parameter.
- * @returns - TODO: describe return value.
+ * @param {string} keyword - keyword parameter.
+ * @param {AnalysisInput[]} data - data parameter.
+ * @returns {TopicSearchResult[]} - TODO: describe return value.
  */
-
-  searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
+searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
     const searchConfig = this.config.getSearchConfig();
     const results: TopicSearchResult[] = [];
 
@@ -284,15 +280,14 @@ export class DataAgent {
     return results.slice(0, searchConfig.maxResults || 50);
   }
 
-  /**
+    /**
  * Detect patterns in data records.
  *
- * @param records - - records parameter.
- * @param categoryId - - categoryId parameter.
- * @returns - TODO: describe return value.
+ * @param {CategoryRecord[]} records - records parameter.
+ * @param {CategoryId} categoryId - categoryId parameter.
+ * @returns {DataInsight[]} - TODO: describe return value.
  */
-
-  private detectPatterns(
+private detectPatterns(
     records: CategoryRecord[],
     categoryId: CategoryId
   ): DataInsight[] {
@@ -325,15 +320,14 @@ export class DataAgent {
     return insights;
   }
 
-  /**
+    /**
  * Detect anomalies in data records.
  *
- * @param records - - records parameter.
- * @param categoryId - - categoryId parameter.
- * @returns - TODO: describe return value.
+ * @param {CategoryRecord[]} records - records parameter.
+ * @param {CategoryId} categoryId - categoryId parameter.
+ * @returns {DataInsight[]} - TODO: describe return value.
  */
-
-  private detectAnomalies(
+private detectAnomalies(
     records: CategoryRecord[],
     categoryId: CategoryId
   ): DataInsight[] {
@@ -371,14 +365,13 @@ export class DataAgent {
     return insights;
   }
 
-  /**
+    /**
  * Analyze relationships for insights.
  *
- * @param relationships - - relationships parameter.
- * @returns - TODO: describe return value.
+ * @param {RelationshipDescription[]} relationships - relationships parameter.
+ * @returns {DataInsight[]} - TODO: describe return value.
  */
-
-  private analyzeRelationships(
+private analyzeRelationships(
     relationships: RelationshipDescription[]
   ): DataInsight[] {
     const insights: DataInsight[] = [];
@@ -395,14 +388,13 @@ export class DataAgent {
     return insights;
   }
 
-  /**
+    /**
  * Get display name for a record.
  *
- * @param record - - record parameter.
- * @returns - TODO: describe return value.
+ * @param {CategoryRecord} record - record parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-  private getRecordDisplayName(record: CategoryRecord): string {
+private getRecordDisplayName(record: CategoryRecord): string {
     return (
       (typeof record.name === "string" && record.name) ||
       (typeof record.title === "string" && record.title) ||
@@ -414,9 +406,8 @@ export class DataAgent {
 /**
  * Factory function that creates a {@link DataAgent} with default configuration.
  *
- * @returns - TODO: describe return value.
+ * @returns {DataAgent} - TODO: describe return value.
  */
-
 export function createDataAgent(): DataAgent {
   return new DataAgent();
 }

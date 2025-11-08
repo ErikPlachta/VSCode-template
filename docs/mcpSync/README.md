@@ -15,15 +15,16 @@ hierarchy:
   - code
   - generated
 ---
+
 [**mybusiness-mcp-extension v1.0.0**](../README.md)
 
-***
+---
 
 [mybusiness-mcp-extension](../modules.md) / mcpSync
 
 # mcpSync
 
-Fetches and normalises Model Context Protocol (MCP) tool
+Fetches and Normalizes Model Context Protocol (MCP) tool
 definitions.
 
 ## Classes
@@ -40,24 +41,23 @@ definitions.
 
 Re-exports [MCPInputSchema](../shared/mcpTypes/interfaces/MCPInputSchema.md)
 
-***
+---
 
 ### MCPListToolsResponse
 
 Re-exports [MCPListToolsResponse](../shared/mcpTypes/interfaces/MCPListToolsResponse.md)
 
-***
+---
 
 ### MCPProperty
 
 Re-exports [MCPProperty](../shared/mcpTypes/interfaces/MCPProperty.md)
 
-***
+---
 
 ### MCPTool
 
 Re-exports [MCPTool](../shared/mcpTypes/interfaces/MCPTool.md)
-
 
 ## Summary
 

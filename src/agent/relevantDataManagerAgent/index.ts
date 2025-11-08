@@ -340,8 +340,8 @@ const CONSOLIDATED_INDEX_CACHE_KEY = "relevant-data:catalogue";
 /**
  * toPosixPath function.
  *
- * @param filePath - - filePath parameter.
- * @returns - TODO: describe return value.
+ * @param {string} filePath - filePath parameter.
+ * @returns {string} - TODO: describe return value.
  */
 function toPosixPath(filePath: string): string {
   return filePath.split(path.sep).join("/");
@@ -350,9 +350,10 @@ function toPosixPath(filePath: string): string {
 /**
  * parseTypeSchema function.
  *
- * @param value - - value parameter.
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {unknown} value - value parameter.
+ * @param {string} context - context parameter.
+ * @returns {TypeSchema} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 function parseTypeSchema(value: unknown, context: string): TypeSchema {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -503,12 +504,12 @@ function parseTypeSchema(value: unknown, context: string): TypeSchema {
 }
 
 /**
- * normaliseLookupKey function.
+ * NormalizeLookupKey function.
  *
- * @param value - - value parameter.
- * @returns - TODO: describe return value.
+ * @param {string} value - value parameter.
+ * @returns {string} - TODO: describe return value.
  */
-function normaliseLookupKey(value: string): string {
+function NormalizeLookupKey(value: string): string {
   return value.trim().toLowerCase();
 }
 
@@ -557,13 +558,12 @@ export class RelevantDataManagerAgent {
     void this.persistConsolidatedIndex();
   }
 
-  /**
+    /**
  * Enumerate the categories available to the MCP client.
  *
- * @returns - TODO: describe return value.
+ * @returns {CategorySummary[]} - TODO: describe return value.
  */
-
-  listCategories(): CategorySummary[] {
+listCategories(): CategorySummary[] {
     return Array.from(this.categories.values()).map((category) => ({
       id: category.id,
       name: category.name,
@@ -571,15 +571,15 @@ export class RelevantDataManagerAgent {
     }));
   }
 
-  /**
+    /**
  * Resolve a topic or identifier to the underlying category definition.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {BusinessCategory} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
-  getCategory(topicOrId: string): BusinessCategory {
-    const key = normaliseLookupKey(topicOrId);
+getCategory(topicOrId: string): BusinessCategory {
+    const key = NormalizeLookupKey(topicOrId);
     const category = this.lookupIndex.get(key);
     if (!category) {
       throw new UnknownCategoryError(topicOrId);
@@ -587,136 +587,128 @@ export class RelevantDataManagerAgent {
     return category;
   }
 
-  /**
+    /**
  * Retrieve the folder blueprint for a given topic.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {FolderBlueprint} - TODO: describe return value.
  */
-
-  getFolderBlueprint(topicOrId: string): FolderBlueprint {
+getFolderBlueprint(topicOrId: string): FolderBlueprint {
     return this.getCategory(topicOrId).config.folder;
   }
 
-  /**
+    /**
  * Access category configuration metadata such as relationships.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {BusinessCategory["config"]} - TODO: describe return value.
  */
-
-  getCategoryConfig(topicOrId: string): BusinessCategory["config"] {
+getCategoryConfig(topicOrId: string): BusinessCategory["config"] {
     return this.getCategory(topicOrId).config;
   }
 
-  /**
+    /**
  * Access the JSON schemas associated with a category.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {CategorySchema[]} - TODO: describe return value.
  */
-
-  getCategorySchemas(topicOrId: string): CategorySchema[] {
+getCategorySchemas(topicOrId: string): CategorySchema[] {
     return this.getCategory(topicOrId).schemas;
   }
 
-  /**
+    /**
  * Retrieve structured type definitions provided as guidance for SDK authors.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {TypeDefinition[]} - TODO: describe return value.
  */
-
-  getTypeDefinitions(topicOrId: string): TypeDefinition[] {
+getTypeDefinitions(topicOrId: string): TypeDefinition[] {
     return this.getCategory(topicOrId).types;
   }
 
-  /**
+    /**
  * Fetch example datasets included inside the category folder.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {ExampleDataset[]} - TODO: describe return value.
  */
-
-  getExamples(topicOrId: string): ExampleDataset[] {
+getExamples(topicOrId: string): ExampleDataset[] {
     return this.getCategory(topicOrId).examples;
   }
 
-  /**
+    /**
  * Retrieve the validation report generated for the category data.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {DataValidationReport} - TODO: describe return value.
  */
-
-  getValidationReport(topicOrId: string): DataValidationReport {
+getValidationReport(topicOrId: string): DataValidationReport {
     return this.getCategory(topicOrId).validation;
   }
 
-  /**
+    /**
  * Retrieve query blueprints that demonstrate how to call the authoritative upstream system.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {RemoteQueryBlueprint[]} - TODO: describe return value.
  */
-
-  getQueries(topicOrId: string): RemoteQueryBlueprint[] {
+getQueries(topicOrId: string): RemoteQueryBlueprint[] {
     return this.getCategory(topicOrId).queries;
   }
 
-  /**
+    /**
  * Return all records stored in the local mock dataset for a category.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {CategoryRecord[]} - TODO: describe return value.
  */
-
-  getRecords(topicOrId: string): CategoryRecord[] {
+getRecords(topicOrId: string): CategoryRecord[] {
     return this.getCategory(topicOrId).records;
   }
 
-  /**
+    /**
  * Compute a deterministic hash of the records for change detection.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-  getCategoryRecordHash(topicOrId: string): string {
+getCategoryRecordHash(topicOrId: string): string {
     const category = this.getCategory(topicOrId);
     return this.hashRecords(category.records);
   }
 
-  /**
+    /**
  * Expose the dataset fingerprint used to detect catalogue changes.
  *
- * @returns - TODO: describe return value.
+ * @returns {string} - TODO: describe return value.
  */
-
-  getDatasetFingerprint(): string {
+getDatasetFingerprint(): string {
     return this.datasetFingerprint;
   }
 
-  /**
+    /**
  * Retrieve a single record by identifier.
  *
- * @param topicOrId - - topicOrId parameter.
- * @param recordId - - recordId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @param {string} recordId - recordId parameter.
+ * @returns {CategoryRecord | undefined} - TODO: describe return value.
  */
-
-  getRecord(topicOrId: string, recordId: string): CategoryRecord | undefined {
+getRecord(topicOrId: string, recordId: string): CategoryRecord | undefined {
     return this.getRecords(topicOrId).find((record) => record.id === recordId);
   }
 
-  /**
+    /**
  * Perform a keyword search across every category.
  *
- * @param keyword - - keyword parameter.
- * @returns - TODO: describe return value.
+ * @param {string} keyword - keyword parameter.
+ * @returns {Array<{
+    categoryId: CategoryId;
+    record: CategoryRecord;
+    matchingFields: string[];
+  }>} - TODO: describe return value.
  */
-
-  searchAcrossCategories(keyword: string): Array<{
+searchAcrossCategories(keyword: string): Array<{
     categoryId: CategoryId;
     record: CategoryRecord;
     matchingFields: string[];
@@ -766,14 +758,13 @@ export class RelevantDataManagerAgent {
     return matches;
   }
 
-  /**
+    /**
  * Build a snapshot view of a category and persist it to the shared cache.
  *
- * @param topicOrId - - topicOrId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @returns {Promise<CategorySnapshot>} - TODO: describe return value.
  */
-
-  async getOrCreateSnapshot(topicOrId: string): Promise<CategorySnapshot> {
+async getOrCreateSnapshot(topicOrId: string): Promise<CategorySnapshot> {
     return this.telemetry("getOrCreateSnapshot", async () => {
       const category = this.getCategory(topicOrId);
       const cacheKey = `relevant-data:${category.id}:snapshot`;
@@ -811,15 +802,15 @@ export class RelevantDataManagerAgent {
     });
   }
 
-  /**
+    /**
  * Resolve relationships for a given record across categories.
  *
- * @param topicOrId - - topicOrId parameter.
- * @param recordId - - recordId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} topicOrId - topicOrId parameter.
+ * @param {string} recordId - recordId parameter.
+ * @returns {EntityConnections} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
-  getEntityConnections(topicOrId: string, recordId: string): EntityConnections {
+getEntityConnections(topicOrId: string, recordId: string): EntityConnections {
     const category = this.getCategory(topicOrId);
     const record = this.getRecord(category.id, recordId);
     if (!record) {
@@ -847,20 +838,20 @@ export class RelevantDataManagerAgent {
     return { categoryId: category.id, recordId, connections };
   }
 
-  /**
+    /**
  * Expose the consolidated dataset catalogue built from the data directory.
  *
- * @returns - TODO: describe return value.
+ * @returns {DatasetCatalogueEntry[]} - TODO: describe return value.
  */
-
-  getDatasetCatalogue(): DatasetCatalogueEntry[] {
+getDatasetCatalogue(): DatasetCatalogueEntry[] {
     return this.consolidatedIndex;
   }
 
-  /**
+    /**
  * loadDataset function.
  *
- * @returns - TODO: describe return value.
+ * @returns {LoadedDataset} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadDataset(): LoadedDataset {
     if (!fs.existsSync(this.dataRoot)) {
@@ -888,7 +879,7 @@ private loadDataset(): LoadedDataset {
       consolidatedIndex.push(this.createCatalogueEntry(category));
       relationships.push(...relationshipDefinitions);
       for (const key of [category.id, category.name, ...category.aliases]) {
-        lookupIndex.set(normaliseLookupKey(key), category);
+        lookupIndex.set(NormalizeLookupKey(key), category);
       }
     }
 
@@ -908,11 +899,15 @@ private loadDataset(): LoadedDataset {
     };
   }
 
-  /**
+    /**
  * loadCategory function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @returns {{
+    category: BusinessCategory;
+    relationshipDefinitions: RelationshipDefinition[];
+  }} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadCategory(categoryDir: string): {
     category: BusinessCategory;
@@ -932,7 +927,7 @@ private loadCategory(categoryDir: string): {
       );
     }
     const folder = this.buildFolderBlueprint(categoryDir, configPath);
-    const orchestration = this.normaliseOrchestrationConfig(
+    const orchestration = this.NormalizeOrchestrationConfig(
       metadata.config.orchestration,
       configPath
     );
@@ -989,14 +984,15 @@ private loadCategory(categoryDir: string): {
     return { category, relationshipDefinitions: definitions };
   }
 
-  /**
- * normaliseOrchestrationConfig function.
+    /**
+ * NormalizeOrchestrationConfig function.
  *
- * @param raw - - raw parameter.
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {RawOrchestrationConfig | undefined} raw - raw parameter.
+ * @param {string} context - context parameter.
+ * @returns {CategoryOrchestrationConfig} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-private normaliseOrchestrationConfig(
+private NormalizeOrchestrationConfig(
     raw: RawOrchestrationConfig | undefined,
     context: string
   ): CategoryOrchestrationConfig {
@@ -1027,17 +1023,17 @@ private normaliseOrchestrationConfig(
       signals,
       escalateWhen,
       agents: {
-        relevantDataManager: this.normaliseAgentGuidance(
+        relevantDataManager: this.NormalizeAgentGuidance(
           agents.relevantDataManager,
           "relevantDataManager",
           context
         ),
-        databaseAgent: this.normaliseAgentGuidance(
+        databaseAgent: this.NormalizeAgentGuidance(
           agents.databaseAgent,
           "databaseAgent",
           context
         ),
-        dataAgent: this.normaliseAgentGuidance(
+        dataAgent: this.NormalizeAgentGuidance(
           agents.dataAgent,
           "dataAgent",
           context
@@ -1046,15 +1042,16 @@ private normaliseOrchestrationConfig(
     };
   }
 
-  /**
- * normaliseAgentGuidance function.
+    /**
+ * NormalizeAgentGuidance function.
  *
- * @param raw - - raw parameter.
- * @param agentKey - - agentKey parameter.
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {RawAgentOrchestrationGuidance | undefined} raw - raw parameter.
+ * @param {keyof CategoryOrchestrationConfig["agents"]} agentKey - agentKey parameter.
+ * @param {string} context - context parameter.
+ * @returns {AgentOrchestrationGuidance} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-private normaliseAgentGuidance(
+private NormalizeAgentGuidance(
     raw: RawAgentOrchestrationGuidance | undefined,
     agentKey: keyof CategoryOrchestrationConfig["agents"],
     context: string
@@ -1080,12 +1077,13 @@ private normaliseAgentGuidance(
     };
   }
 
-  /**
+    /**
  * ensureString function.
  *
- * @param value - - value parameter.
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {unknown} value - value parameter.
+ * @param {string} context - context parameter.
+ * @returns {string} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private ensureString(value: unknown, context: string): string {
     if (typeof value !== "string") {
@@ -1098,12 +1096,13 @@ private ensureString(value: unknown, context: string): string {
     return trimmed;
   }
 
-  /**
+    /**
  * ensureStringArray function.
  *
- * @param value - - value parameter.
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {unknown} value - value parameter.
+ * @param {string} context - context parameter.
+ * @returns {string[]} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private ensureStringArray(value: unknown, context: string): string[] {
     if (!Array.isArray(value) || value.length === 0) {
@@ -1123,12 +1122,12 @@ private ensureStringArray(value: unknown, context: string): string[] {
     });
   }
 
-  /**
+    /**
  * buildFolderBlueprint function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @param configPath - - configPath parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @param {string} configPath - configPath parameter.
+ * @returns {FolderBlueprint} - TODO: describe return value.
  */
 private buildFolderBlueprint(
     categoryDir: string,
@@ -1151,11 +1150,12 @@ private buildFolderBlueprint(
     };
   }
 
-  /**
+    /**
  * requireDirectory function.
  *
- * @param target - - target parameter.
- * @returns - TODO: describe return value.
+ * @param {string} target - target parameter.
+ * @returns {string} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private requireDirectory(target: string): string {
     if (!fs.existsSync(target) || !fs.statSync(target).isDirectory()) {
@@ -1164,12 +1164,12 @@ private requireDirectory(target: string): string {
     return target;
   }
 
-  /**
+    /**
  * collectFiles function.
  *
- * @param targetDir - - targetDir parameter.
- * @param extensions - - extensions parameter.
- * @returns - TODO: describe return value.
+ * @param {string} targetDir - targetDir parameter.
+ * @param {string[]} extensions - extensions parameter.
+ * @returns {string[]} - TODO: describe return value.
  */
 private collectFiles(targetDir: string, extensions: string[]): string[] {
     return fs
@@ -1185,11 +1185,12 @@ private collectFiles(targetDir: string, extensions: string[]): string[] {
       );
   }
 
-  /**
+    /**
  * loadSchemas function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @returns {CategorySchema[]} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadSchemas(categoryDir: string): CategorySchema[] {
     const target = path.join(categoryDir, "schemas");
@@ -1205,11 +1206,12 @@ private loadSchemas(categoryDir: string): CategorySchema[] {
     });
   }
 
-  /**
+    /**
  * loadTypeDefinitions function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @returns {TypeDefinition[]} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadTypeDefinitions(categoryDir: string): TypeDefinition[] {
     const target = path.join(categoryDir, "types");
@@ -1231,11 +1233,12 @@ private loadTypeDefinitions(categoryDir: string): TypeDefinition[] {
     });
   }
 
-  /**
+    /**
  * loadExamples function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @returns {ExampleDataset[]} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadExamples(categoryDir: string): ExampleDataset[] {
     const target = path.join(categoryDir, "examples");
@@ -1251,13 +1254,13 @@ private loadExamples(categoryDir: string): ExampleDataset[] {
     });
   }
 
-  /**
+    /**
  * validateCategoryRecords function.
  *
- * @param schemas - - schemas parameter.
- * @param records - - records parameter.
- * @param relationshipDefinitions - - relationshipDefinitions parameter.
- * @returns - TODO: describe return value.
+ * @param {CategorySchema[]} schemas - schemas parameter.
+ * @param {CategoryRecord[]} records - records parameter.
+ * @param {RelationshipDefinition[]} relationshipDefinitions - relationshipDefinitions parameter.
+ * @returns {DataValidationReport} - TODO: describe return value.
  */
 private validateCategoryRecords(
     schemas: CategorySchema[],
@@ -1332,11 +1335,12 @@ private validateCategoryRecords(
     };
   }
 
-  /**
+    /**
  * loadQueries function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @returns {RemoteQueryBlueprint[]} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadQueries(categoryDir: string): RemoteQueryBlueprint[] {
     const target = path.join(categoryDir, "queries");
@@ -1352,11 +1356,11 @@ private loadQueries(categoryDir: string): RemoteQueryBlueprint[] {
     });
   }
 
-  /**
+    /**
  * performRelationshipValidation function.
  *
- * @param categories - - categories parameter.
- * @param relationships - - relationships parameter.
+ * @param {Map<CategoryId, BusinessCategory>} categories - categories parameter.
+ * @param {RelationshipDefinition[]} relationships - relationships parameter.
  */
 private performRelationshipValidation(
     categories: Map<CategoryId, BusinessCategory>,
@@ -1368,7 +1372,7 @@ private performRelationshipValidation(
       const relationshipIssues: DataValidationIssue[] = [];
       for (const record of category.records) {
         for (const rule of rules) {
-          const values = this.normaliseRelationshipValues(
+          const values = this.NormalizeRelationshipValues(
             record[rule.sourceField]
           );
           if (values.length === 0) {
@@ -1411,13 +1415,14 @@ private performRelationshipValidation(
     }
   }
 
-  /**
+    /**
  * loadRecords function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @param categoryId - - categoryId parameter.
- * @param requirements - - requirements parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @param {string} categoryId - categoryId parameter.
+ * @param {CategoryRequirements} requirements - requirements parameter.
+ * @returns {CategoryRecord[]} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadRecords(
     categoryDir: string,
@@ -1458,12 +1463,13 @@ private loadRecords(
     return records;
   }
 
-  /**
+    /**
  * loadRelationships function.
  *
- * @param categoryDir - - categoryDir parameter.
- * @param categoryId - - categoryId parameter.
- * @returns - TODO: describe return value.
+ * @param {string} categoryDir - categoryDir parameter.
+ * @param {string} categoryId - categoryId parameter.
+ * @returns {RelationshipLoadResult} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadRelationships(
     categoryDir: string,
@@ -1516,12 +1522,13 @@ private loadRelationships(
     return { descriptions, definitions };
   }
 
-  /**
+    /**
  * assertRequiredFields function.
  *
- * @param record - - record parameter.
- * @param fields - - fields parameter.
- * @param context - - context parameter.
+ * @param {CategoryRecord} record - record parameter.
+ * @param {string[]} fields - fields parameter.
+ * @param {string} context - context parameter.
+ * @throws {Error} - May throw an error.
  */
 private assertRequiredFields(
     record: CategoryRecord,
@@ -1535,12 +1542,13 @@ private assertRequiredFields(
     }
   }
 
-  /**
+    /**
  * assertRelationshipCoverage function.
  *
- * @param fields - - fields parameter.
- * @param relationships - - relationships parameter.
- * @param context - - context parameter.
+ * @param {string[]} fields - fields parameter.
+ * @param {RelationshipDefinition[]} relationships - relationships parameter.
+ * @param {string} context - context parameter.
+ * @throws {Error} - May throw an error.
  */
 private assertRelationshipCoverage(
     fields: string[],
@@ -1559,11 +1567,11 @@ private assertRelationshipCoverage(
     }
   }
 
-  /**
+    /**
  * groupRelationshipsBySource function.
  *
- * @param relations - - relations parameter.
- * @returns - TODO: describe return value.
+ * @param {RelationshipDefinition[]} relations - relations parameter.
+ * @returns {Map<CategoryId, RelationshipDefinition[]>} - TODO: describe return value.
  */
 private groupRelationshipsBySource(
     relations: RelationshipDefinition[]
@@ -1577,10 +1585,10 @@ private groupRelationshipsBySource(
     return map;
   }
 
-  /**
+    /**
  * persistConsolidatedIndex function.
  *
- * @returns - TODO: describe return value.
+ * @returns {Promise<void>} - TODO: describe return value.
  */
 private async persistConsolidatedIndex(): Promise<void> {
     await this.telemetry("persistConsolidatedIndex", async () => {
@@ -1607,11 +1615,11 @@ private async persistConsolidatedIndex(): Promise<void> {
     });
   }
 
-  /**
+    /**
  * createCatalogueEntry function.
  *
- * @param category - - category parameter.
- * @returns - TODO: describe return value.
+ * @param {BusinessCategory} category - category parameter.
+ * @returns {DatasetCatalogueEntry} - TODO: describe return value.
  */
 private createCatalogueEntry(
     category: BusinessCategory
@@ -1633,14 +1641,14 @@ private createCatalogueEntry(
     };
   }
 
-  /**
+    /**
  * hashRecords function.
  *
- * @param records - - records parameter.
- * @returns - TODO: describe return value.
+ * @param {CategoryRecord[]} records - records parameter.
+ * @returns {string} - TODO: describe return value.
  */
 private hashRecords(records: CategoryRecord[]): string {
-    const normalised = records.map((record) =>
+    const Normalized = records.map((record) =>
       Object.fromEntries(
         Object.entries(record).sort(([left], [right]) =>
           left.localeCompare(right)
@@ -1649,16 +1657,16 @@ private hashRecords(records: CategoryRecord[]): string {
     );
     return crypto
       .createHash("sha1")
-      .update(JSON.stringify(normalised))
+      .update(JSON.stringify(Normalized))
       .digest("hex");
   }
 
-  /**
+    /**
  * resolveTargets function.
  *
- * @param relationship - - relationship parameter.
- * @param value - - value parameter.
- * @returns - TODO: describe return value.
+ * @param {RelationshipDefinition} relationship - relationship parameter.
+ * @param {unknown} value - value parameter.
+ * @returns {CategoryRecord[]} - TODO: describe return value.
  */
 private resolveTargets(
     relationship: RelationshipDefinition,
@@ -1668,7 +1676,7 @@ private resolveTargets(
     if (!targetCategory) {
       return [];
     }
-    const values = this.normaliseRelationshipValues(value);
+    const values = this.NormalizeRelationshipValues(value);
     if (values.length === 0) {
       return [];
     }
@@ -1679,13 +1687,13 @@ private resolveTargets(
     );
   }
 
-  /**
- * normaliseRelationshipValues function.
+    /**
+ * NormalizeRelationshipValues function.
  *
- * @param value - - value parameter.
- * @returns - TODO: describe return value.
+ * @param {unknown} value - value parameter.
+ * @returns {string[]} - TODO: describe return value.
  */
-private normaliseRelationshipValues(value: unknown): string[] {
+private NormalizeRelationshipValues(value: unknown): string[] {
     if (Array.isArray(value)) {
       return value
         .filter(
@@ -1696,19 +1704,19 @@ private normaliseRelationshipValues(value: unknown): string[] {
         .filter((item) => item.length > 0);
     }
     if (typeof value === "string" || typeof value === "number") {
-      const normalised = String(value).trim();
-      return normalised ? [normalised] : [];
+      const Normalized = String(value).trim();
+      return Normalized ? [Normalized] : [];
     }
     return [];
   }
 
-  /**
+    /**
  * hasMatchingRecordValue function.
  *
- * @param record - - record parameter.
- * @param field - - field parameter.
- * @param expected - - expected parameter.
- * @returns - TODO: describe return value.
+ * @param {CategoryRecord} record - record parameter.
+ * @param {string} field - field parameter.
+ * @param {string} expected - expected parameter.
+ * @returns {boolean} - TODO: describe return value.
  */
 private hasMatchingRecordValue(
     record: CategoryRecord,
@@ -1725,11 +1733,11 @@ private hasMatchingRecordValue(
     return String(targetValue) === expected;
   }
 
-  /**
+    /**
  * formatAjvErrors function.
  *
- * @param errors - - errors parameter.
- * @returns - TODO: describe return value.
+ * @param {ErrorObject[] | null | undefined} errors - errors parameter.
+ * @returns {string | undefined} - TODO: describe return value.
  */
 private formatAjvErrors(
     errors: ErrorObject[] | null | undefined
@@ -1752,12 +1760,13 @@ private formatAjvErrors(
       .join("; ");
   }
 
-  /**
+    /**
  * loadJsonFile function.
  *
- * @param filePath - - filePath parameter.
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {string} filePath - filePath parameter.
+ * @param {string} context - context parameter.
+ * @returns {T} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 private loadJsonFile<T>(filePath: string, context: string): T {
     const raw = fs.readFileSync(filePath, "utf8");
@@ -1776,7 +1785,7 @@ private loadJsonFile<T>(filePath: string, context: string): T {
 /**
  * createRelevantDataManagerAgent function.
  *
- * @returns - TODO: describe return value.
+ * @returns {RelevantDataManagerAgent} - TODO: describe return value.
  */
 export function createRelevantDataManagerAgent(): RelevantDataManagerAgent {
   return new RelevantDataManagerAgent();

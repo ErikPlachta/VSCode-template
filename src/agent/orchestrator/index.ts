@@ -57,14 +57,13 @@ export class Orchestrator {
     this.messages = this.config.getMessages();
   }
 
-  /**
+    /**
  * Create orchestrator instance with configuration loaded from file
  *
- * @param configPath - - configPath parameter.
- * @returns - TODO: describe return value.
+ * @param {string} configPath - configPath parameter.
+ * @returns {Promise<Orchestrator>} - TODO: describe return value.
  */
-
-  public static async createFromConfig(
+public static async createFromConfig(
     configPath?: string
   ): Promise<Orchestrator> {
     try {
@@ -78,34 +77,31 @@ export class Orchestrator {
     }
   }
 
-  /**
+    /**
  * Get public configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getConfig() {
+public getConfig() {
     return this.config.getConfig();
   }
 
-  /**
+    /**
  * Get supported intents
  *
- * @returns - TODO: describe return value.
+ * @returns {OrchestratorIntent[]} - TODO: describe return value.
  */
-
-  public getSupportedIntents(): OrchestratorIntent[] {
+public getSupportedIntents(): OrchestratorIntent[] {
     return this.config.getIntents();
   }
 
-  /**
+    /**
  * Extract keywords from text using configuration
  *
- * @param text - - text parameter.
- * @returns - TODO: describe return value.
+ * @param {string} text - text parameter.
+ * @returns {string[]} - TODO: describe return value.
  */
-
-  private extractKeywords(text: string): string[] {
+private extractKeywords(text: string): string[] {
     const pattern = new RegExp(
       `\\b[a-z0-9]{${this.minimumKeywordLength},}\\b`,
       "g"
@@ -114,15 +110,14 @@ export class Orchestrator {
     return matches.filter((token) => !this.stopWords.has(token));
   }
 
-  /**
+    /**
  * Check if a question is too vague even if it matches an intent.
  *
- * @param question - - question parameter.
- * @param intent - - intent parameter.
- * @returns - TODO: describe return value.
+ * @param {string} question - question parameter.
+ * @param {string} intent - intent parameter.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  private isQuestionTooVague(question: string, intent: string): boolean {
+private isQuestionTooVague(question: string, intent: string): boolean {
     const questionLower = question.toLowerCase().trim();
 
     // Use configured vague phrases instead of hard-coded array
@@ -133,15 +128,14 @@ export class Orchestrator {
         questionLower.endsWith(" " + phrase)
     );
   }
-  /**
+    /**
  * Classify intent using configuration-driven approach.
  *
- * @param questionOrInput - - questionOrInput parameter.
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {string | OrchestratorInput} questionOrInput - questionOrInput parameter.
+ * @param {{ topic?: string }} context - context parameter.
+ * @returns {OrchestratorClassification} - TODO: describe return value.
  */
-
-  classify(
+classify(
     questionOrInput: string | OrchestratorInput,
     context?: { topic?: string }
   ): OrchestratorClassification {
@@ -236,14 +230,13 @@ export class Orchestrator {
     };
   }
 
-  /**
+    /**
  * Route request using configuration (simplified for now - delegates to original implementation)
  *
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {OrchestratorInput} input - input parameter.
+ * @returns {Promise<OrchestratorResponse>} - TODO: describe return value.
  */
-
-  async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
+async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
     const classification = this.classify(input);
 
     // Create more contextual summary and payload
@@ -267,15 +260,14 @@ export class Orchestrator {
     };
   }
 
-  /**
+    /**
  * Generate contextual summary for the response.
  *
- * @param classification - - classification parameter.
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {OrchestratorClassification} classification - classification parameter.
+ * @param {OrchestratorInput} input - input parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-  private generateSummary(
+private generateSummary(
     classification: OrchestratorClassification,
     input: OrchestratorInput
   ): string {
@@ -295,15 +287,14 @@ export class Orchestrator {
     }
   }
 
-  /**
+    /**
  * Generate appropriate payload for the response.
  *
- * @param classification - - classification parameter.
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {OrchestratorClassification} classification - classification parameter.
+ * @param {OrchestratorInput} input - input parameter.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  private generatePayload(
+private generatePayload(
     classification: OrchestratorClassification,
     input: OrchestratorInput
   ): unknown {
@@ -339,14 +330,13 @@ export class Orchestrator {
     }
   }
 
-  /**
+    /**
  * Handle user requests by classifying intent and routing to appropriate agents.
  *
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {OrchestratorInput} input - input parameter.
+ * @returns {Promise<OrchestratorResponse>} - TODO: describe return value.
  */
-
-  async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
+async handle(input: OrchestratorInput): Promise<OrchestratorResponse> {
     try {
       // Delegate to the existing route method
       const response = await this.route(input);
@@ -371,15 +361,14 @@ export class Orchestrator {
     }
   }
 
-  /**
+    /**
  * Format the orchestrator response for user-friendly display.
  *
- * @param response - - response parameter.
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {OrchestratorResponse} response - response parameter.
+ * @param {OrchestratorInput} input - input parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
-  private formatResponseForUser(
+private formatResponseForUser(
     response: OrchestratorResponse,
     input: OrchestratorInput
   ): string {
@@ -415,13 +404,12 @@ export class Orchestrator {
     return sections.join("\n\n");
   }
 
-  /**
+    /**
  * Get current configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-
-  public getCurrentConfig() {
+public getCurrentConfig() {
     return {
       supportedIntents: this.getSupportedIntents(),
       intentAgentMap: this.intentAgentMap,

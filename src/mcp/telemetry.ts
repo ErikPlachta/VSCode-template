@@ -18,10 +18,10 @@ export interface InvocationLogger {
 }
 
 class ConsoleInvocationLogger implements InvocationLogger {
-  /**
+    /**
  * log function.
  *
- * @param event - - event parameter.
+ * @param {InvocationEvent} event - event parameter.
  */
 log(event: InvocationEvent): void {
     if (process.env.JEST_WORKER_ID) {
@@ -37,19 +37,30 @@ log(event: InvocationEvent): void {
 }
 
 export interface InvocationWrapper {
-  <T>(operation: string, fn: () => Promise<T>, metadata?: Record<string, unknown>): Promise<T>;
+  <T>(
+    operation: string,
+    fn: () => Promise<T>,
+    metadata?: Record<string, unknown>
+  ): Promise<T>;
 }
 
 /**
  * Create a helper that wraps asynchronous operations and emits telemetry events.
  *
- * @param agent - - agent parameter.
- * @param logger - - logger parameter.
- * @returns - TODO: describe return value.
+ * @param {string} agent - agent parameter.
+ * @param {InvocationLogger} logger - logger parameter.
+ * @returns {InvocationWrapper} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
-
-export function createInvocationLogger(agent: string, logger: InvocationLogger = new ConsoleInvocationLogger()): InvocationWrapper {
-  return async <T>(operation: string, fn: () => Promise<T>, metadata?: Record<string, unknown>): Promise<T> => {
+export function createInvocationLogger(
+  agent: string,
+  logger: InvocationLogger = new ConsoleInvocationLogger()
+): InvocationWrapper {
+  return async <T>(
+    operation: string,
+    fn: () => Promise<T>,
+    metadata?: Record<string, unknown>
+  ): Promise<T> => {
     const startedAt = Date.now();
     try {
       const result = await fn();
@@ -61,12 +72,13 @@ export function createInvocationLogger(agent: string, logger: InvocationLogger =
         startedAt,
         finishedAt,
         durationMs: finishedAt - startedAt,
-        metadata
+        metadata,
       });
       return result;
     } catch (error) {
       const finishedAt = Date.now();
-      const normalisedError = error instanceof Error ? error : new Error(String(error));
+      const NormalizedError =
+        error instanceof Error ? error : new Error(String(error));
       logger.log({
         agent,
         operation,
@@ -76,12 +88,11 @@ export function createInvocationLogger(agent: string, logger: InvocationLogger =
         durationMs: finishedAt - startedAt,
         metadata,
         error: {
-          name: normalisedError.name,
-          message: normalisedError.message
-        }
+          name: NormalizedError.name,
+          message: NormalizedError.message,
+        },
       });
-      throw normalisedError;
+      throw NormalizedError;
     }
   };
 }
-

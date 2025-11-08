@@ -37,13 +37,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
       this.config.relevantDataManager || ({} as RelevantDataManagerConfig);
   }
 
-  /**
+    /**
  * Get metadata management configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getMetadataConfig() {
+public getMetadataConfig() {
     return (
       this.relevantDataManagerConfig.metadata || {
         enableSchemaValidation: true,
@@ -53,13 +52,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get caching configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getCachingConfig() {
+public getCachingConfig() {
     return (
       this.relevantDataManagerConfig.caching || {
         enableSnapshotCaching: true,
@@ -69,13 +67,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get validation configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getValidationConfig() {
+public getValidationConfig() {
     return (
       this.relevantDataManagerConfig.validation || {
         strictModeEnabled: true,
@@ -85,13 +82,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get schema management configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getSchemaManagementConfig() {
+public getSchemaManagementConfig() {
     return (
       this.relevantDataManagerConfig.schemaManagement || {
         autoDetectSchemaChanges: true,
@@ -105,13 +101,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get relationships configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getRelationshipsConfig() {
+public getRelationshipsConfig() {
     return (
       this.relevantDataManagerConfig.relationships || {
         enableAutoDiscovery: true,
@@ -130,13 +125,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get data management configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getDataManagementConfig() {
+public getDataManagementConfig() {
     return (
       this.relevantDataManagerConfig.dataManagement || {
         enableAutoRefresh: false,
@@ -150,13 +144,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get performance configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {unknown} - TODO: describe return value.
  */
-
-  public getPerformanceConfig() {
+public getPerformanceConfig() {
     return (
       this.relevantDataManagerConfig.performance || {
         enableParallelProcessing: true,
@@ -168,63 +161,57 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Check if schema validation is enabled
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isSchemaValidationEnabled(): boolean {
+public isSchemaValidationEnabled(): boolean {
     return this.getMetadataConfig().enableSchemaValidation;
   }
 
-  /**
+    /**
  * Check if data quality enforcement is enabled
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isDataQualityEnforced(): boolean {
+public isDataQualityEnforced(): boolean {
     return this.getMetadataConfig().enforceDataQuality;
   }
 
-  /**
+    /**
  * Check if data lineage tracking is enabled
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isDataLineageTrackingEnabled(): boolean {
+public isDataLineageTrackingEnabled(): boolean {
     return this.getMetadataConfig().trackDataLineage;
   }
 
-  /**
+    /**
  * Check if snapshot caching is enabled
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isSnapshotCachingEnabled(): boolean {
+public isSnapshotCachingEnabled(): boolean {
     return this.getCachingConfig().enableSnapshotCaching;
   }
 
-  /**
+    /**
  * Check if strict validation mode is enabled
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isStrictModeEnabled(): boolean {
+public isStrictModeEnabled(): boolean {
     return this.getValidationConfig().strictModeEnabled;
   }
 
-  /**
+    /**
  * Get supported business categories
  *
- * @returns - TODO: describe return value.
+ * @returns {string[]} - TODO: describe return value.
  */
-
-  public getSupportedCategories(): string[] {
+public getSupportedCategories(): string[] {
     return (
       this.getMetadataConfig().supportedCategories ?? [
         "people",
@@ -236,13 +223,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get required category files configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {Record<string, string>} - TODO: describe return value.
  */
-
-  public getRequiredCategoryFiles(): Record<string, string> {
+public getRequiredCategoryFiles(): Record<string, string> {
     return (
       this.getMetadataConfig().requiredCategoryFiles ?? {
         configFile: "category.json",
@@ -252,13 +238,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get required directories configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {Record<string, string>} - TODO: describe return value.
  */
-
-  public getRequiredDirectories(): Record<string, string> {
+public getRequiredDirectories(): Record<string, string> {
     return (
       this.getMetadataConfig().requiredDirectories ?? {
         schemas: "schemas",
@@ -269,53 +254,48 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get snapshot cache TTL in milliseconds
  *
- * @returns - TODO: describe return value.
+ * @returns {number} - TODO: describe return value.
  */
-
-  public getSnapshotTTL(): number {
+public getSnapshotTTL(): number {
     return this.getCachingConfig().snapshotTTL;
   }
 
-  /**
+    /**
  * Get maximum cached snapshots
  *
- * @returns - TODO: describe return value.
+ * @returns {number} - TODO: describe return value.
  */
-
-  public getMaxCachedSnapshots(): number {
+public getMaxCachedSnapshots(): number {
     return this.getCachingConfig().maxCachedSnapshots;
   }
 
-  /**
+    /**
  * Get validation timeout in milliseconds
  *
- * @returns - TODO: describe return value.
+ * @returns {number} - TODO: describe return value.
  */
-
-  public getValidationTimeout(): number {
+public getValidationTimeout(): number {
     return this.getValidationConfig().validationTimeout;
   }
 
-  /**
+    /**
  * Get maximum schema file size in bytes
  *
- * @returns - TODO: describe return value.
+ * @returns {number} - TODO: describe return value.
  */
-
-  public getMaxSchemaFileSize(): number {
+public getMaxSchemaFileSize(): number {
     return this.getSchemaManagementConfig().maxSchemaFileSize ?? 1024 * 1024;
   }
 
-  /**
+    /**
  * Get supported schema formats
  *
- * @returns - TODO: describe return value.
+ * @returns {string[]} - TODO: describe return value.
  */
-
-  public getSupportedSchemaFormats(): string[] {
+public getSupportedSchemaFormats(): string[] {
     return (
       this.getSchemaManagementConfig().supportedSchemaFormats ?? [
         "json-schema",
@@ -324,13 +304,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get relationship types to track
  *
- * @returns - TODO: describe return value.
+ * @returns {string[]} - TODO: describe return value.
  */
-
-  public getRelationshipTypes(): string[] {
+public getRelationshipTypes(): string[] {
     return (
       this.getRelationshipsConfig().relationshipTypes ?? [
         "one-to-one",
@@ -342,83 +321,75 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     );
   }
 
-  /**
+    /**
  * Get maximum relationship traversal depth
  *
- * @returns - TODO: describe return value.
+ * @returns {number} - TODO: describe return value.
  */
-
-  public getMaxTraversalDepth(): number {
+public getMaxTraversalDepth(): number {
     return this.getRelationshipsConfig().maxTraversalDepth ?? 5;
   }
 
-  /**
+    /**
  * Get validation library to use
  *
- * @returns - TODO: describe return value.
+ * @returns {string} - TODO: describe return value.
  */
-
-  public getValidationLibrary(): string {
+public getValidationLibrary(): string {
     return this.getSchemaManagementConfig().validationLibrary ?? "ajv";
   }
 
-  /**
+    /**
  * Check if partial validation is allowed
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isPartialValidationAllowed(): boolean {
+public isPartialValidationAllowed(): boolean {
     return this.getValidationConfig().allowPartialValidation ?? false;
   }
 
-  /**
+    /**
  * Check if folder structure validation is enabled
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isFolderStructureValidationEnabled(): boolean {
+public isFolderStructureValidationEnabled(): boolean {
     return this.getMetadataConfig().validateFolderStructure ?? true;
   }
 
-  /**
+    /**
  * Check if AJV validation is enabled
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public isAjvValidationEnabled(): boolean {
+public isAjvValidationEnabled(): boolean {
     return this.getValidationConfig().enableAjvValidation ?? true;
   }
 
-  /**
+    /**
  * Check if relationship references should be validated
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public shouldValidateRelationshipReferences(): boolean {
+public shouldValidateRelationshipReferences(): boolean {
     return this.getRelationshipsConfig().validateReferences ?? true;
   }
 
-  /**
+    /**
  * Check if circular references should be detected
  *
- * @returns - TODO: describe return value.
+ * @returns {boolean} - TODO: describe return value.
  */
-
-  public shouldDetectCircularReferences(): boolean {
+public shouldDetectCircularReferences(): boolean {
     return this.getRelationshipsConfig().detectCircularReferences ?? true;
   }
 
-  /**
+    /**
  * Get telemetry configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-
-  public getTelemetryConfig() {
+public getTelemetryConfig() {
     return {
       logQueries: this.config.telemetry?.logQueries ?? true,
       logPerformance: this.config.telemetry?.logPerformance ?? true,
@@ -432,13 +403,12 @@ export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
     };
   }
 
-  /**
+    /**
  * Get error handling configuration
  *
- * @returns - TODO: describe return value.
+ * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-
-  public getErrorHandlingConfig() {
+public getErrorHandlingConfig() {
     return {
       maxRetries: this.config.errorHandling?.maxRetries ?? 3,
       retryDelay: this.config.errorHandling?.retryDelay ?? 2000,

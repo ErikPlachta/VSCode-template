@@ -13,10 +13,9 @@ import { registerMcpProvider } from "@extension/mcpProvider";
 /**
  * Activates the extension, registering the chat participant.
  *
- * @param context - - context parameter.
- * @returns - TODO: describe return value.
+ * @param {vscode.ExtensionContext} context - context parameter.
+ * @returns {Promise<void>} - TODO: describe return value.
  */
-
 export async function activate(
   context: vscode.ExtensionContext
 ): Promise<void> {
@@ -58,7 +57,16 @@ export async function activate(
     const tools: MCPTool[] = await fetchTools(serverUrl, token);
 
     // Create a proper chat request handler
-    const chatHandler: vscode.ChatRequestHandler = async (
+    const chatHandler: vscode.ChatRequestHandler = /**
+ * chatHandler function.
+ *
+ * @param {vscode.ChatRequest} request - request parameter.
+ * @param {vscode.ChatContext} _context - _context parameter.
+ * @param {vscode.ChatResponseStream} stream - stream parameter.
+ * @param {vscode.CancellationToken} _cancellationToken - _cancellationToken parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
+async (
       request: vscode.ChatRequest,
       _context: vscode.ChatContext,
       stream: vscode.ChatResponseStream,
@@ -154,5 +162,4 @@ export async function activate(
  * Deactivates the extension.
  *
  */
-
 export function deactivate(): void {}

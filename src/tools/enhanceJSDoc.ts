@@ -29,11 +29,9 @@ interface GeneratedDoc {
 
 /**
  * Determines whether a function-like declaration has a void/undefined return type.
- * If no return type annotation exists, the declaration is treated as non-void so a
- * `@returns` tag will be generated.
  *
- * @param {ts.FunctionLikeDeclarationBase} node - Function-like declaration node.
- * @returns {boolean} True when explicitly annotated as void or undefined.
+ * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
+ * @returns {boolean} - TODO: describe return value.
  */
 function isVoidLike(node: ts.FunctionLikeDeclarationBase): boolean {
   if (!node.type) return false; // assume return value if unspecified (to force @returns - tag)
@@ -44,18 +42,83 @@ function isVoidLike(node: ts.FunctionLikeDeclarationBase): boolean {
 /**
  * Collects simple parameter names from a function-like declaration.
  *
- * @param {ts.FunctionLikeDeclarationBase} node - Function-like declaration.
- * @returns {string[]} List of parameter names.
+ * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
+ * @returns {string[]} - TODO: describe return value.
  */
 function collectParamNames(node: ts.FunctionLikeDeclarationBase): string[] {
   return node.parameters.map((p) => p.name.getText());
 }
 
 /**
+ * Collect parameter type strings; falls back to 'unknown' when not annotated.
+ *
+ * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
+ * @returns {string[]} - TODO: describe return value.
+ */
+function collectParamTypes(node: ts.FunctionLikeDeclarationBase): string[] {
+  return node.parameters.map((p) => (p.type ? p.type.getText() : "unknown"));
+}
+
+/**
+ * Infer a return type textual representation for a function-like node.
+ *
+ * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
+ * @returns {string} - TODO: describe return value.
+ */
+function getReturnTypeText(node: ts.FunctionLikeDeclarationBase): string {
+  if (node.type) return node.type.getText();
+  const body = node.body && ts.isBlock(node.body) ? node.body : undefined;
+  if (body) {
+    const returns = body.statements.filter(ts.isReturnStatement);
+    if (returns.length === 1 && returns[0].expression) {
+      const expr = returns[0].expression;
+      if (ts.isStringLiteral(expr)) return "string";
+      if (ts.isNumericLiteral(expr)) return "number";
+      if (
+        expr.kind === ts.SyntaxKind.TrueKeyword ||
+        expr.kind === ts.SyntaxKind.FalseKeyword
+      )
+        return "boolean";
+      if (ts.isArrayLiteralExpression(expr)) return "unknown[]";
+      if (ts.isObjectLiteralExpression(expr)) return "Record<string, unknown>";
+    }
+  }
+  return "unknown";
+}
+
+/**
+ * Detect if the function body contains a throw statement.
+ *
+ * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
+ * @returns {boolean} - TODO: describe return value.
+ */
+function hasThrow(node: ts.FunctionLikeDeclarationBase): boolean {
+  const body = node.body && ts.isBlock(node.body) ? node.body : undefined;
+  if (!body) return false;
+  let found = false;
+
+  /**
+   * Recursive helper to detect any ThrowStatement within the function body.
+   *
+   * @param {ts.Node} n - Node to inspect.
+   * @returns {void} No return value.
+   */
+  const scan = (n: ts.Node): void => {
+    if (ts.isThrowStatement(n)) {
+      found = true;
+      return;
+    }
+    if (!found) ts.forEachChild(n, scan);
+  };
+  ts.forEachChild(body, scan);
+  return found;
+}
+
+/**
  * Extracts the first summary line from an existing JSDoc block.
  *
- * @param {string} fullText - Raw text of a JSDoc block including delimiters.
- * @returns {string | undefined} The first non-tag summary line, if any.
+ * @param {string} fullText - fullText parameter.
+ * @returns {string | undefined} - TODO: describe return value.
  */
 function extractSummaryFromExisting(fullText: string): string | undefined {
   // Match first JSDoc block summary portion (lines between /** and first @ tag)
@@ -78,43 +141,52 @@ function extractSummaryFromExisting(fullText: string): string | undefined {
 /**
  * Builds a canonical JSDoc block for a function.
  *
- * @param {string | undefined} summary - Optional summary line derived from an existing block.
- * @param {string | undefined} fnName - Name of the function (may be undefined for anonymous).
- * @param {string[]} params - Parameter names.
- * @param {boolean} includeReturns - Whether to include a `@returns` tag.
- * @param {boolean} includeThrows - Whether to include a `@throws` tag.
- * @returns {string} - JSDoc block string.
+ * @param {string | undefined} summary - summary parameter.
+ * @param {string | undefined} fnName - fnName parameter.
+ * @param {string[]} params - params parameter.
+ * @param {string[]} paramTypes - paramTypes parameter.
+ * @param {boolean} includeReturns - includeReturns parameter.
+ * @param {string} returnType - returnType parameter.
+ * @param {boolean} includeThrows - includeThrows parameter.
+ * @param {unknown} indent - indent parameter.
+ * @returns {string} - TODO: describe return value.
  */
 function buildDocBlock(
   summary: string | undefined,
   fnName: string | undefined,
   params: string[],
+  paramTypes: string[],
   includeReturns: boolean,
-  includeThrows: boolean
+  returnType: string,
+  includeThrows: boolean,
+  indent = ""
 ): string {
   const lines: string[] = ["/**"];
   const effectiveSummary =
     summary || (fnName ? `${fnName} function.` : "Function.");
   lines.push(` * ${effectiveSummary}`);
   lines.push(" *");
-  for (const p of params) {
-    lines.push(` * @param {unknown} ${p} - ${p} parameter.`);
+  for (let i = 0; i < params.length; i++) {
+    const p = params[i];
+    const t = paramTypes[i] || "unknown";
+    lines.push(` * @param {${t}} ${p} - ${p} parameter.`);
   }
   if (includeReturns) {
-    lines.push(" * @returns {unknown} - TODO: describe return value.");
+    lines.push(` * @returns {${returnType}} - TODO: describe return value.`);
   }
   if (includeThrows) {
     lines.push(" * @throws {Error} - May throw an error.");
   }
   lines.push(" */");
-  return lines.join("\n") + "\n";
+  // Apply indentation to each line of the block
+  return lines.map((l) => (l.length ? indent + l : l)).join("\n") + "\n";
 }
 
 /**
  * Determines whether a file should be processed (non-declaration TS source).
  *
- * @param {string} filePath - Absolute path to the file.
- * @returns {boolean} True if file is a `.ts` (excluding `.d.ts`).
+ * @param {string} filePath - filePath parameter.
+ * @returns {boolean} - TODO: describe return value.
  */
 function shouldProcessFile(filePath: string): boolean {
   return filePath.endsWith(".ts") && !filePath.endsWith(".d.ts");
@@ -123,9 +195,9 @@ function shouldProcessFile(filePath: string): boolean {
 /**
  * Ensures a file-level `@packageDocumentation` block is present; returns updated content.
  *
- * @param {string} content - Original file content.
- * @param {string} filePath - File path for deriving description.
- * @returns {{ content: string; added: boolean }} Content and flag indicating insertion.
+ * @param {string} content - content parameter.
+ * @param {string} filePath - filePath parameter.
+ * @returns {{ content: string; added: boolean }} - TODO: describe return value.
  */
 function ensureFilePackageDocumentation(
   content: string,
@@ -142,8 +214,8 @@ function ensureFilePackageDocumentation(
 /**
  * Generates JSDoc edits for all function-like declarations in a source file.
  *
- * @param {ts.SourceFile} sourceFile - Parsed TypeScript source file.
- * @returns {GeneratedDoc[]} Sorted edit operations.
+ * @param {ts.SourceFile} sourceFile - sourceFile parameter.
+ * @returns {GeneratedDoc[]} - TODO: describe return value.
  */
 function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
   const edits: GeneratedDoc[] = [];
@@ -151,7 +223,7 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
   /**
    * Visits AST nodes recursively and creates or replaces JSDoc blocks where needed.
    *
-   * @param {ts.Node} node - Current AST node.
+   * @param {ts.Node} node - node parameter.
    */
   function visit(node: ts.Node): void {
     if (ts.isFunctionDeclaration(node) && node.name) {
@@ -186,21 +258,20 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
   /**
    * Creates or replaces a JSDoc block for a function-like node.
    *
-   * @param {ts.FunctionLikeDeclarationBase} node - The node to document.
-   * @param {string | undefined} fnName - Name used in summary, if available.
-   */
-  /**
-   * Internal helper implementing the replacement logic.
-   *
-   * @param {ts.FunctionLikeDeclarationBase} node - Node to document.
-   * @param {string | undefined} fnName - Function name for summary.
-   * @returns {void} - No return value.
+   * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
+   * @param {string | undefined} fnName - fnName parameter.
    */
   function createOrReplace(
     node: ts.FunctionLikeDeclarationBase,
     fnName: string | undefined
   ): void {
     const fullText = sourceFile.getFullText();
+    const nodeStart = node.getStart();
+    // Compute indentation for the node's line
+    const lineStart = fullText.lastIndexOf("\n", nodeStart - 1) + 1;
+    const linePrefix = fullText.slice(lineStart, nodeStart);
+    const indentMatch = /(\s*)$/.exec(linePrefix);
+    const indent = indentMatch ? indentMatch[1] : "";
     // Access jsDoc via structural type rather than any.
     const jsDocs: ts.JSDoc[] | undefined = (
       node as unknown as { jsDoc?: ts.JSDoc[] }
@@ -208,8 +279,10 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
     let summary: string | undefined;
     if (jsDocs && jsDocs.length > 0) {
       const first = jsDocs[0];
-      const start = first.getStart();
-      const end = first.getEnd();
+      // Replace from the beginning of the first JSDoc (including any preceding trivia)
+      const start = first.getFullStart();
+      // Up to the node start (remove any extra blank lines and alignment issues)
+      const end = nodeStart;
       summary = extractSummaryFromExisting(fullText.slice(start, end));
       // Replace existing block entirely
       edits.push({
@@ -219,21 +292,28 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
           summary,
           fnName,
           collectParamNames(node),
+          collectParamTypes(node),
           !isVoidLike(node),
-          /throw\s+/.test(fullText.slice(start, end))
+          getReturnTypeText(node),
+          hasThrow(node),
+          indent
         ),
       });
     } else {
-      // Insert new block right before node
-      const insertPos = node.getStart();
+      // Insert/replace the leading whitespace of the node's line with the doc block
+      const insertPos = lineStart;
       edits.push({
         pos: insertPos,
+        end: nodeStart, // replace leading trivia before the node to keep adjacency and alignment
         text: buildDocBlock(
           undefined,
           fnName,
           collectParamNames(node),
+          collectParamTypes(node),
           !isVoidLike(node),
-          /throw\s+/.test(node.getText())
+          getReturnTypeText(node),
+          hasThrow(node),
+          indent
         ),
       });
     }
@@ -246,9 +326,9 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
 /**
  * Applies generated edits to the original file content.
  *
- * @param {string} original - Original source text.
- * @param {GeneratedDoc[]} edits - Edits to apply.
- * @returns {string} Updated source content with JSDoc applied.
+ * @param {string} original - original parameter.
+ * @param {GeneratedDoc[]} edits - edits parameter.
+ * @returns {string} - TODO: describe return value.
  */
 function applyEdits(original: string, edits: GeneratedDoc[]): string {
   if (edits.length === 0) return original;
@@ -266,8 +346,11 @@ function applyEdits(original: string, edits: GeneratedDoc[]): string {
 /**
  * Processes a file: ensures package doc and generates per-function JSDoc blocks.
  *
- * @param {string} filePath - Absolute path to a source file.
- * @returns {{ modified: boolean; addedFileTag: boolean }} Change indicators.
+ * @param {string} filePath - filePath parameter.
+ * @returns {{
+  modified: boolean;
+  addedFileTag: boolean;
+}} - TODO: describe return value.
  */
 function processFile(filePath: string): {
   modified: boolean;
@@ -299,9 +382,9 @@ function processFile(filePath: string): {
 /**
  * Recursively walks a directory collecting processable source files.
  *
- * @param {string} dir - Directory root to traverse.
- * @param {string[]} results - Accumulator for discovered files.
- * @returns {string[]} Array of collected file paths.
+ * @param {string} dir - dir parameter.
+ * @param {string[]} results - results parameter.
+ * @returns {string[]} - TODO: describe return value.
  */
 function walk(dir: string, results: string[] = []): string[] {
   for (const entry of fs.readdirSync(dir)) {
@@ -320,7 +403,6 @@ function walk(dir: string, results: string[] = []): string[] {
 /**
  * CLI entrypoint: enumerates files and applies enhancements.
  *
- * @returns {void} Nothing.
  */
 function main(): void {
   // Resolve project root generically whether script runs from src/tools (ts-node) or out/src/tools (compiled).

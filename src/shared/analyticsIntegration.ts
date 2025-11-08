@@ -8,11 +8,10 @@ import { loadApplicationConfig } from "./configurationLoader";
 /**
  * Decorator function for automatic analytics tracking on agent methods.
  *
- * @param agentName - - agentName parameter.
- * @param methodName - - methodName parameter.
- * @returns - TODO: describe return value.
+ * @param {string} agentName - agentName parameter.
+ * @param {string} methodName - methodName parameter.
+ * @returns {unknown} - TODO: describe return value.
  */
-
 export function trackAgentExecution(agentName: string, methodName?: string) {
   return function <T extends (...args: any[]) => Promise<any>>(
     target: any,
@@ -50,23 +49,25 @@ export abstract class TrackedAgent {
   /**
    * Creates a new tracked agent instance.
    *
-   * @param agentNam - - e-  - Name of the agent for analytics tracking.
+   * @param agentNam - - - - e-  - Name of the agent for analytics tracking.
    */
   constructor(agentName: string) {
     this.agentName = agentName;
     this.analytics = getAnalytics();
   }
 
-  /**
+    /**
  * Executes a tracked operation with automatic analytics recording.
  *
- * @param operationName - - operationName parameter.
- * @param operation - - operation parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {string} operationName - operationName parameter.
+ * @param {() => Promise<T>} operation - operation parameter.
+ * @param {{
+      userId?: string;
+      metadata?: Record<string, any>;
+    }} options - options parameter.
+ * @returns {Promise<T>} - TODO: describe return value.
  */
-
-  protected async executeTracked<T>(
+protected async executeTracked<T>(
     operationName: string,
     operation: () => Promise<T>,
     options: {
@@ -82,14 +83,13 @@ export abstract class TrackedAgent {
     );
   }
 
-  /**
+    /**
  * Records a custom analytics event.
  *
- * @param method - - method parameter.
- * @param eventData - - eventData parameter.
+ * @param {string} method - method parameter.
+ * @param {Record<string, any>} eventData - eventData parameter.
  */
-
-  protected recordEvent(
+protected recordEvent(
     method: string,
     eventData: Record<string, any> = {}
   ): void {
@@ -100,14 +100,13 @@ export abstract class TrackedAgent {
     });
   }
 
-  /**
+    /**
  * Gets analytics statistics for this agent.
  *
- * @param since - - since parameter.
- * @returns - TODO: describe return value.
+ * @param {Date} since - since parameter.
+ * @returns {any | null} - TODO: describe return value.
  */
-
-  getStats(since?: Date): any | null {
+getStats(since?: Date): any | null {
     return this.analytics.getAgentStats(this.agentName, since);
   }
 }
@@ -115,12 +114,11 @@ export abstract class TrackedAgent {
 /**
  * Analytics middleware for MCP method invocations.
  *
- * @param agentName - - agentName parameter.
- * @param methodName - - methodName parameter.
- * @param handler - - handler parameter.
- * @returns - TODO: describe return value.
+ * @param {string} agentName - agentName parameter.
+ * @param {string} methodName - methodName parameter.
+ * @param {T} handler - handler parameter.
+ * @returns {T} - TODO: describe return value.
  */
-
 export function withAnalytics<T extends (...args: any[]) => Promise<any>>(
   agentName: string,
   methodName: string,
@@ -156,16 +154,18 @@ export class PerformanceMonitor {
     this.analytics = getAnalytics();
   }
 
-  /**
+    /**
  * Monitors the performance of a database query operation.
  *
- * @param queryType - - queryType parameter.
- * @param query - - query parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {string} queryType - queryType parameter.
+ * @param {() => Promise<T>} query - query parameter.
+ * @param {{
+      category?: string;
+      filters?: Record<string, any>;
+    }} options - options parameter.
+ * @returns {Promise<T>} - TODO: describe return value.
  */
-
-  async monitorDatabaseQuery<T>(
+async monitorDatabaseQuery<T>(
     queryType: string,
     query: () => Promise<T>,
     options: {
@@ -183,16 +183,18 @@ export class PerformanceMonitor {
     });
   }
 
-  /**
+    /**
  * Monitors data processing operations.
  *
- * @param operationType - - operationType parameter.
- * @param processor - - processor parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {string} operationType - operationType parameter.
+ * @param {() => Promise<T>} processor - processor parameter.
+ * @param {{
+      inputSize?: number;
+      category?: string;
+    }} options - options parameter.
+ * @returns {Promise<T>} - TODO: describe return value.
  */
-
-  async monitorDataProcessing<T>(
+async monitorDataProcessing<T>(
     operationType: string,
     processor: () => Promise<T>,
     options: {
@@ -215,16 +217,18 @@ export class PerformanceMonitor {
     );
   }
 
-  /**
+    /**
  * Monitors orchestration decisions and routing.
  *
- * @param decision - - decision parameter.
- * @param orchestration - - orchestration parameter.
- * @param options - - options parameter.
- * @returns - TODO: describe return value.
+ * @param {string} decision - decision parameter.
+ * @param {() => Promise<T>} orchestration - orchestration parameter.
+ * @param {{
+      intent?: string;
+      agentCount?: number;
+    }} options - options parameter.
+ * @returns {Promise<T>} - TODO: describe return value.
  */
-
-  async monitorOrchestration<T>(
+async monitorOrchestration<T>(
     decision: string,
     orchestration: () => Promise<T>,
     options: {
@@ -251,9 +255,8 @@ export class PerformanceMonitor {
 /**
  * Initializes analytics for the application based on configuration.
  *
- * @returns - TODO: describe return value.
+ * @returns {Promise<AgentUsageAnalytics>} - TODO: describe return value.
  */
-
 export async function initializeAnalytics(): Promise<AgentUsageAnalytics> {
   try {
     const config = await loadApplicationConfig();
@@ -281,11 +284,10 @@ export async function initializeAnalytics(): Promise<AgentUsageAnalytics> {
 /**
  * Creates a scheduled analytics report generator.
  *
- * @param intervalMs - - intervalMs parameter.
- * @param outputPath - - outputPath parameter.
- * @returns - TODO: describe return value.
+ * @param {number} intervalMs - intervalMs parameter.
+ * @param {string} outputPath - outputPath parameter.
+ * @returns {NodeJS.Timeout} - TODO: describe return value.
  */
-
 export function scheduleAnalyticsReports(
   intervalMs: number = 24 * 60 * 60 * 1000, // Daily by default
   outputPath: string = "logs/analytics-report.md"

@@ -7,10 +7,10 @@ import * as path from "path";
 /**
  * registerMcpProvider function.
  *
- * @param serverUrl - - serverUrl parameter.
- * @param token - - token parameter.
- * @param includeAuthHeader - - includeAuthHeader parameter.
- * @param context - - context parameter.
+ * @param {string} serverUrl - serverUrl parameter.
+ * @param {string} token - token parameter.
+ * @param {boolean} includeAuthHeader - includeAuthHeader parameter.
+ * @param {vscode.ExtensionContext} context - context parameter.
  */
 export function registerMcpProvider(
   serverUrl: string,

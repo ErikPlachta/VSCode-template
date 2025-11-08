@@ -1,16 +1,14 @@
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
-
 /**
  * @packageDocumentation Relevant Data Manager Agent Configuration
  *
- * This configuration defines all settings for the relevant data manager agent, which
- * handles metadata management, schema validation, and category orchestration for
- * the business data workspace.
- *
- * The relevant data manager serves as the foundational data layer, managing
- * categories, schemas, relationships, and data quality across the entire system.
+ * Defines the settings for the relevant data manager agent, which handles metadata
+ * management, schema validation, and category orchestration for the business data
+ * workspace. Acts as the foundational data layer, managing categories, schemas,
+ * relationships, and data quality across the entire system.
  */
+
+import type { AgentConfigDefinition } from "../../types/agentConfig";
+import { CONFIG_IDS } from "../../types/configRegistry";
 
 /**
  * Complete configuration for the Relevant Data Manager Agent

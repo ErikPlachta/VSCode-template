@@ -55,10 +55,9 @@ export interface ValidationWarning extends Omit<ValidationError, "level"> {
 /**
  * Comprehensive validation function for agent configurations
  *
- * @param config - - config parameter.
- * @returns - TODO: describe return value.
+ * @param {unknown} config - config parameter.
+ * @returns {ValidationResult} - TODO: describe return value.
  */
-
 export function validateAgentConfig(config: unknown): ValidationResult {
   const errors: ValidationError[] = [];
   const warnings: ValidationWarning[] = [];
@@ -145,11 +144,10 @@ export function validateAgentConfig(config: unknown): ValidationResult {
 /**
  * Validate the agent field structure
  *
- * @param agent - - agent parameter.
- * @param errors - - errors parameter.
- * @param warnings - - warnings parameter.
+ * @param {unknown} agent - agent parameter.
+ * @param {ValidationError[]} errors - errors parameter.
+ * @param {ValidationWarning[]} warnings - warnings parameter.
  */
-
 function validateAgentField(
   agent: unknown,
   errors: ValidationError[],
@@ -210,12 +208,11 @@ function validateAgentField(
 /**
  * Validate configuration sections specific to agent type
  *
- * @param config - - config parameter.
- * @param agentType - - agentType parameter.
- * @param errors - - errors parameter.
- * @param warnings - - warnings parameter.
+ * @param {Record<string, unknown>} config - config parameter.
+ * @param {string} agentType - agentType parameter.
+ * @param {ValidationError[]} errors - errors parameter.
+ * @param {ValidationWarning[]} warnings - warnings parameter.
  */
-
 function validateConfigurationSections(
   config: Record<string, unknown>,
   agentType: string,
@@ -251,11 +248,10 @@ function validateConfigurationSections(
 /**
  * Validate orchestrator-specific configuration
  *
- * @param config - - config parameter.
- * @param errors - - errors parameter.
- * @param warnings - - warnings parameter.
+ * @param {Record<string, unknown>} config - config parameter.
+ * @param {ValidationError[]} errors - errors parameter.
+ * @param {ValidationWarning[]} warnings - warnings parameter.
  */
-
 function validateOrchestratorConfig(
   config: Record<string, unknown>,
   errors: ValidationError[],
@@ -349,11 +345,10 @@ function validateOrchestratorConfig(
 /**
  * Placeholder validation functions for other agent types
  *
- * @param config - - config parameter.
- * @param errors - - errors parameter.
- * @param warnings - - warnings parameter.
+ * @param {Record<string, unknown>} config - config parameter.
+ * @param {ValidationError[]} errors - errors parameter.
+ * @param {ValidationWarning[]} warnings - warnings parameter.
  */
-
 function validateDatabaseAgentConfig(
   config: Record<string, unknown>,
   errors: ValidationError[],
@@ -365,9 +360,9 @@ function validateDatabaseAgentConfig(
 /**
  * validateDataAgentConfig function.
  *
- * @param config - - config parameter.
- * @param errors - - errors parameter.
- * @param warnings - - warnings parameter.
+ * @param {Record<string, unknown>} config - config parameter.
+ * @param {ValidationError[]} errors - errors parameter.
+ * @param {ValidationWarning[]} warnings - warnings parameter.
  */
 function validateDataAgentConfig(
   config: Record<string, unknown>,
@@ -380,9 +375,9 @@ function validateDataAgentConfig(
 /**
  * validateClarificationAgentConfig function.
  *
- * @param config - - config parameter.
- * @param errors - - errors parameter.
- * @param warnings - - warnings parameter.
+ * @param {Record<string, unknown>} config - config parameter.
+ * @param {ValidationError[]} errors - errors parameter.
+ * @param {ValidationWarning[]} warnings - warnings parameter.
  */
 function validateClarificationAgentConfig(
   config: Record<string, unknown>,
@@ -395,9 +390,9 @@ function validateClarificationAgentConfig(
 /**
  * validateRelevantDataManagerConfig function.
  *
- * @param config - - config parameter.
- * @param errors - - errors parameter.
- * @param warnings - - warnings parameter.
+ * @param {Record<string, unknown>} config - config parameter.
+ * @param {ValidationError[]} errors - errors parameter.
+ * @param {ValidationWarning[]} warnings - warnings parameter.
  */
 function validateRelevantDataManagerConfig(
   config: Record<string, unknown>,
@@ -410,11 +405,10 @@ function validateRelevantDataManagerConfig(
 /**
  * Validate configuration compatibility between different versions
  *
- * @param config1 - - config1 parameter.
- * @param config2 - - config2 parameter.
- * @returns - TODO: describe return value.
+ * @param {AgentConfigDefinition} config1 - config1 parameter.
+ * @param {AgentConfigDefinition} config2 - config2 parameter.
+ * @returns {ValidationResult} - TODO: describe return value.
  */
-
 export function validateCompatibility(
   config1: AgentConfigDefinition,
   config2: AgentConfigDefinition
@@ -452,10 +446,9 @@ export function validateCompatibility(
 /**
  * Generate a validation report for display
  *
- * @param result - - result parameter.
- * @returns - TODO: describe return value.
+ * @param {ValidationResult} result - result parameter.
+ * @returns {string} - TODO: describe return value.
  */
-
 export function generateValidationReport(result: ValidationResult): string {
   const lines: string[] = [];
 

@@ -27,8 +27,9 @@ interface RuntimeOverrides {
 /**
  * normalizeAgentId function.
  *
- * @param input - - input parameter.
- * @returns - TODO: describe return value.
+ * @param {string} input - input parameter.
+ * @returns {AgentIdentifier} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 function normalizeAgentId(input: string): AgentIdentifier {
   // Already canonical
@@ -57,8 +58,8 @@ function normalizeAgentId(input: string): AgentIdentifier {
 /**
  * isValidPriority function.
  *
- * @param p - - p parameter.
- * @returns - TODO: describe return value.
+ * @param {string} p - p parameter.
+ * @returns {p is Priority} - TODO: describe return value.
  */
 function isValidPriority(p?: string): p is Priority {
   return p === "high" || p === "medium" || p === "low";
@@ -73,14 +74,13 @@ export interface EffectiveExecutionProfile {
 export class AgentConfigResolver {
   constructor(private readonly configPath: string = "src/mcp.config.json") {}
 
-  /**
+    /**
  * Returns the effective execution profile for an agent after applying runtime overrides.
  *
- * @param agentId - - agentId parameter.
- * @returns - TODO: describe return value.
+ * @param {AgentIdentifier} agentId - agentId parameter.
+ * @returns {Promise<EffectiveExecutionProfile>} - TODO: describe return value.
  */
-
-  async getEffectiveExecutionProfile(
+async getEffectiveExecutionProfile(
     agentId: AgentIdentifier
   ): Promise<EffectiveExecutionProfile> {
     const loader = new ConfigurationLoader(this.configPath);

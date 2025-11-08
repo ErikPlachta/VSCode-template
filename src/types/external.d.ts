@@ -1,9 +1,9 @@
 /**
- * @file external.d implementation for types module
+ * @packageDocumentation external.d implementation for types module
  */
 
-declare module 'ajv-formats' {
-  import type Ajv from 'ajv';
+declare module "ajv-formats" {
+  import type Ajv from "ajv";
 
   type AddFormats = (ajv: Ajv) => Ajv;
 
@@ -11,8 +11,8 @@ declare module 'ajv-formats' {
   export default addFormats;
 }
 
-declare module 'gray-matter' {
-  import type { Buffer } from 'node:buffer';
+declare module "gray-matter" {
+  import type { Buffer } from "node:buffer";
 
   interface GrayMatterFile<T = Record<string, unknown>> {
     data: T;

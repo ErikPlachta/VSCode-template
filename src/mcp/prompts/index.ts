@@ -16,7 +16,7 @@ export interface EscalationPromptOptions {
 /**
  * renderEscalationPrompt function.
  *
- * @param {
+ * @param {EscalationPromptOptions} {
   topic,
   missingSignals,
   manifest,
@@ -27,7 +27,7 @@ export interface EscalationPromptOptions {
   manifest,
   additionalGuidance,
 } parameter.
- * @returns - TODO: describe return value.
+ * @returns {string} - TODO: describe return value.
  */
 export function renderEscalationPrompt({
   topic,
@@ -71,7 +71,7 @@ export interface ClarificationPromptOptions {
 /**
  * renderClarificationPrompt function.
  *
- * @param {
+ * @param {ClarificationPromptOptions} {
   question,
   manifest,
   missingSignals,
@@ -82,7 +82,7 @@ export interface ClarificationPromptOptions {
   missingSignals,
   knowledgeSnippets,
 } parameter.
- * @returns - TODO: describe return value.
+ * @returns {string} - TODO: describe return value.
  */
 export function renderClarificationPrompt({
   question,
@@ -116,14 +116,14 @@ export interface ClassificationSummaryOptions {
 /**
  * renderClassificationSummary function.
  *
- * @param {
+ * @param {ClassificationSummaryOptions} {
   agent,
   matchedSignals,
 } - {
   agent,
   matchedSignals,
 } parameter.
- * @returns - TODO: describe return value.
+ * @returns {string} - TODO: describe return value.
  */
 export function renderClassificationSummary({
   agent,

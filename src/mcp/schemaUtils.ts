@@ -21,28 +21,28 @@ export interface SchemaValidationSummary {
 }
 
 /**
- * normaliseSchemaName function.
+ * NormalizeSchemaName function.
  *
- * @param name - - name parameter.
- * @returns - TODO: describe return value.
+ * @param {string} name - name parameter.
+ * @returns {string} - TODO: describe return value.
  */
-export function normaliseSchemaName(name: string): string {
+export function NormalizeSchemaName(name: string): string {
   return name.trim().toLowerCase();
 }
 
 /**
  * detectDuplicateSchemas function.
  *
- * @param schemas - - schemas parameter.
- * @returns - TODO: describe return value.
+ * @param {CategorySchema[]} schemas - schemas parameter.
+ * @returns {string[]} - TODO: describe return value.
  */
 export function detectDuplicateSchemas(schemas: CategorySchema[]): string[] {
   const seen = new Map<string, number>();
   const duplicates: string[] = [];
   schemas.forEach((schema) => {
-    const normalised = normaliseSchemaName(schema.name);
-    const count = (seen.get(normalised) ?? 0) + 1;
-    seen.set(normalised, count);
+    const Normalized = NormalizeSchemaName(schema.name);
+    const count = (seen.get(Normalized) ?? 0) + 1;
+    seen.set(Normalized, count);
     if (count > 1) {
       duplicates.push(schema.name);
     }
@@ -53,8 +53,8 @@ export function detectDuplicateSchemas(schemas: CategorySchema[]): string[] {
 /**
  * validateRelationships function.
  *
- * @param categories - - categories parameter.
- * @returns - TODO: describe return value.
+ * @param {BusinessCategory[]} categories - categories parameter.
+ * @returns {RelationshipIntegrityIssue[]} - TODO: describe return value.
  */
 export function validateRelationships(
   categories: BusinessCategory[]
@@ -79,8 +79,8 @@ export function validateRelationships(
 /**
  * validateCategorySchemas function.
  *
- * @param categories - - categories parameter.
- * @returns - TODO: describe return value.
+ * @param {BusinessCategory[]} categories - categories parameter.
+ * @returns {SchemaValidationSummary} - TODO: describe return value.
  */
 export function validateCategorySchemas(
   categories: BusinessCategory[]

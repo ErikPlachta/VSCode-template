@@ -14,7 +14,7 @@ interface McpConfig {
 /**
  * getMcpConfigPath function.
  *
- * @returns - TODO: describe return value.
+ * @returns {string} - TODO: describe return value.
  */
 function getMcpConfigPath(): string {
   // Try to resolve platform-specific default for VS Code stable
@@ -41,8 +41,9 @@ function getMcpConfigPath(): string {
 /**
  * readMcpConfig function.
  *
- * @param filePath - - filePath parameter.
- * @returns - TODO: describe return value.
+ * @param {string} filePath - filePath parameter.
+ * @returns {Promise<McpConfig>} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
  */
 async function readMcpConfig(filePath: string): Promise<McpConfig> {
   try {
@@ -61,9 +62,9 @@ async function readMcpConfig(filePath: string): Promise<McpConfig> {
 /**
  * writeMcpConfig function.
  *
- * @param filePath - - filePath parameter.
- * @param config - - config parameter.
- * @returns - TODO: describe return value.
+ * @param {string} filePath - filePath parameter.
+ * @param {McpConfig} config - config parameter.
+ * @returns {Promise<void>} - TODO: describe return value.
  */
 async function writeMcpConfig(
   filePath: string,
@@ -84,10 +85,9 @@ export interface RegistrationOptions {
 /**
  * Ensure an HTTP JSON-RPC server entry exists in mcp.json for Copilot Chat.
  *
- * @param opts - - opts parameter.
- * @returns - TODO: describe return value.
+ * @param {RegistrationOptions} opts - opts parameter.
+ * @returns {Promise<string>} - TODO: describe return value.
  */
-
 export async function ensureRegistration(
   opts: RegistrationOptions
 ): Promise<string> {
@@ -110,10 +110,9 @@ export async function ensureRegistration(
 /**
  * Remove our server entry from mcp.json if present.
  *
- * @param id - - id parameter.
- * @returns - TODO: describe return value.
+ * @param {string} id - id parameter.
+ * @returns {Promise<string>} - TODO: describe return value.
  */
-
 export async function removeRegistration(id: string): Promise<string> {
   const configPath = getMcpConfigPath();
   const current = await readMcpConfig(configPath);
@@ -121,7 +120,6 @@ export async function removeRegistration(id: string): Promise<string> {
     current.servers &&
     Object.prototype.hasOwnProperty.call(current.servers, id)
   ) {
-     
     delete (current.servers as Record<string, unknown>)[id];
     await writeMcpConfig(configPath, current);
   }
