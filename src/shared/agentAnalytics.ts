@@ -14,6 +14,7 @@ export enum AgentExecutionStatus {
 
 /**
  * Agent usage event data structure.
+ *
  */
 export interface AgentUsageEvent {
   /** Unique identifier for the event. */
@@ -42,6 +43,7 @@ export interface AgentUsageEvent {
 
 /**
  * Aggregated usage statistics for an agent.
+ *
  */
 export interface AgentUsageStats {
   /** Agent name. */
@@ -70,6 +72,7 @@ export interface AgentUsageStats {
 
 /**
  * Usage analytics summary across all agents.
+ *
  */
 export interface UsageAnalyticsSummary {
   /** Summary generation timestamp. */
@@ -94,6 +97,7 @@ export interface UsageAnalyticsSummary {
 
 /**
  * Configuration for analytics collection.
+ *
  */
 export interface AnalyticsConfig {
   /** Enable analytics collection. */
@@ -121,11 +125,11 @@ export class AgentUsageAnalytics {
   private eventCounter = 0;
 
     /**
-   * Creates a new analytics collector instance.
-   *
-   * @param {AnalyticsConfig} config - config parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Creates a new analytics collector instance.
+ *
+ * @param {AnalyticsConfig} config - config parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(config: AnalyticsConfig) {
     this.config = config;
   }

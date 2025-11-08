@@ -14,16 +14,28 @@ import { DataAgentConfig } from "./config";
 // Define core data types without importing from other agents
 export type CategoryId = string;
 
+/**
+ * CategoryRecord interface.
+ *
+ */
 export interface CategoryRecord {
   id: string;
   [key: string]: unknown;
 }
 
+/**
+ * CategorySchema interface.
+ *
+ */
 export interface CategorySchema {
   name: string;
   schema: unknown;
 }
 
+/**
+ * RelationshipDescription interface.
+ *
+ */
 export interface RelationshipDescription {
   name: string;
   description: string;
@@ -31,6 +43,10 @@ export interface RelationshipDescription {
   viaField: string;
 }
 
+/**
+ * AnalysisInput interface.
+ *
+ */
 export interface AnalysisInput {
   categoryId: CategoryId;
   records: CategoryRecord[];
@@ -38,6 +54,10 @@ export interface AnalysisInput {
   relationships?: RelationshipDescription[];
 }
 
+/**
+ * DataInsight interface.
+ *
+ */
 export interface DataInsight {
   type:
     | "pattern"
@@ -52,6 +72,10 @@ export interface DataInsight {
   affectedRecords?: string[];
 }
 
+/**
+ * ExplorationPlan interface.
+ *
+ */
 export interface ExplorationPlan {
   topic: string;
   question: string;
@@ -63,6 +87,10 @@ export interface ExplorationPlan {
   }>;
 }
 
+/**
+ * ExplorationStep interface.
+ *
+ */
 export interface ExplorationStep {
   title: string;
   description: string;
@@ -70,6 +98,10 @@ export interface ExplorationStep {
   hints: string[];
 }
 
+/**
+ * TopicSearchResult interface.
+ *
+ */
 export interface TopicSearchResult {
   categoryId: CategoryId;
   recordId: string;
@@ -77,6 +109,10 @@ export interface TopicSearchResult {
   matchingFields: string[];
 }
 
+/**
+ * CrossCategoryConnection interface.
+ *
+ */
 export interface CrossCategoryConnection {
   sourceCategory: CategoryId;
   targetCategory: CategoryId;
@@ -101,10 +137,10 @@ export class DataAgent {
   private readonly config: DataAgentConfig;
 
     /**
-   * Create a new {@link DataAgent}.
-   *
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Create a new {@link DataAgent}.
+ *
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor() {
     this.config = new DataAgentConfig();
   }

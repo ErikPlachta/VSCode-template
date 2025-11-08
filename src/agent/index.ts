@@ -6,8 +6,8 @@
  * The Orchestrator coordinates all inter-agent communication.
  */
 
-// Clean interface definitions for orchestrator coordination
-export * from "./interfaces";
+// Clean interface definitions for orchestrator coordination (moved to types)
+export * from "../types/interfaces";
 
 // Core agent implementations - each properly isolated
 export { ClarificationAgent } from "./clarificationAgent/";

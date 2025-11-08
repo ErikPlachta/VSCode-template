@@ -42,6 +42,7 @@ export const CONFIG_IDS = {
 
 /**
  * Configuration metadata for each schema ID
+ *
  */
 export interface ConfigMetadata {
   /** Unique configuration ID */

@@ -6,6 +6,10 @@ import { promises as fs } from "fs";
 import * as path from "path";
 import * as os from "os";
 
+/**
+ * McpConfig interface.
+ *
+ */
 interface McpConfig {
   inputs?: unknown[];
   servers: Record<string, unknown>;
@@ -75,6 +79,10 @@ async function writeMcpConfig(
   await fs.writeFile(filePath, pretty + "\n", "utf8");
 }
 
+/**
+ * RegistrationOptions interface.
+ *
+ */
 export interface RegistrationOptions {
   id: string; // key under servers
   url: string; // http JSON-RPC endpoint, e.g., http://localhost:39200

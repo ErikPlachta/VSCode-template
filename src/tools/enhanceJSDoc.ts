@@ -104,11 +104,12 @@ function hasThrow(node: ts.FunctionLikeDeclarationBase): boolean {
    * @returns {void} No return value.
    */
   const scan = (n: ts.Node): void => {
+    if (found) return; // short‑circuit if already located
     if (ts.isThrowStatement(n)) {
       found = true;
       return;
     }
-    if (!found) ts.forEachChild(n, scan);
+    ts.forEachChild(n, scan);
   };
   ts.forEachChild(body, scan);
   return found;
@@ -148,7 +149,7 @@ function extractSummaryFromExisting(fullText: string): string | undefined {
  * @param {boolean} includeReturns - includeReturns parameter.
  * @param {string} returnType - returnType parameter.
  * @param {boolean} includeThrows - includeThrows parameter.
- * @param {string[]} typeParams - Generic type parameter names for template tags.
+ * @param {string[]} typeParams - typeParams parameter.
  * @param {unknown} indent - indent parameter.
  * @returns {string} - TODO: describe return value.
  */
@@ -235,6 +236,58 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
    * @param {ts.Node} node - node parameter.
    */
   function visit(node: ts.Node): void {
+    // Interface declarations: ensure a basic block (summary + @template if generics)
+    if (ts.isInterfaceDeclaration(node)) {
+      const fullText = sourceFile.getFullText();
+      const nodeStart = node.getStart();
+      const lineStart = fullText.lastIndexOf("\n", nodeStart - 1) + 1;
+      const linePrefix = fullText.slice(lineStart, nodeStart);
+      const indentMatch = /(\s*)$/.exec(linePrefix);
+      const indent = indentMatch ? indentMatch[1] : "";
+      const jsDocs: ts.JSDoc[] | undefined = (
+        node as unknown as { jsDoc?: ts.JSDoc[] }
+      ).jsDoc;
+      const typeParams = node.typeParameters
+        ? node.typeParameters.map((tp) => tp.name.getText())
+        : [];
+      if (jsDocs && jsDocs.length > 0) {
+        const first = jsDocs[0];
+        const start = first.getFullStart();
+        const end = nodeStart;
+        edits.push({
+          pos: start,
+          end,
+          text: buildDocBlock(
+            extractSummaryFromExisting(fullText.slice(start, end)) ||
+              `${node.name.getText()} interface.`,
+            undefined,
+            [],
+            [],
+            false,
+            "void",
+            false,
+            typeParams,
+            indent
+          ),
+        });
+      } else {
+        edits.push({
+          pos: lineStart,
+          end: nodeStart,
+          text: buildDocBlock(
+            `${node.name.getText()} interface.`,
+            undefined,
+            [],
+            [],
+            false,
+            "void",
+            false,
+            typeParams,
+            indent
+          ),
+        });
+      }
+    }
     if (ts.isFunctionDeclaration(node) && node.name) {
       createOrReplace(node, node.name.getText());
     } else if (

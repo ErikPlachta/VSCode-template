@@ -1,9 +1,10 @@
 /**
- * @packageDocumentation Application configuration types for comprehensive settings management.
+ * @packageDocumentation applicationConfig definitions for types module.
+ * Strongly typed configuration primitives for environment, MCP server/client,
+ * agent metadata, performance characteristics, and validation scaffolding.
  */
-
 /**
- * Environment-specific configuration settings.
+ * EnvironmentConfig interface.
  */
 export interface EnvironmentConfig {
   /** Enable debug mode for detailed logging and error reporting. */
@@ -18,6 +19,7 @@ export interface EnvironmentConfig {
 
 /**
  * MCP server configuration settings.
+ *
  */
 export interface McpServerConfig {
   /** Protocol for MCP communication. */
@@ -39,6 +41,7 @@ export interface McpServerConfig {
 
 /**
  * MCP client configuration settings.
+ *
  */
 export interface McpClientConfig {
   /** Maximum number of concurrent requests. */
@@ -56,6 +59,7 @@ export type AgentPriority = "high" | "medium" | "low";
 
 /**
  * Agent definition with comprehensive metadata.
+ *
  */
 export interface AgentDefinition {
   /** Technical name used in code/imports. */
@@ -112,6 +116,7 @@ export interface AgentDefinition {
 
 /**
  * Agent profile configuration.
+ *
  */
 export interface AgentProfile {
   /** Execution priority for the agent. */
@@ -124,6 +129,7 @@ export interface AgentProfile {
 
 /**
  * Global agent configuration settings.
+ *
  */
 export interface AgentGlobalConfig {
   /** Maximum execution time for any agent in milliseconds. */
@@ -138,6 +144,7 @@ export interface AgentGlobalConfig {
 
 /**
  * Data validation configuration.
+ *
  */
 export interface DataValidationConfig {
   /** Enable strict validation mode. */
@@ -150,6 +157,7 @@ export interface DataValidationConfig {
 
 /**
  * Cache configuration settings.
+ *
  */
 export interface CacheConfig {
   /** Enable caching. */
@@ -164,6 +172,7 @@ export interface CacheConfig {
 
 /**
  * Logging file configuration.
+ *
  */
 export interface LoggingFileConfig {
   /** Enable file logging. */
@@ -178,6 +187,7 @@ export interface LoggingFileConfig {
 
 /**
  * Rate limiting configuration.
+ *
  */
 export interface RateLimitConfig {
   /** Enable rate limiting. */
@@ -190,6 +200,7 @@ export interface RateLimitConfig {
 
 /**
  * Performance monitoring configuration.
+ *
  */
 export interface PerformanceMonitoringConfig {
   /** Enable performance monitoring. */
@@ -200,6 +211,7 @@ export interface PerformanceMonitoringConfig {
 
 /**
  * Memory management configuration.
+ *
  */
 export interface MemoryConfig {
   /** Maximum heap size. */
@@ -210,6 +222,7 @@ export interface MemoryConfig {
 
 /**
  * Experimental features configuration.
+ *
  */
 export interface ExperimentalConfig {
   /** Enable advanced caching features. */
@@ -222,6 +235,7 @@ export interface ExperimentalConfig {
 
 /**
  * Extension features configuration.
+ *
  */
 export interface ExtensionConfig {
   /** Allow third-party extensions. */
@@ -232,6 +246,7 @@ export interface ExtensionConfig {
 
 /**
  * JSON schema validation configuration.
+ *
  */
 export interface JsonSchemaConfig {
   /** File pattern to match. */
@@ -244,6 +259,7 @@ export interface JsonSchemaConfig {
 
 /**
  * Markdown validation configuration.
+ *
  */
 export interface MarkdownConfig {
   /** File patterns to include in validation. */
@@ -258,6 +274,7 @@ export interface MarkdownConfig {
 
 /**
  * Report generation configuration.
+ *
  */
 export interface ReportConfig {
   /** Output path for generated reports. */
@@ -266,6 +283,7 @@ export interface ReportConfig {
 
 /**
  * Comprehensive application configuration structure.
+ *
  */
 export interface ApplicationConfig {
   /** Application metadata and environment settings. */

@@ -1,9 +1,10 @@
 /**
- * @packageDocumentation TypeScript types for individual agent configurations
+ * @packageDocumentation agentConfig definitions for types module.
+ * Central typed structures describing agent identities, intent routing,
+ * scoring parameters, escalation, profiling, and composite configuration.
  */
-
 /**
- * Basic agent identity and metadata
+ * AgentIdentity interface.
  */
 export interface AgentIdentity {
   id: string;
@@ -14,6 +15,7 @@ export interface AgentIdentity {
 
 /**
  * Intent configuration for orchestration
+ *
  */
 export interface IntentConfig {
   name: string;
@@ -24,6 +26,7 @@ export interface IntentConfig {
 
 /**
  * Text processing configuration
+ *
  */
 export interface TextProcessingConfig {
   stopWords: string[];
@@ -37,6 +40,7 @@ export interface TextProcessingConfig {
 
 /**
  * Escalation configuration
+ *
  */
 export interface EscalationConfig {
   conditions: string[];
@@ -47,9 +51,7 @@ export interface EscalationConfig {
 
 /**
  * Orchestration-specific configuration
- */
-/**
- * Orchestration-specific configuration
+ *
  */
 export interface OrchestrationConfig {
   intents?: Record<string, IntentConfig>;
@@ -82,6 +84,7 @@ export interface OrchestrationConfig {
 
 /**
  * Runtime execution configuration
+ *
  */
 export interface ExecutionConfig {
   priority: "high" | "medium" | "low";
@@ -93,6 +96,7 @@ export interface ExecutionConfig {
 
 /**
  * User-facing metadata
+ *
  */
 export interface UserFacingConfig {
   friendlyDescription?: string;
@@ -103,6 +107,7 @@ export interface UserFacingConfig {
 
 /**
  * Performance configuration
+ *
  */
 export interface PerformanceConfig {
   expectedResponseTime: number;
@@ -112,6 +117,7 @@ export interface PerformanceConfig {
 
 /**
  * Error handling configuration
+ *
  */
 export interface ErrorHandlingConfig {
   retryStrategy: "none" | "fixed" | "exponential";
@@ -121,6 +127,7 @@ export interface ErrorHandlingConfig {
 
 /**
  * Monitoring configuration
+ *
  */
 export interface MonitoringConfig {
   metricsToTrack: string[];
@@ -129,6 +136,7 @@ export interface MonitoringConfig {
 
 /**
  * Application-facing metadata
+ *
  */
 export interface ApplicationFacingConfig {
   technicalDescription?: string;
@@ -141,6 +149,7 @@ export interface ApplicationFacingConfig {
 
 /**
  * Database agent-specific configuration
+ *
  */
 export interface DatabaseConfig {
   fieldAliases: Record<string, Record<string, string>>;
@@ -190,6 +199,7 @@ export interface DatabaseConfig {
 
 /**
  * Data agent-specific configuration
+ *
  */
 export interface DataConfig {
   analysis: {
@@ -256,6 +266,7 @@ export interface DataConfig {
 
 /**
  * Clarification agent-specific configuration
+ *
  */
 export interface ClarificationConfig {
   guidance: {
@@ -311,6 +322,7 @@ export interface ClarificationConfig {
 
 /**
  * Relevant data manager-specific configuration
+ *
  */
 export interface RelevantDataManagerConfig {
   metadata: {
@@ -379,7 +391,7 @@ export interface RelevantDataManagerConfig {
 
 /**
  * Complete TypeScript-based agent configuration definition.
- * This replaces the JSON-based approach with full type safety and documentation.
+ *
  */
 export interface AgentConfigDefinition {
   /** Unique configuration schema identifier for validation and versioning */
@@ -453,6 +465,7 @@ export interface AgentConfigDefinition {
 
 /**
  * Complete individual agent configuration (legacy - for JSON compatibility)
+ *
  */
 export interface IndividualAgentConfig {
   agent: AgentIdentity;
@@ -474,16 +487,16 @@ export abstract class BaseAgentConfig {
    * @param {AgentConfigDefinition} config - config parameter.
    * @returns {unknown} - TODO: describe return value.
    */
-constructor(config: AgentConfigDefinition) {
+  constructor(config: AgentConfigDefinition) {
     this.config = config;
   }
 
-    /**
- * Get public-facing configuration (user and some application details)
- *
- * @returns {Partial<AgentConfigDefinition>} - TODO: describe return value.
- */
-public getConfig(): Partial<AgentConfigDefinition> {
+  /**
+   * Get public-facing configuration (user and some application details)
+   *
+   * @returns {Partial<AgentConfigDefinition>} - TODO: describe return value.
+   */
+  public getConfig(): Partial<AgentConfigDefinition> {
     return {
       $configId: this.config.$configId,
       agent: this.config.agent,
@@ -497,48 +510,48 @@ public getConfig(): Partial<AgentConfigDefinition> {
     };
   }
 
-    /**
- * Get complete configuration (private method for internal use)
- *
- * @returns {AgentConfigDefinition} - TODO: describe return value.
- */
-protected _getConfig(): AgentConfigDefinition {
+  /**
+   * Get complete configuration (private method for internal use)
+   *
+   * @returns {AgentConfigDefinition} - TODO: describe return value.
+   */
+  protected _getConfig(): AgentConfigDefinition {
     return this.config;
   }
 
-    /**
- * Get execution configuration
- *
- * @returns {ExecutionConfig | undefined} - TODO: describe return value.
- */
-public getExecutionConfig(): ExecutionConfig | undefined {
+  /**
+   * Get execution configuration
+   *
+   * @returns {ExecutionConfig | undefined} - TODO: describe return value.
+   */
+  public getExecutionConfig(): ExecutionConfig | undefined {
     return this.config.execution;
   }
 
-    /**
- * Get user-facing configuration
- *
- * @returns {UserFacingConfig | undefined} - TODO: describe return value.
- */
-public getUserFacingConfig(): UserFacingConfig | undefined {
+  /**
+   * Get user-facing configuration
+   *
+   * @returns {UserFacingConfig | undefined} - TODO: describe return value.
+   */
+  public getUserFacingConfig(): UserFacingConfig | undefined {
     return this.config.userFacing;
   }
 
-    /**
- * Get application-facing configuration
- *
- * @returns {ApplicationFacingConfig | undefined} - TODO: describe return value.
- */
-public getApplicationFacingConfig(): ApplicationFacingConfig | undefined {
+  /**
+   * Get application-facing configuration
+   *
+   * @returns {ApplicationFacingConfig | undefined} - TODO: describe return value.
+   */
+  public getApplicationFacingConfig(): ApplicationFacingConfig | undefined {
     return this.config.applicationFacing;
   }
 
-    /**
- * Get configuration schema ID
- *
- * @returns {string} - TODO: describe return value.
- */
-public getConfigId(): string {
+  /**
+   * Get configuration schema ID
+   *
+   * @returns {string} - TODO: describe return value.
+   */
+  public getConfigId(): string {
     return this.config.$configId;
   }
 }

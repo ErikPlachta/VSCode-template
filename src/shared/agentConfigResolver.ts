@@ -12,12 +12,20 @@ import {
 
 type Priority = "high" | "medium" | "low";
 
+/**
+ * OverrideExecution interface.
+ *
+ */
 interface OverrideExecution {
   priority?: Priority;
   timeout?: number;
   cacheEnabled?: boolean;
 }
 
+/**
+ * RuntimeOverrides interface.
+ *
+ */
 interface RuntimeOverrides {
   [agentId: string]: {
     execution?: OverrideExecution;
@@ -65,6 +73,10 @@ function isValidPriority(p?: string): p is Priority {
   return p === "high" || p === "medium" || p === "low";
 }
 
+/**
+ * EffectiveExecutionProfile interface.
+ *
+ */
 export interface EffectiveExecutionProfile {
   priority: Priority;
   timeout: number;
@@ -73,11 +85,11 @@ export interface EffectiveExecutionProfile {
 
 export class AgentConfigResolver {
   /**
-   * constructor function.
-   *
-   * @param {string} configPath - configPath parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * constructor function.
+ *
+ * @param {string} configPath - configPath parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(private readonly configPath: string = "src/mcp.config.json") {}
 
     /**

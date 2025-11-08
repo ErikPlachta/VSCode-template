@@ -7,7 +7,10 @@ import { OrchestratorConfig } from "./config";
 /** List of supported orchestration intents (from configuration). */
 export type OrchestratorIntent = string;
 
-/** Classification metadata returned before executing a task. */
+/**
+ * Classification metadata returned before executing a task.
+ *
+ */
 export interface OrchestratorClassification {
   intent: OrchestratorIntent;
   rationale: string;
@@ -16,7 +19,10 @@ export interface OrchestratorClassification {
   missingSignals?: string[];
 }
 
-/** Input supplied when asking the orchestrator to fulfil a task. */
+/**
+ * Input supplied when asking the orchestrator to fulfil a task.
+ *
+ */
 export interface OrchestratorInput {
   topic?: string;
   question: string;
@@ -25,6 +31,7 @@ export interface OrchestratorInput {
 
 /**
  * Result of orchestrating a question across the available agents.
+ *
  */
 export interface OrchestratorResponse {
   intent: OrchestratorIntent;
@@ -48,11 +55,11 @@ export class Orchestrator {
   private messages: any;
 
   /**
-   * constructor function.
-   *
-   * @param {OrchestratorConfig} config - config parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * constructor function.
+ *
+ * @param {OrchestratorConfig} config - config parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(config?: OrchestratorConfig) {
     this.config = config || OrchestratorConfig.createDefault();
     this.stopWords = this.config.getStopWords();

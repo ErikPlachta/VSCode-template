@@ -68,7 +68,7 @@ export interface AnalysisInput {
 }
 
 /**
- * Represents an insight generated from data analysis operations.
+ * DataInsight interface.
  *
  */
 export interface DataInsight {
@@ -86,7 +86,7 @@ export interface DataInsight {
 }
 
 /**
- * Represents a plan for exploring business data to answer a specific question.
+ * ExplorationPlan interface.
  *
  */
 export interface ExplorationPlan {
@@ -101,7 +101,7 @@ export interface ExplorationPlan {
 }
 
 /**
- * Represents a single step in a data exploration plan.
+ * ExplorationStep interface.
  *
  */
 export interface ExplorationStep {
@@ -112,7 +112,7 @@ export interface ExplorationStep {
 }
 
 /**
- * Represents a connection between two different business data categories.
+ * CrossCategoryConnection interface.
  *
  */
 export interface CrossCategoryConnection {
@@ -124,7 +124,7 @@ export interface CrossCategoryConnection {
 }
 
 /**
- * Interface for data agents that handle data analysis and insight generation operations.
+ * DataAgentInterface interface.
  *
  */
 export interface DataAgentInterface {
@@ -152,7 +152,7 @@ export interface CategorySchema {
 }
 
 /**
- * Describes a relationship between business data categories.
+ * RelationshipDescription interface.
  *
  */
 export interface RelationshipDescription {
@@ -163,7 +163,7 @@ export interface RelationshipDescription {
 }
 
 /**
- * Represents the catalogue of business data categories, their relationships, schemas, and last update timestamp.
+ * BusinessDataCatalogue interface.
  *
  */
 export interface BusinessDataCatalogue {
@@ -174,7 +174,7 @@ export interface BusinessDataCatalogue {
 }
 
 /**
- * Represents metadata and relationship information for a business data category.
+ * CategoryInfo interface.
  *
  */
 export interface CategoryInfo {
@@ -187,7 +187,7 @@ export interface CategoryInfo {
 }
 
 /**
- * Interface for managing business data schemas, metadata, and relationships.
+ * RelevantDataManagerInterface interface.
  *
  */
 export interface RelevantDataManagerInterface {
@@ -213,7 +213,7 @@ export interface ClarificationInput {
 }
 
 /**
- * Represents the response from the clarification agent.
+ * ClarificationResponse interface.
  *
  */
 export interface ClarificationResponse {
@@ -222,7 +222,7 @@ export interface ClarificationResponse {
 }
 
 /**
- * Represents a snippet of knowledge used for clarification purposes.
+ * KnowledgeSnippet interface.
  *
  */
 export interface KnowledgeSnippet {
@@ -231,7 +231,7 @@ export interface KnowledgeSnippet {
 }
 
 /**
- * Interface for agents that handle clarification of ambiguous user requests.
+ * ClarificationAgentInterface interface.
  *
  */
 export interface ClarificationAgentInterface {
@@ -249,7 +249,7 @@ export interface ValidationResult {
 }
 
 /**
- * Represents the result of a topic search operation.
+ * TopicSearchResult interface.
  *
  */
 export interface TopicSearchResult {
@@ -270,9 +270,10 @@ export interface AgentRequest {
 }
 
 /**
- * Represents the response from an agent after performing an operation.
+ * AgentResponse interface.
  *
  * @template T
+ *
  */
 export interface AgentResponse<T = unknown> {
   success: boolean;

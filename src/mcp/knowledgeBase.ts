@@ -1,7 +1,11 @@
 /**
- * @packageDocumentation knowledgeBase implementation for mcp module
+ * @packageDocumentation knowledgeBase implementation for mcp module.
+ * Provides in-memory indexing and simple keyword-based querying utilities
+ * for developer-focused internal documentation snippets.
  */
-
+/**
+ * KnowledgeDocument interface.
+ */
 export interface KnowledgeDocument {
   id: string;
   title: string;
@@ -9,6 +13,10 @@ export interface KnowledgeDocument {
   tags?: string[];
 }
 
+/**
+ * KnowledgeHit interface.
+ *
+ */
 export interface KnowledgeHit {
   id: string;
   title: string;

@@ -21,13 +21,19 @@ import { DatabaseAgentConfig } from "./config";
 /** Identifier for a generic category or data source. */
 export type CategoryId = string;
 
-/** Generic record model allowing arbitrary fields. */
+/**
+ * Generic record model allowing arbitrary fields.
+ *
+ */
 export interface CategoryRecord {
   id: string;
   [key: string]: unknown;
 }
 
-/** Definition for a data source the agent can query. */
+/**
+ * Definition for a data source the agent can query.
+ *
+ */
 export interface DataSource {
   id: CategoryId;
   name: string;
@@ -37,7 +43,10 @@ export interface DataSource {
   fieldAliases?: Record<string, string>;
 }
 
-/** Result metadata returned after executing a query. */
+/**
+ * Result metadata returned after executing a query.
+ *
+ */
 export interface QueryResult {
   categoryId: CategoryId;
   records: CategoryRecord[];
@@ -45,7 +54,10 @@ export interface QueryResult {
   cached: boolean;
 }
 
-/** Optional knobs for query execution behaviour. */
+/**
+ * Optional knobs for query execution behaviour.
+ *
+ */
 export interface QueryOptions {
   useCache?: boolean;
   cacheKeyPrefix?: string;
@@ -82,13 +94,13 @@ export class DatabaseAgent {
   private readonly config: DatabaseAgentConfig;
 
     /**
-   * Creates a new DatabaseAgent instance.
-   *
-   * @param {DataSource[]} dataSources - dataSources parameter.
-   * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
-   * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Creates a new DatabaseAgent instance.
+ *
+ * @param {DataSource[]} dataSources - dataSources parameter.
+ * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
+ * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(
     dataSources: DataSource[],
     cacheDirectory: Promise<string>,

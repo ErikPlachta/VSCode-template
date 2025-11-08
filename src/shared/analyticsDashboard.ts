@@ -16,6 +16,7 @@ export enum ReportSection {
 
 /**
  * Report generation options.
+ *
  */
 export interface ReportOptions {
   /** Sections to include in the report. */

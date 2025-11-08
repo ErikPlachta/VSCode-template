@@ -9,12 +9,20 @@ import type {
   CategorySchema,
 } from "@agent/relevantDataManagerAgent";
 
+/**
+ * RelationshipIntegrityIssue interface.
+ *
+ */
 export interface RelationshipIntegrityIssue {
   categoryId: CategoryId;
   relationship: RelationshipDescription;
   reason: string;
 }
 
+/**
+ * SchemaValidationSummary interface.
+ *
+ */
 export interface SchemaValidationSummary {
   missingRelationships: RelationshipIntegrityIssue[];
   duplicateSchemaNames: string[];

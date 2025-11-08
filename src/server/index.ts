@@ -13,6 +13,10 @@ import { readFile, readdir } from "fs/promises";
 import * as path from "path";
 import { MCPTool } from "@shared/mcpTypes";
 
+/**
+ * JsonRpcRequest interface.
+ *
+ */
 interface JsonRpcRequest {
   jsonrpc: string;
   id: number | string | null;
@@ -20,6 +24,10 @@ interface JsonRpcRequest {
   params?: Record<string, unknown>;
 }
 
+/**
+ * JsonRpcResponse interface.
+ *
+ */
 interface JsonRpcResponse {
   jsonrpc: "2.0";
   id: number | string | null;
@@ -27,6 +35,10 @@ interface JsonRpcResponse {
   error?: { code: number; message: string; data?: unknown };
 }
 
+/**
+ * InvokeParams interface.
+ *
+ */
 interface InvokeParams {
   name?: string;
   arguments?: Record<string, unknown>;

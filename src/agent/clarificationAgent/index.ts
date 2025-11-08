@@ -11,6 +11,7 @@ import { ClarificationAgentConfig } from "./config";
 
 /**
  * Input parameters for the clarification agent.
+ *
  */
 export interface ClarificationAgentInput {
   /** The user's question that needs clarification. */
@@ -25,6 +26,7 @@ export interface ClarificationAgentInput {
 
 /**
  * Response from the clarification agent containing guidance and context.
+ *
  */
 export interface ClarificationResponse {
   /** The clarification prompt to guide the user. */
@@ -49,11 +51,11 @@ export class ClarificationAgent {
   private readonly config: ClarificationAgentConfig;
 
     /**
-   * Creates a new clarification agent instance.
-   *
-   * @param {KnowledgeBase} knowledgeBase - knowledgeBase parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Creates a new clarification agent instance.
+ *
+ * @param {KnowledgeBase} knowledgeBase - knowledgeBase parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(knowledgeBase?: KnowledgeBase) {
     this.config = new ClarificationAgentConfig();
     this.knowledgeBase = knowledgeBase ?? new KnowledgeBase();

@@ -14,7 +14,8 @@ const SHARED_CACHE_DIR = "shared";
 
 /**
  * Minimal representation of a cached artefact that can be exchanged across
- * MCP tools.
+ *
+ * @template T
  */
 export interface SharedCacheEntry<T = unknown> {
   /** Uniquely identifies the record on disk. */
@@ -31,6 +32,7 @@ export interface SharedCacheEntry<T = unknown> {
 
 /**
  * Structure for log entries persisted inside `.mcp-cache`.
+ *
  */
 export interface ToolLogEntry {
   /** ISO timestamp when the invocation took place. */

@@ -17,10 +17,10 @@ export class AgentConfigurationService {
   private static instance: AgentConfigurationService | null = null;
 
     /**
-   * Private constructor for singleton pattern.
-   *
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Private constructor for singleton pattern.
+ *
+ * @returns {unknown} - TODO: describe return value.
+ */
 private constructor() {}
 
     /**

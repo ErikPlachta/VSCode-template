@@ -20,12 +20,12 @@ export class DataAgentConfig extends BaseAgentConfig {
   private dataConfig: DataConfig;
 
   /**
-   * constructor function.
-   *
-   * @param {AgentConfigDefinition} config - config parameter.
-   * @returns {unknown} - TODO: describe return value.
-   * @throws {Error} - May throw an error.
-   */
+ * constructor function.
+ *
+ * @param {AgentConfigDefinition} config - config parameter.
+ * @returns {unknown} - TODO: describe return value.
+ * @throws {Error} - May throw an error.
+ */
 constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || dataAgentConfig;

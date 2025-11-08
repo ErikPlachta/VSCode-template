@@ -13,6 +13,7 @@ import {
 
 /**
  * Description of an agent's shared responsibilities and boundaries.
+ *
  */
 export interface AgentCapabilityMetadata {
   /** Stable identifier that matches orchestrator routing names. */

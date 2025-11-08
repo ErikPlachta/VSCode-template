@@ -14,6 +14,7 @@ export type AgentIdentifier =
 
 /**
  * Lightweight agent profile for orchestration logic
+ *
  */
 export interface OrchestrationProfile {
   readonly id: AgentIdentifier;
@@ -25,6 +26,7 @@ export interface OrchestrationProfile {
 
 /**
  * Execution settings for runtime behavior
+ *
  */
 export interface ExecutionProfile {
   priority: "high" | "medium" | "low";
@@ -34,6 +36,7 @@ export interface ExecutionProfile {
 
 /**
  * Rich metadata for user and application interfaces
+ *
  */
 export interface RichMetadata {
   name: string;
@@ -73,6 +76,7 @@ export interface RichMetadata {
 
 /**
  * Complete agent configuration combining all aspects
+ *
  */
 export interface UnifiedAgentConfig {
   orchestration: OrchestrationProfile;

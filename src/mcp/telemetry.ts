@@ -1,7 +1,11 @@
 /**
- * @packageDocumentation telemetry implementation for mcp module
+ * @packageDocumentation telemetry implementation for mcp module.
+ * Captures timing, success/error status, and lightweight metadata for
+ * agent and tool invocations to aid debugging and performance analysis.
  */
-
+/**
+ * InvocationEvent interface.
+ */
 export interface InvocationEvent {
   agent: string;
   operation: string;
@@ -13,6 +17,10 @@ export interface InvocationEvent {
   error?: { name: string; message: string };
 }
 
+/**
+ * InvocationLogger interface.
+ *
+ */
 export interface InvocationLogger {
   log(event: InvocationEvent): void;
 }
@@ -36,6 +44,10 @@ log(event: InvocationEvent): void {
   }
 }
 
+/**
+ * InvocationWrapper interface.
+ *
+ */
 export interface InvocationWrapper {
   <T>(
     operation: string,

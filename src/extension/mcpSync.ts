@@ -18,12 +18,12 @@ import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
  */
 export class MCPDiscoveryError extends Error {
     /**
-   * constructor function.
-   *
-   * @param {string} message - message parameter.
-   * @param {unknown} cause - cause parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * constructor function.
+ *
+ * @param {string} message - message parameter.
+ * @param {unknown} cause - cause parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(message: string, public readonly cause?: unknown) {
     super(message);
     this.name = "MCPDiscoveryError";

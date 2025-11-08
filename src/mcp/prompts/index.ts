@@ -6,6 +6,10 @@
 
 import type { AgentCapabilityMetadata } from "@mcp/config/agentManifest";
 
+/**
+ * EscalationPromptOptions interface.
+ *
+ */
 export interface EscalationPromptOptions {
   topic?: string;
   missingSignals?: string[];
@@ -61,6 +65,10 @@ export function renderEscalationPrompt({
   return lines.join("\n");
 }
 
+/**
+ * ClarificationPromptOptions interface.
+ *
+ */
 export interface ClarificationPromptOptions {
   question: string;
   manifest: AgentCapabilityMetadata;
@@ -108,6 +116,10 @@ export function renderClarificationPrompt({
   return segments.join("\n");
 }
 
+/**
+ * ClassificationSummaryOptions interface.
+ *
+ */
 export interface ClassificationSummaryOptions {
   agent: AgentCapabilityMetadata;
   matchedSignals?: string[];

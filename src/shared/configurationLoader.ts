@@ -1,17 +1,16 @@
 /**
  * @packageDocumentation Configuration loader and validator for application settings.
  */
-
-import fs from "node:fs";
-import path from "node:path";
-import { pathToFileURL } from "node:url";
-import type {
-  ApplicationConfig,
-  EnvironmentConfig,
+import fs from "fs";
+import path from "path";
+import { pathToFileURL } from "url";
+import {
+  type ApplicationConfig,
+  type EnvironmentConfig,
 } from "../types/applicationConfig";
 
 /**
- * Default configuration values for fallback scenarios.
+ * Default configuration values used as a base when merging a loaded config.
  */
 const DEFAULT_CONFIG: Partial<ApplicationConfig> = {
   application: {
@@ -66,11 +65,11 @@ export class ConfigurationLoader {
   private configPath: string;
 
     /**
-   * Creates a new configuration loader instance.
-   *
-   * @param {string} configPath - configPath parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Creates a new configuration loader instance.
+ *
+ * @param {string} configPath - configPath parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(configPath: string = "src/mcp.config.json") {
     this.configPath = path.resolve(configPath);
   }
@@ -95,7 +94,6 @@ async loadConfig(): Promise<ApplicationConfig> {
       }
 
       // 2) Fallback to legacy JSON with deprecation warning
-      // eslint-disable-next-line no-console
       console.warn(
         `[config] Falling back to legacy JSON at ${this.configPath}. This path is deprecated; migrate to src/config/application.config.ts`
       );
@@ -170,10 +168,10 @@ async getEnvironmentConfig(
  * Gets agent-specific configuration.
  *
  * @param {string} agentName - agentName parameter.
- * @returns {Promise<any>} - TODO: describe return value.
+ * @returns {Promise<Record<string, unknown>>} - TODO: describe return value.
  * @throws {Error} - May throw an error.
  */
-async getAgentConfig(agentName: string): Promise<any> {
+async getAgentConfig(agentName: string): Promise<Record<string, unknown>> {
     const config = await this.loadConfig();
 
     const agentConfig =

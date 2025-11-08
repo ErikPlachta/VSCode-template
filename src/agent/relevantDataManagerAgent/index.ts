@@ -24,6 +24,7 @@ import { RelevantDataManagerAgentConfig } from "./config";
 
 /**
  * Description for how a category folder is organised.
+ *
  */
 export interface FolderBlueprint {
   /** Root directory for the category. */
@@ -42,6 +43,7 @@ export interface FolderBlueprint {
 
 /**
  * High-level relationship metadata surfaced to consumers.
+ *
  */
 export interface RelationshipDescription {
   /** Relationship label. */
@@ -58,6 +60,7 @@ export interface RelationshipDescription {
 
 /**
  * Requirements that each category must satisfy before being processed.
+ *
  */
 export interface CategoryRequirements {
   /** Fields that every record must provide. */
@@ -68,7 +71,10 @@ export interface CategoryRequirements {
   notes?: string[];
 }
 
-/** JSON schema snippet stored alongside a category. */
+/**
+ * JSON schema snippet stored alongside a category.
+ *
+ */
 export interface CategorySchema {
   name: string;
   description: string;
@@ -87,7 +93,10 @@ export type TypeSchema =
   | { kind: "enum"; values: Array<string | number | boolean> }
   | { kind: "typedDict"; fields: TypedDictField[] };
 
-/** Field description used within a TypedDict schema. */
+/**
+ * Field description used within a TypedDict schema.
+ *
+ */
 export interface TypedDictField {
   name: string;
   type: TypeSchema;
@@ -95,21 +104,30 @@ export interface TypedDictField {
   description?: string;
 }
 
-/** Python typing hints that mirror the JSON schemas. */
+/**
+ * Python typing hints that mirror the JSON schemas.
+ *
+ */
 export interface TypeDefinition {
   name: string;
   description: string;
   schema: TypeSchema;
 }
 
-/** Example dataset artefact hosted in the category folder. */
+/**
+ * Example dataset artefact hosted in the category folder.
+ *
+ */
 export interface ExampleDataset {
   file: string;
   description: string;
   sample: Record<string, unknown>;
 }
 
-/** Issue detected while validating the raw data set for a category. */
+/**
+ * Issue detected while validating the raw data set for a category.
+ *
+ */
 export interface DataValidationIssue {
   /** Identifier for the record that failed validation. */
   recordId: string;
@@ -123,7 +141,10 @@ export interface DataValidationIssue {
   type: "schema" | "relationship";
 }
 
-/** Summary produced after normalising the dataset. */
+/**
+ * Summary produced after normalising the dataset.
+ *
+ */
 export interface DataValidationReport {
   /** Timestamp when validation occurred. */
   checkedAt: string;
@@ -133,14 +154,20 @@ export interface DataValidationReport {
   issues: DataValidationIssue[];
 }
 
-/** Remote query blueprint associated with the category. */
+/**
+ * Remote query blueprint associated with the category.
+ *
+ */
 export interface RemoteQueryBlueprint {
   name: string;
   description: string;
   samplePayload: Record<string, unknown>;
 }
 
-/** Summary returned when enumerating available categories. */
+/**
+ * Summary returned when enumerating available categories.
+ *
+ */
 export interface CategorySummary {
   id: CategoryId;
   name: string;
@@ -157,7 +184,10 @@ export type CategoryRecord = Record<string, unknown> & {
 /** Unique identifier for a category in the repository. */
 export type CategoryId = string;
 
-/** Full configuration stored for each business category. */
+/**
+ * Full configuration stored for each business category.
+ *
+ */
 export interface AgentOrchestrationGuidance {
   /** Core responsibility for the agent when invoked for this category. */
   focus: string;
@@ -167,6 +197,10 @@ export interface AgentOrchestrationGuidance {
   promptStarters: string[];
 }
 
+/**
+ * CategoryOrchestrationConfig interface.
+ *
+ */
 export interface CategoryOrchestrationConfig {
   /** High-level framing of how orchestration should leverage the category. */
   summary: string;
@@ -182,6 +216,10 @@ export interface CategoryOrchestrationConfig {
   };
 }
 
+/**
+ * BusinessCategory interface.
+ *
+ */
 export interface BusinessCategory {
   id: CategoryId;
   name: string;
@@ -205,7 +243,10 @@ export interface BusinessCategory {
   validation: DataValidationReport;
 }
 
-/** Connections resolved for a specific record. */
+/**
+ * Connections resolved for a specific record.
+ *
+ */
 export interface EntityConnections {
   categoryId: CategoryId;
   recordId: string;
@@ -216,7 +257,10 @@ export interface EntityConnections {
   }>;
 }
 
-/** Snapshot persisted to the shared cache for quick lookups. */
+/**
+ * Snapshot persisted to the shared cache for quick lookups.
+ *
+ */
 export interface CategorySnapshot {
   id: CategoryId;
   name: string;
@@ -229,7 +273,10 @@ export interface CategorySnapshot {
   folder: FolderBlueprint;
 }
 
-/** Consolidated index entry persisted to the shared cache. */
+/**
+ * Consolidated index entry persisted to the shared cache.
+ *
+ */
 export interface DatasetCatalogueEntry {
   id: CategoryId;
   name: string;
@@ -246,7 +293,10 @@ export interface DatasetCatalogueEntry {
   requirements?: CategoryRequirements;
 }
 
-/** Structure representing how different categories reference each other. */
+/**
+ * Structure representing how different categories reference each other.
+ *
+ */
 interface RelationshipDefinition {
   sourceCategory: CategoryId;
   targetCategory: CategoryId;
@@ -256,6 +306,10 @@ interface RelationshipDefinition {
   cardinality: "one" | "many";
 }
 
+/**
+ * LoadedDataset interface.
+ *
+ */
 interface LoadedDataset {
   categories: Map<CategoryId, BusinessCategory>;
   lookupIndex: Map<string, BusinessCategory>;
@@ -264,11 +318,19 @@ interface LoadedDataset {
   fingerprint: string;
 }
 
+/**
+ * RelationshipLoadResult interface.
+ *
+ */
 interface RelationshipLoadResult {
   descriptions: RelationshipDescription[];
   definitions: RelationshipDefinition[];
 }
 
+/**
+ * RawCategoryMetadata interface.
+ *
+ */
 interface RawCategoryMetadata {
   id: string;
   name: string;
@@ -284,12 +346,20 @@ interface RawCategoryMetadata {
   };
 }
 
+/**
+ * RawAgentOrchestrationGuidance interface.
+ *
+ */
 interface RawAgentOrchestrationGuidance {
   focus?: unknown;
   signals?: unknown;
   promptStarters?: unknown;
 }
 
+/**
+ * RawOrchestrationConfig interface.
+ *
+ */
 interface RawOrchestrationConfig {
   summary?: unknown;
   signals?: unknown;
@@ -301,6 +371,10 @@ interface RawOrchestrationConfig {
   };
 }
 
+/**
+ * RawRelationshipEntry interface.
+ *
+ */
 interface RawRelationshipEntry {
   key: string;
   name: string;
@@ -311,23 +385,39 @@ interface RawRelationshipEntry {
   cardinality: "one" | "many";
 }
 
+/**
+ * RawSchemaFile interface.
+ *
+ */
 interface RawSchemaFile {
   name: string;
   description: string;
   schema: Record<string, unknown>;
 }
 
+/**
+ * RawTypeFile interface.
+ *
+ */
 interface RawTypeFile {
   name: string;
   description: string;
   schema: unknown;
 }
 
+/**
+ * RawExampleFile interface.
+ *
+ */
 interface RawExampleFile {
   description: string;
   sample: Record<string, unknown>;
 }
 
+/**
+ * RawQueryFile interface.
+ *
+ */
 interface RawQueryFile {
   name: string;
   description: string;
@@ -516,11 +606,11 @@ function NormalizeLookupKey(value: string): string {
 /** Error thrown when a caller references an unknown category. */
 export class UnknownCategoryError extends Error {
   /**
-   * constructor function.
-   *
-   * @param {string} topic - topic parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * constructor function.
+ *
+ * @param {string} topic - topic parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(topic: string) {
     super(`Unknown category or topic: ${topic}`);
   }
@@ -548,11 +638,11 @@ export class RelevantDataManagerAgent {
   private readonly config: RelevantDataManagerAgentConfig;
 
   /**
-   * constructor function.
-   *
-   * @param {Promise<string>} cacheDirPromise - cacheDirPromise parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * constructor function.
+ *
+ * @param {Promise<string>} cacheDirPromise - cacheDirPromise parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(cacheDirPromise?: Promise<string>) {
     this.config = new RelevantDataManagerAgentConfig();
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();

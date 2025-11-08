@@ -10,6 +10,7 @@ import { ConfigUtils, CONFIG_REGISTRY } from "./configRegistry";
 
 /**
  * Validation result with detailed error information
+ *
  */
 export interface ValidationResult {
   /** Whether validation passed */
@@ -24,6 +25,7 @@ export interface ValidationResult {
 
 /**
  * Detailed validation error information
+ *
  */
 export interface ValidationError {
   /** Error severity level */
@@ -47,6 +49,7 @@ export interface ValidationError {
 
 /**
  * Validation warning (non-blocking issue)
+ *
  */
 export interface ValidationWarning extends Omit<ValidationError, "level"> {
   level: "warning";

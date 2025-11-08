@@ -17,6 +17,7 @@ import { loadApplicationConfig } from "../shared/configurationLoader";
 
 /**
  * Configuration contract for the repository health agent.
+ *
  */
 export interface AgentConfig {
   readonly typescript: { readonly include: readonly string[] };
@@ -36,6 +37,7 @@ export interface AgentConfig {
 
 /**
  * Result of a single compliance check.
+ *
  */
 export interface CheckResult {
   readonly name: string;
@@ -45,6 +47,7 @@ export interface CheckResult {
 
 /**
  * Aggregate report describing every compliance check outcome.
+ *
  */
 export interface HealthReport {
   readonly generatedAt: string;
@@ -52,6 +55,10 @@ export interface HealthReport {
   readonly checks: readonly CheckResult[];
 }
 
+/**
+ * MarkdownDiagnostic interface.
+ *
+ */
 interface MarkdownDiagnostic {
   readonly file: string;
   readonly errors: string[];
@@ -66,12 +73,12 @@ export class RepositoryHealthAgent {
   private readonly ajv: Ajv;
 
     /**
-   * Create a new health agent using the provided configuration.
-   *
-   * @param {string} baseDir - baseDir parameter.
-   * @param {AgentConfig} config - config parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Create a new health agent using the provided configuration.
+ *
+ * @param {string} baseDir - baseDir parameter.
+ * @param {AgentConfig} config - config parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 public constructor(baseDir: string, config: AgentConfig) {
     this.baseDir = baseDir;
     this.config = config;

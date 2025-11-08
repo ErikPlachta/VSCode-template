@@ -47,11 +47,11 @@ export abstract class TrackedAgent {
   protected agentName: string;
 
     /**
-   * Creates a new tracked agent instance.
-   *
-   * @param {string} agentName - agentName parameter.
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Creates a new tracked agent instance.
+ *
+ * @param {string} agentName - agentName parameter.
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor(agentName: string) {
     this.agentName = agentName;
     this.analytics = getAnalytics();
@@ -153,10 +153,10 @@ export class PerformanceMonitor {
   private analytics: AgentUsageAnalytics;
 
     /**
-   * Creates a new performance monitor instance.
-   *
-   * @returns {unknown} - TODO: describe return value.
-   */
+ * Creates a new performance monitor instance.
+ *
+ * @returns {unknown} - TODO: describe return value.
+ */
 constructor() {
     this.analytics = getAnalytics();
   }
