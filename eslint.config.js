@@ -37,6 +37,16 @@ export default [
     rules: {
       ...tseslint.configs.recommended.rules,
       ...jsdoc.configs.recommended.rules,
+      // Disallow relative imports – enforce path aliases defined in tsconfig.json
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            "./*",
+            "../*"
+          ]
+        }
+      ],
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/explicit-function-return-type": [
         "error",
