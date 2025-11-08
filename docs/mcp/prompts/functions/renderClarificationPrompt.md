@@ -6,31 +6,22 @@
 
 # Function: renderClarificationPrompt()
 
-> **renderClarificationPrompt**(`{`): `string`
+> **renderClarificationPrompt**(`options`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:95](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/mcp/prompts/index.ts#L95)
+Defined in: [src/mcp/prompts/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/mcp/prompts/index.ts#L83)
 
-renderClarificationPrompt function.
+Renders a clarification prompt to solicit more precise user input.
 
 ## Parameters
 
-### \{
+### options
 
 [`ClarificationPromptOptions`](../interfaces/ClarificationPromptOptions.md)
 
-question,
- manifest,
- missingSignals,
- knowledgeSnippets,
-} - {
- question,
- manifest,
- missingSignals,
- knowledgeSnippets,
-} parameter.
+Prompt construction options.
 
 ## Returns
 
 `string`
 
-- TODO: describe return value.
+Markdown-formatted clarification prompt.

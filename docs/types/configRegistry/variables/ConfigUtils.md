@@ -8,7 +8,7 @@
 
 > `const` **ConfigUtils**: `object`
 
-Defined in: [src/types/configRegistry.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L173)
+Defined in: [src/types/configRegistry.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L173)
 
 Utility functions for working with configuration IDs
 
@@ -26,13 +26,19 @@ Check if two configuration IDs are compatible (same agent type, compatible versi
 
 `string`
 
+First configuration ID.
+
 ##### configId2
 
 `string`
 
+Second configuration ID.
+
 #### Returns
 
 `boolean`
+
+True if compatible; otherwise false.
 
 ### generateConfigId()
 
@@ -46,21 +52,31 @@ Generate a new configuration ID for an agent type and version
 
 `string`
 
+Target agent type (e.g. "orchestrator").
+
 ##### major
 
 `number`
+
+Major version.
 
 ##### minor
 
 `number`
 
+Minor version.
+
 ##### patch
 
 `number`
 
+Patch version.
+
 #### Returns
 
 `string`
+
+Constructed configuration ID string.
 
 ### getConfigsForAgent()
 
@@ -74,9 +90,13 @@ Get all configuration IDs for a specific agent type
 
 `string`
 
+Agent type key from metadata.
+
 #### Returns
 
 `string`[]
+
+Array of configuration IDs for the agent type.
 
 ### getMetadata()
 
@@ -90,9 +110,13 @@ Get metadata for a configuration ID
 
 `string`
 
+Configuration ID to look up.
+
 #### Returns
 
 [`ConfigMetadata`](../interfaces/ConfigMetadata.md) \| `undefined`
+
+Metadata if found; otherwise undefined.
 
 ### isValidConfigId()
 
@@ -106,9 +130,13 @@ Validate that a configuration ID exists in the registry
 
 `string`
 
+Configuration ID to validate.
+
 #### Returns
 
 `boolean`
+
+True if the ID exists in the registry; otherwise false.
 
 ### parseVersion()
 
@@ -122,6 +150,10 @@ Parse version information from a configuration ID
 
 `string`
 
+Configuration ID to parse.
+
 #### Returns
 
 \{ `major`: `number`; `minor`: `number`; `patch`: `number`; \} \| `undefined`
+
+Parsed version object, or undefined if not found.

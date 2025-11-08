@@ -8,7 +8,7 @@
 
 > **getAgentConfigurationService**(): [`AgentConfigurationService`](../classes/AgentConfigurationService.md)
 
-Defined in: [src/shared/agentConfigurationService.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/agentConfigurationService.ts#L295)
+Defined in: [src/shared/agentConfigurationService.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/agentConfigurationService.ts#L287)
 
 Gets the global agent configuration service instance.
 
@@ -16,4 +16,4 @@ Gets the global agent configuration service instance.
 
 [`AgentConfigurationService`](../classes/AgentConfigurationService.md)
 
-- TODO: describe return value.
+Singleton instance for configuration lookups.

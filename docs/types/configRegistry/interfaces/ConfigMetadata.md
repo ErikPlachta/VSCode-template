@@ -6,7 +6,7 @@
 
 # Interface: ConfigMetadata
 
-Defined in: [src/types/configRegistry.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L49)
+Defined in: [src/types/configRegistry.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L49)
 
 Configuration metadata for each schema ID
 
@@ -16,7 +16,7 @@ Configuration metadata for each schema ID
 
 > **agentType**: `string`
 
-Defined in: [src/types/configRegistry.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L67)
+Defined in: [src/types/configRegistry.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L67)
 
 Agent type this configuration is for
 
@@ -26,7 +26,7 @@ Agent type this configuration is for
 
 > `optional` **breakingChanges**: `string`[]
 
-Defined in: [src/types/configRegistry.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L73)
+Defined in: [src/types/configRegistry.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L73)
 
 List of breaking changes from previous versions
 
@@ -36,7 +36,7 @@ List of breaking changes from previous versions
 
 > **createdDate**: `string`
 
-Defined in: [src/types/configRegistry.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L70)
+Defined in: [src/types/configRegistry.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L70)
 
 Date this schema version was created
 
@@ -46,7 +46,7 @@ Date this schema version was created
 
 > **description**: `string`
 
-Defined in: [src/types/configRegistry.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L64)
+Defined in: [src/types/configRegistry.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L64)
 
 Description of what this configuration schema covers
 
@@ -56,7 +56,7 @@ Description of what this configuration schema covers
 
 > **id**: `string`
 
-Defined in: [src/types/configRegistry.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L51)
+Defined in: [src/types/configRegistry.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L51)
 
 Unique configuration ID
 
@@ -66,7 +66,7 @@ Unique configuration ID
 
 > `optional` **migrationNotes**: `string`[]
 
-Defined in: [src/types/configRegistry.ts:76](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L76)
+Defined in: [src/types/configRegistry.ts:76](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L76)
 
 Migration notes for upgrading from previous versions
 
@@ -76,7 +76,7 @@ Migration notes for upgrading from previous versions
 
 > **name**: `string`
 
-Defined in: [src/types/configRegistry.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L54)
+Defined in: [src/types/configRegistry.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L54)
 
 Human-readable name
 
@@ -86,7 +86,7 @@ Human-readable name
 
 > **version**: `object`
 
-Defined in: [src/types/configRegistry.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L57)
+Defined in: [src/types/configRegistry.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L57)
 
 Version information
 

@@ -6,7 +6,7 @@
 
 # Abstract Class: TrackedAgent
 
-Defined in: [src/shared/analyticsIntegration.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L49)
+Defined in: [src/shared/analyticsIntegration.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L61)
 
 Base class with built-in analytics tracking for agent implementations.
 
@@ -16,7 +16,7 @@ Base class with built-in analytics tracking for agent implementations.
 
 > **new TrackedAgent**(`agentName`): `TrackedAgent`
 
-Defined in: [src/shared/analyticsIntegration.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L59)
+Defined in: [src/shared/analyticsIntegration.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L71)
 
 Creates a new tracked agent instance.
 
@@ -38,11 +38,11 @@ agentName parameter.
 
 ### getStats()
 
-> **getStats**(`since?`): `any`
+> **getStats**(`since?`): [`AgentUsageStats`](../../agentAnalytics/interfaces/AgentUsageStats.md) \| `null`
 
-Defined in: [src/shared/analyticsIntegration.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L118)
+Defined in: [src/shared/analyticsIntegration.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L127)
 
-Gets analytics statistics for this agent.
+Get usage statistics for this tracked agent.
 
 #### Parameters
 
@@ -50,10 +50,10 @@ Gets analytics statistics for this agent.
 
 `Date`
 
-since parameter.
+Optional starting point for stats window.
 
 #### Returns
 
-`any`
+[`AgentUsageStats`](../../agentAnalytics/interfaces/AgentUsageStats.md) \| `null`
 
-- TODO: describe return value.
+Aggregated usage statistics or null if none recorded.

@@ -29,9 +29,22 @@ Guidelines:
 - Create/update remaining docs assets (if any new references appear) and keep health report green.
 - Perform final sweep to replace legacy agent imports and plan deprecation removal of `relevant-data-manager` alias.
 - Run repository-wide EOL normalization commit.
-- Draft legacy config removal plan & deprecation warnings (`mcp.config.json`, loader).
+- Remove legacy `src/mcp.config.json` and update all scripts to consume `src/config/application.config.ts` (emit JSON only if external tooling strictly requires it). Add drift check to prevent divergence.
 - Param name normalization scan & adjustments.
 - Final lint/compile/test sweep and repository health report.
+
+### Added (2025-11-08 – README overhaul & configuration direction)
+
+- README updated to reflect:
+  - User Context as the primary feature with global + local scopes and cache locations.
+  - Settings are UI-first with chat-based adjustments planned.
+  - Configuration source of truth is TypeScript (`src/config/application.config.ts` + `unifiedAgentConfig.ts`).
+  - Quality gates elevated to a literal 100% coverage requirement.
+
+### Changed (2025-11-08 – Config and cache clarifications)
+
+- Documented the removal path for `src/mcp.config.json`. Transitional scripts will be updated to read TS config directly; emitting JSON is optional and generated to prevent drift.
+- Clarified global cache location: `%USERPROFILE%/.vscode/extensions/.mcp-cache` on Windows (workspace cache remains `<repo>/.mcp-cache`).
 
 ### Added (2025-11-08 – Return type & docs remediation)
 
@@ -60,6 +73,8 @@ Guidelines:
 
 - Replace `any` types in analytics and re-run lint to reach zero errors. (Completed for `analyticsIntegration`; `agentAnalytics` remains planned-only, no changes needed today.)
 - Document analytics interfaces (new page if substantial) and update health verification.
+- Implement settings validation layer with structured warnings and safe fallback; expose agent-level settings via Settings UI first.
+- Update template processing to consume TS config; remove legacy JSON file from repo and add generation step if needed for external consumers.
 
 ### Changed
 

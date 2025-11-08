@@ -6,7 +6,7 @@
 
 # Interface: QueryResult
 
-Defined in: [src/types/interfaces.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L40)
+Defined in: [src/types/interfaces.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L40)
 
 Represents the result of a database query operation.
 
@@ -16,7 +16,7 @@ Represents the result of a database query operation.
 
 > **cached**: `boolean`
 
-Defined in: [src/types/interfaces.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L44)
+Defined in: [src/types/interfaces.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L44)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:44](https://github.com/ErikPlachta/vscode-e
 
 > **categoryId**: `string`
 
-Defined in: [src/types/interfaces.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L41)
+Defined in: [src/types/interfaces.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L41)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:41](https://github.com/ErikPlachta/vscode-e
 
 > **records**: [`CategoryRecord`](CategoryRecord.md)[]
 
-Defined in: [src/types/interfaces.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L42)
+Defined in: [src/types/interfaces.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L42)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:42](https://github.com/ErikPlachta/vscode-e
 
 > **totalCount**: `number`
 
-Defined in: [src/types/interfaces.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L43)
+Defined in: [src/types/interfaces.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L43)

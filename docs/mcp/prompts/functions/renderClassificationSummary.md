@@ -6,27 +6,22 @@
 
 # Function: renderClassificationSummary()
 
-> **renderClassificationSummary**(`{`): `string`
+> **renderClassificationSummary**(`options`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/mcp/prompts/index.ts#L140)
+Defined in: [src/mcp/prompts/index.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/mcp/prompts/index.ts#L124)
 
-renderClassificationSummary function.
+Renders a concise classification summary for logging or UI display.
 
 ## Parameters
 
-### \{
+### options
 
 [`ClassificationSummaryOptions`](../interfaces/ClassificationSummaryOptions.md)
 
-agent,
- matchedSignals,
-} - {
- agent,
- matchedSignals,
-} parameter.
+Summary construction options.
 
 ## Returns
 
 `string`
 
-- TODO: describe return value.
+Summary string with matched signals appended when provided.

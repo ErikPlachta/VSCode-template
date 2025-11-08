@@ -102,7 +102,7 @@
     "lint:json": "tsx bin/utils/validateJson.ts",
     "lint:docs": "tsx bin/utils/validateMarkdown.ts",
     "health:report": "tsx src/tools/repositoryHealth.ts",
-    "test": "jest --runInBand --ci",
+    "test": "jest --config=jest.config.js --runInBand --ci",
     "docs": "tsx bin/utils/cleanDocs.ts && typedoc && npm run docs:fix && npm run health:report && npm run docs:nav",
     "docs:nav": "tsx bin/utils/buildDocsNav.ts",
     "docs:fix": "tsx bin/utils/postprocessDocs.ts",

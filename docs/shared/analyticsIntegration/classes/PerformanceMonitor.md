@@ -6,7 +6,7 @@
 
 # Class: PerformanceMonitor
 
-Defined in: [src/shared/analyticsIntegration.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L158)
+Defined in: [src/shared/analyticsIntegration.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L165)
 
 Performance monitoring utility for critical operations.
 
@@ -16,7 +16,7 @@ Performance monitoring utility for critical operations.
 
 > **new PerformanceMonitor**(): `PerformanceMonitor`
 
-Defined in: [src/shared/analyticsIntegration.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L166)
+Defined in: [src/shared/analyticsIntegration.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L173)
 
 Creates a new performance monitor instance.
 
@@ -32,9 +32,9 @@ Creates a new performance monitor instance.
 
 > **monitorDatabaseQuery**\<`T`\>(`queryType`, `query`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L185)
+Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L188)
 
-Monitors the performance of a database query operation.
+Monitor a database query operation and record performance metadata.
 
 #### Type Parameters
 
@@ -48,31 +48,35 @@ Monitors the performance of a database query operation.
 
 `string`
 
-queryType parameter.
+Logical query classification (e.g. 'findRecords').
 
 ##### query
 
 () => `Promise`\<`T`\>
 
-query parameter.
+Async function performing the query.
 
 ##### options
 
-options parameter.
+Optional query context.
 
 ###### category?
 
 `string`
 
+Target category identifier.
+
 ###### filters?
 
-`Record`\<`string`, `any`\>
+`Record`\<`string`, `unknown`\>
+
+Applied filter map.
 
 #### Returns
 
 `Promise`\<`T`\>
 
-- TODO: describe return value.
+Result returned by the query function.
 
 ***
 
@@ -80,9 +84,9 @@ options parameter.
 
 > **monitorDataProcessing**\<`T`\>(`operationType`, `processor`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L218)
+Defined in: [src/shared/analyticsIntegration.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L217)
 
-Monitors data processing operations.
+Monitor a data processing operation and record performance metadata.
 
 #### Type Parameters
 
@@ -96,31 +100,35 @@ Monitors data processing operations.
 
 `string`
 
-operationType parameter.
+Semantic operation type (e.g. 'aggregate').
 
 ##### processor
 
 () => `Promise`\<`T`\>
 
-processor parameter.
+Async processing function.
 
 ##### options
 
-options parameter.
+Optional processing context.
 
 ###### category?
 
 `string`
 
+Category identifier involved.
+
 ###### inputSize?
 
 `number`
+
+Number of items processed.
 
 #### Returns
 
 `Promise`\<`T`\>
 
-- TODO: describe return value.
+Result of the processing function.
 
 ***
 
@@ -128,9 +136,9 @@ options parameter.
 
 > **monitorOrchestration**\<`T`\>(`decision`, `orchestration`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L256)
+Defined in: [src/shared/analyticsIntegration.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L251)
 
-Monitors orchestration decisions and routing.
+Monitor an orchestration decision and record routing metadata.
 
 #### Type Parameters
 
@@ -144,28 +152,32 @@ Monitors orchestration decisions and routing.
 
 `string`
 
-decision parameter.
+Decision identifier (e.g. 'routeIntent').
 
 ##### orchestration
 
 () => `Promise`\<`T`\>
 
-orchestration parameter.
+Async function performing orchestration.
 
 ##### options
 
-options parameter.
+Optional orchestration context.
 
 ###### agentCount?
 
 `number`
 
+Number of candidate agents considered.
+
 ###### intent?
 
 `string`
+
+Classified intent name.
 
 #### Returns
 
 `Promise`\<`T`\>
 
-- TODO: describe return value.
+Result returned by the orchestration function.

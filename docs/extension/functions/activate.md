@@ -8,9 +8,15 @@
 
 > **activate**(`context`): `Promise`\<`void`\>
 
-Defined in: [src/extension/index.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/extension/index.ts#L19)
+Defined in: [src/extension/index.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/extension/index.ts#L25)
 
-Activates the extension, registering the chat participant.
+Activate the MyBusiness MCP extension.
+
+Responsibilities:
+- Optionally start the embedded MCP server (when no external serverUrl is configured).
+- Register the MCP provider for server discovery.
+- Register the chat participant that routes user prompts through the orchestrator.
+- Expose a command for manual tool invocation.
 
 ## Parameters
 
@@ -18,10 +24,10 @@ Activates the extension, registering the chat participant.
 
 `ExtensionContext`
 
-context parameter.
+VS Code extension lifecycle context used for disposables.
 
 ## Returns
 
 `Promise`\<`void`\>
 
-- TODO: describe return value.
+Resolves when activation sequence has completed (server started, participant registered).

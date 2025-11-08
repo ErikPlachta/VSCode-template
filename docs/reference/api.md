@@ -52,6 +52,7 @@
 - [shared/analyticsDashboard](shared/analyticsDashboard/README.md)
 - [shared/analyticsIntegration](shared/analyticsIntegration/README.md)
 - [shared/configurationLoader](shared/configurationLoader/README.md)
+- [shared/env](shared/env/README.md)
 - [shared/mcpTypes](shared/mcpTypes/README.md)
 - [tools/augmentTypedoc](tools/augmentTypedoc/README.md)
 - [tools/convertRelativeImports](tools/convertRelativeImports/README.md)

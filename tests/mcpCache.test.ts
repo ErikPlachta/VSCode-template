@@ -29,15 +29,24 @@ describe("mcpCache", () => {
     workspaceFoldersMock = undefined;
   });
 
-  it("creates the cache directory inside the workspace", async () => {
+  it("creates local and global cache directories inside the workspace and user profile", async () => {
     const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "mcp-cache-test-"));
     workspaceFoldersMock = [{ uri: { fsPath: tempDir } }];
 
     const cacheDir = await ensureCacheDirectory();
-    expect(cacheDir).toBe(path.join(tempDir, ".mcp-cache"));
+    // Cache dir now derives from EXTENSION_NAME (fallback to package name if unset)
+    const expectedName =
+      process.env.EXTENSION_NAME?.trim() || "myBusiness-mcp-extension";
+    expect(cacheDir).toBe(path.join(tempDir, expectedName));
 
     const stats = await fs.stat(cacheDir);
     expect(stats.isDirectory()).toBe(true);
+
+    // Global directory should also exist
+    const globalRoot = path.join(os.homedir(), ".vscode", "extensions");
+    const globalCache = path.join(globalRoot, expectedName);
+    const globalStats = await fs.stat(globalCache);
+    expect(globalStats.isDirectory()).toBe(true);
 
     await fs.rm(tempDir, { recursive: true, force: true });
   });

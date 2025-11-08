@@ -21,6 +21,7 @@ Agent usage analytics system for tracking invocations and performance metrics.
 - [AgentUsageEvent](interfaces/AgentUsageEvent.md)
 - [AgentUsageStats](interfaces/AgentUsageStats.md)
 - [AnalyticsConfig](interfaces/AnalyticsConfig.md)
+- [AnalyticsExecutionOptions](interfaces/AnalyticsExecutionOptions.md)
 - [UsageAnalyticsSummary](interfaces/UsageAnalyticsSummary.md)
 
 ## Variables

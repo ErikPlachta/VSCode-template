@@ -8,6 +8,6 @@
 
 > `const` **performanceMonitor**: [`PerformanceMonitor`](../classes/PerformanceMonitor.md)
 
-Defined in: [src/shared/analyticsIntegration.ts:349](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsIntegration.ts#L349)
+Defined in: [src/shared/analyticsIntegration.ts:344](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsIntegration.ts#L344)
 
 Global performance monitor instance.

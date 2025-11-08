@@ -8,9 +8,21 @@ import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
+import { getCacheDirectoryName } from "@shared/env";
 
 /** Name of the subdirectory that stores cross-tool shared cache entries. */
 const SHARED_CACHE_DIR = "shared";
+
+/**
+ * Resolve global VS Code extension storage root (minimal approximation for now).
+ *
+ * @returns {string} Absolute path to the global extensions root directory.
+ */
+function getGlobalExtensionsRoot(): string {
+  // VS Code does not expose an API for the extensions install folder; approximate using user home.
+  // On Windows we align with %USERPROFILE%/.vscode/extensions; on other platforms use ~/.vscode/extensions.
+  return path.join(os.homedir(), ".vscode", "extensions");
+}
 
 /**
  * Minimal representation of a cached artefact that can be exchanged across tools.
@@ -53,10 +65,17 @@ export interface ToolLogEntry {
  */
 export async function ensureCacheDirectory(): Promise<string> {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-  const basePath = workspaceRoot ?? os.homedir();
-  const cacheDir = path.join(basePath, ".mcp-cache");
-  await fs.mkdir(cacheDir, { recursive: true });
-  return cacheDir;
+  const cacheFolderName = getCacheDirectoryName();
+  const localBase = workspaceRoot ?? os.homedir();
+  const localCache = path.join(localBase, cacheFolderName);
+  await fs.mkdir(localCache, { recursive: true });
+
+  // Also ensure global cache exists for cross-workspace sharing.
+  const globalRoot = getGlobalExtensionsRoot();
+  const globalCache = path.join(globalRoot, cacheFolderName);
+  await fs.mkdir(globalCache, { recursive: true });
+
+  return localCache;
 }
 
 /**

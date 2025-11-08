@@ -6,6 +6,7 @@
  */
 import path from "node:path";
 import process from "node:process";
+// no-op
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { ESLint } from "eslint";
 import Ajv, { ErrorObject } from "ajv";
@@ -75,9 +76,8 @@ export class RepositoryHealthAgent {
   /**
    * Create a new health agent using the provided configuration.
    *
-   * @param {string} baseDir - baseDir parameter.
-   * @param {AgentConfig} config - config parameter.
-   * @returns {unknown} - TODO: describe return value.
+   * @param {string} baseDir - Absolute repository root directory.
+   * @param {AgentConfig} config - Fully resolved health agent configuration contract.
    */
   public constructor(baseDir: string, config: AgentConfig) {
     this.baseDir = baseDir;
@@ -92,10 +92,10 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Load configuration from typed application config, falling back to legacy JSON.
+   * Load configuration from the typed application config (preferred) with a legacy JSON fallback.
    *
-   * @param {string} configPath - configPath parameter.
-   * @returns {Promise<AgentConfig>} - TODO: describe return value.
+   * @param {string} configPath - Path to legacy JSON config used only if the TS loader throws.
+   * @returns {Promise<AgentConfig>} Resolved agent configuration object.
    */
   public static async loadConfig(configPath: string): Promise<AgentConfig> {
     try {
@@ -117,10 +117,10 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Create an agent instance by reading the default configuration file or TS config.
+   * Create an agent instance by reading the preferred TS application config (or legacy JSON fallback).
    *
-   * @param {string} configPath - configPath parameter.
-   * @returns {Promise<RepositoryHealthAgent>} - TODO: describe return value.
+   * @param {string} configPath - Optional legacy JSON path used only if TS config resolution fails.
+   * @returns {Promise<RepositoryHealthAgent>} Instantiated health agent ready to run checks.
    */
   public static async createFromDisk(
     configPath: string = "src/mcp.config.json"
@@ -132,19 +132,19 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Create an agent using an already materialized AgentConfig.
+   * Create an agent using an already materialized configuration (skips disk IO).
    *
-   * @param {AgentConfig} config - config parameter.
-   * @returns {RepositoryHealthAgent} - TODO: describe return value.
+   * @param {AgentConfig} config - Pre-baked configuration object.
+   * @returns {RepositoryHealthAgent} New agent instance.
    */
   public static createFromConfig(config: AgentConfig): RepositoryHealthAgent {
     return new RepositoryHealthAgent(process.cwd(), config);
   }
 
   /**
-   * Execute every configured check and return a comprehensive report.
+   * Execute every configured check (TS lint, JSON schema, Markdown metadata) and aggregate results.
    *
-   * @returns {Promise<HealthReport>} - TODO: describe return value.
+   * @returns {Promise<HealthReport>} Composite report including per-check pass state and messages.
    */
   public async runAllChecks(): Promise<HealthReport> {
     const checks: CheckResult[] = [];
@@ -156,9 +156,9 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Execute ESLint using project settings to ensure documentation coverage.
+   * Execute ESLint across configured TypeScript include globs.
    *
-   * @returns {Promise<CheckResult>} - TODO: describe return value.
+   * @returns {Promise<CheckResult>} Lint result summarizing pass/fail and diagnostic messages.
    */
   public async runTypescriptLint(): Promise<CheckResult> {
     const eslint: ESLint = new ESLint({
@@ -185,9 +185,9 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Validate JSON artifacts against defined schemas.
+   * Validate JSON artifacts against declared schemas using Ajv 2020 draft.
    *
-   * @returns {Promise<CheckResult>} - TODO: describe return value.
+   * @returns {Promise<CheckResult>} Result object enumerating per-file schema validation failures.
    */
   public async validateJsonSchemas(): Promise<CheckResult> {
     const findings: string[] = [];
@@ -227,9 +227,9 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Validate Markdown documents for required metadata and content sections.
+   * Validate Markdown documents for required front matter fields and required section headings.
    *
-   * @returns {Promise<CheckResult>} - TODO: describe return value.
+   * @returns {Promise<CheckResult>} Result summarizing metadata compliance across scanned documents.
    */
   public async validateMarkdownDocuments(): Promise<CheckResult> {
     const include: string[] = [...this.config.markdown.include];
@@ -276,10 +276,10 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Persist a markdown report summarizing the check outcomes.
+   * Persist a markdown report summarizing the check outcomes to the configured output path.
    *
-   * @param {HealthReport} report - report parameter.
-   * @returns {Promise<void>} - TODO: describe return value.
+   * @param {HealthReport} report - Completed health report to serialize.
+   * @returns {Promise<void>} Resolves when the report has been written to disk.
    */
   public async writeReport(report: HealthReport): Promise<void> {
     const outputPath: string = path.resolve(
@@ -361,10 +361,10 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Convert Ajv errors into a readable string.
+   * Convert Ajv errors into a concise human-readable string list.
    *
-   * @param {ErrorObject[]} errors - errors parameter.
-   * @returns {string} - TODO: describe return value.
+   * @param {ErrorObject[]} errors - Raw Ajv error objects.
+   * @returns {string} Joined error description string suitable for logs.
    */
   private formatAjvErrors(errors: ErrorObject[]): string {
     if (errors.length === 0) {
@@ -380,9 +380,9 @@ export class RepositoryHealthAgent {
 }
 
 /**
- * CLI-friendly runner that executes all checks and writes the report.
+ * CLI-friendly runner that executes all checks, prints a summary, and writes the markdown report.
  *
- * @returns {Promise<void>} - TODO: describe return value.
+ * @returns {Promise<void>} Resolves when checks and report persistence complete (exitCode set on failure).
  */
 export async function runHealthCheck(): Promise<void> {
   const agent: RepositoryHealthAgent =
@@ -401,8 +401,19 @@ export async function runHealthCheck(): Promise<void> {
   }
 }
 
-// CLI entrypoint
-if (require.main === module) {
+// CLI entrypoint (works in both CJS and ESM loaders without throwing)
+// We intentionally avoid referencing an undeclared `require` directly; use globalThis to probe.
+const maybeRequire = (globalThis as unknown as { require?: unknown })
+  .require as { main?: unknown } | undefined;
+const maybeModule = (globalThis as unknown as { module?: unknown }).module as
+  | unknown
+  | undefined;
+// In CJS, require.main === module when executed directly; in ESM, both will be undefined.
+if (
+  maybeRequire &&
+  maybeModule &&
+  (maybeRequire as { main?: unknown }).main === maybeModule
+) {
   void runHealthCheck().catch((error: unknown) => {
     console.error(
       "Repository health check encountered an unrecoverable error.",

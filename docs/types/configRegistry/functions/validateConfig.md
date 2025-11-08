@@ -8,7 +8,7 @@
 
 > **validateConfig**(`config`): `boolean`
 
-Defined in: [src/types/configRegistry.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/configRegistry.ts#L262)
+Defined in: [src/types/configRegistry.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/configRegistry.ts#L268)
 
 Validation function for configuration objects
 
@@ -16,14 +16,16 @@ Validation function for configuration objects
 
 ### config
 
-config parameter.
+Object to validate for a known configuration id.
 
 #### $configId?
 
 `string`
 
+Configuration ID to validate against the registry.
+
 ## Returns
 
 `boolean`
 
-- TODO: describe return value.
+True when a valid $configId exists in the registry; otherwise false.

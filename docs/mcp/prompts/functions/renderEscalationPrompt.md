@@ -6,31 +6,22 @@
 
 # Function: renderEscalationPrompt()
 
-> **renderEscalationPrompt**(`{`): `string`
+> **renderEscalationPrompt**(`options`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/mcp/prompts/index.ts#L36)
+Defined in: [src/mcp/prompts/index.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/mcp/prompts/index.ts#L30)
 
-renderEscalationPrompt function.
+Renders an escalation prompt for clarification or routing.
 
 ## Parameters
 
-### \{
+### options
 
 [`EscalationPromptOptions`](../interfaces/EscalationPromptOptions.md)
 
-topic,
- missingSignals,
- manifest,
- additionalGuidance,
-} - {
- topic,
- missingSignals,
- manifest,
- additionalGuidance,
-} parameter.
+Prompt construction options.
 
 ## Returns
 
 `string`
 
-- TODO: describe return value.
+Markdown-formatted escalation prompt.

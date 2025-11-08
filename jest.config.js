@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   preset: "ts-jest",
   testEnvironment: "node",
   roots: ["<rootDir>/tests"],
@@ -10,12 +10,13 @@ module.exports = {
   coverageReporters: ["text", "lcov", "html"],
   testTimeout: 30000,
   // Module name mapping for absolute imports
-  moduleNameMapping: {
+  moduleNameMapper: {
     "^@agent/(.*)$": "<rootDir>/src/agent/$1",
     "^@extension/(.*)$": "<rootDir>/src/extension/$1",
     "^@mcp/(.*)$": "<rootDir>/src/mcp/$1",
     "^@server/(.*)$": "<rootDir>/src/server/$1",
     "^@shared/(.*)$": "<rootDir>/src/shared/$1",
+    "^@internal-types/(.*)$": "<rootDir>/src/types/$1",
     "^@types/(.*)$": "<rootDir>/src/types/$1",
   },
   // Explicitly set transform for TypeScript files

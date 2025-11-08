@@ -8,9 +8,9 @@
 
 > **createStandardReport**(`summary`, `startDate`, `endDate`): `string`
 
-Defined in: [src/shared/analyticsDashboard.ts:341](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/shared/analyticsDashboard.ts#L341)
+Defined in: [src/shared/analyticsDashboard.ts:341](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/analyticsDashboard.ts#L341)
 
-Creates a standard analytics report with default options.
+Create a standard markdown analytics report for a given date range.
 
 ## Parameters
 
@@ -18,22 +18,22 @@ Creates a standard analytics report with default options.
 
 [`UsageAnalyticsSummary`](../../agentAnalytics/interfaces/UsageAnalyticsSummary.md)
 
-summary parameter.
+Aggregated usage analytics summary.
 
 ### startDate
 
 `Date`
 
-startDate parameter.
+Start of reporting period.
 
 ### endDate
 
 `Date`
 
-endDate parameter.
+End of reporting period.
 
 ## Returns
 
 `string`
 
-- TODO: describe return value.
+Markdown report string.

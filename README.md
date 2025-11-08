@@ -1,55 +1,105 @@
 # My Business MCP Extension
 
-Simple, chat-first access to your business tools inside VS Code Copilot Chat.
+Customizable MCP server experience inside VS Code Copilot Chat — with User Context as the core feature.
 
-## Quick start
+## Overview
 
-1. Install the VSIX (or add from Marketplace when published).
+This extension embeds (or connects to) an MCP server and a small set of agents (orchestrator, data, database, clarification, and user-context). It focuses on:
 
-1. Configure the server URL:
+- User Context: local and global domain knowledge that the agents use to answer questions and take actions.
+- Customization: settings via VS Code Settings UI first, and via chat as a secondary path.
+- Quality gates: 100% test coverage, strict JSDoc, generated docs.
+- Migration safety: backwards-compatible aliases when we rename concepts (e.g., businessData → userContext).
 
-- VS Code Settings → “My Business MCP Extension” → set “Server URL” to your MCP endpoint.
-- Leave token empty unless your server requires it.
+## Installation and first-run
 
-1. Open a chat and try:
+1. Install the VSIX (or from Marketplace when available).
 
-- Type `@myBusiness` to mention the participant and use available commands.
-- Or run the Command Palette action: “My Business MCP: Invoke Tool”.
+2. Open Settings → Extensions → “My Business MCP Extension” and review:
 
-## What you can do
+- Server URL (leave blank to use the embedded server)
+- Token (optional bearer token)
+- Auto-register (adds/removes an entry in your global `mcp.json`)
 
-- Discover and invoke all tools exposed by your MCP server.
-- Keep multi-turn context for richer follow-ups.
-- See responses rendered as rich markdown (and JSON when useful).
-- Review local invocation logs under `.mcp-cache/` for troubleshooting.
+3. First-run setup (performed automatically):
 
-## Commands
+- Creates `.mcp-cache` in two places:
+  - Workspace-local: `<your workspace>/.mcp-cache`
+  - Global: `%USERPROFILE%/.vscode/extensions/.mcp-cache` (Windows example: `C:\Users\plach\.vscode\extensions\.mcp-cache`)
+- Processes your User Context datasets and builds an index (catalogue) used by the agents.
+- Starts the embedded MCP server (if no external Server URL is configured) and registers the chat participant `@myBusiness`.
 
-- `/getBusinessMetric`
-- `@listProjects`
-- Command Palette → “My Business MCP: Invoke Tool”
+4. Try it:
 
-## Configure
+- In Copilot Chat, type `@myBusiness` and ask a question.
+- Or run the command palette action: “My Business MCP: Invoke Tool”.
 
-Settings → Extensions → “My Business MCP Extension”
+## Core concepts
 
-- Server URL: `http(s)://your-mcp-server`
-- Token: optional bearer token
-- Auto-register: whether to write an entry into your global `mcp.json`
+- Orchestrator: classifies intent and routes to the right agent(s). Falls back to Clarification when requests are vague.
+- User Context (primary feature): structured, user-specific domain data. Can be global or workspace-local.
+- Data / Database Agents: query records, analyze relationships, and generate insights or exploration plans.
+- Clarification Agent: asks for missing details when a request is ambiguous or incomplete.
 
-## Documentation
+## Configuration model (source of truth)
 
-- User & architecture docs live in the repository’s docs folder:
-  - Build Pipeline (guide):
-    [docs/guides/build-pipeline.md](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/develop/docs/guides/build-pipeline.md)
-  - Repository Health Agent (reference):
-    [docs/reference/tools/repository-health-agent.md](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/develop/docs/reference/tools/repository-health-agent.md)
-  - Orchestration (concept):
-    [docs/concepts/orchestration.md](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/develop/docs/concepts/orchestration.md)
+- Application configuration lives in TypeScript at `src/config/application.config.ts`.
+- Agent definitions live in `src/mcp/config/unifiedAgentConfig.ts`.
+- The legacy `src/mcp.config.json` is being removed. Build/dev utilities are being updated to read the TS config directly.
 
-Looking to contribute or run from source? See the Development Workflow guide:
-[docs/guides/development-workflow.md](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/develop/docs/guides/development-workflow.md)
+Template processing and docs generation use the TS configuration as the single source of truth to avoid drift.
+
+## Settings: UI first, chat second
+
+You can configure the extension in two ways:
+
+1. VS Code Settings UI (preferred): “My Business MCP Extension”
+
+   - Server URL, Token, Auto-register, Port, etc.
+   - Future: agent-level knobs (timeouts, keywords, priorities) exposed in organized sections with help links.
+
+2. Chat commands (secondary):
+   - Planned commands to list, get, and set settings with validation and safe fallback.
+
+Settings validation will prevent invalid values from taking effect; invalid overrides will be rejected with a helpful warning.
+
+## User Context: global and local
+
+- Global context is stored in your VS Code extensions directory (Windows example): `C:\Users\plach\.vscode\extensions` under a `.mcp-cache` folder.
+- Local context is stored in your workspace under `.mcp-cache`.
+- The extension guides you through adding or editing User Context via templates, then validates and indexes it.
+
+## Development
+
+Requirements:
+
+- Node 18+
+- VS Code 1.95+
+
+Useful scripts:
+
+- Build: `npm run compile` (prebuild scripts keep templates and docs in sync)
+- Test (100% coverage target): `npm test`
+- Lint: `npm run lint`
+- Docs: `npm run docs`
+
+Quality gates (enforced before merge):
+
+- 100% coverage (literal)
+- Lint clean (including strict JSDoc)
+- Build passes
+- Docs and health report up-to-date
+
+## Troubleshooting
+
+- If you’re using the embedded server, ensure no conflicting process is running on the configured port.
+- To inspect what was replaced in templates, see `docs/template-variables.md` and the build logs.
+- For User Context problems, check both `.mcp-cache` locations and ensure your JSON files validate against the provided schemas.
+
+## Contributing
+
+See the development workflow guide and the CHANGELOG for planned tasks and verification results. We maintain backward-compatible aliases for one release when renaming/migrating components.
 
 ---
 
-Made with ❤️ to streamline MCP tooling in Copilot Chat.
+Made with ❤️ to streamline customizable MCP tooling in Copilot Chat.

@@ -6,7 +6,7 @@
 
 # Interface: ClarificationInput
 
-Defined in: [src/types/interfaces.ts:224](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L224)
+Defined in: [src/types/interfaces.ts:224](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L224)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/types/interfaces.ts:224](https://github.com/ErikPlachta/vscode-
 
 > **candidateAgents**: `string`[]
 
-Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L228)
+Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L228)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L227)
+Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L227)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-
 
 > **question**: `string`
 
-Defined in: [src/types/interfaces.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L225)
+Defined in: [src/types/interfaces.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L225)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:225](https://github.com/ErikPlachta/vscode-
 
 > `optional` **topic**: `string`
 
-Defined in: [src/types/interfaces.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/ac681b9995fc70e0cb32ac36f59d91c5cc543916/src/types/interfaces.ts#L226)
+Defined in: [src/types/interfaces.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/types/interfaces.ts#L226)
