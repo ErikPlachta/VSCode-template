@@ -174,6 +174,12 @@ export interface BusinessDataCatalogue {
 }
 
 /**
+ * UserContextCatalogue interface (renamed from BusinessDataCatalogue).
+ * Backward compatible alias preserving the same shape during migration.
+ */
+export type UserContextCatalogue = BusinessDataCatalogue;
+
+/**
  * CategoryInfo interface.
  *
  */
@@ -199,6 +205,16 @@ export interface RelevantDataManagerInterface {
     records: CategoryRecord[]
   ): ValidationResult;
   getRelationships(categoryId: CategoryId): RelationshipDescription[];
+}
+
+/**
+ * UserContextManagerInterface interface (renamed from RelevantDataManagerInterface).
+ * Provides forward-compatible method names while delegating to legacy implementations.
+ */
+export interface UserContextManagerInterface
+  extends RelevantDataManagerInterface {
+  /** Optional transitional method returning the renamed catalogue type. */
+  getUserContextCatalogue?(): UserContextCatalogue;
 }
 
 /**

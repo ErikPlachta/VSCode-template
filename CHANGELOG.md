@@ -42,10 +42,17 @@ This file follows the Keep a Changelog format and uses semantic groupings under 
 - Draft legacy config removal plan & deprecation warnings (`mcp.config.json`, loader).
 - Param name normalization scan & adjustments.
 - Final lint/compile/test sweep and repository health report.
+- Fix path alias resolution for health tooling: resolve missing module `@agent/repositoryHealthAgent` impacting `npm run lint:json` and `npm run lint:docs` scripts.
+- Bulk ESLint remediation pass: add explicit return types + JSDoc blocks across agent configs and shared analytics; reduce 136 errors → target zero.
+- Introduce analytics option interfaces to eliminate pervasive `any` types (`src/shared/analyticsIntegration.ts`, `src/shared/agentAnalytics.ts`).
+- Complete migration from `businessData` to `userContext` folder structure once alias patterns validated.
+- Replace legacy agent id `relevant-data-manager` with `user-context` across configs & orchestrator after compatibility window.
 
 ### Changed
 
 - Migrated progress tracking from `docs/PROGRESS.md` to the root `CHANGELOG.md` to avoid conflicts with docs governance.
+- Added transitional User Context Agent (`src/agent/userContextAgent`) aliasing legacy Relevant Data Manager for incremental rename.
+- Extended JSON schema patterns to support both `businessData` and `userContext` directories.
 
 ### Docs
 
@@ -69,3 +76,5 @@ This file follows the Keep a Changelog format and uses semantic groupings under 
 
 - Current lint focus areas include remaining missing return types, `any` usage, parameter doc completeness, unused variables, malformed JSDoc types/namepaths.
 - See Unreleased for structured follow-ups and technical-debt items.
+- Verification (2025-11-08): Build & tests PASS. ESLint FAIL (136 errors). Health report shows JSON schema + markdown metadata PASS but alias resolution failure for direct lint scripts. Added planned remediation items above.
+- Started rename migration: added UserContext agent/profile alias and broadened schema patterns; legacy paths still active.

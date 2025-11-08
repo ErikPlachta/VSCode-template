@@ -66,7 +66,7 @@ These notes teach AI coding agents how to work productively in this workspace. K
 
 1. Create/modify `src/businessData/<category>/category.json` (include `config.orchestration` signals & promptStarters); add records, relationships, schemas, types, examples, queries.
 2. Run `npm run lint:json` + `npm run health:report`; fix issues in `docs/reports/health-report.md`.
-3. Adjust signals/promptStarters if `Orchestrator.classify()` misroutes.
+3. Adjust signals/promptStarters if `Orchestrator.classify()` mis-routes.
 
 ## Useful agent calls
 

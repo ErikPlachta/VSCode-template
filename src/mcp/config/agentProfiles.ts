@@ -11,6 +11,8 @@ export {
   type KnownAgentProfile,
   OrchestratorProfile,
   RelevantDataManagerAgentProfile,
+  /** Alias: User Context Agent profile (renamed from Relevant Data Manager). */
+  RelevantDataManagerAgentProfile as UserContextAgentProfile,
   DatabaseAgentProfile,
   DataAgentProfile,
   ClarificationAgentProfile,
