@@ -39,6 +39,8 @@ const DATA_ROOT = process.env.VSCODE_TEMPLATE_DATA_ROOT
 /**
  * loadJson function.
  *
+ * @template T
+ *
  * @param {string[]} segments - segments parameter.
  * @returns {Promise<T>} - TODO: describe return value.
  */
@@ -50,6 +52,8 @@ async function loadJson<T>(...segments: string[]): Promise<T> {
 
 /**
  * loadOptionalJson function.
+ *
+ * @template T
  *
  * @param {string[]} segments - segments parameter.
  * @returns {Promise<T | undefined>} - TODO: describe return value.

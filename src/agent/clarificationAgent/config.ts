@@ -19,7 +19,14 @@ import { clarificationAgentConfig } from "./agent.config";
 export class ClarificationAgentConfig extends BaseAgentConfig {
   private clarificationConfig: ClarificationConfig;
 
-  constructor(config?: AgentConfigDefinition) {
+  /**
+   * constructor function.
+   *
+   * @param {AgentConfigDefinition} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || clarificationAgentConfig;
 
@@ -315,7 +322,7 @@ public getMaxResponseTime(): number {
  *
  * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-public getTelemetryConfig() {
+public getTelemetryConfig(): Record<string, unknown>  {
     return {
       logQueries: this.config.telemetry?.logQueries ?? true,
       logPerformance: this.config.telemetry?.logPerformance ?? true,
@@ -333,7 +340,7 @@ public getTelemetryConfig() {
  *
  * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-public getErrorHandlingConfig() {
+public getErrorHandlingConfig(): Record<string, unknown>  {
     return {
       maxRetries: this.config.errorHandling?.maxRetries ?? 1,
       retryDelay: this.config.errorHandling?.retryDelay ?? 1000,

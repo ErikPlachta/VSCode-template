@@ -468,7 +468,13 @@ export interface IndividualAgentConfig {
 export abstract class BaseAgentConfig {
   protected config: AgentConfigDefinition;
 
-  constructor(config: AgentConfigDefinition) {
+  /**
+   * constructor function.
+   *
+   * @param {AgentConfigDefinition} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+constructor(config: AgentConfigDefinition) {
     this.config = config;
   }
 

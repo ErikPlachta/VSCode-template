@@ -79,6 +79,8 @@ export async function logInvocation(
 /**
  * Persist a shared cache entry that can be re-used by other MCP tools.
  *
+ * @template T
+ *
  * @param {string} cacheDir - cacheDir parameter.
  * @param {SharedCacheEntry<T>} entry - entry parameter.
  * @returns {Promise<void>} - TODO: describe return value.
@@ -96,6 +98,8 @@ export async function storeSharedCacheEntry<T>(
 
 /**
  * Retrieve a shared cache entry by key.
+ *
+ * @template T
  *
  * @param {string} cacheDir - cacheDir parameter.
  * @param {string} key - key parameter.
@@ -122,6 +126,8 @@ export async function readSharedCacheEntry<T = unknown>(
 
 /**
  * Enumerate all cached artifacts currently stored on disk.
+ *
+ * @template T
  *
  * @param {string} cacheDir - cacheDir parameter.
  * @returns {Promise<SharedCacheEntry<T>[]>} - TODO: describe return value.

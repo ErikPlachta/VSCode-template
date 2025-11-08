@@ -16,10 +16,12 @@ export class AgentConfigurationService {
   private config: ApplicationConfig | null = null;
   private static instance: AgentConfigurationService | null = null;
 
-  /**
+    /**
    * Private constructor for singleton pattern.
+   *
+   * @returns {unknown} - TODO: describe return value.
    */
-  private constructor() {}
+private constructor() {}
 
     /**
  * Gets the singleton instance of the agent configuration service.

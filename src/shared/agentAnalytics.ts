@@ -120,12 +120,13 @@ export class AgentUsageAnalytics {
   private config: AnalyticsConfig;
   private eventCounter = 0;
 
-  /**
+    /**
    * Creates a new analytics collector instance.
    *
-   * @param confi - - - - g-  - Analytics configuration.
+   * @param {AnalyticsConfig} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor(config: AnalyticsConfig) {
+constructor(config: AnalyticsConfig) {
     this.config = config;
   }
 
@@ -168,6 +169,8 @@ recordEvent(event: Partial<AgentUsageEvent>): void {
 
     /**
  * Tracks the execution of an agent method with automatic timing.
+ *
+ * @template T
  *
  * @param {string} agentName - agentName parameter.
  * @param {string} method - method parameter.

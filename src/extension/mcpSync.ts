@@ -17,11 +17,14 @@ import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
  * ```
  */
 export class MCPDiscoveryError extends Error {
-  /**
-   * @param message - - - - - Human-readable error message.
-   * @param [cause] - Optional root cause supplied by axios or the MCP server.
+    /**
+   * constructor function.
+   *
+   * @param {string} message - message parameter.
+   * @param {unknown} cause - cause parameter.
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor(message: string, public readonly cause?: unknown) {
+constructor(message: string, public readonly cause?: unknown) {
     super(message);
     this.name = "MCPDiscoveryError";
   }

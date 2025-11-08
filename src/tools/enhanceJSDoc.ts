@@ -148,6 +148,7 @@ function extractSummaryFromExisting(fullText: string): string | undefined {
  * @param {boolean} includeReturns - includeReturns parameter.
  * @param {string} returnType - returnType parameter.
  * @param {boolean} includeThrows - includeThrows parameter.
+ * @param {string[]} typeParams - Generic type parameter names for template tags.
  * @param {unknown} indent - indent parameter.
  * @returns {string} - TODO: describe return value.
  */
@@ -159,6 +160,7 @@ function buildDocBlock(
   includeReturns: boolean,
   returnType: string,
   includeThrows: boolean,
+  typeParams: string[] = [],
   indent = ""
 ): string {
   const lines: string[] = ["/**"];
@@ -166,6 +168,13 @@ function buildDocBlock(
     summary || (fnName ? `${fnName} function.` : "Function.");
   lines.push(` * ${effectiveSummary}`);
   lines.push(" *");
+  // Add @template tags for generics if any
+  for (const t of typeParams) {
+    lines.push(` * @template ${t}`);
+  }
+  if (typeParams.length > 0) {
+    lines.push(" *");
+  }
   for (let i = 0; i < params.length; i++) {
     const p = params[i];
     const t = paramTypes[i] || "unknown";
@@ -235,6 +244,12 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
     ) {
       const name = node.name.getText();
       createOrReplace(node, name);
+    } else if (ts.isConstructorDeclaration(node)) {
+      // Ensure constructors have proper JSDoc (no return type changes)
+      createOrReplace(
+        node as unknown as ts.FunctionLikeDeclarationBase,
+        "constructor"
+      );
     } else if (
       ts.isArrowFunction(node) &&
       node.parent &&
@@ -277,6 +292,19 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
       node as unknown as { jsDoc?: ts.JSDoc[] }
     ).jsDoc;
     let summary: string | undefined;
+    const typeParams: string[] = (
+      node as unknown as {
+        typeParameters?: ts.NodeArray<ts.TypeParameterDeclaration>;
+      }
+    ).typeParameters
+      ? (
+          (
+            node as unknown as {
+              typeParameters?: ts.NodeArray<ts.TypeParameterDeclaration>;
+            }
+          ).typeParameters as ts.NodeArray<ts.TypeParameterDeclaration>
+        ).map((tp) => tp.name.getText())
+      : [];
     if (jsDocs && jsDocs.length > 0) {
       const first = jsDocs[0];
       // Replace from the beginning of the first JSDoc (including any preceding trivia)
@@ -296,6 +324,7 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
           !isVoidLike(node),
           getReturnTypeText(node),
           hasThrow(node),
+          typeParams,
           indent
         ),
       });
@@ -313,9 +342,31 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
           !isVoidLike(node),
           getReturnTypeText(node),
           hasThrow(node),
+          typeParams,
           indent
         ),
       });
+    }
+
+    // Apply explicit return type annotation when safe and applicable (skip constructors)
+    const isConstructor = (node as ts.Node).kind === ts.SyntaxKind.Constructor;
+    if (!isConstructor && !node.type) {
+      const inferred = getReturnTypeText(node);
+      if (inferred && inferred !== "unknown") {
+        // Find insertion point after closing paren of parameters
+        const headerEnd = node.body ? node.body.getFullStart() : node.getEnd();
+        const headerText = fullText.slice(node.getStart(), headerEnd);
+        // Find last ')' before body
+        const closeIndex = headerText.lastIndexOf(")");
+        const colonAlready = headerText.indexOf(":", closeIndex) !== -1;
+        if (closeIndex !== -1 && !colonAlready) {
+          const insertPos = node.getStart() + closeIndex + 1; // after ')'
+          edits.push({
+            pos: insertPos,
+            text: `: ${inferred} `,
+          });
+        }
+      }
     }
   }
 

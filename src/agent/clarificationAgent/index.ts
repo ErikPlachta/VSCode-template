@@ -48,12 +48,13 @@ export class ClarificationAgent {
   /** Configuration for the clarification agent. */
   private readonly config: ClarificationAgentConfig;
 
-  /**
+    /**
    * Creates a new clarification agent instance.
    *
-   * @param knowledgeBase - - - - - Optional knowledge base instance, creates new one if not provided.
+   * @param {KnowledgeBase} knowledgeBase - knowledgeBase parameter.
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor(knowledgeBase?: KnowledgeBase) {
+constructor(knowledgeBase?: KnowledgeBase) {
     this.config = new ClarificationAgentConfig();
     this.knowledgeBase = knowledgeBase ?? new KnowledgeBase();
   }

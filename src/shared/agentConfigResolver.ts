@@ -72,7 +72,13 @@ export interface EffectiveExecutionProfile {
 }
 
 export class AgentConfigResolver {
-  constructor(private readonly configPath: string = "src/mcp.config.json") {}
+  /**
+   * constructor function.
+   *
+   * @param {string} configPath - configPath parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+constructor(private readonly configPath: string = "src/mcp.config.json") {}
 
     /**
  * Returns the effective execution profile for an agent after applying runtime overrides.

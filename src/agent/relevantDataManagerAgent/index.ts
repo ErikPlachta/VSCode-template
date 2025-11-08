@@ -515,7 +515,13 @@ function NormalizeLookupKey(value: string): string {
 
 /** Error thrown when a caller references an unknown category. */
 export class UnknownCategoryError extends Error {
-  constructor(topic: string) {
+  /**
+   * constructor function.
+   *
+   * @param {string} topic - topic parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+constructor(topic: string) {
     super(`Unknown category or topic: ${topic}`);
   }
 }
@@ -541,7 +547,13 @@ export class RelevantDataManagerAgent {
   );
   private readonly config: RelevantDataManagerAgentConfig;
 
-  constructor(cacheDirPromise?: Promise<string>) {
+  /**
+   * constructor function.
+   *
+   * @param {Promise<string>} cacheDirPromise - cacheDirPromise parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+constructor(cacheDirPromise?: Promise<string>) {
     this.config = new RelevantDataManagerAgentConfig();
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
     this.dataRoot = process.env.VSCODE_TEMPLATE_DATA_ROOT ?? DEFAULT_DATA_ROOT;
@@ -1762,6 +1774,8 @@ private formatAjvErrors(
 
     /**
  * loadJsonFile function.
+ *
+ * @template T
  *
  * @param {string} filePath - filePath parameter.
  * @param {string} context - context parameter.

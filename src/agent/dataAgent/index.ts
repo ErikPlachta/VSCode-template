@@ -100,10 +100,12 @@ export class DataAgent {
   private readonly telemetry = createInvocationLogger(DataAgentProfile.id);
   private readonly config: DataAgentConfig;
 
-  /**
+    /**
    * Create a new {@link DataAgent}.
+   *
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor() {
+constructor() {
     this.config = new DataAgentConfig();
   }
 

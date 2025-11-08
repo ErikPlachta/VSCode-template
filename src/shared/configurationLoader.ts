@@ -65,12 +65,13 @@ export class ConfigurationLoader {
   private config: ApplicationConfig | null = null;
   private configPath: string;
 
-  /**
+    /**
    * Creates a new configuration loader instance.
    *
-   * @param configPat - - - - h-  - Path to the configuration file.
+   * @param {string} configPath - configPath parameter.
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor(configPath: string = "src/mcp.config.json") {
+constructor(configPath: string = "src/mcp.config.json") {
     this.configPath = path.resolve(configPath);
   }
 

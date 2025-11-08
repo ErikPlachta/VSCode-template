@@ -19,7 +19,14 @@ import { orchestratorConfig } from "./agent.config";
 export class OrchestratorConfig extends BaseAgentConfig {
   private orchestrationConfig: OrchestrationConfig;
 
-  constructor(config?: AgentConfigDefinition) {
+  /**
+   * constructor function.
+   *
+   * @param {AgentConfigDefinition} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || orchestratorConfig;
 

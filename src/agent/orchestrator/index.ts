@@ -47,7 +47,13 @@ export class Orchestrator {
   private vaguePhrases: string[];
   private messages: any;
 
-  constructor(config?: OrchestratorConfig) {
+  /**
+   * constructor function.
+   *
+   * @param {OrchestratorConfig} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+constructor(config?: OrchestratorConfig) {
     this.config = config || OrchestratorConfig.createDefault();
     this.stopWords = this.config.getStopWords();
     this.intentAgentMap = this.config.getIntentAgentMap();
@@ -409,7 +415,7 @@ private formatResponseForUser(
  *
  * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-public getCurrentConfig() {
+public getCurrentConfig(): Record<string, unknown>  {
     return {
       supportedIntents: this.getSupportedIntents(),
       intentAgentMap: this.intentAgentMap,

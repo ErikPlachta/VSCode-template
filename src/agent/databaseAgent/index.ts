@@ -81,14 +81,15 @@ export class DatabaseAgent {
   private readonly profile: typeof DatabaseAgentProfile;
   private readonly config: DatabaseAgentConfig;
 
-  /**
+    /**
    * Creates a new DatabaseAgent instance.
    *
-   * @param {DataSource[]} dataSources - - - - - Array of data sources to query against
-   * @param {Promise<string>} cacheDirectory - - - - - Promise resolving to cache directory path
-   * @param {Partial<DatabaseAgentConfig>} _config - - - - - Optional configuration for the agent (currently ignored; config driven by typed defaults)
+   * @param {DataSource[]} dataSources - dataSources parameter.
+   * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
+   * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor(
+constructor(
     dataSources: DataSource[],
     cacheDirectory: Promise<string>,
     _config?: Partial<DatabaseAgentConfig>

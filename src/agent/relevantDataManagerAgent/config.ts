@@ -19,7 +19,14 @@ import { relevantDataManagerAgentConfig } from "./agent.config";
 export class RelevantDataManagerAgentConfig extends BaseAgentConfig {
   private relevantDataManagerConfig: RelevantDataManagerConfig;
 
-  constructor(config?: AgentConfigDefinition) {
+  /**
+   * constructor function.
+   *
+   * @param {AgentConfigDefinition} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
+   * @throws {Error} - May throw an error.
+   */
+constructor(config?: AgentConfigDefinition) {
     // Use the TypeScript config as default, allow override for testing
     const configToUse = config || relevantDataManagerAgentConfig;
 
@@ -389,7 +396,7 @@ public shouldDetectCircularReferences(): boolean {
  *
  * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-public getTelemetryConfig() {
+public getTelemetryConfig(): Record<string, unknown>  {
     return {
       logQueries: this.config.telemetry?.logQueries ?? true,
       logPerformance: this.config.telemetry?.logPerformance ?? true,
@@ -408,7 +415,7 @@ public getTelemetryConfig() {
  *
  * @returns {Record<string, unknown>} - TODO: describe return value.
  */
-public getErrorHandlingConfig() {
+public getErrorHandlingConfig(): Record<string, unknown>  {
     return {
       maxRetries: this.config.errorHandling?.maxRetries ?? 3,
       retryDelay: this.config.errorHandling?.retryDelay ?? 2000,

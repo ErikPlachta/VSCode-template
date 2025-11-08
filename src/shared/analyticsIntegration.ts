@@ -46,18 +46,21 @@ export abstract class TrackedAgent {
   private analytics: AgentUsageAnalytics;
   protected agentName: string;
 
-  /**
+    /**
    * Creates a new tracked agent instance.
    *
-   * @param agentNam - - - - e-  - Name of the agent for analytics tracking.
+   * @param {string} agentName - agentName parameter.
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor(agentName: string) {
+constructor(agentName: string) {
     this.agentName = agentName;
     this.analytics = getAnalytics();
   }
 
     /**
  * Executes a tracked operation with automatic analytics recording.
+ *
+ * @template T
  *
  * @param {string} operationName - operationName parameter.
  * @param {() => Promise<T>} operation - operation parameter.
@@ -114,6 +117,8 @@ getStats(since?: Date): any | null {
 /**
  * Analytics middleware for MCP method invocations.
  *
+ * @template T
+ *
  * @param {string} agentName - agentName parameter.
  * @param {string} methodName - methodName parameter.
  * @param {T} handler - handler parameter.
@@ -147,15 +152,19 @@ export function withAnalytics<T extends (...args: any[]) => Promise<any>>(
 export class PerformanceMonitor {
   private analytics: AgentUsageAnalytics;
 
-  /**
+    /**
    * Creates a new performance monitor instance.
+   *
+   * @returns {unknown} - TODO: describe return value.
    */
-  constructor() {
+constructor() {
     this.analytics = getAnalytics();
   }
 
     /**
  * Monitors the performance of a database query operation.
+ *
+ * @template T
  *
  * @param {string} queryType - queryType parameter.
  * @param {() => Promise<T>} query - query parameter.
@@ -185,6 +194,8 @@ async monitorDatabaseQuery<T>(
 
     /**
  * Monitors data processing operations.
+ *
+ * @template T
  *
  * @param {string} operationType - operationType parameter.
  * @param {() => Promise<T>} processor - processor parameter.
@@ -219,6 +230,8 @@ async monitorDataProcessing<T>(
 
     /**
  * Monitors orchestration decisions and routing.
+ *
+ * @template T
  *
  * @param {string} decision - decision parameter.
  * @param {() => Promise<T>} orchestration - orchestration parameter.

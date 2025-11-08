@@ -65,13 +65,14 @@ export class RepositoryHealthAgent {
   private readonly config: AgentConfig;
   private readonly ajv: Ajv;
 
-  /**
+    /**
    * Create a new health agent using the provided configuration.
    *
-   * @param {string} baseDir - - - - - Repository root directory.
-   * @param {AgentConfig} config - - - - - Parsed agent configuration contract.
+   * @param {string} baseDir - baseDir parameter.
+   * @param {AgentConfig} config - config parameter.
+   * @returns {unknown} - TODO: describe return value.
    */
-  public constructor(baseDir: string, config: AgentConfig) {
+public constructor(baseDir: string, config: AgentConfig) {
     this.baseDir = baseDir;
     this.config = config;
     this.ajv = new Ajv2020({
