@@ -6,6 +6,7 @@
 
 import path from "node:path";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { loadApplicationConfig } from "../shared/configurationLoader";
 import { ESLint } from "eslint";
 import Ajv, { ErrorObject } from "ajv";
 import Ajv2020 from "ajv/dist/2020";
@@ -181,9 +182,25 @@ export class RepositoryHealthAgent {
    * ```
    */
   public static async loadConfig(configPath: string): Promise<AgentConfig> {
-    const absolutePath: string = path.resolve(process.cwd(), configPath);
-    const rawContent: string = await readFile(absolutePath, "utf8");
-    return JSON.parse(rawContent) as AgentConfig;
+    // Deprecated path based loading retained for backward compatibility while migrating
+    // to typed application configuration. Prefer typed application config if present.
+    try {
+      const app = await loadApplicationConfig();
+      return {
+        typescript: app.typescript,
+        jsonSchemas: app.jsonSchemas,
+        markdown: app.markdown,
+        report: app.report,
+      } as AgentConfig;
+    } catch {
+      const absolutePath: string = path.resolve(process.cwd(), configPath);
+      const rawContent: string = await readFile(absolutePath, "utf8");
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[health-check] Deprecated JSON configuration load from ${configPath}. Migrate to application.config.ts`
+      );
+      return JSON.parse(rawContent) as AgentConfig;
+    }
   }
 
   /**
@@ -204,6 +221,16 @@ export class RepositoryHealthAgent {
     const config: AgentConfig = await RepositoryHealthAgent.loadConfig(
       configPath
     );
+    return new RepositoryHealthAgent(process.cwd(), config);
+  }
+
+  /**
+   * Create an agent using an already materialized AgentConfig.
+   *
+   * @param config-  - Agent configuration object.
+   * @returns - RepositoryHealthAgent instance using the provided configuration.
+   */
+  public static createFromConfig(config: AgentConfig): RepositoryHealthAgent {
     return new RepositoryHealthAgent(process.cwd(), config);
   }
 
@@ -431,7 +458,7 @@ export class RepositoryHealthAgent {
       "",
       `## Inputs`,
       "",
-      `- mcp.config.json for configuration directives.`,
+      `- application.config.ts (preferred) or legacy mcp.config.json for configuration directives.`,
       `- JSON Schemas under the schemas directory.`,
       `- Repository TypeScript and Markdown sources.`,
       "",

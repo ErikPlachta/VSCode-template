@@ -4,6 +4,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import type {
   ApplicationConfig,
   EnvironmentConfig,
@@ -85,20 +86,56 @@ export class ConfigurationLoader {
     }
 
     try {
+      // 1) Prefer compiled TS application config (out/src/config/application.config.js)
+      const tsConfig = await this.tryLoadTsConfig();
+      if (tsConfig) {
+        this.config = this.mergeWithDefaults(tsConfig);
+        return this.config;
+      }
+
+      // 2) Fallback to legacy JSON with deprecation warning
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[config] Falling back to legacy JSON at ${this.configPath}. This path is deprecated; migrate to src/config/application.config.ts`
+      );
       const configContent = await fs.promises.readFile(
         this.configPath,
         "utf-8"
       );
       const parsedConfig = JSON.parse(configContent) as ApplicationConfig;
 
-      // Validate and merge with defaults
       this.config = this.mergeWithDefaults(parsedConfig);
-
       return this.config;
     } catch (error) {
       throw new Error(
         `Failed to load configuration from ${this.configPath}: ${error}`
       );
+    }
+  }
+
+  /**
+   * Attempts to load the compiled JS for TS application config.
+   * Looks relative to compiled output directory.
+   */
+  private async tryLoadTsConfig(): Promise<ApplicationConfig | null> {
+    try {
+      const compiledPath = path.resolve(
+        __dirname,
+        "../config/application.config.js"
+      );
+      const url = pathToFileURL(compiledPath).href;
+      const mod = await import(url);
+      const cfg: unknown = mod?.default ?? mod?.applicationConfig ?? null;
+      if (cfg && typeof cfg === "object") {
+        // Minimal runtime shape check
+        const app = cfg as ApplicationConfig;
+        if (app.application && app.mcp) {
+          return app;
+        }
+      }
+      return null;
+    } catch {
+      return null;
     }
   }
 
