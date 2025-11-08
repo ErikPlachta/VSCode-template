@@ -8,7 +8,7 @@
 
 > **registerMcpProvider**(`serverUrl`, `token`, `includeAuthHeader`, `context`): `void`
 
-Defined in: [src/extension/mcpProvider.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/extension/mcpProvider.ts#L15)
+Defined in: [src/extension/mcpProvider.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpProvider.ts#L15)
 
 registerMcpProvider function.
 

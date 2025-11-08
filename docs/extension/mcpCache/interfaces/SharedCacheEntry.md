@@ -6,7 +6,7 @@
 
 # Interface: SharedCacheEntry\<T\>
 
-Defined in: [src/extension/mcpCache.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/extension/mcpCache.ts#L20)
+Defined in: [src/extension/mcpCache.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpCache.ts#L20)
 
 Minimal representation of a cached artefact that can be exchanged across tools.
 
@@ -24,7 +24,7 @@ Payload type stored in the cache entry.
 
 > **key**: `string`
 
-Defined in: [src/extension/mcpCache.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/extension/mcpCache.ts#L22)
+Defined in: [src/extension/mcpCache.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpCache.ts#L22)
 
 Uniquely identifies the record on disk.
 
@@ -34,7 +34,7 @@ Uniquely identifies the record on disk.
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/extension/mcpCache.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/extension/mcpCache.ts#L30)
+Defined in: [src/extension/mcpCache.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpCache.ts#L30)
 
 Optional metadata hints for downstream orchestration.
 
@@ -44,7 +44,7 @@ Optional metadata hints for downstream orchestration.
 
 > **timestamp**: `string`
 
-Defined in: [src/extension/mcpCache.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/extension/mcpCache.ts#L26)
+Defined in: [src/extension/mcpCache.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpCache.ts#L26)
 
 Timestamp recorded when the value was persisted.
 
@@ -54,7 +54,7 @@ Timestamp recorded when the value was persisted.
 
 > **toolName**: `string`
 
-Defined in: [src/extension/mcpCache.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/extension/mcpCache.ts#L24)
+Defined in: [src/extension/mcpCache.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpCache.ts#L24)
 
 Name of the tool that produced the cached payload.
 
@@ -64,6 +64,6 @@ Name of the tool that produced the cached payload.
 
 > **value**: `T`
 
-Defined in: [src/extension/mcpCache.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/extension/mcpCache.ts#L28)
+Defined in: [src/extension/mcpCache.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/extension/mcpCache.ts#L28)
 
 Arbitrary payload produced by the tool.

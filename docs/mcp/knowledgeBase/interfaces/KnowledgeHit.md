@@ -6,7 +6,7 @@
 
 # Interface: KnowledgeHit
 
-Defined in: [src/mcp/knowledgeBase.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/knowledgeBase.ts#L20)
+Defined in: [src/mcp/knowledgeBase.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/mcp/knowledgeBase.ts#L20)
 
 KnowledgeHit interface.
 
@@ -16,7 +16,7 @@ KnowledgeHit interface.
 
 > **id**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/knowledgeBase.ts#L21)
+Defined in: [src/mcp/knowledgeBase.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/mcp/knowledgeBase.ts#L21)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/knowledgeBase.ts:21](https://github.com/ErikPlachta/vscode-
 
 > **score**: `number`
 
-Defined in: [src/mcp/knowledgeBase.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/knowledgeBase.ts#L24)
+Defined in: [src/mcp/knowledgeBase.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/mcp/knowledgeBase.ts#L24)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/mcp/knowledgeBase.ts:24](https://github.com/ErikPlachta/vscode-
 
 > **summary**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/knowledgeBase.ts#L23)
+Defined in: [src/mcp/knowledgeBase.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/mcp/knowledgeBase.ts#L23)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/mcp/knowledgeBase.ts:23](https://github.com/ErikPlachta/vscode-
 
 > **title**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/knowledgeBase.ts#L22)
+Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/mcp/knowledgeBase.ts#L22)

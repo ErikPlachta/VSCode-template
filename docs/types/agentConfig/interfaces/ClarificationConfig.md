@@ -6,7 +6,7 @@
 
 # Interface: ClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:271](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/agentConfig.ts#L271)
+Defined in: [src/types/agentConfig.ts:271](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/agentConfig.ts#L271)
 
 Clarification agent-specific configuration
 
@@ -16,7 +16,7 @@ Clarification agent-specific configuration
 
 > `optional` **contextAnalysis**: `object`
 
-Defined in: [src/types/agentConfig.ts:307](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/agentConfig.ts#L307)
+Defined in: [src/types/agentConfig.ts:307](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/agentConfig.ts#L307)
 
 #### contextConfidenceThreshold?
 
@@ -44,7 +44,7 @@ Defined in: [src/types/agentConfig.ts:307](https://github.com/ErikPlachta/vscode
 
 > **escalation**: `object`
 
-Defined in: [src/types/agentConfig.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/agentConfig.ts#L285)
+Defined in: [src/types/agentConfig.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/agentConfig.ts#L285)
 
 #### clarificationTimeWindow?
 
@@ -72,7 +72,7 @@ Defined in: [src/types/agentConfig.ts:285](https://github.com/ErikPlachta/vscode
 
 > **guidance**: `object`
 
-Defined in: [src/types/agentConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/agentConfig.ts#L272)
+Defined in: [src/types/agentConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/agentConfig.ts#L272)
 
 #### guidanceTypes?
 
@@ -120,7 +120,7 @@ Defined in: [src/types/agentConfig.ts:272](https://github.com/ErikPlachta/vscode
 
 > **knowledgeBase**: `object`
 
-Defined in: [src/types/agentConfig.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/agentConfig.ts#L292)
+Defined in: [src/types/agentConfig.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/agentConfig.ts#L292)
 
 #### enableKnowledgeRanking?
 
@@ -152,7 +152,7 @@ Defined in: [src/types/agentConfig.ts:292](https://github.com/ErikPlachta/vscode
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:314](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/agentConfig.ts#L314)
+Defined in: [src/types/agentConfig.ts:314](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/agentConfig.ts#L314)
 
 #### enableParallelProcessing?
 
@@ -180,7 +180,7 @@ Defined in: [src/types/agentConfig.ts:314](https://github.com/ErikPlachta/vscode
 
 > `optional` **routing**: `object`
 
-Defined in: [src/types/agentConfig.ts:300](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/types/agentConfig.ts#L300)
+Defined in: [src/types/agentConfig.ts:300](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/types/agentConfig.ts#L300)
 
 #### analyzeMissingSignals?
 

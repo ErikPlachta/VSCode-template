@@ -8,6 +8,6 @@
 
 > `const` **agentManifest**: `Record`\<`string`, [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)\>
 
-Defined in: [src/mcp/config/agentManifest.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b0fb0bd0008831a8eec6aad9fe7afd1f38d5ab11/src/mcp/config/agentManifest.ts#L36)
+Defined in: [src/mcp/config/agentManifest.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/8f6b6620372b18eb20e9af44ec4f77c975b604d8/src/mcp/config/agentManifest.ts#L36)
 
 Manifest describing the capabilities of every agent.

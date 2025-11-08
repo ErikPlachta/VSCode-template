@@ -54,7 +54,7 @@ associations:
 - Introduced this changelog as the single source of truth for Copilot Chat–managed work. Updated `.github/copilot-instructions.md` to reference this flow and resume prompts.
 - Added build pipeline, orchestration overview, and repository health agent documentation.
 - Added JSDoc & TypeDoc Style Guide at `docs/guides/jsdoc-style-guide.md`; updated `mcpCache` and `telemetry` as exemplars for cross-linking and clearer contracts.
-- Updated README links to structured documentation hierarchy (guides/, concepts/, reference/tools/); removed legacy paths pointing to deprecated root duplicates.
+- Rewrote root `README.md` to be user-focused (install, configure, commands). Moved developer content to `docs/guides/development-workflow.md`. Updated links to structured docs to avoid TypeDoc copy warnings.
 
 ---
 
