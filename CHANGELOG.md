@@ -37,7 +37,11 @@ This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Lo
 
 ## Outstanding Tasks
 
+### Current Tasks
+
 All incomplete tasks. Organized by priority and managed by User and Copilot Chat.
+
+- Normalize log entry spacing (blank line after heading)
 
 ### Priority 1 - Current Priority
 
@@ -76,11 +80,12 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### Priority 3 - No Priority
 
-- Any additional enhancements to the changelog utility script.
-
 - Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator).
-
 - Convert all bin/utils tools into self-contained modules (doc, JSDoc, template, package config, import fixes).
+- feat: add force typing and JSDoc comments to `bin` content.
+- feat: add full test coverage to `bin` content.
+- fix: Changelog CLI: centralize config, remove snippet assumptions, stop blank-line insertion, add sub-task support for Outstanding Tasks
+- fix: Changelog CLI: testing this
 <!-- CHANGELOG:END:OUTSTANDING_TASKS -->
 
 <!-- CHANGELOG:BEGIN:LOGS -->
@@ -90,6 +95,40 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 All change history. Organized by date/time and semantic titles; verification recorded after each batch.
 
 ### [2025-11-09] Refactor Agents
+
+#### 2025-11-09 12:29:41 feat: Add Current Tasks section, prune-completed command, spacing normalization & H5 verification heading
+
+- Introduced ### Current Tasks section with add-current CLI command
+- Added prune-completed command with automatic log entry summary
+- Normalized log entry heading spacing (blank line after heading)
+- Verification subheading now H5 (#####)
+- Expanded completedPrefixes for pruning detection
+
+##### Verification – post-change quality gates
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+
+#### 2025-11-09 12:09:48 test: Entry with verification
+
+- Point A
+- Point B
+
+#### verification – post-change validation
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+
+#### 2025-11-09 12:07:38 fix: Add details support to add-entry
+
+- Centralized constants in config
+- Removed snippet assumptions
+- Avoided extra blank lines
+- Added sub-task support in Outstanding Tasks
 
 #### 2025-11-09 11:25:00 refactor: Consolidate changelog automation (remove legacy script/snippets; add export-json)
 

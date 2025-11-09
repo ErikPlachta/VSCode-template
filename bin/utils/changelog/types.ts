@@ -36,7 +36,7 @@ export interface LogEntry {
   time: string; // HH:MM:SS
   type: LogType;
   summary: string; // short heading summary
-  details: string[]; // bullet lines
+  details: string[]; // bullet lines ("- " stripped)
   verification?: VerificationBlock;
 }
 
@@ -47,8 +47,9 @@ export interface DayLogSection {
 }
 
 export interface OutstandingTaskItem {
-  rawLine: string; // original markdown line for fidelity
+  rawLine: string; // original markdown line for fidelity (parent line)
   priority: 1 | 2 | 3;
+  subTasks?: string[]; // optional nested subtasks (without leading markdown bullet)
 }
 
 export interface ChangelogData {
@@ -63,5 +64,16 @@ export interface ChangelogConfig {
     outstandingEnd: string;
     logsBegin: string;
     logsEnd?: string; // optional future end marker
+  };
+  headings: {
+    outstanding: string; // e.g. '## Outstanding Tasks'
+    logs: string; // e.g. '## Logs'
+    currentTasks?: string; // optional '### Current Tasks'
+  };
+  patterns: {
+    priorityPrefix: string; // e.g. '### Priority '
+    bullet: string; // e.g. '- '
+    subBullet: string; // e.g. '  - '
+    completedPrefixes?: string[]; // e.g. ['fix:', 'feat:', ...]
   };
 }

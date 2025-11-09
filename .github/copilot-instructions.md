@@ -147,8 +147,7 @@ To guarantee accurate current timestamps and consistent formatting for new log e
 
 - Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary"`
 - Ensure markers: `npm run changelog:manage -- insert-markers`
-
-Valid types: fix | feat | chore | docs | refactor | test | perf | ci | build | style.
+- Valid types: fix | feat | chore | docs | refactor | test | perf | ci | build | style.
 
 Notes:
 

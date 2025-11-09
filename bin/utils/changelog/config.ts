@@ -9,6 +9,30 @@ export const defaultChangelogConfig: ChangelogConfig = {
     logsBegin: "<!-- CHANGELOG:BEGIN:LOGS -->",
     logsEnd: "<!-- CHANGELOG:END:LOGS -->",
   },
+  headings: {
+    outstanding: "## Outstanding Tasks",
+    logs: "## Logs",
+    currentTasks: "### Current Tasks",
+  },
+  patterns: {
+    priorityPrefix: "### Priority ",
+    bullet: "- ",
+    subBullet: "  - ",
+    completedPrefixes: [
+      "✅",
+      "[x]",
+      "fix:",
+      "feat:",
+      "chore:",
+      "docs:",
+      "refactor:",
+      "test:",
+      "perf:",
+      "ci:",
+      "build:",
+      "style:",
+    ],
+  },
 };
 
 export const DAY_HEADING_PREFIX = "### ["; // e.g. "### [2025-11-09] ..."
