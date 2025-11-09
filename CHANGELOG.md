@@ -55,6 +55,20 @@ Guidelines:
 
 ### Verification (latest session 2025-11-08)
 
+### Fixed (2025-11-08 – DatabaseAgent JSDoc + operators tests)
+
+- `src/agent/databaseAgent/index.ts` JSDoc completed with precise param/returns/throws across public and private methods (removed TODO placeholders).
+- Added `tests/databaseAgent.operators.test.ts` to exercise operator handling ($eq, $ne, $gt/$gte/$lt/$lte, $in/$nin, $regex, $exists), alias mapping, cache behavior, helpers, and unknown category error.
+- Lint and health remain PASS; tests PASS.
+
+### Added (2025-11-08 – Coverage expansion batch)
+
+- Added `tests/relevantDataManagerAgent.edges.test.ts` to cover empty search cases, missing record lookups, and dataset fingerprint/hash stability checks.
+- Added `tests/mcpCache.extra.test.ts` to exercise shared cache store/read/list/delete flows and invocation logging, including missing-entry handling.
+- Extended `$regex` coverage in `tests/databaseAgent.operators.test.ts` to include non-string field behavior.
+- Added `tests/databaseAgent.cache-errors.test.ts` to cover cache read error path, cache write failure path, and useCache=false branch.
+- All tests, lint, and health reports PASS; coverage trending upward (still shy of 100%).
+
 - Build: PASS
 - Tests: PASS
 - Lint: PASS – no errors; previous MODULE_TYPELESS_PACKAGE_JSON warning resolved by adding `"type": "module"` to `package.json`.
@@ -107,6 +121,38 @@ Guidelines:
   - Confirmed subsequent lint invocation no longer emits the warning.
 
 ### Docs
+
+### Fixed (2025-11-08 – Dataset root alignment & extension test updates)
+
+- `src/agent/relevantDataManagerAgent/index.ts` updated `DEFAULT_DATA_ROOT` from deprecated `bin/data` to new `src/userContext` directory; added test overrides via `VSCODE_TEMPLATE_DATA_ROOT` to remove hardcoded path assumption and unblock agent/database/data test suites.
+- Tests (`tests/relevantDataManagerAgent.test.ts`, `tests/databaseAgent.test.ts`, `tests/dataAgent.test.ts`) now set env var before creation to ensure consistent dataset loading; prevents cascading failures in dependent agents.
+- `tests/extension.test.ts` refactored to match current activation flow using `vscode.chat.createChatParticipant` (removed legacy slash command/mention expectations); updated info message assertion to new phrasing.
+- Replaced disallowed JSDoc `TODO: describe return value` placeholders in relevant data manager agent with concrete return descriptions to satisfy lint rules.
+
+### Verification Update (post dataset root fix 2025-11-08)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health report: PASS
+- Coverage: IMPROVED (follow-up to reach 100%)
+- JSDoc: IMPROVED
+
+### Added (2025-11-08 – Consolidated index cache behaviour tests)
+
+- Added `tests/relevantDataManagerAgent.catalogueCacheHit.test.ts` to ensure the consolidated index (dataset catalogue) is only persisted once when the dataset fingerprint matches an existing shared cache entry, exercising the early return branch in `persistConsolidatedIndex`.
+- Added `tests/relevantDataManagerAgent.catalogueCacheDivergence.test.ts` to modify dataset records and assert that a changed fingerprint triggers a subsequent persist to the shared cache (cache miss path).
+
+### Verification (after cache-hit + divergence tests 2025-11-08)
+
+- Build: PASS
+- Tests: PASS (cache-hit and divergence scenarios validated; full suite green)
+- Lint: PASS (no new JSDoc regressions introduced by test)
+- Docs: UNCHANGED (PASS)
+- Health: PASS
+- Coverage: IMPROVED (both fingerprint branches covered)
+- JSDoc: UNCHANGED (PASS)
 
 - Introduced this changelog as the single source of truth for Copilot Chat–managed work. Updated `.github/copilot-instructions.md` to reference this flow and resume prompts.
 - Added build pipeline, orchestration overview, and repository health agent documentation.

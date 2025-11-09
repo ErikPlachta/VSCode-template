@@ -96,10 +96,9 @@ export class DatabaseAgent {
   /**
    * Creates a new DatabaseAgent instance.
    *
-   * @param {DataSource[]} dataSources - dataSources parameter.
-   * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
-   * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
-   * @returns {unknown} - TODO: describe return value.
+   * @param {DataSource[]} dataSources - One or more data sources to query.
+   * @param {Promise<string>} cacheDirectory - Directory where shared cache entries are stored.
+   * @param {Partial<DatabaseAgentConfig>} _config - Optional overrides for agent behavior (reserved).
    */
   constructor(
     dataSources: DataSource[],
@@ -116,11 +115,11 @@ export class DatabaseAgent {
   /**
    * Executes a generic query against any data source.
    *
-   * @param {CategoryId} categoryId - categoryId parameter.
-   * @param {Record<string, unknown>} criteria - criteria parameter.
-   * @param {QueryOptions} options - options parameter.
-   * @returns {Promise<CategoryRecord[]>} - TODO: describe return value.
-   * @throws {Error} - May throw an error.
+   * @param {CategoryId} categoryId - Identifier of the data source to query.
+   * @param {Record<string, unknown>} criteria - Key-value filters; supports operators like $eq, $in, $regex, etc.
+   * @param {QueryOptions} options - Execution options (cache behavior, key prefix).
+   * @returns {Promise<CategoryRecord[]>} Matching records (possibly retrieved from cache when enabled).
+   * @throws {Error} When the categoryId does not exist.
    */
   async executeQuery(
     categoryId: CategoryId,
@@ -194,7 +193,7 @@ export class DatabaseAgent {
   /**
    * Gets available data sources.
    *
-   * @returns {CategoryId[]} - TODO: describe return value.
+   * @returns {CategoryId[]} Array of known category identifiers.
    */
   getAvailableCategories(): CategoryId[] {
     return Array.from(this.dataSources.keys());
@@ -203,8 +202,8 @@ export class DatabaseAgent {
   /**
    * Gets metadata for a specific data source.
    *
-   * @param {CategoryId} categoryId - categoryId parameter.
-   * @returns {DataSource | undefined} - TODO: describe return value.
+   * @param {CategoryId} categoryId - Category identifier to look up.
+   * @returns {DataSource | undefined} Data source details or undefined when not found.
    */
   getCategoryInfo(categoryId: CategoryId): DataSource | undefined {
     return this.dataSources.get(categoryId);
@@ -213,8 +212,8 @@ export class DatabaseAgent {
   /**
    * Clears cached results for a specific category.
    *
-   * @param {CategoryId} categoryId - categoryId parameter.
-   * @returns {Promise<void>} - TODO: describe return value.
+   * @param {CategoryId} categoryId - Category identifier for which to clear cached results.
+   * @returns {Promise<void>} Resolves when deletion attempts complete.
    */
   async clearCache(categoryId: CategoryId): Promise<void> {
     const cacheDir = await this.cacheDirectory;
@@ -227,9 +226,9 @@ export class DatabaseAgent {
   /**
    * Filters records based on generic criteria.
    *
-   * @param {DataSource} dataSource - dataSource parameter.
-   * @param {Record<string, unknown>} criteria - criteria parameter.
-   * @returns {CategoryRecord[]} - TODO: describe return value.
+   * @param {DataSource} dataSource - Data source to scan.
+   * @param {Record<string, unknown>} criteria - Key-value filters to apply.
+   * @returns {CategoryRecord[]} Records that satisfy all provided criteria.
    */
   private filterRecords(
     dataSource: DataSource,
@@ -253,10 +252,10 @@ export class DatabaseAgent {
   /**
    * Checks if a record matches specific criteria.
    *
-   * @param {CategoryRecord} record - record parameter.
-   * @param {string} field - field parameter.
-   * @param {unknown} value - value parameter.
-   * @returns {boolean} - TODO: describe return value.
+   * @param {CategoryRecord} record - Candidate record to test.
+   * @param {string} field - Field to evaluate.
+   * @param {unknown} value - Expected value or operator object.
+   * @returns {boolean} True when the record satisfies the condition.
    */
   private matchesCriteria(
     record: CategoryRecord,
@@ -355,10 +354,10 @@ export class DatabaseAgent {
   /**
    * Builds a stable cache key for a query.
    *
-   * @param {CategoryId} categoryId - categoryId parameter.
-   * @param {Record<string, unknown>} criteria - criteria parameter.
-   * @param {string} prefix - prefix parameter.
-   * @returns {string} - TODO: describe return value.
+   * @param {CategoryId} categoryId - Category identifier.
+   * @param {Record<string, unknown>} criteria - Query criteria used to derive a hash.
+   * @param {string} prefix - Optional namespace prefix to avoid collisions.
+   * @returns {string} Stable cache key.
    */
   private buildCacheKey(
     categoryId: CategoryId,
@@ -387,8 +386,8 @@ export class DatabaseAgent {
   /**
    * Retrieves cached query result.
    *
-   * @param {string} cacheKey - cacheKey parameter.
-   * @returns {Promise<CategoryRecord[] | null>} - TODO: describe return value.
+   * @param {string} cacheKey - Cache key previously generated via {@link buildCacheKey}.
+   * @returns {Promise<CategoryRecord[] | null>} Cached records or null when not found.
    */
   private async getCachedResult(
     cacheKey: string
@@ -408,9 +407,9 @@ export class DatabaseAgent {
   /**
    * Stores query result in cache.
    *
-   * @param {string} cacheKey - cacheKey parameter.
-   * @param {CategoryRecord[]} results - results parameter.
-   * @returns {Promise<void>} - TODO: describe return value.
+   * @param {string} cacheKey - Cache key where the results will be stored.
+   * @param {CategoryRecord[]} results - Records to persist.
+   * @returns {Promise<void>} Resolves when the cache entry is written (errors are swallowed and logged).
    */
   private async cacheResult(
     cacheKey: string,
@@ -441,7 +440,7 @@ export class DatabaseAgent {
  * @param {DataSource[]} dataSources - dataSources parameter.
  * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
  * @param {Partial<DatabaseAgentConfig>} config - config parameter.
- * @returns {DatabaseAgent} - TODO: describe return value.
+ * @returns {DatabaseAgent} A configured database agent.
  */
 export function createDatabaseAgent(
   dataSources: DataSource[],

@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { DatabaseAgent } from "../src/agent/databaseAgent";
+import { DatabaseAgent, DataSource } from "../src/agent/databaseAgent";
 import { RelevantDataManagerAgent } from "../src/agent/relevantDataManagerAgent";
 
 let workspaceFoldersMock: any[] | undefined;
@@ -19,6 +19,13 @@ jest.mock(
 );
 
 describe("DatabaseAgent", () => {
+  beforeAll(() => {
+    process.env.VSCODE_TEMPLATE_DATA_ROOT = path.resolve(
+      __dirname,
+      "../src/userContext"
+    );
+  });
+
   beforeEach(() => {
     workspaceFoldersMock = undefined;
   });
@@ -32,13 +39,25 @@ describe("DatabaseAgent", () => {
       path.join(os.tmpdir(), "database-agent-test-")
     );
     const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
-    const database = new DatabaseAgent(manager, Promise.resolve(cacheDir));
+    // Adapt to new database agent signature: provide data sources explicitly
+    const dataSources: DataSource[] = manager
+      .listCategories()
+      .map((summary) => {
+        const category = manager.getCategory(summary.id);
+        return {
+          id: category.id,
+          name: category.name,
+          records: category.records,
+          fieldAliases: {},
+        } as DataSource;
+      });
+    const database = new DatabaseAgent(dataSources, Promise.resolve(cacheDir));
     return { manager, database, cacheDir };
   }
 
   it("filters people by skill and application access", async () => {
     const { database } = await createAgents();
-    const results = await database.queryPeople({
+    const results = await database.executeQuery("people", {
       skill: "python",
       applicationId: "app-aurora",
     });
@@ -48,7 +67,7 @@ describe("DatabaseAgent", () => {
 
   it("filters departments by related systems", async () => {
     const { database } = await createAgents();
-    const results = await database.queryDepartments({
+    const results = await database.executeQuery("departments", {
       applicationId: "app-foundry",
     });
     expect(results.map((record) => record.id)).toEqual(["dept-platform"]);
@@ -59,15 +78,9 @@ describe("DatabaseAgent", () => {
     const sharedDir = path.join(cacheDir, "shared");
     const before = await fs.readdir(sharedDir).catch(() => []);
 
-    const { blueprint, results } = await database.runSavedQuery(
-      "applications",
-      "Fetch critical applications",
-      {
-        criticality: "high",
-      }
-    );
-
-    expect(blueprint.samplePayload.endpoint).toContain("cmdb.example.com");
+    const results = await database.executeQuery("applications", {
+      criticality: "high",
+    });
     expect(results.length).toBeGreaterThan(0);
 
     const after = await fs.readdir(sharedDir);
@@ -76,7 +89,7 @@ describe("DatabaseAgent", () => {
 
   it("retrieves policy coverage for a department", async () => {
     const { database } = await createAgents();
-    const policies = await database.queryPolicies({
+    const policies = await database.executeQuery("companyPolicies", {
       ownerDepartmentId: "dept-platform",
     });
     expect(policies.map((policy) => policy.id)).toEqual([
@@ -86,7 +99,7 @@ describe("DatabaseAgent", () => {
 
   it("retrieves resources bound to an application", async () => {
     const { database } = await createAgents();
-    const resources = await database.queryResources({
+    const resources = await database.executeQuery("companyResources", {
       applicationId: "app-aurora",
     });
     const ids = resources.map((resource) => resource.id);
@@ -102,7 +115,7 @@ describe("DatabaseAgent", () => {
     const { database, manager, cacheDir } = await createAgents();
     const sharedDir = path.join(cacheDir, "shared");
 
-    await database.queryCategory("people", { departmentId: "dept-analytics" });
+    await database.executeQuery("people", { departmentId: "dept-analytics" });
     const cacheFiles = await fs.readdir(sharedDir);
     expect(cacheFiles.length).toBeGreaterThan(0);
     const cachePath = path.join(sharedDir, cacheFiles[0]);
@@ -113,7 +126,7 @@ describe("DatabaseAgent", () => {
     const clone = { ...category.records[0], id: "person-temp" };
     category.records.push(clone);
 
-    await database.queryCategory("people", { departmentId: "dept-analytics" });
+    await database.executeQuery("people", { departmentId: "dept-analytics" });
     const updatedEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
     expect(updatedEntry.metadata?.recordHash).not.toEqual(
       initialEntry.metadata.recordHash

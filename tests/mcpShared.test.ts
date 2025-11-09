@@ -1,10 +1,13 @@
-import { agentManifest, getAgentMetadata } from "../../src/mcp/agentManifest";
+import {
+  agentManifest,
+  getAgentMetadata,
+} from "../src/mcp/config/agentManifest";
 import {
   ClarificationAgentProfile,
   DataAgentProfile,
   DatabaseAgentProfile,
   RelevantDataManagerAgentProfile,
-} from "../../src/mcp/agentProfiles";
+} from "../src/mcp/config/agentProfiles";
 import { renderEscalationPrompt } from "../src/mcp/prompts";
 import { createInvocationLogger, InvocationEvent } from "../src/mcp/telemetry";
 import {

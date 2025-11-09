@@ -22,6 +22,14 @@ jest.mock(
 );
 
 describe("RelevantDataManagerAgent", () => {
+  beforeAll(() => {
+    // Ensure the agent reads datasets from the new userContext directory
+    process.env.VSCODE_TEMPLATE_DATA_ROOT = path.resolve(
+      __dirname,
+      "../src/userContext"
+    );
+  });
+
   beforeEach(() => {
     workspaceFoldersMock = undefined;
   });
@@ -164,9 +172,7 @@ describe("RelevantDataManagerAgent", () => {
 
   it("throws when an unknown topic is requested", async () => {
     const { manager } = await createManager();
-    expect(() => manager.getCategory("unknown")).toThrowError(
-      UnknownCategoryError
-    );
+    expect(() => manager.getCategory("unknown")).toThrow(UnknownCategoryError);
   });
 
   it("creates default manager via factory", () => {

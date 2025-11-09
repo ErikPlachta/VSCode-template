@@ -17,6 +17,7 @@
       "@mcp/*": ["src/mcp/*"],
       "@server/*": ["src/server/*"],
       "@shared/*": ["src/shared/*"],
+      "@config/*": ["src/config/*"],
       "@tools/*": ["src/tools/*"],
       "@internal-types/*": ["src/types/*"],
       "@bin/*": ["bin/*"]
