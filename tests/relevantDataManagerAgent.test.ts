@@ -2,10 +2,10 @@ import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import {
-  createRelevantDataManagerAgent,
-  RelevantDataManagerAgent,
+  createUserContextAgent as createRelevantDataManagerAgent,
+  UserContextAgent as RelevantDataManagerAgent,
   UnknownCategoryError,
-} from "../src/agent/relevantDataManagerAgent";
+} from "../src/agent/userContextAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -21,7 +21,7 @@ jest.mock(
   { virtual: true }
 );
 
-describe("RelevantDataManagerAgent", () => {
+describe("UserContextAgent (legacy RelevantDataManagerAgent parity)", () => {
   beforeAll(() => {
     // Ensure the agent reads datasets from the new userContext directory
     process.env.VSCODE_TEMPLATE_DATA_ROOT = path.resolve(

@@ -3,9 +3,6 @@ import * as os from "os";
 import * as path from "path";
 import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
 
-// This test ensures that the consolidated index (catalogue) is only written once per fingerprint.
-// A second agent instantiation with identical dataset and cache dir should not increase file count.
-
 jest.mock(
   "vscode",
   () => ({
@@ -51,10 +48,11 @@ function categoryConfig(id: string) {
   };
 }
 
-describe("RelevantDataManagerAgent consolidated index cache hit", () => {
+describe("RelevantDataManagerAgent getEntityConnections error path", () => {
   let root: string;
+  let agent: RelevantDataManagerAgent;
   beforeEach(async () => {
-    root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cat-cache-"));
+    root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-entity-"));
     process.env.VSCODE_TEMPLATE_DATA_ROOT = root;
     const categoryDir = path.join(root, "alpha");
     await fs.mkdir(path.join(categoryDir, "schemas"), { recursive: true });
@@ -77,27 +75,15 @@ describe("RelevantDataManagerAgent consolidated index cache hit", () => {
       path.join(categoryDir, "category.json"),
       categoryConfig("alpha")
     );
+    const cacheDir = await fs.mkdtemp(
+      path.join(os.tmpdir(), "rdm-entity-cache-")
+    );
+    agent = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
   });
 
-  it("skips writing catalogue when fingerprint matches", async () => {
-    const cacheDir = await fs.mkdtemp(
-      path.join(os.tmpdir(), "rdm-cat-cache-hit-")
-    );
-    const agent1 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
-    // Allow async dataset load & initial persist
-    await new Promise((r) => setTimeout(r, 60));
-    const sharedDir = path.join(cacheDir, "shared");
-    const beforeFiles = await fs.readdir(sharedDir).catch(() => []);
-    expect(beforeFiles.length).toBeGreaterThan(0);
-
-    const agent2 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
-    await new Promise((r) => setTimeout(r, 60));
-    const afterFiles = await fs.readdir(sharedDir).catch(() => []);
-
-    // No additional file should be written for identical fingerprint
-    expect(afterFiles.length).toEqual(beforeFiles.length);
-    expect(agent1.getDatasetCatalogue().length).toEqual(
-      agent2.getDatasetCatalogue().length
+  it("throws for missing record when resolving connections", () => {
+    expect(() => agent.getEntityConnections("alpha", "missing")).toThrow(
+      /Record missing not found/
     );
   });
 });

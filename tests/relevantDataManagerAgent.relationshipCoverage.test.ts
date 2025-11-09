@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { RelevantDataManagerAgent } from "../src/agent/relevantDataManagerAgent";
+import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
 
 jest.mock(
   "vscode",

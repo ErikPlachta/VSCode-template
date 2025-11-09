@@ -1,0 +1,113 @@
+import { promises as fs } from "fs";
+import * as os from "os";
+import * as path from "path";
+import { DataAgent } from "../../src/agent/dataAgent";
+import { DatabaseAgent } from "../../src/agent/databaseAgent";
+import { RelevantDataManagerAgent } from "../../src/agent/relevantDataManagerAgent";
+
+let workspaceFoldersMock: any[] | undefined;
+
+jest.mock(
+  "vscode",
+  () => ({
+    workspace: {
+      get workspaceFolders() {
+        return workspaceFoldersMock;
+      },
+    },
+  }),
+  { virtual: true }
+);
+
+describe("DataAgent", () => {
+  beforeEach(() => {
+    workspaceFoldersMock = undefined;
+  });
+
+  async function createAgent(): Promise<{
+    agent: DataAgent;
+    manager: RelevantDataManagerAgent;
+    database: DatabaseAgent;
+  }> {
+    const cacheDir = await fs.mkdtemp(
+      path.join(os.tmpdir(), "data-agent-test-")
+    );
+    const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const database = new DatabaseAgent(manager, Promise.resolve(cacheDir));
+    const agent = new DataAgent(manager, database);
+    return { agent, manager, database };
+  }
+
+  it("summarizes topics with highlights", async () => {
+    const { agent } = await createAgent();
+    const overview = await agent.getTopicOverview("people");
+    expect(overview.snapshot.id).toBe("people");
+    expect(overview.highlightRecords.length).toBeGreaterThan(0);
+    expect(overview.relationships.map((rel) => rel.targetCategory)).toEqual(
+      expect.arrayContaining(["departments", "applications"])
+    );
+  });
+
+  it("maps connections for a department", async () => {
+    const { agent } = await createAgent();
+    const connections = await agent.mapTopicConnections(
+      "departments",
+      "dept-analytics"
+    );
+    expect(connections.connections.length).toBeGreaterThan(0);
+    expect(connections.narrative.join(" ")).toContain("Insight & Analytics");
+  });
+
+  it("builds exploration plans with recommended queries", async () => {
+    const { agent } = await createAgent();
+    const plan = await agent.buildExplorationPlan(
+      "applications",
+      "How do we prepare for audits?"
+    );
+    expect(plan.steps.length).toBeGreaterThan(1);
+    expect(plan.recommendedQueries).toContain("Fetch critical applications");
+    const resourceCategories = plan.supportingResources.map(
+      (entry) => entry.categoryId
+    );
+    expect(resourceCategories).toEqual(
+      expect.arrayContaining(["applications", "departments"])
+    );
+  });
+
+  it("finds cross-topic connections", async () => {
+    const { agent } = await createAgent();
+    const connection = await agent.findCrossTopicConnection(
+      "people",
+      "person-001",
+      "applications"
+    );
+    expect(connection?.relatedRecords.map((record) => record.id)).toEqual(
+      expect.arrayContaining(["app-aurora"])
+    );
+  });
+
+  it("searches across categories", async () => {
+    const { agent } = await createAgent();
+    const results = agent.search("runbook");
+    expect(results.length).toBeGreaterThan(0);
+    const categories = results.map((result) => result.categoryId);
+    expect(categories).toEqual(expect.arrayContaining(["companyResources"]));
+  });
+
+  it("exposes the underlying database agent", async () => {
+    const { agent, database } = await createAgent();
+    expect(agent.getDatabaseAgent()).toBe(database);
+  });
+
+  it("returns a toolkit bundle for a category", async () => {
+    const { agent } = await createAgent();
+    const toolkit = agent.getCategoryToolkit("departments");
+    expect(toolkit.folder.root).toBe("src/userContext/departments");
+    expect(toolkit.schemas.length).toBeGreaterThan(0);
+    expect(toolkit.validation.status).toBe("pass");
+    expect(toolkit.validation.issues.length).toBeGreaterThanOrEqual(0);
+    expect(toolkit.queries.map((query) => query.name)).toContain(
+      "List departments"
+    );
+  });
+});

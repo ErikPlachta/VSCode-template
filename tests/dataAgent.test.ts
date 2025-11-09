@@ -3,7 +3,7 @@ import * as os from "os";
 import * as path from "path";
 import { DataAgent } from "../src/agent/dataAgent";
 import { DatabaseAgent, DataSource } from "../src/agent/databaseAgent";
-import { RelevantDataManagerAgent } from "../src/agent/relevantDataManagerAgent";
+import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -42,7 +42,7 @@ describe("DataAgent", () => {
     const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
     const dataSources: DataSource[] = manager
       .listCategories()
-      .map((summary) => {
+      .map((summary: any) => {
         const category = manager.getCategory(summary.id);
         return {
           id: category.id,

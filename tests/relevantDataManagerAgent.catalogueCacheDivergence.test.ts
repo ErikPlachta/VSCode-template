@@ -1,7 +1,8 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { RelevantDataManagerAgent } from "../src/agent/relevantDataManagerAgent";
+import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { listSharedCacheEntries } from "../src/extension/mcpCache";
 
 // Validates that when the dataset changes (fingerprint differs), the consolidated
 // index is written again to the shared cache (file count increases or overwrites).
@@ -85,11 +86,12 @@ describe("RelevantDataManagerAgent consolidated index cache divergence", () => {
     );
 
     // First instantiation persists initial catalogue
-    new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const agent1 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 60));
     const sharedDir = path.join(cacheDir, "shared");
     const beforeFiles = await fs.readdir(sharedDir).catch(() => []);
     expect(beforeFiles.length).toBeGreaterThan(0);
+    const fp1 = agent1.getDatasetFingerprint();
 
     // Modify dataset: add a new record so fingerprint changes
     const categoryDir = path.join(root, "alpha");
@@ -99,12 +101,21 @@ describe("RelevantDataManagerAgent consolidated index cache divergence", () => {
     ]);
 
     // Second instantiation should detect changed fingerprint and persist again
-    new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const agent2 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 80));
     const afterFiles = await fs.readdir(sharedDir).catch(() => []);
 
     // Either a new cache file is created or existing entry is overwritten with same filename but updated timestamp.
     // We assert that at minimum the file count is >= previous count, and fingerprints differ.
     expect(afterFiles.length).toBeGreaterThanOrEqual(beforeFiles.length);
+    const fp2 = agent2.getDatasetFingerprint();
+    expect(fp2).not.toEqual(fp1);
+
+    // Additionally, confirm the cache entry metadata fingerprint matches the latest agent fingerprint
+    const entries = await listSharedCacheEntries(cacheDir);
+    const catalogue = entries.find((e) => Array.isArray((e as any).value));
+    expect(
+      catalogue?.metadata && (catalogue.metadata as any).fingerprint
+    ).toEqual(fp2);
   });
 });

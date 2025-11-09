@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { RelevantDataManagerAgent } from "../src/agent/relevantDataManagerAgent";
+import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -101,7 +101,7 @@ describe("RelevantDataManagerAgent relationship validation failures", () => {
     const manager = await createManager();
     const report = manager.getValidationReport("alpha");
     expect(report.status).toBe("fail");
-    const messages = report.issues.map((i) => i.message || "");
+    const messages = report.issues.map((i: any) => i.message || "");
     expect(messages.join("\n")).toMatch(/references missing category 'nope'/i);
   });
 
@@ -140,7 +140,7 @@ describe("RelevantDataManagerAgent relationship validation failures", () => {
     const manager = await createManager();
     const report = manager.getValidationReport("gamma");
     expect(report.status).toBe("fail");
-    const messages = report.issues.map((i) => i.message || "");
+    const messages = report.issues.map((i: any) => i.message || "");
     expect(messages.join("\n")).toMatch(/does not match any 'beta\.id'/i);
   });
 });

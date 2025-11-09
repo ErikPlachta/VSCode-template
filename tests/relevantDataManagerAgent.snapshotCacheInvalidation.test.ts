@@ -2,9 +2,7 @@ import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
-
-// This test ensures that the consolidated index (catalogue) is only written once per fingerprint.
-// A second agent instantiation with identical dataset and cache dir should not increase file count.
+import { readSharedCacheEntry } from "../src/extension/mcpCache";
 
 jest.mock(
   "vscode",
@@ -51,10 +49,10 @@ function categoryConfig(id: string) {
   };
 }
 
-describe("RelevantDataManagerAgent consolidated index cache hit", () => {
+describe("RelevantDataManagerAgent snapshot cache invalidation", () => {
   let root: string;
   beforeEach(async () => {
-    root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cat-cache-"));
+    root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-snap-"));
     process.env.VSCODE_TEMPLATE_DATA_ROOT = root;
     const categoryDir = path.join(root, "alpha");
     await fs.mkdir(path.join(categoryDir, "schemas"), { recursive: true });
@@ -79,25 +77,31 @@ describe("RelevantDataManagerAgent consolidated index cache hit", () => {
     );
   });
 
-  it("skips writing catalogue when fingerprint matches", async () => {
+  it("rewrites snapshot after record change", async () => {
     const cacheDir = await fs.mkdtemp(
-      path.join(os.tmpdir(), "rdm-cat-cache-hit-")
+      path.join(os.tmpdir(), "rdm-snap-cache-")
     );
-    const agent1 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
-    // Allow async dataset load & initial persist
-    await new Promise((r) => setTimeout(r, 60));
-    const sharedDir = path.join(cacheDir, "shared");
-    const beforeFiles = await fs.readdir(sharedDir).catch(() => []);
-    expect(beforeFiles.length).toBeGreaterThan(0);
+    const agent = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const snap1 = await agent.getOrCreateSnapshot("alpha");
+    expect(snap1.recordCount).toBe(1);
 
-    const agent2 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
-    await new Promise((r) => setTimeout(r, 60));
-    const afterFiles = await fs.readdir(sharedDir).catch(() => []);
+    const key = `relevant-data:alpha:snapshot`;
+    const entry1 = await readSharedCacheEntry(cacheDir, key);
+    const hash1 = (entry1?.metadata as any)?.recordHash;
+    expect(hash1).toBeTruthy();
 
-    // No additional file should be written for identical fingerprint
-    expect(afterFiles.length).toEqual(beforeFiles.length);
-    expect(agent1.getDatasetCatalogue().length).toEqual(
-      agent2.getDatasetCatalogue().length
-    );
+    // Modify records
+    const categoryDir = path.join(root, "alpha");
+    await writeJson(path.join(categoryDir, "records.json"), [
+      { id: "a1" },
+      { id: "a2" },
+    ]);
+
+    const snap2 = await agent.getOrCreateSnapshot("alpha");
+    expect(snap2.recordCount).toBe(2);
+    const entry2 = await readSharedCacheEntry(cacheDir, key);
+    const hash2 = (entry2?.metadata as any)?.recordHash;
+    expect(hash2).toBeTruthy();
+    expect(hash2).not.toEqual(hash1);
   });
 });

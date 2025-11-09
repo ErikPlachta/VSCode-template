@@ -16,7 +16,7 @@ import {
 } from "../src/mcp/schemaUtils";
 import { KnowledgeBase } from "../src/mcp/knowledgeBase";
 import { ClarificationAgent } from "../src/agent/clarificationAgent";
-import type { BusinessCategory } from "../src/agent/relevantDataManagerAgent";
+import type { BusinessCategory } from "../src/agent/userContextAgent";
 
 describe("Shared MCP utilities", () => {
   it("exposes manifest metadata for every agent", () => {

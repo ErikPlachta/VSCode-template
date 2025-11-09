@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import { DatabaseAgent, DataSource } from "../src/agent/databaseAgent";
-import { RelevantDataManagerAgent } from "../src/agent/relevantDataManagerAgent";
+import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -42,7 +42,7 @@ describe("DatabaseAgent", () => {
     // Adapt to new database agent signature: provide data sources explicitly
     const dataSources: DataSource[] = manager
       .listCategories()
-      .map((summary) => {
+      .map((summary: any) => {
         const category = manager.getCategory(summary.id);
         return {
           id: category.id,
@@ -102,7 +102,7 @@ describe("DatabaseAgent", () => {
     const resources = await database.executeQuery("companyResources", {
       applicationId: "app-aurora",
     });
-    const ids = resources.map((resource) => resource.id);
+    const ids = resources.map((resource: any) => resource.id);
     expect(ids).toEqual(
       expect.arrayContaining([
         "resource-analytics-playbook",
