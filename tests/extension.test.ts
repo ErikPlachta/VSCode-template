@@ -122,7 +122,7 @@ describe("activate", () => {
     expect(createChatParticipant).toHaveBeenCalled();
     expect(registerCommand).toHaveBeenCalled();
     expect(showInformationMessage).toHaveBeenCalledWith(
-      "Loaded 1 MCP tools. Use @mybusiness in Copilot Chat!"
+      "✅ MyBusiness MCP ready! Loaded 1 tools. Use @mybusiness in Copilot Chat!"
     );
   });
 });

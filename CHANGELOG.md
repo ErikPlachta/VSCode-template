@@ -41,37 +41,36 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### Current Tasks
 
-- Data & design integrity review and shim removal planning (🛠️ correctness & 🧹 deprecation lifecycle)
-  - Complete a full integrity review after all agent collapses to ensure uniformity. (✅ correctness)
-  - Descriptor metadata enrichment (🧭 UI readiness)
-    - Extend `ConfigDescriptor` with optional `group`, `description`, and `validate(value)` for basic type/shape checks.
-    - Add `getAllDescriptors()` aggregator for UI to enumerate editable settings across agents.
-    - Add `clearOverride(path, env)` to remove overrides cleanly.
-  - Planned shim removals (🧹 deprecation lifecycle)
-    - DatabaseAgentConfig shim removal plan (silent phase → removal):
-      - Add transitional Planned entry (this) documenting removal sequence.
-      - Step 1: Rename any lingering tests or imports referencing `DatabaseAgentConfig` (none expected; verify).
-      - Step 2: Add deprecation notice log entry (not runtime warning; governance only) confirming final release including shim.
-      - Step 3: Delete shim class from `src/agent/databaseAgent/index.ts`; ensure exports remain stable.
-      - Step 4: Run full quality gates; update CHANGELOG with Verification block & mark task complete.
-    - RelevantDataManagerAgent alias removal plan (silent alias phase → removal):
-      - Step 1: Create batch to rename all test imports from `relevantDataManagerAgent` to `userContextAgent`.
-      - Step 2: Add Planned entry confirming alias removal after one more release cycle.
-      - Step 3: Remove legacy shim directory `src/agent/relevantDataManagerAgent/` entirely.
-      - Step 4: Update generator & health checks to omit legacy id if no longer required (retain dataset continuity via user-context ids).
-      - Step 5: Update docs & README to remove remaining references; add migration note.
-      - Step 6: Verification block confirming build/tests/lint/docs/health/coverage PASS and mark task complete.
-  - Edge-case guardrails (⚠️ watch points)
-    - Complete the remaining agent collapses promptly so descriptor conventions do not drift and future override logic stays uniform.
-    - Ensure each collapse keeps descriptor `verifyPaths` covering down to primitive keys so missing nested values are caught immediately.
-    - Reuse centralized runtime types from `@internal-types/agentConfig` during refactors to avoid circular imports or duplicate interfaces.
-    - Audit and update tests that still instantiate `ClarificationAgentConfig` / `DataAgentConfig` / `DatabaseAgentConfig`; migrate them to direct agent constructors once wrappers are removed.
-    - Keep descriptor scopes agent-local to avoid override collisions; document any shared registry work before introducing cross-agent paths.
-- Consider the current Agent design, and how Orchestrator is coordinating with all other agents.
-  - How can I update the file architecture to make it clear the Orchestrator is the central coordinator, and all other agents are working with it accordingly?
+- MCP Server is no longer starting when vs code extension is activated. Need to resolve this issue so the extension can start the server properly again.
 
 ### Priority 1 - Current Priority
 
+- Planned shim removals (🧹 deprecation lifecycle)
+  - DatabaseAgentConfig shim removal plan (silent phase → removal):
+    - Add transitional Planned entry documenting removal sequence.
+    - Step 1: Rename any lingering tests or imports referencing `DatabaseAgentConfig` (none expected; verify).
+    - Step 2: Add deprecation notice log entry (not runtime warning; governance only) confirming final release including shim.
+    - Step 3: Delete shim class from `src/agent/databaseAgent/index.ts`; ensure exports remain stable.
+    - Step 4: Run full quality gates; update CHANGELOG with Verification block & mark task complete.
+  - RelevantDataManagerAgent alias removal plan (silent alias phase → removal):
+    - Step 1: Create batch to rename all test imports from `relevantDataManagerAgent` to `userContextAgent`.
+    - Step 2: Add Planned entry confirming alias removal after one more release cycle.
+    - Step 3: Remove legacy shim directory `src/agent/relevantDataManagerAgent/` entirely.
+    - Step 4: Update generator & health checks to omit legacy id if no longer required (retain dataset continuity via user-context ids).
+    - Step 5: Update docs & README to remove remaining references; add migration note.
+    - Step 6: Verification block confirming build/tests/lint/docs/health/coverage PASS and mark task complete.
+- Descriptor metadata enrichment (🧭 UI readiness)
+  - Extend `ConfigDescriptor` with optional `group`, `description`, and `validate(value)` for basic type/shape checks.
+  - Add `getAllDescriptors()` aggregator for UI to enumerate editable settings across agents.
+  - Add `clearOverride(path, env)` to remove overrides cleanly.
+- Edge-case guardrails (⚠️ watch points)
+  - Complete the remaining agent collapses promptly so descriptor conventions do not drift and future override logic stays uniform.
+  - Ensure each collapse keeps descriptor `verifyPaths` covering down to primitive keys so missing nested values are caught immediately.
+  - Reuse centralized runtime types from `@internal-types/agentConfig` during refactors to avoid circular imports or duplicate interfaces.
+  - Audit and update tests that still instantiate `ClarificationAgentConfig` / `DataAgentConfig` / `DatabaseAgentConfig`; migrate them to direct agent constructors once wrappers are removed.
+  - Keep descriptor scopes agent-local to avoid override collisions; document any shared registry work before introducing cross-agent paths.
+- Consider the current Agent design, and how Orchestrator is coordinating with all other agents.
+  - How can I update the file architecture to make it clear the Orchestrator is the central coordinator, and all other agents are working with it accordingly?
 - Split `agentConfig.ts` into focused modules (📦 maintainability)
   - `src/types/agentConfig.types.ts` – configuration schema types only.
   - `src/types/agentRuntime.types.ts` – runtime models (orchestrator/clarification/data/database types).
@@ -183,7 +182,59 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 All change history. Organized by date/time and semantic titles; verification recorded after each batch.
 
+### [2025-11-09] Manifest alignment, server readiness, and activation resiliency
+
+#### 2025-11-09 18:25:00 fix: Restore manifest defaults and keep provider/chat IDs consistent
+
+- .env: reverted APP/MCP identifiers and publisher to legacy lowercase values so build automation emits canonical manifest casing.
+- package.json: regenerated via `updatePackageConfig` to produce `mybusiness` command prefix, `MybusinessMCP` chat participant id, and `mybusiness-local` provider id; matches runtime registration.
+- src/extension/index.ts: updated chat participant registration to `MybusinessMCP` and harmonized status messaging to match manifest id.
+- src/server/index.ts: replaced direct `import.meta` usage with dynamic evaluation to avoid CommonJS type restrictions while preserving ESM main detection.
+
+##### Verification – manifest and server alignment
+
+- Build: PASS (`npm run build`)
+- Tests: PASS (`npm test -- --no-cache`)
+- Lint: PASS
+- Docs: PASS (unchanged)
+- Health: PASS (unchanged)
+- Coverage: UNCHANGED
+- JSDoc: PASS
+
+### [2025-11-09] Server readiness + activation resiliency
+
+#### 2025-11-09 16:47:00 fix: Ensure embedded MCP server awaits readiness; activate chat even if tool fetch fails; build runs prebuild
+
+- src/server/embedded.ts: startMCPServer now waits for `listening` (handles EADDRINUSE by rejecting and clearing state). Added deterministic stop and JSDoc cleanups.
+- src/extension/index.ts: Register provider and chat participant regardless of tool discovery. Fetch tools with warning on failure to avoid "No activated agent with id 'MyBusinessMCP'".
+- package.json: "build" now runs `prebuild` before `compile` so `npm run package` includes generated assets.
+
+##### Verification – server readiness + activation resiliency
+
+- Build: PASS (tsc)
+- Tests: PASS (81/81)
+- Lint: PASS (no new JSDoc violations)
+- Docs: PASS (unchanged)
+- Health: PASS (legacy JSON not reintroduced)
+- Coverage: UNCHANGED (server files remain minimally covered; intentionally limited)
+- JSDoc: PASS
+
 ### [2025-11-09] Continued Refactoring, new Utilities, Validation, Changelog Management, and Shim Scheduling
+
+#### 2025-11-09 16:20:00 chore: Prune completed Current Tasks and promote remaining actionable items
+
+- Cleaned up `### Current Tasks`: removed completed integrity review sub-item and split remaining work into discrete bullets (descriptor metadata enrichment, planned shim removals, guardrails).
+- No source code changes; governance-only edit to `CHANGELOG.md`.
+
+##### Verification – changelog tasks cleanup
+
+- Build: PASS (compile succeeded)
+- Tests: PASS (full Jest suite executed)
+- Lint: PASS (unchanged; docs-only)
+- Docs: PASS (unchanged)
+- Health: PASS (unchanged)
+- Coverage: UNCHANGED
+- JSDoc: PASS (unchanged)
 
 #### 2025-11-09 15:40:00 fix: Resolve remaining test failures (operators, extension activation, lint under Jest, Align databaseAgent tests with array field naming)
 

@@ -19,17 +19,22 @@ export function registerMcpProvider(
   includeAuthHeader: boolean,
   context: vscode.ExtensionContext
 ): void {
+  console.log(`🔌 Registering MCP provider "Mybusiness-local"...`);
   const emitter = new vscode.EventEmitter<void>();
   const provider = vscode.lm.registerMcpServerDefinitionProvider(
-    "mybusiness-local",
+    "Mybusiness-local",
     {
       onDidChangeMcpServerDefinitions: emitter.event,
       /**
        * Provide MCP server definitions to VS Code LM API for discovery.
        *
+       * @param {vscode.CancellationToken} _token - Cancellation token.
        * @returns {Promise<vscode.McpStdioServerDefinition[]>} List of server definitions.
        */
-      provideMcpServerDefinitions: async () => {
+      provideMcpServerDefinitions: async (_token: vscode.CancellationToken) => {
+        console.log(
+          `📋 provideMcpServerDefinitions called - returning server definition...`
+        );
         // Provide a stdio server definition that runs our Node.js server
         const extensionPath = context.extensionPath;
         const serverScript = path.join(
@@ -39,17 +44,46 @@ export function registerMcpProvider(
           "index.js"
         );
 
+        console.log(`📂 Extension path: ${extensionPath}`);
+        console.log(`📜 Server script: ${serverScript}`);
+
         const def = new vscode.McpStdioServerDefinition(
-          "My Business Embedded Server", // TODO: Update this to be a value pulled from config file somewhere just like should through whole app
+          "My Business Embedded Server",
           "node",
           [serverScript, "--stdio"],
           {},
           "1.0.0"
         );
 
+        console.log(`✅ MCP server definition created:`, {
+          label: "My Business Embedded Server",
+          command: "node",
+          args: [serverScript, "--stdio"],
+          version: "1.0.0",
+        });
         return [def];
+      },
+      /**
+       * Resolve MCP server definition before starting.
+       *
+       * @param {vscode.McpStdioServerDefinition} server - Server definition to resolve.
+       * @param {vscode.CancellationToken} _token - Cancellation token.
+       * @returns {Promise<vscode.McpStdioServerDefinition>} Resolved server definition.
+       */
+      resolveMcpServerDefinition: async (
+        server: vscode.McpStdioServerDefinition,
+        _token: vscode.CancellationToken
+      ) => {
+        console.log(`🔍 resolveMcpServerDefinition called for:`, server.label);
+        // No additional resolution needed - return as-is
+        return server;
       },
     }
   );
   context.subscriptions.push(provider, emitter);
+  console.log(`✅ MCP provider "Mybusiness-local" registered successfully`);
+
+  // Trigger the event to notify VS Code that servers are available
+  console.log(`🔔 Firing onDidChangeMcpServerDefinitions event...`);
+  emitter.fire();
 }

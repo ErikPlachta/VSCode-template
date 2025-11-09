@@ -11,6 +11,7 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";
+import { pathToFileURL } from "url";
 import { MCPTool } from "@shared/mcpTypes";
 
 /**
@@ -588,12 +589,12 @@ function startStdioServer(): void {
 
   // Log to stderr to avoid interfering with stdout JSON-RPC communication
   const log =
-        /**
-         * log function.
-         *
-         * @param {string} message - message parameter.
-         */
-(message: string): void => {
+    /**
+     * log function.
+     *
+     * @param {string} message - message parameter.
+     */
+    (message: string): void => {
       console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
     };
 
@@ -686,7 +687,32 @@ function startStdioServer(): void {
   log("MCP stdio server ready for requests");
 }
 
-if (require.main === module) {
+// Support both CJS and ESM entry detection
+const __isMain = ((): boolean => {
+  // CJS path: require/module available
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const req: any = typeof require !== "undefined" ? require : undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mod: any = typeof module !== "undefined" ? module : undefined;
+  if (req && mod) return req.main === mod;
+  // ESM path: compare import.meta.url to argv[1]
+  try {
+    const argv1 = process.argv?.[1];
+    if (!argv1) return false;
+    let moduleUrl: string | undefined;
+    try {
+      moduleUrl = Function("return import.meta.url")() as string | undefined;
+    } catch {
+      moduleUrl = undefined;
+    }
+    if (!moduleUrl) return false;
+    return pathToFileURL(argv1).href === moduleUrl;
+  } catch {
+    return false;
+  }
+})();
+
+if (__isMain) {
   // Check if we should run in stdio mode
   const args = process.argv.slice(2);
   if (args.includes("--stdio")) {

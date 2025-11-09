@@ -1,10 +1,9 @@
 {
-  "type": "module",
-  "name": "myBusiness-mcp-extension",
+  "name": "mybusiness-mcp-extension",
   "displayName": "My Business MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",
-  "publisher": "myOrg",
+  "publisher": "ErikPlachta",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,7 +17,7 @@
     "onCommand:mybusinessMCP.invokeTool",
     "onCommand:mybusinessMCP.registerServer",
     "onCommand:mybusinessMCP.unregisterServer",
-    "onChatParticipant:MyBusinessMCP"
+    "onChatParticipant:MybusinessMCP"
   ],
   "main": "./out/extension/index.js",
   "contributes": {
@@ -38,14 +37,14 @@
     ],
     "mcpServerDefinitionProviders": [
       {
-        "id": "myBusiness-local",
+        "id": "Mybusiness-local",
         "label": "My Business MCP Extension Embedded Server"
       }
     ],
     "chatParticipants": [
       {
-        "id": "MyBusinessMCP",
-        "name": "myBusiness",
+        "id": "MybusinessMCP",
+        "name": "mybusiness",
         "description": "Access your business data including applications, departments, people, policies, and resources",
         "isSticky": true
       }
@@ -76,7 +75,7 @@
         },
         "mybusinessMCP.registerServerId": {
           "type": "string",
-          "default": "myBusiness",
+          "default": "Mybusiness",
           "description": "Server id key used inside mcp.json servers object."
         },
         "mybusinessMCP.includeAuthHeader": {
@@ -91,7 +90,7 @@
     "config": "tsx bin/utils/updatePackageConfig.ts",
     "templates": "tsx bin/utils/processTemplates.ts",
     "prebuild": "npm run config && npm run mcp:gen && npm run templates",
-    "build": "npm run compile",
+    "build": "npm run prebuild && npm run compile && tsx bin/utils/aliasToRelativeOut.ts",
     "build:pipeline": "bash bin/build.sh",
     "build:pipeline:win": "bin\\build.bat",
     "build:full": "bash bin/build.sh --strict-lint --strict-health",
@@ -123,10 +122,10 @@
     "ajv-formats": "^3.0.1",
     "axios": "^1.7.8",
     "fast-glob": "^3.3.2",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "package": "^1.0.1"
   },
   "devDependencies": {
-    "tsx": "^4.19.2",
     "@types/dotenv": "^6.1.1",
     "@types/eslint": "^9.6.1",
     "@types/jest": "^30.0.0",
@@ -143,6 +142,7 @@
     "markdownlint": "^0.39.0",
     "ts-jest": "^29.2.5",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.2",
     "typedoc": "^0.28.14",
     "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "^5.9.3"
