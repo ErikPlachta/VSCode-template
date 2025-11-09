@@ -6,22 +6,56 @@ roles:
   - documentation
 associations:
   - changelog
+  - history
+  - reference
+  - documentation
 ---
 
 <!-- Title provided via front matter; omit duplicate H1 to satisfy markdownlint MD025 -->
+
+<!-- START OF COPILOT CONTENT -->
 
 ## Notes for Copilot
 
 Maintain this file as the single source of truth for non-trivial changes.
 
-Guidelines:
+### Guidelines
 
-1. Use the Unreleased section for current work: Planned / Added / Changed / Fixed / Docs / Verification / Next Focus.
-2. Include file paths for meaningful changes.
-3. Update Verification after edits (Build / Tests / Lint / Docs / Health).
-4. Add migration/deprecation guidance under Changed with a brief note.
+The content below is broken down into 2 sections, [Outstanding Tasks](#outstanding-tasks) and [Logs](#logs).
 
-## [Unreleased]
+1. [Outstanding Tasks](#outstanding-tasks) represents all incomplete tasks. Organized by priority, and managed by User + Copilot Chat.
+1. Each incomplete task should be represented here.
+1. Tasks should be organized by priority of what should be done next. (Priority 1 - Current Priority, Priority 2 - Next Focus, Priority 3 - No Priority)
+1. Copilot should review and manage this proactively.
+1. When User requests a priority change, this should be updated accordingly.
+1. At the end of each Log Entry, this should be reviewed and updated accordingly.
+1. [Logs](#logs) represents all Change Log history. Organized by date, time, and each unique change.
+1. Each day should have it's own section within the logs, with a summary of all changes that gets updated throughout that day: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`
+1. Use the Logs section for current work using Semantic Titles for sections: `fix | feat | chore | docs | refactor | test | perf | ci | build | style` followed by a concise description. For example: `### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`.
+1. Include file paths for meaningful changes.
+1. Update Verification after edits (Build / Tests / Lint / Docs / Health).
+1. Add migration/deprecation guidance under Changed with a brief note.
+1. Resolved issues should have a ✅, and unresolved should have ❌. Outstanding should be noted and then moved into, [Outstanding Tasks](#outstanding-tasks) sections, accordingly.
+
+<!-- END OF COPILOT CONTENT -->
+
+---
+
+## Outstanding Tasks
+
+All incomplete tasks. Organized by priority and managed by User and Copilot Chat.
+
+### Priority 1 - Current Priority
+
+### Priority 2 - Next Focus
+
+### Priority 3 - No Priority
+
+---
+
+## Logs
+
+Represents all incomplete tasks. Organized by priority, and managed by Copilot Chat.
 
 ### Added (2025-11-09 – Centralized runtime agent types & descriptor helper)
 
@@ -155,7 +189,6 @@ Guidelines:
 ### Planned
 
 - Deprecate `src/mcp.config.json` in favor of build-generated JSON derived from TS sources:
-
   - Source of truth remains TypeScript configs (`src/config/application.config.ts`, `src/mcp/config/unifiedAgentConfig.ts`).
   - Add generator script (e.g., `src/tools/generateMcpConfig.ts`) that produces a runtime `mcp.config.json` at build time.
   - Wire generator into `npm run prebuild` so the file is created automatically; do not commit generated JSON.
@@ -163,7 +196,6 @@ Guidelines:
   - Add tests that snapshot generator output and assert schema/fields stability.
   - Document migration: projects should not import `src/mcp.config.json`; tools expecting JSON should read the generated artifact.
   - Final step: remove `src/mcp.config.json` after one release cycle with deprecation notice in release notes.
-
 - Replace `any` types in analytics modules (`src/shared/analyticsIntegration.ts`, `src/shared/agentAnalytics.ts`) with structured interfaces.
 - Create/update remaining docs assets (if any new references appear) and keep health report green.
 - Perform final sweep to replace legacy agent imports and plan deprecation removal of `relevant-data-manager` alias.
@@ -454,7 +486,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 ### Notes
 
 - Current lint focus areas include remaining missing return types, `any` usage, parameter doc completeness, unused variables, malformed JSDoc types/namepaths.
-- See Unreleased for structured follow-ups and technical-debt items.
+- See Logs for structured follow-ups and technical-debt items.
 - Verification (2025-11-08): Build & tests PASS. ESLint FAIL (136 errors). Health report shows JSON schema + markdown metadata PASS but alias resolution failure for direct lint scripts. Added planned remediation items above.
 - Started rename migration: added UserContext agent/profile alias and broadened schema patterns; legacy paths still active.
 
