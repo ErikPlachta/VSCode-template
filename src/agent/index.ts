@@ -14,7 +14,8 @@ export { ClarificationAgent } from "@agent/clarificationAgent";
 export { DataAgent } from "@agent/dataAgent";
 export { DatabaseAgent } from "@agent/databaseAgent";
 export { Orchestrator } from "@agent/orchestrator";
-export { RelevantDataManagerAgent } from "@agent/relevantDataManagerAgent";
+// Deprecated legacy agent removed; use UserContextAgent instead
+export { UserContextAgent } from "@agent/userContextAgent";
 
 // Health and maintenance agents
 export { RepositoryHealthAgent } from "@tools/repositoryHealth";
@@ -25,7 +26,7 @@ export {
   ClarificationAgentProfile,
   DataAgentProfile,
   DatabaseAgentProfile,
-  RelevantDataManagerAgentProfile,
+  UserContextAgentProfile,
   type AgentIdentifier,
   type AgentProfile,
   type KnownAgentProfile,

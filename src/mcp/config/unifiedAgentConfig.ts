@@ -474,8 +474,8 @@ export const getOrchestrationProfile =
   /**
    * getOrchestrationProfile function.
    *
-   * @param {AgentIdentifier} agentId - agentId parameter.
-   * @returns {OrchestrationProfile} - TODO: describe return value.
+   * @param {AgentIdentifier} agentId - Canonical or aliased agent identifier.
+   * @returns {OrchestrationProfile} - Immutable orchestration profile describing routing signals and escalation triggers.
    */
   (agentId: AgentIdentifier): OrchestrationProfile => {
     return agentConfigurations[agentId].orchestration;
@@ -485,8 +485,8 @@ export const getExecutionProfile =
   /**
    * getExecutionProfile function.
    *
-   * @param {AgentIdentifier} agentId - agentId parameter.
-   * @returns {ExecutionProfile} - TODO: describe return value.
+   * @param {AgentIdentifier} agentId - Canonical or aliased agent identifier.
+   * @returns {ExecutionProfile} - Execution characteristics including priority, timeout, and cache settings.
    */
   (agentId: AgentIdentifier): ExecutionProfile => {
     return agentConfigurations[agentId].execution;
@@ -496,8 +496,8 @@ export const getRichMetadata =
   /**
    * getRichMetadata function.
    *
-   * @param {AgentIdentifier} agentId - agentId parameter.
-   * @returns {RichMetadata} - TODO: describe return value.
+   * @param {AgentIdentifier} agentId - Canonical or aliased agent identifier.
+   * @returns {RichMetadata} - Detailed metadata for UI and system integrations (capabilities, responsibilities, dependencies).
    */
   (agentId: AgentIdentifier): RichMetadata => {
     return agentConfigurations[agentId].metadata;
@@ -507,7 +507,7 @@ export const getAllAgentIds =
   /**
    * getAllAgentIds function.
    *
-   * @returns {AgentIdentifier[]} - TODO: describe return value.
+   * @returns {AgentIdentifier[]} - Array of registered agent identifiers including migration aliases.
    */
   (): AgentIdentifier[] => {
     return Object.keys(agentConfigurations) as AgentIdentifier[];

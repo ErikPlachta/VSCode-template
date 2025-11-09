@@ -90,7 +90,7 @@
   "scripts": {
     "config": "tsx bin/utils/updatePackageConfig.ts",
     "templates": "tsx bin/utils/processTemplates.ts",
-    "prebuild": "npm run config && npm run templates && npm run mcp:gen",
+    "prebuild": "npm run config && npm run mcp:gen && npm run templates",
     "build": "npm run compile",
     "build:pipeline": "bash bin/build.sh",
     "build:pipeline:win": "bin\\build.bat",
@@ -102,7 +102,7 @@
     "lint:json": "tsx bin/utils/validateJson.ts",
     "lint:docs": "tsx bin/utils/validateMarkdown.ts",
     "health:report": "tsx src/tools/repositoryHealth.ts",
-    "test": "jest --config=jest.config.js --runInBand --ci",
+    "test": "npm run templates && jest --config=jest.config.js --runInBand --ci",
     "docs": "tsx bin/utils/cleanDocs.ts && typedoc && npm run docs:fix && npm run health:report && npm run docs:nav",
     "docs:nav": "tsx bin/utils/buildDocsNav.ts",
     "docs:fix": "tsx bin/utils/postprocessDocs.ts",

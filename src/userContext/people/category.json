@@ -1,5 +1,5 @@
 {
-  "id": "<people>",
+  "id": "people",
   "name": "People",
   "description": "Employee directory complete with capabilities and system access.",
   "aliases": ["employees", "teammates", "staff"],

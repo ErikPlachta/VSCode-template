@@ -6,7 +6,7 @@
 
 # Class: ConfigurationLoader
 
-Defined in: [src/shared/configurationLoader.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L63)
+Defined in: [src/shared/configurationLoader.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L62)
 
 Configuration loader class for managing application settings.
 
@@ -16,7 +16,7 @@ Configuration loader class for managing application settings.
 
 > **new ConfigurationLoader**(`configPath`): `ConfigurationLoader`
 
-Defined in: [src/shared/configurationLoader.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L73)
+Defined in: [src/shared/configurationLoader.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L71)
 
 Creates a new configuration loader instance.
 
@@ -24,15 +24,13 @@ Creates a new configuration loader instance.
 
 ##### configPath
 
-`string` = `"src/mcp.config.json"`
+`string` = `"out/mcp.config.json"`
 
-configPath parameter.
+Deprecated JSON config path for legacy fallback (kept for API compatibility).
 
 #### Returns
 
 `ConfigurationLoader`
-
-- TODO: describe return value.
 
 ## Methods
 
@@ -40,9 +38,9 @@ configPath parameter.
 
 > **getAgentConfig**(`agentName`): `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/shared/configurationLoader.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L174)
+Defined in: [src/shared/configurationLoader.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L118)
 
-Gets agent-specific configuration.
+Gets agent-specific configuration merged with global defaults.
 
 #### Parameters
 
@@ -50,17 +48,13 @@ Gets agent-specific configuration.
 
 `string`
 
-agentName parameter.
+Registered agent profile id.
 
 #### Returns
 
 `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-- TODO: describe return value.
-
-#### Throws
-
-- May throw an error.
+Concrete settings for the agent.
 
 ***
 
@@ -68,9 +62,9 @@ agentName parameter.
 
 > **getEnvironmentConfig**(`environment`): `Promise`\<[`EnvironmentConfig`](../../../types/applicationConfig/interfaces/EnvironmentConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L149)
+Defined in: [src/shared/configurationLoader.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L96)
 
-Gets configuration for the current environment.
+Gets configuration for the requested environment.
 
 #### Parameters
 
@@ -78,17 +72,13 @@ Gets configuration for the current environment.
 
 `string` = `"development"`
 
-environment parameter.
+Environment name (development|staging|production).
 
 #### Returns
 
 `Promise`\<[`EnvironmentConfig`](../../../types/applicationConfig/interfaces/EnvironmentConfig.md)\>
 
-- TODO: describe return value.
-
-#### Throws
-
-- May throw an error.
+Environment-specific configuration slice.
 
 ***
 
@@ -96,19 +86,15 @@ environment parameter.
 
 > **loadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L83)
+Defined in: [src/shared/configurationLoader.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L80)
 
-Loads and validates the application configuration.
+Load and return the merged application configuration (TS source of truth).
 
 #### Returns
 
 `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-- TODO: describe return value.
-
-#### Throws
-
-- May throw an error.
+Merged configuration object.
 
 ***
 
@@ -116,12 +102,12 @@ Loads and validates the application configuration.
 
 > **reloadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L194)
+Defined in: [src/shared/configurationLoader.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L136)
 
-Reloads configuration from disk.
+Reload configuration (clears cache and re-reads TS config).
 
 #### Returns
 
 `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-- TODO: describe return value.
+Freshly loaded configuration.

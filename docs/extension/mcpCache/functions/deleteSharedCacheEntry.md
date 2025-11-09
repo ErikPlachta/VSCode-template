@@ -8,7 +8,7 @@
 
 > **deleteSharedCacheEntry**(`cacheDir`, `key`): `Promise`\<`void`\>
 
-Defined in: [src/extension/mcpCache.ts:182](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/extension/mcpCache.ts#L182)
+Defined in: [src/extension/mcpCache.ts:182](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/extension/mcpCache.ts#L182)
 
 Remove a shared cache entry when it is no longer relevant.
 

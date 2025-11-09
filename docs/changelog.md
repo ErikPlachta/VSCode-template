@@ -25,6 +25,16 @@ Guidelines:
 
 ### Planned
 
+- Deprecate `src/mcp.config.json` in favor of build-generated JSON derived from TS sources:
+
+  - Source of truth remains TypeScript configs (`src/config/application.config.ts`, `src/mcp/config/unifiedAgentConfig.ts`).
+  - Add generator script (e.g., `src/tools/generateMcpConfig.ts`) that produces a runtime `mcp.config.json` at build time.
+  - Wire generator into `npm run prebuild` so the file is created automatically; do not commit generated JSON.
+  - Update `.gitignore` and health checks to ensure generated file isn’t treated as source.
+  - Add tests that snapshot generator output and assert schema/fields stability.
+  - Document migration: projects should not import `src/mcp.config.json`; tools expecting JSON should read the generated artifact.
+  - Final step: remove `src/mcp.config.json` after one release cycle with deprecation notice in release notes.
+
 - Replace `any` types in analytics modules (`src/shared/analyticsIntegration.ts`, `src/shared/agentAnalytics.ts`) with structured interfaces.
 - Create/update remaining docs assets (if any new references appear) and keep health report green.
 - Perform final sweep to replace legacy agent imports and plan deprecation removal of `relevant-data-manager` alias.
@@ -55,6 +65,20 @@ Guidelines:
 
 ### Verification (latest session 2025-11-08)
 
+### Fixed (2025-11-08 – DatabaseAgent JSDoc + operators tests)
+
+- `src/agent/databaseAgent/index.ts` JSDoc completed with precise param/returns/throws across public and private methods (removed TODO placeholders).
+- Added `tests/databaseAgent.operators.test.ts` to exercise operator handling ($eq, $ne, $gt/$gte/$lt/$lte, $in/$nin, $regex, $exists), alias mapping, cache behavior, helpers, and unknown category error.
+- Lint and health remain PASS; tests PASS.
+
+### Added (2025-11-08 – Coverage expansion batch)
+
+- Added `tests/relevantDataManagerAgent.edges.test.ts` to cover empty search cases, missing record lookups, and dataset fingerprint/hash stability checks.
+- Added `tests/mcpCache.extra.test.ts` to exercise shared cache store/read/list/delete flows and invocation logging, including missing-entry handling.
+- Extended `$regex` coverage in `tests/databaseAgent.operators.test.ts` to include non-string field behavior.
+- Added `tests/databaseAgent.cache-errors.test.ts` to cover cache read error path, cache write failure path, and useCache=false branch.
+- All tests, lint, and health reports PASS; coverage trending upward (still shy of 100%).
+
 - Build: PASS
 - Tests: PASS
 - Lint: PASS – no errors; previous MODULE_TYPELESS_PACKAGE_JSON warning resolved by adding `"type": "module"` to `package.json`.
@@ -78,6 +102,12 @@ Guidelines:
 
 ### Changed
 
+Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
+
+- Tests now import from `src/agent/userContextAgent` (aliased where practical to reduce churn).
+- `userContextAgent` re-exports `UnknownCategoryError` and legacy types to preserve public API during transition.
+- Follow-up: invert dependency so legacy path re-exports from `userContextAgent`, then remove legacy folder in a subsequent release.
+
 - Migrated progress tracking from `docs/PROGRESS.md` to the root `CHANGELOG.md` to avoid conflicts with docs governance.
 - Refactored `bin/utils/postprocessDocs.ts` to promote generated pages directly into structured Diátaxis folders (guides/, concepts/, reference/) and remove obsolete root duplicates & nested subtree.
 - Enhanced telemetry docs (`src/mcp/telemetry.ts`) with clearer cross-references and `@inheritDoc`, removing unsupported tags after lint feedback.
@@ -85,7 +115,140 @@ Guidelines:
 - Added transitional User Context Agent (`src/agent/userContextAgent`) aliasing legacy Relevant Data Manager for incremental rename.
 - Extended JSON schema patterns to support both `businessData` and `userContext` directories.
 
+### Changed (2025-11-08 – Dependency inversion for User Context Agent)
+
+- Inverted implementation ownership: moved the full agent logic under `src/agent/userContextAgent/index.ts` and converted `src/agent/relevantDataManagerAgent/index.ts` into a thin shim that extends `UserContextAgent`.
+- Added a one-time deprecation warning when instantiating the legacy `RelevantDataManagerAgent` to guide consumers to `@agent/userContextAgent`.
+- Preserved cache keys and profile ids for backwards compatibility (catalogue cache key remains `relevant-data:catalogue`).
+- Kept config exports under both paths; `userContextAgent/config` wraps legacy config as per migration policy.
+
+### Verification (post dependency inversion 2025-11-08)
+
+- Added build-time MCP config generator and tests
+
+### Added (2025-11-08 – Build-generated MCP config)
+
+- Implemented `src/tools/generateMcpConfig.ts` to produce `out/mcp.config.json` from TS sources (`@config/application.config`, `@mcp/config/unifiedAgentConfig`).
+- Wired generator into `prebuild` via new `mcp:gen` script; ensured generated file is `.gitignore`d.
+- Added `tests/generateMcpConfig.test.ts` validating agent ids and application fields; asserts file is written.
+- This begins deprecating `src/mcp.config.json` per plan; removal will follow after one cycle.
+- Updated defaults across loaders (`ConfigurationLoader`, `AgentConfigResolver`, `RepositoryHealthAgent`, `TemplateProcessor`) to prefer generated `out/mcp.config.json` instead of legacy `src/mcp.config.json`.
+- Adjusted build pipeline (`bin/build.sh`) validation stage to generate & validate `out/mcp.config.json` when TS config fallback triggers.
+- Reordered `prebuild` script to run config generation before template processing so templates consume canonical generated JSON.
+
+### Verification (config generator 2025-11-08)
+
+- Build: PASS
+- Tests: PASS (generator tests included; config path migration applied)
+- Lint: PASS (generator annotated and uses path aliases)
+- Docs: PENDING (will update README/docs next; template processor now reads generated JSON)
+- Health: PASS
+- Coverage: Maintained target; generator covered by tests
+
+### Changed (2025-11-09 – Generated config path adoption)
+
+- Default config consumers now point to generated `out/mcp.config.json` (ConfigurationLoader, AgentConfigResolver, RepositoryHealthAgent, TemplateProcessor).
+- Build pipeline validation stage updated to generate/validate `out/mcp.config.json` when TS config fallback triggers.
+- Prebuild script order adjusted: generate MCP config before template processing.
+- Added `tsconfig.typedoc.json` and wired TypeDoc to avoid compiling legacy bin test harness (prevents stale API signature errors during docs generation).
+- Legacy `src/mcp.config.json` scheduled for removal; still present until docs sweep completes.
+- Test workflow now preprocesses templates before Jest to ensure placeholder category IDs (`<application>` etc.) are resolved for dataset-dependent assertions.
+- Template processor default dataset directory switched to `src/userContext` (was `src/businessData`).
+
+### Next Focus (follow-up after path migration)
+
+- Remove `src/mcp.config.json` file and legacy `relevantDataManagerAgent` shim directory once docs references cleaned.
+- Update README and docs to reflect new default JSON location and removal timeline.
+- Run full health + lint sweep post removal to confirm zero stale references.
+
+- Build: PASS
+- Tests: PASS (no regressions after inversion; suite still green)
+- Lint: PASS (addressed JSDoc throws alignment in new `userContextAgent`)
+- Docs: UNCHANGED (to be updated next)
+- Health: PASS
+- Coverage: UNCHANGED (target remains 100%)
+
+### Changed (2025-11-09 – Generator ESM alignment & category ID canonicalization)
+
+### Changed (2025-11-09 – Agent folder simplification & user-context migration)
+
+- Adopted two-file agent standard (`agent.config.ts` + `index.ts`) and deleted redundant `config.ts` in `src/agent/userContextAgent` and legacy shim path.
+- Inlined `UserContextAgentConfig` wrapper into `src/agent/userContextAgent/index.ts`; updated legacy shim exports in `src/agent/relevantDataManagerAgent/index.ts` to re-export new `userContextAgentConfig`.
+- Updated README to document configuration generation, canonical category IDs, quality gate details, troubleshooting matrix, and contributing rules.
+- Refreshed `.github/copilot-instructions.md` with new alias lifecycle (including `relevant-data-manager` → `user-context`) and agent folder standard.
+- Began removal sequence for legacy agent: shim remains; full directory removal scheduled post alias window.
+
+### Changed (2025-11-09 – Remove hard-coded defaults in agents)
+
+- Removed hard-coded business category defaults and config objects from `src/agent/dataAgent/index.ts` (all analysis/exploration/quality/performance/search/synthesis accessors now config-only; explorationPriorities purely config-driven).
+- Removed hard-coded fallbacks for `guidanceTypes` and `knowledgeSources` plus remaining guidance/escalation/knowledgeBase/routing/contextAnalysis/performance fallback objects in `src/agent/clarificationAgent/index.ts`; values must come from `agent.config.ts`.
+- Consolidated former `src/agent/orchestrator/config.ts` logic into `src/agent/orchestrator/index.ts` and removed all embedded fallback message/weights/phrases defaults; strict errors thrown if required config blocks missing (prepares for deleting legacy file after verification).
+
+### Verification (post defaults cleanup 2025-11-09)
+
+- Build: PENDING
+- Tests: PENDING
+- Lint: PASS (agent index refactors JSDoc-complete; added @throws annotations)
+- Docs: UNCHANGED (no generated docs updates yet)
+- Health: UNCHANGED
+- Coverage: PENDING (target 100%) – follow-up run will confirm no drops after removing fallback code paths
+
+### Docs (2025-11-09 – README & governance updates)
+
+- Expanded configuration model section (generator, JSON artifact lifecycle) and clarified User Context canonical IDs.
+- Added quality gates breakdown and troubleshooting table.
+- Added agent folder standard and migration rules to Copilot instructions.
+
+### Verification (post agent folder updates 2025-11-09)
+
+- Build: PASS
+- Tests: PENDING (run after remaining agent config merges—current changes limited to userContext + shim)
+- Lint: PASS (no new JSDoc placeholders introduced)
+- Docs: UNCHANGED (README/manual instructions updated; generated docs unaffected yet)
+- Health: PASS (no structural violations)
+- Coverage: STABLE (files removed were thin wrappers; logic now consolidated)
+
+### Next Focus (after initial folder consolidation)
+
+- Merge remaining agent `config.ts` logic (database, data, clarification, orchestrator) into their respective `index.ts` and delete those files.
+- Update any imports referencing `/config` paths; expose config wrappers from `index.ts`.
+- Re-run full test + coverage; confirm 100% after refactor.
+- Remove legacy shim directory entirely once downstream references & docs updated.
+
+- Updated `tsconfig.json` module target to `ES2022` to align with package `"type": "module"` and enable `import.meta` usage, eliminating prior runtime `require` errors during `mcp:gen`.
+- Refactored `src/tools/generateMcpConfig.ts` execution guard to ESM-compatible `runIfDirect` with JSDoc and explicit `Promise<void>` return type (removed unused eslint-disable directive).
+- Ensured alias appears distinctly: generator now emits both `relevant-data-manager` (canonical) and `user-context` (migration alias) without duplication by using loop id instead of orchestration id.
+- Canonicalized category IDs in `src/userContext/*/category.json` replacing placeholders (`<application>`, `<department>`, `<people>`, `<companyPolicy>`, `<companyResource>`) with stable slugs (`applications`, `departments`, `people`, `companyPolicies`, `companyResources`) removing dependency on template replacement for tests.
+- Added precise JSDoc return descriptions in `src/mcp/config/unifiedAgentConfig.ts` (removed placeholder `TODO: describe return value.` lines) to satisfy strict lint rules.
+
+### Verification (post generator & category updates 2025-11-09)
+
+- Build: PASS (ES2022 module compilation succeeds)
+- Tests: PASS (suite green after category ID canonicalization; generator output validated manually)
+- Lint: PASS (no JSDoc placeholder warnings; import.meta accepted under ES2022)
+- Docs: UNCHANGED (pending README/doc updates for alias lifecycle clarity)
+- Health: PASS (no new validation warnings)
+- Coverage: PENDING explicit measurement (expected unchanged; follow-up will assert 100% or schedule remediation)
+
 ### Fixed (2025-11-08 – Analytics integration and config JSDoc sweep)
+
+### Fixed (2025-11-08 – RelevantDataManagerAgent JSDoc + error-path tests)
+
+- Replaced remaining `TODO: describe return value.` in `src/agent/relevantDataManagerAgent/index.ts` with precise return descriptions and corrected JSDoc alignment to satisfy strict lint rules.
+- Added error-path tests for the agent:
+  - `tests/relevantDataManagerAgent.errorPaths.test.ts` (empty data directory; missing `category.json`).
+  - `tests/relevantDataManagerAgent.entityConnectionsErrors.test.ts` (missing record for `getEntityConnections`).
+- Added snapshot invalidation test to cover `getOrCreateSnapshot` cache recordHash behavior:
+  - `tests/relevantDataManagerAgent.snapshotCacheInvalidation.test.ts` ensures record changes update snapshot and recordHash metadata.
+
+### Verification (post resilience improvements 2025-11-08)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS (no JSDoc placeholder lines; alignment OK)
+- Docs: PASS (unchanged)
+- Health: PASS
+- Coverage: IMPROVED (snapshot cache + error paths + fingerprint divergence)
 
 - `src/shared/analyticsIntegration.ts`
   - Removed remaining `any` usages; replaced with `unknown` and precise assertions.
@@ -107,6 +270,38 @@ Guidelines:
   - Confirmed subsequent lint invocation no longer emits the warning.
 
 ### Docs
+
+### Fixed (2025-11-08 – Dataset root alignment & extension test updates)
+
+- `src/agent/relevantDataManagerAgent/index.ts` updated `DEFAULT_DATA_ROOT` from deprecated `bin/data` to new `src/userContext` directory; added test overrides via `VSCODE_TEMPLATE_DATA_ROOT` to remove hardcoded path assumption and unblock agent/database/data test suites.
+- Tests (`tests/relevantDataManagerAgent.test.ts`, `tests/databaseAgent.test.ts`, `tests/dataAgent.test.ts`) now set env var before creation to ensure consistent dataset loading; prevents cascading failures in dependent agents.
+- `tests/extension.test.ts` refactored to match current activation flow using `vscode.chat.createChatParticipant` (removed legacy slash command/mention expectations); updated info message assertion to new phrasing.
+- Replaced disallowed JSDoc `TODO: describe return value` placeholders in relevant data manager agent with concrete return descriptions to satisfy lint rules.
+
+### Verification Update (post dataset root fix 2025-11-08)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health report: PASS
+- Coverage: IMPROVED (follow-up to reach 100%)
+- JSDoc: IMPROVED
+
+### Added (2025-11-08 – Consolidated index cache behaviour tests)
+
+- Added `tests/relevantDataManagerAgent.catalogueCacheHit.test.ts` to ensure the consolidated index (dataset catalogue) is only persisted once when the dataset fingerprint matches an existing shared cache entry, exercising the early return branch in `persistConsolidatedIndex`.
+- Added `tests/relevantDataManagerAgent.catalogueCacheDivergence.test.ts` to modify dataset records and assert that a changed fingerprint triggers a subsequent persist to the shared cache (cache miss path).
+
+### Verification (after cache-hit + divergence tests 2025-11-08)
+
+- Build: PASS
+- Tests: PASS (cache-hit and divergence scenarios validated; full suite green)
+- Lint: PASS (no new JSDoc regressions introduced by test)
+- Docs: UNCHANGED (PASS)
+- Health: PASS
+- Coverage: IMPROVED (both fingerprint branches covered)
+- JSDoc: UNCHANGED (PASS)
 
 - Introduced this changelog as the single source of truth for Copilot Chat–managed work. Updated `.github/copilot-instructions.md` to reference this flow and resume prompts.
 - Added build pipeline, orchestration overview, and repository health agent documentation.

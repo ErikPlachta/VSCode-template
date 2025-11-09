@@ -18,7 +18,7 @@ import {
 } from "@extension/mcpCache";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { UserContextAgentProfile } from "@mcp/config/agentProfiles";
-import { UserContextAgentConfig } from "@agent/userContextAgent/config";
+import { userContextAgentConfig } from "@agent/userContextAgent/agent.config";
 
 /**
  * Description for how a category folder is organised.
@@ -77,6 +77,15 @@ export interface CategorySchema {
   name: string;
   description: string;
   schema: Record<string, unknown>;
+}
+
+/**
+ * Lightweight configuration wrapper for the User Context Agent.
+ * Provides access to the generated `userContextAgentConfig` object.
+ */
+export class UserContextAgentConfig {
+  /** Underlying config object */
+  public readonly value = userContextAgentConfig;
 }
 
 /** Supported primitive names within a type definition schema. */
@@ -1889,5 +1898,4 @@ export function createUserContextAgent(): UserContextAgent {
 }
 
 // Export configuration types and instances for external use
-export { UserContextAgentConfig } from "@agent/userContextAgent/config";
 export { userContextAgentConfig } from "@agent/userContextAgent/agent.config";

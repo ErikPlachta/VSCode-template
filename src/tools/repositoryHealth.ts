@@ -123,7 +123,7 @@ export class RepositoryHealthAgent {
    * @returns {Promise<RepositoryHealthAgent>} Instantiated health agent ready to run checks.
    */
   public static async createFromDisk(
-    configPath: string = "src/mcp.config.json"
+    configPath: string = "out/mcp.config.json"
   ): Promise<RepositoryHealthAgent> {
     const config: AgentConfig = await RepositoryHealthAgent.loadConfig(
       configPath

@@ -69,7 +69,7 @@ export class TemplateProcessor {
   }
 
   static async create(
-    configPath: string = "src/mcp.config.json"
+    configPath: string = "out/mcp.config.json"
   ): Promise<TemplateProcessor> {
     const config = await this.loadConfig(configPath);
     const agentDefinitions = await this.loadAgentDefinitions(
@@ -80,7 +80,7 @@ export class TemplateProcessor {
   }
 
   async processTemplates(
-    dataDirectory: string = "src/businessData"
+    dataDirectory: string = "src/userContext"
   ): Promise<void> {
     const categoryFiles = await fg("*/category.json", {
       cwd: dataDirectory,
@@ -95,9 +95,8 @@ export class TemplateProcessor {
   private async processFile(filePath: string): Promise<void> {
     const content = await fs.promises.readFile(filePath, "utf-8");
     let processedContent = content;
-    for (const [placeholder, templatePath] of Object.entries(
-      this.config.agents.templateReplacements
-    )) {
+    const replacements = this.config.agents?.templateReplacements || {};
+    for (const [placeholder, templatePath] of Object.entries(replacements)) {
       const replacement = this.resolveTemplateValue(templatePath);
       processedContent = processedContent.replace(
         new RegExp(placeholder, "g"),
@@ -202,7 +201,9 @@ export class TemplateProcessor {
       return config.agents.definitions;
     }
 
-    const configurationSource = config.agents?.configurationSource;
+    const configurationSource =
+      config.agents?.configurationSource ||
+      "src/mcp/config/unifiedAgentConfig.ts";
     if (!configurationSource) {
       console.warn(
         "⚠️  No configurationSource provided; agent definitions unavailable."
@@ -349,9 +350,8 @@ export class TemplateProcessor {
       "|-------------|-------------|---------------|"
     );
 
-    for (const [placeholder, templatePath] of Object.entries(
-      this.config.agents.templateReplacements
-    )) {
+    const replacements = this.config.agents?.templateReplacements || {};
+    for (const [placeholder, templatePath] of Object.entries(replacements)) {
       const resolvedValue = this.resolveTemplateValue(templatePath);
       lines.push(
         `| \`${placeholder}\` | \`${templatePath}\` | ${resolvedValue} |`

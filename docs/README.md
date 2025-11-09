@@ -47,11 +47,19 @@ This extension embeds (or connects to) an MCP server and a small set of agents (
 
 ## Configuration model (source of truth)
 
-- Application configuration lives in TypeScript at `src/config/application.config.ts`.
-- Agent definitions live in `src/mcp/config/unifiedAgentConfig.ts`.
-- The legacy `src/mcp.config.json` is being removed. Build/dev utilities are being updated to read the TS config directly.
+All configuration now originates in TypeScript for transparency, version control, and type safety:
 
-Template processing and docs generation use the TS configuration as the single source of truth to avoid drift.
+- Application configuration: `src/config/application.config.ts`
+- Agent definitions & profiles: `src/mcp/config/unifiedAgentConfig.ts`
+- Build‑generated JSON (for external tools expecting a flat file): `out/mcp.config.json` (NOT committed)
+
+The legacy `src/mcp.config.json` will be fully removed after one migration cycle. During the transition:
+
+- The generator script `src/tools/generateMcpConfig.ts` materializes `out/mcp.config.json` during `npm run prebuild`.
+- Consumers and internal loaders already default to the generated JSON or the TS sources directly.
+- If you previously imported `src/mcp.config.json`, switch to the TS source modules or read the generated file after build.
+
+Template processing, test fixtures, and docs generation all use the TS sources as the single source of truth to prevent drift.
 
 ## Settings: UI first, chat second
 
@@ -69,9 +77,16 @@ Settings validation will prevent invalid values from taking effect; invalid over
 
 ## User Context: global and local
 
-- Global context is stored in your VS Code extensions directory (Windows example): `C:\Users\plach\.vscode\extensions` under a `.mcp-cache` folder.
-- Local context is stored in your workspace under `.mcp-cache`.
-- The extension guides you through adding or editing User Context via templates, then validates and indexes it.
+User Context now replaces the legacy “Relevant Data Manager” terminology. Backwards‑compatible aliases (e.g. agent id `relevant-data-manager` alongside `user-context`) remain for one release cycle and then will emit warnings before removal.
+
+- Global context cache: `%USERPROFILE%/.vscode/extensions/<extensionName>/.mcp-cache`
+- Local context cache: `<workspace>/.mcp-cache`
+- The indexing process builds:
+  - Category snapshots (structure/record counts)
+  - A consolidated catalogue (schemas, relationships, primary keys)
+  - Validation reports (schema + relationship integrity)
+
+You can evolve User Context by editing the folders under `src/userContext/` (applications, departments, people, companyPolicies, companyResources). Placeholders have been fully replaced with canonical IDs for stability.
 
 ## Development
 
@@ -80,29 +95,47 @@ Requirements:
 - Node 18+
 - VS Code 1.95+
 
-Useful scripts:
+Useful scripts (all run through a deterministic prebuild):
 
-- Build: `npm run compile` (prebuild scripts keep templates and docs in sync)
-- Test (100% coverage target): `npm test`
-- Lint: `npm run lint`
-- Docs: `npm run docs`
+- Prebuild (config + JSON generation + templates): `npm run prebuild`
+- Build: `npm run compile`
+- Test (100% coverage target, templates preprocessed): `npm test`
+- Lint (strict JSDoc, zero warnings policy): `npm run lint`
+- Docs (TypeDoc → markdown + post‑processing + health report): `npm run docs`
 
-Quality gates (enforced before merge):
+Quality gates (must all PASS before merge):
 
-- 100% coverage (literal)
-- Lint clean (including strict JSDoc)
-- Build passes
-- Docs and health report up-to-date
+1. Build (TypeScript compile) – no errors.
+2. Tests – 100% line/branch/function coverage; explicit remediation plan required for any temporary dip.
+3. Lint – zero errors/warnings with strict JSDoc (no placeholder @returns, no undocumented public APIs).
+4. Docs – regenerated, no manual edits to generated markdown, no orphan pages.
+5. Health – repository governance checks (naming, front matter, schema alignment) all pass.
+6. Config drift – generated `out/mcp.config.json` matches TS sources (checked implicitly by tests).
 
 ## Troubleshooting
 
-- If you’re using the embedded server, ensure no conflicting process is running on the configured port.
-- To inspect what was replaced in templates, see `docs/template-variables.md` and the build logs.
-- For User Context problems, check both `.mcp-cache` locations and ensure your JSON files validate against the provided schemas.
+| Issue                               | Check                                               | Resolution                                                                              |
+| ----------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Embedded server not reachable       | Port conflict / `mcp.json` registration             | Change port in Settings or disable auto‑register and retry                              |
+| Missing User Context data           | Folder names / canonical IDs in `src/userContext/*` | Ensure category `id` fields are canonical (e.g. `applications`, not placeholder tokens) |
+| Template placeholders still visible | Prebuild execution                                  | Run `npm run prebuild` or `npm test` (auto‑runs templates)                              |
+| Generated config absent             | Build directory contents                            | Run `npm run mcp:gen` (invokes generator)                                               |
+| Coverage below 100%                 | Jest coverage summary                               | Add tests for uncovered branches then re‑run `npm test`                                 |
+| Lint failures (JSDoc)               | ESLint output                                       | Replace placeholder text, add missing tags, ensure param descriptions                   |
+
+More diagnostics: `docs/template-variables.md` (resolved template values), shared cache contents under `.mcp-cache` for snapshot & catalogue verification.
 
 ## Contributing
 
-See the development workflow guide and the CHANGELOG for planned tasks and verification results. We maintain backward-compatible aliases for one release when renaming/migrating components.
+Follow the CHANGELOG “Unreleased” sections (Planned / Added / Changed / Fixed / Docs / Verification / Next Focus) for active work. Every non‑trivial PR must:
+
+1. Update CHANGELOG (at least one section).
+2. Preserve migration aliases until scheduled removal (e.g. keep `relevant-data-manager` alongside `user-context`).
+3. Maintain 100% coverage – add tests first for new logic.
+4. Avoid manual edits to generated docs; regenerate via scripts.
+5. Include precise JSDoc (no placeholders, hyphenated param descriptions, concrete @returns).
+
+After the alias deprecation window, remove legacy agent folders and update tests to only reference the canonical name.
 
 ---
 

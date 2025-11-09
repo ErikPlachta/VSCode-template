@@ -8,9 +8,9 @@
 
 > **loadApplicationConfig**(`configPath?`): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L270)
+Defined in: [src/shared/configurationLoader.ts:206](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L206)
 
-Convenience function to load application configuration.
+Convenience helper to load the application config via the global loader.
 
 ## Parameters
 
@@ -18,10 +18,10 @@ Convenience function to load application configuration.
 
 `string`
 
-configPath parameter.
+Optional legacy path (not used when TS config is present).
 
 ## Returns
 
 `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-- TODO: describe return value.
+Loaded application configuration.

@@ -23,6 +23,39 @@ Guidelines:
 
 ## [Unreleased]
 
+### Verification (post defaults cleanup 2025-11-09)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS (agent index refactors JSDoc-complete; added @throws annotations)
+- Docs: PASS (typedoc + postprocess pipeline completed without errors)
+- Health: PASS
+- Coverage: STABLE (see coverage report; target remains 100%)
+
+### Changed (2025-11-09 – Remove deprecated agent config.ts files)
+
+- Deleted legacy per-agent config wrappers now that configuration classes are merged into their respective `index.ts` files:
+  - `src/agent/orchestrator/config.ts`
+  - `src/agent/dataAgent/config.ts`
+  - `src/agent/clarificationAgent/config.ts`
+  - `src/agent/databaseAgent/config.ts`
+  - `src/agent/relevantDataManagerAgent/config.ts`
+  - `src/agent/userContextAgent/config.ts`
+- Confirmed no remaining imports reference these paths; exports are provided via each agent's `index.ts` and `agent.config.ts` as per the two-file standard.
+
+### Verification (post config.ts removals 2025-11-09)
+
+- Build: PASS (tsc compile)
+- Tests: PASS (jest suite green)
+- Lint: PASS (strict JSDoc, no unused imports)
+- Docs: PASS (typedoc ran and docs post-processing succeeded)
+- Health: PASS (repository health report clean)
+
+### Next Focus (post-removal)
+
+- Finish eliminating any remaining fallback defaults in DatabaseAgent getters if discovered in future diffs; ensure all required values are sourced from `agent.config.ts` and throw when missing.
+- Keep CHANGELOG as single source of truth; begin alias deprecation warning cycle for `relevant-data-manager` → `user-context` per policy.
+
 ### Planned
 
 - Deprecate `src/mcp.config.json` in favor of build-generated JSON derived from TS sources:
@@ -132,15 +165,34 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Wired generator into `prebuild` via new `mcp:gen` script; ensured generated file is `.gitignore`d.
 - Added `tests/generateMcpConfig.test.ts` validating agent ids and application fields; asserts file is written.
 - This begins deprecating `src/mcp.config.json` per plan; removal will follow after one cycle.
+- Updated defaults across loaders (`ConfigurationLoader`, `AgentConfigResolver`, `RepositoryHealthAgent`, `TemplateProcessor`) to prefer generated `out/mcp.config.json` instead of legacy `src/mcp.config.json`.
+- Adjusted build pipeline (`bin/build.sh`) validation stage to generate & validate `out/mcp.config.json` when TS config fallback triggers.
+- Reordered `prebuild` script to run config generation before template processing so templates consume canonical generated JSON.
 
 ### Verification (config generator 2025-11-08)
 
 - Build: PASS
-- Tests: PASS (generator tests included)
+- Tests: PASS (generator tests included; config path migration applied)
 - Lint: PASS (generator annotated and uses path aliases)
-- Docs: PENDING (will update README/docs next)
+- Docs: PENDING (will update README/docs next; template processor now reads generated JSON)
 - Health: PASS
 - Coverage: Maintained target; generator covered by tests
+
+### Changed (2025-11-09 – Generated config path adoption)
+
+- Default config consumers now point to generated `out/mcp.config.json` (ConfigurationLoader, AgentConfigResolver, RepositoryHealthAgent, TemplateProcessor).
+- Build pipeline validation stage updated to generate/validate `out/mcp.config.json` when TS config fallback triggers.
+- Prebuild script order adjusted: generate MCP config before template processing.
+- Added `tsconfig.typedoc.json` and wired TypeDoc to avoid compiling legacy bin test harness (prevents stale API signature errors during docs generation).
+- Legacy `src/mcp.config.json` scheduled for removal; still present until docs sweep completes.
+- Test workflow now preprocesses templates before Jest to ensure placeholder category IDs (`<application>` etc.) are resolved for dataset-dependent assertions.
+- Template processor default dataset directory switched to `src/userContext` (was `src/businessData`).
+
+### Next Focus (follow-up after path migration)
+
+- Remove `src/mcp.config.json` file and legacy `relevantDataManagerAgent` shim directory once docs references cleaned.
+- Update README and docs to reflect new default JSON location and removal timeline.
+- Run full health + lint sweep post removal to confirm zero stale references.
 
 - Build: PASS
 - Tests: PASS (no regressions after inversion; suite still green)
@@ -148,6 +200,68 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Docs: UNCHANGED (to be updated next)
 - Health: PASS
 - Coverage: UNCHANGED (target remains 100%)
+
+### Changed (2025-11-09 – Generator ESM alignment & category ID canonicalization)
+
+### Changed (2025-11-09 – Agent folder simplification & user-context migration)
+
+- Adopted two-file agent standard (`agent.config.ts` + `index.ts`) and deleted redundant `config.ts` in `src/agent/userContextAgent` and legacy shim path.
+- Inlined `UserContextAgentConfig` wrapper into `src/agent/userContextAgent/index.ts`; updated legacy shim exports in `src/agent/relevantDataManagerAgent/index.ts` to re-export new `userContextAgentConfig`.
+- Updated README to document configuration generation, canonical category IDs, quality gate details, troubleshooting matrix, and contributing rules.
+- Refreshed `.github/copilot-instructions.md` with new alias lifecycle (including `relevant-data-manager` → `user-context`) and agent folder standard.
+- Began removal sequence for legacy agent: shim remains; full directory removal scheduled post alias window.
+
+### Changed (2025-11-09 – Remove hard-coded defaults in agents)
+
+- Removed hard-coded business category defaults and config objects from `src/agent/dataAgent/index.ts` (all analysis/exploration/quality/performance/search/synthesis accessors now config-only; explorationPriorities purely config-driven).
+- Removed hard-coded fallbacks for `guidanceTypes` and `knowledgeSources` plus remaining guidance/escalation/knowledgeBase/routing/contextAnalysis/performance fallback objects in `src/agent/clarificationAgent/index.ts`; values must come from `agent.config.ts`.
+- Consolidated former `src/agent/orchestrator/config.ts` logic into `src/agent/orchestrator/index.ts` and removed all embedded fallback message/weights/phrases defaults; strict errors thrown if required config blocks missing (prepares for deleting legacy file after verification).
+
+### Verification (post defaults cleanup 2025-11-09) (superseded by later PASS verification)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS (agent index refactors JSDoc-complete; added @throws annotations)
+- Docs: PASS
+- Health: PASS
+- Coverage: STABLE
+
+### Docs (2025-11-09 – README & governance updates)
+
+- Expanded configuration model section (generator, JSON artifact lifecycle) and clarified User Context canonical IDs.
+- Added quality gates breakdown and troubleshooting table.
+- Added agent folder standard and migration rules to Copilot instructions.
+
+### Verification (post agent folder updates 2025-11-09)
+
+- Build: PASS
+- Tests: PENDING (run after remaining agent config merges—current changes limited to userContext + shim)
+- Lint: PASS (no new JSDoc placeholders introduced)
+- Docs: UNCHANGED (README/manual instructions updated; generated docs unaffected yet)
+- Health: PASS (no structural violations)
+- Coverage: STABLE (files removed were thin wrappers; logic now consolidated)
+
+### Next Focus (after initial folder consolidation)
+
+- Merge remaining agent `config.ts` logic (database, data, clarification, orchestrator) into their respective `index.ts` and delete those files.
+- Update any imports referencing `/config` paths; expose config wrappers from `index.ts`.
+- Re-run full test + coverage; confirm 100% after refactor.
+- Remove legacy shim directory entirely once downstream references & docs updated.
+
+- Updated `tsconfig.json` module target to `ES2022` to align with package `"type": "module"` and enable `import.meta` usage, eliminating prior runtime `require` errors during `mcp:gen`.
+- Refactored `src/tools/generateMcpConfig.ts` execution guard to ESM-compatible `runIfDirect` with JSDoc and explicit `Promise<void>` return type (removed unused eslint-disable directive).
+- Ensured alias appears distinctly: generator now emits both `relevant-data-manager` (canonical) and `user-context` (migration alias) without duplication by using loop id instead of orchestration id.
+- Canonicalized category IDs in `src/userContext/*/category.json` replacing placeholders (`<application>`, `<department>`, `<people>`, `<companyPolicy>`, `<companyResource>`) with stable slugs (`applications`, `departments`, `people`, `companyPolicies`, `companyResources`) removing dependency on template replacement for tests.
+- Added precise JSDoc return descriptions in `src/mcp/config/unifiedAgentConfig.ts` (removed placeholder `TODO: describe return value.` lines) to satisfy strict lint rules.
+
+### Verification (post generator & category updates 2025-11-09)
+
+- Build: PASS (ES2022 module compilation succeeds)
+- Tests: PASS (suite green after category ID canonicalization; generator output validated manually)
+- Lint: PASS (no JSDoc placeholder warnings; import.meta accepted under ES2022)
+- Docs: UNCHANGED (pending README/doc updates for alias lifecycle clarity)
+- Health: PASS (no new validation warnings)
+- Coverage: PENDING explicit measurement (expected unchanged; follow-up will assert 100% or schedule remediation)
 
 ### Fixed (2025-11-08 – Analytics integration and config JSDoc sweep)
 

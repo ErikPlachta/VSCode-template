@@ -8,7 +8,7 @@
 
 > **activate**(`context`): `Promise`\<`void`\>
 
-Defined in: [src/extension/index.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/extension/index.ts#L25)
+Defined in: [src/extension/index.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/extension/index.ts#L25)
 
 Activate the MyBusiness MCP extension.
 

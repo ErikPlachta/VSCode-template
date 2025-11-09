@@ -2,7 +2,17 @@
  * @packageDocumentation Configuration-driven orchestrator implementation
  */
 
-import { OrchestratorConfig } from "@agent/orchestrator/config";
+import {
+  BaseAgentConfig,
+  type AgentConfigDefinition,
+  type OrchestrationConfig,
+  type IntentConfig,
+} from "@internal-types/agentConfig";
+import {
+  validateAgentConfig,
+  generateValidationReport,
+} from "@internal-types/configValidation";
+import { orchestratorConfig } from "@agent/orchestrator/agent.config";
 
 /** List of supported orchestration intents (from configuration). */
 export type OrchestratorIntent = string;
@@ -457,5 +467,199 @@ export class Orchestrator {
       stopWordsCount: this.stopWords.size,
       scoringWeights: this.scoringWeights,
     };
+  }
+}
+
+/**
+ * Orchestrator-specific configuration class (merged from config.ts)
+ */
+export class OrchestratorConfig extends BaseAgentConfig {
+  private orchestrationConfig: OrchestrationConfig;
+
+  /**
+   * Create a config wrapper using default TS config or overrides (for tests)
+   *
+   * @param {AgentConfigDefinition} [config] - Optional override configuration.
+   */
+  constructor(config?: AgentConfigDefinition) {
+    const configToUse = config || orchestratorConfig;
+    const validationResult = validateAgentConfig(configToUse);
+    if (!validationResult.isValid) {
+      const report = generateValidationReport(validationResult);
+      throw new Error(`Invalid orchestrator configuration:\n${report}`);
+    }
+
+    super(configToUse);
+    this.orchestrationConfig = this.config.orchestration || {};
+  }
+
+  /**
+   * List all supported intent names defined in orchestration config.
+   *
+   * @returns {string[]} - Array of intent identifiers.
+   */
+  public getIntents(): string[] {
+    return Object.keys(this.orchestrationConfig.intents || {});
+  }
+
+  /**
+   * Get full intent configuration block by name.
+   *
+   * @param {string} intent - Intent identifier to look up.
+   * @returns {IntentConfig | undefined} - Intent configuration or undefined if missing.
+   */
+  public getIntentConfig(intent: string): IntentConfig | undefined {
+    return this.orchestrationConfig.intents?.[intent];
+  }
+
+  /**
+   * Resolve which agent should handle a given intent.
+   *
+   * @param {string} intent - Intent identifier.
+   * @returns {string | undefined} - Target agent name or undefined when not configured.
+   */
+  public getTargetAgent(intent: string): string | undefined {
+    return this.orchestrationConfig.intents?.[intent]?.targetAgent;
+  }
+
+  /**
+   * Access stop words used for token filtering in keyword extraction.
+   *
+   * @returns {Set<string>} - Set of lowercase stop words.
+   */
+  public getStopWords(): Set<string> {
+    const stopWords = this.orchestrationConfig.textProcessing?.stopWords || [];
+    return new Set(stopWords);
+  }
+
+  /**
+   * Return weighting factors used when computing intent relevance scores.
+   *
+   * @returns {{signalMatch:number, focusMatch:number, promptStarterMatch:number}} - Weight configuration.
+   * @throws {Error} When orchestrator config lacks textProcessing.scoringWeights.
+   */
+  public getScoringWeights(): {
+    signalMatch: number;
+    focusMatch: number;
+    promptStarterMatch: number;
+  } {
+    const weights = this.orchestrationConfig.textProcessing?.scoringWeights;
+    if (!weights) {
+      throw new Error(
+        "Orchestrator config missing textProcessing.scoringWeights"
+      );
+    }
+    return weights;
+  }
+
+  /**
+   * Minimum keyword length threshold for token consideration.
+   *
+   * @returns {number} - Minimum length; defaults to 3.
+   * @throws {Error} When orchestrator config lacks textProcessing.minimumKeywordLength.
+   */
+  public getMinimumKeywordLength(): number {
+    const len = this.orchestrationConfig.textProcessing?.minimumKeywordLength;
+    if (typeof len !== "number") {
+      throw new Error(
+        "Orchestrator config missing textProcessing.minimumKeywordLength"
+      );
+    }
+    return len;
+  }
+
+  /**
+   * Full escalation configuration controlling vague query handling and fallbacks.
+   *
+   * @returns {NonNullable<OrchestrationConfig["escalation"]>} - Escalation settings object.
+   * @throws {Error} When orchestrator config lacks an escalation block.
+   */
+  public getEscalationConfig(): NonNullable<OrchestrationConfig["escalation"]> {
+    const esc = this.orchestrationConfig.escalation;
+    if (!esc) {
+      throw new Error("Orchestrator config missing escalation block");
+    }
+    return esc as NonNullable<OrchestrationConfig["escalation"]>;
+  }
+
+  /**
+   * Build quick lookup table of intent to target agent.
+   *
+   * @returns {Record<string,string>} - Mapping of intent names to agent identifiers.
+   */
+  public getIntentAgentMap(): Record<string, string> {
+    const intents = this.orchestrationConfig.intents || {};
+    const mapping: Record<string, string> = {};
+    for (const [intent, config] of Object.entries(intents)) {
+      mapping[intent] = (config as IntentConfig).targetAgent;
+    }
+    return mapping;
+  }
+
+  /**
+   * Phrases considered too vague and that trigger clarification flow.
+   *
+   * @returns {string[]} - List of vague phrase patterns.
+   */
+  public getVaguePhrases(): string[] {
+    return this.orchestrationConfig.escalation?.vaguePhrases ?? [];
+  }
+
+  /**
+   * Determine which agent handles requests after escalation exhaustion.
+   *
+   * @returns {string} - Fallback agent identifier (default clarification-agent).
+   */
+  public getFallbackAgent(): string {
+    return this.orchestrationConfig.escalation?.fallbackAgent ?? "";
+  }
+
+  /**
+   * User-facing message templates consumed during orchestration.
+   *
+   * @returns {NonNullable<OrchestrationConfig["messages"]>} - Message configuration object.
+   * @throws {Error} When orchestrator config lacks messages definition.
+   */
+  public getMessages(): NonNullable<OrchestrationConfig["messages"]> {
+    const messages = this.orchestrationConfig.messages;
+    if (!messages) {
+      throw new Error("Orchestrator config missing messages block");
+    }
+    return messages as NonNullable<OrchestrationConfig["messages"]>;
+  }
+
+  /**
+   * Load configuration from a JSON file path; falls back to internal default.
+   *
+   * @param {string} [configPath] - Path to JSON config file.
+   * @returns {Promise<OrchestratorConfig>} - Loaded orchestrator config instance.
+   */
+  public static async loadFromFile(
+    configPath?: string
+  ): Promise<OrchestratorConfig> {
+    if (!configPath) {
+      return new OrchestratorConfig(orchestratorConfig);
+    }
+    try {
+      const fs = await import("fs");
+      const configData = fs.readFileSync(configPath, "utf-8");
+      const config = JSON.parse(configData);
+      return new OrchestratorConfig(config);
+    } catch (error) {
+      console.warn(
+        `Failed to load config from ${configPath}, using default:`,
+        error
+      );
+      return new OrchestratorConfig(orchestratorConfig);
+    }
+  }
+
+  /**
+   * Construct a default orchestrator configuration instance.
+   *
+   * @returns {OrchestratorConfig} - Default configuration wrapper.
+   */
+  public static createDefault(): OrchestratorConfig {
+    return new OrchestratorConfig(orchestratorConfig);
   }
 }

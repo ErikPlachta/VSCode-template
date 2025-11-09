@@ -1,5 +1,5 @@
 {
-  "id": "<companyResource>",
+  "id": "companyResources",
   "name": "Company Resources",
   "description": "Knowledge base entries, playbooks, and runbooks.",
   "aliases": ["resources", "knowledge base"],

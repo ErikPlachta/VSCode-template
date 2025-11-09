@@ -8,9 +8,9 @@
 
 > **getConfigurationLoader**(`configPath?`): [`ConfigurationLoader`](../classes/ConfigurationLoader.md)
 
-Defined in: [src/shared/configurationLoader.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a3104d879c581e8ecb29b10b43df8e8ea52971d4/src/shared/configurationLoader.ts#L255)
+Defined in: [src/shared/configurationLoader.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/shared/configurationLoader.ts#L191)
 
-Gets the global configuration loader instance.
+Get the global configuration loader (singleton).
 
 ## Parameters
 
@@ -18,10 +18,10 @@ Gets the global configuration loader instance.
 
 `string`
 
-configPath parameter.
+Legacy JSON path (ignored in TS-first mode; kept for API compatibility).
 
 ## Returns
 
 [`ConfigurationLoader`](../classes/ConfigurationLoader.md)
 
-- TODO: describe return value.
+Shared configuration loader instance.

@@ -7,7 +7,10 @@
  * `@agent/userContextAgent` going forward.
  */
 
-import { UserContextAgent } from "@agent/userContextAgent";
+import {
+  UserContextAgent,
+  userContextAgentConfig,
+} from "@agent/userContextAgent";
 
 // One-time deprecation warning controller
 let __warnedLegacyAgent = false;
@@ -54,5 +57,5 @@ export {
 } from "@agent/userContextAgent";
 
 // Export configuration types and instances for external use (remain under legacy path for now)
-export { RelevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/config";
-export { relevantDataManagerAgentConfig } from "@agent/relevantDataManagerAgent/agent.config";
+// Legacy exports now point directly to the new user-context configuration; remove after alias window.
+export { userContextAgentConfig as relevantDataManagerAgentConfig };

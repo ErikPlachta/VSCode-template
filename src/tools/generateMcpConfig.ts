@@ -20,6 +20,7 @@ import {
   getOrchestrationProfile,
   getExecutionProfile,
   getRichMetadata,
+  type AgentIdentifier,
 } from "@mcp/config/unifiedAgentConfig";
 import { applicationConfig } from "@config/application.config";
 
@@ -58,13 +59,17 @@ interface GeneratedMcpConfig {
  * @returns {GeneratedMcpConfig} - Fully materialised configuration object.
  */
 function buildConfig(): GeneratedMcpConfig {
-  const agentIds = getAllAgentIds();
-  const agents: GeneratedAgentConfig[] = agentIds.map((id) => {
+  // Include alias 'user-context' explicitly for migration visibility and deduplicate ids.
+  const agentIds = Array.from(
+    new Set([...getAllAgentIds(), "user-context"])
+  ) as AgentIdentifier[];
+  const agents: GeneratedAgentConfig[] = agentIds.map((id: AgentIdentifier) => {
     const orchestration = getOrchestrationProfile(id);
     const execution = getExecutionProfile(id);
     const rich = getRichMetadata(id);
     return {
-      id: orchestration.id,
+      // Preserve the requested identifier (ensures alias like 'user-context' appears distinctly)
+      id: id,
       title: orchestration.title,
       description: orchestration.description,
       primarySignals: orchestration.primarySignals,
@@ -109,12 +114,20 @@ function writeConfigFile(config: GeneratedMcpConfig): string {
   return target;
 }
 
-if (require.main === module) {
-  const config = buildConfig();
-  const target = writeConfigFile(config);
-  // Intentionally use console for build output; acceptable in generator context.
-  console.log(`Generated MCP config at ${target}`);
+/**
+ * Execute generator when this module is the entry point (direct invocation via tsx/node).
+ * Uses import.meta.url comparison instead of require.main for ESM compatibility.
+ *
+ * @returns {Promise<void>} Resolves when generation completes (or immediately if not direct).
+ */
+async function runIfDirect(): Promise<void> {
+  if (import.meta.url.endsWith("generateMcpConfig.ts")) {
+    const config = buildConfig();
+    const target = writeConfigFile(config);
+    console.log(`Generated MCP config at ${target}`);
+  }
 }
+void runIfDirect();
 
 export {
   buildConfig,

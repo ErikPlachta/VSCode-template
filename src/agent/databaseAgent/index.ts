@@ -15,7 +15,16 @@ import {
 } from "@extension/mcpCache";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { DatabaseAgentProfile } from "@mcp/config/agentProfiles";
-import { DatabaseAgentConfig } from "@agent/databaseAgent/config";
+import {
+  BaseAgentConfig,
+  type AgentConfigDefinition,
+  type DatabaseConfig,
+} from "@internal-types/agentConfig";
+import {
+  validateAgentConfig,
+  generateValidationReport,
+} from "@internal-types/configValidation";
+import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";
 
 // Generic types that work with any data structure
 /** Identifier for a generic category or data source. */
@@ -431,6 +440,273 @@ export class DatabaseAgent {
         error: error instanceof Error ? error.message : String(error),
       });
     }
+  }
+}
+
+/**
+ * Database agent-specific configuration class (merged from config.ts)
+ */
+export class DatabaseAgentConfig extends BaseAgentConfig {
+  private databaseConfig: DatabaseConfig;
+
+  /**
+   * Create a config wrapper using default TS config or overrides (for tests)
+   *
+   * @param {AgentConfigDefinition} [config] - Optional override configuration.
+   */
+  constructor(config?: AgentConfigDefinition) {
+    const configToUse = config || databaseAgentConfig;
+    const validationResult = validateAgentConfig(configToUse);
+    if (!validationResult.isValid) {
+      const report = generateValidationReport(validationResult);
+      throw new Error(`Invalid database agent configuration:\n${report}`);
+    }
+
+    super(configToUse);
+    this.databaseConfig = this.config.database || ({} as DatabaseConfig);
+  }
+
+  /**
+   * Get field aliases for a specific category.
+   *
+   * @param {string} category - Canonical category identifier.
+   * @returns {Record<string,string>} Map of alias → canonical field.
+   */
+  public getFieldAliases(category: string): Record<string, string> {
+    return this.databaseConfig.fieldAliases?.[category] || {};
+  }
+
+  /**
+   * Get all field aliases across categories.
+   *
+   * @returns {Record<string, Record<string,string>>} Map of category → alias map.
+   */
+  public getAllFieldAliases(): Record<string, Record<string, string>> {
+    return this.databaseConfig.fieldAliases || {};
+  }
+
+  /**
+   * Get caching configuration.
+   *
+   * @returns {DatabaseConfig['performance']['caching']} Caching knobs for query results.
+   */
+  public getCachingConfig(): DatabaseConfig["performance"]["caching"] {
+    return (
+      this.databaseConfig.performance?.caching || {
+        enabledByDefault: true,
+        defaultKeyPrefix: "db-query",
+        maxCacheEntries: 1000,
+        cacheTTL: 24 * 60 * 60 * 1000,
+      }
+    );
+  }
+
+  /**
+   * Get query limits configuration.
+   *
+   * @returns {DatabaseConfig['performance']['limits']} Limits for query size and timeout.
+   */
+  public getQueryLimits(): DatabaseConfig["performance"]["limits"] {
+    return (
+      this.databaseConfig.performance?.limits || {
+        queryTimeout: 30000,
+        maxResultSize: 10000,
+        maxJoinDepth: 3,
+      }
+    );
+  }
+
+  /**
+   * Get schema validation settings.
+   *
+   * @returns {DatabaseConfig['validation']['schemaValidation']} Validation behavior options.
+   */
+  public getSchemaValidation(): DatabaseConfig["validation"]["schemaValidation"] {
+    return (
+      this.databaseConfig.validation?.schemaValidation || {
+        enableStrictValidation: true,
+        allowUnknownFields: false,
+        autoTransformAliases: true,
+      }
+    );
+  }
+
+  /**
+   * Get integrity check settings.
+   *
+   * @returns {DatabaseConfig['validation']['integrityChecks']} Integrity verification options.
+   */
+  public getIntegrityChecks(): DatabaseConfig["validation"]["integrityChecks"] {
+    return (
+      this.databaseConfig.validation?.integrityChecks || {
+        validateRelationships: true,
+        checkMissingReferences: true,
+        warnOnSchemaIssues: true,
+      }
+    );
+  }
+
+  /**
+   * Get supported filter operators.
+   *
+   * @returns {string[]} Operator names supported by filtering.
+   */
+  public getFilterOperators(): string[] {
+    return (
+      this.databaseConfig.operations?.filtering?.operators || [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin",
+        "contains",
+        "startswith",
+        "endswith",
+      ]
+    );
+  }
+
+  /**
+   * Get filtering configuration.
+   *
+   * @returns {DatabaseConfig['operations']['filtering']} Filtering behavior and operators.
+   */
+  public getFilteringConfig(): DatabaseConfig["operations"]["filtering"] {
+    return (
+      this.databaseConfig.operations?.filtering || {
+        operators: [
+          "eq",
+          "ne",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "in",
+          "nin",
+          "contains",
+          "startswith",
+          "endswith",
+        ],
+        caseInsensitiveStrings: true,
+        enableFuzzyMatching: false,
+      }
+    );
+  }
+
+  /**
+   * Get join operation configuration.
+   *
+   * @returns {DatabaseConfig['operations']['joins']} Join options and limits.
+   */
+  public getJoinConfig(): DatabaseConfig["operations"]["joins"] {
+    return (
+      this.databaseConfig.operations?.joins || {
+        supportedJoinTypes: ["inner", "left", "right"],
+        autoDiscoverRelationships: true,
+        maxJoinRecords: 1000,
+      }
+    );
+  }
+
+  /**
+   * Get aggregation configuration.
+   *
+   * @returns {DatabaseConfig['operations']['aggregation']} Supported functions and limits.
+   */
+  public getAggregationConfig(): DatabaseConfig["operations"]["aggregation"] {
+    return (
+      this.databaseConfig.operations?.aggregation || {
+        functions: ["count", "sum", "avg", "min", "max", "distinct"],
+        enableGroupBy: true,
+        maxGroups: 100,
+      }
+    );
+  }
+
+  /**
+   * Get telemetry configuration.
+   *
+   * @returns {Record<string,unknown>} Telemetry logging thresholds and flags.
+   */
+  public getTelemetryConfig(): Record<string, unknown> {
+    return {
+      logQueries: this.config.telemetry?.logQueries ?? true,
+      logPerformance: this.config.telemetry?.logPerformance ?? true,
+      logCacheStats: this.config.telemetry?.logCacheStats ?? true,
+      slowQueryThreshold: this.config.telemetry?.slowQueryThreshold ?? 1000,
+    };
+  }
+
+  /**
+   * Get error handling configuration.
+   *
+   * @returns {Record<string,unknown>} Retry and fallback strategy settings.
+   */
+  public getErrorHandlingConfig(): Record<string, unknown> {
+    return {
+      maxRetries: this.config.errorHandling?.maxRetries ?? 3,
+      retryDelay: this.config.errorHandling?.retryDelay ?? 1000,
+      exponentialBackoff: this.config.errorHandling?.exponentialBackoff ?? true,
+      fallbackOnCacheError:
+        this.config.errorHandling?.fallbackOnCacheError ?? true,
+    };
+  }
+
+  /**
+   * Check if caching is enabled by default.
+   *
+   * @returns {boolean} True when caching is enabled by default.
+   */
+  public isCachingEnabled(): boolean {
+    return this.getCachingConfig().enabledByDefault;
+  }
+
+  /**
+   * Check if strict validation is enabled.
+   *
+   * @returns {boolean} True when strict schema validation is enabled.
+   */
+  public isStrictValidationEnabled(): boolean {
+    return this.getSchemaValidation().enableStrictValidation;
+  }
+
+  /**
+   * Check if auto alias transformation is enabled.
+   *
+   * @returns {boolean} True when alias → field normalization is on.
+   */
+  public isAutoAliasTransformEnabled(): boolean {
+    return this.getSchemaValidation().autoTransformAliases;
+  }
+
+  /**
+   * Get default cache key prefix.
+   *
+   * @returns {string} Default cache key prefix string.
+   */
+  public getDefaultCacheKeyPrefix(): string {
+    return this.getCachingConfig().defaultKeyPrefix;
+  }
+
+  /**
+   * Get maximum result size for queries.
+   *
+   * @returns {number} Maximum number of records allowed in a result.
+   */
+  public getMaxResultSize(): number {
+    return this.getQueryLimits().maxResultSize;
+  }
+
+  /**
+   * Get query timeout in milliseconds.
+   *
+   * @returns {number} Query timeout in ms.
+   */
+  public getQueryTimeout(): number {
+    return this.getQueryLimits().queryTimeout;
   }
 }
 

@@ -8,7 +8,7 @@ This repository uses the root `CHANGELOG.md` as the single source of truth for C
 2. Incremental evolution: prefer additive, non-breaking changes (aliases and transitional shims) before removals.
 3. Documentation integrity: generated docs should never be manually edited—hand-written guides are clearly separated.
 4. Quality gates: build, tests (100% coverage), lint (strict JSDoc), docs generation, health report all must PASS before marking work complete.
-5. Migration safety: renames (e.g. `businessData` → `userContext`) have an alias lifecycle: Introduced → Aliased → Warn → Removed.
+5. Migration safety: renames (e.g. `businessData` → `userContext`, `relevant-data-manager` → `user-context`) have an alias lifecycle: Introduced → Aliased → Warn → Removed.
 
 ## Session Workflow
 
@@ -78,8 +78,8 @@ For any rename (e.g. `relevant-data-manager` → `user-context`):
 
 ## Configuration Source of Truth
 
-- Use `src/config/application.config.ts` and `unifiedAgentConfig.ts` as authoritative sources.
-- Do not edit or reintroduce `src/mcp.config.json`; if external tooling needs JSON, generate it from TS with a build step.
+- Use `src/config/application.config.ts` and `src/mcp/config/unifiedAgentConfig.ts` as authoritative sources.
+- Do not edit or reintroduce `src/mcp.config.json`; if external tooling needs JSON, generate it from TS via `src/tools/generateMcpConfig.ts` (emits `out/mcp.config.json`).
 
 ## Cache Naming
 
@@ -103,7 +103,7 @@ For any rename (e.g. `relevant-data-manager` → `user-context`):
 1. Implement code.
 2. Update/extend tests → ensure coverage stays 100%.
 3. Update JSDoc for any new public API.
-4. Run: lint, test, docs, health.
+4. Run: lint, test, docs, health. Ensure prebuild runs (`npm run prebuild`) so templates and generated config are up to date.
 5. Update CHANGELOG (Added/Changed/Fixed/Docs + Verification + Next Focus).
 6. Commit and push.
 
@@ -113,6 +113,14 @@ For any rename (e.g. `relevant-data-manager` → `user-context`):
 - Allowing coverage to drop below 100% without remediation plan.
 - Introducing `any` types in agent or shared modules—use precise interfaces.
 - Editing generated markdown docs manually (regenerate instead).
+- Forgetting to remove placeholder tokens (e.g., `<application>`) from category ids; canonical ids are required for tests.
+
+## Agent Folder Standard
+
+- Each agent folder contains exactly two source files:
+  - `agent.config.ts` – static configuration data for that agent only.
+  - `index.ts` – the agent implementation and any config wrapper classes previously in `config.ts` (merged here).
+- Remove `config.ts` files and update imports to reference in‑file classes instead. Maintain deprecation shims for one cycle when renaming agents.
 
 Refer to `CHANGELOG.md` for historical decisions and active planned tasks before starting new work.
 

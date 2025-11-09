@@ -68,7 +68,7 @@ export class ConfigurationLoader {
    *
    * @param {string} configPath - Deprecated JSON config path for legacy fallback (kept for API compatibility).
    */
-  constructor(configPath: string = "src/mcp.config.json") {
+  constructor(configPath: string = "out/mcp.config.json") {
     this.configPath = path.resolve(configPath);
   }
 
