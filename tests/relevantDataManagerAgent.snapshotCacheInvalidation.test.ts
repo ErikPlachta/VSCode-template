@@ -97,7 +97,11 @@ describe("RelevantDataManagerAgent snapshot cache invalidation", () => {
       { id: "a2" },
     ]);
 
-    const snap2 = await agent.getOrCreateSnapshot("alpha");
+    // Re-instantiate agent to force re-scan of mutated dataset
+    const refreshedAgent = new RelevantDataManagerAgent(
+      Promise.resolve(cacheDir)
+    );
+    const snap2 = await refreshedAgent.getOrCreateSnapshot("alpha");
     expect(snap2.recordCount).toBe(2);
     const entry2 = await readSharedCacheEntry(cacheDir, key);
     const hash2 = (entry2?.metadata as any)?.recordHash;

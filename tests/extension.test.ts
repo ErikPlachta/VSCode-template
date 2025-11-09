@@ -1,5 +1,20 @@
+// Mock sync module BEFORE importing activate to ensure call interception
+jest.mock("@extension/mcpSync", () => ({
+  fetchTools: jest
+    .fn()
+    .mockResolvedValue([
+      { name: "testTool", title: "Test", description: "desc" },
+    ]),
+}));
+
+import * as path from "path";
 import { activate } from "../src/extension";
-import * as mcpSync from "../src/extension/mcpSync";
+import * as mcpSync from "@extension/mcpSync";
+
+// Stub out provider to avoid depending on VS Code LM API in tests
+jest.mock("../src/extension/mcpProvider", () => ({
+  registerMcpProvider: jest.fn(),
+}));
 
 jest.mock("../src/agent/orchestrator", () => ({
   Orchestrator: jest.fn(() => ({
@@ -34,6 +49,21 @@ jest.mock(
       workspace: {
         getConfiguration: () => ({ get: () => "https://example.com" }),
       },
+      lm: {
+        registerMcpServerDefinitionProvider: jest.fn(() => ({
+          dispose: jest.fn(),
+        })),
+      },
+      McpStdioServerDefinition: jest.fn(function (
+        this: any,
+        title: string,
+        command: string,
+        args: string[],
+        options: Record<string, unknown>,
+        version: string
+      ) {
+        Object.assign(this, { title, command, args, options, version });
+      }),
       chat: {
         createChatParticipant,
       },
@@ -63,13 +93,12 @@ const showQuickPick = vscodeMock.__showQuickPick as jest.Mock;
 const showInformationMessage = vscodeMock.__showInformationMessage as jest.Mock;
 const showErrorMessage = vscodeMock.__showErrorMessage as jest.Mock;
 
-jest.mock("../src/extension/mcpSync");
+// (Already mocked above prior to imports)
 
 describe("activate", () => {
   beforeEach(() => {
-    (mcpSync.fetchTools as jest.Mock).mockResolvedValue([
-      { name: "testTool", title: "Test", description: "desc" },
-    ]);
+    // fetchTools mock already defined; clear call history
+    (mcpSync.fetchTools as jest.Mock).mockClear();
     createChatParticipant.mockClear();
     registerCommand.mockClear();
     showInformationMessage.mockClear();
@@ -82,7 +111,10 @@ describe("activate", () => {
   });
 
   it("registers slash commands and mentions for each tool", async () => {
-    await activate({ subscriptions: [] } as any);
+    await activate({
+      subscriptions: [],
+      extensionPath: path.resolve(__dirname, ".."),
+    } as any);
     expect(mcpSync.fetchTools).toHaveBeenCalledWith(
       "https://example.com",
       "https://example.com"

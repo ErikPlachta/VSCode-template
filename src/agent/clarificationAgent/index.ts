@@ -10,9 +10,11 @@ import { ClarificationAgentProfile } from "@mcp/config/agentProfiles";
 import {
   BaseAgentConfig,
   type AgentConfigDefinition,
-  type ClarificationConfig,
+  // ClarificationConfig,
   type ClarificationAgentInput,
   type ClarificationResponse,
+  type ConfigDescriptor,
+  createDescriptorMap,
 } from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
@@ -25,25 +27,46 @@ export { ClarificationAgentProfile };
 /**
  * Agent responsible for handling ambiguous user requests and providing clarification guidance.
  */
-export class ClarificationAgent {
+export class ClarificationAgent extends BaseAgentConfig {
   /** The knowledge base for finding relevant context. */
   private readonly knowledgeBase: KnowledgeBase;
   /** Telemetry logger for tracking agent invocations. */
   private readonly telemetry = createInvocationLogger(
     ClarificationAgentProfile.id
   );
-  /** Configuration for the clarification agent. */
-  private readonly config: ClarificationAgentConfig;
 
   /**
    * Creates a new clarification agent instance.
    *
-   * @param {KnowledgeBase} knowledgeBase - knowledgeBase parameter.
-   * @returns {unknown} - TODO: describe return value.
+   * Overloads:
+   * - constructor(config?: AgentConfigDefinition, knowledgeBase?: KnowledgeBase)
+   * - constructor(knowledgeBase?: KnowledgeBase)
+   *
+   * @param {AgentConfigDefinition | KnowledgeBase | undefined} arg1 - Optional config or knowledge base.
+   * @param {KnowledgeBase | undefined} arg2 - Optional knowledge base when config provided as first argument.
    */
-  constructor(knowledgeBase?: KnowledgeBase) {
-    this.config = new ClarificationAgentConfig();
-    this.knowledgeBase = knowledgeBase ?? new KnowledgeBase();
+  constructor(
+    arg1?: AgentConfigDefinition | KnowledgeBase,
+    arg2?: KnowledgeBase
+  ) {
+    // Determine parameter pattern
+    const configCandidate =
+      arg1 && "agent" in (arg1 as AgentConfigDefinition)
+        ? (arg1 as AgentConfigDefinition)
+        : undefined;
+    const kbCandidate =
+      (configCandidate ? arg2 : (arg1 as KnowledgeBase)) ?? new KnowledgeBase();
+
+    const configToUse = configCandidate || clarificationAgentConfig;
+    const validationResult = validateAgentConfig(configToUse);
+    if (!validationResult.isValid) {
+      const report = generateValidationReport(validationResult);
+      throw new Error(`Invalid clarification agent configuration:\n${report}`);
+    }
+
+    super(configToUse);
+    this._validateRequiredSections();
+    this.knowledgeBase = kbCandidate;
   }
 
   /**
@@ -67,7 +90,15 @@ export class ClarificationAgent {
     input: ClarificationAgentInput
   ): Promise<ClarificationResponse> {
     return this.telemetry("clarify", async () => {
-      const knowledgeSnippets = this.knowledgeBase.query(input.question, 2);
+      // Use configured maxKnowledgeSnippets when available; fallback to 2
+      const maxSnippets =
+        this.getConfigItem<number>(
+          "clarification.knowledgeBase.maxKnowledgeSnippets"
+        ) ?? 2;
+      const knowledgeSnippets = this.knowledgeBase.query(
+        input.question,
+        maxSnippets
+      );
       const focusAgentId = (input.candidateAgents[0] ??
         ClarificationAgentProfile.id) as never;
       const manifest = getAgentMetadata(focusAgentId);
@@ -83,266 +114,118 @@ export class ClarificationAgent {
       return { prompt, knowledgeSnippets };
     });
   }
-}
-
-/**
- * Clarification agent-specific configuration class (merged from config.ts)
- */
-export class ClarificationAgentConfig extends BaseAgentConfig {
-  private clarificationConfig: ClarificationConfig;
 
   /**
-   * Create a config wrapper using default TS config or overrides (for tests)
+   * Validate presence of required configuration sections.
    *
-   * @param {AgentConfigDefinition} [config] - Optional override configuration.
+   * @returns {void}
+   * @throws {Error} When required configuration paths are missing.
    */
-  constructor(config?: AgentConfigDefinition) {
-    const configToUse = config || clarificationAgentConfig;
-    const validationResult = validateAgentConfig(configToUse);
-    if (!validationResult.isValid) {
-      const report = generateValidationReport(validationResult);
-      throw new Error(`Invalid clarification agent configuration:\n${report}`);
+  private _validateRequiredSections(): void {
+    const requiredPaths: readonly string[] = [
+      // Guidance
+      "clarification.guidance.maxSuggestions",
+      "clarification.guidance.includeCategoryExamples",
+      "clarification.guidance.includeQueryTemplates",
+      // Knowledge base
+      "clarification.knowledgeBase.enableKnowledgeSearch",
+      "clarification.knowledgeBase.maxKnowledgeSnippets",
+      "clarification.knowledgeBase.relevanceThreshold",
+      // Escalation
+      "clarification.escalation.escalationThreshold",
+      "clarification.escalation.fallbackStrategies",
+      "clarification.escalation.maxClarificationRounds",
+    ];
+    const { passed, missing } = this.confirmConfigItems(requiredPaths);
+    if (!passed) {
+      throw new Error(
+        `Clarification agent config missing required paths: ${missing.join(
+          ", "
+        )}`
+      );
     }
-
-    super(configToUse);
-    this.clarificationConfig =
-      this.config.clarification || ({} as ClarificationConfig);
   }
 
   /**
-   * Get guidance configuration.
+   * Descriptor map for dynamic configuration access and UI.
    *
-   * @returns {ClarificationConfig['guidance']} Guidance settings including suggestion limits and style.
-   * @throws {Error} When clarification config lacks the guidance section.
+   * @returns {Record<string, ConfigDescriptor>} Descriptor definitions.
    */
-  public getGuidanceConfig(): ClarificationConfig["guidance"] {
-    if (!this.clarificationConfig.guidance) {
-      throw new Error("Clarification config missing guidance section");
-    }
-    return this.clarificationConfig.guidance;
-  }
-
-  /**
-   * Get escalation configuration.
-   *
-   * @returns {ClarificationConfig['escalation']} Escalation thresholds and fallback strategies.
-   * @throws {Error} When clarification config lacks the escalation section.
-   */
-  public getEscalationConfig(): ClarificationConfig["escalation"] {
-    if (!this.clarificationConfig.escalation) {
-      throw new Error("Clarification config missing escalation section");
-    }
-    return this.clarificationConfig.escalation;
-  }
-
-  /**
-   * Get knowledge base configuration.
-   *
-   * @returns {ClarificationConfig['knowledgeBase']} Knowledge search limits and relevance thresholds.
-   * @throws {Error} When clarification config lacks the knowledgeBase section.
-   */
-  public getKnowledgeBaseConfig(): ClarificationConfig["knowledgeBase"] {
-    if (!this.clarificationConfig.knowledgeBase) {
-      throw new Error("Clarification config missing knowledgeBase section");
-    }
-    return this.clarificationConfig.knowledgeBase;
-  }
-
-  /**
-   * Get routing configuration.
-   *
-   * @returns {NonNullable<ClarificationConfig['routing']>} Routing behavior including alternative agent suggestions.
-   * @throws {Error} When clarification config lacks the routing section.
-   */
-  public getRoutingConfig(): NonNullable<ClarificationConfig["routing"]> {
-    if (!this.clarificationConfig.routing) {
-      throw new Error("Clarification config missing routing section");
-    }
-    return this.clarificationConfig.routing as NonNullable<
-      ClarificationConfig["routing"]
-    >;
-  }
-
-  /**
-   * Get context analysis configuration.
-   *
-   * @returns {NonNullable<ClarificationConfig['contextAnalysis']>} Context inference and terminology handling settings.
-   * @throws {Error} When clarification config lacks the contextAnalysis section.
-   */
-  public getContextAnalysisConfig(): NonNullable<
-    ClarificationConfig["contextAnalysis"]
-  > {
-    if (!this.clarificationConfig.contextAnalysis) {
-      throw new Error("Clarification config missing contextAnalysis section");
-    }
-    return this.clarificationConfig.contextAnalysis as NonNullable<
-      ClarificationConfig["contextAnalysis"]
-    >;
-  }
-
-  /**
-   * Get performance configuration.
-   *
-   * @returns {NonNullable<ClarificationConfig['performance']>} Performance and caching related settings.
-   * @throws {Error} When clarification config lacks the performance section.
-   */
-  public getPerformanceConfig(): NonNullable<
-    ClarificationConfig["performance"]
-  > {
-    if (!this.clarificationConfig.performance) {
-      throw new Error("Clarification config missing performance section");
-    }
-    return this.clarificationConfig.performance as NonNullable<
-      ClarificationConfig["performance"]
-    >;
-  }
-
-  /**
-   * Get maximum suggestions to provide.
-   *
-   * @returns {number} Maximum number of suggestions.
-   */
-  public getMaxSuggestions(): number {
-    return this.getGuidanceConfig().maxSuggestions;
-  }
-
-  /**
-   * Get maximum knowledge snippets.
-   *
-   * @returns {number} Max knowledge snippets to include.
-   */
-  public getMaxKnowledgeSnippets(): number {
-    return this.getKnowledgeBaseConfig().maxKnowledgeSnippets;
-  }
-
-  /**
-   * Get relevance threshold for knowledge snippets.
-   *
-   * @returns {number} Minimum relevance score threshold.
-   */
-  public getRelevanceThreshold(): number {
-    return this.getKnowledgeBaseConfig().relevanceThreshold;
-  }
-
-  /**
-   * Get escalation threshold.
-   *
-   * @returns {number} Number of failed clarifications before escalation.
-   */
-  public getEscalationThreshold(): number {
-    return this.getEscalationConfig().escalationThreshold;
-  }
-
-  /**
-   * Get maximum clarification rounds.
-   *
-   * @returns {number} Maximum number of clarification rounds.
-   */
-  public getMaxClarificationRounds(): number {
-    return this.getEscalationConfig().maxClarificationRounds;
-  }
-
-  /**
-   * Check if knowledge search is enabled.
-   *
-   * @returns {boolean} True when knowledge search is enabled.
-   */
-  public isKnowledgeSearchEnabled(): boolean {
-    return this.getKnowledgeBaseConfig().enableKnowledgeSearch;
-  }
-
-  /**
-   * Check if category examples should be included.
-   *
-   * @returns {boolean} True when category examples are included.
-   */
-  public shouldIncludeCategoryExamples(): boolean {
-    return this.getGuidanceConfig().includeCategoryExamples;
-  }
-
-  /**
-   * Check if query templates should be included.
-   *
-   * @returns {boolean} True when query templates are included.
-   */
-  public shouldIncludeQueryTemplates(): boolean {
-    return this.getGuidanceConfig().includeQueryTemplates;
-  }
-
-  /**
-   * Check if alternative phrasings should be suggested.
-   *
-   * @returns {boolean} True when alternative phrasings are suggested.
-   */
-  public shouldSuggestAlternativePhrasings(): boolean {
-    return !!this.getGuidanceConfig().suggestAlternativePhrasings;
-  }
-
-  /**
-   * Check if missing signals should be analyzed.
-   *
-   * @returns {boolean} True when analyzing missing signals.
-   */
-  public shouldAnalyzeMissingSignals(): boolean {
-    return !!this.getRoutingConfig().analyzeMissingSignals;
-  }
-
-  /**
-   * Check if alternative agents should be suggested.
-   *
-   * @returns {boolean} True when suggesting alternative agents.
-   */
-  public shouldSuggestAlternativeAgents(): boolean {
-    return !!this.getRoutingConfig().suggestAlternativeAgents;
-  }
-
-  /**
-   * Get fallback strategies.
-   *
-   * @returns {string[]} Fallback strategy identifiers.
-   */
-  public getFallbackStrategies(): string[] {
-    return this.getEscalationConfig().fallbackStrategies;
-  }
-
-  /**
-   * Get guidance types to provide.
-   *
-   * @returns {string[]} Guidance categories to include.
-   */
-  public getGuidanceTypes(): string[] {
-    const types = this.getGuidanceConfig().guidanceTypes;
-    return Array.isArray(types) ? types : [];
-  }
-
-  /**
-   * Get knowledge sources to search.
-   *
-   * @returns {string[]} Knowledge source identifiers.
-   */
-  public getKnowledgeSources(): string[] {
-    const sources = this.getKnowledgeBaseConfig().knowledgeSources;
-    return Array.isArray(sources) ? sources : [];
-  }
-
-  /**
-   * Get response style configuration.
-   *
-   * @returns {{tone:string,formality:string,includeEncouragement:boolean,maxResponseLength:number}} Style knobs for rendering responses.
-   */
-  public getResponseStyle(): {
-    tone: string;
-    formality: string;
-    includeEncouragement: boolean;
-    maxResponseLength: number;
-  } {
-    const style = this.getGuidanceConfig().responseStyle || {};
-    return {
-      tone: style.tone ?? "",
-      formality: style.formality ?? "",
-      includeEncouragement: style.includeEncouragement ?? false,
-      maxResponseLength: style.maxResponseLength ?? 0,
-    };
+  public getConfigDescriptors(): Record<string, ConfigDescriptor> {
+    return createDescriptorMap([
+      [
+        "guidance",
+        {
+          name: "Guidance",
+          path: "clarification.guidance",
+          type: "ClarificationConfig['guidance']",
+          visibility: "public",
+          verifyPaths: [
+            "clarification.guidance.maxSuggestions",
+            "clarification.guidance.includeCategoryExamples",
+            "clarification.guidance.includeQueryTemplates",
+          ],
+        },
+      ],
+      [
+        "escalation",
+        {
+          name: "Escalation",
+          path: "clarification.escalation",
+          type: "ClarificationConfig['escalation']",
+          visibility: "public",
+          verifyPaths: [
+            "clarification.escalation.escalationThreshold",
+            "clarification.escalation.fallbackStrategies",
+            "clarification.escalation.maxClarificationRounds",
+          ],
+        },
+      ],
+      [
+        "knowledgeBase",
+        {
+          name: "Knowledge Base",
+          path: "clarification.knowledgeBase",
+          type: "ClarificationConfig['knowledgeBase']",
+          visibility: "public",
+          verifyPaths: [
+            "clarification.knowledgeBase.enableKnowledgeSearch",
+            "clarification.knowledgeBase.maxKnowledgeSnippets",
+            "clarification.knowledgeBase.relevanceThreshold",
+          ],
+        },
+      ],
+      [
+        "routing",
+        {
+          name: "Routing",
+          path: "clarification.routing",
+          type: "NonNullable<ClarificationConfig['routing']>",
+          visibility: "public",
+          verifyPaths: ["clarification.routing.maxCandidateAgents"],
+        },
+      ],
+      [
+        "contextAnalysis",
+        {
+          name: "Context Analysis",
+          path: "clarification.contextAnalysis",
+          type: "NonNullable<ClarificationConfig['contextAnalysis']>",
+          visibility: "public",
+          verifyPaths: ["clarification.contextAnalysis.enableIntentAnalysis"],
+        },
+      ],
+      [
+        "performance",
+        {
+          name: "Performance",
+          path: "performance",
+          type: "NonNullable<ClarificationConfig['performance']>",
+          visibility: "private",
+          verifyPaths: ["performance.maxResponseTime"],
+        },
+      ],
+    ]);
   }
 }
 

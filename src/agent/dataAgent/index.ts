@@ -22,11 +22,10 @@ import {
   type ExplorationStep,
   type TopicSearchResult,
   type CrossCategoryConnection,
+  type ConfigDescriptor,
+  createDescriptorMap,
 } from "@internal-types/agentConfig";
-import {
-  validateAgentConfig,
-  generateValidationReport,
-} from "@internal-types/configValidation";
+// No external validation helpers needed here; BaseAgentConfig-based checks are used
 import { dataAgentConfig } from "@agent/dataAgent/agent.config";
 
 /**
@@ -40,17 +39,141 @@ import { dataAgentConfig } from "@agent/dataAgent/agent.config";
  * console.log(insights.map(insight => insight.description));
  * ```
  */
-export class DataAgent {
+export class DataAgent extends BaseAgentConfig {
   private readonly telemetry = createInvocationLogger(DataAgentProfile.id);
-  private readonly config: DataAgentConfig;
+  private readonly dataConfig: DataConfig;
 
   /**
-   * Create a new {@link DataAgent}.
+   * Create a new {@link DataAgent} instance using default configuration merged with optional partial overrides.
    *
-   * @returns {unknown} - TODO: describe return value.
+   * @param {Partial<AgentConfigDefinition>} [config] - Optional partial configuration overrides (merged atop defaults; identity preserved).
    */
-  constructor() {
-    this.config = new DataAgentConfig();
+  constructor(config?: Partial<AgentConfigDefinition>) {
+    const merged: AgentConfigDefinition = {
+      ...dataAgentConfig,
+      ...(config || {}),
+      agent: { ...dataAgentConfig.agent, ...(config?.agent || {}) },
+      $configId: dataAgentConfig.$configId,
+    } as AgentConfigDefinition;
+    super(merged);
+    this.dataConfig =
+      (this.getConfigItem<DataConfig>("data") as DataConfig) ||
+      ({} as DataConfig);
+    this._validateRequiredSections();
+  }
+
+  /**
+   * Validate required configuration leaf paths.
+   *
+   * @throws {Error} When mandatory paths missing.
+   */
+  private _validateRequiredSections(): void {
+    const requiredPaths: readonly string[] = [
+      "data.analysis.enableInsightGeneration",
+      "data.analysis.maxInsightDepth",
+      "data.exploration.maxExplorationSteps",
+      "data.exploration.enableAutomaticPlanGeneration",
+      "data.exploration.planComplexityLimit",
+      "data.relationships.enableRelationshipMapping",
+      "data.relationships.maxRelationshipDepth",
+    ];
+    const { passed, missing } = this.confirmConfigItems(requiredPaths);
+    if (!passed) {
+      throw new Error(
+        `Data agent config missing required paths: ${missing.join(", ")}`
+      );
+    }
+  }
+
+  /**
+   * Descriptor map for dynamic configuration access.
+   *
+   * @returns {Record<string, ConfigDescriptor>} Descriptors.
+   */
+  public getConfigDescriptors(): Record<string, ConfigDescriptor> {
+    return createDescriptorMap([
+      [
+        "analysis",
+        {
+          name: "Analysis",
+          path: "data.analysis",
+          type: "DataConfig['analysis']",
+          visibility: "public",
+          verifyPaths: [
+            "data.analysis.enableInsightGeneration",
+            "data.analysis.maxInsightDepth",
+            "data.analysis.crossCategoryAnalysis",
+          ],
+        },
+      ],
+      [
+        "exploration",
+        {
+          name: "Exploration",
+          path: "data.exploration",
+          type: "DataConfig['exploration']",
+          visibility: "public",
+          verifyPaths: [
+            "data.exploration.maxExplorationSteps",
+            "data.exploration.enableAutomaticPlanGeneration",
+            "data.exploration.planComplexityLimit",
+          ],
+        },
+      ],
+      [
+        "relationships",
+        {
+          name: "Relationships",
+          path: "data.relationships",
+          type: "DataConfig['relationships']",
+          visibility: "public",
+          verifyPaths: [
+            "data.relationships.enableRelationshipMapping",
+            "data.relationships.maxRelationshipDepth",
+          ],
+        },
+      ],
+      [
+        "search",
+        {
+          name: "Search",
+          path: "data.search",
+          type: "NonNullable<DataConfig['search']>",
+          visibility: "public",
+          verifyPaths: ["data.search.maxResults"],
+        },
+      ],
+      [
+        "synthesis",
+        {
+          name: "Synthesis",
+          path: "data.synthesis",
+          type: "NonNullable<DataConfig['synthesis']>",
+          visibility: "public",
+          verifyPaths: ["data.synthesis.enableTopicOverviews"],
+        },
+      ],
+      [
+        "performance",
+        {
+          name: "Performance",
+          path: "data.performance",
+          type: "NonNullable<DataConfig['performance']>",
+          visibility: "public",
+          verifyPaths: ["data.performance.analysisTimeout"],
+        },
+      ],
+      [
+        "quality",
+        {
+          name: "Quality",
+          path: "data.quality",
+          type: "NonNullable<DataConfig['quality']>",
+          visibility: "public",
+          verifyPaths: ["data.quality.missingFieldThreshold"],
+        },
+      ],
+    ]);
   }
 
   /**
@@ -61,7 +184,7 @@ export class DataAgent {
    */
   async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     return this.telemetry("analyzeData", async () => {
-      const analysisConfig = this.config.getAnalysisConfig();
+      const analysisConfig = this.getAnalysisConfig();
       // Quality configuration is used in detectAnomalies; no need to fetch here.
       const insights: DataInsight[] = [];
 
@@ -112,7 +235,7 @@ export class DataAgent {
     availableData: AnalysisInput
   ): Promise<ExplorationPlan> {
     return this.telemetry("generateExplorationPlan", async () => {
-      const explorationConfig = this.config.getExplorationConfig();
+      const explorationConfig = this.getExplorationConfig();
 
       const steps: ExplorationStep[] = [];
 
@@ -195,7 +318,7 @@ export class DataAgent {
    * @returns {TopicSearchResult[]} - TODO: describe return value.
    */
   searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
-    const searchConfig = this.config.getSearchConfig();
+    const searchConfig = this.getSearchConfig();
     const results: TopicSearchResult[] = [];
 
     data.forEach((input) => {
@@ -278,7 +401,7 @@ export class DataAgent {
     categoryId: CategoryId
   ): DataInsight[] {
     const insights: DataInsight[] = [];
-    const qualityConfig = this.config.getQualityConfig();
+    const qualityConfig = this.getQualityConfig();
 
     // Missing field analysis
     const allFields = new Set<string>();
@@ -347,42 +470,19 @@ export class DataAgent {
       String(record.id)
     );
   }
-}
-
-/**
- * Data agent-specific configuration class (merged from config.ts)
- */
-export class DataAgentConfig extends BaseAgentConfig {
-  private dataConfig: DataConfig;
-
+  // -------------------------
+  // Configuration accessors migrated from legacy wrapper
+  // -------------------------
   /**
-   * Create a config wrapper using default TS config or overrides (for tests)
-   *
-   * @param {AgentConfigDefinition} [config] - Optional override configuration.
-   */
-  constructor(config?: AgentConfigDefinition) {
-    const configToUse = config || dataAgentConfig;
-    const validationResult = validateAgentConfig(configToUse);
-    if (!validationResult.isValid) {
-      const report = generateValidationReport(validationResult);
-      throw new Error(`Invalid data agent configuration:\n${report}`);
-    }
-
-    super(configToUse);
-    this.dataConfig = this.config.data || ({} as DataConfig);
-  }
-
-  /**
-   * Get analysis configuration.
+   * Get analysis configuration block.
    *
    * @returns {DataConfig['analysis']} Insight generation and depth settings.
    */
   public getAnalysisConfig(): DataConfig["analysis"] {
     return this.dataConfig.analysis || ({} as DataConfig["analysis"]);
   }
-
   /**
-   * Get quality configuration.
+   * Get quality configuration block.
    *
    * @returns {NonNullable<DataConfig['quality']>} Data quality thresholds and flags.
    */
@@ -391,40 +491,36 @@ export class DataAgentConfig extends BaseAgentConfig {
       this.dataConfig.quality || ({} as NonNullable<DataConfig["quality"]>)
     );
   }
-
   /**
-   * Get exploration configuration.
+   * Get exploration configuration block.
    *
    * @returns {DataConfig['exploration']} Exploration plan and complexity settings.
    */
   public getExplorationConfig(): DataConfig["exploration"] {
     return this.dataConfig.exploration || ({} as DataConfig["exploration"]);
   }
-
   /**
-   * Get relationships configuration.
+   * Get relationships configuration block.
    *
-   * @returns {DataConfig['relationships']} Relationship mapping behaviors.
+   * @returns {DataConfig['relationships']} Relationship mapping settings.
    */
   public getRelationshipsConfig(): DataConfig["relationships"] {
     return this.dataConfig.relationships || ({} as DataConfig["relationships"]);
   }
-
   /**
-   * Get synthesis configuration.
+   * Get synthesis configuration block.
    *
-   * @returns {NonNullable<DataConfig['synthesis']>} Synthesis and overview generation settings.
+   * @returns {NonNullable<DataConfig['synthesis']>} Topic overview & synthesis settings.
    */
   public getSynthesisConfig(): NonNullable<DataConfig["synthesis"]> {
     return (
       this.dataConfig.synthesis || ({} as NonNullable<DataConfig["synthesis"]>)
     );
   }
-
   /**
-   * Get performance configuration.
+   * Get performance configuration block.
    *
-   * @returns {NonNullable<DataConfig['performance']>} Performance and caching settings for analyses.
+   * @returns {NonNullable<DataConfig['performance']>} Performance and concurrency settings.
    */
   public getPerformanceConfig(): NonNullable<DataConfig["performance"]> {
     return (
@@ -432,152 +528,139 @@ export class DataAgentConfig extends BaseAgentConfig {
       ({} as NonNullable<DataConfig["performance"]>)
     );
   }
-
   /**
-   * Get search configuration.
+   * Get search configuration block.
    *
-   * @returns {NonNullable<DataConfig['search']>} Search behavior (fuzzy matching, result limits).
+   * @returns {NonNullable<DataConfig['search']>} Search behavior (fuzzy matching, limits).
    */
   public getSearchConfig(): NonNullable<DataConfig["search"]> {
     return this.dataConfig.search || ({} as NonNullable<DataConfig["search"]>);
   }
-
   /**
-   * Check if insight generation is enabled.
+   * Determine if insight generation is enabled.
    *
-   * @returns {boolean} True when insights are generated during analysis.
+   * @returns {boolean} True when insights will be produced.
    */
   public isInsightGenerationEnabled(): boolean {
     return this.getAnalysisConfig().enableInsightGeneration;
   }
-
   /**
-   * Check if cross-category analysis is enabled.
+   * Determine if cross-category analysis is enabled.
    *
-   * @returns {boolean} True for cross-category relationship exploration.
+   * @returns {boolean} True when relationships across categories are considered.
    */
   public isCrossCategoryAnalysisEnabled(): boolean {
     return this.getAnalysisConfig().crossCategoryAnalysis;
   }
-
   /**
-   * Check if relationship mapping is enabled.
+   * Determine if relationship mapping is enabled.
    *
    * @returns {boolean} True when mapping across category relationships.
    */
   public isRelationshipMappingEnabled(): boolean {
     return this.getRelationshipsConfig().enableRelationshipMapping;
   }
-
   /**
-   * Check if automatic plan generation is enabled.
+   * Determine if automatic exploration plan generation is enabled.
    *
-   * @returns {boolean} True when exploration plans are auto-generated.
+   * @returns {boolean} True when plans auto-generate.
    */
   public isAutomaticPlanGenerationEnabled(): boolean {
     return this.getExplorationConfig().enableAutomaticPlanGeneration;
   }
-
   /**
-   * Get maximum insight depth.
+   * Maximum insight reasoning depth.
    *
-   * @returns {number} Maximum reasoning depth for insights.
+   * @returns {number} Depth limit.
    */
   public getMaxInsightDepth(): number {
     return this.getAnalysisConfig().maxInsightDepth;
   }
-
   /**
-   * Get maximum exploration steps.
+   * Maximum exploration steps allowed.
    *
-   * @returns {number} Maximum number of steps in exploration sequences.
+   * @returns {number} Step limit.
    */
   public getMaxExplorationSteps(): number {
     return this.getExplorationConfig().maxExplorationSteps;
   }
-
   /**
-   * Get maximum relationship depth.
+   * Maximum relationship traversal depth.
    *
-   * @returns {number} Maximum traversal depth for relationship mapping.
+   * @returns {number} Depth limit.
    */
   public getMaxRelationshipDepth(): number {
     return this.getRelationshipsConfig().maxRelationshipDepth;
   }
-
   /**
-   * Get plan complexity limit.
+   * Exploration plan complexity cap.
    *
-   * @returns {"low"|"medium"|"high"} Configured exploration complexity cap.
+   * @returns {"low"|"medium"|"high"} Complexity limit.
    */
   public getPlanComplexityLimit(): "low" | "medium" | "high" {
     return this.getExplorationConfig().planComplexityLimit;
   }
-
   /**
-   * Get insight confidence threshold.
+   * Minimum insight confidence threshold.
    *
-   * @returns {number} Minimum confidence required to surface an insight.
+   * @returns {number} Confidence threshold.
    */
   public getInsightConfidenceThreshold(): number {
     return this.getAnalysisConfig().insightConfidenceThreshold ?? 0.7;
   }
-
   /**
-   * Get relationship strength threshold.
+   * Minimum relationship strength threshold.
    *
-   * @returns {number} Minimum strength for relationship inclusion.
+   * @returns {number} Strength threshold.
    */
   public getRelationshipStrengthThreshold(): number {
     return this.getRelationshipsConfig().relationshipStrengthThreshold ?? 0.3;
   }
-
   /**
-   * Get maximum insights per analysis.
+   * Maximum insights per analysis.
    *
-   * @returns {number} Cap for insights surfaced in one analysis run.
+   * @returns {number} Cap for insights returned per run.
    */
   public getMaxInsightsPerAnalysis(): number {
     return this.getAnalysisConfig().maxInsightsPerAnalysis ?? 10;
   }
-
   /**
-   * Get maximum relationships per analysis.
+   * Maximum relationships per analysis.
    *
-   * @returns {number} Cap for relationships surfaced in one analysis run.
+   * @returns {number} Cap for relationships evaluated per run.
    */
   public getMaxRelationshipsPerAnalysis(): number {
     return this.getRelationshipsConfig().maxRelationshipsPerAnalysis ?? 25;
   }
-
   /**
-   * Get insight categories to focus on.
+   * Insight categories focus order.
    *
-   * @returns {string[]} Ordered list of categories for insight classification.
+   * @returns {string[]} Category order for insight classification.
    */
   public getInsightCategories(): string[] {
     return this.getAnalysisConfig().insightCategories ?? [];
   }
-
   /**
-   * Get exploration priorities.
+   * Ordered exploration priorities for categories.
    *
-   * @returns {string[]} Ordered category priorities when constructing plans.
+   * @returns {string[]} Category priority list (may be empty).
    */
   public getExplorationPriorities(): string[] {
     const priorities = this.getExplorationConfig().explorationPriorities;
-    // Avoid hard-coding business category IDs in code; fall back to empty array when not configured.
     return Array.isArray(priorities) ? priorities : [];
   }
 }
 
 /**
- * Factory function that creates a {@link DataAgent} with default configuration.
+ * Factory function that creates a {@link DataAgent} with default (or partially overridden) configuration.
  *
- * @returns {DataAgent} - TODO: describe return value.
+ * @param {Partial<AgentConfigDefinition>} [config] - Optional partial configuration overrides.
+ * @returns {DataAgent} DataAgent instance.
  */
-export function createDataAgent(): DataAgent {
-  return new DataAgent();
+export function createDataAgent(
+  config?: Partial<AgentConfigDefinition>
+): DataAgent {
+  return new DataAgent(config);
 }
 
 // Export configuration types and instances for external use

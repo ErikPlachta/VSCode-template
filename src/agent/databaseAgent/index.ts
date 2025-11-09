@@ -23,12 +23,13 @@ import {
   type CategoryRecord,
   type DataSource,
   type QueryOptions,
+  type ConfigDescriptor,
+  createDescriptorMap,
 } from "@internal-types/agentConfig";
-import {
-  validateAgentConfig,
-  generateValidationReport,
-} from "@internal-types/configValidation";
 import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";
+
+// Re-export DataSource type for test suites expecting it from this module
+export type { DataSource };
 
 // Generic types that work with any data structure
 
@@ -55,30 +56,201 @@ import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";
  * const results = await agent.executeQuery("employees", { skill: "javascript" });
  * ```
  */
-export class DatabaseAgent {
+export class DatabaseAgent extends BaseAgentConfig {
   private readonly dataSources: Map<CategoryId, DataSource>;
   private readonly cacheDirectory: Promise<string>;
   private readonly telemetry: ReturnType<typeof createInvocationLogger>;
   private readonly profile: typeof DatabaseAgentProfile;
-  private readonly config: DatabaseAgentConfig;
+  // Snapshot of database-specific configuration block for convenience
+  private readonly databaseConfig: DatabaseConfig;
 
   /**
    * Creates a new DatabaseAgent instance.
    *
    * @param {DataSource[]} dataSources - One or more data sources to query.
    * @param {Promise<string>} cacheDirectory - Directory where shared cache entries are stored.
-   * @param {Partial<DatabaseAgentConfig>} _config - Optional overrides for agent behavior (reserved).
+   * @param {Partial<AgentConfigDefinition>} config - Optional overrides for agent behavior.
    */
   constructor(
     dataSources: DataSource[],
     cacheDirectory: Promise<string>,
-    _config?: Partial<DatabaseAgentConfig>
+    config?: Partial<AgentConfigDefinition>
   ) {
+    // Merge partial overrides with defaults while preserving mandatory identity fields
+    const merged: AgentConfigDefinition = {
+      ...databaseAgentConfig,
+      ...(config || {}),
+      agent: { ...databaseAgentConfig.agent, ...(config?.agent || {}) },
+      $configId: databaseAgentConfig.$configId,
+    } as AgentConfigDefinition;
+    super(merged);
     this.dataSources = new Map(dataSources.map((ds) => [ds.id, ds]));
     this.cacheDirectory = cacheDirectory;
-    this.config = new DatabaseAgentConfig();
     this.profile = DatabaseAgentProfile;
     this.telemetry = createInvocationLogger(this.profile.id);
+    this.databaseConfig =
+      (this.getConfigItem<DatabaseConfig>("database") as DatabaseConfig) ||
+      ({} as DatabaseConfig);
+    this._validateRequiredSections();
+  }
+
+  /**
+   * Validate required configuration sections exist down to leaf paths.
+   * Mirrors previous wrapper validation but uses unified BaseAgentConfig access.
+   *
+   * @throws {Error} When any required path is missing.
+   */
+  private _validateRequiredSections(): void {
+    const requiredPaths: readonly string[] = [
+      "database.fieldAliases",
+      "database.performance.caching.enabledByDefault",
+      "database.performance.caching.defaultKeyPrefix",
+      "database.performance.caching.maxCacheEntries",
+      "database.performance.caching.cacheTTL",
+      "database.performance.limits.queryTimeout",
+      "database.performance.limits.maxResultSize",
+      "database.performance.limits.maxJoinDepth",
+      "database.validation.schemaValidation.enableStrictValidation",
+      "database.validation.schemaValidation.allowUnknownFields",
+      "database.validation.schemaValidation.autoTransformAliases",
+      "database.validation.integrityChecks.validateRelationships",
+      "database.validation.integrityChecks.checkMissingReferences",
+      "database.validation.integrityChecks.warnOnSchemaIssues",
+      "database.operations.filtering.operators",
+      "database.operations.filtering.caseInsensitiveStrings",
+      "database.operations.filtering.enableFuzzyMatching",
+      "database.operations.joins.supportedJoinTypes",
+      "database.operations.joins.autoDiscoverRelationships",
+      "database.operations.joins.maxJoinRecords",
+      "database.operations.aggregation.functions",
+      "database.operations.aggregation.enableGroupBy",
+      "database.operations.aggregation.maxGroups",
+    ];
+    const { passed, missing } = this.confirmConfigItems(requiredPaths);
+    if (!passed) {
+      throw new Error(
+        `Database agent config missing required paths: ${missing.join(", ")}`
+      );
+    }
+  }
+
+  /**
+   * Descriptor map for dynamic configuration surfaces.
+   *
+   * @returns {Record<string, ConfigDescriptor>} Descriptor definitions with deep verifyPaths for strict validation.
+   */
+  public getConfigDescriptors(): Record<string, ConfigDescriptor> {
+    return createDescriptorMap([
+      [
+        "fieldAliases",
+        {
+          name: "Field Aliases",
+          path: "database.fieldAliases",
+          type: "Record<string, Record<string,string>>",
+          visibility: "public",
+          verifyPaths: ["database.fieldAliases"],
+        },
+      ],
+      [
+        "caching",
+        {
+          name: "Caching",
+          path: "database.performance.caching",
+          type: "DatabaseConfig['performance']['caching']",
+          visibility: "public",
+          verifyPaths: [
+            "database.performance.caching.enabledByDefault",
+            "database.performance.caching.defaultKeyPrefix",
+            "database.performance.caching.maxCacheEntries",
+            "database.performance.caching.cacheTTL",
+          ],
+        },
+      ],
+      [
+        "limits",
+        {
+          name: "Limits",
+          path: "database.performance.limits",
+          type: "DatabaseConfig['performance']['limits']",
+          visibility: "public",
+          verifyPaths: [
+            "database.performance.limits.queryTimeout",
+            "database.performance.limits.maxResultSize",
+            "database.performance.limits.maxJoinDepth",
+          ],
+        },
+      ],
+      [
+        "schemaValidation",
+        {
+          name: "Schema Validation",
+          path: "database.validation.schemaValidation",
+          type: "DatabaseConfig['validation']['schemaValidation']",
+          visibility: "public",
+          verifyPaths: [
+            "database.validation.schemaValidation.enableStrictValidation",
+            "database.validation.schemaValidation.allowUnknownFields",
+            "database.validation.schemaValidation.autoTransformAliases",
+          ],
+        },
+      ],
+      [
+        "integrityChecks",
+        {
+          name: "Integrity Checks",
+          path: "database.validation.integrityChecks",
+          type: "DatabaseConfig['validation']['integrityChecks']",
+          visibility: "public",
+          verifyPaths: [
+            "database.validation.integrityChecks.validateRelationships",
+            "database.validation.integrityChecks.checkMissingReferences",
+            "database.validation.integrityChecks.warnOnSchemaIssues",
+          ],
+        },
+      ],
+      [
+        "filtering",
+        {
+          name: "Filtering",
+          path: "database.operations.filtering",
+          type: "DatabaseConfig['operations']['filtering']",
+          visibility: "public",
+          verifyPaths: [
+            "database.operations.filtering.operators",
+            "database.operations.filtering.caseInsensitiveStrings",
+            "database.operations.filtering.enableFuzzyMatching",
+          ],
+        },
+      ],
+      [
+        "joins",
+        {
+          name: "Joins",
+          path: "database.operations.joins",
+          type: "DatabaseConfig['operations']['joins']",
+          visibility: "public",
+          verifyPaths: [
+            "database.operations.joins.supportedJoinTypes",
+            "database.operations.joins.autoDiscoverRelationships",
+            "database.operations.joins.maxJoinRecords",
+          ],
+        },
+      ],
+      [
+        "aggregation",
+        {
+          name: "Aggregation",
+          path: "database.operations.aggregation",
+          type: "DatabaseConfig['operations']['aggregation']",
+          visibility: "public",
+          verifyPaths: [
+            "database.operations.aggregation.functions",
+            "database.operations.aggregation.enableGroupBy",
+            "database.operations.aggregation.maxGroups",
+          ],
+        },
+      ],
+    ]);
   }
 
   /**
@@ -105,7 +277,7 @@ export class DatabaseAgent {
         throw new Error(`Data source not found: ${categoryId}`);
       }
 
-      // Try cache first if enabled
+      // Try cache first if enabled. If cached exists, validate staleness by comparing record id sets.
       if (useCache) {
         const cacheKey = this.buildCacheKey(
           categoryId,
@@ -114,17 +286,29 @@ export class DatabaseAgent {
         );
         const cached = await this.getCachedResult(cacheKey);
         if (cached) {
-          // Emit telemetry for cache hit
-          await this.telemetry("cacheHit", async () => cached, {
-            categoryId,
-            criteria,
-            cacheKey,
-          });
-          return cached;
+          // Compute current results to detect catalogue changes
+          const current = this.filterRecords(dataSource, criteria);
+          const cachedIds = cached.map((r) => r.id).sort();
+          const currentIds = current.map((r) => r.id).sort();
+          const same =
+            cachedIds.length === currentIds.length &&
+            cachedIds.every((v, i) => v === currentIds[i]);
+          if (same) {
+            // Emit telemetry for cache hit and return cached value
+            await this.telemetry("cacheHit", async () => cached, {
+              categoryId,
+              criteria,
+              cacheKey,
+            });
+            return cached;
+          }
+          // Results changed – refresh cache entry and return fresh results
+          await this.cacheResult(cacheKey, current);
+          return current;
         }
       }
 
-      // Execute the query
+      // Execute the query when no cache available or caching is disabled
       const results = this.filterRecords(dataSource, criteria);
       const duration = Date.now() - startTime;
 
@@ -209,7 +393,7 @@ export class DatabaseAgent {
 
     const fieldAliases = dataSource.fieldAliases ?? {};
 
-    return dataSource.records.filter((record) => {
+    return dataSource.records.filter((record: CategoryRecord) => {
       return Object.entries(criteria).every(([field, value]) => {
         // Support field aliases for flexible querying
         const actualField = fieldAliases[field] ?? field;
@@ -386,12 +570,16 @@ export class DatabaseAgent {
   ): Promise<void> {
     try {
       const cacheDir = await this.cacheDirectory;
+      const recordHash = crypto
+        .createHash("md5")
+        .update(JSON.stringify(results.map((r) => r.id).sort()))
+        .digest("hex");
       const entry: SharedCacheEntry<CategoryRecord[]> = {
         key: cacheKey,
         toolName: this.profile.id,
         timestamp: new Date().toISOString(),
         value: results,
-        metadata: { version: "1.0" },
+        metadata: { version: "1.0", recordHash },
       };
       await storeSharedCacheEntry(cacheDir, entry);
     } catch (error) {
@@ -402,300 +590,28 @@ export class DatabaseAgent {
     }
   }
 }
-
+// -------------------------
+// Legacy compatibility shim (if previous code imported DatabaseAgentConfig)
+// -------------------------
 /**
- * Database agent-specific configuration class (merged from config.ts)
+ * Legacy configuration wrapper retained as a silent shim for backward compatibility.
+ *
+ * @deprecated Instantiate {@link DatabaseAgent} directly; this class will be removed in a future release.
  */
 export class DatabaseAgentConfig extends BaseAgentConfig {
-  private databaseConfig: DatabaseConfig;
-
   /**
-   * Create a config wrapper using default TS config or overrides (for tests)
+   * Create a legacy wrapper instance.
    *
-   * @param {AgentConfigDefinition} [config] - Optional override configuration.
+   * @param {AgentConfigDefinition | Partial<AgentConfigDefinition>} [config] - Optional partial overrides.
    */
-  constructor(config?: AgentConfigDefinition) {
-    const configToUse = config || databaseAgentConfig;
-    const validationResult = validateAgentConfig(configToUse);
-    if (!validationResult.isValid) {
-      const report = generateValidationReport(validationResult);
-      throw new Error(`Invalid database agent configuration:\n${report}`);
-    }
-
-    super(configToUse);
-    this.databaseConfig = this.config.database || ({} as DatabaseConfig);
-    this.validateRequiredSections();
-  }
-
-  /**
-   * Validate presence of required nested configuration blocks at construction time.
-   *
-   * @throws {Error} When any mandatory section is missing.
-   */
-  private validateRequiredSections(): void {
-    const missing: string[] = [];
-    if (!this.databaseConfig.fieldAliases)
-      missing.push("database.fieldAliases");
-    if (!this.databaseConfig.performance) missing.push("database.performance");
-    if (!this.databaseConfig.performance?.caching)
-      missing.push("database.performance.caching");
-    if (!this.databaseConfig.performance?.limits)
-      missing.push("database.performance.limits");
-    if (!this.databaseConfig.validation) missing.push("database.validation");
-    if (!this.databaseConfig.validation?.schemaValidation)
-      missing.push("database.validation.schemaValidation");
-    if (!this.databaseConfig.validation?.integrityChecks)
-      missing.push("database.validation.integrityChecks");
-    if (!this.databaseConfig.operations) missing.push("database.operations");
-    if (!this.databaseConfig.operations?.filtering)
-      missing.push("database.operations.filtering");
-    if (!this.databaseConfig.operations?.joins)
-      missing.push("database.operations.joins");
-    if (!this.databaseConfig.operations?.aggregation)
-      missing.push("database.operations.aggregation");
-    // Optional higher-level telemetry & errorHandling sections validated separately when accessed
-    if (missing.length) {
-      throw new Error(
-        `Database agent configuration missing required sections: ${missing.join(
-          ", "
-        )}`
-      );
-    }
-  }
-
-  /**
-   * Get field aliases for a specific category.
-   *
-   * @param {string} category - Canonical category identifier.
-   * @returns {Record<string,string>} Map of alias → canonical field.
-   */
-  public getFieldAliases(category: string): Record<string, string> {
-    return this.databaseConfig.fieldAliases?.[category] || {};
-  }
-
-  /**
-   * Get all field aliases across categories.
-   *
-   * @returns {Record<string, Record<string,string>>} Map of category → alias map.
-   */
-  public getAllFieldAliases(): Record<string, Record<string, string>> {
-    return this.databaseConfig.fieldAliases || {};
-  }
-
-  /**
-   * Get caching configuration.
-   *
-   * @returns  {DatabaseConfig['performance']['caching']} Caching knobs for query results.
-   * @throws  {Error} When performance.caching section is missing from configuration.
-   */
-  public getCachingConfig(): DatabaseConfig["performance"]["caching"] {
-    const caching = this.databaseConfig.performance?.caching;
-    if (!caching) {
-      throw new Error(
-        "Database agent config missing performance.caching section"
-      );
-    }
-    return caching;
-  }
-
-  /**
-   * Get query limits configuration.
-   *
-   * @returns  {DatabaseConfig['performance']['limits']} Limits for query size and timeout.
-   * @throws  {Error} When performance.limits section is missing from configuration.
-   */
-  public getQueryLimits(): DatabaseConfig["performance"]["limits"] {
-    const limits = this.databaseConfig.performance?.limits;
-    if (!limits) {
-      throw new Error(
-        "Database agent config missing performance.limits section"
-      );
-    }
-    return limits;
-  }
-
-  /**
-   * Get schema validation settings.
-   *
-   * @returns  {DatabaseConfig['validation']['schemaValidation']} Validation behavior options.
-   * @throws  {Error} When validation.schemaValidation section is missing from configuration.
-   */
-  public getSchemaValidation(): DatabaseConfig["validation"]["schemaValidation"] {
-    const schemaValidation = this.databaseConfig.validation?.schemaValidation;
-    if (!schemaValidation) {
-      throw new Error(
-        "Database agent config missing validation.schemaValidation section"
-      );
-    }
-    return schemaValidation;
-  }
-
-  /**
-   * Get integrity check settings.
-   *
-   * @returns  {DatabaseConfig['validation']['integrityChecks']} Integrity verification options.
-   * @throws  {Error} When validation.integrityChecks section is missing from configuration.
-   */
-  public getIntegrityChecks(): DatabaseConfig["validation"]["integrityChecks"] {
-    const integrityChecks = this.databaseConfig.validation?.integrityChecks;
-    if (!integrityChecks) {
-      throw new Error(
-        "Database agent config missing validation.integrityChecks section"
-      );
-    }
-    return integrityChecks;
-  }
-
-  /**
-   * Get supported filter operators.
-   *
-   * @returns  {string[]} Operator names supported by filtering.
-   * @throws  {Error} When operations.filtering.operators section is missing from configuration.
-   */
-  public getFilterOperators(): string[] {
-    const operators = this.databaseConfig.operations?.filtering?.operators;
-    if (!operators) {
-      throw new Error(
-        "Database agent config missing operations.filtering.operators section"
-      );
-    }
-    return operators;
-  }
-
-  /**
-   * Get filtering configuration.
-   *
-   * @returns  {DatabaseConfig['operations']['filtering']} Filtering behavior and operators.
-   * @throws  {Error} When operations.filtering section is missing from configuration.
-   */
-  public getFilteringConfig(): DatabaseConfig["operations"]["filtering"] {
-    const filtering = this.databaseConfig.operations?.filtering;
-    if (!filtering) {
-      throw new Error(
-        "Database agent config missing operations.filtering section"
-      );
-    }
-    return filtering;
-  }
-
-  /**
-   * Get join operation configuration.
-   *
-   * @returns  {DatabaseConfig['operations']['joins']} Join options and limits.
-   * @throws  {Error} When operations.joins section is missing from configuration.
-   */
-  public getJoinConfig(): DatabaseConfig["operations"]["joins"] {
-    const joins = this.databaseConfig.operations?.joins;
-    if (!joins) {
-      throw new Error("Database agent config missing operations.joins section");
-    }
-    return joins;
-  }
-
-  /**
-   * Get aggregation configuration.
-   *
-   * @returns  {DatabaseConfig['operations']['aggregation']} Supported functions and limits.
-   * @throws  {Error} When operations.aggregation section is missing from configuration.
-   */
-  public getAggregationConfig(): DatabaseConfig["operations"]["aggregation"] {
-    const aggregation = this.databaseConfig.operations?.aggregation;
-    if (!aggregation) {
-      throw new Error(
-        "Database agent config missing operations.aggregation section"
-      );
-    }
-    return aggregation;
-  }
-
-  /**
-   * Get telemetry configuration.
-   *
-   * @returns  {Record<string,unknown>} Telemetry logging thresholds and flags.
-   * @throws  {Error} When telemetry section is missing from configuration.
-   */
-  public getTelemetryConfig(): Record<string, unknown> {
-    if (!this.config.telemetry) {
-      throw new Error("Database agent config missing telemetry section");
-    }
-    return {
-      logQueries: this.config.telemetry.logQueries,
-      logPerformance: this.config.telemetry.logPerformance,
-      logCacheStats: this.config.telemetry.logCacheStats,
-      slowQueryThreshold: this.config.telemetry.slowQueryThreshold,
-    };
-  }
-
-  /**
-   * Get error handling configuration.
-   *
-   * @returns  {Record<string,unknown>} Retry and fallback strategy settings.
-   * @throws  {Error} When errorHandling section is missing from configuration.
-   */
-  public getErrorHandlingConfig(): Record<string, unknown> {
-    if (!this.config.errorHandling) {
-      throw new Error("Database agent config missing errorHandling section");
-    }
-    return {
-      maxRetries: this.config.errorHandling.maxRetries,
-      retryDelay: this.config.errorHandling.retryDelay,
-      exponentialBackoff: this.config.errorHandling.exponentialBackoff,
-      fallbackOnCacheError: this.config.errorHandling.fallbackOnCacheError,
-    };
-  }
-
-  /**
-   * Check if caching is enabled by default.
-   *
-   * @returns {boolean} True when caching is enabled by default.
-   */
-  public isCachingEnabled(): boolean {
-    return this.getCachingConfig().enabledByDefault;
-  }
-
-  /**
-   * Check if strict validation is enabled.
-   *
-   * @returns {boolean} True when strict schema validation is enabled.
-   */
-  public isStrictValidationEnabled(): boolean {
-    return this.getSchemaValidation().enableStrictValidation;
-  }
-
-  /**
-   * Check if auto alias transformation is enabled.
-   *
-   * @returns {boolean} True when alias → field normalization is on.
-   */
-  public isAutoAliasTransformEnabled(): boolean {
-    return this.getSchemaValidation().autoTransformAliases;
-  }
-
-  /**
-   * Get default cache key prefix.
-   *
-   * @returns {string} Default cache key prefix string.
-   */
-  public getDefaultCacheKeyPrefix(): string {
-    return this.getCachingConfig().defaultKeyPrefix;
-  }
-
-  /**
-   * Get maximum result size for queries.
-   *
-   * @returns {number} Maximum number of records allowed in a result.
-   */
-  public getMaxResultSize(): number {
-    return this.getQueryLimits().maxResultSize;
-  }
-
-  /**
-   * Get query timeout in milliseconds.
-   *
-   * @returns {number} Query timeout in ms.
-   */
-  public getQueryTimeout(): number {
-    return this.getQueryLimits().queryTimeout;
+  constructor(config?: AgentConfigDefinition | Partial<AgentConfigDefinition>) {
+    const merged: AgentConfigDefinition = {
+      ...databaseAgentConfig,
+      ...(config || {}),
+      agent: { ...databaseAgentConfig.agent, ...(config?.agent || {}) },
+      $configId: databaseAgentConfig.$configId,
+    } as AgentConfigDefinition;
+    super(merged);
   }
 }
 
@@ -710,7 +626,7 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
 export function createDatabaseAgent(
   dataSources: DataSource[],
   cacheDirectory: Promise<string>,
-  config?: Partial<DatabaseAgentConfig>
+  config?: Partial<AgentConfigDefinition>
 ): DatabaseAgent {
   return new DatabaseAgent(dataSources, cacheDirectory, config);
 }

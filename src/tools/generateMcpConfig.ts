@@ -121,7 +121,12 @@ function writeConfigFile(config: GeneratedMcpConfig): string {
  * @returns {Promise<void>} Resolves when generation completes (or immediately if not direct).
  */
 async function runIfDirect(): Promise<void> {
-  if (import.meta.url.endsWith("generateMcpConfig.ts")) {
+  // Avoid import.meta usage to remain compatible with Jest transpilation when module setting differs.
+  const invoked = path.basename(process.argv[1] || "");
+  if (
+    invoked === "generateMcpConfig.ts" ||
+    invoked === "generateMcpConfig.js"
+  ) {
     const config = buildConfig();
     const target = writeConfigFile(config);
     console.log(`Generated MCP config at ${target}`);

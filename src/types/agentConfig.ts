@@ -530,6 +530,11 @@ export abstract class BaseAgentConfig {
     env: "local" | "global" = "local"
   ): void {
     const target = env === "local" ? this.overridesLocal : this.overridesGlobal;
+    // Setting undefined/null is treated as clearing the override so base/global resolution can fall back.
+    if (value === undefined || value === null) {
+      this.deepDelete(target, path);
+      return;
+    }
     this.deepSet(target, path, value);
   }
 
@@ -709,6 +714,43 @@ export abstract class BaseAgentConfig {
       cur = cur[key] as Record<string, unknown>;
     }
     cur[parts[parts.length - 1]!] = value as unknown;
+  }
+
+  /**
+   * Safely delete a nested value by path from the given object. Prunes empty containers.
+   *
+   * @param {Record<string, unknown>} obj - Target object to mutate.
+   * @param {string} path - Dot-delimited path to delete.
+   * @returns {void}
+   */
+  private deepDelete(obj: Record<string, unknown>, path: string): void {
+    const parts = path.split(".").filter(Boolean);
+    const stack: Array<[Record<string, unknown>, string]> = [];
+    let cur: Record<string, unknown> | undefined = obj;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const key = parts[i]!;
+      const next = cur[key];
+      if (typeof next !== "object" || next === null) {
+        return; // nothing to delete
+      }
+      stack.push([cur, key]);
+      cur = next as Record<string, unknown>;
+    }
+    if (cur) {
+      delete cur[parts[parts.length - 1]!];
+    }
+    // prune empty objects from the bottom up
+    for (let i = stack.length - 1; i >= 0; i--) {
+      const [parent, key] = stack[i]!;
+      const child = parent[key];
+      if (
+        typeof child === "object" &&
+        child !== null &&
+        Object.keys(child as Record<string, unknown>).length === 0
+      ) {
+        delete parent[key];
+      }
+    }
   }
 }
 
