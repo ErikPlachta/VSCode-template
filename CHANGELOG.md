@@ -41,8 +41,6 @@ This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Lo
 
 All incomplete tasks. Organized by priority and managed by User and Copilot Chat.
 
-- Normalize log entry spacing (blank line after heading)
-
 ### Priority 1 - Current Priority
 
 - Data & design integrity review (config unification, descriptors, and tests)
@@ -65,27 +63,52 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
     - Add `requiredPaths` verification and strict access via `getConfigItem` only.
   - Update CHANGELOG after each collapse (📋 governance)
     - Add Added/Changed/Verification entries per agent collapse; ensure quality gates are recorded after each batch.
-
-### Priority 2 - Next Focus
-
 - Split `agentConfig.ts` into focused modules (📦 maintainability)
   - `src/types/agentConfig.types.ts` – configuration schema types only.
   - `src/types/agentRuntime.types.ts` – runtime models (orchestrator/clarification/data/database types).
   - `src/types/agentConfig.helpers.ts` – `BaseAgentConfig`, descriptor types, and helpers.
   - Create `src/types/index.ts` to re-export a stable public surface; adjust path maps and imports.
+
+### Priority 2 - Next Focus
+
 - Descriptor metadata enrichment (🧭 UI readiness)
   - Extend `ConfigDescriptor` with optional `group`, `description`, and `validate(value)` for basic type/shape checks.
   - Add `getAllDescriptors()` aggregator for UI to enumerate editable settings across agents.
   - Add `clearOverride(path, env)` to remove overrides cleanly.
+- Changelog utility follow-ups (deferred; implemented core features are stable — this tracks hardening and docs for future work)
+  - Tests & Coverage
+    - Unit tests for `ensureCurrentTasksSection`, `insertCurrentTask`, `pruneCompletedOutstanding`, and spacing normalization (blank line after log heading; verification heading at H5).
+  - Integration test invoking CLI (`add-current`, `prune-completed`, `add-entry --details --verification`) and asserting `CHANGELOG.md` structure.
+  - Pruning UX
+    - Add `--prune-after` to `add-entry` to optionally prune completed Outstanding Tasks atomically after logging.
+    - Prefer explicit completion marker (✅) for pruning over semantic prefixes (feat:, fix:, etc.) to avoid accidental backlog removals; deprecate broad prefix pruning later.
+  - JSON export of Logs
+    - Extend `exportChangelogJSON` to parse Logs (day groupings, entries, details, verification) and include a `schemaVersion`.
+  - Daily summary helper
+    - `add-daily-summary --summary "..."` to add/update the optional day heading summary line idempotently.
+  - Auto verification block
+    - `--auto-verify` flag to run compile/test/lint/docs/health and append results plus coverage and JSDoc status.
+  - Current Tasks governance
+    - `sync-current` command to promote Priority 1 items into `### Current Tasks` or remove the section when empty; optionally limit to <= 5.
+  - Docs & instructions
+    - Update `.github/copilot-instructions.md` and README with new commands (`add-current`, `prune-completed`) and verification H5 guidance.
+  - Parser hardening
+    - Graceful handling of malformed markers/duplicate headings; newline normalization config (CRLF/LF preservation).
+  - Config flexibility
+    - Optional user override (e.g., `.changelogrc.json`) to customize headings/markers while preserving governance.
+  - Safety & DX
+    - `--dry-run` for all mutating commands to show a diff without writing; cache parsed AST for batch operations.
 
 ### Priority 3 - No Priority
 
 - Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator).
-- Convert all bin/utils tools into self-contained modules (doc, JSDoc, template, package config, import fixes).
-- feat: add force typing and JSDoc comments to `bin` content.
-- feat: add full test coverage to `bin` content.
-- fix: Changelog CLI: centralize config, remove snippet assumptions, stop blank-line insertion, add sub-task support for Outstanding Tasks
-- fix: Changelog CLI: testing this
+- Rebuild and add governance to bin content
+  - Convert all bin/utils tools into self-contained modules (doc, JSDoc, template, package config, import fixes).
+  - Move the build logic into `bin/utils`, and convert it to use the same type of design as other utilities (like `changelog`).
+  - Make sure package.json is updated accordingly
+  - feat: add force typing and JSDoc comments to `bin` content.
+  - feat: add full test coverage to `bin` content.
+
 <!-- CHANGELOG:END:OUTSTANDING_TASKS -->
 
 <!-- CHANGELOG:BEGIN:LOGS -->
@@ -95,6 +118,20 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 All change history. Organized by date/time and semantic titles; verification recorded after each batch.
 
 ### [2025-11-09] Refactor Agents
+
+#### 2025-11-09 12:37:25 docs: Update instructions & package scripts for new changelog workflow
+
+- Added CLI docs for add-current & prune-completed in copilot-instructions.md
+- Specified H5 Verification heading format
+- Added package.json convenience scripts (changelog:add-\*)
+- Moved ChangeLog follow-up tasks into Priority 2 with rich context
+- Removed deprecated fix bullets from Priority 3 backlog
+
+##### Verification – post-docs verification
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
 
 #### 2025-11-09 12:29:41 feat: Add Current Tasks section, prune-completed command, spacing normalization & H5 verification heading
 

@@ -147,6 +147,8 @@ To guarantee accurate current timestamps and consistent formatting for new log e
 
 - Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary"`
 - Ensure markers: `npm run changelog:manage -- insert-markers`
+- Add a Current Task: `npm run changelog:manage -- add-current --text "Task description"`
+- Prune completed items: `npm run changelog:manage -- prune-completed`
 - Valid types: fix | feat | chore | docs | refactor | test | perf | ci | build | style.
 
 Notes:
@@ -160,9 +162,11 @@ Use the `ChangeLogManager` utilities instead of manual editing whenever possible
 
 - Add entries: `npm run changelog:manage -- add-entry --type feat --summary "Something"`.
 - Add Outstanding Tasks: `npm run changelog:manage -- add-outstanding --priority 3 --text "Task description"`.
+- Add Current Tasks: `npm run changelog:manage -- add-current --text "Task description"`.
+- Prune completed Outstanding Tasks: `npm run changelog:manage -- prune-completed` (recognizes ✅ and configurable prefixes).
 - Ensure markers: `npm run changelog:manage -- insert-markers` (auto-inserts section boundary comments if missing).
 - Markers: `<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->` / `<!-- CHANGELOG:END:OUTSTANDING_TASKS -->`, `<!-- CHANGELOG:BEGIN:LOGS -->` / `<!-- CHANGELOG:END:LOGS -->`.
-- Heading formats remain: Day `### [YYYY-MM-DD] Summary` (optional summary) and Entry `#### YYYY-MM-DD HH:MM:SS type: Summary`.
+- Heading formats remain: Day `### [YYYY-MM-DD] Summary` (optional summary) and Entry `#### YYYY-MM-DD HH:MM:SS type: Summary`. When adding a Verification block, use `##### Verification – SUMMARY` followed by bullet lines.
 
 Planned extensions (parser awareness): structured Outstanding Tasks extraction, automatic verification block generation, JSON export for UI dashboards.
 
