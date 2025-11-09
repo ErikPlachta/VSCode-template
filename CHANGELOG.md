@@ -21,21 +21,17 @@ Maintain this file as the single source of truth for non-trivial changes.
 
 ### Guidelines
 
-The content below is broken down into 2 sections, [Outstanding Tasks](#outstanding-tasks) and [Logs](#logs).
+This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Logs](#logs).
 
-1. [Outstanding Tasks](#outstanding-tasks) represents all incomplete tasks. Organized by priority, and managed by User + Copilot Chat.
-1. Each incomplete task should be represented here.
-1. Tasks should be organized by priority of what should be done next. (Priority 1 - Current Priority, Priority 2 - Next Focus, Priority 3 - No Priority)
-1. Copilot should review and manage this proactively.
-1. When User requests a priority change, this should be updated accordingly.
-1. At the end of each Log Entry, this should be reviewed and updated accordingly.
-1. [Logs](#logs) represents all Change Log history. Organized by date, time, and each unique change.
-1. Each day should have it's own section within the logs, with a summary of all changes that gets updated throughout that day: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`
-1. Use the Logs section for current work using Semantic Titles for sections: `fix | feat | chore | docs | refactor | test | perf | ci | build | style` followed by a concise description. For example: `### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`.
-1. Include file paths for meaningful changes.
-1. Update Verification after edits (Build / Tests / Lint / Docs / Health).
-1. Add migration/deprecation guidance under Changed with a brief note.
-1. Resolved issues should have a ✅, and unresolved should have ❌. Outstanding should be noted and then moved into, [Outstanding Tasks](#outstanding-tasks) sections, accordingly.
+1. Outstanding Tasks captures all incomplete work. It is organized by priority and jointly maintained by the user and Copilot Chat.
+2. Every incomplete task should appear here, grouped by priority: Priority 1 (Current), Priority 2 (Next Focus), Priority 3 (Backlog).
+3. Copilot should proactively review and keep this section up to date, reflecting user-requested priority changes.
+4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
+5. Logs capture all change history, organized by date/time and semantic titles.
+6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
+7. Use semantic titles for log entries: `### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a concise description. Example: `### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`.
+8. Include file paths for meaningful changes.
+9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into [Outstanding Tasks](#outstanding-tasks).
 
 <!-- END OF COPILOT CONTENT -->
 
@@ -47,7 +43,38 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### Priority 1 - Current Priority
 
+- Data & design integrity review (config unification, descriptors, and tests)
+  - JSDoc remediation in knowledge base (✅ quick win)
+    - Remove placeholder return descriptions in `src/mcp/knowledgeBase.ts` for `query()` and `summarize()`; add precise `@returns` docs.
+  - Override precedence tests (✅ integrity)
+    - Add `tests/orchestrator.overrides.test.ts` covering: local override shadows global; clearing overrides restores base value.
+  - Descriptor robustness (✅ correctness)
+    - Extend `tests/orchestrator.descriptors.test.ts` with a negative case: remove a required nested key in a cloned config and assert `verifyDescriptor` fails with the expected `missing` path.
+    - Add a mutation test using `setByDescriptor` on a nested object (e.g., `scoringWeights`) and confirm retrieval/parity.
+  - Collapse Clarification agent (🛠️ unification)
+    - Merge `ClarificationAgentConfig` into the agent class by extending `BaseAgentConfig` directly.
+    - Add `getConfigDescriptors()` covering `guidance`, `escalation`, `knowledgeBase`, `routing`, `contextAnalysis`, `performance`.
+    - Add `requiredPaths` consumed by `confirmConfigItems` for early validation.
+  - Collapse Database agent (🛠️ unification)
+    - Merge `DatabaseAgentConfig` into the agent; add descriptors for `database.performance.caching/limits`, `database.validation.schemaValidation/integrityChecks`, `database.operations.*`.
+    - Add `requiredPaths` verification mirroring orchestrator style.
+  - Collapse Data agent (🛠️ unification)
+    - Merge `DataAgentConfig` into the agent; add descriptors for `data.analysis`, `data.exploration`, `data.relationships`, `data.search`, `data.synthesis`, `data.performance`.
+    - Add `requiredPaths` verification and strict access via `getConfigItem` only.
+  - Update CHANGELOG after each collapse (📋 governance)
+    - Add Added/Changed/Verification entries per agent collapse; ensure quality gates are recorded after each batch.
+
 ### Priority 2 - Next Focus
+
+- Split `agentConfig.ts` into focused modules (📦 maintainability)
+  - `src/types/agentConfig.types.ts` – configuration schema types only.
+  - `src/types/agentRuntime.types.ts` – runtime models (orchestrator/clarification/data/database types).
+  - `src/types/agentConfig.helpers.ts` – `BaseAgentConfig`, descriptor types, and helpers.
+  - Create `src/types/index.ts` to re-export a stable public surface; adjust path maps and imports.
+- Descriptor metadata enrichment (🧭 UI readiness)
+  - Extend `ConfigDescriptor` with optional `group`, `description`, and `validate(value)` for basic type/shape checks.
+  - Add `getAllDescriptors()` aggregator for UI to enumerate editable settings across agents.
+  - Add `clearOverride(path, env)` to remove overrides cleanly.
 
 ### Priority 3 - No Priority
 
@@ -55,7 +82,20 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ## Logs
 
-Represents all incomplete tasks. Organized by priority, and managed by Copilot Chat.
+All change history. Organized by date/time and semantic titles; verification recorded after each batch.
+
+### Changed (2025-11-09 – Remove legacy relevantDataManager agent code)
+
+- Removed deprecated `relevantDataManager` agent implementation and associated shim directory.
+- Verified no remaining imports reference the legacy path; `userContextAgent` remains the canonical path.
+
+### Verification (post relevantDataManager removal 2025-11-09)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
 
 ### Added (2025-11-09 – Centralized runtime agent types & descriptor helper)
 
