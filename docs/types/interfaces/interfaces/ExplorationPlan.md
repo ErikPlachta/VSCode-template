@@ -6,7 +6,7 @@
 
 # Interface: ExplorationPlan
 
-Defined in: [src/types/interfaces.ts:92](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L92)
+Defined in: [src/types/interfaces.ts:92](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L92)
 
 ExplorationPlan interface.
 
@@ -16,7 +16,7 @@ ExplorationPlan interface.
 
 > **question**: `string`
 
-Defined in: [src/types/interfaces.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L94)
+Defined in: [src/types/interfaces.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L94)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:94](https://github.com/ErikPlachta/vscode-e
 
 > **recommendedQueries**: `string`[]
 
-Defined in: [src/types/interfaces.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L96)
+Defined in: [src/types/interfaces.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L96)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:96](https://github.com/ErikPlachta/vscode-e
 
 > **steps**: [`ExplorationStep`](ExplorationStep.md)[]
 
-Defined in: [src/types/interfaces.ts:95](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L95)
+Defined in: [src/types/interfaces.ts:95](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L95)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/interfaces.ts:95](https://github.com/ErikPlachta/vscode-e
 
 > **supportingResources**: `object`[]
 
-Defined in: [src/types/interfaces.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L97)
+Defined in: [src/types/interfaces.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L97)
 
 #### categoryId
 
@@ -56,4 +56,4 @@ Defined in: [src/types/interfaces.ts:97](https://github.com/ErikPlachta/vscode-e
 
 > **topic**: `string`
 
-Defined in: [src/types/interfaces.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L93)
+Defined in: [src/types/interfaces.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L93)

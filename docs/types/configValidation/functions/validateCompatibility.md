@@ -8,7 +8,7 @@
 
 > **validateCompatibility**(`config1`, `config2`): [`ValidationResult`](../interfaces/ValidationResult.md)
 
-Defined in: [src/types/configValidation.ts:421](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/configValidation.ts#L421)
+Defined in: [src/types/configValidation.ts:421](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/configValidation.ts#L421)
 
 Validate configuration compatibility between different versions
 

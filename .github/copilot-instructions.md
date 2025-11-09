@@ -8,7 +8,8 @@ This repository uses the root `CHANGELOG.md` as the single source of truth for C
 2. Incremental evolution: prefer additive, non-breaking changes (aliases and transitional shims) before removals.
 3. Documentation integrity: generated docs should never be manually edited—hand-written guides are clearly separated.
 4. Quality gates: build, tests (100% coverage), lint (strict JSDoc), docs generation, health report all must PASS before marking work complete.
-5. Migration safety: renames (e.g. `businessData` → `userContext`, `relevant-data-manager` → `user-context`) have an alias lifecycle: Introduced → Aliased → Warn → Removed.
+5. Migration safety: renames (e.g. `businessData` → `userContext`, `relevant-data-manager` → `user-context`) follow an alias lifecycle: Introduced → Aliased → Warn → Removed. The `relevant-data-manager` warning phase has concluded; the shim remains silently for compatibility until its scheduled removal.
+6. Configuration integrity: no committed legacy JSON config (`src/mcp.config.json`). Any reintroduction is treated as a governance regression and fails the health check.
 
 ## Session Workflow
 
@@ -71,15 +72,19 @@ Preferred:
 
 For any rename (e.g. `relevant-data-manager` → `user-context`):
 
-1. Add new name alongside old.
+1. Introduce new name alongside old (dual export / shim).
 2. Mark old name as deprecated in docs & CHANGELOG (Changed section).
-3. After one release cycle, add warnings on usage.
-4. After second cycle, remove alias and update tests.
+3. After one release cycle, emit runtime console warning on legacy usage.
+4. After second cycle, silence warnings; keep shim for one final compatibility release.
+5. Remove shim and legacy exports in the following release; update tests accordingly.
+
+Current status: `relevant-data-manager` is in the silent shim phase (warnings removed). Future PRs should plan its full removal; add a CHANGELOG Planned item before deleting.
 
 ## Configuration Source of Truth
 
 - Use `src/config/application.config.ts` and `src/mcp/config/unifiedAgentConfig.ts` as authoritative sources.
-- Do not edit or reintroduce `src/mcp.config.json`; if external tooling needs JSON, generate it from TS via `src/tools/generateMcpConfig.ts` (emits `out/mcp.config.json`).
+- Do not edit or reintroduce `src/mcp.config.json`; it has been removed. If external tooling needs JSON, generate it from TS via `src/tools/generateMcpConfig.ts` (emits `out/mcp.config.json`).
+- Health enforcement: the Repository Health Agent fails if any `mcp.config.json` exists outside `out/`.
 
 ## Cache Naming
 
@@ -106,6 +111,7 @@ For any rename (e.g. `relevant-data-manager` → `user-context`):
 4. Run: lint, test, docs, health. Ensure prebuild runs (`npm run prebuild`) so templates and generated config are up to date.
 5. Update CHANGELOG (Added/Changed/Fixed/Docs + Verification + Next Focus).
 6. Commit and push.
+7. Confirm health check passes (no stray `mcp.config.json` outside `out/`).
 
 ## Common Pitfalls to Avoid
 
@@ -114,16 +120,18 @@ For any rename (e.g. `relevant-data-manager` → `user-context`):
 - Introducing `any` types in agent or shared modules—use precise interfaces.
 - Editing generated markdown docs manually (regenerate instead).
 - Forgetting to remove placeholder tokens (e.g., `<application>`) from category ids; canonical ids are required for tests.
+- Reintroducing a legacy `mcp.config.json` file under `src/` or `bin/` (health check will fail).
+- Leaving deprecated alias warnings in place after the silent phase begins.
 
 ## Agent Folder Standard
 
 - Each agent folder contains exactly two source files:
-  - `agent.config.ts` – static configuration data for that agent only.
-  - `index.ts` – the agent implementation and any config wrapper classes previously in `config.ts` (merged here).
-- Remove `config.ts` files and update imports to reference in‑file classes instead. Maintain deprecation shims for one cycle when renaming agents.
+  - `agent.config.ts` – static configuration for that agent only.
+  - `index.ts` – implementation plus config wrapper classes (legacy `config.ts` merged here).
+- Do not reintroduce removed `config.ts` files. Transitional shims (e.g. `relevantDataManagerAgent`) must not contain business logic—only re-exports and (when in warn phase) a console warning.
 
 Refer to `CHANGELOG.md` for historical decisions and active planned tasks before starting new work.
 
 ---
 
-These instructions are living; update them when governance rules or quality gates evolve.
+These instructions are living; update them when governance rules or quality gates evolve. Document any health check additions (e.g., legacy JSON detection) under CHANGELOG Added.

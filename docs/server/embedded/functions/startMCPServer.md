@@ -8,7 +8,7 @@
 
 > **startMCPServer**(`port?`): `Promise`\<`string`\>
 
-Defined in: [src/server/embedded.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/server/embedded.ts#L20)
+Defined in: [src/server/embedded.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/server/embedded.ts#L20)
 
 Start the embedded MCP server on an available port.
 

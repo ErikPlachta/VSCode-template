@@ -32,6 +32,39 @@ Guidelines:
 - Health: PASS
 - Coverage: STABLE (see coverage report; target remains 100%)
 
+### Changed (2025-11-09 – DatabaseAgent strict getters)
+
+- Tightened `DatabaseAgentConfig` to eliminate embedded fallback objects and enforce config-defined values only in `src/agent/databaseAgent/index.ts`.
+- Added `validateRequiredSections()` to assert presence of `database.performance`, `database.validation`, and `database.operations` (including nested blocks) at construction.
+- Updated getters to throw clear errors when required sections are missing; completed strict JSDoc with `@throws` annotations.
+
+### Verification (post DatabaseAgent strict getters 2025-11-09)
+
+- Build: PASS (tsc compile)
+- Tests: PASS (jest suite green)
+- Lint: PASS (jsdoc alignment + throws annotations satisfied)
+- Docs: PASS (typedoc OK)
+- Health: PASS
+
+### Changed (2025-11-09 – Legacy JSON removal + alias warning cleanup)
+
+- Windows build pipeline now validates/generated `out/mcp.config.json` instead of legacy `src/mcp.config.json` in `bin/build.bat`.
+- Legacy Relevant Data Manager shim no longer emits a deprecation warning (alias window closed) – `src/agent/relevantDataManagerAgent/index.ts`.
+- Plan: remove legacy JSON files from the repo; all code paths already use TS → `out/mcp.config.json`.
+
+### Added (2025-11-09 – Health check for legacy JSON reintroduction)
+
+- Repository Health Agent now includes a check that FAILS if any `mcp.config.json` exists outside `out/`.
+- Added test `tests/repositoryHealth.legacyConfig.test.ts` covering pass (only out/ file) and fail (stray src/ file) scenarios.
+
+### Verification (post legacy JSON changes 2025-11-09)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+
 ### Changed (2025-11-09 – Remove deprecated agent config.ts files)
 
 - Deleted legacy per-agent config wrappers now that configuration classes are merged into their respective `index.ts` files:

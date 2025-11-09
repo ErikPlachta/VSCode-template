@@ -464,6 +464,43 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
 
     super(configToUse);
     this.databaseConfig = this.config.database || ({} as DatabaseConfig);
+    this.validateRequiredSections();
+  }
+
+  /**
+   * Validate presence of required nested configuration blocks at construction time.
+   *
+   * @throws {Error} When any mandatory section is missing.
+   */
+  private validateRequiredSections(): void {
+    const missing: string[] = [];
+    if (!this.databaseConfig.fieldAliases)
+      missing.push("database.fieldAliases");
+    if (!this.databaseConfig.performance) missing.push("database.performance");
+    if (!this.databaseConfig.performance?.caching)
+      missing.push("database.performance.caching");
+    if (!this.databaseConfig.performance?.limits)
+      missing.push("database.performance.limits");
+    if (!this.databaseConfig.validation) missing.push("database.validation");
+    if (!this.databaseConfig.validation?.schemaValidation)
+      missing.push("database.validation.schemaValidation");
+    if (!this.databaseConfig.validation?.integrityChecks)
+      missing.push("database.validation.integrityChecks");
+    if (!this.databaseConfig.operations) missing.push("database.operations");
+    if (!this.databaseConfig.operations?.filtering)
+      missing.push("database.operations.filtering");
+    if (!this.databaseConfig.operations?.joins)
+      missing.push("database.operations.joins");
+    if (!this.databaseConfig.operations?.aggregation)
+      missing.push("database.operations.aggregation");
+    // Optional higher-level telemetry & errorHandling sections validated separately when accessed
+    if (missing.length) {
+      throw new Error(
+        `Database agent configuration missing required sections: ${missing.join(
+          ", "
+        )}`
+      );
+    }
   }
 
   /**
@@ -488,170 +525,162 @@ export class DatabaseAgentConfig extends BaseAgentConfig {
   /**
    * Get caching configuration.
    *
-   * @returns {DatabaseConfig['performance']['caching']} Caching knobs for query results.
+   * @returns  {DatabaseConfig['performance']['caching']} Caching knobs for query results.
+   * @throws  {Error} When performance.caching section is missing from configuration.
    */
   public getCachingConfig(): DatabaseConfig["performance"]["caching"] {
-    return (
-      this.databaseConfig.performance?.caching || {
-        enabledByDefault: true,
-        defaultKeyPrefix: "db-query",
-        maxCacheEntries: 1000,
-        cacheTTL: 24 * 60 * 60 * 1000,
-      }
-    );
+    const caching = this.databaseConfig.performance?.caching;
+    if (!caching) {
+      throw new Error(
+        "Database agent config missing performance.caching section"
+      );
+    }
+    return caching;
   }
 
   /**
    * Get query limits configuration.
    *
-   * @returns {DatabaseConfig['performance']['limits']} Limits for query size and timeout.
+   * @returns  {DatabaseConfig['performance']['limits']} Limits for query size and timeout.
+   * @throws  {Error} When performance.limits section is missing from configuration.
    */
   public getQueryLimits(): DatabaseConfig["performance"]["limits"] {
-    return (
-      this.databaseConfig.performance?.limits || {
-        queryTimeout: 30000,
-        maxResultSize: 10000,
-        maxJoinDepth: 3,
-      }
-    );
+    const limits = this.databaseConfig.performance?.limits;
+    if (!limits) {
+      throw new Error(
+        "Database agent config missing performance.limits section"
+      );
+    }
+    return limits;
   }
 
   /**
    * Get schema validation settings.
    *
-   * @returns {DatabaseConfig['validation']['schemaValidation']} Validation behavior options.
+   * @returns  {DatabaseConfig['validation']['schemaValidation']} Validation behavior options.
+   * @throws  {Error} When validation.schemaValidation section is missing from configuration.
    */
   public getSchemaValidation(): DatabaseConfig["validation"]["schemaValidation"] {
-    return (
-      this.databaseConfig.validation?.schemaValidation || {
-        enableStrictValidation: true,
-        allowUnknownFields: false,
-        autoTransformAliases: true,
-      }
-    );
+    const schemaValidation = this.databaseConfig.validation?.schemaValidation;
+    if (!schemaValidation) {
+      throw new Error(
+        "Database agent config missing validation.schemaValidation section"
+      );
+    }
+    return schemaValidation;
   }
 
   /**
    * Get integrity check settings.
    *
-   * @returns {DatabaseConfig['validation']['integrityChecks']} Integrity verification options.
+   * @returns  {DatabaseConfig['validation']['integrityChecks']} Integrity verification options.
+   * @throws  {Error} When validation.integrityChecks section is missing from configuration.
    */
   public getIntegrityChecks(): DatabaseConfig["validation"]["integrityChecks"] {
-    return (
-      this.databaseConfig.validation?.integrityChecks || {
-        validateRelationships: true,
-        checkMissingReferences: true,
-        warnOnSchemaIssues: true,
-      }
-    );
+    const integrityChecks = this.databaseConfig.validation?.integrityChecks;
+    if (!integrityChecks) {
+      throw new Error(
+        "Database agent config missing validation.integrityChecks section"
+      );
+    }
+    return integrityChecks;
   }
 
   /**
    * Get supported filter operators.
    *
-   * @returns {string[]} Operator names supported by filtering.
+   * @returns  {string[]} Operator names supported by filtering.
+   * @throws  {Error} When operations.filtering.operators section is missing from configuration.
    */
   public getFilterOperators(): string[] {
-    return (
-      this.databaseConfig.operations?.filtering?.operators || [
-        "eq",
-        "ne",
-        "gt",
-        "gte",
-        "lt",
-        "lte",
-        "in",
-        "nin",
-        "contains",
-        "startswith",
-        "endswith",
-      ]
-    );
+    const operators = this.databaseConfig.operations?.filtering?.operators;
+    if (!operators) {
+      throw new Error(
+        "Database agent config missing operations.filtering.operators section"
+      );
+    }
+    return operators;
   }
 
   /**
    * Get filtering configuration.
    *
-   * @returns {DatabaseConfig['operations']['filtering']} Filtering behavior and operators.
+   * @returns  {DatabaseConfig['operations']['filtering']} Filtering behavior and operators.
+   * @throws  {Error} When operations.filtering section is missing from configuration.
    */
   public getFilteringConfig(): DatabaseConfig["operations"]["filtering"] {
-    return (
-      this.databaseConfig.operations?.filtering || {
-        operators: [
-          "eq",
-          "ne",
-          "gt",
-          "gte",
-          "lt",
-          "lte",
-          "in",
-          "nin",
-          "contains",
-          "startswith",
-          "endswith",
-        ],
-        caseInsensitiveStrings: true,
-        enableFuzzyMatching: false,
-      }
-    );
+    const filtering = this.databaseConfig.operations?.filtering;
+    if (!filtering) {
+      throw new Error(
+        "Database agent config missing operations.filtering section"
+      );
+    }
+    return filtering;
   }
 
   /**
    * Get join operation configuration.
    *
-   * @returns {DatabaseConfig['operations']['joins']} Join options and limits.
+   * @returns  {DatabaseConfig['operations']['joins']} Join options and limits.
+   * @throws  {Error} When operations.joins section is missing from configuration.
    */
   public getJoinConfig(): DatabaseConfig["operations"]["joins"] {
-    return (
-      this.databaseConfig.operations?.joins || {
-        supportedJoinTypes: ["inner", "left", "right"],
-        autoDiscoverRelationships: true,
-        maxJoinRecords: 1000,
-      }
-    );
+    const joins = this.databaseConfig.operations?.joins;
+    if (!joins) {
+      throw new Error("Database agent config missing operations.joins section");
+    }
+    return joins;
   }
 
   /**
    * Get aggregation configuration.
    *
-   * @returns {DatabaseConfig['operations']['aggregation']} Supported functions and limits.
+   * @returns  {DatabaseConfig['operations']['aggregation']} Supported functions and limits.
+   * @throws  {Error} When operations.aggregation section is missing from configuration.
    */
   public getAggregationConfig(): DatabaseConfig["operations"]["aggregation"] {
-    return (
-      this.databaseConfig.operations?.aggregation || {
-        functions: ["count", "sum", "avg", "min", "max", "distinct"],
-        enableGroupBy: true,
-        maxGroups: 100,
-      }
-    );
+    const aggregation = this.databaseConfig.operations?.aggregation;
+    if (!aggregation) {
+      throw new Error(
+        "Database agent config missing operations.aggregation section"
+      );
+    }
+    return aggregation;
   }
 
   /**
    * Get telemetry configuration.
    *
-   * @returns {Record<string,unknown>} Telemetry logging thresholds and flags.
+   * @returns  {Record<string,unknown>} Telemetry logging thresholds and flags.
+   * @throws  {Error} When telemetry section is missing from configuration.
    */
   public getTelemetryConfig(): Record<string, unknown> {
+    if (!this.config.telemetry) {
+      throw new Error("Database agent config missing telemetry section");
+    }
     return {
-      logQueries: this.config.telemetry?.logQueries ?? true,
-      logPerformance: this.config.telemetry?.logPerformance ?? true,
-      logCacheStats: this.config.telemetry?.logCacheStats ?? true,
-      slowQueryThreshold: this.config.telemetry?.slowQueryThreshold ?? 1000,
+      logQueries: this.config.telemetry.logQueries,
+      logPerformance: this.config.telemetry.logPerformance,
+      logCacheStats: this.config.telemetry.logCacheStats,
+      slowQueryThreshold: this.config.telemetry.slowQueryThreshold,
     };
   }
 
   /**
    * Get error handling configuration.
    *
-   * @returns {Record<string,unknown>} Retry and fallback strategy settings.
+   * @returns  {Record<string,unknown>} Retry and fallback strategy settings.
+   * @throws  {Error} When errorHandling section is missing from configuration.
    */
   public getErrorHandlingConfig(): Record<string, unknown> {
+    if (!this.config.errorHandling) {
+      throw new Error("Database agent config missing errorHandling section");
+    }
     return {
-      maxRetries: this.config.errorHandling?.maxRetries ?? 3,
-      retryDelay: this.config.errorHandling?.retryDelay ?? 1000,
-      exponentialBackoff: this.config.errorHandling?.exponentialBackoff ?? true,
-      fallbackOnCacheError:
-        this.config.errorHandling?.fallbackOnCacheError ?? true,
+      maxRetries: this.config.errorHandling.maxRetries,
+      retryDelay: this.config.errorHandling.retryDelay,
+      exponentialBackoff: this.config.errorHandling.exponentialBackoff,
+      fallbackOnCacheError: this.config.errorHandling.fallbackOnCacheError,
     };
   }
 

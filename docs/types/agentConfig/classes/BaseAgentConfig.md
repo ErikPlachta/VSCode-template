@@ -6,21 +6,16 @@
 
 # Abstract Class: BaseAgentConfig
 
-Defined in: [src/types/agentConfig.ts:481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L481)
+Defined in: [src/types/agentConfig.ts:481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L481)
 
 Base class for agent configuration management
 
 ## Extended by
 
-- [`ClarificationAgentConfig`](../../../agent/clarificationAgent/config/classes/ClarificationAgentConfig.md)
 - [`ClarificationAgentConfig`](../../../agent/clarificationAgent/classes/ClarificationAgentConfig.md)
-- [`DataAgentConfig`](../../../agent/dataAgent/config/classes/DataAgentConfig.md)
 - [`DataAgentConfig`](../../../agent/dataAgent/classes/DataAgentConfig.md)
-- [`DatabaseAgentConfig`](../../../agent/databaseAgent/config/classes/DatabaseAgentConfig.md)
 - [`DatabaseAgentConfig`](../../../agent/databaseAgent/classes/DatabaseAgentConfig.md)
-- [`OrchestratorConfig`](../../../agent/orchestrator/config/classes/OrchestratorConfig.md)
 - [`OrchestratorConfig`](../../../agent/orchestrator/classes/OrchestratorConfig.md)
-- [`RelevantDataManagerAgentConfig`](../../../agent/relevantDataManagerAgent/config/classes/RelevantDataManagerAgentConfig.md)
 
 ## Constructors
 
@@ -28,7 +23,7 @@ Base class for agent configuration management
 
 > **new BaseAgentConfig**(`config`): `BaseAgentConfig`
 
-Defined in: [src/types/agentConfig.ts:490](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L490)
+Defined in: [src/types/agentConfig.ts:490](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L490)
 
 constructor function.
 
@@ -52,7 +47,7 @@ config parameter.
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L545)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L545)
 
 Get application-facing configuration
 
@@ -68,7 +63,7 @@ Get application-facing configuration
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L499)
+Defined in: [src/types/agentConfig.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L499)
 
 Get public-facing configuration (user and some application details)
 
@@ -84,7 +79,7 @@ Get public-facing configuration (user and some application details)
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L554)
+Defined in: [src/types/agentConfig.ts:554](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L554)
 
 Get configuration schema ID
 
@@ -100,7 +95,7 @@ Get configuration schema ID
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L527)
+Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L527)
 
 Get execution configuration
 
@@ -116,7 +111,7 @@ Get execution configuration
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L536)
+Defined in: [src/types/agentConfig.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L536)
 
 Get user-facing configuration
 

@@ -8,4 +8,4 @@
 
 > `const` **applicationConfig**: [`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)
 
-Defined in: [src/config/application.config.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/config/application.config.ts#L13)
+Defined in: [src/config/application.config.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/config/application.config.ts#L13)

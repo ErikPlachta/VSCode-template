@@ -6,7 +6,7 @@
 
 # Interface: PerformanceConfig
 
-Defined in: [src/types/agentConfig.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L112)
+Defined in: [src/types/agentConfig.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L112)
 
 Performance configuration
 
@@ -16,7 +16,7 @@ Performance configuration
 
 > **complexity**: `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/types/agentConfig.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L115)
+Defined in: [src/types/agentConfig.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L115)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:115](https://github.com/ErikPlachta/vscode
 
 > **expectedResponseTime**: `number`
 
-Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L113)
+Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L113)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode
 
 > **memoryUsage**: `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/types/agentConfig.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/agentConfig.ts#L114)
+Defined in: [src/types/agentConfig.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/agentConfig.ts#L114)

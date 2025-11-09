@@ -6,7 +6,7 @@
 
 # Class: KnowledgeBase
 
-Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/mcp/knowledgeBase.ts#L30)
+Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/mcp/knowledgeBase.ts#L30)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-
 
 > **indexDocument**(`document`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/mcp/knowledgeBase.ts#L38)
+Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/mcp/knowledgeBase.ts#L38)
 
 indexDocument function.
 
@@ -46,7 +46,7 @@ document parameter.
 
 > **indexDocuments**(`documents`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/mcp/knowledgeBase.ts#L47)
+Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/mcp/knowledgeBase.ts#L47)
 
 indexDocuments function.
 
@@ -68,7 +68,7 @@ documents parameter.
 
 > **query**(`term`, `limit`): [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/mcp/knowledgeBase.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/mcp/knowledgeBase.ts#L58)
+Defined in: [src/mcp/knowledgeBase.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/mcp/knowledgeBase.ts#L58)
 
 query function.
 

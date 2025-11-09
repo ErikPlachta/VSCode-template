@@ -6,7 +6,7 @@
 
 # Interface: HealthReport
 
-Defined in: [src/tools/repositoryHealth.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/tools/repositoryHealth.ts#L53)
+Defined in: [src/tools/repositoryHealth.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/tools/repositoryHealth.ts#L53)
 
 Aggregate report describing every compliance check outcome.
 
@@ -16,7 +16,7 @@ Aggregate report describing every compliance check outcome.
 
 > `readonly` **checks**: readonly [`CheckResult`](CheckResult.md)[]
 
-Defined in: [src/tools/repositoryHealth.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/tools/repositoryHealth.ts#L56)
+Defined in: [src/tools/repositoryHealth.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/tools/repositoryHealth.ts#L56)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/tools/repositoryHealth.ts:56](https://github.com/ErikPlachta/vs
 
 > `readonly` **generatedAt**: `string`
 
-Defined in: [src/tools/repositoryHealth.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/tools/repositoryHealth.ts#L54)
+Defined in: [src/tools/repositoryHealth.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/tools/repositoryHealth.ts#L54)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/tools/repositoryHealth.ts:54](https://github.com/ErikPlachta/vs
 
 > `readonly` **passed**: `boolean`
 
-Defined in: [src/tools/repositoryHealth.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/tools/repositoryHealth.ts#L55)
+Defined in: [src/tools/repositoryHealth.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/tools/repositoryHealth.ts#L55)

@@ -6,7 +6,7 @@
 
 # Interface: UserContextManagerInterface
 
-Defined in: [src/types/interfaces.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L214)
+Defined in: [src/types/interfaces.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L214)
 
 UserContextManagerInterface interface (renamed from RelevantDataManagerInterface).
 Provides forward-compatible method names while delegating to legacy implementations.
@@ -21,7 +21,7 @@ Provides forward-compatible method names while delegating to legacy implementati
 
 > **getBusinessDataCatalogue**(): [`BusinessDataCatalogue`](BusinessDataCatalogue.md)
 
-Defined in: [src/types/interfaces.ts:200](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L200)
+Defined in: [src/types/interfaces.ts:200](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L200)
 
 #### Returns
 
@@ -37,7 +37,7 @@ Defined in: [src/types/interfaces.ts:200](https://github.com/ErikPlachta/vscode-
 
 > **getCategoryInfo**(`categoryId`): [`CategoryInfo`](CategoryInfo.md)
 
-Defined in: [src/types/interfaces.ts:201](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L201)
+Defined in: [src/types/interfaces.ts:201](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L201)
 
 #### Parameters
 
@@ -59,7 +59,7 @@ Defined in: [src/types/interfaces.ts:201](https://github.com/ErikPlachta/vscode-
 
 > **getCategorySchema**(`categoryId`): [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/types/interfaces.ts:202](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L202)
+Defined in: [src/types/interfaces.ts:202](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L202)
 
 #### Parameters
 
@@ -81,7 +81,7 @@ Defined in: [src/types/interfaces.ts:202](https://github.com/ErikPlachta/vscode-
 
 > **getRelationships**(`categoryId`): [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/interfaces.ts:207](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L207)
+Defined in: [src/types/interfaces.ts:207](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L207)
 
 #### Parameters
 
@@ -103,7 +103,7 @@ Defined in: [src/types/interfaces.ts:207](https://github.com/ErikPlachta/vscode-
 
 > `optional` **getUserContextCatalogue**(): [`BusinessDataCatalogue`](BusinessDataCatalogue.md)
 
-Defined in: [src/types/interfaces.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L217)
+Defined in: [src/types/interfaces.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L217)
 
 Optional transitional method returning the renamed catalogue type.
 
@@ -117,7 +117,7 @@ Optional transitional method returning the renamed catalogue type.
 
 > **validateCategoryData**(`categoryId`, `records`): [`ValidationResult`](ValidationResult.md)
 
-Defined in: [src/types/interfaces.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/interfaces.ts#L203)
+Defined in: [src/types/interfaces.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/interfaces.ts#L203)
 
 #### Parameters
 

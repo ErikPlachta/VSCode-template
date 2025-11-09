@@ -23,6 +23,53 @@ Guidelines:
 
 ## [Unreleased]
 
+### Verification (post defaults cleanup 2025-11-09)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS (agent index refactors JSDoc-complete; added @throws annotations)
+- Docs: PASS (typedoc + postprocess pipeline completed without errors)
+- Health: PASS
+- Coverage: STABLE (see coverage report; target remains 100%)
+
+### Changed (2025-11-09 – DatabaseAgent strict getters)
+
+- Tightened `DatabaseAgentConfig` to eliminate embedded fallback objects and enforce config-defined values only in `src/agent/databaseAgent/index.ts`.
+- Added `validateRequiredSections()` to assert presence of `database.performance`, `database.validation`, and `database.operations` (including nested blocks) at construction.
+- Updated getters to throw clear errors when required sections are missing; completed strict JSDoc with `@throws` annotations.
+
+### Verification (post DatabaseAgent strict getters 2025-11-09)
+
+- Build: PASS (tsc compile)
+- Tests: PASS (jest suite green)
+- Lint: PASS (jsdoc alignment + throws annotations satisfied)
+- Docs: PASS (typedoc OK)
+- Health: PASS
+
+### Changed (2025-11-09 – Remove deprecated agent config.ts files)
+
+- Deleted legacy per-agent config wrappers now that configuration classes are merged into their respective `index.ts` files:
+  - `src/agent/orchestrator/config.ts`
+  - `src/agent/dataAgent/config.ts`
+  - `src/agent/clarificationAgent/config.ts`
+  - `src/agent/databaseAgent/config.ts`
+  - `src/agent/relevantDataManagerAgent/config.ts`
+  - `src/agent/userContextAgent/config.ts`
+- Confirmed no remaining imports reference these paths; exports are provided via each agent's `index.ts` and `agent.config.ts` as per the two-file standard.
+
+### Verification (post config.ts removals 2025-11-09)
+
+- Build: PASS (tsc compile)
+- Tests: PASS (jest suite green)
+- Lint: PASS (strict JSDoc, no unused imports)
+- Docs: PASS (typedoc ran and docs post-processing succeeded)
+- Health: PASS (repository health report clean)
+
+### Next Focus (post-removal)
+
+- Finish eliminating any remaining fallback defaults in DatabaseAgent getters if discovered in future diffs; ensure all required values are sourced from `agent.config.ts` and throw when missing.
+- Keep CHANGELOG as single source of truth; begin alias deprecation warning cycle for `relevant-data-manager` → `user-context` per policy.
+
 ### Planned
 
 - Deprecate `src/mcp.config.json` in favor of build-generated JSON derived from TS sources:
@@ -184,14 +231,14 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Removed hard-coded fallbacks for `guidanceTypes` and `knowledgeSources` plus remaining guidance/escalation/knowledgeBase/routing/contextAnalysis/performance fallback objects in `src/agent/clarificationAgent/index.ts`; values must come from `agent.config.ts`.
 - Consolidated former `src/agent/orchestrator/config.ts` logic into `src/agent/orchestrator/index.ts` and removed all embedded fallback message/weights/phrases defaults; strict errors thrown if required config blocks missing (prepares for deleting legacy file after verification).
 
-### Verification (post defaults cleanup 2025-11-09)
+### Verification (post defaults cleanup 2025-11-09) (superseded by later PASS verification)
 
-- Build: PENDING
-- Tests: PENDING
+- Build: PASS
+- Tests: PASS
 - Lint: PASS (agent index refactors JSDoc-complete; added @throws annotations)
-- Docs: UNCHANGED (no generated docs updates yet)
-- Health: UNCHANGED
-- Coverage: PENDING (target 100%) – follow-up run will confirm no drops after removing fallback code paths
+- Docs: PASS
+- Health: PASS
+- Coverage: STABLE
 
 ### Docs (2025-11-09 – README & governance updates)
 

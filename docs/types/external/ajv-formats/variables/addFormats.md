@@ -8,4 +8,4 @@
 
 > `const` **addFormats**: [`AddFormats`](../type-aliases/AddFormats.md)
 
-Defined in: [src/types/external.d.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/external.d.ts#L9)
+Defined in: [src/types/external.d.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/external.d.ts#L9)

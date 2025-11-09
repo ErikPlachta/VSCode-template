@@ -151,6 +151,8 @@ export class RepositoryHealthAgent {
     checks.push(await this.runTypescriptLint());
     checks.push(await this.validateJsonSchemas());
     checks.push(await this.validateMarkdownDocuments());
+    // Governance: forbid legacy mcp.config.json anywhere except build output folder
+    checks.push(await this.checkNoLegacyMcpConfigArtifacts());
     const passed: boolean = checks.every((c) => c.passed);
     return { generatedAt: new Date().toISOString(), passed, checks };
   }
@@ -272,6 +274,46 @@ export class RepositoryHealthAgent {
         messages.length === 0
           ? ["All Markdown documents include the mandated metadata."]
           : messages,
+    };
+  }
+
+  /**
+   * Ensure no legacy JSON configuration artifacts are present in the repository (outside of out/).
+   *
+   * Rationale: Configuration source of truth is TypeScript. If external tools need JSON, it's emitted to out/mcp.config.json.
+   * Any file named mcp.config.json outside the build output indicates drift or a regression.
+   *
+   * @returns {Promise<CheckResult>} Result indicating success or listing offending file paths.
+   */
+  public async checkNoLegacyMcpConfigArtifacts(): Promise<CheckResult> {
+    const matches: string[] = await fg(["**/mcp.config.json"], {
+      cwd: this.baseDir,
+      dot: true,
+      onlyFiles: true,
+      absolute: false,
+      ignore: [
+        "out/mcp.config.json",
+        "**/out/mcp.config.json",
+        "node_modules/**",
+        ".git/**",
+        ".vscode/**",
+      ],
+    });
+    // Additional guard in case ignore misses nested paths not under out/
+    const offenders = matches.filter(
+      (p) => !p.replace(/\\/g, "/").startsWith("out/")
+    );
+    return {
+      name: "Legacy JSON config presence",
+      passed: offenders.length === 0,
+      messages:
+        offenders.length === 0
+          ? [
+              "No legacy mcp.config.json files found outside build output. Source of truth remains TypeScript.",
+            ]
+          : offenders.map(
+              (p) => `Unexpected legacy JSON config detected: ${p}`
+            ),
     };
   }
 

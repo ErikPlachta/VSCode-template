@@ -136,13 +136,17 @@ if exist "src\config\application.config.ts" (
     goto :eof
 )
 
-call :log_info "Validating legacy mcp.config.json..."
-if not exist "src\mcp.config.json" (
-    call :log_error "Configuration file not found: src\mcp.config.json"
-    exit /b 1
+call :log_info "Validating generated mcp.config.json..."
+if not exist "out\mcp.config.json" (
+    call :log_info "out\mcp.config.json not found; generating from TS sources..."
+    npm run mcp:gen >NUL 2>&1
+    if errorlevel 1 (
+        call :log_error "Failed to generate out\\mcp.config.json from TS sources"
+        exit /b 1
+    )
 )
-REM Basic JSON existence check (Windows lacks json_pp); rely on later schema linting for structure
-call :log_success "Legacy JSON configuration validated"
+REM Basic existence check; schema correctness verified later in pipeline
+call :log_success "Generated JSON configuration validated"
 goto :eof
 
 :stage_lint_json

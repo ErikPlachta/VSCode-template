@@ -12,9 +12,6 @@ import {
   userContextAgentConfig,
 } from "@agent/userContextAgent";
 
-// One-time deprecation warning controller
-let __warnedLegacyAgent = false;
-
 /**
  * Backwards-compatible class name that extends the new UserContextAgent.
  */
@@ -25,12 +22,7 @@ export class RelevantDataManagerAgent extends UserContextAgent {
    * @param {Promise<string>} cacheDirPromise - Optional cache directory promise used by tests.
    */
   constructor(cacheDirPromise?: Promise<string>) {
-    if (!__warnedLegacyAgent) {
-      console.warn(
-        "Deprecated: '@agent/relevantDataManagerAgent' will be removed in a future release. Please import from '@agent/userContextAgent' instead."
-      );
-      __warnedLegacyAgent = true;
-    }
+    // Legacy shim now silent: deprecation window closed; retain class for compatibility.
     super(cacheDirPromise);
   }
 }

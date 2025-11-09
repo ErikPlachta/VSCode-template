@@ -8,6 +8,6 @@
 
 > **AgentPriority** = `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/types/applicationConfig.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/71969725308ebc3e692eaeafc61e692e33e07c8b/src/types/applicationConfig.ts#L58)
+Defined in: [src/types/applicationConfig.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e4060dce33bfbc073f09052e77af52b9f7e968d6/src/types/applicationConfig.ts#L58)
 
 Agent execution priority levels.
