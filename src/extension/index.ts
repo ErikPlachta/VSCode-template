@@ -9,6 +9,10 @@ import { Orchestrator } from "@agent/orchestrator";
 import { startMCPServer, stopMCPServer } from "@server/embedded";
 import { fetchTools, MCPTool } from "@extension/mcpSync";
 import { registerMcpProvider } from "@extension/mcpProvider";
+import {
+  ensureRegistration,
+  removeRegistration,
+} from "@extension/mcpRegistration";
 
 /**
  * Activate the MyBusiness MCP extension.
@@ -50,21 +54,56 @@ export async function activate(
       console.log(
         `✅ Embedded MCP server started successfully at ${serverUrl}`
       );
+
+      // Register the HTTP server in mcp.json for Copilot Chat discovery
+      console.log(`📝 Registering HTTP server in mcp.json...`);
+      try {
+        const registrationId = "mybusiness-mcp-server";
+        await ensureRegistration({
+          id: registrationId,
+          url: serverUrl,
+          includeAuthHeader,
+          token: token || undefined,
+        });
+        console.log(
+          `✅ HTTP server registered in mcp.json as "${registrationId}"`
+        );
+
+        // Register cleanup for both server stop and mcp.json registration removal
+        context.subscriptions.push({
+          /**
+           * Dispose handler to stop embedded MCP server and remove mcp.json registration.
+           *
+           * @returns {Promise<void>} Resolves when server has stopped and registration removed.
+           */
+          dispose: async () => {
+            await stopMCPServer();
+            await removeRegistration(registrationId);
+            console.log(
+              `🧹 Cleaned up server and removed mcp.json registration`
+            );
+          },
+        });
+      } catch (regError) {
+        const regMsg =
+          regError instanceof Error ? regError.message : String(regError);
+        console.warn(`⚠️ Failed to register in mcp.json: ${regMsg}`);
+        // Continue anyway - stdio provider should still work
+        context.subscriptions.push({
+          /**
+           * Dispose handler to stop embedded MCP server when extension unloads.
+           *
+           * @returns {Promise<void>} Resolves when server has stopped.
+           */
+          dispose: async () => {
+            await stopMCPServer();
+          },
+        });
+      }
+
       vscode.window.showInformationMessage(
         `✅ MyBusiness MCP Server running on port ${actualPort}`
       );
-
-      // Register cleanup when extension is deactivated
-      context.subscriptions.push({
-        /**
-         * Dispose handler to stop embedded MCP server when extension unloads.
-         *
-         * @returns {Promise<void>} Resolves when server has stopped.
-         */
-        dispose: async () => {
-          await stopMCPServer();
-        },
-      });
     } catch (error) {
       // If preferred port is busy, retry with ephemeral port
       // Narrow known NodeJS error code shape without using 'any'
@@ -79,20 +118,56 @@ export async function activate(
           serverUrl = await startMCPServer(undefined);
           const actualPort = serverUrl.split(":").pop();
           console.log(`✅ Started on ephemeral port: ${serverUrl}`);
+
+          // Register the HTTP server in mcp.json for Copilot Chat discovery
+          console.log(`📝 Registering HTTP server in mcp.json...`);
+          try {
+            const registrationId = "mybusiness-mcp-server";
+            await ensureRegistration({
+              id: registrationId,
+              url: serverUrl,
+              includeAuthHeader,
+              token: token || undefined,
+            });
+            console.log(
+              `✅ HTTP server registered in mcp.json as "${registrationId}"`
+            );
+
+            // Register cleanup for both server stop and mcp.json registration removal
+            context.subscriptions.push({
+              /**
+               * Dispose handler to stop embedded MCP server and remove mcp.json registration.
+               *
+               * @returns {Promise<void>} Resolves when server has stopped and registration removed.
+               */
+              dispose: async () => {
+                await stopMCPServer();
+                await removeRegistration(registrationId);
+                console.log(
+                  `🧹 Cleaned up server and removed mcp.json registration`
+                );
+              },
+            });
+          } catch (regError) {
+            const regMsg =
+              regError instanceof Error ? regError.message : String(regError);
+            console.warn(`⚠️ Failed to register in mcp.json: ${regMsg}`);
+            // Continue anyway - stdio provider should still work
+            context.subscriptions.push({
+              /**
+               * Dispose handler to stop embedded MCP server when extension unloads.
+               *
+               * @returns {Promise<void>} resolves when server has stopped
+               */
+              dispose: async () => {
+                await stopMCPServer();
+              },
+            });
+          }
+
           vscode.window.showWarningMessage(
             `⚠️ Port ${port} was busy. MyBusiness MCP Server running on port ${actualPort}`
           );
-
-          context.subscriptions.push({
-            /**
-             * Dispose handler to stop embedded MCP server when extension unloads.
-             *
-             * @returns {Promise<void>} resolves when server has stopped
-             */
-            dispose: async () => {
-              await stopMCPServer();
-            },
-          });
         } catch (retryError) {
           const retryMsg =
             retryError instanceof Error
@@ -241,10 +316,21 @@ export async function activate(
           `🔄 Registering MyBusiness MCP Server...`
         );
 
-        // The MCP provider is already registered during activation,
-        // but we can trigger a refresh by firing the event
-        // Re-register to ensure it's active
+        // Register both the provider and mcp.json entry
         registerMcpProvider(serverUrl, token, includeAuthHeader, context);
+
+        if (serverUrl) {
+          const registrationId = "mybusiness-mcp-server";
+          await ensureRegistration({
+            id: registrationId,
+            url: serverUrl,
+            includeAuthHeader,
+            token: token || undefined,
+          });
+          console.log(
+            `✅ HTTP server registered in mcp.json as "${registrationId}"`
+          );
+        }
 
         vscode.window.showInformationMessage(
           `✅ MyBusiness MCP Server registered! Server: ${serverUrl}`
@@ -264,9 +350,20 @@ export async function activate(
     "mybusinessMCP.unregisterServer",
     async () => {
       console.log(`🔄 Manual MCP server unregistration triggered...`);
-      vscode.window.showInformationMessage(
-        `⚠️ MCP server will be unregistered when extension is deactivated/reloaded`
-      );
+      try {
+        const registrationId = "mybusiness-mcp-server";
+        await removeRegistration(registrationId);
+        console.log(`✅ Removed HTTP server registration from mcp.json`);
+        vscode.window.showInformationMessage(
+          `✅ MyBusiness MCP Server unregistered from mcp.json`
+        );
+      } catch (error) {
+        const msg = error instanceof Error ? error.message : String(error);
+        console.error(`❌ Manual unregistration failed:`, msg);
+        vscode.window.showErrorMessage(
+          `❌ Failed to unregister MCP server: ${msg}`
+        );
+      }
     }
   );
 
