@@ -15,33 +15,38 @@ This repository uses the root `CHANGELOG.md` as the single source of truth for C
 
 At the start of a session:
 
-- Read `CHANGELOG.md` Unreleased → Planned section, confirm which tasks are active.
-- Update the todo list (internal planning) with any new user requests.
+- Read `CHANGELOG.md` → Outstanding Tasks and confirm which Priority 1 items are active.
+- Update the internal todo list to mirror Outstanding Tasks (preserve priorities and wording).
 
 During changes:
 
-- For each significant edit, add an entry under Unreleased (Added / Changed / Fixed / Docs / Verification / Next Focus).
+- For each significant edit, add a timestamped entry under Logs with a semantic type header.
 - Keep entries terse but specific: include file paths for notable code modifications.
-- Record verification results after each batch of changes.
+- Record a Verification block after each batch (Build / Tests / Lint / Docs / Health / Coverage / JSDoc) and update Outstanding Tasks accordingly.
 
 At the end of a session:
 
-- Ensure Verification block reflects latest PASS/FAIL for: Build / Tests / Lint / Docs / Health / Coverage / JSDoc.
-- Add Next Focus items guiding subsequent work.
+- Ensure the latest Verification block reflects PASS/FAIL for: Build / Tests / Lint / Docs / Health / Coverage / JSDoc.
+- Reconcile Outstanding Tasks (move completed items out; carry over remaining; adjust priorities if requested).
 
-## CHANGELOG Format (Unreleased Section)
+## Changelog operations (Outstanding Tasks + Logs)
 
-Sections used in order:
+The changelog is organized around two sections: Outstanding Tasks and Logs. Follow these rules (synced from `CHANGELOG.md` → Notes for Copilot):
 
-1. Planned – backlog items or in-progress efforts.
-2. Added – new features, files, scripts.
-3. Changed – behavior modifications, migrations, refactors.
-4. Fixed – bug resolutions or incorrect logic fixed.
-5. Docs – documentation-only updates.
-6. Verification – PASS/FAIL summary of quality gates (include coverage % if any deviation; goal is literal 100%).
-7. Next Focus – prioritized follow-up actions.
+1. Outstanding Tasks captures all incomplete work. It is organized by priority and jointly maintained by the user and Copilot Chat.
+2. Every incomplete task should appear here, grouped by priority: Priority 1 (Current), Priority 2 (Next Focus), Priority 3 (Backlog).
+3. Copilot should proactively review and keep this section up to date, reflecting user-requested priority changes.
+4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
+5. Logs capture all change history, organized by date/time and semantic titles.
+6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES` (e.g., `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`).
+7. Use semantic titles for log entries: `#### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES` (e.g., `#### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`).
+8. Include file paths for meaningful changes.
+9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into Outstanding Tasks.
 
-Every pull request must update at least one of these sections (unless trivial: whitespace, comment typo, etc.—still prefer inclusion for traceability).
+Practical cadence:
+
+- Insert new log entries newest-first within the current day; add the optional daily summary headline once per day if helpful.
+- After 3–5 edits or when creating/editing >~3 files in a burst, add/update a Verification block and reconcile Outstanding Tasks.
 
 ## Quality Gates
 
@@ -135,3 +140,35 @@ Refer to `CHANGELOG.md` for historical decisions and active planned tasks before
 ---
 
 These instructions are living; update them when governance rules or quality gates evolve. Document any health check additions (e.g., legacy JSON detection) under CHANGELOG Added.
+
+## Automation Aids
+
+To guarantee accurate current timestamps and consistent formatting for new log entries, prefer the ChangeLogManager CLI:
+
+- Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary"`
+- Ensure markers: `npm run changelog:manage -- insert-markers`
+
+Valid types: fix | feat | chore | docs | refactor | test | perf | ci | build | style.
+
+Notes:
+
+- Copilot Chat can execute these for you (it will run the npm script with the proper arguments) or paste the exact command for your confirmation.
+- After 3–5 entries or >~3 file edits, add a Verification block and reconcile Outstanding Tasks.
+
+## ChangeLogManager Module
+
+Use the `ChangeLogManager` utilities instead of manual editing whenever possible:
+
+- Add entries: `npm run changelog:manage -- add-entry --type feat --summary "Something"`.
+- Add Outstanding Tasks: `npm run changelog:manage -- add-outstanding --priority 3 --text "Task description"`.
+- Ensure markers: `npm run changelog:manage -- insert-markers` (auto-inserts section boundary comments if missing).
+- Markers: `<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->` / `<!-- CHANGELOG:END:OUTSTANDING_TASKS -->`, `<!-- CHANGELOG:BEGIN:LOGS -->` / `<!-- CHANGELOG:END:LOGS -->`.
+- Heading formats remain: Day `### [YYYY-MM-DD] Summary` (optional summary) and Entry `#### YYYY-MM-DD HH:MM:SS type: Summary`.
+
+Planned extensions (parser awareness): structured Outstanding Tasks extraction, automatic verification block generation, JSON export for UI dashboards.
+
+Copilot Chat should:
+
+1. Prefer CLI for new entries to guarantee timestamp fidelity.
+2. Reconcile Outstanding Tasks after each batch by reading between boundary markers.
+3. Avoid reformatting markers or headings outside spec to keep parser stable.

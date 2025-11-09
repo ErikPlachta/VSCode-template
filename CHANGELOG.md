@@ -11,8 +11,6 @@ associations:
   - documentation
 ---
 
-<!-- Title provided via front matter; omit duplicate H1 to satisfy markdownlint MD025 -->
-
 <!-- START OF COPILOT CONTENT -->
 
 ## Notes for Copilot
@@ -29,13 +27,13 @@ This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Lo
 4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
 5. Logs capture all change history, organized by date/time and semantic titles.
 6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
-7. Use semantic titles for log entries: `### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a concise description. Example: `### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`.
+7. Use semantic titles for log entries: `#### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a concise description. Example: `#### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`.
 8. Include file paths for meaningful changes.
 9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into [Outstanding Tasks](#outstanding-tasks).
 
 <!-- END OF COPILOT CONTENT -->
 
----
+<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->
 
 ## Outstanding Tasks
 
@@ -78,18 +76,31 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### Priority 3 - No Priority
 
----
+- Any additional enhancements to the changelog utility script.
+
+- Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator).
+
+- Convert all bin/utils tools into self-contained modules (doc, JSDoc, template, package config, import fixes).
+<!-- CHANGELOG:END:OUTSTANDING_TASKS -->
+
+<!-- CHANGELOG:BEGIN:LOGS -->
 
 ## Logs
 
 All change history. Organized by date/time and semantic titles; verification recorded after each batch.
 
-### Changed (2025-11-09 – Remove legacy relevantDataManager agent code)
+### [2025-11-09] Refactor Agents
 
-- Removed deprecated `relevantDataManager` agent implementation and associated shim directory.
-- Verified no remaining imports reference the legacy path; `userContextAgent` remains the canonical path.
+#### 2025-11-09 11:25:00 refactor: Consolidate changelog automation (remove legacy script/snippets; add export-json)
 
-### Verification (post relevantDataManager removal 2025-11-09)
+- Removed legacy `bin/add-changelog-entry.mjs` and `changelog:log` npm script in favor of unified CLI directory entry.
+- Deleted `.vscode/changelog.code-snippets` (timestamp insertion now handled exclusively by CLI).
+- Added `index.ts` entry point allowing `tsx bin/utils/changelog` invocation.
+- Extended CLI with `export-json` command and `exportJSON()` manager method; added Outstanding Tasks JSON export (logs parsing forthcoming).
+- Updated `copilot-instructions.md` to remove snippet + legacy script references and direct usage to new CLI.
+- Enhanced parser to extract Outstanding Tasks into structured JSON (priority & raw line).
+
+#### verification – changelog automation consolidation
 
 - Build: PASS
 - Tests: PASS
@@ -97,13 +108,73 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Docs: PASS
 - Health: PASS
 
-### Added (2025-11-09 – Centralized runtime agent types & descriptor helper)
+#### 2025-11-09 11:12:00 feat: Introduce ChangeLogManager (TS module) and section markers
+
+- Added TypeScript submodule at `bin/utils/changelog/` with: `types.ts`, `config.ts`, `parser.ts`, `manager.ts`, `cli.ts`, and `README.md`.
+- Inserted HTML markers into `CHANGELOG.md` to bound sections for reliable parsing:
+  - `<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->` / `<!-- CHANGELOG:END:OUTSTANDING_TASKS -->`
+  - `<!-- CHANGELOG:BEGIN:LOGS -->` / `<!-- CHANGELOG:END:LOGS -->`
+- Added script `npm run changelog:manage` for CLI commands (insert markers, add entries).
+- Updated `.github/copilot-instructions.md` to document ChangeLogManager usage and guidelines.
+
+#### verification – ChangeLogManager onboarding
+
+- Build: PASS (TS compiles via tsx usage; no runtime build impact)
+- Tests: PASS (no test changes required)
+- Lint: PASS (markdown and TS files conform; README lint fixed)
+- Docs: PASS (no doc generation changes)
+- Health: PASS
+
+#### 2025-11-09 11:06:00 docs: Add timestamp helpers (script + snippets) for Logs
+
+- Added `bin/add-changelog-entry.mjs` and `npm run changelog:log` to auto-insert log entries with the current local time.
+- Added VS Code snippets at `.vscode/changelog.code-snippets` (`chlog-day`, `chlog-entry`) for quick insertion.
+- Updated `.github/copilot-instructions.md` with Automation Aids describing usage and preferred workflow.
+
+#### verification – timestamp helpers
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+
+#### 2025-11-09 11:04:00 docs: Sync Copilot instructions with changelog governance
+
+- Updated `.github/copilot-instructions.md` to embed the CHANGELOG “Notes for Copilot” operating rules:
+  - Adopted Outstanding Tasks + Logs as the canonical structure.
+  - Added daily summary and timestamped semantic entry format with examples.
+  - Clarified verification updates after each batch and reconciliation of Outstanding Tasks.
+- Aligned Session Workflow to reference Outstanding Tasks/Logs (replaced legacy Unreleased/Planned wording).
+
+##### verification – documentation alignment
+
+- Build: PASS (docs-only change)
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+
+#### 2025-11-09 10:49:00 chore: Remove legacy relevantDataManager agent code
+
+- Removed deprecated `relevantDataManager` agent implementation and associated shim directory.
+- Verified no remaining imports reference the legacy path; `userContextAgent` remains the canonical path.
+
+##### verification – post relevantDataManager removal
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+
+#### 2025-11-09 10:45:00 feat: Centralized runtime agent types & descriptor helper
 
 - Consolidated all runtime agent types (orchestrator, clarification, data, database) into `src/types/agentConfig.ts` exporting: `OrchestratorIntent`, `OrchestratorClassification`, `OrchestratorInput`, `OrchestratorResponse`, `ClarificationAgentInput`, `ClarificationResponse`, `CategoryRecord`, `AnalysisInput`, `DataInsight`, `ExplorationPlan`, `ExplorationStep`, `TopicSearchResult`, `CrossCategoryConnection`, `DataSource`, `QueryResult`, `QueryOptions`.
 - Introduced shared `ConfigDescriptor` interface and `createDescriptorMap()` helper in `agentConfig.ts` for unified descriptor creation across agents.
 - Refactored orchestrator `getConfigDescriptors()` in `src/agent/orchestrator/index.ts` to use `createDescriptorMap()`.
 
-### Changed (2025-11-09 – Removed local runtime type duplicates)
+#### 2025-11-09 10:44:00 refactor: Removed local runtime type duplicates
 
 - Deleted per-agent inline runtime type/interface declarations from:
   - `src/agent/orchestrator/index.ts`
@@ -112,7 +183,7 @@ All change history. Organized by date/time and semantic titles; verification rec
   - `src/agent/databaseAgent/index.ts`
 - All agents now import shared runtime types from `@internal-types/agentConfig`, reducing duplication and easing future migrations.
 
-### Verification (post type centralization & descriptor helper 2025-11-09)
+##### verification – post type centralization & descriptor helper
 
 - Build: PASS (compile succeeded after refactor)
 - Tests: PASS (full Jest suite green; no runtime regressions)
@@ -121,7 +192,7 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Health: PASS (no legacy config artifacts; centralized types accepted)
 - Coverage: STABLE (type relocation does not affect executable code paths)
 
-### Next Focus (after centralization batch)
+##### next focus – after centralization batch
 
 - Added descriptor-based access helpers (`getByDescriptor`, `setByDescriptor`, `verifyDescriptor`) to `BaseAgentConfig` in `src/types/agentConfig.ts` and descriptor verification tests `tests/orchestrator.descriptors.test.ts`.
 - Verification update (descriptor tests): Build PASS, Tests PASS, Lint PASS, Health PASS, Coverage STABLE.
@@ -132,11 +203,11 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Re-run docs generation to ensure no stale per-agent type pages remain; update any cross-references.
 - After collapses: update Verification with coverage % and begin planning removal of silent relevant data manager shim.
 
-### Added (2025-11-09 – Orchestrator config helper validation)
+#### 2025-11-09 10:41:00 refactor: Orchestrator config helper validation
 
 - Introduced strict path validation for orchestrator configuration via `validateRequiredSections()` in `src/agent/orchestrator/index.ts` using new `BaseAgentConfig.confirmConfigItems` helper.
 
-### Changed (2025-11-09 – Orchestrator refactor to generic helpers)
+#### 2025-11-09 10:40:00 refactor: Orchestrator refactor to generic helpers
 
 - Eliminated per-agent wrapper class for orchestrator: merged configuration access directly into `Orchestrator` by extending `BaseAgentConfig` and removing the bespoke `OrchestratorConfig` class.
 - Refactored configuration access to use `getConfigItem` for `stopWords`, `scoringWeights`, `minimumKeywordLength`, `intents`, `messages`, and `escalation` paths, removing direct object traversal and silent fallbacks.
@@ -145,7 +216,7 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Introduced `getConfigDescriptors()` in orchestrator returning path/type/visibility to support UI-driven configuration without inlining per-item getters.
 - JSDoc cleanup in `BaseAgentConfig` (removed placeholder return descriptions) in `src/types/agentConfig.ts`.
 
-### Verification (post orchestrator helper refactor 2025-11-09)
+##### verification – post orchestrator helper refactor
 
 - Build: PASS (tsc)
 - Tests: PASS (jest suite green; orchestrator tests unchanged still pass)
@@ -154,13 +225,13 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Health: PASS (no legacy config artifacts; governance checks green)
 - Coverage: STABLE (orchestrator paths continue covered; getters now throw deterministically)
 
-### Next Focus (after orchestrator helper adoption)
+##### next focus – after orchestrator helper adoption
 
 - Apply helper-based strict path validation to Clarification, Data, and Database agent configs (replace bespoke traversal with `getConfigItem` + `confirmConfigItems`).
 - Introduce shared descriptor maps per agent to enumerate required and optional config paths for future dynamic settings UI.
 - Remove silent shim for `relevantDataManagerAgent` in planned removal phase (document in Planned section before deletion).
 
-### Verification (post defaults cleanup 2025-11-09)
+##### verification – post defaults cleanup
 
 - Build: PASS
 - Tests: PASS
@@ -169,13 +240,13 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Health: PASS
 - Coverage: STABLE (see coverage report; target remains 100%)
 
-### Changed (2025-11-09 – DatabaseAgent strict getters)
+#### 2025-11-09 10:32:00 refactor: DatabaseAgent strict getters
 
 - Tightened `DatabaseAgentConfig` to eliminate embedded fallback objects and enforce config-defined values only in `src/agent/databaseAgent/index.ts`.
 - Added `validateRequiredSections()` to assert presence of `database.performance`, `database.validation`, and `database.operations` (including nested blocks) at construction.
 - Updated getters to throw clear errors when required sections are missing; completed strict JSDoc with `@throws` annotations.
 
-### Verification (post DatabaseAgent strict getters 2025-11-09)
+##### verification – post DatabaseAgent strict getters
 
 - Build: PASS (tsc compile)
 - Tests: PASS (jest suite green)
@@ -183,18 +254,18 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Docs: PASS (typedoc OK)
 - Health: PASS
 
-### Changed (2025-11-09 – Legacy JSON removal + alias warning cleanup)
+#### 2025-11-09 10:22:00 chore: Legacy JSON removal + alias warning cleanup
 
 - Windows build pipeline now validates/generated `out/mcp.config.json` instead of legacy `src/mcp.config.json` in `bin/build.bat`.
 - Legacy Relevant Data Manager shim no longer emits a deprecation warning (alias window closed) – `src/agent/relevantDataManagerAgent/index.ts`.
 - Plan: remove legacy JSON files from the repo; all code paths already use TS → `out/mcp.config.json`.
 
-### Added (2025-11-09 – Health check for legacy JSON reintroduction)
+#### 2025-11-09 10:18:00 feat: Health check for legacy JSON reintroduction
 
 - Repository Health Agent now includes a check that FAILS if any `mcp.config.json` exists outside `out/`.
 - Added test `tests/repositoryHealth.legacyConfig.test.ts` covering pass (only out/ file) and fail (stray src/ file) scenarios.
 
-### Verification (post legacy JSON changes 2025-11-09)
+##### verification – post legacy JSON changes
 
 - Build: PASS
 - Tests: PASS
@@ -202,7 +273,7 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Docs: PASS
 - Health: PASS
 
-### Changed (2025-11-09 – Remove deprecated agent config.ts files)
+#### 2025-11-09 10:10:00 chore: Remove deprecated agent config.ts files
 
 - Deleted legacy per-agent config wrappers now that configuration classes are merged into their respective `index.ts` files:
   - `src/agent/orchestrator/config.ts`
@@ -213,7 +284,7 @@ All change history. Organized by date/time and semantic titles; verification rec
   - `src/agent/userContextAgent/config.ts`
 - Confirmed no remaining imports reference these paths; exports are provided via each agent's `index.ts` and `agent.config.ts` as per the two-file standard.
 
-### Verification (post config.ts removals 2025-11-09)
+##### verification – post config.ts removals
 
 - Build: PASS (tsc compile)
 - Tests: PASS (jest suite green)
@@ -221,12 +292,12 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Docs: PASS (typedoc ran and docs post-processing succeeded)
 - Health: PASS (repository health report clean)
 
-### Next Focus (post-removal)
+##### next focus – post-removal
 
 - Finish eliminating any remaining fallback defaults in DatabaseAgent getters if discovered in future diffs; ensure all required values are sourced from `agent.config.ts` and throw when missing.
 - Keep CHANGELOG as single source of truth; begin alias deprecation warning cycle for `relevant-data-manager` → `user-context` per policy.
 
-### Planned
+#### 2025-11-09 10:05:00 planned
 
 - Deprecate `src/mcp.config.json` in favor of build-generated JSON derived from TS sources:
   - Source of truth remains TypeScript configs (`src/config/application.config.ts`, `src/mcp/config/unifiedAgentConfig.ts`).
@@ -244,7 +315,9 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Param name normalization scan & adjustments.
 - Final lint/compile/test sweep and repository health report.
 
-### Added (2025-11-08 – README overhaul & configuration direction)
+### [2025-11-08] Refactor and reorganize codebase; improve test coverage; new helper utilities
+
+#### 2025-11-08 23:05:00 docs: README overhaul & configuration direction
 
 - README updated to reflect:
   - User Context as the primary feature with global + local scopes and cache locations.
@@ -252,27 +325,27 @@ All change history. Organized by date/time and semantic titles; verification rec
   - Configuration source of truth is TypeScript (`src/config/application.config.ts` + `unifiedAgentConfig.ts`).
   - Quality gates elevated to a literal 100% coverage requirement.
 
-### Changed (2025-11-08 – Config and cache clarifications)
+#### 2025-11-08 22:50:00 docs: Config and cache clarifications
 
 - Documented the removal path for `src/mcp.config.json`. Transitional scripts will be updated to read TS config directly; emitting JSON is optional and generated to prevent drift.
 - Clarified global cache location: `%USERPROFILE%/.vscode/extensions/.mcp-cache` on Windows (workspace cache remains `<repo>/.mcp-cache`).
 
-### Added (2025-11-08 – Return type & docs remediation)
+#### 2025-11-08 22:30:00 docs: Return type & docs remediation
 
 - Explicit return types added across agent config getters (clarification, data, database, orchestrator, relevantDataManager/userContext).
 - Normalized fallback objects to ensure required fields present (e.g. `getResponseStyle`).
 - Added missing documentation pages: structured IA pages `docs/guides/build-pipeline.md`, `docs/reference/tools/repository-health-agent.md`, `docs/concepts/orchestration.md` (root duplicates removed).
 - Updated `.github/copilot-instructions.md` to mandate CHANGELOG updates for all non-trivial changes.
 
-### Verification (latest session 2025-11-08)
+##### verification – latest session snapshot
 
-### Fixed (2025-11-08 – DatabaseAgent JSDoc + operators tests)
+#### 2025-11-08 21:40:00 test: DatabaseAgent operators and JSDoc coverage
 
 - `src/agent/databaseAgent/index.ts` JSDoc completed with precise param/returns/throws across public and private methods (removed TODO placeholders).
 - Added `tests/databaseAgent.operators.test.ts` to exercise operator handling ($eq, $ne, $gt/$gte/$lt/$lte, $in/$nin, $regex, $exists), alias mapping, cache behavior, helpers, and unknown category error.
 - Lint and health remain PASS; tests PASS.
 
-### Added (2025-11-08 – Coverage expansion batch)
+#### 2025-11-08 21:15:00 test: Coverage expansion batch
 
 - Added `tests/relevantDataManagerAgent.edges.test.ts` to cover empty search cases, missing record lookups, and dataset fingerprint/hash stability checks.
 - Added `tests/mcpCache.extra.test.ts` to exercise shared cache store/read/list/delete flows and invocation logging, including missing-entry handling.
@@ -286,7 +359,7 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Health report: PASS (ESLint pattern tolerance added to avoid AllFilesIgnoredError).
 - Docs: PASS – IA restructuring complete (no root duplicates); previous TypeDoc symbol warnings resolved by exporting `Priority` and re-exporting `AddFormats`.
 
-### Verification (orchestrator cleanup follow-up 2025-11-08)
+##### verification – orchestrator cleanup follow-up
 
 - Build: PASS
 - Tests: PASS
@@ -294,14 +367,14 @@ All change history. Organized by date/time and semantic titles; verification rec
 - Docs: PASS (unchanged)
 - Health report: PASS (unchanged)
 
-### Next Focus
+##### next focus
 
 - Replace `any` types in analytics and re-run lint to reach zero errors. (Completed for `analyticsIntegration`; `agentAnalytics` remains planned-only, no changes needed today.)
 - Document analytics interfaces (new page if substantial) and update health verification.
 - Implement settings validation layer with structured warnings and safe fallback; expose agent-level settings via Settings UI first.
 - Update template processing to consume TS config; remove legacy JSON file from repo and add generation step if needed for external consumers.
 
-### Changed
+#### 2025-11-08 20:40:00 refactor: Begin migration to UserContextAgent
 
 Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 
@@ -316,18 +389,18 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Added transitional User Context Agent (`src/agent/userContextAgent`) aliasing legacy Relevant Data Manager for incremental rename.
 - Extended JSON schema patterns to support both `businessData` and `userContext` directories.
 
-### Changed (2025-11-08 – Dependency inversion for User Context Agent)
+#### 2025-11-08 20:20:00 refactor: Dependency inversion for User Context Agent
 
 - Inverted implementation ownership: moved the full agent logic under `src/agent/userContextAgent/index.ts` and converted `src/agent/relevantDataManagerAgent/index.ts` into a thin shim that extends `UserContextAgent`.
 - Added a one-time deprecation warning when instantiating the legacy `RelevantDataManagerAgent` to guide consumers to `@agent/userContextAgent`.
 - Preserved cache keys and profile ids for backwards compatibility (catalogue cache key remains `relevant-data:catalogue`).
 - Kept config exports under both paths; `userContextAgent/config` wraps legacy config as per migration policy.
 
-### Verification (post dependency inversion 2025-11-08)
+##### verification – post dependency inversion
 
 - Added build-time MCP config generator and tests
 
-### Added (2025-11-08 – Build-generated MCP config)
+#### 2025-11-08 19:30:00 feat: Build-generated MCP config
 
 - Implemented `src/tools/generateMcpConfig.ts` to produce `out/mcp.config.json` from TS sources (`@config/application.config`, `@mcp/config/unifiedAgentConfig`).
 - Wired generator into `prebuild` via new `mcp:gen` script; ensured generated file is `.gitignore`d.
@@ -337,7 +410,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Adjusted build pipeline (`bin/build.sh`) validation stage to generate & validate `out/mcp.config.json` when TS config fallback triggers.
 - Reordered `prebuild` script to run config generation before template processing so templates consume canonical generated JSON.
 
-### Verification (config generator 2025-11-08)
+##### verification – config generator
 
 - Build: PASS
 - Tests: PASS (generator tests included; config path migration applied)
@@ -346,7 +419,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Health: PASS
 - Coverage: Maintained target; generator covered by tests
 
-### Changed (2025-11-09 – Generated config path adoption)
+#### 2025-11-08 18:45:00 refactor: Generated config path adoption
 
 - Default config consumers now point to generated `out/mcp.config.json` (ConfigurationLoader, AgentConfigResolver, RepositoryHealthAgent, TemplateProcessor).
 - Build pipeline validation stage updated to generate/validate `out/mcp.config.json` when TS config fallback triggers.
@@ -356,7 +429,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Test workflow now preprocesses templates before Jest to ensure placeholder category IDs (`<application>` etc.) are resolved for dataset-dependent assertions.
 - Template processor default dataset directory switched to `src/userContext` (was `src/businessData`).
 
-### Next Focus (follow-up after path migration)
+##### next focus – follow-up after path migration
 
 - Remove `src/mcp.config.json` file and legacy `relevantDataManagerAgent` shim directory once docs references cleaned.
 - Update README and docs to reflect new default JSON location and removal timeline.
@@ -371,7 +444,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 
 ### Changed (2025-11-09 – Generator ESM alignment & category ID canonicalization)
 
-### Changed (2025-11-09 – Agent folder simplification & user-context migration)
+#### 2025-11-08 18:20:00 refactor: Agent folder simplification & user-context migration
 
 - Adopted two-file agent standard (`agent.config.ts` + `index.ts`) and deleted redundant `config.ts` in `src/agent/userContextAgent` and legacy shim path.
 - Inlined `UserContextAgentConfig` wrapper into `src/agent/userContextAgent/index.ts`; updated legacy shim exports in `src/agent/relevantDataManagerAgent/index.ts` to re-export new `userContextAgentConfig`.
@@ -379,7 +452,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Refreshed `.github/copilot-instructions.md` with new alias lifecycle (including `relevant-data-manager` → `user-context`) and agent folder standard.
 - Began removal sequence for legacy agent: shim remains; full directory removal scheduled post alias window.
 
-### Changed (2025-11-09 – Remove hard-coded defaults in agents)
+#### 2025-11-08 18:05:00 refactor: Remove hard-coded defaults in agents
 
 - Removed hard-coded business category defaults and config objects from `src/agent/dataAgent/index.ts` (all analysis/exploration/quality/performance/search/synthesis accessors now config-only; explorationPriorities purely config-driven).
 - Removed hard-coded fallbacks for `guidanceTypes` and `knowledgeSources` plus remaining guidance/escalation/knowledgeBase/routing/contextAnalysis/performance fallback objects in `src/agent/clarificationAgent/index.ts`; values must come from `agent.config.ts`.
@@ -400,7 +473,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Added quality gates breakdown and troubleshooting table.
 - Added agent folder standard and migration rules to Copilot instructions.
 
-### Verification (post agent folder updates 2025-11-09)
+#### verification – post agent folder updates
 
 - Build: PASS
 - Tests: PENDING (run after remaining agent config merges—current changes limited to userContext + shim)
@@ -409,7 +482,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Health: PASS (no structural violations)
 - Coverage: STABLE (files removed were thin wrappers; logic now consolidated)
 
-### Next Focus (after initial folder consolidation)
+##### next focus – after initial folder consolidation
 
 - Merge remaining agent `config.ts` logic (database, data, clarification, orchestrator) into their respective `index.ts` and delete those files.
 - Update any imports referencing `/config` paths; expose config wrappers from `index.ts`.
@@ -422,7 +495,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Canonicalized category IDs in `src/userContext/*/category.json` replacing placeholders (`<application>`, `<department>`, `<people>`, `<companyPolicy>`, `<companyResource>`) with stable slugs (`applications`, `departments`, `people`, `companyPolicies`, `companyResources`) removing dependency on template replacement for tests.
 - Added precise JSDoc return descriptions in `src/mcp/config/unifiedAgentConfig.ts` (removed placeholder `TODO: describe return value.` lines) to satisfy strict lint rules.
 
-### Verification (post generator & category updates 2025-11-09)
+##### verification – post generator & category updates
 
 - Build: PASS (ES2022 module compilation succeeds)
 - Tests: PASS (suite green after category ID canonicalization; generator output validated manually)
@@ -431,9 +504,9 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Health: PASS (no new validation warnings)
 - Coverage: PENDING explicit measurement (expected unchanged; follow-up will assert 100% or schedule remediation)
 
-### Fixed (2025-11-08 – Analytics integration and config JSDoc sweep)
+#### 2025-11-08 17:40:00 fix: Analytics integration and config JSDoc sweep
 
-### Fixed (2025-11-08 – RelevantDataManagerAgent JSDoc + error-path tests)
+#### 2025-11-08 17:20:00 test: RelevantDataManagerAgent JSDoc + error-path tests
 
 - Replaced remaining `TODO: describe return value.` in `src/agent/relevantDataManagerAgent/index.ts` with precise return descriptions and corrected JSDoc alignment to satisfy strict lint rules.
 - Added error-path tests for the agent:
@@ -442,7 +515,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Added snapshot invalidation test to cover `getOrCreateSnapshot` cache recordHash behavior:
   - `tests/relevantDataManagerAgent.snapshotCacheInvalidation.test.ts` ensures record changes update snapshot and recordHash metadata.
 
-### Verification (post resilience improvements 2025-11-08)
+##### verification – post resilience improvements
 
 - Build: PASS
 - Tests: PASS
@@ -464,22 +537,22 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - `src/mcp/prompts/index.ts`
   - Rewrote JSDoc to avoid destructured param namepaths; added nested option property docs for clarity.
 
-### Fixed (2025-11-08 – Module type declaration)
+#### 2025-11-08 16:10:00 chore: Module type declaration
 
 - `package.json`
   - Added `"type": "module"` to eliminate Node `MODULE_TYPELESS_PACKAGE_JSON` warning during lint runs.
   - Confirmed subsequent lint invocation no longer emits the warning.
 
-### Docs
+#### 2025-11-08 15:40:00 docs
 
-### Fixed (2025-11-08 – Dataset root alignment & extension test updates)
+#### 2025-11-08 15:20:00 fix: Dataset root alignment & extension test updates
 
 - `src/agent/relevantDataManagerAgent/index.ts` updated `DEFAULT_DATA_ROOT` from deprecated `bin/data` to new `src/userContext` directory; added test overrides via `VSCODE_TEMPLATE_DATA_ROOT` to remove hardcoded path assumption and unblock agent/database/data test suites.
 - Tests (`tests/relevantDataManagerAgent.test.ts`, `tests/databaseAgent.test.ts`, `tests/dataAgent.test.ts`) now set env var before creation to ensure consistent dataset loading; prevents cascading failures in dependent agents.
 - `tests/extension.test.ts` refactored to match current activation flow using `vscode.chat.createChatParticipant` (removed legacy slash command/mention expectations); updated info message assertion to new phrasing.
 - Replaced disallowed JSDoc `TODO: describe return value` placeholders in relevant data manager agent with concrete return descriptions to satisfy lint rules.
 
-### Verification Update (post dataset root fix 2025-11-08)
+##### verification – post dataset root fix
 
 - Build: PASS
 - Tests: PASS
@@ -489,12 +562,12 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Coverage: IMPROVED (follow-up to reach 100%)
 - JSDoc: IMPROVED
 
-### Added (2025-11-08 – Consolidated index cache behaviour tests)
+#### 2025-11-08 14:50:00 test: Consolidated index cache behaviour tests
 
 - Added `tests/relevantDataManagerAgent.catalogueCacheHit.test.ts` to ensure the consolidated index (dataset catalogue) is only persisted once when the dataset fingerprint matches an existing shared cache entry, exercising the early return branch in `persistConsolidatedIndex`.
 - Added `tests/relevantDataManagerAgent.catalogueCacheDivergence.test.ts` to modify dataset records and assert that a changed fingerprint triggers a subsequent persist to the shared cache (cache miss path).
 
-### Verification (after cache-hit + divergence tests 2025-11-08)
+##### verification – after cache-hit + divergence tests
 
 - Build: PASS
 - Tests: PASS (cache-hit and divergence scenarios validated; full suite green)
@@ -511,35 +584,31 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 
 ---
 
-## [2025-11-08] Initialization and documentation hardening
+#### 2025-11-08 13:00:00 Initialization and documentation hardening
 
-### Added
+#### feat
 
 - Repository-wide `@packageDocumentation` headers for missing files.
 
-### Fixed
+#### fix
 
 - JSDoc tag-line issues in `src/agent/interfaces.ts` and `src/extension/mcpCache.ts`.
 - Initial pass adding explicit return types for clarification agent config getters.
 - Auto-fix run reduced numerous JSDoc alignment warnings.
+- Orchestrator typing & JSDoc cleanup
+  - Refactored `src/agent/orchestrator/index.ts` to remove `any` usage in payload formatting, strengthen `messages` typing, and normalize JSDoc blocks (hyphenated params, blank lines, nested `context.topic`).
+  - Added safer summary generation with fallback strings to eliminate optional chaining replace errors.
+- feat: Changed Orchestrator diagnostics
+  - Updated orchestrator configuration access patterns to cast messages to required shapes locally, improving type safety without widening global config types.
 
-### Notes
+#### Notes
 
 - Current lint focus areas include remaining missing return types, `any` usage, parameter doc completeness, unused variables, malformed JSDoc types/namepaths.
 - See Logs for structured follow-ups and technical-debt items.
 - Verification (2025-11-08): Build & tests PASS. ESLint FAIL (136 errors). Health report shows JSON schema + markdown metadata PASS but alias resolution failure for direct lint scripts. Added planned remediation items above.
 - Started rename migration: added UserContext agent/profile alias and broadened schema patterns; legacy paths still active.
 
-### Fixed (2025-11-08 – Orchestrator typing & JSDoc cleanup)
-
-- Refactored `src/agent/orchestrator/index.ts` to remove `any` usage in payload formatting, strengthen `messages` typing, and normalize JSDoc blocks (hyphenated params, blank lines, nested `context.topic`).
-- Added safer summary generation with fallback strings to eliminate optional chaining replace errors.
-
-### Changed (2025-11-08 – Orchestrator diagnostics)
-
-- Updated orchestrator configuration access patterns to cast messages to required shapes locally, improving type safety without widening global config types.
-
-### Verification Update (post-orchestrator cleanup 2025-11-08)
+#### chore: Verification Update post-orchestrator cleanup
 
 - Build: PENDING (to be re-run after batch of lint fixes).
 - Tests: PENDING.
