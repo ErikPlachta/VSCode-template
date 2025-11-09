@@ -7,56 +7,25 @@ import {
   type AgentConfigDefinition,
   type OrchestrationConfig,
   type IntentConfig,
+  createDescriptorMap,
+  type ConfigDescriptor,
 } from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
 } from "@internal-types/configValidation";
 import { orchestratorConfig } from "@agent/orchestrator/agent.config";
-
-/** List of supported orchestration intents (from configuration). */
-export type OrchestratorIntent = string;
-
-/**
- * Classification metadata returned before executing a task.
- *
- */
-export interface OrchestratorClassification {
-  intent: OrchestratorIntent;
-  rationale: string;
-  escalationPrompt?: string;
-  matchedSignals?: string[];
-  missingSignals?: string[];
-}
-
-/**
- * Input supplied when asking the orchestrator to fulfil a task.
- *
- */
-export interface OrchestratorInput {
-  topic?: string;
-  question: string;
-  criteria?: Record<string, unknown>;
-}
-
-/**
- * Result of orchestrating a question across the available agents.
- *
- */
-export interface OrchestratorResponse {
-  intent: OrchestratorIntent;
-  agent: string;
-  summary: string;
-  rationale: string;
-  payload: unknown;
-  markdown: string;
-}
+import type {
+  OrchestratorIntent,
+  OrchestratorClassification,
+  OrchestratorInput,
+  OrchestratorResponse,
+} from "@internal-types/agentConfig";
 
 /**
  * Configuration-driven orchestrator that routes questions to appropriate agents
  */
-export class Orchestrator {
-  private config: OrchestratorConfig;
+export class Orchestrator extends BaseAgentConfig {
   private stopWords: Set<string>;
   private intentAgentMap: Record<string, string>;
   private scoringWeights: {
@@ -66,25 +35,78 @@ export class Orchestrator {
   };
   private minimumKeywordLength: number;
   private vaguePhrases: string[];
-  private messages: Required<
-    NonNullable<ReturnType<OrchestratorConfig["getMessages"]>>
-  >;
+  private messages: Required<NonNullable<OrchestrationConfig["messages"]>>;
 
   /**
    * Create an orchestrator using the provided configuration (or defaults).
    *
-   * @param {OrchestratorConfig} [config] - Optional pre-loaded configuration.
+   * @param {AgentConfigDefinition} [config] - Optional pre-loaded configuration.
    */
-  constructor(config?: OrchestratorConfig) {
-    this.config = config || OrchestratorConfig.createDefault();
-    this.stopWords = this.config.getStopWords();
-    this.intentAgentMap = this.config.getIntentAgentMap();
-    this.scoringWeights = this.config.getScoringWeights();
-    this.minimumKeywordLength = this.config.getMinimumKeywordLength();
-    this.vaguePhrases = this.config.getVaguePhrases();
-    // The configuration provides defaults for all message properties; cast to required shape for convenience.
-    this.messages = this.config.getMessages() as Required<
-      NonNullable<ReturnType<OrchestratorConfig["getMessages"]>>
+  constructor(config?: AgentConfigDefinition) {
+    const configToUse = config || orchestratorConfig;
+    const validationResult = validateAgentConfig(configToUse);
+    if (!validationResult.isValid) {
+      const report = generateValidationReport(validationResult);
+      throw new Error(`Invalid orchestrator configuration:\n${report}`);
+    }
+
+    super(configToUse);
+    this._validateRequiredSections();
+
+    // Resolve and cache common config items for performance
+    const stop = this.getConfigItem<string[]>(
+      "orchestration.textProcessing.stopWords"
+    );
+    if (!Array.isArray(stop)) {
+      throw new Error("Orchestrator config missing textProcessing.stopWords");
+    }
+    this.stopWords = new Set(stop);
+
+    const weights = this.getConfigItem<{
+      signalMatch: number;
+      focusMatch: number;
+      promptStarterMatch: number;
+    }>("orchestration.textProcessing.scoringWeights");
+    if (!weights) {
+      throw new Error(
+        "Orchestrator config missing textProcessing.scoringWeights"
+      );
+    }
+    this.scoringWeights = weights;
+
+    const minLen = this.getConfigItem<number>(
+      "orchestration.textProcessing.minimumKeywordLength"
+    );
+    if (typeof minLen !== "number") {
+      throw new Error(
+        "Orchestrator config missing textProcessing.minimumKeywordLength"
+      );
+    }
+    this.minimumKeywordLength = minLen;
+
+    this.vaguePhrases =
+      this.getConfigItem<string[]>("orchestration.escalation.vaguePhrases") ??
+      [];
+
+    const intents = this.getConfigItem<Record<string, IntentConfig>>(
+      "orchestration.intents"
+    );
+    if (!intents || Object.keys(intents).length === 0) {
+      throw new Error("Orchestrator config missing intents block");
+    }
+    this.intentAgentMap = {};
+    for (const [intent, cfg] of Object.entries(intents)) {
+      this.intentAgentMap[intent] = cfg.targetAgent;
+    }
+
+    const msgs = this.getConfigItem<
+      NonNullable<OrchestrationConfig["messages"]>
+    >("orchestration.messages");
+    if (!msgs) {
+      throw new Error("Orchestrator config missing messages block");
+    }
+    this.messages = msgs as Required<
+      NonNullable<OrchestrationConfig["messages"]>
     >;
   }
 
@@ -98,13 +120,16 @@ export class Orchestrator {
     configPath?: string
   ): Promise<Orchestrator> {
     try {
-      const config = await OrchestratorConfig.loadFromFile(configPath);
-      return new Orchestrator(config);
+      if (!configPath) return new Orchestrator(orchestratorConfig);
+      const fs = await import("fs");
+      const configData = fs.readFileSync(configPath, "utf-8");
+      const parsed = JSON.parse(configData) as AgentConfigDefinition;
+      return new Orchestrator(parsed);
     } catch (error) {
       console.warn(
         `Failed to load orchestrator config, using defaults: ${error}`
       );
-      return new Orchestrator();
+      return new Orchestrator(orchestratorConfig);
     }
   }
 
@@ -114,7 +139,7 @@ export class Orchestrator {
    * @returns {Record<string, unknown>} Raw public configuration object.
    */
   public getConfig(): Record<string, unknown> {
-    return this.config.getConfig();
+    return super.getConfig();
   }
 
   /**
@@ -123,7 +148,11 @@ export class Orchestrator {
    * @returns {OrchestratorIntent[]} Array of configured intent identifiers.
    */
   public getSupportedIntents(): OrchestratorIntent[] {
-    return this.config.getIntents();
+    const intents = this.getConfigItem<Record<string, IntentConfig>>(
+      "orchestration.intents"
+    );
+    if (!intents) return [];
+    return Object.keys(intents);
   }
 
   /**
@@ -194,13 +223,17 @@ export class Orchestrator {
       agent: string;
     }> = [];
 
-    for (const intent of this.config.getIntents()) {
-      const intentConfig = this.config.getIntentConfig(intent);
+    const intents =
+      this.getConfigItem<Record<string, IntentConfig>>(
+        "orchestration.intents"
+      ) || {};
+    for (const intent of Object.keys(intents)) {
+      const intentConfig = intents[intent];
       if (!intentConfig) continue;
 
       // Score based on intent signals
       const signalMatches = intentConfig.signals
-        ? intentConfig.signals.filter((signal) => {
+        ? intentConfig.signals.filter((signal: string) => {
             // Check if the signal keyword appears in the question text
             // Use more flexible matching to handle plurals, etc.
             const signalLower = signal.toLowerCase();
@@ -273,8 +306,7 @@ export class Orchestrator {
 
     // Create more contextual summary and payload
     const agent =
-      this.intentAgentMap[classification.intent] ||
-      this.config.getFallbackAgent();
+      this.intentAgentMap[classification.intent] || this._getFallbackAgent();
     const summary = this.generateSummary(classification, input);
     const payload = this.generatePayload(classification, input);
 
@@ -394,7 +426,7 @@ export class Orchestrator {
       // Fallback error handling
       return {
         intent: "clarification",
-        agent: this.config.getFallbackAgent(),
+        agent: this._getFallbackAgent(),
         summary: this.messages.errorOccurred,
         rationale: error instanceof Error ? error.message : "Unknown error",
         payload: { error, input },
@@ -431,7 +463,7 @@ export class Orchestrator {
     }
 
     // Add routing information if helpful
-    if (response.agent !== this.config.getFallbackAgent()) {
+    if (response.agent !== this._getFallbackAgent()) {
       sections.push(`*Routing to: ${response.agent}*`);
     }
 
@@ -468,198 +500,149 @@ export class Orchestrator {
       scoringWeights: this.scoringWeights,
     };
   }
-}
 
-/**
- * Orchestrator-specific configuration class (merged from config.ts)
- */
-export class OrchestratorConfig extends BaseAgentConfig {
-  private orchestrationConfig: OrchestrationConfig;
+  // -------------------------
+  // Validation & helper accessors
+  // -------------------------
 
   /**
-   * Create a config wrapper using default TS config or overrides (for tests)
+   * Validate required configuration paths.
    *
-   * @param {AgentConfigDefinition} [config] - Optional override configuration.
+   * @throws {Error} When any required path missing.
    */
-  constructor(config?: AgentConfigDefinition) {
-    const configToUse = config || orchestratorConfig;
-    const validationResult = validateAgentConfig(configToUse);
-    if (!validationResult.isValid) {
-      const report = generateValidationReport(validationResult);
-      throw new Error(`Invalid orchestrator configuration:\n${report}`);
-    }
-
-    super(configToUse);
-    this.orchestrationConfig = this.config.orchestration || {};
-  }
-
-  /**
-   * List all supported intent names defined in orchestration config.
-   *
-   * @returns {string[]} - Array of intent identifiers.
-   */
-  public getIntents(): string[] {
-    return Object.keys(this.orchestrationConfig.intents || {});
-  }
-
-  /**
-   * Get full intent configuration block by name.
-   *
-   * @param {string} intent - Intent identifier to look up.
-   * @returns {IntentConfig | undefined} - Intent configuration or undefined if missing.
-   */
-  public getIntentConfig(intent: string): IntentConfig | undefined {
-    return this.orchestrationConfig.intents?.[intent];
-  }
-
-  /**
-   * Resolve which agent should handle a given intent.
-   *
-   * @param {string} intent - Intent identifier.
-   * @returns {string | undefined} - Target agent name or undefined when not configured.
-   */
-  public getTargetAgent(intent: string): string | undefined {
-    return this.orchestrationConfig.intents?.[intent]?.targetAgent;
-  }
-
-  /**
-   * Access stop words used for token filtering in keyword extraction.
-   *
-   * @returns {Set<string>} - Set of lowercase stop words.
-   */
-  public getStopWords(): Set<string> {
-    const stopWords = this.orchestrationConfig.textProcessing?.stopWords || [];
-    return new Set(stopWords);
-  }
-
-  /**
-   * Return weighting factors used when computing intent relevance scores.
-   *
-   * @returns {{signalMatch:number, focusMatch:number, promptStarterMatch:number}} - Weight configuration.
-   * @throws {Error} When orchestrator config lacks textProcessing.scoringWeights.
-   */
-  public getScoringWeights(): {
-    signalMatch: number;
-    focusMatch: number;
-    promptStarterMatch: number;
-  } {
-    const weights = this.orchestrationConfig.textProcessing?.scoringWeights;
-    if (!weights) {
+  private _validateRequiredSections(): void {
+    const required: readonly string[] = [
+      "orchestration.intents",
+      "orchestration.textProcessing.stopWords",
+      "orchestration.textProcessing.minimumKeywordLength",
+      "orchestration.textProcessing.scoringWeights.signalMatch",
+      "orchestration.textProcessing.scoringWeights.focusMatch",
+      "orchestration.textProcessing.scoringWeights.promptStarterMatch",
+      "orchestration.escalation.fallbackAgent",
+      "orchestration.messages.noIntentDetected",
+      "orchestration.messages.needMoreContext",
+      "orchestration.messages.questionTooVague",
+      "orchestration.messages.missingSignalsHint",
+      "orchestration.messages.errorOccurred",
+      "orchestration.messages.summaries.defaultTopic",
+      "orchestration.messages.guidance.clarificationPrompt",
+    ];
+    const { passed, missing } = this.confirmConfigItems(required);
+    if (!passed) {
       throw new Error(
-        "Orchestrator config missing textProcessing.scoringWeights"
+        `Orchestrator configuration missing required items: ${missing.join(
+          ", "
+        )}`
       );
     }
-    return weights;
   }
 
   /**
-   * Minimum keyword length threshold for token consideration.
+   * Get configured fallback agent.
    *
-   * @returns {number} - Minimum length; defaults to 3.
-   * @throws {Error} When orchestrator config lacks textProcessing.minimumKeywordLength.
+   * @returns {string} Fallback agent id.
+   * @throws {Error} When not configured.
    */
-  public getMinimumKeywordLength(): number {
-    const len = this.orchestrationConfig.textProcessing?.minimumKeywordLength;
-    if (typeof len !== "number") {
-      throw new Error(
-        "Orchestrator config missing textProcessing.minimumKeywordLength"
-      );
+  private _getFallbackAgent(): string {
+    const agent = this.getConfigItem<string>(
+      "orchestration.escalation.fallbackAgent"
+    );
+    if (!agent) {
+      throw new Error("Orchestrator config missing escalation.fallbackAgent");
     }
-    return len;
+    return agent;
   }
 
   /**
-   * Full escalation configuration controlling vague query handling and fallbacks.
+   * Descriptor map for dynamic configuration access.
    *
-   * @returns {NonNullable<OrchestrationConfig["escalation"]>} - Escalation settings object.
-   * @throws {Error} When orchestrator config lacks an escalation block.
+   * @returns {Record<string, {name:string; path:string; type:string; visibility:"public"|"private"; verifyPaths?: string[]}>} Descriptor definitions.
    */
-  public getEscalationConfig(): NonNullable<OrchestrationConfig["escalation"]> {
-    const esc = this.orchestrationConfig.escalation;
-    if (!esc) {
-      throw new Error("Orchestrator config missing escalation block");
-    }
-    return esc as NonNullable<OrchestrationConfig["escalation"]>;
+  public getConfigDescriptors(): Record<string, ConfigDescriptor> {
+    return createDescriptorMap([
+      [
+        "vaguePhrases",
+        {
+          name: "Vague Phrases",
+          path: "orchestration.escalation.vaguePhrases",
+          type: "string[]",
+          visibility: "public",
+          verifyPaths: ["orchestration.escalation.vaguePhrases"],
+        },
+      ],
+      [
+        "fallbackAgent",
+        {
+          name: "Fallback Agent",
+          path: "orchestration.escalation.fallbackAgent",
+          type: "string",
+          visibility: "public",
+          verifyPaths: ["orchestration.escalation.fallbackAgent"],
+        },
+      ],
+      [
+        "stopWords",
+        {
+          name: "Stop Words",
+          path: "orchestration.textProcessing.stopWords",
+          type: "string[]",
+          visibility: "public",
+          verifyPaths: ["orchestration.textProcessing.stopWords"],
+        },
+      ],
+      [
+        "minimumKeywordLength",
+        {
+          name: "Minimum Keyword Length",
+          path: "orchestration.textProcessing.minimumKeywordLength",
+          type: "number",
+          visibility: "public",
+          verifyPaths: ["orchestration.textProcessing.minimumKeywordLength"],
+        },
+      ],
+      [
+        "scoringWeights",
+        {
+          name: "Scoring Weights",
+          path: "orchestration.textProcessing.scoringWeights",
+          type: "{ signalMatch:number; focusMatch:number; promptStarterMatch:number }",
+          visibility: "private",
+          verifyPaths: [
+            "orchestration.textProcessing.scoringWeights.signalMatch",
+            "orchestration.textProcessing.scoringWeights.focusMatch",
+            "orchestration.textProcessing.scoringWeights.promptStarterMatch",
+          ],
+        },
+      ],
+      [
+        "intents",
+        {
+          name: "Intents",
+          path: "orchestration.intents",
+          type: "Record<string, IntentConfig>",
+          visibility: "private",
+          verifyPaths: ["orchestration.intents"],
+        },
+      ],
+      [
+        "messages",
+        {
+          name: "Messages",
+          path: "orchestration.messages",
+          type: "OrchestrationConfig['messages']",
+          visibility: "public",
+          verifyPaths: ["orchestration.messages"],
+        },
+      ],
+    ]);
   }
 
   /**
-   * Build quick lookup table of intent to target agent.
+   * Create default orchestrator using embedded TS config.
    *
-   * @returns {Record<string,string>} - Mapping of intent names to agent identifiers.
+   * @returns {Orchestrator} Orchestrator instance.
    */
-  public getIntentAgentMap(): Record<string, string> {
-    const intents = this.orchestrationConfig.intents || {};
-    const mapping: Record<string, string> = {};
-    for (const [intent, config] of Object.entries(intents)) {
-      mapping[intent] = (config as IntentConfig).targetAgent;
-    }
-    return mapping;
-  }
-
-  /**
-   * Phrases considered too vague and that trigger clarification flow.
-   *
-   * @returns {string[]} - List of vague phrase patterns.
-   */
-  public getVaguePhrases(): string[] {
-    return this.orchestrationConfig.escalation?.vaguePhrases ?? [];
-  }
-
-  /**
-   * Determine which agent handles requests after escalation exhaustion.
-   *
-   * @returns {string} - Fallback agent identifier (default clarification-agent).
-   */
-  public getFallbackAgent(): string {
-    return this.orchestrationConfig.escalation?.fallbackAgent ?? "";
-  }
-
-  /**
-   * User-facing message templates consumed during orchestration.
-   *
-   * @returns {NonNullable<OrchestrationConfig["messages"]>} - Message configuration object.
-   * @throws {Error} When orchestrator config lacks messages definition.
-   */
-  public getMessages(): NonNullable<OrchestrationConfig["messages"]> {
-    const messages = this.orchestrationConfig.messages;
-    if (!messages) {
-      throw new Error("Orchestrator config missing messages block");
-    }
-    return messages as NonNullable<OrchestrationConfig["messages"]>;
-  }
-
-  /**
-   * Load configuration from a JSON file path; falls back to internal default.
-   *
-   * @param {string} [configPath] - Path to JSON config file.
-   * @returns {Promise<OrchestratorConfig>} - Loaded orchestrator config instance.
-   */
-  public static async loadFromFile(
-    configPath?: string
-  ): Promise<OrchestratorConfig> {
-    if (!configPath) {
-      return new OrchestratorConfig(orchestratorConfig);
-    }
-    try {
-      const fs = await import("fs");
-      const configData = fs.readFileSync(configPath, "utf-8");
-      const config = JSON.parse(configData);
-      return new OrchestratorConfig(config);
-    } catch (error) {
-      console.warn(
-        `Failed to load config from ${configPath}, using default:`,
-        error
-      );
-      return new OrchestratorConfig(orchestratorConfig);
-    }
-  }
-
-  /**
-   * Construct a default orchestrator configuration instance.
-   *
-   * @returns {OrchestratorConfig} - Default configuration wrapper.
-   */
-  public static createDefault(): OrchestratorConfig {
-    return new OrchestratorConfig(orchestratorConfig);
+  public static createDefault(): Orchestrator {
+    return new Orchestrator(orchestratorConfig);
   }
 }

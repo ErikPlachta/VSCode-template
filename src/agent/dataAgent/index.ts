@@ -13,125 +13,21 @@ import {
   BaseAgentConfig,
   type AgentConfigDefinition,
   type DataConfig,
+  type CategoryId,
+  type CategoryRecord,
+  type RelationshipDescription,
+  type AnalysisInput,
+  type DataInsight,
+  type ExplorationPlan,
+  type ExplorationStep,
+  type TopicSearchResult,
+  type CrossCategoryConnection,
 } from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
 } from "@internal-types/configValidation";
 import { dataAgentConfig } from "@agent/dataAgent/agent.config";
-
-// Define core data types without importing from other agents
-/**
- *
- */
-export type CategoryId = string;
-
-/**
- * CategoryRecord interface.
- *
- */
-export interface CategoryRecord {
-  id: string;
-  [key: string]: unknown;
-}
-
-/**
- * CategorySchema interface.
- *
- */
-export interface CategorySchema {
-  name: string;
-  schema: unknown;
-}
-
-/**
- * RelationshipDescription interface.
- *
- */
-export interface RelationshipDescription {
-  name: string;
-  description: string;
-  targetCategory: CategoryId;
-  viaField: string;
-}
-
-/**
- * AnalysisInput interface.
- *
- */
-export interface AnalysisInput {
-  categoryId: CategoryId;
-  records: CategoryRecord[];
-  schemas?: CategorySchema[];
-  relationships?: RelationshipDescription[];
-}
-
-/**
- * DataInsight interface.
- *
- */
-export interface DataInsight {
-  type:
-    | "pattern"
-    | "anomaly"
-    | "correlation"
-    | "trend"
-    | "opportunity"
-    | "risk";
-  description: string;
-  confidence: number;
-  category: CategoryId;
-  affectedRecords?: string[];
-}
-
-/**
- * ExplorationPlan interface.
- *
- */
-export interface ExplorationPlan {
-  topic: string;
-  question: string;
-  steps: ExplorationStep[];
-  recommendedQueries: string[];
-  supportingResources: Array<{
-    categoryId: CategoryId;
-    ids: string[];
-  }>;
-}
-
-/**
- * ExplorationStep interface.
- *
- */
-export interface ExplorationStep {
-  title: string;
-  description: string;
-  recommendedCategory: CategoryId;
-  hints: string[];
-}
-
-/**
- * TopicSearchResult interface.
- *
- */
-export interface TopicSearchResult {
-  categoryId: CategoryId;
-  recordId: string;
-  displayName: string;
-  matchingFields: string[];
-}
-
-/**
- * CrossCategoryConnection interface.
- *
- */
-export interface CrossCategoryConnection {
-  sourceCategory: CategoryId;
-  targetCategory: CategoryId;
-  connectionType: string;
-  strength: number;
-  description: string;
-}
 
 /**
  * Agent that analyzes data and generates insights.

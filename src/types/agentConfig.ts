@@ -480,21 +480,126 @@ export interface IndividualAgentConfig {
  */
 export abstract class BaseAgentConfig {
   protected config: AgentConfigDefinition;
+  // Runtime, non-persistent overrides. Local overrides take precedence over global when both present.
+  private overridesLocal: Record<string, unknown> = {};
+  private overridesGlobal: Record<string, unknown> = {};
 
   /**
-   * constructor function.
+   * Initialize the base agent configuration wrapper.
    *
-   * @param {AgentConfigDefinition} config - config parameter.
-   * @returns {unknown} - TODO: describe return value.
+   * @param {AgentConfigDefinition} config - Fully-typed configuration object for the agent.
    */
   constructor(config: AgentConfigDefinition) {
     this.config = config;
   }
 
   /**
-   * Get public-facing configuration (user and some application details)
+   * Retrieve a configuration value by a dot-delimited path, with runtime overrides applied.
    *
-   * @returns {Partial<AgentConfigDefinition>} - TODO: describe return value.
+   * The path is resolved relative to the root AgentConfigDefinition (e.g.,
+   * "orchestration.escalation.vaguePhrases" or "database.performance.caching.enabledByDefault").
+   * Local overrides have higher precedence than global overrides, both override the base config.
+   *
+   * @param {string} path - Dot-delimited key path within the configuration object.
+   * @returns {unknown} Resolved configuration value, or undefined when not found.
+   */
+  public getConfigItem<T = unknown>(path: string): T | undefined {
+    const fromLocal = this.deepGet<T>(this.overridesLocal, path);
+    if (fromLocal !== undefined) return fromLocal;
+    const fromGlobal = this.deepGet<T>(this.overridesGlobal, path);
+    if (fromGlobal !== undefined) return fromGlobal;
+    return this.deepGet<T>(
+      this.config as unknown as Record<string, unknown>,
+      path
+    );
+  }
+
+  /**
+   * Set a runtime override for a configuration value.
+   *
+   * This does not persist to disk; it is intended for live adjustments (e.g., UI or chat-driven changes).
+   *
+   * @param {string} path - Dot-delimited key path to set.
+   * @param {unknown} value - New value for the configuration item.
+   * @param {"local"|"global"} [env="local"] - Scope for the override; local has higher precedence than global.
+   * @returns {void}
+   */
+  public setConfigItem(
+    path: string,
+    value: unknown,
+    env: "local" | "global" = "local"
+  ): void {
+    const target = env === "local" ? this.overridesLocal : this.overridesGlobal;
+    this.deepSet(target, path, value);
+  }
+
+  /**
+   * Verify a list of required configuration paths are present after overrides are applied.
+   *
+   * @param {readonly string[]} requiredPaths - Collection of dot-delimited paths that must exist.
+   * @returns {{ missing: string[]; passed: boolean }} Result indicating which required items are missing.
+   */
+  public confirmConfigItems(requiredPaths: readonly string[]): {
+    missing: string[];
+    passed: boolean;
+  } {
+    const missing: string[] = [];
+    for (const p of requiredPaths) {
+      const v = this.getConfigItem(p);
+      if (v === undefined || v === null) missing.push(p);
+    }
+    return { missing, passed: missing.length === 0 };
+  }
+
+  /**
+   * Retrieve a configuration value using a {@link ConfigDescriptor} reference.
+   *
+   * @param {ConfigDescriptor} descriptor - Descriptor describing the config item.
+   * @returns {unknown} Resolved configuration value or undefined when not found.
+   */
+  public getByDescriptor<T = unknown>(
+    descriptor: ConfigDescriptor
+  ): T | undefined {
+    return this.getConfigItem<T>(descriptor.path);
+  }
+
+  /**
+   * Set a runtime override for a configuration item given its {@link ConfigDescriptor}.
+   *
+   * @param {ConfigDescriptor} descriptor - Descriptor describing the config item.
+   * @param {unknown} value - New value to assign.
+   * @param {"local"|"global"} [env="local"] - Override environment scope.
+   */
+  public setByDescriptor(
+    descriptor: ConfigDescriptor,
+    value: unknown,
+    env: "local" | "global" = "local"
+  ): void {
+    this.setConfigItem(descriptor.path, value, env);
+  }
+
+  /**
+   * Verify a descriptor's declared verifyPaths (or its own path if none provided) exist.
+   *
+   * @param {ConfigDescriptor} descriptor - Descriptor whose paths will be validated.
+   * @returns {{ passed: boolean; missing: string[] }} Verification outcome.
+   */
+  public verifyDescriptor(descriptor: ConfigDescriptor): {
+    passed: boolean;
+    missing: string[];
+  } {
+    const paths =
+      descriptor.verifyPaths && descriptor.verifyPaths.length > 0
+        ? descriptor.verifyPaths
+        : [descriptor.path];
+    const { missing, passed } = this.confirmConfigItems(paths);
+    return { missing, passed };
+  }
+
+  /**
+   * Get a sanitized, public-facing view of the configuration suitable for diagnostics and UI.
+   *
+   * @returns {Partial<AgentConfigDefinition>} Minimal public configuration snapshot.
    */
   public getConfig(): Partial<AgentConfigDefinition> {
     return {
@@ -511,47 +616,282 @@ export abstract class BaseAgentConfig {
   }
 
   /**
-   * Get complete configuration (private method for internal use)
+   * Get complete configuration (private method for internal use).
    *
-   * @returns {AgentConfigDefinition} - TODO: describe return value.
+   * @returns {AgentConfigDefinition} Full underlying configuration object.
    */
   protected _getConfig(): AgentConfigDefinition {
     return this.config;
   }
 
   /**
-   * Get execution configuration
+   * Get execution configuration.
    *
-   * @returns {ExecutionConfig | undefined} - TODO: describe return value.
+   * @returns {ExecutionConfig | undefined} Execution settings when defined.
    */
   public getExecutionConfig(): ExecutionConfig | undefined {
     return this.config.execution;
   }
 
   /**
-   * Get user-facing configuration
+   * Get user-facing configuration.
    *
-   * @returns {UserFacingConfig | undefined} - TODO: describe return value.
+   * @returns {UserFacingConfig | undefined} User documentation and examples when defined.
    */
   public getUserFacingConfig(): UserFacingConfig | undefined {
     return this.config.userFacing;
   }
 
   /**
-   * Get application-facing configuration
+   * Get application-facing configuration.
    *
-   * @returns {ApplicationFacingConfig | undefined} - TODO: describe return value.
+   * @returns {ApplicationFacingConfig | undefined} Operational details for internal use.
    */
   public getApplicationFacingConfig(): ApplicationFacingConfig | undefined {
     return this.config.applicationFacing;
   }
 
   /**
-   * Get configuration schema ID
+   * Get configuration schema ID.
    *
-   * @returns {string} - TODO: describe return value.
+   * @returns {string} Canonical configuration identifier.
    */
   public getConfigId(): string {
     return this.config.$configId;
   }
+
+  // -------------------------
+  // Internal helpers
+  // -------------------------
+
+  /**
+   * Safely retrieve a nested value by path from the given object.
+   *
+   * @param {Record<string, unknown>} obj - Source object.
+   * @param {string} path - Dot-delimited path.
+   * @returns {unknown} Value at the given path, or undefined if not present.
+   */
+  private deepGet<T = unknown>(
+    obj: Record<string, unknown>,
+    path: string
+  ): T | undefined {
+    const parts = path.split(".").filter(Boolean);
+    let cur: unknown = obj;
+    for (const key of parts) {
+      if (typeof cur !== "object" || cur === null) return undefined;
+      const next = (cur as Record<string, unknown>)[key];
+      if (next === undefined) return undefined;
+      cur = next;
+    }
+    return cur as T;
+  }
+
+  /**
+   * Safely assign a nested value by path on the given object, creating containers as needed.
+   *
+   * @param {Record<string, unknown>} obj - Target object to mutate.
+   * @param {string} path - Dot-delimited path.
+   * @param {unknown} value - Value to set.
+   * @returns {void}
+   */
+  private deepSet(
+    obj: Record<string, unknown>,
+    path: string,
+    value: unknown
+  ): void {
+    const parts = path.split(".").filter(Boolean);
+    let cur: Record<string, unknown> = obj;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const key = parts[i]!;
+      if (typeof cur[key] !== "object" || cur[key] === null) {
+        cur[key] = {} as unknown as Record<string, unknown>;
+      }
+      cur = cur[key] as Record<string, unknown>;
+    }
+    cur[parts[parts.length - 1]!] = value as unknown;
+  }
+}
+
+// -------------------------
+// Runtime agent types (centralized)
+// -------------------------
+
+/** Identifier for a generic category or data source. */
+export type CategoryId = string;
+
+/** Generic record model allowing arbitrary fields. */
+export interface CategoryRecord {
+  id: string;
+  [key: string]: unknown;
+}
+
+// Orchestrator runtime types
+
+/** List of supported orchestration intents (from configuration). */
+export type OrchestratorIntent = string;
+
+/** Classification metadata returned before executing a task. */
+export interface OrchestratorClassification {
+  intent: OrchestratorIntent;
+  rationale: string;
+  escalationPrompt?: string;
+  matchedSignals?: string[];
+  missingSignals?: string[];
+}
+
+/** Input supplied when asking the orchestrator to fulfil a task. */
+export interface OrchestratorInput {
+  topic?: string;
+  question: string;
+  criteria?: Record<string, unknown>;
+}
+
+/** Result of orchestrating a question across the available agents. */
+export interface OrchestratorResponse {
+  intent: OrchestratorIntent;
+  agent: string;
+  summary: string;
+  rationale: string;
+  payload: unknown;
+  markdown: string;
+}
+
+// Clarification agent runtime types
+import type { KnowledgeHit } from "@mcp/knowledgeBase";
+
+/** Input parameters for the clarification agent. */
+export interface ClarificationAgentInput {
+  question: string;
+  topic?: string;
+  missingSignals?: string[];
+  candidateAgents: string[];
+}
+
+/** Response from the clarification agent containing guidance and context. */
+export interface ClarificationResponse {
+  prompt: string;
+  knowledgeSnippets: KnowledgeHit[];
+}
+
+// Data agent runtime types
+
+/** Schema definition for a category. */
+export interface CategorySchema {
+  name: string;
+  schema: unknown;
+}
+
+/** Description of a relationship between two categories. */
+export interface RelationshipDescription {
+  name: string;
+  description: string;
+  targetCategory: CategoryId;
+  viaField: string;
+}
+
+/** Input payload used for data analysis operations. */
+export interface AnalysisInput {
+  categoryId: CategoryId;
+  records: CategoryRecord[];
+  schemas?: CategorySchema[];
+  relationships?: RelationshipDescription[];
+}
+
+/** Insight produced by analysis over data records. */
+export interface DataInsight {
+  type:
+    | "pattern"
+    | "anomaly"
+    | "correlation"
+    | "trend"
+    | "opportunity"
+    | "risk";
+  description: string;
+  confidence: number;
+  category: CategoryId;
+  affectedRecords?: string[];
+}
+
+/** Single step within a generated exploration plan. */
+export interface ExplorationStep {
+  title: string;
+  description: string;
+  recommendedCategory: CategoryId;
+  hints: string[];
+}
+
+/** Structured plan for guiding a data exploration workflow. */
+export interface ExplorationPlan {
+  topic: string;
+  question: string;
+  steps: ExplorationStep[];
+  recommendedQueries: string[];
+  supportingResources: Array<{ categoryId: CategoryId; ids: string[] }>;
+}
+
+/** Match result from searching across topic records. */
+export interface TopicSearchResult {
+  categoryId: CategoryId;
+  recordId: string;
+  displayName: string;
+  matchingFields: string[];
+}
+
+/** Aggregated description of a connection between categories. */
+export interface CrossCategoryConnection {
+  sourceCategory: CategoryId;
+  targetCategory: CategoryId;
+  connectionType: string;
+  strength: number;
+  description: string;
+}
+
+// Database agent runtime types
+
+/** Definition for a data source the database agent can query. */
+export interface DataSource {
+  id: CategoryId;
+  name: string;
+  records: CategoryRecord[];
+  schema?: unknown;
+  fieldAliases?: Record<string, string>;
+}
+
+/** Metadata for the result of executing a query. */
+export interface QueryResult {
+  categoryId: CategoryId;
+  records: CategoryRecord[];
+  totalCount: number;
+  cached: boolean;
+}
+
+/** Optional knobs controlling query execution behavior. */
+export interface QueryOptions {
+  useCache?: boolean;
+  cacheKeyPrefix?: string;
+}
+
+// -------------------------
+// Descriptor helper (for agent config UIs)
+// -------------------------
+
+/** Descriptor describing a configurable item available on an agent. */
+export interface ConfigDescriptor {
+  name: string;
+  path: string;
+  type: string;
+  visibility: "public" | "private";
+  verifyPaths?: string[];
+}
+
+/**
+ * Create a descriptor map from a list of descriptor entries.
+ *
+ * @param {Array<[string, ConfigDescriptor]>} entries - Tuples of key and descriptor metadata.
+ * @returns {Record<string, ConfigDescriptor>} Normalized descriptor map.
+ */
+export function createDescriptorMap(
+  entries: Array<[string, ConfigDescriptor]>
+): Record<string, ConfigDescriptor> {
+  return Object.fromEntries(entries);
 }

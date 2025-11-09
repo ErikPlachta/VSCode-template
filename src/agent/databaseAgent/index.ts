@@ -19,6 +19,10 @@ import {
   BaseAgentConfig,
   type AgentConfigDefinition,
   type DatabaseConfig,
+  type CategoryId,
+  type CategoryRecord,
+  type DataSource,
+  type QueryOptions,
 } from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
@@ -27,50 +31,6 @@ import {
 import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";
 
 // Generic types that work with any data structure
-/** Identifier for a generic category or data source. */
-export type CategoryId = string;
-
-/**
- * Generic record model allowing arbitrary fields.
- *
- */
-export interface CategoryRecord {
-  id: string;
-  [key: string]: unknown;
-}
-
-/**
- * Definition for a data source the agent can query.
- *
- */
-export interface DataSource {
-  id: CategoryId;
-  name: string;
-  records: CategoryRecord[];
-  schema?: unknown;
-  /** Optional field mapping for this data source */
-  fieldAliases?: Record<string, string>;
-}
-
-/**
- * Result metadata returned after executing a query.
- *
- */
-export interface QueryResult {
-  categoryId: CategoryId;
-  records: CategoryRecord[];
-  totalCount: number;
-  cached: boolean;
-}
-
-/**
- * Optional knobs for query execution behavior.
- *
- */
-export interface QueryOptions {
-  useCache?: boolean;
-  cacheKeyPrefix?: string;
-}
 
 /**
  * Generic database agent that can query any structured data without hard-coded assumptions.

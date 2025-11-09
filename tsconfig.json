@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es2021",
     "module": "ES2022",
-    "moduleResolution": "node",
     "lib": ["es2021"],
     "strict": true,
     "esModuleInterop": true,
@@ -10,17 +9,16 @@
     "rootDir": ".",
     "skipLibCheck": true,
     "types": ["node", "vscode", "jest", "eslint"],
-    "baseUrl": ".",
     "paths": {
-      "@agent/*": ["src/agent/*"],
-      "@extension/*": ["src/extension/*"],
-      "@mcp/*": ["src/mcp/*"],
-      "@server/*": ["src/server/*"],
-      "@shared/*": ["src/shared/*"],
-      "@config/*": ["src/config/*"],
-      "@tools/*": ["src/tools/*"],
-      "@internal-types/*": ["src/types/*"],
-      "@bin/*": ["bin/*"]
+      "@agent/*": ["./src/agent/*"],
+      "@extension/*": ["./src/extension/*"],
+      "@mcp/*": ["./src/mcp/*"],
+      "@server/*": ["./src/server/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@config/*": ["./src/config/*"],
+      "@tools/*": ["./src/tools/*"],
+      "@internal-types/*": ["./src/types/*"],
+      "@bin/*": ["./bin/*"]
     }
   },
   "include": [
@@ -33,6 +31,7 @@
     "tests/mcpShared.test.ts",
     "tests/mcpSync.test.ts",
     "tests/orchestrator.test.ts",
+    "tests/orchestrator.descriptors.test.ts",
     "tests/relevantDataManagerAgent.test.ts",
     "tests/schemaPrompt.test.ts",
     "tests/server.test.ts"

@@ -23,6 +23,69 @@ Guidelines:
 
 ## [Unreleased]
 
+### Added (2025-11-09 – Centralized runtime agent types & descriptor helper)
+
+- Consolidated all runtime agent types (orchestrator, clarification, data, database) into `src/types/agentConfig.ts` exporting: `OrchestratorIntent`, `OrchestratorClassification`, `OrchestratorInput`, `OrchestratorResponse`, `ClarificationAgentInput`, `ClarificationResponse`, `CategoryRecord`, `AnalysisInput`, `DataInsight`, `ExplorationPlan`, `ExplorationStep`, `TopicSearchResult`, `CrossCategoryConnection`, `DataSource`, `QueryResult`, `QueryOptions`.
+- Introduced shared `ConfigDescriptor` interface and `createDescriptorMap()` helper in `agentConfig.ts` for unified descriptor creation across agents.
+- Refactored orchestrator `getConfigDescriptors()` in `src/agent/orchestrator/index.ts` to use `createDescriptorMap()`.
+
+### Changed (2025-11-09 – Removed local runtime type duplicates)
+
+- Deleted per-agent inline runtime type/interface declarations from:
+  - `src/agent/orchestrator/index.ts`
+  - `src/agent/clarificationAgent/index.ts`
+  - `src/agent/dataAgent/index.ts`
+  - `src/agent/databaseAgent/index.ts`
+- All agents now import shared runtime types from `@internal-types/agentConfig`, reducing duplication and easing future migrations.
+
+### Verification (post type centralization & descriptor helper 2025-11-09)
+
+- Build: PASS (compile succeeded after refactor)
+- Tests: PASS (full Jest suite green; no runtime regressions)
+- Lint: PASS (added JSDoc for new interfaces; removed unused imports)
+- Docs: PENDING (next run will reflect consolidated types; no breaking API changes)
+- Health: PASS (no legacy config artifacts; centralized types accepted)
+- Coverage: STABLE (type relocation does not affect executable code paths)
+
+### Next Focus (after centralization batch)
+
+- Added descriptor-based access helpers (`getByDescriptor`, `setByDescriptor`, `verifyDescriptor`) to `BaseAgentConfig` in `src/types/agentConfig.ts` and descriptor verification tests `tests/orchestrator.descriptors.test.ts`.
+- Verification update (descriptor tests): Build PASS, Tests PASS, Lint PASS, Health PASS, Coverage STABLE.
+
+- Add descriptor verification tests (e.g. ensure required orchestrator paths exist) using `confirmConfigItems`.
+- Collapse Clarification, Data, Database agents to extend `BaseAgentConfig` directly (remove bespoke config wrapper classes) and adopt descriptor maps.
+- Expand descriptor helper usage to remaining agents for consistent UI metadata.
+- Re-run docs generation to ensure no stale per-agent type pages remain; update any cross-references.
+- After collapses: update Verification with coverage % and begin planning removal of silent relevant data manager shim.
+
+### Added (2025-11-09 – Orchestrator config helper validation)
+
+- Introduced strict path validation for orchestrator configuration via `validateRequiredSections()` in `src/agent/orchestrator/index.ts` using new `BaseAgentConfig.confirmConfigItems` helper.
+
+### Changed (2025-11-09 – Orchestrator refactor to generic helpers)
+
+- Eliminated per-agent wrapper class for orchestrator: merged configuration access directly into `Orchestrator` by extending `BaseAgentConfig` and removing the bespoke `OrchestratorConfig` class.
+- Refactored configuration access to use `getConfigItem` for `stopWords`, `scoringWeights`, `minimumKeywordLength`, `intents`, `messages`, and `escalation` paths, removing direct object traversal and silent fallbacks.
+- Added explicit `@throws` JSDoc annotations and alignment fixes for methods that can fail (e.g., fallback agent lookup).
+- Removed implicit defaults for `fallbackAgent` and maintained optional handling for `vaguePhrases`; required sections are strictly validated at construction using `confirmConfigItems`.
+- Introduced `getConfigDescriptors()` in orchestrator returning path/type/visibility to support UI-driven configuration without inlining per-item getters.
+- JSDoc cleanup in `BaseAgentConfig` (removed placeholder return descriptions) in `src/types/agentConfig.ts`.
+
+### Verification (post orchestrator helper refactor 2025-11-09)
+
+- Build: PASS (tsc)
+- Tests: PASS (jest suite green; orchestrator tests unchanged still pass)
+- Lint: PASS (added @throws + alignment corrections; no placeholder JSDoc)
+- Docs: PASS (no public API surface change beyond improved comments)
+- Health: PASS (no legacy config artifacts; governance checks green)
+- Coverage: STABLE (orchestrator paths continue covered; getters now throw deterministically)
+
+### Next Focus (after orchestrator helper adoption)
+
+- Apply helper-based strict path validation to Clarification, Data, and Database agent configs (replace bespoke traversal with `getConfigItem` + `confirmConfigItems`).
+- Introduce shared descriptor maps per agent to enumerate required and optional config paths for future dynamic settings UI.
+- Remove silent shim for `relevantDataManagerAgent` in planned removal phase (document in Planned section before deletion).
+
 ### Verification (post defaults cleanup 2025-11-09)
 
 - Build: PASS

@@ -3,7 +3,7 @@
  */
 
 import { getAgentMetadata } from "@mcp/config/agentManifest";
-import { KnowledgeBase, KnowledgeHit } from "@mcp/knowledgeBase";
+import { KnowledgeBase } from "@mcp/knowledgeBase";
 import { renderClarificationPrompt } from "@mcp/prompts";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { ClarificationAgentProfile } from "@mcp/config/agentProfiles";
@@ -11,38 +11,14 @@ import {
   BaseAgentConfig,
   type AgentConfigDefinition,
   type ClarificationConfig,
+  type ClarificationAgentInput,
+  type ClarificationResponse,
 } from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
   generateValidationReport,
 } from "@internal-types/configValidation";
 import { clarificationAgentConfig } from "@agent/clarificationAgent/agent.config";
-
-/**
- * Input parameters for the clarification agent.
- *
- */
-export interface ClarificationAgentInput {
-  /** The user's question that needs clarification. */
-  question: string;
-  /** Optional topic context for the question. */
-  topic?: string;
-  /** Signals that were missing from the original query. */
-  missingSignals?: string[];
-  /** List of candidate agents that could handle the query. */
-  candidateAgents: string[];
-}
-
-/**
- * Response from the clarification agent containing guidance and context.
- *
- */
-export interface ClarificationResponse {
-  /** The clarification prompt to guide the user. */
-  prompt: string;
-  /** Relevant knowledge snippets to provide context. */
-  knowledgeSnippets: KnowledgeHit[];
-}
 
 export { ClarificationAgentProfile };
 
