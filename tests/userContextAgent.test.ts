@@ -41,7 +41,7 @@ describe("UserContextAgent", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "relevant-data-manager-test-")
     );
-    const manager = new UserContextAgent(Promise.resolve(cacheDir));
+    const manager = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     return { manager, cacheDir };
   }
 

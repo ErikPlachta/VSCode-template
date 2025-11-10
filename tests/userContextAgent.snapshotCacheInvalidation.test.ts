@@ -81,7 +81,7 @@ describe("UserContextAgent snapshot cache invalidation", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-snap-cache-")
     );
-    const agent = new UserContextAgent(Promise.resolve(cacheDir));
+    const agent = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     const snap1 = await agent.getOrCreateSnapshot("alpha");
     expect(snap1.recordCount).toBe(1);
 
@@ -98,7 +98,7 @@ describe("UserContextAgent snapshot cache invalidation", () => {
     ]);
 
     // Re-instantiate agent to force re-scan of mutated dataset
-    const refreshedAgent = new UserContextAgent(Promise.resolve(cacheDir));
+    const refreshedAgent = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     const snap2 = await refreshedAgent.getOrCreateSnapshot("alpha");
     expect(snap2.recordCount).toBe(2);
     const entry2 = await readSharedCacheEntry(cacheDir, key);

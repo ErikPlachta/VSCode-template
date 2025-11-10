@@ -38,7 +38,7 @@ describe("DatabaseAgent", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "database-agent-test-")
     );
-    const manager = new UserContextAgent(Promise.resolve(cacheDir));
+    const manager = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     // Adapt to new database agent signature: provide data sources explicitly
     const dataSources: DataSource[] = manager
       .listCategories()

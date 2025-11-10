@@ -39,7 +39,7 @@ describe("DataAgent", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "data-agent-test-")
     );
-    const manager = new UserContextAgent(Promise.resolve(cacheDir));
+    const manager = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     const dataSources: DataSource[] = manager
       .listCategories()
       .map((summary: any) => {

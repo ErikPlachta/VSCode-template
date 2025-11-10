@@ -82,7 +82,7 @@ describe("UserContextAgent relationship coverage assertion", () => {
   it("throws when relationship coverage is incomplete", async () => {
     const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cache-2-"));
     await expect(
-      (async () => new UserContextAgent(Promise.resolve(cacheDir)))()
+      (async () => new UserContextAgent(undefined, Promise.resolve(cacheDir)))()
     ).rejects.toThrow(/Relationship coverage for field 'missingField'/i);
   });
 });

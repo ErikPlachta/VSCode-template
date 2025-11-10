@@ -64,7 +64,7 @@ describe("UserContextAgent relationship validation failures", () => {
   async function createManager(): Promise<UserContextAgent> {
     process.env.VSCODE_TEMPLATE_DATA_ROOT = dataRoot;
     const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cache-"));
-    return new UserContextAgent(Promise.resolve(cacheDir));
+    return new UserContextAgent(undefined, Promise.resolve(cacheDir));
   }
 
   async function prepareCategory(dir: string, id: string, name: string) {

@@ -78,7 +78,7 @@ describe("UserContextAgent getEntityConnections error path", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-entity-cache-")
     );
-    agent = new UserContextAgent(Promise.resolve(cacheDir));
+    agent = new UserContextAgent(undefined, Promise.resolve(cacheDir));
   });
 
   it("throws for missing record when resolving connections", () => {

@@ -83,14 +83,14 @@ describe("UserContextAgent consolidated index cache hit", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-cat-cache-hit-")
     );
-    const agent1 = new UserContextAgent(Promise.resolve(cacheDir));
+    const agent1 = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     // Allow async dataset load & initial persist
     await new Promise((r) => setTimeout(r, 60));
     const sharedDir = path.join(cacheDir, "shared");
     const beforeFiles = await fs.readdir(sharedDir).catch(() => []);
     expect(beforeFiles.length).toBeGreaterThan(0);
 
-    const agent2 = new UserContextAgent(Promise.resolve(cacheDir));
+    const agent2 = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 60));
     const afterFiles = await fs.readdir(sharedDir).catch(() => []);
 

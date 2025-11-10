@@ -86,7 +86,7 @@ describe("UserContextAgent consolidated index cache divergence", () => {
     );
 
     // First instantiation persists initial catalogue
-    const agent1 = new UserContextAgent(Promise.resolve(cacheDir));
+    const agent1 = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 60));
     const sharedDir = path.join(cacheDir, "shared");
     const beforeFiles = await fs.readdir(sharedDir).catch(() => []);
@@ -101,7 +101,7 @@ describe("UserContextAgent consolidated index cache divergence", () => {
     ]);
 
     // Second instantiation should detect changed fingerprint and persist again
-    const agent2 = new UserContextAgent(Promise.resolve(cacheDir));
+    const agent2 = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 80));
     const afterFiles = await fs.readdir(sharedDir).catch(() => []);
 

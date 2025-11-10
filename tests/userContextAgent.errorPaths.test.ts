@@ -10,7 +10,7 @@ describe("RelevantDataManagerAgent error paths", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-empty-cache-")
     );
-    expect(() => new UserContextAgent(Promise.resolve(cacheDir))).toThrow(
+    expect(() => new UserContextAgent(undefined, Promise.resolve(cacheDir))).toThrow(
       /No category folders were found/
     );
   });
@@ -24,7 +24,7 @@ describe("RelevantDataManagerAgent error paths", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-missing-cat-cache-")
     );
-    expect(() => new UserContextAgent(Promise.resolve(cacheDir))).toThrow(
+    expect(() => new UserContextAgent(undefined, Promise.resolve(cacheDir))).toThrow(
       /No valid categories could be loaded.*Missing required file 'category\.json'/
     );
   });

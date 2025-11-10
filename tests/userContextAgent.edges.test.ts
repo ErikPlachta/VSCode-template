@@ -33,7 +33,7 @@ describe("UserContextAgent (edges)", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "relevant-data-edges-")
     );
-    return new UserContextAgent(Promise.resolve(cacheDir));
+    return new UserContextAgent(undefined, Promise.resolve(cacheDir));
   }
 
   it("returns empty results when keyword is empty", async () => {
