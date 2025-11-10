@@ -19,6 +19,7 @@ import {
 import { createInvocationLogger } from "@mcp/telemetry";
 import { UserContextAgentProfile } from "@mcp/config/agentProfiles";
 import { userContextAgentConfig } from "@agent/userContextAgent/agent.config";
+import { CategoryId, CategoryRecord } from "@internal-types/agentConfig";
 
 /**
  * Description for how a category folder is organised.
@@ -180,16 +181,6 @@ export interface CategorySummary {
   name: string;
   description: string;
 }
-
-/** Minimal representation of a record stored under a category. */
-export type CategoryRecord = Record<string, unknown> & {
-  id: string;
-  name?: string;
-  title?: string;
-};
-
-/** Unique identifier for a category in the repository. */
-export type CategoryId = string;
 
 /**
  * Full configuration stored for each business category.

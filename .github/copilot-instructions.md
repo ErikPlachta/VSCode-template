@@ -38,9 +38,9 @@ The changelog is organized around two sections: Outstanding Tasks and Logs. Foll
 3. Copilot should proactively review and keep this section up to date, reflecting user-requested priority changes.
 4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
 5. Logs capture all change history, organized by date/time and semantic titles.
-6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES` (e.g., `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`).
-7. Use semantic titles for log entries: `#### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES` (e.g., `#### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`).
-8. Include file paths for meaningful changes.
+6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
+7. Use semantic titles for log entries: `#### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a detailed description with sub-points. Entries MUST include specific details, file paths, and implementation notes - never just the summary line alone.
+8. Include file paths for meaningful changes and provide sub-points explaining what was actually changed.
 9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into Outstanding Tasks.
 
 Practical cadence:

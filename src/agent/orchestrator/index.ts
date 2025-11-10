@@ -568,6 +568,22 @@ export class Orchestrator extends BaseAgentConfig {
           type: "string[]",
           visibility: "public",
           verifyPaths: ["orchestration.escalation.vaguePhrases"],
+          group: "Escalation",
+          description:
+            "List of phrases that trigger escalation to fallback agent",
+          /**
+           * Validate that the value is an array of strings.
+           *
+           * @param {unknown} value - Value to validate.
+           * @returns {boolean | string} True if valid, error message if invalid.
+           */
+          validate: (value: unknown): boolean | string => {
+            if (!Array.isArray(value)) return "Must be an array";
+            return (
+              value.every((item) => typeof item === "string") ||
+              "All items must be strings"
+            );
+          },
         },
       ],
       [
@@ -635,6 +651,15 @@ export class Orchestrator extends BaseAgentConfig {
         },
       ],
     ]);
+  }
+
+  /**
+   * Get all descriptors for this agent (delegates to getConfigDescriptors).
+   *
+   * @returns {Record<string, ConfigDescriptor>} Map of descriptor keys to their definitions.
+   */
+  public getAllDescriptors(): Record<string, ConfigDescriptor> {
+    return this.getConfigDescriptors();
   }
 
   /**

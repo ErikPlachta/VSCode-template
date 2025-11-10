@@ -590,37 +590,12 @@ export class DatabaseAgent extends BaseAgentConfig {
     }
   }
 }
-// -------------------------
-// Legacy compatibility shim (if previous code imported DatabaseAgentConfig)
-// -------------------------
-/**
- * Legacy configuration wrapper retained as a silent shim for backward compatibility.
- *
- * @deprecated Instantiate {@link DatabaseAgent} directly; this class will be removed in a future release.
- */
-export class DatabaseAgentConfig extends BaseAgentConfig {
-  /**
-   * Create a legacy wrapper instance.
-   *
-   * @param {AgentConfigDefinition | Partial<AgentConfigDefinition>} [config] - Optional partial overrides.
-   */
-  constructor(config?: AgentConfigDefinition | Partial<AgentConfigDefinition>) {
-    const merged: AgentConfigDefinition = {
-      ...databaseAgentConfig,
-      ...(config || {}),
-      agent: { ...databaseAgentConfig.agent, ...(config?.agent || {}) },
-      $configId: databaseAgentConfig.$configId,
-    } as AgentConfigDefinition;
-    super(merged);
-  }
-}
-
 /**
  * Creates a new DatabaseAgent instance with the provided data sources.
  *
  * @param {DataSource[]} dataSources - dataSources parameter.
  * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
- * @param {Partial<DatabaseAgentConfig>} config - config parameter.
+ * @param {Partial<AgentConfigDefinition>} config - config parameter.
  * @returns {DatabaseAgent} A configured database agent.
  */
 export function createDatabaseAgent(

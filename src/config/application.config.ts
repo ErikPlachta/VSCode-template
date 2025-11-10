@@ -115,19 +115,19 @@ export const applicationConfig: ApplicationConfig = {
   jsonSchemas: [
     {
       pattern: "src/{businessData,userContext}/*/category.json",
-      schema: "src/schemas/category.schema.json",
+      schema: "src/config/schemas/category.schema.json",
       description:
         "Category metadata must define purpose, orchestration, and agent responsibilities.",
     },
     {
       pattern: "src/{businessData,userContext}/*/records.json",
-      schema: "src/schemas/records.schema.json",
+      schema: "src/config/schemas/records.schema.json",
       description:
         "Entity records require identifiers, human-readable names, and linkage metadata.",
     },
     {
       pattern: "src/{businessData,userContext}/*/relationships.json",
-      schema: "src/schemas/relationships.schema.json",
+      schema: "src/config/schemas/relationships.schema.json",
       description:
         "Relationship definitions must clearly communicate target categories and join keys.",
     },

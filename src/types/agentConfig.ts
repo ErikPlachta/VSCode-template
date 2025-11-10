@@ -752,6 +752,32 @@ export abstract class BaseAgentConfig {
       }
     }
   }
+
+  /**
+   * Clear an override for a configuration item given its {@link ConfigDescriptor}.
+   *
+   * @param {ConfigDescriptor} descriptor - Descriptor describing the config item.
+   * @param {"local" | "global"} env - Override scope to clear.
+   * @returns {void}
+   */
+  public clearOverride(
+    descriptor: ConfigDescriptor,
+    env: "local" | "global" = "local"
+  ): void {
+    const targetOverrides =
+      env === "local" ? this.overridesLocal : this.overridesGlobal;
+    this.deepDelete(targetOverrides, descriptor.path);
+  }
+
+  /**
+   * Get all descriptors for this agent (default implementation returns empty object).
+   * Agents should override this method to provide their specific descriptors.
+   *
+   * @returns {Record<string, ConfigDescriptor>} Map of descriptor keys to their definitions.
+   */
+  public getAllDescriptors(): Record<string, ConfigDescriptor> {
+    return {};
+  }
 }
 
 // -------------------------
@@ -761,9 +787,18 @@ export abstract class BaseAgentConfig {
 /** Identifier for a generic category or data source. */
 export type CategoryId = string;
 
-/** Generic record model allowing arbitrary fields. */
+/**
+ * Generic record model allowing arbitrary fields.
+ * Represents a minimal record from any business data category.
+ *
+ * @param id - Unique identifier for the record (required)
+ * @param name - Optional human-readable name
+ * @param title - Optional alternative to name (some records use title instead)
+ */
 export interface CategoryRecord {
   id: string;
+  name?: string;
+  title?: string;
   [key: string]: unknown;
 }
 
@@ -924,6 +959,12 @@ export interface ConfigDescriptor {
   type: string;
   visibility: "public" | "private";
   verifyPaths?: string[];
+  /** Optional group for organizing descriptors in UI. */
+  group?: string;
+  /** Optional human-readable description. */
+  description?: string;
+  /** Optional validation function for basic type/shape checks. */
+  validate?: (value: unknown) => boolean | string;
 }
 
 /**
