@@ -15,7 +15,7 @@
       "request": "launch",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionTestsPath=${workspaceFolder}/out/test"
+        "--extensionTestsPath=${workspaceFolder}/out/src/test"
       ],
       "outFiles": ["${workspaceFolder}/out/**/*.js"],
       "preLaunchTask": "${workspaceFolder}:npm: compile"
@@ -24,7 +24,7 @@
       "name": "Run MCP Server",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/out/server/index.js",
+      "program": "${workspaceFolder}/out/src/server/index.js",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "outFiles": ["${workspaceFolder}/out/**/*.js"],

@@ -44,8 +44,10 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 - MCP Server is no longer starting when vs code extension is activated. Need to resolve this issue so the extension can start the server properly again.
 
 - Verify MCP stdio + HTTP dual-mode after packaging; ensure mcp.json registration persists
+
 ### Priority 1 - Current Priority
 
+- MCP Server is NOT registering into `%appdata%\code\User\mcp.json`
 - Planned shim removals (🧹 deprecation lifecycle)
   - DatabaseAgentConfig shim removal plan (silent phase → removal):
     - Add transitional Planned entry documenting removal sequence.
@@ -185,8 +187,36 @@ All change history. Organized by date/time and semantic titles; verification rec
 
 ### [2025-11-09] Manifest alignment, server readiness, and activation resiliency
 
-#### 2025-11-09 19:00:57 fix: Fix extension entrypoint and stdio server path; vsce packaging succeeds; server starts via LM provider
+#### 2025-11-09 19:48:31 fix: Fix MCP registration schema and preserve existing config
 
+- src/extension/mcpRegistration.ts: write transport-based HTTP server definitions and retain prior keys.
+- tests/mcpRegistration.test.ts: cover registration write/update/remove flows.
+
+##### Verification – registration schema update
+
+- ✅ Build (`npm run compile`)
+- ✅ Tests (`npm test`)
+- ✅ Lint (`npm run lint`)
+- ❌ Docs (not run; code-only change)
+- ❌ Health (not run; unaffected)
+- ❌ Coverage (not recalculated; unit tests already cover path)
+- ❌ JSDoc (no new public APIs introduced)
+
+#### 2025-11-09 19:33:07 fix: Fix MCP registration path resolution for Insiders builds
+
+- src/extension/mcpRegistration.ts: infer user data folder variants and portable directories; tests/mcpRegistration.test.ts: cover path resolver heuristics
+
+##### Verification – registration path heuristics
+
+- ✅ Build (`npm run compile`)
+- ✅ Tests (`npm test`)
+- ❌ Lint (not run in this iteration)
+- ❌ Docs (not run; content unchanged)
+- ❌ Health (not run for this iteration)
+- ❌ Coverage (not recalculated)
+- ❌ JSDoc (no new public APIs; audit deferred)
+
+#### 2025-11-09 19:00:57 fix: Fix extension entrypoint and stdio server path; vsce packaging succeeds; server starts via LM provider
 
 #### 2025-11-09 18:25:00 fix: Restore manifest defaults and keep provider/chat IDs consistent
 
