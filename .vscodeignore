@@ -1,6 +1,8 @@
 # Exclude source and dev-only files from the VSIX
 src/
 tests/
+bin/
+bin/*
 bin/utils/
 bin/schemas/
 coverage/
@@ -8,9 +10,19 @@ docs/*
 .github/
 .vscode/
 .mcp-cache/
+_ARCHIVE/
+20251109_eval/
 .env
+.env.example
+eslint.config.js
+tsconfig.typedoc.json
+CHANGELOG.md
+RESOURCES.md
+RESOURCES.MD
+EXTENSION_TEST.md
 
 # Config and metadata not needed at runtime
+node_modules/
 tsconfig.json
 jest.config.js
 typedoc.json
@@ -19,6 +31,7 @@ typedoc.json
 .gitignore
 .gitattributes
 fix-imports.*
+.prettierignore
 
 # Test files
 **/*.test.ts

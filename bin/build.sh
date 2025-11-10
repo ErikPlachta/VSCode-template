@@ -170,22 +170,6 @@ stage_validate_config() {
         log_success "Typed application configuration validated"
         return
     fi
-
-    # Legacy fallback: validate generated JSON if TS config not present
-    log_info "Validating generated mcp.config.json..."
-    # Ensure generated config exists (run generator if missing)
-    if [[ ! -f "out/mcp.config.json" ]]; then
-        log_warning "out/mcp.config.json not found; generating from TS sources..."
-        npm run -s mcp:gen > /dev/null 2>&1 || {
-            log_error "Failed to generate out/mcp.config.json from TS sources"
-            exit 1
-        }
-    fi
-    if ! json_pp < "out/mcp.config.json" > /dev/null 2>&1; then
-        log_error "Invalid JSON syntax in out/mcp.config.json"
-        exit 1
-    fi
-    log_success "Generated JSON configuration validated"
 }
 
 stage_lint_json() {

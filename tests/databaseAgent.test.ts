@@ -44,11 +44,13 @@ describe("DatabaseAgent", () => {
       .listCategories()
       .map((summary: any) => {
         const category = manager.getCategory(summary.id);
+        // Provide simple alias mapping for people skill filtering test and allow future extensions
+        const fieldAliases = summary.id === "people" ? { skill: "skills" } : {};
         return {
           id: category.id,
           name: category.name,
           records: category.records,
-          fieldAliases: {},
+          fieldAliases,
         } as DataSource;
       });
     const database = new DatabaseAgent(dataSources, Promise.resolve(cacheDir));
@@ -59,7 +61,7 @@ describe("DatabaseAgent", () => {
     const { database } = await createAgents();
     const results = await database.executeQuery("people", {
       skill: "python",
-      applicationId: "app-aurora",
+      applicationIds: "app-aurora",
     });
     const ids = results.map((record) => record.id);
     expect(ids).toEqual(["person-001"]);
@@ -68,7 +70,7 @@ describe("DatabaseAgent", () => {
   it("filters departments by related systems", async () => {
     const { database } = await createAgents();
     const results = await database.executeQuery("departments", {
-      applicationId: "app-foundry",
+      applicationIds: "app-foundry",
     });
     expect(results.map((record) => record.id)).toEqual(["dept-platform"]);
   });
@@ -100,7 +102,7 @@ describe("DatabaseAgent", () => {
   it("retrieves resources bound to an application", async () => {
     const { database } = await createAgents();
     const resources = await database.executeQuery("companyResources", {
-      applicationId: "app-aurora",
+      applicationIds: "app-aurora",
     });
     const ids = resources.map((resource: any) => resource.id);
     expect(ids).toEqual(
@@ -126,8 +128,10 @@ describe("DatabaseAgent", () => {
     const clone = { ...category.records[0], id: "person-temp" };
     category.records.push(clone);
 
+    // Query again to update result set containing the new record
     await database.executeQuery("people", { departmentId: "dept-analytics" });
     const updatedEntry = JSON.parse(await fs.readFile(cachePath, "utf8"));
+    // A changed record set should produce a different recordHash
     expect(updatedEntry.metadata?.recordHash).not.toEqual(
       initialEntry.metadata.recordHash
     );

@@ -11,7 +11,12 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";
+import { fileURLToPath } from "url";
 import { MCPTool } from "@shared/mcpTypes";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * JsonRpcRequest interface.
@@ -171,7 +176,7 @@ async function searchRecords(
 
 const tools: MCPTool[] = [
   {
-    name: "relevant-data.describeCategory",
+    name: "user-context.describeCategory",
     title: "Describe category",
     description:
       "Return the configuration, schema catalogue, and relationship metadata for a business category.",
@@ -189,7 +194,7 @@ const tools: MCPTool[] = [
     },
   },
   {
-    name: "relevant-data.searchRecords",
+    name: "user-context.searchRecords",
     title: "Search category records",
     description:
       "Search the mock dataset for a category using optional equality filters over structured fields.",
@@ -588,12 +593,12 @@ function startStdioServer(): void {
 
   // Log to stderr to avoid interfering with stdout JSON-RPC communication
   const log =
-        /**
-         * log function.
-         *
-         * @param {string} message - message parameter.
-         */
-(message: string): void => {
+    /**
+     * log function.
+     *
+     * @param {string} message - message parameter.
+     */
+    (message: string): void => {
       console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
     };
 
@@ -686,7 +691,20 @@ function startStdioServer(): void {
   log("MCP stdio server ready for requests");
 }
 
-if (require.main === module) {
+// Support both CJS and ESM entry detection
+const __isMain = ((): boolean => {
+  // CJS path: require/module available
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const req: any = typeof require !== "undefined" ? require : undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mod: any = typeof module !== "undefined" ? module : undefined;
+  if (req && mod) return req.main === mod;
+  // ESM path: simplified check for running directly
+  // If we're here and not in a require() context, assume we're main
+  return true;
+})();
+
+if (__isMain) {
   // Check if we should run in stdio mode
   const args = process.argv.slice(2);
   if (args.includes("--stdio")) {

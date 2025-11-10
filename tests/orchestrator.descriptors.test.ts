@@ -30,4 +30,28 @@ describe("Orchestrator descriptor map", () => {
       expect(viaDescriptor).toEqual(direct);
     });
   });
+
+  it("should throw when required nested leaf is missing during construction", () => {
+    const cloned = JSON.parse(JSON.stringify(orchestratorConfig));
+    delete cloned.orchestration.textProcessing.scoringWeights.signalMatch;
+    expect(() => new Orchestrator(cloned)).toThrow(
+      /scoringWeights.signalMatch/
+    );
+  });
+
+  it("setByDescriptor should mutate nested object and getByDescriptor should reflect change", () => {
+    const desc = descriptors.scoringWeights;
+    const original =
+      orchestrator.getByDescriptor<Record<string, number>>(desc)!;
+    const updated = { ...original, signalMatch: original.signalMatch + 1 };
+    orchestrator.setByDescriptor(desc, updated, "local");
+    const roundTrip =
+      orchestrator.getByDescriptor<Record<string, number>>(desc)!;
+    expect(roundTrip).toEqual(updated);
+    // Reset by clearing local override
+    orchestrator.setByDescriptor(desc, undefined, "local");
+    const reverted =
+      orchestrator.getByDescriptor<Record<string, number>>(desc)!;
+    expect(reverted).toEqual(original);
+  });
 });

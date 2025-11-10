@@ -17,14 +17,14 @@ import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
  * ```
  */
 export class MCPDiscoveryError extends Error {
-    /**
-     * constructor function.
-     *
-     * @param {string} message - message parameter.
-     * @param {unknown} cause - cause parameter.
-     * @returns {unknown} - TODO: describe return value.
-     */
-constructor(message: string, public readonly cause?: unknown) {
+  /**
+   * constructor function.
+   *
+   * @param {string} message - message parameter.
+   * @param {unknown} cause - cause parameter.
+   * @returns {unknown} - TODO: describe return value.
+   */
+  constructor(message: string, public readonly cause?: unknown) {
     super(message);
     this.name = "MCPDiscoveryError";
   }
@@ -108,6 +108,21 @@ export async function fetchTools(
       : `Unable to reach MCP server at ${serverUrl}.`;
     throw new MCPDiscoveryError(message, error);
   }
+}
+
+/**
+ * Fetch tools from the locally embedded server module when running in stdio mode.
+ * This avoids HTTP and reads the exported tool catalogue directly.
+ *
+ * @returns {Promise<MCPTool[]>} Normalized tool list from the embedded server.
+ */
+export async function fetchLocalTools(): Promise<MCPTool[]> {
+  // Dynamic import to avoid bundling order issues; alias will be rewritten in out/ to a relative .js path
+  const mod = (await import("@server/index")) as unknown as {
+    tools?: MCPTool[];
+  };
+  const serverTools = Array.isArray(mod.tools) ? mod.tools : [];
+  return serverTools.map(NormalizeTool);
 }
 
 export type {

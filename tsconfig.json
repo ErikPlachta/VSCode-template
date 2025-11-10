@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2021",
+    "module": "es2022",
     "lib": ["es2021"],
     "moduleResolution": "node",
     "strict": true,
@@ -22,25 +23,10 @@
       "@bin/*": ["bin/*"]
     }
   },
-  "include": [
-    "src",
-    "bin",
-    "tests/dataAgent.test.ts",
-    "tests/databaseAgent.test.ts",
-    "tests/extension.test.ts",
-    "tests/mcpCache.test.ts",
-    "tests/mcpShared.test.ts",
-    "tests/mcpSync.test.ts",
-    "tests/orchestrator.test.ts",
-    "tests/orchestrator.descriptors.test.ts",
-    "tests/relevantDataManagerAgent.test.ts",
-    "tests/schemaPrompt.test.ts",
-    "tests/server.test.ts"
-  ],
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "out",
-    "tests",
     "bin/tests/**",
     "jest.config.js",
     "*.config.js"

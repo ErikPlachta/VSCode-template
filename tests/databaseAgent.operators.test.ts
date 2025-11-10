@@ -3,6 +3,32 @@ import * as os from "os";
 import * as path from "path";
 import { DatabaseAgent, DataSource } from "../src/agent/databaseAgent";
 
+// Provide a minimal vscode mock to satisfy transitive imports in mcpCache during tests
+jest.mock(
+  "vscode",
+  () => ({
+    workspace: {
+      get workspaceFolders() {
+        return undefined;
+      },
+    },
+    window: {
+      showInformationMessage: jest.fn(),
+      showErrorMessage: jest.fn(),
+      showQuickPick: jest.fn(),
+      showInputBox: jest.fn(),
+    },
+    commands: {
+      registerCommand: jest.fn(),
+    },
+    chat: {
+      createChatParticipant: jest.fn(() => ({ dispose: jest.fn() })),
+    },
+    Uri: { file: (p: string) => ({ fsPath: p }) },
+  }),
+  { virtual: true }
+);
+
 /**
  * Additional coverage tests for DatabaseAgent operator handling and helpers.
  */
@@ -22,12 +48,12 @@ describe("DatabaseAgent operators & helpers", () => {
           name: "Alice",
           tags: ["dev", "js"],
           dept: "eng",
-          skill: "python",
+          skill: "python", // present only on first record
         },
         { id: "2", age: 22, name: "Bob", tags: ["ops"], dept: "ops" },
         { id: "3", age: 40, name: "Carol", tags: [], dept: "eng" },
       ],
-      fieldAliases: { skill: "tags" },
+      fieldAliases: { tag: "tags" },
     };
     const agent = new DatabaseAgent([dataSource], Promise.resolve(cacheDir));
     return { agent, cacheDir };
@@ -91,21 +117,22 @@ describe("DatabaseAgent operators & helpers", () => {
       )
     ).toEqual([]);
 
-    // $exists
+    // $exists true should only match record with explicit skill property
     expect(
       (await agent.executeQuery("employees", { skill: { $exists: true } })).map(
         (r) => r.id
       )
     ).toEqual(["1"]);
+    // $exists false should return remaining records without skill property
     expect(
       (await agent.executeQuery("employees", { skill: { $exists: false } }))
         .map((r) => r.id)
         .sort()
     ).toEqual(["2", "3"]);
 
-    // alias mapping: skill -> tags (array contains)
+    // alias mapping: tag -> tags (array contains)
     expect(
-      (await agent.executeQuery("employees", { skill: "dev" })).map((r) => r.id)
+      (await agent.executeQuery("employees", { tag: "dev" })).map((r) => r.id)
     ).toEqual(["1"]);
   });
 
