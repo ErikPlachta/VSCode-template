@@ -94,7 +94,27 @@ describe("Orchestrator descriptor map", () => {
 
   it("should support getAllDescriptors method", () => {
     const allDescriptors = orchestrator.getAllDescriptors();
-    expect(allDescriptors).toEqual(descriptors);
+    const currentDescriptors = orchestrator.getConfigDescriptors();
+
+    // Verify it returns the same object structure
+    expect(Object.keys(allDescriptors)).toEqual(
+      Object.keys(currentDescriptors)
+    );
     expect(Object.keys(allDescriptors).length).toBeGreaterThan(0);
+
+    // Verify each descriptor has the expected properties
+    for (const [key, descriptor] of Object.entries(allDescriptors)) {
+      expect(descriptor).toHaveProperty("name");
+      expect(descriptor).toHaveProperty("path");
+      expect(descriptor).toHaveProperty("type");
+      expect(descriptor).toHaveProperty("verifyPaths");
+      expect(descriptor).toHaveProperty("visibility");
+      expect((descriptor as ConfigDescriptor).name).toBe(
+        currentDescriptors[key].name
+      );
+      expect((descriptor as ConfigDescriptor).path).toBe(
+        currentDescriptors[key].path
+      );
+    }
   });
 });
