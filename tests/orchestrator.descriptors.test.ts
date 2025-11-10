@@ -54,4 +54,47 @@ describe("Orchestrator descriptor map", () => {
       orchestrator.getByDescriptor<Record<string, number>>(desc)!;
     expect(reverted).toEqual(original);
   });
+
+  it("should support enhanced descriptor properties", () => {
+    const vaguePhrases = descriptors.vaguePhrases;
+    expect(vaguePhrases).toBeDefined();
+    expect(vaguePhrases.group).toBe("Escalation");
+    expect(vaguePhrases.description).toBe(
+      "List of phrases that trigger escalation to fallback agent"
+    );
+    expect(typeof vaguePhrases.validate).toBe("function");
+  });
+
+  it("should validate descriptor values correctly", () => {
+    const vaguePhrases = descriptors.vaguePhrases;
+    if (vaguePhrases.validate) {
+      // Valid array of strings
+      expect(vaguePhrases.validate(["help", "what", "how"])).toBe(true);
+      // Invalid: not an array
+      expect(vaguePhrases.validate("not an array")).toBe("Must be an array");
+      // Invalid: array with non-string items
+      expect(vaguePhrases.validate(["help", 123])).toBe(
+        "All items must be strings"
+      );
+    }
+  });
+
+  it("should support clearOverride method", () => {
+    const desc = descriptors.vaguePhrases;
+    const original = orchestrator.getByDescriptor<string[]>(desc)!;
+
+    // Set an override
+    orchestrator.setByDescriptor(desc, ["test"], "local");
+    expect(orchestrator.getByDescriptor<string[]>(desc)).toEqual(["test"]);
+
+    // Clear the override
+    orchestrator.clearOverride(desc, "local");
+    expect(orchestrator.getByDescriptor<string[]>(desc)).toEqual(original);
+  });
+
+  it("should support getAllDescriptors method", () => {
+    const allDescriptors = orchestrator.getAllDescriptors();
+    expect(allDescriptors).toEqual(descriptors);
+    expect(Object.keys(allDescriptors).length).toBeGreaterThan(0);
+  });
 });
