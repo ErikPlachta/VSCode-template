@@ -52,6 +52,8 @@ import {
   RawTypeFile,
   RawExampleFile,
   RawQueryFile,
+  validateCategoryRecord,
+  formatValidationErrors,
 } from "@internal-types/userContext.types";
 
 // (All type/interface definitions moved to @internal-types/userContext.types to enforce single source of truth.)
@@ -359,7 +361,6 @@ export class UserContextAgent {
   >;
   private readonly consolidatedIndex: DatasetCatalogueEntry[];
   private readonly datasetFingerprint: string;
-  private readonly ajv: Ajv;
   private readonly telemetry = createInvocationLogger(
     UserContextAgentProfile.id
   );
@@ -378,7 +379,6 @@ export class UserContextAgent {
     this.dataRoot = rootChoice.activeRoot;
     this.externalRoot = rootChoice.externalRoot;
     this.usingExternal = rootChoice.usingExternal;
-    this.ajv = new Ajv({ allErrors: true });
     const dataset = this.loadDataset();
     this.categories = dataset.categories;
     this.lookupIndex = dataset.lookupIndex;
@@ -1331,47 +1331,18 @@ export class UserContextAgent {
     relationshipDefinitions: InternalRelationshipDefinition[]
   ): DataValidationReport {
     const issues: DataValidationIssue[] = [];
-    const validators: Array<{ schema: string; validate: ValidateFunction }> =
-      [];
-    for (const schema of schemas) {
-      try {
-        validators.push({
-          schema: schema.name,
-          validate: this.ajv.compile(schema.schema),
-        });
-      } catch (error) {
-        issues.push({
-          recordId: "__schema__",
-          schema: schema.name,
-          message: `Failed to compile schema: ${(error as Error).message}`,
-          type: "schema",
-        });
-      }
-    }
 
+    // Validate each record using TypeScript type guards
     for (const record of records) {
-      if (validators.length === 0) {
-        break;
-      }
-      let matched = false;
-      const errorsBySchema: string[] = [];
-      for (const { schema, validate } of validators) {
-        if (validate(record)) {
-          matched = true;
-          break;
-        }
-        const details = this.formatAjvErrors(validate.errors);
-        if (details) {
-          errorsBySchema.push(`${schema}: ${details}`);
-        }
-      }
-      if (!matched) {
+      const validationResult = validateCategoryRecord(record);
+
+      if (!validationResult.valid) {
+        const errorMessage = formatValidationErrors(validationResult.errors);
         issues.push({
-          recordId: record.id,
-          schema: validators[0]?.schema,
+          recordId: record.id || "__unknown__",
+          schema: schemas[0]?.name,
           message:
-            errorsBySchema.join(" | ") ||
-            "Record does not conform to declared schemas.",
+            errorMessage || "Record does not conform to expected structure.",
           type: "schema",
         });
       }
@@ -1786,33 +1757,6 @@ export class UserContextAgent {
       return targetValue.some((item) => String(item) === expected);
     }
     return String(targetValue) === expected;
-  }
-
-  /**
-   * formatAjvErrors function.
-   *
-   * @param {ErrorObject[] | null | undefined} errors - errors parameter.
-   * @returns {string | undefined} - Concise combined message for up to first three AJV errors (undefined if none).
-   */
-  private formatAjvErrors(
-    errors: ErrorObject[] | null | undefined
-  ): string | undefined {
-    if (!errors || errors.length === 0) {
-      return undefined;
-    }
-    return errors
-      .slice(0, 3)
-      .map((error) => {
-        const enrichedError = error as ErrorObject & { dataPath?: string };
-        const path =
-          enrichedError.instancePath ??
-          enrichedError.dataPath ??
-          enrichedError.schemaPath ??
-          "";
-        const message = error.message ?? "validation failed";
-        return path ? `${path}: ${message}` : message;
-      })
-      .join("; ");
   }
 
   /**
