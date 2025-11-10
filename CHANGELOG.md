@@ -41,41 +41,87 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### Current Tasks
 
-- AGENT: Verify `userContextAgent` design is in sync with the design of the `orchestrator` logic.
-  - Lots of hard-coded functions
-  - Not using the same design patterns as other agents.
-- AGENT: I need to improve agent functionality
-  - AGENT: clarificationAgent was designed to be a helper agent, and it needs to be improved.
-    - Evaluate the current functionality of the Clarification Agent.
-    - Identify areas where it can be improved to better assist users in clarifying their requests.
-    - Consider adding new features or capabilities that would enhance its usefulness.
-    - Ensure that the Clarification Agent is able to effectively communicate with other agents and provide accurate and helpful responses to user queries.
-    - Users should be able to just type `@mybusiness help` and get a list of available commands and how to use them, which the orchestrator should be able to extract from all existing agents and feed down to clarificationAgent.
-  - AGENT: Create a Communication Agent. I need to improve the user experience when communicating with CoPilot Chat through the Orchestrator.
-    - Evaluate how the Orchestrator is currently communicating with the user.
-    - Identify areas where the communication can be improved to be more user-friendly, clear, and concise.
-    - Create a plan to implement these improvements, including any necessary changes to the Orchestrator or other agents.
-    - Consider creating a new agent that is specifically designed to handle user communication and formatting.
-    - Ensure that all agents are working together to provide a seamless and enjoyable user experience.
-  - AGENT: All agents executing tasks need to be reviewed, regarding how they report the results of their work.
-    - There should be a unified solution that feeds up to orchestrator to be passed down to communicationAgent to package and then provide back to orchestrator to send to user.
-    - ex: I tried to run a specific request to an agent, `What patterns can you find in our application usage across departments?`, and I got hte following response:
-      - > Processing your request: "What patterns can you find in our application usage across departments?"
-        > Records Request
-        > Searching for general records matching your criteria
-        >
-        > Routing to: database-agent
-        > Matched keywords: find
-        > Summary: Searching for general records matching your criteria
-        > Rationale: Classified as records based on 1 signal matches
-        > Agent Used: database-agent
-  - AGENT: I need to improve the design of the OrchestratorAgent's coordination with other agents.
-    - Ensure that the Orchestrator is the central coordinator, and all other agents are working with it accordingly.
-    - Identify core logic related to tagging in an agent, like keyword identification, fuzzy matching, ranking, etc.
-      - I think there should be a utility script that can be used by all agents to take advantage of this logic.
-      - I need to be able to easily update and maintain this logic in one place, so all agents can benefit from it.
-      - I need to be able to verify the logic is working as expected, and can be updated accordingly.
-      - I need to be able to control thresholds and prompt users for clarification when needed, with useful info.
+#### Architecture & Design Alignment
+
+- **REFACTOR: Align userContextAgent with standard agent architecture**
+
+  - **Issue**: userContextAgent doesn't follow the two-file agent standard (agent.config.ts + index.ts) that other agents use
+  - **Issue**: Doesn't extend BaseAgentConfig like orchestrator, clarificationAgent, dataAgent, databaseAgent
+  - **Issue**: Has hard-coded logic instead of configuration-driven behavior
+  - **Impact**: Makes userContextAgent harder to maintain, test, and coordinate with orchestrator
+  - **Tasks**:
+    1. Create `userContextAgent/agent.config.ts` following `AgentConfigDefinition` pattern
+    2. Refactor `index.ts` to extend `BaseAgentConfig` and use configuration via `getConfigItem<T>()`
+    3. Extract hard-coded thresholds, paths, and logic into configuration
+    4. Add validation for userContext-specific config using `validateAgentConfig`
+    5. Update tests to verify config-driven behavior
+    6. Document migration from direct instantiation to config-based pattern
+
+- **CREATE: Communication Agent for unified response formatting**
+
+  - **Purpose**: Create dedicated agent responsible for formatting responses from all agents before returning to user via orchestrator
+  - **Design**: Follow two-file standard (agent.config.ts + index.ts extending BaseAgentConfig)
+  - **Responsibilities**:
+    - Format agent responses into user-friendly messages
+    - Handle error messaging consistently across agents
+    - Provide progress updates and status information
+    - Support multiple output formats (chat, notifications, markdown)
+  - **Integration**: Orchestrator routes agent responses → communicationAgent → formatted output → user
+  - **Configuration sections**:
+    - `communication.formatting`: Message templates, tone, verbosity levels
+    - `communication.errorHandling`: Error message patterns, user guidance
+    - `communication.progressTracking`: Status updates, progress indicators
+  - **Tasks**:
+    1. Design `AgentConfigDefinition` for communication agent
+    2. Create `src/agent/communicationAgent/agent.config.ts`
+    3. Implement `src/agent/communicationAgent/index.ts` extending BaseAgentConfig
+    4. Add response formatting methods (formatSuccess, formatError, formatProgress)
+    5. Integrate with orchestrator's response pipeline
+    6. Add comprehensive tests for formatting scenarios
+    7. Update existing agents to return structured data (not formatted strings)
+
+- **ENHANCE: ClarificationAgent capabilities**
+  - **Current**: Basic ambiguity detection and routing suggestions
+  - **Needed**: Richer help system and capability discovery
+  - **Tasks**:
+    1. Add `@mybusiness help` command support via orchestrator intent
+    2. Implement agent capability extraction from all agent configs
+    3. Create guidance templates in clarification.config
+    4. Add examples generation from agent prompt starters
+    5. Improve routing suggestions with confidence scores
+    6. Add test coverage for help command and capability discovery
+
+#### Shared Utilities & Services
+
+- **CREATE: Shared text processing utility**
+  - **Purpose**: Extract common text processing logic used by multiple agents (orchestrator, clarification)
+  - **Location**: `src/shared/textProcessing.ts`
+  - **Capabilities**:
+    - Keyword extraction with configurable stop words
+    - Fuzzy matching with threshold controls
+    - Signal/focus matching and ranking
+    - Phrase detection and classification
+  - **Benefits**: Single source of truth, consistent behavior, easier testing and tuning
+  - **Tasks**:
+    1. Audit orchestrator and clarificationAgent for shared text processing patterns
+    2. Design utility API with configuration parameters
+    3. Implement core functions with comprehensive tests
+    4. Refactor orchestrator to use utility instead of internal methods
+    5. Update clarificationAgent to use utility
+    6. Document usage patterns and configuration options
+
+#### Testing & Quality
+
+- **IMPROVE: Agent result reporting consistency**
+  - **Current**: Agents return different response formats causing inconsistent user experience
+  - **Root cause**: No standard response interface or communication layer
+  - **Solution**: Define standard response types + use communicationAgent for formatting
+  - **Tasks**:
+    1. Define `AgentResponse<T>` interface with status, data, metadata, errors
+    2. Update all agents to return `AgentResponse<T>` instead of raw strings
+    3. Route responses through communicationAgent for consistent formatting
+    4. Add response validation in orchestrator
+    5. Update tests to verify response structure compliance
 
 ### Priority 1 - Things to Handle Next
 
