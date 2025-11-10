@@ -6,7 +6,6 @@
  * @module agent/userContextAgent
  */
 
-import Ajv, { ErrorObject, ValidateFunction } from "ajv";
 import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";

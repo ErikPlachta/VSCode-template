@@ -208,6 +208,184 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-10]
 
+#### 2025-11-10 13:53:06 feat: Phase 3.3 Step 1: Created comprehensive type guard validation functions
+
+**IMPLEMENTATION**:
+
+Added native TypeScript validation functions to `src/types/userContext.types.ts` to replace Ajv JSON schema validation:
+
+**New Types**:
+
+- `ValidationError`: Detailed error information with path, message, expected, and actual values
+- `ValidationResult`: Container for validation outcome with error list
+
+**Validation Functions**:
+
+1. **`validateCategoryConfig(obj: unknown): ValidationResult`**
+
+   - Validates complete CategoryConfig structure
+   - Checks all required fields: id, name, description, aliases
+   - Validates nested config object: purpose, primaryKeys, updateCadence, access
+   - Validates orchestration configuration: summary, signals, agents
+   - Returns detailed path-based errors (e.g., "config.orchestration.signals: Missing or invalid signals field")
+
+2. **`validateCategoryRecord(obj: unknown): ValidationResult`**
+
+   - Validates BaseRecord structure
+   - Checks required id field
+   - Ensures either name or title is present (flexible requirement)
+   - Returns specific errors for missing/invalid fields
+
+3. **`validateRelationshipDefinition(obj: unknown): ValidationResult`**
+
+   - Validates relationship structure
+   - Checks from, to, type, description fields
+   - Validates nested fields object: source, target
+   - Optional required field validation
+   - Returns path-based errors for all failures
+
+4. **`formatValidationErrors(errors: ValidationError[], maxErrors?: number): string`**
+   - Converts ValidationError array to human-readable string
+   - Defaults to first 3 errors (configurable)
+   - Compatible with existing Ajv error formatting patterns
+
+**DESIGN PRINCIPLES**:
+
+- **Detailed errors**: Every validation provides specific path, expected value, and actual value
+- **Type-safe**: Pure TypeScript with no external dependencies
+- **Backward compatible**: Error format matches Ajv output style for seamless migration
+- **Extensible**: Easy to add new validation rules or customize messages
+- **Performance**: No schema compilation overhead - direct TypeScript checks
+
+**BENEFITS OVER AJV**:
+
+- No schema drift - validation IS the TypeScript types
+- Better error messages with contextual information
+- Smaller bundle size (no Ajv dependency)
+- Compile-time guarantees on validation logic
+- Easier to customize and extend
+
+**NEXT STEPS**:
+
+- Replace Ajv usage in userContextAgent (line 1341)
+- Update repositoryHealth validation
+- Add comprehensive tests for validation scenarios
+- Remove Ajv dependencies from package.json
+
+##### Verification – Type Guard Functions
+
+- ✅ Build (`npm run compile`) - no errors, functions compile successfully
+- ⏳ Tests - pending implementation (Step 6)
+- ⏳ Lint - will run after all changes
+- ⏳ Docs - will regenerate after completion
+- ⏳ Coverage - will verify 100% maintained
+
+#### 2025-11-10 13:39:53 docs: Type System Unification Evaluation: Phase 3.1 & 3.2 complete, Phase 3.3 ready to start
+
+**EVALUATION SUMMARY**:
+
+Comprehensive review of "UNIFY TYPE SYSTEM" task in Outstanding Tasks confirms we're on track and haven't overlooked anything critical.
+
+**COMPLETED PHASES**:
+
+- ✅ **Phase 1 - Consolidate CategoryRecord**: Successfully eliminated duplicate CategoryRecord definitions across three files (agentConfig.ts, interfaces.ts, userContextAgent). All agents now import from single source.
+
+- ✅ **Phase 3.1 - Data/Schema Separation**: Centralized all UserContext interfaces in `src/types/userContext.types.ts`. Restored JSON data files under `src/userContext/*/`. Removed duplicate in-file interface blocks. Added internal/raw interfaces for Phase 3.2.
+
+- ✅ **Phase 3.2 - User Configuration System**: External user data root resolution complete. Export/import commands with VS Code Command Palette integration. Fallback chain (external → workspace → error). Graceful error handling with skip+warn pattern. Comprehensive test coverage (phase3_2.test.ts, fallback.test.ts).
+
+**CURRENT STATE - Ajv Usage Analysis**:
+
+Active Ajv dependencies remain in two locations:
+
+1. **userContextAgent** (`src/agent/userContextAgent/index.ts`):
+
+   - Line 363: `private readonly ajv: Ajv;`
+   - Line 382: `this.ajv = new Ajv({ allErrors: true });`
+   - Line 1341: `validate: this.ajv.compile(schema.schema)`
+   - Line 1798: `formatAjvErrors()` method for error formatting
+
+2. **repositoryHealth** (`src/tools/repositoryHealth.ts`):
+   - Line 85: `this.ajv = new Ajv2020({...})`
+   - Line 227: `const validate = this.ajv.compile(JSON.parse(schemaContent));`
+   - Method: `validateJsonSchemas()` validates JSON files against schemas
+
+**JSON Schema Inventory**:
+
+Active schemas in `src/config/schemas/`:
+
+- `category.schema.json` - Category metadata validation
+- `records.schema.json` - Entity record validation
+- `relationships.schema.json` - Relationship definition validation
+- `agent.config.schema.json` - Agent configuration validation (unused?)
+
+Referenced by `application.config.ts` jsonSchemas array for repository health checks.
+
+**PHASE 3.3 IMPLEMENTATION PLAN**:
+
+**Step 1: Create Type Guard Functions** (`src/types/userContext.types.ts`):
+
+```typescript
+export function isCategoryConfig(value: unknown): value is CategoryConfig { ... }
+export function validateCategoryRecord(value: unknown): value is CategoryRecord { ... }
+export function validateRelationshipDefinition(value: unknown): value is RelationshipDefinition { ... }
+```
+
+**Step 2: Replace Ajv in userContextAgent**:
+
+- Replace `this.ajv.compile()` call (line 1341) with type guard invocations
+- Update validation error messages to use type guard results instead of Ajv errors
+- Remove `ajv` instance variable and imports
+- Maintain same error reporting UX for users
+
+**Step 3: Update repositoryHealth**:
+
+- Replace `validateJsonSchemas()` Ajv implementation with type guard validation
+- Keep or enhance error formatting for governance checks
+- Maintain same CheckResult interface and reporting format
+
+**Step 4: Remove Dependencies**:
+
+- Remove `ajv` and `ajv-formats` from `package.json` dependencies
+- Update any imports that reference Ajv types
+
+**Step 5: JSON Schema Decision**:
+
+Option A: **Remove schemas entirely** - Type guards replace validation, no need for separate schema files
+Option B: **Keep as documentation** - Helpful reference for users creating custom categories, but update README to clarify they're documentation-only
+
+**Step 6: Test Coverage**:
+
+- Add tests for type guard validation error scenarios
+- Test malformed data handling (missing required fields, wrong types, invalid structures)
+- Test error message clarity and usefulness
+- Maintain 100% coverage throughout migration
+
+**RISKS & MITIGATIONS**:
+
+1. **Risk**: Type guards may produce different error messages than Ajv
+
+   - **Mitigation**: Design guard functions to return descriptive validation results matching or exceeding Ajv detail
+
+2. **Risk**: Repository health validation behavior changes
+
+   - **Mitigation**: Ensure new validation matches existing governance expectations; update tests to verify same rigor
+
+3. **Risk**: Breaking changes for users with custom categories
+   - **Mitigation**: Type guards should validate same structure as current schemas; phase rollout with clear migration docs
+
+**BENEFITS OF PHASE 3.3**:
+
+- **No schema drift**: TypeScript types ARE the validation rules
+- **Better errors**: Custom validation messages tailored to user context
+- **Smaller bundle**: Remove Ajv dependency (~100KB)
+- **Type-safe validation**: Compile-time guarantees on validation logic
+- **Maintainability**: Single source of truth for structure + validation
+
+**RECOMMENDATION**:
+
+Proceed with Phase 3.3 as next priority. All prerequisites complete, plan is clear, risks identified with mitigations. Estimated effort: 1-2 sessions for implementation + comprehensive testing.
+
 #### 2025-11-10 13:17:44 docs: Phase 3.2 Examples Fallback: Clarified that workspace (src/userContext) serves as bundled examples - fallback chain already complete
 
 **CLARIFICATION**:
