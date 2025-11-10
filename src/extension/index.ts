@@ -35,7 +35,26 @@ export async function activate(
   // Clean up any orphaned registrations from previous uninstalls
   await cleanupOrphanedRegistrations(context);
 
-  const cfg = vscode.workspace.getConfiguration("mybusinessMCP");
+  // Establish dynamic IDs and prefixes from package.json contributions
+  interface PackageJsonLike {
+    name?: string;
+    contributes?: { chatParticipants?: Array<{ id?: string; name?: string }> };
+    publisher?: string;
+  }
+  const extObj = (context.extension as unknown as
+    | { packageJSON?: PackageJsonLike }
+    | undefined) as { packageJSON?: PackageJsonLike } | undefined;
+  const pkg = (extObj?.packageJSON || {}) as PackageJsonLike;
+  const contributedChat = (pkg.contributes?.chatParticipants || [])[0] || {};
+  const contributedId: string = contributedChat.id || "MybusinessMCP";
+  const contributedName: string = contributedChat.name || "mybusiness";
+  const commandPrefix: string = ((): string => {
+    const id = contributedId || "MybusinessMCP";
+    const base = id.endsWith("MCP") ? id.slice(0, -3) : id;
+    return base.toLowerCase() + "MCP";
+  })();
+
+  const cfg = vscode.workspace.getConfiguration(commandPrefix);
   let serverUrl = cfg.get<string>("serverUrl") ?? "";
   const token = cfg.get<string>("token") ?? "";
   const orchestrator = new Orchestrator();
@@ -56,14 +75,20 @@ export async function activate(
     } else {
       console.log(`ℹ️ Registering stdio MCP server in mcp.json...`);
       try {
-        const extensionPath = context.extensionPath;
+        // Prefer installed extension path if available (packaged); fallback to workspace path in dev
+        const extIdentifier = `${pkg.publisher || "ErikPlachta"}.${
+          pkg.name || "mybusiness-mcp-extension"
+        }`;
+        const installedExt = vscode.extensions.getExtension(extIdentifier);
+        const basePath = installedExt?.extensionPath || context.extensionPath;
         const serverScript = path.join(
-          extensionPath,
+          basePath,
           "out",
+          "src",
           "server",
           "index.js"
         );
-        const registrationId = "mybusiness-mcp-server";
+        const registrationId = `${contributedName}-mcp-server`;
 
         await ensureRegistration({
           id: registrationId,
@@ -77,12 +102,19 @@ export async function activate(
         );
 
         // Register cleanup to remove mcp.json registration
-        context.subscriptions.push({
-          dispose: async () => {
+        // Cleanup disposable to remove registration on deactivate
+        const cleanupRegistration: vscode.Disposable = {
+          /**
+           * Dispose hook to remove mcp.json registration added during activation.
+           *
+           * @returns {Promise<void>} Resolves when the registration entry has been removed.
+           */
+          dispose: async (): Promise<void> => {
             await removeRegistration(registrationId);
             console.log(`🧹 Cleaned up mcp.json registration`);
           },
-        });
+        };
+        context.subscriptions.push(cleanupRegistration);
       } catch (regError) {
         const regMsg =
           regError instanceof Error ? regError.message : String(regError);
@@ -126,7 +158,10 @@ export async function activate(
   }
 
   // Create a proper chat request handler
-  console.log(`💬 Registering chat participant "MybusinessMCP"...`);
+  // Derive chat participant id & name dynamically from package.json contributions (allows env-driven build customization)
+  console.log(
+    `💬 Registering chat participant "${contributedId}" (mention @${contributedName})...`
+  );
   /**
    * Process a Copilot Chat request using the orchestrator.
    *
@@ -170,7 +205,7 @@ export async function activate(
 
   // Create the chat participant with the new API
   const chatParticipant = vscode.chat.createChatParticipant(
-    "MybusinessMCP",
+    contributedId,
     chatHandler
   );
 
@@ -184,11 +219,13 @@ export async function activate(
   }
 
   context.subscriptions.push(chatParticipant);
-  console.log(`✅ Chat participant "MybusinessMCP" registered successfully`);
+  console.log(
+    `✅ Chat participant "${contributedId}" registered successfully; mention is @${contributedName}`
+  );
 
   // Register the manual tool invocation command
   const toolCommand = vscode.commands.registerCommand(
-    "mybusinessMCP.invokeTool",
+    `${commandPrefix}.invokeTool`,
     async () => {
       if (!tools.length) {
         vscode.window.showErrorMessage("No MCP tools are available.");
@@ -222,7 +259,7 @@ export async function activate(
 
   // Register MCP server management commands
   const registerServerCommand = vscode.commands.registerCommand(
-    "mybusinessMCP.registerServer",
+    `${commandPrefix}.registerServer`,
     async () => {
       console.log(`🔄 Manual MCP server registration triggered...`);
       try {
@@ -234,7 +271,7 @@ export async function activate(
         registerMcpProvider(serverUrl, token, includeAuthHeader, context);
 
         if (serverUrl) {
-          const registrationId = "mybusiness-mcp-server";
+          const registrationId = `${contributedName}-mcp-server`;
           await ensureRegistration({
             id: registrationId,
             type: "http",
@@ -247,14 +284,19 @@ export async function activate(
           );
         } else {
           // Register stdio server
-          const extensionPath = context.extensionPath;
+          const extIdentifier = `${pkg.publisher || "ErikPlachta"}.${
+            pkg.name || "mybusiness-mcp-extension"
+          }`;
+          const installedExt = vscode.extensions.getExtension(extIdentifier);
+          const basePath = installedExt?.extensionPath || context.extensionPath;
           const serverScript = path.join(
-            extensionPath,
+            basePath,
             "out",
+            "src",
             "server",
             "index.js"
           );
-          const registrationId = "mybusiness-mcp-server";
+          const registrationId = `${contributedName}-mcp-server`;
           await ensureRegistration({
             id: registrationId,
             type: "stdio",
@@ -281,11 +323,11 @@ export async function activate(
   );
 
   const unregisterServerCommand = vscode.commands.registerCommand(
-    "mybusinessMCP.unregisterServer",
+    `${commandPrefix}.unregisterServer`,
     async () => {
       console.log(`🔄 Manual MCP server unregistration triggered...`);
       try {
-        const registrationId = "mybusiness-mcp-server";
+        const registrationId = `${contributedName}-mcp-server`;
         await removeRegistration(registrationId);
         console.log(`✅ Removed HTTP server registration from mcp.json`);
         vscode.window.showInformationMessage(
@@ -301,10 +343,71 @@ export async function activate(
     }
   );
 
+  /**
+   * Diagnostic command to surface actual vs expected ID/mention values.
+   * Returns a structured object for programmatic inspection (tests / future UI).
+   */
+  const diagnoseIdsCommand = vscode.commands.registerCommand(
+    `${commandPrefix}.diagnoseIds`,
+    async () => {
+      const envExtName = (process.env.EXTENSION_NAME || "").trim() || undefined;
+      const envChatId =
+        (process.env.MCP_CHAT_PARTICIPANT_ID || "").trim() || undefined;
+      const envChatName =
+        (process.env.MCP_CHAT_PARTICIPANT_NAME || "").trim() || undefined;
+
+      // Expected derivation mirrors build script logic (capitalize first char + 'MCP' suffix for ID)
+      const baseId = envChatId || envChatName || "mybusiness";
+      const expectedId =
+        baseId.charAt(0).toUpperCase() + baseId.slice(1) + "MCP";
+      const expectedName = envChatName || baseId;
+
+      const actualMention = `@${contributedName}`;
+      const expectedMention = `@${expectedName}`;
+
+      const differences = {
+        idMismatch: expectedId !== contributedId,
+        nameMismatch: expectedName !== contributedName,
+        mentionMismatch: expectedMention !== actualMention,
+      };
+
+      const diag = {
+        env: {
+          EXTENSION_NAME: envExtName,
+          MCP_CHAT_PARTICIPANT_ID: envChatId,
+          MCP_CHAT_PARTICIPANT_NAME: envChatName,
+        },
+        packageJson: {
+          name: pkg.name,
+          chatParticipant: {
+            id: contributedId,
+            name: contributedName,
+          },
+        },
+        runtime: {
+          createdChatParticipantId: contributedId,
+          mention: actualMention,
+        },
+        expected: {
+          id: expectedId,
+          name: expectedName,
+          mention: expectedMention,
+        },
+        differences,
+      };
+
+      const summary = `Chat ID: actual=${contributedId} expected=${expectedId}; mention: actual=${actualMention} expected=${expectedMention}`;
+      vscode.window.showInformationMessage(summary);
+      console.log(`🔍 diagnoseIds`, JSON.stringify(diag, null, 2));
+      return diag;
+    }
+  );
+
   context.subscriptions.push(
     toolCommand,
     registerServerCommand,
-    unregisterServerCommand
+    unregisterServerCommand,
+    diagnoseIdsCommand
   );
 
   if (tools.length) {
@@ -322,7 +425,7 @@ export async function activate(
   console.log(`🎉 MyBusiness MCP Extension activation complete!`);
   console.log(`   📍 Server: ${serverUrl}`);
   console.log(`   🔧 Tools: ${tools.length}`);
-  console.log(`   💬 Participant: @mybusiness`);
+  console.log(`   💬 Participant: @${contributedName}`);
 }
 
 /**
@@ -337,7 +440,9 @@ async function cleanupOrphanedRegistrations(
 ): Promise<void> {
   try {
     const lastCleanupKey = "lastUninstallCleanup";
-    const currentVersion = context.extension.packageJSON.version;
+    const currentVersion = (context.extension as unknown as
+      | { packageJSON?: { version?: string } }
+      | undefined)?.packageJSON?.version || "0.0.0-test";
     const lastCleanup = context.globalState.get<string>(lastCleanupKey);
 
     // Only run cleanup if we haven't already done it for this version
@@ -345,13 +450,6 @@ async function cleanupOrphanedRegistrations(
       console.log(`🧹 Checking for orphaned registrations...`);
 
       const extensionPath = context.extensionPath;
-      const expectedServerPath = path.join(
-        extensionPath,
-        "out",
-        "src",
-        "server",
-        "index.js"
-      );
 
       try {
         // Resolve the user's mcp.json path and read the current configuration
@@ -359,21 +457,26 @@ async function cleanupOrphanedRegistrations(
         let raw = "";
         try {
           raw = await fsPromises.readFile(configPath, "utf8");
-        } catch (e) {
+        } catch {
           // No config file - nothing to do
           console.log(`No global mcp.json found at ${configPath}`);
           await context.globalState.update(lastCleanupKey, currentVersion);
           return;
         }
 
-        const parsed = JSON.parse(raw) as { servers?: Record<string, any> };
-        const servers = parsed.servers ?? {};
+        const parsed = JSON.parse(raw) as { servers?: Record<string, unknown> };
+        const servers: Record<string, unknown> = parsed.servers ?? {};
 
         // Inspect servers and remove entries that clearly point to missing or non-extension files.
         for (const [id, def] of Object.entries(servers)) {
           try {
-            if (def && def.type === "stdio" && Array.isArray(def.args)) {
-              const scriptArg = def.args.find((a: string) =>
+            const defAny = def as { type?: unknown; args?: unknown };
+            if (
+              defAny &&
+              defAny.type === "stdio" &&
+              Array.isArray(defAny.args)
+            ) {
+              const scriptArg = (defAny.args as string[]).find((a: string) =>
                 a.includes("server/index.js")
               );
               if (scriptArg) {
@@ -381,8 +484,6 @@ async function cleanupOrphanedRegistrations(
                   ? scriptArg
                   : path.resolve(scriptArg);
 
-                // If the referenced file doesn't exist, or it exists but is not under our extension path,
-                // consider it orphaned and remove it. This is conservative and scoped to stdio server scripts.
                 if (
                   !existsSync(candidatePath) ||
                   !candidatePath.startsWith(extensionPath)
@@ -390,9 +491,6 @@ async function cleanupOrphanedRegistrations(
                   console.log(
                     `🧹 Removing orphaned mcp.json server entry: ${id} -> ${scriptArg}`
                   );
-                  // Use the exported removeRegistration helper so we stay consistent with how writes happen.
-                  // It will resolve the same config path and update the file.
-                  // eslint-disable-next-line no-await-in-loop
                   await removeRegistration(id);
                 }
               }

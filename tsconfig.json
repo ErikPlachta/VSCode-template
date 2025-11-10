@@ -23,7 +23,7 @@
       "@bin/*": ["bin/*"]
     }
   },
-  "include": ["src", "bin", "tests"],
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "out",

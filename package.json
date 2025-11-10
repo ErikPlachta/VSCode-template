@@ -34,11 +34,15 @@
       {
         "command": "mybusinessMCP.unregisterServer",
         "title": "My Business MCP Extension: Unregister MCP Server"
+      },
+      {
+        "command": "mybusinessMCP.diagnoseIds",
+        "title": "My Business MCP Extension: Diagnose Chat IDs"
       }
     ],
     "mcpServerDefinitionProviders": [
       {
-        "id": "Mybusiness-local",
+        "id": "mybusiness-local",
         "label": "My Business MCP Extension Embedded Server"
       }
     ],
@@ -83,6 +87,48 @@
           "type": "boolean",
           "default": false,
           "description": "Include Authorization header metadata when registering HTTP server in mcp.json."
+        },
+        "mybusinessMCP.ids.chatParticipantId": {
+          "type": "string",
+          "enum": [
+            "MybusinessMCP"
+          ],
+          "markdownDescription": "Read-only. Current chat participant id as contributed (activation event)."
+        },
+        "mybusinessMCP.ids.chatParticipantName": {
+          "type": "string",
+          "enum": [
+            "mybusiness"
+          ],
+          "markdownDescription": "Read-only. Current mention name (use @<name> in chat)."
+        },
+        "mybusinessMCP.ids.commandPrefix": {
+          "type": "string",
+          "enum": [
+            "mybusinessMCP"
+          ],
+          "markdownDescription": "Read-only. Current command/settings prefix."
+        },
+        "mybusinessMCP.ids.activationEventId": {
+          "type": "string",
+          "enum": [
+            "MybusinessMCP"
+          ],
+          "markdownDescription": "Read-only. Activation event id (onChatParticipant:<id>)."
+        },
+        "mybusinessMCP.ids.extensionId": {
+          "type": "string",
+          "enum": [
+            "ErikPlachta.mybusiness-mcp-extension"
+          ],
+          "markdownDescription": "Read-only. Extension identifier (publisher.name)."
+        },
+        "mybusinessMCP.ids.serverRegisterId": {
+          "type": "string",
+          "enum": [
+            "Mybusiness"
+          ],
+          "markdownDescription": "Read-only. Server id key used in mcp.json servers."
         }
       }
     }
@@ -110,6 +156,7 @@
     "compile": "tsc -p ./",
     "mcp:gen": "tsx src/tools/generateMcpConfig.ts",
     "package": "npm run build && npx vsce package",
+    "prepublishOnly": "npm run prebuild",
     "install": "code --install-extension mybusiness-mcp-extension-1.0.0.vsix",
     "server": "npm run compile -- --pretty false && node ./out/server/index.js",
     "changelog:manage": "tsx bin/utils/changelog",

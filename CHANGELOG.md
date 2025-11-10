@@ -187,6 +187,22 @@ All change history. Organized by date/time and semantic titles; verification rec
 
 ### [2025-11-09] Manifest alignment, server readiness, and activation resiliency
 
+#### 2025-11-09 20:15:00 feat: Dynamic chat participant ID derivation + diagnoseIds command
+
+- src/extension/index.ts: derive chat participant id/name from package.json contributions (env-driven), add `mybusinessMCP.diagnoseIds` command returning structured diff of actual vs expected IDs.
+- tests/diagnoseIds.test.ts: validate diagnostic command output and env variable influence.
+
+##### Verification – dynamic ID & diagnostics
+
+- ✅ Build (`npm run compile`)
+- ✅ Tests (`npm test`) – added new test file; all green.
+- ✅ Lint (`npm run lint`) – no new violations introduced.
+- ❌ Docs (not regenerated; runtime behavior change only)
+- ❌ Health (not executed; no config/doc structural changes)
+- ✅ Coverage (new test preserves 100% target – lines exercised in index.ts & new test file)
+- ✅ JSDoc (added documentation block for diagnostic command)
+
+
 #### 2025-11-09 19:48:31 fix: Fix MCP registration schema and preserve existing config
 
 - src/extension/mcpRegistration.ts: write transport-based HTTP server definitions and retain prior keys.

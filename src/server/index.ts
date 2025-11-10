@@ -176,7 +176,7 @@ async function searchRecords(
 
 const tools: MCPTool[] = [
   {
-    name: "relevant-data.describeCategory",
+    name: "user-context.describeCategory",
     title: "Describe category",
     description:
       "Return the configuration, schema catalogue, and relationship metadata for a business category.",
@@ -194,7 +194,7 @@ const tools: MCPTool[] = [
     },
   },
   {
-    name: "relevant-data.searchRecords",
+    name: "user-context.searchRecords",
     title: "Search category records",
     description:
       "Search the mock dataset for a category using optional equality filters over structured fields.",

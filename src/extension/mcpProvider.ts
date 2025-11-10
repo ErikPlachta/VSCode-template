@@ -19,10 +19,18 @@ export function registerMcpProvider(
   includeAuthHeader: boolean,
   context: vscode.ExtensionContext
 ): void {
-  console.log(`🔌 Registering MCP provider "Mybusiness-local"...`);
+  // Derive provider id from contributed chat participant (keeps build/runtime aligned)
+  interface PackageJsonLike {
+    contributes?: { chatParticipants?: Array<{ id?: string; name?: string }> };
+  }
+  const pkg = (context.extension as unknown as { packageJSON?: PackageJsonLike }).packageJSON || {};
+  const contributedChat = (pkg.contributes?.chatParticipants || [])[0] || {};
+  const contributedName: string = contributedChat.name || "mybusiness";
+  const providerId = `${contributedName}-local`;
+  console.log(`🔌 Registering MCP provider "${providerId}"...`);
   const emitter = new vscode.EventEmitter<void>();
   const provider = vscode.lm.registerMcpServerDefinitionProvider(
-    "Mybusiness-local",
+    providerId,
     {
       onDidChangeMcpServerDefinitions: emitter.event,
       /**
@@ -37,13 +45,8 @@ export function registerMcpProvider(
         );
         // Provide a stdio server definition that runs our Node.js server
         const extensionPath = context.extensionPath;
-        const serverScript = path.join(
-          extensionPath,
-          "out",
-          "src",
-          "server",
-          "index.js"
-        );
+        // Prefer compiled src path layout (out/src/server/index.js) for alignment with tsconfig include
+        const serverScript = path.join(extensionPath, "out", "src", "server", "index.js");
 
         console.log(`📂 Extension path: ${extensionPath}`);
         console.log(`📜 Server script: ${serverScript}`);
@@ -82,7 +85,7 @@ export function registerMcpProvider(
     }
   );
   context.subscriptions.push(provider, emitter);
-  console.log(`✅ MCP provider "Mybusiness-local" registered successfully`);
+  console.log(`✅ MCP provider "${providerId}" registered successfully`);
 
   // Trigger the event to notify VS Code that servers are available
   console.log(`🔔 Firing onDidChangeMcpServerDefinitions event...`);

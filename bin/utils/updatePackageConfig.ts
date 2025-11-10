@@ -5,6 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import dotenv from "dotenv";
+import { deriveIds } from "../../src/shared/ids";
 
 interface PackageConfig {
   name: string;
@@ -23,6 +24,7 @@ function loadEnvironmentConfig(): PackageConfig {
   dotenv.config();
   const appName = process.env.APP_NAME || "mybusiness";
   const appDisplayName = process.env.APP_DISPLAY_NAME || "My Business";
+  const ids = deriveIds(process.env as any);
   return {
     name: process.env.EXTENSION_NAME || `${appName}-mcp-extension`,
     displayName:
@@ -31,8 +33,8 @@ function loadEnvironmentConfig(): PackageConfig {
       process.env.EXTENSION_DESCRIPTION ||
       "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
     publisher: process.env.EXTENSION_PUBLISHER || "myorg",
-    chatParticipantId: process.env.MCP_CHAT_PARTICIPANT_ID || appName,
-    chatParticipantName: process.env.MCP_CHAT_PARTICIPANT_NAME || appName,
+    chatParticipantId: ids.baseId,
+    chatParticipantName: ids.baseId,
     serverRegisterId: process.env.MCP_SERVER_ID || appName,
     defaultPort: parseInt(process.env.MCP_DEFAULT_PORT || "39200"),
     autoRegister: process.env.MCP_AUTO_REGISTER === "true",
@@ -133,8 +135,61 @@ async function updatePackageJson(config: PackageConfig): Promise<void> {
         description:
           "Include Authorization header metadata when registering HTTP server in mcp.json.",
       },
+      // Read-only (enumerated) diagnostics for IDs
+      [`${settingsPrefix}.ids.chatParticipantId`]: {
+        type: "string",
+        enum: [
+          config.chatParticipantId.charAt(0).toUpperCase() +
+            config.chatParticipantId.slice(1) +
+            "MCP",
+        ],
+        markdownDescription:
+          "Read-only. Current chat participant id as contributed (activation event).",
+      },
+      [`${settingsPrefix}.ids.chatParticipantName`]: {
+        type: "string",
+        enum: [config.chatParticipantName],
+        markdownDescription:
+          "Read-only. Current mention name (use @<name> in chat).",
+      },
+      [`${settingsPrefix}.ids.commandPrefix`]: {
+        type: "string",
+        enum: [settingsPrefix],
+        markdownDescription: "Read-only. Current command/settings prefix.",
+      },
+      [`${settingsPrefix}.ids.activationEventId`]: {
+        type: "string",
+        enum: [
+          config.chatParticipantId.charAt(0).toUpperCase() +
+            config.chatParticipantId.slice(1) +
+            "MCP",
+        ],
+        markdownDescription:
+          "Read-only. Activation event id (onChatParticipant:<id>).",
+      },
+      [`${settingsPrefix}.ids.extensionId`]: {
+        type: "string",
+        enum: [`${packageData.publisher}.${packageData.name}`],
+        markdownDescription:
+          "Read-only. Extension identifier (publisher.name).",
+      },
+      [`${settingsPrefix}.ids.serverRegisterId`]: {
+        type: "string",
+        enum: [config.serverRegisterId],
+        markdownDescription:
+          "Read-only. Server id key used in mcp.json servers.",
+      },
     },
   };
+
+  // Contribute diagnostic command for visibility in palette
+  packageData.contributes.commands = [
+    ...(packageData.contributes.commands || []),
+    {
+      command: `${commandPrefix}.diagnoseIds`,
+      title: `${config.displayName}: Diagnose Chat IDs`,
+    },
+  ];
 
   await fs.promises.writeFile(
     packagePath,
