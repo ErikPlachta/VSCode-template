@@ -40,6 +40,7 @@ export function registerMcpProvider(
         const serverScript = path.join(
           extensionPath,
           "out",
+          "src",
           "server",
           "index.js"
         );

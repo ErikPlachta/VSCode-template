@@ -19,7 +19,7 @@
     "onCommand:mybusinessMCP.unregisterServer",
     "onChatParticipant:MybusinessMCP"
   ],
-  "main": "./out/extension/index.js",
+  "main": "./out/src/extension/index.js",
   "contributes": {
     "commands": [
       {

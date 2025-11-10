@@ -43,6 +43,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 - MCP Server is no longer starting when vs code extension is activated. Need to resolve this issue so the extension can start the server properly again.
 
+- Verify MCP stdio + HTTP dual-mode after packaging; ensure mcp.json registration persists
 ### Priority 1 - Current Priority
 
 - Planned shim removals (🧹 deprecation lifecycle)
@@ -183,6 +184,9 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 All change history. Organized by date/time and semantic titles; verification recorded after each batch.
 
 ### [2025-11-09] Manifest alignment, server readiness, and activation resiliency
+
+#### 2025-11-09 19:00:57 fix: Fix extension entrypoint and stdio server path; vsce packaging succeeds; server starts via LM provider
+
 
 #### 2025-11-09 18:25:00 fix: Restore manifest defaults and keep provider/chat IDs consistent
 
