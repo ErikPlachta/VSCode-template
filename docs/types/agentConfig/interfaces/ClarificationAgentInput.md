@@ -6,7 +6,7 @@
 
 # Interface: ClarificationAgentInput
 
-Defined in: [src/types/agentConfig.ts:805](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L805)
+Defined in: [src/types/agentConfig.ts:840](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L840)
 
 Input parameters for the clarification agent.
 
@@ -16,7 +16,7 @@ Input parameters for the clarification agent.
 
 > **candidateAgents**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:809](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L809)
+Defined in: [src/types/agentConfig.ts:844](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L844)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:809](https://github.com/ErikPlachta/vscode
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:808](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L808)
+Defined in: [src/types/agentConfig.ts:843](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L843)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:808](https://github.com/ErikPlachta/vscode
 
 > **question**: `string`
 
-Defined in: [src/types/agentConfig.ts:806](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L806)
+Defined in: [src/types/agentConfig.ts:841](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L841)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:806](https://github.com/ErikPlachta/vscode
 
 > `optional` **topic**: `string`
 
-Defined in: [src/types/agentConfig.ts:807](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L807)
+Defined in: [src/types/agentConfig.ts:842](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L842)

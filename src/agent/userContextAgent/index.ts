@@ -20,411 +20,138 @@ import { createInvocationLogger } from "@mcp/telemetry";
 import { UserContextAgentProfile } from "@mcp/config/agentProfiles";
 import { userContextAgentConfig } from "@agent/userContextAgent/agent.config";
 import { CategoryId, CategoryRecord } from "@internal-types/agentConfig";
+import { IDS } from "@shared/ids";
+import * as os from "os";
+import {
+  FolderBlueprint,
+  RelationshipDescription,
+  CategoryRequirements,
+  CategorySchema,
+  PrimitiveTypeName,
+  TypeSchema,
+  TypedDictField,
+  TypeDefinition,
+  ExampleDataset,
+  DataValidationIssue,
+  DataValidationReport,
+  RemoteQueryBlueprint,
+  CategorySummary,
+  AgentOrchestrationGuidance,
+  CategoryOrchestrationConfig,
+  BusinessCategory,
+  EntityConnections,
+  CategorySnapshot,
+  DatasetCatalogueEntry,
+  InternalRelationshipDefinition,
+  LoadedDataset,
+  RelationshipLoadResult,
+  RawCategoryMetadata,
+  RawAgentOrchestrationGuidance,
+  RawOrchestrationConfig,
+  RawRelationshipEntry,
+  RawSchemaFile,
+  RawTypeFile,
+  RawExampleFile,
+  RawQueryFile,
+} from "@internal-types/userContext.types";
 
-/**
- * Description for how a category folder is organised.
- *
- */
-export interface FolderBlueprint {
-  /** Root directory for the category. */
-  root: string;
-  /** Path to the category configuration file. */
-  configFile: string;
-  /** JSON schema file paths. */
-  schemaFiles: string[];
-  /** Structured type definition file paths. */
-  typeFiles: string[];
-  /** Directory containing example datasets. */
-  examplesDir: string;
-  /** Directory containing query blueprints. */
-  queriesDir: string;
-}
+// (All type/interface definitions moved to @internal-types/userContext.types to enforce single source of truth.)
 
-/**
- * High-level relationship metadata surfaced to consumers.
- *
- */
-export interface RelationshipDescription {
-  /** Relationship label. */
-  name: string;
-  /** Category on the other side of the relationship. */
-  targetCategory: CategoryId;
-  /** Field or property used to establish the link. */
-  viaField: string;
-  /** Expected cardinality of the relationship. */
-  cardinality: "one" | "many";
-  /** Narrative description of the relationship. */
-  description: string;
-}
-
-/**
- * Requirements that each category must satisfy before being processed.
- *
- */
-export interface CategoryRequirements {
-  /** Fields that every record must provide. */
-  requiredRecordFields: string[];
-  /** Record properties that should align with relationship definitions. */
-  requiredRelationshipFields?: string[];
-  /** Free-form notes surfaced to orchestration layers. */
-  notes?: string[];
-}
-
-/**
- * JSON schema snippet stored alongside a category.
- *
- */
-export interface CategorySchema {
-  name: string;
-  description: string;
-  schema: Record<string, unknown>;
-}
-
-/**
- * Lightweight configuration wrapper for the User Context Agent.
- * Provides access to the generated `userContextAgentConfig` object.
- */
+/** Lightweight configuration wrapper for the User Context Agent. */
 export class UserContextAgentConfig {
   /** Underlying config object */
   public readonly value = userContextAgentConfig;
-}
-
-/** Supported primitive names within a type definition schema. */
-export type PrimitiveTypeName = "str" | "int" | "float" | "bool" | "datetime";
-
-/** JSON description for a structured type that can be materialised by an MCP server. */
-export type TypeSchema =
-  | { kind: "primitive"; name: PrimitiveTypeName }
-  | { kind: "optional"; value: TypeSchema }
-  | { kind: "list"; element: TypeSchema }
-  | { kind: "literal"; value: string | number | boolean | null }
-  | { kind: "enum"; values: Array<string | number | boolean> }
-  | { kind: "typedDict"; fields: TypedDictField[] };
-
-/**
- * Field description used within a TypedDict schema.
- *
- */
-export interface TypedDictField {
-  name: string;
-  type: TypeSchema;
-  required?: boolean;
-  description?: string;
-}
-
-/**
- * Python typing hints that mirror the JSON schemas.
- *
- */
-export interface TypeDefinition {
-  name: string;
-  description: string;
-  schema: TypeSchema;
-}
-
-/**
- * Example dataset artefact hosted in the category folder.
- *
- */
-export interface ExampleDataset {
-  file: string;
-  description: string;
-  sample: Record<string, unknown>;
-}
-
-/**
- * Issue detected while validating the raw data set for a category.
- *
- */
-export interface DataValidationIssue {
-  /** Identifier for the record that failed validation. */
-  recordId: string;
-  /** Optional schema name that triggered the error. */
-  schema?: string;
-  /** Field that failed validation if available. */
-  field?: string;
-  /** Detailed error message. */
-  message: string;
-  /** Type of validation that generated the issue. */
-  type: "schema" | "relationship";
-}
-
-/**
- * Summary produced after normalising the dataset.
- *
- */
-export interface DataValidationReport {
-  /** Timestamp when validation occurred. */
-  checkedAt: string;
-  /** Overall status for the category. */
-  status: "pass" | "fail";
-  /** Detailed issues encountered during validation. */
-  issues: DataValidationIssue[];
-}
-
-/**
- * Remote query blueprint associated with the category.
- *
- */
-export interface RemoteQueryBlueprint {
-  name: string;
-  description: string;
-  samplePayload: Record<string, unknown>;
-}
-
-/**
- * Summary returned when enumerating available categories.
- *
- */
-export interface CategorySummary {
-  id: CategoryId;
-  name: string;
-  description: string;
-}
-
-/**
- * Full configuration stored for each business category.
- *
- */
-export interface AgentOrchestrationGuidance {
-  /** Core responsibility for the agent when invoked for this category. */
-  focus: string;
-  /** Signals that hint the orchestrator should route the request to this agent. */
-  signals: string[];
-  /** Prompt starters that the orchestrator can feed to the agent. */
-  promptStarters: string[];
-}
-
-/**
- * CategoryOrchestrationConfig interface.
- *
- */
-export interface CategoryOrchestrationConfig {
-  /** High-level framing of how orchestration should leverage the category. */
-  summary: string;
-  /** Triggers that indicate the category is relevant to the request. */
-  signals: string[];
-  /** Situations where orchestration should escalate for clarification. */
-  escalateWhen?: string[];
-  /** Agent-specific routing guidance. */
-  agents: {
-    relevantDataManager: AgentOrchestrationGuidance;
-    databaseAgent: AgentOrchestrationGuidance;
-    dataAgent: AgentOrchestrationGuidance;
-  };
-}
-
-/**
- * BusinessCategory interface.
- *
- */
-export interface BusinessCategory {
-  id: CategoryId;
-  name: string;
-  description: string;
-  aliases: string[];
-  config: {
-    purpose: string;
-    primaryKeys: string[];
-    updateCadence: string;
-    access: string;
-    folder: FolderBlueprint;
-    requirements?: CategoryRequirements;
-    relationships: RelationshipDescription[];
-    orchestration: CategoryOrchestrationConfig;
-  };
-  schemas: CategorySchema[];
-  types: TypeDefinition[];
-  examples: ExampleDataset[];
-  queries: RemoteQueryBlueprint[];
-  records: CategoryRecord[];
-  validation: DataValidationReport;
-}
-
-/**
- * Connections resolved for a specific record.
- *
- */
-export interface EntityConnections {
-  categoryId: CategoryId;
-  recordId: string;
-  connections: Array<{
-    relationship: string;
-    targetCategory: CategoryId;
-    records: CategoryRecord[];
-  }>;
-}
-
-/**
- * Snapshot persisted to the shared cache for quick lookups.
- *
- */
-export interface CategorySnapshot {
-  id: CategoryId;
-  name: string;
-  description: string;
-  recordCount: number;
-  schemaNames: string[];
-  typeNames: string[];
-  queryNames: string[];
-  exampleFiles: string[];
-  folder: FolderBlueprint;
-}
-
-/**
- * Consolidated index entry persisted to the shared cache.
- *
- */
-export interface DatasetCatalogueEntry {
-  id: CategoryId;
-  name: string;
-  description: string;
-  primaryKeys: string[];
-  recordIds: string[];
-  relationships: Array<{
-    name: string;
-    targetCategory: CategoryId;
-    viaField: string;
-    cardinality: "one" | "many";
-  }>;
-  schemaNames: string[];
-  requirements?: CategoryRequirements;
-}
-
-/**
- * Structure representing how different categories reference each other.
- *
- */
-interface RelationshipDefinition {
-  sourceCategory: CategoryId;
-  targetCategory: CategoryId;
-  relationshipName: string;
-  sourceField: string;
-  targetField: string;
-  cardinality: "one" | "many";
-}
-
-/**
- * LoadedDataset interface.
- *
- */
-interface LoadedDataset {
-  categories: Map<CategoryId, BusinessCategory>;
-  lookupIndex: Map<string, BusinessCategory>;
-  relationships: RelationshipDefinition[];
-  consolidatedIndex: DatasetCatalogueEntry[];
-  fingerprint: string;
-}
-
-/**
- * RelationshipLoadResult interface.
- *
- */
-interface RelationshipLoadResult {
-  descriptions: RelationshipDescription[];
-  definitions: RelationshipDefinition[];
-}
-
-/**
- * RawCategoryMetadata interface.
- *
- */
-interface RawCategoryMetadata {
-  id: string;
-  name: string;
-  description: string;
-  aliases?: string[];
-  config: {
-    purpose: string;
-    primaryKeys: string[];
-    updateCadence: string;
-    access: string;
-    requirements?: CategoryRequirements;
-    orchestration: RawOrchestrationConfig;
-  };
-}
-
-/**
- * RawAgentOrchestrationGuidance interface.
- *
- */
-interface RawAgentOrchestrationGuidance {
-  focus?: unknown;
-  signals?: unknown;
-  promptStarters?: unknown;
-}
-
-/**
- * RawOrchestrationConfig interface.
- *
- */
-interface RawOrchestrationConfig {
-  summary?: unknown;
-  signals?: unknown;
-  escalateWhen?: unknown;
-  agents?: {
-    relevantDataManager?: RawAgentOrchestrationGuidance;
-    databaseAgent?: RawAgentOrchestrationGuidance;
-    dataAgent?: RawAgentOrchestrationGuidance;
-  };
-}
-
-/**
- * RawRelationshipEntry interface.
- *
- */
-interface RawRelationshipEntry {
-  key: string;
-  name: string;
-  description: string;
-  targetCategory: string;
-  sourceField: string;
-  targetField: string;
-  cardinality: "one" | "many";
-}
-
-/**
- * RawSchemaFile interface.
- *
- */
-interface RawSchemaFile {
-  name: string;
-  description: string;
-  schema: Record<string, unknown>;
-}
-
-/**
- * RawTypeFile interface.
- */
-interface RawTypeFile {
-  name: string;
-  description: string;
-  schema: unknown;
-}
-
-/**
- * RawExampleFile interface.
- *
- */
-interface RawExampleFile {
-  description: string;
-  sample: Record<string, unknown>;
-}
-
-/**
- * RawQueryFile interface.
- *
- */
-interface RawQueryFile {
-  name: string;
-  description: string;
-  samplePayload: Record<string, unknown>;
 }
 
 // Default root for user context business data. Previously pointed to a deprecated `bin/data` directory.
 // The dataset folders now live under `src/userContext` (applications, departments, people, etc.).
 // Tests and runtime may override via VSCODE_TEMPLATE_DATA_ROOT.
 const DEFAULT_DATA_ROOT = path.resolve(__dirname, "..", "..", "userContext");
+// External user data directory (Phase 3.2): ~/.vscode/extensions/<publisher>.<extensionName>/userData
+// Prefer installed extension path; fallback to workspace-local path if not present.
+/**
+ * Resolve the external user data root where user-managed category folders live.
+ * Format: ~/.vscode/extensions/<publisher>.<extensionName>/userData
+ *
+ * @returns {string} Absolute path to the external user data directory.
+ */
+function resolveExternalUserDataRoot(): string {
+  const extensionFolder = IDS.extensionFullId;
+  const base = path.join(
+    os.homedir(),
+    ".vscode",
+    "extensions",
+    extensionFolder
+  );
+  return path.join(base, "userData");
+}
+
+/**
+ * Determine whether the provided root contains at least one valid user category.
+ * A valid category directory has a category.json present.
+ *
+ * @param {string} root - Candidate external user data root.
+ * @returns {boolean} True when at least one category folder is discovered.
+ */
+function hasUserCategories(root: string): boolean {
+  try {
+    if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) return false;
+    const entries = fs
+      .readdirSync(root, { withFileTypes: true })
+      .filter((e) => e.isDirectory());
+    for (const entry of entries) {
+      const categoryDir = path.join(root, entry.name);
+      if (fs.existsSync(path.join(categoryDir, "category.json"))) {
+        return true;
+      }
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Choose the active data root for the agent. Preference order:
+ * 1. Explicit override via VSCODE_TEMPLATE_DATA_ROOT (tests/dev)
+ * 2. External user data directory if it contains categories
+ * 3. Built-in default dataset bundled in the extension source.
+ * Ensures external directory exists for future imports.
+ *
+ * @returns {{ activeRoot: string; externalRoot: string; usingExternal: boolean }} Resolution outcome.
+ */
+function chooseDataRoot(): {
+  activeRoot: string;
+  externalRoot: string;
+  usingExternal: boolean;
+} {
+  const override = process.env.VSCODE_TEMPLATE_DATA_ROOT;
+  if (override) {
+    return {
+      activeRoot: override,
+      externalRoot: override,
+      usingExternal: false,
+    };
+  }
+  const external = resolveExternalUserDataRoot();
+  if (hasUserCategories(external)) {
+    return {
+      activeRoot: external,
+      externalRoot: external,
+      usingExternal: true,
+    };
+  }
+  try {
+    fs.mkdirSync(external, { recursive: true });
+  } catch {
+    /* ignore */
+  }
+  return {
+    activeRoot: DEFAULT_DATA_ROOT,
+    externalRoot: external,
+    usingExternal: false,
+  };
+}
 const CONSOLIDATED_INDEX_CACHE_KEY = "relevant-data:catalogue";
 
 /**
@@ -622,12 +349,14 @@ export class UnknownCategoryError extends Error {
 export class UserContextAgent {
   private readonly cacheDirPromise: Promise<string>;
   private readonly dataRoot: string;
+  private readonly externalRoot: string;
+  private usingExternal: boolean;
   private readonly categories: Map<CategoryId, BusinessCategory>;
   private readonly lookupIndex: Map<string, BusinessCategory>;
-  private readonly relationshipDefinitions: RelationshipDefinition[];
+  private readonly relationshipDefinitions: InternalRelationshipDefinition[];
   private readonly relationshipsBySource: Map<
     CategoryId,
-    RelationshipDefinition[]
+    InternalRelationshipDefinition[]
   >;
   private readonly consolidatedIndex: DatasetCatalogueEntry[];
   private readonly datasetFingerprint: string;
@@ -646,7 +375,10 @@ export class UserContextAgent {
   constructor(cacheDirPromise?: Promise<string>) {
     this.config = new UserContextAgentConfig();
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
-    this.dataRoot = process.env.VSCODE_TEMPLATE_DATA_ROOT ?? DEFAULT_DATA_ROOT;
+    const rootChoice = chooseDataRoot();
+    this.dataRoot = rootChoice.activeRoot;
+    this.externalRoot = rootChoice.externalRoot;
+    this.usingExternal = rootChoice.usingExternal;
     this.ajv = new Ajv({ allErrors: true });
     const dataset = this.loadDataset();
     this.categories = dataset.categories;
@@ -787,6 +519,144 @@ export class UserContextAgent {
    */
   getDatasetFingerprint(): string {
     return this.datasetFingerprint;
+  }
+
+  /**
+   * Expose which data root is currently active. Helpful for tests & diagnostics.
+   *
+   * @returns {{ active: string; external: string; usingExternal: boolean }} Resolution details.
+   */
+  getActiveDataRoot(): {
+    active: string;
+    external: string;
+    usingExternal: boolean;
+  } {
+    return {
+      active: this.dataRoot,
+      external: this.externalRoot,
+      usingExternal: this.usingExternal,
+    };
+  }
+
+  /**
+   * Export current active dataset (category folders) to a target directory.
+   *
+   * @param {string} destination - Absolute path to export into (will be created).
+   * @returns {string[]} List of exported category ids.
+   * @throws {Error} When destination cannot be written.
+   */
+  exportUserData(destination: string): string[] {
+    const sourceRoot = this.dataRoot;
+    fs.mkdirSync(destination, { recursive: true });
+    const exported: string[] = [];
+    const entries = fs
+      .readdirSync(sourceRoot, { withFileTypes: true })
+      .filter((e) => e.isDirectory());
+    for (const entry of entries) {
+      const categoryDir = path.join(sourceRoot, entry.name);
+      if (!fs.existsSync(path.join(categoryDir, "category.json"))) continue; // skip non-category dirs
+      const targetDir = path.join(destination, entry.name);
+      fs.mkdirSync(targetDir, { recursive: true });
+      // Shallow copy: category.json, records.json, relationships.json plus subfolders (schemas/types/examples/queries)
+      const copyItems = ["category.json", "records.json", "relationships.json"];
+      for (const item of copyItems) {
+        const src = path.join(categoryDir, item);
+        if (fs.existsSync(src)) {
+          fs.copyFileSync(src, path.join(targetDir, item));
+        }
+      }
+      for (const sub of ["schemas", "types", "examples", "queries"]) {
+        const subSrc = path.join(categoryDir, sub);
+        if (!fs.existsSync(subSrc) || !fs.statSync(subSrc).isDirectory())
+          continue;
+        const subDest = path.join(targetDir, sub);
+        fs.mkdirSync(subDest, { recursive: true });
+        for (const file of fs.readdirSync(subSrc)) {
+          const srcFile = path.join(subSrc, file);
+          if (fs.statSync(srcFile).isFile()) {
+            fs.copyFileSync(srcFile, path.join(subDest, file));
+          }
+        }
+      }
+      exported.push(entry.name);
+    }
+    return exported;
+  }
+
+  /**
+   * Import user data from a directory of category folders into the external user data root.
+   * Replaces existing category folder contents. After import, reloads the dataset.
+   *
+   * @param {string} source - Directory containing category subfolders.
+   * @returns {string[]} Imported category ids.
+   * @throws {Error} When validation fails or source unreadable.
+   */
+  importUserData(source: string): string[] {
+    if (!fs.existsSync(source) || !fs.statSync(source).isDirectory()) {
+      throw new Error(
+        `Import source '${source}' does not exist or is not a directory.`
+      );
+    }
+    const entries = fs
+      .readdirSync(source, { withFileTypes: true })
+      .filter((e) => e.isDirectory());
+    if (entries.length === 0) {
+      throw new Error(
+        `Import source '${source}' contains no category folders.`
+      );
+    }
+    fs.mkdirSync(this.externalRoot, { recursive: true });
+    const imported: string[] = [];
+    for (const entry of entries) {
+      const categoryDir = path.join(source, entry.name);
+      const configPath = path.join(categoryDir, "category.json");
+      if (!fs.existsSync(configPath)) {
+        continue; // skip invalid folder
+      }
+      // Basic validation: parse category.json for id/name
+      const metadata = this.loadJsonFile<RawCategoryMetadata>(
+        configPath,
+        `import metadata for ${entry.name}`
+      );
+      if (!metadata.id || !metadata.name) {
+        throw new Error(
+          `Category '${entry.name}' missing id or name in import source.`
+        );
+      }
+      const targetDir = path.join(this.externalRoot, entry.name);
+      // Clear existing contents
+      if (fs.existsSync(targetDir)) {
+        for (const existing of fs.readdirSync(targetDir)) {
+          const existingPath = path.join(targetDir, existing);
+          fs.rmSync(existingPath, { recursive: true, force: true });
+        }
+      } else {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+      // Copy
+      for (const item of fs.readdirSync(categoryDir)) {
+        const srcItem = path.join(categoryDir, item);
+        const destItem = path.join(targetDir, item);
+        if (fs.statSync(srcItem).isDirectory()) {
+          fs.mkdirSync(destItem, { recursive: true });
+          for (const sub of fs.readdirSync(srcItem)) {
+            const subSrc = path.join(srcItem, sub);
+            const subDest = path.join(destItem, sub);
+            if (fs.statSync(subSrc).isFile()) {
+              fs.copyFileSync(subSrc, subDest);
+            }
+          }
+        } else if (fs.statSync(srcItem).isFile()) {
+          fs.copyFileSync(srcItem, destItem);
+        }
+      }
+      imported.push(metadata.id);
+    }
+    // If we were previously using default root and now imported data, switch to external root.
+    if (!this.usingExternal) {
+      this.usingExternal = true; // Mark now using external; recommend instantiating new agent for full reload.
+    }
+    return imported;
   }
 
   /**
@@ -957,8 +827,9 @@ export class UserContextAgent {
     }
     const categories = new Map<CategoryId, BusinessCategory>();
     const lookupIndex = new Map<string, BusinessCategory>();
-    const relationships: RelationshipDefinition[] = [];
+    const relationships: InternalRelationshipDefinition[] = [];
     const consolidatedIndex: DatasetCatalogueEntry[] = [];
+    const loadErrors: Array<{ categoryName: string; error: string }> = [];
 
     const entries = fs
       .readdirSync(this.dataRoot, { withFileTypes: true })
@@ -971,14 +842,36 @@ export class UserContextAgent {
 
     for (const entry of entries) {
       const categoryDir = path.join(this.dataRoot, entry.name);
-      const { category, relationshipDefinitions } =
-        this.loadCategory(categoryDir);
-      categories.set(category.id, category);
-      consolidatedIndex.push(this.createCatalogueEntry(category));
-      relationships.push(...relationshipDefinitions);
-      for (const key of [category.id, category.name, ...category.aliases]) {
-        lookupIndex.set(NormalizeLookupKey(key), category);
+      try {
+        const { category, relationshipDefinitions } = this.loadCategory(
+          categoryDir,
+          entry.name
+        );
+        categories.set(category.id, category);
+        consolidatedIndex.push(this.createCatalogueEntry(category));
+        relationships.push(...relationshipDefinitions);
+        for (const key of [category.id, category.name, ...category.aliases]) {
+          lookupIndex.set(NormalizeLookupKey(key), category);
+        }
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        loadErrors.push({ categoryName: entry.name, error: message });
+        console.warn(`Skipping category '${entry.name}': ${message}`);
       }
+    }
+
+    if (categories.size === 0) {
+      throw new Error(
+        `No valid categories could be loaded. Errors encountered: ${loadErrors
+          .map((e) => `${e.categoryName}: ${e.error}`)
+          .join("; ")}`
+      );
+    }
+
+    if (loadErrors.length > 0) {
+      console.warn(
+        `Loaded ${categories.size} categories with ${loadErrors.length} failures.`
+      );
     }
 
     this.performRelationshipValidation(categories, relationships);
@@ -1001,20 +894,40 @@ export class UserContextAgent {
    * loadCategory function.
    *
    * @param {string} categoryDir - Absolute path to category folder containing config and data assets.
-   * @returns {{ category: BusinessCategory; relationshipDefinitions: RelationshipDefinition[] }} Loaded category and relationships.
+   * @param {string} [categoryName] - Optional category folder name for diagnostics.
+   * @returns {{ category: BusinessCategory; relationshipDefinitions: InternalRelationshipDefinition[]; source: string }} Loaded category, relationships, and source path.
    * @throws {Error} When required files like category.json are missing or malformed.
    */
-  private loadCategory(categoryDir: string): {
+  private loadCategory(
+    categoryDir: string,
+    categoryName?: string
+  ): {
     category: BusinessCategory;
-    relationshipDefinitions: RelationshipDefinition[];
+    relationshipDefinitions: InternalRelationshipDefinition[];
+    source: string;
   } {
-    const configPath = path.join(categoryDir, "category.json");
-    if (!fs.existsSync(configPath)) {
-      throw new Error(`Missing category.json inside '${categoryDir}'.`);
-    }
+    const displayName = categoryName ?? path.basename(categoryDir);
+
+    // Resolve paths with fallback chain: external userData → workspace → examples
+    const configPath = this.resolveCategoryFile(
+      categoryDir,
+      "category.json",
+      displayName
+    );
+    const recordsPath = this.resolveCategoryFile(
+      categoryDir,
+      "records.json",
+      displayName
+    );
+    const relationshipsPath = this.resolveCategoryFile(
+      categoryDir,
+      "relationships.json",
+      displayName
+    );
+
     const metadata = this.loadJsonFile<RawCategoryMetadata>(
       configPath,
-      `metadata for ${categoryDir}`
+      `metadata for ${displayName}`
     );
     if (!metadata.id || !metadata.name || !metadata.description) {
       throw new Error(
@@ -1031,11 +944,11 @@ export class UserContextAgent {
     const examples = this.loadExamples(categoryDir);
     const queries = this.loadQueries(categoryDir);
     const { descriptions, definitions } = this.loadRelationships(
-      categoryDir,
+      relationshipsPath,
       metadata.id
     );
     const records = this.loadRecords(
-      categoryDir,
+      recordsPath,
       metadata.id,
       metadata.config.requirements
     );
@@ -1076,7 +989,63 @@ export class UserContextAgent {
       );
     }
 
-    return { category, relationshipDefinitions: definitions };
+    return {
+      category,
+      relationshipDefinitions: definitions,
+      source: configPath,
+    };
+  }
+
+  /**
+   * Resolve a category file path with fallback chain: external userData → workspace (bundled examples).
+   * Enables graceful degradation when user customizations are incomplete.
+   * The workspace serves as both the default dataset and example data for new users.
+   *
+   * @param {string} categoryDir - Base category directory path.
+   * @param {string} filename - Target file (e.g., 'category.json', 'records.json').
+   * @param {string} displayName - Category name for error messages.
+   * @returns {string} Resolved absolute file path.
+   * @throws {Error} When file cannot be found in any fallback location.
+   */
+  private resolveCategoryFile(
+    categoryDir: string,
+    filename: string,
+    displayName: string
+  ): string {
+    // Try primary location (could be external or workspace depending on how agent was initialized)
+    const primaryPath = path.join(categoryDir, filename);
+    if (fs.existsSync(primaryPath)) {
+      return primaryPath;
+    }
+
+    // Fallback chain: if external root was selected but file missing, try workspace
+    // The workspace (DEFAULT_DATA_ROOT) contains bundled example categories and serves as the fallback
+    if (this.usingExternal) {
+      const categoryName = path.basename(categoryDir);
+      const workspacePath = path.join(
+        DEFAULT_DATA_ROOT,
+        categoryName,
+        filename
+      );
+      if (fs.existsSync(workspacePath)) {
+        console.warn(
+          `Category '${displayName}': using workspace fallback for ${filename}`
+        );
+        return workspacePath;
+      }
+    }
+
+    throw new Error(
+      `Missing required file '${filename}' for category '${displayName}' (checked: ${primaryPath}${
+        this.usingExternal
+          ? `, ${path.join(
+              DEFAULT_DATA_ROOT,
+              path.basename(categoryDir),
+              filename
+            )}`
+          : ""
+      })`
+    );
   }
 
   /**
@@ -1354,13 +1323,13 @@ export class UserContextAgent {
    *
    * @param {CategorySchema[]} schemas - schemas parameter.
    * @param {CategoryRecord[]} records - records parameter.
-   * @param {RelationshipDefinition[]} relationshipDefinitions - relationshipDefinitions parameter.
+   * @param {InternalRelationshipDefinition[]} relationshipDefinitions - relationshipDefinitions parameter.
    * @returns {DataValidationReport} - Aggregated validation status and issues for category records across schemas & relationships.
    */
   private validateCategoryRecords(
     schemas: CategorySchema[],
     records: CategoryRecord[],
-    relationshipDefinitions: RelationshipDefinition[]
+    relationshipDefinitions: InternalRelationshipDefinition[]
   ): DataValidationReport {
     const issues: DataValidationIssue[] = [];
     const validators: Array<{ schema: string; validate: ValidateFunction }> =
@@ -1455,11 +1424,11 @@ export class UserContextAgent {
    * performRelationshipValidation function.
    *
    * @param {Map<CategoryId, BusinessCategory>} categories - categories parameter.
-   * @param {RelationshipDefinition[]} relationships - relationships parameter.
+   * @param {InternalRelationshipDefinition[]} relationships - relationships parameter.
    */
   private performRelationshipValidation(
     categories: Map<CategoryId, BusinessCategory>,
-    relationships: RelationshipDefinition[]
+    relationships: InternalRelationshipDefinition[]
   ): void {
     const bySource = this.groupRelationshipsBySource(relationships);
     for (const category of categories.values()) {
@@ -1511,23 +1480,20 @@ export class UserContextAgent {
   }
 
   /**
-   * loadRecords function.
+   * Load records from a resolved file path.
+   * Supports fallback chain: external userData → workspace → examples.
    *
-   * @param {string} categoryDir - categoryDir parameter.
-   * @param {string} categoryId - categoryId parameter.
-   * @param {CategoryRequirements} requirements - requirements parameter.
+   * @param {string} recordsPath - Pre-resolved absolute path to records.json.
+   * @param {string} categoryId - Category identifier for error context.
+   * @param {CategoryRequirements} requirements - Category validation requirements.
    * @returns {CategoryRecord[]} - Parsed and validated record objects loaded from records.json.
    * @throws {Error} - May throw an error.
    */
   private loadRecords(
-    categoryDir: string,
+    recordsPath: string,
     categoryId: string,
     requirements?: CategoryRequirements
   ): CategoryRecord[] {
-    const recordsPath = path.join(categoryDir, "records.json");
-    if (!fs.existsSync(recordsPath)) {
-      throw new Error(`Missing records.json for category '${categoryId}'.`);
-    }
     const raw = this.loadJsonFile<unknown[]>(
       recordsPath,
       `records for ${categoryId}`
@@ -1559,23 +1525,18 @@ export class UserContextAgent {
   }
 
   /**
-   * loadRelationships function.
+   * Load relationship definitions from a resolved file path.
+   * Supports fallback chain: external userData → workspace → examples.
    *
-   * @param {string} categoryDir - categoryDir parameter.
-   * @param {string} categoryId - categoryId parameter.
+   * @param {string} relationshipsPath - Pre-resolved absolute path to relationships.json.
+   * @param {string} categoryId - Category identifier for error context.
    * @returns {RelationshipLoadResult} - Relationship descriptions plus internal definitions for resolution.
    * @throws {Error} - May throw an error.
    */
   private loadRelationships(
-    categoryDir: string,
+    relationshipsPath: string,
     categoryId: string
   ): RelationshipLoadResult {
-    const relationshipsPath = path.join(categoryDir, "relationships.json");
-    if (!fs.existsSync(relationshipsPath)) {
-      throw new Error(
-        `Missing relationships.json for category '${categoryId}'.`
-      );
-    }
     const raw = this.loadJsonFile<RawRelationshipEntry[]>(
       relationshipsPath,
       `relationships for ${categoryId}`
@@ -1586,7 +1547,7 @@ export class UserContextAgent {
       );
     }
     const descriptions: RelationshipDescription[] = [];
-    const definitions: RelationshipDefinition[] = [];
+    const definitions: InternalRelationshipDefinition[] = [];
     for (const relationship of raw) {
       if (
         !relationship.key ||
@@ -1641,13 +1602,13 @@ export class UserContextAgent {
    * assertRelationshipCoverage function.
    *
    * @param {string[]} fields - fields parameter.
-   * @param {RelationshipDefinition[]} relationships - relationships parameter.
+   * @param {InternalRelationshipDefinition[]} relationships - relationships parameter.
    * @param {string} context - context parameter.
    * @throws {Error} - May throw an error.
    */
   private assertRelationshipCoverage(
     fields: string[],
-    relationships: RelationshipDefinition[],
+    relationships: InternalRelationshipDefinition[],
     context: string
   ): void {
     const covered = new Set(
@@ -1665,13 +1626,13 @@ export class UserContextAgent {
   /**
    * groupRelationshipsBySource function.
    *
-   * @param {RelationshipDefinition[]} relations - relations parameter.
-   * @returns {Map<CategoryId, RelationshipDefinition[]>} - Map keyed by source category id listing its relationship definitions.
+   * @param {InternalRelationshipDefinition[]} relations - relations parameter.
+   * @returns {Map<CategoryId, InternalRelationshipDefinition[]>} - Map keyed by source category id listing its relationship definitions.
    */
   private groupRelationshipsBySource(
-    relations: RelationshipDefinition[]
-  ): Map<CategoryId, RelationshipDefinition[]> {
-    const map = new Map<CategoryId, RelationshipDefinition[]>();
+    relations: InternalRelationshipDefinition[]
+  ): Map<CategoryId, InternalRelationshipDefinition[]> {
+    const map = new Map<CategoryId, InternalRelationshipDefinition[]>();
     for (const relationship of relations) {
       const existing = map.get(relationship.sourceCategory) ?? [];
       existing.push(relationship);
@@ -1759,12 +1720,12 @@ export class UserContextAgent {
   /**
    * resolveTargets function.
    *
-   * @param {RelationshipDefinition} relationship - relationship parameter.
+   * @param {InternalRelationshipDefinition} relationship - relationship parameter.
    * @param {unknown} value - value parameter.
    * @returns {CategoryRecord[]} - Records in target category matching provided source field value(s).
    */
   private resolveTargets(
-    relationship: RelationshipDefinition,
+    relationship: InternalRelationshipDefinition,
     value: unknown
   ): CategoryRecord[] {
     const targetCategory = this.categories.get(relationship.targetCategory);
@@ -1890,3 +1851,12 @@ export function createUserContextAgent(): UserContextAgent {
 
 // Export configuration types and instances for external use
 export { userContextAgentConfig } from "@agent/userContextAgent/agent.config";
+
+// Re-export key types for external consumers
+export type {
+  BusinessCategory,
+  CategorySummary,
+  EntityConnections,
+  CategorySnapshot,
+  DatasetCatalogueEntry,
+} from "@internal-types/userContext.types";

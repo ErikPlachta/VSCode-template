@@ -8,7 +8,7 @@
 
 > `const` **ConfigUtils**: `object`
 
-Defined in: [src/types/configRegistry.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/configRegistry.ts#L173)
+Defined in: [src/types/configRegistry.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/configRegistry.ts#L173)
 
 Utility functions for working with configuration IDs
 

@@ -6,7 +6,7 @@
 
 # Class: RepositoryHealthAgent
 
-Defined in: [src/tools/repositoryHealth.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L71)
+Defined in: [src/tools/repositoryHealth.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L71)
 
 Orchestrates linting, schema validation, and documentation audits.
 
@@ -16,7 +16,7 @@ Orchestrates linting, schema validation, and documentation audits.
 
 > **new RepositoryHealthAgent**(`baseDir`, `config`): `RepositoryHealthAgent`
 
-Defined in: [src/tools/repositoryHealth.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L82)
+Defined in: [src/tools/repositoryHealth.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L82)
 
 Create a new health agent using the provided configuration.
 
@@ -44,7 +44,7 @@ Fully resolved health agent configuration contract.
 
 > **checkNoLegacyMcpConfigArtifacts**(): `Promise`\<[`CheckResult`](../interfaces/CheckResult.md)\>
 
-Defined in: [src/tools/repositoryHealth.ts:308](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L308)
+Defined in: [src/tools/repositoryHealth.ts:308](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L308)
 
 Ensure no legacy JSON configuration artifacts are present in the repository (outside of out/).
 
@@ -63,7 +63,7 @@ Result indicating success or listing offending file paths.
 
 > **runAllChecks**(): `Promise`\<[`HealthReport`](../interfaces/HealthReport.md)\>
 
-Defined in: [src/tools/repositoryHealth.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L149)
+Defined in: [src/tools/repositoryHealth.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L149)
 
 Execute every configured check (TS lint, JSON schema, Markdown metadata) and aggregate results.
 
@@ -79,7 +79,7 @@ Composite report including per-check pass state and messages.
 
 > **runTypescriptLint**(): `Promise`\<[`CheckResult`](../interfaces/CheckResult.md)\>
 
-Defined in: [src/tools/repositoryHealth.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L165)
+Defined in: [src/tools/repositoryHealth.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L165)
 
 Execute ESLint across configured TypeScript include globs.
 
@@ -95,7 +95,7 @@ Lint result summarizing pass/fail and diagnostic messages.
 
 > **validateJsonSchemas**(): `Promise`\<[`CheckResult`](../interfaces/CheckResult.md)\>
 
-Defined in: [src/tools/repositoryHealth.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L214)
+Defined in: [src/tools/repositoryHealth.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L214)
 
 Validate JSON artifacts against declared schemas using Ajv 2020 draft.
 
@@ -111,7 +111,7 @@ Result object enumerating per-file schema validation failures.
 
 > **validateMarkdownDocuments**(): `Promise`\<[`CheckResult`](../interfaces/CheckResult.md)\>
 
-Defined in: [src/tools/repositoryHealth.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L256)
+Defined in: [src/tools/repositoryHealth.ts:256](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L256)
 
 Validate Markdown documents for required front matter fields and required section headings.
 
@@ -127,7 +127,7 @@ Result summarizing metadata compliance across scanned documents.
 
 > **writeReport**(`report`): `Promise`\<`void`\>
 
-Defined in: [src/tools/repositoryHealth.ts:346](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L346)
+Defined in: [src/tools/repositoryHealth.ts:346](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L346)
 
 Persist a markdown report summarizing the check outcomes to the configured output path.
 
@@ -151,7 +151,7 @@ Resolves when the report has been written to disk.
 
 > `static` **createFromConfig**(`config`): `RepositoryHealthAgent`
 
-Defined in: [src/tools/repositoryHealth.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L140)
+Defined in: [src/tools/repositoryHealth.ts:140](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L140)
 
 Create an agent using an already materialized configuration (skips disk IO).
 
@@ -175,7 +175,7 @@ New agent instance.
 
 > `static` **createFromDisk**(`configPath`): `Promise`\<`RepositoryHealthAgent`\>
 
-Defined in: [src/tools/repositoryHealth.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L125)
+Defined in: [src/tools/repositoryHealth.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L125)
 
 Create an agent instance by reading the preferred TS application config (or legacy JSON fallback).
 
@@ -199,7 +199,7 @@ Instantiated health agent ready to run checks.
 
 > `static` **loadConfig**(`configPath`): `Promise`\<[`AgentConfig`](../interfaces/AgentConfig.md)\>
 
-Defined in: [src/tools/repositoryHealth.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L100)
+Defined in: [src/tools/repositoryHealth.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L100)
 
 Load configuration from the typed application config (preferred) with a legacy JSON fallback.
 

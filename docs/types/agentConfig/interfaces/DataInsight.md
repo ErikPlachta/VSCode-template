@@ -6,7 +6,7 @@
 
 # Interface: DataInsight
 
-Defined in: [src/types/agentConfig.ts:843](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L843)
+Defined in: [src/types/agentConfig.ts:878](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L878)
 
 Insight produced by analysis over data records.
 
@@ -16,7 +16,7 @@ Insight produced by analysis over data records.
 
 > `optional` **affectedRecords**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:854](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L854)
+Defined in: [src/types/agentConfig.ts:889](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L889)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:854](https://github.com/ErikPlachta/vscode
 
 > **category**: `string`
 
-Defined in: [src/types/agentConfig.ts:853](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L853)
+Defined in: [src/types/agentConfig.ts:888](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L888)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:853](https://github.com/ErikPlachta/vscode
 
 > **confidence**: `number`
 
-Defined in: [src/types/agentConfig.ts:852](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L852)
+Defined in: [src/types/agentConfig.ts:887](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L887)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:852](https://github.com/ErikPlachta/vscode
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:851](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L851)
+Defined in: [src/types/agentConfig.ts:886](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L886)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/agentConfig.ts:851](https://github.com/ErikPlachta/vscode
 
 > **type**: `"pattern"` \| `"anomaly"` \| `"correlation"` \| `"trend"` \| `"opportunity"` \| `"risk"`
 
-Defined in: [src/types/agentConfig.ts:844](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L844)
+Defined in: [src/types/agentConfig.ts:879](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L879)

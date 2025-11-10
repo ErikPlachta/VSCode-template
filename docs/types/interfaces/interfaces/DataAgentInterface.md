@@ -6,7 +6,7 @@
 
 # Interface: DataAgentInterface
 
-Defined in: [src/types/interfaces.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L130)
+Defined in: [src/types/interfaces.ts:119](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L119)
 
 DataAgentInterface interface.
 
@@ -16,7 +16,7 @@ DataAgentInterface interface.
 
 > **analyzeConnection**(`sourceData`, `targetData`, `relationship`): `Promise`\<[`CrossCategoryConnection`](CrossCategoryConnection.md)\>
 
-Defined in: [src/types/interfaces.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L137)
+Defined in: [src/types/interfaces.ts:126](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L126)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [src/types/interfaces.ts:137](https://github.com/ErikPlachta/vscode-
 
 > **analyzeData**(`input`): `Promise`\<[`DataInsight`](DataInsight.md)[]\>
 
-Defined in: [src/types/interfaces.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L131)
+Defined in: [src/types/interfaces.ts:120](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L120)
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: [src/types/interfaces.ts:131](https://github.com/ErikPlachta/vscode-
 
 > **generateExplorationPlan**(`categoryId`, `question`, `availableData`): `Promise`\<[`ExplorationPlan`](ExplorationPlan.md)\>
 
-Defined in: [src/types/interfaces.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L132)
+Defined in: [src/types/interfaces.ts:121](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L121)
 
 #### Parameters
 
@@ -86,7 +86,7 @@ Defined in: [src/types/interfaces.ts:132](https://github.com/ErikPlachta/vscode-
 
 > **searchData**(`keyword`, `data`): [`TopicSearchResult`](TopicSearchResult.md)[]
 
-Defined in: [src/types/interfaces.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L142)
+Defined in: [src/types/interfaces.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L131)
 
 #### Parameters
 

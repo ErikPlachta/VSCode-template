@@ -4,10 +4,20 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["id"],
+    "required": [
+      "id"
+    ],
     "anyOf": [
-      { "required": ["name"] },
-      { "required": ["title"] }
+      {
+        "required": [
+          "name"
+        ]
+      },
+      {
+        "required": [
+          "title"
+        ]
+      }
     ],
     "properties": {
       "id": {
@@ -28,11 +38,15 @@
       "role": {
         "type": "string"
       },
-      "departmentId": {
+      "department": {
         "type": "string"
       },
-      "managerId": {
-        "type": ["string", "null"]
+      "email": {
+        "type": "string",
+        "format": "email"
+      },
+      "phone": {
+        "type": "string"
       },
       "location": {
         "type": "string"
@@ -40,29 +54,31 @@
       "skills": {
         "type": "array",
         "items": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         }
       },
-      "applicationIds": {
+      "applications": {
         "type": "array",
         "items": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         }
       },
-      "policyAcks": {
+      "policies": {
         "type": "array",
         "items": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         }
       },
-      "resourceIds": {
+      "resources": {
         "type": "array",
         "items": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
+        }
+      },
+      "systems": {
+        "type": "array",
+        "items": {
+          "type": "string"
         }
       }
     },

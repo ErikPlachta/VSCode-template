@@ -6,7 +6,7 @@
 
 # Interface: ExplorationPlan
 
-Defined in: [src/types/agentConfig.ts:866](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L866)
+Defined in: [src/types/agentConfig.ts:901](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L901)
 
 Structured plan for guiding a data exploration workflow.
 
@@ -16,7 +16,7 @@ Structured plan for guiding a data exploration workflow.
 
 > **question**: `string`
 
-Defined in: [src/types/agentConfig.ts:868](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L868)
+Defined in: [src/types/agentConfig.ts:903](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L903)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:868](https://github.com/ErikPlachta/vscode
 
 > **recommendedQueries**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:870](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L870)
+Defined in: [src/types/agentConfig.ts:905](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L905)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:870](https://github.com/ErikPlachta/vscode
 
 > **steps**: [`ExplorationStep`](ExplorationStep.md)[]
 
-Defined in: [src/types/agentConfig.ts:869](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L869)
+Defined in: [src/types/agentConfig.ts:904](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L904)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:869](https://github.com/ErikPlachta/vscode
 
 > **supportingResources**: `object`[]
 
-Defined in: [src/types/agentConfig.ts:871](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L871)
+Defined in: [src/types/agentConfig.ts:906](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L906)
 
 #### categoryId
 
@@ -56,4 +56,4 @@ Defined in: [src/types/agentConfig.ts:871](https://github.com/ErikPlachta/vscode
 
 > **topic**: `string`
 
-Defined in: [src/types/agentConfig.ts:867](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L867)
+Defined in: [src/types/agentConfig.ts:902](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L902)

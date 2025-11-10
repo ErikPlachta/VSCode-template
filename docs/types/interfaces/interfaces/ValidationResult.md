@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult
 
-Defined in: [src/types/interfaces.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L261)
+Defined in: [src/types/interfaces.ts:250](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L250)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/types/interfaces.ts:261](https://github.com/ErikPlachta/vscode-
 
 > **errors**: `string`[]
 
-Defined in: [src/types/interfaces.ts:263](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L263)
+Defined in: [src/types/interfaces.ts:252](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L252)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:263](https://github.com/ErikPlachta/vscode-
 
 > **isValid**: `boolean`
 
-Defined in: [src/types/interfaces.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L262)
+Defined in: [src/types/interfaces.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L251)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/interfaces.ts:262](https://github.com/ErikPlachta/vscode-
 
 > **warnings**: `string`[]
 
-Defined in: [src/types/interfaces.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L264)
+Defined in: [src/types/interfaces.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L253)

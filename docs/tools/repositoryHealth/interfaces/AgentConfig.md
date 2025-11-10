@@ -6,7 +6,7 @@
 
 # Interface: AgentConfig
 
-Defined in: [src/tools/repositoryHealth.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L23)
+Defined in: [src/tools/repositoryHealth.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L23)
 
 Configuration contract for the repository health agent.
 
@@ -16,7 +16,7 @@ Configuration contract for the repository health agent.
 
 > `readonly` **jsonSchemas**: readonly `object`[]
 
-Defined in: [src/tools/repositoryHealth.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L25)
+Defined in: [src/tools/repositoryHealth.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L25)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/tools/repositoryHealth.ts:25](https://github.com/ErikPlachta/vs
 
 > `readonly` **markdown**: `object`
 
-Defined in: [src/tools/repositoryHealth.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L30)
+Defined in: [src/tools/repositoryHealth.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L30)
 
 #### exclude?
 
@@ -48,7 +48,7 @@ Defined in: [src/tools/repositoryHealth.ts:30](https://github.com/ErikPlachta/vs
 
 > `readonly` **report**: `object`
 
-Defined in: [src/tools/repositoryHealth.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L36)
+Defined in: [src/tools/repositoryHealth.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L36)
 
 #### output
 
@@ -60,7 +60,7 @@ Defined in: [src/tools/repositoryHealth.ts:36](https://github.com/ErikPlachta/vs
 
 > `readonly` **typescript**: `object`
 
-Defined in: [src/tools/repositoryHealth.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/tools/repositoryHealth.ts#L24)
+Defined in: [src/tools/repositoryHealth.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/tools/repositoryHealth.ts#L24)
 
 #### include
 

@@ -6,7 +6,7 @@
 
 # Interface: RelationshipDescription
 
-Defined in: [src/types/agentConfig.ts:827](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L827)
+Defined in: [src/types/agentConfig.ts:862](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L862)
 
 Description of a relationship between two categories.
 
@@ -16,7 +16,7 @@ Description of a relationship between two categories.
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:829](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L829)
+Defined in: [src/types/agentConfig.ts:864](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L864)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:829](https://github.com/ErikPlachta/vscode
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:828](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L828)
+Defined in: [src/types/agentConfig.ts:863](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L863)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:828](https://github.com/ErikPlachta/vscode
 
 > **targetCategory**: `string`
 
-Defined in: [src/types/agentConfig.ts:830](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L830)
+Defined in: [src/types/agentConfig.ts:865](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L865)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:830](https://github.com/ErikPlachta/vscode
 
 > **viaField**: `string`
 
-Defined in: [src/types/agentConfig.ts:831](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L831)
+Defined in: [src/types/agentConfig.ts:866](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L866)

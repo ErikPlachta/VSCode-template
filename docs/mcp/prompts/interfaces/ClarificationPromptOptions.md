@@ -6,7 +6,7 @@
 
 # Interface: ClarificationPromptOptions
 
-Defined in: [src/mcp/prompts/index.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/prompts/index.ts#L66)
+Defined in: [src/mcp/prompts/index.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/prompts/index.ts#L66)
 
 ClarificationPromptOptions interface.
 
@@ -16,7 +16,7 @@ ClarificationPromptOptions interface.
 
 > `optional` **knowledgeSnippets**: `object`[]
 
-Defined in: [src/mcp/prompts/index.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/prompts/index.ts#L70)
+Defined in: [src/mcp/prompts/index.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/prompts/index.ts#L70)
 
 #### source
 
@@ -32,7 +32,7 @@ Defined in: [src/mcp/prompts/index.ts:70](https://github.com/ErikPlachta/vscode-
 
 > **manifest**: [`AgentCapabilityMetadata`](../../config/agentManifest/interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/prompts/index.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/prompts/index.ts#L68)
+Defined in: [src/mcp/prompts/index.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/prompts/index.ts#L68)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/mcp/prompts/index.ts:68](https://github.com/ErikPlachta/vscode-
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/mcp/prompts/index.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/prompts/index.ts#L69)
+Defined in: [src/mcp/prompts/index.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/prompts/index.ts#L69)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/mcp/prompts/index.ts:69](https://github.com/ErikPlachta/vscode-
 
 > **question**: `string`
 
-Defined in: [src/mcp/prompts/index.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/prompts/index.ts#L67)
+Defined in: [src/mcp/prompts/index.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/prompts/index.ts#L67)

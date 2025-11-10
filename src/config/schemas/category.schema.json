@@ -2,7 +2,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/schemas/category.schema.json",
   "type": "object",
-  "required": ["id", "name", "description", "aliases", "config"],
+  "required": [
+    "id",
+    "name",
+    "description",
+    "aliases",
+    "config"
+  ],
   "additionalProperties": false,
   "properties": {
     "id": {
@@ -26,7 +32,13 @@
     },
     "config": {
       "type": "object",
-      "required": ["purpose", "primaryKeys", "updateCadence", "access", "requirements", "orchestration"],
+      "required": [
+        "purpose",
+        "primaryKeys",
+        "updateCadence",
+        "access",
+        "orchestration"
+      ],
       "additionalProperties": false,
       "properties": {
         "purpose": {
@@ -49,94 +61,122 @@
           "type": "string",
           "minLength": 1
         },
+        "folder": {
+          "type": "object",
+          "additionalProperties": true
+        },
         "requirements": {
           "type": "object",
-          "required": ["requiredRecordFields", "requiredRelationshipFields", "notes"],
-          "additionalProperties": false,
-          "properties": {
-            "requiredRecordFields": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "minLength": 1
-              },
-              "minItems": 1
-            },
-            "requiredRelationshipFields": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "minLength": 1
-              },
-              "minItems": 1
-            },
-            "notes": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
+          "additionalProperties": true
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
           }
         },
         "orchestration": {
           "type": "object",
-          "required": ["summary", "signals", "escalateWhen", "agents"],
+          "required": [
+            "intent",
+            "primaryPrompts"
+          ],
           "additionalProperties": false,
           "properties": {
-            "summary": {
+            "intent": {
               "type": "string",
               "minLength": 1
             },
-            "signals": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "minLength": 1
-              },
-              "minItems": 1
-            },
-            "escalateWhen": {
+            "primaryPrompts": {
               "type": "array",
               "items": {
                 "type": "string",
                 "minLength": 1
               }
             },
-            "agents": {
-              "type": "object",
-              "minProperties": 1,
-              "additionalProperties": {
-                "type": "object",
-                "required": ["focus", "signals", "promptStarters"],
-                "additionalProperties": false,
-                "properties": {
-                  "focus": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "signals": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "minLength": 1
-                    },
-                    "minItems": 1
-                  },
-                  "promptStarters": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "minLength": 1
-                    },
-                    "minItems": 1
-                  }
-                }
+            "secondaryPrompts": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
         }
       }
+    },
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "queries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CategoryRecord"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "definitions": {
+    "CategoryRecord": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "required": [
+            "title"
+          ]
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
     }
   }
 }

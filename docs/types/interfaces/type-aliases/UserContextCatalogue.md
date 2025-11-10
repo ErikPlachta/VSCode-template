@@ -8,7 +8,7 @@
 
 > **UserContextCatalogue** = [`BusinessDataCatalogue`](../interfaces/BusinessDataCatalogue.md)
 
-Defined in: [src/types/interfaces.ts:180](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L180)
+Defined in: [src/types/interfaces.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L169)
 
 UserContextCatalogue interface (renamed from BusinessDataCatalogue).
 Backward compatible alias preserving the same shape during migration.

@@ -8,7 +8,7 @@
 
 > **renderEscalationPrompt**(`options`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/prompts/index.ts#L30)
+Defined in: [src/mcp/prompts/index.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/prompts/index.ts#L30)
 
 Renders an escalation prompt for clarification or routing.
 

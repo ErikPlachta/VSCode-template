@@ -6,7 +6,7 @@
 
 # Interface: AgentRequest
 
-Defined in: [src/types/interfaces.ts:282](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L282)
+Defined in: [src/types/interfaces.ts:271](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L271)
 
 ======================================
 
@@ -14,9 +14,9 @@ Defined in: [src/types/interfaces.ts:282](https://github.com/ErikPlachta/vscode-
 
 ### agentType
 
-> **agentType**: `"database"` \| `"data"` \| `"relevantDataManager"` \| `"clarification"`
+> **agentType**: `"database"` \| `"data"` \| `"clarification"` \| `"relevantDataManager"`
 
-Defined in: [src/types/interfaces.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L283)
+Defined in: [src/types/interfaces.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L272)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:283](https://github.com/ErikPlachta/vscode-
 
 > **operation**: `string`
 
-Defined in: [src/types/interfaces.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L284)
+Defined in: [src/types/interfaces.ts:273](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L273)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/interfaces.ts:284](https://github.com/ErikPlachta/vscode-
 
 > **parameters**: `unknown`
 
-Defined in: [src/types/interfaces.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L285)
+Defined in: [src/types/interfaces.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L274)

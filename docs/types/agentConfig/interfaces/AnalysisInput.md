@@ -6,7 +6,7 @@
 
 # Interface: AnalysisInput
 
-Defined in: [src/types/agentConfig.ts:835](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L835)
+Defined in: [src/types/agentConfig.ts:870](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L870)
 
 Input payload used for data analysis operations.
 
@@ -16,7 +16,7 @@ Input payload used for data analysis operations.
 
 > **categoryId**: `string`
 
-Defined in: [src/types/agentConfig.ts:836](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L836)
+Defined in: [src/types/agentConfig.ts:871](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L871)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:836](https://github.com/ErikPlachta/vscode
 
 > **records**: [`CategoryRecord`](CategoryRecord.md)[]
 
-Defined in: [src/types/agentConfig.ts:837](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L837)
+Defined in: [src/types/agentConfig.ts:872](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L872)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:837](https://github.com/ErikPlachta/vscode
 
 > `optional` **relationships**: [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/agentConfig.ts:839](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L839)
+Defined in: [src/types/agentConfig.ts:874](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L874)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:839](https://github.com/ErikPlachta/vscode
 
 > `optional` **schemas**: [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/types/agentConfig.ts:838](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L838)
+Defined in: [src/types/agentConfig.ts:873](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L873)

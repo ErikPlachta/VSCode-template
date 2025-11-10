@@ -8,7 +8,7 @@
 
 > **readSharedCacheEntry**\<`T`\>(`cacheDir`, `key`): `Promise`\<[`SharedCacheEntry`](../interfaces/SharedCacheEntry.md)\<`T`\> \| `undefined`\>
 
-Defined in: [src/extension/mcpCache.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/extension/mcpCache.ts#L125)
+Defined in: [src/extension/mcpCache.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/extension/mcpCache.ts#L125)
 
 Retrieve a shared cache entry by key.
 

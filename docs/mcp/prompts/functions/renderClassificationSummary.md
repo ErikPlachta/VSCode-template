@@ -8,7 +8,7 @@
 
 > **renderClassificationSummary**(`options`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/prompts/index.ts#L124)
+Defined in: [src/mcp/prompts/index.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/prompts/index.ts#L124)
 
 Renders a concise classification summary for logging or UI display.
 

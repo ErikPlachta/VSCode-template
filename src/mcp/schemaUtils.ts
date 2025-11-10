@@ -7,7 +7,7 @@ import type {
   BusinessCategory,
   RelationshipDescription,
   CategorySchema,
-} from "@agent/userContextAgent";
+} from "@internal-types/userContext.types";
 
 /**
  * RelationshipIntegrityIssue interface.

@@ -6,9 +6,22 @@
 
 # Interface: CategoryRecord
 
-Defined in: [src/types/agentConfig.ts:765](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L765)
+Defined in: [src/types/agentConfig.ts:798](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L798)
 
 Generic record model allowing arbitrary fields.
+Represents a minimal record from any business data category.
+
+## Param
+
+Unique identifier for the record (required)
+
+## Param
+
+Optional human-readable name
+
+## Param
+
+Optional alternative to name (some records use title instead)
 
 ## Indexable
 
@@ -20,4 +33,20 @@ Generic record model allowing arbitrary fields.
 
 > **id**: `string`
 
-Defined in: [src/types/agentConfig.ts:766](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/agentConfig.ts#L766)
+Defined in: [src/types/agentConfig.ts:799](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L799)
+
+***
+
+### name?
+
+> `optional` **name**: `string`
+
+Defined in: [src/types/agentConfig.ts:800](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L800)
+
+***
+
+### title?
+
+> `optional` **title**: `string`
+
+Defined in: [src/types/agentConfig.ts:801](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L801)

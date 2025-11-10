@@ -8,7 +8,7 @@
 
 > **validateCategorySchemas**(`categories`): [`SchemaValidationSummary`](../interfaces/SchemaValidationSummary.md)
 
-Defined in: [src/mcp/schemaUtils.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/mcp/schemaUtils.ts#L93)
+Defined in: [src/mcp/schemaUtils.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/schemaUtils.ts#L93)
 
 validateCategorySchemas function.
 
@@ -16,7 +16,7 @@ validateCategorySchemas function.
 
 ### categories
 
-[`BusinessCategory`](../../../agent/userContextAgent/interfaces/BusinessCategory.md)[]
+[`BusinessCategory`](../../../types/userContext.types/interfaces/BusinessCategory.md)[]
 
 categories parameter.
 

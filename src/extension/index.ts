@@ -41,9 +41,9 @@ export async function activate(
     contributes?: { chatParticipants?: Array<{ id?: string; name?: string }> };
     publisher?: string;
   }
-  const extObj = (context.extension as unknown as
+  const extObj = context.extension as unknown as
     | { packageJSON?: PackageJsonLike }
-    | undefined) as { packageJSON?: PackageJsonLike } | undefined;
+    | undefined as { packageJSON?: PackageJsonLike } | undefined;
   const pkg = (extObj?.packageJSON || {}) as PackageJsonLike;
   const contributedChat = (pkg.contributes?.chatParticipants || [])[0] || {};
   const contributedId: string = contributedChat.id || "MybusinessMCP";
@@ -403,11 +403,157 @@ export async function activate(
     }
   );
 
+  /**
+   * Export user context data command.
+   * Prompts user to select destination folder, then exports all categories.
+   */
+  const exportUserDataCommand = vscode.commands.registerCommand(
+    `${commandPrefix}.exportUserData`,
+    async () => {
+      try {
+        const destinationUri = await vscode.window.showOpenDialog({
+          canSelectFiles: false,
+          canSelectFolders: true,
+          canSelectMany: false,
+          openLabel: "Select Export Destination",
+          title: "Export User Context Data",
+        });
+
+        if (!destinationUri || destinationUri.length === 0) {
+          vscode.window.showInformationMessage("Export cancelled");
+          return;
+        }
+
+        const destination = destinationUri[0].fsPath;
+
+        await vscode.window.withProgress(
+          {
+            location: vscode.ProgressLocation.Notification,
+            title: "Exporting User Context Data",
+            cancellable: false,
+          },
+          async (progress) => {
+            progress.report({ increment: 0, message: "Initializing..." });
+
+            // Dynamically import UserContextAgent to avoid circular dependencies
+            const { UserContextAgent } = await import(
+              "@agent/userContextAgent"
+            );
+            const agent = new UserContextAgent();
+
+            progress.report({
+              increment: 30,
+              message: "Exporting categories...",
+            });
+
+            const exportedCategories = agent.exportUserData(destination);
+
+            progress.report({ increment: 70, message: "Finalizing..." });
+
+            vscode.window.showInformationMessage(
+              `✅ Successfully exported ${exportedCategories.length} categories to ${destination}`
+            );
+            console.log(
+              `📤 Exported categories: ${exportedCategories.join(", ")}`
+            );
+
+            return exportedCategories;
+          }
+        );
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        vscode.window.showErrorMessage(
+          `❌ Failed to export user data: ${message}`
+        );
+        console.error(`Export error:`, error);
+      }
+    }
+  );
+
+  /**
+   * Import user context data command.
+   * Prompts user to select source folder, then imports all categories into external userData root.
+   */
+  const importUserDataCommand = vscode.commands.registerCommand(
+    `${commandPrefix}.importUserData`,
+    async () => {
+      try {
+        const sourceUri = await vscode.window.showOpenDialog({
+          canSelectFiles: false,
+          canSelectFolders: true,
+          canSelectMany: false,
+          openLabel: "Select Import Source",
+          title: "Import User Context Data",
+        });
+
+        if (!sourceUri || sourceUri.length === 0) {
+          vscode.window.showInformationMessage("Import cancelled");
+          return;
+        }
+
+        const source = sourceUri[0].fsPath;
+
+        await vscode.window.withProgress(
+          {
+            location: vscode.ProgressLocation.Notification,
+            title: "Importing User Context Data",
+            cancellable: false,
+          },
+          async (progress) => {
+            progress.report({ increment: 0, message: "Initializing..." });
+
+            // Dynamically import UserContextAgent to avoid circular dependencies
+            const { UserContextAgent } = await import(
+              "@agent/userContextAgent"
+            );
+            const agent = new UserContextAgent();
+
+            progress.report({
+              increment: 30,
+              message: "Importing categories...",
+            });
+
+            const importedCategories = agent.importUserData(source);
+
+            progress.report({ increment: 70, message: "Finalizing..." });
+
+            const reloadAction = "Reload Window";
+            const response = await vscode.window.showInformationMessage(
+              `✅ Successfully imported ${importedCategories.length} categories. Reload window to use the new data?`,
+              reloadAction,
+              "Later"
+            );
+
+            if (response === reloadAction) {
+              await vscode.commands.executeCommand(
+                "workbench.action.reloadWindow"
+              );
+            }
+
+            console.log(
+              `📥 Imported categories: ${importedCategories.join(", ")}`
+            );
+
+            return importedCategories;
+          }
+        );
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        vscode.window.showErrorMessage(
+          `❌ Failed to import user data: ${message}`
+        );
+        console.error(`Import error:`, error);
+      }
+    }
+  );
+
   context.subscriptions.push(
     toolCommand,
     registerServerCommand,
     unregisterServerCommand,
-    diagnoseIdsCommand
+    diagnoseIdsCommand,
+    exportUserDataCommand,
+    importUserDataCommand
   );
 
   if (tools.length) {
@@ -440,9 +586,12 @@ async function cleanupOrphanedRegistrations(
 ): Promise<void> {
   try {
     const lastCleanupKey = "lastUninstallCleanup";
-    const currentVersion = (context.extension as unknown as
-      | { packageJSON?: { version?: string } }
-      | undefined)?.packageJSON?.version || "0.0.0-test";
+    const currentVersion =
+      (
+        context.extension as unknown as
+          | { packageJSON?: { version?: string } }
+          | undefined
+      )?.packageJSON?.version || "0.0.0-test";
     const lastCleanup = context.globalState.get<string>(lastCleanupKey);
 
     // Only run cleanup if we haven't already done it for this version

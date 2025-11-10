@@ -6,7 +6,7 @@
 
 # Class: AgentConfigResolver
 
-Defined in: [src/shared/agentConfigResolver.ts:92](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/shared/agentConfigResolver.ts#L92)
+Defined in: [src/shared/agentConfigResolver.ts:92](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentConfigResolver.ts#L92)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [src/shared/agentConfigResolver.ts:92](https://github.com/ErikPlacht
 
 > **new AgentConfigResolver**(`configPath`): `AgentConfigResolver`
 
-Defined in: [src/shared/agentConfigResolver.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/shared/agentConfigResolver.ts#L99)
+Defined in: [src/shared/agentConfigResolver.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentConfigResolver.ts#L99)
 
 constructor function.
 
@@ -38,7 +38,7 @@ configPath parameter.
 
 > **getEffectiveExecutionProfile**(`agentId`): `Promise`\<[`EffectiveExecutionProfile`](../interfaces/EffectiveExecutionProfile.md)\>
 
-Defined in: [src/shared/agentConfigResolver.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/shared/agentConfigResolver.ts#L107)
+Defined in: [src/shared/agentConfigResolver.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentConfigResolver.ts#L107)
 
 Returns the effective execution profile for an agent after applying runtime overrides.
 

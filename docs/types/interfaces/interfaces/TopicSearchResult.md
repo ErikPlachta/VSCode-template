@@ -6,7 +6,7 @@
 
 # Interface: TopicSearchResult
 
-Defined in: [src/types/interfaces.ts:271](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L271)
+Defined in: [src/types/interfaces.ts:260](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L260)
 
 TopicSearchResult interface.
 
@@ -16,7 +16,7 @@ TopicSearchResult interface.
 
 > **categoryId**: `string`
 
-Defined in: [src/types/interfaces.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L272)
+Defined in: [src/types/interfaces.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L261)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:272](https://github.com/ErikPlachta/vscode-
 
 > **displayName**: `string`
 
-Defined in: [src/types/interfaces.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L274)
+Defined in: [src/types/interfaces.ts:263](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L263)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:274](https://github.com/ErikPlachta/vscode-
 
 > **matchingFields**: `string`[]
 
-Defined in: [src/types/interfaces.ts:275](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L275)
+Defined in: [src/types/interfaces.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L264)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:275](https://github.com/ErikPlachta/vscode-
 
 > **recordId**: `string`
 
-Defined in: [src/types/interfaces.ts:273](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/interfaces.ts#L273)
+Defined in: [src/types/interfaces.ts:262](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L262)

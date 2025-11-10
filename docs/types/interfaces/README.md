@@ -19,7 +19,6 @@ and should only be used for its specific function.
 - [AnalysisInput](interfaces/AnalysisInput.md)
 - [BusinessDataCatalogue](interfaces/BusinessDataCatalogue.md)
 - [CategoryInfo](interfaces/CategoryInfo.md)
-- [CategoryRecord](interfaces/CategoryRecord.md)
 - [CategorySchema](interfaces/CategorySchema.md)
 - [ClarificationAgentInterface](interfaces/ClarificationAgentInterface.md)
 - [ClarificationInput](interfaces/ClarificationInput.md)
@@ -42,5 +41,4 @@ and should only be used for its specific function.
 
 ## Type Aliases
 
-- [CategoryId](type-aliases/CategoryId.md)
 - [UserContextCatalogue](type-aliases/UserContextCatalogue.md)

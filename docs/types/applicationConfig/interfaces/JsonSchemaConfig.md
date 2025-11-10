@@ -6,7 +6,7 @@
 
 # Interface: JsonSchemaConfig
 
-Defined in: [src/types/applicationConfig.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/applicationConfig.ts#L251)
+Defined in: [src/types/applicationConfig.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L251)
 
 JSON schema validation configuration.
 
@@ -16,7 +16,7 @@ JSON schema validation configuration.
 
 > **description**: `string`
 
-Defined in: [src/types/applicationConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/applicationConfig.ts#L257)
+Defined in: [src/types/applicationConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L257)
 
 Human-readable description of validation purpose.
 
@@ -26,7 +26,7 @@ Human-readable description of validation purpose.
 
 > **pattern**: `string`
 
-Defined in: [src/types/applicationConfig.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/applicationConfig.ts#L253)
+Defined in: [src/types/applicationConfig.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L253)
 
 File pattern to match.
 
@@ -36,6 +36,6 @@ File pattern to match.
 
 > **schema**: `string`
 
-Defined in: [src/types/applicationConfig.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/bd905499aa24766e14e9248e3e46a7ba633506e2/src/types/applicationConfig.ts#L255)
+Defined in: [src/types/applicationConfig.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L255)
 
 Path to JSON schema file.
