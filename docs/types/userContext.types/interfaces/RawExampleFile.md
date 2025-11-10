@@ -6,7 +6,7 @@
 
 # Interface: RawExampleFile
 
-Defined in: src/types/userContext.types.ts:510
+Defined in: [src/types/userContext.types.ts:510](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L510)
 
 Raw example file contents
 
@@ -16,7 +16,7 @@ Raw example file contents
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:511
+Defined in: [src/types/userContext.types.ts:511](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L511)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: src/types/userContext.types.ts:511
 
 > **sample**: `Record`\<`string`, `unknown`\>
 
-Defined in: src/types/userContext.types.ts:512
+Defined in: [src/types/userContext.types.ts:512](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L512)

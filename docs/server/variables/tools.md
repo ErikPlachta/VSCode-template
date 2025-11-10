@@ -8,4 +8,4 @@
 
 > `const` **tools**: [`MCPTool`](../../shared/mcpTypes/interfaces/MCPTool.md)[]
 
-Defined in: [src/server/index.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/server/index.ts#L177)
+Defined in: [src/server/index.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/server/index.ts#L177)

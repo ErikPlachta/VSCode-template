@@ -6,7 +6,7 @@
 
 # Interface: BusinessCategory
 
-Defined in: src/types/userContext.types.ts:351
+Defined in: [src/types/userContext.types.ts:351](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L351)
 
 Full business category configuration
 
@@ -16,7 +16,7 @@ Full business category configuration
 
 > **aliases**: `string`[]
 
-Defined in: src/types/userContext.types.ts:355
+Defined in: [src/types/userContext.types.ts:355](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L355)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:355
 
 > **config**: `object`
 
-Defined in: src/types/userContext.types.ts:356
+Defined in: [src/types/userContext.types.ts:356](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L356)
 
 #### access
 
@@ -64,7 +64,7 @@ Defined in: src/types/userContext.types.ts:356
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:354
+Defined in: [src/types/userContext.types.ts:354](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L354)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: src/types/userContext.types.ts:354
 
 > **examples**: [`ExampleDataset`](ExampleDataset.md)[]
 
-Defined in: src/types/userContext.types.ts:368
+Defined in: [src/types/userContext.types.ts:368](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L368)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: src/types/userContext.types.ts:368
 
 > **id**: `string`
 
-Defined in: src/types/userContext.types.ts:352
+Defined in: [src/types/userContext.types.ts:352](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L352)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: src/types/userContext.types.ts:352
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:353
+Defined in: [src/types/userContext.types.ts:353](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L353)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: src/types/userContext.types.ts:353
 
 > **queries**: [`RemoteQueryBlueprint`](RemoteQueryBlueprint.md)[]
 
-Defined in: src/types/userContext.types.ts:369
+Defined in: [src/types/userContext.types.ts:369](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L369)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: src/types/userContext.types.ts:369
 
 > **records**: [`CategoryRecord`](../type-aliases/CategoryRecord.md)[]
 
-Defined in: src/types/userContext.types.ts:370
+Defined in: [src/types/userContext.types.ts:370](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L370)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: src/types/userContext.types.ts:370
 
 > **schemas**: [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: src/types/userContext.types.ts:366
+Defined in: [src/types/userContext.types.ts:366](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L366)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: src/types/userContext.types.ts:366
 
 > **types**: [`TypeDefinition`](TypeDefinition.md)[]
 
-Defined in: src/types/userContext.types.ts:367
+Defined in: [src/types/userContext.types.ts:367](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L367)
 
 ***
 
@@ -128,4 +128,4 @@ Defined in: src/types/userContext.types.ts:367
 
 > **validation**: [`DataValidationReport`](DataValidationReport.md)
 
-Defined in: src/types/userContext.types.ts:371
+Defined in: [src/types/userContext.types.ts:371](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L371)

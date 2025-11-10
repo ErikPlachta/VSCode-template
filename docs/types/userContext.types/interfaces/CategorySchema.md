@@ -6,7 +6,7 @@
 
 # Interface: CategorySchema
 
-Defined in: src/types/userContext.types.ts:240
+Defined in: [src/types/userContext.types.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L240)
 
 JSON schema snippet stored alongside a category
 
@@ -16,7 +16,7 @@ JSON schema snippet stored alongside a category
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:242
+Defined in: [src/types/userContext.types.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L242)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:242
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:241
+Defined in: [src/types/userContext.types.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L241)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: src/types/userContext.types.ts:241
 
 > **schema**: `Record`\<`string`, `unknown`\>
 
-Defined in: src/types/userContext.types.ts:243
+Defined in: [src/types/userContext.types.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L243)

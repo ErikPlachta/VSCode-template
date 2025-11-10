@@ -19,6 +19,8 @@ export default {
     "^@config/(.*)$": "<rootDir>/src/config/$1",
     "^@internal-types/(.*)$": "<rootDir>/src/types/$1",
     "^@types/(.*)$": "<rootDir>/src/types/$1",
+    // Mock vscode module for tests that import extension code
+    "^vscode$": "<rootDir>/tests/__mocks__/vscode.ts",
   },
   // Explicitly set transform for TypeScript files
   transform: {

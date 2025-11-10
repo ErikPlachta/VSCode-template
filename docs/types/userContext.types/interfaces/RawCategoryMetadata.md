@@ -6,7 +6,7 @@
 
 # Interface: RawCategoryMetadata
 
-Defined in: src/types/userContext.types.ts:450
+Defined in: [src/types/userContext.types.ts:450](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L450)
 
 Raw (unvalidated) category metadata structure read from category.json
 
@@ -16,7 +16,7 @@ Raw (unvalidated) category metadata structure read from category.json
 
 > `optional` **aliases**: `string`[]
 
-Defined in: src/types/userContext.types.ts:454
+Defined in: [src/types/userContext.types.ts:454](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L454)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:454
 
 > **config**: `object`
 
-Defined in: src/types/userContext.types.ts:455
+Defined in: [src/types/userContext.types.ts:455](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L455)
 
 #### access
 
@@ -56,7 +56,7 @@ Defined in: src/types/userContext.types.ts:455
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:453
+Defined in: [src/types/userContext.types.ts:453](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L453)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: src/types/userContext.types.ts:453
 
 > **id**: `string`
 
-Defined in: src/types/userContext.types.ts:451
+Defined in: [src/types/userContext.types.ts:451](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L451)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: src/types/userContext.types.ts:451
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:452
+Defined in: [src/types/userContext.types.ts:452](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L452)

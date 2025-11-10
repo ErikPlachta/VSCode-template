@@ -6,7 +6,7 @@
 
 # Interface: ExampleDataset
 
-Defined in: src/types/userContext.types.ts:284
+Defined in: [src/types/userContext.types.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L284)
 
 Example dataset artifact hosted in the category folder
 
@@ -16,7 +16,7 @@ Example dataset artifact hosted in the category folder
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:286
+Defined in: [src/types/userContext.types.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L286)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:286
 
 > **file**: `string`
 
-Defined in: src/types/userContext.types.ts:285
+Defined in: [src/types/userContext.types.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L285)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: src/types/userContext.types.ts:285
 
 > **sample**: `Record`\<`string`, `unknown`\>
 
-Defined in: src/types/userContext.types.ts:287
+Defined in: [src/types/userContext.types.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L287)

@@ -6,7 +6,7 @@
 
 # Interface: DataValidationReport
 
-Defined in: src/types/userContext.types.ts:309
+Defined in: [src/types/userContext.types.ts:309](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L309)
 
 Summary produced after normalizing the dataset
 
@@ -16,7 +16,7 @@ Summary produced after normalizing the dataset
 
 > **checkedAt**: `string`
 
-Defined in: src/types/userContext.types.ts:311
+Defined in: [src/types/userContext.types.ts:311](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L311)
 
 Timestamp when validation occurred
 
@@ -26,7 +26,7 @@ Timestamp when validation occurred
 
 > **issues**: [`DataValidationIssue`](DataValidationIssue.md)[]
 
-Defined in: src/types/userContext.types.ts:315
+Defined in: [src/types/userContext.types.ts:315](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L315)
 
 Detailed issues encountered during validation
 
@@ -36,6 +36,6 @@ Detailed issues encountered during validation
 
 > **status**: `"pass"` \| `"fail"`
 
-Defined in: src/types/userContext.types.ts:313
+Defined in: [src/types/userContext.types.ts:313](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L313)
 
 Overall status for the category

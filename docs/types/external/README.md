@@ -8,7 +8,15 @@
 
 external.d implementation for types module
 
-## Modules
+## Interfaces
 
-- [ajv-formats](ajv-formats/README.md)
-- [gray-matter](gray-matter/README.md)
+- [GrayMatterFile](interfaces/GrayMatterFile.md)
+- [GrayMatterOptions](interfaces/GrayMatterOptions.md)
+
+## Type Aliases
+
+- [GrayMatterInput](type-aliases/GrayMatterInput.md)
+
+## Functions
+
+- [default](functions/default.md)

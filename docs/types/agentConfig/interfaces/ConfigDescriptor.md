@@ -6,7 +6,7 @@
 
 # Interface: ConfigDescriptor
 
-Defined in: [src/types/agentConfig.ts:956](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L956)
+Defined in: [src/types/agentConfig.ts:956](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L956)
 
 Descriptor describing a configurable item available on an agent.
 
@@ -16,7 +16,7 @@ Descriptor describing a configurable item available on an agent.
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:965](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L965)
+Defined in: [src/types/agentConfig.ts:965](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L965)
 
 Optional human-readable description.
 
@@ -26,7 +26,7 @@ Optional human-readable description.
 
 > `optional` **group**: `string`
 
-Defined in: [src/types/agentConfig.ts:963](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L963)
+Defined in: [src/types/agentConfig.ts:963](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L963)
 
 Optional group for organizing descriptors in UI.
 
@@ -36,7 +36,7 @@ Optional group for organizing descriptors in UI.
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:957](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L957)
+Defined in: [src/types/agentConfig.ts:957](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L957)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/types/agentConfig.ts:957](https://github.com/ErikPlachta/vscode
 
 > **path**: `string`
 
-Defined in: [src/types/agentConfig.ts:958](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L958)
+Defined in: [src/types/agentConfig.ts:958](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L958)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/types/agentConfig.ts:958](https://github.com/ErikPlachta/vscode
 
 > **type**: `string`
 
-Defined in: [src/types/agentConfig.ts:959](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L959)
+Defined in: [src/types/agentConfig.ts:959](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L959)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [src/types/agentConfig.ts:959](https://github.com/ErikPlachta/vscode
 
 > `optional` **validate**: (`value`) => `string` \| `boolean`
 
-Defined in: [src/types/agentConfig.ts:967](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L967)
+Defined in: [src/types/agentConfig.ts:967](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L967)
 
 Optional validation function for basic type/shape checks.
 
@@ -80,7 +80,7 @@ Optional validation function for basic type/shape checks.
 
 > `optional` **verifyPaths**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:961](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L961)
+Defined in: [src/types/agentConfig.ts:961](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L961)
 
 ***
 
@@ -88,4 +88,4 @@ Defined in: [src/types/agentConfig.ts:961](https://github.com/ErikPlachta/vscode
 
 > **visibility**: `"public"` \| `"private"`
 
-Defined in: [src/types/agentConfig.ts:960](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L960)
+Defined in: [src/types/agentConfig.ts:960](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L960)

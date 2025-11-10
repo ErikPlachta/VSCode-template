@@ -6,7 +6,7 @@
 
 # Interface: TypeDefinition
 
-Defined in: src/types/userContext.types.ts:275
+Defined in: [src/types/userContext.types.ts:275](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L275)
 
 Python typing hints that mirror the JSON schemas
 
@@ -16,7 +16,7 @@ Python typing hints that mirror the JSON schemas
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:277
+Defined in: [src/types/userContext.types.ts:277](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L277)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:277
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:276
+Defined in: [src/types/userContext.types.ts:276](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L276)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: src/types/userContext.types.ts:276
 
 > **schema**: [`TypeSchema`](../type-aliases/TypeSchema.md)
 
-Defined in: src/types/userContext.types.ts:278
+Defined in: [src/types/userContext.types.ts:278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L278)

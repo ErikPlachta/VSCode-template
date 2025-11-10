@@ -6,7 +6,7 @@
 
 # Interface: RawQueryFile
 
-Defined in: src/types/userContext.types.ts:516
+Defined in: [src/types/userContext.types.ts:516](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L516)
 
 Raw query file contents
 
@@ -16,7 +16,7 @@ Raw query file contents
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:518
+Defined in: [src/types/userContext.types.ts:518](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L518)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:518
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:517
+Defined in: [src/types/userContext.types.ts:517](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L517)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: src/types/userContext.types.ts:517
 
 > **samplePayload**: `Record`\<`string`, `unknown`\>
 
-Defined in: src/types/userContext.types.ts:519
+Defined in: [src/types/userContext.types.ts:519](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L519)

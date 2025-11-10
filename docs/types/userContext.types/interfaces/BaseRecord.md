@@ -6,7 +6,7 @@
 
 # Interface: BaseRecord
 
-Defined in: src/types/userContext.types.ts:82
+Defined in: [src/types/userContext.types.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L82)
 
 Base record interface - all records must have an ID and either name or title
 
@@ -30,7 +30,7 @@ Additional dynamic properties
 
 > **id**: `string`
 
-Defined in: src/types/userContext.types.ts:84
+Defined in: [src/types/userContext.types.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L84)
 
 Unique identifier for this record
 
@@ -40,7 +40,7 @@ Unique identifier for this record
 
 > `optional` **name**: `string`
 
-Defined in: src/types/userContext.types.ts:86
+Defined in: [src/types/userContext.types.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L86)
 
 Human-readable name (optional, but either name or title required)
 
@@ -50,6 +50,6 @@ Human-readable name (optional, but either name or title required)
 
 > `optional` **title**: `string`
 
-Defined in: src/types/userContext.types.ts:88
+Defined in: [src/types/userContext.types.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L88)
 
 Alternative to name (optional, but either name or title required)

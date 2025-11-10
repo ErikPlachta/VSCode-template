@@ -6,7 +6,7 @@
 
 # Interface: UsageAnalyticsSummary
 
-Defined in: [src/shared/agentAnalytics.ts:77](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L77)
+Defined in: [src/shared/agentAnalytics.ts:77](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L77)
 
 Usage analytics summary across all agents.
 
@@ -16,7 +16,7 @@ Usage analytics summary across all agents.
 
 > **agentStats**: [`AgentUsageStats`](AgentUsageStats.md)[]
 
-Defined in: [src/shared/agentAnalytics.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L87)
+Defined in: [src/shared/agentAnalytics.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L87)
 
 Per-agent statistics.
 
@@ -26,7 +26,7 @@ Per-agent statistics.
 
 > **averageResponseTime**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L91)
+Defined in: [src/shared/agentAnalytics.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L91)
 
 Average response time across all agents.
 
@@ -36,7 +36,7 @@ Average response time across all agents.
 
 > **highestErrorRateAgent**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:95](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L95)
+Defined in: [src/shared/agentAnalytics.ts:95](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L95)
 
 Agent with highest error rate.
 
@@ -46,7 +46,7 @@ Agent with highest error rate.
 
 > **mostUsedAgent**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L93)
+Defined in: [src/shared/agentAnalytics.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L93)
 
 Most frequently used agent.
 
@@ -56,7 +56,7 @@ Most frequently used agent.
 
 > **overallSuccessRate**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L89)
+Defined in: [src/shared/agentAnalytics.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L89)
 
 Overall success rate across all agents.
 
@@ -66,7 +66,7 @@ Overall success rate across all agents.
 
 > **periodEnd**: `Date`
 
-Defined in: [src/shared/agentAnalytics.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L85)
+Defined in: [src/shared/agentAnalytics.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L85)
 
 End of time period covered.
 
@@ -76,7 +76,7 @@ End of time period covered.
 
 > **periodStart**: `Date`
 
-Defined in: [src/shared/agentAnalytics.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L83)
+Defined in: [src/shared/agentAnalytics.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L83)
 
 Time period covered by the summary.
 
@@ -86,7 +86,7 @@ Time period covered by the summary.
 
 > **timestamp**: `Date`
 
-Defined in: [src/shared/agentAnalytics.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L79)
+Defined in: [src/shared/agentAnalytics.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L79)
 
 Summary generation timestamp.
 
@@ -96,6 +96,6 @@ Summary generation timestamp.
 
 > **totalEvents**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:81](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/shared/agentAnalytics.ts#L81)
+Defined in: [src/shared/agentAnalytics.ts:81](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/agentAnalytics.ts#L81)
 
 Total events processed.

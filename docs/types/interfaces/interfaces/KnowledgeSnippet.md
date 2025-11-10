@@ -6,7 +6,7 @@
 
 # Interface: KnowledgeSnippet
 
-Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L233)
+Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/interfaces.ts#L233)
 
 KnowledgeSnippet interface.
 
@@ -16,7 +16,7 @@ KnowledgeSnippet interface.
 
 > **source**: `string`
 
-Defined in: [src/types/interfaces.ts:234](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L234)
+Defined in: [src/types/interfaces.ts:234](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/interfaces.ts#L234)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/interfaces.ts:234](https://github.com/ErikPlachta/vscode-
 
 > **summary**: `string`
 
-Defined in: [src/types/interfaces.ts:235](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/interfaces.ts#L235)
+Defined in: [src/types/interfaces.ts:235](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/interfaces.ts#L235)

@@ -6,7 +6,7 @@
 
 # Interface: LoadedDataset
 
-Defined in: src/types/userContext.types.ts:435
+Defined in: [src/types/userContext.types.ts:435](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L435)
 
 Loaded dataset bundle produced during agent initialisation
 
@@ -16,7 +16,7 @@ Loaded dataset bundle produced during agent initialisation
 
 > **categories**: `Map`\<`string`, [`BusinessCategory`](BusinessCategory.md)\>
 
-Defined in: src/types/userContext.types.ts:436
+Defined in: [src/types/userContext.types.ts:436](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L436)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:436
 
 > **consolidatedIndex**: [`DatasetCatalogueEntry`](DatasetCatalogueEntry.md)[]
 
-Defined in: src/types/userContext.types.ts:439
+Defined in: [src/types/userContext.types.ts:439](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L439)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/types/userContext.types.ts:439
 
 > **fingerprint**: `string`
 
-Defined in: src/types/userContext.types.ts:440
+Defined in: [src/types/userContext.types.ts:440](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L440)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/types/userContext.types.ts:440
 
 > **lookupIndex**: `Map`\<`string`, [`BusinessCategory`](BusinessCategory.md)\>
 
-Defined in: src/types/userContext.types.ts:437
+Defined in: [src/types/userContext.types.ts:437](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L437)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: src/types/userContext.types.ts:437
 
 > **relationships**: [`InternalRelationshipDefinition`](InternalRelationshipDefinition.md)[]
 
-Defined in: src/types/userContext.types.ts:438
+Defined in: [src/types/userContext.types.ts:438](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L438)

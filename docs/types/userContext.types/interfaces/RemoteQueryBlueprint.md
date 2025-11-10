@@ -6,7 +6,7 @@
 
 # Interface: RemoteQueryBlueprint
 
-Defined in: src/types/userContext.types.ts:321
+Defined in: [src/types/userContext.types.ts:321](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L321)
 
 Remote query blueprint associated with the category
 
@@ -16,7 +16,7 @@ Remote query blueprint associated with the category
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:323
+Defined in: [src/types/userContext.types.ts:323](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L323)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:323
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:322
+Defined in: [src/types/userContext.types.ts:322](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L322)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: src/types/userContext.types.ts:322
 
 > **samplePayload**: `Record`\<`string`, `unknown`\>
 
-Defined in: src/types/userContext.types.ts:324
+Defined in: [src/types/userContext.types.ts:324](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L324)

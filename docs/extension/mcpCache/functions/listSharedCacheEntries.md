@@ -8,7 +8,7 @@
 
 > **listSharedCacheEntries**\<`T`\>(`cacheDir`): `Promise`\<[`SharedCacheEntry`](../interfaces/SharedCacheEntry.md)\<`T`\>[]\>
 
-Defined in: [src/extension/mcpCache.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/extension/mcpCache.ts#L151)
+Defined in: [src/extension/mcpCache.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/extension/mcpCache.ts#L151)
 
 Enumerate all cached artefacts currently stored on disk.
 

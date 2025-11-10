@@ -3,18 +3,6 @@ import * as os from "os";
 import * as path from "path";
 import { UserContextAgent } from "../src/agent/userContextAgent";
 
-jest.mock(
-  "vscode",
-  () => ({
-    workspace: {
-      get workspaceFolders() {
-        return undefined;
-      },
-    },
-  }),
-  { virtual: true }
-);
-
 describe("RelevantDataManagerAgent error paths", () => {
   it("throws when data directory is empty", async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-empty-"));
@@ -37,7 +25,7 @@ describe("RelevantDataManagerAgent error paths", () => {
       path.join(os.tmpdir(), "rdm-missing-cat-cache-")
     );
     expect(() => new UserContextAgent(Promise.resolve(cacheDir))).toThrow(
-      /Missing category\.json/
+      /No valid categories could be loaded.*Missing required file 'category\.json'/
     );
   });
 });

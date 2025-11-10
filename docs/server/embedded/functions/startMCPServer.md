@@ -8,7 +8,7 @@
 
 > **startMCPServer**(`port?`): `Promise`\<`string`\>
 
-Defined in: [src/server/embedded.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/server/embedded.ts#L23)
+Defined in: [src/server/embedded.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/server/embedded.ts#L23)
 
 Start the embedded MCP server on a provided or ephemeral port and resolve when it is ready.
 - When a fixed port is provided, wait for the underlying server to emit `listening`.

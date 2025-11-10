@@ -6,7 +6,7 @@
 
 # Interface: RawRelationshipEntry
 
-Defined in: src/types/userContext.types.ts:485
+Defined in: [src/types/userContext.types.ts:485](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L485)
 
 Raw relationship entry from relationships.json
 
@@ -16,7 +16,7 @@ Raw relationship entry from relationships.json
 
 > **cardinality**: `"one"` \| `"many"`
 
-Defined in: src/types/userContext.types.ts:492
+Defined in: [src/types/userContext.types.ts:492](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L492)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:492
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:488
+Defined in: [src/types/userContext.types.ts:488](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L488)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/types/userContext.types.ts:488
 
 > **key**: `string`
 
-Defined in: src/types/userContext.types.ts:486
+Defined in: [src/types/userContext.types.ts:486](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L486)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/types/userContext.types.ts:486
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:487
+Defined in: [src/types/userContext.types.ts:487](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L487)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: src/types/userContext.types.ts:487
 
 > **sourceField**: `string`
 
-Defined in: src/types/userContext.types.ts:490
+Defined in: [src/types/userContext.types.ts:490](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L490)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: src/types/userContext.types.ts:490
 
 > **targetCategory**: `string`
 
-Defined in: src/types/userContext.types.ts:489
+Defined in: [src/types/userContext.types.ts:489](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L489)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: src/types/userContext.types.ts:489
 
 > **targetField**: `string`
 
-Defined in: src/types/userContext.types.ts:491
+Defined in: [src/types/userContext.types.ts:491](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L491)

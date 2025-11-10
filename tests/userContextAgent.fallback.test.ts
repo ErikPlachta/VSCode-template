@@ -10,6 +10,11 @@ import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
 import { UserContextAgent } from "@agent/userContextAgent";
+import {
+  createValidCategoryJson,
+  createValidRecordsJson,
+  createValidRelationshipsJson,
+} from "./helpers/categoryFixtures";
 
 function makeTempDir(prefix: string): string {
   return fs.mkdtempSync(path.join(os.tmpdir(), `${prefix}-`));
@@ -53,34 +58,23 @@ describe("UserContextAgent Fallback Resolution", () => {
         fs.mkdirSync(validDir, { recursive: true });
         fs.writeFileSync(
           path.join(validDir, "category.json"),
-          JSON.stringify({
-            id: "valid",
-            name: "Valid Category",
-            description: "Valid category for testing",
-            config: {
-              purpose: "Test",
-              primaryKeys: ["id"],
-              updateCadence: "realtime",
-              access: "unrestricted",
-              orchestration: {
-                summary: "Test orchestration",
-                signals: ["test"],
-                agents: {
-                  relevantDataManager: { when: "Never", capabilities: "None" },
-                  databaseAgent: { when: "Never", capabilities: "None" },
-                  dataAgent: { when: "Never", capabilities: "None" },
-                },
-              },
-            },
-          })
+          JSON.stringify(
+            createValidCategoryJson({
+              id: "valid",
+              name: "Valid Category",
+              description: "Valid category for testing",
+            }),
+            null,
+            2
+          )
         );
         fs.writeFileSync(
           path.join(validDir, "records.json"),
-          JSON.stringify([{ id: "v1", name: "Valid Record" }])
+          JSON.stringify(createValidRecordsJson("valid"), null, 2)
         );
         fs.writeFileSync(
           path.join(validDir, "relationships.json"),
-          JSON.stringify([])
+          JSON.stringify(createValidRelationshipsJson(), null, 2)
         );
 
         ["schemas", "types", "examples", "queries"].forEach((dir) => {
@@ -186,34 +180,19 @@ describe("UserContextAgent Fallback Resolution", () => {
         fs.mkdirSync(validDir, { recursive: true });
         fs.writeFileSync(
           path.join(validDir, "category.json"),
-          JSON.stringify({
-            id: "valid",
-            name: "Valid",
-            description: "Valid",
-            config: {
-              purpose: "Test",
-              primaryKeys: ["id"],
-              updateCadence: "realtime",
-              access: "unrestricted",
-              orchestration: {
-                summary: "Test",
-                signals: ["test"],
-                agents: {
-                  relevantDataManager: { when: "Never", capabilities: "None" },
-                  databaseAgent: { when: "Never", capabilities: "None" },
-                  dataAgent: { when: "Never", capabilities: "None" },
-                },
-              },
-            },
-          })
+          JSON.stringify(
+            createValidCategoryJson({ id: "valid", name: "Valid" }),
+            null,
+            2
+          )
         );
         fs.writeFileSync(
           path.join(validDir, "records.json"),
-          JSON.stringify([])
+          JSON.stringify(createValidRecordsJson("valid"), null, 2)
         );
         fs.writeFileSync(
           path.join(validDir, "relationships.json"),
-          JSON.stringify([])
+          JSON.stringify(createValidRelationshipsJson(), null, 2)
         );
         ["schemas", "types", "examples", "queries"].forEach((dir) => {
           fs.mkdirSync(path.join(validDir, dir), { recursive: true });
@@ -224,26 +203,15 @@ describe("UserContextAgent Fallback Resolution", () => {
         fs.mkdirSync(noRecordsDir, { recursive: true });
         fs.writeFileSync(
           path.join(noRecordsDir, "category.json"),
-          JSON.stringify({
-            id: "noRecords",
-            name: "No Records",
-            description: "Missing records.json",
-            config: {
-              purpose: "Test",
-              primaryKeys: ["id"],
-              updateCadence: "realtime",
-              access: "unrestricted",
-              orchestration: {
-                summary: "Test",
-                signals: ["test"],
-                agents: {
-                  relevantDataManager: { when: "Never", capabilities: "None" },
-                  databaseAgent: { when: "Never", capabilities: "None" },
-                  dataAgent: { when: "Never", capabilities: "None" },
-                },
-              },
-            },
-          })
+          JSON.stringify(
+            createValidCategoryJson({
+              id: "noRecords",
+              name: "No Records",
+              description: "Missing records.json",
+            }),
+            null,
+            2
+          )
         );
         // Note: no records.json or relationships.json created
 
@@ -281,34 +249,19 @@ describe("UserContextAgent Fallback Resolution", () => {
         fs.mkdirSync(validDir, { recursive: true });
         fs.writeFileSync(
           path.join(validDir, "category.json"),
-          JSON.stringify({
-            id: "valid",
-            name: "Valid",
-            description: "Valid",
-            config: {
-              purpose: "Test",
-              primaryKeys: ["id"],
-              updateCadence: "realtime",
-              access: "unrestricted",
-              orchestration: {
-                summary: "Test",
-                signals: ["test"],
-                agents: {
-                  relevantDataManager: { when: "Never", capabilities: "None" },
-                  databaseAgent: { when: "Never", capabilities: "None" },
-                  dataAgent: { when: "Never", capabilities: "None" },
-                },
-              },
-            },
-          })
+          JSON.stringify(
+            createValidCategoryJson({ id: "valid", name: "Valid" }),
+            null,
+            2
+          )
         );
         fs.writeFileSync(
           path.join(validDir, "records.json"),
-          JSON.stringify([])
+          JSON.stringify(createValidRecordsJson("valid"), null, 2)
         );
         fs.writeFileSync(
           path.join(validDir, "relationships.json"),
-          JSON.stringify([])
+          JSON.stringify(createValidRelationshipsJson(), null, 2)
         );
         ["schemas", "types", "examples", "queries"].forEach((dir) => {
           fs.mkdirSync(path.join(validDir, dir), { recursive: true });
@@ -347,6 +300,14 @@ describe("UserContextAgent Fallback Resolution", () => {
 
   describe("getActiveDataRoot diagnostic", () => {
     it("should report active data root paths", () => {
+      // Use the workspace data root for testing
+      process.env.VSCODE_TEMPLATE_DATA_ROOT = path.join(
+        __dirname,
+        "..",
+        "src",
+        "userContext"
+      );
+
       const agent = new UserContextAgent();
       const roots = agent.getActiveDataRoot();
 

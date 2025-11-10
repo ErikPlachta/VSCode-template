@@ -6,7 +6,7 @@
 
 # Interface: RawTypeFile
 
-Defined in: src/types/userContext.types.ts:503
+Defined in: [src/types/userContext.types.ts:503](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L503)
 
 Raw type definition file contents
 
@@ -16,7 +16,7 @@ Raw type definition file contents
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:505
+Defined in: [src/types/userContext.types.ts:505](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L505)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:505
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:504
+Defined in: [src/types/userContext.types.ts:504](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L504)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: src/types/userContext.types.ts:504
 
 > **schema**: `unknown`
 
-Defined in: src/types/userContext.types.ts:506
+Defined in: [src/types/userContext.types.ts:506](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L506)

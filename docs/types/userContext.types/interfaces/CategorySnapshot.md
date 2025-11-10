@@ -6,7 +6,7 @@
 
 # Interface: CategorySnapshot
 
-Defined in: src/types/userContext.types.ts:390
+Defined in: [src/types/userContext.types.ts:390](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L390)
 
 Snapshot persisted to the shared cache for quick lookups
 
@@ -16,7 +16,7 @@ Snapshot persisted to the shared cache for quick lookups
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:393
+Defined in: [src/types/userContext.types.ts:393](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L393)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:393
 
 > **exampleFiles**: `string`[]
 
-Defined in: src/types/userContext.types.ts:398
+Defined in: [src/types/userContext.types.ts:398](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L398)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/types/userContext.types.ts:398
 
 > **folder**: [`FolderBlueprint`](FolderBlueprint.md)
 
-Defined in: src/types/userContext.types.ts:399
+Defined in: [src/types/userContext.types.ts:399](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L399)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/types/userContext.types.ts:399
 
 > **id**: `string`
 
-Defined in: src/types/userContext.types.ts:391
+Defined in: [src/types/userContext.types.ts:391](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L391)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: src/types/userContext.types.ts:391
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:392
+Defined in: [src/types/userContext.types.ts:392](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L392)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: src/types/userContext.types.ts:392
 
 > **queryNames**: `string`[]
 
-Defined in: src/types/userContext.types.ts:397
+Defined in: [src/types/userContext.types.ts:397](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L397)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: src/types/userContext.types.ts:397
 
 > **recordCount**: `number`
 
-Defined in: src/types/userContext.types.ts:394
+Defined in: [src/types/userContext.types.ts:394](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L394)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: src/types/userContext.types.ts:394
 
 > **schemaNames**: `string`[]
 
-Defined in: src/types/userContext.types.ts:395
+Defined in: [src/types/userContext.types.ts:395](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L395)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: src/types/userContext.types.ts:395
 
 > **typeNames**: `string`[]
 
-Defined in: src/types/userContext.types.ts:396
+Defined in: [src/types/userContext.types.ts:396](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L396)

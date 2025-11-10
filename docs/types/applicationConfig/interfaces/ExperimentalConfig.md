@@ -6,7 +6,7 @@
 
 # Interface: ExperimentalConfig
 
-Defined in: [src/types/applicationConfig.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L227)
+Defined in: [src/types/applicationConfig.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L227)
 
 Experimental features configuration.
 
@@ -16,7 +16,7 @@ Experimental features configuration.
 
 > **enableAdvancedCaching**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L229)
+Defined in: [src/types/applicationConfig.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L229)
 
 Enable advanced caching features.
 
@@ -26,7 +26,7 @@ Enable advanced caching features.
 
 > **enableParallelProcessing**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:231](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L231)
+Defined in: [src/types/applicationConfig.ts:231](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L231)
 
 Enable parallel processing.
 
@@ -36,6 +36,6 @@ Enable parallel processing.
 
 > **enableStreamingResponses**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/applicationConfig.ts#L233)
+Defined in: [src/types/applicationConfig.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L233)
 
 Enable streaming responses.

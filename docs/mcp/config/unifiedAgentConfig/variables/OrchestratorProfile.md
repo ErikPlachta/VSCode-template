@@ -8,4 +8,4 @@
 
 > `const` **OrchestratorProfile**: [`OrchestrationProfile`](../interfaces/OrchestrationProfile.md) = `agentConfigurations.orchestrator.orchestration`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:517](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/mcp/config/unifiedAgentConfig.ts#L517)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:517](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/mcp/config/unifiedAgentConfig.ts#L517)

@@ -6,7 +6,7 @@
 
 # Interface: ApplicationRecord
 
-Defined in: src/types/userContext.types.ts:127
+Defined in: [src/types/userContext.types.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L127)
 
 Application record with system information
 
@@ -26,7 +26,7 @@ Additional dynamic properties
 
 > **description**: `string`
 
-Defined in: src/types/userContext.types.ts:130
+Defined in: [src/types/userContext.types.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L130)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: src/types/userContext.types.ts:130
 
 > `optional` **documentation**: `string`
 
-Defined in: src/types/userContext.types.ts:135
+Defined in: [src/types/userContext.types.ts:135](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L135)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: src/types/userContext.types.ts:135
 
 > **id**: `string`
 
-Defined in: src/types/userContext.types.ts:128
+Defined in: [src/types/userContext.types.ts:128](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L128)
 
 Unique identifier for this record
 
@@ -56,7 +56,7 @@ Unique identifier for this record
 
 > **name**: `string`
 
-Defined in: src/types/userContext.types.ts:129
+Defined in: [src/types/userContext.types.ts:129](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L129)
 
 Human-readable name (optional, but either name or title required)
 
@@ -70,7 +70,7 @@ Human-readable name (optional, but either name or title required)
 
 > **owner**: `string`
 
-Defined in: src/types/userContext.types.ts:133
+Defined in: [src/types/userContext.types.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L133)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: src/types/userContext.types.ts:133
 
 > **status**: `string`
 
-Defined in: src/types/userContext.types.ts:132
+Defined in: [src/types/userContext.types.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L132)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: src/types/userContext.types.ts:132
 
 > **supportContacts**: `string`[]
 
-Defined in: src/types/userContext.types.ts:136
+Defined in: [src/types/userContext.types.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L136)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: src/types/userContext.types.ts:136
 
 > `optional` **title**: `string`
 
-Defined in: src/types/userContext.types.ts:88
+Defined in: [src/types/userContext.types.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L88)
 
 Alternative to name (optional, but either name or title required)
 
@@ -108,7 +108,7 @@ Alternative to name (optional, but either name or title required)
 
 > **type**: `string`
 
-Defined in: src/types/userContext.types.ts:131
+Defined in: [src/types/userContext.types.ts:131](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L131)
 
 ***
 
@@ -116,4 +116,4 @@ Defined in: src/types/userContext.types.ts:131
 
 > `optional` **url**: `string`
 
-Defined in: src/types/userContext.types.ts:134
+Defined in: [src/types/userContext.types.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L134)

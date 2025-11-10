@@ -6,7 +6,7 @@
 
 # Interface: CategoryOrchestrationConfig
 
-Defined in: src/types/userContext.types.ts:17
+Defined in: [src/types/userContext.types.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L17)
 
 Category orchestration configuration for agents
 
@@ -16,7 +16,7 @@ Category orchestration configuration for agents
 
 > **agents**: `object`
 
-Defined in: src/types/userContext.types.ts:25
+Defined in: [src/types/userContext.types.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L25)
 
 Agent-specific configuration
 
@@ -30,7 +30,7 @@ Agent-specific configuration
 
 > `optional` **escalateWhen**: `string`[]
 
-Defined in: src/types/userContext.types.ts:23
+Defined in: [src/types/userContext.types.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L23)
 
 Conditions when this category should escalate
 
@@ -40,7 +40,7 @@ Conditions when this category should escalate
 
 > **signals**: `string`[]
 
-Defined in: src/types/userContext.types.ts:21
+Defined in: [src/types/userContext.types.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L21)
 
 Signals that indicate this category should be used
 
@@ -50,6 +50,6 @@ Signals that indicate this category should be used
 
 > **summary**: `string`
 
-Defined in: src/types/userContext.types.ts:19
+Defined in: [src/types/userContext.types.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L19)
 
 Summary description of what this category represents

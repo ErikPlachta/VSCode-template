@@ -50,6 +50,8 @@ to be loaded from user-configurable JSON files.
 - [RemoteQueryBlueprint](interfaces/RemoteQueryBlueprint.md)
 - [TypedDictField](interfaces/TypedDictField.md)
 - [TypeDefinition](interfaces/TypeDefinition.md)
+- [ValidationError](interfaces/ValidationError.md)
+- [ValidationResult](interfaces/ValidationResult.md)
 
 ## Type Aliases
 
@@ -60,6 +62,10 @@ to be loaded from user-configurable JSON files.
 
 ## Functions
 
+- [formatValidationErrors](functions/formatValidationErrors.md)
 - [isBaseRecord](functions/isBaseRecord.md)
 - [isCategoryConfig](functions/isCategoryConfig.md)
 - [isRecordArray](functions/isRecordArray.md)
+- [validateCategoryConfig](functions/validateCategoryConfig.md)
+- [validateCategoryRecord](functions/validateCategoryRecord.md)
+- [validateRelationshipDefinition](functions/validateRelationshipDefinition.md)

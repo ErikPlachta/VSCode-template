@@ -6,7 +6,7 @@
 
 # Abstract Class: BaseAgentConfig
 
-Defined in: [src/types/agentConfig.ts:481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L481)
+Defined in: [src/types/agentConfig.ts:481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L481)
 
 Base class for agent configuration management
 
@@ -23,7 +23,7 @@ Base class for agent configuration management
 
 > **new BaseAgentConfig**(`config`): `BaseAgentConfig`
 
-Defined in: [src/types/agentConfig.ts:492](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L492)
+Defined in: [src/types/agentConfig.ts:492](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L492)
 
 Initialize the base agent configuration wrapper.
 
@@ -45,7 +45,7 @@ Fully-typed configuration object for the agent.
 
 > **clearOverride**(`descriptor`, `env`): `void`
 
-Defined in: [src/types/agentConfig.ts:763](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L763)
+Defined in: [src/types/agentConfig.ts:763](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L763)
 
 Clear an override for a configuration item given its [ConfigDescriptor](../interfaces/ConfigDescriptor.md).
 
@@ -73,7 +73,7 @@ Override scope to clear.
 
 > **confirmConfigItems**(`requiredPaths`): `object`
 
-Defined in: [src/types/agentConfig.ts:547](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L547)
+Defined in: [src/types/agentConfig.ts:547](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L547)
 
 Verify a list of required configuration paths are present after overrides are applied.
 
@@ -105,7 +105,7 @@ Result indicating which required items are missing.
 
 > **getAllDescriptors**(): `Record`\<`string`, [`ConfigDescriptor`](../interfaces/ConfigDescriptor.md)\>
 
-Defined in: [src/types/agentConfig.ts:778](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L778)
+Defined in: [src/types/agentConfig.ts:778](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L778)
 
 Get all descriptors for this agent (default implementation returns empty object).
 Agents should override this method to provide their specific descriptors.
@@ -122,7 +122,7 @@ Map of descriptor keys to their definitions.
 
 > **getApplicationFacingConfig**(): [`ApplicationFacingConfig`](../interfaces/ApplicationFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:655](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L655)
+Defined in: [src/types/agentConfig.ts:655](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L655)
 
 Get application-facing configuration.
 
@@ -138,7 +138,7 @@ Operational details for internal use.
 
 > **getByDescriptor**\<`T`\>(`descriptor`): `T` \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:565](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L565)
+Defined in: [src/types/agentConfig.ts:565](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L565)
 
 Retrieve a configuration value using a [ConfigDescriptor](../interfaces/ConfigDescriptor.md) reference.
 
@@ -168,7 +168,7 @@ Resolved configuration value or undefined when not found.
 
 > **getConfig**(): `Partial`\<[`AgentConfigDefinition`](../interfaces/AgentConfigDefinition.md)\>
 
-Defined in: [src/types/agentConfig.ts:609](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L609)
+Defined in: [src/types/agentConfig.ts:609](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L609)
 
 Get a sanitized, public-facing view of the configuration suitable for diagnostics and UI.
 
@@ -184,7 +184,7 @@ Minimal public configuration snapshot.
 
 > **getConfigId**(): `string`
 
-Defined in: [src/types/agentConfig.ts:664](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L664)
+Defined in: [src/types/agentConfig.ts:664](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L664)
 
 Get configuration schema ID.
 
@@ -200,7 +200,7 @@ Canonical configuration identifier.
 
 > **getConfigItem**\<`T`\>(`path`): `T` \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:506](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L506)
+Defined in: [src/types/agentConfig.ts:506](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L506)
 
 Retrieve a configuration value by a dot-delimited path, with runtime overrides applied.
 
@@ -234,7 +234,7 @@ Resolved configuration value, or undefined when not found.
 
 > **getExecutionConfig**(): [`ExecutionConfig`](../interfaces/ExecutionConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:637](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L637)
+Defined in: [src/types/agentConfig.ts:637](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L637)
 
 Get execution configuration.
 
@@ -250,7 +250,7 @@ Execution settings when defined.
 
 > **getUserFacingConfig**(): [`UserFacingConfig`](../interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/types/agentConfig.ts:646](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L646)
+Defined in: [src/types/agentConfig.ts:646](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L646)
 
 Get user-facing configuration.
 
@@ -266,7 +266,7 @@ User documentation and examples when defined.
 
 > **setByDescriptor**(`descriptor`, `value`, `env?`): `void`
 
-Defined in: [src/types/agentConfig.ts:578](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L578)
+Defined in: [src/types/agentConfig.ts:578](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L578)
 
 Set a runtime override for a configuration item given its [ConfigDescriptor](../interfaces/ConfigDescriptor.md).
 
@@ -300,7 +300,7 @@ Override environment scope.
 
 > **setConfigItem**(`path`, `value`, `env?`): `void`
 
-Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L527)
+Defined in: [src/types/agentConfig.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L527)
 
 Set a runtime override for a configuration value.
 
@@ -336,7 +336,7 @@ Scope for the override; local has higher precedence than global.
 
 > **verifyDescriptor**(`descriptor`): `object`
 
-Defined in: [src/types/agentConfig.ts:592](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e3b55db1722f4cd35a6381c637c0156003e0830a/src/types/agentConfig.ts#L592)
+Defined in: [src/types/agentConfig.ts:592](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L592)
 
 Verify a descriptor's declared verifyPaths (or its own path if none provided) exist.
 

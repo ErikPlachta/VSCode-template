@@ -6,7 +6,7 @@
 
 # Interface: EntityConnections
 
-Defined in: src/types/userContext.types.ts:377
+Defined in: [src/types/userContext.types.ts:377](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L377)
 
 Connections resolved for a specific record
 
@@ -16,7 +16,7 @@ Connections resolved for a specific record
 
 > **categoryId**: `string`
 
-Defined in: src/types/userContext.types.ts:378
+Defined in: [src/types/userContext.types.ts:378](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L378)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/userContext.types.ts:378
 
 > **connections**: `object`[]
 
-Defined in: src/types/userContext.types.ts:380
+Defined in: [src/types/userContext.types.ts:380](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L380)
 
 #### records
 
@@ -44,4 +44,4 @@ Defined in: src/types/userContext.types.ts:380
 
 > **recordId**: `string`
 
-Defined in: src/types/userContext.types.ts:379
+Defined in: [src/types/userContext.types.ts:379](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L379)

@@ -8,7 +8,7 @@
 
 > **generateSchemas**(`outputDir`): `Promise`\<`void`\>
 
-Defined in: src/tools/generateSchemas.ts:268
+Defined in: [src/tools/generateSchemas.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/tools/generateSchemas.ts#L268)
 
 Generate JSON schemas from TypeScript interfaces.
 
