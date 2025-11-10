@@ -1,3 +1,12 @@
+/**
+ * User Context Agent Phase 3.2 Tests - External User Data Directory
+ *
+ * Validates external userData directory functionality:
+ * - Export dataset to external destination
+ * - Import dataset from source into external userData root
+ * - Directory resolution and usingExternal flag toggling
+ */
+
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
@@ -9,7 +18,7 @@ function makeTempDir(prefix: string): string {
   return base;
 }
 
-describe("Phase 3.2 – External user data directory", () => {
+describe("UserContextAgent – External User Data Directory", () => {
   const origEnv: Record<string, string | undefined> = {};
 
   beforeAll(() => {
