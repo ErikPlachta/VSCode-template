@@ -91,6 +91,37 @@ Current status: `relevant-data-manager` is in the silent shim phase (warnings re
 - Do not edit or reintroduce `src/mcp.config.json`; it has been removed. If external tooling needs JSON, generate it from TS via `src/tools/generateMcpConfig.ts` (emits `out/mcp.config.json`).
 - Health enforcement: the Repository Health Agent fails if any `mcp.config.json` exists outside `out/`.
 
+## ID, provider, and path alignment
+
+To avoid runtime vs. manifest drift, IDs and paths are centrally derived and must stay consistent across build- and run-time:
+
+- Central derivation: use `src/shared/ids.ts` (`deriveIds`) as the single place to compute:
+  - `participantId` (VS Code chat participant id), `mention` (e.g. `@mybusiness`), and `commandPrefix`/`settingsPrefix` (e.g. `mybusinessMCP`).
+  - `extensionFullId` (`<publisher>.<name>`) for locating the installed path.
+- Manifest generation: `bin/utils/updatePackageConfig.ts` consumes `deriveIds` to populate `package.json` contributions and commands. Don’t hand-edit IDs in `package.json`.
+- Activation/runtime: read `context.extension.packageJSON.contributes.chatParticipants[0]` to determine the contributed id/name. Compute the command/settings prefix from the contributed id so runtime always matches the manifest.
+- Provider contribution consistency:
+  - Contribute a provider id in `package.json.contributes.mcpServerDefinitionProviders[0].id` with the pattern `${baseId}-local` (lowercase, e.g. `mybusiness-local`).
+  - Register the provider at runtime with the exact same id; mismatches cause VS Code to warn: “providers must be registered in contributes.mcpServerDefinitionProviders …”.
+- mcp.json registration ids: use `${contributedName}-mcp-server` (e.g. `mybusiness-mcp-server`) for both HTTP and stdio entries.
+- Build layout and server path:
+  - TypeScript emits only `src` into `out/src` (tsconfig include restricted to `src`).
+  - The embedded stdio server entry point is `out/src/server/index.js` (not `out/server/index.js`). Use this path in both provider definitions and mcp.json args.
+- Installed vs. workspace path preference:
+  - When writing `mcp.json`, prefer the installed extension path resolved from `<publisher>.<name>`; fallback to `context.extensionPath` in dev.
+  - Activation includes a lightweight orphaned-registration cleanup that removes stale `mcp.json` entries pointing to non-existent or non-extension paths.
+
+## Diagnostics and read-only settings
+
+- A palette command surfaces id alignment at runtime: `${commandPrefix}.diagnoseIds`.
+  - It prints actual vs. expected chat participant id, mention, and derived command prefix.
+- Read-only settings enumerate current IDs for quick checks (e.g., `${settingsPrefix}.ids.chatParticipantId`, `${settingsPrefix}.ids.commandPrefix`, `${settingsPrefix}.ids.extensionId`). These are contributed via `updatePackageConfig.ts` and should not be edited manually.
+
+## Prepublish and packaging safeguards
+
+- `prepublishOnly` runs `prebuild` to regenerate the manifest and docs so packaged `.vsix` always reflects the current env/ids.
+- Ensure provider and participant ids are verified by running quick tests before packaging.
+
 ## Cache Naming
 
 - Cache folder name derives from `EXTENSION_NAME` env variable (fallback `myBusiness-mcp-extension`).

@@ -183,6 +183,11 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ## Logs
 
+### [2025-11-10]
+
+#### 2025-11-10 09:15:54 docs: Update Copilot instructions: dynamic IDs, provider id alignment, out/src server path, diagnostics, prepublish safeguard
+
+
 All change history. Organized by date/time and semantic titles; verification recorded after each batch.
 
 ### [2025-11-09] Manifest alignment, server readiness, and activation resiliency
