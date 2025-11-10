@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -17,7 +17,7 @@ jest.mock(
   { virtual: true }
 );
 
-describe("RelevantDataManagerAgent (edges)", () => {
+describe("UserContextAgent (edges)", () => {
   beforeAll(() => {
     process.env.VSCODE_TEMPLATE_DATA_ROOT = path.resolve(
       __dirname,
@@ -29,11 +29,11 @@ describe("RelevantDataManagerAgent (edges)", () => {
     workspaceFoldersMock = undefined;
   });
 
-  async function createManager(): Promise<RelevantDataManagerAgent> {
+  async function createManager(): Promise<UserContextAgent> {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "relevant-data-edges-")
     );
-    return new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    return new UserContextAgent(Promise.resolve(cacheDir));
   }
 
   it("returns empty results when keyword is empty", async () => {

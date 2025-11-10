@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 
 jest.mock(
   "vscode",
@@ -48,9 +48,9 @@ function categoryConfig(id: string) {
   };
 }
 
-describe("RelevantDataManagerAgent getEntityConnections error path", () => {
+describe("UserContextAgent getEntityConnections error path", () => {
   let root: string;
-  let agent: RelevantDataManagerAgent;
+  let agent: UserContextAgent;
   beforeEach(async () => {
     root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-entity-"));
     process.env.VSCODE_TEMPLATE_DATA_ROOT = root;
@@ -78,7 +78,7 @@ describe("RelevantDataManagerAgent getEntityConnections error path", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-entity-cache-")
     );
-    agent = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    agent = new UserContextAgent(Promise.resolve(cacheDir));
   });
 
   it("throws for missing record when resolving connections", () => {

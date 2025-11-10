@@ -2,8 +2,8 @@ import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import {
-  createUserContextAgent as createRelevantDataManagerAgent,
-  UserContextAgent as RelevantDataManagerAgent,
+  createUserContextAgent,
+  UserContextAgent,
   UnknownCategoryError,
 } from "../src/agent/userContextAgent";
 
@@ -21,7 +21,7 @@ jest.mock(
   { virtual: true }
 );
 
-describe("UserContextAgent (legacy RelevantDataManagerAgent parity)", () => {
+describe("UserContextAgent", () => {
   beforeAll(() => {
     // Ensure the agent reads datasets from the new userContext directory
     process.env.VSCODE_TEMPLATE_DATA_ROOT = path.resolve(
@@ -35,13 +35,13 @@ describe("UserContextAgent (legacy RelevantDataManagerAgent parity)", () => {
   });
 
   async function createManager(): Promise<{
-    manager: RelevantDataManagerAgent;
+    manager: UserContextAgent;
     cacheDir: string;
   }> {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "relevant-data-manager-test-")
     );
-    const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const manager = new UserContextAgent(Promise.resolve(cacheDir));
     return { manager, cacheDir };
   }
 
@@ -178,7 +178,7 @@ describe("UserContextAgent (legacy RelevantDataManagerAgent parity)", () => {
   });
 
   it("creates default manager via factory", () => {
-    const manager = createRelevantDataManagerAgent();
+    const manager = createUserContextAgent();
     expect(manager.listCategories().length).toBeGreaterThan(0);
   });
 });

@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 import { listSharedCacheEntries } from "../src/extension/mcpCache";
 
 // Validates that when the dataset changes (fingerprint differs), the consolidated
@@ -52,7 +52,7 @@ function categoryConfig(id: string) {
   };
 }
 
-describe("RelevantDataManagerAgent consolidated index cache divergence", () => {
+describe("UserContextAgent consolidated index cache divergence", () => {
   let root: string;
   beforeEach(async () => {
     root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cat-div-"));
@@ -86,7 +86,7 @@ describe("RelevantDataManagerAgent consolidated index cache divergence", () => {
     );
 
     // First instantiation persists initial catalogue
-    const agent1 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const agent1 = new UserContextAgent(Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 60));
     const sharedDir = path.join(cacheDir, "shared");
     const beforeFiles = await fs.readdir(sharedDir).catch(() => []);
@@ -101,7 +101,7 @@ describe("RelevantDataManagerAgent consolidated index cache divergence", () => {
     ]);
 
     // Second instantiation should detect changed fingerprint and persist again
-    const agent2 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const agent2 = new UserContextAgent(Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 80));
     const afterFiles = await fs.readdir(sharedDir).catch(() => []);
 

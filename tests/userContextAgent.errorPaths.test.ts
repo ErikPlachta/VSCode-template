@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 
 jest.mock(
   "vscode",
@@ -22,9 +22,9 @@ describe("RelevantDataManagerAgent error paths", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-empty-cache-")
     );
-    expect(
-      () => new RelevantDataManagerAgent(Promise.resolve(cacheDir))
-    ).toThrow(/No category folders were found/);
+    expect(() => new UserContextAgent(Promise.resolve(cacheDir))).toThrow(
+      /No category folders were found/
+    );
   });
 
   it("throws when category.json is missing", async () => {
@@ -36,8 +36,8 @@ describe("RelevantDataManagerAgent error paths", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-missing-cat-cache-")
     );
-    expect(
-      () => new RelevantDataManagerAgent(Promise.resolve(cacheDir))
-    ).toThrow(/Missing category\.json/);
+    expect(() => new UserContextAgent(Promise.resolve(cacheDir))).toThrow(
+      /Missing category\.json/
+    );
   });
 });

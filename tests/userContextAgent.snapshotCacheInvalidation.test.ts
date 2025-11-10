@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 import { readSharedCacheEntry } from "../src/extension/mcpCache";
 
 jest.mock(
@@ -49,7 +49,7 @@ function categoryConfig(id: string) {
   };
 }
 
-describe("RelevantDataManagerAgent snapshot cache invalidation", () => {
+describe("UserContextAgent snapshot cache invalidation", () => {
   let root: string;
   beforeEach(async () => {
     root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-snap-"));
@@ -81,7 +81,7 @@ describe("RelevantDataManagerAgent snapshot cache invalidation", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-snap-cache-")
     );
-    const agent = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const agent = new UserContextAgent(Promise.resolve(cacheDir));
     const snap1 = await agent.getOrCreateSnapshot("alpha");
     expect(snap1.recordCount).toBe(1);
 
@@ -98,9 +98,7 @@ describe("RelevantDataManagerAgent snapshot cache invalidation", () => {
     ]);
 
     // Re-instantiate agent to force re-scan of mutated dataset
-    const refreshedAgent = new RelevantDataManagerAgent(
-      Promise.resolve(cacheDir)
-    );
+    const refreshedAgent = new UserContextAgent(Promise.resolve(cacheDir));
     const snap2 = await refreshedAgent.getOrCreateSnapshot("alpha");
     expect(snap2.recordCount).toBe(2);
     const entry2 = await readSharedCacheEntry(cacheDir, key);

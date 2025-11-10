@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import { DatabaseAgent, DataSource } from "../src/agent/databaseAgent";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -31,14 +31,14 @@ describe("DatabaseAgent", () => {
   });
 
   async function createAgents(): Promise<{
-    manager: RelevantDataManagerAgent;
+    manager: UserContextAgent;
     database: DatabaseAgent;
     cacheDir: string;
   }> {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "database-agent-test-")
     );
-    const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const manager = new UserContextAgent(Promise.resolve(cacheDir));
     // Adapt to new database agent signature: provide data sources explicitly
     const dataSources: DataSource[] = manager
       .listCategories()

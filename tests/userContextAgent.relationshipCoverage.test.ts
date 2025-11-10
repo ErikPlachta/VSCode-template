@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 
 jest.mock(
   "vscode",
@@ -51,7 +51,7 @@ function baseConfig(id: string) {
   };
 }
 
-describe("RelevantDataManagerAgent relationship coverage assertion", () => {
+describe("UserContextAgent relationship coverage assertion", () => {
   let root: string;
   beforeEach(async () => {
     root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-relcov-"));
@@ -82,7 +82,7 @@ describe("RelevantDataManagerAgent relationship coverage assertion", () => {
   it("throws when relationship coverage is incomplete", async () => {
     const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cache-2-"));
     await expect(
-      (async () => new RelevantDataManagerAgent(Promise.resolve(cacheDir)))()
+      (async () => new UserContextAgent(Promise.resolve(cacheDir)))()
     ).rejects.toThrow(/Relationship coverage for field 'missingField'/i);
   });
 });

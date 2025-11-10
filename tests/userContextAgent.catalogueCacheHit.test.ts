@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 
 // This test ensures that the consolidated index (catalogue) is only written once per fingerprint.
 // A second agent instantiation with identical dataset and cache dir should not increase file count.
@@ -51,7 +51,7 @@ function categoryConfig(id: string) {
   };
 }
 
-describe("RelevantDataManagerAgent consolidated index cache hit", () => {
+describe("UserContextAgent consolidated index cache hit", () => {
   let root: string;
   beforeEach(async () => {
     root = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cat-cache-"));
@@ -83,14 +83,14 @@ describe("RelevantDataManagerAgent consolidated index cache hit", () => {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "rdm-cat-cache-hit-")
     );
-    const agent1 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const agent1 = new UserContextAgent(Promise.resolve(cacheDir));
     // Allow async dataset load & initial persist
     await new Promise((r) => setTimeout(r, 60));
     const sharedDir = path.join(cacheDir, "shared");
     const beforeFiles = await fs.readdir(sharedDir).catch(() => []);
     expect(beforeFiles.length).toBeGreaterThan(0);
 
-    const agent2 = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const agent2 = new UserContextAgent(Promise.resolve(cacheDir));
     await new Promise((r) => setTimeout(r, 60));
     const afterFiles = await fs.readdir(sharedDir).catch(() => []);
 

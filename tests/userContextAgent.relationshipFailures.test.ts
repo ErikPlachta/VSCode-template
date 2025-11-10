@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -53,7 +53,7 @@ function minimalCategoryConfig(id: string, name: string) {
   };
 }
 
-describe("RelevantDataManagerAgent relationship validation failures", () => {
+describe("UserContextAgent relationship validation failures", () => {
   let dataRoot: string;
 
   beforeEach(async () => {
@@ -61,10 +61,10 @@ describe("RelevantDataManagerAgent relationship validation failures", () => {
     dataRoot = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-relfail-"));
   });
 
-  async function createManager(): Promise<RelevantDataManagerAgent> {
+  async function createManager(): Promise<UserContextAgent> {
     process.env.VSCODE_TEMPLATE_DATA_ROOT = dataRoot;
     const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), "rdm-cache-"));
-    return new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    return new UserContextAgent(Promise.resolve(cacheDir));
   }
 
   async function prepareCategory(dir: string, id: string, name: string) {
