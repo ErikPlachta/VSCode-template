@@ -8,9 +8,24 @@ import * as os from "os";
 import * as vscode from "vscode";
 
 /**
- * McpConfig interface.
- *
+ * McpConfig interfaces supporting both legacy and transport formats.
  */
+
+// Legacy format (used by most existing servers)
+interface McpServerLegacyStdio {
+  command: string;
+  args?: string[];
+  env?: Record<string, string>;
+  type: "stdio";
+}
+
+interface McpServerLegacyHttp {
+  url: string;
+  type: "http";
+  headers?: Record<string, string>;
+}
+
+// New transport-based format
 interface McpServerTransportHttp {
   type: "http";
   url: string;
@@ -26,10 +41,16 @@ interface McpServerTransportStdio {
 
 type McpServerTransport = McpServerTransportHttp | McpServerTransportStdio;
 
-interface McpServerDefinition {
+interface McpServerWithTransport {
   transport: McpServerTransport;
   metadata?: Record<string, unknown>;
 }
+
+// Union type supporting both formats
+type McpServerDefinition =
+  | McpServerLegacyStdio
+  | McpServerLegacyHttp
+  | McpServerWithTransport;
 
 interface McpConfig {
   inputs?: unknown[];
@@ -112,7 +133,7 @@ export function resolveMcpConfigPath(
   const portableDir = options.portableDir ?? process.env.VSCODE_PORTABLE;
   const pathLib = platform === "win32" ? path.win32 : path.posix;
 
-  if (portableDir) {
+  if (portableDir && portableDir.trim()) {
     const portableCandidates = [
       pathLib.join(portableDir, "user-data"),
       pathLib.join(portableDir, "data"),
@@ -196,20 +217,27 @@ async function writeMcpConfig(
 }
 
 /**
- * RegistrationOptions interface.
- *
+ * Registration options supporting both stdio and HTTP servers.
  */
 export interface RegistrationOptions {
   id: string; // key under servers
-  url: string; // http JSON-RPC endpoint, e.g., http://localhost:39200
+  // For HTTP servers
+  url?: string;
   includeAuthHeader?: boolean;
   token?: string;
+  // For stdio servers
+  command?: string;
+  args?: string[];
+  env?: Record<string, string>;
+  // Required: transport type
+  type: "http" | "stdio";
 }
 
 /**
- * Ensure an HTTP JSON-RPC server entry exists in mcp.json for Copilot Chat.
+ * Ensure an MCP server entry exists in mcp.json for Copilot Chat.
+ * Supports both stdio and HTTP transports using the legacy format.
  *
- * @param {RegistrationOptions} opts - Registration parameters describing the HTTP server.
+ * @param {RegistrationOptions} opts - Registration parameters describing the server.
  * @param {McpConfigPathOptions} [pathOptions] - Optional overrides used to resolve the configuration path.
  * @returns {Promise<string>} Absolute path to the written `mcp.json` file.
  */
@@ -219,17 +247,40 @@ export async function ensureRegistration(
 ): Promise<string> {
   const configPath = resolveMcpConfigPath(pathOptions);
   const current = await readMcpConfig(configPath);
-  const headers =
-    opts.includeAuthHeader && opts.token
-      ? { Authorization: `Bearer ${opts.token}` }
-      : undefined;
-  const transport: McpServerTransport = headers
-    ? { type: "http", url: opts.url, headers }
-    : { type: "http", url: opts.url };
+
+  let serverDef: McpServerDefinition;
+
+  if (opts.type === "stdio") {
+    if (!opts.command) {
+      throw new Error("command is required for stdio servers");
+    }
+    // Use legacy stdio format to match existing servers
+    serverDef = {
+      command: opts.command,
+      args: opts.args,
+      env: opts.env,
+      type: "stdio",
+    };
+  } else if (opts.type === "http") {
+    if (!opts.url) {
+      throw new Error("url is required for HTTP servers");
+    }
+    // Use legacy HTTP format to match existing servers
+    const headers =
+      opts.includeAuthHeader && opts.token
+        ? { Authorization: `Bearer ${opts.token}` }
+        : undefined;
+
+    serverDef = headers
+      ? { url: opts.url, type: "http", headers }
+      : { url: opts.url, type: "http" };
+  } else {
+    throw new Error(`Unsupported transport type: ${opts.type}`);
+  }
 
   const nextServers: Record<string, McpServerDefinition> = {
     ...(current.servers ?? {}),
-    [opts.id]: { transport },
+    [opts.id]: serverDef,
   };
 
   const nextConfig: McpConfig = { ...current, servers: nextServers };

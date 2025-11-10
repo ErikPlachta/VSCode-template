@@ -3,6 +3,7 @@
   "displayName": "My Business MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",
+  "type": "module",
   "publisher": "ErikPlachta",
   "license": "MIT",
   "repository": {

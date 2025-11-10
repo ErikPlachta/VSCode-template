@@ -11,8 +11,12 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";
-import { pathToFileURL } from "url";
+import { fileURLToPath } from "url";
 import { MCPTool } from "@shared/mcpTypes";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * JsonRpcRequest interface.
@@ -695,21 +699,9 @@ const __isMain = ((): boolean => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mod: any = typeof module !== "undefined" ? module : undefined;
   if (req && mod) return req.main === mod;
-  // ESM path: compare import.meta.url to argv[1]
-  try {
-    const argv1 = process.argv?.[1];
-    if (!argv1) return false;
-    let moduleUrl: string | undefined;
-    try {
-      moduleUrl = Function("return import.meta.url")() as string | undefined;
-    } catch {
-      moduleUrl = undefined;
-    }
-    if (!moduleUrl) return false;
-    return pathToFileURL(argv1).href === moduleUrl;
-  } catch {
-    return false;
-  }
+  // ESM path: simplified check for running directly
+  // If we're here and not in a require() context, assume we're main
+  return true;
 })();
 
 if (__isMain) {

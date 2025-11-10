@@ -7,6 +7,7 @@
 
 import path from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import fg from "fast-glob";
 
 interface AliasRoot {
@@ -18,14 +19,14 @@ const PROJECT_ROOT = process.cwd();
 const OUT_DIR = path.resolve(PROJECT_ROOT, "out");
 
 const ALIASES: AliasRoot[] = [
-  { alias: "@agent", outRoot: path.join(OUT_DIR, "agent") },
-  { alias: "@extension", outRoot: path.join(OUT_DIR, "extension") },
-  { alias: "@mcp", outRoot: path.join(OUT_DIR, "mcp") },
-  { alias: "@server", outRoot: path.join(OUT_DIR, "server") },
-  { alias: "@shared", outRoot: path.join(OUT_DIR, "shared") },
-  { alias: "@config", outRoot: path.join(OUT_DIR, "config") },
-  { alias: "@tools", outRoot: path.join(OUT_DIR, "tools") },
-  { alias: "@internal-types", outRoot: path.join(OUT_DIR, "types") },
+  { alias: "@agent", outRoot: path.join(OUT_DIR, "src", "agent") },
+  { alias: "@extension", outRoot: path.join(OUT_DIR, "src", "extension") },
+  { alias: "@mcp", outRoot: path.join(OUT_DIR, "src", "mcp") },
+  { alias: "@server", outRoot: path.join(OUT_DIR, "src", "server") },
+  { alias: "@shared", outRoot: path.join(OUT_DIR, "src", "shared") },
+  { alias: "@config", outRoot: path.join(OUT_DIR, "src", "config") },
+  { alias: "@tools", outRoot: path.join(OUT_DIR, "src", "tools") },
+  { alias: "@internal-types", outRoot: path.join(OUT_DIR, "src", "types") },
   { alias: "@bin", outRoot: path.join(OUT_DIR, "bin") },
 ];
 
@@ -44,9 +45,19 @@ function rewriteSpec(filePath: string, spec: string): string | null {
   for (const { alias, outRoot } of ALIASES) {
     if (spec === alias || spec.startsWith(alias + "/")) {
       const subPath = spec.slice(alias.length + 1); // may be '' if root import
-      const targetAbs = subPath ? path.join(outRoot, subPath) : outRoot;
-      // Prefer extension-less import; compiled files are .js
-      const rel = computeRelative(filePath, targetAbs);
+      const baseTarget = subPath ? path.join(outRoot, subPath) : outRoot;
+
+      // Node ESM requires explicit file extensions; prefer exact .js, else index.js
+      let resolvedTarget = baseTarget;
+      const fileCandidate = baseTarget + ".js";
+      const indexCandidate = path.join(baseTarget, "index.js");
+      if (existsSync(fileCandidate)) {
+        resolvedTarget = fileCandidate;
+      } else if (existsSync(indexCandidate)) {
+        resolvedTarget = indexCandidate;
+      }
+
+      const rel = computeRelative(filePath, resolvedTarget);
       return rel;
     }
   }
@@ -57,6 +68,8 @@ function rewriteFileContent(filePath: string, content: string): string {
   const importExportRegex =
     /(^\s*(?:import|export)\s[^'"`]*?from\s*['"])([^'"`]+)(['"];?)/gm;
   const bareImportRegex = /(^\s*import\s*['"])([^'"`]+)(['"];?)/gm;
+  // dynamic import("spec")
+  const dynamicImportRegex = /(import\s*\(\s*['"])([^'"`]+)(['"]\s*\))/gm;
 
   const handler = (
     full: string,
@@ -71,6 +84,7 @@ function rewriteFileContent(filePath: string, content: string): string {
 
   let updated = content.replace(importExportRegex, handler);
   updated = updated.replace(bareImportRegex, handler);
+  updated = updated.replace(dynamicImportRegex, handler);
   return updated;
 }
 

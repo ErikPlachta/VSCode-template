@@ -5,13 +5,14 @@
  */
 import * as vscode from "vscode";
 import * as path from "path";
+import { promises as fsPromises, existsSync } from "fs";
 import { Orchestrator } from "@agent/orchestrator";
-import { startMCPServer, stopMCPServer } from "@server/embedded";
-import { fetchTools, MCPTool } from "@extension/mcpSync";
+import { fetchTools, fetchLocalTools, MCPTool } from "@extension/mcpSync";
 import { registerMcpProvider } from "@extension/mcpProvider";
 import {
   ensureRegistration,
   removeRegistration,
+  resolveMcpConfigPath,
 } from "@extension/mcpRegistration";
 
 /**
@@ -31,173 +32,86 @@ export async function activate(
 ): Promise<void> {
   console.log("🚀 MyBusiness MCP Extension: Starting activation...");
 
+  // Clean up any orphaned registrations from previous uninstalls
+  await cleanupOrphanedRegistrations(context);
+
   const cfg = vscode.workspace.getConfiguration("mybusinessMCP");
   let serverUrl = cfg.get<string>("serverUrl") ?? "";
   const token = cfg.get<string>("token") ?? "";
   const orchestrator = new Orchestrator();
-
-  console.log(
-    `📋 Configuration loaded - serverUrl: ${
-      serverUrl || "(embedded)"
-    }, token: ${token ? "***" : "(none)"}`
-  );
-
-  // Start embedded MCP server if no external server URL is configured
-  const port = cfg.get<number>("port") ?? 39200;
   const includeAuthHeader = cfg.get<boolean>("includeAuthHeader") ?? false;
 
-  if (!serverUrl) {
-    console.log(`🔧 Starting embedded MCP server on port ${port}...`);
-    try {
-      serverUrl = await startMCPServer(port);
-      const actualPort = serverUrl.split(":").pop();
-      console.log(
-        `✅ Embedded MCP server started successfully at ${serverUrl}`
-      );
+  console.log(
+    `📋 Configuration loaded - serverUrl: ${serverUrl || "(stdio)"}, token: ${
+      token ? "***" : "(none)"
+    }`
+  );
 
-      // Register the HTTP server in mcp.json for Copilot Chat discovery
-      console.log(`📝 Registering HTTP server in mcp.json...`);
+  if (!serverUrl) {
+    const autoRegister = cfg.get<boolean>("autoRegister") ?? true;
+    if (!autoRegister) {
+      console.log(
+        `ℹ️ autoRegister is disabled; skipping automatic mcp.json registration`
+      );
+    } else {
+      console.log(`ℹ️ Registering stdio MCP server in mcp.json...`);
       try {
+        const extensionPath = context.extensionPath;
+        const serverScript = path.join(
+          extensionPath,
+          "out",
+          "server",
+          "index.js"
+        );
         const registrationId = "mybusiness-mcp-server";
+
         await ensureRegistration({
           id: registrationId,
-          url: serverUrl,
-          includeAuthHeader,
-          token: token || undefined,
+          type: "stdio",
+          command: "node",
+          args: [serverScript, "--stdio"],
         });
+
         console.log(
-          `✅ HTTP server registered in mcp.json as "${registrationId}"`
+          `✅ Stdio MCP server registered in mcp.json as "${registrationId}"`
         );
 
-        // Register cleanup for both server stop and mcp.json registration removal
+        // Register cleanup to remove mcp.json registration
         context.subscriptions.push({
-          /**
-           * Dispose handler to stop embedded MCP server and remove mcp.json registration.
-           *
-           * @returns {Promise<void>} Resolves when server has stopped and registration removed.
-           */
           dispose: async () => {
-            await stopMCPServer();
             await removeRegistration(registrationId);
-            console.log(
-              `🧹 Cleaned up server and removed mcp.json registration`
-            );
+            console.log(`🧹 Cleaned up mcp.json registration`);
           },
         });
       } catch (regError) {
         const regMsg =
           regError instanceof Error ? regError.message : String(regError);
-        console.warn(`⚠️ Failed to register in mcp.json: ${regMsg}`);
-        // Continue anyway - stdio provider should still work
-        context.subscriptions.push({
-          /**
-           * Dispose handler to stop embedded MCP server when extension unloads.
-           *
-           * @returns {Promise<void>} Resolves when server has stopped.
-           */
-          dispose: async () => {
-            await stopMCPServer();
-          },
-        });
-      }
-
-      vscode.window.showInformationMessage(
-        `✅ MyBusiness MCP Server running on port ${actualPort}`
-      );
-    } catch (error) {
-      // If preferred port is busy, retry with ephemeral port
-      // Narrow known NodeJS error code shape without using 'any'
-      const code = (error as Partial<{ code: string }> | undefined)?.code as
-        | string
-        | undefined;
-      const msg = error instanceof Error ? error.message : String(error);
-      console.error(`❌ Failed to start server on port ${port}:`, msg);
-      if (code === "EADDRINUSE" || /EADDRINUSE/i.test(msg)) {
-        console.log(`⚠️ Port ${port} in use, retrying with ephemeral port...`);
-        try {
-          serverUrl = await startMCPServer(undefined);
-          const actualPort = serverUrl.split(":").pop();
-          console.log(`✅ Started on ephemeral port: ${serverUrl}`);
-
-          // Register the HTTP server in mcp.json for Copilot Chat discovery
-          console.log(`📝 Registering HTTP server in mcp.json...`);
-          try {
-            const registrationId = "mybusiness-mcp-server";
-            await ensureRegistration({
-              id: registrationId,
-              url: serverUrl,
-              includeAuthHeader,
-              token: token || undefined,
-            });
-            console.log(
-              `✅ HTTP server registered in mcp.json as "${registrationId}"`
-            );
-
-            // Register cleanup for both server stop and mcp.json registration removal
-            context.subscriptions.push({
-              /**
-               * Dispose handler to stop embedded MCP server and remove mcp.json registration.
-               *
-               * @returns {Promise<void>} Resolves when server has stopped and registration removed.
-               */
-              dispose: async () => {
-                await stopMCPServer();
-                await removeRegistration(registrationId);
-                console.log(
-                  `🧹 Cleaned up server and removed mcp.json registration`
-                );
-              },
-            });
-          } catch (regError) {
-            const regMsg =
-              regError instanceof Error ? regError.message : String(regError);
-            console.warn(`⚠️ Failed to register in mcp.json: ${regMsg}`);
-            // Continue anyway - stdio provider should still work
-            context.subscriptions.push({
-              /**
-               * Dispose handler to stop embedded MCP server when extension unloads.
-               *
-               * @returns {Promise<void>} resolves when server has stopped
-               */
-              dispose: async () => {
-                await stopMCPServer();
-              },
-            });
-          }
-
-          vscode.window.showWarningMessage(
-            `⚠️ Port ${port} was busy. MyBusiness MCP Server running on port ${actualPort}`
-          );
-        } catch (retryError) {
-          const retryMsg =
-            retryError instanceof Error
-              ? retryError.message
-              : String(retryError);
-          console.error(`❌ Failed on ephemeral port too:`, retryMsg);
-          vscode.window.showErrorMessage(
-            `❌ Failed to start MyBusiness MCP server: ${retryMsg}`
-          );
-          return;
-        }
-      } else {
-        console.error(`❌ Server startup failed:`, msg);
-        vscode.window.showErrorMessage(
-          `❌ Failed to start MyBusiness MCP server: ${msg}`
+        console.warn(
+          `⚠️ Failed to register stdio server in mcp.json: ${regMsg}`
         );
-        return;
       }
     }
   }
-
   // Always register provider and chat participant; tool discovery can fail independently
-  console.log(`🔌 Registering MCP provider with serverUrl: ${serverUrl}`);
+  console.log(
+    `🔌 Registering MCP provider with serverUrl: ${
+      serverUrl || "(embedded stdio)"
+    }`
+  );
   let tools: MCPTool[] = [];
   try {
+    // Register provider even for stdio (provider may enumerate registrations)
     registerMcpProvider(serverUrl, token, includeAuthHeader, context);
     console.log(`✅ MCP provider registered`);
 
-    console.log(`🔍 Fetching tools from ${serverUrl}...`);
-    tools = await fetchTools(serverUrl, token);
+    if (serverUrl) {
+      console.log(`🔍 Fetching tools via HTTP from ${serverUrl}...`);
+      tools = await fetchTools(serverUrl, token);
+    } else {
+      console.log(`🔍 Fetching tools from embedded stdio server module...`);
+      tools = await fetchLocalTools();
+    }
+
     console.log(
       `✅ Fetched ${tools.length} tools:`,
       tools.map((t) => t.name).join(", ")
@@ -323,12 +237,32 @@ export async function activate(
           const registrationId = "mybusiness-mcp-server";
           await ensureRegistration({
             id: registrationId,
+            type: "http",
             url: serverUrl,
             includeAuthHeader,
             token: token || undefined,
           });
           console.log(
             `✅ HTTP server registered in mcp.json as "${registrationId}"`
+          );
+        } else {
+          // Register stdio server
+          const extensionPath = context.extensionPath;
+          const serverScript = path.join(
+            extensionPath,
+            "out",
+            "server",
+            "index.js"
+          );
+          const registrationId = "mybusiness-mcp-server";
+          await ensureRegistration({
+            id: registrationId,
+            type: "stdio",
+            command: "node",
+            args: [serverScript, "--stdio"],
+          });
+          console.log(
+            `✅ Stdio server registered in mcp.json as "${registrationId}"`
           );
         }
 
@@ -389,6 +323,106 @@ export async function activate(
   console.log(`   📍 Server: ${serverUrl}`);
   console.log(`   🔧 Tools: ${tools.length}`);
   console.log(`   💬 Participant: @mybusiness`);
+}
+
+/**
+ * Check for and clean up orphaned MCP registrations from previous extension installations.
+ * This helps handle the case where the extension was uninstalled but the mcp.json entry remains.
+ *
+ * @param {vscode.ExtensionContext} context - VS Code extension context
+ * @returns {Promise<void>} Resolves when cleanup check is complete.
+ */
+async function cleanupOrphanedRegistrations(
+  context: vscode.ExtensionContext
+): Promise<void> {
+  try {
+    const lastCleanupKey = "lastUninstallCleanup";
+    const currentVersion = context.extension.packageJSON.version;
+    const lastCleanup = context.globalState.get<string>(lastCleanupKey);
+
+    // Only run cleanup if we haven't already done it for this version
+    if (lastCleanup !== currentVersion) {
+      console.log(`🧹 Checking for orphaned registrations...`);
+
+      const extensionPath = context.extensionPath;
+      const expectedServerPath = path.join(
+        extensionPath,
+        "out",
+        "src",
+        "server",
+        "index.js"
+      );
+
+      try {
+        // Resolve the user's mcp.json path and read the current configuration
+        const configPath = resolveMcpConfigPath();
+        let raw = "";
+        try {
+          raw = await fsPromises.readFile(configPath, "utf8");
+        } catch (e) {
+          // No config file - nothing to do
+          console.log(`No global mcp.json found at ${configPath}`);
+          await context.globalState.update(lastCleanupKey, currentVersion);
+          return;
+        }
+
+        const parsed = JSON.parse(raw) as { servers?: Record<string, any> };
+        const servers = parsed.servers ?? {};
+
+        // Inspect servers and remove entries that clearly point to missing or non-extension files.
+        for (const [id, def] of Object.entries(servers)) {
+          try {
+            if (def && def.type === "stdio" && Array.isArray(def.args)) {
+              const scriptArg = def.args.find((a: string) =>
+                a.includes("server/index.js")
+              );
+              if (scriptArg) {
+                const candidatePath = path.isAbsolute(scriptArg)
+                  ? scriptArg
+                  : path.resolve(scriptArg);
+
+                // If the referenced file doesn't exist, or it exists but is not under our extension path,
+                // consider it orphaned and remove it. This is conservative and scoped to stdio server scripts.
+                if (
+                  !existsSync(candidatePath) ||
+                  !candidatePath.startsWith(extensionPath)
+                ) {
+                  console.log(
+                    `🧹 Removing orphaned mcp.json server entry: ${id} -> ${scriptArg}`
+                  );
+                  // Use the exported removeRegistration helper so we stay consistent with how writes happen.
+                  // It will resolve the same config path and update the file.
+                  // eslint-disable-next-line no-await-in-loop
+                  await removeRegistration(id);
+                }
+              }
+            }
+          } catch (inner) {
+            console.warn(
+              `⚠️ Error inspecting server ${id}: ${
+                inner instanceof Error ? inner.message : String(inner)
+              }`
+            );
+          }
+        }
+      } catch (err) {
+        console.warn(
+          `⚠️ Could not inspect global mcp.json: ${
+            err instanceof Error ? err.message : String(err)
+          }`
+        );
+      }
+
+      // Mark cleanup as done for this version
+      await context.globalState.update(lastCleanupKey, currentVersion);
+    }
+  } catch (error) {
+    console.warn(
+      `⚠️ Could not check for orphaned registrations: ${
+        error instanceof Error ? error.message : String(error)
+      }`
+    );
+  }
 }
 
 /**

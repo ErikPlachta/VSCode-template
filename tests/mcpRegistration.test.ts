@@ -14,6 +14,11 @@ describe("resolveMcpConfigPath", () => {
   const originalAppName = process.env.VSCODE_APP_NAME;
   const originalPortable = process.env.VSCODE_PORTABLE;
 
+  beforeEach(() => {
+    // Ensure VSCODE_PORTABLE is not set for these tests
+    delete process.env.VSCODE_PORTABLE;
+  });
+
   afterEach(() => {
     process.env.VSCODE_QUALITY = originalQuality;
     process.env.VSCODE_APP_NAME = originalAppName;
@@ -172,7 +177,7 @@ describe("ensureRegistration", () => {
       portableDir: "",
     };
     await ensureRegistration(
-      { id: "mybusiness", url: "http://localhost:39200" },
+      { id: "mybusiness", url: "http://localhost:39200", type: "http" },
       options
     );
 
@@ -180,7 +185,7 @@ describe("ensureRegistration", () => {
     expect(updated.custom).toBe(true);
     expect(updated.clients).toEqual(existingConfig.clients);
     expect(updated.servers.legacy).toEqual(existingConfig.servers.legacy);
-    expect(updated.servers.mybusiness.transport).toEqual({
+    expect(updated.servers.mybusiness).toEqual({
       type: "http",
       url: "http://localhost:39200",
     });
@@ -202,6 +207,7 @@ describe("ensureRegistration", () => {
         url: "http://localhost:5555",
         includeAuthHeader: true,
         token: "secret",
+        type: "http",
       },
       options
     );
@@ -214,7 +220,7 @@ describe("ensureRegistration", () => {
       "mcp.json"
     );
     const updated = JSON.parse(await fs.readFile(configPath, "utf8"));
-    expect(updated.servers.auth.transport).toEqual({
+    expect(updated.servers.auth).toEqual({
       type: "http",
       url: "http://localhost:5555",
       headers: { Authorization: "Bearer secret" },
@@ -239,11 +245,11 @@ describe("ensureRegistration", () => {
     );
 
     await ensureRegistration(
-      { id: "remove-me", url: "http://localhost:6000" },
+      { id: "remove-me", url: "http://localhost:6000", type: "http" },
       options
     );
     await ensureRegistration(
-      { id: "keep-me", url: "http://localhost:7000" },
+      { id: "keep-me", url: "http://localhost:7000", type: "http" },
       options
     );
 
@@ -251,9 +257,7 @@ describe("ensureRegistration", () => {
 
     const updated = JSON.parse(await fs.readFile(configPath, "utf8"));
     expect(updated.servers["remove-me"]).toBeUndefined();
-    expect(updated.servers["keep-me"].transport.url).toBe(
-      "http://localhost:7000"
-    );
+    expect(updated.servers["keep-me"].url).toBe("http://localhost:7000");
 
     await cleanTempHome(tempHome);
   });
