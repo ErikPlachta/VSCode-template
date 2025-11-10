@@ -41,13 +41,8 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### Current Tasks
 
-- MCP Server is no longer starting when vs code extension is activated. Need to resolve this issue so the extension can start the server properly again.
-
-- Verify MCP stdio + HTTP dual-mode after packaging; ensure mcp.json registration persists
-
 ### Priority 1 - Current Priority
 
-- MCP Server is NOT registering into `%appdata%\code\User\mcp.json`
 - Planned shim removals (🧹 deprecation lifecycle)
   - DatabaseAgentConfig shim removal plan (silent phase → removal):
     - Add transitional Planned entry documenting removal sequence.
@@ -187,7 +182,6 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 #### 2025-11-10 09:15:54 docs: Update Copilot instructions: dynamic IDs, provider id alignment, out/src server path, diagnostics, prepublish safeguard
 
-
 All change history. Organized by date/time and semantic titles; verification recorded after each batch.
 
 ### [2025-11-09] Manifest alignment, server readiness, and activation resiliency
@@ -206,7 +200,6 @@ All change history. Organized by date/time and semantic titles; verification rec
 - ❌ Health (not executed; no config/doc structural changes)
 - ✅ Coverage (new test preserves 100% target – lines exercised in index.ts & new test file)
 - ✅ JSDoc (added documentation block for diagnostic command)
-
 
 #### 2025-11-09 19:48:31 fix: Fix MCP registration schema and preserve existing config
 
