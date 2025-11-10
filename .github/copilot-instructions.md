@@ -15,7 +15,7 @@ This repository uses the root `CHANGELOG.md` as the single source of truth for C
 
 At the start of a session:
 
-- Read `CHANGELOG.md` → Outstanding Tasks and confirm which Priority 1 items are active.
+- Read `CHANGELOG.md` → Outstanding Tasks and confirm which Current Tasks are active.
 - Update the internal todo list to mirror Outstanding Tasks (preserve priorities and wording).
 
 During changes:
@@ -34,12 +34,12 @@ At the end of a session:
 The changelog is organized around two sections: Outstanding Tasks and Logs. Follow these rules (synced from `CHANGELOG.md` → Notes for Copilot):
 
 1. Outstanding Tasks captures all incomplete work. It is organized by priority and jointly maintained by the user and Copilot Chat.
-2. Every incomplete task should appear here, grouped by priority: Priority 1 (Current), Priority 2 (Next Focus), Priority 3 (Backlog).
+2. Every incomplete task should appear here, grouped by priority: Current Tasks (immediate focus), Priority 1 (Next), Priority 2 (Later), Priority 3 (Backlog).
 3. Copilot should proactively review and keep this section up to date, reflecting user-requested priority changes.
 4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
 5. Logs capture all change history, organized by date/time and semantic titles.
 6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
-7. Use semantic titles for log entries: `#### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a detailed description with sub-points. Entries MUST include specific details, file paths, and implementation notes - never just the summary line alone.
+7. Use semantic titles for log entries: `#### YYYY-MM-DD HH:MM:SS fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a detailed description with sub-points. Entries MUST include specific details, file paths, and implementation notes - never just the summary line alone.
 8. Include file paths for meaningful changes and provide sub-points explaining what was actually changed.
 9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into Outstanding Tasks.
 
@@ -47,6 +47,7 @@ Practical cadence:
 
 - Insert new log entries newest-first within the current day; add the optional daily summary headline once per day if helpful.
 - After 3–5 edits or when creating/editing >~3 files in a burst, add/update a Verification block and reconcile Outstanding Tasks.
+- **Timestamp format**: Use `YYYY-MM-DD HH:MM:SS` (24-hour time with spaces) for log entry headers. The ChangeLogManager CLI handles this automatically.
 
 ## Quality Gates
 

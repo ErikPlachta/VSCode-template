@@ -214,6 +214,34 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-10]
 
+#### 2025-11-10 16:51:27 docs: Updated copilot-instructions.md to reflect current codebase state
+
+**Motivation**: Instructions had outdated terminology and didn't reflect current agent architecture state.
+
+**Changes to `.github/copilot-instructions.md`:**
+
+1. **Agent Folder Standard section**:
+
+   - Clarified that standard pattern is maximum two files (agent.config.ts + index.ts)
+   - Documented that standard agents (orchestrator, clarificationAgent, dataAgent, databaseAgent) follow pattern.
+   - Noted userContextAgent doesn't extend BaseAgentConfig yet (aligning it is a Current Task)
+
+2. **Changelog operations section**:
+
+   - Updated priority terminology from "Priority 1/2/3" to "Current Tasks" / Priority 1/2/3"
+   - Changed entry timestamp format documentation from `[YYYY-MM-DD][HH:MM:SS]` to `YYYY-MM-DD HH:MM:SS` (space-separated)
+   - Added note about ChangeLogManager CLI handling timestamps automatically
+
+3. **Session Workflow section**:
+   - Changed "Priority 1 items" to "Current Tasks" for consistency
+
+**Verified**:
+
+- ✅ `src/config/application.config.ts` exists and is accurate
+- ✅ `src/mcp/config/unifiedAgentConfig.ts` exists and is accurate
+- ✅ Agent architecture patterns documented correctly
+- ✅ CHANGELOG structure terminology aligned
+
 #### 2025-11-10 16:43:38 chore: Restructured Current Tasks with architectural alignment and actionable items
 
 **Changes:**
