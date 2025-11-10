@@ -6,7 +6,7 @@
 
 # Interface: QueryOptions
 
-Defined in: [src/types/agentConfig.ts:946](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L946)
+Defined in: [src/types/agentConfig.ts:1025](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L1025)
 
 Optional knobs controlling query execution behavior.
 
@@ -16,7 +16,7 @@ Optional knobs controlling query execution behavior.
 
 > `optional` **cacheKeyPrefix**: `string`
 
-Defined in: [src/types/agentConfig.ts:948](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L948)
+Defined in: [src/types/agentConfig.ts:1027](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L1027)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/agentConfig.ts:948](https://github.com/ErikPlachta/vscode
 
 > `optional` **useCache**: `boolean`
 
-Defined in: [src/types/agentConfig.ts:947](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/agentConfig.ts#L947)
+Defined in: [src/types/agentConfig.ts:1026](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L1026)

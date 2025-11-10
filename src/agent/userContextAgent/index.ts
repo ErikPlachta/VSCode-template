@@ -18,7 +18,16 @@ import {
 import { createInvocationLogger } from "@mcp/telemetry";
 import { UserContextAgentProfile } from "@mcp/config/agentProfiles";
 import { userContextAgentConfig } from "@agent/userContextAgent/agent.config";
-import { CategoryId, CategoryRecord } from "@internal-types/agentConfig";
+import {
+  CategoryId,
+  CategoryRecord,
+  BaseAgentConfig,
+  AgentConfigDefinition,
+} from "@internal-types/agentConfig";
+import {
+  validateAgentConfig,
+  generateValidationReport,
+} from "@internal-types/configValidation";
 import { IDS } from "@shared/ids";
 import * as os from "os";
 import {
@@ -57,13 +66,6 @@ import {
 } from "@internal-types/userContext.types";
 
 // (All type/interface definitions moved to @internal-types/userContext.types to enforce single source of truth.)
-
-/** Lightweight configuration wrapper for the User Context Agent. */
-export class UserContextAgentConfig {
-  /** Underlying config object */
-  public readonly value = userContextAgentConfig;
-}
-
 // Default root for user context business data. Previously pointed to a deprecated `bin/data` directory.
 // The dataset folders now live under `src/userContext` (applications, departments, people, etc.).
 // Tests and runtime may override via VSCODE_TEMPLATE_DATA_ROOT.
@@ -347,7 +349,15 @@ export class UnknownCategoryError extends Error {
 /**
  * Agent that manages the user-context workspace representation.
  */
-export class UserContextAgent {
+/**
+ * Agent responsible for managing user-centric contextual datasets.
+ * Follows the standard agent pattern: extends BaseAgentConfig, validates configuration,
+ * and uses getConfigItem<T>() for type-safe configuration access.
+ *
+ * Manages categories, records, relationships, and provides query capabilities
+ * for business context data.
+ */
+export class UserContextAgent extends BaseAgentConfig {
   private readonly cacheDirPromise: Promise<string>;
   private readonly dataRoot: string;
   private readonly externalRoot: string;
@@ -364,21 +374,37 @@ export class UserContextAgent {
   private readonly telemetry = createInvocationLogger(
     UserContextAgentProfile.id
   );
-  private readonly config: UserContextAgentConfig;
 
   /**
-   * constructor function.
+   * Creates a new UserContextAgent with validated configuration.
    *
-   * @param {Promise<string>} cacheDirPromise - cacheDirPromise parameter.
-   * @returns {unknown} Raw JSON content parsed from the target file.
+   * @param {AgentConfigDefinition} [config] - Optional pre-loaded configuration. Defaults to userContextAgentConfig.
+   * @param {Promise<string>} [cacheDirPromise] - Optional cache directory promise for testing/custom cache locations.
+   * @throws {Error} When configuration validation fails.
    */
-  constructor(cacheDirPromise?: Promise<string>) {
-    this.config = new UserContextAgentConfig();
+  constructor(
+    config?: AgentConfigDefinition,
+    cacheDirPromise?: Promise<string>
+  ) {
+    // Validate and initialize configuration
+    const configToUse = config || userContextAgentConfig;
+    const validationResult = validateAgentConfig(configToUse);
+    if (!validationResult.isValid) {
+      const report = generateValidationReport(validationResult);
+      throw new Error(`Invalid UserContext agent configuration:\n${report}`);
+    }
+
+    super(configToUse);
+    this._validateRequiredSections();
+
+    // Initialize cache and data root
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
     const rootChoice = chooseDataRoot();
     this.dataRoot = rootChoice.activeRoot;
     this.externalRoot = rootChoice.externalRoot;
     this.usingExternal = rootChoice.usingExternal;
+
+    // Load dataset
     const dataset = this.loadDataset();
     this.categories = dataset.categories;
     this.lookupIndex = dataset.lookupIndex;
@@ -388,7 +414,41 @@ export class UserContextAgent {
     );
     this.consolidatedIndex = dataset.consolidatedIndex;
     this.datasetFingerprint = dataset.fingerprint;
+
     void this.persistConsolidatedIndex();
+  }
+
+  /**
+   * Validates that required configuration sections are present.
+   *
+   * @throws {Error} When required sections are missing.
+   * @private
+   */
+  private _validateRequiredSections(): void {
+    const metadata = this.getConfigItem<unknown>(
+      "relevantDataManager.metadata"
+    );
+    if (!metadata) {
+      throw new Error(
+        "UserContext config missing relevantDataManager.metadata section"
+      );
+    }
+
+    const caching = this.getConfigItem<unknown>("relevantDataManager.caching");
+    if (!caching) {
+      throw new Error(
+        "UserContext config missing relevantDataManager.caching section"
+      );
+    }
+
+    const validation = this.getConfigItem<unknown>(
+      "relevantDataManager.validation"
+    );
+    if (!validation) {
+      throw new Error(
+        "UserContext config missing relevantDataManager.validation section"
+      );
+    }
   }
 
   /**

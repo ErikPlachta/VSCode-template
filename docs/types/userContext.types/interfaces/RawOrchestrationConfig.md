@@ -6,7 +6,7 @@
 
 # Interface: RawOrchestrationConfig
 
-Defined in: [src/types/userContext.types.ts:473](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L473)
+Defined in: [src/types/userContext.types.ts:473](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/userContext.types.ts#L473)
 
 Unvalidated orchestration configuration
 
@@ -16,7 +16,7 @@ Unvalidated orchestration configuration
 
 > `optional` **agents**: `object`
 
-Defined in: [src/types/userContext.types.ts:477](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L477)
+Defined in: [src/types/userContext.types.ts:477](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/userContext.types.ts#L477)
 
 #### dataAgent?
 
@@ -36,7 +36,7 @@ Defined in: [src/types/userContext.types.ts:477](https://github.com/ErikPlachta/
 
 > `optional` **escalateWhen**: `unknown`
 
-Defined in: [src/types/userContext.types.ts:476](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L476)
+Defined in: [src/types/userContext.types.ts:476](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/userContext.types.ts#L476)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/types/userContext.types.ts:476](https://github.com/ErikPlachta/
 
 > `optional` **signals**: `unknown`
 
-Defined in: [src/types/userContext.types.ts:475](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L475)
+Defined in: [src/types/userContext.types.ts:475](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/userContext.types.ts#L475)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [src/types/userContext.types.ts:475](https://github.com/ErikPlachta/
 
 > `optional` **summary**: `unknown`
 
-Defined in: [src/types/userContext.types.ts:474](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L474)
+Defined in: [src/types/userContext.types.ts:474](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/userContext.types.ts#L474)

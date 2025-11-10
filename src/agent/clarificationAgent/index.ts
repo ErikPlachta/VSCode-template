@@ -2,7 +2,10 @@
  * @packageDocumentation Clarification agent for handling ambiguous user requests and guiding users toward actionable queries.
  */
 
-import { getAgentMetadata } from "@mcp/config/agentManifest";
+import {
+  getAgentMetadata,
+  listAgentCapabilities,
+} from "@mcp/config/agentManifest";
 import { KnowledgeBase } from "@mcp/knowledgeBase";
 import { renderClarificationPrompt } from "@mcp/prompts";
 import { createInvocationLogger } from "@mcp/telemetry";
@@ -83,13 +86,33 @@ export class ClarificationAgent extends BaseAgentConfig {
   /**
    * Generates clarification guidance for ambiguous user requests.
    *
-   * @param {ClarificationAgentInput} input - input parameter.
-   * @returns {Promise<ClarificationResponse>} - TODO: describe return value.
+   * @param {ClarificationAgentInput} input - User question with context (topic, missing signals, candidate agents).
+   * @returns {Promise<ClarificationResponse>} Prompt with clarification guidance and relevant knowledge snippets.
    */
   async clarify(
     input: ClarificationAgentInput
   ): Promise<ClarificationResponse> {
     return this.telemetry("clarify", async () => {
+      // Check if this is a help request
+      const normalizedQuestion = input.question.toLowerCase().trim();
+      const isHelpRequest =
+        normalizedQuestion === "help" ||
+        normalizedQuestion.startsWith("help ") ||
+        normalizedQuestion.startsWith("help?") ||
+        normalizedQuestion.endsWith(" help") ||
+        normalizedQuestion.endsWith(" help?") ||
+        normalizedQuestion.includes("what can you do") ||
+        normalizedQuestion.includes("what are your capabilities");
+
+      if (isHelpRequest) {
+        // Delegate to provideHelp() method
+        const helpContent = this.provideHelp();
+        return {
+          prompt: helpContent,
+          knowledgeSnippets: [],
+        };
+      }
+
       // Use configured maxKnowledgeSnippets when available; fallback to 2
       const maxSnippets =
         this.getConfigItem<number>(
@@ -113,6 +136,74 @@ export class ClarificationAgent extends BaseAgentConfig {
       });
       return { prompt, knowledgeSnippets };
     });
+  }
+
+  /**
+   * Generates formatted help response listing available agent capabilities with descriptions, signals, and example queries.
+   *
+   * @returns {string} Markdown-formatted help content showing all available agents and their capabilities.
+   */
+  provideHelp(): string {
+    const helpEnabled =
+      this.getConfigItem<boolean>(
+        "clarification.guidance.helpSystem.enabled"
+      ) ?? true;
+
+    if (!helpEnabled) {
+      return "Help system is currently disabled.";
+    }
+
+    const listCapabilities =
+      this.getConfigItem<boolean>(
+        "clarification.guidance.helpSystem.listAgentCapabilities"
+      ) ?? true;
+    const includeExamples =
+      this.getConfigItem<boolean>(
+        "clarification.guidance.helpSystem.includeExampleQueries"
+      ) ?? true;
+    const maxExamplesPerAgent =
+      this.getConfigItem<number>(
+        "clarification.guidance.helpSystem.maxExamplesPerAgent"
+      ) ?? 3;
+
+    let helpText = "# Available Capabilities\n\n";
+    helpText +=
+      "I can assist you with the following tasks. Each capability responds to specific signals in your queries.\n\n";
+
+    if (listCapabilities) {
+      const capabilities = listAgentCapabilities();
+
+      for (const capability of capabilities) {
+        helpText += `## ${capability.title}\n\n`;
+        helpText += `${capability.description}\n\n`;
+
+        if (capability.primarySignals.length > 0) {
+          helpText += `**Key signals**: ${capability.primarySignals.join(
+            ", "
+          )}\n\n`;
+        }
+
+        if (includeExamples && capability.primarySignals.length > 0) {
+          const exampleCount = Math.min(
+            maxExamplesPerAgent,
+            capability.primarySignals.length
+          );
+          helpText += "**Example queries**:\n";
+
+          for (let i = 0; i < exampleCount; i++) {
+            const signal = capability.primarySignals[i];
+            helpText += `- "Show me ${signal}"\n`;
+          }
+          helpText += "\n";
+        }
+      }
+    }
+
+    helpText += "---\n\n";
+    helpText +=
+      "Ask me questions using natural language, and I'll route your request to the appropriate capability.\n";
+
+    return helpText;
   }
 
   /**

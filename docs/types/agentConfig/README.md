@@ -25,6 +25,7 @@ scoring parameters, escalation, profiling, and composite configuration.
 - [ClarificationAgentInput](interfaces/ClarificationAgentInput.md)
 - [ClarificationConfig](interfaces/ClarificationConfig.md)
 - [ClarificationResponse](interfaces/ClarificationResponse.md)
+- [CommunicationConfig](interfaces/CommunicationConfig.md)
 - [ConfigDescriptor](interfaces/ConfigDescriptor.md)
 - [CrossCategoryConnection](interfaces/CrossCategoryConnection.md)
 - [DatabaseConfig](interfaces/DatabaseConfig.md)

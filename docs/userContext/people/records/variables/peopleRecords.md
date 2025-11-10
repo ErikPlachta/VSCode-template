@@ -8,7 +8,7 @@
 
 > `const` **peopleRecords**: `PersonRecord`[]
 
-Defined in: [src/userContext/people/records.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/userContext/people/records.ts#L29)
+Defined in: [src/userContext/people/records.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/userContext/people/records.ts#L29)
 
 People records array
 Employee directory complete with capabilities and system access.

@@ -281,6 +281,14 @@ export interface ClarificationConfig {
       includeEncouragement?: boolean;
       maxResponseLength?: number;
     };
+    helpSystem?: {
+      enabled?: boolean;
+      listAgentCapabilities?: boolean;
+      includeExampleQueries?: boolean;
+      maxExamplesPerAgent?: number;
+      includeCategorySummaries?: boolean;
+      maxCategoriesToList?: number;
+    };
   };
   escalation: {
     escalationThreshold: number;
@@ -317,6 +325,76 @@ export interface ClarificationConfig {
     maxResponseTime?: number;
     enableParallelProcessing?: boolean;
     processingBatchSize?: number;
+  };
+}
+
+/**
+ * Communication agent-specific configuration for response formatting and user interaction
+ *
+ */
+export interface CommunicationConfig {
+  formatting: {
+    defaultFormat: "markdown" | "plaintext" | "html";
+    tone: {
+      success: string;
+      error: string;
+      progress: string;
+      validation: string;
+    };
+    verbosity: "minimal" | "balanced" | "detailed";
+    maxMessageLength: number;
+    includeEmoji?: boolean;
+    includeSectionHeaders?: boolean;
+    formatLists?: boolean;
+    highlightKeyInfo?: boolean;
+  };
+  successTemplates?: {
+    dataRetrieved?: string;
+    analysisComplete?: string;
+    metadataRetrieved?: string;
+    exportComplete?: string;
+    importComplete?: string;
+    validationPassed?: string;
+  };
+  errorHandling: {
+    includeStackTrace?: boolean;
+    includeErrorCodes?: boolean;
+    suggestRecoveryActions?: boolean;
+    maxRecoverySuggestions?: number;
+    errorTemplates?: {
+      notFound?: string;
+      validationFailed?: string;
+      permissionDenied?: string;
+      configurationError?: string;
+      externalError?: string;
+      unexpected?: string;
+    };
+    recoveryActions?: {
+      notFound?: string[];
+      validationFailed?: string[];
+      permissionDenied?: string[];
+      configurationError?: string[];
+    };
+  };
+  progressTracking?: {
+    enabled?: boolean;
+    minimumDuration?: number;
+    showPercentage?: boolean;
+    showElapsedTime?: boolean;
+    showEstimatedTimeRemaining?: boolean;
+    updateInterval?: number;
+    progressTemplates?: {
+      started?: string;
+      inProgress?: string;
+      completed?: string;
+    };
+  };
+  validation?: {
+    groupByCategory?: boolean;
+    maxErrorsPerEntity?: number;
+    showFieldPaths?: boolean;
+    showExpectedActual?: boolean;
+    summaryTemplate?: string;
   };
 }
 
@@ -405,6 +483,7 @@ export interface AgentConfigDefinition {
   database?: DatabaseConfig;
   data?: DataConfig;
   clarification?: ClarificationConfig;
+  communication?: CommunicationConfig;
   relevantDataManager?: RelevantDataManagerConfig;
 
   /** Runtime execution configuration */

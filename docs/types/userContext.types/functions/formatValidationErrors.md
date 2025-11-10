@@ -8,7 +8,7 @@
 
 > **formatValidationErrors**(`errors`, `maxErrors`): `string`
 
-Defined in: [src/types/userContext.types.ts:943](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/userContext.types.ts#L943)
+Defined in: [src/types/userContext.types.ts:943](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/userContext.types.ts#L943)
 
 Formats validation errors into a human-readable string
 

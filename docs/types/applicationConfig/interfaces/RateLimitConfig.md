@@ -6,7 +6,7 @@
 
 # Interface: RateLimitConfig
 
-Defined in: [src/types/applicationConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L192)
+Defined in: [src/types/applicationConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L192)
 
 Rate limiting configuration.
 
@@ -16,7 +16,7 @@ Rate limiting configuration.
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L194)
+Defined in: [src/types/applicationConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L194)
 
 Enable rate limiting.
 
@@ -26,7 +26,7 @@ Enable rate limiting.
 
 > **maxRequests**: `number`
 
-Defined in: [src/types/applicationConfig.ts:198](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L198)
+Defined in: [src/types/applicationConfig.ts:198](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L198)
 
 Maximum requests per window.
 
@@ -36,6 +36,6 @@ Maximum requests per window.
 
 > **windowMs**: `number`
 
-Defined in: [src/types/applicationConfig.ts:196](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/applicationConfig.ts#L196)
+Defined in: [src/types/applicationConfig.ts:196](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L196)
 
 Time window in milliseconds.

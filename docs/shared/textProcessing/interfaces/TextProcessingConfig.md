@@ -1,0 +1,51 @@
+[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+
+***
+
+[mybusiness-mcp-extension](../../../modules.md) / [shared/textProcessing](../README.md) / TextProcessingConfig
+
+# Interface: TextProcessingConfig
+
+Defined in: src/shared/textProcessing.ts:11
+
+Configuration options for text processing operations.
+
+## Properties
+
+### fuzzyMatchThreshold?
+
+> `optional` **fuzzyMatchThreshold**: `number`
+
+Defined in: src/shared/textProcessing.ts:17
+
+Fuzzy match threshold 0-1 (default: 0.8)
+
+***
+
+### handleInflections?
+
+> `optional` **handleInflections**: `boolean`
+
+Defined in: src/shared/textProcessing.ts:19
+
+Whether to handle plural/singular variations (default: true)
+
+***
+
+### minimumKeywordLength?
+
+> `optional` **minimumKeywordLength**: `number`
+
+Defined in: src/shared/textProcessing.ts:15
+
+Minimum keyword length to include (default: 3)
+
+***
+
+### stopWords?
+
+> `optional` **stopWords**: `Set`\<`string`\>
+
+Defined in: src/shared/textProcessing.ts:13
+
+Set of stop words to exclude from keyword extraction

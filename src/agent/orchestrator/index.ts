@@ -21,6 +21,11 @@ import type {
   OrchestratorInput,
   OrchestratorResponse,
 } from "@internal-types/agentConfig";
+import {
+  scoreSignals,
+  containsAnyPhrase,
+  type TextProcessingConfig,
+} from "@shared/textProcessing";
 
 /**
  * Configuration-driven orchestrator that routes questions to appropriate agents
@@ -36,7 +41,7 @@ export class Orchestrator extends BaseAgentConfig {
   private minimumKeywordLength: number;
   private vaguePhrases: string[];
   private messages: Required<NonNullable<OrchestrationConfig["messages"]>>;
-
+  private textProcessingConfig: TextProcessingConfig;
   /**
    * Create an orchestrator using the provided configuration (or defaults).
    *
@@ -108,6 +113,13 @@ export class Orchestrator extends BaseAgentConfig {
     this.messages = msgs as Required<
       NonNullable<OrchestrationConfig["messages"]>
     >;
+
+    // Initialize text processing config for utility functions
+    this.textProcessingConfig = {
+      stopWords: this.stopWords,
+      minimumKeywordLength: this.minimumKeywordLength,
+      handleInflections: true,
+    };
   }
 
   /**
@@ -156,21 +168,6 @@ export class Orchestrator extends BaseAgentConfig {
   }
 
   /**
-   * Extract keywords from text applying stop words and minimum length.
-   *
-   * @param {string} text - Source question text.
-   * @returns {string[]} Filtered keyword tokens.
-   */
-  private extractKeywords(text: string): string[] {
-    const pattern = new RegExp(
-      `\\b[a-z0-9]{${this.minimumKeywordLength},}\\b`,
-      "g"
-    );
-    const matches = text.toLowerCase().match(pattern) ?? [];
-    return matches.filter((token) => !this.stopWords.has(token));
-  }
-
-  /**
    * Determine whether the input question lacks sufficient context.
    *
    * @param {string} question - User's raw question.
@@ -178,15 +175,7 @@ export class Orchestrator extends BaseAgentConfig {
    * @returns {boolean} True if clarification should be requested.
    */
   private isQuestionTooVague(question: string, _intent: string): boolean {
-    const questionLower = question.toLowerCase().trim();
-
-    // Use configured vague phrases instead of hard-coded array
-    return this.vaguePhrases.some(
-      (phrase) =>
-        questionLower === phrase ||
-        questionLower.startsWith(phrase + " ") ||
-        questionLower.endsWith(" " + phrase)
-    );
+    return containsAnyPhrase(question, this.vaguePhrases);
   }
   /**
    * Classify intent for a question (legacy string or new structured input).
@@ -213,8 +202,6 @@ export class Orchestrator extends BaseAgentConfig {
       input = questionOrInput;
     }
 
-    const questionTokens = new Set(this.extractKeywords(input.question));
-
     // Score each intent based on configuration
     const intentScores: Array<{
       intent: string;
@@ -231,31 +218,21 @@ export class Orchestrator extends BaseAgentConfig {
       const intentConfig = intents[intent];
       if (!intentConfig) continue;
 
-      // Score based on intent signals
-      const signalMatches = intentConfig.signals
-        ? intentConfig.signals.filter((signal: string) => {
-            // Check if the signal keyword appears in the question text
-            // Use more flexible matching to handle plurals, etc.
-            const signalLower = signal.toLowerCase();
-            const questionLower = input.question.toLowerCase();
-            return (
-              questionLower.includes(signalLower) ||
-              questionTokens.has(signalLower) ||
-              // Handle basic plural/singular matching
-              questionTokens.has(signalLower + "s") ||
-              questionTokens.has(signalLower.replace(/s$/, ""))
-            );
-          })
-        : [];
+      // Use shared text processing utility for signal scoring
+      const signalResult = scoreSignals(
+        input.question,
+        intentConfig.signals || [],
+        this.textProcessingConfig
+      );
 
       const signalScore =
-        signalMatches.length * this.scoringWeights.signalMatch;
+        signalResult.matched.length * this.scoringWeights.signalMatch;
 
       if (signalScore > 0) {
         intentScores.push({
           intent,
           score: signalScore,
-          matches: signalMatches,
+          matches: signalResult.matched,
           agent: intentConfig.targetAgent,
         });
       }

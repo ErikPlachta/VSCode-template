@@ -6,7 +6,7 @@
 
 # Class: ConfigurationLoader
 
-Defined in: [src/shared/configurationLoader.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/configurationLoader.ts#L62)
+Defined in: [src/shared/configurationLoader.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/configurationLoader.ts#L62)
 
 Configuration loader class for managing application settings.
 
@@ -16,7 +16,7 @@ Configuration loader class for managing application settings.
 
 > **new ConfigurationLoader**(`configPath`): `ConfigurationLoader`
 
-Defined in: [src/shared/configurationLoader.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/configurationLoader.ts#L71)
+Defined in: [src/shared/configurationLoader.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/configurationLoader.ts#L71)
 
 Creates a new configuration loader instance.
 
@@ -38,7 +38,7 @@ Deprecated JSON config path for legacy fallback (kept for API compatibility).
 
 > **getAgentConfig**(`agentName`): `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/shared/configurationLoader.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/configurationLoader.ts#L118)
+Defined in: [src/shared/configurationLoader.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/configurationLoader.ts#L118)
 
 Gets agent-specific configuration merged with global defaults.
 
@@ -62,7 +62,7 @@ Concrete settings for the agent.
 
 > **getEnvironmentConfig**(`environment`): `Promise`\<[`EnvironmentConfig`](../../../types/applicationConfig/interfaces/EnvironmentConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/configurationLoader.ts#L96)
+Defined in: [src/shared/configurationLoader.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/configurationLoader.ts#L96)
 
 Gets configuration for the requested environment.
 
@@ -86,7 +86,7 @@ Environment-specific configuration slice.
 
 > **loadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/configurationLoader.ts#L80)
+Defined in: [src/shared/configurationLoader.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/configurationLoader.ts#L80)
 
 Load and return the merged application configuration (TS source of truth).
 
@@ -102,7 +102,7 @@ Merged configuration object.
 
 > **reloadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/shared/configurationLoader.ts#L136)
+Defined in: [src/shared/configurationLoader.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/configurationLoader.ts#L136)
 
 Reload configuration (clears cache and re-reads TS config).
 

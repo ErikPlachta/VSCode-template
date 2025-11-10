@@ -8,6 +8,6 @@
 
 > **ConfigId** = *typeof* [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\[keyof *typeof* [`CONFIG_IDS`](../variables/CONFIG_IDS.md)\]
 
-Defined in: [src/types/configRegistry.ts:259](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/configRegistry.ts#L259)
+Defined in: [src/types/configRegistry.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configRegistry.ts#L274)
 
 Type-safe way to reference configuration IDs

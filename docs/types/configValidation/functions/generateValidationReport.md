@@ -8,7 +8,7 @@
 
 > **generateValidationReport**(`result`): `string`
 
-Defined in: [src/types/configValidation.ts:461](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/configValidation.ts#L461)
+Defined in: [src/types/configValidation.ts:461](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L461)
 
 Generate a validation report for display
 

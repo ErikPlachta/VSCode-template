@@ -8,7 +8,7 @@
 
 > `const` **CONFIG\_IDS**: `object`
 
-Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/dbd1f1b9fa5b16d372045236383e524b66205c7f/src/types/configRegistry.ts#L23)
+Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configRegistry.ts#L23)
 
 Configuration ID format: agent.{agentType}.v{major}.{minor}.{patch}
 
@@ -24,6 +24,12 @@ Examples:
 > `readonly` **CLARIFICATION\_AGENT**: `"agent.clarification.v1.0.0"` = `"agent.clarification.v1.0.0"`
 
 Clarification agent configuration schema
+
+### COMMUNICATION\_AGENT
+
+> `readonly` **COMMUNICATION\_AGENT**: `"agent.communication.v1.0.0"` = `"agent.communication.v1.0.0"`
+
+Communication agent configuration schema
 
 ### DATA\_AGENT
 
