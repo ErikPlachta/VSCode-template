@@ -232,14 +232,14 @@ async function handleInvoke(
   args: Record<string, unknown> = {}
 ): Promise<unknown> {
   switch (name) {
-    case "relevant-data.describeCategory": {
+    case "user-context.describeCategory": {
       const categoryId = String(args.categoryId ?? "");
       if (!categoryId) {
         throw new Error("'categoryId' is required.");
       }
       return describeCategory(categoryId);
     }
-    case "relevant-data.searchRecords": {
+    case "user-context.searchRecords": {
       const categoryId = String(args.categoryId ?? "");
       if (!categoryId) {
         throw new Error("'categoryId' is required.");
