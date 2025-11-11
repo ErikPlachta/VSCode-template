@@ -39,6 +39,7 @@ import { UserContextAgent } from "@agent/userContextAgent";
 import type {
   WorkflowState,
   WorkflowAction,
+  WorkflowActionType,
   WorkflowContext,
   WorkflowResult,
   PerformanceMetrics,
@@ -1197,5 +1198,215 @@ export class Orchestrator extends BaseAgentConfig {
     }
 
     return lines.join("\n");
+  }
+
+  // ============================================================================
+  // Validation Methods
+  // ============================================================================
+
+  /**
+   * Validate workflow input
+   *
+   * Ensures input meets basic requirements before workflow execution
+   *
+   * @param {OrchestratorInput} input - User input to validate
+   * @returns {{ valid: boolean; error?: string }} Validation result
+   */
+  private validateInput(input: OrchestratorInput): {
+    valid: boolean;
+    error?: string;
+  } {
+    // Check required question field
+    if (!input.question || typeof input.question !== "string") {
+      return {
+        valid: false,
+        error: "Input must include a 'question' string field",
+      };
+    }
+
+    // Check question is not empty
+    const trimmed = input.question.trim();
+    if (trimmed.length === 0) {
+      return {
+        valid: false,
+        error: "Question cannot be empty",
+      };
+    }
+
+    // Check maximum length (1000 characters)
+    if (trimmed.length > 1000) {
+      return {
+        valid: false,
+        error: `Question too long (${trimmed.length} characters, maximum 1000)`,
+      };
+    }
+
+    // Check topic is valid if provided
+    if (
+      input.topic &&
+      !["general", "metadata", "records", "insight"].includes(input.topic)
+    ) {
+      return {
+        valid: false,
+        error: `Invalid topic: "${input.topic}". Must be one of: general, metadata, records, insight`,
+      };
+    }
+
+    return { valid: true };
+  }
+
+  /**
+   * Validate workflow action definition
+   *
+   * Ensures action has all required fields and references valid agents/methods
+   *
+   * @param {WorkflowAction} action - Action to validate
+   * @returns {{ valid: boolean; error?: string }} Validation result
+   */
+  private validateAction(action: WorkflowAction): {
+    valid: boolean;
+    error?: string;
+  } {
+    // Check required id field
+    if (!action.id || typeof action.id !== "string") {
+      return {
+        valid: false,
+        error: "Action must include an 'id' string field",
+      };
+    }
+
+    // Check required type field
+    if (!action.type) {
+      return {
+        valid: false,
+        error: `Action ${action.id}: missing 'type' field`,
+      };
+    }
+
+    // Check valid type
+    const validTypes: WorkflowActionType[] = [
+      "classify",
+      "execute-agent",
+      "format",
+      "clarify",
+    ];
+    if (!validTypes.includes(action.type)) {
+      return {
+        valid: false,
+        error: `Action ${action.id}: invalid type "${
+          action.type
+        }". Must be one of: ${validTypes.join(", ")}`,
+      };
+    }
+
+    // For execute-agent actions, validate agent and method
+    if (action.type === "execute-agent") {
+      // Check agent field
+      if (!action.agent) {
+        return {
+          valid: false,
+          error: `Action ${action.id}: execute-agent type requires 'agent' field`,
+        };
+      }
+
+      // Check agent exists in registry
+      const validAgents = [
+        "database-agent",
+        "data-agent",
+        "user-context-agent",
+      ];
+      if (!validAgents.includes(action.agent)) {
+        return {
+          valid: false,
+          error: `Action ${action.id}: unknown agent "${
+            action.agent
+          }". Must be one of: ${validAgents.join(", ")}`,
+        };
+      }
+
+      // Check agent is initialized
+      if (
+        !this.agentRegistry[action.agent as keyof typeof this.agentRegistry]
+      ) {
+        return {
+          valid: false,
+          error: `Action ${action.id}: agent "${action.agent}" not initialized`,
+        };
+      }
+
+      // Check method field
+      if (!action.method) {
+        return {
+          valid: false,
+          error: `Action ${action.id}: execute-agent type requires 'method' field`,
+        };
+      }
+
+      // Validate method exists on agent (basic check - method name is string)
+      if (typeof action.method !== "string") {
+        return {
+          valid: false,
+          error: `Action ${action.id}: method must be a string`,
+        };
+      }
+    }
+
+    // Validate dependencies if present
+    if (action.dependencies && !Array.isArray(action.dependencies)) {
+      return {
+        valid: false,
+        error: `Action ${action.id}: dependencies must be an array`,
+      };
+    }
+
+    return { valid: true };
+  }
+
+  /**
+   * Validate workflow state transition
+   *
+   * Ensures state transitions follow the valid state machine
+   *
+   * Valid transitions:
+   * - pending → classifying
+   * - classifying → executing | needs-clarification
+   * - executing → processing | failed
+   * - processing → completed | failed
+   * - needs-clarification → (external - waiting for user)
+   *
+   * @param {WorkflowState} fromState - Current state
+   * @param {WorkflowState} toState - Target state
+   * @returns {{ valid: boolean; error?: string }} Validation result
+   */
+  private validateStateTransition(
+    fromState: WorkflowState,
+    toState: WorkflowState
+  ): {
+    valid: boolean;
+    error?: string;
+  } {
+    // Define valid transitions
+    const validTransitions: Record<WorkflowState, WorkflowState[]> = {
+      pending: ["classifying"],
+      classifying: ["executing", "needs-clarification", "failed"],
+      executing: ["processing", "failed"],
+      processing: ["completed", "failed"],
+      "needs-clarification": ["classifying"], // After user provides clarification
+      completed: [], // Terminal state
+      failed: [], // Terminal state
+    };
+
+    // Check if transition is valid
+    const allowedStates = validTransitions[fromState];
+    if (!allowedStates.includes(toState)) {
+      return {
+        valid: false,
+        error: `Invalid state transition: ${fromState} → ${toState}. Allowed transitions from ${fromState}: ${
+          allowedStates.join(", ") || "none (terminal state)"
+        }`,
+      };
+    }
+
+    return { valid: true };
   }
 }

@@ -1,14 +1,20 @@
 # Orchestrator Workflow Coordination Analysis
 
+## 2025-11-11
+
+-- TODO: Add updated plan.
+
+## 2025-11-10
+
 **Date**: 2025-11-10  
 **Issue**: Orchestrator is a router, not a coordinator  
 **Impact**: Critical - agents are never actually called, users get routing info instead of data
 
 ---
 
-## Current State (BROKEN)
+### Current State (BROKEN)
 
-### What Happens Now
+#### What Happens Now
 
 ```mermaid
 sequenceDiagram
@@ -20,7 +26,7 @@ sequenceDiagram
     Extension->>User: "Routed to database-agent" (no data!)
 ```
 
-### Code Evidence
+#### Code Evidence
 
 **Extension (`src/extension/index.ts:184-202`)**:
 
@@ -72,7 +78,7 @@ async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
 }
 ```
 
-### Problems
+#### Problems
 
 1. **❌ No Agent Execution**: Agents are identified by ID but never instantiated or called
 2. **❌ No Data Returned**: Users get routing guidance instead of actual query results
@@ -84,7 +90,7 @@ async route(input: OrchestratorInput): Promise<OrchestratorResponse> {
 
 ---
 
-## Required State (CORRECT)
+#### Required State (CORRECT)
 
 ### What Should Happen
 
@@ -363,9 +369,9 @@ class Orchestrator {
 
 ---
 
-## Implementation Plan (New Phase 4)
+### Implementation Plan (New Phase 4)
 
-### Phase 4: Workflow Coordination (~30%, 2-3 hours)
+#### Phase 4: Workflow Coordination (~30%, 2-3 hours)
 
 #### Tasks
 
@@ -427,7 +433,7 @@ class Orchestrator {
 
 ---
 
-## Updated Phase Plan
+#### Updated Phase Plan
 
 - **Foundation** (20%): ✅ COMPLETE
 - **Phase 1 - Reversion** (15%): ✅ COMPLETE
@@ -441,16 +447,16 @@ class Orchestrator {
 
 ---
 
-## Risk Assessment
+#### Risk Assessment
 
-### High Impact Issues
+#### High Impact Issues
 
 1. **Agent Instance Creation**: Need actual agent instances, not just IDs
 2. **Parameter Extraction**: Need to parse user questions into agent method params
 3. **Multi-Step Coordination**: Need to pass results between agents
 4. **Breaking Changes**: Extension needs update to call new executeWorkflow()
 
-### Mitigation
+#### Mitigation
 
 - Start with single-step workflows (simpler)
 - Use existing callAgentWithResponse() wrapper (already tested)
@@ -459,13 +465,13 @@ class Orchestrator {
 
 ---
 
-## Quality Review: Critical Gaps Identified
+### Quality Review: Critical Gaps Identified
 
-### ❌ Missing: Debug & Observability Infrastructure
+#### ❌ Missing: Debug & Observability Infrastructure
 
 **Problem**: No visibility into workflow execution, making debugging impossible in production.
 
-#### Required Debug Logging
+##### Required Debug Logging
 
 ```typescript
 interface WorkflowLogger {
@@ -587,7 +593,7 @@ class Orchestrator {
 }
 ```
 
-#### Log Output Examples
+##### Log Output Examples
 
 **Successful Single-Step Workflow**:
 
@@ -618,7 +624,7 @@ class Orchestrator {
   Suggestions: [Verify category spelling, List available categories]
 ```
 
-### ❌ Missing: Performance Monitoring
+#### ❌ Missing: Performance Monitoring
 
 ```typescript
 interface PerformanceMetrics {
@@ -673,7 +679,7 @@ class Orchestrator {
 }
 ```
 
-### ❌ Missing: Workflow Diagnostics
+#### ❌ Missing: Workflow Diagnostics
 
 ```typescript
 interface WorkflowDiagnostics {
@@ -744,7 +750,7 @@ class Orchestrator {
 }
 ```
 
-### ❌ Missing: Error Context & Recovery
+#### ❌ Missing: Error Context & Recovery
 
 ```typescript
 interface EnhancedError extends Error {
@@ -809,7 +815,7 @@ class Orchestrator {
 }
 ```
 
-### ❌ Missing: Workflow Replay & History
+#### ❌ Missing: Workflow Replay & History
 
 ```typescript
 interface WorkflowHistory {
@@ -872,7 +878,7 @@ class Orchestrator {
 }
 ```
 
-### ❌ Missing: Timeout & Circuit Breaker
+#### ❌ Missing: Timeout & Circuit Breaker
 
 ```typescript
 interface WorkflowTimeouts {
@@ -936,7 +942,7 @@ class Orchestrator {
 }
 ```
 
-### ❌ Missing: Validation & Type Safety
+#### ❌ Missing: Validation & Type Safety
 
 ```typescript
 class Orchestrator {
@@ -1019,11 +1025,11 @@ class Orchestrator {
 
 ---
 
-## Enhanced Implementation Plan
+### Enhanced Implementation Plan
 
-### Phase 4: Workflow Coordination (REVISED - 30%, 3-4 hours)
+#### Phase 4: Workflow Coordination (REVISED - 30%, 3-4 hours)
 
-#### Updated Tasks
+##### Updated Tasks
 
 1. **Logging Infrastructure** (45 min) ← NEW
 
@@ -1103,7 +1109,7 @@ class Orchestrator {
     - Test diagnostics APIs
     - Test performance under load
 
-#### Enhanced Success Criteria
+##### Enhanced Success Criteria
 
 - ✅ User requests return actual data
 - ✅ All workflow steps logged with context
