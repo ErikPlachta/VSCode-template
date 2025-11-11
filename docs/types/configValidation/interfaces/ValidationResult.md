@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult
 
-Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L15)
+Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L15)
 
 Validation result with detailed error information
 
@@ -16,7 +16,7 @@ Validation result with detailed error information
 
 > **errors**: [`ValidationError`](ValidationError.md)[]
 
-Defined in: [src/types/configValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L20)
+Defined in: [src/types/configValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L20)
 
 List of validation errors found
 
@@ -26,7 +26,7 @@ List of validation errors found
 
 > **isValid**: `boolean`
 
-Defined in: [src/types/configValidation.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L17)
+Defined in: [src/types/configValidation.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L17)
 
 Whether validation passed
 
@@ -36,6 +36,6 @@ Whether validation passed
 
 > **warnings**: [`ValidationWarning`](ValidationWarning.md)[]
 
-Defined in: [src/types/configValidation.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L23)
+Defined in: [src/types/configValidation.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L23)
 
 List of validation warnings (non-blocking issues)

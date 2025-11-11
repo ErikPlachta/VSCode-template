@@ -6,7 +6,7 @@
 
 # Interface: CategorySchema
 
-Defined in: [src/types/agentConfig.ts:935](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L935)
+Defined in: [src/types/agentConfig.ts:935](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L935)
 
 Schema definition for a category.
 
@@ -16,7 +16,7 @@ Schema definition for a category.
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:936](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L936)
+Defined in: [src/types/agentConfig.ts:936](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L936)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/agentConfig.ts:936](https://github.com/ErikPlachta/vscode
 
 > **schema**: `unknown`
 
-Defined in: [src/types/agentConfig.ts:937](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L937)
+Defined in: [src/types/agentConfig.ts:937](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L937)

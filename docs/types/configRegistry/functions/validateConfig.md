@@ -8,7 +8,7 @@
 
 > **validateConfig**(`config`): `boolean`
 
-Defined in: [src/types/configRegistry.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configRegistry.ts#L283)
+Defined in: [src/types/configRegistry.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configRegistry.ts#L283)
 
 Validation function for configuration objects
 

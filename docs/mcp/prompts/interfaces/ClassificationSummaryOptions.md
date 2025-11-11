@@ -6,7 +6,7 @@
 
 # Interface: ClassificationSummaryOptions
 
-Defined in: [src/mcp/prompts/index.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/prompts/index.ts#L111)
+Defined in: [src/mcp/prompts/index.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/prompts/index.ts#L111)
 
 ClassificationSummaryOptions interface.
 
@@ -16,7 +16,7 @@ ClassificationSummaryOptions interface.
 
 > **agent**: [`AgentCapabilityMetadata`](../../config/agentManifest/interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/prompts/index.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/prompts/index.ts#L112)
+Defined in: [src/mcp/prompts/index.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/prompts/index.ts#L112)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/mcp/prompts/index.ts:112](https://github.com/ErikPlachta/vscode
 
 > `optional` **matchedSignals**: `string`[]
 
-Defined in: [src/mcp/prompts/index.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/prompts/index.ts#L113)
+Defined in: [src/mcp/prompts/index.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/prompts/index.ts#L113)

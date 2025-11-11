@@ -6,7 +6,7 @@
 
 # Interface: ExecutionProfile
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/config/unifiedAgentConfig.ts#L32)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/config/unifiedAgentConfig.ts#L32)
 
 Execution settings for runtime behavior
 
@@ -16,7 +16,7 @@ Execution settings for runtime behavior
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/config/unifiedAgentConfig.ts#L35)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/config/unifiedAgentConfig.ts#L35)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:35](https://github.com/ErikPla
 
 > **priority**: `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/config/unifiedAgentConfig.ts#L33)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/config/unifiedAgentConfig.ts#L33)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:33](https://github.com/ErikPla
 
 > **timeout**: `number`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/config/unifiedAgentConfig.ts#L34)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/config/unifiedAgentConfig.ts#L34)

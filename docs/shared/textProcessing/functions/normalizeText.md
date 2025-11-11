@@ -8,7 +8,7 @@
 
 > **normalizeText**(`text`): `string`
 
-Defined in: src/shared/textProcessing.ts:268
+Defined in: [src/shared/textProcessing.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/textProcessing.ts#L268)
 
 Normalizes text for comparison by lowercasing and removing extra whitespace.
 

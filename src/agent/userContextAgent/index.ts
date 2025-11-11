@@ -830,6 +830,63 @@ export class UserContextAgent extends BaseAgentConfig {
   }
 
   /**
+   * Get or create snapshot with structured response wrapper
+   *
+   * Returns a CategorySnapshot wrapped in AgentResponse<T> for consistent formatting.
+   * This method demonstrates the new response pattern for agent result reporting.
+   *
+   * @param {string} topicOrId - Category topic or ID to retrieve snapshot for.
+   * @returns {Promise<import("@agent/communicationAgent").AgentResponse<CategorySnapshot>>} Structured response containing snapshot data.
+   */
+  async getSnapshotResponse(
+    topicOrId: string
+  ): Promise<
+    import("@agent/communicationAgent").AgentResponse<CategorySnapshot>
+  > {
+    const { createSuccessResponse, createErrorResponse } = await import(
+      "@agent/communicationAgent"
+    );
+
+    try {
+      const startTime = Date.now();
+      const snapshot = await this.getOrCreateSnapshot(topicOrId);
+      const duration = Date.now() - startTime;
+
+      return createSuccessResponse(snapshot, {
+        message: `Retrieved snapshot for category: ${snapshot.name}`,
+        metadata: {
+          agentId: UserContextAgentProfile.id,
+          operation: "getSnapshot",
+          duration,
+          count: snapshot.recordCount,
+          entityType: "CategorySnapshot",
+        },
+      });
+    } catch (error) {
+      return createErrorResponse(
+        error instanceof Error ? error.message : String(error),
+        {
+          metadata: {
+            agentId: UserContextAgentProfile.id,
+            operation: "getSnapshot",
+          },
+          errors: [
+            {
+              message: error instanceof Error ? error.message : String(error),
+              severity: "high",
+              code: "SNAPSHOT_RETRIEVAL_FAILED",
+              suggestions: [
+                "Verify the category exists",
+                "Check that the dataset is properly loaded",
+              ],
+            },
+          ],
+        }
+      );
+    }
+  }
+
+  /**
    * Resolve relationships for a given record across categories.
    *
    * @param {string} topicOrId - topicOrId parameter.

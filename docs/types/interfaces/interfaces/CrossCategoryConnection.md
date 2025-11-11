@@ -6,7 +6,7 @@
 
 # Interface: CrossCategoryConnection
 
-Defined in: [src/types/interfaces.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/interfaces.ts#L107)
+Defined in: [src/types/interfaces.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L107)
 
 CrossCategoryConnection interface.
 
@@ -16,7 +16,7 @@ CrossCategoryConnection interface.
 
 > **connectionType**: `string`
 
-Defined in: [src/types/interfaces.ts:110](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/interfaces.ts#L110)
+Defined in: [src/types/interfaces.ts:110](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L110)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:110](https://github.com/ErikPlachta/vscode-
 
 > **description**: `string`
 
-Defined in: [src/types/interfaces.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/interfaces.ts#L112)
+Defined in: [src/types/interfaces.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L112)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:112](https://github.com/ErikPlachta/vscode-
 
 > **sourceCategory**: `string`
 
-Defined in: [src/types/interfaces.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/interfaces.ts#L108)
+Defined in: [src/types/interfaces.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L108)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/interfaces.ts:108](https://github.com/ErikPlachta/vscode-
 
 > **strength**: `number`
 
-Defined in: [src/types/interfaces.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/interfaces.ts#L111)
+Defined in: [src/types/interfaces.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L111)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/interfaces.ts:111](https://github.com/ErikPlachta/vscode-
 
 > **targetCategory**: `string`
 
-Defined in: [src/types/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/interfaces.ts#L109)
+Defined in: [src/types/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L109)

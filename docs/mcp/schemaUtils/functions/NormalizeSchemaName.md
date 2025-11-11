@@ -8,7 +8,7 @@
 
 > **NormalizeSchemaName**(`name`): `string`
 
-Defined in: [src/mcp/schemaUtils.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/mcp/schemaUtils.ts#L37)
+Defined in: [src/mcp/schemaUtils.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/schemaUtils.ts#L37)
 
 NormalizeSchemaName function.
 

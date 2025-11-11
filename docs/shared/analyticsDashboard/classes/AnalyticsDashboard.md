@@ -6,7 +6,7 @@
 
 # Class: AnalyticsDashboard
 
-Defined in: [src/shared/analyticsDashboard.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/analyticsDashboard.ts#L38)
+Defined in: [src/shared/analyticsDashboard.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsDashboard.ts#L38)
 
 Analytics dashboard for generating usage reports and insights.
 
@@ -26,7 +26,7 @@ Analytics dashboard for generating usage reports and insights.
 
 > **generateRecommendations**(`summary`): `string`[]
 
-Defined in: [src/shared/analyticsDashboard.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/analyticsDashboard.ts#L69)
+Defined in: [src/shared/analyticsDashboard.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsDashboard.ts#L69)
 
 Generates performance recommendations based on analytics data.
 
@@ -50,7 +50,7 @@ summary parameter.
 
 > **generateReport**(`summary`, `_options`): `string`
 
-Defined in: [src/shared/analyticsDashboard.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/analyticsDashboard.ts#L47)
+Defined in: [src/shared/analyticsDashboard.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsDashboard.ts#L47)
 
 Generates a comprehensive analytics report.
 

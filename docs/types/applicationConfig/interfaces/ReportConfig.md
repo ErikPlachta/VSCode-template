@@ -6,7 +6,7 @@
 
 # Interface: ReportConfig
 
-Defined in: [src/types/applicationConfig.ts:279](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L279)
+Defined in: [src/types/applicationConfig.ts:279](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L279)
 
 Report generation configuration.
 
@@ -16,6 +16,6 @@ Report generation configuration.
 
 > **output**: `string`
 
-Defined in: [src/types/applicationConfig.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L281)
+Defined in: [src/types/applicationConfig.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L281)
 
 Output path for generated reports.

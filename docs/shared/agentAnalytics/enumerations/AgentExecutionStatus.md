@@ -6,7 +6,7 @@
 
 # Enumeration: AgentExecutionStatus
 
-Defined in: [src/shared/agentAnalytics.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/agentAnalytics.ts#L8)
+Defined in: [src/shared/agentAnalytics.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L8)
 
 Agent execution status enumeration.
 
@@ -16,7 +16,7 @@ Agent execution status enumeration.
 
 > **CANCELLED**: `"cancelled"`
 
-Defined in: [src/shared/agentAnalytics.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/agentAnalytics.ts#L12)
+Defined in: [src/shared/agentAnalytics.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L12)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/shared/agentAnalytics.ts:12](https://github.com/ErikPlachta/vsc
 
 > **ERROR**: `"error"`
 
-Defined in: [src/shared/agentAnalytics.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/agentAnalytics.ts#L10)
+Defined in: [src/shared/agentAnalytics.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L10)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/shared/agentAnalytics.ts:10](https://github.com/ErikPlachta/vsc
 
 > **SUCCESS**: `"success"`
 
-Defined in: [src/shared/agentAnalytics.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/agentAnalytics.ts#L9)
+Defined in: [src/shared/agentAnalytics.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L9)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/shared/agentAnalytics.ts:9](https://github.com/ErikPlachta/vsco
 
 > **TIMEOUT**: `"timeout"`
 
-Defined in: [src/shared/agentAnalytics.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/shared/agentAnalytics.ts#L11)
+Defined in: [src/shared/agentAnalytics.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L11)

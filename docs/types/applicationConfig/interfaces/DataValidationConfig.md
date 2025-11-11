@@ -6,7 +6,7 @@
 
 # Interface: DataValidationConfig
 
-Defined in: [src/types/applicationConfig.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L149)
+Defined in: [src/types/applicationConfig.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L149)
 
 Data validation configuration.
 
@@ -16,7 +16,7 @@ Data validation configuration.
 
 > **strictMode**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L151)
+Defined in: [src/types/applicationConfig.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L151)
 
 Enable strict validation mode.
 
@@ -26,7 +26,7 @@ Enable strict validation mode.
 
 > **validateOnLoad**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L153)
+Defined in: [src/types/applicationConfig.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L153)
 
 Validate data on load.
 
@@ -36,6 +36,6 @@ Validate data on load.
 
 > **validateRelationships**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/applicationConfig.ts#L155)
+Defined in: [src/types/applicationConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L155)
 
 Validate relationship integrity.

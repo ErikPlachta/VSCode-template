@@ -6,7 +6,7 @@
 
 # Interface: OrchestrationConfig
 
-Defined in: [src/types/agentConfig.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L56)
+Defined in: [src/types/agentConfig.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L56)
 
 Orchestration-specific configuration
 
@@ -16,7 +16,7 @@ Orchestration-specific configuration
 
 > `optional` **escalation**: [`EscalationConfig`](EscalationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L59)
+Defined in: [src/types/agentConfig.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L59)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:59](https://github.com/ErikPlachta/vscode-
 
 > `optional` **intents**: `Record`\<`string`, [`IntentConfig`](IntentConfig.md)\>
 
-Defined in: [src/types/agentConfig.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L57)
+Defined in: [src/types/agentConfig.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L57)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:57](https://github.com/ErikPlachta/vscode-
 
 > `optional` **messages**: `object`
 
-Defined in: [src/types/agentConfig.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L60)
+Defined in: [src/types/agentConfig.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L60)
 
 #### errorOccurred?
 
@@ -116,4 +116,4 @@ Defined in: [src/types/agentConfig.ts:60](https://github.com/ErikPlachta/vscode-
 
 > `optional` **textProcessing**: [`TextProcessingConfig`](TextProcessingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/agentConfig.ts#L58)
+Defined in: [src/types/agentConfig.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L58)

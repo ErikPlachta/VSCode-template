@@ -6,7 +6,7 @@
 
 # Interface: ValidationError
 
-Defined in: [src/types/configValidation.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L30)
+Defined in: [src/types/configValidation.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L30)
 
 Detailed validation error information
 
@@ -16,7 +16,7 @@ Detailed validation error information
 
 > `optional` **actual**: `unknown`
 
-Defined in: [src/types/configValidation.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L47)
+Defined in: [src/types/configValidation.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L47)
 
 Actual value found
 
@@ -26,7 +26,7 @@ Actual value found
 
 > **category**: `"schema"` \| `"type"` \| `"business_rule"` \| `"compatibility"`
 
-Defined in: [src/types/configValidation.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L35)
+Defined in: [src/types/configValidation.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L35)
 
 Error category
 
@@ -36,7 +36,7 @@ Error category
 
 > `optional` **expected**: `unknown`
 
-Defined in: [src/types/configValidation.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L44)
+Defined in: [src/types/configValidation.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L44)
 
 Expected value or format
 
@@ -46,7 +46,7 @@ Expected value or format
 
 > **level**: `"error"` \| `"warning"`
 
-Defined in: [src/types/configValidation.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L32)
+Defined in: [src/types/configValidation.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L32)
 
 Error severity level
 
@@ -56,7 +56,7 @@ Error severity level
 
 > **message**: `string`
 
-Defined in: [src/types/configValidation.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L41)
+Defined in: [src/types/configValidation.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L41)
 
 Human-readable error message
 
@@ -66,6 +66,6 @@ Human-readable error message
 
 > **path**: `string`
 
-Defined in: [src/types/configValidation.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0508d3321d479706f24b24b1470ab30317977c0/src/types/configValidation.ts#L38)
+Defined in: [src/types/configValidation.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configValidation.ts#L38)
 
 JSON path to the problematic field

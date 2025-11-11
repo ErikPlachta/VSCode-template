@@ -516,3 +516,123 @@ export class CommunicationAgent extends BaseAgentConfig {
     return suggestions.slice(0, maxSuggestions);
   }
 }
+
+/**
+ * Response Builder Utilities
+ *
+ * Helper functions for creating consistent AgentResponse objects across all agents.
+ */
+
+/**
+ * Create a success response
+ *
+ * @template T Type of response data
+ * @param {T} data - The response data.
+ * @param {Partial<AgentResponse<T>>} [options] - Optional fields to override defaults.
+ * @returns {AgentResponse<T>} Structured success response.
+ */
+export function createSuccessResponse<T>(
+  data: T,
+  options?: Partial<AgentResponse<T>>
+): AgentResponse<T> {
+  return {
+    type: "success",
+    status: "success",
+    data,
+    message: options?.message,
+    metadata: {
+      timestamp: Date.now(),
+      ...options?.metadata,
+    },
+  };
+}
+
+/**
+ * Create an error response
+ *
+ * @template T Type of response data (usually undefined for errors)
+ * @param {string} message - Error message.
+ * @param {Partial<AgentResponse<T>>} [options] - Optional fields including errors array.
+ * @returns {AgentResponse<T>} Structured error response.
+ */
+export function createErrorResponse<T = undefined>(
+  message: string,
+  options?: Partial<AgentResponse<T>>
+): AgentResponse<T> {
+  return {
+    type: "error",
+    status: "error",
+    message,
+    metadata: {
+      timestamp: Date.now(),
+      ...options?.metadata,
+    },
+    errors: options?.errors || [
+      {
+        message,
+        severity: "medium",
+      },
+    ],
+    ...options,
+  };
+}
+
+/**
+ * Create a progress response
+ *
+ * @template T Type of response data
+ * @param {number} percentage - Progress percentage (0-100).
+ * @param {string} currentStep - Description of current step.
+ * @param {Partial<AgentResponse<T>>} [options] - Optional fields including progress details.
+ * @returns {AgentResponse<T>} Structured progress response.
+ */
+export function createProgressResponse<T>(
+  percentage: number,
+  currentStep: string,
+  options?: Partial<AgentResponse<T>>
+): AgentResponse<T> {
+  return {
+    type: "progress",
+    status: "in-progress",
+    message: options?.message || `${currentStep} (${percentage}%)`,
+    metadata: {
+      timestamp: Date.now(),
+      ...options?.metadata,
+    },
+    data: options?.data,
+    progress: {
+      percentage,
+      currentStep,
+      ...options?.progress,
+    },
+  };
+}
+/**
+ * Create a partial success response (some items succeeded, some failed)
+ *
+ * @template T Type of response data
+ * @param {T} data - The response data (successful items).
+ * @param {Array<{ message: string; code?: string; severity?: SeverityLevel }>} errors - Errors that occurred.
+ * @param {Partial<AgentResponse<T>>} [options] - Optional fields to override defaults.
+ * @returns {AgentResponse<T>} Structured partial success response.
+ */
+export function createPartialResponse<T>(
+  data: T,
+  errors: Array<{ message: string; code?: string; severity?: SeverityLevel }>,
+  options?: Partial<AgentResponse<T>>
+): AgentResponse<T> {
+  return {
+    type: "success",
+    status: "partial",
+    data,
+    message:
+      options?.message ||
+      `Operation partially completed with ${errors.length} errors`,
+    metadata: {
+      timestamp: Date.now(),
+      ...options?.metadata,
+    },
+    errors,
+    ...options,
+  };
+}
