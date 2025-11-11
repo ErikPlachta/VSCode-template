@@ -10,6 +10,7 @@ This repository uses the root `CHANGELOG.md` as the single source of truth for C
 4. Quality gates: build, tests (100% coverage), lint (strict JSDoc), docs generation, health report all must PASS before marking work complete.
 5. Migration safety: renames (e.g. `businessData` → `userContext`, `relevant-data-manager` → `user-context`) follow an alias lifecycle: Introduced → Aliased → Warn → Removed. The `relevant-data-manager` warning phase has concluded; the shim remains silently for compatibility until its scheduled removal.
 6. Configuration integrity: no committed legacy JSON config (`src/mcp.config.json`). Any reintroduction is treated as a governance regression and fails the health check.
+7. **Agent isolation (CRITICAL)**: Orchestrator is the ONLY agent that coordinates inter-agent communication. Agents MUST NOT import from other agents (no `@agent/communicationAgent`, `@agent/dataAgent`, etc.). Agents are black boxes: receive request from Orchestrator → process → return typed data. Orchestrator handles all formatting, error wrapping, and agent-to-agent coordination.
 
 ## Session Workflow
 
@@ -48,6 +49,55 @@ Practical cadence:
 - Insert new log entries newest-first within the current day; add the optional daily summary headline once per day if helpful.
 - After 3–5 edits or when creating/editing >~3 files in a burst, add/update a Verification block and reconcile Outstanding Tasks.
 - **Timestamp format**: Use `YYYY-MM-DD HH:MM:SS` (24-hour time with spaces) for log entry headers. The ChangeLogManager CLI handles this automatically.
+
+## Agent Architecture (CRITICAL)
+
+### Core Design Principle: Orchestrator-Centric Communication
+
+**RULE**: Orchestrator is the ONLY agent that coordinates inter-agent communication.
+
+**Agent Isolation Requirements**:
+
+1. **No agent-to-agent imports**: Agents MUST NOT import from other agents
+   - ❌ FORBIDDEN: `import { ... } from "@agent/communicationAgent"`
+   - ❌ FORBIDDEN: `import { ... } from "@agent/dataAgent"`
+   - ❌ FORBIDDEN: `await import("@agent/communicationAgent")`
+   - ✅ ALLOWED: Import from shared utilities (`@shared/*`), types (`@internal-types/*`), config
+2. **Agents are black boxes**:
+
+   - Receive request from Orchestrator
+   - Process internally using own methods
+   - Return typed data (NOT formatted responses)
+   - No knowledge of other agents
+
+3. **Orchestrator responsibilities**:
+
+   - Route user requests to appropriate agents
+   - Call agent methods and receive typed data
+   - Handle errors and wrap in structured responses
+   - Use CommunicationAgent for formatting
+   - Coordinate multi-agent workflows
+
+4. **Data flow pattern**:
+   ```
+   User → Orchestrator → Agent (returns typed data) → Orchestrator → CommunicationAgent (formats) → User
+   ```
+
+**Why This Matters**:
+
+- **Loose coupling**: Agents can be modified without affecting others
+- **Testability**: Agents tested in complete isolation
+- **Clear boundaries**: Single responsibility for each component
+- **No circular dependencies**: Even with dynamic imports
+- **Maintainability**: Changes localized to single agent
+
+**Verification**:
+
+Before any agent change, check:
+
+- Does this agent import from another agent? → Refactor to Orchestrator
+- Does this agent format responses? → Move formatting to Orchestrator/CommunicationAgent
+- Does this agent coordinate with others? → Logic belongs in Orchestrator
 
 ## Quality Gates
 
