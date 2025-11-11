@@ -1362,4 +1362,60 @@ export class Orchestrator extends BaseAgentConfig {
       .filter((h) => h.result.state === "failed")
       .slice(-limit);
   }
+
+  /**
+   * Generates a human-readable performance summary for a completed workflow
+   *
+   * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Performance Monitoring section
+   *
+   * @param metrics - Performance metrics to summarize
+   * @returns Formatted performance summary string with breakdown and percentages
+   */
+  private generatePerformanceSummary(metrics: PerformanceMetrics): string {
+    const {
+      totalDuration,
+      classificationDuration,
+      planningDuration,
+      executionDuration,
+      formattingDuration,
+      actionMetrics,
+    } = metrics;
+
+    const lines: string[] = [
+      `Total Duration: ${totalDuration}ms`,
+      `Breakdown:`,
+      `  - Classification: ${classificationDuration}ms (${(
+        (classificationDuration / totalDuration) *
+        100
+      ).toFixed(1)}%)`,
+      `  - Planning: ${planningDuration}ms (${(
+        (planningDuration / totalDuration) *
+        100
+      ).toFixed(1)}%)`,
+      `  - Execution: ${executionDuration}ms (${(
+        (executionDuration / totalDuration) *
+        100
+      ).toFixed(1)}%)`,
+      `  - Formatting: ${formattingDuration}ms (${(
+        (formattingDuration / totalDuration) *
+        100
+      ).toFixed(1)}%)`,
+    ];
+
+    // Add action timings if any
+    if (actionMetrics.length > 0) {
+      lines.push(`Actions:`);
+      actionMetrics.forEach(
+        ({ actionId, agent, method, duration, recordCount }) => {
+          const countInfo =
+            recordCount !== undefined ? ` (${recordCount} records)` : "";
+          lines.push(
+            `  - ${actionId} (${agent}.${method}): ${duration}ms${countInfo}`
+          );
+        }
+      );
+    }
+
+    return lines.join("\n");
+  }
 }
