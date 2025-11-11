@@ -41,70 +41,80 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### Current Tasks
 
-#### Architecture & Design Alignment
+#### Priority 0: Data-Driven Architecture Integrity (Critical)
 
-- ✅ **COMPLETE: REFACTOR: Align userContextAgent with standard agent architecture**
+**Objective**: Maintain data-driven design principles throughout agent response migration and codebase cleanup.
 
-  - **Status**: COMPLETE (2025-11-10 17:25:59)
-  - **Changes**: UserContextAgent now extends BaseAgentConfig, validates config at construction, removed wrapper class
-  - **Impact**: Pattern consistency achieved - userContextAgent matches orchestrator/clarificationAgent/dataAgent/databaseAgent architecture
-  - **Documentation**: See CHANGELOG entry 2025-11-10 17:25:59 for complete implementation details
+- **ACTIVE: Complete AgentResponse pattern migration** (~45% complete)
 
-- ✅ **COMPLETE: CREATE: Communication Agent for unified response formatting**
+  - **Status**: POC proven, documentation complete, infrastructure ready
+  - **Completed Foundation**:
 
-  - **Status**: COMPLETE (2025-11-10 18:06:17)
-  - **Files Created**:
-    - `src/agent/communicationAgent/agent.config.ts` (241 lines)
-    - `src/agent/communicationAgent/index.ts` (493 lines)
-    - `tests/communicationAgent.test.ts` (475 lines, 33 test cases)
-  - **Type System**: Added CommunicationConfig interface, CONFIG_REGISTRY entry, AgentResponse<T> types
-  - **Features**: Template-based formatting, error enrichment with recovery suggestions, progress tracking, format-specific output (markdown/plaintext/HTML)
-  - **Coverage**: 85.98% for communicationAgent module
-  - **Documentation**: See CHANGELOG entry 2025-11-10 18:06:17 for complete implementation details, integration patterns, and next steps
+    - ✅ AgentResponse<T> interface with comprehensive metadata
+    - ✅ Response builder utilities (4 functions, tested)
+    - ✅ POC: UserContextAgent.getSnapshotResponse()
+    - ✅ Migration guide with examples and patterns
+    - ✅ All tests passing (268/268)
 
-- ✅ **COMPLETE: ENHANCE: ClarificationAgent capabilities**
+  - **Remaining Work** (aligned with data-driven principles):
 
-  - **Status**: COMPLETE (2025-11-10 18:26:17)
-  - **Features**: Help system with capability discovery, example query generation, intelligent help detection in clarify()
-  - **Files Modified**:
-    - `src/types/agentConfig.ts` (+8 lines): helpSystem field in ClarificationConfig
-    - `src/agent/clarificationAgent/index.ts` (+43 lines): provideHelp() method + help delegation
-  - **Files Created**: `tests/clarificationAgent.help.test.ts` (367 lines, 28 test cases)
-  - **Integration**: Orchestrator routing unchanged (already routes help signal), ClarificationAgent detects and delegates
-  - **Test Results**: 253/253 tests passing, 93.84% coverage for clarificationAgent
-  - **Documentation**: See CHANGELOG entry 2025-11-10 18:26:17 for complete implementation details
+    1. **DatabaseAgent migration** (30% of remaining work)
 
-#### Shared Utilities & Services
+       - Priority: HIGH - Database layer is data access foundation
+       - Methods: `queryResponse()`, `executeWithRetryResponse()`
+       - Rationale: Data access layer must have structured error reporting for upstream agents
+       - Impact: Enables orchestrator to make data-driven routing decisions based on query success/failure
 
-- ✅ **COMPLETE: CREATE: Shared text processing utility**
-  - **Status**: COMPLETE (2025-11-10 17:47:46)
-  - **Files**: Created `src/shared/textProcessing.ts` (260 lines, 5 functions)
-  - **Tests**: Created `tests/textProcessing.ts` (39 test cases, 94% coverage)
-  - **Refactoring**: Updated orchestrator to use utility, removed duplicate logic
-  - **Documentation**: See CHANGELOG entry 2025-11-10 17:47:46 for complete details
+    2. **DataAgent migration** (25% of remaining work)
 
-#### Testing & Quality
+       - Priority: HIGH - Data transformation and analysis layer
+       - Methods: `analyzeResponse()`, `aggregateResponse()`
+       - Rationale: Analytics results need consistent structure for UI presentation
+       - Impact: Enables consistent data insights formatting across all analysis types
 
-- **IN PROGRESS: Agent result reporting consistency** (~40% complete)
-  - **Status**: POC complete, documentation created, ready for migration to remaining agents
-  - **Completed**:
-    - ✅ Leveraged existing `AgentResponse<T>` interface from CommunicationAgent
-    - ✅ Created 4 response builder utilities (createSuccessResponse, createErrorResponse, createProgressResponse, createPartialResponse)
-    - ✅ Implemented POC: UserContextAgent.getSnapshotResponse() wrapper method
-    - ✅ Created comprehensive test suite (15 tests, all passing)
-    - ✅ Created migration guide: `docs/guides/agent-response-pattern.md`
-  - **Remaining Tasks**:
-    1. Migrate orchestrator methods (route() wrapper for OrchestratorResponse)
-    2. Migrate DatabaseAgent methods (queryResponse(), executeWithRetryResponse())
-    3. Migrate DataAgent methods (analyzeResponse(), aggregateResponse())
-    4. Add orchestrator response validation (type guards, error handling)
-    5. Update CHANGELOG when complete
-  - **Documentation**: See CHANGELOG entry 2025-11-10 19:10:46 for POC details
-  - **Migration Guide**: `docs/guides/agent-response-pattern.md`
+    3. **Orchestrator integration** (30% of remaining work)
 
-### Remove all References to Relevant Data Manager
+       - Priority: MEDIUM - Coordination layer needs validation
+       - Tasks: Response validation type guards, error handling for invalid agent responses
+       - Rationale: Orchestrator validates data flow between agents
+       - Impact: Ensures data integrity throughout request/response pipeline
 
-- UserContext replaced it, and there should be NOTHING left related to it within the code, aside from changelog.
+    4. **Final verification** (15% of remaining work)
+       - Update all tests to verify response structures
+       - Verify 100% coverage maintained
+       - Update CHANGELOG, mark task complete
+
+  - **Data-Driven Guardrails**:
+
+    - ✅ All responses maintain type safety (AgentResponse<T>)
+    - ✅ Metadata enables timing/performance analysis
+    - ✅ Structured errors support recovery suggestion logic
+    - ✅ Backward compatibility preserves existing data flows
+    - ✅ Progress tracking enables UI responsiveness for long operations
+
+  - **Documentation**: See migration guide `docs/guides/agent-response-pattern.md`
+
+- **BLOCKED: Remove "Relevant Data Manager" references**
+
+  - **Status**: Waiting for AgentResponse migration completion
+  - **Rationale**: Current codebase still uses "relevant-data-manager" as agentId in metadata
+  - **Risk**: Premature removal could break agent identification in responses
+  - **Action Required**:
+    1. Complete AgentResponse migration first
+    2. Create alias migration plan (relevant-data-manager → user-context)
+    3. Update all agentId references in agent implementations
+    4. Update tests to expect new ID
+    5. Remove legacy references
+  - **Estimated Effort**: 2-3 hours after AgentResponse migration complete
+
+#### Completed This Session (2025-11-10)
+
+- ✅ **UserContextAgent architecture alignment** - Now extends BaseAgentConfig, validates config
+- ✅ **Shared text processing utility** - Centralized keyword extraction, signal scoring
+- ✅ **Communication Agent** - Unified response formatting with template system
+- ✅ **ClarificationAgent help system** - Capability discovery, example query generation
+- ✅ **AgentResponse POC** - Proven pattern with UserContextAgent, comprehensive tests
+- ✅ **Migration guide** - Complete documentation for remaining agent migrations
 
 ### Priority 1 - Things to Handle Next
 
