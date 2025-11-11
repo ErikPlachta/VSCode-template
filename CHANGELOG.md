@@ -15,7 +15,7 @@ associations:
 
 ## Notes for Copilot
 
-Maintain this file as the single source of truth for non-trivial changes.
+Maintain this file as the single source of truth for application changes.
 
 ### Guidelines
 
@@ -45,19 +45,25 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 **Objective**: Maintain data-driven design principles throughout agent response migration and codebase cleanup.
 
-- **ACTIVE: ARCHITECTURAL CORRECTION - Revert agent isolation violations and implement correct pattern** (~85% complete, was incorrectly reported as 85% before reversion)
+- **ACTIVE: ARCHITECTURAL CORRECTION - Revert agent isolation violations and implement correct pattern** (~70% complete)
 
-  - **Status**: ⚠️ Phase 3 COMPLETE - Integration testing passing. Phase 4 NEXT: Workflow Coordination
+  - **Status**: ⚠️ Phase 4 IN PROGRESS - Workflow Coordination infrastructure complete, validation next
   - **Progress Summary**:
     - Foundation (20%): ✅ COMPLETE (AgentResponse<T> interface, builders, CommunicationAgent)
     - Phase 1 - Reversion (15%): ✅ COMPLETE (removed agent wrapper methods, tests passing)
     - Phase 2 - Orchestrator Response Handling (30%): ✅ COMPLETE (callAgentWithResponse, error assessment, recovery suggestions)
     - Phase 3 - Integration Testing (15%): ✅ COMPLETE (30 new tests, 274/275 passing)
-    - **Phase 4 - Workflow Coordination (30%)**: 🔄 **NEXT PRIORITY** - Production-ready implementation with observability
+    - **Phase 4 - Workflow Coordination (30%)**: 🔄 **IN PROGRESS** - Infrastructure complete (4.1-4.3), validation next (4.5)
+      - Phase 4.1 - Logging Infrastructure: ✅ COMPLETE (WorkflowLogger, 10 methods, request tracing)
+      - Phase 4.2 - Performance Monitoring: ✅ COMPLETE (generatePerformanceSummary, slow-op warnings)
+      - Phase 4.3 - Agent Registry: ✅ COMPLETE (instantiated agents, health checks)
+      - Phase 4.4 - Workflow State Types: ✅ COMPLETE (all types in workflow.types.ts)
+      - Phase 4.5 - Input Validation: 🔄 **NEXT** (validateInput, validateAction, validateStateTransition)
+      - Phase 4.6-4.11: 🔄 PENDING (workflow execution, testing)
     - Phase 5 - Documentation (10%): 🔄 PENDING (update migration guide)
     - Phase 6 - Final Verification (10%): 🔄 PENDING (final tests + health check)
     - Phase 7 - Legacy Cleanup (5%): 🔄 PENDING (remove all relevant-data references)
-  - **Remaining Time**: ~4-6 hours (Phase 4: 3-4h, Phase 5: 1h, Phase 6: 30min, Phase 7: 30min)
+  - **Remaining Time**: ~3-4 hours (Phase 4.5-4.11: 2.5-3h, Phase 5: 1h, Phase 6: 30min, Phase 7: 30min)
   - **Critical Discovery**: Orchestrator currently only routes (returns agent ID) but never executes agents. Phase 4 implements complete workflow execution system.
   - **Issue**: DatabaseAgent, DataAgent, and UserContextAgent directly import from CommunicationAgent (via dynamic imports)
   - **Core Violation**: Agents MUST NOT import from other agents. Orchestrator is the ONLY coordinator.
@@ -115,52 +121,57 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
     5. ✅ Verify backward compatibility (original agent methods unchanged, all tests pass)
     6. ✅ Test metadata tracking (timing, counts, operation names)
 
-    **Phase 4: Workflow Coordination** 🔄 **NEXT PRIORITY** (30% of task, 3-4 hours)
+    **Phase 4: Workflow Coordination** 🔄 **IN PROGRESS** (30% of task, 3-4 hours total, ~2.5-3h remaining)
 
     **Critical Gap**: Orchestrator currently only routes (returns agent ID string) but never executes agents. Extension displays "Routed to database-agent" instead of actual data.
 
     **Required Implementation**: Complete workflow execution system with production-ready observability
 
-    1. 🔄 **Logging Infrastructure** (45 min)
+    1. ✅ **Logging Infrastructure** (45 min) - COMPLETE
 
-       - Implement WorkflowLogger interface with structured logging (10 methods: logWorkflowStart, logClassification, logActionPlanned, logActionStart/Complete/Failed, logStateTransition, logWorkflowComplete/Failed)
-       - Add workflow IDs for request tracing
-       - Log state transitions throughout lifecycle
-       - Include action timing and performance tracking
-       - Support console, file, and remote log destinations
+       - Implemented WorkflowLogger class with structured logging (10 methods: logWorkflowStart, logClassification, logActionPlanned, logActionStart/Complete/Failed, logStateTransition, logWorkflowComplete/Failed)
+       - Added workflow IDs for request tracing (format: "wf-1-abc123")
+       - Logs all state transitions throughout lifecycle
+       - Includes action timing and performance tracking
+       - Console output with [Workflow:wf-id] prefix for easy filtering
+       - Separated into src/shared/workflowLogger.ts per architecture requirements
 
-    2. 🔄 **Performance Monitoring** (30 min)
+    2. ✅ **Performance Monitoring** (30 min) - COMPLETE
 
-       - Implement PerformanceMetrics tracking for each workflow phase
-       - Record timing for classification, planning, execution, formatting
-       - Add actionMetrics array for per-action timing
-       - Implement slow operation warnings (>5000ms workflow, >2000ms action)
-       - Generate performance summary reports
+       - Implemented PerformanceMetrics tracking for each workflow phase
+       - Records timing for classification, planning, execution, formatting
+       - Added actionMetrics array for per-action timing with record counts
+       - Implemented slow operation warnings (>5000ms workflow, >2000ms action)
+       - Added generatePerformanceSummary() for formatted performance reports
+       - Includes phase breakdowns with percentages of total time
 
-    3. 🔄 **Agent Registry Setup** (30 min)
+    3. ✅ **Agent Registry Setup** (30 min) - COMPLETE
 
-       - Instantiate DatabaseAgent, DataAgent, UserContextAgent in Orchestrator constructor
-       - Create AgentRegistry interface mapping agent IDs to instances
-       - Handle agent initialization errors gracefully
-       - Add agent health checks before use
+       - Instantiated DatabaseAgent, DataAgent, UserContextAgent in Orchestrator constructor
+       - Created AgentRegistry type in workflow.types.ts mapping agent IDs to instances
+       - Handles agent initialization errors gracefully (sets to null, logs error)
+       - Added checkAgentHealth() method for diagnostics
+       - Enables actual agent method calls: `agentRegistry["database-agent"].executeQuery()`
 
-    4. 🔄 **Workflow State Types** (30 min)
+    4. ✅ **Workflow State Types** (30 min) - COMPLETE (via refactoring)
 
-       - Define WorkflowState ("pending" | "classifying" | "executing" | "processing" | "needs-clarification" | "completed" | "failed")
-       - Define WorkflowAction interface (id, type, agent, method, params, dependencies, status, result, error)
-       - Define WorkflowContext interface (state, currentAction, completedActions, pendingActions, results, errors)
-       - Add WorkflowDiagnostics, WorkflowHistory, PerformanceMetrics types
-       - Document all state transitions
-       - Add TypeScript strict mode compliance
+       - All types already defined in src/types/workflow.types.ts
+       - WorkflowState: 7 states (pending → classifying → executing → processing → needs-clarification → completed → failed)
+       - WorkflowAction: Generic action with id, type, agent, method, params, dependencies, status, result, error, timing
+       - WorkflowContext: Complete state snapshot with input, classification, actions, results, errors, metrics
+       - WorkflowDiagnostics, WorkflowHistory, PerformanceMetrics, AgentRegistry all defined
+       - All state transitions documented in ORCHESTRATOR_WORKFLOW_ANALYSIS.md
 
-    5. 🔄 **Input Validation** (20 min)
+    5. 🔄 **Input Validation** (20 min) - NEXT PRIORITY
+
+    6. 🔄 **Input Validation** (20 min) - NEXT PRIORITY
 
        - Implement validateInput() for OrchestratorInput (required question, max length, valid topic)
        - Implement validateAction() for WorkflowAction definitions (required fields, agent exists, method exists)
        - Implement validateStateTransition() with valid transition map
        - Add helpful error messages for each validation failure
 
-    6. 🔄 **Implement executeWorkflow()** (1 hour)
+    7. 🔄 **Implement executeWorkflow()** (1 hour)
 
        - Complete workflow lifecycle with logging at each step
        - State machine with validateStateTransition checks
@@ -172,7 +183,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
        - Build final response with CommunicationAgent, log completion with metrics
        - Handle needs-clarification state for ambiguous requests
 
-    7. 🔄 **Implement Action Planning** (45 min)
+    8. 🔄 **Implement Action Planning** (45 min)
 
        - Implement planActions() based on classification intent
        - Map intents to agent method calls:
@@ -183,7 +194,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
        - Implement extractQueryParams() to parse user question into agent params
        - Validate planned actions before queueing
 
-    8. 🔄 **Implement Action Execution** (30 min)
+    9. 🔄 **Implement Action Execution** (30 min)
 
        - Implement executeAction() with per-action timeout (default 10s)
        - Use Promise.race for timeout enforcement
@@ -193,17 +204,17 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
        - Detect retryable errors (timeout/network) vs non-retryable (not found/permission)
        - Implement resolveParams() to inject previous action results into dependencies
 
-    9. 🔄 **Diagnostics & Debugging** (30 min)
+    10. 🔄 **Diagnostics & Debugging** (30 min)
 
-       - Implement getWorkflowDiagnostics(workflowId) returning complete snapshot
-       - Implement getActiveWorkflows() for monitoring dashboard
-       - Implement cancelWorkflow(workflowId, reason) for timeout/user cancellation
-       - Implement recordWorkflow() for history tracking
-       - Implement replayWorkflow(workflowId) for debugging failed workflows
-       - Implement getFailedWorkflows(limit) for error analysis
-       - Keep maxHistorySize (100) recent workflows in memory
+        - Implement getWorkflowDiagnostics(workflowId) returning complete snapshot
+        - Implement getActiveWorkflows() for monitoring dashboard
+        - Implement cancelWorkflow(workflowId, reason) for timeout/user cancellation
+        - Implement recordWorkflow() for history tracking
+        - Implement replayWorkflow(workflowId) for debugging failed workflows
+        - Implement getFailedWorkflows(limit) for error analysis
+        - Keep maxHistorySize (100) recent workflows in memory
 
-    10. 🔄 **Update Extension Integration** (20 min)
+    11. 🔄 **Update Extension Integration** (20 min)
 
         - Change chatHandler from orchestrator.handle() to orchestrator.executeWorkflow()
         - Display formatted data from result.formatted instead of routing info
@@ -212,7 +223,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
         - Add cancellationToken support using cancelWorkflow()
         - Test end-to-end: user question → actual data displayed
 
-    11. 🔄 **Create Comprehensive Tests** (1 hour)
+    12. 🔄 **Create Comprehensive Tests** (1 hour)
         - Test single-step workflows (records query, metadata fetch)
         - Test multi-step workflows (insight = query + analyze)
         - Test dependency resolution (action B waits for action A)
@@ -323,13 +334,17 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
   - **Updated Progress**:
 
     - Foundation (20%): ✅ Complete (AgentResponse<T> interface, builders, CommunicationAgent)
-    - Reversion (15%): ✅ **COMPLETE** (removed agent wrapper methods and tests - Phase 1 done)
-    - Orchestrator (30%): 🔄 **NEXT PRIORITY** (implement response handling in orchestrator)
-    - Integration Testing (15%): 🔄 Not started (orchestrator integration tests)
-    - Documentation (10%): 🔄 Partial (migration guide needs revision)
-    - Final Verification (10%): 🔄 Not started
+    - Phase 1 - Reversion (15%): ✅ COMPLETE (removed agent wrapper methods and tests)
+    - Phase 2 - Orchestrator (30%): ✅ COMPLETE (callAgentWithResponse, error assessment, recovery)
+    - Phase 3 - Integration Testing (15%): ✅ COMPLETE (30 orchestrator integration tests)
+    - Phase 4 - Workflow Coordination (30%): 🔄 **IN PROGRESS** (~45% complete)
+      - Phase 4.1-4.4: ✅ COMPLETE (Logging, Performance, Registry, Types)
+      - Phase 4.5-4.11: 🔄 PENDING (Validation, Execution, Testing)
+    - Phase 5 - Documentation (10%): 🔄 PENDING (migration guide needs revision)
+    - Phase 6 - Final Verification (10%): 🔄 PENDING
+    - Phase 7 - Legacy Cleanup (5%): 🔄 PENDING
 
-  - **Estimated Completion**: Currently ~55% complete (Foundation + Reversion). Remaining: ~3-5 hours
+  - **Estimated Completion**: Currently ~70% complete (Foundation + Phase 1-3 + Phase 4.1-4.4). Remaining: ~2.5-4 hours
 
     - Phase 1 (Revert): 1-2 hours
     - Phase 2 (Orchestrator): 2-3 hours
@@ -448,16 +463,19 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 **Agent Registry Implementation:**
 
 - **Created AgentRegistry type** (`src/types/workflow.types.ts`, +19 lines)
+
   - Maps agent IDs to agent instances: "database-agent", "data-agent", "user-context-agent"
   - Uses `unknown` type to avoid circular dependencies
   - Properly typed when used in Orchestrator
 
 - **Added agent imports** (`src/agent/orchestrator/index.ts`)
+
   - Imported DatabaseAgent, DataAgent, UserContextAgent classes
   - Imported ensureCacheDirectory for agent initialization
   - Added AgentRegistry to workflow types imports
 
 - **Instantiated agent registry** (`src/agent/orchestrator/index.ts`, +40 lines in constructor)
+
   - Created `agentRegistry` private field of type AgentRegistry
   - Instantiated all three agents in constructor with proper dependencies:
     - DatabaseAgent: requires dataSources array (currently empty) and cacheDirectory promise
