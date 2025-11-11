@@ -459,6 +459,36 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-11]
 
+#### 2025-11-11 10:13:31 ci: Consolidate workflows into unified CI/CD pipeline with proper job dependencies
+
+**Unified CI/CD Pipeline:**
+
+- **Removed separate workflows** (`.github/workflows/compliance.yml`, `test.yml`, `docs.yml`)
+- **Created single pipeline** (`.github/workflows/ci.yml`) with three stages:
+  - **Stage 1 - Compliance**: Lint, validate JSON/Markdown, generate health report
+  - **Stage 2 - Test**: Run full test suite with coverage (only if compliance passes)
+  - **Stage 3 - Docs**: Build and publish documentation (only on main branch, only if tests pass)
+- **Added job dependencies**: `test` needs `compliance`, `docs` needs `test`
+- **Fail-fast strategy**: Pipeline stops at first failure, saving CI/CD resources
+- **Added npm cache** to speed up dependency installation
+- **Conditional docs publishing**: Only runs on main branch pushes
+
+**Benefits:**
+
+- ✅ Clear visibility into which stage failed
+- ✅ Resource efficiency - don't run tests if compliance fails
+- ✅ No docs published from broken code
+- ✅ Unified artifact collection (health reports, coverage)
+
+#### 2025-11-11 10:10:24 ci: Fix GitHub workflows to include prebuild step for config generation and template processing
+
+**Initial Workflow Fixes:**
+
+- Added `npm run prebuild` step to all workflows before compilation
+- Ensures config generation (`updatePackageConfig.ts`) runs first
+- Ensures template processing (`processTemplates.ts`) completes before tests
+- Fixed missing prerequisite steps causing CI failures
+
 #### 2025-11-11 15:30:00 feat: Phase 4.3 - Implement agent registry with health checks
 
 **Agent Registry Implementation:**

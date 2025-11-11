@@ -4,7 +4,7 @@
 
 User archived this file as it was used before but now is not up to date.
 
-> It was originall used to understand and establish a plan for next steps.
+> It was originally used to understand and establish a plan for next steps.
 > It is now out of sync, and then `./CHANGELOG.md` in the root is the source of truth.
 
 ## 2025-11-10

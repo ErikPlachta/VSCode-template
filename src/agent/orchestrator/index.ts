@@ -1409,4 +1409,727 @@ export class Orchestrator extends BaseAgentConfig {
 
     return { valid: true };
   }
+
+  // ============================================================================
+  // Workflow Execution Methods
+  // ============================================================================
+
+  /**
+   * Execute a complete workflow from user input to formatted response
+   *
+   * This is the main entry point for workflow execution. It orchestrates:
+   * 1. Input validation
+   * 2. Classification
+   * 3. Action planning
+   * 4. Action execution (with dependencies)
+   * 5. Response formatting
+   * 6. Performance tracking
+   * 7. Error handling and recovery
+   *
+   * @param {OrchestratorInput} input - User input to process
+   * @param {number} [timeout=30000] - Workflow timeout in milliseconds (default 30s)
+   * @returns {Promise<WorkflowResult>} Complete workflow result with formatted response
+   */
+  public async executeWorkflow(
+    input: OrchestratorInput,
+    timeout = 30000
+  ): Promise<WorkflowResult> {
+    const workflowId = this.generateWorkflowId();
+    const startTime = Date.now();
+
+    // Initialize workflow context
+    const context: WorkflowContext = {
+      workflowId,
+      state: "pending",
+      input: {
+        question: input.question,
+        topic: input.topic,
+      },
+      classification: undefined,
+      currentAction: null,
+      completedActions: [],
+      pendingActions: [],
+      results: new Map<string, unknown>(),
+      errors: [],
+      metrics: this.initializeMetrics(workflowId),
+      startTime,
+      endTime: undefined,
+    };
+
+    this.workflows.set(workflowId, context);
+    this.logger.logWorkflowStart(workflowId, input);
+
+    try {
+      // Validate input
+      const inputValidation = this.validateInput(input);
+      if (!inputValidation.valid) {
+        return await this.failWorkflow(
+          context,
+          new Error(`Invalid input: ${inputValidation.error}`)
+        );
+      }
+
+      // Transition to classifying
+      await this.transitionState(context, "classifying");
+
+      // Classify user intent
+      const classificationStart = Date.now();
+      const classification = this.classify(input);
+      context.classification = {
+        intent: classification.intent,
+        agent:
+          this.intentAgentMap[classification.intent] || "user-context-agent",
+      };
+      if (context.metrics) {
+        context.metrics.classificationDuration =
+          Date.now() - classificationStart;
+      }
+
+      this.logger.logClassification(workflowId, classification);
+
+      // Check if clarification needed (vague query)
+      const vaguePhraseFound = this.vaguePhrases.some((phrase) =>
+        input.question.toLowerCase().includes(phrase)
+      );
+      if (vaguePhraseFound || classification.intent === "general") {
+        await this.transitionState(context, "needs-clarification");
+        return this.buildWorkflowResult(context, "needs-clarification");
+      }
+
+      // Transition to executing
+      await this.transitionState(context, "executing");
+
+      // Plan actions
+      const planningStart = Date.now();
+      const actions = await this.planActions(classification, input);
+      context.pendingActions = actions;
+      if (context.metrics) {
+        context.metrics.planningDuration = Date.now() - planningStart;
+      }
+
+      // Log planned actions
+      actions.forEach((action) =>
+        this.logger.logActionPlanned(workflowId, action)
+      );
+
+      // Execute actions with timeout
+      const executionPromise = this.executeActions(context);
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(
+          () => reject(new Error(`Workflow timeout after ${timeout}ms`)),
+          timeout
+        )
+      );
+
+      await Promise.race([executionPromise, timeoutPromise]);
+
+      // Transition to processing
+      await this.transitionState(context, "processing");
+
+      // Format final response
+      const formattingStart = Date.now();
+      const formatted = await this.formatWorkflowResult(context);
+      if (context.metrics) {
+        context.metrics.formattingDuration = Date.now() - formattingStart;
+      }
+
+      // Transition to completed
+      await this.transitionState(context, "completed");
+
+      // Build final result
+      const result = this.buildWorkflowResult(context, "completed", formatted);
+
+      // Record workflow for history
+      const duration = Date.now() - startTime;
+      this.recordWorkflow(workflowId, input, result, duration, []);
+
+      // Check performance
+      if (context.metrics) {
+        this.checkPerformance(context.metrics);
+      }
+
+      // Log completion
+      this.logger.logWorkflowComplete(workflowId, result);
+
+      return result;
+    } catch (error) {
+      return await this.failWorkflow(
+        context,
+        error instanceof Error ? error : new Error(String(error))
+      );
+    } finally {
+      // Update end time
+      context.endTime = Date.now();
+      if (context.metrics) {
+        context.metrics.endTime = Date.now();
+        context.metrics.totalDuration = context.endTime - startTime;
+      }
+
+      // Remove from active workflows after a delay (keep for diagnostics)
+      setTimeout(() => this.workflows.delete(workflowId), 60000);
+    }
+  }
+
+  /**
+   * Plan workflow actions based on classification
+   *
+   * Maps user intents to specific agent method calls with parameters
+   *
+   * @param {OrchestratorClassification} classification - Intent classification
+   * @param {OrchestratorInput} input - Original user input
+   * @returns {Promise<WorkflowAction[]>} Array of planned actions
+   */
+  private async planActions(
+    classification: OrchestratorClassification,
+    input: OrchestratorInput
+  ): Promise<WorkflowAction[]> {
+    const actions: WorkflowAction[] = [];
+    const intent = classification.intent;
+
+    switch (intent) {
+      case "metadata": {
+        // Get user context snapshot
+        actions.push({
+          id: "get-snapshot",
+          type: "execute-agent",
+          agent: "user-context-agent",
+          method: "getOrCreateSnapshot",
+          params: undefined,
+          status: "pending",
+        });
+        break;
+      }
+
+      case "records": {
+        // Extract query parameters from user question
+        const queryParams = this.extractQueryParams(input.question);
+
+        // Execute database query
+        actions.push({
+          id: "query-records",
+          type: "execute-agent",
+          agent: "database-agent",
+          method: "executeQuery",
+          params: queryParams,
+          status: "pending",
+        });
+        break;
+      }
+
+      case "insight": {
+        // Multi-step: query data, then analyze
+        const queryParams = this.extractQueryParams(input.question);
+
+        // Step 1: Query data
+        actions.push({
+          id: "query-data",
+          type: "execute-agent",
+          agent: "database-agent",
+          method: "executeQuery",
+          params: queryParams,
+          status: "pending",
+        });
+
+        // Step 2: Analyze results (depends on query)
+        actions.push({
+          id: "analyze-data",
+          type: "execute-agent",
+          agent: "data-agent",
+          method: "analyzeData",
+          params: undefined, // Will be populated from query-data result
+          dependencies: ["query-data"],
+          status: "pending",
+        });
+        break;
+      }
+
+      case "general":
+      default: {
+        // General queries might need clarification or simple routing
+        // For now, get snapshot as fallback
+        actions.push({
+          id: "get-context",
+          type: "execute-agent",
+          agent: "user-context-agent",
+          method: "getOrCreateSnapshot",
+          params: undefined,
+          status: "pending",
+        });
+        break;
+      }
+    }
+
+    // Validate all planned actions
+    for (const action of actions) {
+      const validation = this.validateAction(action);
+      if (!validation.valid) {
+        throw new Error(`Action planning failed: ${validation.error}`);
+      }
+    }
+
+    return actions;
+  }
+
+  /**
+   * Extract query parameters from user question
+   *
+   * Parses natural language question into structured query parameters
+   *
+   * @param {string} question - User's question
+   * @returns {object} Query parameters for database agent
+   */
+  private extractQueryParams(question: string): {
+    category?: string;
+    filters?: Record<string, unknown>;
+    limit?: number;
+  } {
+    // Simple keyword-based extraction (can be enhanced with NLP)
+    const params: {
+      category?: string;
+      filters?: Record<string, unknown>;
+      limit?: number;
+    } = {
+      limit: 10, // Default limit
+    };
+
+    // Extract category hints
+    const lowerQuestion = question.toLowerCase();
+    if (lowerQuestion.includes("people") || lowerQuestion.includes("person")) {
+      params.category = "people";
+    } else if (
+      lowerQuestion.includes("project") ||
+      lowerQuestion.includes("projects")
+    ) {
+      params.category = "projects";
+    } else if (
+      lowerQuestion.includes("department") ||
+      lowerQuestion.includes("departments")
+    ) {
+      params.category = "departments";
+    }
+
+    // Extract filters (basic skill matching)
+    if (lowerQuestion.includes("python")) {
+      params.filters = { skills: "Python" };
+    } else if (
+      lowerQuestion.includes("javascript") ||
+      lowerQuestion.includes("js")
+    ) {
+      params.filters = { skills: "JavaScript" };
+    }
+
+    return params;
+  }
+
+  /**
+   * Execute all pending actions in workflow context
+   *
+   * Handles action dependencies and executes in correct order
+   *
+   * @param {WorkflowContext} context - Workflow context with pending actions
+   * @returns {Promise<void>}
+   */
+  private async executeActions(context: WorkflowContext): Promise<void> {
+    const executionStart = Date.now();
+
+    while (context.pendingActions.length > 0) {
+      // Find next action with resolved dependencies
+      const nextAction = this.findNextAction(context);
+
+      if (!nextAction) {
+        throw new Error(
+          "No executable actions found (circular dependencies or all failed)"
+        );
+      }
+
+      // Execute action
+      await this.executeAction(nextAction, context);
+
+      // Move to completed
+      context.pendingActions = context.pendingActions.filter(
+        (a) => a.id !== nextAction.id
+      );
+      context.completedActions.push(nextAction);
+    }
+
+    context.metrics.executionDuration = Date.now() - executionStart;
+  }
+
+  /**
+   * Find next action ready to execute (dependencies resolved)
+   *
+   * @param {WorkflowContext} context - Workflow context
+   * @returns {WorkflowAction | undefined} Next executable action or undefined
+   */
+  private findNextAction(context: WorkflowContext): WorkflowAction | undefined {
+    return context.pendingActions.find((action) => {
+      // Skip failed actions
+      if (action.status === "failed") {
+        return false;
+      }
+
+      // Check if all dependencies are completed
+      if (!action.dependencies || action.dependencies.length === 0) {
+        return true;
+      }
+
+      return action.dependencies.every((depId) =>
+        context.completedActions.some(
+          (a) => a.id === depId && a.status === "completed"
+        )
+      );
+    });
+  }
+
+  /**
+   * Execute a single workflow action
+   *
+   * Dispatches to agent method via registry, handles timeout and errors
+   *
+   * @param {WorkflowAction} action - Action to execute
+   * @param {WorkflowContext} context - Workflow context
+   * @returns {Promise<void>}
+   */
+  private async executeAction(
+    action: WorkflowAction,
+    context: WorkflowContext
+  ): Promise<void> {
+    const actionTimeout = 10000; // 10 second per-action timeout
+    action.status = "in-progress";
+    action.startTime = Date.now();
+
+    context.currentAction = action;
+    this.logger.logActionStart(context.workflowId, action);
+
+    try {
+      // Resolve parameters (inject dependency results if needed)
+      const resolvedParams = this.resolveParams(action, context);
+
+      // Get agent from registry
+      const agent =
+        this.agentRegistry[action.agent as keyof typeof this.agentRegistry];
+
+      if (!agent) {
+        throw new Error(`Agent ${action.agent} not initialized`);
+      }
+
+      // Execute with timeout
+      const executionPromise = this.callAgentMethod(
+        agent,
+        action.method!,
+        resolvedParams
+      );
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(
+          () =>
+            reject(
+              new Error(`Action ${action.id} timeout after ${actionTimeout}ms`)
+            ),
+          actionTimeout
+        )
+      );
+
+      const result = await Promise.race([executionPromise, timeoutPromise]);
+
+      // Store result
+      action.result = result;
+      action.status = "completed";
+      action.endTime = Date.now();
+      action.duration = action.endTime - action.startTime;
+
+      context.results[action.id] = result;
+
+      // Add to metrics
+      context.metrics.actionMetrics.push({
+        actionId: action.id,
+        agent: action.agent!,
+        method: action.method!,
+        duration: action.duration,
+        recordCount: Array.isArray(result) ? result.length : undefined,
+      });
+
+      this.logger.logActionComplete(context.workflowId, action);
+    } catch (error) {
+      action.status = "failed";
+      action.error = error instanceof Error ? error : new Error(String(error));
+      action.endTime = Date.now();
+      action.duration = action.endTime - action.startTime;
+
+      context.errors.push(action.error);
+
+      this.logger.logActionFailed(context.workflowId, action, action.error);
+
+      // Check if error is retryable
+      const isRetryable = this.isRetryableError(action.error);
+
+      if (!isRetryable) {
+        throw action.error; // Fail workflow on non-retryable errors
+      }
+
+      // For retryable errors, continue (other actions might succeed)
+    }
+  }
+
+  /**
+   * Call agent method dynamically
+   *
+   * @param {unknown} agent - Agent instance
+   * @param {string} method - Method name
+   * @param {unknown} params - Method parameters
+   * @returns {Promise<unknown>} Method result
+   */
+  private async callAgentMethod(
+    agent: unknown,
+    method: string,
+    params: unknown
+  ): Promise<unknown> {
+    // Use callAgentWithResponse for proper error handling and metadata
+    // But extract just the data for workflow execution
+    const agentObj = agent as Record<string, unknown>;
+    const methodFn = agentObj[method];
+
+    if (typeof methodFn !== "function") {
+      throw new Error(`Method ${method} not found on agent`);
+    }
+
+    // Call method with params
+    if (params === undefined) {
+      return await (methodFn as () => Promise<unknown>).call(agent);
+    } else if (Array.isArray(params)) {
+      return await (methodFn as (...args: unknown[]) => Promise<unknown>).apply(
+        agent,
+        params
+      );
+    } else {
+      return await (methodFn as (arg: unknown) => Promise<unknown>).call(
+        agent,
+        params
+      );
+    }
+  }
+
+  /**
+   * Resolve action parameters by injecting dependency results
+   *
+   * @param {WorkflowAction} action - Action with params to resolve
+   * @param {WorkflowContext} context - Workflow context with results
+   * @returns {unknown} Resolved parameters
+   */
+  private resolveParams(
+    action: WorkflowAction,
+    context: WorkflowContext
+  ): unknown {
+    // If no dependencies, return params as-is
+    if (!action.dependencies || action.dependencies.length === 0) {
+      return action.params;
+    }
+
+    // If action depends on previous results, inject them
+    // For now, simple case: inject first dependency result as params
+    const firstDepId = action.dependencies[0];
+    const depResult = context.results[firstDepId];
+
+    return depResult !== undefined ? depResult : action.params;
+  }
+
+  /**
+   * Check if error is retryable
+   *
+   * @param {Error} error - Error to check
+   * @returns {boolean} True if error might succeed on retry
+   */
+  private isRetryableError(error: Error): boolean {
+    const message = error.message.toLowerCase();
+
+    // Network/timeout errors are retryable
+    if (
+      message.includes("timeout") ||
+      message.includes("network") ||
+      message.includes("connection")
+    ) {
+      return true;
+    }
+
+    // Not found, permission errors are not retryable
+    if (
+      message.includes("not found") ||
+      message.includes("permission") ||
+      message.includes("unauthorized")
+    ) {
+      return false;
+    }
+
+    // Default: not retryable
+    return false;
+  }
+
+  /**
+   * Transition workflow to new state
+   *
+   * Validates transition and logs state change
+   *
+   * @param {WorkflowContext} context - Workflow context
+   * @param {WorkflowState} newState - Target state
+   * @returns {Promise<void>}
+   */
+  private async transitionState(
+    context: WorkflowContext,
+    newState: WorkflowState
+  ): Promise<void> {
+    const validation = this.validateStateTransition(context.state, newState);
+
+    if (!validation.valid) {
+      throw new Error(`State transition failed: ${validation.error}`);
+    }
+
+    const oldState = context.state;
+    context.state = newState;
+
+    this.logger.logStateTransition(context.workflowId, oldState, newState);
+  }
+
+  /**
+   * Format workflow result into user-facing response
+   *
+   * @param {WorkflowContext} context - Workflow context
+   * @returns {Promise<{ message: string; markdown?: string }>} Formatted response
+   */
+  private async formatWorkflowResult(
+    context: WorkflowContext
+  ): Promise<{ message: string; markdown?: string }> {
+    // Get primary result (last completed action)
+    const lastAction =
+      context.completedActions[context.completedActions.length - 1];
+
+    if (!lastAction || !lastAction.result) {
+      return {
+        message: "Workflow completed but no results available",
+      };
+    }
+
+    // Format based on result type
+    const result = lastAction.result;
+
+    if (Array.isArray(result)) {
+      // Format array results (records)
+      return {
+        message: `Found ${result.length} result(s)`,
+        markdown: this.formatRecords(result),
+      };
+    } else if (typeof result === "object" && result !== null) {
+      // Format object results (snapshot, insights)
+      return {
+        message: "Data retrieved successfully",
+        markdown: this.formatObject(result),
+      };
+    } else {
+      return {
+        message: String(result),
+      };
+    }
+  }
+
+  /**
+   * Format array of records as markdown table
+   *
+   * @param {unknown[]} records - Array of records
+   * @returns {string} Markdown formatted table
+   */
+  private formatRecords(records: unknown[]): string {
+    if (records.length === 0) {
+      return "No records found";
+    }
+
+    // Simple list format for now (can be enhanced to table)
+    return records
+      .slice(0, 10)
+      .map((record, i) => {
+        const obj = record as Record<string, unknown>;
+        const name = obj.name || obj.id || `Item ${i + 1}`;
+        return `- ${name}`;
+      })
+      .join("\n");
+  }
+
+  /**
+   * Format object as markdown
+   *
+   * @param {object} obj - Object to format
+   * @returns {string} Markdown formatted object
+   */
+  private formatObject(obj: object): string {
+    return Object.entries(obj)
+      .slice(0, 10)
+      .map(([key, value]) => `- **${key}**: ${String(value)}`)
+      .join("\n");
+  }
+
+  /**
+   * Build workflow result object
+   *
+   * @param {WorkflowContext} context - Workflow context
+   * @param {WorkflowState} state - Final state
+   * @param {object} [formatted] - Formatted response
+   * @returns {WorkflowResult} Complete workflow result
+   */
+  private buildWorkflowResult(
+    context: WorkflowContext,
+    state: WorkflowState,
+    formatted?: { message: string; markdown?: string }
+  ): WorkflowResult {
+    // Get primary data result
+    const lastAction =
+      context.completedActions[context.completedActions.length - 1];
+    const data = lastAction?.result;
+
+    return {
+      state,
+      data,
+      error: context.errors.length > 0 ? context.errors[0] : undefined,
+      formatted,
+      metrics: context.metrics,
+      workflowId: context.workflowId,
+    };
+  }
+
+  /**
+   * Fail workflow with error
+   *
+   * @param {WorkflowContext} context - Workflow context
+   * @param {Error} error - Error that caused failure
+   * @returns {Promise<WorkflowResult>} Failed workflow result
+   */
+  private async failWorkflow(
+    context: WorkflowContext,
+    error: Error
+  ): Promise<WorkflowResult> {
+    // Transition to failed state (skip validation since this is error handling)
+    context.state = "failed";
+    context.errors.push(error);
+
+    this.logger.logWorkflowFailed(context.workflowId, error);
+
+    // Build error result
+    const result: WorkflowResult = {
+      state: "failed",
+      error,
+      formatted: {
+        message: `Workflow failed: ${error.message}`,
+      },
+      metrics: context.metrics,
+      workflowId: context.workflowId,
+    };
+
+    // Record failed workflow
+    const duration = Date.now() - context.startTime;
+    this.recordWorkflow(
+      context.workflowId,
+      context.input,
+      result,
+      duration,
+      []
+    );
+
+    return result;
+  }
 }
