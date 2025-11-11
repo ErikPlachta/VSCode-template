@@ -309,7 +309,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
   - **Correct Data Flow**:
 
-    ```
+    ```txt
     User Request
       ↓
     Orchestrator.route() (classifies intent, selects agent)
@@ -628,6 +628,235 @@ Foundation: Complete workflow execution system
 - ✅ **Type Safety**: WorkflowActionType imported and used correctly
 - ⏭️ **Tests**: Infrastructure only, no behavior changes yet
 - 🔄 **Next**: Phase 4.6 - Implement executeWorkflow() (main workflow execution method)
+
+#### 2025-11-11 16:30:00 feat: Phase 4.6-4.8 - Complete workflow execution system with action planning and execution
+
+**MAJOR MILESTONE: Complete Workflow Execution System**
+
+This massive implementation adds the core workflow execution engine that transforms the Orchestrator from a router into a full workflow executor. Implements Phases 4.6, 4.7, and 4.8 together (tightly coupled).
+
+**Phase 4.6: Main Workflow Execution** (`executeWorkflow()`, +170 lines)
+
+- **Entry point for all workflow execution**
+  - Validates input using validateInput()
+  - Generates unique workflow ID
+  - Initializes WorkflowContext with metrics tracking
+  - Manages complete workflow lifecycle from start to completion
+  - Stores workflows in active workflows Map
+  - Logs workflow start via WorkflowLogger
+
+- **Classification phase**
+  - Calls classify() to determine user intent
+  - Tracks classification duration in metrics
+  - Logs classification result
+  - Checks for vague queries requiring clarification
+
+- **Action planning phase**
+  - Calls planActions() to convert intent into agent method calls
+  - Tracks planning duration in metrics
+  - Logs all planned actions
+  - Validates actions before queueing
+
+- **Action execution phase**
+  - Calls executeActions() to process action queue
+  - Handles action dependencies (multi-step workflows)
+  - Implements workflow timeout (default 30s, configurable)
+  - Uses Promise.race for timeout enforcement
+  - Tracks execution duration in metrics
+
+- **Response formatting phase**
+  - Calls formatWorkflowResult() to create user-facing response
+  - Tracks formatting duration in metrics
+  - Builds final WorkflowResult with state/data/error/formatted/metrics
+
+- **State management**
+  - State transitions: pending → classifying → executing → processing → completed
+  - Uses validateStateTransition() at each transition
+  - Logs every state change via WorkflowLogger
+  - Handles needs-clarification state for ambiguous queries
+
+- **Error handling**
+  - Try/catch around entire workflow
+  - Calls failWorkflow() on any error
+  - Records failed workflows in history
+  - Transitions to failed state with error details
+
+- **Performance tracking**
+  - Records workflow in history via recordWorkflow()
+  - Calls checkPerformance() for slow-op warnings
+  - Generates performance summary if needed
+  - Logs completion with metrics
+
+- **Cleanup**
+  - Updates end time and total duration in metrics
+  - Removes from active workflows after 60s (keeps for diagnostics)
+
+**Phase 4.7: Action Planning** (`planActions()`, `extractQueryParams()`, +150 lines)
+
+- **Intent-to-action mapping**
+  - `metadata` intent → user-context-agent.getOrCreateSnapshot()
+  - `records` intent → database-agent.executeQuery(params)
+  - `insight` intent → database-agent.executeQuery(params) THEN data-agent.analyzeData(results)
+  - `general` intent → user-context-agent.getOrCreateSnapshot() (fallback)
+
+- **Multi-step workflow support**
+  - Creates action chains with dependencies array
+  - insight intent creates 2 actions: query-data → analyze-data
+  - analyze-data depends on query-data (dependency: ["query-data"])
+  - Enables complex workflows with proper sequencing
+
+- **Query parameter extraction** (`extractQueryParams()`)
+  - Parses natural language question into structured params
+  - Extracts category hints: "people", "projects", "departments"
+  - Extracts filter keywords: "Python", "JavaScript" → filters.skills
+  - Sets default limit of 10 records
+  - Returns structured query object for database-agent
+
+- **Action validation**
+  - Validates all planned actions using validateAction()
+  - Throws error if any action is invalid
+  - Ensures actions reference valid agents/methods
+  - Prevents malformed action queues
+
+**Phase 4.8: Action Execution** (`executeAction()`, `executeActions()`, +190 lines)
+
+- **Action queue management** (`executeActions()`)
+  - While loop processes pendingActions until empty
+  - Finds next executable action via findNextAction()
+  - Executes action via executeAction()
+  - Moves completed actions from pending to completed
+  - Tracks total execution duration in metrics
+  - Throws error if no executable actions (circular dependencies)
+
+- **Dependency resolution** (`findNextAction()`)
+  - Scans pending actions for one with resolved dependencies
+  - Skips failed actions
+  - Checks if all dependencies in completedActions with status=completed
+  - Returns first executable action or undefined
+  - Enables proper action ordering in multi-step workflows
+
+- **Individual action execution** (`executeAction()`)
+  - Sets action status to in-progress
+  - Records startTime timestamp
+  - Logs action start via WorkflowLogger
+  - Resolves parameters via resolveParams() (injects dependency results)
+  - Gets agent from registry
+  - Calls agent method via callAgentMethod()
+  - Implements per-action timeout (10s default)
+  - Uses Promise.race for timeout enforcement
+  - Stores result in context.results Map
+  - Records action metrics (timing, record count)
+  - Logs action complete/failed
+  - Checks if error is retryable via isRetryableError()
+  - Throws on non-retryable errors (fails workflow)
+  - Continues on retryable errors (other actions might succeed)
+
+- **Dynamic agent method calling** (`callAgentMethod()`)
+  - Calls agent methods dynamically via reflection
+  - Handles methods with no params, single param, or array params
+  - Type-safe method lookup and invocation
+  - Throws error if method not found on agent
+  - Returns method result directly
+
+- **Parameter resolution** (`resolveParams()`)
+  - Injects dependency results into action params
+  - For actions with no dependencies, returns params as-is
+  - For actions with dependencies, gets first dependency result from context.results
+  - Returns dependency result as params (enables chaining)
+  - Example: analyze-data gets query-data results as input
+
+- **Error classification** (`isRetryableError()`)
+  - Analyzes error messages for retry potential
+  - Retryable: timeout, network, connection errors
+  - Non-retryable: not found, permission, unauthorized errors
+  - Default: non-retryable (fail fast)
+  - Enables smart error recovery strategies
+
+**Additional Helper Methods** (+80 lines)
+
+- **transitionState()**: Validates and executes state transitions with logging
+- **formatWorkflowResult()**: Creates user-facing formatted response
+- **formatRecords()**: Formats array results as markdown list (top 10)
+- **formatObject()**: Formats object results as markdown key-value list
+- **buildWorkflowResult()**: Constructs final WorkflowResult object
+- **failWorkflow()**: Handles workflow failure with error logging and history recording
+
+**Architecture Achievements:**
+
+- ✅ **Complete Lifecycle**: Full workflow execution from input to formatted response
+- ✅ **Multi-Step Workflows**: Dependency resolution enables action chaining
+- ✅ **Timeout Handling**: Both workflow-level (30s) and action-level (10s) timeouts
+- ✅ **State Machine**: Enforced transitions with validation at every step
+- ✅ **Performance Tracking**: Metrics for classification, planning, execution, formatting
+- ✅ **Error Recovery**: Retryable vs non-retryable error detection
+- ✅ **Observability**: Comprehensive logging at every stage
+- ✅ **Registry Integration**: Actually calls agent methods via registry
+- ✅ **Type Safety**: Full TypeScript type checking throughout
+
+**Why This Matters:**
+
+**BEFORE**: Orchestrator only routes (returns agent ID string). Extension displays "Routed to database-agent" instead of actual data.
+
+**AFTER**: Orchestrator executes complete workflows. When user asks "Show me people with Python skills":
+1. Classifies intent as "records"
+2. Plans action: database-agent.executeQuery({ category: "people", filters: { skills: "Python" } })
+3. Executes action via registry: agentRegistry["database-agent"].executeQuery(...)
+4. Gets actual CategoryRecord[] results
+5. Formats as markdown list
+6. Returns WorkflowResult with actual data + formatted response
+7. Extension displays actual people with Python skills
+
+**Multi-Step Example** - User asks "Analyze project completion rates":
+1. Classifies as "insight"
+2. Plans 2 actions: query-data (get projects) → analyze-data (analyze completion)
+3. Executes query-data: gets project records
+4. Resolves analyze-data params: injects project records
+5. Executes analyze-data: generates insights
+6. Returns formatted insights with charts/summaries
+
+**Data Flow:**
+```
+User: "Show me Python developers"
+  ↓
+executeWorkflow(input)
+  ↓ classify()
+intent: "records"
+  ↓ planActions()
+action: database-agent.executeQuery({ category: "people", filters: { skills: "Python" } })
+  ↓ executeActions()
+agentRegistry["database-agent"].executeQuery(...) → [{ name: "Alice", skills: ["Python"] }, ...]
+  ↓ formatWorkflowResult()
+markdown: "- Alice\n- Bob\n..."
+  ↓ buildWorkflowResult()
+WorkflowResult { state: "completed", data: [...], formatted: { message: "Found 12 result(s)", markdown: "..." } }
+  ↓
+Extension displays actual results to user
+```
+
+**Code Statistics:**
+
+- Total lines added: ~590
+- executeWorkflow(): 170 lines (main orchestration)
+- planActions(): 100 lines (intent mapping)
+- extractQueryParams(): 50 lines (NLP-lite parsing)
+- executeActions(): 40 lines (queue management)
+- executeAction(): 80 lines (per-action execution)
+- Helper methods: 150 lines (formatting, state, errors)
+
+##### Verification – Phases 4.6-4.8 Complete
+
+- ✅ **Build**: TypeScript compilation successful (npm run compile)
+- ✅ **Workflow Execution**: executeWorkflow() complete with full lifecycle
+- ✅ **Action Planning**: planActions() maps all intents to agent methods
+- ✅ **Action Execution**: executeAction() calls agents via registry
+- ✅ **Multi-Step Support**: Dependency resolution enables action chaining
+- ✅ **Timeout Handling**: Both workflow (30s) and action (10s) timeouts
+- ✅ **State Machine**: All transitions validated and logged
+- ✅ **Error Recovery**: Retryable error detection and handling
+- ✅ **Performance Tracking**: Comprehensive metrics throughout
+- ✅ **Type Safety**: Fixed all Map usage (get/set instead of bracket notation)
+- ⏭️ **Tests**: Infrastructure complete, ready for Phase 4.11 (comprehensive tests)
+- 🔄 **Next**: Phase 4.9 - Diagnostics & Debugging (already mostly implemented via earlier infrastructure)
 
 ### [2025-11-10]
 

@@ -1752,7 +1752,9 @@ export class Orchestrator extends BaseAgentConfig {
       context.completedActions.push(nextAction);
     }
 
-    context.metrics.executionDuration = Date.now() - executionStart;
+    if (context.metrics) {
+      context.metrics.executionDuration = Date.now() - executionStart;
+    }
   }
 
   /**
@@ -1837,16 +1839,19 @@ export class Orchestrator extends BaseAgentConfig {
       action.endTime = Date.now();
       action.duration = action.endTime - action.startTime;
 
-      context.results[action.id] = result;
+      context.results.set(action.id, result);
 
       // Add to metrics
-      context.metrics.actionMetrics.push({
-        actionId: action.id,
-        agent: action.agent!,
-        method: action.method!,
-        duration: action.duration,
-        recordCount: Array.isArray(result) ? result.length : undefined,
-      });
+      if (context.metrics) {
+        context.metrics.actionMetrics.push({
+          actionId: action.id,
+          agent: action.agent!,
+          method: action.method!,
+          duration: action.duration,
+          recordCount: Array.isArray(result) ? result.length : undefined,
+          timestamp: Date.now(),
+        });
+      }
 
       this.logger.logActionComplete(context.workflowId, action);
     } catch (error) {
@@ -1927,7 +1932,7 @@ export class Orchestrator extends BaseAgentConfig {
     // If action depends on previous results, inject them
     // For now, simple case: inject first dependency result as params
     const firstDepId = action.dependencies[0];
-    const depResult = context.results[firstDepId];
+    const depResult = context.results.get(firstDepId);
 
     return depResult !== undefined ? depResult : action.params;
   }
