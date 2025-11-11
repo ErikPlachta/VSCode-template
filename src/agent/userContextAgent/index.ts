@@ -9,6 +9,7 @@
 import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
+import { fileURLToPath } from "url";
 import {
   ensureCacheDirectory,
   readSharedCacheEntry,
@@ -64,6 +65,10 @@ import {
   validateCategoryRecord,
   formatValidationErrors,
 } from "@internal-types/userContext.types";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // (All type/interface definitions moved to @internal-types/userContext.types to enforce single source of truth.)
 // Default root for user context business data. Previously pointed to a deprecated `bin/data` directory.

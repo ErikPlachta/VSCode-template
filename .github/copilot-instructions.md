@@ -209,6 +209,37 @@ To avoid runtime vs. manifest drift, IDs and paths are centrally derived and mus
 - Forgetting to remove placeholder tokens (e.g., `<application>`) from category ids; canonical ids are required for tests.
 - Reintroducing a legacy `mcp.config.json` file under `src/` or `bin/` (health check will fail).
 - Leaving deprecated alias warnings in place after the silent phase begins.
+- Using `__dirname` or `__filename` without ES module polyfills (see ES Module Requirements below).
+
+## ES Module Requirements
+
+This project uses ES modules (`"type": "module"` in `package.json`). CommonJS globals like `__dirname` and `__filename` are NOT available.
+
+**REQUIRED pattern** when you need file path resolution:
+
+```typescript
+import { fileURLToPath } from "url";
+import * as path from "path";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+```
+
+**When to use this pattern**:
+
+- Any time you need to resolve paths relative to the current source file
+- When referencing sibling directories or parent directories
+- When loading resources bundled with the extension
+
+**Examples in codebase**:
+
+- `src/server/index.ts` (lines 18-19)
+- `src/tools/generateSchemas.ts` (lines 13-14)
+- `src/agent/userContextAgent/index.ts` (lines 68-70)
+- `src/extension/index.ts` (lines 14-16)
+
+**Verification**: Before committing new files that use path resolution, ensure they follow this pattern.
 
 ## Agent Folder Standard
 

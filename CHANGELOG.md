@@ -15,7 +15,8 @@ associations:
 
 ## Notes for Copilot
 
-Maintain this file as the single source of truth for application changes.
+- Maintain this file as the single source of truth for application changes.
+- This file is used by `.github/copilot-instructions.md` for tracking historical decisions and active planned tasks before starting new work.
 
 ### Guidelines
 
@@ -458,9 +459,6 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-11]
 
-#### 2025-11-11 09:42:00 feat: Phase 4.5 - Implement input validation with comprehensive error messages
-
-
 #### 2025-11-11 15:30:00 feat: Phase 4.3 - Implement agent registry with health checks
 
 **Agent Registry Implementation:**
@@ -525,6 +523,81 @@ Foundation: Complete workflow execution system
 - ✅ **Error Handling**: Graceful fallback on initialization failure
 - ⏭️ **Tests**: Infrastructure only, no behavior changes yet
 - 🔄 **Next**: Phase 4.5 - Input Validation (skip 4.4, types already done)
+
+#### 2025-11-11 16:00:00 feat: Phase 4.5 - Implement input validation with comprehensive error messages
+
+**Input Validation Implementation:**
+
+- **Added validateInput() method** (`src/agent/orchestrator/index.ts`, +50 lines)
+
+  - Validates OrchestratorInput before workflow execution
+  - Checks required 'question' field (must be non-empty string)
+  - Enforces maximum length of 1000 characters
+  - Validates optional 'topic' field (must be: general, metadata, records, or insight)
+  - Returns `{ valid: boolean, error?: string }` for clear error reporting
+  - Provides specific error messages for each validation failure
+
+- **Added validateAction() method** (`src/agent/orchestrator/index.ts`, +85 lines)
+
+  - Validates WorkflowAction definitions before execution
+  - Checks required fields: id, type
+  - Validates type is one of: classify, execute-agent, format, clarify
+  - For execute-agent actions:
+    - Validates 'agent' field exists and is a known agent (database-agent, data-agent, user-context-agent)
+    - Checks agent is initialized in registry (not null)
+    - Validates 'method' field exists and is a string
+  - Validates dependencies array if present
+  - Returns detailed error messages with action ID for debugging
+
+- **Added validateStateTransition() method** (`src/agent/orchestrator/index.ts`, +60 lines)
+
+  - Enforces workflow state machine rules
+  - Valid transitions defined:
+    - pending → classifying
+    - classifying → executing | needs-clarification | failed
+    - executing → processing | failed
+    - processing → completed | failed
+    - needs-clarification → classifying (after user clarification)
+    - completed/failed → none (terminal states)
+  - Returns clear error message showing allowed transitions from current state
+  - Prevents invalid state transitions that would break workflow integrity
+
+- **Updated imports** (`src/agent/orchestrator/index.ts`)
+  - Added WorkflowActionType to imports from workflow.types.ts
+  - Required for type-safe validation of action types
+
+**Architecture:**
+
+- ✅ **Input Safety**: All inputs validated before workflow execution
+- ✅ **Early Failure**: Invalid actions detected during planning, not execution
+- ✅ **State Integrity**: State machine enforced, prevents invalid transitions
+- ✅ **Helpful Errors**: Specific error messages guide users to fix issues
+- ✅ **Type Safety**: Uses TypeScript types for validation consistency
+
+**Why This Matters:**
+
+- Prevents malformed workflows from starting execution
+- Catches configuration errors early (invalid agent IDs, missing methods)
+- Ensures state machine integrity throughout workflow lifecycle
+- Provides clear error messages for debugging
+- Foundation for safe workflow execution in Phase 4.6
+
+**Error Message Examples:**
+
+- Input: "Question too long (1523 characters, maximum 1000)"
+- Action: "Action query-1: unknown agent 'invalid-agent'. Must be one of: database-agent, data-agent, user-context-agent"
+- State: "Invalid state transition: pending → completed. Allowed transitions from pending: classifying"
+
+##### Verification – Phase 4.5 Complete
+
+- ✅ **Build**: TypeScript compilation successful (npm run compile)
+- ✅ **Input Validation**: validateInput() with length/type/topic checks
+- ✅ **Action Validation**: validateAction() with agent/method/dependency checks
+- ✅ **State Validation**: validateStateTransition() with state machine enforcement
+- ✅ **Error Messages**: Clear, specific error messages for all validation failures
+- ✅ **Type Safety**: WorkflowActionType imported and used correctly
+- ⏭️ **Tests**: Infrastructure only, no behavior changes yet
+- 🔄 **Next**: Phase 4.6 - Implement executeWorkflow() (main workflow execution method)
 
 ### [2025-11-10]
 

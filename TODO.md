@@ -11,6 +11,8 @@ associations:
   - documentation
 ---
 
+!! WARNING: THIS IS NOT YET BEING USED AND IS JUST A PROOF_OF_CONCEPT> NEED TO BUILD IT OUT THE REST OF THE WAY.
+
 ## Copilot Instructions
 
 <!-- TODO:BEGIN:COPILOT_INSTRUCTIONS -->

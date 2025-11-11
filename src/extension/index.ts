@@ -6,6 +6,7 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import { promises as fsPromises, existsSync } from "fs";
+import { fileURLToPath } from "url";
 import { Orchestrator } from "@agent/orchestrator";
 import { fetchTools, fetchLocalTools, MCPTool } from "@extension/mcpSync";
 import { registerMcpProvider } from "@extension/mcpProvider";
@@ -14,6 +15,10 @@ import {
   removeRegistration,
   resolveMcpConfigPath,
 } from "@extension/mcpRegistration";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Activate the MyBusiness MCP extension.
