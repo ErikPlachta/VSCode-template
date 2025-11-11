@@ -49,13 +49,17 @@ This file serves as the central repository for tracking all outstanding TODOs, m
 Follow these guidelines to ensure effective task management:
 
 1. **Comprehensive Tracking**: Ensure every outstanding task is documented here, categorized by priority (Current, Next, Backlog).
-2. **Incomplete TODO Organization**: Group incomplete TODOs into three sections distinct sections for claritiy and programability.
-   - **Current TODOs**: Tasks actively being worked on.
+2. **Incomplete TODO Organization**: Group incomplete TODOs into three sections distinct sections for clarity and programmability.
+   - **Current TODOs**: Tasks actively being worked on. Contains a single parent-level item. Represents the immediate focus.
    - **Next TODOs**: Tasks planned for the near future.
    - **Backlog TODOs**: Unplanned tasks that may be addressed later.
 3. **TODO Priority**: Every TODO should have a classified priority: `Priority 1 (Critical. Blocking or  Urgent) | Priority 2 (Next) | Priority 3 (Backlog)`.
-4. **Regular Updates**: Completion of TODOs should take it's hierarchy into consideration. Regularly update this file to reflect changes in task status and priorities.
-5. **Completion Workflow**: When a TODO is completed, and CHANGELOG entry should be made. Reference the `.github/copilot-instructions.md` and `CHANGELOG.md` for specifics.
+4. **TODO Hierarchy**: A TODO will likely live within a hierarchy. A TODO may have a parent, siblings, or children items.
+5. **TODO Completion Tracking**: Completion of TODOs should take it's hierarchy into consideration. Completing a parent TODO should also complete all child TODOs. Completing a child TODO should not complete the parent TODO unless all siblings are also completed. A full list of TODOs is not complete until the full hierarchy is processed.
+6. **Regular Updates**: Regularly update this file to reflect changes in task status and priorities:
+   - Use visual indicators for status: ✅ completed | ❌ removed | ⏳ in-progress | 🚫 blocked | ‼️invalid
+   - Validate integrity and modify as things change.
+7. **Completion Workflow**: When a TODO is completed, and CHANGELOG entry should be made. Reference the `.github/copilot-instructions.md` and `CHANGELOG.md` for specifics.
 
 <!-- TODO:END:COPILOT_INSTRUCTIONS -->
 
@@ -63,7 +67,7 @@ Follow these guidelines to ensure effective task management:
 
 ## Incomplete TODOs
 
-> This section contains all active TODOs, managed by the User and CoPilot Chat collaboratively.
+> This section contains all active TODOs, managed by the User and CoPilot Chat collaboratively. Should only contain a single parent level item.
 
 ### Current TODOs
 
