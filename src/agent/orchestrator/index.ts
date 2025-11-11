@@ -26,6 +26,13 @@ import {
   containsAnyPhrase,
   type TextProcessingConfig,
 } from "@shared/textProcessing";
+import {
+  CommunicationAgent,
+  createSuccessResponse,
+  createErrorResponse,
+  type AgentResponse,
+  type SeverityLevel,
+} from "@agent/communicationAgent";
 
 /**
  * Configuration-driven orchestrator that routes questions to appropriate agents
@@ -42,6 +49,7 @@ export class Orchestrator extends BaseAgentConfig {
   private vaguePhrases: string[];
   private messages: Required<NonNullable<OrchestrationConfig["messages"]>>;
   private textProcessingConfig: TextProcessingConfig;
+  private communicationAgent: CommunicationAgent;
   /**
    * Create an orchestrator using the provided configuration (or defaults).
    *
@@ -120,6 +128,9 @@ export class Orchestrator extends BaseAgentConfig {
       minimumKeywordLength: this.minimumKeywordLength,
       handleInflections: true,
     };
+
+    // Initialize communication agent for response formatting
+    this.communicationAgent = new CommunicationAgent();
   }
 
   /**
@@ -177,6 +188,7 @@ export class Orchestrator extends BaseAgentConfig {
   private isQuestionTooVague(question: string, _intent: string): boolean {
     return containsAnyPhrase(question, this.vaguePhrases);
   }
+
   /**
    * Classify intent for a question (legacy string or new structured input).
    *
@@ -646,5 +658,204 @@ export class Orchestrator extends BaseAgentConfig {
    */
   public static createDefault(): Orchestrator {
     return new Orchestrator(orchestratorConfig);
+  }
+
+  // -------------------------
+  // Agent Call Wrappers (Demonstration of Correct Pattern)
+  // -------------------------
+
+  /**
+   * Execute an agent method and wrap the result in a formatted response.
+   *
+   * This method demonstrates the CORRECT architecture pattern where:
+   * 1. Orchestrator calls agent method (agent returns typed data)
+   * 2. Orchestrator builds AgentResponse<T> with metadata
+   * 3. Orchestrator uses CommunicationAgent for formatting
+   *
+   * Agents MUST NOT import from other agents. This pattern maintains agent isolation.
+   *
+   * @template T Type of data returned by the agent
+   * @param {string} agentId - Identifier of the agent being called.
+   * @param {string} operation - Name of the operation being performed.
+   * @param {() => Promise<T>} agentCall - Async function that calls the agent method.
+   * @param {Partial<AgentResponse<T>>} [options] - Optional metadata to include in response.
+   * @returns {Promise<AgentResponse<T>>} Structured response ready for formatting.
+   *
+   * @example
+   * ```typescript
+   * // Call DatabaseAgent
+   * const response = await orchestrator.callAgentWithResponse(
+   *   "database-agent",
+   *   "executeQuery",
+   *   () => databaseAgent.executeQuery("people", { skill: "python" }),
+   *   { metadata: { entityType: "people" } }
+   * );
+   * const formatted = communicationAgent.formatSuccess(response);
+   * ```
+   */
+  async callAgentWithResponse<T>(
+    agentId: string,
+    operation: string,
+    agentCall: () => Promise<T>,
+    options?: Partial<AgentResponse<T>>
+  ): Promise<AgentResponse<T>> {
+    try {
+      const startTime = Date.now();
+      const data = await agentCall();
+      const duration = Date.now() - startTime;
+
+      // Determine count if data is an array
+      const count = Array.isArray(data) ? data.length : undefined;
+
+      return createSuccessResponse(data, {
+        ...options,
+        message:
+          options?.message ||
+          `${operation} completed successfully in ${duration}ms`,
+        metadata: {
+          agentId,
+          operation,
+          timestamp: Date.now(),
+          duration,
+          count,
+          ...options?.metadata,
+        },
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+
+      // Determine error severity based on context
+      const severity = this.assessErrorSeverity(error, operation);
+
+      // Generate recovery suggestions
+      const suggestions = this.generateRecoverySuggestions(error, operation);
+
+      return createErrorResponse(errorMessage, {
+        ...options,
+        metadata: {
+          agentId,
+          operation,
+          timestamp: Date.now(),
+          ...options?.metadata,
+        },
+        errors: [
+          {
+            message: errorMessage,
+            severity,
+            code: error instanceof Error ? error.name : "UNKNOWN_ERROR",
+            suggestions,
+          },
+        ],
+      });
+    }
+  }
+
+  /**
+   * Assess error severity based on error type and operation context.
+   *
+   * @param {unknown} error - The error that occurred.
+   * @param {string} _operation - Name of the operation that failed (reserved for future use).
+   * @returns {SeverityLevel} Assessed severity level.
+   */
+  private assessErrorSeverity(
+    error: unknown,
+    _operation: string
+  ): "low" | "medium" | "high" | "critical" {
+    const errorMessage =
+      error instanceof Error ? error.message.toLowerCase() : String(error);
+
+    // Critical: System-level failures
+    if (
+      errorMessage.includes("out of memory") ||
+      errorMessage.includes("system error")
+    ) {
+      return "critical";
+    }
+
+    // High: Data corruption or security issues
+    if (
+      errorMessage.includes("corrupt") ||
+      errorMessage.includes("unauthorized") ||
+      errorMessage.includes("permission denied")
+    ) {
+      return "high";
+    }
+
+    // Low: Expected user errors (not found, invalid input)
+    if (
+      errorMessage.includes("not found") ||
+      errorMessage.includes("does not exist") ||
+      errorMessage.includes("invalid")
+    ) {
+      return "low";
+    }
+
+    // Medium: Default for unexpected errors
+    return "medium";
+  }
+
+  /**
+   * Generate contextual recovery suggestions based on error type.
+   *
+   * @param {unknown} error - The error that occurred.
+   * @param {string} operation - Name of the operation that failed.
+   * @returns {string[]} Array of recovery suggestions.
+   */
+  private generateRecoverySuggestions(
+    error: unknown,
+    operation: string
+  ): string[] {
+    const errorMessage =
+      error instanceof Error ? error.message.toLowerCase() : String(error);
+    const suggestions: string[] = [];
+
+    // Category not found
+    if (
+      errorMessage.includes("not found") ||
+      errorMessage.includes("does not exist")
+    ) {
+      suggestions.push(
+        "Verify the category ID or entity name is spelled correctly"
+      );
+      suggestions.push("Use the metadata agent to list available categories");
+    }
+
+    // Permission errors
+    if (
+      errorMessage.includes("permission") ||
+      errorMessage.includes("unauthorized")
+    ) {
+      suggestions.push("Check that you have access to the requested resource");
+      suggestions.push("Contact your administrator if access is needed");
+    }
+
+    // Timeout errors
+    if (
+      errorMessage.includes("timeout") ||
+      errorMessage.includes("timed out")
+    ) {
+      suggestions.push(
+        "Try again with a smaller dataset or more specific filters"
+      );
+      suggestions.push("Consider breaking the query into smaller parts");
+    }
+
+    // Validation errors
+    if (
+      errorMessage.includes("invalid") ||
+      errorMessage.includes("validation")
+    ) {
+      suggestions.push("Check that all required parameters are provided");
+      suggestions.push("Review the parameter format and try again");
+    }
+
+    // Generic fallback
+    if (suggestions.length === 0) {
+      suggestions.push(`Retry the ${operation} operation`);
+      suggestions.push("Check the error message for specific details");
+    }
+
+    return suggestions;
   }
 }
