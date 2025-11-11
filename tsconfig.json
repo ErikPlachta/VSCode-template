@@ -23,10 +23,11 @@
       "@bin/*": ["bin/*"]
     }
   },
-  "include": ["src", "tests"],
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "out",
+    "tests",
     "bin/tests/**",
     "jest.config.js",
     "*.config.js"

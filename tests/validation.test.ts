@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+
 /**
  * @file Comprehensive tests for TypeScript type guard validation functions
  * Tests validation logic for CategoryConfig, CategoryRecord, and RelationshipDefinition

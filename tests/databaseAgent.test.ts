@@ -1,8 +1,23 @@
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
+import { fileURLToPath } from "url";
 import { DatabaseAgent, DataSource } from "../src/agent/databaseAgent";
 import { UserContextAgent } from "../src/agent/userContextAgent";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let workspaceFoldersMock: any[] | undefined;
 

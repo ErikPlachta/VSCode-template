@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+
 jest.mock("vscode", () => ({ env: {} }), { virtual: true });
 
 import { promises as fs } from "fs";

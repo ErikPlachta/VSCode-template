@@ -1,3 +1,15 @@
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
+import { fileURLToPath } from "url";
+
 /**
  * User Context Agent Phase 3.2 - Fallback Chain Resolution Tests
  *
@@ -9,6 +21,11 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import { UserContextAgent } from "@agent/userContextAgent";
 import {
   createValidCategoryJson,

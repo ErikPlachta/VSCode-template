@@ -9,6 +9,7 @@
  * This pattern maintains agent isolation - agents MUST NOT import from other agents.
  */
 
+import { describe, it, expect, beforeEach, jest } from "@jest/globals";
 import { Orchestrator } from "../src/agent/orchestrator";
 import { CommunicationAgent } from "../src/agent/communicationAgent";
 

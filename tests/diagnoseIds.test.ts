@@ -1,4 +1,20 @@
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
+import { fileURLToPath } from "url";
 import * as path from "path";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import { activate } from "../src/extension";
 import * as mcpSync from "@extension/mcpSync";
 

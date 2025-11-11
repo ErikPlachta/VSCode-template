@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+
 const showInputBox = jest.fn();
 const showQuickPick = jest.fn();
 const showErrorMessage = jest.fn();

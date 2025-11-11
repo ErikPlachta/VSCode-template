@@ -2074,7 +2074,9 @@ export class Orchestrator extends BaseAgentConfig {
    *
    * @param {WorkflowContext} context - Workflow context
    * @param {WorkflowState} state - Final state
-   * @param {object} [formatted] - Formatted response
+   * @param {object} [formatted] - Formatted response object
+   * @param {string} formatted.message - Human-readable message describing the result
+   * @param {string} [formatted.markdown] - Optional markdown-formatted content for rich display
    * @returns {WorkflowResult} Complete workflow result
    */
   private buildWorkflowResult(
