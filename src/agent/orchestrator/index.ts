@@ -33,320 +33,30 @@ import {
   type AgentResponse,
   type SeverityLevel,
 } from "@agent/communicationAgent";
+import type {
+  WorkflowState,
+  WorkflowAction,
+  WorkflowContext,
+  WorkflowResult,
+  PerformanceMetrics,
+  WorkflowDiagnostics,
+  WorkflowHistory,
+} from "@internal-types/workflow.types";
+import { WorkflowLogger } from "@shared/workflowLogger";
 
 // ============================================================================
-// Workflow Coordination Types
+// Workflow Coordination Types (imported from @internal-types/workflow.types)
 // ============================================================================
 // Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Workflow State Machine Design
+//
+// All workflow types are now defined in src/types/workflow.types.ts
+// This ensures proper separation of concerns and reusability
+//
+// WorkflowLogger is imported from @shared/workflowLogger
 
-/**
- * Workflow execution state
- *
- * State transitions:
- * - pending → classifying → executing → processing → completed
- * - Any state can transition to failed
- * - processing can transition to needs-clarification
- * - needs-clarification can transition back to classifying or completed
- */
-type WorkflowState =
-  | "pending" // Not started
-  | "classifying" // Analyzing intent
-  | "executing" // Calling agent(s)
-  | "processing" // Building response
-  | "needs-clarification" // Missing info
-  | "completed" // Ready to return
-  | "failed"; // Error occurred
-
-/**
- * Workflow action definition
- *
- * Represents a single step in the workflow (e.g., call DatabaseAgent.executeQuery)
- */
-interface WorkflowAction {
-  id: string; // Unique action identifier (e.g., "query-records")
-  type: "classify" | "execute-agent" | "format" | "clarify";
-  agent?: string; // Agent ID (e.g., "database-agent")
-  method?: string; // Method name (e.g., "executeQuery")
-  params?: unknown; // Method parameters
-  dependencies?: string[]; // IDs of actions that must complete first
-  status: "pending" | "in-progress" | "completed" | "failed";
-  result?: unknown; // Action result data
-  error?: Error; // Action error if failed
-}
-
-/**
- * Workflow execution context
- *
- * Tracks the complete state of a workflow execution
- */
-interface WorkflowContext {
-  workflowId: string; // Unique workflow identifier
-  state: WorkflowState; // Current workflow state
-  input: OrchestratorInput; // Original user input
-  classification?: OrchestratorClassification; // Classification result
-  currentAction: WorkflowAction | null; // Currently executing action
-  completedActions: WorkflowAction[]; // Successfully completed actions
-  pendingActions: WorkflowAction[]; // Actions waiting to execute
-  results: Map<string, unknown>; // Map of action ID → result data
-  errors: Error[]; // All errors encountered
-  startTime: number; // Workflow start timestamp
-  metrics: PerformanceMetrics; // Performance tracking
-}
-
-/**
- * Workflow execution result
- *
- * Final result returned from executeWorkflow()
- */
-interface WorkflowResult {
-  state: "completed" | "failed" | "needs-clarification";
-  data?: unknown; // Final result data
-  formatted?: string; // Formatted message for user
-  error?: Error; // Error if failed
-  metadata?: {
-    workflowId: string;
-    actionsExecuted: number;
-    duration: number;
-    [key: string]: unknown;
-  };
-}
-
-/**
- * Performance metrics for workflow execution
- *
- * Tracks timing for each phase and action
- */
-interface PerformanceMetrics {
-  workflowId: string;
-  totalDuration: number; // Total workflow time
-  classificationDuration: number; // Time spent classifying
-  planningDuration: number; // Time spent planning actions
-  executionDuration: number; // Time spent executing actions
-  formattingDuration: number; // Time spent formatting response
-  actionMetrics: Array<{
-    // Per-action timing
-    actionId: string;
-    agent: string;
-    method: string;
-    duration: number;
-    recordCount?: number;
-  }>;
-}
-
-/**
- * Workflow diagnostic snapshot
- *
- * Used for debugging and monitoring
- */
-interface WorkflowDiagnostics {
-  workflowId: string;
-  state: WorkflowState;
-  input: OrchestratorInput;
-  classification?: OrchestratorClassification;
-  totalActions: number;
-  completedActions: number;
-  failedActions: number;
-  currentAction: WorkflowAction | null;
-  pendingActions: WorkflowAction[];
-  errors: Error[];
-  startTime: number;
-  elapsedTime: number;
-  estimatedRemainingTime?: number;
-}
-
-/**
- * Workflow history record
- *
- * Stored for replay and debugging
- */
-interface WorkflowHistory {
-  workflowId: string;
-  input: OrchestratorInput;
-  result: WorkflowResult;
-  duration: number;
-  timestamp: number;
-  events: Array<{
-    type: "state-change" | "action-start" | "action-complete" | "action-failed";
-    timestamp: number;
-    data: unknown;
-  }>;
-}
-
-/**
- * Workflow logger interface
- *
- * Provides structured logging throughout workflow lifecycle
- * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Debug Logging section
- */
-interface WorkflowLogger {
-  logWorkflowStart(workflowId: string, input: OrchestratorInput): void;
-  logClassification(
-    workflowId: string,
-    classification: OrchestratorClassification
-  ): void;
-  logActionPlanned(workflowId: string, action: WorkflowAction): void;
-  logActionStart(workflowId: string, action: WorkflowAction): void;
-  logActionComplete(
-    workflowId: string,
-    action: WorkflowAction,
-    duration: number
-  ): void;
-  logActionFailed(
-    workflowId: string,
-    action: WorkflowAction,
-    error: Error
-  ): void;
-  logStateTransition(
-    workflowId: string,
-    from: WorkflowState,
-    to: WorkflowState
-  ): void;
-  logWorkflowComplete(
-    workflowId: string,
-    result: WorkflowResult,
-    totalDuration: number
-  ): void;
-  logWorkflowFailed(
-    workflowId: string,
-    error: Error,
-    context: WorkflowContext
-  ): void;
-  logWorkflowTimeout(workflowId: string, duration: number): void;
-}
-
-/**
- * Default console-based workflow logger implementation
- *
- * Formats logs with workflow ID prefix for easy filtering
- * Example: [Workflow:wf-abc123] START - User: "Show me people with Python skills"
- */
-class ConsoleWorkflowLogger implements WorkflowLogger {
-  /**
-   * Format log message with workflow ID prefix
-   * @param workflowId - Unique workflow identifier
-   * @param message - Log message content
-   * @returns Formatted log string
-   */
-  private format(workflowId: string, message: string): string {
-    return `[Workflow:${workflowId}] ${message}`;
-  }
-
-  /** Log workflow start with user question */
-  logWorkflowStart(workflowId: string, input: OrchestratorInput): void {
-    console.log(this.format(workflowId, `START - User: "${input.question}"`));
-  }
-
-  /** Log classification result with intent and matched signals */
-  logClassification(
-    workflowId: string,
-    classification: OrchestratorClassification
-  ): void {
-    const signals =
-      classification.matchedSignals?.slice(0, 3).join(", ") || "none";
-    console.log(
-      this.format(
-        workflowId,
-        `CLASSIFY - Intent: ${classification.intent}, Signals: [${signals}]`
-      )
-    );
-  }
-
-  /** Log planned action with dependencies if any */
-  logActionPlanned(workflowId: string, action: WorkflowAction): void {
-    const deps = action.dependencies?.length
-      ? ` [depends on: ${action.dependencies.join(", ")}]`
-      : "";
-    console.log(
-      this.format(
-        workflowId,
-        `PLAN - Action: ${action.id} (${action.agent}.${action.method})${deps}`
-      )
-    );
-  }
-
-  /** Log action start */
-  logActionStart(workflowId: string, action: WorkflowAction): void {
-    console.log(this.format(workflowId, `ACTION START - ${action.id}`));
-  }
-
-  /** Log action completion with duration and record count */
-  logActionComplete(
-    workflowId: string,
-    action: WorkflowAction,
-    duration: number
-  ): void {
-    const result = action.result as AgentResponse<unknown> | undefined;
-    const count = result?.metadata?.count;
-    const countStr = count !== undefined ? `, ${count} records` : "";
-    console.log(
-      this.format(
-        workflowId,
-        `ACTION COMPLETE - ${action.id} (${duration}ms${countStr})`
-      )
-    );
-  }
-
-  /** Log action failure with error message */
-  logActionFailed(
-    workflowId: string,
-    action: WorkflowAction,
-    error: Error
-  ): void {
-    console.error(
-      this.format(
-        workflowId,
-        `ACTION FAILED - ${action.id} (Error: ${error.message})`
-      )
-    );
-  }
-
-  /** Log workflow state transition */
-  logStateTransition(
-    workflowId: string,
-    from: WorkflowState,
-    to: WorkflowState
-  ): void {
-    console.log(this.format(workflowId, `STATE - ${from} → ${to}`));
-  }
-
-  /** Log successful workflow completion with metrics */
-  logWorkflowComplete(
-    workflowId: string,
-    result: WorkflowResult,
-    totalDuration: number
-  ): void {
-    const actions = result.metadata?.actionsExecuted || 0;
-    const recordCount = result.metadata?.recordCount;
-    const countStr =
-      recordCount !== undefined ? `, Records: ${recordCount}` : "";
-    console.log(
-      this.format(
-        workflowId,
-        `COMPLETE - Duration: ${totalDuration}ms, Actions: ${actions}${countStr}`
-      )
-    );
-  }
-
-  /** Log workflow failure with context */
-  logWorkflowFailed(
-    workflowId: string,
-    error: Error,
-    context: WorkflowContext
-  ): void {
-    const duration = Date.now() - context.startTime;
-    console.error(
-      this.format(
-        workflowId,
-        `FAILED - Duration: ${duration}ms, Error: ${error.message}`
-      )
-    );
-  }
-
-  /** Log workflow timeout */
-  logWorkflowTimeout(workflowId: string, duration: number): void {
-    console.error(this.format(workflowId, `TIMEOUT - Exceeded ${duration}ms`));
-  }
-}
+// ============================================================================
+// Orchestrator Class
+// ============================================================================
 
 /**
  * Configuration-driven orchestrator that routes questions to appropriate agents
@@ -463,7 +173,7 @@ export class Orchestrator extends BaseAgentConfig {
     this.communicationAgent = new CommunicationAgent();
 
     // Initialize workflow coordination infrastructure
-    this.logger = new ConsoleWorkflowLogger();
+    this.logger = new WorkflowLogger();
     this.workflows = new Map();
     this.workflowHistory = [];
     this.workflowIdCounter = 0;
@@ -1221,6 +931,7 @@ export class Orchestrator extends BaseAgentConfig {
    * @returns Initialized PerformanceMetrics object
    */
   private initializeMetrics(workflowId: string): PerformanceMetrics {
+    const now = Date.now();
     return {
       workflowId,
       totalDuration: 0,
@@ -1229,6 +940,8 @@ export class Orchestrator extends BaseAgentConfig {
       executionDuration: 0,
       formattingDuration: 0,
       actionMetrics: [],
+      startTime: now,
+      endTime: now,
     };
   }
 
@@ -1281,7 +994,7 @@ export class Orchestrator extends BaseAgentConfig {
 
     this.workflowHistory.push({
       workflowId,
-      input,
+      input: input as WorkflowHistory["input"],
       result,
       duration,
       timestamp: Date.now(),
