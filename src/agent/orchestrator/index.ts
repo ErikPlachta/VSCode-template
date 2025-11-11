@@ -33,6 +33,9 @@ import {
   type AgentResponse,
   type SeverityLevel,
 } from "@agent/communicationAgent";
+import { DatabaseAgent } from "@agent/databaseAgent";
+import { DataAgent } from "@agent/dataAgent";
+import { UserContextAgent } from "@agent/userContextAgent";
 import type {
   WorkflowState,
   WorkflowAction,
@@ -41,8 +44,10 @@ import type {
   PerformanceMetrics,
   WorkflowDiagnostics,
   WorkflowHistory,
+  AgentRegistry,
 } from "@internal-types/workflow.types";
 import { WorkflowLogger } from "@shared/workflowLogger";
+import { ensureCacheDirectory } from "@extension/mcpCache";
 
 // ============================================================================
 // Workflow Coordination Types (imported from @internal-types/workflow.types)
@@ -90,6 +95,8 @@ export class Orchestrator extends BaseAgentConfig {
   private workflows: Map<string, WorkflowContext>;
   private workflowHistory: WorkflowHistory[];
   private workflowIdCounter: number;
+  private agentRegistry: AgentRegistry;
+
   /**
    * Create an orchestrator using the provided configuration (or defaults).
    *
@@ -177,6 +184,34 @@ export class Orchestrator extends BaseAgentConfig {
     this.workflows = new Map();
     this.workflowHistory = [];
     this.workflowIdCounter = 0;
+
+    // Initialize agent registry with agent instances
+    // Each agent is instantiated with its required dependencies
+    try {
+      const cacheDirectory = ensureCacheDirectory();
+
+      this.agentRegistry = {
+        "database-agent": new DatabaseAgent([], cacheDirectory),
+        "data-agent": new DataAgent(),
+        "user-context-agent": new UserContextAgent(),
+      };
+
+      this.logger.logInfo("system", "Agent registry initialized successfully", {
+        agents: Object.keys(this.agentRegistry),
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      this.logger.logInfo("system", "Failed to initialize agent registry", {
+        error: errorMessage,
+      });
+      // Initialize with empty registry as fallback
+      this.agentRegistry = {
+        "database-agent": null,
+        "data-agent": null,
+        "user-context-agent": null,
+      };
+    }
   }
 
   /**
@@ -1074,6 +1109,38 @@ export class Orchestrator extends BaseAgentConfig {
     return this.workflowHistory
       .filter((h) => h.result.state === "failed")
       .slice(-limit);
+  }
+
+  /**
+   * Check agent registry health status
+   *
+   * Verifies all agents in the registry are properly initialized
+   *
+   * @returns {{ healthy: boolean; agents: Record<string, boolean>; message: string }} Health status with agent availability
+   */
+  public checkAgentHealth(): {
+    healthy: boolean;
+    agents: Record<string, boolean>;
+    message: string;
+  } {
+    const agentStatus: Record<string, boolean> = {
+      "database-agent": this.agentRegistry["database-agent"] !== null,
+      "data-agent": this.agentRegistry["data-agent"] !== null,
+      "user-context-agent": this.agentRegistry["user-context-agent"] !== null,
+    };
+
+    const allHealthy = Object.values(agentStatus).every((status) => status);
+    const healthyCount = Object.values(agentStatus).filter(
+      (status) => status
+    ).length;
+
+    return {
+      healthy: allHealthy,
+      agents: agentStatus,
+      message: allHealthy
+        ? "All agents initialized successfully"
+        : `${healthyCount}/3 agents initialized`,
+    };
   }
 
   /**

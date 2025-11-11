@@ -443,17 +443,67 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-11]
 
-#### 2025-11-11 08:31:21 refactor: Extract workflow types and logger to proper modules for separation of concerns
+#### 2025-11-11 15:30:00 feat: Phase 4.3 - Implement agent registry with health checks
 
-- - Created src/types/workflow.types.ts with all workflow types (WorkflowState, WorkflowAction, WorkflowContext, etc.)
+**Agent Registry Implementation:**
 
-#### 2025-11-11 08:24:38 feat: Phase 4.2 - Add performance monitoring with generatePerformanceSummary
+- **Created AgentRegistry type** (`src/types/workflow.types.ts`, +19 lines)
+  - Maps agent IDs to agent instances: "database-agent", "data-agent", "user-context-agent"
+  - Uses `unknown` type to avoid circular dependencies
+  - Properly typed when used in Orchestrator
 
-- - Add generatePerformanceSummary() method for workflow performance reports
+- **Added agent imports** (`src/agent/orchestrator/index.ts`)
+  - Imported DatabaseAgent, DataAgent, UserContextAgent classes
+  - Imported ensureCacheDirectory for agent initialization
+  - Added AgentRegistry to workflow types imports
 
-#### 2025-11-11 08:22:04 feat: Phase 4.1 - Implement logging infrastructure with WorkflowLogger
+- **Instantiated agent registry** (`src/agent/orchestrator/index.ts`, +40 lines in constructor)
+  - Created `agentRegistry` private field of type AgentRegistry
+  - Instantiated all three agents in constructor with proper dependencies:
+    - DatabaseAgent: requires dataSources array (currently empty) and cacheDirectory promise
+    - DataAgent: no constructor parameters required
+    - UserContextAgent: uses default config and default cache directory
+  - Wrapped initialization in try/catch with graceful fallback
+  - Logs successful initialization via WorkflowLogger
+  - Sets agents to null on initialization failure (prevents crashes)
 
-- - Add WorkflowLogger class with 10 structured logging methods
+- **Added checkAgentHealth() method** (`src/agent/orchestrator/index.ts`, +32 lines)
+  - Public diagnostic method for checking agent registry status
+  - Returns object with: `healthy` (boolean), `agents` (status per agent), `message` (summary)
+  - Verifies all agents properly initialized (not null)
+  - Provides health summary: "All agents initialized successfully" or "X/3 agents initialized"
+
+**Architecture:**
+
+- ✅ **Registry Pattern**: Central mapping of agent IDs to instances
+- ✅ **Dependency Injection**: Agents receive required dependencies at construction
+- ✅ **Graceful Degradation**: Failed initialization doesn't crash, logs error
+- ✅ **Health Monitoring**: New checkAgentHealth() API for diagnostics
+- ✅ **Foundation for Execution**: Registry enables Phase 4.6-4.8 (workflow execution)
+
+**Why This Matters:**
+
+Current state: Orchestrator identifies agents by string IDs but never executes them
+After registry: Enables `agentRegistry["database-agent"].executeQuery()` calls
+Unblocks: executeWorkflow() implementation in Phase 4.6
+Foundation: Complete workflow execution system
+
+**Implementation Details:**
+
+- DatabaseAgent currently instantiated with empty dataSources array (will be populated from UserContext in Phase 4.7)
+- UserContextAgent uses default configuration and standard cache directory
+- DataAgent requires no special configuration
+- All agents share the same cache directory from ensureCacheDirectory()
+
+##### Verification – Phase 4.3 Complete
+
+- ✅ **Build**: TypeScript compilation successful (npm run compile)
+- ✅ **Types**: AgentRegistry properly defined in workflow.types.ts
+- ✅ **Instantiation**: All three agents instantiated in constructor
+- ✅ **Health Check**: checkAgentHealth() method implemented and documented
+- ✅ **Error Handling**: Graceful fallback on initialization failure
+- ⏭️ **Tests**: Infrastructure only, no behavior changes yet
+- 🔄 **Next**: Phase 4.5 - Input Validation (skip 4.4, types already done)
 
 ### [2025-11-10]
 

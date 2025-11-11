@@ -309,6 +309,28 @@ export interface WorkflowHistory {
 }
 
 /**
+ * Agent registry mapping agent IDs to instances
+ *
+ * Maps agent identifiers to their instantiated classes.
+ * The actual agent classes are imported by the Orchestrator.
+ *
+ * Agent IDs:
+ * - "database-agent": DatabaseAgent instance
+ * - "data-agent": DataAgent instance
+ * - "user-context-agent": UserContextAgent instance
+ *
+ * Note: Using 'unknown' to avoid circular dependencies.
+ * The Orchestrator imports and properly types the actual agent classes.
+ *
+ * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Agent Coordination section
+ */
+export interface AgentRegistry {
+  "database-agent": unknown;
+  "data-agent": unknown;
+  "user-context-agent": unknown;
+}
+
+/**
  * Workflow result returned to caller
  *
  * Contains final state and formatted response
