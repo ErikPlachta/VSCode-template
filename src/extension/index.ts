@@ -117,43 +117,94 @@ export async function activate(
     `💬 Registering chat participant "${contributedId}" (mention @${contributedName})...`
   );
   /**
-   * Process a Copilot Chat request using the orchestrator.
+   * Process a Copilot Chat request using the orchestrator workflow execution system.
+   *
+   * Routes requests through the complete workflow lifecycle:
+   * - Classification: Determine user intent
+   * - Planning: Map intent to agent actions
+   * - Execution: Execute agent methods and gather results
+   * - Formatting: Build user-friendly response
    *
    * @param {vscode.ChatRequest} request - Incoming chat message payload.
    * @param {vscode.ChatContext} _context - Conversation context (currently unused).
    * @param {vscode.ChatResponseStream} stream - Streaming interface for incremental markdown responses.
-   * @param {vscode.CancellationToken} _cancellationToken - Cancellation token for long-running operations.
+   * @param {vscode.CancellationToken} cancellationToken - Cancellation token for long-running operations.
    * @returns {Promise<void>} Resolves when response has been fully streamed.
    */
   const chatHandler: vscode.ChatRequestHandler = async (
     request: vscode.ChatRequest,
     _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    _cancellationToken: vscode.CancellationToken // TODO: use this token to cancel long-running operations
+    cancellationToken: vscode.CancellationToken
   ) => {
     try {
-      stream.markdown(`Processing your request: "${request.prompt}"\n\n`);
+      stream.markdown(`🔄 Processing your request...\n\n`);
 
-      // Use the orchestrator to handle the request
-      const response = await orchestrator.handle({
+      // Execute workflow through orchestrator (replaces legacy handle() method)
+      const result = await orchestrator.executeWorkflow({
         question: request.prompt,
         topic: "general",
       });
 
-      stream.markdown(`${response.markdown}\n\n`);
-
-      if (response.summary) {
-        stream.markdown(`**Summary:** ${response.summary}\n\n`);
+      // Handle cancellation
+      if (cancellationToken.isCancellationRequested) {
+        stream.markdown(`⚠️ Request cancelled by user.\n`);
+        return;
       }
 
-      if (response.rationale) {
-        stream.markdown(`**Rationale:** ${response.rationale}\n\n`);
-      }
+      // Handle different workflow states
+      if (result.state === "completed") {
+        // Display formatted response
+        if (result.formatted?.markdown) {
+          stream.markdown(result.formatted.markdown);
+        } else if (result.formatted?.message) {
+          stream.markdown(result.formatted.message);
+        } else {
+          stream.markdown(`✅ Request completed successfully.\n`);
+        }
 
-      stream.markdown(`*Agent Used: ${response.agent}*\n`);
+        // Show performance metrics if available
+        if (result.metrics && result.metrics.totalDuration > 1000) {
+          const durationSec = (result.metrics.totalDuration / 1000).toFixed(2);
+          stream.markdown(`\n\n*Completed in ${durationSec}s*\n`);
+        }
+      } else if (result.state === "needs-clarification") {
+        // User query is ambiguous, request clarification
+        stream.markdown(`❓ **Need More Information**\n\n`);
+        if (result.formatted?.message) {
+          stream.markdown(result.formatted.message);
+        } else {
+          stream.markdown(
+            `Your request needs clarification. Please provide more details about what you're looking for.\n`
+          );
+        }
+      } else if (result.state === "failed") {
+        // Workflow failed, show error with diagnostics
+        stream.markdown(`❌ **Request Failed**\n\n`);
+        if (result.error) {
+          stream.markdown(`**Error:** ${result.error.message}\n\n`);
+        }
+        if (result.formatted?.message) {
+          stream.markdown(result.formatted.message);
+        }
+
+        // Show diagnostic info for debugging
+        if (result.metrics) {
+          const durationSec = (result.metrics.totalDuration / 1000).toFixed(2);
+          stream.markdown(
+            `\n*Failed after ${durationSec}s* | Workflow ID: \`${result.workflowId}\`\n`
+          );
+        }
+      } else {
+        // Unexpected state
+        stream.markdown(
+          `⚠️ Workflow ended in unexpected state: ${result.state}\n`
+        );
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      stream.markdown(`❌ **Error:** ${message}`);
+      stream.markdown(`❌ **Unexpected Error:** ${message}\n`);
+      console.error(`❌ Chat handler error:`, error);
     }
   };
 

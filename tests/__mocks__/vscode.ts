@@ -20,6 +20,8 @@ export const window = {
   showInformationMessage: () => Promise.resolve(undefined),
   showWarningMessage: () => Promise.resolve(undefined),
   showErrorMessage: () => Promise.resolve(undefined),
+  showInputBox: () => Promise.resolve(undefined),
+  showQuickPick: () => Promise.resolve(undefined),
   createOutputChannel: () => ({
     append: () => {},
     appendLine: () => {},
@@ -28,6 +30,35 @@ export const window = {
     hide: () => {},
     show: () => {},
   }),
+};
+
+export class EventEmitter {
+  event = () => ({ dispose: () => {} });
+  fire = () => {};
+  dispose = () => {};
+}
+
+export const chat = {
+  createChatParticipant: () => ({
+    dispose: () => {},
+    iconPath: undefined,
+  }),
+};
+
+export const lm = {
+  registerMcpServerDefinitionProvider: () => ({
+    dispose: () => {},
+  }),
+};
+
+export const McpStdioServerDefinition = class {
+  constructor(
+    public title: string,
+    public command: string,
+    public args: string[],
+    public options: Record<string, unknown>,
+    public version: string
+  ) {}
 };
 
 export const Uri = {

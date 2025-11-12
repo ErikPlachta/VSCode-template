@@ -28,8 +28,6 @@ import {
 } from "@shared/textProcessing";
 import {
   CommunicationAgent,
-  createSuccessResponse,
-  createErrorResponse,
   type AgentResponse,
   type SeverityLevel,
 } from "@agent/communicationAgent";
@@ -104,6 +102,7 @@ export class Orchestrator extends BaseAgentConfig {
    * @param {AgentConfigDefinition} [config] - Optional pre-loaded configuration.
    */
   constructor(config?: AgentConfigDefinition) {
+    console.log("🚀 Orchestrator constructor START");
     const configToUse = config || orchestratorConfig;
     const validationResult = validateAgentConfig(configToUse);
     if (!validationResult.isValid) {
@@ -190,21 +189,53 @@ export class Orchestrator extends BaseAgentConfig {
     // Each agent is instantiated with its required dependencies
     try {
       const cacheDirectory = ensureCacheDirectory();
+      console.log("🔧 Orchestrator: Initializing agent registry...");
+      console.log("🔧 Cache directory promise:", cacheDirectory);
+
+      console.log("🔧 Creating DatabaseAgent...");
+      const dbAgent = new DatabaseAgent([], cacheDirectory);
+      console.log("✅ DatabaseAgent created successfully");
+
+      console.log("🔧 Creating DataAgent...");
+      const dataAgent = new DataAgent();
+      console.log("✅ DataAgent created successfully");
+
+      console.log("🔧 Creating UserContextAgent...");
+      let userContextAgent: UserContextAgent | null = null;
+      try {
+        userContextAgent = new UserContextAgent(undefined, cacheDirectory);
+        console.log("✅ UserContextAgent created successfully");
+      } catch (ucError) {
+        console.error("❌ UserContextAgent creation failed:", ucError);
+        console.error(
+          "❌ UserContextAgent stack:",
+          ucError instanceof Error ? ucError.stack : "N/A"
+        );
+        // Don't throw - allow other agents to initialize
+      }
 
       this.agentRegistry = {
-        "database-agent": new DatabaseAgent([], cacheDirectory),
-        "data-agent": new DataAgent(),
-        "user-context-agent": new UserContextAgent(),
+        "database-agent": dbAgent,
+        "data-agent": dataAgent,
+        "user-context-agent": userContextAgent,
       };
 
+      console.log(
+        "✅ Agent registry initialized successfully:",
+        Object.keys(this.agentRegistry)
+      );
       this.logger.logInfo("system", "Agent registry initialized successfully", {
         agents: Object.keys(this.agentRegistry),
       });
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
+      const stack = error instanceof Error ? error.stack : undefined;
+      console.error("❌ Failed to initialize agent registry:", errorMessage);
+      console.error("❌ Stack trace:", stack);
       this.logger.logInfo("system", "Failed to initialize agent registry", {
         error: errorMessage,
+        stack,
       });
       // Initialize with empty registry as fallback
       this.agentRegistry = {
@@ -789,7 +820,7 @@ export class Orchestrator extends BaseAgentConfig {
       // Determine count if data is an array
       const count = Array.isArray(data) ? data.length : undefined;
 
-      return createSuccessResponse(data, {
+      return CommunicationAgent.createSuccessResponse(data, {
         ...options,
         message:
           options?.message ||
@@ -813,7 +844,7 @@ export class Orchestrator extends BaseAgentConfig {
       // Generate recovery suggestions
       const suggestions = this.generateRecoverySuggestions(error, operation);
 
-      return createErrorResponse(errorMessage, {
+      return CommunicationAgent.createErrorResponse(errorMessage, {
         ...options,
         metadata: {
           agentId,

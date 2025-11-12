@@ -704,7 +704,8 @@ const __isMain = ((): boolean => {
   return true;
 })();
 
-if (__isMain) {
+// Only auto-start the server if running as main module AND not in test environment
+if (__isMain && process.env.NODE_ENV !== "test") {
   // Check if we should run in stdio mode
   const args = process.argv.slice(2);
   if (args.includes("--stdio")) {

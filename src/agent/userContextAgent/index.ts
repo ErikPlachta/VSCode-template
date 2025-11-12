@@ -74,7 +74,8 @@ const __dirname = path.dirname(__filename);
 // Default root for user context business data. Previously pointed to a deprecated `bin/data` directory.
 // The dataset folders now live under `src/userContext` (applications, departments, people, etc.).
 // Tests and runtime may override via VSCODE_TEMPLATE_DATA_ROOT.
-const DEFAULT_DATA_ROOT = path.resolve(__dirname, "..", "..", "userContext");
+// When compiled: out/src/agent/userContextAgent/../../../userContext = out/userContext
+const DEFAULT_DATA_ROOT = path.resolve(__dirname, "..", "..", "..", "userContext");
 // External user data directory (Phase 3.2): ~/.vscode/extensions/<publisher>.<extensionName>/userData
 // Prefer installed extension path; fallback to workspace-local path if not present.
 /**

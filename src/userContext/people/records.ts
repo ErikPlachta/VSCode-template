@@ -3,24 +3,7 @@
  *
  * Employee directory records with skills, access, and organizational relationships.
  */
-import type { CategoryRecord } from "@internal-types/agentConfig";
-
-/**
- * Extended person record with organizational and access information
- */
-interface PersonRecord extends CategoryRecord {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  departmentId: string;
-  managerId?: string;
-  location: string;
-  skills: string[];
-  applicationIds: string[];
-  policyAcks: string[];
-  resourceIds: string[];
-}
+import type { PersonRecord } from "@internal-types/userContext.types";
 
 /**
  * People records array

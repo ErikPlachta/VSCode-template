@@ -36,6 +36,9 @@ export const CONFIG_IDS = {
   /** Communication agent configuration schema */
   COMMUNICATION_AGENT: "agent.communication.v1.0.0",
 
+  /** DataLoader agent configuration schema */
+  DATA_LOADER_AGENT: "agent.data-loader.v1.0.0",
+
   /** Relevant data manager agent configuration schema */
   RELEVANT_DATA_MANAGER: "agent.relevant-data-manager.v1.0.0",
   /** User Context (renamed) agent configuration schema - alias of relevant-data-manager */

@@ -91,7 +91,22 @@ export interface BaseRecord {
 }
 
 /**
+ * Result of a bulk category discovery operation from DataLoaderAgent
+ */
+export interface CategoryDiscoveryResult {
+  /** Successfully loaded categories */
+  categories: Map<string, { config: CategoryConfig; records: BaseRecord[] }>;
+  /** Errors encountered during discovery */
+  errors: Array<{ categoryName: string; error: Error }>;
+  /** Warnings for skipped or partial categories */
+  warnings: string[];
+}
+
+/**
  * Person record with organizational and access information
+ *
+ * NOTE: This is a UserContext-specific type for the current data model.
+ * Modify or replace these types based on your actual business data.
  */
 export interface PersonRecord extends BaseRecord {
   id: string;
@@ -167,7 +182,9 @@ export interface CompanyResourceRecord extends BaseRecord {
 }
 
 /**
- * Union type for all possible record types
+ * Union type for category records in the current UserContext data model.
+ *
+ * NOTE: Modify this union type when you add, remove, or change record types.
  */
 export type CategoryRecord =
   | PersonRecord

@@ -399,6 +399,65 @@ export interface CommunicationConfig {
 }
 
 /**
+ * DataLoader agent-specific configuration for file I/O and data validation
+ */
+export interface DataLoaderConfig {
+  validation: {
+    enableStrictTypeChecking: boolean;
+    allowPartialRecords: boolean;
+    validateOnLoad: boolean;
+    useTypeGuards: boolean;
+    maxValidationErrors: number;
+    logValidationWarnings: boolean;
+  };
+  fileOperations: {
+    encoding: "utf-8" | "ascii" | "utf8";
+    maxFileSize: number;
+    enableCaching: boolean;
+    cacheTTL: number;
+    maxCacheEntries: number;
+    allowSyncOperations: boolean;
+    enableRetry: boolean;
+    maxRetries: number;
+    retryDelay: number;
+  };
+  pathResolution: {
+    enableExamplesFallback: boolean;
+    examplesDirectory: string;
+    resolveFromDataRoot: boolean;
+    followSymlinks: boolean;
+    normalizePaths: boolean;
+    allowAbsolutePaths: boolean;
+  };
+  errorHandling: {
+    includeStackTrace: boolean;
+    provideFilePath: boolean;
+    suggestRecovery: boolean;
+    wrapNativeErrors: boolean;
+    logToTelemetry: boolean;
+    logSeverityThreshold: "info" | "warning" | "error" | "critical";
+  };
+  performance: {
+    enableParallelLoading: boolean;
+    maxConcurrentOperations: number;
+    enableStreaming: boolean;
+    streamingThreshold: number;
+    enableMemoryOptimization: boolean;
+    maxMemoryUsage: number;
+  };
+  discovery: {
+    enableAutoDiscovery: boolean;
+    requiredCategoryFiles: string[];
+    optionalCategoryFiles: string[];
+    skipHiddenFiles: boolean;
+    skipPatterns: string[];
+    maxDepth: number;
+    continueOnError: boolean;
+    logDiscoveryWarnings: boolean;
+  };
+}
+
+/**
  * Relevant data manager-specific configuration
  *
  */
@@ -484,6 +543,7 @@ export interface AgentConfigDefinition {
   data?: DataConfig;
   clarification?: ClarificationConfig;
   communication?: CommunicationConfig;
+  dataLoader?: DataLoaderConfig;
   relevantDataManager?: RelevantDataManagerConfig;
 
   /** Runtime execution configuration */
