@@ -1,6 +1,6 @@
 ---
 title: Branch Focus – feat/update-repo-automation
-summary: Improve Copilot instructions, introduce session-context discipline, migrate task management from CHANGELOG to TODO, and scaffold a RepoAutomation CLI to enforce governance without breaking existing flows.
+summary: Improve Copilot instructions, introduce session-context discipline, migrate task management from CHANGELOG to TODO, and scaffold a RepoAutomation CLI to enforce governance without breaking existing flows. Tasks now live in TODO.md; CHANGELOG is history only.
 branch: feat/update-repo-automation
 owner: @ErikPlachta
 created: 2025-11-12
@@ -24,13 +24,13 @@ links:
   - Dry-run and backups for all mutations
   - Deterministic markers and parsers
   - Non-breaking migration path from existing ChangeLogManager
-- Migrate Outstanding Tasks out of CHANGELOG into TODO.md with a reversible, logged process.
+- Migrate Outstanding Tasks out of CHANGELOG into TODO.md with a reversible, logged process (read-only banner remains temporarily in CHANGELOG).
 
 ## Deliverables (definition of done)
 
 - Governance
   - Updated .github/copilot-instructions.md:
-    - “Tasks live in TODO.md; CHANGELOG is history only”
+    - “Tasks live in TODO.md; CHANGELOG is history only” (updated)
     - Session Context purpose and TTL
     - Minimal daily CLI commands
 - Templates and discipline
@@ -77,12 +77,12 @@ links:
 
 ## Milestones
 
-1. Planning (this file + templates)
-2. Repo-ops scaffolding (no file changes; add backups/dry-run infra)
-3. Migration command (dry-run first; create backups)
-4. Governance updates (.github/copilot-instructions.md minimal edits)
-5. Validation (quality gates pass)
-6. Sunset and prune read-only mirror in CHANGELOG after N days
+1. Planning (this file + templates) – DONE
+2. Repo-ops scaffolding (no file changes; add backups/dry-run infra) – DONE
+3. Migration command (dry-run first; create backups) – DONE (executed with --write)
+4. Governance updates (.github/copilot-instructions.md minimal edits) – PARTIAL (intro/session steps updated)
+5. Validation (quality gates pass) – IN PROGRESS (build/tests pass)
+6. Sunset and prune read-only mirror in CHANGELOG after N days – PENDING
 
 ## Success criteria
 
@@ -100,10 +100,10 @@ links:
 ## Task map (sync with TODO.md)
 
 - [x] (P1) ID-OPS-001: Scaffold repo-ops CLI (dry-run + backups)
-- [ ] (P1) ID-OPS-002: Implement todo sync-from-changelog (migration)
-- [ ] (P1) ID-OPS-003: Update copilot-instructions (tasks → TODO, session TTL)
-- [ ] (P2) ID-OPS-004: Add session rotate --archive + lint
-- [ ] (P2) ID-OPS-005: Unit tests for parsers and migration
+- [x] (P1) ID-OPS-002: Implement todo sync-from-changelog (migration)
+- [~] (P1) ID-OPS-003: Update copilot-instructions (tasks → TODO, session TTL) – intro + session workflow updated; deeper sweep pending
+- [x] (P2) ID-OPS-004: Add session rotate --archive + lint – rotate DONE; lint PENDING
+- [x] (P2) ID-OPS-005: Unit tests for parsers and migration – initial tests DONE; add more coverage later
 - [ ] (P3) ID-OPS-006: Optional repo-ops lint in CI
 
 ## Logging guidance

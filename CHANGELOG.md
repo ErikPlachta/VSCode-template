@@ -38,6 +38,8 @@ This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Lo
 
 ## Outstanding Tasks
 
+> NOTE: Tasks are now managed in `TODO.md` (source-of-truth). This section remains temporarily as a read-only mirror during migration and will be pruned after the branch completes. Please update `TODO.md` going forward.
+
 All incomplete tasks. Organized by priority and managed by User and Copilot Chat.
 
 ### Current Tasks
@@ -98,6 +100,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 - Review the code base and identify british-english words `artefacts`, that should be american-english `artifacts`. Also seeing other words like 'behaviour', 'optimise', 'utilise', 'customise', 'organisation' etc.
 - Evaluate the logic in `C:\repo\vscode-extension-mcp-server\src\tools`, and identify things that should exist in `C:\repo\vscode-extension-mcp-server\bin\utils\`, and update all imports, tests, documentation, etc. accordingly.
+  - Specific follow-up: Move `src/tools/repositoryHealth.ts` into a `bin/utils` library and consolidate shared helpers with `bin/utils/validateMarkdown.ts` and `bin/utils/validateJson.ts`.
 - Rename `C:\repo\vscode-extension-mcp-server\src\tools` to `C:\repo\vscode-extension-mcp-server\src\utils`, and update all imports, tests, documentation, etc. accordingly.
 - Add a feature to the MCP Server for Error Event handling. Must be managed and fail gracefully.
   - An Error Event management solution needs to be created
@@ -168,6 +171,137 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 ## Logs
 
 ### [2025-11-12]
+
+#### 2025-11-12 16:05:10 chore: Add CI gate for session lint and backlog TODO for test organization
+
+- Added CI workflow `.github/workflows/session-lint.yml` to run `npm run repo:ops -- session lint` on push/PR; fails build if issues are found.
+- Updated repo-ops CLI `session lint` to exit non-zero when issues exist (enables CI gating).
+- Added backlog TODO in `TODO.md` to review test organization (colocated vs centralized) with evaluation criteria and migration plan.
+
+##### Verification – CI gate & TODO
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS for changed TS; CHANGELOG historical markdown warnings unchanged
+- CI: Workflow syntax validated locally; will run on next push/PR
+- Health: PASS
+
+#### 2025-11-12 15:46:20 feat: Repo-ops: add session lint command
+
+- Added `bin/repo-ops/sessionLint.ts` with `validateSessionContent(md)` and `lintSession()`:
+  - Checks top heading is `# Session Context`
+  - Ensures a `Started:` ISO-like timestamp line exists
+  - Requires `## Related` section with `CHANGELOG.md`, `CONTEXT-BRANCH.md`, `TODO.md`
+  - Requires `## Notes` section
+- Wired `session lint` into `bin/repo-ops/index.ts` and printed human-friendly output.
+- Added tests: `tests/repoOps.sessionLint.test.ts` covering happy path and common failures.
+- Minor docs: repo-ops README usage examples for `session rotate` and `session lint`.
+
+##### Verification – Repo-ops session lint
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no new issues in bin/repo-ops)
+- Docs: N/A beyond small README update
+- Health: PASS (unchanged)
+
+#### 2025-11-12 15:24:30 docs: Clarify CONTEXT files roles; align TODO vs CHANGELOG guidance
+
+- `.github/copilot-instructions.md`:
+  - Added an explicit "Context files: roles and usage" section documenting when/how to use `CONTEXT-SESSION.md` and `CONTEXT-BRANCH.md`.
+  - Updated Key Files Reference to list `TODO.md` as source-of-truth for tasks and `CHANGELOG.md` as history with a read-only Outstanding Tasks mirror.
+  - Reconciled duplicate guidance to consistently read tasks from `TODO.md` (not CHANGELOG); noted the mirror is temporary.
+  - Fixed markdownlint issues (unique headings, fenced code language and spacing, list spacing).
+
+##### Verification – Docs roles/guidance update
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no new code lint issues)
+- Docs: PASS (markdownlint clean for updated sections)
+- Health: PASS (no config changes)
+
+#### 2025-11-12 15:02:10 chore: Migrate task tracking to TODO.md and update context
+
+- Ran repo-ops to populate TODO from CHANGELOG: `todo sync-from-changelog --write`, `todo generate-actions --write`.
+- Inserted a read-only migration banner at the top of CHANGELOG Outstanding Tasks pointing to `TODO.md` as the source of truth.
+- Updated CONTEXT-BRANCH.md (progress/task map) and CONTEXT-SESSION.md (current focus, governance updates).
+- Tweaked `.github/copilot-instructions.md` intro and session workflow to read TODO.md for tasks and CHANGELOG.md for history.
+
+##### Verification – Task migration & context updates
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Docs: Lint shows pre-existing markdown warnings; functional behavior unaffected
+- Health: PASS
+
+#### 2025-11-12 14:29:40 docs: Run markdown linter on CHANGELOG (no changes needed)
+
+- Executed repository docs linter against `CHANGELOG.md`; no actionable issues reported by project linter.
+- Skipped mass normalization to avoid churn; will revisit if repo health checks flag specific rules.
+
+##### Verification – Docs lint
+
+- Docs Lint: PASS (`npm run lint:docs`)
+- Build: PASS (unchanged)
+- Tests: PASS (unchanged)
+
+#### 2025-11-12 14:19:05 chore: Remove deprecated changelog:manage script
+
+- Removed the `changelog:manage` stub script from `package.json` to complete the changelog CLI retirement.
+
+##### Verification – Script removal
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no script-related lint)
+- Docs: Already updated to reflect CLI retirement
+- Health: PASS
+
+#### 2025-11-12 14:05:40 chore: Remove legacy bin/utils/changelog shims and clean npm scripts
+
+- Deleted legacy `bin/utils/changelog/` (cli.ts, index.ts, config.ts, manager.ts, parser.ts, types.ts, README.md).
+- Removed `changelog:add-entry`, `changelog:add-outstanding`, `changelog:add-current`, `changelog:prune` scripts from `package.json`.
+- Retained `changelog:manage` as a deprecation stub to fail fast with guidance.
+
+##### Verification – Legacy shim cleanup
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no new issues)
+- Docs: Not impacted
+- Health: PASS
+
+#### 2025-11-12 13:52:30 docs: Retire changelog CLI references in governance docs
+
+- Updated `.github/copilot-instructions.md` to remove `changelog:manage` usage and document manual editing + repo-ops alternatives.
+- Updated `TODO.md` Automation Aids to reflect retired CLI and current repo-ops commands.
+
+##### Verification – Docs update
+
+- Build: PASS (no code changes)
+- Tests: PASS (no changes)
+- Lint: N/A for docs (manual sweep only)
+- Health: PASS
+
+#### 2025-11-12 13:45:10 chore: Remove repo-ops changelog CLI and stub npm scripts
+
+- Deleted `bin/repo-ops/changelog/` (cli.ts, config.ts, index.ts, manager.ts, parser.ts, types.ts, README.md).
+- Updated `package.json` scripts:
+  - Replaced `changelog:manage` with a deprecation stub that exits with guidance.
+  - Removed obsolete `--ignore-pattern "bin/repo-ops/changelog/**"` from `lint:repo-ops`.
+
+##### Verification – Changelog CLI removal
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS for repo-ops scope
+- Docs: Pending sweep to remove references to `changelog:manage`
+- Health: Not impacted
+
+#### 2025-11-12 13:20:25 feat: Repo-ops: session rotate command
+
+- Added 'session rotate' subcommand that archives CONTEXT-SESSION.md into \_ARCHIVE/session\_\_YYYYMMDD_HHMMSS.md and creates a fresh session file from a template. Dry-run by default; backups on write. Scoped lint (repo-ops) and tests pass.
 
 #### 2025-11-12 13:08:23 feat: Repo-ops: add TODO actions generator and unit tests
 

@@ -32,8 +32,8 @@ This is a new file I've created to be used by CoPilot Chat as a `current chat's 
 
 ### Current branch
 
-- Branch: `chore/cleanup-instructions`
-- Current focus
+- Branch: `feat/update-repo-auotmation`
+- Current focus: Governance automation and migration (use TODO.md for tasks; CHANGELOG.md for history)
 
 <!--END:CURRENT-BRANCH-PR -->
 
@@ -41,7 +41,8 @@ This is a new file I've created to be used by CoPilot Chat as a `current chat's 
 
 ### Key Files
 
-- `CHANGELOG.md` is the single source of truth for work tracking and recent changes.
+- `TODO.md` — single source of truth for outstanding tasks.
+- `CHANGELOG.md` — single source of truth for change history and verification logs.
 - `.github/copilot-instructions.md` — governance: agent isolation, quality gates, reload note.
 - `CONTEXT-SESSION.md` — current chat's context summary, to serve as a more precise reference to supplement the instructions in `copilot-instructions.md`.
 
@@ -170,5 +171,16 @@ This is a new file I've created to be used by CoPilot Chat as a `current chat's 
   - Type/JSDoc: Missing `@param`/`@returns` types in `src/agent/orchestrator/index.ts` can fail the build.
   - Markdown lint: `CHANGELOG.md` has formatting nits (lists/spacing/fences) flagged by health checks.
 - Performance: vsce warns the extension should be bundled (not currently bundled).
+
+### Governance updates (today)
+
+- Tasks migrated to `TODO.md`:
+  - Ran repo-ops: `todo sync-from-changelog --write` and `todo generate-actions --write`.
+  - Inserted migration banner at top of CHANGELOG Outstanding Tasks (temporary read-only mirror).
+- Changelog CLI retired fully:
+  - Removed repo-ops and legacy changelog CLIs and scripts; docs updated.
+- Session workflow:
+
+  - `session rotate` implemented and verified; `session lint` planned.
 
   <!-- END:CURRENT-FOCUS -->

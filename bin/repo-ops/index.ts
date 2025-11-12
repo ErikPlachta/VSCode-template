@@ -8,7 +8,8 @@
 // ESM-safe import for process argv and output
 const args = process.argv.slice(2);
 
-type Command = "help" | "version" | "status" | "todo";
+type Command = "help" | "version" | "status" | "todo" | "session";
+type SessionSubcommand = "rotate" | "lint";
 type TodoSubcommand = "sync-from-changelog" | "generate-actions";
 
 /**
@@ -102,6 +103,10 @@ const printHelp = (): void => {
   console.log(
     "  status            Read-only checks for governance files (COMING SOON)\n"
   );
+  console.log(
+    "  todo               TODO operations (sync-from-changelog, generate-actions)"
+  );
+  console.log("  session            Session operations (rotate, lint)\n");
 
   console.log("Planned (not yet implemented):");
   console.log("  todo add|complete|move|export-json|sync-from-changelog");
@@ -144,6 +149,73 @@ const main = (): void => {
         if (code !== 0) process.exitCode = code;
       });
       return;
+    }
+    case "session": {
+      const sub = (args[1] as SessionSubcommand | undefined) ?? "rotate";
+      const rest = args.slice(2);
+      switch (sub) {
+        case "rotate": {
+          /**
+           * Execute the session rotation flow (archive then create new session file).
+           *
+           * @returns {Promise<void>} - Resolves when the flow has printed results.
+           */
+          const runRotate = async (): Promise<void> => {
+            const { rotateSession } = await import("./session");
+            const write = rest.includes("--write");
+            const result = await rotateSession({ write });
+            console.log(
+              `session rotate: ${
+                result.changed
+                  ? result.dryRun
+                    ? "CHANGES (dry-run)"
+                    : "APPLIED"
+                  : "NO-OP"
+              }`
+            );
+            for (const plan of result.plans) {
+              console.log(
+                `- ${plan.description} → ${plan.filePath} (${plan.wouldWriteBytes} bytes)`
+              );
+            }
+            if (result.notes?.length) {
+              for (const note of result.notes) console.log(`note: ${note}`);
+            }
+          };
+          runRotate();
+          return;
+        }
+        case "lint": {
+          const runLint = async (): Promise<void> => {
+            const { lintSession } = await import("./sessionLint");
+            const result = await lintSession();
+            console.log(
+              `session lint: ${
+                result.notes && result.notes.length ? "ISSUES" : "OK"
+              }`
+            );
+            if (result.notes?.length) {
+              for (const note of result.notes) console.log(`- ${note}`);
+            } else {
+              console.log("- No issues found. CONTEXT-SESSION.md looks good.");
+            }
+            // Exit non-zero if issues were found to enable CI gating
+            if (result.notes && result.notes.length) {
+              process.exitCode = 1;
+            } else {
+              process.exitCode = 0;
+            }
+          };
+          runLint();
+          return;
+        }
+        default:
+          console.error(
+            "Unknown session subcommand. Try: session rotate [--write] | session lint"
+          );
+          process.exitCode = 1;
+          return;
+      }
     }
     default:
       console.error(`Unknown command: ${args[0] ?? "<none>"}`);

@@ -23,4 +23,11 @@ Usage examples:
 - Apply changes with backup
   - `npm run repo:ops -- todo sync-from-changelog --write`
 
+- Rotate session file (dry-run / apply)
+  - `npm run repo:ops -- session rotate`
+  - `npm run repo:ops -- session rotate --write`
+
+- Lint current session file (read-only)
+  - `npm run repo:ops -- session lint`
+
 Status: initial scaffolding only (no behavior yet).

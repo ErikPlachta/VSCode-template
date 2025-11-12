@@ -1,6 +1,6 @@
 # Copilot Chat Instructions
 
-This repository uses `CHANGELOG.md` as the single source of truth for work tracking. Follow these guidelines for consistent, high-quality changes.
+This repository uses `TODO.md` for outstanding tasks and `CHANGELOG.md` for history and verification. Follow these guidelines for consistent, high-quality changes.
 
 > Note: Use american-english spelling for all artifacts, not british-english (e.g. "organization" not "organisation").
 
@@ -76,12 +76,13 @@ Use `mcp_memory` tools when:
 
 **Example**: Store "Agent X should never import Agent Y" as entity with observations
 
-## Session Workflow
+## Session Workflow (detailed)
 
 **Start of session**:
 
-1. Read `CHANGELOG.md` → Outstanding Tasks section
-2. Update internal todo list to match priorities
+1. Read `TODO.md` → Current/Next/Backlog sections
+2. Skim `CHANGELOG.md` recent logs for context and decisions
+3. Update internal todo list to match priorities
 
 **During work**:
 
@@ -119,11 +120,11 @@ Use `mcp_memory` tools when:
 **Impact**: What this enables/fixes
 ```
 
-**Use ChangeLogManager CLI** for timestamps:
+Timestamping entries:
 
-```bash
-npm run changelog:manage -- add-entry --type feat --summary "Your summary"
-```
+- The previous ChangeLogManager CLI has been retired (2025-11-12). Add entries manually using the required format above.
+- Use 24-hour timestamps in the exact format `YYYY-MM-DD HH:MM:SS`.
+- Keep entries newest-first within each day.
 
 ## Quality Gates (ALL must PASS)
 
@@ -205,7 +206,10 @@ const __dirname = path.dirname(__filename);
 
 ## Key Files Reference
 
-- `CHANGELOG.md` – Single source of truth for work tracking
+- `TODO.md` – Source of truth for outstanding tasks and priorities (Current/Next/Backlog)
+- `CHANGELOG.md` – History and verification. The Outstanding Tasks section here is a temporary, read-only mirror during migration and may be pruned post-branch.
+- `CONTEXT-SESSION.md` – Rolling session scratchpad: current focus, active branch/run state, quick notes. Rotate via repo-ops (session rotate) between work sprints.
+- `CONTEXT-BRANCH.md` – Branch plan and status: scope, milestones, acceptance criteria, and progress. Update as the branch evolves; close when merged.
 - `src/config/application.config.ts` – Application configuration
 - `src/agent/*/agent.config.ts` – Agent configurations
 - `src/shared/ids.ts` – Central ID derivation
@@ -229,8 +233,9 @@ const __dirname = path.dirname(__filename);
 
 At the start of a session:
 
-- Read `CHANGELOG.md` → Outstanding Tasks and confirm which Current Tasks are active.
-- Update the internal todo list to mirror Outstanding Tasks (preserve priorities and wording).
+- Read `TODO.md` → Current/Next/Backlog and confirm which Current Tasks are active.
+- Note: The `CHANGELOG.md` Outstanding Tasks section is a read-only mirror for migration safety; do not edit it directly.
+- Update your internal todo list to mirror `TODO.md` priorities and wording.
 
 During changes:
 
@@ -247,15 +252,15 @@ At the end of a session:
 
 The changelog is organized around two sections: Outstanding Tasks and Logs. Follow these rules (synced from `CHANGELOG.md` → Notes for Copilot):
 
-1. Outstanding Tasks captures all incomplete work. It is organized by priority and jointly maintained by the user and Copilot Chat.
-2. Every incomplete task should appear here, grouped by priority: Current Tasks (immediate focus), Priority 1 (Next), Priority 2 (Later), Priority 3 (Backlog).
-3. Copilot should proactively review and keep this section up to date, reflecting user-requested priority changes.
-4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
+1. Outstanding Tasks are managed in `TODO.md` (source of truth). The section inside `CHANGELOG.md` is a read-only mirror used during migration and can be pruned after the branch.
+2. Keep `TODO.md` organized by priority: Current Tasks (immediate focus), Priority 1 (Next), Priority 2 (Later), Priority 3 (Backlog).
+3. Copilot should proactively review and keep `TODO.md` up to date, reflecting user-requested priority changes.
+4. After each set of logged changes, revisit and update `TODO.md` accordingly (use repo-ops helpers when applicable).
 5. Logs capture all change history, organized by date/time and semantic titles.
 6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
 7. Use semantic titles for log entries: `#### YYYY-MM-DD HH:MM:SS fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a detailed description with sub-points. Entries MUST include specific details, file paths, and implementation notes - never just the summary line alone.
 8. Include file paths for meaningful changes and provide sub-points explaining what was actually changed.
-9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into Outstanding Tasks.
+9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items in `TODO.md` as needed.
 
 Practical cadence:
 
@@ -292,9 +297,11 @@ Practical cadence:
    - Coordinate multi-agent workflows
 
 4. **Data flow pattern**:
-   ```
-   User → Orchestrator → Agent (returns typed data) → Orchestrator → CommunicationAgent (formats) → User
-   ```
+
+  ```text
+  User → Orchestrator → Agent (returns typed data) → Orchestrator → CommunicationAgent (formats) → User
+  ```
+
 
 **Why This Matters**:
 
@@ -424,7 +431,7 @@ To avoid runtime vs. manifest drift, IDs and paths are centrally derived and mus
 - Leaving deprecated alias warnings in place after the silent phase begins.
 - Using `__dirname` or `__filename` without ES module polyfills (see ES Module Requirements below).
 
-## ES Module Requirements
+## ES Module Requirements (ESM patterns)
 
 This project uses ES modules (`"type": "module"` in `package.json`). CommonJS globals like `__dirname` and `__filename` are NOT available.
 
@@ -454,7 +461,7 @@ const __dirname = path.dirname(__filename);
 
 **Verification**: Before committing new files that use path resolution, ensure they follow this pattern.
 
-## Agent Folder Standard
+## Agent Folder Standard (structure rules)
 
 - Each agent folder contains exactly two source files:
   - `agent.config.ts` – static configuration for that agent only.
@@ -463,41 +470,45 @@ const __dirname = path.dirname(__filename);
 
 Refer to `CHANGELOG.md` for historical decisions and active planned tasks before starting new work.
 
+## Context files: roles and usage
+
+Use both context files to keep navigation fast and thinking visible without polluting the changelog:
+
+- `CONTEXT-SESSION.md` (short-lived)
+  - Purpose: Live session notes for the current working block. Track: active branch, focus areas, what tasks/tests are running, quick decisions, and immediate follow-ups.
+  - When to update: At session start, after notable steps (e.g., tool runs, edits, verification), and before pausing. Rotate with repo-ops `session rotate` between sprints.
+  - Structure tips: Keep it skim-friendly with headings like “current focus”, “actions taken”, “next up”. Avoid duplicating detailed history—link to CHANGELOG entries instead.
+
+- `CONTEXT-BRANCH.md` (longer-lived)
+  - Purpose: Branch plan and status. Capture scope, milestones, acceptance criteria, risks, and decision records that span multiple sessions.
+  - When to update: When scope changes, milestones complete, new risks are found, or acceptance criteria evolve. Close or archive when the branch merges.
+  - Structure tips: Start with a brief summary and milestone checklist. Include a task map keyed to TODO items for traceability.
+
+Notes:
+
+- Tasks live in `TODO.md`. Do not introduce new tasks directly in context files; link back to `TODO.md` or reference task IDs.
+- The `CHANGELOG.md` Outstanding Tasks section is a read-only mirror used during migration; prefer `TODO.md` for updates and prioritization.
+
 ---
 
 These instructions are living; update them when governance rules or quality gates evolve. Document any health check additions (e.g., legacy JSON detection) under CHANGELOG Added.
 
 ## Automation Aids
 
-To guarantee accurate current timestamps and consistent formatting for new log entries, prefer the ChangeLogManager CLI:
+The ChangeLogManager CLI has been retired. Continue to edit `CHANGELOG.md` directly following the required format. The repo-ops CLI remains for TODO and session workflows:
 
-- Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary" --details "Detailed description here. Use full markdown formatting here."`
-- Ensure markers: `npm run changelog:manage -- insert-markers`
-- Add a Current Task: `npm run changelog:manage -- add-current --text "Task description"`
-- Prune completed items: `npm run changelog:manage -- prune-completed`
-- Valid types: fix | feat | chore | docs | refactor | test | perf | ci | build | style.
+- Sync TODO from changelog (dry-run by default):
+  - `npm run repo:ops -- todo sync-from-changelog [--write]`
+- Generate actionable TODO checklist from Outstanding Tasks:
+  - `npm run repo:ops -- todo generate-actions [--write]`
+- Rotate session log (archive current, create fresh):
+  - `npm run repo:ops -- session rotate [--write]`
 
-Notes:
+## Changelog editing guidance
 
-- Copilot Chat can execute these for you (it will run the npm script with the proper arguments) or paste the exact command for your confirmation.
-- After 3–5 entries or >~3 file edits, add a Verification block and reconcile Outstanding Tasks.
-
-## ChangeLogManager Module
-
-Use the `ChangeLogManager` utilities instead of manual editing whenever possible:
-
-- Add entries: `npm run changelog:manage -- add-entry --type feat --summary "Something"`.
-- Add Outstanding Tasks: `npm run changelog:manage -- add-outstanding --priority 3 --text "Task description"`.
-- Add Current Tasks: `npm run changelog:manage -- add-current --text "Task description"`.
-- Prune completed Outstanding Tasks: `npm run changelog:manage -- prune-completed` (recognizes ✅ and configurable prefixes).
-- Ensure markers: `npm run changelog:manage -- insert-markers` (auto-inserts section boundary comments if missing).
-- Markers: `<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->` / `<!-- CHANGELOG:END:OUTSTANDING_TASKS -->`, `<!-- CHANGELOG:BEGIN:LOGS -->` / `<!-- CHANGELOG:END:LOGS -->`.
-- Heading formats remain: Day `### [YYYY-MM-DD] Summary` (optional summary) and Entry `#### YYYY-MM-DD HH:MM:SS type: Summary`. When adding a Verification block, use `##### Verification – SUMMARY` followed by bullet lines.
-
-Planned extensions (parser awareness): structured Outstanding Tasks extraction, automatic verification block generation, JSON export for UI dashboards.
-
-Copilot Chat should:
-
-1. Prefer CLI for new entries to guarantee timestamp fidelity.
-2. Reconcile Outstanding Tasks after each batch by reading between boundary markers.
-3. Avoid reformatting markers or headings outside spec to keep parser stable.
+- Edit `CHANGELOG.md` by hand; keep markers stable:
+  - `<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->` / `<!-- CHANGELOG:END:OUTSTANDING_TASKS -->`
+  - `<!-- CHANGELOG:BEGIN:LOGS -->` / `<!-- CHANGELOG:END:LOGS -->`
+- Use the required headings and timestamp format; include Verification blocks after meaningful batches.
+- Reconcile Outstanding Tasks after each batch by reading between boundary markers.
+- Avoid reformatting markers or headings outside spec to keep the parser stable in future automation.
