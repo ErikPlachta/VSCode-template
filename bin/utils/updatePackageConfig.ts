@@ -37,7 +37,7 @@ function loadEnvironmentConfig(): PackageConfig {
     chatParticipantName: ids.baseId,
     serverRegisterId: process.env.MCP_SERVER_ID || appName,
     defaultPort: parseInt(process.env.MCP_DEFAULT_PORT || "39200"),
-    autoRegister: process.env.MCP_AUTO_REGISTER === "true",
+    autoRegister: process.env.MCP_AUTO_REGISTER === "false",
     includeAuthHeader: process.env.MCP_INCLUDE_AUTH_HEADER === "true",
   };
 }

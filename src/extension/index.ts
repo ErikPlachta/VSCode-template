@@ -36,6 +36,8 @@ export async function activate(
   context: vscode.ExtensionContext
 ): Promise<void> {
   console.log("🚀 MyBusiness MCP Extension: Starting activation...");
+  console.log(`📋 Extension context: ${context.extensionPath}`);
+  console.log(`📋 Extension ID: ${context.extension.id}`);
 
   // Clean up any orphaned registrations from previous uninstalls
   await cleanupOrphanedRegistrations(context);
@@ -53,6 +55,12 @@ export async function activate(
   const contributedChat = (pkg.contributes?.chatParticipants || [])[0] || {};
   const contributedId: string = contributedChat.id || "MybusinessMCP";
   const contributedName: string = contributedChat.name || "mybusiness";
+
+  console.log(`🆔 Chat Participant ID from package.json: ${contributedId}`);
+  console.log(
+    `🏷️  Chat Participant Name from package.json: ${contributedName}`
+  );
+
   const commandPrefix: string = ((): string => {
     const id = contributedId || "MybusinessMCP";
     const base = id.endsWith("MCP") ? id.slice(0, -3) : id;
@@ -84,8 +92,15 @@ export async function activate(
         const extIdentifier = `${pkg.publisher || "ErikPlachta"}.${
           pkg.name || "mybusiness-mcp-extension"
         }`;
+        console.log(`🔍 Looking for extension: ${extIdentifier}`);
         const installedExt = vscode.extensions.getExtension(extIdentifier);
+        console.log(`📦 Extension found: ${installedExt ? "YES" : "NO"}`);
+        console.log(
+          `📂 Installed path: ${installedExt?.extensionPath || "N/A"}`
+        );
+        console.log(`📂 Context path: ${context.extensionPath}`);
         const basePath = installedExt?.extensionPath || context.extensionPath;
+        console.log(`✅ Using base path: ${basePath}`);
         const serverScript = path.join(
           basePath,
           "out",
@@ -93,6 +108,7 @@ export async function activate(
           "server",
           "index.js"
         );
+        console.log(`🚀 Server script: ${serverScript}`);
         const registrationId = `${contributedName}-mcp-server`;
 
         await ensureRegistration({
@@ -227,6 +243,8 @@ export async function activate(
   console.log(
     `✅ Chat participant "${contributedId}" registered successfully; mention is @${contributedName}`
   );
+  console.log(`🔍 Verify activation event in package.json: onChatParticipant:${contributedId}`);
+
 
   // Register the manual tool invocation command
   const toolCommand = vscode.commands.registerCommand(

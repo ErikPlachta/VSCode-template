@@ -1,21 +1,6 @@
 /**
  * @packageDocumentation Environment helpers for extension-wide configuration.
  */
-import * as path from "path";
-import * as fs from "fs";
-import dotenv from "dotenv";
-
-// Load variables from project-level .env when present
-try {
-  const envPath = path.resolve(process.cwd(), ".env");
-  if (fs.existsSync(envPath)) {
-    dotenv.config({ path: envPath });
-  } else {
-    dotenv.config();
-  }
-} catch {
-  // ignore .env loading errors in environments that manage vars externally
-}
 
 /**
  * Return the extension name for cache scoping, preferring EXTENSION_NAME from env.
@@ -27,7 +12,7 @@ export function getExtensionName(): string {
   const fromEnv = (process.env.EXTENSION_NAME || "").trim();
   if (fromEnv) return fromEnv;
   // Final fallback to a safe default
-  return "myBusiness-mcp-extension";
+  return "mybusiness-mcp-extension";
 }
 
 /**

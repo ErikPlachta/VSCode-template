@@ -22,7 +22,7 @@ RESOURCES.MD
 EXTENSION_TEST.md
 
 # Config and metadata not needed at runtime
-node_modules/
+# node_modules/ ## KEEP THIS COMMENTED - runtime dependencies must be included
 tsconfig.json
 jest.config.js
 typedoc.json
