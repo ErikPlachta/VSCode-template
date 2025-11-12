@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [tools/generateMcpConfig](../README.md) / GeneratedMcpConfig
+[UserContext-mcp-extension](../../../modules.md) / [tools/generateMcpConfig](../README.md) / GeneratedMcpConfig
 
 # Interface: GeneratedMcpConfig
 
-Defined in: [src/tools/generateMcpConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/generateMcpConfig.ts#L46)
+Defined in: [src/tools/generateMcpConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/generateMcpConfig.ts#L46)
 
 Structure of the generated MCP configuration file
 
@@ -16,7 +16,7 @@ Structure of the generated MCP configuration file
 
 > **agents**: [`GeneratedAgentConfig`](GeneratedAgentConfig.md)[]
 
-Defined in: [src/tools/generateMcpConfig.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/generateMcpConfig.ts#L53)
+Defined in: [src/tools/generateMcpConfig.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/generateMcpConfig.ts#L53)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/tools/generateMcpConfig.ts:53](https://github.com/ErikPlachta/v
 
 > **application**: `object`
 
-Defined in: [src/tools/generateMcpConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/generateMcpConfig.ts#L48)
+Defined in: [src/tools/generateMcpConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/generateMcpConfig.ts#L48)
 
 #### description?
 
@@ -44,4 +44,4 @@ Defined in: [src/tools/generateMcpConfig.ts:48](https://github.com/ErikPlachta/v
 
 > **generatedAt**: `string`
 
-Defined in: [src/tools/generateMcpConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/generateMcpConfig.ts#L47)
+Defined in: [src/tools/generateMcpConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/generateMcpConfig.ts#L47)

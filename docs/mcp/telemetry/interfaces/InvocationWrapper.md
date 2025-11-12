@@ -1,18 +1,18 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/telemetry](../README.md) / InvocationWrapper
+[UserContext-mcp-extension](../../../modules.md) / [mcp/telemetry](../README.md) / InvocationWrapper
 
 # Interface: InvocationWrapper()
 
-Defined in: [src/mcp/telemetry.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/telemetry.ts#L46)
+Defined in: [src/mcp/telemetry.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/mcp/telemetry.ts#L46)
 
 Function signature returned by [createInvocationLogger](../functions/createInvocationLogger.md).
 
 > **InvocationWrapper**\<`T`\>(`operation`, `fn`, `metadata?`): `Promise`\<`T`\>
 
-Defined in: [src/mcp/telemetry.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/telemetry.ts#L47)
+Defined in: [src/mcp/telemetry.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/mcp/telemetry.ts#L47)
 
 Function signature returned by [createInvocationLogger](../functions/createInvocationLogger.md).
 

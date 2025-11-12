@@ -1,6 +1,6 @@
 {
-  "name": "mybusiness-mcp-extension",
-  "displayName": "My Business MCP Extension",
+  "name": "UserContext-mcp-extension",
+  "displayName": "User Context MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",
   "type": "module",
@@ -15,118 +15,118 @@
   },
   "activationEvents": [
     "onStartupFinished",
-    "onCommand:mybusinessMCP.invokeTool",
-    "onCommand:mybusinessMCP.registerServer",
-    "onCommand:mybusinessMCP.unregisterServer",
-    "onChatParticipant:MybusinessMCP"
+    "onCommand:usercontextMCP.invokeTool",
+    "onCommand:usercontextMCP.registerServer",
+    "onCommand:usercontextMCP.unregisterServer",
+    "onChatParticipant:UsercontextMCP"
   ],
   "main": "./out/src/extension/index.js",
   "contributes": {
     "commands": [
       {
-        "command": "mybusinessMCP.invokeTool",
-        "title": "My Business MCP Extension: Invoke Tool"
+        "command": "usercontextMCP.invokeTool",
+        "title": "User Context MCP Extension: Invoke Tool"
       },
       {
-        "command": "mybusinessMCP.registerServer",
-        "title": "My Business MCP Extension: Register MCP Server"
+        "command": "usercontextMCP.registerServer",
+        "title": "User Context MCP Extension: Register MCP Server"
       },
       {
-        "command": "mybusinessMCP.unregisterServer",
-        "title": "My Business MCP Extension: Unregister MCP Server"
+        "command": "usercontextMCP.unregisterServer",
+        "title": "User Context MCP Extension: Unregister MCP Server"
       },
       {
-        "command": "mybusinessMCP.diagnoseIds",
-        "title": "My Business MCP Extension: Diagnose Chat IDs"
+        "command": "usercontextMCP.diagnoseIds",
+        "title": "User Context MCP Extension: Diagnose Chat IDs"
       }
     ],
     "mcpServerDefinitionProviders": [
       {
-        "id": "mybusiness-local",
-        "label": "My Business MCP Extension Embedded Server"
+        "id": "usercontext-local",
+        "label": "User Context MCP Extension Embedded Server"
       }
     ],
     "chatParticipants": [
       {
-        "id": "MybusinessMCP",
-        "name": "mybusiness",
-        "description": "Access your business data including applications, departments, people, policies, and resources",
+        "id": "UsercontextMCP",
+        "name": "usercontext",
+        "description": "Access your user context data via MCP (User Context MCP Extension).",
         "isSticky": true
       }
     ],
     "configuration": {
-      "title": "My Business MCP Extension Settings",
+      "title": "User Context MCP Extension Settings",
       "properties": {
-        "mybusinessMCP.serverUrl": {
+        "usercontextMCP.serverUrl": {
           "type": "string",
           "default": "",
           "description": "External MCP server URL (leave blank to use embedded)."
         },
-        "mybusinessMCP.token": {
+        "usercontextMCP.token": {
           "type": "string",
           "description": "Bearer token for MCP authentication."
         },
-        "mybusinessMCP.autoRegister": {
+        "usercontextMCP.autoRegister": {
           "type": "boolean",
           "default": false,
           "description": "Automatically register embedded server in global mcp.json."
         },
-        "mybusinessMCP.port": {
+        "usercontextMCP.port": {
           "type": "number",
           "default": 39200,
           "minimum": 1024,
           "maximum": 65535,
           "description": "Port for embedded HTTP JSON-RPC server."
         },
-        "mybusinessMCP.registerServerId": {
+        "usercontextMCP.registerServerId": {
           "type": "string",
-          "default": "Mybusiness",
+          "default": "UserContext",
           "description": "Server id key used inside mcp.json servers object."
         },
-        "mybusinessMCP.includeAuthHeader": {
+        "usercontextMCP.includeAuthHeader": {
           "type": "boolean",
           "default": false,
           "description": "Include Authorization header metadata when registering HTTP server in mcp.json."
         },
-        "mybusinessMCP.ids.chatParticipantId": {
+        "usercontextMCP.ids.chatParticipantId": {
           "type": "string",
           "enum": [
-            "MybusinessMCP"
+            "UsercontextMCP"
           ],
           "markdownDescription": "Read-only. Current chat participant id as contributed (activation event)."
         },
-        "mybusinessMCP.ids.chatParticipantName": {
+        "usercontextMCP.ids.chatParticipantName": {
           "type": "string",
           "enum": [
-            "mybusiness"
+            "usercontext"
           ],
           "markdownDescription": "Read-only. Current mention name (use @<name> in chat)."
         },
-        "mybusinessMCP.ids.commandPrefix": {
+        "usercontextMCP.ids.commandPrefix": {
           "type": "string",
           "enum": [
-            "mybusinessMCP"
+            "usercontextMCP"
           ],
           "markdownDescription": "Read-only. Current command/settings prefix."
         },
-        "mybusinessMCP.ids.activationEventId": {
+        "usercontextMCP.ids.activationEventId": {
           "type": "string",
           "enum": [
-            "MybusinessMCP"
+            "UsercontextMCP"
           ],
           "markdownDescription": "Read-only. Activation event id (onChatParticipant:<id>)."
         },
-        "mybusinessMCP.ids.extensionId": {
+        "usercontextMCP.ids.extensionId": {
           "type": "string",
           "enum": [
-            "ErikPlachta.mybusiness-mcp-extension"
+            "ErikPlachta.UserContext-mcp-extension"
           ],
           "markdownDescription": "Read-only. Extension identifier (publisher.name)."
         },
-        "mybusinessMCP.ids.serverRegisterId": {
+        "usercontextMCP.ids.serverRegisterId": {
           "type": "string",
           "enum": [
-            "Mybusiness"
+            "UserContext"
           ],
           "markdownDescription": "Read-only. Server id key used in mcp.json servers."
         }
@@ -157,7 +157,7 @@
     "mcp:gen": "tsx src/tools/generateMcpConfig.ts",
     "package": "npm run build && npx vsce package",
     "prepublishOnly": "npm run prebuild",
-    "install": "code --install-extension mybusiness-mcp-extension-1.0.0.vsix",
+    "install": "code --install-extension UserContext-mcp-extension-1.0.0.vsix",
     "server": "npm run compile -- --pretty false && node ./out/server/index.js",
     "changelog:manage": "tsx bin/utils/changelog",
     "changelog:add-entry": "npm run changelog:manage -- add-entry --type fix --summary \"Placeholder summary (override)\"",

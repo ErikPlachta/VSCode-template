@@ -1,7 +1,36 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
+
+// Mock vscode module with getter that will be set by tests
+jest.mock(
+  "vscode",
+  () => {
+    let mockWorkspaceFolders: any[] | undefined;
+    return {
+      workspace: {
+        get workspaceFolders() {
+          return mockWorkspaceFolders;
+        },
+        set workspaceFolders(value: any[] | undefined) {
+          mockWorkspaceFolders = value;
+        },
+      },
+    };
+  },
+  { virtual: true }
+);
+
 import {
   deleteSharedCacheEntry,
   ensureCacheDirectory,
@@ -11,33 +40,24 @@ import {
   storeSharedCacheEntry,
 } from "../src/extension/mcpCache";
 
-let workspaceFoldersMock: any[] | undefined;
-
-jest.mock(
-  "vscode",
-  () => ({
-    workspace: {
-      get workspaceFolders() {
-        return workspaceFoldersMock;
-      },
-    },
-  }),
-  { virtual: true }
-);
+// Get reference to mocked vscode
+const vscode = jest.requireMock("vscode") as {
+  workspace: { workspaceFolders?: any[] };
+};
 
 describe("mcpCache", () => {
   beforeEach(() => {
-    workspaceFoldersMock = undefined;
+    vscode.workspace.workspaceFolders = undefined;
   });
 
   it("creates local and global cache directories inside the workspace and user profile", async () => {
     const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "mcp-cache-test-"));
-    workspaceFoldersMock = [{ uri: { fsPath: tempDir } }];
+    vscode.workspace.workspaceFolders = [{ uri: { fsPath: tempDir } }];
 
     const cacheDir = await ensureCacheDirectory();
     // Cache dir now derives from EXTENSION_NAME (fallback to package name if unset)
     const expectedName =
-      process.env.EXTENSION_NAME?.trim() || "myBusiness-mcp-extension";
+      process.env.EXTENSION_NAME?.trim() || "usercontext-mcp-extension";
     expect(cacheDir).toBe(path.join(tempDir, expectedName));
 
     const stats = await fs.stat(cacheDir);
@@ -54,7 +74,7 @@ describe("mcpCache", () => {
 
   it("appends invocation logs to a JSONL file", async () => {
     const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "mcp-cache-test-"));
-    workspaceFoldersMock = [{ uri: { fsPath: tempDir } }];
+    vscode.workspace.workspaceFolders = [{ uri: { fsPath: tempDir } }];
     const cacheDir = await ensureCacheDirectory();
 
     await logInvocation(cacheDir, {
@@ -76,7 +96,7 @@ describe("mcpCache", () => {
 
   it("stores and retrieves shared cache entries", async () => {
     const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "mcp-cache-test-"));
-    workspaceFoldersMock = [{ uri: { fsPath: tempDir } }];
+    vscode.workspace.workspaceFolders = [{ uri: { fsPath: tempDir } }];
     const cacheDir = await ensureCacheDirectory();
 
     await storeSharedCacheEntry(cacheDir, {

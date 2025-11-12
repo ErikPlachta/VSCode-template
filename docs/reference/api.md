@@ -1,8 +1,8 @@
-[**mybusiness-mcp-extension v1.0.0**](README.md)
+[**UserContext-mcp-extension v1.0.0**](README.md)
 
 ***
 
-# mybusiness-mcp-extension v1.0.0
+# UserContext-mcp-extension v1.0.0
 
 ## Modules
 
@@ -52,6 +52,7 @@
 - [shared/ids](shared/ids/README.md)
 - [shared/mcpTypes](shared/mcpTypes/README.md)
 - [shared/textProcessing](shared/textProcessing/README.md)
+- [shared/workflowLogger](shared/workflowLogger/README.md)
 - [tools/augmentTypedoc](tools/augmentTypedoc/README.md)
 - [tools/convertRelativeImports](tools/convertRelativeImports/README.md)
 - [tools/enhanceJSDoc](tools/enhanceJSDoc/README.md)
@@ -69,5 +70,6 @@
 - [types/interfaces](types/interfaces/README.md)
 - [types/userContext.types](types/userContext.types/README.md)
 - [types/vscode-chat](types/vscode-chat/README.md)
+- [types/workflow](types/workflow/README.md)
 - [userContext/people/category](userContext/people/category/README.md)
 - [userContext/people/records](userContext/people/records/README.md)

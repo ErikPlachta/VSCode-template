@@ -15,7 +15,7 @@ async function main() {
   // Adjust these values as needed
   const targetAppData =
     process.env.TARGET_APPDATA || "C:\\Users\\plach\\AppData\\Roaming";
-  const registrationId = process.env.REG_ID || "mybusiness-mcp-server-test";
+  const registrationId = process.env.REG_ID || "usercontext-mcp-server-test";
   const serverUrl = process.env.SERVER_URL || "http://localhost:39200";
 
   const modulePath = path.resolve("./out/src/extension/mcpRegistration.js");

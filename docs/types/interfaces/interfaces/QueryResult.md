@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / QueryResult
+[UserContext-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / QueryResult
 
 # Interface: QueryResult
 
-Defined in: [src/types/interfaces.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L29)
+Defined in: [src/types/interfaces.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L29)
 
 Represents the result of a database query operation.
 
@@ -16,7 +16,7 @@ Represents the result of a database query operation.
 
 > **cached**: `boolean`
 
-Defined in: [src/types/interfaces.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L33)
+Defined in: [src/types/interfaces.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L33)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:33](https://github.com/ErikPlachta/vscode-e
 
 > **categoryId**: `string`
 
-Defined in: [src/types/interfaces.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L30)
+Defined in: [src/types/interfaces.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L30)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:30](https://github.com/ErikPlachta/vscode-e
 
 > **records**: [`CategoryRecord`](../../agentConfig/interfaces/CategoryRecord.md)[]
 
-Defined in: [src/types/interfaces.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L31)
+Defined in: [src/types/interfaces.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L31)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:31](https://github.com/ErikPlachta/vscode-e
 
 > **totalCount**: `number`
 
-Defined in: [src/types/interfaces.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L32)
+Defined in: [src/types/interfaces.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L32)

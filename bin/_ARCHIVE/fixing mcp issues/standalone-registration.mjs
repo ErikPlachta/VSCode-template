@@ -178,7 +178,7 @@ async function main() {
   const targetAppData =
     process.env.TARGET_APPDATA || "C:\\Users\\plach\\AppData\\Roaming";
   const registrationId =
-    process.env.REG_ID || "mybusiness-mcp-server-standalone";
+    process.env.REG_ID || "usercontext-mcp-server-standalone";
   const serverUrl = process.env.SERVER_URL || "http://localhost:39200";
   const includeAuth = process.env.INCLUDE_AUTH === "true";
   const token = process.env.TOKEN || "test-token";

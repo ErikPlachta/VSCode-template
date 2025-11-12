@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/configurationLoader](../README.md) / getConfigurationLoader
+[UserContext-mcp-extension](../../../modules.md) / [shared/configurationLoader](../README.md) / getConfigurationLoader
 
 # Function: getConfigurationLoader()
 
 > **getConfigurationLoader**(`configPath?`): [`ConfigurationLoader`](../classes/ConfigurationLoader.md)
 
-Defined in: [src/shared/configurationLoader.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/configurationLoader.ts#L191)
+Defined in: [src/shared/configurationLoader.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/configurationLoader.ts#L191)
 
 Get the global configuration loader (singleton).
 

@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [extension/mcpProvider](../README.md) / registerMcpProvider
+[UserContext-mcp-extension](../../../modules.md) / [extension/mcpProvider](../README.md) / registerMcpProvider
 
 # Function: registerMcpProvider()
 
 > **registerMcpProvider**(`serverUrl`, `token`, `includeAuthHeader`, `context`): `void`
 
-Defined in: [src/extension/mcpProvider.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/extension/mcpProvider.ts#L16)
+Defined in: [src/extension/mcpProvider.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/extension/mcpProvider.ts#L16)
 
 Register a McpServerDefinitionProvider to let VS Code discover the embedded MCP server.
 

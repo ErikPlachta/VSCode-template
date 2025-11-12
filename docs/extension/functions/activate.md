@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / [extension](../README.md) / activate
+[UserContext-mcp-extension](../../modules.md) / [extension](../README.md) / activate
 
 # Function: activate()
 
 > **activate**(`context`): `Promise`\<`void`\>
 
-Defined in: [src/extension/index.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/extension/index.ts#L30)
+Defined in: [src/extension/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/extension/index.ts#L31)
 
 Activate the MyBusiness MCP extension.
 

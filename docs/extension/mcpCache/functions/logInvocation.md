@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [extension/mcpCache](../README.md) / logInvocation
+[UserContext-mcp-extension](../../../modules.md) / [extension/mcpCache](../README.md) / logInvocation
 
 # Function: logInvocation()
 
 > **logInvocation**(`cacheDir`, `entry`): `Promise`\<`void`\>
 
-Defined in: [src/extension/mcpCache.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/extension/mcpCache.ts#L88)
+Defined in: [src/extension/mcpCache.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/extension/mcpCache.ts#L88)
 
 Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
 

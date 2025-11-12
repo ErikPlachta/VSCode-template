@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / AgentProfile
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / AgentProfile
 
 # Interface: AgentProfile
 
-Defined in: [src/types/applicationConfig.ts:121](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L121)
+Defined in: [src/types/applicationConfig.ts:121](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/applicationConfig.ts#L121)
 
 Agent profile configuration.
 
@@ -16,7 +16,7 @@ Agent profile configuration.
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L127)
+Defined in: [src/types/applicationConfig.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/applicationConfig.ts#L127)
 
 Enable caching for this agent.
 
@@ -26,7 +26,7 @@ Enable caching for this agent.
 
 > **priority**: [`AgentPriority`](../type-aliases/AgentPriority.md)
 
-Defined in: [src/types/applicationConfig.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L123)
+Defined in: [src/types/applicationConfig.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/applicationConfig.ts#L123)
 
 Execution priority for the agent.
 
@@ -36,6 +36,6 @@ Execution priority for the agent.
 
 > **timeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L125)
+Defined in: [src/types/applicationConfig.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/applicationConfig.ts#L125)
 
 Maximum execution timeout in milliseconds.

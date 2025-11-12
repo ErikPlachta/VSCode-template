@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / RawSchemaFile
+[UserContext-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / RawSchemaFile
 
 # Interface: RawSchemaFile
 
-Defined in: [src/types/userContext.types.ts:496](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L496)
+Defined in: [src/types/userContext.types.ts:496](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L496)
 
 Raw schema file contents
 
@@ -16,7 +16,7 @@ Raw schema file contents
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:498](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L498)
+Defined in: [src/types/userContext.types.ts:498](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L498)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:498](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:497](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L497)
+Defined in: [src/types/userContext.types.ts:497](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L497)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:497](https://github.com/ErikPlachta/
 
 > **schema**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/userContext.types.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L499)
+Defined in: [src/types/userContext.types.ts:499](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L499)

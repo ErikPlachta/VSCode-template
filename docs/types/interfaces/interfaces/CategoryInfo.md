@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / CategoryInfo
+[UserContext-mcp-extension](../../../modules.md) / [types/interfaces](../README.md) / CategoryInfo
 
 # Interface: CategoryInfo
 
-Defined in: [src/types/interfaces.ts:175](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L175)
+Defined in: [src/types/interfaces.ts:175](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L175)
 
 CategoryInfo interface.
 
@@ -16,7 +16,7 @@ CategoryInfo interface.
 
 > **description**: `string`
 
-Defined in: [src/types/interfaces.ts:178](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L178)
+Defined in: [src/types/interfaces.ts:178](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L178)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:178](https://github.com/ErikPlachta/vscode-
 
 > **id**: `string`
 
-Defined in: [src/types/interfaces.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L176)
+Defined in: [src/types/interfaces.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L176)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:176](https://github.com/ErikPlachta/vscode-
 
 > **name**: `string`
 
-Defined in: [src/types/interfaces.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L177)
+Defined in: [src/types/interfaces.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L177)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/interfaces.ts:177](https://github.com/ErikPlachta/vscode-
 
 > **recordCount**: `number`
 
-Defined in: [src/types/interfaces.ts:179](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L179)
+Defined in: [src/types/interfaces.ts:179](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L179)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/interfaces.ts:179](https://github.com/ErikPlachta/vscode-
 
 > **relationships**: [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/interfaces.ts:181](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L181)
+Defined in: [src/types/interfaces.ts:181](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L181)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/types/interfaces.ts:181](https://github.com/ErikPlachta/vscode-
 
 > **schemaVersion**: `string`
 
-Defined in: [src/types/interfaces.ts:180](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/interfaces.ts#L180)
+Defined in: [src/types/interfaces.ts:180](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L180)

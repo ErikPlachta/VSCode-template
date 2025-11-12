@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / TypedDictField
+[UserContext-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / TypedDictField
 
 # Interface: TypedDictField
 
-Defined in: [src/types/userContext.types.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L265)
+Defined in: [src/types/userContext.types.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L265)
 
 Field description used within a TypedDict schema
 
@@ -16,7 +16,7 @@ Field description used within a TypedDict schema
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L269)
+Defined in: [src/types/userContext.types.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L269)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:269](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L266)
+Defined in: [src/types/userContext.types.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L266)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/userContext.types.ts:266](https://github.com/ErikPlachta/
 
 > `optional` **required**: `boolean`
 
-Defined in: [src/types/userContext.types.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L268)
+Defined in: [src/types/userContext.types.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L268)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/userContext.types.ts:268](https://github.com/ErikPlachta/
 
 > **type**: [`TypeSchema`](../type-aliases/TypeSchema.md)
 
-Defined in: [src/types/userContext.types.ts:267](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L267)
+Defined in: [src/types/userContext.types.ts:267](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L267)

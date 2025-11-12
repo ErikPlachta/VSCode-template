@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/agentAnalytics](../README.md) / AnalyticsExecutionOptions
+[UserContext-mcp-extension](../../../modules.md) / [shared/agentAnalytics](../README.md) / AnalyticsExecutionOptions
 
 # Interface: AnalyticsExecutionOptions
 
-Defined in: [src/shared/agentAnalytics.ts:120](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L120)
+Defined in: [src/shared/agentAnalytics.ts:120](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/agentAnalytics.ts#L120)
 
 Options for recording additional execution context.
 
@@ -16,7 +16,7 @@ Options for recording additional execution context.
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/shared/agentAnalytics.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L124)
+Defined in: [src/shared/agentAnalytics.ts:124](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/agentAnalytics.ts#L124)
 
 Arbitrary context for analytics enrichment.
 
@@ -26,6 +26,6 @@ Arbitrary context for analytics enrichment.
 
 > `optional` **userId**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/agentAnalytics.ts#L122)
+Defined in: [src/shared/agentAnalytics.ts:122](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/agentAnalytics.ts#L122)
 
 Optional user/session identifier.

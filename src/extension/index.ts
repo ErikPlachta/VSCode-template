@@ -1,5 +1,5 @@
 /**
- * @packageDocumentation Entry point for MyBusiness MCP VS Code extension.
+ * @packageDocumentation Entry point for UserContext MCP VS Code extension.
  *
  * @module extension
  */
@@ -17,7 +17,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /**
- * Activate the MyBusiness MCP extension.
+ * Activate the UserContext MCP extension.
  *
  * Responsibilities:
  * - Optionally start the embedded MCP server (when no external serverUrl is configured).
@@ -31,7 +31,7 @@ const __dirname = path.dirname(__filename);
 export async function activate(
   context: vscode.ExtensionContext
 ): Promise<void> {
-  console.log("🚀 MyBusiness MCP Extension: Starting activation...");
+  console.log("🚀 UserContext MCP Extension: Starting activation...");
   console.log(`📋 Extension context: ${context.extensionPath}`);
   console.log(`📋 Extension ID: ${context.extension.id}`);
 
@@ -49,8 +49,8 @@ export async function activate(
     | undefined as { packageJSON?: PackageJsonLike } | undefined;
   const pkg = (extObj?.packageJSON || {}) as PackageJsonLike;
   const contributedChat = (pkg.contributes?.chatParticipants || [])[0] || {};
-  const contributedId: string = contributedChat.id || "MybusinessMCP";
-  const contributedName: string = contributedChat.name || "mybusiness";
+  const contributedId: string = contributedChat.id || "UserContextMCP";
+  const contributedName: string = contributedChat.name || "usercontext";
 
   console.log(`🆔 Chat Participant ID from package.json: ${contributedId}`);
   console.log(
@@ -58,7 +58,7 @@ export async function activate(
   );
 
   const commandPrefix: string = ((): string => {
-    const id = contributedId || "MybusinessMCP";
+    const id = contributedId || "UserContextMCP";
     const base = id.endsWith("MCP") ? id.slice(0, -3) : id;
     return base.toLowerCase() + "MCP";
   })();
@@ -221,7 +221,7 @@ export async function activate(
       console.log(`🔄 Manual MCP server registration triggered...`);
       try {
         vscode.window.showInformationMessage(
-          `🔄 Registering MyBusiness MCP Server...`
+          `🔄 Registering UserContext MCP Server...`
         );
 
         // Register the provider (replaces legacy mcp.json registration)
@@ -229,7 +229,7 @@ export async function activate(
         console.log(`✅ MCP provider registered`);
 
         vscode.window.showInformationMessage(
-          `✅ MyBusiness MCP Server registered via provider! Server: ${
+          `✅ UserContext MCP Server registered via provider! Server: ${
             serverUrl || "(embedded stdio)"
           }`
         );
@@ -281,7 +281,7 @@ export async function activate(
         (process.env.MCP_CHAT_PARTICIPANT_NAME || "").trim() || undefined;
 
       // Expected derivation mirrors build script logic (capitalize first char + 'MCP' suffix for ID)
-      const baseId = envChatId || envChatName || "mybusiness";
+      const baseId = envChatId || envChatName || "usercontext";
       const expectedId =
         baseId.charAt(0).toUpperCase() + baseId.slice(1) + "MCP";
       const expectedName = envChatName || baseId;
@@ -483,16 +483,16 @@ export async function activate(
   if (tools.length) {
     console.log(`✅ Successfully loaded ${tools.length} MCP tools`);
     vscode.window.showInformationMessage(
-      `✅ MyBusiness MCP ready! Loaded ${tools.length} tools. Use @mybusiness in Copilot Chat!`
+      `✅ UserContext MCP ready! Loaded ${tools.length} tools. Use @usercontext in Copilot Chat!`
     );
   } else {
     console.warn(`⚠️ No MCP tools were loaded`);
     vscode.window.showWarningMessage(
-      `⚠️ MyBusiness MCP activated but no tools loaded. Check server connection.`
+      `⚠️ UserContext MCP activated but no tools loaded. Check server connection.`
     );
   }
 
-  console.log(`🎉 MyBusiness MCP Extension activation complete!`);
+  console.log(`🎉 UserContext MCP Extension activation complete!`);
   console.log(`   📍 Server: ${serverUrl}`);
   console.log(`   🔧 Tools: ${tools.length}`);
   console.log(`   💬 Participant: @${contributedName}`);
@@ -602,6 +602,6 @@ async function cleanupOrphanedRegistrations(
  * Currently a no-op because embedded server shutdown is handled via subscription dispose.
  */
 export function deactivate(): void {
-  console.log("👋 MyBusiness MCP Extension: Deactivating...");
+  console.log("👋 UserContext MCP Extension: Deactivating...");
   // Intentionally empty; resources cleaned up by disposables registered on activation.
 }

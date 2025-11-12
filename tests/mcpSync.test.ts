@@ -1,9 +1,27 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
-import * as https from "https";
-import { fetchTools, MCPDiscoveryError } from "../src/extension/mcpSync";
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
 
-// Mock the https module
-jest.mock("https");
+// Mock https module before importing the module under test
+const mockHttpsRequest = jest.fn();
+jest.unstable_mockModule("https", () => ({
+  default: {
+    request: mockHttpsRequest,
+  },
+  request: mockHttpsRequest,
+}));
+
+// Dynamic import to ensure mock is applied
+const { fetchTools, MCPDiscoveryError } = await import(
+  "../src/extension/mcpSync.js"
+);
 
 describe("fetchTools", () => {
   beforeEach(() => {
@@ -17,28 +35,30 @@ describe("fetchTools", () => {
       write: jest.fn(),
       end: jest.fn(),
     };
-    
+
     const mockResponse = {
       statusCode: 200,
       on: jest.fn((event: string, handler: (chunk: string) => void) => {
         if (event === "data") {
-          handler(JSON.stringify({
-            result: {
-              tools: [
-                {
-                  name: "t1",
-                  title: "Test",
-                  description: "desc",
-                  input_schema: {
-                    properties: {
-                      metric: { description: "Metric", type: "string" },
+          handler(
+            JSON.stringify({
+              result: {
+                tools: [
+                  {
+                    name: "t1",
+                    title: "Test",
+                    description: "desc",
+                    input_schema: {
+                      properties: {
+                        metric: { description: "Metric", type: "string" },
+                      },
+                      required: ["metric"],
                     },
-                    required: ["metric"],
                   },
-                },
-              ],
-            },
-          }));
+                ],
+              },
+            })
+          );
         } else if (event === "end") {
           handler("");
         }
@@ -46,11 +66,12 @@ describe("fetchTools", () => {
       }),
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (https.request as any).mockImplementation((options: unknown, callback: (res: unknown) => void) => {
-      callback(mockResponse);
-      return mockRequest;
-    });
+    mockHttpsRequest.mockImplementation(
+      (options: unknown, callback: (res: unknown) => void) => {
+        callback(mockResponse);
+        return mockRequest;
+      }
+    );
 
     const result = await fetchTools("https://example.com");
     expect(result).toHaveLength(1);
@@ -69,8 +90,7 @@ describe("fetchTools", () => {
       end: jest.fn(),
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (https.request as any).mockImplementation(() => mockRequest);
+    mockHttpsRequest.mockImplementation(() => mockRequest);
 
     await expect(fetchTools("https://example.com")).rejects.toBeInstanceOf(
       MCPDiscoveryError

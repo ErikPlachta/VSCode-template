@@ -147,14 +147,14 @@ Current status: `relevant-data-manager` is in the silent shim phase (warnings re
 To avoid runtime vs. manifest drift, IDs and paths are centrally derived and must stay consistent across build- and run-time:
 
 - Central derivation: use `src/shared/ids.ts` (`deriveIds`) as the single place to compute:
-  - `participantId` (VS Code chat participant id), `mention` (e.g. `@mybusiness`), and `commandPrefix`/`settingsPrefix` (e.g. `mybusinessMCP`).
+  - `participantId` (VS Code chat participant id), `mention` (e.g. `@usercontext`), and `commandPrefix`/`settingsPrefix` (e.g. `usercontextMCP`).
   - `extensionFullId` (`<publisher>.<name>`) for locating the installed path.
 - Manifest generation: `bin/utils/updatePackageConfig.ts` consumes `deriveIds` to populate `package.json` contributions and commands. Don’t hand-edit IDs in `package.json`.
 - Activation/runtime: read `context.extension.packageJSON.contributes.chatParticipants[0]` to determine the contributed id/name. Compute the command/settings prefix from the contributed id so runtime always matches the manifest.
 - Provider contribution consistency:
-  - Contribute a provider id in `package.json.contributes.mcpServerDefinitionProviders[0].id` with the pattern `${baseId}-local` (lowercase, e.g. `mybusiness-local`).
+  - Contribute a provider id in `package.json.contributes.mcpServerDefinitionProviders[0].id` with the pattern `${baseId}-local` (lowercase, e.g. `usercontext-local`).
   - Register the provider at runtime with the exact same id; mismatches cause VS Code to warn: “providers must be registered in contributes.mcpServerDefinitionProviders …”.
-- mcp.json registration ids: use `${contributedName}-mcp-server` (e.g. `mybusiness-mcp-server`) for both HTTP and stdio entries.
+- mcp.json registration ids: use `${contributedName}-mcp-server` (e.g. `usercontext-mcp-server`) for both HTTP and stdio entries.
 - Build layout and server path:
   - TypeScript emits only `src` into `out/src` (tsconfig include restricted to `src`).
   - The embedded stdio server entry point is `out/src/server/index.js` (not `out/server/index.js`). Use this path in both provider definitions and mcp.json args.
@@ -175,7 +175,7 @@ To avoid runtime vs. manifest drift, IDs and paths are centrally derived and mus
 
 ## Cache Naming
 
-- Cache folder name derives from `EXTENSION_NAME` env variable (fallback `myBusiness-mcp-extension`).
+- Cache folder name derives from `EXTENSION_NAME` env variable (fallback `usercontext-mcp-extension`).
 - Both workspace-local and global (`%USERPROFILE%/.vscode/extensions/<EXTENSION_NAME>`) cache directories are created.
 - Never hardcode `.mcp-cache`; adapt tests & scripts accordingly.
 

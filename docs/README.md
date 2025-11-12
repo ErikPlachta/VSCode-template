@@ -1,4 +1,4 @@
-**mybusiness-mcp-extension v1.0.0**
+**UserContext-mcp-extension v1.0.0**
 
 ***
 

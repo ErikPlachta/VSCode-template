@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / [schemaPrompt](../README.md) / promptForArgs
+[UserContext-mcp-extension](../../modules.md) / [schemaPrompt](../README.md) / promptForArgs
 
 # Function: promptForArgs()
 
 > **promptForArgs**(`tool`): `Promise`\<`Record`\<`string`, `unknown`\> \| `undefined`\>
 
-Defined in: [src/extension/schemaPrompt.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/extension/schemaPrompt.ts#L70)
+Defined in: [src/extension/schemaPrompt.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/extension/schemaPrompt.ts#L70)
 
 Prompts the user for all required tool arguments.
 

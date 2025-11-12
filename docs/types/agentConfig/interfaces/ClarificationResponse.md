@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ClarificationResponse
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ClarificationResponse
 
 # Interface: ClarificationResponse
 
-Defined in: [src/types/agentConfig.ts:927](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L927)
+Defined in: [src/types/agentConfig.ts:927](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L927)
 
 Response from the clarification agent containing guidance and context.
 
@@ -16,7 +16,7 @@ Response from the clarification agent containing guidance and context.
 
 > **knowledgeSnippets**: [`KnowledgeHit`](../../../mcp/knowledgeBase/interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/types/agentConfig.ts:929](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L929)
+Defined in: [src/types/agentConfig.ts:929](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L929)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/agentConfig.ts:929](https://github.com/ErikPlachta/vscode
 
 > **prompt**: `string`
 
-Defined in: [src/types/agentConfig.ts:928](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L928)
+Defined in: [src/types/agentConfig.ts:928](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L928)

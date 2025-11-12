@@ -479,7 +479,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-11]
 
-#### 2025-11-11 20:42:20 fix: Remove dotenv runtime dependency from env.ts
+#### 2025-11-11 20:42:20 fix: Remove dotenv runtime dependency from env.ts & verified build installation works
 
 - Removed dotenv import from src/shared/env.ts, moved to devDependencies only. Extension name now uses process.env directly with fallback, eliminating runtime dependency loading. Dotenv still used in build scripts.
 

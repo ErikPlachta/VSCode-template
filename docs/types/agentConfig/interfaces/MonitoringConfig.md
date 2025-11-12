@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / MonitoringConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / MonitoringConfig
 
 # Interface: MonitoringConfig
 
-Defined in: [src/types/agentConfig.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L132)
+Defined in: [src/types/agentConfig.ts:132](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L132)
 
 Monitoring configuration
 
@@ -16,7 +16,7 @@ Monitoring configuration
 
 > **alertThresholds**: `Record`\<`string`, `number`\>
 
-Defined in: [src/types/agentConfig.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L134)
+Defined in: [src/types/agentConfig.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L134)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/agentConfig.ts:134](https://github.com/ErikPlachta/vscode
 
 > **metricsToTrack**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/agentConfig.ts#L133)
+Defined in: [src/types/agentConfig.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L133)

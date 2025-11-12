@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/textProcessing](../README.md) / fuzzyMatch
+[UserContext-mcp-extension](../../../modules.md) / [shared/textProcessing](../README.md) / fuzzyMatch
 
 # Function: fuzzyMatch()
 
 > **fuzzyMatch**(`str1`, `str2`): `number`
 
-Defined in: [src/shared/textProcessing.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/textProcessing.ts#L136)
+Defined in: [src/shared/textProcessing.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/textProcessing.ts#L136)
 
 Calculates fuzzy match score between two strings using Levenshtein distance ratio.
 Score ranges from 0 (no match) to 1 (exact match).

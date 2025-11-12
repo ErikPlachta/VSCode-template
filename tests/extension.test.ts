@@ -15,8 +15,62 @@ import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Mock vscode FIRST before any extension imports
+jest.mock(
+  "vscode",
+  () => {
+    const createChatParticipant = jest.fn(() => ({
+      dispose: jest.fn(),
+      iconPath: undefined as any,
+    }));
+    const registerCommand = jest.fn(() => ({ dispose: jest.fn() }));
+    const showQuickPick = jest.fn();
+    const showInformationMessage = jest.fn();
+    const showErrorMessage = jest.fn();
+
+    return {
+      workspace: {
+        getConfiguration: () => ({ get: () => "https://example.com" }),
+      },
+      lm: {
+        registerMcpServerDefinitionProvider: jest.fn(() => ({
+          dispose: jest.fn(),
+        })),
+      },
+      McpStdioServerDefinition: jest.fn(function (
+        this: any,
+        title: string,
+        command: string,
+        args: string[],
+        options: Record<string, unknown>,
+        version: string
+      ) {
+        Object.assign(this, { title, command, args, options, version });
+      }),
+      chat: {
+        createChatParticipant,
+      },
+      commands: {
+        registerCommand,
+      },
+      window: {
+        showInformationMessage,
+        showErrorMessage,
+        showQuickPick,
+        showInputBox: jest.fn(),
+      },
+      __createChatParticipant: createChatParticipant,
+      __registerCommand: registerCommand,
+      __showQuickPick: showQuickPick,
+      __showInformationMessage: showInformationMessage,
+      __showErrorMessage: showErrorMessage,
+    };
+  },
+  { virtual: true }
+);
+
 // Mock sync module BEFORE importing activate to ensure call interception
-jest.mock("@extension/mcpSync", () => ({
+jest.mock("../src/extension/mcpSync", () => ({
   fetchTools: jest
     .fn()
     .mockResolvedValue([
@@ -24,12 +78,13 @@ jest.mock("@extension/mcpSync", () => ({
     ]),
 }));
 
-import { activate } from "../src/extension";
-import * as mcpSync from "@extension/mcpSync";
-
 // Stub out provider to avoid depending on VS Code LM API in tests
 jest.mock("../src/extension/mcpProvider", () => ({
   registerMcpProvider: jest.fn(),
+}));
+
+import { activate } from "../src/extension";
+import * as mcpSync from "../src/extension/mcpSync";
 }));
 
 jest.mock("../src/agent/orchestrator", () => ({
@@ -113,13 +168,8 @@ const showErrorMessage = vscodeMock.__showErrorMessage as jest.Mock;
 
 describe("activate", () => {
   beforeEach(() => {
-    // fetchTools mock already defined; clear call history
-    (mcpSync.fetchTools as jest.Mock).mockClear();
-    createChatParticipant.mockClear();
-    registerCommand.mockClear();
-    showInformationMessage.mockClear();
-    showErrorMessage.mockClear();
-    showQuickPick.mockClear();
+    // Clear all mocks
+    jest.clearAllMocks();
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
       json: async () => ({ jsonrpc: "2.0", id: 1, result: { content: "ok" } }),
@@ -127,9 +177,14 @@ describe("activate", () => {
   });
 
   it("registers slash commands and mentions for each tool", async () => {
+    const packageJson = await import("../package.json");
     await activate({
       subscriptions: [],
       extensionPath: path.resolve(__dirname, ".."),
+      extension: {
+        id: "test.usercontext",
+        packageJSON: packageJson.default || packageJson,
+      },
     } as any);
     expect(mcpSync.fetchTools).toHaveBeenCalledWith(
       "https://example.com",
@@ -138,7 +193,7 @@ describe("activate", () => {
     expect(createChatParticipant).toHaveBeenCalled();
     expect(registerCommand).toHaveBeenCalled();
     expect(showInformationMessage).toHaveBeenCalledWith(
-      "✅ MyBusiness MCP ready! Loaded 1 tools. Use @mybusiness in Copilot Chat!"
+      "✅ UserContext MCP ready! Loaded 1 tools. Use @usercontext in Copilot Chat!"
     );
   });
 });

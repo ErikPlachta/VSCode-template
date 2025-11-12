@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
+[UserContext-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
 
 # Class: PerformanceMonitor
 
-Defined in: [src/shared/analyticsIntegration.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsIntegration.ts#L165)
+Defined in: [src/shared/analyticsIntegration.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsIntegration.ts#L165)
 
 Performance monitoring utility for critical operations.
 
@@ -16,7 +16,7 @@ Performance monitoring utility for critical operations.
 
 > **new PerformanceMonitor**(): `PerformanceMonitor`
 
-Defined in: [src/shared/analyticsIntegration.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsIntegration.ts#L173)
+Defined in: [src/shared/analyticsIntegration.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsIntegration.ts#L173)
 
 Creates a new performance monitor instance.
 
@@ -32,7 +32,7 @@ Creates a new performance monitor instance.
 
 > **monitorDatabaseQuery**\<`T`\>(`queryType`, `query`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsIntegration.ts#L188)
+Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsIntegration.ts#L188)
 
 Monitor a database query operation and record performance metadata.
 
@@ -84,7 +84,7 @@ Result returned by the query function.
 
 > **monitorDataProcessing**\<`T`\>(`operationType`, `processor`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsIntegration.ts#L217)
+Defined in: [src/shared/analyticsIntegration.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsIntegration.ts#L217)
 
 Monitor a data processing operation and record performance metadata.
 
@@ -136,7 +136,7 @@ Result of the processing function.
 
 > **monitorOrchestration**\<`T`\>(`decision`, `orchestration`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/shared/analyticsIntegration.ts#L251)
+Defined in: [src/shared/analyticsIntegration.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsIntegration.ts#L251)
 
 Monitor an orchestration decision and record routing metadata.
 

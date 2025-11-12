@@ -16,10 +16,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import { activate } from "../src/extension";
-import * as mcpSync from "@extension/mcpSync";
+import * as mcpSync from "../src/extension/mcpSync";
 
 // Mock tool fetch
-jest.mock("@extension/mcpSync", () => ({
+jest.mock("../src/extension/mcpSync", () => ({
   fetchTools: jest
     .fn()
     .mockResolvedValue([
@@ -78,20 +78,24 @@ const registered = vscodeMock.__registeredCommands as Record<string, Function>;
 
 describe("diagnoseIds command", () => {
   beforeEach(() => {
-    (mcpSync.fetchTools as jest.Mock).mockClear();
+    jest.clearAllMocks();
     process.env.MCP_CHAT_PARTICIPANT_ID = "custombiz"; // simulate env override
     process.env.MCP_CHAT_PARTICIPANT_NAME = "custombiz";
   });
 
   it("returns structured diagnostic info with expected vs actual", async () => {
+    const packageJson = require("../package.json");
     await activate({
       subscriptions: [],
       extensionPath: path.resolve(__dirname, ".."),
-      extension: { packageJSON: require("../package.json") },
+      extension: {
+        id: "test.usercontext",
+        packageJSON: packageJson,
+      },
     } as any);
 
-    expect(registered["mybusinessMCP.diagnoseIds"]).toBeDefined();
-    const diag = await registered["mybusinessMCP.diagnoseIds"]();
+    expect(registered["usercontextMCP.diagnoseIds"]).toBeDefined();
+    const diag = await registered["usercontextMCP.diagnoseIds"]();
 
     expect(diag.env.MCP_CHAT_PARTICIPANT_ID).toBe("custombiz");
     expect(diag.expected.id).toBe("CustombizMCP");

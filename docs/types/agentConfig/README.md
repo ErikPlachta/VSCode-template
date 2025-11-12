@@ -1,8 +1,8 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / types/agentConfig
+[UserContext-mcp-extension](../../modules.md) / types/agentConfig
 
 # types/agentConfig
 

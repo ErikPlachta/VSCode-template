@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / RelationshipDefinition
+[UserContext-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / RelationshipDefinition
 
 # Interface: RelationshipDefinition
 
-Defined in: [src/types/userContext.types.ts:183](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L183)
+Defined in: [src/types/userContext.types.ts:183](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L183)
 
 Relationship definition between categories
 
@@ -16,7 +16,7 @@ Relationship definition between categories
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:198](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L198)
+Defined in: [src/types/userContext.types.ts:198](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L198)
 
 Description of the relationship
 
@@ -26,7 +26,7 @@ Description of the relationship
 
 > **fields**: `object`
 
-Defined in: [src/types/userContext.types.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L191)
+Defined in: [src/types/userContext.types.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L191)
 
 Fields used to join/link records
 
@@ -48,7 +48,7 @@ Field in target category
 
 > **from**: `string`
 
-Defined in: [src/types/userContext.types.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L185)
+Defined in: [src/types/userContext.types.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L185)
 
 Source category ID
 
@@ -58,7 +58,7 @@ Source category ID
 
 > `optional` **required**: `boolean`
 
-Defined in: [src/types/userContext.types.ts:200](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L200)
+Defined in: [src/types/userContext.types.ts:200](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L200)
 
 Whether the relationship is required
 
@@ -68,7 +68,7 @@ Whether the relationship is required
 
 > **to**: `string`
 
-Defined in: [src/types/userContext.types.ts:187](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L187)
+Defined in: [src/types/userContext.types.ts:187](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L187)
 
 Target category ID
 
@@ -78,6 +78,6 @@ Target category ID
 
 > **type**: `string`
 
-Defined in: [src/types/userContext.types.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L189)
+Defined in: [src/types/userContext.types.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L189)
 
 Type of relationship

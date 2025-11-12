@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / CategoryRequirements
+[UserContext-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / CategoryRequirements
 
 # Interface: CategoryRequirements
 
-Defined in: [src/types/userContext.types.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L40)
+Defined in: [src/types/userContext.types.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L40)
 
 Category requirements and constraints
 
@@ -16,7 +16,7 @@ Category requirements and constraints
 
 > `optional` **notes**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L46)
+Defined in: [src/types/userContext.types.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L46)
 
 Additional notes about requirements
 
@@ -26,7 +26,7 @@ Additional notes about requirements
 
 > **requiredRecordFields**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L42)
+Defined in: [src/types/userContext.types.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L42)
 
 Fields that must be present in records
 
@@ -36,6 +36,6 @@ Fields that must be present in records
 
 > `optional` **requiredRelationshipFields**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/userContext.types.ts#L44)
+Defined in: [src/types/userContext.types.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L44)
 
 Relationship fields that must be present

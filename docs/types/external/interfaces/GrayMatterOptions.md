@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/external](../README.md) / GrayMatterOptions
+[UserContext-mcp-extension](../../../modules.md) / [types/external](../README.md) / GrayMatterOptions
 
 # Interface: GrayMatterOptions\<T\>
 
-Defined in: [src/types/external.d.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/external.d.ts#L22)
+Defined in: [src/types/external.d.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/external.d.ts#L22)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [src/types/external.d.ts:22](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **engines**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/external.d.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/external.d.ts#L24)
+Defined in: [src/types/external.d.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/external.d.ts#L24)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/types/external.d.ts:24](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **excerpt**: `boolean` \| (`file`) => `unknown`
 
-Defined in: [src/types/external.d.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/external.d.ts#L23)
+Defined in: [src/types/external.d.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/external.d.ts#L23)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [src/types/external.d.ts:23](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **language**: `string`
 
-Defined in: [src/types/external.d.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/external.d.ts#L25)
+Defined in: [src/types/external.d.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/external.d.ts#L25)

@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / ExtensionConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / ExtensionConfig
 
 # Interface: ExtensionConfig
 
-Defined in: [src/types/applicationConfig.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L240)
+Defined in: [src/types/applicationConfig.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/applicationConfig.ts#L240)
 
 Extension features configuration.
 
@@ -16,7 +16,7 @@ Extension features configuration.
 
 > **allowThirdParty**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L242)
+Defined in: [src/types/applicationConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/applicationConfig.ts#L242)
 
 Allow third-party extensions.
 
@@ -26,6 +26,6 @@ Allow third-party extensions.
 
 > **sandboxMode**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/applicationConfig.ts#L244)
+Defined in: [src/types/applicationConfig.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/applicationConfig.ts#L244)
 
 Run extensions in sandbox mode.

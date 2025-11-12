@@ -1,22 +1,40 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
 
-const showInputBox = jest.fn();
-const showQuickPick = jest.fn();
-const showErrorMessage = jest.fn();
-
+// Create mock functions that will be returned by the vscode module
 jest.mock(
   "vscode",
-  () => ({
-    window: {
-      showInputBox,
-      showQuickPick,
-      showErrorMessage,
-    },
-  }),
+  () => {
+    const mockFns = {
+      showInputBox: jest.fn(),
+      showQuickPick: jest.fn(),
+      showErrorMessage: jest.fn(),
+    };
+    return {
+      window: mockFns,
+      __mockFns: mockFns, // Expose for test access
+    };
+  },
   { virtual: true }
 );
 
 import { promptForArgs } from "../src/extension/schemaPrompt";
+const vscode = jest.requireMock("vscode") as {
+  __mockFns: {
+    showInputBox: jest.Mock;
+    showQuickPick: jest.Mock;
+    showErrorMessage: jest.Mock;
+  };
+};
+const { showInputBox, showQuickPick, showErrorMessage } = vscode.__mockFns;
 
 describe("promptForArgs", () => {
   beforeEach(() => {

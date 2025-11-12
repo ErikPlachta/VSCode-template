@@ -1,8 +1,8 @@
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / shared/analyticsDashboard
+[UserContext-mcp-extension](../../modules.md) / shared/analyticsDashboard
 
 # shared/analyticsDashboard
 

@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG\_IDS
+[UserContext-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG\_IDS
 
 # Variable: CONFIG\_IDS
 
 > `const` **CONFIG\_IDS**: `object`
 
-Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/types/configRegistry.ts#L23)
+Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/configRegistry.ts#L23)
 
 Configuration ID format: agent.{agentType}.v{major}.{minor}.{patch}
 

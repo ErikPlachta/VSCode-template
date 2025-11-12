@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/prompts](../README.md) / renderClarificationPrompt
+[UserContext-mcp-extension](../../../modules.md) / [mcp/prompts](../README.md) / renderClarificationPrompt
 
 # Function: renderClarificationPrompt()
 
 > **renderClarificationPrompt**(`options`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/prompts/index.ts#L83)
+Defined in: [src/mcp/prompts/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/mcp/prompts/index.ts#L83)
 
 Renders a clarification prompt to solicit more precise user input.
 

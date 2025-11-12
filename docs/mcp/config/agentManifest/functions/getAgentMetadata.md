@@ -1,14 +1,14 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/agentManifest](../README.md) / getAgentMetadata
+[UserContext-mcp-extension](../../../../modules.md) / [mcp/config/agentManifest](../README.md) / getAgentMetadata
 
 # Function: getAgentMetadata()
 
 > **getAgentMetadata**(`agentId`): [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/config/agentManifest.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/mcp/config/agentManifest.ts#L71)
+Defined in: [src/mcp/config/agentManifest.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/mcp/config/agentManifest.ts#L71)
 
 Retrieve manifest metadata for a given agent identifier.
 

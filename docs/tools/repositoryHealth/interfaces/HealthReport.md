@@ -1,12 +1,12 @@
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / HealthReport
+[UserContext-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / HealthReport
 
 # Interface: HealthReport
 
-Defined in: [src/tools/repositoryHealth.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/repositoryHealth.ts#L55)
+Defined in: [src/tools/repositoryHealth.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/repositoryHealth.ts#L55)
 
 Aggregate report describing every compliance check outcome.
 
@@ -16,7 +16,7 @@ Aggregate report describing every compliance check outcome.
 
 > `readonly` **checks**: readonly [`CheckResult`](CheckResult.md)[]
 
-Defined in: [src/tools/repositoryHealth.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/repositoryHealth.ts#L58)
+Defined in: [src/tools/repositoryHealth.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/repositoryHealth.ts#L58)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/tools/repositoryHealth.ts:58](https://github.com/ErikPlachta/vs
 
 > `readonly` **generatedAt**: `string`
 
-Defined in: [src/tools/repositoryHealth.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/repositoryHealth.ts#L56)
+Defined in: [src/tools/repositoryHealth.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/repositoryHealth.ts#L56)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/tools/repositoryHealth.ts:56](https://github.com/ErikPlachta/vs
 
 > `readonly` **passed**: `boolean`
 
-Defined in: [src/tools/repositoryHealth.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/7c19ee49a3a6a5a04e34517f40b64b6722b18db8/src/tools/repositoryHealth.ts#L57)
+Defined in: [src/tools/repositoryHealth.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/tools/repositoryHealth.ts#L57)

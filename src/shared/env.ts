@@ -12,7 +12,7 @@ export function getExtensionName(): string {
   const fromEnv = (process.env.EXTENSION_NAME || "").trim();
   if (fromEnv) return fromEnv;
   // Final fallback to a safe default
-  return "mybusiness-mcp-extension";
+  return "usercontext-mcp-extension";
 }
 
 /**
