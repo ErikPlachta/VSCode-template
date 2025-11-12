@@ -17,11 +17,13 @@ This repository uses `CHANGELOG.md` as the single source of truth for work track
 - ✅ **REQUIRED**: CommunicationAgent handles ALL user-facing formatting
 
 **Data Flow Pattern**:
+
 ```
 User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationAgent (format) → User
 ```
 
 **Before ANY agent change**, verify:
+
 - Does this agent import another agent? → **STOP, refactor to Orchestrator**
 - Does this agent format responses? → **STOP, move to CommunicationAgent**
 - Does this agent call another agent? → **STOP, logic belongs in Orchestrator**
@@ -43,7 +45,9 @@ User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationA
 When complex problem-solving or memory is needed:
 
 ### Sequential Thinking Tool
+
 Use `mcp_sequentialthi_sequentialthinking` when:
+
 - Breaking down multi-step problems
 - Planning complex refactoring
 - Analyzing architectural decisions
@@ -52,13 +56,16 @@ Use `mcp_sequentialthi_sequentialthinking` when:
 **Example**: Planning agent architecture changes, analyzing workflow logic
 
 ### Memory Tool
+
 Use `mcp_memory` tools when:
+
 - Tracking user preferences across sessions
 - Storing project-specific patterns
 - Recording architectural decisions
 - Building knowledge graph of codebase relationships
 
 **Available operations**:
+
 - `create_entities`: Store new concepts/patterns
 - `add_observations`: Add details to existing knowledge
 - `create_relations`: Link related concepts
@@ -70,16 +77,19 @@ Use `mcp_memory` tools when:
 ## Session Workflow
 
 **Start of session**:
+
 1. Read `CHANGELOG.md` → Outstanding Tasks section
 2. Update internal todo list to match priorities
 
 **During work**:
+
 1. Make changes
 2. Add timestamped CHANGELOG entry with details (file paths, what changed, why)
 3. After 3-5 edits: Add Verification block (Build/Tests/Lint/Docs/Coverage)
 4. Update Outstanding Tasks (move completed, add new)
 
 **End of session**:
+
 1. Final Verification block with all quality gates
 2. Reconcile Outstanding Tasks
 3. Commit and push
@@ -87,12 +97,14 @@ Use `mcp_memory` tools when:
 ## Changelog Entry Format
 
 **Required format**:
+
 ```markdown
 #### YYYY-MM-DD HH:MM:SS type: Summary of changes
 
 **Problem/Context**: What was wrong or needed
 
 **Changes Made**:
+
 1. File path (lines X-Y): What changed and why
 2. File path (lines A-B): What changed and why
 
@@ -106,6 +118,7 @@ Use `mcp_memory` tools when:
 ```
 
 **Use ChangeLogManager CLI** for timestamps:
+
 ```bash
 npm run changelog:manage -- add-entry --type feat --summary "Your summary"
 ```
@@ -121,11 +134,13 @@ npm run changelog:manage -- add-entry --type feat --summary "Your summary"
 ## JSDoc Requirements
 
 ❌ **Disallowed**:
+
 - `TODO: describe return value`
 - Missing @param or @returns
 - Undocumented public functions
 
 ✅ **Required**:
+
 - Specific descriptions ("Generates markdown classification summary" not "Returns summary")
 - All parameters documented with types
 - All return values documented with types
@@ -133,6 +148,7 @@ npm run changelog:manage -- add-entry --type feat --summary "Your summary"
 ## Agent Folder Standard
 
 Each agent folder has **EXACTLY 2 files**:
+
 - `agent.config.ts` – Configuration only
 - `index.ts` – Implementation (merged legacy config.ts)
 
@@ -143,6 +159,7 @@ Do NOT reintroduce separate `config.ts` files.
 ❌ **Wrong**: `__dirname` and `__filename` (Not available in ES modules)
 
 ✅ **Correct**:
+
 ```typescript
 import { fileURLToPath } from "url";
 import * as path from "path";
@@ -166,15 +183,19 @@ const __dirname = path.dirname(__filename);
 1. ✅ Implement code
 2. ✅ Update tests → maintain 100% coverage
 3. ✅ Update JSDoc for public APIs
-4. ✅ Run: `npm run prebuild` (lint, test, docs, health)
-5. ✅ Add comprehensive CHANGELOG entry with details
-6. ✅ Verify all quality gates PASS
-7. ✅ Update Outstanding Tasks
-8. ✅ Commit and push
+4. ✅ Run: `npm run compile` to build extension
+5. ✅ Run: `npm run prebuild` (lint, test, docs, health)
+6. ✅ Add comprehensive CHANGELOG entry with details
+7. ✅ Verify all quality gates PASS
+8. ✅ Update Outstanding Tasks
+9. ✅ Commit and push
+
+**Extension Development Note**: After packaging and installing changes to the extension, you MUST reload the VS Code window for changes to take effect. The extension runs in the extension host process, which is not restarted automatically. (Ctrl+Shift+P → "Developer: Reload Window") to test extension changes refreshes vs code.
 
 ## When To Read CHANGELOG.md
 
 **ALWAYS** read `CHANGELOG.md` before starting work:
+
 - Understand current Outstanding Tasks
 - Review recent architectural decisions
 - Check for related recent changes

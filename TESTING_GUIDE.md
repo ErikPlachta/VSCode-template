@@ -6,6 +6,29 @@ This guide provides instructions for testing the current feature set of the MCP 
 
 ## What Changed Recently
 
+### Chat UX Improvements & Agent Isolation Fix (2025-11-11)
+
+**Completed Changes**:
+
+- **Chat Response Formatting**: Added collapsible workflow details, clean status messages
+- **Agent Isolation Restored**: Removed Orchestrator.buildClarificationResponse() - formatting now delegated to CommunicationAgent
+- **Vague Query Detection**: Expanded from 12 to 24 phrase patterns
+- **Clarification Response**: Added CommunicationAgent.formatClarification() with contextual examples and dynamic category listing
+- **Governance Documentation**: Streamlined copilot-instructions.md (291→193 lines, -34%), added MCP tool usage guidance
+
+**Critical Fix**:
+
+- **Agent Isolation Violation**: Orchestrator was formatting user messages directly
+- **Resolution**: Added CommunicationAgent.formatClarification() method, removed Orchestrator.buildClarificationResponse()
+- **Pattern**: User → Orchestrator (coordinates) → CommunicationAgent (formats) → User
+
+**New Testing Requirements**:
+
+1. **Clarification Flow**: Verify vague queries trigger helpful contextual examples
+2. **Collapsible Sections**: Verify workflow details show in <details> tags
+3. **Status Messages**: Verify stream.progress() used instead of markdown
+4. **Dynamic Categories**: Verify category list comes from UserContextAgent
+
 ### Data-Driven Architecture Cleanup (2025-11-11)
 
 **Completed Changes**:
@@ -269,7 +292,93 @@ import { ... } from "@config/application.config";
 
 ## Testing End-to-End Workflows
 
-### Test 9: Test Workflow Execution
+### Test 9: Test Clarification Flow (NEW)
+
+**Objective**: Verify vague queries trigger helpful clarification with contextual examples
+
+**Test Scenario 1: Vague Query Detection**
+
+```bash
+# Test via chat participant
+# 1. Open VS Code with extension installed
+# 2. Open chat panel
+# 3. Send vague query: "@usercontext database info"
+```
+
+**Expected Response Structure**:
+
+```markdown
+I need more specific information to help you. Here are some examples:
+
+**Category Information:**
+
+- "What's in the Applications category?"
+- "Show me the People database structure"
+
+**Query Records:**
+
+- "List all applications used by engineering"
+- "Find people with Python skills"
+
+**Data Analysis:**
+
+- "What insights can you provide about our tech stack?"
+- "Analyze skill distribution"
+
+**Available Categories:**
+Applications, People, Departments, Projects
+
+What would you like to know?
+```
+
+**Verification Points**:
+
+- [ ] Vague query detected (matches one of 24 patterns)
+- [ ] Response shows 3 example categories
+- [ ] Available categories dynamically listed from UserContextAgent
+- [ ] Markdown formatting used (bold, bullets)
+- [ ] No raw data dumps
+
+**Test Scenario 2: Collapsible Workflow Details**
+
+```bash
+# Test successful query
+# Send: "@usercontext list people"
+```
+
+**Expected Response**:
+
+```markdown
+[Primary response content here]
+
+<details><summary>Workflow Details (2.3s)</summary>
+
+**Workflow Performance:**
+
+- Classification: 0.5s
+- Planning: 0.3s
+- Execution: 1.2s
+- Formatting: 0.3s
+
+</details>
+```
+
+**Verification Points**:
+
+- [ ] Primary response clean and focused
+- [ ] Workflow details in collapsible section
+- [ ] Performance timings shown
+- [ ] User can expand for diagnostics
+
+**Test Scenario 3: Status Messages**
+
+**Expected Behavior**:
+
+- [ ] Processing status shows as progress indicator (not visible markdown)
+- [ ] No "🔄 Processing..." text in chat
+- [ ] Clean final response without status clutter
+
+### Test 10: Test Workflow Execution
 
 **Objective**: Verify complete workflow from user request → agent processing → formatted response
 
@@ -305,7 +414,53 @@ const result = await orchestrator.executeTask("list", "people");
 3. Run: `User Context MCP: Diagnose IDs`
 4. **Expected**: Diagnostic output showing participant ID, mention, command prefix
 
-### Test 10: Test Configuration-Driven Behavior
+### Test 11: Test Agent Isolation (UPDATED)
+
+**Objective**: Verify Orchestrator is ONLY agent that coordinates inter-agent communication
+
+**Critical Pattern**: User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationAgent (formats) → User
+
+**Steps**:
+
+```bash
+# Check for forbidden agent-to-agent imports
+grep -rn "from \"@agent/[^\"]*Agent\"" src/agent/*/index.ts | grep -v orchestrator
+
+# Should return: empty (only Orchestrator imports agents)
+
+# Verify CommunicationAgent.formatClarification exists
+grep -n "formatClarification" src/agent/communicationAgent/index.ts
+
+# Should return: 2+ results (method definition and export)
+
+# Verify Orchestrator.buildClarificationResponse REMOVED
+grep -n "buildClarificationResponse" src/agent/orchestrator/index.ts
+
+# Should return: empty (method deleted)
+
+# Verify clarification handler delegates to CommunicationAgent
+grep -A10 "classification.intent === \"clarification\"" src/agent/orchestrator/index.ts | grep "formatClarification"
+
+# Should return: 1 result showing delegation call
+```
+
+**Verification Pattern**:
+
+```typescript
+// ✅ CORRECT: Orchestrator coordinates, CommunicationAgent formats
+const clarificationResponse: AgentResponse = {
+  type: "info",
+  metadata: { originalQuestion, availableCategories, matchedIntent },
+};
+const formatted = this.communicationAgent.formatClarification(
+  clarificationResponse
+);
+
+// ❌ WRONG: Orchestrator formats directly
+// const markdown = this.buildClarificationResponse(question);
+```
+
+### Test 12: Test Configuration-Driven Behavior
 
 **Objective**: Verify agents use configuration files for behavior
 
@@ -335,7 +490,7 @@ const result = await orchestrator.executeTask("list", "people");
 
 ## Regression Testing
 
-### Test 11: Verify No Breaking Changes
+### Test 13: Verify No Breaking Changes
 
 **Objective**: Confirm all changes maintain backward compatibility
 
@@ -420,41 +575,10 @@ Before marking work complete, verify:
 - [ ] Health: Repository health report passes
 - [ ] Coverage: 100% or documented exceptions
 - [ ] JSDoc: No placeholder language
-- [ ] Agent Structure: 2 files per agent (except userContextAgent - outstanding)
+- [ ] Agent Structure: 2 files per agent (index.ts + agent.config.ts)
 - [ ] Agent Isolation: No agent-to-agent imports (except Orchestrator)
 - [ ] Single Class: No standalone exported functions
 - [ ] Type Centralization: Types in `types/` folder, not in agents
-
-## Next Steps
-
-1. ✅ **~~Fix userContextAgent structure~~** - **COMPLETE** (2025-11-11 22:45)
-
-   - ✅ Removed `dataLoader.ts`
-   - ✅ All 7 agents now follow 2-file pattern
-
-2. **Continue Phase 4 Workflow Coordination** (~90% complete)
-
-   - Phase 4.11: Create comprehensive workflow execution tests
-   - Phase 5: Update documentation
-   - Phase 6: Final verification
-
-3. **Agent Configuration Enhancement** (Priority 1)
-
-   - Add focus, signal, prompt starters to all agent configs
-   - Enable runtime configuration merging from UserContext
-
-4. **Legacy Cleanup**
-   - Remove relevant-data-manager shim (after compatibility period)
-   - Update any remaining references
-
-## Resources
-
-- **CHANGELOG.md**: Complete history of changes and outstanding tasks
-- **README.md**: User-facing documentation
-- **docs/**: Generated API documentation
-- **.github/copilot-instructions.md**: Governance and architectural rules
-
----
-
-**Last Updated**: 2025-11-11 22:40:00  
-**Status**: Data-driven architecture cleanup COMPLETE; userContextAgent cleanup pending
+- [ ] **Clarification Flow**: Vague queries trigger helpful examples (NEW)
+- [ ] **Chat UX**: Collapsible workflow details, clean status messages (NEW)
+- [ ] **Dynamic Categories**: Category list from UserContextAgent (NEW)
