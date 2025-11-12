@@ -7,8 +7,8 @@ async function main() {
   const pkg = JSON.parse(await fs.promises.readFile(pkgPath, "utf8"));
 
   const chat = (pkg.contributes?.chatParticipants || [])[0] || {};
-  const contributedId: string = chat.id || "MybusinessMCP";
-  const contributedName: string = chat.name || "mybusiness";
+  const contributedId: string = chat.id || "UserContextMCP";
+  const contributedName: string = chat.name || "usercontext";
 
   const envExtName = (process.env.EXTENSION_NAME || "").trim() || undefined;
   const envChatId =
@@ -16,7 +16,7 @@ async function main() {
   const envChatName =
     (process.env.MCP_CHAT_PARTICIPANT_NAME || "").trim() || undefined;
 
-  const baseId = envChatId || envChatName || "mybusiness";
+  const baseId = envChatId || envChatName || "usercontext";
   const expectedId = baseId.charAt(0).toUpperCase() + baseId.slice(1) + "MCP";
   const expectedName = envChatName || baseId;
 

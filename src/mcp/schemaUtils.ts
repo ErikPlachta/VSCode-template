@@ -2,12 +2,12 @@
  * @packageDocumentation schemaUtils implementation for mcp module
  */
 
+import { CategoryId } from "@internal-types/agentConfig";
 import type {
   BusinessCategory,
-  CategoryId,
   RelationshipDescription,
   CategorySchema,
-} from "@agent/userContextAgent";
+} from "@internal-types/userContext.types";
 
 /**
  * RelationshipIntegrityIssue interface.

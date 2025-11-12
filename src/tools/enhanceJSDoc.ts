@@ -14,6 +14,11 @@
 import * as fs from "fs";
 import * as path from "path";
 import ts from "typescript";
+import { fileURLToPath } from "url";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Represents a generated or replacement JSDoc block to apply to a source file.

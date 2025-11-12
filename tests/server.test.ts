@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+
 // Skip server tests temporarily due to ES module import.meta issues in test environment
 describe.skip("server", () => {
   it("exposes development tools for the MCP client", () => {

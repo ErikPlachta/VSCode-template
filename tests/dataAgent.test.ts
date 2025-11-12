@@ -1,9 +1,24 @@
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
+import { fileURLToPath } from "url";
 import { DataAgent } from "../src/agent/dataAgent";
 import { DatabaseAgent, DataSource } from "../src/agent/databaseAgent";
-import { UserContextAgent as RelevantDataManagerAgent } from "../src/agent/userContextAgent";
+import { UserContextAgent } from "../src/agent/userContextAgent";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let workspaceFoldersMock: any[] | undefined;
 
@@ -33,13 +48,13 @@ describe("DataAgent", () => {
 
   async function createAgent(): Promise<{
     agent: DataAgent;
-    manager: RelevantDataManagerAgent;
+    manager: UserContextAgent;
     database: DatabaseAgent;
   }> {
     const cacheDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "data-agent-test-")
     );
-    const manager = new RelevantDataManagerAgent(Promise.resolve(cacheDir));
+    const manager = new UserContextAgent(undefined, Promise.resolve(cacheDir));
     const dataSources: DataSource[] = manager
       .listCategories()
       .map((summary: any) => {

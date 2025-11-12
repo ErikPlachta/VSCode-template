@@ -1,6 +1,196 @@
 # Copilot Chat Instructions
 
-This repository uses the root `CHANGELOG.md` as the single source of truth for Copilot Chat managed work. Follow these guidelines to ensure consistent, high-quality changes aligned with the extension's design goals (customizable MCP server, User Context focus, 100% coverage, strict JSDoc).
+This repository uses `CHANGELOG.md` as the single source of truth for work tracking. Follow these guidelines for consistent, high-quality changes.
+
+## Critical Architecture Rules
+
+### 1. **Agent Isolation (MUST FOLLOW)**
+
+**RULE**: Orchestrator is the ONLY agent that coordinates inter-agent communication.
+
+- ❌ **FORBIDDEN**: Agents importing other agents (`@agent/communicationAgent`, `@agent/dataAgent`, etc.)
+- ❌ **FORBIDDEN**: Agents formatting responses for users
+- ❌ **FORBIDDEN**: Agents calling other agents directly
+
+- ✅ **REQUIRED**: Agents return typed data only
+- ✅ **REQUIRED**: Orchestrator coordinates all agent calls
+- ✅ **REQUIRED**: CommunicationAgent handles ALL user-facing formatting
+
+**Data Flow Pattern**:
+```
+User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationAgent (format) → User
+```
+
+**Before ANY agent change**, verify:
+- Does this agent import another agent? → **STOP, refactor to Orchestrator**
+- Does this agent format responses? → **STOP, move to CommunicationAgent**
+- Does this agent call another agent? → **STOP, logic belongs in Orchestrator**
+
+### 2. **100% Data-Driven Design**
+
+- ❌ **NEVER** hardcode business values (category names, field names, etc.)
+- ✅ **ALWAYS** derive from configuration or loaded data
+- ✅ **ALWAYS** use proper typed parameters (never pass bare `undefined`)
+
+### 3. **Configuration Source of Truth**
+
+- Use `src/config/application.config.ts` and agent.config.ts files
+- **NEVER** edit or commit `src/mcp.config.json` (health check fails)
+- Generated configs go in `out/` directory only
+
+## MCP Tool Usage
+
+When complex problem-solving or memory is needed:
+
+### Sequential Thinking Tool
+Use `mcp_sequentialthi_sequentialthinking` when:
+- Breaking down multi-step problems
+- Planning complex refactoring
+- Analyzing architectural decisions
+- Need to revise approach mid-solution
+
+**Example**: Planning agent architecture changes, analyzing workflow logic
+
+### Memory Tool
+Use `mcp_memory` tools when:
+- Tracking user preferences across sessions
+- Storing project-specific patterns
+- Recording architectural decisions
+- Building knowledge graph of codebase relationships
+
+**Available operations**:
+- `create_entities`: Store new concepts/patterns
+- `add_observations`: Add details to existing knowledge
+- `create_relations`: Link related concepts
+- `search_nodes`: Find relevant stored knowledge
+- `read_graph`: Review all stored knowledge
+
+**Example**: Store "Agent X should never import Agent Y" as entity with observations
+
+## Session Workflow
+
+**Start of session**:
+1. Read `CHANGELOG.md` → Outstanding Tasks section
+2. Update internal todo list to match priorities
+
+**During work**:
+1. Make changes
+2. Add timestamped CHANGELOG entry with details (file paths, what changed, why)
+3. After 3-5 edits: Add Verification block (Build/Tests/Lint/Docs/Coverage)
+4. Update Outstanding Tasks (move completed, add new)
+
+**End of session**:
+1. Final Verification block with all quality gates
+2. Reconcile Outstanding Tasks
+3. Commit and push
+
+## Changelog Entry Format
+
+**Required format**:
+```markdown
+#### YYYY-MM-DD HH:MM:SS type: Summary of changes
+
+**Problem/Context**: What was wrong or needed
+
+**Changes Made**:
+1. File path (lines X-Y): What changed and why
+2. File path (lines A-B): What changed and why
+
+**Architecture Notes**: Why this approach, patterns used
+
+**Files Changed**: List with line counts
+
+**Testing**: Status of compilation, tests, coverage
+
+**Impact**: What this enables/fixes
+```
+
+**Use ChangeLogManager CLI** for timestamps:
+```bash
+npm run changelog:manage -- add-entry --type feat --summary "Your summary"
+```
+
+## Quality Gates (ALL must PASS)
+
+- ✅ **Build**: TypeScript compiles with no errors
+- ✅ **Tests**: All tests pass, 100% coverage (or documented exception)
+- ✅ **Lint**: No errors, complete JSDoc (no TODOs, no missing @returns)
+- ✅ **Docs**: Regenerated, no orphans
+- ✅ **Health**: Repository health checks pass
+
+## JSDoc Requirements
+
+❌ **Disallowed**:
+- `TODO: describe return value`
+- Missing @param or @returns
+- Undocumented public functions
+
+✅ **Required**:
+- Specific descriptions ("Generates markdown classification summary" not "Returns summary")
+- All parameters documented with types
+- All return values documented with types
+
+## Agent Folder Standard
+
+Each agent folder has **EXACTLY 2 files**:
+- `agent.config.ts` – Configuration only
+- `index.ts` – Implementation (merged legacy config.ts)
+
+Do NOT reintroduce separate `config.ts` files.
+
+## ES Module Requirements
+
+❌ **Wrong**: `__dirname` and `__filename` (Not available in ES modules)
+
+✅ **Correct**:
+```typescript
+import { fileURLToPath } from "url";
+import * as path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+```
+
+## Common Pitfalls
+
+1. **Agent isolation violations** (importing/calling other agents)
+2. **Hardcoded values** (not data-driven)
+3. **Bare changelog entries** (missing details, file paths, testing)
+4. **Coverage drops** (without remediation plan)
+5. **Missing JSDoc** (incomplete documentation)
+6. **Manual doc edits** (regenerate instead)
+7. **Legacy mcp.config.json** (triggers health check failure)
+
+## Making a Change Checklist
+
+1. ✅ Implement code
+2. ✅ Update tests → maintain 100% coverage
+3. ✅ Update JSDoc for public APIs
+4. ✅ Run: `npm run prebuild` (lint, test, docs, health)
+5. ✅ Add comprehensive CHANGELOG entry with details
+6. ✅ Verify all quality gates PASS
+7. ✅ Update Outstanding Tasks
+8. ✅ Commit and push
+
+## When To Read CHANGELOG.md
+
+**ALWAYS** read `CHANGELOG.md` before starting work:
+- Understand current Outstanding Tasks
+- Review recent architectural decisions
+- Check for related recent changes
+- Understand current priorities
+
+## Key Files Reference
+
+- `CHANGELOG.md` – Single source of truth for work tracking
+- `src/config/application.config.ts` – Application configuration
+- `src/agent/*/agent.config.ts` – Agent configurations
+- `src/shared/ids.ts` – Central ID derivation
+- `.github/copilot-instructions.md` – This file (governance rules)
+
+---
+
+**Remember**: When in doubt about architecture, check agent isolation rules. When in doubt about what to work on, check CHANGELOG Outstanding Tasks. When stuck on complex problems, use Sequential Thinking MCP tool.
 
 ## Core Principles
 
@@ -10,12 +200,13 @@ This repository uses the root `CHANGELOG.md` as the single source of truth for C
 4. Quality gates: build, tests (100% coverage), lint (strict JSDoc), docs generation, health report all must PASS before marking work complete.
 5. Migration safety: renames (e.g. `businessData` → `userContext`, `relevant-data-manager` → `user-context`) follow an alias lifecycle: Introduced → Aliased → Warn → Removed. The `relevant-data-manager` warning phase has concluded; the shim remains silently for compatibility until its scheduled removal.
 6. Configuration integrity: no committed legacy JSON config (`src/mcp.config.json`). Any reintroduction is treated as a governance regression and fails the health check.
+7. **Agent isolation (CRITICAL)**: Orchestrator is the ONLY agent that coordinates inter-agent communication. Agents MUST NOT import from other agents (no `@agent/communicationAgent`, `@agent/dataAgent`, etc.). Agents are black boxes: receive request from Orchestrator → process → return typed data. Orchestrator handles all formatting, error wrapping, and agent-to-agent coordination.
 
 ## Session Workflow
 
 At the start of a session:
 
-- Read `CHANGELOG.md` → Outstanding Tasks and confirm which Priority 1 items are active.
+- Read `CHANGELOG.md` → Outstanding Tasks and confirm which Current Tasks are active.
 - Update the internal todo list to mirror Outstanding Tasks (preserve priorities and wording).
 
 During changes:
@@ -34,19 +225,69 @@ At the end of a session:
 The changelog is organized around two sections: Outstanding Tasks and Logs. Follow these rules (synced from `CHANGELOG.md` → Notes for Copilot):
 
 1. Outstanding Tasks captures all incomplete work. It is organized by priority and jointly maintained by the user and Copilot Chat.
-2. Every incomplete task should appear here, grouped by priority: Priority 1 (Current), Priority 2 (Next Focus), Priority 3 (Backlog).
+2. Every incomplete task should appear here, grouped by priority: Current Tasks (immediate focus), Priority 1 (Next), Priority 2 (Later), Priority 3 (Backlog).
 3. Copilot should proactively review and keep this section up to date, reflecting user-requested priority changes.
 4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
 5. Logs capture all change history, organized by date/time and semantic titles.
-6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES` (e.g., `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`).
-7. Use semantic titles for log entries: `#### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES` (e.g., `#### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`).
-8. Include file paths for meaningful changes.
+6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
+7. Use semantic titles for log entries: `#### YYYY-MM-DD HH:MM:SS fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a detailed description with sub-points. Entries MUST include specific details, file paths, and implementation notes - never just the summary line alone.
+8. Include file paths for meaningful changes and provide sub-points explaining what was actually changed.
 9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into Outstanding Tasks.
 
 Practical cadence:
 
 - Insert new log entries newest-first within the current day; add the optional daily summary headline once per day if helpful.
 - After 3–5 edits or when creating/editing >~3 files in a burst, add/update a Verification block and reconcile Outstanding Tasks.
+- **Timestamp format**: Use `YYYY-MM-DD HH:MM:SS` (24-hour time with spaces) for log entry headers. The ChangeLogManager CLI handles this automatically.
+
+## Agent Architecture (CRITICAL)
+
+### Core Design Principle: Orchestrator-Centric Communication
+
+**RULE**: Orchestrator is the ONLY agent that coordinates inter-agent communication.
+
+**Agent Isolation Requirements**:
+
+1. **No agent-to-agent imports**: Agents MUST NOT import from other agents
+   - ❌ FORBIDDEN: `import { ... } from "@agent/communicationAgent"`
+   - ❌ FORBIDDEN: `import { ... } from "@agent/dataAgent"`
+   - ❌ FORBIDDEN: `await import("@agent/communicationAgent")`
+   - ✅ ALLOWED: Import from shared utilities (`@shared/*`), types (`@internal-types/*`), config
+2. **Agents are black boxes**:
+
+   - Receive request from Orchestrator
+   - Process internally using own methods
+   - Return typed data (NOT formatted responses)
+   - No knowledge of other agents
+
+3. **Orchestrator responsibilities**:
+
+   - Route user requests to appropriate agents
+   - Call agent methods and receive typed data
+   - Handle errors and wrap in structured responses
+   - Use CommunicationAgent for formatting
+   - Coordinate multi-agent workflows
+
+4. **Data flow pattern**:
+   ```
+   User → Orchestrator → Agent (returns typed data) → Orchestrator → CommunicationAgent (formats) → User
+   ```
+
+**Why This Matters**:
+
+- **Loose coupling**: Agents can be modified without affecting others
+- **Testability**: Agents tested in complete isolation
+- **Clear boundaries**: Single responsibility for each component
+- **No circular dependencies**: Even with dynamic imports
+- **Maintainability**: Changes localized to single agent
+
+**Verification**:
+
+Before any agent change, check:
+
+- Does this agent import from another agent? → Refactor to Orchestrator
+- Does this agent format responses? → Move formatting to Orchestrator/CommunicationAgent
+- Does this agent coordinate with others? → Logic belongs in Orchestrator
 
 ## Quality Gates
 
@@ -96,14 +337,14 @@ Current status: `relevant-data-manager` is in the silent shim phase (warnings re
 To avoid runtime vs. manifest drift, IDs and paths are centrally derived and must stay consistent across build- and run-time:
 
 - Central derivation: use `src/shared/ids.ts` (`deriveIds`) as the single place to compute:
-  - `participantId` (VS Code chat participant id), `mention` (e.g. `@mybusiness`), and `commandPrefix`/`settingsPrefix` (e.g. `mybusinessMCP`).
+  - `participantId` (VS Code chat participant id), `mention` (e.g. `@usercontext`), and `commandPrefix`/`settingsPrefix` (e.g. `usercontextMCP`).
   - `extensionFullId` (`<publisher>.<name>`) for locating the installed path.
-- Manifest generation: `bin/utils/updatePackageConfig.ts` consumes `deriveIds` to populate `package.json` contributions and commands. Don’t hand-edit IDs in `package.json`.
+- Manifest generation: `bin/utils/updatePackageConfig.ts` consumes `deriveIds` to populate and/or modify `package.json` contributions and commands. Don’t hand-edit IDs in `package.json`.
 - Activation/runtime: read `context.extension.packageJSON.contributes.chatParticipants[0]` to determine the contributed id/name. Compute the command/settings prefix from the contributed id so runtime always matches the manifest.
 - Provider contribution consistency:
-  - Contribute a provider id in `package.json.contributes.mcpServerDefinitionProviders[0].id` with the pattern `${baseId}-local` (lowercase, e.g. `mybusiness-local`).
+  - Contribute a provider id in `package.json.contributes.mcpServerDefinitionProviders[0].id` with the pattern `${baseId}-local` (lowercase, e.g. `usercontext-local`).
   - Register the provider at runtime with the exact same id; mismatches cause VS Code to warn: “providers must be registered in contributes.mcpServerDefinitionProviders …”.
-- mcp.json registration ids: use `${contributedName}-mcp-server` (e.g. `mybusiness-mcp-server`) for both HTTP and stdio entries.
+- mcp.json registration ids: use `${contributedName}-mcp-server` (e.g. `usercontext-mcp-server`) for both HTTP and stdio entries.
 - Build layout and server path:
   - TypeScript emits only `src` into `out/src` (tsconfig include restricted to `src`).
   - The embedded stdio server entry point is `out/src/server/index.js` (not `out/server/index.js`). Use this path in both provider definitions and mcp.json args.
@@ -124,7 +365,7 @@ To avoid runtime vs. manifest drift, IDs and paths are centrally derived and mus
 
 ## Cache Naming
 
-- Cache folder name derives from `EXTENSION_NAME` env variable (fallback `myBusiness-mcp-extension`).
+- Cache folder name derives from `EXTENSION_NAME` env variable (fallback `usercontext-mcp-extension`).
 - Both workspace-local and global (`%USERPROFILE%/.vscode/extensions/<EXTENSION_NAME>`) cache directories are created.
 - Never hardcode `.mcp-cache`; adapt tests & scripts accordingly.
 
@@ -158,6 +399,37 @@ To avoid runtime vs. manifest drift, IDs and paths are centrally derived and mus
 - Forgetting to remove placeholder tokens (e.g., `<application>`) from category ids; canonical ids are required for tests.
 - Reintroducing a legacy `mcp.config.json` file under `src/` or `bin/` (health check will fail).
 - Leaving deprecated alias warnings in place after the silent phase begins.
+- Using `__dirname` or `__filename` without ES module polyfills (see ES Module Requirements below).
+
+## ES Module Requirements
+
+This project uses ES modules (`"type": "module"` in `package.json`). CommonJS globals like `__dirname` and `__filename` are NOT available.
+
+**REQUIRED pattern** when you need file path resolution:
+
+```typescript
+import { fileURLToPath } from "url";
+import * as path from "path";
+
+// ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+```
+
+**When to use this pattern**:
+
+- Any time you need to resolve paths relative to the current source file
+- When referencing sibling directories or parent directories
+- When loading resources bundled with the extension
+
+**Examples in codebase**:
+
+- `src/server/index.ts` (lines 18-19)
+- `src/tools/generateSchemas.ts` (lines 13-14)
+- `src/agent/userContextAgent/index.ts` (lines 68-70)
+- `src/extension/index.ts` (lines 14-16)
+
+**Verification**: Before committing new files that use path resolution, ensure they follow this pattern.
 
 ## Agent Folder Standard
 

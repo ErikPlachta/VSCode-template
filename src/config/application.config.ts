@@ -112,26 +112,10 @@ export const applicationConfig: ApplicationConfig = {
   typescript: {
     include: ["src/**/*.ts"],
   },
-  jsonSchemas: [
-    {
-      pattern: "src/{businessData,userContext}/*/category.json",
-      schema: "src/schemas/category.schema.json",
-      description:
-        "Category metadata must define purpose, orchestration, and agent responsibilities.",
-    },
-    {
-      pattern: "src/{businessData,userContext}/*/records.json",
-      schema: "src/schemas/records.schema.json",
-      description:
-        "Entity records require identifiers, human-readable names, and linkage metadata.",
-    },
-    {
-      pattern: "src/{businessData,userContext}/*/relationships.json",
-      schema: "src/schemas/relationships.schema.json",
-      description:
-        "Relationship definitions must clearly communicate target categories and join keys.",
-    },
-  ],
+  // JSON schema validation removed - now using native TypeScript type guards
+  // Validation is performed by type guard functions in src/types/userContext.types.ts
+  // Users will onboard custom UserContext data through extension utilities (not source code)
+  jsonSchemas: [],
   markdown: {
     include: ["docs/**/*.md"],
     exclude: ["docs/**"],

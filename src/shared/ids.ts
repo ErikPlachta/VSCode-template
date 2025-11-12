@@ -44,14 +44,14 @@ export interface DerivedIds {
 export function deriveIds(env: RawEnv = process.env as RawEnv): DerivedIds {
   const publisher = sanitizeSegment(env.EXTENSION_PUBLISHER || "ErikPlachta");
   const extensionName = sanitizeSegment(
-    env.EXTENSION_NAME || "mybusiness-mcp-extension"
+    env.EXTENSION_NAME || "usercontext-mcp-extension"
   );
 
   const rawBase =
     env.MCP_CHAT_PARTICIPANT_ID ||
     env.MCP_CHAT_PARTICIPANT_NAME ||
-    "mybusiness";
-  const baseId = sanitizeSegment(rawBase || "mybusiness");
+    "usercontext";
+  const baseId = sanitizeSegment(rawBase || "usercontext");
   const participantId =
     baseId.charAt(0).toUpperCase() + baseId.slice(1) + "MCP";
   const mention = `@${baseId}`;

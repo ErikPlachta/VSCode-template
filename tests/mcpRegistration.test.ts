@@ -1,3 +1,14 @@
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
+
 jest.mock("vscode", () => ({ env: {} }), { virtual: true });
 
 import { promises as fs } from "fs";
@@ -177,7 +188,7 @@ describe("ensureRegistration", () => {
       portableDir: "",
     };
     await ensureRegistration(
-      { id: "mybusiness", url: "http://localhost:39200", type: "http" },
+      { id: "usercontext", url: "http://localhost:39200", type: "http" },
       options
     );
 
@@ -185,7 +196,7 @@ describe("ensureRegistration", () => {
     expect(updated.custom).toBe(true);
     expect(updated.clients).toEqual(existingConfig.clients);
     expect(updated.servers.legacy).toEqual(existingConfig.servers.legacy);
-    expect(updated.servers.mybusiness).toEqual({
+    expect(updated.servers.usercontext).toEqual({
       type: "http",
       url: "http://localhost:39200",
     });

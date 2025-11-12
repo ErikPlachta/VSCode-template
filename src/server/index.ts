@@ -232,14 +232,14 @@ async function handleInvoke(
   args: Record<string, unknown> = {}
 ): Promise<unknown> {
   switch (name) {
-    case "relevant-data.describeCategory": {
+    case "user-context.describeCategory": {
       const categoryId = String(args.categoryId ?? "");
       if (!categoryId) {
         throw new Error("'categoryId' is required.");
       }
       return describeCategory(categoryId);
     }
-    case "relevant-data.searchRecords": {
+    case "user-context.searchRecords": {
       const categoryId = String(args.categoryId ?? "");
       if (!categoryId) {
         throw new Error("'categoryId' is required.");
@@ -311,7 +311,7 @@ async function handleRequest(
           tools: {},
         },
         serverInfo: {
-          name: "mybusiness-mcp-server", // TODO: Update this to be an arg from a config in the bin folder or something.
+          name: "usercontext-mcp-server", // TODO: Update this to be an arg from a config in the bin folder or something.
           version: "1.0.0",
         },
       },
@@ -485,7 +485,7 @@ async function handleJsonRpcMessage(
             tools: {},
           },
           serverInfo: {
-            name: "mybusiness-mcp-server",
+            name: "usercontext-mcp-server",
             version: "1.0.0",
           },
         },
@@ -704,7 +704,8 @@ const __isMain = ((): boolean => {
   return true;
 })();
 
-if (__isMain) {
+// Only auto-start the server if running as main module AND not in test environment
+if (__isMain && process.env.NODE_ENV !== "test") {
   // Check if we should run in stdio mode
   const args = process.argv.slice(2);
   if (args.includes("--stdio")) {

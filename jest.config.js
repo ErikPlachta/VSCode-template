@@ -1,5 +1,5 @@
 export default {
-  preset: "ts-jest",
+  preset: "ts-jest/presets/default-esm",
   testEnvironment: "node",
   roots: ["<rootDir>/tests"],
   moduleFileExtensions: ["ts", "js", "json"],
@@ -9,6 +9,7 @@ export default {
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov", "html"],
   testTimeout: 30000,
+  extensionsToTreatAsEsm: [".ts"],
   // Module name mapping for absolute imports
   moduleNameMapper: {
     "^@agent/(.*)$": "<rootDir>/src/agent/$1",
@@ -19,13 +20,18 @@ export default {
     "^@config/(.*)$": "<rootDir>/src/config/$1",
     "^@internal-types/(.*)$": "<rootDir>/src/types/$1",
     "^@types/(.*)$": "<rootDir>/src/types/$1",
+    // Mock vscode module for tests that import extension code
+    "^vscode$": "<rootDir>/tests/__mocks__/vscode.ts",
+    // Add .js extensions to imports for ESM compatibility
+    "^(\\.{1,2}/.*)\\.js$": "$1",
   },
   // Explicitly set transform for TypeScript files
   transform: {
     "^.+\\.ts$": [
       "ts-jest",
       {
-        tsconfig: "tsconfig.json",
+        tsconfig: "tsconfig.test.json",
+        useESM: true,
       },
     ],
   },

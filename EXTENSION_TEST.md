@@ -13,26 +13,26 @@
 
 - [ ] Press F5 to start debugging
 - [ ] Extension Development Host opens without errors
-- [ ] Check console for "🚀 MyBusiness MCP Extension: Starting activation..."
+- [ ] Check console for "🚀 UserContext MCP Extension: Starting activation..."
 - [ ] Check console for "📁 Set data root to: ..." log
 - [ ] Verify no "Data directory does not exist" errors
 
 ### 2. Chat Participant Test
 
 - [ ] Open Copilot Chat in Extension Development Host
-- [ ] Type `@mybusiness` to see if participant appears
+- [ ] Type `@usercontext` to see if participant appears
 - [ ] Verify chat participant is available
 
 ### 3. MCP Registration Test
 
 - [ ] Go to Settings > Language Models > Model Context Protocol
-- [ ] Check if "MyBusiness MCP" appears as available server
+- [ ] Check if "UserContext MCP" appears as available server
 - [ ] Verify server status shows as connected
 
 ### 4. Tool Integration Test
 
 - [ ] In Copilot Chat, ask: "What tools are available?"
-- [ ] Test a simple query: "@mybusiness What departments do we have?"
+- [ ] Test a simple query: "@usercontext What departments do we have?"
 
 ## 🐛 If Issues Persist
 
@@ -44,6 +44,6 @@
 ## 📊 Success Criteria
 
 - ✅ Extension activates without errors
-- ✅ Chat participant @mybusiness appears
+- ✅ Chat participant @usercontext appears
 - ✅ MCP server registers with VS Code
 - ✅ Tools are accessible via Copilot Chat

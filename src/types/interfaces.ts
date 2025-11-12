@@ -6,21 +6,10 @@
  * and should only be used for its specific function.
  */
 
-// Generic types that work with any data structure, not hard-coded categories
-/**
- * Unique identifier for a business data category.
- * Used to reference specific categories across the agent system.
- */
-export type CategoryId = string;
+// Import centralized types to ensure consistency
+import { CategoryId, CategoryRecord } from "@internal-types/agentConfig";
 
-/**
- * Represents a generic record from any business data category.
- *
- */
-export interface CategoryRecord {
-  id: string;
-  [key: string]: unknown;
-}
+// Generic types that work with any data structure, not hard-coded categories
 
 /**
  * ======================================

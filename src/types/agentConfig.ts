@@ -281,6 +281,14 @@ export interface ClarificationConfig {
       includeEncouragement?: boolean;
       maxResponseLength?: number;
     };
+    helpSystem?: {
+      enabled?: boolean;
+      listAgentCapabilities?: boolean;
+      includeExampleQueries?: boolean;
+      maxExamplesPerAgent?: number;
+      includeCategorySummaries?: boolean;
+      maxCategoriesToList?: number;
+    };
   };
   escalation: {
     escalationThreshold: number;
@@ -317,6 +325,135 @@ export interface ClarificationConfig {
     maxResponseTime?: number;
     enableParallelProcessing?: boolean;
     processingBatchSize?: number;
+  };
+}
+
+/**
+ * Communication agent-specific configuration for response formatting and user interaction
+ *
+ */
+export interface CommunicationConfig {
+  formatting: {
+    defaultFormat: "markdown" | "plaintext" | "html";
+    tone: {
+      success: string;
+      error: string;
+      progress: string;
+      validation: string;
+    };
+    verbosity: "minimal" | "balanced" | "detailed";
+    maxMessageLength: number;
+    includeEmoji?: boolean;
+    includeSectionHeaders?: boolean;
+    formatLists?: boolean;
+    highlightKeyInfo?: boolean;
+  };
+  successTemplates?: {
+    dataRetrieved?: string;
+    analysisComplete?: string;
+    metadataRetrieved?: string;
+    exportComplete?: string;
+    importComplete?: string;
+    validationPassed?: string;
+  };
+  errorHandling: {
+    includeStackTrace?: boolean;
+    includeErrorCodes?: boolean;
+    suggestRecoveryActions?: boolean;
+    maxRecoverySuggestions?: number;
+    errorTemplates?: {
+      notFound?: string;
+      validationFailed?: string;
+      permissionDenied?: string;
+      configurationError?: string;
+      externalError?: string;
+      unexpected?: string;
+    };
+    recoveryActions?: {
+      notFound?: string[];
+      validationFailed?: string[];
+      permissionDenied?: string[];
+      configurationError?: string[];
+    };
+  };
+  progressTracking?: {
+    enabled?: boolean;
+    minimumDuration?: number;
+    showPercentage?: boolean;
+    showElapsedTime?: boolean;
+    showEstimatedTimeRemaining?: boolean;
+    updateInterval?: number;
+    progressTemplates?: {
+      started?: string;
+      inProgress?: string;
+      completed?: string;
+    };
+  };
+  validation?: {
+    groupByCategory?: boolean;
+    maxErrorsPerEntity?: number;
+    showFieldPaths?: boolean;
+    showExpectedActual?: boolean;
+    summaryTemplate?: string;
+  };
+}
+
+/**
+ * DataLoader agent-specific configuration for file I/O and data validation
+ */
+export interface DataLoaderConfig {
+  validation: {
+    enableStrictTypeChecking: boolean;
+    allowPartialRecords: boolean;
+    validateOnLoad: boolean;
+    useTypeGuards: boolean;
+    maxValidationErrors: number;
+    logValidationWarnings: boolean;
+  };
+  fileOperations: {
+    encoding: "utf-8" | "ascii" | "utf8";
+    maxFileSize: number;
+    enableCaching: boolean;
+    cacheTTL: number;
+    maxCacheEntries: number;
+    allowSyncOperations: boolean;
+    enableRetry: boolean;
+    maxRetries: number;
+    retryDelay: number;
+  };
+  pathResolution: {
+    enableExamplesFallback: boolean;
+    examplesDirectory: string;
+    resolveFromDataRoot: boolean;
+    followSymlinks: boolean;
+    normalizePaths: boolean;
+    allowAbsolutePaths: boolean;
+  };
+  errorHandling: {
+    includeStackTrace: boolean;
+    provideFilePath: boolean;
+    suggestRecovery: boolean;
+    wrapNativeErrors: boolean;
+    logToTelemetry: boolean;
+    logSeverityThreshold: "info" | "warning" | "error" | "critical";
+  };
+  performance: {
+    enableParallelLoading: boolean;
+    maxConcurrentOperations: number;
+    enableStreaming: boolean;
+    streamingThreshold: number;
+    enableMemoryOptimization: boolean;
+    maxMemoryUsage: number;
+  };
+  discovery: {
+    enableAutoDiscovery: boolean;
+    requiredCategoryFiles: string[];
+    optionalCategoryFiles: string[];
+    skipHiddenFiles: boolean;
+    skipPatterns: string[];
+    maxDepth: number;
+    continueOnError: boolean;
+    logDiscoveryWarnings: boolean;
   };
 }
 
@@ -405,6 +542,8 @@ export interface AgentConfigDefinition {
   database?: DatabaseConfig;
   data?: DataConfig;
   clarification?: ClarificationConfig;
+  communication?: CommunicationConfig;
+  dataLoader?: DataLoaderConfig;
   relevantDataManager?: RelevantDataManagerConfig;
 
   /** Runtime execution configuration */
@@ -752,6 +891,32 @@ export abstract class BaseAgentConfig {
       }
     }
   }
+
+  /**
+   * Clear an override for a configuration item given its {@link ConfigDescriptor}.
+   *
+   * @param {ConfigDescriptor} descriptor - Descriptor describing the config item.
+   * @param {"local" | "global"} env - Override scope to clear.
+   * @returns {void}
+   */
+  public clearOverride(
+    descriptor: ConfigDescriptor,
+    env: "local" | "global" = "local"
+  ): void {
+    const targetOverrides =
+      env === "local" ? this.overridesLocal : this.overridesGlobal;
+    this.deepDelete(targetOverrides, descriptor.path);
+  }
+
+  /**
+   * Get all descriptors for this agent (default implementation returns empty object).
+   * Agents should override this method to provide their specific descriptors.
+   *
+   * @returns {Record<string, ConfigDescriptor>} Map of descriptor keys to their definitions.
+   */
+  public getAllDescriptors(): Record<string, ConfigDescriptor> {
+    return {};
+  }
 }
 
 // -------------------------
@@ -761,9 +926,18 @@ export abstract class BaseAgentConfig {
 /** Identifier for a generic category or data source. */
 export type CategoryId = string;
 
-/** Generic record model allowing arbitrary fields. */
+/**
+ * Generic record model allowing arbitrary fields.
+ * Represents a minimal record from any business data category.
+ *
+ * @param id - Unique identifier for the record (required)
+ * @param name - Optional human-readable name
+ * @param title - Optional alternative to name (some records use title instead)
+ */
 export interface CategoryRecord {
   id: string;
+  name?: string;
+  title?: string;
   [key: string]: unknown;
 }
 
@@ -924,6 +1098,12 @@ export interface ConfigDescriptor {
   type: string;
   visibility: "public" | "private";
   verifyPaths?: string[];
+  /** Optional group for organizing descriptors in UI. */
+  group?: string;
+  /** Optional human-readable description. */
+  description?: string;
+  /** Optional validation function for basic type/shape checks. */
+  validate?: (value: unknown) => boolean | string;
 }
 
 /**

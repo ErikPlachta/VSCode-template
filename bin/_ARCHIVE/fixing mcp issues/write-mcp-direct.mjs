@@ -21,7 +21,7 @@ async function main() {
   }
 
   config.servers = config.servers || {};
-  config.servers["mybusiness-mcp-server"] = {
+  config.servers["usercontext-mcp-server"] = {
     transport: { type: "http", url: "http://localhost:39200" },
     metadata: { addedBy: "manual-test", timestamp: new Date().toISOString() },
   };

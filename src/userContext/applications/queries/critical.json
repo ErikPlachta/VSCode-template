@@ -1,8 +1,8 @@
 {
-  "name": "Fetch critical applications",
-  "description": "Retrieve all high criticality systems from the CMDB.",
+  "name": "Fetch critical applications and systems",
+  "description": "Get core critical applications and systems used by the organization.",
   "samplePayload": {
-    "endpoint": "https://cmdb.example.com/api/applications",
+    "endpoint": "TODO-Add-route-here",
     "method": "POST",
     "body": {
       "filter": {

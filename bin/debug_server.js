@@ -248,7 +248,7 @@ async function handleRequest(req, res) {
           tools: {},
         },
         serverInfo: {
-          name: "mybusiness-mcp-server", // TODO: Update this to be an arg from a config in the bin folder or something.
+          name: "usercontext-mcp-server", // TODO: Update this to be an arg from a config in the bin folder or something.
           version: "1.0.0",
         },
       },
@@ -402,7 +402,7 @@ async function handleJsonRpcMessage(message) {
             tools: {},
           },
           serverInfo: {
-            name: "mybusiness-mcp-server",
+            name: "usercontext-mcp-server",
             version: "1.0.0",
           },
         },

@@ -33,6 +33,12 @@ export const CONFIG_IDS = {
   /** Clarification agent configuration schema */
   CLARIFICATION_AGENT: "agent.clarification.v1.0.0",
 
+  /** Communication agent configuration schema */
+  COMMUNICATION_AGENT: "agent.communication.v1.0.0",
+
+  /** DataLoader agent configuration schema */
+  DATA_LOADER_AGENT: "agent.data-loader.v1.0.0",
+
   /** Relevant data manager agent configuration schema */
   RELEVANT_DATA_MANAGER: "agent.relevant-data-manager.v1.0.0",
   /** User Context (renamed) agent configuration schema - alias of relevant-data-manager */
@@ -124,6 +130,18 @@ export const CONFIG_REGISTRY: Record<string, ConfigMetadata> = {
       "Configuration schema for clarification agent including escalation handling and user guidance settings",
     agentType: "clarification-agent",
     createdDate: "2025-11-07",
+    breakingChanges: [],
+    migrationNotes: [],
+  },
+
+  [CONFIG_IDS.COMMUNICATION_AGENT]: {
+    id: CONFIG_IDS.COMMUNICATION_AGENT,
+    name: "Communication Agent Configuration",
+    version: { major: 1, minor: 0, patch: 0 },
+    description:
+      "Configuration schema for communication agent including response formatting, error handling, and progress tracking settings",
+    agentType: "communication-agent",
+    createdDate: "2025-11-10",
     breakingChanges: [],
     migrationNotes: [],
   },

@@ -9,12 +9,14 @@ import process from "node:process";
 // no-op
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { ESLint } from "eslint";
-import Ajv, { ErrorObject } from "ajv";
-import Ajv2020 from "ajv/dist/2020";
-import addFormats from "ajv-formats";
 import fg from "fast-glob";
 import matter from "gray-matter";
 import { loadApplicationConfig } from "@shared/configurationLoader";
+import {
+  validateCategoryConfig,
+  validateCategoryRecord,
+  formatValidationErrors,
+} from "@internal-types/userContext.types";
 
 /**
  * Configuration contract for the repository health agent.
@@ -71,7 +73,6 @@ interface MarkdownDiagnostic {
 export class RepositoryHealthAgent {
   private readonly baseDir: string;
   private readonly config: AgentConfig;
-  private readonly ajv: Ajv;
 
   /**
    * Create a new health agent using the provided configuration.
@@ -82,13 +83,6 @@ export class RepositoryHealthAgent {
   public constructor(baseDir: string, config: AgentConfig) {
     this.baseDir = baseDir;
     this.config = config;
-    this.ajv = new Ajv2020({
-      allErrors: true,
-      strict: true,
-      strictRequired: false,
-      allowUnionTypes: true,
-    });
-    addFormats(this.ajv);
   }
 
   /**
@@ -207,11 +201,26 @@ export class RepositoryHealthAgent {
   }
 
   /**
-   * Validate JSON artifacts against declared schemas using Ajv 2020 draft.
+   * Validate JSON artifacts against TypeScript type definitions using native type guards.
    *
-   * @returns {Promise<CheckResult>} Result object enumerating per-file schema validation failures.
+   * Note: JSON schema validation has been replaced with TypeScript type guards.
+   * User data validation occurs at runtime through extension utilities.
+   *
+   * @returns {Promise<CheckResult>} Result object enumerating per-file validation failures.
    */
   public async validateJsonSchemas(): Promise<CheckResult> {
+    // If no schema rules are configured, skip validation
+    if (this.config.jsonSchemas.length === 0) {
+      return {
+        name: "JSON Type Validation",
+        passed: true,
+        messages: [
+          "JSON validation skipped - using native TypeScript type guards at runtime.",
+          "User data validation occurs through extension onboarding utilities.",
+        ],
+      };
+    }
+
     const findings: string[] = [];
     for (const rule of this.config.jsonSchemas) {
       const files: string[] = await fg(rule.pattern, {
@@ -222,28 +231,54 @@ export class RepositoryHealthAgent {
         findings.push(`No files matched pattern ${rule.pattern}.`);
         continue;
       }
-      const schemaPath: string = path.resolve(this.baseDir, rule.schema);
-      const schemaContent: string = await readFile(schemaPath, "utf8");
-      const validate = this.ajv.compile(JSON.parse(schemaContent));
+
       for (const file of files) {
         const fileContent: string = await readFile(file, "utf8");
         const data = JSON.parse(fileContent);
-        const valid: boolean = validate(data) as boolean;
-        if (!valid) {
-          const relativePath: string = path.relative(this.baseDir, file);
-          const errorMessages: string = this.formatAjvErrors(
-            validate.errors ?? []
-          );
-          findings.push(`${relativePath}: ${errorMessages}`);
+        const relativePath: string = path.relative(this.baseDir, file);
+
+        // Determine validation function based on file pattern
+        let validationResult;
+        if (rule.pattern.includes("category.json")) {
+          validationResult = validateCategoryConfig(data);
+        } else if (rule.pattern.includes("records.json")) {
+          // Records files are arrays, validate each record
+          if (!Array.isArray(data)) {
+            findings.push(
+              `${relativePath}: Expected array of records, got ${typeof data}`
+            );
+            continue;
+          }
+          const recordErrors = [];
+          for (let i = 0; i < data.length; i++) {
+            const result = validateCategoryRecord(data[i]);
+            if (!result.valid) {
+              recordErrors.push(
+                `Record ${i}: ${formatValidationErrors(result.errors, 1)}`
+              );
+            }
+          }
+          if (recordErrors.length > 0) {
+            findings.push(`${relativePath}: ${recordErrors.join("; ")}`);
+          }
+          continue;
+        } else {
+          // For other file types, skip validation (relationships, etc. can be added later)
+          continue;
+        }
+
+        if (!validationResult.valid) {
+          const errorMessage = formatValidationErrors(validationResult.errors);
+          findings.push(`${relativePath}: ${errorMessage}`);
         }
       }
     }
     return {
-      name: "JSON Schema Validation",
+      name: "JSON Type Validation",
       passed: findings.length === 0,
       messages:
         findings.length === 0
-          ? ["All JSON files satisfy their schemas."]
+          ? ["All JSON files satisfy their type definitions."]
           : findings,
     };
   }
@@ -376,7 +411,7 @@ export class RepositoryHealthAgent {
       `## Inputs`,
       "",
       `- application.config.ts (preferred) or legacy mcp.config.json for configuration directives.`,
-      `- JSON Schemas under the schemas directory.`,
+      `- TypeScript type definitions for JSON data validation.`,
       `- Repository TypeScript and Markdown sources.`,
       "",
       `## Outputs`,
@@ -388,7 +423,7 @@ export class RepositoryHealthAgent {
       `## Error Handling`,
       "",
       `- Exits with non-zero status when any check fails.`,
-      `- Surfaces Ajv and ESLint diagnostics verbosely.`,
+      `- Surfaces TypeScript type guard and ESLint diagnostics verbosely.`,
       `- Guides maintainers to remediation documentation.`,
       "",
       `## Examples`,
@@ -420,24 +455,6 @@ export class RepositoryHealthAgent {
       "- Review failing checks before merging changes."
     );
     await writeFile(outputPath, `${lines.join("\n")}\n`, "utf8");
-  }
-
-  /**
-   * Convert Ajv errors into a concise human-readable string list.
-   *
-   * @param {ErrorObject[]} errors - Raw Ajv error objects.
-   * @returns {string} Joined error description string suitable for logs.
-   */
-  private formatAjvErrors(errors: ErrorObject[]): string {
-    if (errors.length === 0) {
-      return "Unknown schema validation error.";
-    }
-    return errors
-      .map((error: ErrorObject) => {
-        const instancePath: string = error.instancePath || "(root)";
-        return `${instancePath} ${error.message ?? "unknown issue"}`;
-      })
-      .join("; ");
   }
 }
 

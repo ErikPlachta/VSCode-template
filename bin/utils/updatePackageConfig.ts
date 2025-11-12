@@ -22,8 +22,8 @@ interface PackageConfig {
 
 function loadEnvironmentConfig(): PackageConfig {
   dotenv.config();
-  const appName = process.env.APP_NAME || "mybusiness";
-  const appDisplayName = process.env.APP_DISPLAY_NAME || "My Business";
+  const appName = process.env.APP_NAME || "userContext";
+  const appDisplayName = process.env.APP_DISPLAY_NAME || "User Context";
   const ids = deriveIds(process.env as any);
   return {
     name: process.env.EXTENSION_NAME || `${appName}-mcp-extension`,
@@ -37,7 +37,7 @@ function loadEnvironmentConfig(): PackageConfig {
     chatParticipantName: ids.baseId,
     serverRegisterId: process.env.MCP_SERVER_ID || appName,
     defaultPort: parseInt(process.env.MCP_DEFAULT_PORT || "39200"),
-    autoRegister: process.env.MCP_AUTO_REGISTER === "true",
+    autoRegister: process.env.MCP_AUTO_REGISTER === "false",
     includeAuthHeader: process.env.MCP_INCLUDE_AUTH_HEADER === "true",
   };
 }
@@ -86,7 +86,7 @@ async function updatePackageJson(config: PackageConfig): Promise<void> {
         config.chatParticipantId.slice(1) +
         "MCP",
       name: config.chatParticipantName,
-      description: `Access your business data including applications, departments, people, policies, and resources`,
+      description: `Access your user context data via MCP (${config.displayName}).`,
       isSticky: true,
     },
   ];
