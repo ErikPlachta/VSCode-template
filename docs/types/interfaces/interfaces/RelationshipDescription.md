@@ -6,7 +6,7 @@
 
 # Interface: RelationshipDescription
 
-Defined in: [src/types/interfaces.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L147)
+Defined in: [src/types/interfaces.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/interfaces.ts#L147)
 
 RelationshipDescription interface.
 
@@ -16,7 +16,7 @@ RelationshipDescription interface.
 
 > **description**: `string`
 
-Defined in: [src/types/interfaces.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L149)
+Defined in: [src/types/interfaces.ts:149](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/interfaces.ts#L149)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:149](https://github.com/ErikPlachta/vscode-
 
 > **name**: `string`
 
-Defined in: [src/types/interfaces.ts:148](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L148)
+Defined in: [src/types/interfaces.ts:148](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/interfaces.ts#L148)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:148](https://github.com/ErikPlachta/vscode-
 
 > **targetCategory**: `string`
 
-Defined in: [src/types/interfaces.ts:150](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L150)
+Defined in: [src/types/interfaces.ts:150](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/interfaces.ts#L150)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:150](https://github.com/ErikPlachta/vscode-
 
 > **viaField**: `string`
 
-Defined in: [src/types/interfaces.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L151)
+Defined in: [src/types/interfaces.ts:151](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/interfaces.ts#L151)

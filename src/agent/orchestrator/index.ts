@@ -9,6 +9,7 @@ import {
   type IntentConfig,
   createDescriptorMap,
   type ConfigDescriptor,
+  type DataSource,
 } from "@internal-types/agentConfig";
 import {
   validateAgentConfig,
@@ -98,6 +99,7 @@ export class Orchestrator extends BaseAgentConfig {
   private workflowHistory: WorkflowHistory[];
   private workflowIdCounter: number;
   private agentRegistry: AgentRegistry;
+  private userContextAgent: UserContextAgent | null = null;
 
   /**
    * Create an orchestrator using the provided configuration (or defaults).
@@ -195,14 +197,6 @@ export class Orchestrator extends BaseAgentConfig {
       console.log("🔧 Orchestrator: Initializing agent registry...");
       console.log("🔧 Cache directory promise:", cacheDirectory);
 
-      console.log("🔧 Creating DatabaseAgent...");
-      const dbAgent = new DatabaseAgent([], cacheDirectory);
-      console.log("✅ DatabaseAgent created successfully");
-
-      console.log("🔧 Creating DataAgent...");
-      const dataAgent = new DataAgent();
-      console.log("✅ DataAgent created successfully");
-
       console.log("🔧 Creating UserContextAgent...");
       let userContextAgent: UserContextAgent | null = null;
       try {
@@ -216,6 +210,44 @@ export class Orchestrator extends BaseAgentConfig {
         );
         // Don't throw - allow other agents to initialize
       }
+
+      // Store reference for data-driven query extraction
+      this.userContextAgent = userContextAgent;
+
+      // Build data sources from UserContextAgent categories for DatabaseAgent
+      const dataSources: DataSource[] = [];
+      if (userContextAgent) {
+        const categories = userContextAgent.listCategories();
+        for (const categorySummary of categories) {
+          try {
+            const category = userContextAgent.getCategory(categorySummary.id);
+            dataSources.push({
+              id: category.id,
+              name: category.name,
+              records: category.records,
+              schema: category.schemas, // BusinessCategory has schemas (plural)
+              fieldAliases: {}, // BusinessCategory doesn't have fieldAliases, use empty object
+            });
+          } catch (catError) {
+            console.warn(
+              `⚠️ Failed to load category ${categorySummary.id}:`,
+              catError
+            );
+            // Continue with other categories
+          }
+        }
+        console.log(
+          `✅ Loaded ${dataSources.length} data sources for DatabaseAgent`
+        );
+      }
+
+      console.log("🔧 Creating DatabaseAgent...");
+      const dbAgent = new DatabaseAgent(dataSources, cacheDirectory);
+      console.log("✅ DatabaseAgent created successfully");
+
+      console.log("🔧 Creating DataAgent...");
+      const dataAgent = new DataAgent();
+      console.log("✅ DataAgent created successfully");
 
       this.agentRegistry = {
         "database-agent": dbAgent,
@@ -1565,8 +1597,9 @@ export class Orchestrator extends BaseAgentConfig {
           },
         };
 
-        const formatted =
-          this.communicationAgent.formatClarification(clarificationResponse);
+        const formatted = this.communicationAgent.formatClarification(
+          clarificationResponse
+        );
 
         return this.buildWorkflowResult(context, "needs-clarification", {
           message: formatted.message,
@@ -1769,7 +1802,8 @@ export class Orchestrator extends BaseAgentConfig {
    * Extract query parameters from user question
    *
    * Parses natural language question into structured query parameters.
-   * All extraction is data-driven based on keywords in the question.
+   * All extraction is DATA-DRIVEN based on actual category data from UserContextAgent.
+   * Matches category names, aliases, and common filter keywords.
    *
    * @param {string} question - User's question
    * @returns {QueryParams} Structured query parameters for database agent
@@ -1779,20 +1813,66 @@ export class Orchestrator extends BaseAgentConfig {
       limit: 10, // Default limit
     };
 
-    // Extract category hints - data-driven keyword matching
+    // DATA-DRIVEN category matching using actual loaded categories
     const lowerQuestion = question.toLowerCase();
-    if (lowerQuestion.includes("people") || lowerQuestion.includes("person")) {
-      params.category = "people";
-    } else if (
-      lowerQuestion.includes("project") ||
-      lowerQuestion.includes("projects")
-    ) {
-      params.category = "projects";
-    } else if (
-      lowerQuestion.includes("department") ||
-      lowerQuestion.includes("departments")
-    ) {
-      params.category = "departments";
+
+    if (this.userContextAgent) {
+      try {
+        const categories = this.userContextAgent.listCategories();
+
+        // Match against category id, name, and aliases
+        for (const categorySummary of categories) {
+          const category = this.userContextAgent.getCategory(
+            categorySummary.id
+          );
+
+          // Check category id (e.g., "people", "applications")
+          if (lowerQuestion.includes(category.id.toLowerCase())) {
+            params.category = category.id;
+            break;
+          }
+
+          // Check category name (e.g., "People", "Applications")
+          if (lowerQuestion.includes(category.name.toLowerCase())) {
+            params.category = category.id;
+            break;
+          }
+
+          // Check category aliases (e.g., "apps" -> "applications")
+          if (category.aliases) {
+            for (const alias of category.aliases) {
+              if (lowerQuestion.includes(alias.toLowerCase())) {
+                params.category = category.id;
+                break;
+              }
+            }
+            if (params.category) break; // Found match via alias
+          }
+        }
+      } catch (error) {
+        console.warn("⚠️ Failed to extract category from question:", error);
+        // Fall through to hardcoded fallback
+      }
+    }
+
+    // Fallback: hardcoded category matching if data-driven failed
+    if (!params.category) {
+      if (
+        lowerQuestion.includes("people") ||
+        lowerQuestion.includes("person")
+      ) {
+        params.category = "people";
+      } else if (
+        lowerQuestion.includes("project") ||
+        lowerQuestion.includes("projects")
+      ) {
+        params.category = "projects";
+      } else if (
+        lowerQuestion.includes("department") ||
+        lowerQuestion.includes("departments")
+      ) {
+        params.category = "departments";
+      }
     }
 
     // Extract filters - data-driven based on common skill keywords
@@ -1803,6 +1883,8 @@ export class Orchestrator extends BaseAgentConfig {
       lowerQuestion.includes("js")
     ) {
       params.filters = { skills: "JavaScript" };
+    } else if (lowerQuestion.includes("engineering")) {
+      params.filters = { department: "Engineering" };
     }
 
     return params;
@@ -2009,7 +2091,31 @@ export class Orchestrator extends BaseAgentConfig {
         ).call(agent, paramObj.topicOrId as string | undefined);
       }
 
-      // For QueryParams and AnalyzeParams: pass the whole object
+      // For QueryParams: destructure into positional args for DatabaseAgent.executeQuery
+      if (
+        "category" in paramObj ||
+        "filters" in paramObj ||
+        "limit" in paramObj
+      ) {
+        const queryParams = paramObj as {
+          category?: string;
+          filters?: Record<string, unknown>;
+          limit?: number;
+        };
+        const categoryId = queryParams.category;
+        const criteria = queryParams.filters || {};
+        const options = queryParams.limit ? { limit: queryParams.limit } : {};
+
+        return await (
+          methodFn as (
+            categoryId: string | undefined,
+            criteria: Record<string, unknown>,
+            options: Record<string, unknown>
+          ) => Promise<unknown>
+        ).call(agent, categoryId, criteria, options);
+      }
+
+      // For AnalyzeParams and other structured params: pass the whole object
       return await (methodFn as (params: unknown) => Promise<unknown>).call(
         agent,
         params

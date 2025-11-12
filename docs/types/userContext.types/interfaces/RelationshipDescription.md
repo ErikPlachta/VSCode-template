@@ -6,7 +6,7 @@
 
 # Interface: RelationshipDescription
 
-Defined in: [src/types/userContext.types.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L241)
+Defined in: [src/types/userContext.types.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L241)
 
 High-level relationship metadata surfaced to consumers
 
@@ -16,7 +16,7 @@ High-level relationship metadata surfaced to consumers
 
 > **cardinality**: `"one"` \| `"many"`
 
-Defined in: [src/types/userContext.types.ts:249](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L249)
+Defined in: [src/types/userContext.types.ts:249](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L249)
 
 Expected cardinality of the relationship
 
@@ -26,7 +26,7 @@ Expected cardinality of the relationship
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L251)
+Defined in: [src/types/userContext.types.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L251)
 
 Narrative description of the relationship
 
@@ -36,7 +36,7 @@ Narrative description of the relationship
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L243)
+Defined in: [src/types/userContext.types.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L243)
 
 Relationship label
 
@@ -46,7 +46,7 @@ Relationship label
 
 > **targetCategory**: `string`
 
-Defined in: [src/types/userContext.types.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L245)
+Defined in: [src/types/userContext.types.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L245)
 
 Category on the other side of the relationship
 
@@ -56,6 +56,6 @@ Category on the other side of the relationship
 
 > **viaField**: `string`
 
-Defined in: [src/types/userContext.types.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L247)
+Defined in: [src/types/userContext.types.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L247)
 
 Field or property used to establish the link

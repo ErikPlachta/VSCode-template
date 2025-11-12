@@ -6,7 +6,7 @@
 
 # Interface: CategoryDiscoveryResult
 
-Defined in: [src/types/userContext.types.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L96)
+Defined in: [src/types/userContext.types.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L96)
 
 Result of a bulk category discovery operation from DataLoaderAgent
 
@@ -16,7 +16,7 @@ Result of a bulk category discovery operation from DataLoaderAgent
 
 > **categories**: `Map`\<`string`, \{ `config`: [`CategoryConfig`](CategoryConfig.md); `records`: [`BaseRecord`](BaseRecord.md)[]; \}\>
 
-Defined in: [src/types/userContext.types.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L98)
+Defined in: [src/types/userContext.types.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L98)
 
 Successfully loaded categories
 
@@ -26,7 +26,7 @@ Successfully loaded categories
 
 > **errors**: `object`[]
 
-Defined in: [src/types/userContext.types.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L100)
+Defined in: [src/types/userContext.types.ts:100](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L100)
 
 Errors encountered during discovery
 
@@ -44,6 +44,6 @@ Errors encountered during discovery
 
 > **warnings**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L102)
+Defined in: [src/types/userContext.types.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L102)
 
 Warnings for skipped or partial categories

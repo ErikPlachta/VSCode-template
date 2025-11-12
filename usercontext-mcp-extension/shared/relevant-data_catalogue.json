@@ -1,0 +1,326 @@
+{
+  "key": "relevant-data:catalogue",
+  "toolName": "relevant-data-manager",
+  "timestamp": "2025-11-12T13:24:11.457Z",
+  "value": [
+    {
+      "id": "applications",
+      "name": "Applications",
+      "description": "Internal platforms, SaaS tooling, and business systems.",
+      "primaryKeys": [
+        "id"
+      ],
+      "recordIds": [
+        "app-aurora",
+        "app-atlas",
+        "app-foundry",
+        "app-oracle"
+      ],
+      "relationships": [
+        {
+          "name": "owning department",
+          "targetCategory": "departments",
+          "viaField": "ownerDepartmentId",
+          "cardinality": "one"
+        },
+        {
+          "name": "policy coverage",
+          "targetCategory": "companyPolicies",
+          "viaField": "relatedPolicyIds",
+          "cardinality": "many"
+        },
+        {
+          "name": "dependent resources",
+          "targetCategory": "companyResources",
+          "viaField": "resourceIds",
+          "cardinality": "many"
+        }
+      ],
+      "schemaNames": [
+        "Application"
+      ],
+      "requirements": {
+        "requiredRecordFields": [
+          "id",
+          "name",
+          "ownerDepartmentId",
+          "criticality"
+        ],
+        "requiredRelationshipFields": [
+          "ownerDepartmentId",
+          "relatedPolicyIds",
+          "resourceIds"
+        ],
+        "notes": [
+          "<Application> must declare an accountable department and policy coverage."
+        ]
+      }
+    },
+    {
+      "id": "companyPolicies",
+      "name": "Company Policies",
+      "description": "Governance, compliance, and operating procedures.",
+      "primaryKeys": [
+        "id"
+      ],
+      "recordIds": [
+        "policy-data-handling",
+        "policy-platform-standards",
+        "policy-remote-work"
+      ],
+      "relationships": [
+        {
+          "name": "owning department",
+          "targetCategory": "departments",
+          "viaField": "ownerDepartmentId",
+          "cardinality": "one"
+        },
+        {
+          "name": "referenced applications",
+          "targetCategory": "applications",
+          "viaField": "applicationIds",
+          "cardinality": "many"
+        },
+        {
+          "name": "linked resources",
+          "targetCategory": "companyResources",
+          "viaField": "relatedResourceIds",
+          "cardinality": "many"
+        }
+      ],
+      "schemaNames": [
+        "Policy"
+      ],
+      "requirements": {
+        "requiredRecordFields": [
+          "id",
+          "title",
+          "ownerDepartmentId"
+        ],
+        "requiredRelationshipFields": [
+          "ownerDepartmentId",
+          "applicationIds",
+          "relatedResourceIds"
+        ],
+        "notes": [
+          "<Policy> should highlight the owning department and impacted resources."
+        ]
+      }
+    },
+    {
+      "id": "companyResources",
+      "name": "Company Resources",
+      "description": "Knowledge base entries, playbooks, and runbooks.",
+      "primaryKeys": [
+        "id"
+      ],
+      "recordIds": [
+        "resource-analytics-playbook",
+        "resource-platform-runbook",
+        "resource-operating-model",
+        "resource-ml-handbook",
+        "resource-data-handbook"
+      ],
+      "relationships": [
+        {
+          "name": "department",
+          "targetCategory": "departments",
+          "viaField": "departmentId",
+          "cardinality": "one"
+        },
+        {
+          "name": "linked policies",
+          "targetCategory": "companyPolicies",
+          "viaField": "linkedPolicyIds",
+          "cardinality": "many"
+        },
+        {
+          "name": "referenced applications",
+          "targetCategory": "applications",
+          "viaField": "applicationIds",
+          "cardinality": "many"
+        }
+      ],
+      "schemaNames": [
+        "Resource"
+      ],
+      "requirements": {
+        "requiredRecordFields": [
+          "id",
+          "name",
+          "departmentId",
+          "type"
+        ],
+        "requiredRelationshipFields": [
+          "departmentId",
+          "linkedPolicyIds",
+          "applicationIds"
+        ],
+        "notes": [
+          "<Resource> should reference owning policies and supported applications."
+        ]
+      }
+    },
+    {
+      "id": "demo",
+      "name": "Demo",
+      "description": "Demo",
+      "primaryKeys": [
+        "id"
+      ],
+      "recordIds": [
+        "demo-1"
+      ],
+      "relationships": [
+        {
+          "name": "Demo Relationship",
+          "targetCategory": "demo",
+          "viaField": "id"
+        }
+      ],
+      "schemaNames": [],
+      "requirements": {}
+    },
+    {
+      "id": "departments",
+      "name": "Departments",
+      "description": "Organisational units, their missions, and leadership hierarchy.",
+      "primaryKeys": [
+        "id"
+      ],
+      "recordIds": [
+        "dept-analytics",
+        "dept-platform",
+        "dept-operations"
+      ],
+      "relationships": [
+        {
+          "name": "department lead",
+          "targetCategory": "people",
+          "viaField": "leadId",
+          "cardinality": "one"
+        },
+        {
+          "name": "team members",
+          "targetCategory": "people",
+          "viaField": "id",
+          "cardinality": "many"
+        },
+        {
+          "name": "owned applications",
+          "targetCategory": "applications",
+          "viaField": "applicationIds",
+          "cardinality": "many"
+        },
+        {
+          "name": "governing policies",
+          "targetCategory": "companyPolicies",
+          "viaField": "policyIds",
+          "cardinality": "many"
+        },
+        {
+          "name": "resources",
+          "targetCategory": "companyResources",
+          "viaField": "resourceIds",
+          "cardinality": "many"
+        }
+      ],
+      "schemaNames": [
+        "Department",
+        "OrgChart"
+      ],
+      "requirements": {
+        "requiredRecordFields": [
+          "id",
+          "name",
+          "leadId",
+          "description"
+        ],
+        "requiredRelationshipFields": [
+          "leadId",
+          "applicationIds",
+          "policyIds",
+          "resourceIds"
+        ],
+        "notes": [
+          "Records must surface accountable leaders.",
+          "Applications, policies, and resources should be linked for each department."
+        ]
+      }
+    },
+    {
+      "id": "people",
+      "name": "People",
+      "description": "Employee directory complete with capabilities and system access.",
+      "primaryKeys": [
+        "id",
+        "email"
+      ],
+      "recordIds": [
+        "person-001",
+        "person-002",
+        "person-003",
+        "person-004",
+        "person-005",
+        "person-006",
+        "person-007"
+      ],
+      "relationships": [
+        {
+          "name": "department",
+          "targetCategory": "departments",
+          "viaField": "departmentId",
+          "cardinality": "one"
+        },
+        {
+          "name": "manager",
+          "targetCategory": "people",
+          "viaField": "managerId",
+          "cardinality": "one"
+        },
+        {
+          "name": "applications",
+          "targetCategory": "applications",
+          "viaField": "applicationIds",
+          "cardinality": "many"
+        },
+        {
+          "name": "policies acknowledged",
+          "targetCategory": "companyPolicies",
+          "viaField": "policyAcks",
+          "cardinality": "many"
+        },
+        {
+          "name": "resources contributed",
+          "targetCategory": "companyResources",
+          "viaField": "resourceIds",
+          "cardinality": "many"
+        }
+      ],
+      "schemaNames": [
+        "AccessProfile",
+        "Person"
+      ],
+      "requirements": {
+        "requiredRecordFields": [
+          "id",
+          "name",
+          "departmentId",
+          "skills"
+        ],
+        "requiredRelationshipFields": [
+          "departmentId",
+          "applicationIds",
+          "policyAcks",
+          "resourceIds"
+        ],
+        "notes": [
+          "<People> must link to a department and at least one policy acknowledgement."
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "fingerprint": "ac06fbfe66902adfa6698b13323968f8fa3d58d1"
+  }
+}

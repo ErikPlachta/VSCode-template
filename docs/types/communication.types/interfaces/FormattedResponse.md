@@ -6,7 +6,7 @@
 
 # Interface: FormattedResponse
 
-Defined in: [src/types/communication.types.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L103)
+Defined in: [src/types/communication.types.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L103)
 
 Formatted response ready for display to user
 
@@ -16,7 +16,7 @@ Formatted response ready for display to user
 
 > **format**: `"markdown"` \| `"plaintext"` \| `"html"`
 
-Defined in: [src/types/communication.types.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L108)
+Defined in: [src/types/communication.types.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L108)
 
 Format of the response
 
@@ -26,7 +26,7 @@ Format of the response
 
 > **isFinal**: `boolean`
 
-Defined in: [src/types/communication.types.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L114)
+Defined in: [src/types/communication.types.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L114)
 
 Whether this response is final or will be updated
 
@@ -36,7 +36,7 @@ Whether this response is final or will be updated
 
 > **message**: `string`
 
-Defined in: [src/types/communication.types.ts:105](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L105)
+Defined in: [src/types/communication.types.ts:105](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L105)
 
 Formatted message text
 
@@ -46,7 +46,7 @@ Formatted message text
 
 > `optional` **raw**: [`AgentResponse`](AgentResponse.md)\<`unknown`\>
 
-Defined in: [src/types/communication.types.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L117)
+Defined in: [src/types/communication.types.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L117)
 
 Original response data (for programmatic access)
 
@@ -56,6 +56,6 @@ Original response data (for programmatic access)
 
 > `optional` **severity**: [`SeverityLevel`](../type-aliases/SeverityLevel.md)
 
-Defined in: [src/types/communication.types.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L111)
+Defined in: [src/types/communication.types.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L111)
 
 Severity level (for errors)

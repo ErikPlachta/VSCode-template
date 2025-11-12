@@ -1,12 +1,11 @@
 /**
- * @fileoverview Workflow coordination types for Orchestrator
+ * @packageDocumentation
+ * Workflow coordination types for Orchestrator.
  *
  * Defines types for workflow state management, action execution,
  * diagnostics, and performance monitoring.
  *
  * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md
- *
- * @module types/workflow
  */
 
 /**
