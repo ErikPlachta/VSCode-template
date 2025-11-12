@@ -6,7 +6,7 @@
 
 # Interface: AgentRegistry
 
-Defined in: [src/types/workflow.types.ts:327](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L327)
+Defined in: [src/types/workflow.types.ts:327](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/workflow.types.ts#L327)
 
 Agent registry mapping agent IDs to instances
 
@@ -29,7 +29,7 @@ Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Agent Coordination section
 
 > **data-agent**: `unknown`
 
-Defined in: [src/types/workflow.types.ts:329](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L329)
+Defined in: [src/types/workflow.types.ts:329](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/workflow.types.ts#L329)
 
 ***
 
@@ -37,7 +37,7 @@ Defined in: [src/types/workflow.types.ts:329](https://github.com/ErikPlachta/vsc
 
 > **database-agent**: `unknown`
 
-Defined in: [src/types/workflow.types.ts:328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L328)
+Defined in: [src/types/workflow.types.ts:328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/workflow.types.ts#L328)
 
 ***
 
@@ -45,4 +45,4 @@ Defined in: [src/types/workflow.types.ts:328](https://github.com/ErikPlachta/vsc
 
 > **user-context-agent**: `unknown`
 
-Defined in: [src/types/workflow.types.ts:330](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L330)
+Defined in: [src/types/workflow.types.ts:330](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/workflow.types.ts#L330)

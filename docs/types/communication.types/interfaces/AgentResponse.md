@@ -6,7 +6,7 @@
 
 # Interface: AgentResponse\<T\>
 
-Defined in: [src/types/communication.types.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L26)
+Defined in: [src/types/communication.types.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L26)
 
 Structured response from an agent before formatting
 
@@ -22,7 +22,7 @@ Structured response from an agent before formatting
 
 > `optional` **data**: `T`
 
-Defined in: [src/types/communication.types.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L34)
+Defined in: [src/types/communication.types.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L34)
 
 Main response data
 
@@ -32,7 +32,7 @@ Main response data
 
 > `optional` **errors**: `object`[]
 
-Defined in: [src/types/communication.types.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L64)
+Defined in: [src/types/communication.types.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L64)
 
 Errors that occurred (for error responses)
 
@@ -72,7 +72,7 @@ Suggested recovery actions
 
 > `optional` **message**: `string`
 
-Defined in: [src/types/communication.types.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L37)
+Defined in: [src/types/communication.types.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L37)
 
 Human-readable message (optional, will be generated if not provided)
 
@@ -82,7 +82,7 @@ Human-readable message (optional, will be generated if not provided)
 
 > `optional` **metadata**: `object`
 
-Defined in: [src/types/communication.types.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L40)
+Defined in: [src/types/communication.types.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L40)
 
 Additional metadata about the response
 
@@ -134,7 +134,7 @@ Timestamp of the response
 
 > `optional` **progress**: `object`
 
-Defined in: [src/types/communication.types.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L82)
+Defined in: [src/types/communication.types.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L82)
 
 Progress information (for in-progress responses)
 
@@ -174,7 +174,7 @@ Total number of steps
 
 > **status**: `"error"` \| `"success"` \| `"in-progress"` \| `"partial"`
 
-Defined in: [src/types/communication.types.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L31)
+Defined in: [src/types/communication.types.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L31)
 
 Status of the operation
 
@@ -184,6 +184,6 @@ Status of the operation
 
 > **type**: [`ResponseType`](../type-aliases/ResponseType.md)
 
-Defined in: [src/types/communication.types.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/communication.types.ts#L28)
+Defined in: [src/types/communication.types.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/communication.types.ts#L28)
 
 Type of response

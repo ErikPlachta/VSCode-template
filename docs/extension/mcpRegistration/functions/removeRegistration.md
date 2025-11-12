@@ -8,7 +8,7 @@
 
 > **removeRegistration**(`id`, `pathOptions?`): `Promise`\<`string`\>
 
-Defined in: [src/extension/mcpRegistration.ts:298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/extension/mcpRegistration.ts#L298)
+Defined in: [src/extension/mcpRegistration.ts:298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/extension/mcpRegistration.ts#L298)
 
 Remove our server entry from mcp.json if present.
 

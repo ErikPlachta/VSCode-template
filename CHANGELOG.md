@@ -169,18 +169,122 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-12]
 
+#### 2025-11-12 13:08:23 feat: Repo-ops: add TODO actions generator and unit tests
+
+- New subcommand: 'todo generate-actions' to parse CHANGELOG Outstanding Tasks into a generated checklist block in TODO.md (dry-run default, backups on write). Added unit tests for changelogExtract and todoMirror modules. Scoped lint to repo-ops passes; build and tests pass.
+
+#### 2025-11-12 12:37:42 chore: Remove legacy changelog CLI and scope lint to repo-ops
+
+- Updated package.json scripts to use bin/repo-ops/changelog; added lint:repo-ops; replaced legacy bin/utils/changelog entry points with hard-fail shims. Verified tests and repo-ops lint pass.
+
+#### 2025-11-12 12:10:10 chore: Normalize CHANGELOG fences and split repo-ops sync into feature modules
+
+- Fixed missing code fence languages and stray fences in CHANGELOG.md (Data Flow Verification, Implementation pattern, Example Help Output). Introduced bin/repo-ops/changelogExtract.ts and bin/repo-ops/todoMirror.ts; refactored todoSync.ts to use new modules. Verified build and tests pass.
+
+#### 2025-11-12 11:52:53 docs: Repo-ops: add full JSDoc to CLI/modules and enable lint for bin/repo-ops
+
+**Changes Made**:
+
+1. `bin/repo-ops/index.ts`: Added file overview and function-level JSDoc (runTodo, header/help/version/main) with explicit param/return typing.
+2. `bin/repo-ops/fs.ts`: Documented read/write/ensureDir/backupFile with typed JSDoc and hyphenated param descriptions.
+3. `bin/repo-ops/parse.ts`: Documented normalize/extract/upsert/anchor helpers; clarified contracts and return shapes.
+4. `bin/repo-ops/todoSync.ts`: Documented resolveRepoPaths/buildImportedBlock/syncFromChangelog, including default dry-run behavior.
+5. `bin/repo-ops/types.ts`: Added @packageDocumentation and interface docs for MarkerBounds/MarkerSet/RepoPaths/SyncOptions/ExtractResult/ApplyPlan/SyncResult.
+6. `bin/repo-ops/markers.ts`: Added @packageDocumentation and defaultMarkers docs; centralizes data-driven strings.
+7. `eslint.config.js`: Enabled a dedicated ruleset for `bin/repo-ops/**/*.ts` with strict JSDoc; allowed relative imports in bin; removed bin from ignore for this path.
+8. `package.json` (scripts): Expanded `lint` script to include `bin/repo-ops/**/*.ts` so new rules are enforced.
+
+**Architecture Notes**:
+
+- Bin tooling remains data-driven, modular, and typed; JSDoc is now enforced by lint for repo-ops.
+- Lint scope limited to repo-ops to avoid pulling legacy bin/utils into this change; can expand later incrementally.
+
+##### Verification – Repo-ops JSDoc & lint enforcement
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test`)
+- Lint: Repo-ops PASS; overall still shows existing src JSDoc warnings (intentional defer)
+- Docs: N/A
+- Health: PASS (`npm run health:report`)
+
+**Impact**: Codifies the requirement that bin code is documented and typed, reduces drift, and paves the way for future repo-ops features with confidence.
+
+#### 2025-11-12 11:41:00 docs: Repo-ops: add typed dry-run 'todo sync-from-changelog' + TODO marker fix
+
+**Changes Made**:
+
+1. `bin/repo-ops/types.ts` (new): Typed interfaces for markers, repo paths, options, and results.
+2. `bin/repo-ops/markers.ts` (new): Default data-driven marker set (no hardcoded scatter).
+3. `bin/repo-ops/fs.ts` (new): Read/write helpers and timestamped backup routine.
+4. `bin/repo-ops/parse.ts` (new): Marker extraction and idempotent upsert helpers.
+5. `bin/repo-ops/todoSync.ts` (new): Implements `todo sync-from-changelog` (dry-run by default; `--write` applies with backup).
+6. `bin/repo-ops/index.ts`: Wire `todo sync-from-changelog [--write]` subcommand.
+7. `bin/repo-ops/README.md`: Document usage and safety defaults (markdownlint-friendly).
+8. `TODO.md`: Removed malformed duplicate marker `<!-- END:INCOMPLETE_TODOs >`.
+
+**Behavior**:
+
+- Dry-run shows an insertion plan for a read-only mirror block delimited by `<!-- TODO:BEGIN:IMPORTED_FROM_CHANGELOG -->` ... `<!-- TODO:END:IMPORTED_FROM_CHANGELOG -->`.
+- `--write` creates a backup under `.repo-ops-backups/` then applies the change.
+
+##### Verification – Repo-ops sync-from-changelog
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test`) – no changes to runtime code paths
+- Lint: FAIL (pre-existing JSDoc warnings in src; bin not included in lint target)
+- Docs: N/A
+- Health: PASS (`npm run health:report`)
+
+**Impact**: Establishes typed, modular foundations for governance automation with safe, dry-run-first task migration. Next: add structured parsing to transform tasks into TODO format and implement `session rotate --archive`.
+
+#### 2025-11-12 11:30:10 docs: Branch governance: CONTEXT-BRANCH added, CONTEXT-SESSION linked, TODO integrity fix, repo-ops scaffold
+
+**Problem/Context**: Finalize the branch governance setup with a lightweight, non-breaking CLI scaffold and ensure docs/tasks are linked cleanly. Establish a path for safe automation without affecting extension runtime.
+
+**Changes Made**:
+
+1. `bin/repo-ops/index.ts` (new): Added a read-only CLI scaffold with `help`, `version`, and `status` commands; clearly documents planned subcommands and safety defaults (dry-run/backups).
+2. `package.json` (scripts): Added `repo:ops` script to run the scaffold via `tsx`.
+3. `bin/repo-ops/README.md`: Fixed markdown spacing for linter compatibility; documented safety defaults explicitly.
+4. `CONTEXT-BRANCH.md`: Marked repo-ops CLI as scaffolded and checked off task `ID-OPS-001` in the task map.
+
+**Architecture Notes**:
+
+- No agent/runtime changes. CLI is tooling-only and read-only for now.
+- Aligns with governance: incremental, non-breaking steps with clear verification.
+
+**Files Changed**:
+
+- `bin/repo-ops/index.ts` (+120): New CLI scaffold
+- `package.json` (+1): Script `repo:ops`
+- `bin/repo-ops/README.md` (+2): Markdown spacing and safety notes
+- `CONTEXT-BRANCH.md` (+2): Status updates (scaffolded; task checked)
+
+##### Verification – Repo-ops scaffold
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test`)
+- Lint: FAIL (jsdoc warnings across existing sources; unchanged in this change set; defer fix)
+- Docs: Deferred (no doc generation needed for scaffold)
+- Health: PASS (`npm run health:report`)
+- Coverage: Unchanged (no source logic changes)
+
+**Impact**: Provides a safe entry point for upcoming governance automation (todo/session/changelog) while keeping the codebase stable. Next up: implement `todo sync-from-changelog` with dry-run and backups.
+
 #### 2025-11-12 09:10:25 docs: LLM switch: from Claude 4.5 to GPT-5
 
+GPT-5 is better at handling long
 
 #### 2025-11-12 08:57:36 fix: Data-driven category extraction using actual category aliases from UserContextAgent
 
 **Problems Identified**:
 
 1. **Query "list people"** returned empty/minimal data
-2. **Query "list departments"** returned empty/minimal data  
+2. **Query "list departments"** returned empty/minimal data
 3. **Query "List all applications used by engineering"** threw error: `Data source not found: undefined`
 
 **Root Cause**: `Orchestrator.extractQueryParams()` was using **hardcoded category matching** (only "people", "projects", "departments"). It didn't recognize:
+
 - "applications" category (not in hardcoded list)
 - Category aliases like "apps", "software", "systems" (from category.json)
 - Filter keywords like "engineering"
@@ -188,6 +292,7 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 **Changes Made**:
 
 1. **Added userContextAgent reference** (`src/agent/orchestrator/index.ts`):
+
    - Added private field `userContextAgent: UserContextAgent | null = null`
    - Stored reference during initialization for data-driven query extraction
 
@@ -200,28 +305,31 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
    - Keeps hardcoded fallback for backwards compatibility
 
 **Architecture Benefits**:
+
 - **100% data-driven**: Query extraction now uses actual category data, not hardcoded lists
 - **Extensible**: New categories automatically supported without code changes
 - **Alias support**: Users can use natural language ("apps" instead of "applications")
 - **Maintainable**: Category metadata lives in category.json, not scattered in code
 
 **Files Changed**:
+
 - `src/agent/orchestrator/index.ts`:
   - Added userContextAgent field (+1 line)
   - Stored reference in constructor (+2 lines)
   - Rewrote extractQueryParams with data-driven logic (+60 lines, -30 lines)
 
 **Testing**:
+
 - TypeScript compilation successful
 - Extension packaged (876 files, 5.46 MB)
 - Ready for: `@usercontext list applications`, `@usercontext list apps used by engineering`
 
 **Impact**:
+
 - ✅ All 6 categories now recognized: Applications, Company Policies, Company Resources, Demo, Departments, People
 - ✅ Alias matching works: "apps", "software", "systems" → "applications"
 - ✅ Filter extraction improved: "engineering" → department filter
 - ✅ No more "Data source not found: undefined" errors
-
 
 #### 2025-11-12 08:49:59 fix: Fixed DatabaseAgent parameter passing - QueryParams destructured correctly
 
@@ -1432,7 +1540,7 @@ Agents remain black boxes with NO imports from other agents.
 
 **Data Flow Verification:**
 
-```
+```text
 ✅ CORRECT: User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationAgent → User
 ❌ WRONG:   User → Orchestrator → Agent (AgentResponse) → User
 ```
@@ -2223,22 +2331,25 @@ guidance: {
 
 **Example Help Output:**
 
-```
+```md
 # Available Capabilities
 
 I can assist you with the following tasks. Each capability responds to specific signals in your queries.
 
 ## Orchestrator
+
 Master routing and coordination service...
 
 **Key signals**: metadata, records, insight
 
 **Example queries**:
+
 - "Show me metadata"
 - "Show me records"
 - "Show me insight"
 
 ## Database Query Agent
+
 Direct data access and filtering...
 ...
 ```

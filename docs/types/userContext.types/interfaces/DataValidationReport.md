@@ -6,7 +6,7 @@
 
 # Interface: DataValidationReport
 
-Defined in: [src/types/userContext.types.ts:326](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L326)
+Defined in: [src/types/userContext.types.ts:326](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L326)
 
 Summary produced after normalizing the dataset
 
@@ -16,7 +16,7 @@ Summary produced after normalizing the dataset
 
 > **checkedAt**: `string`
 
-Defined in: [src/types/userContext.types.ts:328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L328)
+Defined in: [src/types/userContext.types.ts:328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L328)
 
 Timestamp when validation occurred
 
@@ -26,7 +26,7 @@ Timestamp when validation occurred
 
 > **issues**: [`DataValidationIssue`](DataValidationIssue.md)[]
 
-Defined in: [src/types/userContext.types.ts:332](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L332)
+Defined in: [src/types/userContext.types.ts:332](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L332)
 
 Detailed issues encountered during validation
 
@@ -36,6 +36,6 @@ Detailed issues encountered during validation
 
 > **status**: `"pass"` \| `"fail"`
 
-Defined in: [src/types/userContext.types.ts:330](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L330)
+Defined in: [src/types/userContext.types.ts:330](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L330)
 
 Overall status for the category

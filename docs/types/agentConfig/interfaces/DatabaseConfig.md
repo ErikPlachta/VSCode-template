@@ -6,7 +6,7 @@
 
 # Interface: DatabaseConfig
 
-Defined in: [src/types/agentConfig.ts:154](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L154)
+Defined in: [src/types/agentConfig.ts:154](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L154)
 
 Database agent-specific configuration
 
@@ -16,7 +16,7 @@ Database agent-specific configuration
 
 > **fieldAliases**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [src/types/agentConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L155)
+Defined in: [src/types/agentConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L155)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:155](https://github.com/ErikPlachta/vscode
 
 > **operations**: `object`
 
-Defined in: [src/types/agentConfig.ts:181](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L181)
+Defined in: [src/types/agentConfig.ts:181](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L181)
 
 #### aggregation
 
@@ -80,7 +80,7 @@ Defined in: [src/types/agentConfig.ts:181](https://github.com/ErikPlachta/vscode
 
 > **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L156)
+Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L156)
 
 #### caching
 
@@ -124,7 +124,7 @@ Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode
 
 > **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L169)
+Defined in: [src/types/agentConfig.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L169)
 
 #### integrityChecks
 

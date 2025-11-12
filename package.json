@@ -145,7 +145,8 @@
     "build:quick": "bash bin/build.sh --stages compile,test --no-coverage",
     "build:clean": "bash bin/build.sh --deep-clean",
     "deploy": "bash bin/build.sh --update-version",
-    "lint": "eslint \"src/**/*.ts\" --max-warnings=0",
+    "lint": "eslint \"src/**/*.ts\" \"bin/repo-ops/**/*.ts\" --max-warnings=0",
+    "lint:repo-ops": "eslint \"bin/repo-ops/**/*.ts\" --ignore-pattern \"bin/repo-ops/changelog/**\" --max-warnings=0",
     "lint:json": "tsx bin/utils/validateJson.ts",
     "lint:docs": "tsx bin/utils/validateMarkdown.ts",
     "health:report": "tsx src/tools/repositoryHealth.ts",
@@ -160,11 +161,12 @@
     "prepublishOnly": "npm run prebuild",
     "install": "code --install-extension UserContext-mcp-extension-1.0.0.vsix",
     "server": "npm run compile -- --pretty false && node ./out/server/index.js",
-    "changelog:manage": "tsx bin/utils/changelog",
+    "changelog:manage": "tsx bin/repo-ops/changelog",
     "changelog:add-entry": "npm run changelog:manage -- add-entry --type fix --summary \"Placeholder summary (override)\"",
     "changelog:add-outstanding": "npm run changelog:manage -- add-outstanding --priority 2 --text \"Placeholder task (override)\"",
     "changelog:add-current": "npm run changelog:manage -- add-current --text \"Placeholder current task (override)\"",
-    "changelog:prune": "npm run changelog:manage -- prune-completed"
+    "changelog:prune": "npm run changelog:manage -- prune-completed",
+    "repo:ops": "tsx bin/repo-ops/index.ts"
   },
   "dependencies": {
     "fast-glob": "^3.3.2",

@@ -1,8 +1,12 @@
 # Context summary for new chat
 
+> Related: [Branch Focus](CONTEXT-BRANCH.md) • [Copilot Instructions](.github/copilot-instructions.md) • [Changelog](CHANGELOG.md) • [TODOs](TODO.md)
+
 <!-- BEGIN:SESSION-CONTEXT-MD-OVERVIEW -->
 
 ## SESSION-CONTEXT.md Overview
+
+This is a new file I've created to be used by CoPilot Chat as a `current chat's context helper`.
 
 - This file provides a summary of the current chat's context.
 - It supplements the instructions in `.github/copilot-instructions.md`.
@@ -26,11 +30,10 @@
 <!--END:WHAT-IS-THIS-REPO -->
 <!-- BEGIN:CURRENT-BRANCH-PR -->
 
-### Current branch / PR
+### Current branch
 
-- Branch: `feat/agent-updates`
-- Active PR: “Feat: finalize agent concept”
-  - <https://github.com/ErikPlachta/vscode-extension-mcp-server/pull/36>
+- Branch: `chore/cleanup-instructions`
+- Current focus
 
 <!--END:CURRENT-BRANCH-PR -->
 
@@ -40,7 +43,7 @@
 
 - `CHANGELOG.md` is the single source of truth for work tracking and recent changes.
 - `.github/copilot-instructions.md` — governance: agent isolation, quality gates, reload note.
-- `SESSION-CONTEXT.md` — current chat's context summary, to serve as a more precise reference to supplement the instructions in `copilot-instructions.md`.
+- `CONTEXT-SESSION.md` — current chat's context summary, to serve as a more precise reference to supplement the instructions in `copilot-instructions.md`.
 
 <!--END:KEY-FILES -->
 
@@ -54,16 +57,16 @@
   architecture. It provides user-specific context and functionality to CoPilot chat through a set of specialized agents coordinated by an Orchestrator.
 
 <!--END:APPLICATION-OVERVIEW -->
-<!--BEGIN:IMPORTANT-CONCEPTS -->
+<!--BEGIN:CRITICAL-DESIGN-CONCEPTS-THAT-MUST-BE-FOLLOWED-100%-OF-THE-TIME -->
 
-## Important concepts
+## Critical Design Concepts That MUST Be Followed 100% of the Time
 
 - Data Driven Design — all business logic is driven by configuration and loaded data; no hardcoded values.
 - Typed Inputs/Outputs — agents communicate using strictly typed data structures; no freeform text between agents.
 - Orchestrator-Centric — all inter-agent communication is routed through the Orchestrator; agents do not call each other directly.
 - UserContext — User Specific Data loaded by UserContextAgent; includes categories, records, and aliases. User will be able to modify this data in future.
 
-<!--END:IMPORTANT-CONCEPTS -->
+<!--END:CRITICAL-DESIGN-CONCEPTS-THAT-MUST-BE-FOLLOWED-100%-OF-THE-TIME -->
 <!--BEGIN:GUIDELINES-AND-INTEGRITY-REFERENCE -->
 
 ## Guidelines and Integrity Reference

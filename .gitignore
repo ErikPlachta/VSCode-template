@@ -1,9 +1,12 @@
-out/mcp.config.json
-.mcp-cache/
+
+# Development environment files
 node_modules/
 coverage/
 out/
 tests/**/*.js
+
+# User Session specific MCP Extension context 
+usercontext-mcp-extension/ 
 
 # Environment configuration
 .env

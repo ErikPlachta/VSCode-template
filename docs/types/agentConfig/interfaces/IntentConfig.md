@@ -6,7 +6,7 @@
 
 # Interface: IntentConfig
 
-Defined in: [src/types/agentConfig.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L20)
+Defined in: [src/types/agentConfig.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L20)
 
 Intent configuration for orchestration
 
@@ -16,7 +16,7 @@ Intent configuration for orchestration
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L22)
+Defined in: [src/types/agentConfig.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L22)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:22](https://github.com/ErikPlachta/vscode-
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L21)
+Defined in: [src/types/agentConfig.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L21)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:21](https://github.com/ErikPlachta/vscode-
 
 > `optional` **signals**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L24)
+Defined in: [src/types/agentConfig.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L24)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:24](https://github.com/ErikPlachta/vscode-
 
 > **targetAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L23)
+Defined in: [src/types/agentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L23)

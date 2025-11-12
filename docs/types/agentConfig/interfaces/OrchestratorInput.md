@@ -6,7 +6,7 @@
 
 # Interface: OrchestratorInput
 
-Defined in: [src/types/agentConfig.ts:959](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L959)
+Defined in: [src/types/agentConfig.ts:959](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L959)
 
 Input supplied when asking the orchestrator to fulfil a task.
 
@@ -16,7 +16,7 @@ Input supplied when asking the orchestrator to fulfil a task.
 
 > `optional` **criteria**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/agentConfig.ts:962](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L962)
+Defined in: [src/types/agentConfig.ts:962](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L962)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:962](https://github.com/ErikPlachta/vscode
 
 > **question**: `string`
 
-Defined in: [src/types/agentConfig.ts:961](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L961)
+Defined in: [src/types/agentConfig.ts:961](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L961)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/agentConfig.ts:961](https://github.com/ErikPlachta/vscode
 
 > `optional` **topic**: `string`
 
-Defined in: [src/types/agentConfig.ts:960](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L960)
+Defined in: [src/types/agentConfig.ts:960](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L960)

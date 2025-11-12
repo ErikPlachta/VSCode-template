@@ -6,7 +6,7 @@
 
 # Interface: RelevantDataManagerConfig
 
-Defined in: [src/types/agentConfig.ts:464](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L464)
+Defined in: [src/types/agentConfig.ts:464](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L464)
 
 Relevant data manager-specific configuration
 
@@ -16,7 +16,7 @@ Relevant data manager-specific configuration
 
 > **caching**: `object`
 
-Defined in: [src/types/agentConfig.ts:475](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L475)
+Defined in: [src/types/agentConfig.ts:475](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L475)
 
 #### cacheCleanupThreshold?
 
@@ -52,7 +52,7 @@ Defined in: [src/types/agentConfig.ts:475](https://github.com/ErikPlachta/vscode
 
 > `optional` **dataManagement**: `object`
 
-Defined in: [src/types/agentConfig.ts:511](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L511)
+Defined in: [src/types/agentConfig.ts:511](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L511)
 
 #### backupRetentionDays?
 
@@ -88,7 +88,7 @@ Defined in: [src/types/agentConfig.ts:511](https://github.com/ErikPlachta/vscode
 
 > **metadata**: `object`
 
-Defined in: [src/types/agentConfig.ts:465](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L465)
+Defined in: [src/types/agentConfig.ts:465](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L465)
 
 #### autoGenerateMetadata?
 
@@ -128,7 +128,7 @@ Defined in: [src/types/agentConfig.ts:465](https://github.com/ErikPlachta/vscode
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:520](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L520)
+Defined in: [src/types/agentConfig.ts:520](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L520)
 
 #### defaultOperationTimeout?
 
@@ -156,7 +156,7 @@ Defined in: [src/types/agentConfig.ts:520](https://github.com/ErikPlachta/vscode
 
 > `optional` **relationships**: `object`
 
-Defined in: [src/types/agentConfig.ts:503](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L503)
+Defined in: [src/types/agentConfig.ts:503](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L503)
 
 #### buildRelationshipIndexes?
 
@@ -188,7 +188,7 @@ Defined in: [src/types/agentConfig.ts:503](https://github.com/ErikPlachta/vscode
 
 > `optional` **schemaManagement**: `object`
 
-Defined in: [src/types/agentConfig.ts:494](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L494)
+Defined in: [src/types/agentConfig.ts:494](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L494)
 
 #### autoDetectSchemaChanges?
 
@@ -224,7 +224,7 @@ Defined in: [src/types/agentConfig.ts:494](https://github.com/ErikPlachta/vscode
 
 > **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:484](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L484)
+Defined in: [src/types/agentConfig.ts:484](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L484)
 
 #### allowPartialValidation
 

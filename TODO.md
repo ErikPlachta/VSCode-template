@@ -15,7 +15,7 @@ associations:
 
 ## Copilot Instructions
 
-<!-- TODO:BEGIN:COPILOT_INSTRUCTIONS -->
+<!-- BEGIN:COPILOT_INSTRUCTIONS -->
 
 ### Core Principals
 
@@ -30,7 +30,6 @@ associations:
 
 - Maintain this file as the single source of truth for outstanding tasks.
 - This file is used by `.github/copilot-instructions.md` for tracking historical decisions and active planned tasks before starting new work.
-- The content within this file is used to make entries within the `CHANGELOG.md` file.
 - Ensure all outstanding tasks are captured here, organized by priority.
 - There are custom scripts created for interacting with this file via CLI to ensure consistency and proper formatting. (see [Automation Aids](#automation-aids) below)
 
@@ -38,7 +37,7 @@ associations:
 
 To guarantee accurate current timestamps and consistent formatting for new log entries, prefer the ChangeLogManager CLI:
 
-- Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary"`
+- Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary" --details "Detailed description here. Use full markdown formatting here. New lines, lists, sections, links to other content, etc. (don't just use one block of text)"`
 - Ensure markers: `npm run changelog:manage -- insert-markers`
 - Add a Current Task: `npm run changelog:manage -- add-current --text "Task description"`
 - Prune completed items: `npm run changelog:manage -- prune-completed`
@@ -63,9 +62,8 @@ Follow these guidelines to ensure effective task management:
    - Validate integrity and modify as things change.
 7. **Completion Workflow**: When a TODO is completed, and CHANGELOG entry should be made. Reference the `.github/copilot-instructions.md` and `CHANGELOG.md` for specifics.
 
-<!-- TODO:END:COPILOT_INSTRUCTIONS -->
-
-<!-- TODO:BEGIN: INCOMPLETE_TODOs -->
+<!-- END:COPILOT_INSTRUCTIONS -->
+<!-- BEGIN: INCOMPLETE_TODOs -->
 
 ## Incomplete TODOs
 
@@ -75,27 +73,27 @@ Follow these guidelines to ensure effective task management:
 
 > This section contains the active TODOs being worked on.
 
-<!-- TODO:BEGIN:CURRENT_TODOS_PROCESSING -->
+<!-- BEGIN:CURRENT_TODOS_PROCESSING -->
 
-<!-- TODO:END:CURRENT_TODOS_PROCESSING -->
+<!-- END:CURRENT_TODOS_PROCESSING -->
 
 ### Next TODOs
 
 > This section contains the next TODOs to be worked on.
 
-<!-- TODO:BEGIN:NEXT_TODOS_TO_PROCESS -->
+<!-- BEGIN:NEXT_TODOS_TO_PROCESS -->
 
-<!-- TODO:END:NEXT_TODOS_TO_PROCESS -->
+<!-- END:NEXT_TODOS_TO_PROCESS -->
 
 ### Backlog TODOs
 
 > This section contains unplanned TODOs that may be addressed later.
 
-<!-- TODO:BEGIN:UNPLANNED_TODOS_TO_PROCESS -->
+<!-- BEGIN:UNPLANNED_TODOS_TO_PROCESS -->
 
-<!-- TODO:END:UNPLANNED_TODOS_TO_PROCESS -->
+<!-- END:UNPLANNED_TODOS_TO_PROCESS -->
 
-<!-- TODO:END:INCOMPLETE_TODOs >
+<!-- END:INCOMPLETE_TODOs -->
 
 ## Completed TODOs
 

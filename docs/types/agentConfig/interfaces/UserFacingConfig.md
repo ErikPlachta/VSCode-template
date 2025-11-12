@@ -6,7 +6,7 @@
 
 # Interface: UserFacingConfig
 
-Defined in: [src/types/agentConfig.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L101)
+Defined in: [src/types/agentConfig.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L101)
 
 User-facing metadata
 
@@ -16,7 +16,7 @@ User-facing metadata
 
 > `optional` **exampleQueries**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L104)
+Defined in: [src/types/agentConfig.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L104)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:104](https://github.com/ErikPlachta/vscode
 
 > `optional` **friendlyDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L102)
+Defined in: [src/types/agentConfig.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L102)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:102](https://github.com/ErikPlachta/vscode
 
 > `optional` **helpText**: `string`
 
-Defined in: [src/types/agentConfig.ts:105](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L105)
+Defined in: [src/types/agentConfig.ts:105](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L105)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:105](https://github.com/ErikPlachta/vscode
 
 > `optional` **useWhen**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L103)
+Defined in: [src/types/agentConfig.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L103)

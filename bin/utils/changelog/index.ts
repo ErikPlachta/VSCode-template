@@ -1,8 +1,11 @@
 #!/usr/bin/env tsx
 /**
- * Entry point for ChangeLogManager when invoking the directory directly:
- *   tsx bin/utils/changelog -- add-entry --type feat --summary "Something"
- * Falls back to CLI help if no command provided.
+ * Legacy path deprecated: bin/utils/changelog.
+ * This shim prevents accidental usage after migration.
+ *
+ * New CLI location: bin/repo-ops/changelog (same commands & args)
  */
-import { runCli } from "./cli";
-runCli();
+console.error(
+  "[DEPRECATED] bin/utils/changelog has been removed. Use bin/repo-ops/changelog instead."
+);
+process.exit(1);

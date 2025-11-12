@@ -8,7 +8,7 @@
 
 > **deactivate**(): `void`
 
-Defined in: [src/extension/index.ts:655](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/extension/index.ts#L655)
+Defined in: [src/extension/index.ts:682](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/extension/index.ts#L682)
 
 Deactivate the extension.
 Currently a no-op because embedded server shutdown is handled via subscription dispose.

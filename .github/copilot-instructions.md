@@ -2,6 +2,8 @@
 
 This repository uses `CHANGELOG.md` as the single source of truth for work tracking. Follow these guidelines for consistent, high-quality changes.
 
+> Note: Use american-english spelling for all artifacts, not british-english (e.g. "organization" not "organisation").
+
 ## Critical Architecture Rules
 
 ### 1. **Agent Isolation (MUST FOLLOW)**
@@ -469,7 +471,7 @@ These instructions are living; update them when governance rules or quality gate
 
 To guarantee accurate current timestamps and consistent formatting for new log entries, prefer the ChangeLogManager CLI:
 
-- Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary"`
+- Quick add entry: `npm run changelog:manage -- add-entry --type docs --summary "Your summary" --details "Detailed description here. Use full markdown formatting here."`
 - Ensure markers: `npm run changelog:manage -- insert-markers`
 - Add a Current Task: `npm run changelog:manage -- add-current --text "Task description"`
 - Prune completed items: `npm run changelog:manage -- prune-completed`

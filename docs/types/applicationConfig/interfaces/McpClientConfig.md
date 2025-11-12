@@ -6,7 +6,7 @@
 
 # Interface: McpClientConfig
 
-Defined in: [src/types/applicationConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/applicationConfig.ts#L46)
+Defined in: [src/types/applicationConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L46)
 
 MCP client configuration settings.
 
@@ -16,7 +16,7 @@ MCP client configuration settings.
 
 > **maxConcurrentRequests**: `number`
 
-Defined in: [src/types/applicationConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/applicationConfig.ts#L48)
+Defined in: [src/types/applicationConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L48)
 
 Maximum number of concurrent requests.
 
@@ -26,7 +26,7 @@ Maximum number of concurrent requests.
 
 > **requestTimeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/applicationConfig.ts#L50)
+Defined in: [src/types/applicationConfig.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L50)
 
 Request timeout in milliseconds.
 
@@ -36,6 +36,6 @@ Request timeout in milliseconds.
 
 > **retryDelay**: `number`
 
-Defined in: [src/types/applicationConfig.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/applicationConfig.ts#L52)
+Defined in: [src/types/applicationConfig.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L52)
 
 Delay between retry attempts in milliseconds.
