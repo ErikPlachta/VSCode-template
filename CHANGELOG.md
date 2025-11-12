@@ -169,6 +169,9 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-12]
 
+#### 2025-11-12 09:10:25 docs: LLM switch: from Claude 4.5 to GPT-5
+
+
 #### 2025-11-12 08:57:36 fix: Data-driven category extraction using actual category aliases from UserContextAgent
 
 **Problems Identified**:
