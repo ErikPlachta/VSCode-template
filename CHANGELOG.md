@@ -479,12 +479,23 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-11]
 
+#### 2025-11-11 20:42:20 fix: Remove dotenv runtime dependency from env.ts
+
+- Removed dotenv import from src/shared/env.ts, moved to devDependencies only. Extension name now uses process.env directly with fallback, eliminating runtime dependency loading. Dotenv still used in build scripts.
+
+#### 2025-11-11 20:42:04 fix: Replace axios with native Node.js http/https modules
+
+- Removed axios dependency, implemented native HTTP client in mcpSync.ts using Node's built-in http/https modules for MCP tool fetching. Reduces package size and eliminates external dependency.
+
+#### 2025-11-11 20:40:55 refactor: Remove legacy mcp.json direct registration code in favor of provider system
+
+- Removed ensureRegistration/removeRegistration calls from activation flow, simplified register/unregister commands to provider-only, cleaned up orphaned registration cleanup logic. Extension now fully relies on mcpServerDefinitionProviders for MCP server registration.
+
 #### 2025-11-11 18:21:20 fix: Fix extension runtime - resolve path alias imports
 
-- Extension failed to activate with 'Cannot find package @agent/orchestrator' error. Root cause: TypeScript path aliases not resolved at runtime. Fixed by: 1) Excluded tests from main tsconfig.json (only compile src/), 2) Manually added __dirname polyfill (fileURLToPath + path.dirname) to 7 test files, 3) Verified aliasToRelativeOut.ts successfully converted 40 files with path aliases to relative imports (e.g. @agent/orchestrator → ../agent/orchestrator/index.js). Extension now packages and installs successfully.
+- Extension failed to activate with 'Cannot find package @agent/orchestrator' error. Root cause: TypeScript path aliases not resolved at runtime. Fixed by: 1) Excluded tests from main tsconfig.json (only compile src/), 2) Manually added \_\_dirname polyfill (fileURLToPath + path.dirname) to 7 test files, 3) Verified aliasToRelativeOut.ts successfully converted 40 files with path aliases to relative imports (e.g. @agent/orchestrator → ../agent/orchestrator/index.js). Extension now packages and installs successfully.
 
 ##### Verification – Build: PASS (tsc compiled src/ successfully). Package: PASS (454 files, 405KB VSIX created). Install: PASS (extension installed successfully). Path Resolution: VERIFIED (out/src/extension/index.js shows correct relative imports).
-
 
 #### 2025-11-11 17:53:38 chore: Update progress tracking - Phase 4 Workflow Coordination complete
 
@@ -492,10 +503,9 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ##### Verification – Build: PASS (npm run compile successful). Tests: 265/275 passing (96% pass rate). Remaining: 5 test suites with ESM mock issues. Coverage: Not yet verified. Next: Phase 4.10 Extension Integration.
 
-
 #### 2025-11-11 17:50:48 fix: Fix TypeScript/Jest ESM configuration for import.meta support
 
-- Added tsconfig.test.json with NodeNext module setting and isolatedModules. Updated jest.config.js to use ts-jest/presets/default-esm. Added cross-env for NODE_OPTIONS. Updated 35 test files with @jest/globals imports. Added __dirname polyfill to 8 test files. Result: 265/275 tests passing (96% pass rate).
+- Added tsconfig.test.json with NodeNext module setting and isolatedModules. Updated jest.config.js to use ts-jest/presets/default-esm. Added cross-env for NODE_OPTIONS. Updated 35 test files with @jest/globals imports. Added \_\_dirname polyfill to 8 test files. Result: 265/275 tests passing (96% pass rate).
 
 #### 2025-11-11 10:13:31 ci: Consolidate workflows into unified CI/CD pipeline with proper job dependencies
 

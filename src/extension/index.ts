@@ -10,11 +10,7 @@ import { fileURLToPath } from "url";
 import { Orchestrator } from "@agent/orchestrator";
 import { fetchTools, fetchLocalTools, MCPTool } from "@extension/mcpSync";
 import { registerMcpProvider } from "@extension/mcpProvider";
-import {
-  ensureRegistration,
-  removeRegistration,
-  resolveMcpConfigPath,
-} from "@extension/mcpRegistration";
+import { resolveMcpConfigPath } from "@extension/mcpRegistration";
 
 // ES module equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -79,72 +75,9 @@ export async function activate(
     }`
   );
 
-  if (!serverUrl) {
-    const autoRegister = cfg.get<boolean>("autoRegister") ?? true;
-    if (!autoRegister) {
-      console.log(
-        `ℹ️ autoRegister is disabled; skipping automatic mcp.json registration`
-      );
-    } else {
-      console.log(`ℹ️ Registering stdio MCP server in mcp.json...`);
-      try {
-        // Prefer installed extension path if available (packaged); fallback to workspace path in dev
-        const extIdentifier = `${pkg.publisher || "ErikPlachta"}.${
-          pkg.name || "mybusiness-mcp-extension"
-        }`;
-        console.log(`🔍 Looking for extension: ${extIdentifier}`);
-        const installedExt = vscode.extensions.getExtension(extIdentifier);
-        console.log(`📦 Extension found: ${installedExt ? "YES" : "NO"}`);
-        console.log(
-          `📂 Installed path: ${installedExt?.extensionPath || "N/A"}`
-        );
-        console.log(`📂 Context path: ${context.extensionPath}`);
-        const basePath = installedExt?.extensionPath || context.extensionPath;
-        console.log(`✅ Using base path: ${basePath}`);
-        const serverScript = path.join(
-          basePath,
-          "out",
-          "src",
-          "server",
-          "index.js"
-        );
-        console.log(`🚀 Server script: ${serverScript}`);
-        const registrationId = `${contributedName}-mcp-server`;
+  // MCP server registration is now handled by the provider system
+  // Legacy autoRegister setting is deprecated but kept for backwards compatibility
 
-        await ensureRegistration({
-          id: registrationId,
-          type: "stdio",
-          command: "node",
-          args: [serverScript, "--stdio"],
-        });
-
-        console.log(
-          `✅ Stdio MCP server registered in mcp.json as "${registrationId}"`
-        );
-
-        // Register cleanup to remove mcp.json registration
-        // Cleanup disposable to remove registration on deactivate
-        const cleanupRegistration: vscode.Disposable = {
-          /**
-           * Dispose hook to remove mcp.json registration added during activation.
-           *
-           * @returns {Promise<void>} Resolves when the registration entry has been removed.
-           */
-          dispose: async (): Promise<void> => {
-            await removeRegistration(registrationId);
-            console.log(`🧹 Cleaned up mcp.json registration`);
-          },
-        };
-        context.subscriptions.push(cleanupRegistration);
-      } catch (regError) {
-        const regMsg =
-          regError instanceof Error ? regError.message : String(regError);
-        console.warn(
-          `⚠️ Failed to register stdio server in mcp.json: ${regMsg}`
-        );
-      }
-    }
-  }
   // Always register provider and chat participant; tool discovery can fail independently
   console.log(
     `🔌 Registering MCP provider with serverUrl: ${
@@ -243,8 +176,9 @@ export async function activate(
   console.log(
     `✅ Chat participant "${contributedId}" registered successfully; mention is @${contributedName}`
   );
-  console.log(`🔍 Verify activation event in package.json: onChatParticipant:${contributedId}`);
-
+  console.log(
+    `🔍 Verify activation event in package.json: onChatParticipant:${contributedId}`
+  );
 
   // Register the manual tool invocation command
   const toolCommand = vscode.commands.registerCommand(
@@ -290,49 +224,14 @@ export async function activate(
           `🔄 Registering MyBusiness MCP Server...`
         );
 
-        // Register both the provider and mcp.json entry
+        // Register the provider (replaces legacy mcp.json registration)
         registerMcpProvider(serverUrl, token, includeAuthHeader, context);
-
-        if (serverUrl) {
-          const registrationId = `${contributedName}-mcp-server`;
-          await ensureRegistration({
-            id: registrationId,
-            type: "http",
-            url: serverUrl,
-            includeAuthHeader,
-            token: token || undefined,
-          });
-          console.log(
-            `✅ HTTP server registered in mcp.json as "${registrationId}"`
-          );
-        } else {
-          // Register stdio server
-          const extIdentifier = `${pkg.publisher || "ErikPlachta"}.${
-            pkg.name || "mybusiness-mcp-extension"
-          }`;
-          const installedExt = vscode.extensions.getExtension(extIdentifier);
-          const basePath = installedExt?.extensionPath || context.extensionPath;
-          const serverScript = path.join(
-            basePath,
-            "out",
-            "src",
-            "server",
-            "index.js"
-          );
-          const registrationId = `${contributedName}-mcp-server`;
-          await ensureRegistration({
-            id: registrationId,
-            type: "stdio",
-            command: "node",
-            args: [serverScript, "--stdio"],
-          });
-          console.log(
-            `✅ Stdio server registered in mcp.json as "${registrationId}"`
-          );
-        }
+        console.log(`✅ MCP provider registered`);
 
         vscode.window.showInformationMessage(
-          `✅ MyBusiness MCP Server registered! Server: ${serverUrl}`
+          `✅ MyBusiness MCP Server registered via provider! Server: ${
+            serverUrl || "(embedded stdio)"
+          }`
         );
         console.log(`✅ Manual registration complete`);
       } catch (error) {
@@ -350,17 +249,19 @@ export async function activate(
     async () => {
       console.log(`🔄 Manual MCP server unregistration triggered...`);
       try {
-        const registrationId = `${contributedName}-mcp-server`;
-        await removeRegistration(registrationId);
-        console.log(`✅ Removed HTTP server registration from mcp.json`);
+        // The provider system handles registration automatically
+        // This command is kept for backwards compatibility but is now a no-op
+        console.log(
+          `ℹ️ Provider-based servers are managed automatically by VS Code`
+        );
         vscode.window.showInformationMessage(
-          `✅ MyBusiness MCP Server unregistered from mcp.json`
+          `ℹ️ MCP Server is managed via provider - no manual unregistration needed`
         );
       } catch (error) {
         const msg = error instanceof Error ? error.message : String(error);
-        console.error(`❌ Manual unregistration failed:`, msg);
+        console.error(`❌ Unregistration command failed:`, msg);
         vscode.window.showErrorMessage(
-          `❌ Failed to unregister MCP server: ${msg}`
+          `❌ Failed to process unregister command: ${msg}`
         );
       }
     }
@@ -661,9 +562,10 @@ async function cleanupOrphanedRegistrations(
                   !candidatePath.startsWith(extensionPath)
                 ) {
                   console.log(
-                    `🧹 Removing orphaned mcp.json server entry: ${id} -> ${scriptArg}`
+                    `🧹 Found orphaned mcp.json server entry: ${id} -> ${scriptArg} (provider system manages automatically)`
                   );
-                  await removeRegistration(id);
+                  // Note: With provider system, manual cleanup is no longer needed
+                  // Legacy entries can be removed manually if needed
                 }
               }
             }
