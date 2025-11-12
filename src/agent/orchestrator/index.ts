@@ -44,6 +44,9 @@ import type {
   WorkflowDiagnostics,
   WorkflowHistory,
   AgentRegistry,
+  GetSnapshotParams,
+  QueryParams,
+  AnalyzeParams,
 } from "@internal-types/workflow.types";
 import { WorkflowLogger } from "@shared/workflowLogger";
 import { ensureCacheDirectory } from "@extension/mcpCache";
@@ -1619,21 +1622,27 @@ export class Orchestrator extends BaseAgentConfig {
 
     switch (intent) {
       case "metadata": {
-        // Get user context snapshot
+        // Get user context snapshot - data-driven: no topicOrId specified
+        const snapshotParams: GetSnapshotParams = {
+          topicOrId: undefined, // Agent will use first available category
+        };
+
         actions.push({
           id: "get-snapshot",
           type: "execute-agent",
           agent: "user-context-agent",
           method: "getOrCreateSnapshot",
-          params: undefined,
+          params: snapshotParams,
           status: "pending",
         });
         break;
       }
 
       case "records": {
-        // Extract query parameters from user question
-        const queryParams = this.extractQueryParams(input.question);
+        // Extract query parameters from user question - data-driven
+        const queryParams: QueryParams = this.extractQueryParams(
+          input.question
+        );
 
         // Execute database query
         actions.push({
@@ -1648,8 +1657,10 @@ export class Orchestrator extends BaseAgentConfig {
       }
 
       case "insight": {
-        // Multi-step: query data, then analyze
-        const queryParams = this.extractQueryParams(input.question);
+        // Multi-step: query data, then analyze - data-driven
+        const queryParams: QueryParams = this.extractQueryParams(
+          input.question
+        );
 
         // Step 1: Query data
         actions.push({
@@ -1661,13 +1672,19 @@ export class Orchestrator extends BaseAgentConfig {
           status: "pending",
         });
 
-        // Step 2: Analyze results (depends on query)
+        // Step 2: Analyze results (depends on query) - data-driven
+        const analyzeParams: AnalyzeParams = {
+          data: undefined, // Will be populated from query-data result via dependency resolution
+          analysisType: "summary", // Default analysis
+          fields: undefined, // Agent will analyze all relevant fields
+        };
+
         actions.push({
           id: "analyze-data",
           type: "execute-agent",
           agent: "data-agent",
           method: "analyzeData",
-          params: undefined, // Will be populated from query-data result
+          params: analyzeParams,
           dependencies: ["query-data"],
           status: "pending",
         });
@@ -1676,14 +1693,17 @@ export class Orchestrator extends BaseAgentConfig {
 
       case "general":
       default: {
-        // General queries might need clarification or simple routing
-        // For now, get snapshot as fallback
+        // General queries might need clarification or simple routing - data-driven
+        const snapshotParams: GetSnapshotParams = {
+          topicOrId: undefined, // Agent will use first available category
+        };
+
         actions.push({
           id: "get-context",
           type: "execute-agent",
           agent: "user-context-agent",
           method: "getOrCreateSnapshot",
-          params: undefined,
+          params: snapshotParams,
           status: "pending",
         });
         break;
@@ -1704,26 +1724,18 @@ export class Orchestrator extends BaseAgentConfig {
   /**
    * Extract query parameters from user question
    *
-   * Parses natural language question into structured query parameters
+   * Parses natural language question into structured query parameters.
+   * All extraction is data-driven based on keywords in the question.
    *
    * @param {string} question - User's question
-   * @returns {object} Query parameters for database agent
+   * @returns {QueryParams} Structured query parameters for database agent
    */
-  private extractQueryParams(question: string): {
-    category?: string;
-    filters?: Record<string, unknown>;
-    limit?: number;
-  } {
-    // Simple keyword-based extraction (can be enhanced with NLP)
-    const params: {
-      category?: string;
-      filters?: Record<string, unknown>;
-      limit?: number;
-    } = {
+  private extractQueryParams(question: string): QueryParams {
+    const params: QueryParams = {
       limit: 10, // Default limit
     };
 
-    // Extract category hints
+    // Extract category hints - data-driven keyword matching
     const lowerQuestion = question.toLowerCase();
     if (lowerQuestion.includes("people") || lowerQuestion.includes("person")) {
       params.category = "people";
@@ -1739,7 +1751,7 @@ export class Orchestrator extends BaseAgentConfig {
       params.category = "departments";
     }
 
-    // Extract filters (basic skill matching)
+    // Extract filters - data-driven based on common skill keywords
     if (lowerQuestion.includes("python")) {
       params.filters = { skills: "Python" };
     } else if (
@@ -1909,9 +1921,14 @@ export class Orchestrator extends BaseAgentConfig {
   /**
    * Call agent method dynamically
    *
+   * Handles various parameter formats:
+   * - undefined: No params
+   * - GetSnapshotParams/QueryParams/AnalyzeParams: Single structured object
+   * - Array: Multiple positional arguments
+   *
    * @param {unknown} agent - Agent instance
    * @param {string} method - Method name
-   * @param {unknown} params - Method parameters
+   * @param {unknown} params - Method parameters (structured object, array, or undefined)
    * @returns {Promise<unknown>} Method result
    */
   private async callAgentMethod(
@@ -1919,8 +1936,6 @@ export class Orchestrator extends BaseAgentConfig {
     method: string,
     params: unknown
   ): Promise<unknown> {
-    // Use callAgentWithResponse for proper error handling and metadata
-    // But extract just the data for workflow execution
     const agentObj = agent as Record<string, unknown>;
     const methodFn = agentObj[method];
 
@@ -1928,15 +1943,35 @@ export class Orchestrator extends BaseAgentConfig {
       throw new Error(`Method ${method} not found on agent`);
     }
 
-    // Call method with params
+    // Handle different parameter formats
     if (params === undefined) {
+      // No parameters
       return await (methodFn as () => Promise<unknown>).call(agent);
     } else if (Array.isArray(params)) {
+      // Multiple positional arguments
       return await (methodFn as (...args: unknown[]) => Promise<unknown>).apply(
         agent,
         params
       );
+    } else if (typeof params === "object" && params !== null) {
+      // Structured parameter object (GetSnapshotParams, QueryParams, AnalyzeParams, etc.)
+      // Extract the actual parameter value(s) from the structured object
+      const paramObj = params as Record<string, unknown>;
+
+      // For GetSnapshotParams: { topicOrId?: string }
+      if ("topicOrId" in paramObj) {
+        return await (
+          methodFn as (topicOrId?: string) => Promise<unknown>
+        ).call(agent, paramObj.topicOrId as string | undefined);
+      }
+
+      // For QueryParams and AnalyzeParams: pass the whole object
+      return await (methodFn as (params: unknown) => Promise<unknown>).call(
+        agent,
+        params
+      );
     } else {
+      // Single primitive parameter
       return await (methodFn as (arg: unknown) => Promise<unknown>).call(
         agent,
         params

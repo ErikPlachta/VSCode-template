@@ -182,7 +182,6 @@
     "@vscode/vsce": "^3.2.0",
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
-    "esbuild": "^0.27.0",
     "eslint": "^9.39.1",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-jsdoc": "^61.1.12",

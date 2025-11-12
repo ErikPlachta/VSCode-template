@@ -357,3 +357,55 @@ export interface WorkflowResult {
   /** Workflow identifier for diagnostics */
   workflowId: string;
 }
+
+// ============================================================================
+// Agent Method Parameter Types
+// ============================================================================
+
+/**
+ * Parameters for UserContextAgent.getOrCreateSnapshot()
+ *
+ * If topicOrId is undefined, agent will use first available category (data-driven)
+ */
+export interface GetSnapshotParams {
+  /** Optional category identifier. If undefined, uses first available category */
+  topicOrId?: string;
+}
+
+/**
+ * Parameters for DatabaseAgent.executeQuery()
+ *
+ * All fields optional to support data-driven querying
+ */
+export interface QueryParams {
+  /** Category to query. If undefined, agent determines from context */
+  category?: string;
+
+  /** Filters to apply. Structure depends on category schema */
+  filters?: Record<string, unknown>;
+
+  /** Maximum number of results. Defaults to agent-specific limit */
+  limit?: number;
+
+  /** Fields to return. If undefined, returns all fields */
+  fields?: string[];
+
+  /** Sort order. Format: { field: 'asc' | 'desc' } */
+  sort?: Record<string, "asc" | "desc">;
+}
+
+/**
+ * Parameters for DataAgent.analyzeData()
+ *
+ * Accepts data from previous action or explicit dataset
+ */
+export interface AnalyzeParams {
+  /** Data to analyze. Can come from dependency resolution */
+  data?: unknown[];
+
+  /** Type of analysis to perform */
+  analysisType?: "summary" | "correlation" | "trend" | "distribution";
+
+  /** Fields to analyze. If undefined, analyzes all numeric/categorical fields */
+  fields?: string[];
+}

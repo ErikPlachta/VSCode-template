@@ -75,7 +75,13 @@ const __dirname = path.dirname(__filename);
 // The dataset folders now live under `src/userContext` (applications, departments, people, etc.).
 // Tests and runtime may override via VSCODE_TEMPLATE_DATA_ROOT.
 // When compiled: out/src/agent/userContextAgent/../../../userContext = out/userContext
-const DEFAULT_DATA_ROOT = path.resolve(__dirname, "..", "..", "..", "userContext");
+const DEFAULT_DATA_ROOT = path.resolve(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "userContext"
+);
 // External user data directory (Phase 3.2): ~/.vscode/extensions/<publisher>.<extensionName>/userData
 // Prefer installed extension path; fallback to workspace-local path if not present.
 /**
@@ -794,12 +800,22 @@ export class UserContextAgent extends BaseAgentConfig {
   /**
    * Build a snapshot view of a category and persist it to the shared cache.
    *
-   * @param {string} topicOrId - topicOrId parameter.
+   * @param {string} [topicOrId] - Category identifier or topic. If undefined, uses first available category.
    * @returns {Promise<CategorySnapshot>} Cached or newly generated snapshot summarising the category.
+   * @throws {Error} If no categories are available.
    */
-  async getOrCreateSnapshot(topicOrId: string): Promise<CategorySnapshot> {
+  async getOrCreateSnapshot(topicOrId?: string): Promise<CategorySnapshot> {
     return this.telemetry("getOrCreateSnapshot", async () => {
-      const category = this.getCategory(topicOrId);
+      // Data-driven: If no category specified, use first available category
+      let resolvedTopic = topicOrId;
+      if (!resolvedTopic) {
+        const categories = this.listCategories();
+        if (categories.length === 0) {
+          throw new Error("No categories available in UserContext");
+        }
+        resolvedTopic = categories[0].id;
+      }
+      const category = this.getCategory(resolvedTopic);
       const cacheKey = `relevant-data:${category.id}:snapshot`;
       const cacheDir = await this.cacheDirPromise;
       const currentHash = this.getCategoryRecordHash(category.id);
