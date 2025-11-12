@@ -6,7 +6,7 @@
 
 # Interface: ExampleDataset
 
-Defined in: [src/types/userContext.types.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L284)
+Defined in: [src/types/userContext.types.ts:301](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L301)
 
 Example dataset artifact hosted in the category folder
 
@@ -16,7 +16,7 @@ Example dataset artifact hosted in the category folder
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L286)
+Defined in: [src/types/userContext.types.ts:303](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L303)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:286](https://github.com/ErikPlachta/
 
 > **file**: `string`
 
-Defined in: [src/types/userContext.types.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L285)
+Defined in: [src/types/userContext.types.ts:302](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L302)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:285](https://github.com/ErikPlachta/
 
 > **sample**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/userContext.types.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L287)
+Defined in: [src/types/userContext.types.ts:304](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L304)

@@ -8,7 +8,7 @@
 
 > `const` **CONFIG\_IDS**: `object`
 
-Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/configRegistry.ts#L23)
+Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/configRegistry.ts#L23)
 
 Configuration ID format: agent.{agentType}.v{major}.{minor}.{patch}
 
@@ -36,6 +36,12 @@ Communication agent configuration schema
 > `readonly` **DATA\_AGENT**: `"agent.data.v1.0.0"` = `"agent.data.v1.0.0"`
 
 Data agent configuration schema
+
+### DATA\_LOADER\_AGENT
+
+> `readonly` **DATA\_LOADER\_AGENT**: `"agent.data-loader.v1.0.0"` = `"agent.data-loader.v1.0.0"`
+
+DataLoader agent configuration schema
 
 ### DATABASE\_AGENT
 

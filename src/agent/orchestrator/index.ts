@@ -306,6 +306,7 @@ export class Orchestrator extends BaseAgentConfig {
   }
 
   /**
+   * Build helpful clarification response with examples
    * Classify intent for a question (legacy string or new structured input).
    *
    * @param {string | OrchestratorInput} questionOrInput - Raw question text or structured input.
@@ -1525,9 +1526,52 @@ export class Orchestrator extends BaseAgentConfig {
       const vaguePhraseFound = this.vaguePhrases.some((phrase) =>
         input.question.toLowerCase().includes(phrase)
       );
-      if (vaguePhraseFound || classification.intent === "general") {
+      if (
+        vaguePhraseFound ||
+        classification.intent === "clarification" ||
+        classification.intent === "general"
+      ) {
         await this.transitionState(context, "needs-clarification");
-        return this.buildWorkflowResult(context, "needs-clarification");
+
+        // Get available categories from UserContextAgent
+        const userContextAgent = this.agentRegistry["user-context-agent"];
+        let categoryNames: string[] = [];
+        if (
+          userContextAgent &&
+          typeof userContextAgent === "object" &&
+          "listCategories" in userContextAgent
+        ) {
+          const categories =
+            (
+              userContextAgent as {
+                listCategories: () => Array<{ name: string }>;
+              }
+            ).listCategories() || [];
+          categoryNames = categories.map((c) => c.name);
+        }
+
+        // Delegate clarification formatting to CommunicationAgent
+        const clarificationResponse: AgentResponse = {
+          type: "info",
+          status: "in-progress",
+          message: "I need more information to help you properly",
+          metadata: {
+            originalQuestion: input.question,
+            matchedIntent:
+              classification.intent !== "clarification"
+                ? classification.intent
+                : undefined,
+            availableCategories: categoryNames,
+          },
+        };
+
+        const formatted =
+          this.communicationAgent.formatClarification(clarificationResponse);
+
+        return this.buildWorkflowResult(context, "needs-clarification", {
+          message: formatted.message,
+          markdown: formatted.message,
+        });
       }
 
       // Transition to executing
@@ -2062,6 +2106,9 @@ export class Orchestrator extends BaseAgentConfig {
   /**
    * Format workflow result into user-facing response
    *
+   * Delegates to CommunicationAgent for proper user-friendly formatting
+   * instead of doing simple Object.entries() dump.
+   *
    * @param {WorkflowContext} context - Workflow context
    * @returns {Promise<{ message: string; markdown?: string }>} Formatted response
    */
@@ -2078,25 +2125,83 @@ export class Orchestrator extends BaseAgentConfig {
       };
     }
 
-    // Format based on result type
     const result = lastAction.result;
 
-    if (Array.isArray(result)) {
-      // Format array results (records)
-      return {
-        message: `Found ${result.length} result(s)`,
-        markdown: this.formatRecords(result),
+    // Check if result is a CategorySnapshot (has specific structure)
+    if (
+      typeof result === "object" &&
+      result !== null &&
+      "id" in result &&
+      "name" in result &&
+      "recordCount" in result
+    ) {
+      // Format CategorySnapshot in user-friendly way
+      const snapshot = result as {
+        id: string;
+        name: string;
+        description?: string;
+        recordCount: number;
+        schemaNames?: string[];
+        typeNames?: string[];
       };
-    } else if (typeof result === "object" && result !== null) {
-      // Format object results (snapshot, insights)
+
+      const markdown = `### ${snapshot.name}\n\n${
+        snapshot.description || ""
+      }\n\n**Records:** ${snapshot.recordCount}\n\n${
+        snapshot.schemaNames && snapshot.schemaNames.length > 0
+          ? `**Schemas:** ${snapshot.schemaNames.join(", ")}\n\n`
+          : ""
+      }${
+        snapshot.typeNames && snapshot.typeNames.length > 0
+          ? `**Types:** ${snapshot.typeNames.join(", ")}`
+          : ""
+      }`;
+
       return {
-        message: "Data retrieved successfully",
-        markdown: this.formatObject(result),
+        message: `Found ${snapshot.name} with ${snapshot.recordCount} records`,
+        markdown,
       };
-    } else {
+    }
+
+    // Use CommunicationAgent for other response types
+    try {
+      // Wrap result in AgentResponse structure
+      const agentResponse: AgentResponse<unknown> = {
+        type: "success",
+        status: "success",
+        data: result,
+        message: "Request completed successfully",
+      };
+
+      // Format using CommunicationAgent
+      const formatted = this.communicationAgent.formatSuccess(agentResponse);
+
       return {
-        message: String(result),
+        message: formatted.message,
+        markdown: formatted.message, // FormattedResponse.message contains the formatted text
       };
+    } catch (error) {
+      // Fallback to basic formatting if CommunicationAgent fails
+      console.warn(
+        "CommunicationAgent formatting failed, using fallback:",
+        error
+      );
+
+      if (Array.isArray(result)) {
+        return {
+          message: `Found ${result.length} result(s)`,
+          markdown: this.formatRecords(result),
+        };
+      } else if (typeof result === "object" && result !== null) {
+        return {
+          message: "Data retrieved successfully",
+          markdown: this.formatObject(result),
+        };
+      } else {
+        return {
+          message: String(result),
+        };
+      }
     }
   }
 

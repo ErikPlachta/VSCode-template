@@ -1,6 +1,196 @@
 # Copilot Chat Instructions
 
-This repository uses the root `CHANGELOG.md` as the single source of truth for Copilot Chat managed work. Follow these guidelines to ensure consistent, high-quality changes aligned with the extension's design goals (customizable MCP server, User Context focus, 100% coverage, strict JSDoc).
+This repository uses `CHANGELOG.md` as the single source of truth for work tracking. Follow these guidelines for consistent, high-quality changes.
+
+## Critical Architecture Rules
+
+### 1. **Agent Isolation (MUST FOLLOW)**
+
+**RULE**: Orchestrator is the ONLY agent that coordinates inter-agent communication.
+
+- ❌ **FORBIDDEN**: Agents importing other agents (`@agent/communicationAgent`, `@agent/dataAgent`, etc.)
+- ❌ **FORBIDDEN**: Agents formatting responses for users
+- ❌ **FORBIDDEN**: Agents calling other agents directly
+
+- ✅ **REQUIRED**: Agents return typed data only
+- ✅ **REQUIRED**: Orchestrator coordinates all agent calls
+- ✅ **REQUIRED**: CommunicationAgent handles ALL user-facing formatting
+
+**Data Flow Pattern**:
+```
+User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationAgent (format) → User
+```
+
+**Before ANY agent change**, verify:
+- Does this agent import another agent? → **STOP, refactor to Orchestrator**
+- Does this agent format responses? → **STOP, move to CommunicationAgent**
+- Does this agent call another agent? → **STOP, logic belongs in Orchestrator**
+
+### 2. **100% Data-Driven Design**
+
+- ❌ **NEVER** hardcode business values (category names, field names, etc.)
+- ✅ **ALWAYS** derive from configuration or loaded data
+- ✅ **ALWAYS** use proper typed parameters (never pass bare `undefined`)
+
+### 3. **Configuration Source of Truth**
+
+- Use `src/config/application.config.ts` and agent.config.ts files
+- **NEVER** edit or commit `src/mcp.config.json` (health check fails)
+- Generated configs go in `out/` directory only
+
+## MCP Tool Usage
+
+When complex problem-solving or memory is needed:
+
+### Sequential Thinking Tool
+Use `mcp_sequentialthi_sequentialthinking` when:
+- Breaking down multi-step problems
+- Planning complex refactoring
+- Analyzing architectural decisions
+- Need to revise approach mid-solution
+
+**Example**: Planning agent architecture changes, analyzing workflow logic
+
+### Memory Tool
+Use `mcp_memory` tools when:
+- Tracking user preferences across sessions
+- Storing project-specific patterns
+- Recording architectural decisions
+- Building knowledge graph of codebase relationships
+
+**Available operations**:
+- `create_entities`: Store new concepts/patterns
+- `add_observations`: Add details to existing knowledge
+- `create_relations`: Link related concepts
+- `search_nodes`: Find relevant stored knowledge
+- `read_graph`: Review all stored knowledge
+
+**Example**: Store "Agent X should never import Agent Y" as entity with observations
+
+## Session Workflow
+
+**Start of session**:
+1. Read `CHANGELOG.md` → Outstanding Tasks section
+2. Update internal todo list to match priorities
+
+**During work**:
+1. Make changes
+2. Add timestamped CHANGELOG entry with details (file paths, what changed, why)
+3. After 3-5 edits: Add Verification block (Build/Tests/Lint/Docs/Coverage)
+4. Update Outstanding Tasks (move completed, add new)
+
+**End of session**:
+1. Final Verification block with all quality gates
+2. Reconcile Outstanding Tasks
+3. Commit and push
+
+## Changelog Entry Format
+
+**Required format**:
+```markdown
+#### YYYY-MM-DD HH:MM:SS type: Summary of changes
+
+**Problem/Context**: What was wrong or needed
+
+**Changes Made**:
+1. File path (lines X-Y): What changed and why
+2. File path (lines A-B): What changed and why
+
+**Architecture Notes**: Why this approach, patterns used
+
+**Files Changed**: List with line counts
+
+**Testing**: Status of compilation, tests, coverage
+
+**Impact**: What this enables/fixes
+```
+
+**Use ChangeLogManager CLI** for timestamps:
+```bash
+npm run changelog:manage -- add-entry --type feat --summary "Your summary"
+```
+
+## Quality Gates (ALL must PASS)
+
+- ✅ **Build**: TypeScript compiles with no errors
+- ✅ **Tests**: All tests pass, 100% coverage (or documented exception)
+- ✅ **Lint**: No errors, complete JSDoc (no TODOs, no missing @returns)
+- ✅ **Docs**: Regenerated, no orphans
+- ✅ **Health**: Repository health checks pass
+
+## JSDoc Requirements
+
+❌ **Disallowed**:
+- `TODO: describe return value`
+- Missing @param or @returns
+- Undocumented public functions
+
+✅ **Required**:
+- Specific descriptions ("Generates markdown classification summary" not "Returns summary")
+- All parameters documented with types
+- All return values documented with types
+
+## Agent Folder Standard
+
+Each agent folder has **EXACTLY 2 files**:
+- `agent.config.ts` – Configuration only
+- `index.ts` – Implementation (merged legacy config.ts)
+
+Do NOT reintroduce separate `config.ts` files.
+
+## ES Module Requirements
+
+❌ **Wrong**: `__dirname` and `__filename` (Not available in ES modules)
+
+✅ **Correct**:
+```typescript
+import { fileURLToPath } from "url";
+import * as path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+```
+
+## Common Pitfalls
+
+1. **Agent isolation violations** (importing/calling other agents)
+2. **Hardcoded values** (not data-driven)
+3. **Bare changelog entries** (missing details, file paths, testing)
+4. **Coverage drops** (without remediation plan)
+5. **Missing JSDoc** (incomplete documentation)
+6. **Manual doc edits** (regenerate instead)
+7. **Legacy mcp.config.json** (triggers health check failure)
+
+## Making a Change Checklist
+
+1. ✅ Implement code
+2. ✅ Update tests → maintain 100% coverage
+3. ✅ Update JSDoc for public APIs
+4. ✅ Run: `npm run prebuild` (lint, test, docs, health)
+5. ✅ Add comprehensive CHANGELOG entry with details
+6. ✅ Verify all quality gates PASS
+7. ✅ Update Outstanding Tasks
+8. ✅ Commit and push
+
+## When To Read CHANGELOG.md
+
+**ALWAYS** read `CHANGELOG.md` before starting work:
+- Understand current Outstanding Tasks
+- Review recent architectural decisions
+- Check for related recent changes
+- Understand current priorities
+
+## Key Files Reference
+
+- `CHANGELOG.md` – Single source of truth for work tracking
+- `src/config/application.config.ts` – Application configuration
+- `src/agent/*/agent.config.ts` – Agent configurations
+- `src/shared/ids.ts` – Central ID derivation
+- `.github/copilot-instructions.md` – This file (governance rules)
+
+---
+
+**Remember**: When in doubt about architecture, check agent isolation rules. When in doubt about what to work on, check CHANGELOG Outstanding Tasks. When stuck on complex problems, use Sequential Thinking MCP tool.
 
 ## Core Principles
 
@@ -149,7 +339,7 @@ To avoid runtime vs. manifest drift, IDs and paths are centrally derived and mus
 - Central derivation: use `src/shared/ids.ts` (`deriveIds`) as the single place to compute:
   - `participantId` (VS Code chat participant id), `mention` (e.g. `@usercontext`), and `commandPrefix`/`settingsPrefix` (e.g. `usercontextMCP`).
   - `extensionFullId` (`<publisher>.<name>`) for locating the installed path.
-- Manifest generation: `bin/utils/updatePackageConfig.ts` consumes `deriveIds` to populate `package.json` contributions and commands. Don’t hand-edit IDs in `package.json`.
+- Manifest generation: `bin/utils/updatePackageConfig.ts` consumes `deriveIds` to populate and/or modify `package.json` contributions and commands. Don’t hand-edit IDs in `package.json`.
 - Activation/runtime: read `context.extension.packageJSON.contributes.chatParticipants[0]` to determine the contributed id/name. Compute the command/settings prefix from the contributed id so runtime always matches the manifest.
 - Provider contribution consistency:
   - Contribute a provider id in `package.json.contributes.mcpServerDefinitionProviders[0].id` with the pattern `${baseId}-local` (lowercase, e.g. `usercontext-local`).

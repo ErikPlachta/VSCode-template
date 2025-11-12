@@ -31,6 +31,7 @@ scoring parameters, escalation, profiling, and composite configuration.
 - [DatabaseConfig](interfaces/DatabaseConfig.md)
 - [DataConfig](interfaces/DataConfig.md)
 - [DataInsight](interfaces/DataInsight.md)
+- [DataLoaderConfig](interfaces/DataLoaderConfig.md)
 - [DataSource](interfaces/DataSource.md)
 - [ErrorHandlingConfig](interfaces/ErrorHandlingConfig.md)
 - [EscalationConfig](interfaces/EscalationConfig.md)

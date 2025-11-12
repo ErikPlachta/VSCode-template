@@ -6,7 +6,7 @@
 
 # Interface: ExplorationStep
 
-Defined in: [src/types/agentConfig.ts:972](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L972)
+Defined in: [src/types/agentConfig.ts:1032](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1032)
 
 Single step within a generated exploration plan.
 
@@ -16,7 +16,7 @@ Single step within a generated exploration plan.
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:974](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L974)
+Defined in: [src/types/agentConfig.ts:1034](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1034)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:974](https://github.com/ErikPlachta/vscode
 
 > **hints**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:976](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L976)
+Defined in: [src/types/agentConfig.ts:1036](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1036)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:976](https://github.com/ErikPlachta/vscode
 
 > **recommendedCategory**: `string`
 
-Defined in: [src/types/agentConfig.ts:975](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L975)
+Defined in: [src/types/agentConfig.ts:1035](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1035)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:975](https://github.com/ErikPlachta/vscode
 
 > **title**: `string`
 
-Defined in: [src/types/agentConfig.ts:973](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L973)
+Defined in: [src/types/agentConfig.ts:1033](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1033)

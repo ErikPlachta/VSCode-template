@@ -19,6 +19,7 @@ to be loaded from user-configurable JSON files.
 - [BaseRecord](interfaces/BaseRecord.md)
 - [BusinessCategory](interfaces/BusinessCategory.md)
 - [CategoryConfig](interfaces/CategoryConfig.md)
+- [CategoryDiscoveryResult](interfaces/CategoryDiscoveryResult.md)
 - [CategoryOrchestrationConfig](interfaces/CategoryOrchestrationConfig.md)
 - [CategoryRequirements](interfaces/CategoryRequirements.md)
 - [CategorySchema](interfaces/CategorySchema.md)

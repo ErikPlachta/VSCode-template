@@ -6,7 +6,7 @@
 
 # Enumeration: ReportSection
 
-Defined in: [src/shared/analyticsDashboard.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsDashboard.ts#L10)
+Defined in: [src/shared/analyticsDashboard.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/analyticsDashboard.ts#L10)
 
 Dashboard report section enumeration.
 
@@ -16,7 +16,7 @@ Dashboard report section enumeration.
 
 > **AGENT\_PERFORMANCE**: `"agent_performance"`
 
-Defined in: [src/shared/analyticsDashboard.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsDashboard.ts#L12)
+Defined in: [src/shared/analyticsDashboard.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/analyticsDashboard.ts#L12)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/shared/analyticsDashboard.ts:12](https://github.com/ErikPlachta
 
 > **ERROR\_ANALYSIS**: `"error_analysis"`
 
-Defined in: [src/shared/analyticsDashboard.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsDashboard.ts#L13)
+Defined in: [src/shared/analyticsDashboard.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/analyticsDashboard.ts#L13)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/shared/analyticsDashboard.ts:13](https://github.com/ErikPlachta
 
 > **OVERVIEW**: `"overview"`
 
-Defined in: [src/shared/analyticsDashboard.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsDashboard.ts#L11)
+Defined in: [src/shared/analyticsDashboard.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/analyticsDashboard.ts#L11)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/shared/analyticsDashboard.ts:11](https://github.com/ErikPlachta
 
 > **TRENDS**: `"trends"`
 
-Defined in: [src/shared/analyticsDashboard.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/analyticsDashboard.ts#L14)
+Defined in: [src/shared/analyticsDashboard.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/analyticsDashboard.ts#L14)

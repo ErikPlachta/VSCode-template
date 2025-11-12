@@ -6,7 +6,7 @@
 
 # extension
 
-Entry point for MyBusiness MCP VS Code extension.
+Entry point for UserContext MCP VS Code extension.
 
 ## Functions
 

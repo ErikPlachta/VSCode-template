@@ -251,18 +251,31 @@ export const orchestratorConfig: AgentConfigDefinition = {
        * clarification regardless of intent matching.
        */
       vaguePhrases: [
+        // Generic record requests without category
         "list records",
         "show records",
         "get records",
         "find records",
+        "display records",
+        "retrieve records",
+        // Generic data requests without context
         "show data",
         "get data",
         "list data",
-        "display records",
-        "retrieve records",
         "fetch data",
         "get information",
         "show information",
+        // Generic database requests
+        "database info",
+        "database data",
+        "database records",
+        "show database",
+        "list database",
+        // Too generic queries
+        "tell me about",
+        "what is",
+        "info about",
+        "information on",
       ],
     },
 

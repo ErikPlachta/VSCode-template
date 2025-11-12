@@ -8,7 +8,7 @@
 
 > **extractKeywords**(`text`, `config?`): `string`[]
 
-Defined in: [src/shared/textProcessing.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/textProcessing.ts#L107)
+Defined in: [src/shared/textProcessing.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/textProcessing.ts#L107)
 
 Extracts meaningful keywords from text by filtering stop words and applying length constraints.
 

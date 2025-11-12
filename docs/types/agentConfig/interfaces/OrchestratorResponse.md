@@ -6,7 +6,7 @@
 
 # Interface: OrchestratorResponse
 
-Defined in: [src/types/agentConfig.ts:906](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L906)
+Defined in: [src/types/agentConfig.ts:966](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L966)
 
 Result of orchestrating a question across the available agents.
 
@@ -16,7 +16,7 @@ Result of orchestrating a question across the available agents.
 
 > **agent**: `string`
 
-Defined in: [src/types/agentConfig.ts:908](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L908)
+Defined in: [src/types/agentConfig.ts:968](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L968)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:908](https://github.com/ErikPlachta/vscode
 
 > **intent**: `string`
 
-Defined in: [src/types/agentConfig.ts:907](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L907)
+Defined in: [src/types/agentConfig.ts:967](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L967)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:907](https://github.com/ErikPlachta/vscode
 
 > **markdown**: `string`
 
-Defined in: [src/types/agentConfig.ts:912](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L912)
+Defined in: [src/types/agentConfig.ts:972](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L972)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:912](https://github.com/ErikPlachta/vscode
 
 > **payload**: `unknown`
 
-Defined in: [src/types/agentConfig.ts:911](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L911)
+Defined in: [src/types/agentConfig.ts:971](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L971)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/agentConfig.ts:911](https://github.com/ErikPlachta/vscode
 
 > **rationale**: `string`
 
-Defined in: [src/types/agentConfig.ts:910](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L910)
+Defined in: [src/types/agentConfig.ts:970](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L970)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/types/agentConfig.ts:910](https://github.com/ErikPlachta/vscode
 
 > **summary**: `string`
 
-Defined in: [src/types/agentConfig.ts:909](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L909)
+Defined in: [src/types/agentConfig.ts:969](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L969)

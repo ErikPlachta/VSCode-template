@@ -6,7 +6,7 @@
 
 # Interface: RawRelationshipEntry
 
-Defined in: [src/types/userContext.types.ts:485](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L485)
+Defined in: [src/types/userContext.types.ts:502](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L502)
 
 Raw relationship entry from relationships.json
 
@@ -16,7 +16,7 @@ Raw relationship entry from relationships.json
 
 > **cardinality**: `"one"` \| `"many"`
 
-Defined in: [src/types/userContext.types.ts:492](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L492)
+Defined in: [src/types/userContext.types.ts:509](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L509)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:492](https://github.com/ErikPlachta/
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:488](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L488)
+Defined in: [src/types/userContext.types.ts:505](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L505)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/userContext.types.ts:488](https://github.com/ErikPlachta/
 
 > **key**: `string`
 
-Defined in: [src/types/userContext.types.ts:486](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L486)
+Defined in: [src/types/userContext.types.ts:503](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L503)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/userContext.types.ts:486](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:487](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L487)
+Defined in: [src/types/userContext.types.ts:504](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L504)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/userContext.types.ts:487](https://github.com/ErikPlachta/
 
 > **sourceField**: `string`
 
-Defined in: [src/types/userContext.types.ts:490](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L490)
+Defined in: [src/types/userContext.types.ts:507](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L507)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/userContext.types.ts:490](https://github.com/ErikPlachta/
 
 > **targetCategory**: `string`
 
-Defined in: [src/types/userContext.types.ts:489](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L489)
+Defined in: [src/types/userContext.types.ts:506](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L506)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [src/types/userContext.types.ts:489](https://github.com/ErikPlachta/
 
 > **targetField**: `string`
 
-Defined in: [src/types/userContext.types.ts:491](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L491)
+Defined in: [src/types/userContext.types.ts:508](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L508)

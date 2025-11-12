@@ -8,7 +8,7 @@
 
 > **validateAgentConfig**(`config`): [`ValidationResult`](../interfaces/ValidationResult.md)
 
-Defined in: [src/types/configValidation.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/configValidation.ts#L64)
+Defined in: [src/types/configValidation.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/configValidation.ts#L64)
 
 Comprehensive validation function for agent configurations
 

@@ -6,7 +6,7 @@
 
 # Interface: TypeDefinition
 
-Defined in: [src/types/userContext.types.ts:275](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L275)
+Defined in: [src/types/userContext.types.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L292)
 
 Python typing hints that mirror the JSON schemas
 
@@ -16,7 +16,7 @@ Python typing hints that mirror the JSON schemas
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:277](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L277)
+Defined in: [src/types/userContext.types.ts:294](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L294)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:277](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:276](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L276)
+Defined in: [src/types/userContext.types.ts:293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L293)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:276](https://github.com/ErikPlachta/
 
 > **schema**: [`TypeSchema`](../type-aliases/TypeSchema.md)
 
-Defined in: [src/types/userContext.types.ts:278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L278)
+Defined in: [src/types/userContext.types.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L295)

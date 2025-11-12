@@ -440,6 +440,109 @@ export class CommunicationAgent extends BaseAgentConfig {
   }
 
   /**
+  /**
+   * Format a clarification request with helpful examples
+   *
+   * Transforms vague or ambiguous queries into user-friendly clarification requests
+   * with contextual examples based on available categories and common query patterns.
+   *
+   * @param {AgentResponse} response - Clarification request with metadata about the vague query
+   * @returns {FormattedResponse} Formatted clarification message with examples
+   */
+  formatClarification(response: AgentResponse): FormattedResponse {
+    const format = this.getConfigItem<string>(
+      "communication.formatting.defaultFormat"
+    ) as "markdown" | "plaintext" | "html";
+
+    const originalQuestion =
+      (response.metadata?.originalQuestion as string) || "your request";
+    const availableCategories =
+      (response.metadata?.availableCategories as string[]) || [];
+    const matchedIntent = response.metadata?.matchedIntent as
+      | string
+      | undefined;
+
+    // Build examples based on context
+    const examples = [
+      {
+        category: "**Category Information**",
+        samples: [
+          "What's in the Applications category?",
+          "Show me the People database structure",
+          "Describe the Departments data",
+        ],
+      },
+      {
+        category: "**Query Records**",
+        samples: [
+          "List all applications used by engineering",
+          "Find people with Python skills",
+          "Show departments with more than 10 people",
+        ],
+      },
+      {
+        category: "**Data Analysis**",
+        samples: [
+          "What insights can you provide about our tech stack?",
+          "Analyze skill distribution across teams",
+          "Show connections between people and projects",
+        ],
+      },
+    ];
+
+    let message = `I'm not sure what you're looking for with "${originalQuestion}".`;
+
+    if (matchedIntent) {
+      message += `\n\nYour question seems related to ${matchedIntent}, but needs more specific details.`;
+    }
+
+    if (format === "markdown") {
+      message += `\n\n**Here are some examples of what you can ask me:**\n\n`;
+      examples.forEach((ex) => {
+        message += `${ex.category}\n${ex.samples
+          .map((s) => `- "${s}"`)
+          .join("\n")}\n\n`;
+      });
+
+      if (availableCategories.length > 0) {
+        message += `**Available Categories:**\n`;
+        availableCategories.forEach((cat) => {
+          message += `- ${cat}\n`;
+        });
+      } else {
+        message += `**Available Categories:**\n- Applications (business systems and tools)\n- People (team members and skills)\n- Departments (organizational structure)\n- Projects (active initiatives)\n`;
+      }
+
+      message += `\n**Please provide more specific details about what you'd like to know!**`;
+    } else {
+      message += `\n\nHere are some examples of what you can ask me:\n\n`;
+      examples.forEach((ex) => {
+        message += `${ex.category.replace(/\*\*/g, "")}\n${ex.samples
+          .map((s) => `• "${s}"`)
+          .join("\n")}\n\n`;
+      });
+
+      if (availableCategories.length > 0) {
+        message += `Available Categories:\n`;
+        availableCategories.forEach((cat) => {
+          message += `• ${cat}\n`;
+        });
+      } else {
+        message += `Available Categories:\n• Applications\n• People\n• Departments\n• Projects\n`;
+      }
+
+      message += `\nPlease provide more specific details about what you'd like to know!`;
+    }
+
+    return {
+      message,
+      format,
+      isFinal: true,
+      raw: response,
+    };
+  }
+
+  /**
    * Process a template string with variable substitution
    *
    * Replaces {{variable}} placeholders with values from metadata object.

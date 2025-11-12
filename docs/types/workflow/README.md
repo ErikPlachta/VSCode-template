@@ -18,7 +18,10 @@ Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md
 ## Interfaces
 
 - [AgentRegistry](interfaces/AgentRegistry.md)
+- [AnalyzeParams](interfaces/AnalyzeParams.md)
+- [GetSnapshotParams](interfaces/GetSnapshotParams.md)
 - [PerformanceMetrics](interfaces/PerformanceMetrics.md)
+- [QueryParams](interfaces/QueryParams.md)
 - [WorkflowAction](interfaces/WorkflowAction.md)
 - [WorkflowContext](interfaces/WorkflowContext.md)
 - [WorkflowDiagnostics](interfaces/WorkflowDiagnostics.md)

@@ -6,7 +6,7 @@
 
 # Interface: TextProcessingConfig
 
-Defined in: [src/shared/textProcessing.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/textProcessing.ts#L11)
+Defined in: [src/shared/textProcessing.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/textProcessing.ts#L11)
 
 Configuration options for text processing operations.
 
@@ -16,7 +16,7 @@ Configuration options for text processing operations.
 
 > `optional` **fuzzyMatchThreshold**: `number`
 
-Defined in: [src/shared/textProcessing.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/textProcessing.ts#L17)
+Defined in: [src/shared/textProcessing.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/textProcessing.ts#L17)
 
 Fuzzy match threshold 0-1 (default: 0.8)
 
@@ -26,7 +26,7 @@ Fuzzy match threshold 0-1 (default: 0.8)
 
 > `optional` **handleInflections**: `boolean`
 
-Defined in: [src/shared/textProcessing.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/textProcessing.ts#L19)
+Defined in: [src/shared/textProcessing.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/textProcessing.ts#L19)
 
 Whether to handle plural/singular variations (default: true)
 
@@ -36,7 +36,7 @@ Whether to handle plural/singular variations (default: true)
 
 > `optional` **minimumKeywordLength**: `number`
 
-Defined in: [src/shared/textProcessing.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/textProcessing.ts#L15)
+Defined in: [src/shared/textProcessing.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/textProcessing.ts#L15)
 
 Minimum keyword length to include (default: 3)
 
@@ -46,6 +46,6 @@ Minimum keyword length to include (default: 3)
 
 > `optional` **stopWords**: `Set`\<`string`\>
 
-Defined in: [src/shared/textProcessing.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/textProcessing.ts#L13)
+Defined in: [src/shared/textProcessing.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/textProcessing.ts#L13)
 
 Set of stop words to exclude from keyword extraction

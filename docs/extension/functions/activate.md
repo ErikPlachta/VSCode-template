@@ -8,9 +8,9 @@
 
 > **activate**(`context`): `Promise`\<`void`\>
 
-Defined in: [src/extension/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/extension/index.ts#L31)
+Defined in: [src/extension/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/extension/index.ts#L31)
 
-Activate the MyBusiness MCP extension.
+Activate the UserContext MCP extension.
 
 Responsibilities:
 - Optionally start the embedded MCP server (when no external serverUrl is configured).

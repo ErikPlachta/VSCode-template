@@ -6,7 +6,7 @@
 
 # Interface: DataSource
 
-Defined in: [src/types/interfaces.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L18)
+Defined in: [src/types/interfaces.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L18)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/types/interfaces.ts:18](https://github.com/ErikPlachta/vscode-e
 
 > **id**: `string`
 
-Defined in: [src/types/interfaces.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L19)
+Defined in: [src/types/interfaces.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L19)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:19](https://github.com/ErikPlachta/vscode-e
 
 > **name**: `string`
 
-Defined in: [src/types/interfaces.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L20)
+Defined in: [src/types/interfaces.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L20)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:20](https://github.com/ErikPlachta/vscode-e
 
 > **records**: [`CategoryRecord`](../../agentConfig/interfaces/CategoryRecord.md)[]
 
-Defined in: [src/types/interfaces.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L21)
+Defined in: [src/types/interfaces.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L21)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:21](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **schema**: `unknown`
 
-Defined in: [src/types/interfaces.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/interfaces.ts#L22)
+Defined in: [src/types/interfaces.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/interfaces.ts#L22)

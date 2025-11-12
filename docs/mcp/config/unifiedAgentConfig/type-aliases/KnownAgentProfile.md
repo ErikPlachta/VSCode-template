@@ -8,4 +8,4 @@
 
 > **KnownAgentProfile** = [`OrchestrationProfile`](../interfaces/OrchestrationProfile.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:535](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/mcp/config/unifiedAgentConfig.ts#L535)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:535](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/mcp/config/unifiedAgentConfig.ts#L535)

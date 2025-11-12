@@ -8,7 +8,7 @@
 
 > **handleRequest**(`req`, `res`): `Promise`\<`void`\>
 
-Defined in: [src/server/index.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/server/index.ts#L274)
+Defined in: [src/server/index.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/server/index.ts#L274)
 
 handleRequest function.
 

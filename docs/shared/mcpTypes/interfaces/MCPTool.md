@@ -6,7 +6,7 @@
 
 # Interface: MCPTool
 
-Defined in: [src/shared/mcpTypes.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/mcpTypes.ts#L40)
+Defined in: [src/shared/mcpTypes.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/mcpTypes.ts#L40)
 
 Full MCP tool definition returned by `listTools`.
 
@@ -16,7 +16,7 @@ Full MCP tool definition returned by `listTools`.
 
 > **description**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/mcpTypes.ts#L46)
+Defined in: [src/shared/mcpTypes.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/mcpTypes.ts#L46)
 
 Rich description detailing the tool purpose.
 
@@ -26,7 +26,7 @@ Rich description detailing the tool purpose.
 
 > `optional` **input\_schema**: [`MCPInputSchema`](MCPInputSchema.md)
 
-Defined in: [src/shared/mcpTypes.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/mcpTypes.ts#L52)
+Defined in: [src/shared/mcpTypes.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/mcpTypes.ts#L52)
 
 JSON schema describing the tool arguments.
 
@@ -36,7 +36,7 @@ JSON schema describing the tool arguments.
 
 > **name**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/mcpTypes.ts#L42)
+Defined in: [src/shared/mcpTypes.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/mcpTypes.ts#L42)
 
 Machine-readable tool identifier.
 
@@ -46,7 +46,7 @@ Machine-readable tool identifier.
 
 > `optional` **summary**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/mcpTypes.ts#L48)
+Defined in: [src/shared/mcpTypes.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/mcpTypes.ts#L48)
 
 Optional extended summary for reference content.
 
@@ -56,7 +56,7 @@ Optional extended summary for reference content.
 
 > `optional` **tags**: `string`[]
 
-Defined in: [src/shared/mcpTypes.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/mcpTypes.ts#L50)
+Defined in: [src/shared/mcpTypes.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/mcpTypes.ts#L50)
 
 Optional category or tags provided by the MCP server.
 
@@ -66,6 +66,6 @@ Optional category or tags provided by the MCP server.
 
 > **title**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/shared/mcpTypes.ts#L44)
+Defined in: [src/shared/mcpTypes.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/shared/mcpTypes.ts#L44)
 
 Title displayed to VS Code users.

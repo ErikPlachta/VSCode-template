@@ -6,7 +6,7 @@
 
 # Interface: CrossCategoryConnection
 
-Defined in: [src/types/agentConfig.ts:997](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L997)
+Defined in: [src/types/agentConfig.ts:1057](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1057)
 
 Aggregated description of a connection between categories.
 
@@ -16,7 +16,7 @@ Aggregated description of a connection between categories.
 
 > **connectionType**: `string`
 
-Defined in: [src/types/agentConfig.ts:1000](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L1000)
+Defined in: [src/types/agentConfig.ts:1060](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1060)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:1000](https://github.com/ErikPlachta/vscod
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:1002](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L1002)
+Defined in: [src/types/agentConfig.ts:1062](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1062)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:1002](https://github.com/ErikPlachta/vscod
 
 > **sourceCategory**: `string`
 
-Defined in: [src/types/agentConfig.ts:998](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L998)
+Defined in: [src/types/agentConfig.ts:1058](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1058)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:998](https://github.com/ErikPlachta/vscode
 
 > **strength**: `number`
 
-Defined in: [src/types/agentConfig.ts:1001](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L1001)
+Defined in: [src/types/agentConfig.ts:1061](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1061)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/agentConfig.ts:1001](https://github.com/ErikPlachta/vscod
 
 > **targetCategory**: `string`
 
-Defined in: [src/types/agentConfig.ts:999](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/agentConfig.ts#L999)
+Defined in: [src/types/agentConfig.ts:1059](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/agentConfig.ts#L1059)

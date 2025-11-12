@@ -6,7 +6,7 @@
 
 # Interface: RawAgentOrchestrationGuidance
 
-Defined in: [src/types/userContext.types.ts:466](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L466)
+Defined in: [src/types/userContext.types.ts:483](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L483)
 
 Unvalidated agent guidance block
 
@@ -16,7 +16,7 @@ Unvalidated agent guidance block
 
 > `optional` **focus**: `unknown`
 
-Defined in: [src/types/userContext.types.ts:467](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L467)
+Defined in: [src/types/userContext.types.ts:484](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L484)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:467](https://github.com/ErikPlachta/
 
 > `optional` **promptStarters**: `unknown`
 
-Defined in: [src/types/userContext.types.ts:469](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L469)
+Defined in: [src/types/userContext.types.ts:486](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L486)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:469](https://github.com/ErikPlachta/
 
 > `optional` **signals**: `unknown`
 
-Defined in: [src/types/userContext.types.ts:468](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L468)
+Defined in: [src/types/userContext.types.ts:485](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L485)

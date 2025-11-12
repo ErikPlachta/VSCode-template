@@ -31,11 +31,11 @@ This extension embeds (or connects to) an MCP server and a small set of agents (
   - Workspace-local: `<your workspace>/.mcp-cache`
   - Global: `%USERPROFILE%/.vscode/extensions/.mcp-cache` (Windows example: `C:\Users\plach\.vscode\extensions\.mcp-cache`)
 - Processes your User Context datasets and builds an index (catalogue) used by the agents.
-- Starts the embedded MCP server (if no external Server URL is configured) and registers the chat participant `@myBusiness`.
+- Starts the embedded MCP server (if no external Server URL is configured) and registers the chat participant `@userContext`.
 
 4. Try it:
 
-- In Copilot Chat, type `@myBusiness` and ask a question.
+- In Copilot Chat, type `@UserContext` and ask a question.
 - Or run the command palette action: “My Business MCP: Invoke Tool”.
 
 ## Core concepts

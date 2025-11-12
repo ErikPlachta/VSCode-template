@@ -6,7 +6,7 @@
 
 # Interface: RawQueryFile
 
-Defined in: [src/types/userContext.types.ts:516](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L516)
+Defined in: [src/types/userContext.types.ts:533](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L533)
 
 Raw query file contents
 
@@ -16,7 +16,7 @@ Raw query file contents
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:518](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L518)
+Defined in: [src/types/userContext.types.ts:535](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L535)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:518](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:517](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L517)
+Defined in: [src/types/userContext.types.ts:534](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L534)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:517](https://github.com/ErikPlachta/
 
 > **samplePayload**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/userContext.types.ts:519](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/userContext.types.ts#L519)
+Defined in: [src/types/userContext.types.ts:536](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/userContext.types.ts#L536)

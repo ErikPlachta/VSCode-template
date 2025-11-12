@@ -138,7 +138,8 @@ export async function activate(
     cancellationToken: vscode.CancellationToken
   ) => {
     try {
-      stream.markdown(`🔄 Processing your request...\n\n`);
+      // Show initial progress indicator
+      stream.progress("Processing your request...");
 
       // Execute workflow through orchestrator (replaces legacy handle() method)
       const result = await orchestrator.executeWorkflow({
@@ -163,10 +164,28 @@ export async function activate(
           stream.markdown(`✅ Request completed successfully.\n`);
         }
 
-        // Show performance metrics if available
-        if (result.metrics && result.metrics.totalDuration > 1000) {
+        // Show workflow details in collapsible section
+        if (result.metrics) {
           const durationSec = (result.metrics.totalDuration / 1000).toFixed(2);
-          stream.markdown(`\n\n*Completed in ${durationSec}s*\n`);
+          stream.markdown(
+            `\n\n<details>\n<summary>Workflow Details (${durationSec}s)</summary>\n\n`
+          );
+          stream.markdown(`- **Workflow ID:** \`${result.workflowId}\`\n`);
+          stream.markdown(
+            `- **Classification:** ${
+              result.metrics.classificationDuration || 0
+            }ms\n`
+          );
+          stream.markdown(
+            `- **Planning:** ${result.metrics.planningDuration || 0}ms\n`
+          );
+          stream.markdown(
+            `- **Execution:** ${result.metrics.executionDuration || 0}ms\n`
+          );
+          stream.markdown(
+            `- **Formatting:** ${result.metrics.formattingDuration || 0}ms\n`
+          );
+          stream.markdown(`\n</details>\n`);
         }
       } else if (result.state === "needs-clarification") {
         // User query is ambiguous, request clarification
@@ -188,12 +207,20 @@ export async function activate(
           stream.markdown(result.formatted.message);
         }
 
-        // Show diagnostic info for debugging
+        // Show diagnostic info in collapsible section
         if (result.metrics) {
           const durationSec = (result.metrics.totalDuration / 1000).toFixed(2);
           stream.markdown(
-            `\n*Failed after ${durationSec}s* | Workflow ID: \`${result.workflowId}\`\n`
+            `\n\n<details>\n<summary>Diagnostic Details (failed after ${durationSec}s)</summary>\n\n`
           );
+          stream.markdown(`- **Workflow ID:** \`${result.workflowId}\`\n`);
+          if (result.error) {
+            stream.markdown(`- **Error:** ${result.error.message}\n`);
+            if (result.error.stack) {
+              stream.markdown(`\n\`\`\`\n${result.error.stack}\n\`\`\`\n`);
+            }
+          }
+          stream.markdown(`\n</details>\n`);
         }
       } else {
         // Unexpected state

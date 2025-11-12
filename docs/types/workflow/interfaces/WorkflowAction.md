@@ -6,7 +6,7 @@
 
 # Interface: WorkflowAction\<T\>
 
-Defined in: [src/types/workflow.types.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L62)
+Defined in: [src/types/workflow.types.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L62)
 
 Workflow action definition
 
@@ -26,7 +26,7 @@ Result type for the action
 
 > `optional` **agent**: `string`
 
-Defined in: [src/types/workflow.types.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L70)
+Defined in: [src/types/workflow.types.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L70)
 
 Agent identifier if type is 'execute-agent'
 
@@ -36,7 +36,7 @@ Agent identifier if type is 'execute-agent'
 
 > `optional` **dependencies**: `string`[]
 
-Defined in: [src/types/workflow.types.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L79)
+Defined in: [src/types/workflow.types.ts:79](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L79)
 
 Action IDs this action depends on (must complete first)
 
@@ -46,7 +46,7 @@ Action IDs this action depends on (must complete first)
 
 > `optional` **duration**: `number`
 
-Defined in: [src/types/workflow.types.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L97)
+Defined in: [src/types/workflow.types.ts:97](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L97)
 
 Duration in milliseconds
 
@@ -56,7 +56,7 @@ Duration in milliseconds
 
 > `optional` **endTime**: `number`
 
-Defined in: [src/types/workflow.types.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L94)
+Defined in: [src/types/workflow.types.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L94)
 
 Timestamp when action completed
 
@@ -66,7 +66,7 @@ Timestamp when action completed
 
 > `optional` **error**: `Error`
 
-Defined in: [src/types/workflow.types.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L88)
+Defined in: [src/types/workflow.types.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L88)
 
 Error if failed
 
@@ -76,7 +76,7 @@ Error if failed
 
 > **id**: `string`
 
-Defined in: [src/types/workflow.types.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L64)
+Defined in: [src/types/workflow.types.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L64)
 
 Unique action identifier
 
@@ -86,7 +86,7 @@ Unique action identifier
 
 > `optional` **method**: `string`
 
-Defined in: [src/types/workflow.types.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L73)
+Defined in: [src/types/workflow.types.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L73)
 
 Method name to call on the agent
 
@@ -96,7 +96,7 @@ Method name to call on the agent
 
 > `optional` **params**: `unknown`
 
-Defined in: [src/types/workflow.types.ts:76](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L76)
+Defined in: [src/types/workflow.types.ts:76](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L76)
 
 Parameters to pass to the method
 
@@ -106,7 +106,7 @@ Parameters to pass to the method
 
 > `optional` **result**: `T`
 
-Defined in: [src/types/workflow.types.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L85)
+Defined in: [src/types/workflow.types.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L85)
 
 Result data if completed successfully
 
@@ -116,7 +116,7 @@ Result data if completed successfully
 
 > `optional` **startTime**: `number`
 
-Defined in: [src/types/workflow.types.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L91)
+Defined in: [src/types/workflow.types.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L91)
 
 Timestamp when action started
 
@@ -126,7 +126,7 @@ Timestamp when action started
 
 > **status**: [`WorkflowActionStatus`](../type-aliases/WorkflowActionStatus.md)
 
-Defined in: [src/types/workflow.types.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L82)
+Defined in: [src/types/workflow.types.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L82)
 
 Current execution status
 
@@ -136,6 +136,6 @@ Current execution status
 
 > **type**: [`WorkflowActionType`](../type-aliases/WorkflowActionType.md)
 
-Defined in: [src/types/workflow.types.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/a4612cf11a8e4895364ff4492326833e37841da7/src/types/workflow.types.ts#L67)
+Defined in: [src/types/workflow.types.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/566183273bc118fc1cea1f3b93a5f9fe451722a2/src/types/workflow.types.ts#L67)
 
 Type of action to perform
