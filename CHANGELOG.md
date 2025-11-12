@@ -500,6 +500,93 @@ All incomplete tasks. Organized by priority and managed by User and Copilot Chat
 
 ### [2025-11-11]
 
+#### 2025-11-11 23:17:15 docs: Streamlined copilot-instructions.md - removed redundant info, added MCP tool guidance
+
+**Problem/Context**: User reported consistent mistakes and oversights related to copilot-instructions.md content. File was too verbose (291 lines), contained redundant sections, and lacked guidance on when to use MCP tools (Sequential Thinking, Memory) for complex problem-solving.
+
+**Root Cause**: `.github/copilot-instructions.md` had grown organically with duplicated information:
+
+- Agent isolation rules repeated 3 times in different sections
+- Session workflow described twice (lines 19-32 and 207-221)
+- ID/provider alignment, diagnostics, cache naming, settings validation all detailed when not critical for day-to-day work
+- No mention of MCP tools despite them being available and useful
+
+**Changes Made**:
+
+1. **Reduced File Size** (`.github/copilot-instructions.md`): 291 lines → 193 lines (-98 lines, 34% reduction)
+
+   - Removed redundant "Session Workflow" section (was duplicated)
+   - Removed "ID, provider, and path alignment" section (too detailed, rarely needed)
+   - Removed "Diagnostics and read-only settings" section (implementation detail)
+   - Removed "Prepublish and packaging safeguards" section (automated, not manual)
+   - Removed "Cache Naming" section (implementation detail)
+   - Removed "Settings & Validation" section (too specific)
+   - Removed "Analytics & Telemetry" section (not frequently used)
+   - Consolidated agent architecture from 3 sections into 1 focused section
+
+2. **Added MCP Tool Usage Section** (new lines 43-70):
+
+   ```markdown
+   ## MCP Tool Usage
+
+   ### Sequential Thinking Tool
+
+   Use when: Breaking down multi-step problems, planning complex refactoring,
+   analyzing architectural decisions, need to revise approach mid-solution
+
+   ### Memory Tool
+
+   Use when: Tracking user preferences across sessions, storing project-specific patterns,
+   recording architectural decisions, building knowledge graph of codebase relationships
+   ```
+
+   - Documents when to use `mcp_sequentialthi_sequentialthinking`
+   - Lists memory tool operations: create_entities, add_observations, create_relations, search_nodes, read_graph
+   - Provides concrete examples of appropriate use cases
+
+3. **Streamlined Critical Rules** (lines 5-41):
+
+   - Focused on top 3 must-follow patterns: Agent Isolation, Data-Driven Design, Config Source of Truth
+   - Kept verification checklist for before ANY agent change
+   - Removed verbose explanations that duplicated the essentials
+
+4. **Simplified Changelog Guidance** (lines 89-110):
+
+   - Kept required format with examples
+   - Retained ChangeLogManager CLI commands
+   - Removed redundant explanations about practical cadence (user knows the workflow now)
+
+5. **Condensed Quality Gates** (lines 114-120):
+
+   - Listed 5 essential gates in bullet format
+   - Removed verbose explanations of each gate (they're self-explanatory)
+
+6. **Added "When To Read CHANGELOG.md" Section** (lines 177-183):
+   - ✅ NEW: Explicit reminder to ALWAYS read CHANGELOG before starting work
+   - Lists 4 specific reasons: Outstanding Tasks, recent decisions, related changes, priorities
+   - Addresses root cause of oversights
+
+**Architecture Benefits**:
+
+- **Clearer Priorities**: Critical rules front-loaded, implementation details removed
+- **Actionable Guidance**: MCP tool section provides concrete use cases
+- **Reduced Cognitive Load**: 34% shorter, focuses on what matters
+- **Better Tool Adoption**: Explicit MCP tool guidance encourages usage for complex problems
+- **Improved Consistency**: Less repetition = less chance for contradictory guidance
+
+**Files Changed**:
+
+- `.github/copilot-instructions.md`: Reduced 291 → 193 lines, added MCP tool section, streamlined all sections
+
+**Testing**:
+
+- ✅ Markdown lint passing (only formatting warnings, not blocking)
+- ✅ All critical rules preserved (agent isolation, data-driven, config source)
+- ✅ Automation aids section intact (ChangeLogManager CLI commands)
+- ⏳ Real-world validation: Monitor if mistakes/oversights decrease
+
+**Impact**: Copilot should now make fewer mistakes by having clearer, less redundant guidance. MCP tools will be used more effectively for complex architectural decisions and problem-solving.
+
 #### 2025-11-11 23:08:40 feat: Enhanced chat response formatting and vague query detection
 
 **CRITICAL FIX**: Orchestrator was violating agent isolation by handling response formatting directly. Moved all user-facing communication to CommunicationAgent.
