@@ -5,7 +5,12 @@
  * Defines types for workflow state management, action execution,
  * diagnostics, and performance monitoring.
  *
- * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md
+ * @remarks
+ * These types model orchestration without importing agent implementations.
+ * They are safe to use in tests and diagnostics and are decoupled from
+ * presentation formatting handled by the CommunicationAgent.
+ *
+ * @see ORCHESTRATOR_WORKFLOW_ANALYSIS.md
  */
 
 /**
@@ -52,11 +57,20 @@ export type WorkflowActionStatus =
   | "failed";
 
 /**
- * Workflow action definition
+ * Workflow action definition.
  *
- * Represents a single step in the workflow execution plan
+ * Represents a single step in the workflow execution plan.
  *
- * @template T - Result type for the action
+ * @typeParam T - Result type for the action.
+ *
+ * @example
+ * ```ts
+ * const classify: WorkflowAction = {
+ *   id: "a1",
+ *   type: "classify",
+ *   status: "pending"
+ * };
+ * ```
  */
 export interface WorkflowAction<T = unknown> {
   /** Unique action identifier */
@@ -97,9 +111,9 @@ export interface WorkflowAction<T = unknown> {
 }
 
 /**
- * Workflow execution context
+ * Workflow execution context.
  *
- * Maintains state throughout workflow lifecycle
+ * Maintains state throughout the workflow lifecycle.
  */
 export interface WorkflowContext {
   /** Unique workflow identifier */
@@ -149,11 +163,11 @@ export interface WorkflowContext {
 }
 
 /**
- * Performance metrics for workflow execution
+ * Performance metrics for workflow execution.
  *
- * Tracks timing for each phase and action
+ * Tracks timing for each phase and action.
  *
- * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Performance Monitoring
+ * @see ORCHESTRATOR_WORKFLOW_ANALYSIS.md (Performance Monitoring)
  */
 export interface PerformanceMetrics {
   /** Unique workflow identifier */
@@ -203,11 +217,11 @@ export interface PerformanceMetrics {
 }
 
 /**
- * Workflow diagnostic snapshot
+ * Workflow diagnostic snapshot.
  *
- * Used for debugging and monitoring active workflows
+ * Used for debugging and monitoring active workflows.
  *
- * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Diagnostics section
+ * @see ORCHESTRATOR_WORKFLOW_ANALYSIS.md (Diagnostics)
  */
 export interface WorkflowDiagnostics {
   /** Unique workflow identifier */
@@ -260,11 +274,11 @@ export interface WorkflowDiagnostics {
 }
 
 /**
- * Workflow history record
+ * Workflow history record.
  *
- * Stored for replay and debugging failed workflows
+ * Stored for replay and debugging failed workflows.
  *
- * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Workflow History section
+ * @see ORCHESTRATOR_WORKFLOW_ANALYSIS.md (Workflow History)
  */
 export interface WorkflowHistory {
   /** Unique workflow identifier */
@@ -330,9 +344,9 @@ export interface AgentRegistry {
 }
 
 /**
- * Workflow result returned to caller
+ * Workflow result returned to the caller.
  *
- * Contains final state and formatted response
+ * Contains final state and formatted response.
  */
 export interface WorkflowResult {
   /** Final workflow state */

@@ -69,12 +69,14 @@ Follow these guidelines to ensure effective task management:
 ### Current Action Items
 
 - [ ] P1: Agent Cleanup & Orchestrator Compliance (Critical)
+
   - [ ] Objective: Ensure orchestrator follows agent isolation and data-driven design; agents return typed data only.
   - [ ] Scope:
     - [ ] Deep review each agent (5 Ws: intent, problem, why, how, when).
     - [ ] Update TSDoc for all public agent APIs; fix missing @param/@returns, @example, @remarks, etc.
     - [ ] Audit for hardcoded business data and orchestrator responsibilities; delegate to appropriate agents.
     - [ ] Verify clear separation of concerns, modular, data-driven design.
+    - [ ] Open follow-up TODOs per finding (one line each) and link in CHANGELOG when resolved.
   - [x] Orchestrator remediation:
   - [x] Expand `src/agent/index.ts` with documentation-level overview of core design and infrastructure.
     - [x] Remove user-facing formatting and ad-hoc markdown; call `CommunicationAgent` for all formatting.
@@ -109,13 +111,41 @@ Follow these guidelines to ensure effective task management:
     - [ ] ClarificationAgent: Ensure examples and capability lists derive from manifest/config (no hardcoded business values).
     - [ ] DatabaseAgent: Confirm all field aliases live in config only; no code-level hardcoded business values.
     - [ ] DataAgent: Confirm category references are read from config; no code-level hardcoded business values.
-  - [ ] Next Steps:
-    - [ ] Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes. This will require updating copilot-instructions.md and the CONTEXT-SESSION.md files with clear instructions to guide the LLM accordingly.
-    - [ ] Open follow-up TODOs per finding (one line each) and link in CHANGELOG when resolved.
-  - [ ] P2: Follow-up (Copilot Chat UX): Update `CommunicationAgent` to leverage additional VS Code Copilot Chat features (structured TODO blocks, interactive messages, collapsible sections/details, and richer progress/status elements) in formatted responses.
+  - [ ] P1: MCP Server: Evaluate Tools and Resolve Integrity issue
 
-<!-- END:CURRENT_ACTION_ITEMS -->
-<!-- BEGIN:NEXT_ACTION_ITEMS -->
+    - Context: When I type `list all departments` into CoPiliot Chat, my custom Tools ` Describe Category` and `Search Category records` are executed.
+    - When executed, I receive the following errors:
+
+      - response in chat: `Error: MPC -32000: Tool execution error: 'categoryId' is required.`
+      - Debug Output output:
+
+        ```txt
+          2025-11-13 11:33:21.407 [error] Error: Request json/validateContent failed with message: Cannot read properties of undefined (reading 'length')
+              at ae (c:\Users\plach\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\json-language-features\client\dist\node\jsonClientMain.js:2:495328)
+              at oe (c:\Users\plach\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\json-language-features\client\dist\node\jsonClientMain.js:2:493306)
+              at Immediate.<anonymous> (c:\Users\plach\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\json-language-features\client\dist\node\jsonClientMain.js:2:489609)
+              at processImmediate (node:internal/timers:485:21)
+              at process.callbackTrampoline (node:internal/async_hooks:130:17) json.validate {"value":"vscode.json-language-features","_lower":"vscode.json-language-features"}
+          2025-11-13 11:33:21.409 [error] Error: Request json/validateContent failed with message: Cannot read properties of undefined (reading 'length')
+              at ae (c:\Users\plach\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\json-language-features\client\dist\node\jsonClientMain.js:2:495328)
+              at oe (c:\Users\plach\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\json-language-features\client\dist\node\jsonClientMain.js:2:493306)
+              at Immediate.<anonymous> (c:\Users\plach\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\json-language-features\client\dist\node\jsonClientMain.js:2:489609)
+              at processImmediate (node:internal/timers:485:21)
+              at process.callbackTrampoline (node:internal/async_hooks:130:17) json.validate {"value":"vscode.json-language-features","_lower":"vscode.json-language-features"}
+        ```
+
+    - Next Steps:
+      - [ ] Investigate and resolve the `categoryId` requirement error in the `Describe Category` and `Search Category records` tools.
+      - [ ] Review tool implementations for proper parameter.
+        - I provided the keyword departments, so an ID should have been identified.
+        - If an ID wasn't identified, user should be prompted with all available categories based on data-driven solution.
+      - [ ] Test tool executions post-fix to ensure error resolution.
+
+  - [ ] P2: Follow-up (Copilot Chat UX): Update `CommunicationAgent` to leverage additional VS Code Copilot Chat features (structured TODO blocks, interactive messages, collapsible sections/details, and richer progress/status elements) in formatted responses.
+  - [ ] P3: Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes. This will require updating copilot-instructions.md and the CONTEXT-SESSION.md files with clear instructions to guide the LLM accordingly.
+
+    <!-- END:CURRENT_ACTION_ITEMS -->
+    <!-- BEGIN:NEXT_ACTION_ITEMS -->
 
 ### Next Action Items
 

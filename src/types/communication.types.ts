@@ -6,7 +6,10 @@
  */
 
 /**
- * Response type enumeration for categorizing agent responses
+ * Response type enumeration for categorizing agent responses.
+ *
+ * @remarks
+ * Used to drive formatting and UX decisions in the CommunicationAgent.
  */
 export type ResponseType =
   | "success"
@@ -16,12 +19,26 @@ export type ResponseType =
   | "info";
 
 /**
- * Severity levels for error and warning messages
+ * Severity levels for error and warning messages.
  */
 export type SeverityLevel = "low" | "medium" | "high" | "critical";
 
 /**
- * Structured response from an agent before formatting
+ * Structured response from an agent before formatting.
+ *
+ * @remarks
+ * This type is returned by agents and then transformed by the
+ * CommunicationAgent into a user-facing {@link FormattedResponse}.
+ *
+ * @example
+ * ```ts
+ * const response: AgentResponse<{ items: string[] }> = {
+ *   type: "success",
+ *   status: "success",
+ *   data: { items: ["A", "B"] },
+ *   metadata: { agentId: "data-agent", operation: "list" }
+ * };
+ * ```
  */
 export interface AgentResponse<T = unknown> {
   /** Type of response */
@@ -98,7 +115,20 @@ export interface AgentResponse<T = unknown> {
 }
 
 /**
- * Formatted response ready for display to user
+ * Formatted response ready for display to the user.
+ *
+ * @remarks
+ * Produced by the CommunicationAgent. Carries both the rendered message and
+ * optional raw payload for programmatic handling.
+ *
+ * @example
+ * ```ts
+ * const view: FormattedResponse = {
+ *   message: "### Results\n- A\n- B",
+ *   format: "markdown",
+ *   isFinal: true
+ * };
+ * ```
  */
 export interface FormattedResponse {
   /** Formatted message text */

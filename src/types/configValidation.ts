@@ -1,16 +1,21 @@
 /**
  * @packageDocumentation Configuration Validation Utilities
  *
- * Provides comprehensive validation functions for agent configurations,
+ * Provides comprehensive validation utilities for agent configurations,
  * including schema validation, type checking, and business rule validation.
+ *
+ * @remarks
+ * These helpers validate unknown configuration objects against registry metadata
+ * and produce structured results that can be rendered or acted upon.
+ * Prefer using these functions in tooling, CI health checks, or UX flows that
+ * surface actionable validation feedback to users.
  */
 
 import { AgentConfigDefinition } from "@internal-types/agentConfig";
 import { ConfigUtils } from "@internal-types/configRegistry";
 
 /**
- * Validation result with detailed error information
- *
+ * Validation result with detailed error and warning information.
  */
 export interface ValidationResult {
   /** Whether validation passed */
@@ -24,8 +29,7 @@ export interface ValidationResult {
 }
 
 /**
- * Detailed validation error information
- *
+ * Detailed validation error information.
  */
 export interface ValidationError {
   /** Error severity level */
@@ -48,18 +52,25 @@ export interface ValidationError {
 }
 
 /**
- * Validation warning (non-blocking issue)
- *
+ * Validation warning (non-blocking issue).
  */
 export interface ValidationWarning extends Omit<ValidationError, "level"> {
   level: "warning";
 }
 
 /**
- * Comprehensive validation function for agent configurations
+ * Validates an unknown configuration object against known schema and rules.
  *
- * @param {unknown} config - config parameter.
- * @returns {ValidationResult} - TODO: describe return value.
+ * @param config - The configuration object to validate (may be unknown/untyped).
+ * @returns A {@link ValidationResult} describing validity, errors, and warnings.
+ *
+ * @example
+ * ```ts
+ * const result = validateAgentConfig(candidate);
+ * if (!result.isValid) {
+ *   console.error(generateValidationReport(result));
+ * }
+ * ```
  */
 export function validateAgentConfig(config: unknown): ValidationResult {
   const errors: ValidationError[] = [];
@@ -145,11 +156,11 @@ export function validateAgentConfig(config: unknown): ValidationResult {
 }
 
 /**
- * Validate the agent field structure
+ * Validate the `agent` field structure.
  *
- * @param {unknown} agent - agent parameter.
- * @param {ValidationError[]} errors - errors parameter.
- * @param {ValidationWarning[]} warnings - warnings parameter.
+ * @param agent - Agent sub-object to check.
+ * @param errors - Collector array to receive validation errors.
+ * @param warnings - Collector array to receive validation warnings.
  */
 function validateAgentField(
   agent: unknown,
@@ -209,12 +220,12 @@ function validateAgentField(
 }
 
 /**
- * Validate configuration sections specific to agent type
+ * Validate configuration sections specific to an agent type.
  *
- * @param {Record<string, unknown>} config - config parameter.
- * @param {string} agentType - agentType parameter.
- * @param {ValidationError[]} errors - errors parameter.
- * @param {ValidationWarning[]} warnings - warnings parameter.
+ * @param config - The full configuration object.
+ * @param agentType - Agent type string from registry metadata.
+ * @param errors - Collector array to receive validation errors.
+ * @param warnings - Collector array to receive validation warnings.
  */
 function validateConfigurationSections(
   config: Record<string, unknown>,
@@ -353,9 +364,9 @@ function validateOrchestratorConfig(
  * Placeholder validation functions for other agent types.
  * Parameters are intentionally unused until specialized validation is implemented.
  *
- * @param {Record<string, unknown>} _config - Configuration object to validate.
- * @param {ValidationError[]} _errors - Array to push validation errors into.
- * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
+ * @param _config - Configuration object to validate.
+ * @param _errors - Array to push validation errors into.
+ * @param _warnings - Array to push validation warnings into.
  */
 function validateDatabaseAgentConfig(
   _config: Record<string, unknown>,
@@ -368,9 +379,9 @@ function validateDatabaseAgentConfig(
 /**
  * Placeholder data-agent configuration validation.
  *
- * @param {Record<string, unknown>} _config - Configuration object to validate.
- * @param {ValidationError[]} _errors - Array to push validation errors into.
- * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
+ * @param _config - Configuration object to validate.
+ * @param _errors - Array to push validation errors into.
+ * @param _warnings - Array to push validation warnings into.
  */
 function validateDataAgentConfig(
   _config: Record<string, unknown>,
@@ -383,9 +394,9 @@ function validateDataAgentConfig(
 /**
  * Placeholder clarification-agent configuration validation.
  *
- * @param {Record<string, unknown>} _config - Configuration object to validate.
- * @param {ValidationError[]} _errors - Array to push validation errors into.
- * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
+ * @param _config - Configuration object to validate.
+ * @param _errors - Array to push validation errors into.
+ * @param _warnings - Array to push validation warnings into.
  */
 function validateClarificationAgentConfig(
   _config: Record<string, unknown>,
@@ -399,9 +410,9 @@ function validateClarificationAgentConfig(
  * Placeholder relevant-data-manager configuration validation.
  * (Also reused for user-context alias.)
  *
- * @param {Record<string, unknown>} _config - Configuration object to validate.
- * @param {ValidationError[]} _errors - Array to push validation errors into.
- * @param {ValidationWarning[]} _warnings - Array to push validation warnings into.
+ * @param _config - Configuration object to validate.
+ * @param _errors - Array to push validation errors into.
+ * @param _warnings - Array to push validation warnings into.
  */
 function validateRelevantDataManagerConfig(
   _config: Record<string, unknown>,
@@ -412,11 +423,11 @@ function validateRelevantDataManagerConfig(
 }
 
 /**
- * Validate configuration compatibility between different versions
+ * Validates compatibility between two concrete configuration definitions.
  *
- * @param {AgentConfigDefinition} config1 - config1 parameter.
- * @param {AgentConfigDefinition} config2 - config2 parameter.
- * @returns {ValidationResult} - TODO: describe return value.
+ * @param config1 - Baseline configuration.
+ * @param config2 - Candidate configuration to compare against baseline.
+ * @returns A {@link ValidationResult} indicating whether versions are compatible.
  */
 export function validateCompatibility(
   config1: AgentConfigDefinition,
@@ -453,10 +464,16 @@ export function validateCompatibility(
 }
 
 /**
- * Generate a validation report for display
+ * Generates a human-readable validation report.
  *
- * @param {ValidationResult} result - result parameter.
- * @returns {string} - TODO: describe return value.
+ * @param result - Validation outcome to render.
+ * @returns A multi-line string summarizing pass/fail, errors, and warnings.
+ *
+ * @example
+ * ```ts
+ * const report = generateValidationReport(result);
+ * console.log(report);
+ * ```
  */
 export function generateValidationReport(result: ValidationResult): string {
   const lines: string[] = [];

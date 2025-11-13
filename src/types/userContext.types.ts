@@ -4,6 +4,11 @@
  * Shared interfaces for user context data validation. These interfaces define
  * the structure for compile-time type checking while allowing runtime data
  * to be loaded from user-configurable JSON files.
+ *
+ * @remarks
+ * These types intentionally avoid importing agent implementations to prevent
+ * circular dependencies. Use them for validation, schema mapping, and
+ * IntelliSense in configuration authoring.
  */
 
 /**
@@ -537,10 +542,17 @@ export interface RawQueryFile {
 }
 
 /**
- * Type guard to check if an object is a valid CategoryConfig
+ * Type guard to check if a value is a valid {@link CategoryConfig}.
  *
- * @param {unknown} obj - The object to validate
- * @returns {obj is CategoryConfig} True if the object is a valid CategoryConfig
+ * @param obj - The value to validate.
+ * @returns True if the value is a valid CategoryConfig.
+ *
+ * @example
+ * ```ts
+ * if (isCategoryConfig(maybe)) {
+ *   console.log(maybe.id);
+ * }
+ * ```
  */
 export function isCategoryConfig(obj: unknown): obj is CategoryConfig {
   if (typeof obj !== "object" || obj === null) return false;
@@ -557,10 +569,10 @@ export function isCategoryConfig(obj: unknown): obj is CategoryConfig {
 }
 
 /**
- * Type guard to check if an object is a valid BaseRecord
+ * Type guard to check if a value is a valid {@link BaseRecord}.
  *
- * @param {unknown} obj - The object to validate
- * @returns {obj is BaseRecord} True if the object is a valid BaseRecord
+ * @param obj - The value to validate.
+ * @returns True if the value is a valid BaseRecord.
  */
 export function isBaseRecord(obj: unknown): obj is BaseRecord {
   if (typeof obj !== "object" || obj === null) return false;
@@ -573,17 +585,17 @@ export function isBaseRecord(obj: unknown): obj is BaseRecord {
 }
 
 /**
- * Type guard to check if an array contains valid records
+ * Type guard to check if a value is an array of {@link BaseRecord}.
  *
- * @param {unknown} obj - The object to validate
- * @returns {obj is BaseRecord[]} True if the object is an array of valid records
+ * @param obj - The value to validate.
+ * @returns True if the value is an array of valid records.
  */
 export function isRecordArray(obj: unknown): obj is BaseRecord[] {
   return Array.isArray(obj) && obj.every(isBaseRecord);
 }
 
 /**
- * Validation error detail
+ * Validation error detail.
  */
 export interface ValidationError {
   /** Path to the field with the error (e.g., "config.primaryKeys") */
@@ -597,7 +609,7 @@ export interface ValidationError {
 }
 
 /**
- * Validation result with detailed errors
+ * Validation result with detailed errors.
  */
 export interface ValidationResult {
   /** Whether validation passed */
@@ -607,10 +619,18 @@ export interface ValidationResult {
 }
 
 /**
- * Validates a CategoryConfig object with detailed error reporting
+ * Validates a {@link CategoryConfig} object with detailed error reporting.
  *
- * @param {unknown} obj - The object to validate
- * @returns {ValidationResult} Validation result with detailed errors
+ * @param obj - The value to validate.
+ * @returns Validation result with detailed errors.
+ *
+ * @example
+ * ```ts
+ * const result = validateCategoryConfig(candidate);
+ * if (!result.valid) {
+ *   console.warn(formatValidationErrors(result.errors));
+ * }
+ * ```
  */
 export function validateCategoryConfig(obj: unknown): ValidationResult {
   const errors: ValidationError[] = [];
@@ -787,10 +807,10 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
 }
 
 /**
- * Validates a CategoryRecord object with detailed error reporting
+ * Validates a {@link CategoryRecord} object with detailed error reporting.
  *
- * @param {unknown} obj - The object to validate
- * @returns {ValidationResult} Validation result with detailed errors
+ * @param obj - The value to validate.
+ * @returns Validation result with detailed errors.
  */
 export function validateCategoryRecord(obj: unknown): ValidationResult {
   const errors: ValidationError[] = [];
@@ -842,10 +862,10 @@ export function validateCategoryRecord(obj: unknown): ValidationResult {
 }
 
 /**
- * Validates a RelationshipDefinition object with detailed error reporting
+ * Validates a {@link RelationshipDefinition} object with detailed error reporting.
  *
- * @param {unknown} obj - The object to validate
- * @returns {ValidationResult} Validation result with detailed errors
+ * @param obj - The value to validate.
+ * @returns Validation result with detailed errors.
  */
 export function validateRelationshipDefinition(obj: unknown): ValidationResult {
   const errors: ValidationError[] = [];
@@ -951,11 +971,17 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
 }
 
 /**
- * Formats validation errors into a human-readable string
+ * Formats validation errors into a human-readable string.
  *
- * @param {ValidationError[]} errors - Array of validation errors
- * @param {number} maxErrors - Maximum number of errors to include (default: 3)
- * @returns {string} Formatted error message
+ * @param errors - Array of validation errors.
+ * @param maxErrors - Maximum number of errors to include (default: 3).
+ * @returns Formatted error message string.
+ *
+ * @example
+ * ```ts
+ * const msg = formatValidationErrors(result.errors, 5);
+ * console.log(msg);
+ * ```
  */
 export function formatValidationErrors(
   errors: ValidationError[],
