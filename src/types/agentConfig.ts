@@ -396,6 +396,32 @@ export interface CommunicationConfig {
     showExpectedActual?: boolean;
     summaryTemplate?: string;
   };
+  /** Clarification message templates and settings for CommunicationAgent */
+  clarification?: CommunicationClarificationConfig;
+}
+
+/**
+ * Clarification formatting configuration for CommunicationAgent
+ */
+export interface CommunicationClarificationConfig {
+  /** Max number of categories to include in examples */
+  maxCategoriesInExamples?: number;
+  /** Heading before example prompts */
+  examplesHeader?: string;
+  /** Heading before category list */
+  availableCategoriesHeader?: string;
+  /** Closing prompt encouraging specificity */
+  closingPrompt?: string;
+  /** Template: I'm not sure what you're looking for with "{{question}}". */
+  unknownRequestTemplate?: string;
+  /** Template when an intent is guessed: uses {{intent}} */
+  matchedIntentTemplate?: string;
+  /** Example groups; when usesCategories=true, replace {{category}} */
+  groups?: Array<{
+    title: string;
+    usesCategories?: boolean;
+    sampleTemplates: string[];
+  }>;
 }
 
 /**

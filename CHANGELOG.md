@@ -34,6 +34,43 @@ This changelog records Logs only.
 
 ## Logs
 
+### [2025-11-13]
+
+#### 2025-11-13 10:00:00 refactor: CommunicationAgent clarification via configuration; add types and templates
+
+**Problem/Context**: Clarification output in `CommunicationAgent` included hardcoded examples, headers, and category mentions. Governance requires 100% data-driven formatting with values sourced from configuration or loaded data.
+
+**Changes Made**:
+
+1. `src/agent/communicationAgent/index.ts` (formatClarification): Rewrote to consume templates, headers, and limits from configuration; removed hardcoded examples/category strings; supports markdown/plaintext output consistently.
+2. `src/agent/communicationAgent/agent.config.ts`: Added `communication.clarification` block (examplesHeader, availableCategoriesHeader, closingPrompt, maxCategoriesInExamples, unknownRequestTemplate, matchedIntentTemplate, groups with sampleTemplates).
+3. `src/types/agentConfig.ts`: Extended `CommunicationConfig` with `clarification?: CommunicationClarificationConfig` and introduced the new interface.
+4. `CONTEXT-SESSION.md`: Updated remediation status (orchestrator emits typed-only; no markdown) and recorded the clarification refactor and verification.
+5. `TODO.md`: Marked clarification as complete under P1 findings; noted that other CommunicationAgent responses still need dynamic category/example enumeration.
+
+**Architecture Notes**: Keeps agent isolation intact (formatting centralized in `CommunicationAgent`) and aligns with data-driven design by moving all business strings and examples into typed configuration. Orchestrator remains typed-only; presentation is owned by `CommunicationAgent`.
+
+**Files Changed**: `src/agent/communicationAgent/index.ts`, `src/agent/communicationAgent/agent.config.ts`, `src/types/agentConfig.ts`, `CONTEXT-SESSION.md`, `TODO.md`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 271 total)
+- Docs Lint: PASS (`npm run lint:docs`)
+- Prebuild: PASS (`npm run prebuild`)
+
+**Impact**: Clarification UX is now fully configurable and free of hardcoded business values. This simplifies future copy/UX adjustments and ensures consistency across environments.
+
+##### Verification – 2025-11-13 (Clarification Refactor)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 271 total)
+- Lint: PASS (JSDoc clean for changed public APIs)
+- Docs: PASS (markdown/docs linters)
+- Health: PASS (repository health checks)
+- Coverage: ~65.7% lines overall (unchanged)
+- JSDoc: PASS for changed surfaces; broader audits ongoing under P1
+
 ### [2025-11-12]
 
 #### 2025-11-12 23:28:00 refactor: Remove extractQueryParams fallbacks; centralize formatting in CommunicationAgent
@@ -53,6 +90,16 @@ This changelog records Logs only.
 **Testing**: Build: PASS (`npm run compile`); Tests: PASS (34 passed, 1 skipped, 271 total); Docs Lint: PASS (`npm run lint:docs`); Prebuild: PASS (`npm run prebuild`).
 
 **Impact**: Eliminates drift from hardcoded categories and consolidates formatting in one place, simplifying future UX improvements and reducing risk of inconsistent presentation.
+
+##### Verification – 2025-11-13
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 271 total)
+- Lint: FAIL — 43 jsdoc warnings (max-warnings=0 causes failure). Primary areas: `src/agent/orchestrator/index.ts` (JSDoc param/returns types around workflow helpers), `src/shared/workflowLogger.ts`. No new errors introduced by today’s change.
+- Docs Lint: PASS (`npm run lint:docs`)
+- Health: PASS (`npm run health:report`)
+- Coverage: Unchanged; sampled files at 100%
+- JSDoc: Incomplete in noted areas; remediation tracked in TODO.md (P1 audits/JSDoc updates)
 
 #### 2025-11-12 23:36:00 chore: Normalize TODO.md to checkbox lists; prune unused orchestrator helpers
 

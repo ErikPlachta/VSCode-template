@@ -73,6 +73,7 @@ export class CommunicationAgent extends BaseAgentConfig {
     const requiredSections = [
       "communication.formatting",
       "communication.errorHandling",
+      "communication.clarification",
     ];
     const missingSections: string[] = [];
 
@@ -454,84 +455,119 @@ export class CommunicationAgent extends BaseAgentConfig {
       "communication.formatting.defaultFormat"
     ) as "markdown" | "plaintext" | "html";
 
+    const clar = this.getConfigItem<{
+      maxCategoriesInExamples: number;
+      examplesHeader: string;
+      availableCategoriesHeader: string;
+      closingPrompt: string;
+      unknownRequestTemplate: string;
+      matchedIntentTemplate: string;
+      groups: Array<{
+        title: string;
+        usesCategories: boolean;
+        sampleTemplates: string[];
+      }>;
+    }>("communication.clarification");
+
     const originalQuestion =
-      (response.metadata?.originalQuestion as string) || "your request";
+      (response.metadata?.originalQuestion as string) || "";
     const availableCategories =
       (response.metadata?.availableCategories as string[]) || [];
     const matchedIntent = response.metadata?.matchedIntent as
       | string
       | undefined;
 
-    // Build examples based on context
-    const examples = [
-      {
-        category: "**Category Information**",
-        samples: [
-          "What's in the Applications category?",
-          "Show me the People database structure",
-          "Describe the Departments data",
-        ],
-      },
-      {
-        category: "**Query Records**",
-        samples: [
-          "List all applications used by engineering",
-          "Find people with Python skills",
-          "Show departments with more than 10 people",
-        ],
-      },
-      {
-        category: "**Data Analysis**",
-        samples: [
-          "What insights can you provide about our tech stack?",
-          "Analyze skill distribution across teams",
-          "Show connections between people and projects",
-        ],
-      },
-    ];
+    const topCategories = availableCategories.slice(
+      0,
+      clar?.maxCategoriesInExamples ?? 4
+    );
 
-    let message = `I'm not sure what you're looking for with "${originalQuestion}".`;
+    const open = (
+      clar?.unknownRequestTemplate ||
+      "I'm not sure what you're looking for with \"{{question}}\"."
+    ).replace(/\{\{question\}\}/g, originalQuestion || "your request");
+    const intentNote = matchedIntent
+      ? "\n\n" +
+        (
+          clar?.matchedIntentTemplate ||
+          "Your question seems related to {{intent}}, but needs more specific details."
+        ).replace(/\{\{intent\}\}/g, matchedIntent)
+      : "";
 
-    if (matchedIntent) {
-      message += `\n\nYour question seems related to ${matchedIntent}, but needs more specific details.`;
-    }
+    let message = `${open}${intentNote}`;
 
     if (format === "markdown") {
-      message += `\n\n**Here are some examples of what you can ask me:**\n\n`;
-      examples.forEach((ex) => {
-        message += `${ex.category}\n${ex.samples
-          .map((s) => `- "${s}"`)
-          .join("\n")}\n\n`;
+      message += `\n\n**${
+        clar?.examplesHeader || "Here are some examples of what you can ask me:"
+      }**\n\n`;
+      (clar?.groups || []).forEach((group) => {
+        const samples: string[] = [];
+        if (group.usesCategories && topCategories.length > 0) {
+          group.sampleTemplates.forEach((tmpl) => {
+            topCategories.forEach((cat) => {
+              samples.push(tmpl.replace(/\{\{category\}\}/g, cat));
+            });
+          });
+        } else {
+          samples.push(...group.sampleTemplates);
+        }
+        if (samples.length > 0) {
+          message += `${group.title}\n${samples
+            .map((s) => `- "${s}"`)
+            .join("\n")}\n\n`;
+        }
       });
 
       if (availableCategories.length > 0) {
-        message += `**Available Categories:**\n`;
+        message += `**${
+          clar?.availableCategoriesHeader || "Available Categories:"
+        }**\n`;
         availableCategories.forEach((cat) => {
           message += `- ${cat}\n`;
         });
-      } else {
-        message += `**Available Categories:**\n- Applications (business systems and tools)\n- People (team members and skills)\n- Departments (organizational structure)\n- Projects (active initiatives)\n`;
       }
 
-      message += `\n**Please provide more specific details about what you'd like to know!**`;
+      message += `\n**${
+        clar?.closingPrompt ||
+        "Please provide more specific details about what you'd like to know!"
+      }**`;
     } else {
-      message += `\n\nHere are some examples of what you can ask me:\n\n`;
-      examples.forEach((ex) => {
-        message += `${ex.category.replace(/\*\*/g, "")}\n${ex.samples
-          .map((s) => `• "${s}"`)
-          .join("\n")}\n\n`;
+      message += `\n\n${
+        clar?.examplesHeader || "Here are some examples of what you can ask me:"
+      }\n\n`;
+      (clar?.groups || []).forEach((group) => {
+        const title = group.title.replace(/\*\*/g, "");
+        const samples: string[] = [];
+        if (group.usesCategories && topCategories.length > 0) {
+          group.sampleTemplates.forEach((tmpl) => {
+            topCategories.forEach((cat) => {
+              samples.push(tmpl.replace(/\{\{category\}\}/g, cat));
+            });
+          });
+        } else {
+          samples.push(...group.sampleTemplates);
+        }
+        if (samples.length > 0) {
+          message += `${title}\n${samples
+            .map((s) => `• "${s}"`)
+            .join("\n")}\n\n`;
+        }
       });
 
       if (availableCategories.length > 0) {
-        message += `Available Categories:\n`;
+        const header = (
+          clar?.availableCategoriesHeader || "Available Categories:"
+        ).replace(/\*\*/g, "");
+        message += `${header}\n`;
         availableCategories.forEach((cat) => {
           message += `• ${cat}\n`;
         });
-      } else {
-        message += `Available Categories:\n• Applications\n• People\n• Departments\n• Projects\n`;
       }
 
-      message += `\nPlease provide more specific details about what you'd like to know!`;
+      message += `\n${
+        clar?.closingPrompt ||
+        "Please provide more specific details about what you'd like to know!"
+      }`;
     }
 
     return {

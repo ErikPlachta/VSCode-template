@@ -17,7 +17,7 @@
  *
  * Notes
  * - Tests should validate typed data at agent and orchestrator boundaries; formatting is verified via CommunicationAgent.
- * - Public APIs include complete JSDoc with specific @param and @returns types.
+ * - Public APIs include complete JSDoc with specific `@param` and `@returns` types.
  */
 
 // Clean interface definitions for orchestrator coordination (moved to types)

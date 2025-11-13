@@ -233,5 +233,60 @@ export const communicationAgentConfig: AgentConfigDefinition = {
       summaryTemplate:
         "Validation summary: {{passedCount}} passed, {{failedCount}} failed{{#if skippedCount}}, {{skippedCount}} skipped{{/if}}.",
     },
+
+    /**
+     * Clarification message configuration (data-driven, no hardcoded business values)
+     */
+    clarification: {
+      /** Maximum number of categories to include when generating examples */
+      maxCategoriesInExamples: 4,
+
+      /** Heading shown before example prompts */
+      examplesHeader: "Here are some examples of what you can ask me:",
+
+      /** Heading shown before the category list */
+      availableCategoriesHeader: "Available Categories:",
+
+      /** Closing guidance after examples */
+      closingPrompt:
+        "Please provide more specific details about what you'd like to know!",
+
+      /** Template for the opening sentence when the request is unclear */
+      unknownRequestTemplate:
+        'I\'m not sure what you\'re looking for with "{{question}}".',
+
+      /** Optional note when a likely intent was detected */
+      matchedIntentTemplate:
+        "Your question seems related to {{intent}}, but needs more specific details.",
+
+      /** Example groups and sample templates. When usesCategories=true, {{category}} is substituted. */
+      groups: [
+        {
+          title: "**Category Information**",
+          usesCategories: true,
+          sampleTemplates: [
+            "What's in the {{category}} category?",
+            "Describe the {{category}} data model",
+          ],
+        },
+        {
+          title: "**Query Records**",
+          usesCategories: true,
+          sampleTemplates: [
+            "List recent items in {{category}}",
+            "Find items matching specific keywords in {{category}}",
+          ],
+        },
+        {
+          title: "**Data Analysis**",
+          usesCategories: false,
+          sampleTemplates: [
+            "What insights can you provide for my dataset?",
+            "Analyze trends across categories",
+            "Show connections between related entities",
+          ],
+        },
+      ],
+    },
   },
 };

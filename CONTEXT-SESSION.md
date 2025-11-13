@@ -36,8 +36,8 @@ Started: 2025-11-12T17:30:00Z
 
 #### Validated Findings
 
-- Orchestrator hardcodes agent ids in `validateAction` → use registry-derived keys for data-driven validation.
-- Orchestrator assembles markdown in `route()`, `handle()`, and `formatResponseForUser()` → delegate to `CommunicationAgent` and return typed data only.
+- Orchestrator hardcoded agent ids in `validateAction` → replaced with registry-derived keys (complete).
+- Orchestrator assembled markdown in `route()`, `handle()`, and `formatResponseForUser()` → formatting delegated to `CommunicationAgent` (complete); `markdown` retained temporarily for compatibility.
 
 #### Plan of Action
 
@@ -62,15 +62,25 @@ Started: 2025-11-12T17:30:00Z
 - JSDoc: complete and accurate for public APIs.
 - Tests: cover public surface, error paths, and edge cases.
 
-#### Orchestrator Remediation Tasks
+#### Orchestrator Remediation Status
 
-- Replace hardcoded `validAgents` in `validateAction` with registry keys.
-- Remove `formatResponseForUser` and any inline markdown assembly.
-- Ensure `route`/`handle` return typed data only; compose UX via `CommunicationAgent`.
+- ✅ Replace hardcoded `validAgents` in `validateAction` with registry keys.
+- ✅ Remove `formatResponseForUser` and inline markdown assembly; delegate formatting to `CommunicationAgent`.
+  ✅ Ensure `route`/`handle` return typed data only; orchestrator no longer emits `markdown` (deprecated field remains in types for compatibility, not populated).
+
+#### Recent Changes
+
+- Added `formatted` response field; marked `markdown` as deprecated (compatibility shim remains).
+- Removed `formatRecords()`/`formatObject()` helpers from Orchestrator.
+- Removed hardcoded category fallbacks from `extractQueryParams`; derive strictly from `UserContextAgent` data/aliases.
+- CommunicationAgent: Refactored `formatClarification` to be fully config-driven via `communication.clarification`; removed hardcoded examples/headers; templates and limits read from config.
+- Types: Extended `CommunicationConfig` with `clarification` block; added `CommunicationClarificationConfig`.
+- Verification: `npm run prebuild` and full tests executed on 2025-11-13 — all gates PASS.
 
 #### Documentation Updates
 
 - Expand `src/agent/index.ts` with architecture overview and examples aligned to CommunicationAgent formatting.
 - Correct and complete JSDoc across agents during audits.
+- Document `communication.clarification` configuration structure in README and internal docs (planned).
 
 <!-- END:CURRENT-FOCUS-DETAIL -->

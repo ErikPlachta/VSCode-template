@@ -480,7 +480,6 @@ export class Orchestrator extends BaseAgentConfig {
       rationale: classification.rationale,
       payload,
       formatted: { message: formatted.message, markdown: formatted.message },
-      markdown: formatted.message,
     };
   }
 
@@ -577,11 +576,8 @@ export class Orchestrator extends BaseAgentConfig {
       // Delegate to the existing route method
       const response = await this.route(input);
 
-      // Enhance the response with additional context for user-facing output
-      return {
-        ...response,
-        markdown: this.formatResponseForUser(response, input),
-      };
+      // Return typed response; presentation owned by CommunicationAgent via `formatted`
+      return response;
     } catch (error) {
       // Fallback error handling
       return {
@@ -598,62 +594,11 @@ export class Orchestrator extends BaseAgentConfig {
             error instanceof Error ? error.message : "Unknown error"
           }\n\nPlease try rephrasing your question or ask for help.`,
         },
-        markdown: `## Error\n\nI encountered an issue while processing your request: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }\n\nPlease try rephrasing your question or ask for help.`,
       };
     }
   }
 
-  /**
-   * Convert internal routing response into markdown UX output.
-   *
-   * @param {OrchestratorResponse} response - Routing response.
-   * @param {OrchestratorInput} _input - Original user input (unused currently; reserved for future personalization).
-   * @returns {string} Markdown string for chat rendering.
-   */
-  private formatResponseForUser(
-    response: OrchestratorResponse,
-    _input: OrchestratorInput
-  ): string {
-    const lines: string[] = [];
-    lines.push(
-      `## ${
-        response.intent.charAt(0).toUpperCase() + response.intent.slice(1)
-      } Request`
-    );
-    if (response.summary) {
-      lines.push(response.summary);
-    }
-    if (response.agent !== this._getFallbackAgent()) {
-      lines.push(`*Routing to: ${response.agent}*`);
-    }
-
-    const payload = response.payload as unknown;
-    const hasClassification =
-      typeof payload === "object" &&
-      payload !== null &&
-      "classification" in (payload as Record<string, unknown>);
-    if (
-      hasClassification &&
-      ((payload as { classification?: OrchestratorClassification })
-        .classification?.matchedSignals?.length || 0) > 0
-    ) {
-      const matched = (
-        payload as { classification?: OrchestratorClassification }
-      ).classification?.matchedSignals as string[];
-      lines.push(`**Matched keywords:** ${matched.join(", ")}`);
-    }
-
-    const message = lines.join("\n\n");
-    const formatted = this.communicationAgent.formatSuccess(
-      CommunicationAgent.createSuccessResponse(response.payload, {
-        message,
-        metadata: { operation: "route", intent: response.intent },
-      })
-    );
-    return formatted.message;
-  }
+  // Presentation helpers were removed; CommunicationAgent owns user-facing formatting.
 
   /**
    * Snapshot current high-level orchestrator settings for diagnostics.
@@ -1049,7 +994,7 @@ export class Orchestrator extends BaseAgentConfig {
    * Format: wf-{counter}-{timestamp}
    * Example: wf-1-1699654321
    *
-   * @returns Unique workflow ID string
+   * @returns {string} Unique workflow ID string
    */
   private generateWorkflowId(): string {
     this.workflowIdCounter++;
@@ -1060,8 +1005,8 @@ export class Orchestrator extends BaseAgentConfig {
   /**
    * Initialize performance metrics for a workflow
    *
-   * @param workflowId - Unique workflow identifier
-   * @returns Initialized PerformanceMetrics object
+   * @param {string} workflowId - Unique workflow identifier
+   * @returns {PerformanceMetrics} Initialized PerformanceMetrics object
    */
   private initializeMetrics(workflowId: string): PerformanceMetrics {
     const now = Date.now();
@@ -1085,7 +1030,7 @@ export class Orchestrator extends BaseAgentConfig {
    * - Workflow: >5000ms
    * - Action: >2000ms
    *
-   * @param metrics - Performance metrics to check
+   * @param {PerformanceMetrics} metrics - Performance metrics to check
    */
   private checkPerformance(metrics: PerformanceMetrics): void {
     // Check overall workflow duration
@@ -1110,11 +1055,11 @@ export class Orchestrator extends BaseAgentConfig {
    *
    * Keeps only the most recent 100 workflows to limit memory usage
    *
-   * @param workflowId - Unique workflow identifier
-   * @param input - Original user input
-   * @param result - Final workflow result
-   * @param duration - Total workflow duration in ms
-   * @param events - Array of workflow events for replay
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {OrchestratorInput} input - Original user input
+   * @param {WorkflowResult} result - Final workflow result
+   * @param {number} duration - Total workflow duration in ms
+   * @param {WorkflowHistory["events"]} events - Array of workflow events for replay
    */
   private recordWorkflow(
     workflowId: string,
@@ -1145,8 +1090,8 @@ export class Orchestrator extends BaseAgentConfig {
    *
    * Useful for debugging stuck workflows or understanding execution
    *
-   * @param workflowId - Unique workflow identifier
-   * @returns Diagnostic snapshot or null if workflow not found
+   * @param {string} workflowId - Unique workflow identifier
+   * @returns {WorkflowDiagnostics | null} Diagnostic snapshot or null if workflow not found
    */
   public getWorkflowDiagnostics(
     workflowId: string
@@ -1176,7 +1121,7 @@ export class Orchestrator extends BaseAgentConfig {
   /**
    * List all active workflows (for monitoring dashboard)
    *
-   * @returns Array of diagnostic snapshots for active workflows
+   * @returns {WorkflowDiagnostics[]} Array of diagnostic snapshots for active workflows
    */
   public getActiveWorkflows(): WorkflowDiagnostics[] {
     return Array.from(this.workflows.entries())
@@ -1188,8 +1133,8 @@ export class Orchestrator extends BaseAgentConfig {
   /**
    * Replay workflow for debugging (without executing agents)
    *
-   * @param workflowId - Unique workflow identifier to replay
-   * @returns Workflow history or null if not found
+   * @param {string} workflowId - Unique workflow identifier to replay
+   * @returns {WorkflowHistory | null} Workflow history or null if not found
    */
   public replayWorkflow(workflowId: string): WorkflowHistory | null {
     return (
@@ -1200,8 +1145,8 @@ export class Orchestrator extends BaseAgentConfig {
   /**
    * Get recent failed workflows for debugging
    *
-   * @param limit - Maximum number of failed workflows to return (default: 10)
-   * @returns Array of failed workflow histories
+   * @param {number} [limit=10] - Maximum number of failed workflows to return
+   * @returns {WorkflowHistory[]} Array of failed workflow histories
    */
   public getFailedWorkflows(limit = 10): WorkflowHistory[] {
     return this.workflowHistory
@@ -1246,8 +1191,8 @@ export class Orchestrator extends BaseAgentConfig {
    *
    * Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Performance Monitoring section
    *
-   * @param metrics - Performance metrics to summarize
-   * @returns Formatted performance summary string with breakdown and percentages
+   * @param {PerformanceMetrics} metrics - Performance metrics to summarize
+   * @returns {string} Formatted performance summary string with breakdown and percentages
    */
   private generatePerformanceSummary(metrics: PerformanceMetrics): string {
     const {

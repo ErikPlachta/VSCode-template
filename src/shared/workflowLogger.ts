@@ -32,8 +32,8 @@ export class WorkflowLogger {
   /**
    * Log workflow start
    *
-   * @param workflowId - Unique workflow identifier
-   * @param input - User input that initiated the workflow
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {unknown} input - User input that initiated the workflow
    */
   public logWorkflowStart(workflowId: string, input: unknown): void {
     console.log(`[Workflow:${workflowId}] START`, input);
@@ -42,8 +42,8 @@ export class WorkflowLogger {
   /**
    * Log classification result
    *
-   * @param workflowId - Unique workflow identifier
-   * @param classification - Intent classification result
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {unknown} classification - Intent classification result
    */
   public logClassification(workflowId: string, classification: unknown): void {
     console.log(`[Workflow:${workflowId}] CLASSIFY`, classification);
@@ -52,8 +52,8 @@ export class WorkflowLogger {
   /**
    * Log action planning
    *
-   * @param workflowId - Unique workflow identifier
-   * @param action - Planned workflow action
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {WorkflowAction} action - Planned workflow action
    */
   public logActionPlanned(workflowId: string, action: WorkflowAction): void {
     console.log(
@@ -65,8 +65,8 @@ export class WorkflowLogger {
   /**
    * Log action start
    *
-   * @param workflowId - Unique workflow identifier
-   * @param action - Action being started
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {WorkflowAction} action - Action being started
    */
   public logActionStart(workflowId: string, action: WorkflowAction): void {
     console.log(
@@ -78,8 +78,8 @@ export class WorkflowLogger {
   /**
    * Log action completion
    *
-   * @param workflowId - Unique workflow identifier
-   * @param action - Completed action
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {WorkflowAction} action - Completed action
    */
   public logActionComplete(workflowId: string, action: WorkflowAction): void {
     console.log(
@@ -91,9 +91,9 @@ export class WorkflowLogger {
   /**
    * Log action failure
    *
-   * @param workflowId - Unique workflow identifier
-   * @param action - Failed action
-   * @param error - Error that caused failure
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {WorkflowAction} action - Failed action
+   * @param {Error} error - Error that caused failure
    */
   public logActionFailed(
     workflowId: string,
@@ -110,9 +110,9 @@ export class WorkflowLogger {
   /**
    * Log state transition
    *
-   * @param workflowId - Unique workflow identifier
-   * @param fromState - Previous state
-   * @param toState - New state
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {WorkflowState} fromState - Previous state
+   * @param {WorkflowState} toState - New state
    */
   public logStateTransition(
     workflowId: string,
@@ -128,8 +128,8 @@ export class WorkflowLogger {
   /**
    * Log workflow completion
    *
-   * @param workflowId - Unique workflow identifier
-   * @param result - Final workflow result
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {unknown} result - Final workflow result
    */
   public logWorkflowComplete(workflowId: string, result: unknown): void {
     console.log(`[Workflow:${workflowId}] COMPLETE`, result);
@@ -138,8 +138,8 @@ export class WorkflowLogger {
   /**
    * Log workflow failure
    *
-   * @param workflowId - Unique workflow identifier
-   * @param error - Error that caused failure
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {Error} error - Error that caused failure
    */
   public logWorkflowFailed(workflowId: string, error: Error): void {
     console.error(`[Workflow:${workflowId}] FAILED`, error.message, error);
@@ -148,9 +148,9 @@ export class WorkflowLogger {
   /**
    * Log general information
    *
-   * @param workflowId - Unique workflow identifier
-   * @param message - Information message
-   * @param data - Optional additional data
+   * @param {string} workflowId - Unique workflow identifier
+   * @param {string} message - Information message
+   * @param {unknown} [data] - Optional additional data
    */
   public logInfo(workflowId: string, message: string, data?: unknown): void {
     console.log(`[Workflow:${workflowId}] INFO`, message, data || "");

@@ -73,25 +73,26 @@ Follow these guidelines to ensure effective task management:
   - [ ] Scope:
     - [ ] Deep review each agent (5 Ws: intent, problem, why, how, when).
     - [ ] Update JSDocs for all public agent APIs; fix missing @param/@returns.
-    - [ ] Expand `src/agent/index.ts` with documentation-level overview of core design and infrastructure.
+    - [x] Expand `src/agent/index.ts` with documentation-level overview of core design and infrastructure.
     - [ ] Audit for hardcoded business data and orchestrator responsibilities; delegate to appropriate agents.
     - [ ] Orchestrator remediation:
-      - [ ] Remove user-facing formatting and ad-hoc markdown; call `CommunicationAgent` for all formatting.
-      - [ ] Replace hardcoded `validAgents` in `validateAction` with registry-derived keys.
-      - [ ] Refactor `route`/`handle` to return typed data and omit `markdown` fields; assemble UX via `CommunicationAgent`.
+      - [x] Remove user-facing formatting and ad-hoc markdown; call `CommunicationAgent` for all formatting.
+      - [x] Replace hardcoded `validAgents` in `validateAction` with registry-derived keys.
+      - [x] Refactor `route`/`handle` to return typed data and omit `markdown` fields; assemble UX via `CommunicationAgent`.
   - [ ] Findings (seeded TODOs):
-    - [ ] Orchestrator: Migrate `formatRecords()`/`formatObject()` and inline markdown (e.g., table/headers) to `CommunicationAgent`.
-    - [ ] Orchestrator: Remove fallback hardcoded categories in `extractQueryParams` (e.g., "people", "departments"); derive solely from `UserContextAgent` category data/aliases.
-    - [ ] Orchestrator: Replace remaining direct markdown assembly (e.g., `### ${snapshot.name}`) with `CommunicationAgent` templates.
+    - [x] Orchestrator: Migrate `formatRecords()`/`formatObject()` and inline markdown (e.g., table/headers) to `CommunicationAgent`.
+    - [x] Orchestrator: Remove fallback hardcoded categories in `extractQueryParams` (e.g., "people", "departments"); derive solely from `UserContextAgent` category data/aliases.
+    - [x] Orchestrator: Replace remaining direct markdown assembly (e.g., `### ${snapshot.name}`) with `CommunicationAgent` templates.
+    - [x] CommunicationAgent: Clarification formatting is fully config-driven (no hardcoded examples/categories); uses `communication.clarification`.
     - [ ] CommunicationAgent: Replace hardcoded "Available Categories" list with dynamic enumeration from `UserContextAgent` categories.
-    - [ ] CommunicationAgent: Replace example queries that hardcode category names with data-driven templates or config-provided samples.
+    - [ ] CommunicationAgent: Replace example queries that hardcode category names with data-driven templates or config-provided samples (clarification path complete; other responses pending).
     - [ ] ClarificationAgent: Ensure examples and capability lists derive from manifest/config (no hardcoded business values).
     - [ ] DatabaseAgent: Confirm all field aliases live in config only; no code-level hardcoded business values.
     - [ ] DataAgent: Confirm category references are read from config; no code-level hardcoded business values.
   - [ ] Next Steps:
     - [ ] Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes.
     - [ ] Open follow-up TODOs per finding (one line each) and link in CHANGELOG when resolved.
-  - [ ] Follow-up (Copilot Chat UX): Update `CommunicationAgent` to leverage additional VS Code Copilot Chat features (structured TODO blocks, interactive messages, collapsible sections/details, and richer progress/status elements) in formatted responses.
+  - [ ] P2: Follow-up (Copilot Chat UX): Update `CommunicationAgent` to leverage additional VS Code Copilot Chat features (structured TODO blocks, interactive messages, collapsible sections/details, and richer progress/status elements) in formatted responses.
 
 <!-- END:CURRENT_ACTION_ITEMS -->
 <!-- BEGIN:NEXT_ACTION_ITEMS -->
@@ -199,5 +200,6 @@ Follow these guidelines to ensure effective task management:
 
 - [x] REPO-OPS: Harden tests with mocked I/O and unskip — see CHANGELOG entry "2025-11-12 22:05:00 ci: Repo-ops CI, mocked tests, and branch/task alignment"
 - [x] CI: Add optional repo-ops lint step — implemented via `.github/workflows/repo-ops-lint.yml`
+- [x] P1: CommunicationAgent clarification is config-driven — see CHANGELOG entry "2025-11-13 10:00:00 refactor: CommunicationAgent clarification via configuration; add types and templates"
 
 <!-- END:COMPLETED_ACTION_ITEMS -->
