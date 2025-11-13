@@ -6,7 +6,7 @@
 
 # Interface: EntityConnections
 
-Defined in: [src/types/userContext.types.ts:394](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L394)
+Defined in: [src/types/userContext.types.ts:394](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L394)
 
 Connections resolved for a specific record
 
@@ -16,7 +16,7 @@ Connections resolved for a specific record
 
 > **categoryId**: `string`
 
-Defined in: [src/types/userContext.types.ts:395](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L395)
+Defined in: [src/types/userContext.types.ts:395](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L395)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:395](https://github.com/ErikPlachta/
 
 > **connections**: `object`[]
 
-Defined in: [src/types/userContext.types.ts:397](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L397)
+Defined in: [src/types/userContext.types.ts:397](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L397)
 
 #### records
 
@@ -44,4 +44,4 @@ Defined in: [src/types/userContext.types.ts:397](https://github.com/ErikPlachta/
 
 > **recordId**: `string`
 
-Defined in: [src/types/userContext.types.ts:396](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L396)
+Defined in: [src/types/userContext.types.ts:396](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L396)

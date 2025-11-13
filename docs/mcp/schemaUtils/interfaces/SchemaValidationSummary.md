@@ -6,7 +6,7 @@
 
 # Interface: SchemaValidationSummary
 
-Defined in: [src/mcp/schemaUtils.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/schemaUtils.ts#L26)
+Defined in: [src/mcp/schemaUtils.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/schemaUtils.ts#L26)
 
 SchemaValidationSummary interface.
 
@@ -16,7 +16,7 @@ SchemaValidationSummary interface.
 
 > **duplicateSchemaNames**: `string`[]
 
-Defined in: [src/mcp/schemaUtils.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/schemaUtils.ts#L28)
+Defined in: [src/mcp/schemaUtils.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/schemaUtils.ts#L28)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/mcp/schemaUtils.ts:28](https://github.com/ErikPlachta/vscode-ex
 
 > **missingRelationships**: [`RelationshipIntegrityIssue`](RelationshipIntegrityIssue.md)[]
 
-Defined in: [src/mcp/schemaUtils.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/schemaUtils.ts#L27)
+Defined in: [src/mcp/schemaUtils.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/schemaUtils.ts#L27)

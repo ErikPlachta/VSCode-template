@@ -235,6 +235,7 @@ export const defaultConfig: RepoOpsConfig = {
     ],
   },
   changelog: {
+    timeZone: "America/New_York",
     entryTypes: [
       "feat",
       "fix",

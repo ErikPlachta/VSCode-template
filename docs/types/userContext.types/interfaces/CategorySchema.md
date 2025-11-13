@@ -6,7 +6,7 @@
 
 # Interface: CategorySchema
 
-Defined in: [src/types/userContext.types.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L257)
+Defined in: [src/types/userContext.types.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L257)
 
 JSON schema snippet stored alongside a category
 
@@ -16,7 +16,7 @@ JSON schema snippet stored alongside a category
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:259](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L259)
+Defined in: [src/types/userContext.types.ts:259](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L259)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:259](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:258](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L258)
+Defined in: [src/types/userContext.types.ts:258](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L258)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:258](https://github.com/ErikPlachta/
 
 > **schema**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/userContext.types.ts:260](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L260)
+Defined in: [src/types/userContext.types.ts:260](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L260)

@@ -8,7 +8,7 @@
 
 > **createStandardReport**(`summary`, `startDate`, `endDate`): `string`
 
-Defined in: [src/shared/analyticsDashboard.ts:341](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/analyticsDashboard.ts#L341)
+Defined in: [src/shared/analyticsDashboard.ts:341](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/analyticsDashboard.ts#L341)
 
 Create a standard markdown analytics report for a given date range.
 

@@ -36,20 +36,42 @@ This changelog records Logs only.
 
 ### [2025-11-12]
 
+#### 2025-11-12 22:05:00 ci: Repo-ops CI, mocked tests, and branch/task alignment
+
+**Problem/Context**: Enforce governance via CI, harden repo-ops tests without touching real files, and align CONTEXT-BRANCH with TODO-driven tasks and TSDoc-based docs.
+
+**Changes Made**:
+
+1. `.github/workflows/repo-ops-lint.yml`: Added workflow to run compile, `lint:repo-ops`, `repo:ops -- session lint`, and tests on PRs/pushes.
+2. `tests/repoOps.changelogWrite.test.ts`: Converted to mocked I/O using `jest.unstable_mockModule` to avoid real file mutations.
+3. `tests/repoOps.todoActions.test.ts`: Added mocked I/O tests for `moveTodo` and `completeTodo`; asserts deterministic plans/results.
+4. `bin/repo-ops/index.ts`: Replaced ad-hoc docs with top-level README-grade TSDoc; no docs/ artifacts created.
+5. `CONTEXT-BRANCH.md`: Marked migration as historical; updated milestones and task map to reflect TSDoc docs and mocked tests.
+6. `TODO.md`: Added P2 Next item to harden repo-ops tests (mocked I/O) and P3 CI task for repo-ops lint step.
+
+**Architecture Notes**: Docs are sourced from TSDoc within code; no manual files under `docs/`. Repo-ops tests mock `bin/repo-ops/fs` for deterministic behavior. CI enforces session lint and repo-ops lint to prevent governance drift.
+
+**Files Changed**: `.github/workflows/repo-ops-lint.yml`, `tests/repoOps.changelogWrite.test.ts`, `tests/repoOps.todoActions.test.ts`, `bin/repo-ops/index.ts`, `CONTEXT-BRANCH.md`, `TODO.md`
+
+**Testing**: Build: PASS; Tests: PASS (34 passed, 1 skipped, 271 total); Lint: PASS (repo-ops); Docs: PASS; Health: PASS; Coverage: unchanged; JSDoc: PASS
+
+**Impact**: CI gates ensure governance checks run on PRs; repo-ops tests are reliable and fast; branch context and tasks are aligned with the single-source-of-truth policy.
+
 #### 2025-11-12 21:30:09 feat: Repo-ops: implement changelog write and wire CLI
 
 **Problem/Context**: Adds writeEntry with backup+day-grouping and a 'changelog write' subcommand; dry-run-first behavior.
 
 **Changes Made**:
 
-1. <file path> (lines X-Y): <What changed and why>
-2. <file path> (lines A-B): <What changed and why>
+1. `bin/repo-ops/changelog.ts`: Implemented `writeEntry()` with backups and day-grouped insertion; added timezone-aware formatting helpers.
+2. `bin/repo-ops/index.ts`: Added `changelog write` subcommand and flag parsing (`--type`, `--summary`, `--context`, `--write`).
+3. `bin/repo-ops/repo-ops.config.ts`: Extended `changelog` settings with `timeZone: "America/New_York"`.
 
-**Architecture Notes**: <Patterns/decisions>
+**Architecture Notes**: Config-driven, dry-run-first with backups. Timestamps and day headers use configured IANA timezone (America/New_York) to avoid UTC drift.
 
-**Files Changed**: <List files with line counts>
+**Files Changed**: `bin/repo-ops/changelog.ts`, `bin/repo-ops/index.ts`, `bin/repo-ops/repo-ops.config.ts`
 
-**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
+**Testing**: Build: PASS; Tests: PASS (32 passed, 1 skipped, 268 total); Lint (repo-ops): PASS; Docs: PASS; Health: PASS; Coverage: unchanged; JSDoc: PASS (repo-ops scope)
 
 **Impact**: <What this enables/fixes>
 

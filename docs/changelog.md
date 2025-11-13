@@ -15,172 +15,302 @@ associations:
 
 ## Notes for Copilot
 
-- Purpose: This file records history only. Do not track tasks here.
-- Source of truth for tasks: `TODO.md` (Current/Next/Backlog/Completed).
-- Formatting, verification, and ordering are strictly enforced by governance.
+- Maintain this file as the single source of truth for application changes and history.
+- Do not put tasks here. Tasks live in `TODO.md` only. Use this file for logs, decisions, and verification of completed work.
 
-### Logs-Only Guidelines
+### Guidelines
 
-- Entry format: `YYYY-MM-DD HH:MM:SS type: Summary of changes`.
-  - Types: `feat | fix | chore | docs | refactor | test | perf | ci | build | style`.
-- Content blocks per entry:
-  - Problem/Context: What was wrong or needed.
-  - Changes Made: Numbered list with file paths and what changed/why.
-  - Architecture Notes: Patterns or decisions relevant to the change.
-  - Files Changed: Optional list with line counts if material.
-  - Testing (Verification): Build / Tests / Lint / Docs / Health / Coverage / JSDoc.
-  - Impact: What this enables or fixes.
-- Ordering: Newest-first within each day; optional daily summary heading allowed.
-- No Outstanding Tasks or mirrors: Never copy tasks into CHANGELOG; update `TODO.md` instead.
+This changelog records Logs only.
 
-### Decision Helper
-
-- Are you recording a change or decision? Add a log entry here.
-- Are you planning or tracking work? Edit `TODO.md` instead.
-- Are you capturing transient notes for the current session? Use `CONTEXT-SESSION.md`.
-
-### Common Mistakes to Avoid
-
-- Adding or mirroring TODO items in CHANGELOG (not allowed).
-- Missing file paths in “Changes Made” for non-trivial edits.
-- Skipping the Verification block for meaningful changes.
+1. Tasks: Track all outstanding work exclusively in `TODO.md` (sections: Current, Next, Backlog, Completed). Do not add tasks to this file.
+2. Logs: Capture change history with timestamped, semantic titles. Include what changed, where (file paths), and why.
+3. Verification: After meaningful batches, add a Verification block covering Build, Tests, Lint, Docs, Health, and Coverage where applicable.
+4. Cross-references: Link related TODO IDs in log entries when relevant; do not duplicate task content here.
+5. Working context: Before starting work, read `TODO.md`, `CONTEXT-SESSION.md` (current session focus), and the most recent Logs in this file.
+6. Migration note: Any historical Outstanding Tasks mirrors in this file are read-only artifacts and will be pruned; `TODO.md` is the single source of truth for tasks.
 
 <!-- END OF COPILOT CONTENT -->
-
-<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->
-
-## Outstanding Tasks
-
-All incomplete tasks. Organized by priority and managed by User and Copilot Chat.
-
-### Current Tasks
-
-#### Priority 0: Data-Driven Architecture Integrity (Critical)
-
-**Objective**: Complete workflow execution system and finalize architectural cleanup.
-
-- **ACTIVE: Workflow Execution System** (~95% complete, 30 min remaining)
-
-  - **Status**: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
-  - **Current Issue**: DatabaseAgent initialization error - data sources not loading properly
-  - **Next Steps**:
-    - ✅ Phase 1-4: COMPLETE (Agent isolation, response handling, testing, workflow coordination)
-    - 🔄 **Debug & Fix**: DatabaseAgent data source initialization (CURRENT PRIORITY)
-    - 🔄 Phase 5: Documentation (30 min) - Update migration guide with workflow patterns
-    - 🔄 Phase 6: Final Verification (15 min) - End-to-end testing, health check
-    - 🔄 Phase 7: Legacy Cleanup (15 min) - Remove relevant-data-manager references
-
-  **Test Status**: 264/265 tests passing (100% pass rate for active tests)
-
-  **Architecture Compliance**:
-
-  - ✅ Agent Isolation: Orchestrator is ONLY coordinator
-  - ✅ Data-Driven: No hardcoded business logic
-  - ✅ Single-Class: All agents follow 2-file pattern
-  - ✅ Type Centralization: Types in types/ folder
-  - ✅ Communication: CommunicationAgent handles ALL formatting
-
-#### Completed This Session (2025-11-12)
-
-- ✅ **Chat UX Improvements**: Clarification with contextual examples, collapsible workflow details
-- ✅ **copilot-instructions.md**: Streamlined 291→193 lines, added MCP tool guidance, added reload reminder
-- 🔄 **DatabaseAgent Fix**: Attempted data source initialization from UserContextAgent (needs debugging)
-
-#### Completed This Session (2025-11-11)
-
-- ✅ **Data-driven architecture cleanup**: All 7 agents now compliant (2-file, data-driven, importing-types)
-- ✅ **Workflow execution system**: Complete lifecycle with logging, performance tracking, diagnostics
-- ✅ **Extension integration**: Chat handler uses executeWorkflow(), displays actual data
-
-### Priority 1 - Things to Handle Next
-
-- AGENT: Updates
-  - feat: agent specific config need focus, signal, prompt starters, etc
-    - Review all agents to make sure they have the appropriate config options.
-      - Just like in the UserContext, agent configs should have base Signal, Focus, and PromptStarter definitions.
-      - User context values for these should also be passed in to relative agents on run time, to append the list with additional options.
-- BUILD: Update build Pipeline to include bundler
-  - https://code.visualstudio.com/api/working-with-extensions/bundling-extension
-  - Evaluate options for bundling the extension to reduce size and improve performance.
-    - Consider using tools like Webpack, Rollup, or esbuild.
-    - Update the build scripts in package.json to include the bundling step.
-    - Test the bundled extension to ensure it works correctly in VS Code.
-    - Update documentation to reflect the new build process.
-
-### Priority 2 - Things to Handle Soon
-
-- Review the code base and identify british-english words `artefacts`, that should be american-english `artifacts`. Also seeing other words like 'behaviour', 'optimise', 'utilise', 'customise', 'organisation' etc.
-- Evaluate the logic in `C:\repo\vscode-extension-mcp-server\src\tools`, and identify things that should exist in `C:\repo\vscode-extension-mcp-server\bin\utils\`, and update all imports, tests, documentation, etc. accordingly.
-- Rename `C:\repo\vscode-extension-mcp-server\src\tools` to `C:\repo\vscode-extension-mcp-server\src\utils`, and update all imports, tests, documentation, etc. accordingly.
-- Add a feature to the MCP Server for Error Event handling. Must be managed and fail gracefully.
-  - An Error Event management solution needs to be created
-  - All of the logic should run through it, so no matter what happens the extension doesn't break VS Code.
-  - It should be connected to logging, used by Orchestrator, have safe guards to self-disable after N failure attempts, notify vscode accordingly, disable in critical failure event, and then notify user to contact developer if still issues.
-  - Build with configuration in mind, so options can be modified by user accordingly later on.
-
-### Priority 3 - No Priority
-
-- REFACTOR: Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator).
-  - Move existing test files into a parallel directory structure under `tests/src/` to match `src/`.
-  - Update all import paths in test files to reflect new locations.
-  - Adjust Jest configuration if necessary to ensure all tests are discovered and run correctly.
-  - Verify full test suite passes after reorganization.
-- REFACTOR: Rebuild and add governance to bin content
-  - Convert all bin/utils tools into self-contained modules (doc, JSDoc, template, package config, import fixes).
-  - Move the build logic into `bin/utils`, and convert it to use the same type of design as other utilities (like `changelog`).
-  - Make sure package.json is updated accordingly
-  - feat: add force typing and JSDoc comments to `bin` content.
-  - feat: add full test coverage to `bin` content.
-- UTILITY: Changelog utility follow-ups (deferred; implemented core features are stable — this tracks hardening and docs for future work)
-  - Tests & Coverage
-    - Unit tests for `ensureCurrentTasksSection`, `insertCurrentTask`, `pruneCompletedOutstanding`, and spacing normalization (blank line after log heading; verification heading at H5).
-  - Integration test invoking CLI (`add-current`, `prune-completed`, `add-entry --details --verification`) and asserting `CHANGELOG.md` structure.
-  - Pruning UX
-    - Add `--prune-after` to `add-entry` to optionally prune completed Outstanding Tasks atomically after logging.
-    - Prefer explicit completion marker (✅) for pruning over semantic prefixes (feat:, fix:, etc.) to avoid accidental backlog removals; deprecate broad prefix pruning later.
-  - JSON export of Logs
-    - Extend `exportChangelogJSON` to parse Logs (day groupings, entries, details, verification) and include a `schemaVersion`.
-  - Daily summary helper
-    - `add-daily-summary --summary "..."` to add/update the optional day heading summary line idempotently.
-  - Auto verification block
-    - `--auto-verify` flag to run compile/test/lint/docs/health and append results plus coverage and JSDoc status.
-  - Current Tasks governance
-    - `sync-current` command to promote Priority 1 items into `### Current Tasks` or remove the section when empty; optionally limit to <= 5.
-  - Docs & instructions
-    - Update `.github/copilot-instructions.md` and README with new commands (`add-current`, `prune-completed`) and verification H5 guidance.
-  - Parser hardening
-    - Graceful handling of malformed markers/duplicate headings; newline normalization config (CRLF/LF preservation).
-  - Config flexibility
-    - Optional user override (e.g., `.changelogrc.json`) to customize headings/markers while preserving governance.
-  - Safety & DX
-    - `--dry-run` for all mutating commands to show a diff without writing; cache parsed AST for batch operations.
-- UTILITY: Does it make sense to update my build into extension logic to run through an obfuscation utility?
-  - I don't have anything to hide, but I am worried about security.
-- AGENT: I want to add an agent that can be used to learn about the user.
-  - Parse through logs and identify patterns.
-  - Uses metricsToTrack, define din mcp.config.json and then extracted by "C:\repo\VSCode-template\src\shared\analyticsIntegration.ts".
-  - Build reports on those patterns in an easy-to-digest format.
-  - Over time, should be able to categorize patterns to understand users.
-  - Should also look for specific types of patterns that I can use to improve the app.
-    - Identify patterns in user requests between what they asked and what they actually meant, to create user-specific keyword associations.
-    - Be able to understand and identify how to better provide solutions to the user.
-    - Users should be able to view these associations and manage them accordingly.
-      - In the extension settings, each feature within the app should have a section for managing settings.
-      - Within that section, there should be a list of "Custom Keywords", which are used to improve the user's experience by driving them towards solutions quicker.
-      - We should be able to use the new logging logic results to identify how many steps it took to get to a resolution, evaluate the original step, and extrapolate patterns.
-      - When patterns are defined, user should be notified and provided a link in the chat to modify the settings if they want to remove it.
-- EXTENSION: Add functionality within extension to work with TODOs and different functionalities within CoPilot Chat.
-  - Maybe this should be an agent?
-  - Want to take advantage of features that will help add clarity and keep Agent organized and focused while communicating to user with clarity.
-  - I'm hoping there is a way to send a response up, so orchestrator can just pass the text block vs something really complicated.
-    - If there is, probably this should be an agent.
-
-<!-- CHANGELOG:END:OUTSTANDING_TASKS -->
 <!-- CHANGELOG:BEGIN:LOGS -->
 
 ## Logs
 
 ### [2025-11-12]
+
+#### 2025-11-12 21:30:09 feat: Repo-ops: implement changelog write and wire CLI
+
+**Problem/Context**: Adds writeEntry with backup+day-grouping and a 'changelog write' subcommand; dry-run-first behavior.
+
+**Changes Made**:
+
+1. `bin/repo-ops/changelog.ts`: Implemented `writeEntry()` with backups and day-grouped insertion; added timezone-aware formatting helpers.
+2. `bin/repo-ops/index.ts`: Added `changelog write` subcommand and flag parsing (`--type`, `--summary`, `--context`, `--write`).
+3. `bin/repo-ops/repo-ops.config.ts`: Extended `changelog` settings with `timeZone: "America/New_York"`.
+
+**Architecture Notes**: Config-driven, dry-run-first with backups. Timestamps and day headers use configured IANA timezone (America/New_York) to avoid UTC drift.
+
+**Files Changed**: `bin/repo-ops/changelog.ts`, `bin/repo-ops/index.ts`, `bin/repo-ops/repo-ops.config.ts`
+
+**Testing**: Build: PASS; Tests: PASS (32 passed, 1 skipped, 268 total); Lint (repo-ops): PASS; Docs: PASS; Health: PASS; Coverage: unchanged; JSDoc: PASS (repo-ops scope)
+
+**Impact**: <What this enables/fixes>
+
+#### 2025-11-12 18:24:00 feat: Repo-ops – TODO add/complete/move, changelog scaffold+write, data-driven help
+
+**Problem/Context**: We need first-class, config-driven tooling to manage TODOs (add/complete/move) and to scaffold or write logs-only entries into CHANGELOG.md, while keeping governance intact. Help output should be data-driven to avoid drift.
+
+**Changes Made**:
+
+1. `bin/repo-ops/todo.ts` (new): Implemented `addTodo` plus helpers to insert into section markers; added building blocks for complete/move.
+2. `bin/repo-ops/index.ts`: Added `todo add`, `todo complete` (planned), `todo move` (planned) subcommands; added `changelog scaffold` and `changelog write` commands; printHelp refactor prepared to use config.
+3. `bin/repo-ops/changelog.ts` (new): Added `scaffoldEntry` generator; wiring for write operation added in CLI.
+4. `bin/repo-ops/repo-ops.config.ts`: Extended with `todoSections` (current/next/backlog/completed), help skeleton, and changelog types; improved JSDoc; kept all values data-driven.
+
+**Architecture Notes**: Repo-ops now reads section markers and help metadata from a single config. All mutations remain dry-run by default with backup-on-write behavior.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test` – unchanged)
+- Lint (repo-ops): PASS (`npm run lint:repo-ops`)
+- Docs/Health: Unchanged
+
+**Impact**: Enables safe automation for managing tasks and creating CHANGELOG entries under the logs-only governance, reducing manual friction and preventing divergence.
+
+#### 2025-11-12 17:58:00 docs: Align CHANGELOG governance, docs cleanup, and prebuild
+
+**Problem/Context**: Governance requires logs-only CHANGELOG entries and verification blocks. Some docs referenced legacy "Unreleased" guidance and contained a bare URL in `TODO.md`.
+
+**Changes Made**:
+
+1. `docs/changelog.md` (header): Rewrote Copilot notes to enforce logs-only usage (no tasks), entry format, required Verification block, and decision helper for where to record info.
+2. `src/docs/buildPipeline.ts`: Updated Verification guidance to attach results to each CHANGELOG log entry; removed reference to an "Unreleased" section.
+3. `docs/README.md` (Contributing): Replaced Unreleased-centric process with logs-only entry requirements and explicit Verification checklist.
+4. `TODO.md`: Fixed bare URL by converting to a proper markdown link under Next → BUILD.
+5. Ran `npm run prebuild` to regenerate package config, MCP config, and templates.
+
+**Architecture Notes**: Centralizes governance around a single logs-only CHANGELOG and keeps task management solely in `TODO.md`. Ensures build pipeline docs and contributing guide reflect the same contract.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test` → 32 passed, 1 skipped, 268 total)
+- Lint (code): FAIL – repo-ops scope has strict JSDoc/usage findings
+  - `bin/repo-ops/changelogExtract.ts`: unused import `path`
+  - `bin/repo-ops/index.ts`: missing JSDoc comment (function)
+  - `bin/repo-ops/repo-ops.config.ts`: missing `@returns` and function JSDoc
+  - Remainder are warnings in `src/` for missing JSDoc types (unchanged today)
+- Docs Lint: PASS (`npm run lint:docs`)
+- Health: PASS (`npm run health:report`)
+- Coverage: Unchanged (tests green; no runtime code added)
+- JSDoc: No new public APIs introduced
+
+**Impact**: Clarifies contributor workflow and prevents drift by aligning all docs to logs-only governance. Prebuild confirms templates and generated configs are up to date.
+
+#### 2025-11-12 17:22:00 chore: Repo-ops cleanup – delete remaining legacy modules
+
+**Problem/Context**: After removing the changelog→TODO mirror and actions flows, two legacy modules remained in `bin/repo-ops/` with no references.
+
+**Changes Made**:
+
+1. `bin/repo-ops/changelogExtract.ts` (deleted): Legacy helper for extracting Outstanding Tasks from CHANGELOG.
+2. `bin/repo-ops/todoActions.ts` (deleted): Legacy generator for actions from changelog content.
+
+**Verification**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test` → Test Suites: 1 skipped, 32 passed, 33 total)
+- Lint: PASS (no new issues in repo-ops scope)
+- Docs/Health: PASS (no generated config changes)
+
+**Impact**: Finalizes the cleanup so `TODO.md` remains the sole task source. No code paths reference mirror/actions logic anymore; tests remain green.
+
+#### 2025-11-12 16:48:00 chore: Repo-ops – remove deprecated TODO import/actions from CLI; TODO.md is source of truth
+
+**Context**: We standardized on `TODO.md` as the single source of truth for official tasks. The changelog→TODO mirror and generated-actions flows are no longer used.
+
+**Changes**:
+
+1. `bin/repo-ops/index.ts`: Removed `todo` subcommands (`sync-from-changelog`, `generate-actions`) and related help output; CLI now exposes only session commands.
+2. `bin/repo-ops/README.md`: Updated to reflect session-only commands and trimmed mirror/actions references.
+3. Legacy modules left in-tree temporarily (no references) for safe transition; follow-up can delete the files and tests.
+
+**Verification**:
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test – unchanged)
+- Lint: PASS for repo-ops scope
+- Docs/Health: PASS
+
+**Next**: Optionally delete `bin/repo-ops/{todoSync.ts,todoActions.ts,todoMirror.ts,changelogExtract.ts}` and tests `tests/repoOps.{changelogExtract,todoMirror}.test.ts` in a cleanup commit.
+
+#### 2025-11-12 16:30:00 refactor: Repo-ops: central config + config-driven wiring
+
+**Problem/Context**: Repo-ops modules referenced hardcoded markers and path resolution scattered across files, and `repo-ops.config.ts` was missing despite coverage/docs referencing a central config. Needed to ensure 100% config/data/type-driven behavior per governance.
+
+**Changes Made**:
+
+1. `bin/repo-ops/repo-ops.config.ts` (new): Added typed `RepoOpsConfig`; exported `defaultConfig` with markers, path resolver, backup dir name, and session template.
+2. `bin/repo-ops/markers.ts`: Re-exports `defaultConfig.markers` as `defaultMarkers` to avoid duplicated strings.
+3. `bin/repo-ops/changelogExtract.ts`: `resolveRepoPaths()` now delegates to `defaultConfig.resolveRepoPaths` (single source of truth).
+4. `bin/repo-ops/session.ts`: Uses `defaultConfig.resolveRepoPaths`, `defaultConfig.sessionTemplate()`, and `defaultConfig.backupDirName`.
+5. `bin/repo-ops/sessionLint.ts`: Uses `defaultConfig.resolveRepoPaths` (removed local resolver).
+
+**Architecture Notes**: Aligns repo-ops with configuration-driven design; no business strings are hardcoded in modules. Centralizes defaults for easy overrides and future extension.
+
+**Files Changed**: 5 files (+1 new)
+
+**Testing**:
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test – 34 passed, 1 skipped)
+- Lint: PASS for repo-ops scope
+- Docs: N/A
+- Health: PASS (no legacy JSON added)
+
+**Impact**: Restores central config, reduces drift, and prepares repo-ops for repository-specific customization via a single typed configuration.
+
+#### 2025-11-12 16:05:10 chore: Add CI gate for session lint and backlog TODO for test organization
+
+- Added CI workflow `.github/workflows/session-lint.yml` to run `npm run repo:ops -- session lint` on push/PR; fails build if issues are found.
+- Updated repo-ops CLI `session lint` to exit non-zero when issues exist (enables CI gating).
+- Added backlog TODO in `TODO.md` to review test organization (colocated vs centralized) with evaluation criteria and migration plan.
+
+##### Verification – CI gate & TODO
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS for changed TS; CHANGELOG historical markdown warnings unchanged
+- CI: Workflow syntax validated locally; will run on next push/PR
+- Health: PASS
+
+#### 2025-11-12 15:46:20 feat: Repo-ops: add session lint command
+
+- Added `bin/repo-ops/sessionLint.ts` with `validateSessionContent(md)` and `lintSession()`:
+  - Checks top heading is `# Session Context`
+  - Ensures a `Started:` ISO-like timestamp line exists
+  - Requires `## Related` section with `CHANGELOG.md`, `CONTEXT-BRANCH.md`, `TODO.md`
+  - Requires `## Notes` section
+- Wired `session lint` into `bin/repo-ops/index.ts` and printed human-friendly output.
+- Added tests: `tests/repoOps.sessionLint.test.ts` covering happy path and common failures.
+- Minor docs: repo-ops README usage examples for `session rotate` and `session lint`.
+
+##### Verification – Repo-ops session lint
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no new issues in bin/repo-ops)
+- Docs: N/A beyond small README update
+- Health: PASS (unchanged)
+
+#### 2025-11-12 15:24:30 docs: Clarify CONTEXT files roles; align TODO vs CHANGELOG guidance
+
+- `.github/copilot-instructions.md`:
+  - Added an explicit "Context files: roles and usage" section documenting when/how to use `CONTEXT-SESSION.md` and `CONTEXT-BRANCH.md`.
+  - Updated Key Files Reference to list `TODO.md` as source-of-truth for tasks and `CHANGELOG.md` as history with a read-only Outstanding Tasks mirror.
+  - Reconciled duplicate guidance to consistently read tasks from `TODO.md` (not CHANGELOG); noted the mirror is temporary.
+  - Fixed markdownlint issues (unique headings, fenced code language and spacing, list spacing).
+
+##### Verification – Docs roles/guidance update
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no new code lint issues)
+- Docs: PASS (markdownlint clean for updated sections)
+- Health: PASS (no config changes)
+
+#### 2025-11-12 15:02:10 chore: Migrate task tracking to TODO.md and update context
+
+- Ran repo-ops to populate TODO from CHANGELOG: `todo sync-from-changelog --write`, `todo generate-actions --write`.
+- Inserted a read-only migration banner at the top of CHANGELOG Outstanding Tasks pointing to `TODO.md` as the source of truth.
+- Updated CONTEXT-BRANCH.md (progress/task map) and CONTEXT-SESSION.md (current focus, governance updates).
+- Tweaked `.github/copilot-instructions.md` intro and session workflow to read TODO.md for tasks and CHANGELOG.md for history.
+
+##### Verification – Task migration & context updates
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Docs: Lint shows pre-existing markdown warnings; functional behavior unaffected
+- Health: PASS
+
+#### 2025-11-12 14:29:40 docs: Run markdown linter on CHANGELOG (no changes needed)
+
+- Executed repository docs linter against `CHANGELOG.md`; no actionable issues reported by project linter.
+- Skipped mass normalization to avoid churn; will revisit if repo health checks flag specific rules.
+
+##### Verification – Docs lint
+
+- Docs Lint: PASS (`npm run lint:docs`)
+- Build: PASS (unchanged)
+- Tests: PASS (unchanged)
+
+#### 2025-11-12 14:19:05 chore: Remove deprecated changelog:manage script
+
+- Removed the `changelog:manage` stub script from `package.json` to complete the changelog CLI retirement.
+
+##### Verification – Script removal
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no script-related lint)
+- Docs: Already updated to reflect CLI retirement
+- Health: PASS
+
+#### 2025-11-12 14:05:40 chore: Remove legacy bin/utils/changelog shims and clean npm scripts
+
+- Deleted legacy `bin/utils/changelog/` (cli.ts, index.ts, config.ts, manager.ts, parser.ts, types.ts, README.md).
+- Removed `changelog:add-entry`, `changelog:add-outstanding`, `changelog:add-current`, `changelog:prune` scripts from `package.json`.
+- Retained `changelog:manage` as a deprecation stub to fail fast with guidance.
+
+##### Verification – Legacy shim cleanup
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS (no new issues)
+- Docs: Not impacted
+- Health: PASS
+
+#### 2025-11-12 13:52:30 docs: Retire changelog CLI references in governance docs
+
+- Updated `.github/copilot-instructions.md` to remove `changelog:manage` usage and document manual editing + repo-ops alternatives.
+- Updated `TODO.md` Automation Aids to reflect retired CLI and current repo-ops commands.
+
+##### Verification – Docs update
+
+- Build: PASS (no code changes)
+- Tests: PASS (no changes)
+- Lint: N/A for docs (manual sweep only)
+- Health: PASS
+
+#### 2025-11-12 13:45:10 chore: Remove repo-ops changelog CLI and stub npm scripts
+
+- Deleted `bin/repo-ops/changelog/` (cli.ts, config.ts, index.ts, manager.ts, parser.ts, types.ts, README.md).
+- Updated `package.json` scripts:
+  - Replaced `changelog:manage` with a deprecation stub that exits with guidance.
+  - Removed obsolete `--ignore-pattern "bin/repo-ops/changelog/**"` from `lint:repo-ops`.
+
+##### Verification – Changelog CLI removal
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test)
+- Lint: PASS for repo-ops scope
+- Docs: Pending sweep to remove references to `changelog:manage`
+- Health: Not impacted
+
+#### 2025-11-12 13:20:25 feat: Repo-ops: session rotate command
+
+- Added 'session rotate' subcommand that archives CONTEXT-SESSION.md into \_ARCHIVE/session\_\_YYYYMMDD_HHMMSS.md and creates a fresh session file from a template. Dry-run by default; backups on write. Scoped lint (repo-ops) and tests pass.
+
+#### 2025-11-12 13:08:23 feat: Repo-ops: add TODO actions generator and unit tests
+
+- New subcommand: 'todo generate-actions' to parse CHANGELOG Outstanding Tasks into a generated checklist block in TODO.md (dry-run default, backups on write). Added unit tests for changelogExtract and todoMirror modules. Scoped lint to repo-ops passes; build and tests pass.
+
+#### 2025-11-12 12:37:42 chore: Remove legacy changelog CLI and scope lint to repo-ops
+
+- Updated package.json scripts to use bin/repo-ops/changelog; added lint:repo-ops; replaced legacy bin/utils/changelog entry points with hard-fail shims. Verified tests and repo-ops lint pass.
+
+#### 2025-11-12 12:10:10 chore: Normalize CHANGELOG fences and split repo-ops sync into feature modules
+
+- Fixed missing code fence languages and stray fences in CHANGELOG.md (Data Flow Verification, Implementation pattern, Example Help Output). Introduced bin/repo-ops/changelogExtract.ts and bin/repo-ops/todoMirror.ts; refactored todoSync.ts to use new modules. Verified build and tests pass.
 
 #### 2025-11-12 11:52:53 docs: Repo-ops: add full JSDoc to CLI/modules and enable lint for bin/repo-ops
 
@@ -1541,7 +1671,7 @@ Agents remain black boxes with NO imports from other agents.
 
 **Data Flow Verification:**
 
-```
+```text
 ✅ CORRECT: User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationAgent → User
 ❌ WRONG:   User → Orchestrator → Agent (AgentResponse) → User
 ```
@@ -2332,22 +2462,25 @@ guidance: {
 
 **Example Help Output:**
 
-```
+```md
 # Available Capabilities
 
 I can assist you with the following tasks. Each capability responds to specific signals in your queries.
 
 ## Orchestrator
+
 Master routing and coordination service...
 
 **Key signals**: metadata, records, insight
 
 **Example queries**:
+
 - "Show me metadata"
 - "Show me records"
 - "Show me insight"
 
 ## Database Query Agent
+
 Direct data access and filtering...
 ...
 ```

@@ -40,16 +40,14 @@ links:
     - - [ ] (P1) ID-123: Short title — owner:@me — deps:ID-098
     - Sections: Current, Next, Backlog, Completed
 - Tooling
-  - bin/repo-ops/ scaffolding:
-    - todo: add, complete, move, export-json, sync-from-changelog
-    - session: note, rotate --archive, lint
-    - changelog: re-export existing manager + add small helpers
-    - shared: markers, IO, backups, diff
-- Migration
-  - One-time command: “todo sync-from-changelog” with:
-    - backup + dry-run
-    - migration log entry in CHANGELOG
-    - read-only banner left in CHANGELOG Outstanding Tasks (to be pruned after N days)
+  - bin/repo-ops/ commands implemented now:
+    - todo: add, complete, move
+    - session: rotate --archive, lint
+    - changelog: scaffold, write
+    - shared: markers, IO, backups
+- Migration (historical)
+  - One-time migration executed; tasks moved from CHANGELOG to TODO with backup + dry-run
+  - Logged in CHANGELOG; legacy mirrors removed; no read-only banner retained; no sunset/prune needed
 - Quality gates
   - Build, Tests, Lint (including markdown lint), Docs, Health → PASS
   - Unit tests for todo/session parsers and migration
@@ -82,7 +80,11 @@ links:
 3. Migration command (dry-run first; create backups) – DONE (executed with --write)
 4. Governance updates (.github/copilot-instructions.md + docs alignment) – DONE
 5. Validation (quality gates pass) – DONE (compile/tests/docs lint/health pass; code lint has existing repo-ops JSDoc items to address separately)
-6. Sunset and prune read-only mirror in CHANGELOG after N days – PENDING
+6. Changelog write command with EST timestamps – DONE
+7. TODO actions (complete/move) – DONE
+8. Unit tests for changelog write and TODO actions (mocked I/O) – IN PROGRESS
+9. Repo-ops docs source via TSDoc in CLI (no manual docs/) – DONE
+10. Optional CI: add repo-ops lint step – DONE (GitHub Actions workflow added: .github/workflows/repo-ops-lint.yml)
 
 ## Success criteria
 
@@ -104,7 +106,11 @@ links:
 - [x] (P1) ID-OPS-003: Update copilot-instructions (tasks → TODO, session TTL) – complete; docs and templates aligned
 - [x] (P2) ID-OPS-004: Add session rotate --archive + lint – rotate + lint DONE
 - [x] (P2) ID-OPS-005: Unit tests for parsers and migration – initial tests DONE; add more coverage later
-- [ ] (P3) ID-OPS-006: Optional repo-ops lint in CI
+- [x] (P3) ID-OPS-006: Optional repo-ops lint in CI – implemented via .github/workflows/repo-ops-lint.yml
+- [x] (P2) ID-OPS-007: Implement changelog write command (logs-only, grouped by day)
+- [x] (P2) ID-OPS-008: Implement TODO actions (complete, move) with dry-run + backups
+- [ ] (P2) ID-OPS-009: Add unit tests for changelog write and TODO actions (mocked I/O; deterministic)
+- [x] (P2) ID-OPS-010: Repo-ops usage documented via TSDoc at bin/repo-ops/index.ts
 
 ## Logging guidance
 

@@ -8,7 +8,7 @@
 
 > **augmentTypedoc**(): `Promise`\<`void`\>
 
-Defined in: [src/tools/augmentTypedoc.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/augmentTypedoc.ts#L117)
+Defined in: [src/tools/augmentTypedoc.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/augmentTypedoc.ts#L117)
 
 Entrypoint to augment all markdown files under docs/.
 

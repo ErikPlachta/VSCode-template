@@ -6,7 +6,7 @@
 
 # Interface: IndividualAgentConfig
 
-Defined in: [src/types/agentConfig.ts:609](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L609)
+Defined in: [src/types/agentConfig.ts:609](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L609)
 
 Complete individual agent configuration (legacy - for JSON compatibility)
 
@@ -16,7 +16,7 @@ Complete individual agent configuration (legacy - for JSON compatibility)
 
 > **agent**: [`AgentIdentity`](AgentIdentity.md)
 
-Defined in: [src/types/agentConfig.ts:610](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L610)
+Defined in: [src/types/agentConfig.ts:610](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L610)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:610](https://github.com/ErikPlachta/vscode
 
 > `optional` **applicationFacing**: [`ApplicationFacingConfig`](ApplicationFacingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:614](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L614)
+Defined in: [src/types/agentConfig.ts:614](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L614)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:614](https://github.com/ErikPlachta/vscode
 
 > **execution**: [`ExecutionConfig`](ExecutionConfig.md)
 
-Defined in: [src/types/agentConfig.ts:612](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L612)
+Defined in: [src/types/agentConfig.ts:612](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L612)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:612](https://github.com/ErikPlachta/vscode
 
 > `optional` **orchestration**: [`OrchestrationConfig`](OrchestrationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:611](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L611)
+Defined in: [src/types/agentConfig.ts:611](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L611)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/agentConfig.ts:611](https://github.com/ErikPlachta/vscode
 
 > `optional` **userFacing**: [`UserFacingConfig`](UserFacingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:613](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L613)
+Defined in: [src/types/agentConfig.ts:613](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L613)

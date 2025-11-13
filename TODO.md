@@ -107,12 +107,17 @@ Follow these guidelines to ensure effective task management:
       - Just like in the UserContext, agent configs should have base Signal, Focus, and PromptStarter definitions.
       - User context values for these should also be passed in to relative agents on run time, to append the list with additional options.
 - P2: BUILD: Update build Pipeline to include bundler
+
   - Reference: [Bundling extensions](https://code.visualstudio.com/api/working-with-extensions/bundling-extension)
   - Evaluate options for bundling the extension to reduce size and improve performance.
     - Consider using tools like Webpack, Rollup, or esbuild.
     - Update the build scripts in package.json to include the bundling step.
     - Test the bundled extension to ensure it works correctly in VS Code.
     - Update documentation to reflect the new build process.
+
+- P2: REPO-OPS: Harden tests with mocked I/O and unskip
+  - Add deterministic unit tests for changelog write and TODO actions using mocked fs
+  - Ensure no real file mutations; restore tests from skipped state
 
 <!-- END:NEXT_ACTION_ITEMS -->
 <!-- BEGIN:BACKLOG_ACTION_ITEMS -->
@@ -178,10 +183,14 @@ Follow these guidelines to ensure effective task management:
       - We should be able to use the new logging logic results to identify how many steps it took to get to a resolution, evaluate the original step, and extrapolate patterns.
       - When patterns are defined, user should be notified and provided a link in the chat to modify the settings if they want to remove it.
 - P3: EXTENSION: Add functionality within extension to work with TODOs and different functionalities within CoPilot Chat.
+
   - Maybe this should be an agent?
   - Want to take advantage of features that will help add clarity and keep Agent organized and focused while communicating to user with clarity.
   - I'm hoping there is a way to send a response up, so orchestrator can just pass the text block vs something really complicated.
     - If there is, probably this should be an agent.
+
+- P3: CI: Add optional repo-ops lint step
+  - Add a CI job to run `npm run repo:ops -- session lint` (and future repo-ops checks) to gate PRs
 
 <!-- END:BACKLOG_ACTION_ITEMS -->
 <!-- END:GENERATED_ACTION_ITEMS -->

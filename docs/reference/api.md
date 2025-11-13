@@ -72,6 +72,6 @@
 - [types/interfaces](types/interfaces/README.md)
 - [types/userContext.types](types/userContext.types/README.md)
 - [types/vscode-chat](types/vscode-chat/README.md)
-- [types/workflow](types/workflow/README.md)
+- [types/workflow.types](types/workflow.types/README.md)
 - [userContext/people/category](userContext/people/category/README.md)
 - [userContext/people/records](userContext/people/records/README.md)

@@ -8,6 +8,6 @@
 
 > **CategoryId** = `string`
 
-Defined in: [src/types/userContext.types.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L12)
+Defined in: [src/types/userContext.types.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L12)
 
 Unique identifier for a category

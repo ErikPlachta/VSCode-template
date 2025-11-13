@@ -6,7 +6,7 @@
 
 # Interface: ReportOptions
 
-Defined in: [src/shared/analyticsDashboard.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/analyticsDashboard.ts#L21)
+Defined in: [src/shared/analyticsDashboard.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/analyticsDashboard.ts#L21)
 
 Report generation options.
 
@@ -16,7 +16,7 @@ Report generation options.
 
 > **format**: `"markdown"` \| `"json"` \| `"csv"`
 
-Defined in: [src/shared/analyticsDashboard.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/analyticsDashboard.ts#L27)
+Defined in: [src/shared/analyticsDashboard.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/analyticsDashboard.ts#L27)
 
 Format for the report output.
 
@@ -26,7 +26,7 @@ Format for the report output.
 
 > **includeDetails**: `boolean`
 
-Defined in: [src/shared/analyticsDashboard.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/analyticsDashboard.ts#L25)
+Defined in: [src/shared/analyticsDashboard.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/analyticsDashboard.ts#L25)
 
 Include detailed statistics.
 
@@ -36,7 +36,7 @@ Include detailed statistics.
 
 > **period**: `object`
 
-Defined in: [src/shared/analyticsDashboard.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/analyticsDashboard.ts#L29)
+Defined in: [src/shared/analyticsDashboard.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/analyticsDashboard.ts#L29)
 
 Time period for the report.
 
@@ -54,6 +54,6 @@ Time period for the report.
 
 > **sections**: [`ReportSection`](../enumerations/ReportSection.md)[]
 
-Defined in: [src/shared/analyticsDashboard.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/analyticsDashboard.ts#L23)
+Defined in: [src/shared/analyticsDashboard.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/analyticsDashboard.ts#L23)
 
 Sections to include in the report.

@@ -198,7 +198,7 @@ export async function writeEntry(
   }
   const plan: ApplyPlan = {
     filePath: repo.changelog,
-    description: "Insert logs-only changelog entry (newest-first)",
+    description: "Insert logs-only changelog entry",
     beforeSnippet: content.slice(0, 400),
     afterSnippet: next.slice(0, 400),
     wouldWriteBytes: Buffer.byteLength(next, "utf8"),

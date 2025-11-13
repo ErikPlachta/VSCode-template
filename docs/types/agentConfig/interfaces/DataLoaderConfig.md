@@ -6,7 +6,7 @@
 
 # Interface: DataLoaderConfig
 
-Defined in: [src/types/agentConfig.ts:404](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L404)
+Defined in: [src/types/agentConfig.ts:404](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L404)
 
 DataLoader agent-specific configuration for file I/O and data validation
 
@@ -16,7 +16,7 @@ DataLoader agent-specific configuration for file I/O and data validation
 
 > **discovery**: `object`
 
-Defined in: [src/types/agentConfig.ts:448](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L448)
+Defined in: [src/types/agentConfig.ts:448](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L448)
 
 #### continueOnError
 
@@ -56,7 +56,7 @@ Defined in: [src/types/agentConfig.ts:448](https://github.com/ErikPlachta/vscode
 
 > **errorHandling**: `object`
 
-Defined in: [src/types/agentConfig.ts:432](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L432)
+Defined in: [src/types/agentConfig.ts:432](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L432)
 
 #### includeStackTrace
 
@@ -88,7 +88,7 @@ Defined in: [src/types/agentConfig.ts:432](https://github.com/ErikPlachta/vscode
 
 > **fileOperations**: `object`
 
-Defined in: [src/types/agentConfig.ts:413](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L413)
+Defined in: [src/types/agentConfig.ts:413](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L413)
 
 #### allowSyncOperations
 
@@ -132,7 +132,7 @@ Defined in: [src/types/agentConfig.ts:413](https://github.com/ErikPlachta/vscode
 
 > **pathResolution**: `object`
 
-Defined in: [src/types/agentConfig.ts:424](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L424)
+Defined in: [src/types/agentConfig.ts:424](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L424)
 
 #### allowAbsolutePaths
 
@@ -164,7 +164,7 @@ Defined in: [src/types/agentConfig.ts:424](https://github.com/ErikPlachta/vscode
 
 > **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:440](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L440)
+Defined in: [src/types/agentConfig.ts:440](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L440)
 
 #### enableMemoryOptimization
 
@@ -196,7 +196,7 @@ Defined in: [src/types/agentConfig.ts:440](https://github.com/ErikPlachta/vscode
 
 > **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:405](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/agentConfig.ts#L405)
+Defined in: [src/types/agentConfig.ts:405](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L405)
 
 #### allowPartialRecords
 

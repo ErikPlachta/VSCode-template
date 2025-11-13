@@ -6,7 +6,7 @@
 
 # Interface: EffectiveExecutionProfile
 
-Defined in: [src/shared/agentConfigResolver.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/agentConfigResolver.ts#L83)
+Defined in: [src/shared/agentConfigResolver.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/agentConfigResolver.ts#L83)
 
 EffectiveExecutionProfile interface.
 
@@ -16,7 +16,7 @@ EffectiveExecutionProfile interface.
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/shared/agentConfigResolver.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/agentConfigResolver.ts#L86)
+Defined in: [src/shared/agentConfigResolver.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/agentConfigResolver.ts#L86)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/shared/agentConfigResolver.ts:86](https://github.com/ErikPlacht
 
 > **priority**: [`Priority`](../type-aliases/Priority.md)
 
-Defined in: [src/shared/agentConfigResolver.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/agentConfigResolver.ts#L84)
+Defined in: [src/shared/agentConfigResolver.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/agentConfigResolver.ts#L84)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/shared/agentConfigResolver.ts:84](https://github.com/ErikPlacht
 
 > **timeout**: `number`
 
-Defined in: [src/shared/agentConfigResolver.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/agentConfigResolver.ts#L85)
+Defined in: [src/shared/agentConfigResolver.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/agentConfigResolver.ts#L85)

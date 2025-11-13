@@ -6,7 +6,7 @@
 
 # Class: WorkflowLogger
 
-Defined in: [src/shared/workflowLogger.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L31)
+Defined in: [src/shared/workflowLogger.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L31)
 
 Workflow logger for structured logging
 
@@ -36,7 +36,7 @@ logger.logWorkflowComplete(workflowId, result);
 
 > **logActionComplete**(`workflowId`, `action`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L84)
+Defined in: [src/shared/workflowLogger.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L84)
 
 Log action completion
 
@@ -50,7 +50,7 @@ Unique workflow identifier
 
 ##### action
 
-[`WorkflowAction`](../../../types/workflow/interfaces/WorkflowAction.md)
+[`WorkflowAction`](../../../types/workflow.types/interfaces/WorkflowAction.md)
 
 Completed action
 
@@ -64,7 +64,7 @@ Completed action
 
 > **logActionFailed**(`workflowId`, `action`, `error`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L98)
+Defined in: [src/shared/workflowLogger.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L98)
 
 Log action failure
 
@@ -78,7 +78,7 @@ Unique workflow identifier
 
 ##### action
 
-[`WorkflowAction`](../../../types/workflow/interfaces/WorkflowAction.md)
+[`WorkflowAction`](../../../types/workflow.types/interfaces/WorkflowAction.md)
 
 Failed action
 
@@ -98,7 +98,7 @@ Error that caused failure
 
 > **logActionPlanned**(`workflowId`, `action`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L58)
+Defined in: [src/shared/workflowLogger.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L58)
 
 Log action planning
 
@@ -112,7 +112,7 @@ Unique workflow identifier
 
 ##### action
 
-[`WorkflowAction`](../../../types/workflow/interfaces/WorkflowAction.md)
+[`WorkflowAction`](../../../types/workflow.types/interfaces/WorkflowAction.md)
 
 Planned workflow action
 
@@ -126,7 +126,7 @@ Planned workflow action
 
 > **logActionStart**(`workflowId`, `action`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L71)
+Defined in: [src/shared/workflowLogger.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L71)
 
 Log action start
 
@@ -140,7 +140,7 @@ Unique workflow identifier
 
 ##### action
 
-[`WorkflowAction`](../../../types/workflow/interfaces/WorkflowAction.md)
+[`WorkflowAction`](../../../types/workflow.types/interfaces/WorkflowAction.md)
 
 Action being started
 
@@ -154,7 +154,7 @@ Action being started
 
 > **logClassification**(`workflowId`, `classification`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L48)
+Defined in: [src/shared/workflowLogger.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L48)
 
 Log classification result
 
@@ -182,7 +182,7 @@ Intent classification result
 
 > **logInfo**(`workflowId`, `message`, `data?`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L155)
+Defined in: [src/shared/workflowLogger.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L155)
 
 Log general information
 
@@ -216,7 +216,7 @@ Optional additional data
 
 > **logStateTransition**(`workflowId`, `fromState`, `toState`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L117)
+Defined in: [src/shared/workflowLogger.ts:117](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L117)
 
 Log state transition
 
@@ -230,13 +230,13 @@ Unique workflow identifier
 
 ##### fromState
 
-[`WorkflowState`](../../../types/workflow/type-aliases/WorkflowState.md)
+[`WorkflowState`](../../../types/workflow.types/type-aliases/WorkflowState.md)
 
 Previous state
 
 ##### toState
 
-[`WorkflowState`](../../../types/workflow/type-aliases/WorkflowState.md)
+[`WorkflowState`](../../../types/workflow.types/type-aliases/WorkflowState.md)
 
 New state
 
@@ -250,7 +250,7 @@ New state
 
 > **logWorkflowComplete**(`workflowId`, `result`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L134)
+Defined in: [src/shared/workflowLogger.ts:134](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L134)
 
 Log workflow completion
 
@@ -278,7 +278,7 @@ Final workflow result
 
 > **logWorkflowFailed**(`workflowId`, `error`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L144)
+Defined in: [src/shared/workflowLogger.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L144)
 
 Log workflow failure
 
@@ -306,7 +306,7 @@ Error that caused failure
 
 > **logWorkflowStart**(`workflowId`, `input`): `void`
 
-Defined in: [src/shared/workflowLogger.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/workflowLogger.ts#L38)
+Defined in: [src/shared/workflowLogger.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/workflowLogger.ts#L38)
 
 Log workflow start
 

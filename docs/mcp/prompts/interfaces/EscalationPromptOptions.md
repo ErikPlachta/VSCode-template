@@ -6,7 +6,7 @@
 
 # Interface: EscalationPromptOptions
 
-Defined in: [src/mcp/prompts/index.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/prompts/index.ts#L13)
+Defined in: [src/mcp/prompts/index.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/prompts/index.ts#L13)
 
 EscalationPromptOptions interface.
 
@@ -16,7 +16,7 @@ EscalationPromptOptions interface.
 
 > `optional` **additionalGuidance**: `string`
 
-Defined in: [src/mcp/prompts/index.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/prompts/index.ts#L17)
+Defined in: [src/mcp/prompts/index.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/prompts/index.ts#L17)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/prompts/index.ts:17](https://github.com/ErikPlachta/vscode-
 
 > `optional` **manifest**: [`AgentCapabilityMetadata`](../../config/agentManifest/interfaces/AgentCapabilityMetadata.md) \| `null`
 
-Defined in: [src/mcp/prompts/index.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/prompts/index.ts#L16)
+Defined in: [src/mcp/prompts/index.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/prompts/index.ts#L16)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/mcp/prompts/index.ts:16](https://github.com/ErikPlachta/vscode-
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/mcp/prompts/index.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/prompts/index.ts#L15)
+Defined in: [src/mcp/prompts/index.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/prompts/index.ts#L15)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/mcp/prompts/index.ts:15](https://github.com/ErikPlachta/vscode-
 
 > `optional` **topic**: `string`
 
-Defined in: [src/mcp/prompts/index.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/mcp/prompts/index.ts#L14)
+Defined in: [src/mcp/prompts/index.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/prompts/index.ts#L14)

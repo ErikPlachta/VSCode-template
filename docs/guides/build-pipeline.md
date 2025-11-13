@@ -32,4 +32,4 @@ Passing --strict-lint or --strict-health enforces zero-tolerance and aborts on f
 - docs/ generated markdown
 
 ## Verification Checklist
-Record PASS/FAIL for compile, tests, lint, health, docs in CHANGELOG.md under Unreleased for every non-trivial change.
+For every non-trivial change, add a Verification block to the corresponding CHANGELOG log entry recording PASS/FAIL for: Build, Tests, Lint, Docs, Health, Coverage, and JSDoc. Do not use an Unreleased section.

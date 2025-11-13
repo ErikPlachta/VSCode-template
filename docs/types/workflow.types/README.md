@@ -2,13 +2,11 @@
 
 ***
 
-[UserContext-mcp-extension](../../modules.md) / types/workflow
+[UserContext-mcp-extension](../../modules.md) / types/workflow.types
 
-# types/workflow
+# types/workflow.types
 
-## Fileoverview
-
-Workflow coordination types for Orchestrator
+Workflow coordination types for Orchestrator.
 
 Defines types for workflow state management, action execution,
 diagnostics, and performance monitoring.

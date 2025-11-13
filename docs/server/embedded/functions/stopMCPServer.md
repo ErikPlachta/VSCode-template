@@ -8,7 +8,7 @@
 
 > **stopMCPServer**(): `Promise`\<`void`\>
 
-Defined in: [src/server/embedded.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/server/embedded.ts#L137)
+Defined in: [src/server/embedded.ts:137](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/server/embedded.ts#L137)
 
 Stop the embedded MCP server if it is running.
 

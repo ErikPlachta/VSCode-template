@@ -1,8 +1,47 @@
 #!/usr/bin/env node
 /**
  * @packageDocumentation
- * Repo Ops CLI entrypoint. Provides governance automation for TODO/Session/
- * Changelog with a dry-run-first philosophy and backups on mutating actions.
+ * Repo-Ops CLI – Safe, config-driven utilities for session context, TODOs, and changelog management.
+ *
+ * Overview
+ * - Purpose: governance automation for `CONTEXT-SESSION.md`, `TODO.md`, and `CHANGELOG.md`.
+ * - Philosophy: dry-run first; on `--write`, create a timestamped backup before mutating files.
+ * - Source of truth: tasks live only in `TODO.md`; `CHANGELOG.md` is logs-only history.
+ *
+ * Commands
+ * - Session
+ *   - `session rotate [--write]` – Archive current session, scaffold a fresh session file from template.
+ *   - `session lint` – Validate required headings/markers and ISO 8601 Started line.
+ * - TODOs
+ *   - `todo add --title "..." [--priority P1|P2|P3] [--parent "..."] [--details "..."] [--child "..."] [--owner \@me] [--deps id1,id2] [--status "⏳"] [--write]`
+ *   - `todo complete --match "substring" [--write]` – Move first matching bullet to Completed with a ✅ prefix.
+ *   - `todo move --match "substring" --to P1|P2|P3 [--write]` – Relocate a matching bullet between sections.
+ * - Changelog
+ *   - `changelog scaffold --type feat|fix|docs|refactor|test|perf|ci|build|style|chore --summary "..." [--context "..."]`
+ *   - `changelog write --type <type> --summary "..." [--context "..."] [--write]` – Insert entry under `## Logs`, grouped by day `### [YYYY-MM-DD]`, newest-first.
+ *
+ * Safety
+ * - Dry-run by default: prints a plan showing file path, description, and byte size.
+ * - Backups: on `--write`, creates a backup in the configured backup directory before writing.
+ * - Deterministic parsing: uses configured markers for sections; avoids hardcoded business values.
+ *
+ * Configuration
+ * - See `bin/repo-ops/repo-ops.config.ts` for:
+ *   - `todoSections` markers (Current/Next/Backlog/Completed) and repo paths
+ *   - `changelog.entryTypes` and `changelog.timeZone` (default: `America/New_York`)
+ *   - `backupDirName` and repo path resolution
+ *
+ * Examples
+ * ```bash
+ * # Complete a TODO without writing
+ * npm run repo:ops -- todo complete --match "BUILD: Update build Pipeline"
+ *
+ * # Add a logs-only changelog entry (dry-run)
+ * npm run repo:ops -- changelog write --type chore --summary "Bump docs and tests"
+ *
+ * # Apply the changelog entry and create a backup
+ * npm run repo:ops -- changelog write --type chore --summary "Bump docs and tests" --write
+ * ```
  */
 
 import { defaultConfig } from "./repo-ops.config";
