@@ -69,7 +69,7 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
-- Data-Driven Architecture Integrity (Critical)
+- P1: Data-Driven Architecture Integrity (Critical)
   - **Objective**: Complete workflow execution system and finalize architectural cleanup.
   - **ACTIVE: Workflow Execution System** (~95% complete, 30 min remaining)
   - **Status**: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
@@ -102,12 +102,12 @@ Follow these guidelines to ensure effective task management:
 
 ### Next Action Items
 
-- AGENT: Updates
+- P2: AGENT: Updates
   - feat: agent specific config need focus, signal, prompt starters, etc
     - Review all agents to make sure they have the appropriate config options.
       - Just like in the UserContext, agent configs should have base Signal, Focus, and PromptStarter definitions.
       - User context values for these should also be passed in to relative agents on run time, to append the list with additional options.
-- BUILD: Update build Pipeline to include bundler
+- P2: BUILD: Update build Pipeline to include bundler
   - https://code.visualstudio.com/api/working-with-extensions/bundling-extension
   - Evaluate options for bundling the extension to reduce size and improve performance.
     - Consider using tools like Webpack, Rollup, or esbuild.
@@ -120,27 +120,27 @@ Follow these guidelines to ensure effective task management:
 
 ### Backlog Action Items
 
-- Review the code base and identify british-english words `artefacts`, that should be american-english `artifacts`. Also seeing other words like 'behaviour', 'optimise', 'utilise', 'customise', 'organisation' etc.
-- Evaluate the logic in `C:\repo\vscode-extension-mcp-server\src\tools`, and identify things that should exist in `C:\repo\vscode-extension-mcp-server\bin\utils\`, and update all imports, tests, documentation, etc. accordingly.
+- P3: Review the code base and identify british-english words `artefacts`, that should be american-english `artifacts`. Also seeing other words like 'behaviour', 'optimise', 'utilise', 'customise', 'organisation' etc.
+- P3: Evaluate the logic in `C:\repo\vscode-extension-mcp-server\src\tools`, and identify things that should exist in `C:\repo\vscode-extension-mcp-server\bin\utils\`, and update all imports, tests, documentation, etc. accordingly.
   - Specific follow-up: Move `src/tools/repositoryHealth.ts` into a `bin/utils` library and consolidate shared helpers with `bin/utils/validateMarkdown.ts` and `bin/utils/validateJson.ts`.
-- Rename `C:\repo\vscode-extension-mcp-server\src\tools` to `C:\repo\vscode-extension-mcp-server\src\utils`, and update all imports, tests, documentation, etc. accordingly.
-- Add a feature to the MCP Server for Error Event handling. Must be managed and fail gracefully.
+- P3: Rename `C:\repo\vscode-extension-mcp-server\src\tools` to `C:\repo\vscode-extension-mcp-server\src\utils`, and update all imports, tests, documentation, etc. accordingly.
+- P3: Add a feature to the MCP Server for Error Event handling. Must be managed and fail gracefully.
   - An Error Event management solution needs to be created
   - All of the logic should run through it, so no matter what happens the extension doesn't break VS Code.
   - It should be connected to logging, used by Orchestrator, have safe guards to self-disable after N failure attempts, notify vscode accordingly, disable in critical failure event, and then notify user to contact developer if still issues.
   - Build with configuration in mind, so options can be modified by user accordingly later on.
-- REFACTOR: Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator).
+- P3: REFACTOR: Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator).
   - Move existing test files into a parallel directory structure under `tests/src/` to match `src/`.
   - Update all import paths in test files to reflect new locations.
   - Adjust Jest configuration if necessary to ensure all tests are discovered and run correctly.
   - Verify full test suite passes after reorganization.
-- REFACTOR: Rebuild and add governance to bin content
+- P3: REFACTOR: Rebuild and add governance to bin content
   - Convert all bin/utils tools into self-contained modules (doc, JSDoc, template, package config, import fixes).
   - Move the build logic into `bin/utils`, and convert it to use the same type of design as other utilities (like `changelog`).
   - Make sure package.json is updated accordingly
   - feat: add force typing and JSDoc comments to `bin` content.
   - feat: add full test coverage to `bin` content.
-- UTILITY: Changelog utility follow-ups (deferred; implemented core features are stable — this tracks hardening and docs for future work)
+- P3: UTILITY: Changelog utility follow-ups (deferred; implemented core features are stable — this tracks hardening and docs for future work)
   - Tests & Coverage
     - Unit tests for `ensureCurrentTasksSection`, `insertCurrentTask`, `pruneCompletedOutstanding`, and spacing normalization (blank line after log heading; verification heading at H5).
   - Integration test invoking CLI (`add-current`, `prune-completed`, `add-entry --details --verification`) and asserting `CHANGELOG.md` structure.
@@ -163,9 +163,9 @@ Follow these guidelines to ensure effective task management:
     - Optional user override (e.g., `.changelogrc.json`) to customize headings/markers while preserving governance.
   - Safety & DX
     - `--dry-run` for all mutating commands to show a diff without writing; cache parsed AST for batch operations.
-- UTILITY: Does it make sense to update my build into extension logic to run through an obfuscation utility?
+- P3: UTILITY: Does it make sense to update my build into extension logic to run through an obfuscation utility?
   - I don't have anything to hide, but I am worried about security.
-- AGENT: I want to add an agent that can be used to learn about the user.
+- P3: AGENT: I want to add an agent that can be used to learn about the user.
   - Parse through logs and identify patterns.
   - Uses metricsToTrack, define din mcp.config.json and then extracted by "C:\repo\VSCode-template\src\shared\analyticsIntegration.ts".
   - Build reports on those patterns in an easy-to-digest format.
@@ -178,7 +178,7 @@ Follow these guidelines to ensure effective task management:
       - Within that section, there should be a list of "Custom Keywords", which are used to improve the user's experience by driving them towards solutions quicker.
       - We should be able to use the new logging logic results to identify how many steps it took to get to a resolution, evaluate the original step, and extrapolate patterns.
       - When patterns are defined, user should be notified and provided a link in the chat to modify the settings if they want to remove it.
-- EXTENSION: Add functionality within extension to work with TODOs and different functionalities within CoPilot Chat.
+- P3: EXTENSION: Add functionality within extension to work with TODOs and different functionalities within CoPilot Chat.
   - Maybe this should be an agent?
   - Want to take advantage of features that will help add clarity and keep Agent organized and focused while communicating to user with clarity.
   - I'm hoping there is a way to send a response up, so orchestrator can just pass the text block vs something really complicated.
@@ -186,47 +186,9 @@ Follow these guidelines to ensure effective task management:
 
 <!-- END:BACKLOG_ACTION_ITEMS -->
 <!-- END:GENERATED_ACTION_ITEMS -->
-
-<!-- TODO:END:IMPORTED_FROM_CHANGELOG -->
-
-> This section contains all active TODOs, managed by the User and CoPilot Chat collaboratively. Should only contain a single parent level item.
-
-### Current TODOs
-
-> This section contains the active TODOs being worked on.
-
-<!-- BEGIN:CURRENT_TODOS_PROCESSING -->
-
-<!-- END:CURRENT_TODOS_PROCESSING -->
-
-### Next TODOs
-
-> This section contains the next TODOs to be worked on.
-
-<!-- BEGIN:NEXT_TODOS_TO_PROCESS -->
-
-<!-- END:NEXT_TODOS_TO_PROCESS -->
-
-### Backlog TODOs
-
-> This section contains unplanned TODOs that may be addressed later.
-
-<!-- BEGIN:UNPLANNED_TODOS_TO_PROCESS -->
-
-- [ ] Review test organization approach
-  - Evaluate colocated tests (e.g., `thing.test.ts` adjacent to source) versus a centralized `tests/` folder.
-  - Document pros/cons: DX discoverability, path/alias simplicity, coverage mapping, watch-mode performance, repo navigation.
-  - Assess tooling impacts (Jest config, ts-jest/esm setup, coverage reporters, CI patterns).
-  - Recommend a standard for this repo and outline a migration plan if a change is warranted.
-
-<!-- END:UNPLANNED_TODOS_TO_PROCESS -->
-
-<!-- END:INCOMPLETE_TODOs -->
-
+<!-- BEGIN:COMPLETED_ACTION_ITEMS>
 ## Completed TODOs
 
 > This section contains all completed TODOs, maintained for historical reference. The full list of completed TODOs start with a link to the `CHANGELOG.md` entry.
 
-<!--TODO:BEGIN:COMPLETED_TODOS -->
-
-<!--TODO:END:COMPLETED_TODOS -->
+<!-- END:COMPLETED_ACTION_ITEMS -->

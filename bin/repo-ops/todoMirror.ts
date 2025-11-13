@@ -3,6 +3,7 @@
  * Helpers for constructing and inserting the read-only TODO mirror block.
  */
 import { upsertSection } from "./parse";
+import { defaultConfig } from "./repo-ops.config";
 import type { MarkerSet } from "./types";
 
 /**
@@ -21,9 +22,7 @@ export function buildImportedBlock(
   const lines: string[] = [];
   lines.push(markers.todoImportedMirror.begin);
   lines.push("");
-  lines.push(
-    "> READ-ONLY MIRROR – This section is imported from CHANGELOG Outstanding Tasks for migration. Do not edit here."
-  );
+  lines.push(`> ${defaultConfig.mirrorAdvisory}`);
   lines.push("");
   lines.push(markdown.trimEnd());
   lines.push("");

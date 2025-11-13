@@ -6,6 +6,7 @@
 import * as path from "path";
 import { readFileUtf8, writeFileUtf8, backupFile, ensureDir } from "./fs";
 import { defaultMarkers } from "./markers";
+import { defaultConfig } from "./repo-ops.config";
 import { resolveRepoPaths, extractOutstandingTasks } from "./changelogExtract";
 import { buildImportedBlock, upsertTodoMirror } from "./todoMirror";
 import type { MarkerSet, SyncOptions, SyncResult, ApplyPlan } from "./types";
@@ -88,7 +89,7 @@ export async function syncFromChangelog(
   }
 
   // Mutating path: back up then write
-  const backupRoot = path.join(repo.root, ".repo-ops-backups");
+  const backupRoot = path.join(repo.root, defaultConfig.backupDirName);
   await ensureDir(backupRoot);
   await backupFile(repo.todo, backupRoot);
   await writeFileUtf8(repo.todo, next);

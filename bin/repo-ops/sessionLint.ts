@@ -28,13 +28,13 @@ export function validateSessionContent(
 } {
   const issues: string[] = [];
   const lines = md.split(/\r?\n/);
-  const maxAgeDays = opts.maxAgeDays ?? 14;
+  const maxAgeDays = opts.maxAgeDays ?? defaultConfig.sessionLint.maxAgeDays;
 
   // 1) First heading should be "# Session Context"
   const firstNonEmpty = lines.find((l) => l.trim().length > 0) ?? "";
-  if (firstNonEmpty.trim() !== "# Session Context") {
+  if (firstNonEmpty.trim() !== defaultConfig.sessionLint.topHeading) {
     issues.push(
-      'Missing or incorrect top heading: expected "# Session Context"'
+      `Missing or incorrect top heading: expected "${defaultConfig.sessionLint.topHeading}"`
     );
   }
 
@@ -73,7 +73,7 @@ export function validateSessionContent(
   if (relatedIndex === -1) {
     issues.push('Missing "## Related" section');
   } else {
-    const requiredRefs = ["CHANGELOG.md", "CONTEXT-BRANCH.md", "TODO.md"];
+    const requiredRefs = defaultConfig.sessionLint.requiredRelated;
     for (const ref of requiredRefs) {
       if (!md.includes(ref)) {
         issues.push(`Related section missing reference to ${ref}`);

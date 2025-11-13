@@ -4,7 +4,7 @@
  * strings so all behavior remains config-, data-, and type-driven.
  */
 import * as path from "path";
-import type { MarkerSet, RepoPaths } from "./types";
+import type { MarkerBounds, MarkerSet, RepoPaths } from "./types";
 
 /**
  * Shape of the repo-ops configuration. Extend as new modules are added.
@@ -18,6 +18,20 @@ export interface RepoOpsConfig {
   backupDirName: string;
   /** Default session file template content factory. */
   sessionTemplate(): string;
+  /** Marker bounds for generated action items block in TODO.md. */
+  actionsMarkers: MarkerBounds;
+  /** Regex string (source) for a preferred insertion anchor; optional. */
+  insertAnchorRegex?: string;
+  /** Heading text used atop generated actions. */
+  generatedActionsHeading: string;
+  /** Advisory text included in the imported-from-changelog mirror block. */
+  mirrorAdvisory: string;
+  /** Session lint expectations. */
+  sessionLint: {
+    topHeading: string;
+    requiredRelated: string[];
+    maxAgeDays: number;
+  };
 }
 
 /**
@@ -65,4 +79,20 @@ export const defaultConfig: RepoOpsConfig = {
   },
   backupDirName: ".repo-ops-backups",
   sessionTemplate: defaultSessionTemplate,
+  // Align with current TODO.md marker usage (no TODO: prefix)
+  actionsMarkers: {
+    begin: "<!-- BEGIN:GENERATED_ACTION_ITEMS -->",
+    end: "<!-- END:GENERATED_ACTION_ITEMS -->",
+  },
+  // Prefer inserting after this heading if present; otherwise insert at top
+  insertAnchorRegex: "\n##\\s+Generated\\s+Action\\s+Items\\s*\n",
+  generatedActionsHeading:
+    "### Action Items (generated from CHANGELOG Outstanding Tasks)",
+  mirrorAdvisory:
+    "READ-ONLY MIRROR – This section is imported from CHANGELOG Outstanding Tasks for migration. Do not edit here.",
+  sessionLint: {
+    topHeading: "# Session Context",
+    requiredRelated: ["CHANGELOG.md", "CONTEXT-BRANCH.md", "TODO.md"],
+    maxAgeDays: 14,
+  },
 };

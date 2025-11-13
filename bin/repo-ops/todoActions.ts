@@ -8,23 +8,18 @@
 import * as path from "path";
 import { readFileUtf8, writeFileUtf8, backupFile, ensureDir } from "./fs";
 import { extractOutstandingTasks, resolveRepoPaths } from "./changelogExtract";
+import { defaultConfig } from "./repo-ops.config";
 import { normalizeNewlines, upsertSection } from "./parse";
 import type {
   MarkerBounds,
-  MarkerSet,
   RepoPaths,
   SyncOptions,
   SyncResult,
   ApplyPlan,
 } from "./types";
 
-/**
- * Marker bounds used for the generated action items block in TODO.md.
- */
-const ACTIONS_MARKERS: MarkerBounds = {
-  begin: "<!-- TODO:BEGIN:GENERATED_ACTION_ITEMS -->",
-  end: "<!-- TODO:END:GENERATED_ACTION_ITEMS -->",
-};
+// Marker bounds now sourced from central configuration
+const ACTIONS_MARKERS: MarkerBounds = defaultConfig.actionsMarkers;
 
 /**
  * Convert the marker-inclusive Outstanding Tasks section into a simple
@@ -44,9 +39,7 @@ export function transformOutstandingToActions(
   for (const line of lines) {
     if (line.includes("CHANGELOG:BEGIN:OUTSTANDING_TASKS")) {
       inBody = true;
-      body.push(
-        "### Action Items (generated from CHANGELOG Outstanding Tasks)"
-      );
+      body.push(defaultConfig.generatedActionsHeading);
       body.push("");
       continue;
     }
@@ -116,14 +109,10 @@ export async function generateActionsFromChangelog(
   const changelogContent = await readFileUtf8(repo.changelog);
   const todoContent = await readFileUtf8(repo.todo);
 
-  const extracted = extractOutstandingTasks(changelogContent, {
-    changelogOutstanding: {
-      begin: "<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->",
-      end: "<!-- CHANGELOG:END:OUTSTANDING_TASKS -->",
-    },
-    // dummy to satisfy type, not used here
-    todoImportedMirror: { begin: "", end: "" },
-  } as unknown as MarkerSet);
+  const extracted = extractOutstandingTasks(
+    changelogContent,
+    defaultConfig.markers
+  );
   if (!extracted.ok) {
     return {
       changed: false,
@@ -168,7 +157,7 @@ export async function generateActionsFromChangelog(
     };
   }
 
-  const backupRoot = path.join(repo.root, ".repo-ops-backups");
+  const backupRoot = path.join(repo.root, defaultConfig.backupDirName);
   await ensureDir(backupRoot);
   await backupFile(repo.todo, backupRoot);
   await writeFileUtf8(repo.todo, next);
