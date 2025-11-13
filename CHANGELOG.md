@@ -36,6 +36,55 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 14:05:45 docs/governance: Replace Copilot instructions with approved overhaul
+
+**Problem/Context**: The existing `.github/copilot-instructions.md` had grown verbose and partially redundant. We finalized an LLM‑friendly governance overhaul aligned with the current architecture (agent isolation, typed-only agents, CommunicationAgent formatting, ESM pathing, generated config under `out/`). A timestamped backup existed; we needed to safely replace the authoritative doc and verify gates.
+
+**Changes Made**:
+
+1. `.github/copilot-instructions.md`: Replaced content with the approved governance overhaul; ensured first-line H1 to satisfy markdownlint MD041.
+2. Kept explicit references to `CONTEXT-SESSION.md`, repo-ops session commands, and verification cadence.
+
+**Files Changed**: `.github/copilot-instructions.md`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 272 total)
+- Prebuild: PASS (`npm run prebuild` → config generated; templates processed; docs updated)
+
+**Impact**: Consolidates governance into a concise, LLM-friendly document with explicit guardrails. Reduces drift risk and clarifies operational workflow (tasks in `TODO.md`, logs-only `CHANGELOG.md`, session hygiene in `CONTEXT-SESSION.md`).
+
+##### Verification – 2025-11-13 (Governance Overhaul)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 272 total)
+- Lint/Docs: PASS (markdownlint MD041 resolved by H1 at first line)
+- Health: PASS (generated config under `out/`; no stray JSON)
+- Coverage: Unchanged (docs-only)
+
+#### 2025-11-13 13:45:30 docs/governance: Overhaul draft – add Common Pitfalls and Quick Checks after src/bin scan
+
+**Problem/Context**: We’re finalizing the LLM‑friendly instructions overhaul. A last repo scan surfaced recurring gotchas (JSDoc placeholders, ESM/Jest mocking, IDs alignment, types/runtime bleed) that should be explicitly called out to prevent repeat mistakes.
+
+**Changes Made**:
+
+1. `.github/copilot-instructions.overhaul.md`:
+
+- Added concrete pitfalls: no new functions under `src/types/**` (validation exceptions are temporary), no hardcoded business values, formatting owned by CommunicationAgent, disallow `TODO: describe return value`, ESM `__dirname` pattern, forbid `src/mcp.config.json`, and two‑file agent standard.
+- Added “Quick Checks” list: IDs/provider alignment + stdio path, ESM/Jest mocking via `jest.unstable_mockModule`, TSDoc hygiene, no hardcoded categories in logic, no new runtime under `src/types/**`, and generated artifacts only under `out/**`.
+
+**Files Changed**: `.github/copilot-instructions.overhaul.md`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Prebuild: N/A (docs‑only)
+- Tests: N/A (no runtime changes)
+- Lint/Docs: Overhaul draft renders; markdown structure validated informally
+
+**Impact**: The overhaul now encodes the most common failure modes as actionable checks, reducing regressions (agent isolation, types hygiene, IDs alignment, ESM/Jest mocking, and doc placeholders).
+
 #### 2025-11-13 13:32:00 docs/governance: Add Quick Links and Decision Trees to copilot instructions; fix fenced block language
 
 **Problem/Context**: The instructions showed drift and lacked a concise overview and explicit decision trees for normal ops and failovers. A fenced block also lacked a language tag (markdownlint MD040).
