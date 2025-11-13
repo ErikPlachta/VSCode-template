@@ -969,7 +969,24 @@ export interface OrchestratorResponse {
   summary: string;
   rationale: string;
   payload: unknown;
-  markdown: string;
+  /**
+   * Optional pre-formatted content. Prefer using `WorkflowResult.formatted` in
+   * end-to-end workflows. This field exists only for transitional compatibility
+   * with older orchestration paths.
+   */
+  formatted?: {
+    /** Human-readable message describing the routing/decision */
+    message: string;
+    /** Markdown-formatted content for rich display */
+    markdown?: string;
+  };
+
+  /**
+   * @deprecated Use `formatted` (above) and, in full workflows, rely on
+   * `WorkflowResult.formatted` produced via the CommunicationAgent. This field
+   * will be removed in a future release after the deprecation lifecycle.
+   */
+  markdown?: string;
 }
 
 // Clarification agent runtime types

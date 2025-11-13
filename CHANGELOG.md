@@ -36,6 +36,24 @@ This changelog records Logs only.
 
 ### [2025-11-12]
 
+#### 2025-11-12 23:05:00 chore/deprecate: OrchestratorResponse.markdown deprecated; add formatted field
+
+**Problem/Context**: We want Orchestrator to return typed data while CommunicationAgent owns formatting. The top-level `markdown` string on `OrchestratorResponse` encouraged presentation coupling and conflicted with `WorkflowResult.formatted` used by full workflows.
+
+**Changes Made**:
+
+1. `src/types/agentConfig.ts` (OrchestratorResponse): Marked `markdown` as optional and `@deprecated`; added optional `formatted { message; markdown? }` field.
+2. `src/agent/orchestrator/index.ts` (route): Populates `formatted` using `CommunicationAgent.formatSuccess` while retaining deprecated `markdown` for compatibility.
+3. `src/agent/orchestrator/index.ts` (handle error path): Returns `formatted` with the error message; keeps deprecated `markdown` populated.
+
+**Architecture Notes**: This begins Stage 2 of the deprecation plan. Callers should use `WorkflowResult.formatted` for user display in end-to-end workflows. The deprecated `markdown` on `OrchestratorResponse` remains temporarily for backward compatibility and will be removed in a later release per the documented lifecycle.
+
+**Files Changed**: `src/types/agentConfig.ts`, `src/agent/orchestrator/index.ts`
+
+**Testing**: Build: PASS (`npm run compile`); Tests: PASS (34 passed, 1 skipped, 271 total)
+
+**Impact**: Aligns orchestrator with agent isolation and typed-only contracts; enables consumers to standardize on `formatted` without breaking existing code paths.
+
 #### 2025-11-12 22:55:00 chore/refactor: Centralize orchestrator formatting and make agent validation data-driven
 
 **Problem/Context**: Orchestrator assembled user-facing markdown and validated agents via a hardcoded list, violating agent isolation and data-driven design.

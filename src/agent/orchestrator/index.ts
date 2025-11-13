@@ -479,6 +479,7 @@ export class Orchestrator extends BaseAgentConfig {
       summary,
       rationale: classification.rationale,
       payload,
+      formatted: { message: formatted.message, markdown: formatted.message },
       markdown: formatted.message,
     };
   }
@@ -589,6 +590,14 @@ export class Orchestrator extends BaseAgentConfig {
         summary: this.messages.errorOccurred,
         rationale: error instanceof Error ? error.message : "Unknown error",
         payload: { error, input },
+        formatted: {
+          message: `## Error\n\nI encountered an issue while processing your request: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }\n\nPlease try rephrasing your question or ask for help.`,
+          markdown: `## Error\n\nI encountered an issue while processing your request: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }\n\nPlease try rephrasing your question or ask for help.`,
+        },
         markdown: `## Error\n\nI encountered an issue while processing your request: ${
           error instanceof Error ? error.message : "Unknown error"
         }\n\nPlease try rephrasing your question or ask for help.`,
