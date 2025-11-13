@@ -21,7 +21,7 @@ Started: 2025-11-12T17:30:00Z
 
 ## Current Focus Summary
 
-- High-level focus: Agent cleanup and orchestrator rule compliance (data-driven design, agent isolation, typed data only).
+- High-level focus: Agent cleanup and orchestrator rule compliance (data-driven design, agent isolation, typed data only). Strengthen TSDoc across types to power IntelliSense and reduce duplication.
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
 - Keep quality gates green: build, tests, lint, docs, and health.
 
@@ -82,6 +82,13 @@ Started: 2025-11-12T17:30:00Z
 - Expand `src/agent/index.ts` with architecture overview and examples aligned to CommunicationAgent formatting.
 - Correct and complete JSDoc across agents during audits.
 - Document `communication.clarification` configuration structure in README and internal docs (planned).
+- Governance: Added “TSDoc: Practices and Pitfalls” to `.github/copilot-instructions.md` so Copilot Chat consistently applies safe examples and block comment rules.
+
+### TSDoc Sweep Progress (2025-11-13 12:55)
+
+- Done: `src/types/applicationConfig.ts` (interface-level examples + @see), `src/types/configValidation.ts` (params/returns + examples), `src/types/communication.types.ts` (remarks + examples), `src/types/workflow.types.ts` (remarks + example), `src/types/userContext.types.ts` (guards/validators examples), `src/types/configRegistry.ts` (utils with examples and precise params/returns).
+- Next: Remaining stragglers only (Types sweep checklist now includes interfaces.ts, configRegistry.ts, index.ts as done).
+- Verification: `npm run compile` PASS; plan to run `npm run prebuild` and capture results in CHANGELOG verification block.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

@@ -30,6 +30,9 @@
  * @see [TypeScript JSDoc Reference](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)
  */
 
+import type { ConfigDescriptor } from "@shared/agentConfigDescriptors";
+import { createDescriptorMap } from "@shared/agentConfigDescriptors";
+
 /**
  * Basic identity and human-readable metadata for an agent.
  *
@@ -1434,30 +1437,8 @@ export interface QueryOptions {
 // -------------------------
 // Descriptor helper (for agent config UIs)
 // -------------------------
+// Re-exports are provided below to preserve existing import paths
+// (e.g., `@internal-types/agentConfig`).
 
-/** Descriptor describing a configurable item available on an agent. */
-export interface ConfigDescriptor {
-  name: string;
-  path: string;
-  type: string;
-  visibility: "public" | "private";
-  verifyPaths?: string[];
-  /** Optional group for organizing descriptors in UI. */
-  group?: string;
-  /** Optional human-readable description. */
-  description?: string;
-  /** Optional validation function for basic type/shape checks. */
-  validate?: (value: unknown) => boolean | string;
-}
-
-/**
- * Create a descriptor map from a list of descriptor entries.
- *
- * @param {Array<[string, ConfigDescriptor]>} entries - Tuples of key and descriptor metadata.
- * @returns {Record<string, ConfigDescriptor>} Normalized descriptor map.
- */
-export function createDescriptorMap(
-  entries: Array<[string, ConfigDescriptor]>
-): Record<string, ConfigDescriptor> {
-  return Object.fromEntries(entries);
-}
+export type { ConfigDescriptor } from "@shared/agentConfigDescriptors";
+export { createDescriptorMap } from "@shared/agentConfigDescriptors";

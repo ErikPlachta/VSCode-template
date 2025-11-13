@@ -4,6 +4,15 @@ This repository uses `TODO.md` for outstanding tasks and `CHANGELOG.md` for hist
 
 > Note: Use american-english spelling for all artifacts, not british-english (e.g. "organization" not "organisation").
 
+## Quick Links
+
+- Normal Ops: See [Session Workflow](#session-workflow-detailed) and [Operational Playbooks](#operational-playbooks)
+- Error Handling: See [Failure Handling](#failure-handling) and [Decision Trees](#decision-trees)
+- Architecture Rules: See [Critical Architecture Rules](#critical-architecture-rules) and [Core Principles](#core-principles)
+- Types vs Functions: See [Core Principles](#core-principles)
+- Changelog Format: See [Changelog Entry Format](#changelog-entry-format)
+- IDs and MCP registration: See [ID, provider, and path alignment](#id-provider-and-path-alignment)
+
 ## Critical Architecture Rules
 
 ### 1. **Agent Isolation (MUST FOLLOW)**
@@ -20,7 +29,7 @@ This repository uses `TODO.md` for outstanding tasks and `CHANGELOG.md` for hist
 
 **Data Flow Pattern**:
 
-```
+```text
 User → Orchestrator → Agent (typed data) → Orchestrator → CommunicationAgent (format) → User
 ```
 
@@ -140,6 +149,54 @@ Use `mcp_memory` tools when:
   - Fix headings, code fences with languages, blank lines around fences; avoid inline HTML where lints disallow it.
 - Session lint fails:
   - Ensure `CONTEXT-SESSION.md` has: `# Session Context`, `Started: <ISO 8601>`, `## Related`, `## Notes`.
+
+## Decision Trees
+
+### Start Work
+
+1. Define scope: Read [TODO.md](../TODO.md) Current/Next and skim latest [CHANGELOG.md](../CHANGELOG.md) Logs.
+2. Choose artifact: Use [Which artifact to edit?](#which-artifact-to-edit) to decide between `TODO.md`, `CHANGELOG.md`, or `CONTEXT-SESSION.md`.
+3. Preflight: Run `npm run compile` and `npm test` to ensure a clean baseline.
+
+### Implement Change
+
+1. Follow [Critical Architecture Rules](#critical-architecture-rules):
+   - Agent isolation, typed data only, formatting via CommunicationAgent.
+   - Types-only in `src/types/**`; functions in `src/shared/**` or appropriate runtime modules.
+   - Data-driven: no hardcoded business values; read from typed config.
+2. Update code and tests; write precise TSDoc for public APIs.
+3. Keep tasks in sync: Update `TODO.md` status as you progress.
+
+### Verify and Record
+
+1. Run: `npm run compile && npm test && npm run prebuild`.
+2. If all PASS, write a [Changelog Entry](#changelog-entry-format) with a Verification block.
+3. Reconcile Outstanding Tasks in `TODO.md` (move completed to Completed).
+
+### On Errors (Failover Paths)
+
+- Build fails → See [Failure Handling](#failure-handling)
+  - Fix TS errors (imports/paths/types, ESM path pattern), re-run `npm run compile`.
+- Tests fail → Target the affected suites first.
+  - Use focused runs; fix logic or mocks; re-run `npm test`.
+- Lint/Docs fail → Fix TSDoc/Markdown issues.
+  - Ensure fenced code has languages; avoid inline HTML in headings; surround code fences with blank lines.
+- Health fails → Check generated configs and governance:
+  - Ensure no `src/mcp.config.json`; generated config must live under `out/`.
+  - Run repo-ops session lint; fix `CONTEXT-SESSION.md` markers.
+- MCP Registration/ID drift → See [ID, provider, and path alignment](#id-provider-and-path-alignment)
+  - Verify contributed ids match runtime; run `npm run prebuild` to regenerate manifest/config.
+- Tool execution errors (e.g., `categoryId` required) → Data-driven remediation:
+  - Orchestrator should return typed error data; CommunicationAgent should enumerate available categories using agent-provided metadata (no hardcoded lists).
+  - Open/update a `TODO.md` item under Current findings; link to CHANGELOG when resolved.
+
+### Refactors: Types vs Shared
+
+1. If a runtime function is found under `src/types/**`:
+   - Move it to `src/shared/**` (or a suitable runtime module).
+   - Keep interfaces/types in `src/types/**` only; import types into shared.
+2. If shared needs types, create or extend a dedicated types-only module under `src/types/**` to avoid cycles.
+3. Update imports, run compile/tests, and log in `CHANGELOG.md` with verification.
 
 ## Scenario Guides
 
@@ -301,7 +358,12 @@ const __dirname = path.dirname(__filename);
 4. Quality gates: build, tests (100% coverage), lint (strict JSDoc), docs generation, health report all must PASS before marking work complete.
 5. Migration safety: renames (e.g. `businessData` → `userContext`, `relevant-data-manager` → `user-context`) follow an alias lifecycle: Introduced → Aliased → Warn → Removed. The `relevant-data-manager` warning phase has concluded; the shim remains silently for compatibility until its scheduled removal.
 6. Configuration integrity: no committed legacy JSON config (`src/mcp.config.json`). Any reintroduction is treated as a governance regression and fails the health check.
-7. **Agent isolation (CRITICAL)**: Orchestrator is the ONLY agent that coordinates inter-agent communication. Agents MUST NOT import from other agents (no `@agent/communicationAgent`, `@agent/dataAgent`, etc.). Agents are black boxes: receive request from Orchestrator → process → return typed data. Orchestrator handles all formatting, error wrapping, and agent-to-agent coordination.
+7. **CRITICAL**: **Agent isolation**: Orchestrator is the ONLY agent that coordinates inter-agent communication. Agents MUST NOT import from other agents (no `@agent/communicationAgent`, `@agent/dataAgent`, etc.). Agents are black boxes: receive request from Orchestrator → process → return typed data. Orchestrator handles all formatting, error wrapping, and agent-to-agent coordination.
+8. **CRITICAL**: Types location: All source type definitions live in `src/types/**`. Do not declare types/interfaces in `src/shared/**`, `src/agent/**`, `src/tools/**`, or other runtime folders. Import types from `@internal-types/*` instead.
+9. **CRITICAL**: Functions vs. types: `src/types/**` exports type information only. It must not export runtime functions. Place reusable helpers and logic in `src/shared/**` (or appropriate runtime module), importing types from `src/types/**` as needed.
+10. **CRITICAL**: Data‑driven logic: All logic follows data‑driven design. Avoid hardcoded business values (category names, field names, examples). Derive behavior from configuration or loaded data.
+11. **CRITICAL**: Configuration as source: Logic reads values from that module’s typed configuration. Do not inline fallback lists or duplicate config. Use validated defaults defined in config types.
+12. **CRITICAL**: Layering and cycles: Maintain dependency direction `types → shared → agents → orchestrator`. Avoid circular dependencies (e.g., a shared helper importing runtime from agents). If a helper needs a type, put the type in a dedicated types‑only module under `src/types/**` and import it from shared.
 
 ## Session Workflow
 

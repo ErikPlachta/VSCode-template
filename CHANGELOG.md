@@ -36,6 +36,45 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 13:32:00 docs/governance: Add Quick Links and Decision Trees to copilot instructions; fix fenced block language
+
+**Problem/Context**: The instructions showed drift and lacked a concise overview and explicit decision trees for normal ops and failovers. A fenced block also lacked a language tag (markdownlint MD040).
+
+**Changes Made**:
+
+1. `.github/copilot-instructions.md`:
+
+- Added "Quick Links" section with anchors to key guidance.
+- Added "Decision Trees" covering Start Work, Implement Change, Verify and Record, On Errors, and Refactors (Types vs Shared) with links to authoritative sections.
+- Fixed fenced code block under Data Flow Pattern to use `text` language for markdownlint compliance.
+
+**Testing**:
+
+- Prebuild: PASS (`npm run prebuild`)
+
+**Impact**: Improves navigation and operational clarity; reduces drift risk and ensures consistent handling of normal operations and failover scenarios.
+
+#### 2025-11-13 13:15:00 docs/governance: Clarify types vs functions location and data-driven rules
+
+**Problem/Context**: A recent refactor risked violating our architectural rule about keeping types under `src/types/**` and functions outside of types. Core guidance needed to be explicit under "Core Principles" to prevent recurrence.
+
+**Changes Made**:
+
+1. `.github/copilot-instructions.md` (Core Principles):
+   - Added items 8–12 to codify:
+     - Types live only in `src/types/**`; not in `src/shared/**`, `src/agent/**`, or other runtime folders.
+     - Types-only modules must not export runtime functions.
+     - Logic is data-driven; no hardcoded business values.
+     - Configuration is the source of truth for values.
+     - Maintain layering `types → shared → agents → orchestrator`; avoid cycles via types-only modules.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Prebuild: PASS (`npm run prebuild`)
+
+**Impact**: Clarifies enforceable rules for type/function placement and data-driven architecture, reducing the chance of future violations and circular dependencies.
+
 #### 2025-11-13 12:55:00 docs/tsdoc: Sweep workflow and userContext types for TSDoc consistency
 
 **Problem/Context**: Remaining type files lacked consistent TSDoc tags, examples at symbol-level, and precise param/return descriptions. This reduced IntelliSense quality and risked drift from governance standards.
@@ -43,18 +82,22 @@ This changelog records Logs only.
 **Changes Made**:
 
 1. `src/types/workflow.types.ts`:
-  - Added `@remarks`, `@see`, and a safe `@example` on `WorkflowAction`.
-  - Clarified summaries for context, diagnostics, history, and result types.
+
+- Added `@remarks`, `@see`, and a safe `@example` on `WorkflowAction`.
+- Clarified summaries for context, diagnostics, history, and result types.
+
 2. `src/types/userContext.types.ts`:
-  - Converted JSDoc-style tags to TSDoc style with precise `@param`/`@returns`.
-  - Added small, safe `@example` blocks for guards and validators (`isCategoryConfig`, `validateCategoryConfig`, `formatValidationErrors`).
-  - Enhanced top-level `@remarks` explaining usage and dependency boundaries.
+
+- Converted JSDoc-style tags to TSDoc style with precise `@param`/`@returns`.
+- Added small, safe `@example` blocks for guards and validators (`isCategoryConfig`, `validateCategoryConfig`, `formatValidationErrors`).
+- Enhanced top-level `@remarks` explaining usage and dependency boundaries.
 
 **Testing**:
 
 - Build: PASS (`npm run compile`)
 
 **Impact**: Improves IntelliSense and documentation consistency; aligns types with governance (examples at symbol-level, safe fenced code, and no risky comment terminators).
+
 #### 2025-11-13 12:40:00 docs/governance: Add TSDoc practices and pitfalls to Copilot instructions
 
 **Problem/Context**: We added a pitfalls section to `TSDOC_REFERENCE_GUIDE.md`, but Copilot Chat relies on `.github/copilot-instructions.md` as the canonical governance surface. The guidance needed to be present there so agents consistently follow it.
@@ -1818,13 +1861,14 @@ Documentation Files:
 
 **PHASE 1 COMPLETE: Removed agent-to-agent imports**
 
-**Changes Made:**
+**Changes Made**:
 
-1. **Removed DatabaseAgent.executeQueryResponse()** (`src/agent/databaseAgent/index.ts`, -70 lines)
+1. `.github/copilot-instructions.md`:
 
-   - Deleted wrapper method that dynamically imported from CommunicationAgent
-   - Kept original `executeQuery()` method unchanged
-   - Restored agent isolation - DatabaseAgent no longer imports from other agents
+- Added "Quick Links" section with anchors to key guidance.
+- Added "Decision Trees" covering Start Work, Implement Change, Verify and Record, On Errors, and Refactors (Types vs Shared) with links to authoritative sections.
+- Fixed fenced code block under Data Flow Pattern to use `text` language for markdownlint compliance.
+  - Restored agent isolation - DatabaseAgent no longer imports from other agents
 
 2. **Removed DataAgent wrapper methods** (`src/agent/dataAgent/index.ts`, -144 lines)
 

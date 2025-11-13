@@ -83,6 +83,7 @@ Follow these guidelines to ensure effective task management:
     - [x] Replace hardcoded `validAgents` in `validateAction` with registry-derived keys.
     - [x] Refactor `route`/`handle` to return typed data and omit `markdown` fields; assemble UX via `CommunicationAgent`.
   - [ ] Findings (seeded TODOs):
+
     - [x] Orchestrator: Migrate `formatRecords()`/`formatObject()` and inline markdown (e.g., table/headers) to `CommunicationAgent`.
     - [x] Orchestrator: Remove fallback hardcoded categories in `extractQueryParams` (e.g., "people", "departments"); derive solely from `UserContextAgent` category data/aliases.
     - [x] Orchestrator: Replace remaining direct markdown assembly (e.g., `### ${snapshot.name}`) with `CommunicationAgent` templates.
@@ -95,26 +96,31 @@ Follow these guidelines to ensure effective task management:
         - [x] User updated with more complete JSDOC @property values and comments as desired.
         - [x] Verified user changes to make a plan for all other files
       - [ ] List other files here and execute same type of changes as in agentConfig.ts
-        - [ ] src/types/applicationConfig.ts — add interface-level TSDoc with @remarks/@example; move any inline examples to symbol docblocks
-        - [ ] src/types/configValidation.ts — document exported types/functions; ensure @param/@returns; add examples for key validators
-        - [ ] src/types/configRegistry.ts — document registry types/APIs; provide usage example for registration and lookup
-        - [ ] src/types/interfaces.ts — add summaries and examples for shared interfaces; ensure member docs are concise
-        - [ ] src/types/communication.types.ts — document response/formatting types; examples where relevant
-        - [ ] src/types/workflow.types.ts — document workflow models; include minimal end-to-end example
-        - [ ] src/types/userContext.types.ts — document user context models; add examples for common shapes
-        - [ ] src/types/index.ts — add module-level @packageDocumentation and re-export notes
+        - [x] src/types/applicationConfig.ts — add interface-level TSDoc with @remarks/@example; move any inline examples to symbol docblocks
+        - [x] src/types/configValidation.ts — document exported types/functions; ensure @param/@returns; add examples for key validators
+        - [x] src/types/configRegistry.ts — document registry types/APIs; provide usage example for registration and lookup
+        - [x] src/types/interfaces.ts — add summaries and examples for shared interfaces; ensure member docs are concise
+        - [x] src/types/communication.types.ts — document response/formatting types; examples where relevant
+        - [x] src/types/workflow.types.ts — document workflow models; include minimal end-to-end example
+        - [x] src/types/userContext.types.ts — document user context models; add examples for common shapes
+        - [x] src/types/index.ts — add module-level @packageDocumentation and re-export notes
+      - [ ] Governance docs hygiene
+        - [x] Add “TSDoc: Practices and Pitfalls” to `.github/copilot-instructions.md` (symbol-level examples, block comment safety, @see usage, fenced code, build hygiene)
+        - [x] Run `npm run prebuild` and address any markdownlint issues flagged in `CHANGELOG.md` if they are newly introduced by today’s entries
     - [ ] Extract Functions out of `Types` and move into `Shared`
       - When reviewing `agentConfig.ts`, I noticed a handful of functions and methods that should be in the `C:\repo\vscode-extension-mcp-server\src\shared` folder.
         - example, but not limited to: `public setConfigItem`, `function createDescriptorMap`, `protected _getConfig():`, `public getUserFacingConfig()`.
+        - example, C:\repo\vscode-extension-mcp-server\src\types\configRegistry.ts has hard-coded config info that should be defined in the `application.config.ts` file
         - I'm concerned this is a mistake thats true in other files, and we need to keep the architecture clean.
     - [ ] CommunicationAgent (evaluation): Identify other responses where `metadata.availableCategories` (or similar) adds value beyond error/clarification (e.g., success for `metadataRetrieved`); define config-gated enumeration and limits; open follow-ups per finding.
     - [ ] ClarificationAgent: Ensure examples and capability lists derive from manifest/config (no hardcoded business values).
     - [ ] DatabaseAgent: Confirm all field aliases live in config only; no code-level hardcoded business values.
     - [ ] DataAgent: Confirm category references are read from config; no code-level hardcoded business values.
+
   - [ ] P1: MCP Server: Evaluate Tools and Resolve Integrity issue
 
-    - Context: When I type `list all departments` into CoPiliot Chat, my custom Tools ` Describe Category` and `Search Category records` are executed.
-    - When executed, I receive the following errors:
+    - [] Context: When I type `list all departments` into CoPiliot Chat, my custom Tools `Describe Category` and `Search Category records` are executed.
+    - [] When executed, I receive the following errors:
 
       - response in chat: `Error: MPC -32000: Tool execution error: 'categoryId' is required.`
       - Debug Output output:
@@ -134,15 +140,15 @@ Follow these guidelines to ensure effective task management:
               at process.callbackTrampoline (node:internal/async_hooks:130:17) json.validate {"value":"vscode.json-language-features","_lower":"vscode.json-language-features"}
         ```
 
-    - Next Steps:
+    - [] Next Steps:
       - [ ] Investigate and resolve the `categoryId` requirement error in the `Describe Category` and `Search Category records` tools.
       - [ ] Review tool implementations for proper parameter.
         - I provided the keyword departments, so an ID should have been identified.
         - If an ID wasn't identified, user should be prompted with all available categories based on data-driven solution.
       - [ ] Test tool executions post-fix to ensure error resolution.
 
-  - [ ] P2: Follow-up (Copilot Chat UX): Update `CommunicationAgent` to leverage additional VS Code Copilot Chat features (structured TODO blocks, interactive messages, collapsible sections/details, and richer progress/status elements) in formatted responses.
-  - [ ] P3: Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes. This will require updating copilot-instructions.md and the CONTEXT-SESSION.md files with clear instructions to guide the LLM accordingly.
+- [ ] P2: Follow-up (Copilot Chat UX): Update `CommunicationAgent` to leverage additional VS Code Copilot Chat features (structured TODO blocks, interactive messages, collapsible sections/details, and richer progress/status elements) in formatted responses.
+- [ ] P3: Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes. This will require updating copilot-instructions.md and the CONTEXT-SESSION.md files with clear instructions to guide the LLM accordingly.
 
     <!-- END:CURRENT_ACTION_ITEMS -->
     <!-- BEGIN:NEXT_ACTION_ITEMS -->
@@ -195,6 +201,7 @@ Follow these guidelines to ensure effective task management:
     - [ ] Confirm TypeDoc renders `@remarks` and examples from `src` as expected.
     - [ ] Evaluate adding a `jsdoc` doc task for `out/**` (optional) and wire as `docs:jsdoc`.
     - [ ] Update governance docs to reflect “TSDoc for src / JSDoc for out” policy.
+    - [ ] Verification: Run `npm run prebuild` (lint/docs/health) and capture results in CHANGELOG verification block.
 
 <!-- END:NEXT_ACTION_ITEMS -->
 <!-- BEGIN:BACKLOG_ACTION_ITEMS -->

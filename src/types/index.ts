@@ -1,15 +1,18 @@
 /**
- * @packageDocumentation Internal types for the module. This index is used to import all types and allow for easier access.
+ * @packageDocumentation Types entrypoint.
  *
- * @namespace src.InternalTypes
+ * Central index for internal types. Prefer importing specific symbols from their
+ * defining modules (e.g., `@internal-types/agentConfig`) for tree clarity; this
+ * file exists primarily to provide a discoverable doc surface and future-proof
+ * re-exports if needed.
  *
+ * @remarks
+ * This project follows a “types-as-docs” approach. Place comprehensive
+ * descriptions and examples on exported types/interfaces in their source files
+ * (not here). Keep this file light-weight to avoid duplication.
  *
- * @todo Add full TSDoc style comments, considering this the central documentation for all types in the module and can be used to provide high-level info or navigational structure to get more details
- *
- *
- * @see {@link https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html | TypeScript Supported JSDOC Types}
- * @see {@link https://tsdoc.org/ | TSDOC Main Reference}
- * @see {@link https://tsdoc.org/pages/intro/using_tsdoc/ | Using TSDOC}
+ * @see https://tsdoc.org/
  */
 
-// TODO: add imports and then exports of all types in the module.
+// Intentional: no re-exports to avoid accidental public API expansion.
+// Add explicit re-exports only when a stable barrel is desired.

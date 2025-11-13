@@ -1,9 +1,14 @@
 /**
- * @packageDocumentation Agent Interfaces for Orchestrator Communication
+ * @packageDocumentation Agent interfaces for orchestrator communication.
  *
- * This file defines the clean interfaces that the orchestrator agent uses
- * to communicate with specialized agents. Each agent has a distinct purpose
- * and should only be used for its specific function.
+ * Clean, dependency-light interfaces the Orchestrator uses to communicate with
+ * specialized agents. Each agent has a distinct purpose and should only be used
+ * for its specific function.
+ *
+ * @remarks
+ * These are type-only contracts to preserve agent isolation: the Orchestrator
+ * coordinates and returns typed data; agents implement these interfaces; the
+ * CommunicationAgent owns all user-facing formatting.
  */
 
 // Import centralized types to ensure consistency
@@ -36,6 +41,11 @@ export interface QueryResult {
 /**
  * Interface for database agents that handle data retrieval operations.
  *
+ * @example
+ * ```ts
+ * // Orchestrator calling a DatabaseAgent
+ * const records = await db.executeQuery("people", { department: "engineering" }, { useCache: true });
+ * ```
  */
 export interface DatabaseAgentInterface {
   executeQuery(
@@ -113,8 +123,12 @@ export interface CrossCategoryConnection {
 }
 
 /**
- * DataAgentInterface interface.
+ * Interface for data analysis agents.
  *
+ * @example
+ * ```ts
+ * const insights = await dataAgent.analyzeData({ categoryId: "people", records });
+ * ```
  */
 export interface DataAgentInterface {
   analyzeData(input: AnalysisInput): Promise<DataInsight[]>;
@@ -218,8 +232,7 @@ export interface ClarificationInput {
 }
 
 /**
- * ClarificationResponse interface.
- *
+ * Clarification response from a ClarificationAgent.
  */
 export interface ClarificationResponse {
   prompt: string;
@@ -236,8 +249,7 @@ export interface KnowledgeSnippet {
 }
 
 /**
- * ClarificationAgentInterface interface.
- *
+ * Interface for agents that generate clarification prompts.
  */
 export interface ClarificationAgentInterface {
   clarify(input: ClarificationInput): Promise<ClarificationResponse>;
@@ -248,8 +260,11 @@ export interface ClarificationAgentInterface {
  *
  */
 export interface ValidationResult {
+  /** Whether validation passed */
   isValid: boolean;
+  /** Error messages */
   errors: string[];
+  /** Warning messages */
   warnings: string[];
 }
 
@@ -275,9 +290,9 @@ export interface AgentRequest {
 }
 
 /**
- * AgentResponse interface.
+ * Generic agent response shape used by orchestration helpers.
  *
- * @template T
+ * @typeParam T - Response payload type.
  */
 export interface AgentResponse<T = unknown> {
   success: boolean;
@@ -288,8 +303,7 @@ export interface AgentResponse<T = unknown> {
 }
 
 /**
- * Orchestrator workflow for handling user requests:
- *
+ * Orchestrator workflow for handling user requests.
  */
 export interface OrchestrationWorkflow {
   userQuery: string;

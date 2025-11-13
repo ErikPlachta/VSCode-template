@@ -1,15 +1,14 @@
 /**
- * @packageDocumentation Configuration ID Registry - Central registry for all agent configuration schema IDs
+ * @packageDocumentation Configuration ID Registry – Central registry for agent configuration schema IDs.
  *
- * This file provides a centralized registry of unique configuration IDs (UIDs) for all
- * agent configurations. Instead of using file paths in schema references, each configuration
- * type has a unique ID that can be validated and versioned independently.
+ * Centralized registry of unique configuration IDs (UIDs) for all agent configurations.
+ * Instead of file-path based references, each configuration type has a stable ID that can
+ * be validated and versioned independently.
  *
- * Benefits:
- * - Unique identification of configuration schemas
- * - Version tracking for configuration changes
- * - Validation and compatibility checking
- * - Decoupling from file system structure
+ * @remarks
+ * Use these IDs across configs, validators, and tooling to avoid file-structure coupling.
+ * Prefer type-safe references (`ConfigId`) and utility helpers (`ConfigUtils`) when working
+ * with IDs at runtime.
  */
 
 /**
@@ -49,8 +48,7 @@ export const CONFIG_IDS = {
 } as const;
 
 /**
- * Configuration metadata for each schema ID
- *
+ * Configuration metadata for each schema ID.
  */
 export interface ConfigMetadata {
   /** Unique configuration ID */
@@ -83,7 +81,7 @@ export interface ConfigMetadata {
 }
 
 /**
- * Registry of all configuration metadata
+ * Registry of all configuration metadata.
  */
 export const CONFIG_REGISTRY: Record<string, ConfigMetadata> = {
   [CONFIG_IDS.ORCHESTRATOR]: {
@@ -186,34 +184,53 @@ export const CONFIG_REGISTRY: Record<string, ConfigMetadata> = {
 };
 
 /**
- * Utility functions for working with configuration IDs
+ * Utility functions for working with configuration IDs.
  */
 export const ConfigUtils = {
   /**
-   * Validate that a configuration ID exists in the registry
+   * Validate that a configuration ID exists in the registry.
    *
-   * @param {string} configId - Configuration ID to validate.
-   * @returns {boolean} True if the ID exists in the registry; otherwise false.
+   * @param configId - Configuration ID to validate.
+   * @returns True if the ID exists in the registry; otherwise false.
+   *
+   * @example
+   * ```ts
+   * const ok = ConfigUtils.isValidConfigId(CONFIG_IDS.ORCHESTRATOR);
+   * ```
    */
   isValidConfigId(configId: string): boolean {
     return configId in CONFIG_REGISTRY;
   },
 
   /**
-   * Get metadata for a configuration ID
+   * Get metadata for a configuration ID.
    *
-   * @param {string} configId - Configuration ID to look up.
-   * @returns {ConfigMetadata | undefined} Metadata if found; otherwise undefined.
+   * @param configId - Configuration ID to look up.
+   * @returns Metadata if found; otherwise undefined.
+   *
+   * @example
+   * ```ts
+   * const meta = ConfigUtils.getMetadata(CONFIG_IDS.DATA_AGENT);
+   * console.log(meta?.version.major);
+   * ```
    */
   getMetadata(configId: string): ConfigMetadata | undefined {
     return CONFIG_REGISTRY[configId];
   },
 
   /**
-   * Parse version information from a configuration ID
+   * Parse version information from a configuration ID.
    *
-   * @param {string} configId - Configuration ID to parse.
-   * @returns {{ major: number; minor: number; patch: number } | undefined} Parsed version object, or undefined if not found.
+   * @param configId - Configuration ID to parse.
+   * @returns Parsed version object, or undefined if not found.
+   *
+   * @example
+   * ```ts
+   * const v = ConfigUtils.parseVersion(CONFIG_IDS.CLARIFICATION_AGENT);
+   * if (v) {
+   *   console.log(`${v.major}.${v.minor}.${v.patch}`);
+   * }
+   * ```
    */
   parseVersion(
     configId: string
@@ -223,11 +240,16 @@ export const ConfigUtils = {
   },
 
   /**
-   * Check if two configuration IDs are compatible (same agent type, compatible version)
+   * Check if two configuration IDs are compatible (same agent type, same major version).
    *
-   * @param {string} configId1 - First configuration ID.
-   * @param {string} configId2 - Second configuration ID.
-   * @returns {boolean} True if compatible; otherwise false.
+   * @param configId1 - First configuration ID.
+   * @param configId2 - Second configuration ID.
+   * @returns True if compatible; otherwise false.
+   *
+   * @example
+   * ```ts
+   * const ok = ConfigUtils.areCompatible(CONFIG_IDS.DATA_AGENT, CONFIG_IDS.DATA_AGENT);
+   * ```
    */
   areCompatible(configId1: string, configId2: string): boolean {
     const meta1 = this.getMetadata(configId1);
@@ -241,10 +263,15 @@ export const ConfigUtils = {
   },
 
   /**
-   * Get all configuration IDs for a specific agent type
+   * Get all configuration IDs for a specific agent type.
    *
-   * @param {string} agentType - Agent type key from metadata.
-   * @returns {string[]} Array of configuration IDs for the agent type.
+   * @param agentType - Agent type key from metadata.
+   * @returns Array of configuration IDs for the agent type.
+   *
+   * @example
+   * ```ts
+   * const ids = ConfigUtils.getConfigsForAgent("data-agent");
+   * ```
    */
   getConfigsForAgent(agentType: string): string[] {
     return Object.keys(CONFIG_REGISTRY).filter(
@@ -253,13 +280,19 @@ export const ConfigUtils = {
   },
 
   /**
-   * Generate a new configuration ID for an agent type and version
+   * Generate a new configuration ID for an agent type and version.
    *
-   * @param {string} agentType - Target agent type (e.g. "orchestrator").
-   * @param {number} major - Major version.
-   * @param {number} minor - Minor version.
-   * @param {number} patch - Patch version.
-   * @returns {string} Constructed configuration ID string.
+   * @param agentType - Target agent type (e.g. "orchestrator").
+   * @param major - Major version.
+   * @param minor - Minor version.
+   * @param patch - Patch version.
+   * @returns Constructed configuration ID string.
+   *
+   * @example
+   * ```ts
+   * const id = ConfigUtils.generateConfigId("orchestrator", 1, 1, 0);
+   * // "agent.orchestrator.v1.1.0"
+   * ```
    */
   generateConfigId(
     agentType: string,
@@ -272,16 +305,20 @@ export const ConfigUtils = {
 };
 
 /**
- * Type-safe way to reference configuration IDs
+ * Type-safe way to reference configuration IDs.
  */
 export type ConfigId = (typeof CONFIG_IDS)[keyof typeof CONFIG_IDS];
 
 /**
- * Validation function for configuration objects
+ * Validation helper for configuration objects.
  *
- * @param {{ $configId?: string }} config - Object to validate for a known configuration id.
- * @param {string} [config.$configId] - Configuration ID to validate against the registry.
- * @returns {boolean} True when a valid $configId exists in the registry; otherwise false.
+ * @param config - Object to validate for a known configuration id.
+ * @returns True when a valid `$configId` exists in the registry; otherwise false.
+ *
+ * @example
+ * ```ts
+ * const ok = validateConfig({ $configId: CONFIG_IDS.ORCHESTRATOR });
+ * ```
  */
 export function validateConfig(config: { $configId?: string }): boolean {
   if (!config.$configId) {
