@@ -4,7 +4,7 @@ summary: Improve Copilot instructions, introduce session-context discipline, mig
 branch: feat/update-repo-automation
 owner: @ErikPlachta
 created: 2025-11-12
-status: active
+status: complete
 links:
   - copilot-instructions: .github/copilot-instructions.md
   - session-context: CONTEXT-SESSION.md
@@ -82,7 +82,7 @@ links:
 5. Validation (quality gates pass) – DONE (compile/tests/docs lint/health pass; code lint has existing repo-ops JSDoc items to address separately)
 6. Changelog write command with EST timestamps – DONE
 7. TODO actions (complete/move) – DONE
-8. Unit tests for changelog write and TODO actions (mocked I/O) – IN PROGRESS
+8. Unit tests for changelog write and TODO actions (mocked I/O) – DONE
 9. Repo-ops docs source via TSDoc in CLI (no manual docs/) – DONE
 10. Optional CI: add repo-ops lint step – DONE (GitHub Actions workflow added: .github/workflows/repo-ops-lint.yml)
 
@@ -109,7 +109,7 @@ links:
 - [x] (P3) ID-OPS-006: Optional repo-ops lint in CI – implemented via .github/workflows/repo-ops-lint.yml
 - [x] (P2) ID-OPS-007: Implement changelog write command (logs-only, grouped by day)
 - [x] (P2) ID-OPS-008: Implement TODO actions (complete, move) with dry-run + backups
-- [ ] (P2) ID-OPS-009: Add unit tests for changelog write and TODO actions (mocked I/O; deterministic)
+- [x] (P2) ID-OPS-009: Add unit tests for changelog write and TODO actions (mocked I/O; deterministic)
 - [x] (P2) ID-OPS-010: Repo-ops usage documented via TSDoc at bin/repo-ops/index.ts
 
 ## Logging guidance

@@ -183,14 +183,12 @@ Follow these guidelines to ensure effective task management:
       - We should be able to use the new logging logic results to identify how many steps it took to get to a resolution, evaluate the original step, and extrapolate patterns.
       - When patterns are defined, user should be notified and provided a link in the chat to modify the settings if they want to remove it.
 - P3: EXTENSION: Add functionality within extension to work with TODOs and different functionalities within CoPilot Chat.
-
   - Maybe this should be an agent?
   - Want to take advantage of features that will help add clarity and keep Agent organized and focused while communicating to user with clarity.
   - I'm hoping there is a way to send a response up, so orchestrator can just pass the text block vs something really complicated.
     - If there is, probably this should be an agent.
 
-- P3: CI: Add optional repo-ops lint step
-  - Add a CI job to run `npm run repo:ops -- session lint` (and future repo-ops checks) to gate PRs
+<!-- The CI task moved to Completed after workflow addition -->
 
 <!-- END:BACKLOG_ACTION_ITEMS -->
 <!-- END:GENERATED_ACTION_ITEMS -->
@@ -199,5 +197,8 @@ Follow these guidelines to ensure effective task management:
 ## Completed TODOs
 
 > This section contains all completed TODOs, maintained for historical reference. The full list of completed TODOs start with a link to the `CHANGELOG.md` entry.
+
+- ✅ REPO-OPS: Harden tests with mocked I/O and unskip — see CHANGELOG entry "2025-11-12 22:05:00 ci: Repo-ops CI, mocked tests, and branch/task alignment"
+- ✅ CI: Add optional repo-ops lint step — implemented via `.github/workflows/repo-ops-lint.yml`
 
 <!-- END:COMPLETED_ACTION_ITEMS -->
