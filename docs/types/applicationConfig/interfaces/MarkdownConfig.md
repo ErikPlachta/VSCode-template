@@ -6,7 +6,7 @@
 
 # Interface: MarkdownConfig
 
-Defined in: [src/types/applicationConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L264)
+Defined in: [src/types/applicationConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L264)
 
 Markdown validation configuration.
 
@@ -16,7 +16,7 @@ Markdown validation configuration.
 
 > **exclude**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L268)
+Defined in: [src/types/applicationConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L268)
 
 File patterns to exclude from validation.
 
@@ -26,7 +26,7 @@ File patterns to exclude from validation.
 
 > **include**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L266)
+Defined in: [src/types/applicationConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L266)
 
 File patterns to include in validation.
 
@@ -36,7 +36,7 @@ File patterns to include in validation.
 
 > **requiredFrontMatter**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L270)
+Defined in: [src/types/applicationConfig.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L270)
 
 Required front matter fields.
 
@@ -46,6 +46,6 @@ Required front matter fields.
 
 > **requiredSections**: `string`[]
 
-Defined in: [src/types/applicationConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/applicationConfig.ts#L272)
+Defined in: [src/types/applicationConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L272)
 
 Required section headings.

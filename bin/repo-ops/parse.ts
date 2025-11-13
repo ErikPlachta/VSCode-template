@@ -3,6 +3,7 @@
  * Pure parsing helpers for working with delimited sections in markdown files.
  */
 import type { MarkerBounds, ExtractResult } from "./types";
+import { defaultConfig } from "./repo-ops.config";
 
 /**
  * Normalize CRLF to LF for predictable string operations.
@@ -85,11 +86,13 @@ export function upsertSection(
  * @returns {number} - Character index for insertion.
  */
 function findInsertionAnchor(src: string): number {
-  // Prefer to insert after the "## Incomplete TODOs" heading if present
-  const heading = /\n##\s+Incomplete\s+TODOs\s*\n/i;
-  const match = heading.exec(src);
-  if (match && match.index !== undefined) {
-    return match.index + match[0].length;
+  // Prefer to insert after a configured heading if present
+  if (defaultConfig.insertAnchorRegex) {
+    const heading = new RegExp(defaultConfig.insertAnchorRegex, "i");
+    const match = heading.exec(src);
+    if (match && match.index !== undefined) {
+      return match.index + match[0].length;
+    }
   }
 
   // Fallback: after front-matter or at beginning

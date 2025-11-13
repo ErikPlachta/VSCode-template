@@ -6,7 +6,7 @@
 
 # Interface: CategoryRequirements
 
-Defined in: [src/types/userContext.types.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L40)
+Defined in: [src/types/userContext.types.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L40)
 
 Category requirements and constraints
 
@@ -16,7 +16,7 @@ Category requirements and constraints
 
 > `optional` **notes**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L46)
+Defined in: [src/types/userContext.types.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L46)
 
 Additional notes about requirements
 
@@ -26,7 +26,7 @@ Additional notes about requirements
 
 > **requiredRecordFields**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L42)
+Defined in: [src/types/userContext.types.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L42)
 
 Fields that must be present in records
 
@@ -36,6 +36,6 @@ Fields that must be present in records
 
 > `optional` **requiredRelationshipFields**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L44)
+Defined in: [src/types/userContext.types.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L44)
 
 Relationship fields that must be present

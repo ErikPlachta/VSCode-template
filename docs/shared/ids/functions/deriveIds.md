@@ -8,7 +8,7 @@
 
 > **deriveIds**(`env`): [`DerivedIds`](../interfaces/DerivedIds.md)
 
-Defined in: [src/shared/ids.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/ids.ts#L44)
+Defined in: [src/shared/ids.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/ids.ts#L44)
 
 Compute IDs given environment variables. If no env provided, uses process.env.
 

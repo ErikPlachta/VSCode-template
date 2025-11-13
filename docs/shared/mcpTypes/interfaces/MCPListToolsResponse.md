@@ -6,7 +6,7 @@
 
 # Interface: MCPListToolsResponse
 
-Defined in: [src/shared/mcpTypes.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/mcpTypes.ts#L59)
+Defined in: [src/shared/mcpTypes.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/mcpTypes.ts#L59)
 
 JSON-RPC 2.0 payload returned by the MCP server.
 
@@ -16,7 +16,7 @@ JSON-RPC 2.0 payload returned by the MCP server.
 
 > `optional` **error**: `object`
 
-Defined in: [src/shared/mcpTypes.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/mcpTypes.ts#L63)
+Defined in: [src/shared/mcpTypes.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/mcpTypes.ts#L63)
 
 #### code?
 
@@ -36,7 +36,7 @@ Defined in: [src/shared/mcpTypes.ts:63](https://github.com/ErikPlachta/vscode-ex
 
 > **id**: `string` \| `number`
 
-Defined in: [src/shared/mcpTypes.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/mcpTypes.ts#L61)
+Defined in: [src/shared/mcpTypes.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/mcpTypes.ts#L61)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/shared/mcpTypes.ts:61](https://github.com/ErikPlachta/vscode-ex
 
 > **jsonrpc**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/mcpTypes.ts#L60)
+Defined in: [src/shared/mcpTypes.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/mcpTypes.ts#L60)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/shared/mcpTypes.ts:60](https://github.com/ErikPlachta/vscode-ex
 
 > `optional` **result**: `object`
 
-Defined in: [src/shared/mcpTypes.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/shared/mcpTypes.ts#L62)
+Defined in: [src/shared/mcpTypes.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/mcpTypes.ts#L62)
 
 #### tools?
 

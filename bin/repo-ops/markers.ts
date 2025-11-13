@@ -6,17 +6,9 @@
  * provide overrides if repository conventions differ.
  */
 import type { MarkerSet } from "./types";
+import { defaultConfig } from "./repo-ops.config";
 
 /**
  * Default markers used by the sync tooling.
  */
-export const defaultMarkers: MarkerSet = {
-  changelogOutstanding: {
-    begin: "<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->",
-    end: "<!-- CHANGELOG:END:OUTSTANDING_TASKS -->",
-  },
-  todoImportedMirror: {
-    begin: "<!-- TODO:BEGIN:IMPORTED_FROM_CHANGELOG -->",
-    end: "<!-- TODO:END:IMPORTED_FROM_CHANGELOG -->",
-  },
-};
+export const defaultMarkers: MarkerSet = defaultConfig.markers;

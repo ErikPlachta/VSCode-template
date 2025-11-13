@@ -6,7 +6,7 @@
 
 # Interface: GeneratedAgentConfig
 
-Defined in: [src/tools/generateMcpConfig.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L27)
+Defined in: [src/tools/generateMcpConfig.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L27)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/tools/generateMcpConfig.ts:27](https://github.com/ErikPlachta/v
 
 > **description**: `string`
 
-Defined in: [src/tools/generateMcpConfig.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L30)
+Defined in: [src/tools/generateMcpConfig.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L30)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/tools/generateMcpConfig.ts:30](https://github.com/ErikPlachta/v
 
 > **escalateWhen**: `string`[]
 
-Defined in: [src/tools/generateMcpConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L32)
+Defined in: [src/tools/generateMcpConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L32)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/tools/generateMcpConfig.ts:32](https://github.com/ErikPlachta/v
 
 > **execution**: `object`
 
-Defined in: [src/tools/generateMcpConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L33)
+Defined in: [src/tools/generateMcpConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L33)
 
 #### cacheEnabled?
 
@@ -50,7 +50,7 @@ Defined in: [src/tools/generateMcpConfig.ts:33](https://github.com/ErikPlachta/v
 
 > **id**: `string`
 
-Defined in: [src/tools/generateMcpConfig.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L28)
+Defined in: [src/tools/generateMcpConfig.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L28)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [src/tools/generateMcpConfig.ts:28](https://github.com/ErikPlachta/v
 
 > **metadata**: `object`
 
-Defined in: [src/tools/generateMcpConfig.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L38)
+Defined in: [src/tools/generateMcpConfig.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L38)
 
 #### capabilities
 
@@ -78,7 +78,7 @@ Defined in: [src/tools/generateMcpConfig.ts:38](https://github.com/ErikPlachta/v
 
 > **primarySignals**: `string`[]
 
-Defined in: [src/tools/generateMcpConfig.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L31)
+Defined in: [src/tools/generateMcpConfig.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L31)
 
 ***
 
@@ -86,4 +86,4 @@ Defined in: [src/tools/generateMcpConfig.ts:31](https://github.com/ErikPlachta/v
 
 > **title**: `string`
 
-Defined in: [src/tools/generateMcpConfig.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/tools/generateMcpConfig.ts#L29)
+Defined in: [src/tools/generateMcpConfig.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/tools/generateMcpConfig.ts#L29)

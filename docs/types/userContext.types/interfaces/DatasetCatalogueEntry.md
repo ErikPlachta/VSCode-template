@@ -6,7 +6,7 @@
 
 # Interface: DatasetCatalogueEntry
 
-Defined in: [src/types/userContext.types.ts:422](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L422)
+Defined in: [src/types/userContext.types.ts:422](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L422)
 
 Consolidated index entry persisted to the shared cache
 
@@ -16,7 +16,7 @@ Consolidated index entry persisted to the shared cache
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:425](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L425)
+Defined in: [src/types/userContext.types.ts:425](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L425)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:425](https://github.com/ErikPlachta/
 
 > **id**: `string`
 
-Defined in: [src/types/userContext.types.ts:423](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L423)
+Defined in: [src/types/userContext.types.ts:423](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L423)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/userContext.types.ts:423](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:424](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L424)
+Defined in: [src/types/userContext.types.ts:424](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L424)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/userContext.types.ts:424](https://github.com/ErikPlachta/
 
 > **primaryKeys**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:426](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L426)
+Defined in: [src/types/userContext.types.ts:426](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L426)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/userContext.types.ts:426](https://github.com/ErikPlachta/
 
 > **recordIds**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:427](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L427)
+Defined in: [src/types/userContext.types.ts:427](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L427)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/userContext.types.ts:427](https://github.com/ErikPlachta/
 
 > **relationships**: `object`[]
 
-Defined in: [src/types/userContext.types.ts:428](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L428)
+Defined in: [src/types/userContext.types.ts:428](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L428)
 
 #### cardinality
 
@@ -80,7 +80,7 @@ Defined in: [src/types/userContext.types.ts:428](https://github.com/ErikPlachta/
 
 > `optional` **requirements**: [`CategoryRequirements`](CategoryRequirements.md)
 
-Defined in: [src/types/userContext.types.ts:435](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L435)
+Defined in: [src/types/userContext.types.ts:435](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L435)
 
 ***
 
@@ -88,4 +88,4 @@ Defined in: [src/types/userContext.types.ts:435](https://github.com/ErikPlachta/
 
 > **schemaNames**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:434](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/2ccd6b8bbef47559b20524504c3e82ce2d944b63/src/types/userContext.types.ts#L434)
+Defined in: [src/types/userContext.types.ts:434](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L434)

@@ -13,8 +13,25 @@ describe("sessionLint.validateSessionContent", () => {
       "- CONTEXT-BRANCH.md",
       "- TODO.md",
       "",
-      "## Notes",
-      "-",
+      "<!-- BEGIN:COPILOT_INSTRUCTIONS -->",
+      "",
+      "## Copilot Instructions",
+      "",
+      "- Keep this session file concise.",
+      "",
+      "<!-- END:COPILOT_INSTRUCTIONS -->",
+      "",
+      "<!-- BEGIN:CURRENT-FOCUS-SUMMARY -->",
+      "",
+      "## Current Focus Summary",
+      "",
+      "<!-- END:CURRENT-FOCUS-SUMMARY -->",
+      "",
+      "<!-- BEGIN:CURRENT-FOCUS-DETAIL -->",
+      "",
+      "## Current Focus Detail",
+      "",
+      "<!-- END:CURRENT-FOCUS-DETAIL -->",
       "",
     ].join("\n");
 
@@ -30,9 +47,11 @@ describe("sessionLint.validateSessionContent", () => {
       "Started: not-a-timestamp",
       "",
       // Missing Related
-      "## Notes",
-      "-",
+      "<!-- BEGIN:COPILOT_INSTRUCTIONS -->",
+      "## Copilot Instructions",
+      "<!-- END:COPILOT_INSTRUCTIONS -->",
       "",
+      // Missing boundary markers
     ].join("\n");
 
     const res = validateSessionContent(md);
@@ -55,8 +74,14 @@ describe("sessionLint.validateSessionContent", () => {
       "- CONTEXT-BRANCH.md",
       "- TODO.md",
       "",
-      "## Notes",
-      "-",
+      "<!-- BEGIN:COPILOT_INSTRUCTIONS -->",
+      "## Copilot Instructions",
+      "<!-- END:COPILOT_INSTRUCTIONS -->",
+      "",
+      "<!-- BEGIN:CURRENT-FOCUS-SUMMARY -->",
+      "<!-- END:CURRENT-FOCUS-SUMMARY -->",
+      "<!-- BEGIN:CURRENT-FOCUS-DETAIL -->",
+      "<!-- END:CURRENT-FOCUS-DETAIL -->",
       "",
     ].join("\n");
 

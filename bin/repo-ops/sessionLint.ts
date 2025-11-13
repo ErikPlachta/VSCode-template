@@ -6,21 +6,10 @@
  */
 import * as fs from "fs/promises";
 import * as path from "path";
+import { defaultConfig } from "./repo-ops.config";
 import type { RepoPaths, SyncOptions, SyncResult } from "./types";
 
-/**
- * Resolve absolute repo file paths for session operations.
- *
- * @param {string} root - Repository root directory.
- * @returns {RepoPaths} - Absolute paths of key governance files.
- */
-function resolveRepo(root: string): RepoPaths {
-  return {
-    root,
-    changelog: path.join(root, "CHANGELOG.md"),
-    todo: path.join(root, "TODO.md"),
-  };
-}
+// Repo path resolution now sourced from central config
 
 /**
  * Validate the content of CONTEXT-SESSION.md.
@@ -39,13 +28,13 @@ export function validateSessionContent(
 } {
   const issues: string[] = [];
   const lines = md.split(/\r?\n/);
-  const maxAgeDays = opts.maxAgeDays ?? 14;
+  const maxAgeDays = opts.maxAgeDays ?? defaultConfig.sessionLint.maxAgeDays;
 
   // 1) First heading should be "# Session Context"
   const firstNonEmpty = lines.find((l) => l.trim().length > 0) ?? "";
-  if (firstNonEmpty.trim() !== "# Session Context") {
+  if (firstNonEmpty.trim() !== defaultConfig.sessionLint.topHeading) {
     issues.push(
-      'Missing or incorrect top heading: expected "# Session Context"'
+      `Missing or incorrect top heading: expected "${defaultConfig.sessionLint.topHeading}"`
     );
   }
 
@@ -84,7 +73,7 @@ export function validateSessionContent(
   if (relatedIndex === -1) {
     issues.push('Missing "## Related" section');
   } else {
-    const requiredRefs = ["CHANGELOG.md", "CONTEXT-BRANCH.md", "TODO.md"];
+    const requiredRefs = defaultConfig.sessionLint.requiredRelated;
     for (const ref of requiredRefs) {
       if (!md.includes(ref)) {
         issues.push(`Related section missing reference to ${ref}`);
@@ -92,24 +81,53 @@ export function validateSessionContent(
     }
   }
 
-  // 4) Notes section exists
-  const notesIndex = lines.findIndex((l) => l.trim() === "## Notes");
-  if (notesIndex === -1) {
-    issues.push('Missing "## Notes" section');
+  // 4) Copilot Instructions block exists (accept underscore or hyphen markers) and heading
+  const copilotBeginIdx = md.indexOf("<!-- BEGIN:COPILOT_INSTRUCTIONS -->");
+  const copilotEndIdx = md.indexOf("<!-- END:COPILOT_INSTRUCTIONS -->");
+  const copilotBeginAltIdx = md.indexOf("<!-- BEGIN:COPILOT-INSTRUCTIONS -->");
+  const copilotEndAltIdx = md.indexOf("<!-- END:COPILOT-INSTRUCTIONS -->");
+
+  const hasCopilotBlock =
+    (copilotBeginIdx !== -1 && copilotEndIdx !== -1 && copilotEndIdx > copilotBeginIdx) ||
+    (copilotBeginAltIdx !== -1 && copilotEndAltIdx !== -1 && copilotEndAltIdx > copilotBeginAltIdx);
+
+  if (!hasCopilotBlock) {
+    issues.push(
+      'Missing Copilot Instructions block (<!-- BEGIN:COPILOT_INSTRUCTIONS --> … <!-- END:COPILOT_INSTRUCTIONS -->)'
+    );
+  }
+
+  const hasCopilotHeading = lines.some(
+    (l) => l.trim().toLowerCase() === "## copilot instructions"
+  );
+  if (!hasCopilotHeading) {
+    issues.push('Missing "## Copilot Instructions" heading');
   }
 
   // 5) Ordering: Related before Notes; Started before sections
-  if (relatedIndex !== -1 && notesIndex !== -1 && notesIndex < relatedIndex) {
-    issues.push('Section order: "## Related" should appear before "## Notes"');
-  }
   if (startedIndex !== -1) {
     if (relatedIndex !== -1 && startedIndex > relatedIndex) {
       issues.push(
         'Ordering: "Started:" line should appear before "## Related"'
       );
     }
-    if (notesIndex !== -1 && startedIndex > notesIndex) {
-      issues.push('Ordering: "Started:" line should appear before "## Notes"');
+  }
+
+  // 6) Required boundary markers exist in correct order
+  const boundaries = defaultConfig.sessionLint.boundaryMarkers;
+  for (const b of boundaries) {
+    const beginIdx = md.indexOf(b.begin);
+    const endIdx = md.indexOf(b.end);
+    if (beginIdx === -1) {
+      issues.push(`Missing boundary marker: ${b.begin}`);
+      continue;
+    }
+    if (endIdx === -1) {
+      issues.push(`Missing boundary marker: ${b.end}`);
+      continue;
+    }
+    if (endIdx < beginIdx) {
+      issues.push(`Boundary order invalid: ${b.end} appears before ${b.begin}`);
     }
   }
 
@@ -125,7 +143,8 @@ export function validateSessionContent(
 export async function lintSession(
   options?: Partial<SyncOptions>
 ): Promise<SyncResult> {
-  const repo: RepoPaths = options?.repo ?? resolveRepo(process.cwd());
+  const repo: RepoPaths =
+    options?.repo ?? defaultConfig.resolveRepoPaths(process.cwd());
   const sessionPath = path.join(repo.root, "CONTEXT-SESSION.md");
 
   let content = "";
