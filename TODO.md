@@ -68,56 +68,45 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
-- P1: Data-Driven Architecture Integrity (Critical)
-  - **Objective**: Complete workflow execution system and finalize architectural cleanup.
-  - **ACTIVE: Workflow Execution System** (~95% complete, 30 min remaining)
-  - **Status**: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
-  - **Current Issue**: DatabaseAgent initialization error - data sources not loading properly
-  - **Next Steps**:
-    - ✅ Phase 1-4: COMPLETE (Agent isolation, response handling, testing, workflow coordination)
-    - 🔄 **Debug & Fix**: DatabaseAgent data source initialization (CURRENT PRIORITY)
-    - 🔄 Phase 5: Documentation (30 min) - Update migration guide with workflow patterns
-    - 🔄 Phase 6: Final Verification (15 min) - End-to-end testing, health check
-    - 🔄 Phase 7: Legacy Cleanup (15 min) - Remove relevant-data-manager references
-  - **Test Status**: 264/265 tests passing (100% pass rate for active tests)
-  - **Architecture Compliance**:
-    - ✅ Agent Isolation: Orchestrator is ONLY coordinator
-    - ✅ Data-Driven: No hardcoded business logic
-    - ✅ Single-Class: All agents follow 2-file pattern
-    - ✅ Type Centralization: Types in types/ folder
-    - ✅ Communication: CommunicationAgent handles ALL formatting
-  - Completed This Session
-    - (2025-11-12)
-      - ✅ **Chat UX Improvements**: Clarification with contextual examples, collapsible workflow details
-      - ✅ **copilot-instructions.md**: Streamlined 291→193 lines, added MCP tool guidance, added reload reminder
-      - 🔄 **DatabaseAgent Fix**: Attempted data source initialization from UserContextAgent (needs debugging)
-    - (2025-11-11)
-      - ✅ **Data-driven architecture cleanup**: All 7 agents now compliant (2-file, data-driven, importing-types)
-      - ✅ **Workflow execution system**: Complete lifecycle with logging, performance tracking, diagnostics
-      - ✅ **Extension integration**: Chat handler uses executeWorkflow(), displays actual data
+- P1: Agent Cleanup & Orchestrator Compliance (Critical)
+  - Objective: Ensure orchestrator follows agent isolation and data-driven design; agents return typed data only.
+  - Scope:
+    - Deep review each agent (5 Ws: intent, problem, why, how, when).
+    - Update JSDocs for all public agent APIs; fix missing @param/@returns.
+    - Expand `src/agent/index.ts` with documentation-level overview of core design and infrastructure.
+    - Audit for hardcoded business data and orchestrator responsibilities; delegate to appropriate agents.
+    - Orchestrator remediation:
+      - Remove user-facing formatting and ad-hoc markdown; call `CommunicationAgent` for all formatting.
+      - Replace hardcoded `validAgents` in `validateAction` with registry-derived keys.
+      - Refactor `route`/`handle` to return typed data and omit `markdown` fields; assemble UX via `CommunicationAgent`.
+  - Next Steps:
+    - Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes.
+    - Open follow-up TODOs per finding (one line each) and link in CHANGELOG when resolved.
 
 <!-- END:CURRENT_ACTION_ITEMS -->
 <!-- BEGIN:NEXT_ACTION_ITEMS -->
 
 ### Next Action Items
 
-- P2: AGENT: Updates
-  - feat: agent specific config need focus, signal, prompt starters, etc
-    - Review all agents to make sure they have the appropriate config options.
-      - Just like in the UserContext, agent configs should have base Signal, Focus, and PromptStarter definitions.
-      - User context values for these should also be passed in to relative agents on run time, to append the list with additional options.
+- P1: Data-Driven Architecture Integrity
+  - Objective: Complete workflow execution system and finalize architectural cleanup.
+  - Status: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
+  - Current Issue: DatabaseAgent initialization error - data sources not loading properly
+  - Next Steps:
+    - ✅ Phase 1-4: COMPLETE (Agent isolation, response handling, testing, workflow coordination)
+    - 🔄 Debug & Fix: DatabaseAgent data source initialization
+    - 🔄 Phase 5: Documentation – Update migration guide with workflow patterns
+    - 🔄 Phase 6: Final Verification – End-to-end testing, health check
+    - 🔄 Phase 7: Legacy Cleanup – Remove relevant-data-manager references
+  - Architecture Compliance:
+    - ✅ Agent Isolation / Data-Driven / Single-Class / Types centralized / Communication formatting via CommunicationAgent
 - P2: BUILD: Update build Pipeline to include bundler
-
   - Reference: [Bundling extensions](https://code.visualstudio.com/api/working-with-extensions/bundling-extension)
   - Evaluate options for bundling the extension to reduce size and improve performance.
     - Consider using tools like Webpack, Rollup, or esbuild.
     - Update the build scripts in package.json to include the bundling step.
     - Test the bundled extension to ensure it works correctly in VS Code.
     - Update documentation to reflect the new build process.
-
-- P2: REPO-OPS: Harden tests with mocked I/O and unskip
-  - Add deterministic unit tests for changelog write and TODO actions using mocked fs
-  - Ensure no real file mutations; restore tests from skipped state
 
 <!-- END:NEXT_ACTION_ITEMS -->
 <!-- BEGIN:BACKLOG_ACTION_ITEMS -->

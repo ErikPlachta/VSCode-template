@@ -36,6 +36,25 @@ This changelog records Logs only.
 
 ### [2025-11-12]
 
+#### 2025-11-12 22:55:00 chore/refactor: Centralize orchestrator formatting and make agent validation data-driven
+
+**Problem/Context**: Orchestrator assembled user-facing markdown and validated agents via a hardcoded list, violating agent isolation and data-driven design.
+
+**Changes Made**:
+
+1. `src/agent/orchestrator/index.ts` (route): Compose routing message and delegate formatting to `CommunicationAgent.formatSuccess`; keep `markdown` for compatibility.
+2. `src/agent/orchestrator/index.ts` (formatResponseForUser): Delegate final formatting to `CommunicationAgent` for consistent UX.
+3. `src/agent/orchestrator/index.ts` (validateAction): Replace hardcoded `validAgents` array with registry-derived keys.
+4. `src/agent/index.ts`: Expand module JSDoc with architecture overview (data flow, isolation, typed-data contract, formatting ownership).
+
+**Architecture Notes**: Orchestrator returns typed data and defers presentation to `CommunicationAgent`. Agent IDs are derived from the runtime registry, removing hardcoded business values. This aligns with agent isolation and data-driven governance.
+
+**Files Changed**: `src/agent/orchestrator/index.ts`, `src/agent/index.ts`
+
+**Testing**: Build: PASS (`npm run compile`); Tests: PASS (34 passed, 1 skipped, 271 total); Docs Lint: PASS (`npm run lint:docs`); Lint/Docs/Health: Deferred to CI prebuild
+
+**Impact**: Consistent, centralized formatting; data-driven validation; smoother path to deprecate the `markdown` field in a later stage without breaking current callers.
+
 #### 2025-11-12 22:40:00 chore: Remove CONTEXT-BRANCH; consolidate planning into CONTEXT-SESSION
 
 **Problem/Context**: Maintain a single, authoritative context file to reduce drift and simplify governance. `CONTEXT-BRANCH.md` created duplication across docs, config, and tests.

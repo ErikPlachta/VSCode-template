@@ -448,17 +448,38 @@ export class Orchestrator extends BaseAgentConfig {
     const summary = this.generateSummary(classification, input);
     const payload = this.generatePayload(classification, input);
 
+    // Compose a message and delegate formatting to CommunicationAgent
+    const lines: string[] = [];
+    lines.push(
+      `## ${
+        classification.intent.charAt(0).toUpperCase() +
+        classification.intent.slice(1)
+      } Request`
+    );
+    if (summary) lines.push(summary);
+    if (agent !== this._getFallbackAgent()) {
+      lines.push(`*Routing to: ${agent}*`);
+    }
+    if ((classification.matchedSignals?.length || 0) > 0) {
+      lines.push(
+        `**Matched keywords:** ${classification.matchedSignals!.join(", ")}`
+      );
+    }
+    const message = lines.join("\n\n");
+    const formatted = this.communicationAgent.formatSuccess(
+      CommunicationAgent.createSuccessResponse(payload, {
+        message,
+        metadata: { operation: "route", intent: classification.intent },
+      })
+    );
+
     return {
       intent: classification.intent,
       agent,
       summary,
       rationale: classification.rationale,
       payload,
-      markdown: `## ${classification.intent}\n\n${
-        classification.rationale
-      }\n\nMatched signals: ${
-        classification.matchedSignals?.join(", ") || "none"
-      }`,
+      markdown: formatted.message,
     };
   }
 
@@ -586,26 +607,19 @@ export class Orchestrator extends BaseAgentConfig {
     response: OrchestratorResponse,
     _input: OrchestratorInput
   ): string {
-    const sections: string[] = [];
-
-    // Add header with intent classification
-    sections.push(
+    const lines: string[] = [];
+    lines.push(
       `## ${
         response.intent.charAt(0).toUpperCase() + response.intent.slice(1)
       } Request`
     );
-
-    // Add the main response content
     if (response.summary) {
-      sections.push(`${response.summary}`);
+      lines.push(response.summary);
     }
-
-    // Add routing information if helpful
     if (response.agent !== this._getFallbackAgent()) {
-      sections.push(`*Routing to: ${response.agent}*`);
+      lines.push(`*Routing to: ${response.agent}*`);
     }
 
-    // Add matched signals for transparency (when available)
     const payload = response.payload as unknown;
     const hasClassification =
       typeof payload === "object" &&
@@ -619,10 +633,17 @@ export class Orchestrator extends BaseAgentConfig {
       const matched = (
         payload as { classification?: OrchestratorClassification }
       ).classification?.matchedSignals as string[];
-      sections.push(`**Matched keywords:** ${matched.join(", ")}`);
+      lines.push(`**Matched keywords:** ${matched.join(", ")}`);
     }
 
-    return sections.join("\n\n");
+    const message = lines.join("\n\n");
+    const formatted = this.communicationAgent.formatSuccess(
+      CommunicationAgent.createSuccessResponse(response.payload, {
+        message,
+        metadata: { operation: "route", intent: response.intent },
+      })
+    );
+    return formatted.message;
   }
 
   /**
@@ -1376,12 +1397,8 @@ export class Orchestrator extends BaseAgentConfig {
         };
       }
 
-      // Check agent exists in registry
-      const validAgents = [
-        "database-agent",
-        "data-agent",
-        "user-context-agent",
-      ];
+      // Check agent exists in registry (data-driven from registry keys)
+      const validAgents = Object.keys(this.agentRegistry || {});
       if (!validAgents.includes(action.agent)) {
         return {
           valid: false,
