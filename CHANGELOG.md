@@ -36,6 +36,28 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 12:40:00 docs/governance: Add TSDoc practices and pitfalls to Copilot instructions
+
+**Problem/Context**: We added a pitfalls section to `TSDOC_REFERENCE_GUIDE.md`, but Copilot Chat relies on `.github/copilot-instructions.md` as the canonical governance surface. The guidance needed to be present there so agents consistently follow it.
+
+**Changes Made**:
+
+1. `.github/copilot-instructions.md`:
+   - Added "TSDoc: Practices and Pitfalls" under the TSDoc defaults section covering:
+     - Symbol-level `@example` placement (not on members)
+     - Block comment safety (avoid `*/` e.g., from `**/` globs; provide safe alternatives)
+     - Prefer `@see` links to canonical docs instead of duplicating long examples
+     - Always fence code blocks with language tag
+     - Post-edit build hygiene (`npm run compile` to catch TS1109/TS1160)
+     - Pointer to `TSDOC_REFERENCE_GUIDE.md` for deeper details
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Docs: N/A (guidance docs only)
+
+**Impact**: Ensures Copilot Chat surfaces TSDoc pitfalls/practices directly in governance, reducing recurrence of comment-terminator errors and keeping examples centralized and safe.
+
 #### 2025-11-13 12:12:00 docs/tsdoc: Restore safe @example blocks and add @see links in applicationConfig
 
 **Problem/Context**: Fenced @example blocks in `src/types/applicationConfig.ts` used glob patterns like `**/*.ts` and `**/_ARCHIVE/**` which introduced the `*/` sequence inside TSDoc comments, prematurely closing the block and breaking TypeScript compilation. A temporary placeholder removed some examples to unblock the build.
@@ -43,9 +65,10 @@ This changelog records Logs only.
 **Changes Made**:
 
 1. `src/types/applicationConfig.ts`:
-  - Restored fenced `@example` blocks with safe content for `JsonSchemaConfig`, `MarkdownConfig`, and `ReportConfig`.
-  - Added `@see` references to `docs/tools/validateJson/README.md` and `docs/tools/validateMarkdown/README.md`.
-  - For `ApplicationConfig`, replaced the long inline example with `@see` pointers to `docs/config/application.config/variables/applicationConfig.md` and `src/config/application.config.ts` to avoid duplication and comment-terminator pitfalls.
+
+- Restored fenced `@example` blocks with safe content for `JsonSchemaConfig`, `MarkdownConfig`, and `ReportConfig`.
+- Added `@see` references to `docs/tools/validateJson/README.md` and `docs/tools/validateMarkdown/README.md`.
+- For `ApplicationConfig`, replaced the long inline example with `@see` pointers to `docs/config/application.config/variables/applicationConfig.md` and `src/config/application.config.ts` to avoid duplication and comment-terminator pitfalls.
 
 **Testing**:
 
@@ -112,7 +135,6 @@ This changelog records Logs only.
 2. Notes: Added session notes in `CONTEXT-SESSION.md` under thinking area to capture audit outcome and next UX evaluation.
 
 **Impact**: Confirms CommunicationAgent is fully data-driven for examples; no code change required beyond documentation/notes.
-
 
 #### 2025-11-13 10:00:00 refactor: CommunicationAgent clarification via configuration; add types and templates
 

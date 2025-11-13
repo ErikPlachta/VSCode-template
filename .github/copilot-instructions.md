@@ -210,6 +210,19 @@ Timestamping entries:
 - Prefer “types-as-docs”: place comprehensive descriptions and examples on exported types/interfaces (e.g., `src/types/agentConfig.ts`) instead of duplicating comments in runtime configs.
 - Generated or compiled outputs under `out/**` are lint-ignored; if docs are needed there, prefer a separate JSDoc task.
 
+### TSDoc: Practices and Pitfalls
+
+- Examples placement: Put `@example` blocks on the symbol’s top-level docblock (exported interfaces/types/classes), not on individual members. Keep member docs concise (what the field means), and centralize usage examples on the parent symbol.
+- Block comment safety: Avoid any `*/` sequence inside TSDoc comments. Glob patterns like `**/` will prematurely close the comment and break compilation. Use safer alternatives like `"docs/*.md"`, or split patterns such as `"docs/**" + "/*.md"` when you must illustrate recursion.
+- Prefer `@see` over long samples: When examples are lengthy or already documented elsewhere, link to the canonical source with `@see` instead of duplicating. Common targets:
+  - `docs/tools/validateMarkdown/README.md`
+  - `docs/tools/validateJson/README.md`
+  - `docs/config/application.config/variables/applicationConfig.md`
+  - `src/config/application.config.ts`
+- Fenced code: Always fence examples with a language tag (e.g., ```ts) to keep IntelliSense and rendered docs clean.
+- Build hygiene: After editing TSDoc-heavy files, run `npm run compile` to catch accidental comment termination early (TS1109/TS1160 errors).
+- Reference guide: For details and safe patterns, see `TSDOC_REFERENCE_GUIDE.md` (includes a pitfalls section on block comment termination and `@see` usage).
+
 ## Agent Folder Standard
 
 Each agent folder has **EXACTLY 2 files**:

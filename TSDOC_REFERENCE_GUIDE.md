@@ -157,6 +157,29 @@ interface AgentIdentity {
 
 ---
 
+## ⚠️ Pitfalls with Block Comments
+
+Doc comments are regular block comments. Any `*/` sequence ends the comment, even inside fenced examples.
+
+- Avoid placing glob patterns with `**/` inside TSDoc comments (e.g., `"docs/**/*.md"`). They contain `*/` and will prematurely close the comment.
+- Safer alternatives:
+  - Escape the asterisk: `"docs/*\*/.md"` (may not work in all contexts).
+  - Or break the pattern to avoid `*/` (e.g., `"docs/**" + "/*.md"`).
+  - OR use simplified examples that don’t include `**/` (e.g., `"docs/*.md"`) if it doesn't affect integrity (isn't wrong in context).
+  - Prefer shorter examples and add `@see` to the source of truth (docs or config files) instead of duplicating long samples.
+
+Example (safe):
+
+```ts
+/**
+ * @example
+ * const cfg = { include: ["docs/*.md"] };
+ * @see docs/tools/validateMarkdown/README.md
+ */
+```
+
+---
+
 ## 📦 Use Cases
 
 | Use Case                 | Example                                                                                  |
