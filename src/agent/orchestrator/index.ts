@@ -2266,40 +2266,8 @@ export class Orchestrator extends BaseAgentConfig {
     }
   }
 
-  /**
-   * Format array of records as markdown table
-   *
-   * @param {unknown[]} records - Array of records
-   * @returns {string} Markdown formatted table
-   */
-  private formatRecords(records: unknown[]): string {
-    if (records.length === 0) {
-      return "No records found";
-    }
-
-    // Simple list format for now (can be enhanced to table)
-    return records
-      .slice(0, 10)
-      .map((record, i) => {
-        const obj = record as Record<string, unknown>;
-        const name = obj.name || obj.id || `Item ${i + 1}`;
-        return `- ${name}`;
-      })
-      .join("\n");
-  }
-
-  /**
-   * Format object as markdown
-   *
-   * @param {object} obj - Object to format
-   * @returns {string} Markdown formatted object
-   */
-  private formatObject(obj: object): string {
-    return Object.entries(obj)
-      .slice(0, 10)
-      .map(([key, value]) => `- **${key}**: ${String(value)}`)
-      .join("\n");
-  }
+  // Note: Manual formatting helpers (formatRecords/formatObject) were removed.
+  // All user-facing formatting is delegated to CommunicationAgent.
 
   /**
    * Build workflow result object

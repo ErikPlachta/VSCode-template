@@ -54,6 +54,19 @@ This changelog records Logs only.
 
 **Impact**: Eliminates drift from hardcoded categories and consolidates formatting in one place, simplifying future UX improvements and reducing risk of inconsistent presentation.
 
+#### 2025-11-12 23:36:00 chore: Normalize TODO.md to checkbox lists; prune unused orchestrator helpers
+
+**Problem/Context**: TODO list formatting mixed plain bullets and emoji; governance prefers explicit checkboxes for automation. Orchestrator still contained unused manual-formatting helpers (`formatRecords`, `formatObject`) after centralizing formatting to CommunicationAgent.
+
+**Changes Made**:
+
+1. `TODO.md` (Generated Action Items): Converted all bullets under Current/Next/Backlog/Completed to `- [ ]` / `- [x]` checkboxes.
+2. `src/agent/orchestrator/index.ts`: Removed unused `formatRecords` and `formatObject` helpers; left a note indicating formatting is owned by `CommunicationAgent`.
+
+**Testing**: Build: PASS (`npm run compile`); Tests: PASS (34 passed, 1 skipped, 271 total).
+
+**Impact**: Consistent checklist format in TODOs for better automation; cleaner orchestrator with presentation concerns fully delegated.
+
 #### 2025-11-12 23:05:00 chore/deprecate: OrchestratorResponse.markdown deprecated; add formatted field
 
 **Problem/Context**: We want Orchestrator to return typed data while CommunicationAgent owns formatting. The top-level `markdown` string on `OrchestratorResponse` encouraged presentation coupling and conflicted with `WorkflowResult.formatted` used by full workflows.
