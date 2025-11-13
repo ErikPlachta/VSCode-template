@@ -36,6 +36,25 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 12:55:00 docs/tsdoc: Sweep workflow and userContext types for TSDoc consistency
+
+**Problem/Context**: Remaining type files lacked consistent TSDoc tags, examples at symbol-level, and precise param/return descriptions. This reduced IntelliSense quality and risked drift from governance standards.
+
+**Changes Made**:
+
+1. `src/types/workflow.types.ts`:
+  - Added `@remarks`, `@see`, and a safe `@example` on `WorkflowAction`.
+  - Clarified summaries for context, diagnostics, history, and result types.
+2. `src/types/userContext.types.ts`:
+  - Converted JSDoc-style tags to TSDoc style with precise `@param`/`@returns`.
+  - Added small, safe `@example` blocks for guards and validators (`isCategoryConfig`, `validateCategoryConfig`, `formatValidationErrors`).
+  - Enhanced top-level `@remarks` explaining usage and dependency boundaries.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+
+**Impact**: Improves IntelliSense and documentation consistency; aligns types with governance (examples at symbol-level, safe fenced code, and no risky comment terminators).
 #### 2025-11-13 12:40:00 docs/governance: Add TSDoc practices and pitfalls to Copilot instructions
 
 **Problem/Context**: We added a pitfalls section to `TSDOC_REFERENCE_GUIDE.md`, but Copilot Chat relies on `.github/copilot-instructions.md` as the canonical governance surface. The guidance needed to be present there so agents consistently follow it.
