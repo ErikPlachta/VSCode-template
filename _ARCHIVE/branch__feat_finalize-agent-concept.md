@@ -1,4 +1,5 @@
 ---
+
 title: Branch Focus – feat/update-repo-automation
 summary: Improve Copilot instructions, introduce session-context discipline, migrate task management from CHANGELOG to TODO, and scaffold a RepoAutomation CLI to enforce governance without breaking existing flows. Tasks now live in TODO.md; CHANGELOG is history only.
 branch: feat/update-repo-automation
@@ -11,7 +12,14 @@ links:
   - changelog: CHANGELOG.md
   - todo: TODO.md
   - repo-ops-cli: bin/repo-ops/ (scaffolded)
+
 ---
+
+> archived: true  
+> source: CONTEXT-BRANCH.md  
+> archivedAt: 2025-11-12
+
+<!-- BEGIN:BRANCH-CONTEXT -->
 
 ## Objectives
 
@@ -121,3 +129,5 @@ links:
 
 - Restore from repo-ops backup folder for any mutated file
 - Revert migration by re-synchronizing Outstanding Tasks from backup and removing banner
+
+<!-- END:BRANCH-FOCUS -->

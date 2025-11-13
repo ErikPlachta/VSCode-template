@@ -86,7 +86,6 @@ function defaultSessionTemplate(): string {
     "",
     "## Related",
     "- CHANGELOG.md",
-    "- CONTEXT-BRANCH.md",
     "- TODO.md",
     "",
     "<!-- BEGIN:COPILOT_INSTRUCTIONS -->",
@@ -162,14 +161,13 @@ export const defaultConfig: RepoOpsConfig = {
   },
   // Prefer inserting after this heading if present; otherwise insert at top
   insertAnchorRegex: "\n##\\s+Generated\\s+Action\\s+Items\\s*\n",
-  timeZone: "America/New_York",
   generatedActionsHeading:
     "### Action Items (generated from CHANGELOG Outstanding Tasks)",
   mirrorAdvisory:
     "READ-ONLY MIRROR – This section is imported from CHANGELOG Outstanding Tasks for migration. Do not edit here.",
   sessionLint: {
     topHeading: "# Session Context",
-    requiredRelated: ["CHANGELOG.md", "CONTEXT-BRANCH.md", "TODO.md"],
+    requiredRelated: ["CHANGELOG.md", "TODO.md"],
     maxAgeDays: 14,
     boundaryMarkers: [
       {

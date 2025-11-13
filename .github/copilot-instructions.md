@@ -105,7 +105,7 @@ Use `mcp_memory` tools when:
   - If it’s a task (work to do): add/update in `TODO.md` (Current/Next/Backlog/Completed). Link to related log entry when done.
   - If it’s history/decision/result: add a `CHANGELOG.md` log entry with details and verification.
   - If it’s transient session thoughts/notes: put in `CONTEXT-SESSION.md` under Notes. Keep concise and rotate frequently.
-  - If it’s long‑lived branch plan/status: update `CONTEXT-BRANCH.md`.
+  - If it’s long‑lived branch plan/status: use `CONTEXT-SESSION.md` (Branch Plan section).
 
 ### Before you code (fast preflight)
 
@@ -263,8 +263,7 @@ const __dirname = path.dirname(__filename);
 
 - `TODO.md` – Source of truth for outstanding tasks and priorities (Current/Next/Backlog)
 - `CHANGELOG.md` – History and verification only (no Outstanding Tasks mirror)
-- `CONTEXT-SESSION.md` – Rolling session scratchpad: current focus, active branch/run state, quick notes. Rotate via repo-ops (session rotate) between work sprints.
-- `CONTEXT-BRANCH.md` – Branch plan and status: scope, milestones, acceptance criteria, and progress. Update as the branch evolves; close when merged.
+- `CONTEXT-SESSION.md` – Rolling session scratchpad and branch planning (Branch Plan section). Track current focus, active branch/run state, quick notes. Rotate via repo-ops (session rotate) between sprints.
 - `src/config/application.config.ts` – Application configuration
 - `src/agent/*/agent.config.ts` – Agent configurations
 - `src/shared/ids.ts` – Central ID derivation
@@ -513,20 +512,15 @@ const __dirname = path.dirname(__filename);
 
 Refer to `CHANGELOG.md` for historical decisions and active planned tasks before starting new work.
 
-## Context files: roles and usage
+## Context file: role and usage
 
-Use both context files to keep navigation fast and thinking visible without polluting the changelog:
+Use `CONTEXT-SESSION.md` to keep navigation fast and thinking visible without polluting the changelog:
 
-- `CONTEXT-SESSION.md` (short-lived)
+- `CONTEXT-SESSION.md`
 
-  - Purpose: Live session notes for the current working block. Track: active branch, focus areas, what tasks/tests are running, quick decisions, and immediate follow-ups.
+  - Purpose: Live session notes for the current working block and branch planning (see “Branch Plan (Active)” section). Track: active branch, focus areas, tasks/tests running, quick decisions, and immediate follow-ups.
   - When to update: At session start, after notable steps (e.g., tool runs, edits, verification), and before pausing. Rotate with repo-ops `session rotate` between sprints.
   - Structure tips: Keep it skim-friendly with headings like “current focus”, “actions taken”, “next up”. Avoid duplicating detailed history—link to CHANGELOG entries instead.
-
-- `CONTEXT-BRANCH.md` (longer-lived)
-  - Purpose: Branch plan and status. Capture scope, milestones, acceptance criteria, risks, and decision records that span multiple sessions.
-  - When to update: When scope changes, milestones complete, new risks are found, or acceptance criteria evolve. Close or archive when the branch merges.
-  - Structure tips: Start with a brief summary and milestone checklist. Include a task map keyed to TODO items for traceability.
 
 Notes:
 

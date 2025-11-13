@@ -5,7 +5,6 @@ Started: 2025-11-12T17:30:00Z
 ## Related
 
 - [CHANGELOG.md](CHANGELOG.md)
-- [CONTEXT-BRANCH.md](CONTEXT-BRANCH.md)
 - [TODO.md](TODO.md)
 
 <!-- BEGIN:COPILOT_INSTRUCTIONS -->
@@ -56,5 +55,50 @@ Started: 2025-11-12T17:30:00Z
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
 
 ## Current Focus Detail
+
+### Agent Cleanup (Draft)
+
+These are instructions I have started for the next branch, so that I can work through and clean up the Agents more.
+
+It's rough draft and needs review.
+
+If Copilot Chat sees this section, do not change it and do not modify it outside of the markers in this file.
+
+Context below to make a plan for next steps:
+
+1. Firstly, the change made to the orchestrator logic did resolve the error I was seeing. That being said, we've broken one of the core application rules:
+
+> - Data driven design.
+> - Segmentation of responsibilities.
+
+> **There are two violations that I see**:
+>
+> 1.1. Orchestrator has hard-coded data, instead of using a data driven design.
+> 1.2. Orchestrator should be using another agent to handle the data processing.
+>
+> At this point, I'm concerned there is more.
+>
+> Furthermore, we need to figure out why you keep making this mistake when developing solutions
+
+1. DO a deep review on agents, verify you understand the existing features, outlining the 5 Ws for each.
+
+> - What is the agent's design intention?
+> - What problem does it solve?
+> - Why does it solve that problem?
+> - How does it solve problem(s)?
+> - When does it solve problems?
+> - etc, etc, etc.
+
+1. During this process, please update the JSDocs within each agent.
+
+> - Don't assume anything existing is accurate.
+
+1. Update `C:\repo\vscode-extension-mcp-server\src\agent\index.ts` to contain more documentation-level details.
+
+> It should provide an overview of the application's core design and infrastructure.
+
+1. During this process, also look for any concerns where core application design goals are not being followed.
+
+> - If you do, update the current tasks in the change log so that it's clear what needs to be resolved.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->

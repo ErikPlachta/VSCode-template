@@ -36,6 +36,26 @@ This changelog records Logs only.
 
 ### [2025-11-12]
 
+#### 2025-11-12 22:40:00 chore: Remove CONTEXT-BRANCH; consolidate planning into CONTEXT-SESSION
+
+**Problem/Context**: Maintain a single, authoritative context file to reduce drift and simplify governance. `CONTEXT-BRANCH.md` created duplication across docs, config, and tests.
+
+**Changes Made**:
+
+1. `bin/repo-ops/repo-ops.config.ts`: Removed `CONTEXT-BRANCH.md` from the default session template Related list and from `sessionLint.requiredRelated`.
+2. `tests/repoOps.sessionLint.test.ts`: Updated fixtures to no longer expect `CONTEXT-BRANCH.md` under Related.
+3. `.github/copilot-instructions.md`: Consolidated branch planning guidance into `CONTEXT-SESSION.md` (Branch Plan section); removed references to `CONTEXT-BRANCH.md`.
+4. `CONTEXT-SESSION.md`: Cleaned Related links to drop `CONTEXT-BRANCH.md`; branch plan lives under “Branch Plan (Active)”.
+5. `CONTEXT-BRANCH.md`: Deleted from repository.
+
+**Architecture Notes**: Session becomes the single context surface (includes Branch Plan). Repo-ops session lint requires only `CHANGELOG.md` and `TODO.md` in Related; avoids multi-file drift.
+
+**Files Changed**: `bin/repo-ops/repo-ops.config.ts`, `tests/repoOps.sessionLint.test.ts`, `.github/copilot-instructions.md`, `CONTEXT-SESSION.md`, `CONTEXT-BRANCH.md` (deleted)
+
+**Testing**: Build: PASS (`npm run compile`); Tests: PASS (34 passed, 1 skipped, 271 total); Lint: PASS (repo-ops); Docs Lint: PASS; Health: PASS; Coverage: unchanged; JSDoc: unchanged
+
+**Impact**: Simplifies context management; eliminates dead links; prevents future drift by making the session file the single context entry point.
+
 #### 2025-11-12 22:18:00 docs: Finalize branch context and sync TODO
 
 **Problem/Context**: Close out branch work by marking CONTEXT-BRANCH complete, aligning milestones with actual state, and syncing completed items into TODO.md while keeping governance rules intact.
