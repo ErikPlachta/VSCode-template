@@ -86,12 +86,16 @@ Follow these guidelines to ensure effective task management:
     - [x] CommunicationAgent: Clarification formatting is fully config-driven (no hardcoded examples/categories); uses `communication.clarification`.
     - [x] CommunicationAgent: Replace hardcoded "Available Categories" list with dynamic enumeration from `UserContextAgent` categories (via response metadata in error/clarification paths).
     - [x] CommunicationAgent: Replace example queries that hardcode category names with data-driven templates or config-provided samples (clarification path complete; other responses pending). Audit found no hardcoded category examples outside clarification; clarification already config-driven.
-    - [x] Types: Add comprehensive JSDoc for all configuration types in all type files. For example, `src/types/agentConfig.ts` (purpose, parameters, defaults) and include example snippets to power IntelliSense; prefer types-level docs over inline comments in `agent.config.ts` to avoid duplication as a code-base level rule. We may find duplication and contradictions. Use the end of the CONTEXT-SESSION for notes to stay organized and make a plan between the markers `CONTEXT-SESSION-LLM-THINKING-NOTES-AREA`.
-      - [x] agentConfig.ts
+    - [ ] Types: Add comprehensive TSDoc for all configuration types in all type files. For example, `src/types/agentConfig.ts` (purpose, parameters, defaults) and include example snippets to power IntelliSense; prefer types-level docs over inline comments in `agent.config.ts` to avoid duplication as a code-base level rule. We may find duplication and contradictions. Use the end of the CONTEXT-SESSION for notes to stay organized and make a plan between the markers `CONTEXT-SESSION-LLM-THINKING-NOTES-AREA`.
+      - [] agentConfig.ts
         - [x] Made initial changes to verify desire
         - [x] User updated with more complete JSDOC @property values and comments as desired.
         - [ ] Verified user changes to make a plan for all other files
       - [ ] List other files here and execute same type of changes as in agentConfig.ts
+    - [ ] Extract Functions out of `Types` and move into `Shared`
+      - When reviewing `agentConfig.ts`, I noticed a handful of functions and methods that should be in the `C:\repo\vscode-extension-mcp-server\src\shared` folder.
+        - example, but not limited to: `public setConfigItem`, `function createDescriptorMap`, `protected _getConfig():`, `public getUserFacingConfig()`.
+        - I'm concerned this is a mistake thats true in other files, and we need to keep the architecture clean.
     - [ ] CommunicationAgent (evaluation): Identify other responses where `metadata.availableCategories` (or similar) adds value beyond error/clarification (e.g., success for `metadataRetrieved`); define config-gated enumeration and limits; open follow-ups per finding.
     - [ ] ClarificationAgent: Ensure examples and capability lists derive from manifest/config (no hardcoded business values).
     - [ ] DatabaseAgent: Confirm all field aliases live in config only; no code-level hardcoded business values.
@@ -106,6 +110,13 @@ Follow these guidelines to ensure effective task management:
 
 ### Next Action Items
 
+- [ ] P1: Refactor shared config utilities into `src/shared`
+  - [ ] Extract `BaseAgentConfig` helpers and related utilities into `src/shared/config/`
+  - [ ] Candidates: `setConfigItem`, `getUserFacingConfig`, `_getConfig`, `getExecutionConfig`, descriptor helpers
+  - [ ] Extract `createDescriptorMap()` into `src/shared/config/descriptors.ts`
+  - [ ] Update all imports across agents and tools; run `npm run fix:imports` if needed
+  - [ ] Add unit tests for shared helpers; update existing tests to new import paths
+  - [ ] Update type docs to reference new shared modules; add CHANGELOG entry
 - [ ] P1: Data-Driven Architecture Integrity
   - [ ] Objective: Complete workflow execution system and finalize architectural cleanup.
   - [ ] Status: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
@@ -118,19 +129,6 @@ Follow these guidelines to ensure effective task management:
     - [ ] 🔄 Phase 7: Legacy Cleanup – Remove relevant-data-manager references
   - [ ] Architecture Compliance:
     - [ ] ✅ Agent Isolation / Data-Driven / Single-Class / Types centralized / Communication formatting via CommunicationAgent
-- [ ] P2: BUILD: Update build Pipeline to include bundler
-  - [ ] Reference: [Bundling extensions](https://code.visualstudio.com/api/working-with-extensions/bundling-extension)
-  - [ ] Evaluate options for bundling the extension to reduce size and improve performance.
-    - [ ] Consider using tools like Webpack, Rollup, or esbuild.
-    - [ ] Update the build scripts in package.json to include the bundling step.
-    - [ ] Test the bundled extension to ensure it works correctly in VS Code.
-    - [ ] Update documentation to reflect the new build process.
-  - [ ] P1: Lint/Docs: Adopt TSDoc in `src`, keep JSDoc for `out`
-    - [ ] Install `eslint-plugin-tsdoc` and update local dev (`npm i`).
-    - [ ] Run `npm run lint` to validate TSDoc tags (e.g., `@remarks`) do not error.
-    - [ ] Confirm TypeDoc renders `@remarks` and examples from `src` as expected.
-    - [ ] Evaluate adding a `jsdoc` doc task for `out/**` (optional) and wire as `docs:jsdoc`.
-    - [ ] Update governance docs to reflect “TSDoc for src / JSDoc for out” policy.
 - [ ] P1: Build Utilities Evaluation and Consolidation
   - [ ] Disable JSON lint in pipelines (bash + Windows) — COMPLETE in this branch
   - [ ] Audit `@tools/repositoryHealth` usage paths
@@ -145,6 +143,19 @@ Follow these guidelines to ensure effective task management:
   - [ ] Docs
     - [ ] Update README and `.github/copilot-instructions.md` to reflect the new flow
     - [ ] Add troubleshooting section for health/lint failures
+- [ ] P2: BUILD: Update build Pipeline to include bundler
+  - [ ] Reference: [Bundling extensions](https://code.visualstudio.com/api/working-with-extensions/bundling-extension)
+  - [ ] Evaluate options for bundling the extension to reduce size and improve performance.
+    - [ ] Consider using tools like Webpack, Rollup, or esbuild.
+    - [ ] Update the build scripts in package.json to include the bundling step.
+    - [ ] Test the bundled extension to ensure it works correctly in VS Code.
+    - [ ] Update documentation to reflect the new build process.
+  - [ ] P1: Lint/Docs: Adopt TSDoc in `src`, keep JSDoc for `out`
+    - [ ] Install `eslint-plugin-tsdoc` and update local dev (`npm i`).
+    - [ ] Run `npm run lint` to validate TSDoc tags (e.g., `@remarks`) do not error.
+    - [ ] Confirm TypeDoc renders `@remarks` and examples from `src` as expected.
+    - [ ] Evaluate adding a `jsdoc` doc task for `out/**` (optional) and wire as `docs:jsdoc`.
+    - [ ] Update governance docs to reflect “TSDoc for src / JSDoc for out” policy.
 
 <!-- END:NEXT_ACTION_ITEMS -->
 <!-- BEGIN:BACKLOG_ACTION_ITEMS -->

@@ -203,6 +203,13 @@ Timestamping entries:
 - All parameters documented with types
 - All return values documented with types
 
+## TSDoc Default for TypeScript
+
+- For all `.ts` files under `bin/**` and `src/**`, write documentation using TSDoc syntax and tags (e.g., `@remarks`, `@example`).
+- ESLint enforces TSDoc syntax via `eslint-plugin-tsdoc` and validates tags; `eslint-plugin-jsdoc` remains in place for structural requirements (params/returns) with TSDoc tags allowed.
+- Prefer “types-as-docs”: place comprehensive descriptions and examples on exported types/interfaces (e.g., `src/types/agentConfig.ts`) instead of duplicating comments in runtime configs.
+- Generated or compiled outputs under `out/**` are lint-ignored; if docs are needed there, prefer a separate JSDoc task.
+
 ## Agent Folder Standard
 
 Each agent folder has **EXACTLY 2 files**:

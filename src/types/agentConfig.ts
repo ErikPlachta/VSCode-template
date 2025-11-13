@@ -138,11 +138,6 @@ export interface EscalationConfig {
 /**
  * Orchestration configuration: intents, text handling, escalation, and messages.
  *
- * @property {Record<string, IntentConfig>} [intents] - Mapping of intent names to their configurations
- * @property {TextProcessingConfig} [textProcessing] - Configuration for text signal extraction
- * @property {EscalationConfig} [escalation] - Configuration for escalation and fallback behavior
- * @property {object} [messages] - Customizable messages for various orchestration scenarios
- *
  * @example
  * const orchConfig: OrchestrationConfig = {
  *   intents: {
@@ -232,13 +227,6 @@ export interface OrchestrationConfig {
 /**
  * Runtime execution configuration for an agent.
  *
- * @property {"high" | "medium" | "low"} priority - Execution priority level
- * @property {number} timeout - Maximum execution time in milliseconds
- * @property {boolean} [cacheEnabled] - Whether caching is enabled for this agent
- * @property {"none" | "fixed" | "exponential"} [retryStrategy] - Strategy for retrying failed operations
- * @property {number} [maxRetries] - Maximum number of retry attempts
- * @property {string} [fallbackAgent] - Identifier of the fallback agent to use on repeated failures
- *
  * @example
  * const exec: ExecutionConfig = {
  *   priority: "high",
@@ -261,11 +249,6 @@ export interface ExecutionConfig {
  *
  * Prefer adding examples here instead of inline comments in configs.
  *
- * @property {string} [friendlyDescription] - Simple description of the agent's purpose for users
- * @property {string[]} [useWhen] - List of scenarios when users should use this agent
- * @property {string[]} [exampleQueries] - Example queries users can ask this agent
- * @property {string} [helpText] - Detailed help text shown to users about the agent's capabilities
- *
  * @example
  * const userFacing: UserFacingConfig = {
  *   friendlyDescription: "Analyze relationships and summarize insights.",
@@ -286,10 +269,6 @@ export interface UserFacingConfig {
 /**
  * Static performance profile hints for docs/diagnostics.
  *
- * @property {number} expectedResponseTime - Expected response time in milliseconds
- * @property {"low" | "medium" | "high"} memoryUsage - Expected memory usage profile
- * @property {"low" | "medium" | "high"} complexity - Expected computational complexity
- *
  * @example
  * const perf: PerformanceConfig = {
  * expectedResponseTime: 5000,
@@ -306,10 +285,6 @@ export interface PerformanceConfig {
 /**
  * Error handling preferences for an agent.
  *
- * @property {"none" | "fixed" | "exponential"} retryStrategy - Strategy for retrying failed operations
- * @property {number} maxRetries - Maximum number of retry attempts
- * @property {string} [fallbackAgent] - Identifier of the fallback agent to use on repeated failures
- *
  * @example
  * const errorHandling: ErrorHandlingConfig = {
  * retryStrategy: "exponential",
@@ -324,9 +299,6 @@ export interface ErrorHandlingConfig {
 
 /**
  * Monitoring/telemetry configuration for an agent.
- *
- * @property {string[]} metricsToTrack - List of performance metrics to monitor
- * @property {Record<string, number>} alertThresholds - Thresholds for triggering alerts on specific metrics
  *
  * @example
  * const monitoring: MonitoringConfig = {
@@ -344,13 +316,6 @@ export interface MonitoringConfig {
 
 /**
  * Technical/application-facing metadata for operators and docs.
- *
- * @property {string} [technicalDescription] - Detailed technical description of the agent
- * @property {string[]} [dependencies] - List of other agents or services this agent depends on
- * @property {string[]} [capabilities] - List of key capabilities provided by this agent
- * @property {PerformanceConfig} [performance] - Performance profile configuration
- * @property {ErrorHandlingConfig} [errorHandling] - Error handling preferences
- * @property {MonitoringConfig} [monitoring] - Monitoring and telemetry configuration
  *
  * @example
  * const appFacing: ApplicationFacingConfig = {
@@ -387,6 +352,26 @@ export interface ApplicationFacingConfig {
  * DatabaseAgent configuration for query behavior, validation, and performance.
  *
  * All business values (aliases, operators) must come from configuration.
+ *
+ * @example
+ * ```ts
+ * const dbCfg: DatabaseConfig = {
+ *   fieldAliases: { people: { dept: "departmentId" } },
+ *   performance: {
+ *     caching: { enabledByDefault: true, defaultKeyPrefix: "db:", maxCacheEntries: 500, cacheTTL: 60000 },
+ *     limits: { queryTimeout: 5000, maxResultSize: 1000, maxJoinDepth: 2 }
+ *   },
+ *   validation: {
+ *     schemaValidation: { enableStrictValidation: true, allowUnknownFields: false, autoTransformAliases: true },
+ *     integrityChecks: { validateRelationships: true, checkMissingReferences: true, warnOnSchemaIssues: true }
+ *   },
+ *   operations: {
+ *     filtering: { operators: ["=", "!=", "in"], caseInsensitiveStrings: true, enableFuzzyMatching: false },
+ *     joins: { supportedJoinTypes: ["inner", "left"], autoDiscoverRelationships: true, maxJoinRecords: 5000 },
+ *     aggregation: { functions: ["count", "avg"], enableGroupBy: true, maxGroups: 100 }
+ *   }
+ * };
+ * ```
  */
 export interface DatabaseConfig {
   fieldAliases: Record<string, Record<string, string>>;
@@ -436,6 +421,16 @@ export interface DatabaseConfig {
 
 /**
  * DataAgent configuration governing analysis, exploration, relationships, search, and performance.
+ *
+ * @example
+ * ```ts
+ * const dataCfg: DataConfig = {
+ *   analysis: { enableInsightGeneration: true, maxInsightDepth: 3, crossCategoryAnalysis: true, insightConfidenceThreshold: 0.6 },
+ *   exploration: { maxExplorationSteps: 5, enableAutomaticPlanGeneration: true, planComplexityLimit: "medium" },
+ *   relationships: { enableRelationshipMapping: true, maxRelationshipDepth: 2, includeWeakRelationships: false },
+ *   search: { maxResults: 50, enableFuzzyMatching: true, minimumMatchScore: 0.5 },
+ * };
+ * ```
  */
 export interface DataConfig {
   analysis: {
@@ -502,6 +497,15 @@ export interface DataConfig {
 
 /**
  * ClarificationAgent configuration for guidance, escalation, knowledge search, routing, and performance.
+ *
+ * @example
+ * ```ts
+ * const clarCfg: ClarificationConfig = {
+ *   guidance: { maxSuggestions: 5, includeCategoryExamples: true, includeQueryTemplates: true },
+ *   escalation: { escalationThreshold: 0.4, fallbackStrategies: ["rephrase", "handoff"], maxClarificationRounds: 1 },
+ *   knowledgeBase: { enableKnowledgeSearch: true, maxKnowledgeSnippets: 3, relevanceThreshold: 0.5 },
+ * };
+ * ```
  */
 export interface ClarificationConfig {
   guidance: {
@@ -765,6 +769,16 @@ export interface DataLoaderConfig {
 /**
  * RelevantDataManager configuration for metadata validation, relationship integrity,
  * caching, schema management, and operational performance.
+ *
+ * @example
+ * ```ts
+ * const rdmCfg: RelevantDataManagerConfig = {
+ *   metadata: { enableSchemaValidation: true, enforceDataQuality: true, trackDataLineage: false },
+ *   caching: { enableSnapshotCaching: true, snapshotTTL: 60000, maxCachedSnapshots: 10 },
+ *   validation: { strictModeEnabled: true, allowPartialValidation: false, validationTimeout: 15000 },
+ *   performance: { enableParallelProcessing: true, maxConcurrentOperations: 4 }
+ * };
+ * ```
  */
 export interface RelevantDataManagerConfig {
   metadata: {

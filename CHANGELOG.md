@@ -36,6 +36,22 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 11:55:00 docs/tsdoc: Move interface examples to top-level comments
+
+**Problem/Context**: `@example` blocks were placed inside interface bodies (above first members) in `src/types/agentConfig.ts`. TSDoc expects examples to live in the interface-level doc comment so IntelliSense associates them with the symbol itself.
+
+**Changes Made**:
+
+1. `src/types/agentConfig.ts`: Moved `@example` blocks to the interface docblocks for `DatabaseConfig`, `DataConfig`, `ClarificationConfig`, and `RelevantDataManagerConfig`; removed inline member-level example comments.
+
+**Files Changed**: `src/types/agentConfig.ts`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+
+**Impact**: Aligns examples with TSDoc best practices and ensures IDEs display examples at the correct symbol level.
+
 #### 2025-11-13 11:42:00 chore/build: Temporarily disable JSON lint stage in build
 
 **Problem/Context**: We are transitioning doc standards and want to avoid pipeline noise from JSON validation while we re-evaluate build utilities. The bash and Windows pipelines invoked `lint:json` as a dedicated stage.
