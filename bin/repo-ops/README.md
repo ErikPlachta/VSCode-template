@@ -4,8 +4,6 @@ Purpose: manage core governance files (TODO, CONTEXT-SESSION, CHANGELOG) with a 
 
 Implemented commands:
 
-- `todo sync-from-changelog` – Mirrors CHANGELOG Outstanding Tasks into a read-only block in `TODO.md` (dry-run by default).
-- `todo generate-actions` – Generates actionable checklist items in `TODO.md` from the Outstanding Tasks mirror (dry-run by default).
 - `session rotate` – Archives `CONTEXT-SESSION.md` and writes a fresh template (dry-run by default).
 - `session lint` – Validates `CONTEXT-SESSION.md` structure (read-only; exits non-zero on issues).
 
@@ -17,8 +15,6 @@ Safety:
 Usage examples:
 
 - Show help: `npm run repo:ops -- help`
-- Sync TODOs from CHANGELOG Outstanding Tasks (dry-run): `npm run repo:ops -- todo sync-from-changelog`
-- Apply with backup: `npm run repo:ops -- todo sync-from-changelog --write`
 - Rotate session file (dry-run): `npm run repo:ops -- session rotate`
 - Rotate session file (apply): `npm run repo:ops -- session rotate --write`
 - Lint current session file: `npm run repo:ops -- session lint`
@@ -27,7 +23,6 @@ Configuration (central, typed):
 
 Repo-ops uses a single source of truth at `bin/repo-ops/repo-ops.config.ts`.
 
-- Markers: bounds for CHANGELOG Outstanding Tasks and the TODO mirror.
 - Path resolver: computes absolute repo paths for `CHANGELOG.md` and `TODO.md`.
 - Backup directory name: where timestamped backups are written.
 - Session template: default content for a fresh `CONTEXT-SESSION.md`.
@@ -38,7 +33,6 @@ Reference:
 import { defaultConfig } from "./repo-ops.config";
 
 // Example reads
-const markers = defaultConfig.markers;
 const repo = defaultConfig.resolveRepoPaths(process.cwd());
 const backupDir = defaultConfig.backupDirName;
 const sessionTemplate = defaultConfig.sessionTemplate();

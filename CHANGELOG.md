@@ -39,6 +39,43 @@ This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Lo
 
 ### [2025-11-12]
 
+#### 2025-11-12 17:22:00 chore: Repo-ops cleanup – delete remaining legacy modules
+
+**Problem/Context**: After removing the changelog→TODO mirror and actions flows, two legacy modules remained in `bin/repo-ops/` with no references.
+
+**Changes Made**:
+
+1. `bin/repo-ops/changelogExtract.ts` (deleted): Legacy helper for extracting Outstanding Tasks from CHANGELOG.
+2. `bin/repo-ops/todoActions.ts` (deleted): Legacy generator for actions from changelog content.
+
+**Verification**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test` → Test Suites: 1 skipped, 32 passed, 33 total)
+- Lint: PASS (no new issues in repo-ops scope)
+- Docs/Health: PASS (no generated config changes)
+
+**Impact**: Finalizes the cleanup so `TODO.md` remains the sole task source. No code paths reference mirror/actions logic anymore; tests remain green.
+
+#### 2025-11-12 16:48:00 chore: Repo-ops – remove deprecated TODO import/actions from CLI; TODO.md is source of truth
+
+**Context**: We standardized on `TODO.md` as the single source of truth for official tasks. The changelog→TODO mirror and generated-actions flows are no longer used.
+
+**Changes**:
+
+1. `bin/repo-ops/index.ts`: Removed `todo` subcommands (`sync-from-changelog`, `generate-actions`) and related help output; CLI now exposes only session commands.
+2. `bin/repo-ops/README.md`: Updated to reflect session-only commands and trimmed mirror/actions references.
+3. Legacy modules left in-tree temporarily (no references) for safe transition; follow-up can delete the files and tests.
+
+**Verification**:
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test – unchanged)
+- Lint: PASS for repo-ops scope
+- Docs/Health: PASS
+
+**Next**: Optionally delete `bin/repo-ops/{todoSync.ts,todoActions.ts,todoMirror.ts,changelogExtract.ts}` and tests `tests/repoOps.{changelogExtract,todoMirror}.test.ts` in a cleanup commit.
+
 #### 2025-11-12 16:30:00 refactor: Repo-ops: central config + config-driven wiring
 
 **Problem/Context**: Repo-ops modules referenced hardcoded markers and path resolution scattered across files, and `repo-ops.config.ts` was missing despite coverage/docs referencing a central config. Needed to ensure 100% config/data/type-driven behavior per governance.

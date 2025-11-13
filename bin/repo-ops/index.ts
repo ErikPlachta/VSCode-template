@@ -8,79 +8,8 @@
 // ESM-safe import for process argv and output
 const args = process.argv.slice(2);
 
-type Command = "help" | "version" | "status" | "todo" | "session";
+type Command = "help" | "version" | "status" | "session";
 type SessionSubcommand = "rotate" | "lint";
-type TodoSubcommand = "sync-from-changelog" | "generate-actions";
-
-/**
- * Handle `todo` subcommands.
- *
- * @param {TodoSubcommand | undefined} sub - Subcommand name (currently only 'sync-from-changelog').
- * @param {string[]} rest - Remaining argv (supports --write).
- * @returns {Promise<number>} - Exit code (0=success).
- */
-async function runTodo(
-  sub: TodoSubcommand | undefined,
-  rest: string[]
-): Promise<number> {
-  switch (sub) {
-    case "sync-from-changelog": {
-      const { syncFromChangelog } = await import("./todoSync");
-      const write = rest.includes("--write");
-      const result = await syncFromChangelog({ write });
-      console.log(
-        `todo sync-from-changelog: ${
-          result.changed
-            ? result.dryRun
-              ? "CHANGES (dry-run)"
-              : "APPLIED"
-            : "NO-OP"
-        }`
-      );
-      if (result.plans.length) {
-        for (const plan of result.plans) {
-          console.log(
-            `- ${plan.description} → ${plan.filePath} (${plan.wouldWriteBytes} bytes)`
-          );
-        }
-      }
-      if (result.notes?.length) {
-        for (const note of result.notes) console.log(`note: ${note}`);
-      }
-      return result.changed ? 0 : 0;
-    }
-    case "generate-actions": {
-      const { generateActionsFromChangelog } = await import("./todoActions");
-      const write = rest.includes("--write");
-      const result = await generateActionsFromChangelog({ write });
-      console.log(
-        `todo generate-actions: ${
-          result.changed
-            ? result.dryRun
-              ? "CHANGES (dry-run)"
-              : "APPLIED"
-            : "NO-OP"
-        }`
-      );
-      if (result.plans.length) {
-        for (const plan of result.plans) {
-          console.log(
-            `- ${plan.description} → ${plan.filePath} (${plan.wouldWriteBytes} bytes)`
-          );
-        }
-      }
-      if (result.notes?.length) {
-        for (const note of result.notes) console.log(`note: ${note}`);
-      }
-      return 0;
-    }
-    default:
-      console.error(
-        "Unknown or missing todo subcommand. Try: npm run repo:ops -- todo sync-from-changelog [--write] | generate-actions [--write]"
-      );
-      return 1;
-  }
-}
 
 /** Print a concise header for CLI screens. */
 const printHeader = (): void => {
@@ -103,13 +32,10 @@ const printHelp = (): void => {
   console.log(
     "  status            Read-only checks for governance files (COMING SOON)\n"
   );
-  console.log(
-    "  todo               TODO operations (sync-from-changelog, generate-actions)"
-  );
   console.log("  session            Session operations (rotate, lint)\n");
 
   console.log("Planned (not yet implemented):");
-  console.log("  todo add|complete|move|export-json|sync-from-changelog");
+  console.log("  todo add|complete|move|export-json");
   console.log("  session note|rotate --archive|lint");
   console.log("  changelog reuse existing manager + helpers");
   console.log("  shared markers|io|backups|diff\n");
@@ -142,14 +68,7 @@ const main = (): void => {
       printHeader();
       console.log("status: OK (scaffold) – no checks implemented yet");
       return;
-    case "todo": {
-      const sub = args[1] as TodoSubcommand | undefined;
-      const rest = args.slice(2);
-      runTodo(sub, rest).then((code) => {
-        if (code !== 0) process.exitCode = code;
-      });
-      return;
-    }
+
     case "session": {
       const sub = (args[1] as SessionSubcommand | undefined) ?? "rotate";
       const rest = args.slice(2);
