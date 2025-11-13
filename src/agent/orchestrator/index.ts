@@ -1881,26 +1881,6 @@ export class Orchestrator extends BaseAgentConfig {
       }
     }
 
-    // Fallback: hardcoded category matching if data-driven failed
-    if (!params.category) {
-      if (
-        lowerQuestion.includes("people") ||
-        lowerQuestion.includes("person")
-      ) {
-        params.category = "people";
-      } else if (
-        lowerQuestion.includes("project") ||
-        lowerQuestion.includes("projects")
-      ) {
-        params.category = "projects";
-      } else if (
-        lowerQuestion.includes("department") ||
-        lowerQuestion.includes("departments")
-      ) {
-        params.category = "departments";
-      }
-    }
-
     // Extract filters - data-driven based on common skill keywords
     if (lowerQuestion.includes("python")) {
       params.filters = { skills: "Python" };
@@ -2259,42 +2239,6 @@ export class Orchestrator extends BaseAgentConfig {
 
     const result = lastAction.result;
 
-    // Check if result is a CategorySnapshot (has specific structure)
-    if (
-      typeof result === "object" &&
-      result !== null &&
-      "id" in result &&
-      "name" in result &&
-      "recordCount" in result
-    ) {
-      // Format CategorySnapshot in user-friendly way
-      const snapshot = result as {
-        id: string;
-        name: string;
-        description?: string;
-        recordCount: number;
-        schemaNames?: string[];
-        typeNames?: string[];
-      };
-
-      const markdown = `### ${snapshot.name}\n\n${
-        snapshot.description || ""
-      }\n\n**Records:** ${snapshot.recordCount}\n\n${
-        snapshot.schemaNames && snapshot.schemaNames.length > 0
-          ? `**Schemas:** ${snapshot.schemaNames.join(", ")}\n\n`
-          : ""
-      }${
-        snapshot.typeNames && snapshot.typeNames.length > 0
-          ? `**Types:** ${snapshot.typeNames.join(", ")}`
-          : ""
-      }`;
-
-      return {
-        message: `Found ${snapshot.name} with ${snapshot.recordCount} records`,
-        markdown,
-      };
-    }
-
     // Use CommunicationAgent for other response types
     try {
       // Wrap result in AgentResponse structure
@@ -2313,27 +2257,12 @@ export class Orchestrator extends BaseAgentConfig {
         markdown: formatted.message, // FormattedResponse.message contains the formatted text
       };
     } catch (error) {
-      // Fallback to basic formatting if CommunicationAgent fails
+      // Fallback to minimal message only to avoid hand-rolled formatting
       console.warn(
-        "CommunicationAgent formatting failed, using fallback:",
+        "CommunicationAgent formatting failed; returning minimal message only",
         error
       );
-
-      if (Array.isArray(result)) {
-        return {
-          message: `Found ${result.length} result(s)`,
-          markdown: this.formatRecords(result),
-        };
-      } else if (typeof result === "object" && result !== null) {
-        return {
-          message: "Data retrieved successfully",
-          markdown: this.formatObject(result),
-        };
-      } else {
-        return {
-          message: String(result),
-        };
-      }
+      return { message: String(result) };
     }
   }
 

@@ -14,6 +14,7 @@ Started: 2025-11-12T17:30:00Z
 - Keep this session file concise; use it for current focus, quick notes, and links.
 - Tasks live in TODO.md; add/change priorities there.
 - Log changes and verification in CHANGELOG.md.
+- CoPilot Chat should use this file as a sandbox for thinking, along with tracking the high-level goals. Create additional sections at the end (below CURRENT-FOCUS-DETAILS), use the content, and then cleanup as you go without breaking the core CURRENT-FUCUS-DETAILS or anything above.
 
 <!-- END:COPILOT_INSTRUCTIONS -->
 <!-- BEGIN:CURRENT-FOCUS-SUMMARY -->

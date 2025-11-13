@@ -36,6 +36,24 @@ This changelog records Logs only.
 
 ### [2025-11-12]
 
+#### 2025-11-12 23:28:00 refactor: Remove extractQueryParams fallbacks; centralize formatting in CommunicationAgent
+
+**Problem/Context**: Orchestrator still had hardcoded category fallbacks in `extractQueryParams` (e.g., people/departments/projects) and performed ad-hoc markdown formatting (CategorySnapshot and list/object fallbacks). This violated data-driven design and agent isolation where CommunicationAgent owns all user-facing formatting.
+
+**Changes Made**:
+
+1. `src/agent/orchestrator/index.ts` (extractQueryParams): Removed hardcoded category fallback block; category detection is now 100% data-driven via `UserContextAgent` categories and aliases. Filter extraction remains keyword-based.
+2. `src/agent/orchestrator/index.ts` (formatWorkflowResult): Deleted manual CategorySnapshot markdown and list/object formatting fallbacks. Always delegates to `CommunicationAgent.formatSuccess`; on formatter error, returns a minimal message instead of building markdown.
+3. `TODO.md` (Current → Follow-up): Added a Copilot Chat UX enhancement task to extend `CommunicationAgent` with structured TODO blocks, interactive messages, and collapsible sections.
+
+**Architecture Notes**: Tightens agent isolation boundaries: Orchestrator coordinates and returns typed data; CommunicationAgent is the single presentation layer. Parsing is strictly data-driven from runtime category data—no business constants.
+
+**Files Changed**: `src/agent/orchestrator/index.ts`, `TODO.md`
+
+**Testing**: Build: PASS (`npm run compile`); Tests: PASS (34 passed, 1 skipped, 271 total); Docs Lint: PASS (`npm run lint:docs`); Prebuild: PASS (`npm run prebuild`).
+
+**Impact**: Eliminates drift from hardcoded categories and consolidates formatting in one place, simplifying future UX improvements and reducing risk of inconsistent presentation.
+
 #### 2025-11-12 23:05:00 chore/deprecate: OrchestratorResponse.markdown deprecated; add formatted field
 
 **Problem/Context**: We want Orchestrator to return typed data while CommunicationAgent owns formatting. The top-level `markdown` string on `OrchestratorResponse` encouraged presentation coupling and conflicted with `WorkflowResult.formatted` used by full workflows.
