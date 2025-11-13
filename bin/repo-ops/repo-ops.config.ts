@@ -187,6 +187,15 @@ export const defaultConfig: RepoOpsConfig = {
     ],
     commands: [
       {
+        name: "lint",
+        description: "Run consolidated repository linters (docs/json)",
+        subcommands: [
+          { name: "--all", description: "Run all supported linters" },
+          { name: "--docs", description: "Run markdown/docs linter only" },
+          { name: "--json", description: "Run JSON/schema linter only" },
+        ],
+      },
+      {
         name: "session",
         description: "Session operations",
         subcommands: [

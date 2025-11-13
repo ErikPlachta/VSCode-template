@@ -48,7 +48,14 @@ import { defaultConfig } from "./repo-ops.config";
 // ESM-safe import for process argv and output
 const args = process.argv.slice(2);
 
-type Command = "help" | "version" | "status" | "session" | "todo" | "changelog";
+type Command =
+  | "help"
+  | "version"
+  | "status"
+  | "lint"
+  | "session"
+  | "todo"
+  | "changelog";
 type SessionSubcommand = "rotate" | "lint";
 
 /** Print a concise header for CLI screens. */
@@ -107,6 +114,45 @@ const main = (): void => {
       printHeader();
       console.log("status: OK (scaffold) – no checks implemented yet");
       return;
+
+    case "lint": {
+      // Simple flags: default to --docs if none provided; --all runs both
+      const rest = args.slice(1);
+      const useAll = rest.includes("--all");
+      const useDocs = useAll || rest.includes("--docs") || rest.length === 0;
+      const useJson = useAll || rest.includes("--json");
+      /** Run a single npm script and return success boolean */
+      const runScript = async (script: string): Promise<boolean> => {
+        const { spawn } = await import("node:child_process");
+        return await new Promise<boolean>((resolve) => {
+          const p = spawn(process.platform === "win32" ? "npm.cmd" : "npm", [
+            "run",
+            script,
+          ], {
+            stdio: "inherit",
+          });
+          p.on("exit", (code) => resolve(code === 0));
+        });
+      };
+      (async () => {
+        printHeader();
+        console.log("lint: starting consolidated lint runner\n");
+        let ok = true;
+        if (useDocs) {
+          console.log("→ docs: npm run lint:docs");
+          ok = (await runScript("lint:docs")) && ok;
+          console.log("");
+        }
+        if (useJson) {
+          console.log("→ json: npm run lint:json");
+          ok = (await runScript("lint:json")) && ok;
+          console.log("");
+        }
+        console.log(`lint: ${ok ? "OK" : "ISSUES"}`);
+        process.exitCode = ok ? 0 : 1;
+      })();
+      return;
+    }
 
     case "session": {
       const sub = (args[1] as SessionSubcommand | undefined) ?? "rotate";
