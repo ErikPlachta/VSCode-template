@@ -36,6 +36,23 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 12:12:00 docs/tsdoc: Restore safe @example blocks and add @see links in applicationConfig
+
+**Problem/Context**: Fenced @example blocks in `src/types/applicationConfig.ts` used glob patterns like `**/*.ts` and `**/_ARCHIVE/**` which introduced the `*/` sequence inside TSDoc comments, prematurely closing the block and breaking TypeScript compilation. A temporary placeholder removed some examples to unblock the build.
+
+**Changes Made**:
+
+1. `src/types/applicationConfig.ts`:
+  - Restored fenced `@example` blocks with safe content for `JsonSchemaConfig`, `MarkdownConfig`, and `ReportConfig`.
+  - Added `@see` references to `docs/tools/validateJson/README.md` and `docs/tools/validateMarkdown/README.md`.
+  - For `ApplicationConfig`, replaced the long inline example with `@see` pointers to `docs/config/application.config/variables/applicationConfig.md` and `src/config/application.config.ts` to avoid duplication and comment-terminator pitfalls.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+
+**Impact**: Retains illustrative examples without risking comment termination; establishes clear sources of truth via `@see` links and reduces duplication.
+
 #### 2025-11-13 11:55:00 docs/tsdoc: Move interface examples to top-level comments
 
 **Problem/Context**: `@example` blocks were placed inside interface bodies (above first members) in `src/types/agentConfig.ts`. TSDoc expects examples to live in the interface-level doc comment so IntelliSense associates them with the symbol itself.

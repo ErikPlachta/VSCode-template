@@ -86,7 +86,27 @@ Started: 2025-11-12T17:30:00Z
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->
 
-### Notes – CommunicationAgent examples audit & JSDoc plan (2025-11-13)
+### Notes – TSDoc normalization for examples (2025-11-13 11:55)
+
+- Updated `src/types/agentConfig.ts` to move `@example` blocks from member-level to interface-level docblocks for: `DatabaseConfig`, `DataConfig`, `ClarificationConfig`, `RelevantDataManagerConfig` (aligns with TSDoc best practices; improves IntelliSense association).
+- Build verified after changes: `npm run compile` PASS.
+- Planned per-file TSDoc sweep (configuration-centric types first):
+
+  - `src/types/applicationConfig.ts` — add interface-level TSDoc, @remarks, @example; relocate any inline examples
+  - `src/types/configValidation.ts` — document validators with @param/@returns and concise examples
+  - `src/types/configRegistry.ts` — document registry types and usage
+  - `src/types/interfaces.ts` — summaries/examples for shared interfaces
+  - `src/types/communication.types.ts` — document formatting/response types
+  - `src/types/workflow.types.ts` — document workflow models with small example
+  - `src/types/userContext.types.ts` — document user context models
+  - `src/types/index.ts` — add @packageDocumentation and export notes
+
+- Execution rules for the sweep:
+  - Prefer types-as-docs; avoid duplication in `agent.config.ts`
+  - Examples at symbol (interface/type) level; keep member comments concise
+  - Ensure structural completeness: @param/@returns where applicable; add @remarks for nuanced behavior
+
+### Notes – CommunicationAgent examples audit & JSDoc plan (2025-11-13 11:30)
 
 - CommunicationAgent audit: No hardcoded category names found in example queries outside clarification. Clarification path already config-driven via `communication.clarification.groups` using `{{category}}` substitution. Other response formatters (success/error/progress/validation) do not embed example queries.
 - Follow-up UX: Consider optionally showing category-aware tips for `metadataRetrieved` success when `metadata.availableCategories` is present; should be config-gated to avoid unsolicited noise.

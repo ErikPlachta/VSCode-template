@@ -72,13 +72,14 @@ Follow these guidelines to ensure effective task management:
   - [ ] Objective: Ensure orchestrator follows agent isolation and data-driven design; agents return typed data only.
   - [ ] Scope:
     - [ ] Deep review each agent (5 Ws: intent, problem, why, how, when).
-    - [ ] Update JSDocs for all public agent APIs; fix missing @param/@returns.
-    - [x] Expand `src/agent/index.ts` with documentation-level overview of core design and infrastructure.
+    - [ ] Update TSDoc for all public agent APIs; fix missing @param/@returns, @example, @remarks, etc.
     - [ ] Audit for hardcoded business data and orchestrator responsibilities; delegate to appropriate agents.
-    - [x] Orchestrator remediation:
-      - [x] Remove user-facing formatting and ad-hoc markdown; call `CommunicationAgent` for all formatting.
-      - [x] Replace hardcoded `validAgents` in `validateAction` with registry-derived keys.
-      - [x] Refactor `route`/`handle` to return typed data and omit `markdown` fields; assemble UX via `CommunicationAgent`.
+    - [ ] Verify clear separation of concerns, modular, data-driven design.
+  - [x] Orchestrator remediation:
+  - [x] Expand `src/agent/index.ts` with documentation-level overview of core design and infrastructure.
+    - [x] Remove user-facing formatting and ad-hoc markdown; call `CommunicationAgent` for all formatting.
+    - [x] Replace hardcoded `validAgents` in `validateAction` with registry-derived keys.
+    - [x] Refactor `route`/`handle` to return typed data and omit `markdown` fields; assemble UX via `CommunicationAgent`.
   - [ ] Findings (seeded TODOs):
     - [x] Orchestrator: Migrate `formatRecords()`/`formatObject()` and inline markdown (e.g., table/headers) to `CommunicationAgent`.
     - [x] Orchestrator: Remove fallback hardcoded categories in `extractQueryParams` (e.g., "people", "departments"); derive solely from `UserContextAgent` category data/aliases.
@@ -87,11 +88,19 @@ Follow these guidelines to ensure effective task management:
     - [x] CommunicationAgent: Replace hardcoded "Available Categories" list with dynamic enumeration from `UserContextAgent` categories (via response metadata in error/clarification paths).
     - [x] CommunicationAgent: Replace example queries that hardcode category names with data-driven templates or config-provided samples (clarification path complete; other responses pending). Audit found no hardcoded category examples outside clarification; clarification already config-driven.
     - [ ] Types: Add comprehensive TSDoc for all configuration types in all type files. For example, `src/types/agentConfig.ts` (purpose, parameters, defaults) and include example snippets to power IntelliSense; prefer types-level docs over inline comments in `agent.config.ts` to avoid duplication as a code-base level rule. We may find duplication and contradictions. Use the end of the CONTEXT-SESSION for notes to stay organized and make a plan between the markers `CONTEXT-SESSION-LLM-THINKING-NOTES-AREA`.
-      - [] agentConfig.ts
+      - [ ] agentConfig.ts
         - [x] Made initial changes to verify desire
         - [x] User updated with more complete JSDOC @property values and comments as desired.
-        - [ ] Verified user changes to make a plan for all other files
+        - [x] Verified user changes to make a plan for all other files
       - [ ] List other files here and execute same type of changes as in agentConfig.ts
+        - [ ] src/types/applicationConfig.ts — add interface-level TSDoc with @remarks/@example; move any inline examples to symbol docblocks
+        - [ ] src/types/configValidation.ts — document exported types/functions; ensure @param/@returns; add examples for key validators
+        - [ ] src/types/configRegistry.ts — document registry types/APIs; provide usage example for registration and lookup
+        - [ ] src/types/interfaces.ts — add summaries and examples for shared interfaces; ensure member docs are concise
+        - [ ] src/types/communication.types.ts — document response/formatting types; examples where relevant
+        - [ ] src/types/workflow.types.ts — document workflow models; include minimal end-to-end example
+        - [ ] src/types/userContext.types.ts — document user context models; add examples for common shapes
+        - [ ] src/types/index.ts — add module-level @packageDocumentation and re-export notes
     - [ ] Extract Functions out of `Types` and move into `Shared`
       - When reviewing `agentConfig.ts`, I noticed a handful of functions and methods that should be in the `C:\repo\vscode-extension-mcp-server\src\shared` folder.
         - example, but not limited to: `public setConfigItem`, `function createDescriptorMap`, `protected _getConfig():`, `public getUserFacingConfig()`.
