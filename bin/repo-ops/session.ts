@@ -7,21 +7,10 @@
  */
 import * as path from "path";
 import { ensureDir, readFileUtf8, writeFileUtf8, backupFile } from "./fs";
+import { defaultConfig } from "./repo-ops.config";
 import type { RepoPaths, SyncOptions, SyncResult, ApplyPlan } from "./types";
 
-/**
- * Resolve absolute repo file paths for session operations.
- *
- * @param {string} root - Repository root directory.
- * @returns {RepoPaths} - Absolute paths of key governance files.
- */
-function resolveRepo(root: string): RepoPaths {
-  return {
-    root,
-    changelog: path.join(root, "CHANGELOG.md"),
-    todo: path.join(root, "TODO.md"),
-  };
-}
+// Repo path resolution now comes from central config
 
 /**
  * Return a compact timestamp in the form YYYYMMDD_HHMMSS.
@@ -48,28 +37,7 @@ function stamp(): string {
   );
 }
 
-/**
- * Default template for a new CONTEXT-SESSION.md file.
- *
- * @returns {string} - Markdown content for the new session.
- */
-function defaultSessionTemplate(): string {
-  const now = new Date().toISOString();
-  return [
-    "# Session Context",
-    "",
-    `Started: ${now}`,
-    "",
-    "## Related",
-    "- CHANGELOG.md",
-    "- CONTEXT-BRANCH.md",
-    "- TODO.md",
-    "",
-    "## Notes",
-    "-",
-    "",
-  ].join("\n");
-}
+// Default session template now provided by central config
 
 /**
  * Rotate the session file: archive the current CONTEXT-SESSION.md and create a new one.
@@ -80,7 +48,8 @@ function defaultSessionTemplate(): string {
 export async function rotateSession(
   options?: Partial<SyncOptions> & { template?: string }
 ): Promise<SyncResult> {
-  const repo: RepoPaths = options?.repo ?? resolveRepo(process.cwd());
+  const repo: RepoPaths =
+    options?.repo ?? defaultConfig.resolveRepoPaths(process.cwd());
   const write = options?.write ?? false;
   const sessionPath = path.join(repo.root, "CONTEXT-SESSION.md");
   const archiveDir = path.join(repo.root, "_ARCHIVE");
@@ -94,7 +63,7 @@ export async function rotateSession(
     // missing file is acceptable
   }
 
-  const newContent = options?.template ?? defaultSessionTemplate();
+  const newContent = options?.template ?? defaultConfig.sessionTemplate();
   const plan: ApplyPlan[] = [];
 
   // Plan: archive write (if content exists)
@@ -132,7 +101,7 @@ export async function rotateSession(
   await ensureDir(archiveDir);
   if (current) {
     // Also timestamped backup to backups dir for consistency
-    const backupRoot = path.join(repo.root, ".repo-ops-backups");
+    const backupRoot = path.join(repo.root, defaultConfig.backupDirName);
     await ensureDir(backupRoot);
     await backupFile(sessionPath, backupRoot).catch(() => Promise.resolve(""));
     await writeFileUtf8(archivePath, current);

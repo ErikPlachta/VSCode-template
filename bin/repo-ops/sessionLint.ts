@@ -6,21 +6,10 @@
  */
 import * as fs from "fs/promises";
 import * as path from "path";
+import { defaultConfig } from "./repo-ops.config";
 import type { RepoPaths, SyncOptions, SyncResult } from "./types";
 
-/**
- * Resolve absolute repo file paths for session operations.
- *
- * @param {string} root - Repository root directory.
- * @returns {RepoPaths} - Absolute paths of key governance files.
- */
-function resolveRepo(root: string): RepoPaths {
-  return {
-    root,
-    changelog: path.join(root, "CHANGELOG.md"),
-    todo: path.join(root, "TODO.md"),
-  };
-}
+// Repo path resolution now sourced from central config
 
 /**
  * Validate the content of CONTEXT-SESSION.md.
@@ -125,7 +114,8 @@ export function validateSessionContent(
 export async function lintSession(
   options?: Partial<SyncOptions>
 ): Promise<SyncResult> {
-  const repo: RepoPaths = options?.repo ?? resolveRepo(process.cwd());
+  const repo: RepoPaths =
+    options?.repo ?? defaultConfig.resolveRepoPaths(process.cwd());
   const sessionPath = path.join(repo.root, "CONTEXT-SESSION.md");
 
   let content = "";

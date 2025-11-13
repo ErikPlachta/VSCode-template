@@ -33,144 +33,37 @@ This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Lo
 9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into [Outstanding Tasks](#outstanding-tasks).
 
 <!-- END OF COPILOT CONTENT -->
-
-<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->
-
-## Outstanding Tasks
-
-> NOTE: Tasks are now managed in `TODO.md` (source-of-truth). This section remains temporarily as a read-only mirror during migration and will be pruned after the branch completes. Please update `TODO.md` going forward.
-
-All incomplete tasks. Organized by priority and managed by User and Copilot Chat.
-
-### Current Tasks
-
-#### Priority 0: Data-Driven Architecture Integrity (Critical)
-
-**Objective**: Complete workflow execution system and finalize architectural cleanup.
-
-- **ACTIVE: Workflow Execution System** (~95% complete, 30 min remaining)
-
-  - **Status**: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
-  - **Current Issue**: DatabaseAgent initialization error - data sources not loading properly
-  - **Next Steps**:
-    - ✅ Phase 1-4: COMPLETE (Agent isolation, response handling, testing, workflow coordination)
-    - 🔄 **Debug & Fix**: DatabaseAgent data source initialization (CURRENT PRIORITY)
-    - 🔄 Phase 5: Documentation (30 min) - Update migration guide with workflow patterns
-    - 🔄 Phase 6: Final Verification (15 min) - End-to-end testing, health check
-    - 🔄 Phase 7: Legacy Cleanup (15 min) - Remove relevant-data-manager references
-
-  **Test Status**: 264/265 tests passing (100% pass rate for active tests)
-
-  **Architecture Compliance**:
-
-  - ✅ Agent Isolation: Orchestrator is ONLY coordinator
-  - ✅ Data-Driven: No hardcoded business logic
-  - ✅ Single-Class: All agents follow 2-file pattern
-  - ✅ Type Centralization: Types in types/ folder
-  - ✅ Communication: CommunicationAgent handles ALL formatting
-
-#### Completed This Session (2025-11-12)
-
-- ✅ **Chat UX Improvements**: Clarification with contextual examples, collapsible workflow details
-- ✅ **copilot-instructions.md**: Streamlined 291→193 lines, added MCP tool guidance, added reload reminder
-- 🔄 **DatabaseAgent Fix**: Attempted data source initialization from UserContextAgent (needs debugging)
-
-#### Completed This Session (2025-11-11)
-
-- ✅ **Data-driven architecture cleanup**: All 7 agents now compliant (2-file, data-driven, importing-types)
-- ✅ **Workflow execution system**: Complete lifecycle with logging, performance tracking, diagnostics
-- ✅ **Extension integration**: Chat handler uses executeWorkflow(), displays actual data
-
-### Priority 1 - Things to Handle Next
-
-- AGENT: Updates
-  - feat: agent specific config need focus, signal, prompt starters, etc
-    - Review all agents to make sure they have the appropriate config options.
-      - Just like in the UserContext, agent configs should have base Signal, Focus, and PromptStarter definitions.
-      - User context values for these should also be passed in to relative agents on run time, to append the list with additional options.
-- BUILD: Update build Pipeline to include bundler
-  - https://code.visualstudio.com/api/working-with-extensions/bundling-extension
-  - Evaluate options for bundling the extension to reduce size and improve performance.
-    - Consider using tools like Webpack, Rollup, or esbuild.
-    - Update the build scripts in package.json to include the bundling step.
-    - Test the bundled extension to ensure it works correctly in VS Code.
-    - Update documentation to reflect the new build process.
-
-### Priority 2 - Things to Handle Soon
-
-- Review the code base and identify british-english words `artefacts`, that should be american-english `artifacts`. Also seeing other words like 'behaviour', 'optimise', 'utilise', 'customise', 'organisation' etc.
-- Evaluate the logic in `C:\repo\vscode-extension-mcp-server\src\tools`, and identify things that should exist in `C:\repo\vscode-extension-mcp-server\bin\utils\`, and update all imports, tests, documentation, etc. accordingly.
-  - Specific follow-up: Move `src/tools/repositoryHealth.ts` into a `bin/utils` library and consolidate shared helpers with `bin/utils/validateMarkdown.ts` and `bin/utils/validateJson.ts`.
-- Rename `C:\repo\vscode-extension-mcp-server\src\tools` to `C:\repo\vscode-extension-mcp-server\src\utils`, and update all imports, tests, documentation, etc. accordingly.
-- Add a feature to the MCP Server for Error Event handling. Must be managed and fail gracefully.
-  - An Error Event management solution needs to be created
-  - All of the logic should run through it, so no matter what happens the extension doesn't break VS Code.
-  - It should be connected to logging, used by Orchestrator, have safe guards to self-disable after N failure attempts, notify vscode accordingly, disable in critical failure event, and then notify user to contact developer if still issues.
-  - Build with configuration in mind, so options can be modified by user accordingly later on.
-
-### Priority 3 - No Priority
-
-- REFACTOR: Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator).
-  - Move existing test files into a parallel directory structure under `tests/src/` to match `src/`.
-  - Update all import paths in test files to reflect new locations.
-  - Adjust Jest configuration if necessary to ensure all tests are discovered and run correctly.
-  - Verify full test suite passes after reorganization.
-- REFACTOR: Rebuild and add governance to bin content
-  - Convert all bin/utils tools into self-contained modules (doc, JSDoc, template, package config, import fixes).
-  - Move the build logic into `bin/utils`, and convert it to use the same type of design as other utilities (like `changelog`).
-  - Make sure package.json is updated accordingly
-  - feat: add force typing and JSDoc comments to `bin` content.
-  - feat: add full test coverage to `bin` content.
-- UTILITY: Changelog utility follow-ups (deferred; implemented core features are stable — this tracks hardening and docs for future work)
-  - Tests & Coverage
-    - Unit tests for `ensureCurrentTasksSection`, `insertCurrentTask`, `pruneCompletedOutstanding`, and spacing normalization (blank line after log heading; verification heading at H5).
-  - Integration test invoking CLI (`add-current`, `prune-completed`, `add-entry --details --verification`) and asserting `CHANGELOG.md` structure.
-  - Pruning UX
-    - Add `--prune-after` to `add-entry` to optionally prune completed Outstanding Tasks atomically after logging.
-    - Prefer explicit completion marker (✅) for pruning over semantic prefixes (feat:, fix:, etc.) to avoid accidental backlog removals; deprecate broad prefix pruning later.
-  - JSON export of Logs
-    - Extend `exportChangelogJSON` to parse Logs (day groupings, entries, details, verification) and include a `schemaVersion`.
-  - Daily summary helper
-    - `add-daily-summary --summary "..."` to add/update the optional day heading summary line idempotently.
-  - Auto verification block
-    - `--auto-verify` flag to run compile/test/lint/docs/health and append results plus coverage and JSDoc status.
-  - Current Tasks governance
-    - `sync-current` command to promote Priority 1 items into `### Current Tasks` or remove the section when empty; optionally limit to <= 5.
-  - Docs & instructions
-    - Update `.github/copilot-instructions.md` and README with new commands (`add-current`, `prune-completed`) and verification H5 guidance.
-  - Parser hardening
-    - Graceful handling of malformed markers/duplicate headings; newline normalization config (CRLF/LF preservation).
-  - Config flexibility
-    - Optional user override (e.g., `.changelogrc.json`) to customize headings/markers while preserving governance.
-  - Safety & DX
-    - `--dry-run` for all mutating commands to show a diff without writing; cache parsed AST for batch operations.
-- UTILITY: Does it make sense to update my build into extension logic to run through an obfuscation utility?
-  - I don't have anything to hide, but I am worried about security.
-- AGENT: I want to add an agent that can be used to learn about the user.
-  - Parse through logs and identify patterns.
-  - Uses metricsToTrack, define din mcp.config.json and then extracted by "C:\repo\VSCode-template\src\shared\analyticsIntegration.ts".
-  - Build reports on those patterns in an easy-to-digest format.
-  - Over time, should be able to categorize patterns to understand users.
-  - Should also look for specific types of patterns that I can use to improve the app.
-    - Identify patterns in user requests between what they asked and what they actually meant, to create user-specific keyword associations.
-    - Be able to understand and identify how to better provide solutions to the user.
-    - Users should be able to view these associations and manage them accordingly.
-      - In the extension settings, each feature within the app should have a section for managing settings.
-      - Within that section, there should be a list of "Custom Keywords", which are used to improve the user's experience by driving them towards solutions quicker.
-      - We should be able to use the new logging logic results to identify how many steps it took to get to a resolution, evaluate the original step, and extrapolate patterns.
-      - When patterns are defined, user should be notified and provided a link in the chat to modify the settings if they want to remove it.
-- EXTENSION: Add functionality within extension to work with TODOs and different functionalities within CoPilot Chat.
-  - Maybe this should be an agent?
-  - Want to take advantage of features that will help add clarity and keep Agent organized and focused while communicating to user with clarity.
-  - I'm hoping there is a way to send a response up, so orchestrator can just pass the text block vs something really complicated.
-    - If there is, probably this should be an agent.
-
-<!-- CHANGELOG:END:OUTSTANDING_TASKS -->
 <!-- CHANGELOG:BEGIN:LOGS -->
 
 ## Logs
 
 ### [2025-11-12]
+
+#### 2025-11-12 16:30:00 refactor: Repo-ops: central config + config-driven wiring
+
+**Problem/Context**: Repo-ops modules referenced hardcoded markers and path resolution scattered across files, and `repo-ops.config.ts` was missing despite coverage/docs referencing a central config. Needed to ensure 100% config/data/type-driven behavior per governance.
+
+**Changes Made**:
+
+1. `bin/repo-ops/repo-ops.config.ts` (new): Added typed `RepoOpsConfig`; exported `defaultConfig` with markers, path resolver, backup dir name, and session template.
+2. `bin/repo-ops/markers.ts`: Re-exports `defaultConfig.markers` as `defaultMarkers` to avoid duplicated strings.
+3. `bin/repo-ops/changelogExtract.ts`: `resolveRepoPaths()` now delegates to `defaultConfig.resolveRepoPaths` (single source of truth).
+4. `bin/repo-ops/session.ts`: Uses `defaultConfig.resolveRepoPaths`, `defaultConfig.sessionTemplate()`, and `defaultConfig.backupDirName`.
+5. `bin/repo-ops/sessionLint.ts`: Uses `defaultConfig.resolveRepoPaths` (removed local resolver).
+
+**Architecture Notes**: Aligns repo-ops with configuration-driven design; no business strings are hardcoded in modules. Centralizes defaults for easy overrides and future extension.
+
+**Files Changed**: 5 files (+1 new)
+
+**Testing**:
+
+- Build: PASS (npm run compile)
+- Tests: PASS (npm test – 34 passed, 1 skipped)
+- Lint: PASS for repo-ops scope
+- Docs: N/A
+- Health: PASS (no legacy JSON added)
+
+**Impact**: Restores central config, reduces drift, and prepares repo-ops for repository-specific customization via a single typed configuration.
 
 #### 2025-11-12 16:05:10 chore: Add CI gate for session lint and backlog TODO for test organization
 

@@ -4,6 +4,7 @@
  */
 import * as path from "path";
 import { readFileUtf8 } from "./fs";
+import { defaultConfig } from "./repo-ops.config";
 import { extractBetweenMarkers } from "./parse";
 import type { ExtractResult, MarkerSet, RepoPaths } from "./types";
 
@@ -14,11 +15,8 @@ import type { ExtractResult, MarkerSet, RepoPaths } from "./types";
  * @returns {RepoPaths} - Absolute paths to CHANGELOG and TODO files.
  */
 export function resolveRepoPaths(root: string): RepoPaths {
-  return {
-    root,
-    changelog: path.join(root, "CHANGELOG.md"),
-    todo: path.join(root, "TODO.md"),
-  };
+  // Delegate to central config for single source of truth
+  return defaultConfig.resolveRepoPaths(root);
 }
 
 /**
