@@ -310,6 +310,29 @@ export class CommunicationAgent extends BaseAgentConfig {
       }
     }
 
+    // Include available categories enumeration when provided (data-driven)
+    const availableCategories =
+      (response.metadata?.availableCategories as string[] | undefined) || [];
+    if (availableCategories.length > 0) {
+      // Reuse clarification header configuration to keep copy consistent
+      const clar = this.getConfigItem<{
+        availableCategoriesHeader?: string;
+      }>("communication.clarification");
+
+      if (format === "markdown") {
+        const header =
+          clar?.availableCategoriesHeader || "Available Categories:";
+        const list = availableCategories.map((c) => `- ${c}`).join("\n");
+        message += `\n\n**${header}**\n${list}`;
+      } else {
+        const rawHeader = (
+          clar?.availableCategoriesHeader || "Available Categories:"
+        ).replace(/\*\*/g, "");
+        const list = availableCategories.map((c) => `• ${c}`).join("\n");
+        message += `\n\n${rawHeader}\n${list}`;
+      }
+    }
+
     // Determine severity
     const severity = response.errors?.[0]?.severity || "medium";
 

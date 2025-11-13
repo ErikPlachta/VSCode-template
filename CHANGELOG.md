@@ -71,6 +71,25 @@ This changelog records Logs only.
 - Coverage: ~65.7% lines overall (unchanged)
 - JSDoc: PASS for changed surfaces; broader audits ongoing under P1
 
+#### 2025-11-13 10:20:00 feat: Enumerate available categories in error formatting when provided
+
+**Problem/Context**: Some error responses benefit from showing the available categories (e.g., unknown category). This was previously implicit/hardcoded in places. We need a data-driven, agent-isolation compliant way to surface this.
+
+**Changes Made**:
+
+1. `src/agent/communicationAgent/index.ts` (formatError): When `response.metadata.availableCategories` is present, append an "Available Categories" section using the configured clarification header; renders as bullets in markdown/plaintext.
+2. `tests/communicationAgent.test.ts`: Added test "should enumerate available categories when provided" under formatError().
+3. `TODO.md`: Marked the "Available Categories" enumeration item complete under P1 findings.
+
+**Architecture Notes**: Preserves agent isolation by requiring the caller to supply `availableCategories` in metadata (no direct UserContextAgent import). Reuses configured header to keep copy centralized.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (now 272 total; added 1 for error enumeration)
+
+**Impact**: Clearer error messages that guide the user toward valid options without hardcoded business values.
+
 ### [2025-11-12]
 
 #### 2025-11-12 23:28:00 refactor: Remove extractQueryParams fallbacks; centralize formatting in CommunicationAgent

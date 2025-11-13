@@ -1,4 +1,13 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
 
 /**
  * @packageDocumentation Communication Agent Test Suite
@@ -161,6 +170,30 @@ describe("CommunicationAgent", () => {
       const result = agent.formatError(response);
 
       expect(result.message).toContain("Suggestions:");
+    });
+
+    test("should enumerate available categories when provided", () => {
+      const response: AgentResponse = {
+        type: "error",
+        status: "error",
+        message: "Unknown category",
+        metadata: {
+          availableCategories: ["people", "departments", "projects"],
+        },
+        errors: [
+          {
+            code: "notFound",
+            message: "Category not found",
+          },
+        ],
+      };
+
+      const result = agent.formatError(response);
+
+      expect(result.message).toContain("Available Categories:");
+      expect(result.message).toContain("- people");
+      expect(result.message).toContain("- departments");
+      expect(result.message).toContain("- projects");
     });
 
     test("should set severity from first error", () => {

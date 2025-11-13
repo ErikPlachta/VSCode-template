@@ -75,7 +75,7 @@ Follow these guidelines to ensure effective task management:
     - [ ] Update JSDocs for all public agent APIs; fix missing @param/@returns.
     - [x] Expand `src/agent/index.ts` with documentation-level overview of core design and infrastructure.
     - [ ] Audit for hardcoded business data and orchestrator responsibilities; delegate to appropriate agents.
-    - [ ] Orchestrator remediation:
+    - [x] Orchestrator remediation:
       - [x] Remove user-facing formatting and ad-hoc markdown; call `CommunicationAgent` for all formatting.
       - [x] Replace hardcoded `validAgents` in `validateAction` with registry-derived keys.
       - [x] Refactor `route`/`handle` to return typed data and omit `markdown` fields; assemble UX via `CommunicationAgent`.
@@ -84,7 +84,7 @@ Follow these guidelines to ensure effective task management:
     - [x] Orchestrator: Remove fallback hardcoded categories in `extractQueryParams` (e.g., "people", "departments"); derive solely from `UserContextAgent` category data/aliases.
     - [x] Orchestrator: Replace remaining direct markdown assembly (e.g., `### ${snapshot.name}`) with `CommunicationAgent` templates.
     - [x] CommunicationAgent: Clarification formatting is fully config-driven (no hardcoded examples/categories); uses `communication.clarification`.
-    - [ ] CommunicationAgent: Replace hardcoded "Available Categories" list with dynamic enumeration from `UserContextAgent` categories.
+    - [x] CommunicationAgent: Replace hardcoded "Available Categories" list with dynamic enumeration from `UserContextAgent` categories (via response metadata in error/clarification paths).
     - [ ] CommunicationAgent: Replace example queries that hardcode category names with data-driven templates or config-provided samples (clarification path complete; other responses pending).
     - [ ] ClarificationAgent: Ensure examples and capability lists derive from manifest/config (no hardcoded business values).
     - [ ] DatabaseAgent: Confirm all field aliases live in config only; no code-level hardcoded business values.
@@ -104,7 +104,7 @@ Follow these guidelines to ensure effective task management:
   - [ ] Status: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
   - [ ] Current Issue: DatabaseAgent initialization error - data sources not loading properly
   - [ ] Next Steps:
-    - [ ] ✅ Phase 1-4: COMPLETE (Agent isolation, response handling, testing, workflow coordination)
+    - [x] ✅ Phase 1-4: COMPLETE (Agent isolation, response handling, testing, workflow coordination)
     - [ ] 🔄 Debug & Fix: DatabaseAgent data source initialization
     - [ ] 🔄 Phase 5: Documentation – Update migration guide with workflow patterns
     - [ ] 🔄 Phase 6: Final Verification – End-to-end testing, health check
