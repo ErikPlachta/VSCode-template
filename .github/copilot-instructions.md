@@ -97,6 +97,61 @@ Use `mcp_memory` tools when:
 2. Reconcile Outstanding Tasks
 3. Commit and push
 
+## Operational Playbooks
+
+### Which artifact to edit?
+
+- Question: “Where should this go?”
+  - If it’s a task (work to do): add/update in `TODO.md` (Current/Next/Backlog/Completed). Link to related log entry when done.
+  - If it’s history/decision/result: add a `CHANGELOG.md` log entry with details and verification.
+  - If it’s transient session thoughts/notes: put in `CONTEXT-SESSION.md` under Notes. Keep concise and rotate frequently.
+  - If it’s long‑lived branch plan/status: update `CONTEXT-BRANCH.md`.
+
+### Before you code (fast preflight)
+
+- Read: `TODO.md` (Current/Next), latest `CHANGELOG.md` logs
+- Run quick checks:
+  - `npm run compile`
+  - `npm test`
+  - `npm run repo:ops -- session lint`
+
+### After you code (verification batch)
+
+- Build/tests/lint/docs/health in one pass:
+  - `npm run compile && npm test && npm run prebuild`
+- Add a Verification block to `CHANGELOG.md` with results and any coverage/JSDoc notes.
+- Update `TODO.md` statuses (move to Completed, carry overs stay in Current/Next).
+
+### Rolling back safely
+
+- If a repo-ops command wrote files: recover from the backup folder noted by the command (backups are created before writes).
+- If a code change broke tests: `git restore -SW :/` the impacted files or `git checkout -p` to undo hunks.
+- If documentation got out of sync: re-run `npm run prebuild` to regenerate docs/manifests.
+
+## Failure Handling
+
+- Build fails:
+  - Check TS errors; prioritize missing imports/types and ESM path issues. Re-run `npm run compile` locally.
+- Tests fail:
+  - Start with the specific suite you changed. For ESM mocks, prefer `jest.unstable_mockModule`. Avoid hoisted `jest.mock` pitfalls.
+- Lint fails (code or JSDoc):
+  - Add precise `@param`/`@returns` types; remove placeholders; keep descriptions specific.
+- Markdown/Docs fail:
+  - Fix headings, code fences with languages, blank lines around fences; avoid inline HTML where lints disallow it.
+- Session lint fails:
+  - Ensure `CONTEXT-SESSION.md` has: `# Session Context`, `Started: <ISO 8601>`, `## Related`, `## Notes`.
+
+## Scenario Guides
+
+- Add a new setting
+  - Define in config; validate inputs; document in README + docs reference; add to quality gates; include CHANGELOG entry.
+- Add an agent
+  - Create exactly two files (`agent.config.ts`, `index.ts`); no imports from other agents; return typed data only; orchestrator wires it.
+- Breaking rename
+  - Use alias lifecycle: Introduce → Aliased → Warn → Remove; log in CHANGELOG every phase; add migration notes.
+- Remove deprecated module
+  - Ensure no references; delete file/tests; run `npm test`; log the deletion with verification.
+
 ## Changelog Entry Format
 
 **Required format**:
@@ -199,7 +254,7 @@ const __dirname = path.dirname(__filename);
 
 **ALWAYS** read `CHANGELOG.md` before starting work:
 
-- Understand current Outstanding Tasks
+- Understand recent changes and decisions
 - Review recent architectural decisions
 - Check for related recent changes
 - Understand current priorities
@@ -207,7 +262,7 @@ const __dirname = path.dirname(__filename);
 ## Key Files Reference
 
 - `TODO.md` – Source of truth for outstanding tasks and priorities (Current/Next/Backlog)
-- `CHANGELOG.md` – History and verification. The Outstanding Tasks section here is a temporary, read-only mirror during migration and may be pruned post-branch.
+- `CHANGELOG.md` – History and verification only (no Outstanding Tasks mirror)
 - `CONTEXT-SESSION.md` – Rolling session scratchpad: current focus, active branch/run state, quick notes. Rotate via repo-ops (session rotate) between work sprints.
 - `CONTEXT-BRANCH.md` – Branch plan and status: scope, milestones, acceptance criteria, and progress. Update as the branch evolves; close when merged.
 - `src/config/application.config.ts` – Application configuration
@@ -217,7 +272,7 @@ const __dirname = path.dirname(__filename);
 
 ---
 
-**Remember**: When in doubt about architecture, check agent isolation rules. When in doubt about what to work on, check CHANGELOG Outstanding Tasks. When stuck on complex problems, use Sequential Thinking MCP tool.
+**Remember**: When in doubt about architecture, check agent isolation rules. When in doubt about what to work on, check `TODO.md`. When stuck on complex problems, use Sequential Thinking MCP tool.
 
 ## Core Principles
 
@@ -234,7 +289,6 @@ const __dirname = path.dirname(__filename);
 At the start of a session:
 
 - Read `TODO.md` → Current/Next/Backlog and confirm which Current Tasks are active.
-- Note: The `CHANGELOG.md` Outstanding Tasks section is a read-only mirror for migration safety; do not edit it directly.
 - Update your internal todo list to mirror `TODO.md` priorities and wording.
 
 During changes:
@@ -248,25 +302,15 @@ At the end of a session:
 - Ensure the latest Verification block reflects PASS/FAIL for: Build / Tests / Lint / Docs / Health / Coverage / JSDoc.
 - Reconcile Outstanding Tasks (move completed items out; carry over remaining; adjust priorities if requested).
 
-## Changelog operations (Outstanding Tasks + Logs)
+## Changelog operations (Logs only)
 
-The changelog is organized around two sections: Outstanding Tasks and Logs. Follow these rules (synced from `CHANGELOG.md` → Notes for Copilot):
+The changelog records Logs only. Follow these rules:
 
-1. Outstanding Tasks are managed in `TODO.md` (source of truth). The section inside `CHANGELOG.md` is a read-only mirror used during migration and can be pruned after the branch.
-2. Keep `TODO.md` organized by priority: Current Tasks (immediate focus), Priority 1 (Next), Priority 2 (Later), Priority 3 (Backlog).
-3. Copilot should proactively review and keep `TODO.md` up to date, reflecting user-requested priority changes.
-4. After each set of logged changes, revisit and update `TODO.md` accordingly (use repo-ops helpers when applicable).
-5. Logs capture all change history, organized by date/time and semantic titles.
-6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
-7. Use semantic titles for log entries: `#### YYYY-MM-DD HH:MM:SS fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a detailed description with sub-points. Entries MUST include specific details, file paths, and implementation notes - never just the summary line alone.
-8. Include file paths for meaningful changes and provide sub-points explaining what was actually changed.
-9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items in `TODO.md` as needed.
-
-Practical cadence:
-
-- Insert new log entries newest-first within the current day; add the optional daily summary headline once per day if helpful.
-- After 3–5 edits or when creating/editing >~3 files in a burst, add/update a Verification block and reconcile Outstanding Tasks.
-- **Timestamp format**: Use `YYYY-MM-DD HH:MM:SS` (24-hour time with spaces) for log entry headers. The ChangeLogManager CLI handles this automatically.
+1. Keep `TODO.md` organized by priority: Current, Next, Backlog, Completed. Do not track tasks in `CHANGELOG.md`.
+2. Capture change history with timestamped, semantic titles and include file paths and rationale.
+3. After each batch, add a Verification block (Build / Tests / Lint / Docs / Health / Coverage / JSDoc) and update `TODO.md` as needed.
+4. Insert new log entries newest-first within each day; an optional daily summary heading is allowed.
+5. Use `YYYY-MM-DD HH:MM:SS` timestamps in 24-hour format.
 
 ## Agent Architecture (CRITICAL)
 
@@ -298,10 +342,9 @@ Practical cadence:
 
 4. **Data flow pattern**:
 
-  ```text
-  User → Orchestrator → Agent (returns typed data) → Orchestrator → CommunicationAgent (formats) → User
-  ```
-
+```text
+User → Orchestrator → Agent (returns typed data) → Orchestrator → CommunicationAgent (formats) → User
+```
 
 **Why This Matters**:
 
@@ -475,6 +518,7 @@ Refer to `CHANGELOG.md` for historical decisions and active planned tasks before
 Use both context files to keep navigation fast and thinking visible without polluting the changelog:
 
 - `CONTEXT-SESSION.md` (short-lived)
+
   - Purpose: Live session notes for the current working block. Track: active branch, focus areas, what tasks/tests are running, quick decisions, and immediate follow-ups.
   - When to update: At session start, after notable steps (e.g., tool runs, edits, verification), and before pausing. Rotate with repo-ops `session rotate` between sprints.
   - Structure tips: Keep it skim-friendly with headings like “current focus”, “actions taken”, “next up”. Avoid duplicating detailed history—link to CHANGELOG entries instead.
@@ -487,7 +531,6 @@ Use both context files to keep navigation fast and thinking visible without poll
 Notes:
 
 - Tasks live in `TODO.md`. Do not introduce new tasks directly in context files; link back to `TODO.md` or reference task IDs.
-- The `CHANGELOG.md` Outstanding Tasks section is a read-only mirror used during migration; prefer `TODO.md` for updates and prioritization.
 
 ---
 
@@ -495,20 +538,16 @@ These instructions are living; update them when governance rules or quality gate
 
 ## Automation Aids
 
-The ChangeLogManager CLI has been retired. Continue to edit `CHANGELOG.md` directly following the required format. The repo-ops CLI remains for TODO and session workflows:
+The ChangeLogManager CLI has been retired. Continue to edit `CHANGELOG.md` directly following the required format. The repo-ops CLI remains for session workflows:
 
-- Sync TODO from changelog (dry-run by default):
-  - `npm run repo:ops -- todo sync-from-changelog [--write]`
-- Generate actionable TODO checklist from Outstanding Tasks:
-  - `npm run repo:ops -- todo generate-actions [--write]`
 - Rotate session log (archive current, create fresh):
   - `npm run repo:ops -- session rotate [--write]`
+- Lint session context:
+  - `npm run repo:ops -- session lint`
 
 ## Changelog editing guidance
 
 - Edit `CHANGELOG.md` by hand; keep markers stable:
-  - `<!-- CHANGELOG:BEGIN:OUTSTANDING_TASKS -->` / `<!-- CHANGELOG:END:OUTSTANDING_TASKS -->`
   - `<!-- CHANGELOG:BEGIN:LOGS -->` / `<!-- CHANGELOG:END:LOGS -->`
 - Use the required headings and timestamp format; include Verification blocks after meaningful batches.
-- Reconcile Outstanding Tasks after each batch by reading between boundary markers.
 - Avoid reformatting markers or headings outside spec to keep the parser stable in future automation.

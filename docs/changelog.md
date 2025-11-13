@@ -15,22 +15,35 @@ associations:
 
 ## Notes for Copilot
 
-- Maintain this file as the single source of truth for application changes.
-- This file is used by `.github/copilot-instructions.md` for tracking historical decisions and active planned tasks before starting new work.
+- Purpose: This file records history only. Do not track tasks here.
+- Source of truth for tasks: `TODO.md` (Current/Next/Backlog/Completed).
+- Formatting, verification, and ordering are strictly enforced by governance.
 
-### Guidelines
+### Logs-Only Guidelines
 
-This changelog has two sections: [Outstanding Tasks](#outstanding-tasks) and [Logs](#logs).
+- Entry format: `YYYY-MM-DD HH:MM:SS type: Summary of changes`.
+  - Types: `feat | fix | chore | docs | refactor | test | perf | ci | build | style`.
+- Content blocks per entry:
+  - Problem/Context: What was wrong or needed.
+  - Changes Made: Numbered list with file paths and what changed/why.
+  - Architecture Notes: Patterns or decisions relevant to the change.
+  - Files Changed: Optional list with line counts if material.
+  - Testing (Verification): Build / Tests / Lint / Docs / Health / Coverage / JSDoc.
+  - Impact: What this enables or fixes.
+- Ordering: Newest-first within each day; optional daily summary heading allowed.
+- No Outstanding Tasks or mirrors: Never copy tasks into CHANGELOG; update `TODO.md` instead.
 
-1. Outstanding Tasks captures all incomplete work. It is organized by priority and jointly maintained by the user and Copilot Chat.
-2. Every incomplete task should appear here, grouped by priority: Priority 1 (Current), Priority 2 (Next Focus), Priority 3 (Backlog).
-3. Copilot should proactively review and keep this section up to date, reflecting user-requested priority changes.
-4. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
-5. Logs capture all change history, organized by date/time and semantic titles.
-6. Each day may include a summary line in the form: `### [YYYY-MM-DD] SUMMARY_OF_CHANGES`. Example: `### [2025-11-09] Refactored Agents. Testing Coverage Up to 90%.`
-7. Use semantic titles for log entries: `#### [YYYY-MM-DD][HH:MM:SS] fix | feat | chore | docs | refactor | test | perf | ci | build | style: SUMMARY_OF_CHANGES`, followed by a concise description. Example: `#### [2025-11-09][14:30:00] feat: Centralize runtime agent types & descriptor helper`.
-8. Include file paths for meaningful changes.
-9. Update Verification after edits (Build / Tests / Lint / Docs / Health). Mark resolved items with ✅ and unresolved with ❌. Move outstanding items into [Outstanding Tasks](#outstanding-tasks).
+### Decision Helper
+
+- Are you recording a change or decision? Add a log entry here.
+- Are you planning or tracking work? Edit `TODO.md` instead.
+- Are you capturing transient notes for the current session? Use `CONTEXT-SESSION.md`.
+
+### Common Mistakes to Avoid
+
+- Adding or mirroring TODO items in CHANGELOG (not allowed).
+- Missing file paths in “Changes Made” for non-trivial edits.
+- Skipping the Verification block for meaningful changes.
 
 <!-- END OF COPILOT CONTENT -->
 

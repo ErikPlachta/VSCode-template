@@ -11,8 +11,6 @@ associations:
   - documentation
 ---
 
-!! WARNING: THIS IS NOT YET BEING USED AND IS JUST A PROOF_OF_CONCEPT> NEED TO BUILD IT OUT THE REST OF THE WAY.
-
 ## Copilot Instructions
 
 <!-- BEGIN:COPILOT_INSTRUCTIONS -->
@@ -37,9 +35,10 @@ associations:
 
 The ChangeLogManager CLI has been retired. Edit `CHANGELOG.md` directly using the required format (timestamps: `YYYY-MM-DD HH:MM:SS`). For automation that remains:
 
-- Sync TODO from changelog (dry-run by default): `npm run repo:ops -- todo sync-from-changelog [--write]`
-- Generate actionable TODO checklist from Outstanding Tasks: `npm run repo:ops -- todo generate-actions [--write]`
-- Rotate session context: `npm run repo:ops -- session rotate [--write]`
+- Repo-ops (session management):
+  - Rotate session context: `npm run repo:ops -- session rotate [--write]`
+  - Lint session context: `npm run repo:ops -- session lint`
+- Note: CHANGELOG→TODO mirror and generated-actions commands have been removed. `TODO.md` is the single source of truth for tasks.
 
 #### Guidelines
 
@@ -108,7 +107,7 @@ Follow these guidelines to ensure effective task management:
       - Just like in the UserContext, agent configs should have base Signal, Focus, and PromptStarter definitions.
       - User context values for these should also be passed in to relative agents on run time, to append the list with additional options.
 - P2: BUILD: Update build Pipeline to include bundler
-  - https://code.visualstudio.com/api/working-with-extensions/bundling-extension
+  - Reference: [Bundling extensions](https://code.visualstudio.com/api/working-with-extensions/bundling-extension)
   - Evaluate options for bundling the extension to reduce size and improve performance.
     - Consider using tools like Webpack, Rollup, or esbuild.
     - Update the build scripts in package.json to include the bundling step.
@@ -186,7 +185,8 @@ Follow these guidelines to ensure effective task management:
 
 <!-- END:BACKLOG_ACTION_ITEMS -->
 <!-- END:GENERATED_ACTION_ITEMS -->
-<!-- BEGIN:COMPLETED_ACTION_ITEMS>
+<!-- BEGIN:COMPLETED_ACTION_ITEMS -->
+
 ## Completed TODOs
 
 > This section contains all completed TODOs, maintained for historical reference. The full list of completed TODOs start with a link to the `CHANGELOG.md` entry.

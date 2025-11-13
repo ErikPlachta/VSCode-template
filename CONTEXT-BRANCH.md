@@ -80,8 +80,8 @@ links:
 1. Planning (this file + templates) – DONE
 2. Repo-ops scaffolding (no file changes; add backups/dry-run infra) – DONE
 3. Migration command (dry-run first; create backups) – DONE (executed with --write)
-4. Governance updates (.github/copilot-instructions.md minimal edits) – PARTIAL (intro/session steps updated)
-5. Validation (quality gates pass) – IN PROGRESS (build/tests pass)
+4. Governance updates (.github/copilot-instructions.md + docs alignment) – DONE
+5. Validation (quality gates pass) – DONE (compile/tests/docs lint/health pass; code lint has existing repo-ops JSDoc items to address separately)
 6. Sunset and prune read-only mirror in CHANGELOG after N days – PENDING
 
 ## Success criteria
@@ -101,8 +101,8 @@ links:
 
 - [x] (P1) ID-OPS-001: Scaffold repo-ops CLI (dry-run + backups)
 - [x] (P1) ID-OPS-002: Implement todo sync-from-changelog (migration)
-- [~] (P1) ID-OPS-003: Update copilot-instructions (tasks → TODO, session TTL) – intro + session workflow updated; deeper sweep pending
-- [x] (P2) ID-OPS-004: Add session rotate --archive + lint – rotate DONE; lint PENDING
+- [x] (P1) ID-OPS-003: Update copilot-instructions (tasks → TODO, session TTL) – complete; docs and templates aligned
+- [x] (P2) ID-OPS-004: Add session rotate --archive + lint – rotate + lint DONE
 - [x] (P2) ID-OPS-005: Unit tests for parsers and migration – initial tests DONE; add more coverage later
 - [ ] (P3) ID-OPS-006: Optional repo-ops lint in CI
 

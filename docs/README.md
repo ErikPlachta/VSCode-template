@@ -1,6 +1,6 @@
 **UserContext-mcp-extension v1.0.0**
 
-***
+---
 
 # My Business MCP Extension
 
@@ -127,9 +127,9 @@ More diagnostics: `docs/template-variables.md` (resolved template values), share
 
 ## Contributing
 
-Follow the CHANGELOG “Unreleased” sections (Planned / Added / Changed / Fixed / Docs / Verification / Next Focus) for active work. Every non‑trivial PR must:
+Follow logs-only governance for `CHANGELOG.md`. For every non‑trivial PR:
 
-1. Update CHANGELOG (at least one section).
+1. Add a new CHANGELOG log entry with: Problem/Context, Changes Made (with file paths), Architecture Notes, Testing (Verification: Build/Tests/Lint/Docs/Health/Coverage/JSDoc), and Impact.
 2. Preserve migration aliases until scheduled removal (e.g. keep `relevant-data-manager` alongside `user-context`).
 3. Maintain 100% coverage – add tests first for new logic.
 4. Avoid manual edits to generated docs; regenerate via scripts.

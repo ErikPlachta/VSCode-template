@@ -36,23 +36,6 @@ This changelog records Logs only.
 
 ### [2025-11-12]
 
-#### 2025-11-12 21:30:09 feat: Repo-ops: implement changelog write and wire CLI
-
-**Problem/Context**: Adds writeEntry with backup+day-grouping and a 'changelog write' subcommand; dry-run-first behavior.
-
-**Changes Made**:
-
-1. <file path> (lines X-Y): <What changed and why>
-2. <file path> (lines A-B): <What changed and why>
-
-**Architecture Notes**: <Patterns/decisions>
-
-**Files Changed**: <List files with line counts>
-
-**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
-
-**Impact**: <What this enables/fixes>
-
 #### 2025-11-12 18:24:00 feat: Repo-ops – TODO add/complete/move, changelog scaffold+write, data-driven help
 
 **Problem/Context**: We need first-class, config-driven tooling to manage TODOs (add/complete/move) and to scaffold or write logs-only entries into CHANGELOG.md, while keeping governance intact. Help output should be data-driven to avoid drift.
