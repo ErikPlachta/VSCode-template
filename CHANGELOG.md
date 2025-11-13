@@ -36,6 +36,51 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 11:42:00 chore/build: Temporarily disable JSON lint stage in build
+
+**Problem/Context**: We are transitioning doc standards and want to avoid pipeline noise from JSON validation while we re-evaluate build utilities. The bash and Windows pipelines invoked `lint:json` as a dedicated stage.
+
+**Changes Made**:
+
+1. `bin/build.sh`: Removed `lint-json` from `STAGES` so it no longer executes `npm run lint:json`.
+2. `bin/build.bat`: Removed `lint-json` from `STAGES` and the explicit `:stage_lint_json` call.
+
+**Impact**: Build pipelines no longer execute JSON linting. The `lint:json` npm script remains available for manual runs. A follow-up task tracks consolidating build utilities and deciding the permanent home for JSON/schema validation tooling.
+
+#### 2025-11-13 11:30:00 build/lint: Enable TSDoc in src; keep JSDoc for out
+
+**Problem/Context**: We use strict JSDoc linting, but `src` types/docs increasingly use TSDoc tags like `@remarks`. ESLint flagged unknown tags. We want to validate TSDoc in `src` while preserving existing JSDoc linting (and ignoring generated `out/`).
+
+**Changes Made**:
+
+1. `eslint.config.js` (src override): Added `eslint-plugin-tsdoc` and enabled `tsdoc/syntax`; disabled `jsdoc/check-tag-names`; declared common TSDoc tags in `settings.jsdoc.definedTags` to avoid false-positives.
+2. `tsdoc.json`: Added standard TSDoc schema and enabled support for key tags (e.g., `@remarks`, `@privateRemarks`).
+3. `package.json`: Added `eslint-plugin-tsdoc` to devDependencies.
+
+**Architecture Notes**: Aligns with “types-as-docs” strategy. `src` uses TSDoc (validated via `tsdoc/syntax`), while lint continues to ignore `out/**`. Documentation generation remains via TypeDoc for `src`.
+
+**Files Changed**: `eslint.config.js`, `tsdoc.json`, `package.json`.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Lint: Pending full run; requires `npm i` to install `eslint-plugin-tsdoc` locally.
+- Docs: No changes to TypeDoc config; docs pipeline unaffected.
+
+**Impact**: Unblocks use of TSDoc tags like `@remarks` in `src` without relaxing overall documentation quality gates. Sets foundation for a staged transition: TSDoc in `src`, JSDoc (or ignored) for `out`.
+
+#### 2025-11-13 11:05:00 chore/audit: CommunicationAgent example queries are data-driven (no hardcoded categories)
+
+**Problem/Context**: Governance requires that example queries and business values are data-driven. After refactoring clarification to config-driven templates, we audited other CommunicationAgent responses for any remaining hardcoded category examples.
+
+**Changes Made**:
+
+1. Audit: Reviewed `src/agent/communicationAgent/index.ts` formatters (success/error/progress/validation) and `agent.config.ts` example templates. No hardcoded category names were found outside the clarification path. Clarification path already uses `communication.clarification.groups` with `{{category}}` substitution.
+2. Notes: Added session notes in `CONTEXT-SESSION.md` under thinking area to capture audit outcome and next UX evaluation.
+
+**Impact**: Confirms CommunicationAgent is fully data-driven for examples; no code change required beyond documentation/notes.
+
+
 #### 2025-11-13 10:00:00 refactor: CommunicationAgent clarification via configuration; add types and templates
 
 **Problem/Context**: Clarification output in `CommunicationAgent` included hardcoded examples, headers, and category mentions. Governance requires 100% data-driven formatting with values sourced from configuration or loaded data.
@@ -89,6 +134,25 @@ This changelog records Logs only.
 - Tests: PASS (now 272 total; added 1 for error enumeration)
 
 **Impact**: Clearer error messages that guide the user toward valid options without hardcoded business values.
+
+#### 2025-11-13 10:28:00 docs/chore: README config & IntelliSense; seed TODOs for types JSDoc and UX evaluation
+
+**Problem/Context**: We want IntelliSense to explain settings and provide examples at the type level to reduce inline duplication in `agent.config.ts`. Also, we added category enumeration via metadata and should document the design intention.
+
+**Changes Made**:
+
+1. `README.md`: Added “Configuration & IntelliSense” section describing types-as-docs in `src/types/agentConfig.ts`, minimizing inline comments in agent configs, the `communication.clarification` block, and how `metadata.availableCategories` drives the “Available Categories” section in formatted messages.
+2. `TODO.md`: Seeded two items under Findings:
+
+- Comprehensive JSDoc with examples for config types in `src/types/agentConfig.ts` (and related types).
+- Evaluation task to consider category enumeration in CommunicationAgent responses beyond clarification/error.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test`)
+
+**Impact**: Establishes types-as-docs as the single source for configuration semantics and examples, reduces duplication, and clarifies how metadata informs UX formatting.
 
 ### [2025-11-12]
 

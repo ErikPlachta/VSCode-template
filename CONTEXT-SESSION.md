@@ -66,7 +66,7 @@ Started: 2025-11-12T17:30:00Z
 
 - ✅ Replace hardcoded `validAgents` in `validateAction` with registry keys.
 - ✅ Remove `formatResponseForUser` and inline markdown assembly; delegate formatting to `CommunicationAgent`.
-  ✅ Ensure `route`/`handle` return typed data only; orchestrator no longer emits `markdown` (deprecated field remains in types for compatibility, not populated).
+- ✅ Ensure `route`/`handle` return typed data only; orchestrator no longer emits `markdown` (deprecated field remains in types for compatibility, not populated).
 
 #### Recent Changes
 
@@ -84,3 +84,13 @@ Started: 2025-11-12T17:30:00Z
 - Document `communication.clarification` configuration structure in README and internal docs (planned).
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
+<!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->
+
+### Notes – CommunicationAgent examples audit & JSDoc plan (2025-11-13)
+
+- CommunicationAgent audit: No hardcoded category names found in example queries outside clarification. Clarification path already config-driven via `communication.clarification.groups` using `{{category}}` substitution. Other response formatters (success/error/progress/validation) do not embed example queries.
+- Follow-up UX: Consider optionally showing category-aware tips for `metadataRetrieved` success when `metadata.availableCategories` is present; should be config-gated to avoid unsolicited noise.
+- JSDoc pass focus: Centralize semantics and examples in `src/types/agentConfig.ts` (types-as-docs). Avoid inline duplication in `agent.config.ts`. Added examples for `AgentIdentity`, `IntentConfig`, `TextProcessingConfig`, `ExecutionConfig`, `UserFacingConfig`, `CommunicationConfig`, and `CommunicationClarificationConfig`.
+- Risk & scope: Broader type files can be incrementally annotated later; today’s pass covers primary configuration surfaces used by extension and agents.
+
+<!-- END:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

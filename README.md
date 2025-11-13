@@ -57,6 +57,13 @@ The legacy `src/mcp.config.json` will be fully removed after one migration cycle
 
 Template processing, test fixtures, and docs generation all use the TS sources as the single source of truth to prevent drift.
 
+### Configuration & IntelliSense
+
+- Types-as-docs: Core configuration types live in type definitions, for example `src/types/agentConfig.ts`, and will include rich JSDoc (purpose, defaults, and examples) to power IntelliSense across the repo and prevent duplication and drift.
+- Agent configs: Keep inline comments in `agent.config.ts` minimal; rely on type JSDoc for canonical docs to avoid duplication and drift.
+- CommunicationAgent clarification: The `communication.clarification` block drives all clarification copy (headers, templates, limits). Avoid hardcoded business values in code; update config instead.
+- Available categories: When a caller includes `metadata.availableCategories` in a response, `CommunicationAgent` appends an “Available Categories” section (markdown/plaintext) using the configured header.
+
 ## Settings: UI first, chat second
 
 You can configure the extension in two ways:

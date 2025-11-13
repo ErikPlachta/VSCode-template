@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsparser from "@typescript-eslint/parser";
 import jsdoc from "eslint-plugin-jsdoc";
+import tsdoc from "eslint-plugin-tsdoc";
 
 export default [
   js.configs.recommended,
@@ -33,10 +34,13 @@ export default [
     plugins: {
       "@typescript-eslint": tseslint,
       jsdoc: jsdoc,
+      tsdoc: tsdoc,
     },
     rules: {
       ...tseslint.configs.recommended.rules,
       ...jsdoc.configs.recommended.rules,
+      // Validate TSDoc syntax and tags in TypeScript source
+      "tsdoc/syntax": "error",
       // Disallow relative imports – enforce path aliases defined in tsconfig.json
       "no-restricted-imports": [
         "error",
@@ -84,10 +88,30 @@ export default [
       "jsdoc/tag-lines": ["error", "any", { startLines: 1 }],
       "jsdoc/require-example": "off",
       "jsdoc/require-hyphen-before-param-description": "error",
+      // We rely on tsdoc/syntax for tag validation in TS; avoid double-reporting unknown tags like @remarks
+      "jsdoc/check-tag-names": "off",
     },
     settings: {
       jsdoc: {
         mode: "typescript",
+        // Allow common TSDoc tags so other jsdoc rules (like require-description) don't choke on them
+        definedTags: [
+          "remarks",
+          "defaultValue",
+          "eventProperty",
+          "inheritDoc",
+          "label",
+          "link",
+          "override",
+          "sealed",
+          "virtual",
+          "alpha",
+          "beta",
+          "internal",
+          "public",
+          "privateRemarks",
+          "packageDocumentation",
+        ],
         tagNamePreference: {
           file: "packageDocumentation",
           fileoverview: "packageDocumentation",

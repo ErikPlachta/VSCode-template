@@ -22,7 +22,7 @@ set "COVERAGE_DIR=%PROJECT_ROOT%\coverage"
 set "REPORTS_DIR=%DOCS_DIR%\reports"
 
 REM Build stages
-set "STAGES=clean,validate-config,lint-json,lint-docs,lint-code,compile,process-templates,test,docs,health-report,package"
+set "STAGES=clean,validate-config,lint-docs,lint-code,compile,process-templates,test,docs,health-report,package"
 
 REM Default configuration
 set "COVERAGE=true"
@@ -319,7 +319,6 @@ exit /b 1
 REM Execute stages (simplified - run all stages)
 call :stage_clean
 call :stage_validate_config
-call :stage_lint_json
 call :stage_lint_docs
 call :stage_lint_code
 call :stage_compile

@@ -85,12 +85,19 @@ Follow these guidelines to ensure effective task management:
     - [x] Orchestrator: Replace remaining direct markdown assembly (e.g., `### ${snapshot.name}`) with `CommunicationAgent` templates.
     - [x] CommunicationAgent: Clarification formatting is fully config-driven (no hardcoded examples/categories); uses `communication.clarification`.
     - [x] CommunicationAgent: Replace hardcoded "Available Categories" list with dynamic enumeration from `UserContextAgent` categories (via response metadata in error/clarification paths).
-    - [ ] CommunicationAgent: Replace example queries that hardcode category names with data-driven templates or config-provided samples (clarification path complete; other responses pending).
+    - [x] CommunicationAgent: Replace example queries that hardcode category names with data-driven templates or config-provided samples (clarification path complete; other responses pending). Audit found no hardcoded category examples outside clarification; clarification already config-driven.
+    - [x] Types: Add comprehensive JSDoc for all configuration types in all type files. For example, `src/types/agentConfig.ts` (purpose, parameters, defaults) and include example snippets to power IntelliSense; prefer types-level docs over inline comments in `agent.config.ts` to avoid duplication as a code-base level rule. We may find duplication and contradictions. Use the end of the CONTEXT-SESSION for notes to stay organized and make a plan between the markers `CONTEXT-SESSION-LLM-THINKING-NOTES-AREA`.
+      - [x] agentConfig.ts
+        - [x] Made initial changes to verify desire
+        - [x] User updated with more complete JSDOC @property values and comments as desired.
+        - [ ] Verified user changes to make a plan for all other files
+      - [ ] List other files here and execute same type of changes as in agentConfig.ts
+    - [ ] CommunicationAgent (evaluation): Identify other responses where `metadata.availableCategories` (or similar) adds value beyond error/clarification (e.g., success for `metadataRetrieved`); define config-gated enumeration and limits; open follow-ups per finding.
     - [ ] ClarificationAgent: Ensure examples and capability lists derive from manifest/config (no hardcoded business values).
     - [ ] DatabaseAgent: Confirm all field aliases live in config only; no code-level hardcoded business values.
     - [ ] DataAgent: Confirm category references are read from config; no code-level hardcoded business values.
   - [ ] Next Steps:
-    - [ ] Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes.
+    - [ ] Produce per-agent review notes in CONTEXT-SESSION (Current Focus Detail) as working notes. This will require updating copilot-instructions.md and the CONTEXT-SESSION.md files with clear instructions to guide the LLM accordingly.
     - [ ] Open follow-up TODOs per finding (one line each) and link in CHANGELOG when resolved.
   - [ ] P2: Follow-up (Copilot Chat UX): Update `CommunicationAgent` to leverage additional VS Code Copilot Chat features (structured TODO blocks, interactive messages, collapsible sections/details, and richer progress/status elements) in formatted responses.
 
@@ -118,6 +125,26 @@ Follow these guidelines to ensure effective task management:
     - [ ] Update the build scripts in package.json to include the bundling step.
     - [ ] Test the bundled extension to ensure it works correctly in VS Code.
     - [ ] Update documentation to reflect the new build process.
+  - [ ] P1: Lint/Docs: Adopt TSDoc in `src`, keep JSDoc for `out`
+    - [ ] Install `eslint-plugin-tsdoc` and update local dev (`npm i`).
+    - [ ] Run `npm run lint` to validate TSDoc tags (e.g., `@remarks`) do not error.
+    - [ ] Confirm TypeDoc renders `@remarks` and examples from `src` as expected.
+    - [ ] Evaluate adding a `jsdoc` doc task for `out/**` (optional) and wire as `docs:jsdoc`.
+    - [ ] Update governance docs to reflect “TSDoc for src / JSDoc for out” policy.
+- [ ] P1: Build Utilities Evaluation and Consolidation
+  - [ ] Disable JSON lint in pipelines (bash + Windows) — COMPLETE in this branch
+  - [ ] Audit `@tools/repositoryHealth` usage paths
+    - [ ] Decide: build-time only vs. runtime usage
+    - [ ] If build-only, plan migration to `bin/utils` packaged tool (like `repo-ops`)
+  - [ ] Unify scripts
+    - [ ] Replace `npm run lint:json` with repo-ops subcommand or a single entry point
+    - [ ] Review `lint:docs` and consider merging into the same tool for consistency
+  - [ ] CI integration
+    - [ ] Update build scripts and CI to call the unified tool
+    - [ ] Document strict vs. non-strict modes for local vs. CI
+  - [ ] Docs
+    - [ ] Update README and `.github/copilot-instructions.md` to reflect the new flow
+    - [ ] Add troubleshooting section for health/lint failures
 
 <!-- END:NEXT_ACTION_ITEMS -->
 <!-- BEGIN:BACKLOG_ACTION_ITEMS -->

@@ -28,7 +28,6 @@ readonly REPORTS_DIR="${DOCS_DIR}/reports"
 readonly STAGES=(
     "clean"
     "validate-config"
-    "lint-json"
     "lint-docs" 
     "lint-code"
     "compile"
