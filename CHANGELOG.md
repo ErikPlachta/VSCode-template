@@ -113,6 +113,53 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 17:45:00 refactor/validation: Introduce shared category validation module (Phase 3 partial)
+
+**Problem/Context**: Begin Phase 3 of validation runtime extraction by creating a shared module for category/record/relationship validation while retaining existing logic in `src/types/userContext.types.ts` (cannot yet delegate due to types-only import guard). Shared code will enable later agent migration without editing type definitions.
+
+**Changes Made**:
+
+- Added `src/shared/validation/categoryValidation.ts` with implementations: `validateCategoryConfigImpl`, `validateCategoryRecordImpl`, `validateRelationshipDefinitionImpl`, `formatValidationErrorsImpl` (copied logic verbatim from types file).
+- Left existing runtime validation functions in `src/types/userContext.types.ts` (delegation deferred; added explanatory comment to avoid runtime import violation).
+- Updated `TODO.md` marking Phase 2 complete and adding Phase 3 partial status.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (38 passed, 1 skipped, 39 total)
+
+**Impact**: Establishes shared validation layer foundation for future agent migration without increasing coupling; keeps current public API stable while enabling incremental extraction.
+
+##### Verification – 2025-11-13 (Shared module creation)
+
+- Build: PASS
+- Tests: PASS (38 passed, 1 skipped)
+- Lint/Docs: PASS (no new violations beyond pre-existing markdown warnings in CHANGELOG)
+
+#### 2025-11-13 17:30:00 test/validation: Phase 2 parity tests for validation runtime
+
+**Problem/Context**: Before extracting validation logic out of `src/types/**`, we need parity tests to freeze current behavior and shapes for validators and helpers.
+
+**Changes Made**:
+
+- Added `tests/validation.parity.test.ts` covering:
+  - `validateCategoryConfig`, `validateCategoryRecord`, `validateRelationshipDefinition`, and `formatValidationErrors` in `src/types/userContext.types.ts`.
+  - `validateAgentConfig`, `validateCompatibility`, and `generateValidationReport` in `src/types/configValidation.ts`.
+  - `validateConfig` and `CONFIG_IDS` usage in `src/types/configRegistry.ts`.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (38 passed, 1 skipped, 39 total)
+
+**Impact**: Locks in current validator behavior to enable safe refactors during Phases 3–5 with quick detection of regressions.
+
+##### Verification – 2025-11-13 (Parity tests)
+
+- Build: PASS
+- Tests: PASS (38 passed, 1 skipped)
+- Lint/Docs: N/A
+
 #### 2025-11-13 17:15:00 chore/tests+health: Baseline verification prior to validation runtime extraction
 
 **Problem/Context**: Before beginning Phase 1 (Inventory & Tag) of the validation runtime extraction, a clean, verified baseline is required to anchor forthcoming parity tests and quickly isolate any regression introduced by moving validation logic out of `src/types/**`.

@@ -11,6 +11,11 @@
  * IntelliSense in configuration authoring.
  */
 
+// Phase 3 note: shared validation implementations exist under
+// `src/shared/validation/categoryValidation.ts` but are not imported here to
+// preserve the types-only constraint (no runtime imports). Full delegation
+// will occur after agents switch to shared module (later Phase 3).
+
 /**
  * Unique identifier for a category
  */
@@ -621,6 +626,8 @@ export interface ValidationResult {
 /**
  * Validates a {@link CategoryConfig} object with detailed error reporting.
  *
+ * @remarks Phase 1 Inventory: runtime validation function scheduled for extraction to `src/shared/validation/categoryValidation.ts` in Phase 3. Present here temporarily; do not add new runtime functions under `src/types/**`.
+ *
  * @param obj - The value to validate.
  * @returns Validation result with detailed errors.
  *
@@ -634,8 +641,6 @@ export interface ValidationResult {
  */
 export function validateCategoryConfig(obj: unknown): ValidationResult {
   const errors: ValidationError[] = [];
-
-  // Check if object exists and is an object
   if (!obj || typeof obj !== "object") {
     return {
       valid: false,
@@ -649,10 +654,7 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       ],
     };
   }
-
   const record = obj as Record<string, unknown>;
-
-  // Validate required top-level fields
   if (typeof record.id !== "string") {
     errors.push({
       path: "id",
@@ -661,7 +663,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: typeof record.id,
     });
   }
-
   if (typeof record.name !== "string") {
     errors.push({
       path: "name",
@@ -670,7 +671,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: typeof record.name,
     });
   }
-
   if (typeof record.description !== "string") {
     errors.push({
       path: "description",
@@ -679,7 +679,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: typeof record.description,
     });
   }
-
   if (!Array.isArray(record.aliases)) {
     errors.push({
       path: "aliases",
@@ -695,8 +694,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: "mixed types",
     });
   }
-
-  // Validate config object
   if (!record.config || typeof record.config !== "object") {
     errors.push({
       path: "config",
@@ -704,13 +701,9 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       expected: "object",
       actual: typeof record.config,
     });
-    // Stop here if config is missing - can't validate nested fields
     return { valid: false, errors };
   }
-
   const config = record.config as Record<string, unknown>;
-
-  // Validate config fields
   if (typeof config.purpose !== "string") {
     errors.push({
       path: "config.purpose",
@@ -719,7 +712,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: typeof config.purpose,
     });
   }
-
   if (!Array.isArray(config.primaryKeys)) {
     errors.push({
       path: "config.primaryKeys",
@@ -735,7 +727,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: "mixed types",
     });
   }
-
   if (typeof config.updateCadence !== "string") {
     errors.push({
       path: "config.updateCadence",
@@ -744,7 +735,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: typeof config.updateCadence,
     });
   }
-
   if (typeof config.access !== "string") {
     errors.push({
       path: "config.access",
@@ -753,8 +743,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       actual: typeof config.access,
     });
   }
-
-  // Validate orchestration object
   if (!config.orchestration || typeof config.orchestration !== "object") {
     errors.push({
       path: "config.orchestration",
@@ -764,7 +752,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
     });
   } else {
     const orch = config.orchestration as Record<string, unknown>;
-
     if (typeof orch.summary !== "string") {
       errors.push({
         path: "config.orchestration.summary",
@@ -773,7 +760,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
         actual: typeof orch.summary,
       });
     }
-
     if (!Array.isArray(orch.signals)) {
       errors.push({
         path: "config.orchestration.signals",
@@ -789,7 +775,6 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
         actual: "mixed types",
       });
     }
-
     if (!orch.agents || typeof orch.agents !== "object") {
       errors.push({
         path: "config.orchestration.agents",
@@ -799,23 +784,19 @@ export function validateCategoryConfig(obj: unknown): ValidationResult {
       });
     }
   }
-
-  return {
-    valid: errors.length === 0,
-    errors,
-  };
+  return { valid: errors.length === 0, errors };
 }
 
 /**
  * Validates a {@link CategoryRecord} object with detailed error reporting.
+ *
+ * @remarks Phase 1 Inventory: scheduled for extraction to shared validation module (Phase 3). Keep logic unchanged for parity tests.
  *
  * @param obj - The value to validate.
  * @returns Validation result with detailed errors.
  */
 export function validateCategoryRecord(obj: unknown): ValidationResult {
   const errors: ValidationError[] = [];
-
-  // Check if object exists and is an object
   if (!obj || typeof obj !== "object") {
     return {
       valid: false,
@@ -829,10 +810,7 @@ export function validateCategoryRecord(obj: unknown): ValidationResult {
       ],
     };
   }
-
   const record = obj as Record<string, unknown>;
-
-  // Validate required id field
   if (typeof record.id !== "string") {
     errors.push({
       path: "id",
@@ -841,11 +819,8 @@ export function validateCategoryRecord(obj: unknown): ValidationResult {
       actual: typeof record.id,
     });
   }
-
-  // Validate that either name or title is present
   const hasName = typeof record.name === "string";
   const hasTitle = typeof record.title === "string";
-
   if (!hasName && !hasTitle) {
     errors.push({
       path: "name/title",
@@ -854,23 +829,19 @@ export function validateCategoryRecord(obj: unknown): ValidationResult {
       actual: `name: ${typeof record.name}, title: ${typeof record.title}`,
     });
   }
-
-  return {
-    valid: errors.length === 0,
-    errors,
-  };
+  return { valid: errors.length === 0, errors };
 }
 
 /**
  * Validates a {@link RelationshipDefinition} object with detailed error reporting.
+ *
+ * @remarks Phase 1 Inventory: will move to shared validation module; retained here for baseline parity.
  *
  * @param obj - The value to validate.
  * @returns Validation result with detailed errors.
  */
 export function validateRelationshipDefinition(obj: unknown): ValidationResult {
   const errors: ValidationError[] = [];
-
-  // Check if object exists and is an object
   if (!obj || typeof obj !== "object") {
     return {
       valid: false,
@@ -884,10 +855,7 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
       ],
     };
   }
-
   const record = obj as Record<string, unknown>;
-
-  // Validate required fields
   if (typeof record.from !== "string") {
     errors.push({
       path: "from",
@@ -896,7 +864,6 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
       actual: typeof record.from,
     });
   }
-
   if (typeof record.to !== "string") {
     errors.push({
       path: "to",
@@ -905,7 +872,6 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
       actual: typeof record.to,
     });
   }
-
   if (typeof record.type !== "string") {
     errors.push({
       path: "type",
@@ -914,8 +880,6 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
       actual: typeof record.type,
     });
   }
-
-  // Validate fields object
   if (!record.fields || typeof record.fields !== "object") {
     errors.push({
       path: "fields",
@@ -925,7 +889,6 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
     });
   } else {
     const fields = record.fields as Record<string, unknown>;
-
     if (typeof fields.source !== "string") {
       errors.push({
         path: "fields.source",
@@ -934,7 +897,6 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
         actual: typeof fields.source,
       });
     }
-
     if (typeof fields.target !== "string") {
       errors.push({
         path: "fields.target",
@@ -944,7 +906,6 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
       });
     }
   }
-
   if (typeof record.description !== "string") {
     errors.push({
       path: "description",
@@ -953,8 +914,6 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
       actual: typeof record.description,
     });
   }
-
-  // Optional: validate required field if present
   if (record.required !== undefined && typeof record.required !== "boolean") {
     errors.push({
       path: "required",
@@ -963,15 +922,13 @@ export function validateRelationshipDefinition(obj: unknown): ValidationResult {
       actual: typeof record.required,
     });
   }
-
-  return {
-    valid: errors.length === 0,
-    errors,
-  };
+  return { valid: errors.length === 0, errors };
 }
 
 /**
  * Formats validation errors into a human-readable string.
+ *
+ * @remarks Phase 1 Inventory: formatting helper slated for relocation to shared validation utilities (Phase 3). Maintain signature unchanged.
  *
  * @param errors - Array of validation errors.
  * @param maxErrors - Maximum number of errors to include (default: 3).
@@ -987,17 +944,9 @@ export function formatValidationErrors(
   errors: ValidationError[],
   maxErrors: number = 3
 ): string {
-  if (errors.length === 0) {
-    return "";
-  }
-
+  if (errors.length === 0) return "";
   return errors
     .slice(0, maxErrors)
-    .map((error) => {
-      if (error.path) {
-        return `${error.path}: ${error.message}`;
-      }
-      return error.message;
-    })
+    .map((error) => (error.path ? `${error.path}: ${error.message}` : error.message))
     .join("; ");
 }

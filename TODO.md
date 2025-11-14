@@ -82,7 +82,9 @@ Follow these guidelines to ensure effective task management:
 
 - [ ] P1: Validation Runtime Extraction (Phased)
 
-  - [ ] Phase 1: Inventory & Tag – enumerate all runtime exports in `src/types/configValidation.ts` (validators, normalizers); annotate with temporary inline TODO tags (non-invasive).
+  - [x] Phase 1: Inventory & Tag – enumerated runtime validation exports (agent/category/relationship/errors/reporting); added Phase 1 @remarks tags to each exported function in `src/types/userContext.types.ts`, `src/types/configValidation.ts`, `src/types/configRegistry.ts`.
+  - [x] Phase 2: Parity Test Scaffold – added `tests/validation.parity.test.ts` (locks behavior for category + config validators, 38 passed, 1 skipped total suites now 39).
+  - [ ] Phase 3: Shared Module Completion (Category subset) – create `src/shared/validation/categoryValidation.ts` with extracted logic; delegate wrappers in `src/types/userContext.types.ts`.
   - [ ] Phase 2: Parity Test Scaffold – create dedicated tests asserting current behaviors (inputs/outputs/error shapes) before migration.
   - [ ] Phase 3: Shared Module Completion – implement logic in `src/shared/config/agentConfigValidation.ts`; keep legacy file exporting wrappers.
   - [ ] Phase 4: Single-Agent Import Switch – migrate one agent (e.g. `UserContextAgent`) to shared module; run full verification (`compile && test`).

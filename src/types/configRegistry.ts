@@ -319,6 +319,8 @@ export type ConfigId = (typeof CONFIG_IDS)[keyof typeof CONFIG_IDS];
  * ```ts
  * const ok = validateConfig({ $configId: CONFIG_IDS.ORCHESTRATOR });
  * ```
+ * 
+ * @remarks Phase 1 Inventory: simple presence/registry validator slated for migration to shared validation utilities (Phase 3). Maintain current console side-effects for parity.
  */
 export function validateConfig(config: { $configId?: string }): boolean {
   if (!config.$configId) {

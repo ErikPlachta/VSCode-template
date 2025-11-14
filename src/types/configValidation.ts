@@ -71,6 +71,7 @@ export interface ValidationWarning extends Omit<ValidationError, "level"> {
  *   console.error(generateValidationReport(result));
  * }
  * ```
+ * @remarks Phase 1 Inventory: runtime validation export to be migrated to `src/shared/validation/agentConfigValidation.ts` (Phase 3). Keep logic stable for parity tests.
  */
 export function validateAgentConfig(config: unknown): ValidationResult {
   const errors: ValidationError[] = [];
@@ -428,6 +429,7 @@ function validateRelevantDataManagerConfig(
  * @param config1 - Baseline configuration.
  * @param config2 - Candidate configuration to compare against baseline.
  * @returns A {@link ValidationResult} indicating whether versions are compatible.
+ * @remarks Phase 1 Inventory: compatibility check will relocate to shared validation module in Phase 3. Do not modify behavior before parity tests.
  */
 export function validateCompatibility(
   config1: AgentConfigDefinition,
@@ -474,6 +476,7 @@ export function validateCompatibility(
  * const report = generateValidationReport(result);
  * console.log(report);
  * ```
+ * @remarks Phase 1 Inventory: reporting helper scheduled for extraction alongside validation functions (Phase 3). Signature must remain unchanged for parity.
  */
 export function generateValidationReport(result: ValidationResult): string {
   const lines: string[] = [];
