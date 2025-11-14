@@ -100,7 +100,12 @@ Follow these guidelines to ensure effective task management:
   - [x] Phase 7: Cleanup & Changelog – removed phased inline remarks across types; added verification changelog entry confirming tests (42 passed / 1 skipped) and purity intact.
   - [x] Phase 8: Post-Migration Audit – confirm no hardcoded business values introduced; validate agent isolation remains intact.
     - Findings: No hardcoded category ids or business strings found in `src/shared/validation/**`; agent modules under `src/agent/**` only import their own `agent.config.ts` and do not import other agents. Orchestrator remains sole coordinator. Test suite remains green (44 passed, 1 skipped).
-  - [ ] Phase 9: Coverage Review – ensure parity tests + new shared module maintain or improve coverage metrics.
+  - [x] Phase 9: Coverage Review – ensure parity tests + new shared module maintain or improve coverage metrics.
+    - Baseline (2025-11-14): `src/shared/validation/categoryValidation.ts` – Statements 95%, Branches 93.82%, Functions 100%, Lines 94.73%.
+    - Baseline (2025-11-14): `src/shared/validation/configValidation.ts` – Statements 63.73%, Branches 61.44%, Functions 75%, Lines 63.73%.
+    - Action: Added `tests/configValidation.coverage.test.ts` to exercise invalid `$configId`, orchestrator `intents` type, `textProcessing.stopWords`, and `scoring.weights` branches; unknown agent type warning; semver warning; compatibility paths; and report generation.
+    - Result (2025-11-14): `src/shared/validation/configValidation.ts` – Statements 92.30%, Branches 89.15%, Functions 91.66%, Lines 92.30%.
+    - Suite status: PASS (1 skipped, 45 passed). Coverage updated via `npm test -- --coverage`.
 - [ ] P1: MCP Transport & Protocol Enforcement
   - [x] Ensure JSON-RPC 2.0 compliance end-to-end.
   - [x] Verify stdio is default transport; HTTP enabled only with `MCP_HTTP_ENABLED=true`.
@@ -164,6 +169,12 @@ Follow these guidelines to ensure effective task management:
   - [ ] Add unit tests for write/scaffold with new flags (dry-run/apply, context-file, minimal template)
   - [ ] Add integration tests that verify generated markdown has no MD lint errors
   - [ ] Update README/docs and `CHANGELOG.md` instructions with examples for new flags
+- [ ] P2: CLI: repo-ops — Add `--remove-lock` to clear stale changelog lock
+  - [ ] Implement `--remove-lock` (or `lock --remove`) to delete `out/changelog/changelog.write.lock` safely
+  - [ ] Guard with TTL + confirmation prompt; support `--force` for CI
+  - [ ] Add unit tests for stale vs active lock scenarios
+  - [ ] Update CLI help/README and `CHANGELOG.md` instructions
+  - [ ] Add docs note warning against use during active writes
 - [ ] P3: EXTENSION: Add TODO management capabilities (consider agent)
   - [ ] Evaluate agent vs direct extension implementation
   - [ ] Define minimal commands & UX
