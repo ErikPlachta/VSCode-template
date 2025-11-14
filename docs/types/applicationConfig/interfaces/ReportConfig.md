@@ -6,9 +6,15 @@
 
 # Interface: ReportConfig
 
-Defined in: [src/types/applicationConfig.ts:279](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L279)
+Defined in: [src/types/applicationConfig.ts:443](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L443)
 
 Report generation configuration.
+
+## Example
+
+```ts
+const reportCfg: ReportConfig = { output: "coverage/report.json" };
+```
 
 ## Properties
 
@@ -16,6 +22,6 @@ Report generation configuration.
 
 > **output**: `string`
 
-Defined in: [src/types/applicationConfig.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L281)
+Defined in: [src/types/applicationConfig.ts:445](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L445)
 
 Output path for generated reports.

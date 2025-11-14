@@ -6,9 +6,19 @@
 
 # Interface: AgentProfile
 
-Defined in: [src/types/applicationConfig.ts:121](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L121)
+Defined in: [src/types/applicationConfig.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L188)
 
 Agent profile configuration.
+
+## Example
+
+```ts
+const profile: AgentProfile = {
+  priority: "high",
+  timeout: 5000,
+  cacheEnabled: true,
+};
+```
 
 ## Properties
 
@@ -16,7 +26,7 @@ Agent profile configuration.
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L127)
+Defined in: [src/types/applicationConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L194)
 
 Enable caching for this agent.
 
@@ -26,7 +36,7 @@ Enable caching for this agent.
 
 > **priority**: [`AgentPriority`](../type-aliases/AgentPriority.md)
 
-Defined in: [src/types/applicationConfig.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L123)
+Defined in: [src/types/applicationConfig.ts:190](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L190)
 
 Execution priority for the agent.
 
@@ -36,6 +46,6 @@ Execution priority for the agent.
 
 > **timeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:125](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L125)
+Defined in: [src/types/applicationConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L192)
 
 Maximum execution timeout in milliseconds.

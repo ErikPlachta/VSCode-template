@@ -8,7 +8,7 @@
 
 > **WorkflowActionType** = `"classify"` \| `"execute-agent"` \| `"format"` \| `"clarify"`
 
-Defined in: [src/types/workflow.types.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L37)
+Defined in: [src/types/workflow.types.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L42)
 
 Workflow action type
 

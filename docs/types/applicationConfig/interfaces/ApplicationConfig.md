@@ -6,9 +6,25 @@
 
 # Interface: ApplicationConfig
 
-Defined in: [src/types/applicationConfig.ts:288](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L288)
+Defined in: [src/types/applicationConfig.ts:461](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L461)
 
 Comprehensive application configuration structure.
+
+## Remarks
+
+Serves as the single entry point for app configuration. External tools can
+generate or validate this structure during build.
+
+## Example
+
+```ts
+See generated docs for a complete sample.
+```
+
+## See
+
+ - docs/config/application.config/variables/applicationConfig.md
+ - src/config/application.config.ts
 
 ## Properties
 
@@ -16,7 +32,7 @@ Comprehensive application configuration structure.
 
 > **agents**: `object`
 
-Defined in: [src/types/applicationConfig.ts:314](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L314)
+Defined in: [src/types/applicationConfig.ts:487](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L487)
 
 Agent configuration and profiles.
 
@@ -98,7 +114,7 @@ Template replacement mappings.
 
 > **application**: `object`
 
-Defined in: [src/types/applicationConfig.ts:290](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L290)
+Defined in: [src/types/applicationConfig.ts:463](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L463)
 
 Application metadata and environment settings.
 
@@ -144,7 +160,7 @@ Application version.
 
 > **data**: `object`
 
-Defined in: [src/types/applicationConfig.ts:340](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L340)
+Defined in: [src/types/applicationConfig.ts:513](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L513)
 
 Data management configuration.
 
@@ -172,7 +188,7 @@ Data validation settings.
 
 > **features**: `object`
 
-Defined in: [src/types/applicationConfig.ts:395](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L395)
+Defined in: [src/types/applicationConfig.ts:568](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L568)
 
 Feature flags and experimental settings.
 
@@ -194,7 +210,7 @@ Extension management configuration.
 
 > **jsonSchemas**: [`JsonSchemaConfig`](JsonSchemaConfig.md)[]
 
-Defined in: [src/types/applicationConfig.ts:356](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L356)
+Defined in: [src/types/applicationConfig.ts:529](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L529)
 
 JSON schema validation configurations.
 
@@ -204,7 +220,7 @@ JSON schema validation configurations.
 
 > **logging**: `object`
 
-Defined in: [src/types/applicationConfig.ts:365](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L365)
+Defined in: [src/types/applicationConfig.ts:538](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L538)
 
 Logging configuration.
 
@@ -238,7 +254,7 @@ Log output destinations.
 
 > **markdown**: [`MarkdownConfig`](MarkdownConfig.md)
 
-Defined in: [src/types/applicationConfig.ts:359](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L359)
+Defined in: [src/types/applicationConfig.ts:532](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L532)
 
 Markdown validation configuration.
 
@@ -248,7 +264,7 @@ Markdown validation configuration.
 
 > **mcp**: `object`
 
-Defined in: [src/types/applicationConfig.ts:306](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L306)
+Defined in: [src/types/applicationConfig.ts:479](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L479)
 
 MCP (Model Context Protocol) configuration.
 
@@ -270,7 +286,7 @@ Server configuration settings.
 
 > **performance**: `object`
 
-Defined in: [src/types/applicationConfig.ts:387](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L387)
+Defined in: [src/types/applicationConfig.ts:560](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L560)
 
 Performance configuration.
 
@@ -292,7 +308,7 @@ Performance monitoring settings.
 
 > **report**: [`ReportConfig`](ReportConfig.md)
 
-Defined in: [src/types/applicationConfig.ts:362](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L362)
+Defined in: [src/types/applicationConfig.ts:535](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L535)
 
 Report generation configuration.
 
@@ -302,7 +318,7 @@ Report generation configuration.
 
 > **security**: `object`
 
-Defined in: [src/types/applicationConfig.ts:377](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L377)
+Defined in: [src/types/applicationConfig.ts:550](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L550)
 
 Security configuration.
 
@@ -330,7 +346,7 @@ Rate limiting configuration.
 
 > **typescript**: `object`
 
-Defined in: [src/types/applicationConfig.ts:350](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L350)
+Defined in: [src/types/applicationConfig.ts:523](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L523)
 
 TypeScript compilation settings.
 

@@ -10,6 +10,12 @@ applicationConfig definitions for types module.
 Strongly typed configuration primitives for environment, MCP server/client,
 agent metadata, performance characteristics, and validation scaffolding.
 
+## Remarks
+
+These types are the source of truth for application-level configuration.
+Prefer documenting semantics here (types-as-docs) and keep runtime config
+files minimal to avoid duplication and drift.
+
 ## Interfaces
 
 - [AgentDefinition](interfaces/AgentDefinition.md)

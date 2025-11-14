@@ -6,7 +6,7 @@
 
 # Interface: CategoryConfig
 
-Defined in: [src/types/userContext.types.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L53)
+Defined in: [src/types/userContext.types.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L63)
 
 Category configuration (JSON-serializable subset of BusinessCategory)
 This interface defines the structure for category.json files.
@@ -17,7 +17,7 @@ This interface defines the structure for category.json files.
 
 > **aliases**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L61)
+Defined in: [src/types/userContext.types.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L71)
 
 Alternative names/aliases for this category
 
@@ -27,7 +27,7 @@ Alternative names/aliases for this category
 
 > **config**: `object`
 
-Defined in: [src/types/userContext.types.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L63)
+Defined in: [src/types/userContext.types.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L73)
 
 Configuration details
 
@@ -73,7 +73,7 @@ How often this data is updated
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L59)
+Defined in: [src/types/userContext.types.ts:69](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L69)
 
 Description of what this category contains
 
@@ -83,7 +83,7 @@ Description of what this category contains
 
 > **id**: `string`
 
-Defined in: [src/types/userContext.types.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L55)
+Defined in: [src/types/userContext.types.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L65)
 
 Unique identifier for this category
 
@@ -93,6 +93,6 @@ Unique identifier for this category
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L57)
+Defined in: [src/types/userContext.types.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L67)
 
 Human-readable name

@@ -17,12 +17,18 @@ associations:
 
 ### Core Principals
 
-1. This file is the single source of truth for all outstanding tasks.
+1. This file is the single source of truth for all outstanding tasks. When working with Tasks/TODOs, always refer to this file exclusively.
 2. It is collaboratively managed by the User and Copilot Chat.
-3. All outstanding tasks must be captured here, organized by priority.
-4. Copilot Chat should proactively review and keep this file up to date, reflecting user-requested priority changes.
-5. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
-6. Logs capture all change history, organized by date/time and semantic titles.
+3. All outstanding tasks must be captured here.
+4. Tasks should be organized by proper sections (Current/Next/Backlog) and priorities (P1/P2/P3). (See [Guidelines](#guidelines) below)
+5. Copilot Chat should proactively review and keep this file up to date, reflecting user-requested priority changes.
+6. Log capture all change history, organized by date/time and semantic titles.
+7. After each set of logged changes, revisit and update Outstanding Tasks accordingly.
+8. You must always use [Automation Aids](#automation-aids) below to help manage and maintain this files integrity.
+9. You must always use [Guidelines](#guidelines) for detailed instructions on managing tasks.
+10. Changes in this file should be reflected in [CHANGELOG.md](./CHANGELOG.md), keeping both files in sync.
+11. High-level goals and vision should be reflected in [CONTEXT-SESSION.md](./CONTEXT-SESSION.md), keeping alignment between tasks and overall direction.
+12. Whenever you're not sure on how to handle a situation, ask the User. Don't just make an assumption.
 
 ### High Level Notes
 
@@ -72,6 +78,9 @@ Follow these guidelines to ensure effective task management:
 7. **Completion Workflow**: When a TODO is completed, and CHANGELOG entry should be made. Reference the `.github/copilot-instructions.md` and `CHANGELOG.md` for specifics.
 
 <!-- END:COPILOT_INSTRUCTIONS -->
+
+---
+
 <!-- BEGIN:GENERATED-ACTION-ITEMS -->
 
 ## Generated Action Items
@@ -149,6 +158,7 @@ Follow these guidelines to ensure effective task management:
   - [ ] Add unit tests for shared helpers; update existing tests to new import paths
   - [ ] Update type docs to reference new shared modules; add CHANGELOG entry
 - [ ] P1: Data-Driven Architecture Integrity
+
   - [ ] Objective: Complete workflow execution system and finalize architectural cleanup.
   - [ ] Status: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
   - [ ] Current Issue: DatabaseAgent initialization error - data sources not loading properly
@@ -158,8 +168,19 @@ Follow these guidelines to ensure effective task management:
     - [ ] 🔄 Phase 5: Documentation – Update migration guide with workflow patterns
     - [ ] 🔄 Phase 6: Final Verification – End-to-end testing, health check
     - [ ] 🔄 Phase 7: Legacy Cleanup – Remove relevant-data-manager references
+
+- [ ] P2: GOV: Add "Core Principles" and "Decision Tree" sections to `.github/copilot-instructions.md`
+
+  - [ ] Review and refine user's draft notes for Core Principles
+  - [ ] Validate, restructure, and position both sections at the top
+
+- [ ] P2: GOV: Update all sections to reference Core Principles/Decision Tree (start/end workflow)
+
+  - [ ] Ensure every section has explicit fallback to principles/decision tree
+  - [ ] Enforce completion-loop semantics so requests are only done when loop closed
   - [ ] Architecture Compliance:
     - [ ] ✅ Agent Isolation / Data-Driven / Single-Class / Types centralized / Communication formatting via CommunicationAgent
+
 - [ ] P1: Build Utilities Evaluation and Consolidation
   - [ ] Disable JSON lint in pipelines (bash + Windows) — COMPLETE in this branch
   - [ ] Audit `@tools/repositoryHealth` usage paths

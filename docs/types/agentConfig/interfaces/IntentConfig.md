@@ -6,9 +6,22 @@
 
 # Interface: IntentConfig
 
-Defined in: [src/types/agentConfig.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L20)
+Defined in: [src/types/agentConfig.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L82)
 
-Intent configuration for orchestration
+Intent configuration for the Orchestrator routing system.
+
+Associates a named intent with a target agent and optional detection signals.
+
+## Example
+
+```ts
+const classifyIntent: IntentConfig = {
+  name: "fetch-metadata",
+  description: "Retrieve category metadata and schemas",
+  targetAgent: "data-agent",
+  signals: ["schema", "fields", "metadata"],
+};
+```
 
 ## Properties
 
@@ -16,7 +29,7 @@ Intent configuration for orchestration
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L22)
+Defined in: [src/types/agentConfig.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L86)
 
 ***
 
@@ -24,7 +37,7 @@ Defined in: [src/types/agentConfig.ts:22](https://github.com/ErikPlachta/vscode-
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L21)
+Defined in: [src/types/agentConfig.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L84)
 
 ***
 
@@ -32,7 +45,7 @@ Defined in: [src/types/agentConfig.ts:21](https://github.com/ErikPlachta/vscode-
 
 > `optional` **signals**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L24)
+Defined in: [src/types/agentConfig.ts:90](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L90)
 
 ***
 
@@ -40,4 +53,4 @@ Defined in: [src/types/agentConfig.ts:24](https://github.com/ErikPlachta/vscode-
 
 > **targetAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L23)
+Defined in: [src/types/agentConfig.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L88)

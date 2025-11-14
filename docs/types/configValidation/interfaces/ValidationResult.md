@@ -6,9 +6,9 @@
 
 # Interface: ValidationResult
 
-Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L15)
+Defined in: [src/types/configValidation.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L24)
 
-Validation result with detailed error information
+Validation result with detailed error and warning information.
 
 ## Properties
 
@@ -16,9 +16,7 @@ Validation result with detailed error information
 
 > **errors**: [`ValidationError`](ValidationError.md)[]
 
-Defined in: [src/types/configValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L20)
-
-List of validation errors found
+Defined in: [src/types/configValidation.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L26)
 
 ***
 
@@ -26,9 +24,7 @@ List of validation errors found
 
 > **isValid**: `boolean`
 
-Defined in: [src/types/configValidation.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L17)
-
-Whether validation passed
+Defined in: [src/types/configValidation.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L25)
 
 ***
 
@@ -36,6 +32,4 @@ Whether validation passed
 
 > **warnings**: [`ValidationWarning`](ValidationWarning.md)[]
 
-Defined in: [src/types/configValidation.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L23)
-
-List of validation warnings (non-blocking issues)
+Defined in: [src/types/configValidation.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L27)

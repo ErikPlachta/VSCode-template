@@ -6,9 +6,25 @@
 
 # Interface: AgentResponse\<T\>
 
-Defined in: [src/types/communication.types.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L26)
+Defined in: [src/types/communication.types.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L43)
 
-Structured response from an agent before formatting
+Structured response from an agent before formatting.
+
+## Remarks
+
+This type is returned by agents and then transformed by the
+CommunicationAgent into a user-facing [FormattedResponse](FormattedResponse.md).
+
+## Example
+
+```ts
+const response: AgentResponse<{ items: string[] }> = {
+  type: "success",
+  status: "success",
+  data: { items: ["A", "B"] },
+  metadata: { agentId: "data-agent", operation: "list" }
+};
+```
 
 ## Type Parameters
 
@@ -22,7 +38,7 @@ Structured response from an agent before formatting
 
 > `optional` **data**: `T`
 
-Defined in: [src/types/communication.types.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L34)
+Defined in: [src/types/communication.types.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L51)
 
 Main response data
 
@@ -32,7 +48,7 @@ Main response data
 
 > `optional` **errors**: `object`[]
 
-Defined in: [src/types/communication.types.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L64)
+Defined in: [src/types/communication.types.ts:81](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L81)
 
 Errors that occurred (for error responses)
 
@@ -72,7 +88,7 @@ Suggested recovery actions
 
 > `optional` **message**: `string`
 
-Defined in: [src/types/communication.types.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L37)
+Defined in: [src/types/communication.types.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L54)
 
 Human-readable message (optional, will be generated if not provided)
 
@@ -82,7 +98,7 @@ Human-readable message (optional, will be generated if not provided)
 
 > `optional` **metadata**: `object`
 
-Defined in: [src/types/communication.types.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L40)
+Defined in: [src/types/communication.types.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L57)
 
 Additional metadata about the response
 
@@ -134,7 +150,7 @@ Timestamp of the response
 
 > `optional` **progress**: `object`
 
-Defined in: [src/types/communication.types.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L82)
+Defined in: [src/types/communication.types.ts:99](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L99)
 
 Progress information (for in-progress responses)
 
@@ -174,7 +190,7 @@ Total number of steps
 
 > **status**: `"error"` \| `"success"` \| `"in-progress"` \| `"partial"`
 
-Defined in: [src/types/communication.types.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L31)
+Defined in: [src/types/communication.types.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L48)
 
 Status of the operation
 
@@ -184,6 +200,6 @@ Status of the operation
 
 > **type**: [`ResponseType`](../type-aliases/ResponseType.md)
 
-Defined in: [src/types/communication.types.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/communication.types.ts#L28)
+Defined in: [src/types/communication.types.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/communication.types.ts#L45)
 
 Type of response

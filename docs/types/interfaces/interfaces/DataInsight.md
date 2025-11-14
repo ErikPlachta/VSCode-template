@@ -6,7 +6,7 @@
 
 # Interface: DataInsight
 
-Defined in: [src/types/interfaces.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L63)
+Defined in: [src/types/interfaces.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L73)
 
 DataInsight interface.
 
@@ -16,7 +16,7 @@ DataInsight interface.
 
 > `optional` **affectedRecords**: `string`[]
 
-Defined in: [src/types/interfaces.ts:74](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L74)
+Defined in: [src/types/interfaces.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L84)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:74](https://github.com/ErikPlachta/vscode-e
 
 > **category**: `string`
 
-Defined in: [src/types/interfaces.ts:73](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L73)
+Defined in: [src/types/interfaces.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L83)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:73](https://github.com/ErikPlachta/vscode-e
 
 > **confidence**: `number`
 
-Defined in: [src/types/interfaces.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L72)
+Defined in: [src/types/interfaces.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L82)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/interfaces.ts:72](https://github.com/ErikPlachta/vscode-e
 
 > **description**: `string`
 
-Defined in: [src/types/interfaces.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L71)
+Defined in: [src/types/interfaces.ts:81](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L81)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/interfaces.ts:71](https://github.com/ErikPlachta/vscode-e
 
 > **type**: `"pattern"` \| `"anomaly"` \| `"correlation"` \| `"trend"` \| `"opportunity"` \| `"risk"`
 
-Defined in: [src/types/interfaces.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L64)
+Defined in: [src/types/interfaces.ts:74](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L74)

@@ -6,18 +6,24 @@
 
 # types/interfaces
 
-Agent Interfaces for Orchestrator Communication
+Agent interfaces for orchestrator communication.
 
-This file defines the clean interfaces that the orchestrator agent uses
-to communicate with specialized agents. Each agent has a distinct purpose
-and should only be used for its specific function.
+Clean, dependency-light interfaces the Orchestrator uses to communicate with
+specialized agents. Each agent has a distinct purpose and should only be used
+for its specific function.
+
+## Remarks
+
+These are type-only contracts to preserve agent isolation: the Orchestrator
+coordinates and returns typed data; agents implement these interfaces; the
+CommunicationAgent owns all user-facing formatting.
 
 ## Interfaces
 
 - [AgentRequest](interfaces/AgentRequest.md)
 - [AgentResponse](interfaces/AgentResponse.md)
 - [AnalysisInput](interfaces/AnalysisInput.md)
-- [BusinessDataCatalogue](interfaces/BusinessDataCatalogue.md)
+- [BusinessDataCatalog](interfaces/BusinessDataCatalog.md)
 - [CategoryInfo](interfaces/CategoryInfo.md)
 - [CategorySchema](interfaces/CategorySchema.md)
 - [ClarificationAgentInterface](interfaces/ClarificationAgentInterface.md)
@@ -41,4 +47,6 @@ and should only be used for its specific function.
 
 ## Type Aliases
 
-- [UserContextCatalogue](type-aliases/UserContextCatalogue.md)
+- [~~BusinessDataCatalogue~~](type-aliases/BusinessDataCatalogue.md)
+- [UserContextCatalog](type-aliases/UserContextCatalog.md)
+- [~~UserContextCatalogue~~](type-aliases/UserContextCatalogue.md)

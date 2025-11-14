@@ -6,7 +6,7 @@
 
 # Interface: SignalMatchResult
 
-Defined in: [src/shared/textProcessing.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/textProcessing.ts#L25)
+Defined in: [src/shared/textProcessing.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/textProcessing.ts#L25)
 
 Result of a signal matching operation.
 
@@ -16,7 +16,7 @@ Result of a signal matching operation.
 
 > **matched**: `string`[]
 
-Defined in: [src/shared/textProcessing.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/textProcessing.ts#L27)
+Defined in: [src/shared/textProcessing.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/textProcessing.ts#L27)
 
 Signals that matched the input text
 
@@ -26,7 +26,7 @@ Signals that matched the input text
 
 > **score**: `number`
 
-Defined in: [src/shared/textProcessing.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/textProcessing.ts#L31)
+Defined in: [src/shared/textProcessing.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/textProcessing.ts#L31)
 
 Total match score based on weights
 
@@ -36,6 +36,6 @@ Total match score based on weights
 
 > **unmatched**: `string`[]
 
-Defined in: [src/shared/textProcessing.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/shared/textProcessing.ts#L29)
+Defined in: [src/shared/textProcessing.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/textProcessing.ts#L29)
 
 Signals that did not match

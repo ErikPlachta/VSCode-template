@@ -6,9 +6,9 @@
 
 # Interface: AgentResponse\<T\>
 
-Defined in: [src/types/interfaces.ts:282](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L282)
+Defined in: [src/types/interfaces.ts:328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L328)
 
-AgentResponse interface.
+Generic agent response shape used by orchestration helpers.
 
 ## Type Parameters
 
@@ -16,13 +16,15 @@ AgentResponse interface.
 
 `T` = `unknown`
 
+Response payload type.
+
 ## Properties
 
 ### agentType
 
 > **agentType**: `string`
 
-Defined in: [src/types/interfaces.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L286)
+Defined in: [src/types/interfaces.ts:332](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L332)
 
 ***
 
@@ -30,7 +32,7 @@ Defined in: [src/types/interfaces.ts:286](https://github.com/ErikPlachta/vscode-
 
 > `optional` **data**: `T`
 
-Defined in: [src/types/interfaces.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L284)
+Defined in: [src/types/interfaces.ts:330](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L330)
 
 ***
 
@@ -38,7 +40,7 @@ Defined in: [src/types/interfaces.ts:284](https://github.com/ErikPlachta/vscode-
 
 > `optional` **error**: `string`
 
-Defined in: [src/types/interfaces.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L285)
+Defined in: [src/types/interfaces.ts:331](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L331)
 
 ***
 
@@ -46,7 +48,7 @@ Defined in: [src/types/interfaces.ts:285](https://github.com/ErikPlachta/vscode-
 
 > **operation**: `string`
 
-Defined in: [src/types/interfaces.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L287)
+Defined in: [src/types/interfaces.ts:333](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L333)
 
 ***
 
@@ -54,4 +56,4 @@ Defined in: [src/types/interfaces.ts:287](https://github.com/ErikPlachta/vscode-
 
 > **success**: `boolean`
 
-Defined in: [src/types/interfaces.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L283)
+Defined in: [src/types/interfaces.ts:329](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L329)

@@ -6,11 +6,6 @@
 
 # server
 
-## Variables
-
-- [tools](variables/tools.md)
-
 ## Functions
 
-- [createMcpServer](functions/createMcpServer.md)
-- [handleRequest](functions/handleRequest.md)
+- [getTools](functions/getTools.md)

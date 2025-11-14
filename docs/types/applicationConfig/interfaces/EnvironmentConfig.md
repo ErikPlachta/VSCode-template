@@ -6,9 +6,25 @@
 
 # Interface: EnvironmentConfig
 
-Defined in: [src/types/applicationConfig.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L9)
+Defined in: [src/types/applicationConfig.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L28)
 
-EnvironmentConfig interface.
+Environment configuration controlling debug behavior and defaults.
+
+## Remarks
+
+Use different instances for `development`, `staging`, and `production` in
+the `ApplicationConfig.application.environments` block.
+
+## Example
+
+```ts
+const devEnv: EnvironmentConfig = {
+  debug: true,
+  logLevel: "verbose",
+  hotReload: true,
+  mockData: true,
+};
+```
 
 ## Properties
 
@@ -16,7 +32,7 @@ EnvironmentConfig interface.
 
 > **debug**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L11)
+Defined in: [src/types/applicationConfig.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L30)
 
 Enable debug mode for detailed logging and error reporting.
 
@@ -26,7 +42,7 @@ Enable debug mode for detailed logging and error reporting.
 
 > **hotReload**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L15)
+Defined in: [src/types/applicationConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L34)
 
 Enable hot reload for development.
 
@@ -36,7 +52,7 @@ Enable hot reload for development.
 
 > **logLevel**: `"info"` \| `"error"` \| `"verbose"` \| `"warn"`
 
-Defined in: [src/types/applicationConfig.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L13)
+Defined in: [src/types/applicationConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L32)
 
 Logging level for the environment.
 
@@ -46,6 +62,6 @@ Logging level for the environment.
 
 > **mockData**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L17)
+Defined in: [src/types/applicationConfig.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L36)
 
 Use mock data instead of real data sources.

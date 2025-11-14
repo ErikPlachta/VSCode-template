@@ -147,6 +147,8 @@ export class RepositoryHealthAgent {
     checks.push(await this.validateMarkdownDocuments());
     // Governance: forbid legacy mcp.config.json anywhere except build output folder
     checks.push(await this.checkNoLegacyMcpConfigArtifacts());
+    // Governance: prevent reintroduction of deprecated British English spellings in source code
+    checks.push(await this.checkNoBritishSpellings());
     const passed: boolean = checks.every((c) => c.passed);
     return { generatedAt: new Date().toISOString(), passed, checks };
   }
@@ -369,6 +371,64 @@ export class RepositoryHealthAgent {
           : offenders.map(
               (p) => `Unexpected legacy JSON config detected: ${p}`
             ),
+    };
+  }
+
+  /**
+   * Scan TypeScript source files for deprecated British English spellings that should no longer appear
+   * outside explicitly deprecated alias declarations. This enforces the American English normalization
+   * and guards against regressions.
+   *
+   * Allowed contexts: lines containing an explicit "\@deprecated" tag or known alias identifiers
+   * (e.g. getDatasetCatalogue, BusinessDataCatalogue). All other occurrences are flagged.
+   *
+   * @returns Compliance result listing offending file locations or success message when none found.
+   */
+  public async checkNoBritishSpellings(): Promise<CheckResult> {
+    const bannedWords = [
+      "catalogue",
+      "Catalogue",
+      "artefact",
+      "Artefact",
+      "organisational",
+      "Organisational",
+    ];
+    const allowListSubstrings = [
+      "@deprecated",
+      "getDatasetCatalogue",
+      "getBusinessDataCatalogue",
+      "getUserContextCatalogue",
+      "DatasetCatalogueEntry",
+      "BusinessDataCatalogue",
+      "UserContextCatalogue",
+    ];
+    const files: string[] = await fg(["src/**/*.ts", "src/**/*.tsx"], {
+      cwd: this.baseDir,
+      absolute: true,
+      ignore: ["node_modules/**", "out/**"],
+    });
+    const offenders: string[] = [];
+    for (const file of files) {
+      const content: string = await readFile(file, "utf8");
+      const lines: string[] = content.split(/\r?\n/);
+      lines.forEach((line, index) => {
+        // Skip allowed contexts
+        if (allowListSubstrings.some((s) => line.includes(s))) return;
+        if (bannedWords.some((w) => line.includes(w))) {
+          const rel: string = path.relative(this.baseDir, file);
+          offenders.push(`${rel}:${index + 1}: ${line.trim()}`);
+        }
+      });
+    }
+    return {
+      name: "British spelling regression scan",
+      passed: offenders.length === 0,
+      messages:
+        offenders.length === 0
+          ? [
+              "No deprecated British English spellings detected outside allowed alias declarations.",
+            ]
+          : offenders,
     };
   }
 

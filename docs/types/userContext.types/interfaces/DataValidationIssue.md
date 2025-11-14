@@ -6,7 +6,7 @@
 
 # Interface: DataValidationIssue
 
-Defined in: [src/types/userContext.types.ts:310](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L310)
+Defined in: [src/types/userContext.types.ts:320](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L320)
 
 Issue detected while validating the raw data set for a category
 
@@ -16,7 +16,7 @@ Issue detected while validating the raw data set for a category
 
 > `optional` **field**: `string`
 
-Defined in: [src/types/userContext.types.ts:316](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L316)
+Defined in: [src/types/userContext.types.ts:326](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L326)
 
 Field that failed validation if available
 
@@ -26,7 +26,7 @@ Field that failed validation if available
 
 > **message**: `string`
 
-Defined in: [src/types/userContext.types.ts:318](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L318)
+Defined in: [src/types/userContext.types.ts:328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L328)
 
 Detailed error message
 
@@ -36,7 +36,7 @@ Detailed error message
 
 > **recordId**: `string`
 
-Defined in: [src/types/userContext.types.ts:312](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L312)
+Defined in: [src/types/userContext.types.ts:322](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L322)
 
 Identifier for the record that failed validation
 
@@ -46,7 +46,7 @@ Identifier for the record that failed validation
 
 > `optional` **schema**: `string`
 
-Defined in: [src/types/userContext.types.ts:314](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L314)
+Defined in: [src/types/userContext.types.ts:324](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L324)
 
 Optional schema name that triggered the error
 
@@ -56,6 +56,6 @@ Optional schema name that triggered the error
 
 > **type**: `"schema"` \| `"relationship"`
 
-Defined in: [src/types/userContext.types.ts:320](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L320)
+Defined in: [src/types/userContext.types.ts:330](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L330)
 
 Type of validation that generated the issue

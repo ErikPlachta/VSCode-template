@@ -6,17 +6,56 @@
 
 # Interface: CommunicationConfig
 
-Defined in: [src/types/agentConfig.ts:335](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L335)
+Defined in: [src/types/agentConfig.ts:602](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L602)
 
-Communication agent-specific configuration for response formatting and user interaction
+CommunicationAgent configuration for response formatting and user interaction.
+
+Prefer defining copy/templates here and referencing them from agents to avoid
+hardcoded business values in code.
+
+## Example
+
+```ts
+const comm: CommunicationConfig = {
+  formatting: {
+    defaultFormat: "markdown",
+    tone: { success: "friendly", error: "helpful", progress: "informative", validation: "constructive" },
+    verbosity: "balanced",
+    maxMessageLength: 1000,
+  },
+  clarification: {
+    maxCategoriesInExamples: 3,
+    examplesHeader: "Examples:",
+    availableCategoriesHeader: "Available Categories:",
+    unknownRequestTemplate: "I'm not sure what you're looking for with \"{{question}}\".",
+    matchedIntentTemplate: "Your question seems related to {{intent}}.",
+    groups: [
+      { title: "**Category Information**", usesCategories: true, sampleTemplates: [
+        "What's in the {{category}} category?",
+        "Describe the {{category}} data model",
+      ]},
+    ],
+  },
+};
+```
 
 ## Properties
+
+### clarification?
+
+> `optional` **clarification**: [`CommunicationClarificationConfig`](CommunicationClarificationConfig.md)
+
+Defined in: [src/types/agentConfig.ts:667](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L667)
+
+Clarification message templates and settings for CommunicationAgent
+
+***
 
 ### errorHandling
 
 > **errorHandling**: `object`
 
-Defined in: [src/types/agentConfig.ts:359](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L359)
+Defined in: [src/types/agentConfig.ts:626](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L626)
 
 #### errorTemplates?
 
@@ -88,7 +127,7 @@ Defined in: [src/types/agentConfig.ts:359](https://github.com/ErikPlachta/vscode
 
 > **formatting**: `object`
 
-Defined in: [src/types/agentConfig.ts:336](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L336)
+Defined in: [src/types/agentConfig.ts:603](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L603)
 
 #### defaultFormat
 
@@ -144,7 +183,7 @@ Defined in: [src/types/agentConfig.ts:336](https://github.com/ErikPlachta/vscode
 
 > `optional` **progressTracking**: `object`
 
-Defined in: [src/types/agentConfig.ts:379](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L379)
+Defined in: [src/types/agentConfig.ts:646](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L646)
 
 #### enabled?
 
@@ -192,7 +231,7 @@ Defined in: [src/types/agentConfig.ts:379](https://github.com/ErikPlachta/vscode
 
 > `optional` **successTemplates**: `object`
 
-Defined in: [src/types/agentConfig.ts:351](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L351)
+Defined in: [src/types/agentConfig.ts:618](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L618)
 
 #### analysisComplete?
 
@@ -224,7 +263,7 @@ Defined in: [src/types/agentConfig.ts:351](https://github.com/ErikPlachta/vscode
 
 > `optional` **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:392](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L392)
+Defined in: [src/types/agentConfig.ts:659](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L659)
 
 #### groupByCategory?
 

@@ -8,9 +8,9 @@
 
 > **isCategoryConfig**(`obj`): `obj is CategoryConfig`
 
-Defined in: [src/types/userContext.types.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L545)
+Defined in: [src/types/userContext.types.ts:568](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L568)
 
-Type guard to check if an object is a valid CategoryConfig
+Type guard to check if a value is a valid [CategoryConfig](../interfaces/CategoryConfig.md).
 
 ## Parameters
 
@@ -18,10 +18,18 @@ Type guard to check if an object is a valid CategoryConfig
 
 `unknown`
 
-The object to validate
+The value to validate.
 
 ## Returns
 
 `obj is CategoryConfig`
 
-True if the object is a valid CategoryConfig
+True if the value is a valid CategoryConfig.
+
+## Example
+
+```ts
+if (isCategoryConfig(maybe)) {
+  console.log(maybe.id);
+}
+```

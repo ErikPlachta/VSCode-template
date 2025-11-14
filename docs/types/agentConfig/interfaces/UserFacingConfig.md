@@ -6,9 +6,24 @@
 
 # Interface: UserFacingConfig
 
-Defined in: [src/types/agentConfig.ts:101](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L101)
+Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L265)
 
-User-facing metadata
+User-facing documentation and guidance shown in help/UX.
+
+Prefer adding examples here instead of inline comments in configs.
+
+## Example
+
+```ts
+const userFacing: UserFacingConfig = {
+  friendlyDescription: "Analyze relationships and summarize insights.",
+  useWhen: ["Find connections", "Summarize data"],
+  exampleQueries: [
+    "Show connections between categories",
+    "Summarize recent changes across datasets",
+  ],
+};
+```
 
 ## Properties
 
@@ -16,7 +31,7 @@ User-facing metadata
 
 > `optional` **exampleQueries**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L104)
+Defined in: [src/types/agentConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L268)
 
 ***
 
@@ -24,7 +39,7 @@ Defined in: [src/types/agentConfig.ts:104](https://github.com/ErikPlachta/vscode
 
 > `optional` **friendlyDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L102)
+Defined in: [src/types/agentConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L266)
 
 ***
 
@@ -32,7 +47,7 @@ Defined in: [src/types/agentConfig.ts:102](https://github.com/ErikPlachta/vscode
 
 > `optional` **helpText**: `string`
 
-Defined in: [src/types/agentConfig.ts:105](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L105)
+Defined in: [src/types/agentConfig.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L269)
 
 ***
 
@@ -40,4 +55,4 @@ Defined in: [src/types/agentConfig.ts:105](https://github.com/ErikPlachta/vscode
 
 > `optional` **useWhen**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:103](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L103)
+Defined in: [src/types/agentConfig.ts:267](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L267)

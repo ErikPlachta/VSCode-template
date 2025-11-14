@@ -8,7 +8,7 @@
 
 > **WorkflowActionStatus** = `"pending"` \| `"in-progress"` \| `"completed"` \| `"failed"`
 
-Defined in: [src/types/workflow.types.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L48)
+Defined in: [src/types/workflow.types.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L53)
 
 Workflow action status
 

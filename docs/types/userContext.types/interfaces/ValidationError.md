@@ -6,9 +6,9 @@
 
 # Interface: ValidationError
 
-Defined in: [src/types/userContext.types.ts:588](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L588)
+Defined in: [src/types/userContext.types.ts:611](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L611)
 
-Validation error detail
+Validation error detail.
 
 ## Properties
 
@@ -16,7 +16,7 @@ Validation error detail
 
 > `optional` **actual**: `string`
 
-Defined in: [src/types/userContext.types.ts:596](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L596)
+Defined in: [src/types/userContext.types.ts:619](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L619)
 
 Actual value received (for debugging)
 
@@ -26,7 +26,7 @@ Actual value received (for debugging)
 
 > `optional` **expected**: `string`
 
-Defined in: [src/types/userContext.types.ts:594](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L594)
+Defined in: [src/types/userContext.types.ts:617](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L617)
 
 Expected value or type
 
@@ -36,7 +36,7 @@ Expected value or type
 
 > **message**: `string`
 
-Defined in: [src/types/userContext.types.ts:592](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L592)
+Defined in: [src/types/userContext.types.ts:615](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L615)
 
 Description of what went wrong
 
@@ -46,6 +46,6 @@ Description of what went wrong
 
 > **path**: `string`
 
-Defined in: [src/types/userContext.types.ts:590](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L590)
+Defined in: [src/types/userContext.types.ts:613](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L613)
 
 Path to the field with the error (e.g., "config.primaryKeys")

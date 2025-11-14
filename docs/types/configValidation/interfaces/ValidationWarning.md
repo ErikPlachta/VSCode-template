@@ -6,9 +6,9 @@
 
 # Interface: ValidationWarning
 
-Defined in: [src/types/configValidation.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L54)
+Defined in: [src/types/configValidation.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L19)
 
-Validation warning (non-blocking issue)
+Validation warning (non-blocking issue).
 
 ## Extends
 
@@ -20,9 +20,7 @@ Validation warning (non-blocking issue)
 
 > `optional` **actual**: `unknown`
 
-Defined in: [src/types/configValidation.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L47)
-
-Actual value found
+Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L15)
 
 #### Inherited from
 
@@ -34,9 +32,7 @@ Actual value found
 
 > **category**: `"schema"` \| `"type"` \| `"business_rule"` \| `"compatibility"`
 
-Defined in: [src/types/configValidation.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L35)
-
-Error category
+Defined in: [src/types/configValidation.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L11)
 
 #### Inherited from
 
@@ -48,9 +44,7 @@ Error category
 
 > `optional` **expected**: `unknown`
 
-Defined in: [src/types/configValidation.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L44)
-
-Expected value or format
+Defined in: [src/types/configValidation.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L14)
 
 #### Inherited from
 
@@ -62,7 +56,7 @@ Expected value or format
 
 > **level**: `"warning"`
 
-Defined in: [src/types/configValidation.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L55)
+Defined in: [src/types/configValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L20)
 
 ***
 
@@ -70,9 +64,7 @@ Defined in: [src/types/configValidation.ts:55](https://github.com/ErikPlachta/vs
 
 > **message**: `string`
 
-Defined in: [src/types/configValidation.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L41)
-
-Human-readable error message
+Defined in: [src/types/configValidation.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L13)
 
 #### Inherited from
 
@@ -84,9 +76,7 @@ Human-readable error message
 
 > **path**: `string`
 
-Defined in: [src/types/configValidation.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configValidation.ts#L38)
-
-JSON path to the problematic field
+Defined in: [src/types/configValidation.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configValidation.ts#L12)
 
 #### Inherited from
 

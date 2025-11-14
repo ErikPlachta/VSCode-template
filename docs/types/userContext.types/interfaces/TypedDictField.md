@@ -6,7 +6,7 @@
 
 # Interface: TypedDictField
 
-Defined in: [src/types/userContext.types.ts:282](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L282)
+Defined in: [src/types/userContext.types.ts:292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L292)
 
 Field description used within a TypedDict schema
 
@@ -16,7 +16,7 @@ Field description used within a TypedDict schema
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L286)
+Defined in: [src/types/userContext.types.ts:296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L296)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:286](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L283)
+Defined in: [src/types/userContext.types.ts:293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L293)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/userContext.types.ts:283](https://github.com/ErikPlachta/
 
 > `optional` **required**: `boolean`
 
-Defined in: [src/types/userContext.types.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L285)
+Defined in: [src/types/userContext.types.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L295)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/userContext.types.ts:285](https://github.com/ErikPlachta/
 
 > **type**: [`TypeSchema`](../type-aliases/TypeSchema.md)
 
-Defined in: [src/types/userContext.types.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L284)
+Defined in: [src/types/userContext.types.ts:294](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L294)

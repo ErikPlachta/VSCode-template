@@ -6,7 +6,7 @@
 
 # Interface: AgentOrchestrationGuidance
 
-Defined in: [src/types/userContext.types.ts:356](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L356)
+Defined in: [src/types/userContext.types.ts:366](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L366)
 
 Agent orchestration guidance for specific agents
 
@@ -16,7 +16,7 @@ Agent orchestration guidance for specific agents
 
 > **focus**: `string`
 
-Defined in: [src/types/userContext.types.ts:358](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L358)
+Defined in: [src/types/userContext.types.ts:368](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L368)
 
 Core responsibility for the agent when invoked for this category
 
@@ -26,7 +26,7 @@ Core responsibility for the agent when invoked for this category
 
 > **promptStarters**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:362](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L362)
+Defined in: [src/types/userContext.types.ts:372](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L372)
 
 Prompt starters that the orchestrator can feed to the agent
 
@@ -36,6 +36,6 @@ Prompt starters that the orchestrator can feed to the agent
 
 > **signals**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:360](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L360)
+Defined in: [src/types/userContext.types.ts:370](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L370)
 
 Signals that hint the orchestrator should route the request to this agent

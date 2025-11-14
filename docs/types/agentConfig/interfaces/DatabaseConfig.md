@@ -6,9 +6,32 @@
 
 # Interface: DatabaseConfig
 
-Defined in: [src/types/agentConfig.ts:154](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L154)
+Defined in: [src/types/agentConfig.ts:379](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L379)
 
-Database agent-specific configuration
+DatabaseAgent configuration for query behavior, validation, and performance.
+
+All business values (aliases, operators) must come from configuration.
+
+## Example
+
+```ts
+const dbCfg: DatabaseConfig = {
+  fieldAliases: { people: { dept: "departmentId" } },
+  performance: {
+    caching: { enabledByDefault: true, defaultKeyPrefix: "db:", maxCacheEntries: 500, cacheTTL: 60000 },
+    limits: { queryTimeout: 5000, maxResultSize: 1000, maxJoinDepth: 2 }
+  },
+  validation: {
+    schemaValidation: { enableStrictValidation: true, allowUnknownFields: false, autoTransformAliases: true },
+    integrityChecks: { validateRelationships: true, checkMissingReferences: true, warnOnSchemaIssues: true }
+  },
+  operations: {
+    filtering: { operators: ["=", "!=", "in"], caseInsensitiveStrings: true, enableFuzzyMatching: false },
+    joins: { supportedJoinTypes: ["inner", "left"], autoDiscoverRelationships: true, maxJoinRecords: 5000 },
+    aggregation: { functions: ["count", "avg"], enableGroupBy: true, maxGroups: 100 }
+  }
+};
+```
 
 ## Properties
 
@@ -16,7 +39,7 @@ Database agent-specific configuration
 
 > **fieldAliases**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [src/types/agentConfig.ts:155](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L155)
+Defined in: [src/types/agentConfig.ts:380](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L380)
 
 ***
 
@@ -24,7 +47,7 @@ Defined in: [src/types/agentConfig.ts:155](https://github.com/ErikPlachta/vscode
 
 > **operations**: `object`
 
-Defined in: [src/types/agentConfig.ts:181](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L181)
+Defined in: [src/types/agentConfig.ts:406](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L406)
 
 #### aggregation
 
@@ -80,7 +103,7 @@ Defined in: [src/types/agentConfig.ts:181](https://github.com/ErikPlachta/vscode
 
 > **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L156)
+Defined in: [src/types/agentConfig.ts:381](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L381)
 
 #### caching
 
@@ -124,7 +147,7 @@ Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode
 
 > **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L169)
+Defined in: [src/types/agentConfig.ts:394](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L394)
 
 #### integrityChecks
 

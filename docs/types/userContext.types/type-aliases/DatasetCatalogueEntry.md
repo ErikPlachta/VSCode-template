@@ -1,0 +1,17 @@
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
+
+***
+
+[UserContext-mcp-extension](../../../modules.md) / [types/userContext.types](../README.md) / DatasetCatalogueEntry
+
+# ~~Type Alias: DatasetCatalogueEntry~~
+
+> **DatasetCatalogueEntry** = [`DatasetCatalogEntry`](../interfaces/DatasetCatalogEntry.md)
+
+Defined in: [src/types/userContext.types.ts:474](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L474)
+
+Deprecated British English alias retained for backwards compatibility.
+
+## Deprecated
+
+Use DatasetCatalogEntry instead.

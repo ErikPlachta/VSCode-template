@@ -12,6 +12,12 @@ Shared interfaces for user context data validation. These interfaces define
 the structure for compile-time type checking while allowing runtime data
 to be loaded from user-configurable JSON files.
 
+## Remarks
+
+These types intentionally avoid importing agent implementations to prevent
+circular dependencies. Use them for validation, schema mapping, and
+IntelliSense in configuration authoring.
+
 ## Interfaces
 
 - [AgentOrchestrationGuidance](interfaces/AgentOrchestrationGuidance.md)
@@ -27,7 +33,7 @@ to be loaded from user-configurable JSON files.
 - [CategorySummary](interfaces/CategorySummary.md)
 - [CompanyPolicyRecord](interfaces/CompanyPolicyRecord.md)
 - [CompanyResourceRecord](interfaces/CompanyResourceRecord.md)
-- [DatasetCatalogueEntry](interfaces/DatasetCatalogueEntry.md)
+- [DatasetCatalogEntry](interfaces/DatasetCatalogEntry.md)
 - [DataValidationIssue](interfaces/DataValidationIssue.md)
 - [DataValidationReport](interfaces/DataValidationReport.md)
 - [DepartmentRecord](interfaces/DepartmentRecord.md)
@@ -58,15 +64,12 @@ to be loaded from user-configurable JSON files.
 
 - [CategoryId](type-aliases/CategoryId.md)
 - [CategoryRecord](type-aliases/CategoryRecord.md)
+- [~~DatasetCatalogueEntry~~](type-aliases/DatasetCatalogueEntry.md)
 - [PrimitiveTypeName](type-aliases/PrimitiveTypeName.md)
 - [TypeSchema](type-aliases/TypeSchema.md)
 
 ## Functions
 
-- [formatValidationErrors](functions/formatValidationErrors.md)
 - [isBaseRecord](functions/isBaseRecord.md)
 - [isCategoryConfig](functions/isCategoryConfig.md)
 - [isRecordArray](functions/isRecordArray.md)
-- [validateCategoryConfig](functions/validateCategoryConfig.md)
-- [validateCategoryRecord](functions/validateCategoryRecord.md)
-- [validateRelationshipDefinition](functions/validateRelationshipDefinition.md)

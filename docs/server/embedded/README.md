@@ -6,10 +6,13 @@
 
 # server/embedded
 
-Embedded MCP server for VS Code extension use.
-Starts the MCP server on a random available port for internal extension use.
+Deprecated HTTP embedded server stub.
+
+The project migrated to stdio-only JSON-RPC transport. This file remains as a
+no-op placeholder to avoid breaking historical imports during refactor stages.
+Remove after all references are cleaned.
 
 ## Functions
 
-- [startMCPServer](functions/startMCPServer.md)
-- [stopMCPServer](functions/stopMCPServer.md)
+- [~~startMCPServer~~](functions/startMCPServer.md)
+- [~~stopMCPServer~~](functions/stopMCPServer.md)

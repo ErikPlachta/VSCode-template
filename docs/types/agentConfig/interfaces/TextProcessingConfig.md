@@ -6,9 +6,23 @@
 
 # Interface: TextProcessingConfig
 
-Defined in: [src/types/agentConfig.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L31)
+Defined in: [src/types/agentConfig.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L107)
 
-Text processing configuration
+Text processing configuration for extracting signals and keywords.
+
+## Example
+
+```ts
+const textCfg: TextProcessingConfig = {
+  stopWords: ["the", "a", "an"],
+  minimumKeywordLength: 3,
+  scoringWeights: {
+    signalMatch: 0.6,
+    focusMatch: 0.3,
+    promptStarterMatch: 0.1,
+  },
+};
+```
 
 ## Properties
 
@@ -16,7 +30,7 @@ Text processing configuration
 
 > **minimumKeywordLength**: `number`
 
-Defined in: [src/types/agentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L33)
+Defined in: [src/types/agentConfig.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L111)
 
 ***
 
@@ -24,7 +38,7 @@ Defined in: [src/types/agentConfig.ts:33](https://github.com/ErikPlachta/vscode-
 
 > **scoringWeights**: `object`
 
-Defined in: [src/types/agentConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L34)
+Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L113)
 
 #### focusMatch
 
@@ -44,4 +58,4 @@ Defined in: [src/types/agentConfig.ts:34](https://github.com/ErikPlachta/vscode-
 
 > **stopWords**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L32)
+Defined in: [src/types/agentConfig.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L109)

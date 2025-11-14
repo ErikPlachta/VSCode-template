@@ -8,9 +8,9 @@
 
 > **validateRelationships**(`categories`): [`RelationshipIntegrityIssue`](../interfaces/RelationshipIntegrityIssue.md)[]
 
-Defined in: [src/mcp/schemaUtils.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/schemaUtils.ts#L67)
+Defined in: [src/mcp/schemaUtils.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/schemaUtils.ts#L67)
 
-validateRelationships function.
+Validate that all declared relationships target existing categories.
 
 ## Parameters
 
@@ -18,10 +18,10 @@ validateRelationships function.
 
 [`BusinessCategory`](../../../types/userContext.types/interfaces/BusinessCategory.md)[]
 
-categories parameter.
+All business categories loaded.
 
 ## Returns
 
 [`RelationshipIntegrityIssue`](../interfaces/RelationshipIntegrityIssue.md)[]
 
-- TODO: describe return value.
+Issues for each relationship referencing a missing target category.

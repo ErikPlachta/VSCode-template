@@ -8,9 +8,9 @@
 
 > **validateConfig**(`config`): `boolean`
 
-Defined in: [src/types/configRegistry.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configRegistry.ts#L286)
+Defined in: [src/types/configRegistry.ts:325](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configRegistry.ts#L325)
 
-Validation function for configuration objects
+Validation helper for configuration objects.
 
 ## Parameters
 
@@ -22,10 +22,18 @@ Object to validate for a known configuration id.
 
 `string`
 
-Configuration ID to validate against the registry.
-
 ## Returns
 
 `boolean`
 
-True when a valid $configId exists in the registry; otherwise false.
+True when a valid `$configId` exists in the registry; otherwise false.
+
+## Example
+
+```ts
+const ok = validateConfig({ $configId: CONFIG_IDS.ORCHESTRATOR });
+```
+
+## Remarks
+
+Phase 1 Inventory: simple presence/registry validator slated for migration to shared validation utilities (Phase 3). Maintain current console side-effects for parity.

@@ -6,9 +6,18 @@
 
 # Interface: ExtensionConfig
 
-Defined in: [src/types/applicationConfig.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L240)
+Defined in: [src/types/applicationConfig.ts:379](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L379)
 
 Extension features configuration.
+
+## Example
+
+```ts
+const ext: ExtensionConfig = {
+  allowThirdParty: false,
+  sandboxMode: true,
+};
+```
 
 ## Properties
 
@@ -16,7 +25,7 @@ Extension features configuration.
 
 > **allowThirdParty**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L242)
+Defined in: [src/types/applicationConfig.ts:381](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L381)
 
 Allow third-party extensions.
 
@@ -26,6 +35,6 @@ Allow third-party extensions.
 
 > **sandboxMode**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L244)
+Defined in: [src/types/applicationConfig.ts:383](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L383)
 
 Run extensions in sandbox mode.

@@ -6,13 +6,15 @@
 
 # Interface: PerformanceMetrics
 
-Defined in: [src/types/workflow.types.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L158)
+Defined in: [src/types/workflow.types.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L172)
 
-Performance metrics for workflow execution
+Performance metrics for workflow execution.
 
-Tracks timing for each phase and action
+Tracks timing for each phase and action.
 
-Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Performance Monitoring
+## See
+
+ORCHESTRATOR_WORKFLOW_ANALYSIS.md (Performance Monitoring)
 
 ## Properties
 
@@ -20,7 +22,7 @@ Reference: ORCHESTRATOR_WORKFLOW_ANALYSIS.md - Performance Monitoring
 
 > **actionMetrics**: `object`[]
 
-Defined in: [src/types/workflow.types.ts:178](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L178)
+Defined in: [src/types/workflow.types.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L192)
 
 Per-action timing details
 
@@ -66,7 +68,7 @@ Timestamp when action started
 
 > **classificationDuration**: `number`
 
-Defined in: [src/types/workflow.types.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L166)
+Defined in: [src/types/workflow.types.ts:180](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L180)
 
 Time spent classifying intent
 
@@ -76,7 +78,7 @@ Time spent classifying intent
 
 > **endTime**: `number`
 
-Defined in: [src/types/workflow.types.ts:202](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L202)
+Defined in: [src/types/workflow.types.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L216)
 
 Workflow end timestamp
 
@@ -86,7 +88,7 @@ Workflow end timestamp
 
 > **executionDuration**: `number`
 
-Defined in: [src/types/workflow.types.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L172)
+Defined in: [src/types/workflow.types.ts:186](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L186)
 
 Time spent executing actions
 
@@ -96,7 +98,7 @@ Time spent executing actions
 
 > **formattingDuration**: `number`
 
-Defined in: [src/types/workflow.types.ts:175](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L175)
+Defined in: [src/types/workflow.types.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L189)
 
 Time spent formatting response
 
@@ -106,7 +108,7 @@ Time spent formatting response
 
 > **planningDuration**: `number`
 
-Defined in: [src/types/workflow.types.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L169)
+Defined in: [src/types/workflow.types.ts:183](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L183)
 
 Time spent planning actions
 
@@ -116,7 +118,7 @@ Time spent planning actions
 
 > **startTime**: `number`
 
-Defined in: [src/types/workflow.types.ts:199](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L199)
+Defined in: [src/types/workflow.types.ts:213](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L213)
 
 Workflow start timestamp
 
@@ -126,7 +128,7 @@ Workflow start timestamp
 
 > **totalDuration**: `number`
 
-Defined in: [src/types/workflow.types.ts:163](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L163)
+Defined in: [src/types/workflow.types.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L177)
 
 Total workflow duration in milliseconds
 
@@ -136,6 +138,6 @@ Total workflow duration in milliseconds
 
 > **workflowId**: `string`
 
-Defined in: [src/types/workflow.types.ts:160](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L160)
+Defined in: [src/types/workflow.types.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L174)
 
 Unique workflow identifier

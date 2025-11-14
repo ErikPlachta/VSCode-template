@@ -8,7 +8,7 @@
 
 > **renderClarificationPrompt**(`options`): `string`
 
-Defined in: [src/mcp/prompts/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/prompts/index.ts#L83)
+Defined in: [src/mcp/prompts/index.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/prompts/index.ts#L83)
 
 Renders a clarification prompt to solicit more precise user input.
 

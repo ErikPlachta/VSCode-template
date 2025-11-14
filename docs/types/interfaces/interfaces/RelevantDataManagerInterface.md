@@ -6,7 +6,7 @@
 
 # Interface: RelevantDataManagerInterface
 
-Defined in: [src/types/interfaces.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L188)
+Defined in: [src/types/interfaces.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L216)
 
 RelevantDataManagerInterface interface.
 
@@ -16,15 +16,35 @@ RelevantDataManagerInterface interface.
 
 ## Methods
 
-### getBusinessDataCatalogue()
+### getBusinessDataCatalog()
 
-> **getBusinessDataCatalogue**(): [`BusinessDataCatalogue`](BusinessDataCatalogue.md)
+> **getBusinessDataCatalog**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
 
-Defined in: [src/types/interfaces.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L189)
+Defined in: [src/types/interfaces.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L220)
+
+Primary American English method returning the business data catalog.
 
 #### Returns
 
-[`BusinessDataCatalogue`](BusinessDataCatalogue.md)
+[`BusinessDataCatalog`](BusinessDataCatalog.md)
+
+***
+
+### ~~getBusinessDataCatalogue()~~
+
+> **getBusinessDataCatalogue**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
+
+Defined in: [src/types/interfaces.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L226)
+
+Deprecated British English variant retained for migration window.
+
+#### Returns
+
+[`BusinessDataCatalog`](BusinessDataCatalog.md)
+
+#### Deprecated
+
+Use getBusinessDataCatalog instead.
 
 ***
 
@@ -32,7 +52,7 @@ Defined in: [src/types/interfaces.ts:189](https://github.com/ErikPlachta/vscode-
 
 > **getCategoryInfo**(`categoryId`): [`CategoryInfo`](CategoryInfo.md)
 
-Defined in: [src/types/interfaces.ts:190](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L190)
+Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L227)
 
 #### Parameters
 
@@ -50,7 +70,7 @@ Defined in: [src/types/interfaces.ts:190](https://github.com/ErikPlachta/vscode-
 
 > **getCategorySchema**(`categoryId`): [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/types/interfaces.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L191)
+Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L228)
 
 #### Parameters
 
@@ -68,7 +88,7 @@ Defined in: [src/types/interfaces.ts:191](https://github.com/ErikPlachta/vscode-
 
 > **getRelationships**(`categoryId`): [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/interfaces.ts:196](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L196)
+Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L233)
 
 #### Parameters
 
@@ -86,7 +106,7 @@ Defined in: [src/types/interfaces.ts:196](https://github.com/ErikPlachta/vscode-
 
 > **validateCategoryData**(`categoryId`, `records`): [`ValidationResult`](ValidationResult.md)
 
-Defined in: [src/types/interfaces.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/interfaces.ts#L192)
+Defined in: [src/types/interfaces.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L229)
 
 #### Parameters
 

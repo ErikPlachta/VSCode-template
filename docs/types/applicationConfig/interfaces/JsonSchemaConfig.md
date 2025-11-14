@@ -6,9 +6,23 @@
 
 # Interface: JsonSchemaConfig
 
-Defined in: [src/types/applicationConfig.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L251)
+Defined in: [src/types/applicationConfig.ts:400](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L400)
 
 JSON schema validation configuration.
+
+## Example
+
+```ts
+const schema: JsonSchemaConfig = {
+  pattern: "docs/*.json",
+  schema: "schemas/doc.schema.json",
+  description: "Validate docs JSON files",
+};
+```
+
+## See
+
+docs/tools/validateJson/README.md
 
 ## Properties
 
@@ -16,7 +30,7 @@ JSON schema validation configuration.
 
 > **description**: `string`
 
-Defined in: [src/types/applicationConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L257)
+Defined in: [src/types/applicationConfig.ts:406](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L406)
 
 Human-readable description of validation purpose.
 
@@ -26,7 +40,7 @@ Human-readable description of validation purpose.
 
 > **pattern**: `string`
 
-Defined in: [src/types/applicationConfig.ts:253](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L253)
+Defined in: [src/types/applicationConfig.ts:402](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L402)
 
 File pattern to match.
 
@@ -36,6 +50,6 @@ File pattern to match.
 
 > **schema**: `string`
 
-Defined in: [src/types/applicationConfig.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L255)
+Defined in: [src/types/applicationConfig.ts:404](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L404)
 
 Path to JSON schema file.

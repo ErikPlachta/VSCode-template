@@ -8,9 +8,9 @@
 
 > **detectDuplicateSchemas**(`schemas`): `string`[]
 
-Defined in: [src/mcp/schemaUtils.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/schemaUtils.ts#L47)
+Defined in: [src/mcp/schemaUtils.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/schemaUtils.ts#L47)
 
-detectDuplicateSchemas function.
+Detect duplicate schema names (case-insensitive) within a category.
 
 ## Parameters
 
@@ -18,10 +18,10 @@ detectDuplicateSchemas function.
 
 [`CategorySchema`](../../../types/userContext.types/interfaces/CategorySchema.md)[]
 
-schemas parameter.
+List of schema descriptors.
 
 ## Returns
 
 `string`[]
 
-- TODO: describe return value.
+Array of original schema names that appear more than once when normalized.

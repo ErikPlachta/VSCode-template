@@ -76,6 +76,27 @@ import {
   formatValidationErrorsImpl as formatValidationErrors,
 } from "@shared/validation/categoryValidation";
 
+// Deprecation warning emission registry (ensures one-time logging per accessor).
+const emittedDeprecationWarnings = new Set<string>();
+/**
+ * Emit a structured deprecation warning for a British English accessor name.
+ * Warnings are logged exactly once per process to avoid noisy output.
+ *
+ * @param name - Deprecated British accessor invoked.
+ * @param replacement - Recommended American English replacement.
+ */
+function emitDeprecatedAccessorWarning(
+  name: string,
+  replacement: string
+): void {
+  if (emittedDeprecationWarnings.has(name)) return;
+  emittedDeprecationWarnings.add(name);
+  // Single standardized format to aid future log parsers / health checks.
+  console.warn(
+    `[DEPRECATED] Accessor '${name}' will be removed in a future release. Use '${replacement}' instead.`
+  );
+}
+
 // ES module equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -915,6 +936,7 @@ export class UserContextAgent extends BaseAgentConfig {
    * @deprecated Use {@link getDatasetCatalog} instead.
    */
   getDatasetCatalogue(): DatasetCatalogueEntry[] {
+    emitDeprecatedAccessorWarning("getDatasetCatalogue", "getDatasetCatalog");
     return this.consolidatedIndex as DatasetCatalogueEntry[];
   }
 
@@ -950,6 +972,10 @@ export class UserContextAgent extends BaseAgentConfig {
    * @deprecated Use getBusinessDataCatalog instead.
    */
   getBusinessDataCatalogue(): BusinessDataCatalogue {
+    emitDeprecatedAccessorWarning(
+      "getBusinessDataCatalogue",
+      "getBusinessDataCatalog"
+    );
     return this.getBusinessDataCatalog();
   }
 
@@ -966,6 +992,10 @@ export class UserContextAgent extends BaseAgentConfig {
    * @deprecated Use getUserContextCatalog instead.
    */
   getUserContextCatalogue(): UserContextCatalogue {
+    emitDeprecatedAccessorWarning(
+      "getUserContextCatalogue",
+      "getUserContextCatalog"
+    );
     return this.getUserContextCatalog();
   }
 

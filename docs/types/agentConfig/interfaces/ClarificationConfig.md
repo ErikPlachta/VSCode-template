@@ -6,9 +6,19 @@
 
 # Interface: ClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:271](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L271)
+Defined in: [src/types/agentConfig.ts:513](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L513)
 
-Clarification agent-specific configuration
+ClarificationAgent configuration for guidance, escalation, knowledge search, routing, and performance.
+
+## Example
+
+```ts
+const clarCfg: ClarificationConfig = {
+  guidance: { maxSuggestions: 5, includeCategoryExamples: true, includeQueryTemplates: true },
+  escalation: { escalationThreshold: 0.4, fallbackStrategies: ["rephrase", "handoff"], maxClarificationRounds: 1 },
+  knowledgeBase: { enableKnowledgeSearch: true, maxKnowledgeSnippets: 3, relevanceThreshold: 0.5 },
+};
+```
 
 ## Properties
 
@@ -16,7 +26,7 @@ Clarification agent-specific configuration
 
 > `optional` **contextAnalysis**: `object`
 
-Defined in: [src/types/agentConfig.ts:315](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L315)
+Defined in: [src/types/agentConfig.ts:557](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L557)
 
 #### contextConfidenceThreshold?
 
@@ -44,7 +54,7 @@ Defined in: [src/types/agentConfig.ts:315](https://github.com/ErikPlachta/vscode
 
 > **escalation**: `object`
 
-Defined in: [src/types/agentConfig.ts:293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L293)
+Defined in: [src/types/agentConfig.ts:535](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L535)
 
 #### clarificationTimeWindow?
 
@@ -72,7 +82,7 @@ Defined in: [src/types/agentConfig.ts:293](https://github.com/ErikPlachta/vscode
 
 > **guidance**: `object`
 
-Defined in: [src/types/agentConfig.ts:272](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L272)
+Defined in: [src/types/agentConfig.ts:514](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L514)
 
 #### guidanceTypes?
 
@@ -148,7 +158,7 @@ Defined in: [src/types/agentConfig.ts:272](https://github.com/ErikPlachta/vscode
 
 > **knowledgeBase**: `object`
 
-Defined in: [src/types/agentConfig.ts:300](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L300)
+Defined in: [src/types/agentConfig.ts:542](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L542)
 
 #### enableKnowledgeRanking?
 
@@ -180,7 +190,7 @@ Defined in: [src/types/agentConfig.ts:300](https://github.com/ErikPlachta/vscode
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:322](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L322)
+Defined in: [src/types/agentConfig.ts:564](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L564)
 
 #### enableParallelProcessing?
 
@@ -208,7 +218,7 @@ Defined in: [src/types/agentConfig.ts:322](https://github.com/ErikPlachta/vscode
 
 > `optional` **routing**: `object`
 
-Defined in: [src/types/agentConfig.ts:308](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L308)
+Defined in: [src/types/agentConfig.ts:550](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L550)
 
 #### analyzeMissingSignals?
 

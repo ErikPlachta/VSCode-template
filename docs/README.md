@@ -30,7 +30,7 @@ This extension embeds (or connects to) an MCP server and a small set of agents (
 - Creates `.mcp-cache` in two places:
   - Workspace-local: `<your workspace>/.mcp-cache`
   - Global: `%USERPROFILE%/.vscode/extensions/.mcp-cache` (Windows example: `C:\Users\plach\.vscode\extensions\.mcp-cache`)
-- Processes your User Context datasets and builds an index (catalogue) used by the agents.
+- Processes your User Context datasets and builds an index (catalog) used by the agents.
 - Starts the embedded MCP server (if no external Server URL is configured) and registers the chat participant `@userContext`.
 
 4. Try it:
@@ -61,6 +61,13 @@ The legacy `src/mcp.config.json` will be fully removed after one migration cycle
 
 Template processing, test fixtures, and docs generation all use the TS sources as the single source of truth to prevent drift.
 
+### Configuration & IntelliSense
+
+- Types-as-docs: Core configuration types live in type definitions, for example `src/types/agentConfig.ts`, and will include rich JSDoc (purpose, defaults, and examples) to power IntelliSense across the repo and prevent duplication and drift.
+- Agent configs: Keep inline comments in `agent.config.ts` minimal; rely on type JSDoc for canonical docs to avoid duplication and drift.
+- CommunicationAgent clarification: The `communication.clarification` block drives all clarification copy (headers, templates, limits). Avoid hardcoded business values in code; update config instead.
+- Available categories: When a caller includes `metadata.availableCategories` in a response, `CommunicationAgent` appends an “Available Categories” section (markdown/plaintext) using the configured header.
+
 ## Settings: UI first, chat second
 
 You can configure the extension in two ways:
@@ -83,7 +90,7 @@ User Context now replaces the legacy “Relevant Data Manager” terminology. Ba
 - Local context cache: `<workspace>/.mcp-cache`
 - The indexing process builds:
   - Category snapshots (structure/record counts)
-  - A consolidated catalogue (schemas, relationships, primary keys)
+  - A consolidated catalog (schemas, relationships, primary keys)
   - Validation reports (schema + relationship integrity)
 
 You can evolve User Context by editing the folders under `src/userContext/` (applications, departments, people, companyPolicies, companyResources). Placeholders have been fully replaced with canonical IDs for stability.
@@ -123,7 +130,7 @@ Quality gates (must all PASS before merge):
 | Coverage below 100%                 | Jest coverage summary                               | Add tests for uncovered branches then re‑run `npm test`                                 |
 | Lint failures (JSDoc)               | ESLint output                                       | Replace placeholder text, add missing tags, ensure param descriptions                   |
 
-More diagnostics: `docs/template-variables.md` (resolved template values), shared cache contents under `.mcp-cache` for snapshot & catalogue verification.
+More diagnostics: `docs/template-variables.md` (resolved template values), shared cache contents under `.mcp-cache` for snapshot & catalog verification.
 
 ## Contributing
 

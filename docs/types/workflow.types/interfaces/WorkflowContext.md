@@ -6,11 +6,11 @@
 
 # Interface: WorkflowContext
 
-Defined in: [src/types/workflow.types.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L104)
+Defined in: [src/types/workflow.types.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L118)
 
-Workflow execution context
+Workflow execution context.
 
-Maintains state throughout workflow lifecycle
+Maintains state throughout the workflow lifecycle.
 
 ## Properties
 
@@ -18,7 +18,7 @@ Maintains state throughout workflow lifecycle
 
 > `optional` **classification**: `object`
 
-Defined in: [src/types/workflow.types.ts:119](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L119)
+Defined in: [src/types/workflow.types.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L133)
 
 Classification result (if completed)
 
@@ -44,7 +44,7 @@ Classification result (if completed)
 
 > **completedActions**: [`WorkflowAction`](WorkflowAction.md)\<`unknown`\>[]
 
-Defined in: [src/types/workflow.types.ts:130](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L130)
+Defined in: [src/types/workflow.types.ts:144](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L144)
 
 Actions that have been completed
 
@@ -54,7 +54,7 @@ Actions that have been completed
 
 > **currentAction**: [`WorkflowAction`](WorkflowAction.md)\<`unknown`\> \| `null`
 
-Defined in: [src/types/workflow.types.ts:127](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L127)
+Defined in: [src/types/workflow.types.ts:141](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L141)
 
 Action currently being executed
 
@@ -64,7 +64,7 @@ Action currently being executed
 
 > `optional` **endTime**: `number`
 
-Defined in: [src/types/workflow.types.ts:148](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L148)
+Defined in: [src/types/workflow.types.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L162)
 
 Workflow end timestamp (when completed or failed)
 
@@ -74,7 +74,7 @@ Workflow end timestamp (when completed or failed)
 
 > **errors**: `Error`[]
 
-Defined in: [src/types/workflow.types.ts:139](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L139)
+Defined in: [src/types/workflow.types.ts:153](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L153)
 
 Errors encountered during execution
 
@@ -84,7 +84,7 @@ Errors encountered during execution
 
 > **input**: `object`
 
-Defined in: [src/types/workflow.types.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L112)
+Defined in: [src/types/workflow.types.ts:126](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L126)
 
 Original user input
 
@@ -106,7 +106,7 @@ Original user input
 
 > `optional` **metrics**: [`PerformanceMetrics`](PerformanceMetrics.md)
 
-Defined in: [src/types/workflow.types.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L142)
+Defined in: [src/types/workflow.types.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L156)
 
 Performance metrics
 
@@ -116,7 +116,7 @@ Performance metrics
 
 > **pendingActions**: [`WorkflowAction`](WorkflowAction.md)\<`unknown`\>[]
 
-Defined in: [src/types/workflow.types.ts:133](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L133)
+Defined in: [src/types/workflow.types.ts:147](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L147)
 
 Actions waiting to be executed
 
@@ -126,7 +126,7 @@ Actions waiting to be executed
 
 > **results**: `Map`\<`string`, `unknown`\>
 
-Defined in: [src/types/workflow.types.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L136)
+Defined in: [src/types/workflow.types.ts:150](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L150)
 
 Results map keyed by action ID
 
@@ -136,7 +136,7 @@ Results map keyed by action ID
 
 > **startTime**: `number`
 
-Defined in: [src/types/workflow.types.ts:145](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L145)
+Defined in: [src/types/workflow.types.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L159)
 
 Workflow start timestamp
 
@@ -146,7 +146,7 @@ Workflow start timestamp
 
 > **state**: [`WorkflowState`](../type-aliases/WorkflowState.md)
 
-Defined in: [src/types/workflow.types.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L109)
+Defined in: [src/types/workflow.types.ts:123](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L123)
 
 Current workflow state
 
@@ -156,6 +156,6 @@ Current workflow state
 
 > **workflowId**: `string`
 
-Defined in: [src/types/workflow.types.ts:106](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/workflow.types.ts#L106)
+Defined in: [src/types/workflow.types.ts:120](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L120)
 
 Unique workflow identifier

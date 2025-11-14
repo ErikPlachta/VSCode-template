@@ -8,9 +8,9 @@
 
 > `const` **ConfigUtils**: `object`
 
-Defined in: [src/types/configRegistry.ts:191](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/configRegistry.ts#L191)
+Defined in: [src/types/configRegistry.ts:189](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/configRegistry.ts#L189)
 
-Utility functions for working with configuration IDs
+Utility functions for working with configuration IDs.
 
 ## Type Declaration
 
@@ -18,7 +18,7 @@ Utility functions for working with configuration IDs
 
 > **areCompatible**(`configId1`, `configId2`): `boolean`
 
-Check if two configuration IDs are compatible (same agent type, compatible version)
+Check if two configuration IDs are compatible (same agent type, same major version).
 
 #### Parameters
 
@@ -40,11 +40,17 @@ Second configuration ID.
 
 True if compatible; otherwise false.
 
+#### Example
+
+```ts
+const ok = ConfigUtils.areCompatible(CONFIG_IDS.DATA_AGENT, CONFIG_IDS.DATA_AGENT);
+```
+
 ### generateConfigId()
 
 > **generateConfigId**(`agentType`, `major`, `minor`, `patch`): `string`
 
-Generate a new configuration ID for an agent type and version
+Generate a new configuration ID for an agent type and version.
 
 #### Parameters
 
@@ -78,11 +84,18 @@ Patch version.
 
 Constructed configuration ID string.
 
+#### Example
+
+```ts
+const id = ConfigUtils.generateConfigId("orchestrator", 1, 1, 0);
+// "agent.orchestrator.v1.1.0"
+```
+
 ### getConfigsForAgent()
 
 > **getConfigsForAgent**(`agentType`): `string`[]
 
-Get all configuration IDs for a specific agent type
+Get all configuration IDs for a specific agent type.
 
 #### Parameters
 
@@ -98,11 +111,17 @@ Agent type key from metadata.
 
 Array of configuration IDs for the agent type.
 
+#### Example
+
+```ts
+const ids = ConfigUtils.getConfigsForAgent("data-agent");
+```
+
 ### getMetadata()
 
 > **getMetadata**(`configId`): [`ConfigMetadata`](../interfaces/ConfigMetadata.md) \| `undefined`
 
-Get metadata for a configuration ID
+Get metadata for a configuration ID.
 
 #### Parameters
 
@@ -118,11 +137,18 @@ Configuration ID to look up.
 
 Metadata if found; otherwise undefined.
 
+#### Example
+
+```ts
+const meta = ConfigUtils.getMetadata(CONFIG_IDS.DATA_AGENT);
+console.log(meta?.version.major);
+```
+
 ### isValidConfigId()
 
 > **isValidConfigId**(`configId`): `boolean`
 
-Validate that a configuration ID exists in the registry
+Validate that a configuration ID exists in the registry.
 
 #### Parameters
 
@@ -138,11 +164,17 @@ Configuration ID to validate.
 
 True if the ID exists in the registry; otherwise false.
 
+#### Example
+
+```ts
+const ok = ConfigUtils.isValidConfigId(CONFIG_IDS.ORCHESTRATOR);
+```
+
 ### parseVersion()
 
 > **parseVersion**(`configId`): \{ `major`: `number`; `minor`: `number`; `patch`: `number`; \} \| `undefined`
 
-Parse version information from a configuration ID
+Parse version information from a configuration ID.
 
 #### Parameters
 
@@ -157,3 +189,12 @@ Configuration ID to parse.
 \{ `major`: `number`; `minor`: `number`; `patch`: `number`; \} \| `undefined`
 
 Parsed version object, or undefined if not found.
+
+#### Example
+
+```ts
+const v = ConfigUtils.parseVersion(CONFIG_IDS.CLARIFICATION_AGENT);
+if (v) {
+  console.log(`${v.major}.${v.minor}.${v.patch}`);
+}
+```

@@ -6,9 +6,20 @@
 
 # Interface: CacheConfig
 
-Defined in: [src/types/applicationConfig.ts:162](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L162)
+Defined in: [src/types/applicationConfig.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L255)
 
 Cache configuration settings.
+
+## Example
+
+```ts
+const cache: CacheConfig = {
+  enabled: true,
+  directory: ".cache",
+  maxSize: "256mb",
+  ttl: 60000,
+};
+```
 
 ## Properties
 
@@ -16,7 +27,7 @@ Cache configuration settings.
 
 > **directory**: `string`
 
-Defined in: [src/types/applicationConfig.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L166)
+Defined in: [src/types/applicationConfig.ts:259](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L259)
 
 Cache directory path.
 
@@ -26,7 +37,7 @@ Cache directory path.
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:164](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L164)
+Defined in: [src/types/applicationConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L257)
 
 Enable caching.
 
@@ -36,7 +47,7 @@ Enable caching.
 
 > **maxSize**: `string`
 
-Defined in: [src/types/applicationConfig.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L168)
+Defined in: [src/types/applicationConfig.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L261)
 
 Maximum cache size.
 
@@ -46,6 +57,6 @@ Maximum cache size.
 
 > **ttl**: `number`
 
-Defined in: [src/types/applicationConfig.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L170)
+Defined in: [src/types/applicationConfig.ts:263](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L263)
 
 Time-to-live for cached items in milliseconds.

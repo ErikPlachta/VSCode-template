@@ -8,9 +8,9 @@
 
 > **isBaseRecord**(`obj`): `obj is BaseRecord`
 
-Defined in: [src/types/userContext.types.ts:565](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L565)
+Defined in: [src/types/userContext.types.ts:588](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L588)
 
-Type guard to check if an object is a valid BaseRecord
+Type guard to check if a value is a valid [BaseRecord](../interfaces/BaseRecord.md).
 
 ## Parameters
 
@@ -18,10 +18,10 @@ Type guard to check if an object is a valid BaseRecord
 
 `unknown`
 
-The object to validate
+The value to validate.
 
 ## Returns
 
 `obj is BaseRecord`
 
-True if the object is a valid BaseRecord
+True if the value is a valid BaseRecord.

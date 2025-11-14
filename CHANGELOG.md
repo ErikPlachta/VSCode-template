@@ -292,6 +292,36 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
+#### 2025-11-14 11:29:07 docs: Move JSON-RPC reference to src/docs; convert to TSDoc
+
+**Problem/Context**: `docs/` is generated and wiped by the docs pipeline. The JSON-RPC 2.0 reference should live in source so TypeDoc can generate it reliably.
+
+**Changes Made**:
+
+1. `src/docs/mcp/jsonRpc.ts`: Added new TSDoc module (`@packageDocumentation`) containing the full JSON-RPC 2.0 reference tailored for MCP.
+2. `docs/mcp/json-rpc.md`: Removed legacy markdown file; content now generated from `src/docs` via TypeDoc.
+
+**Architecture Notes**: Keep durable documentation in `src/docs/**` and generate static output into `docs/` during the pipeline. Aligns with governance (Path Guard: src/** vs docs/**) and prevents drift/wipe.
+
+**Files Changed**: 2 files (`src/docs/mcp/jsonRpc.ts` added; `docs/mcp/json-rpc.md` removed).
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`)
+- Docs: SKIPPED (tsdoc.json config error pre-existing; unrelated to this change)
+- Health: PASS (`npm run health:report`)
+
+**Impact**: Documentation is now source-controlled and generated deterministically; prevents accidental loss when `docs/` is cleaned.
+
+##### Verification – 2025-11-14 (Docs migration)
+
+- Build: PASS
+- Tests: PASS
+- Docs: SKIPPED (blocked by tsdoc.json error)
+- Health: PASS
+
+
 #### 2025-11-14 09:03:42 docs: Clarify Copilot communication protocols (micro-updates, CLI narration, examples)
 
 **Problem/Context**: Added micro-update cadence, 8–12 word preambles, standard 4-step CLI narration, formatting/tone rules, good/bad/improve examples, and revision policy.

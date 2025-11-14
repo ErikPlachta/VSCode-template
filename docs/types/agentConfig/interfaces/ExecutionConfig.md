@@ -6,9 +6,21 @@
 
 # Interface: ExecutionConfig
 
-Defined in: [src/types/agentConfig.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L89)
+Defined in: [src/types/agentConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L242)
 
-Runtime execution configuration
+Runtime execution configuration for an agent.
+
+## Example
+
+```ts
+const exec: ExecutionConfig = {
+  priority: "high",
+  timeout: 8000,
+  cacheEnabled: true,
+  retryStrategy: "exponential",
+  maxRetries: 2,
+};
+```
 
 ## Properties
 
@@ -16,7 +28,7 @@ Runtime execution configuration
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/types/agentConfig.ts:92](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L92)
+Defined in: [src/types/agentConfig.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L245)
 
 ***
 
@@ -24,7 +36,7 @@ Defined in: [src/types/agentConfig.ts:92](https://github.com/ErikPlachta/vscode-
 
 > `optional` **maxRetries**: `number`
 
-Defined in: [src/types/agentConfig.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L94)
+Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L247)
 
 ***
 
@@ -32,7 +44,7 @@ Defined in: [src/types/agentConfig.ts:94](https://github.com/ErikPlachta/vscode-
 
 > **priority**: `"high"` \| `"medium"` \| `"low"`
 
-Defined in: [src/types/agentConfig.ts:90](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L90)
+Defined in: [src/types/agentConfig.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L243)
 
 ***
 
@@ -40,7 +52,7 @@ Defined in: [src/types/agentConfig.ts:90](https://github.com/ErikPlachta/vscode-
 
 > `optional` **retryStrategy**: `"none"` \| `"fixed"` \| `"exponential"`
 
-Defined in: [src/types/agentConfig.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L93)
+Defined in: [src/types/agentConfig.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L246)
 
 ***
 
@@ -48,4 +60,4 @@ Defined in: [src/types/agentConfig.ts:93](https://github.com/ErikPlachta/vscode-
 
 > **timeout**: `number`
 
-Defined in: [src/types/agentConfig.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L91)
+Defined in: [src/types/agentConfig.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L244)

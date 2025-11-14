@@ -8,7 +8,7 @@
 
 Utilities for managing the local `.mcp-cache` directory.
 
-Module for working with on-disk cache artefacts shared across tools and agents.
+Module for working with on-disk cache artifacts shared across tools and agents.
 
 ## Interfaces
 

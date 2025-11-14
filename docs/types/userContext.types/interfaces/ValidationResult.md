@@ -6,9 +6,9 @@
 
 # Interface: ValidationResult
 
-Defined in: [src/types/userContext.types.ts:602](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L602)
+Defined in: [src/types/userContext.types.ts:625](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L625)
 
-Validation result with detailed errors
+Validation result with detailed errors.
 
 ## Properties
 
@@ -16,7 +16,7 @@ Validation result with detailed errors
 
 > **errors**: [`ValidationError`](ValidationError.md)[]
 
-Defined in: [src/types/userContext.types.ts:606](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L606)
+Defined in: [src/types/userContext.types.ts:629](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L629)
 
 List of validation errors (empty if valid)
 
@@ -26,6 +26,6 @@ List of validation errors (empty if valid)
 
 > **valid**: `boolean`
 
-Defined in: [src/types/userContext.types.ts:604](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/userContext.types.ts#L604)
+Defined in: [src/types/userContext.types.ts:627](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L627)
 
 Whether validation passed

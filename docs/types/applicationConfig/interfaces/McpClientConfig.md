@@ -6,9 +6,19 @@
 
 # Interface: McpClientConfig
 
-Defined in: [src/types/applicationConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L46)
+Defined in: [src/types/applicationConfig.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L87)
 
 MCP client configuration settings.
+
+## Example
+
+```ts
+const client: McpClientConfig = {
+  maxConcurrentRequests: 8,
+  requestTimeout: 8000,
+  retryDelay: 250,
+};
+```
 
 ## Properties
 
@@ -16,7 +26,7 @@ MCP client configuration settings.
 
 > **maxConcurrentRequests**: `number`
 
-Defined in: [src/types/applicationConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L48)
+Defined in: [src/types/applicationConfig.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L89)
 
 Maximum number of concurrent requests.
 
@@ -26,7 +36,7 @@ Maximum number of concurrent requests.
 
 > **requestTimeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L50)
+Defined in: [src/types/applicationConfig.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L91)
 
 Request timeout in milliseconds.
 
@@ -36,6 +46,6 @@ Request timeout in milliseconds.
 
 > **retryDelay**: `number`
 
-Defined in: [src/types/applicationConfig.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/applicationConfig.ts#L52)
+Defined in: [src/types/applicationConfig.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L93)
 
 Delay between retry attempts in milliseconds.

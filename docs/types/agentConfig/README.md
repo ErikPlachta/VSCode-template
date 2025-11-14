@@ -6,9 +6,38 @@
 
 # types/agentConfig
 
-agentConfig definitions for types module.
-Central typed structures describing agent identities, intent routing,
-scoring parameters, escalation, profiling, and composite configuration.
+Type definitions for `agentConfig` used across the application.
+
+This file defines all structures related to agent identity, routing,
+scoring, profiling, escalation logic, and composite configuration.
+
+## Remarks
+
+### Developer & LLM Instructions:
+- This is the **single source of truth** for all agent configuration types.
+- Prefer placing comprehensive TSDoc comments here, rather than duplicating
+  them in `agent.config.ts`.
+- Add `@example` blocks to definitions where meaningful to clarify usage.
+- Use `/** ... */` inline docblocks directly above each property.
+- Avoid redundancy; focus on clarity and completeness in type definitions.
+- Comments in `agent.config.ts` should be minimal and not diverge from this.
+
+## Example
+
+```ts
+const agent: AgentIdentity = {
+  id: "comm-agent",
+  name: "Communications Agent",
+  version: "1.0.0",
+  description: "Handles formatting of outbound user-facing messages."
+};
+```
+
+## See
+
+ - [TSDoc Main Reference](https://tsdoc.org)
+ - [Using TSDoc](https://tsdoc.org/pages/intro/using_tsdoc/)
+ - [TypeScript JSDoc Reference](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)
 
 ## Classes
 
@@ -25,8 +54,8 @@ scoring parameters, escalation, profiling, and composite configuration.
 - [ClarificationAgentInput](interfaces/ClarificationAgentInput.md)
 - [ClarificationConfig](interfaces/ClarificationConfig.md)
 - [ClarificationResponse](interfaces/ClarificationResponse.md)
+- [CommunicationClarificationConfig](interfaces/CommunicationClarificationConfig.md)
 - [CommunicationConfig](interfaces/CommunicationConfig.md)
-- [ConfigDescriptor](interfaces/ConfigDescriptor.md)
 - [CrossCategoryConnection](interfaces/CrossCategoryConnection.md)
 - [DatabaseConfig](interfaces/DatabaseConfig.md)
 - [DataConfig](interfaces/DataConfig.md)
@@ -59,6 +88,14 @@ scoring parameters, escalation, profiling, and composite configuration.
 - [CategoryId](type-aliases/CategoryId.md)
 - [OrchestratorIntent](type-aliases/OrchestratorIntent.md)
 
-## Functions
+## References
 
-- [createDescriptorMap](functions/createDescriptorMap.md)
+### ConfigDescriptor
+
+Re-exports [ConfigDescriptor](../../shared/agentConfigDescriptors/interfaces/ConfigDescriptor.md)
+
+***
+
+### createDescriptorMap
+
+Re-exports [createDescriptorMap](../../shared/agentConfigDescriptors/functions/createDescriptorMap.md)

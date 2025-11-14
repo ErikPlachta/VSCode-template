@@ -6,9 +6,69 @@
 
 # Interface: OrchestrationConfig
 
-Defined in: [src/types/agentConfig.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L56)
+Defined in: [src/types/agentConfig.ts:201](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L201)
 
-Orchestration-specific configuration
+Orchestration configuration: intents, text handling, escalation, and messages.
+
+## Example
+
+```ts
+const orchConfig: OrchestrationConfig = {
+  intents: {
+    "fetch-metadata": {
+      name: "fetch-metadata",
+      description: "Retrieve category metadata and schemas",
+      targetAgent: "data-agent",
+      signals: ["schema", "fields", "metadata"],
+    },
+  },
+  textProcessing: {
+    stopWords: ["the", "a", "an"],
+    minimumKeywordLength: 3,
+    scoringWeights: {
+      signalMatch: 0.6,
+      focusMatch: 0.3,
+      promptStarterMatch: 0.1,
+    },
+  },
+  escalation: {
+    conditions: ["low-confidence", "missing-signals"],
+    fallbackAgent: "clarification-agent",
+    maxRetries: 1,
+    vaguePhrases: ["help", "not sure"],
+  },
+  messages: {
+    noIntentDetected: "I'm not sure how to help with that.",
+    needMoreContext: "Could you provide more details?",
+    questionTooVague: "Your question seems too broad.",
+    missingSignalsHint: [
+      "Try including specific keywords.",
+      "Provide more context about what you're looking for.",
+    ],
+    errorOccurred: "Something went wrong while processing your request.",
+    summaries: {
+      metadata: "Here's the metadata I found.",
+      records: "Here are the records matching your query.",
+      insight: "Here are some insights based on the data.",
+      clarification: "I need some clarification to proceed.",
+      defaultTopic: "Here's what I found on that topic.",
+    },
+    guidance: {
+      metadata: "You can ask about specific categories or fields.",
+      recordsConnections: "Try asking about relationships between categories.",
+      recordsFiltering: "You can filter records by specific criteria.",
+      insightPlan: [
+        "Consider exploring related categories.",
+        "Look for trends over time.",
+        "Analyze key metrics for deeper insights.",
+      ],
+      insightOverview: "Here's an overview of the insights generated.",
+      insightRecommendations: "Based on the insights, consider these actions.",
+      clarificationPrompt: "Could you clarify what you're looking for?",
+    },
+  },
+};
+```
 
 ## Properties
 
@@ -16,7 +76,7 @@ Orchestration-specific configuration
 
 > `optional` **escalation**: [`EscalationConfig`](EscalationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L59)
+Defined in: [src/types/agentConfig.ts:204](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L204)
 
 ***
 
@@ -24,7 +84,7 @@ Defined in: [src/types/agentConfig.ts:59](https://github.com/ErikPlachta/vscode-
 
 > `optional` **intents**: `Record`\<`string`, [`IntentConfig`](IntentConfig.md)\>
 
-Defined in: [src/types/agentConfig.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L57)
+Defined in: [src/types/agentConfig.ts:202](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L202)
 
 ***
 
@@ -32,7 +92,7 @@ Defined in: [src/types/agentConfig.ts:57](https://github.com/ErikPlachta/vscode-
 
 > `optional` **messages**: `object`
 
-Defined in: [src/types/agentConfig.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L60)
+Defined in: [src/types/agentConfig.ts:205](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L205)
 
 #### errorOccurred?
 
@@ -116,4 +176,4 @@ Defined in: [src/types/agentConfig.ts:60](https://github.com/ErikPlachta/vscode-
 
 > `optional` **textProcessing**: [`TextProcessingConfig`](TextProcessingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/agentConfig.ts#L58)
+Defined in: [src/types/agentConfig.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L203)

@@ -6,7 +6,7 @@
 
 # Interface: InvocationLogger
 
-Defined in: [src/mcp/telemetry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/telemetry.ts#L23)
+Defined in: [src/mcp/telemetry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/telemetry.ts#L23)
 
 Logger abstraction used by [createInvocationLogger](../functions/createInvocationLogger.md) to emit events.
 
@@ -16,7 +16,7 @@ Logger abstraction used by [createInvocationLogger](../functions/createInvocatio
 
 > **log**(`event`): `void`
 
-Defined in: [src/mcp/telemetry.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/mcp/telemetry.ts#L24)
+Defined in: [src/mcp/telemetry.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/telemetry.ts#L24)
 
 #### Parameters
 

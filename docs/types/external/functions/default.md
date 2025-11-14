@@ -8,7 +8,7 @@
 
 > **default**\<`T`\>(`input`, `options?`): [`GrayMatterFile`](../interfaces/GrayMatterFile.md)\<`T`\>
 
-Defined in: [src/types/external.d.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/types/external.d.ts#L28)
+Defined in: [src/types/external.d.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L28)
 
 ## Type Parameters
 

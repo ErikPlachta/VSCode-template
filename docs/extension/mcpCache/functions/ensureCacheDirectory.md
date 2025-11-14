@@ -8,7 +8,7 @@
 
 > **ensureCacheDirectory**(): `Promise`\<`string`\>
 
-Defined in: [src/extension/mcpCache.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/82a5145af02a0dfcaf89b0463e3a24e33a8ba7ad/src/extension/mcpCache.ts#L66)
+Defined in: [src/extension/mcpCache.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpCache.ts#L66)
 
 Ensure the workspace has a `.mcp-cache` directory and return its path.
 

@@ -6,17 +6,17 @@
 
 # types/configRegistry
 
-Configuration ID Registry - Central registry for all agent configuration schema IDs
+Configuration ID Registry – Central registry for agent configuration schema IDs.
 
-This file provides a centralized registry of unique configuration IDs (UIDs) for all
-agent configurations. Instead of using file paths in schema references, each configuration
-type has a unique ID that can be validated and versioned independently.
+Centralized registry of unique configuration IDs (UIDs) for all agent configurations.
+Instead of file-path based references, each configuration type has a stable ID that can
+be validated and versioned independently.
 
-Benefits:
-- Unique identification of configuration schemas
-- Version tracking for configuration changes
-- Validation and compatibility checking
-- Decoupling from file system structure
+## Remarks
+
+Use these IDs across configs, validators, and tooling to avoid file-structure coupling.
+Prefer type-safe references (`ConfigId`) and utility helpers (`ConfigUtils`) when working
+with IDs at runtime.
 
 ## Interfaces
 
