@@ -309,6 +309,53 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
+#### 2025-11-14 18:20:00 ci: Add HTTP transport verifier job; local run docs
+
+**Problem/Context**: Add a fast, deterministic HTTP transport verification to CI and document the local command so developers can run the same protocol check outside Jest. Keeps stdio as the default runtime while enabling optional HTTP (`MCP_HTTP_ENABLED=true`) for verification.
+
+**Changes Made**:
+
+1. file: `.github/workflows/ci.yml` — added a separate `transport` job that runs `npm run test:http:ci` after compliance to exercise JSON-RPC `initialize` and `tools/list` against the compiled server.
+2. file: `src/docs/server/transport.ts` — added a TSDoc module describing transport policy and a "Local Quick Check" snippet (`npm run test:http`).
+3. file: `TODO.md` — marked the CI wiring complete under the transport enforcement task.
+4. file: `CONTEXT-SESSION.md` — updated focus summary and next actions to reflect the new CI job and docs location.
+
+**Architecture Notes**:
+
+- Single JSON-RPC handler path is reused across transports (initialize/tools/list/tools/call); the CI verifier guards against drift.
+- HTTP remains optional and is enabled only with `MCP_HTTP_ENABLED=true`; stdio remains the default.
+- The transport verifier runs outside Jest to avoid ESM + stdio framing pitfalls and VS Code dependency coupling.
+
+**Files Changed**:
+
+- `.github/workflows/ci.yml`
+- `src/docs/server/transport.ts` (added)
+- `TODO.md`
+- `CONTEXT-SESSION.md`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- HTTP Harness: PASS (`npm run test:http`) — initialize + tools/list validated
+- Tests: Not run (unrelated to CI job addition)
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
+**Impact**:
+
+- Adds a stable CI guard for transport/protocol invariants without flakiness.
+- Documents the local verifier for quick, reproducible checks by developers.
+- Keeps transport policy clear (stdio by default; HTTP opt-in for verification).
+
+##### Verification – 2025-11-14 (CI transport verifier)
+
+- Build: PASS
+- HTTP Harness: PASS
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
 #### 2025-11-14 17:51:13 chore: Add HTTP transport verification harness; deprecate stdio harness
 
 **Problem/Context**: Pivoted transport verification from a fragile stdio/Jest approach to a simple HTTP-based harness that validates JSON-RPC 2.0 invariants (`initialize`, `tools/list`) against the compiled server. This avoids ESM + stdio framing issues, decouples from VS Code-only dependencies in tests, and provides a CI-friendly check while keeping stdio as the default runtime transport.
