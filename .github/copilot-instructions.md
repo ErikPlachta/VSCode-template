@@ -76,6 +76,7 @@ The Core Principles guarantee agents do not drift from directives and always ope
 - Protocol: Reuse shared JSON-RPC handling when needed—do not implement divergent handlers.
 - Documentation Standard: Use TSDoc (not JSDoc) for all TypeScript files under `bin/**` (future enforcement task in TODO backlog).
 - Changelog Tooling: `repo-ops` provides `changelog map`, `map --fast`, `diff`, and `verify` for observation; only `write` mutates the file. Fast path falls back automatically if index absent.
+- Changelog Index Auto-Regeneration: `out/changelog/index.json` (schema v2) is rewritten only after a successful `changelog write --write`. Observation commands (`map`, `map --fast`, `diff`, `verify`) never update it. If `REPO_OPS_CHANGELOG_PATH` is set (test override), the index will reflect the synthetic file path; unset the variable and perform a chore write to refresh. ex: `npm run repo:ops -- changelog write --type chore --summary "Refresh changelog index" --context "Rebuilding index after synthetic override" --write`.
 
 <!-- END: CORE-PRINCIPLES -->
 

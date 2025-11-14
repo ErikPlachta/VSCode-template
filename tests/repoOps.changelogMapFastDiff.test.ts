@@ -92,4 +92,15 @@ describe("repo-ops changelog map --fast and diff", () => {
     expect(payload.removedCount).toBe(0);
     expect(payload.modifiedCount).toBeGreaterThanOrEqual(0);
   });
+  // Cleanup synthetic temp directory created by these tests.
+  afterAll(() => {
+    const dir = path.join(process.cwd(), "tests_tmp");
+    if (fs.existsSync(dir)) {
+      try {
+        fs.rmSync(dir, { recursive: true, force: true });
+      } catch {
+        // swallow errors in cleanup
+      }
+    }
+  });
 });
