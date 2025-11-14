@@ -47,11 +47,11 @@ Formatting Conventions
 
 ## Current Focus Summary
 
-- High-level focus: Validation runtime extraction — Phase 8 audit in progress; Phase 9 coverage next.
+- Transport verification: HTTP harness in place (initialize + tools/list); stdio harness removed.
+- Validation runtime extraction: Phase 8 audit in progress; Phase 9 coverage next.
 - Stabilization: Dynamic MCP tools registry & orchestrator bridge stable; data‑driven descriptors and formatting isolation maintained.
 - Migration: Cache directory rename to `.usercontext-mcp-extension` staged in Current with migration script follow‑ups.
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
-- Keep quality gates green: build, tests, lint, docs, and health.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
@@ -110,7 +110,8 @@ Current Status: Phase 7 complete; Phase 8 (Post‑Migration Audit) in progress; 
 2. Start Phase 9: add targeted tests to sustain/improve coverage for shared validators; report metrics.
 3. Implement cache directory rename and migration script; update references and verify initialization.
 4. Optional: Add `reindex` CLI enhancement (non‑mutating index rebuild) in repo‑ops.
-5. Monitor docs lint and TypeDoc external link warnings; add regression guard as needed.
+5. Wire `test:http:ci` into CI and add a short docs note for local runs.
+6. Monitor docs lint and TypeDoc external link warnings; add regression guard as needed.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

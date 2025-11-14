@@ -89,7 +89,7 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
-- [ ] P1: Validation Runtime Extraction (Phased)
+- [x] P1: Validation Runtime Extraction (Phased)
   - [x] Phase 1: Inventory & Tag – enumerated runtime validation exports (agent/category/relationship/errors/reporting); added Phase 1 @remarks tags to each exported function in `src/types/userContext.types.ts`, `src/types/configValidation.ts`, `src/types/configRegistry.ts`.
   - [x] Phase 2: Parity Test Scaffold – added `tests/validation.parity.test.ts` (locks behavior for category + config validators, 38 passed, 1 skipped total suites now 39).
   - [x] Phase 3: Shared Module Completion (Category subset) – created `src/shared/validation/categoryValidation.ts` (extracted logic; delegation deferred to preserve types-only constraint).
@@ -114,8 +114,9 @@ Follow these guidelines to ensure effective task management:
     - [x] Wire both stdio and HTTP to reuse the same dispatcher
   - [ ] Add tests to validate protocol and transport behavior (single-handler + negative transport cases).
     - [x] Unit: method not found / invalid params error shapes
-    - [ ] Integration: stdio path happy-path tools/list + tools/call
-    - [x] Integration: HTTP behind `MCP_HTTP_ENABLED=true` only; disabled by default
+    - [ ] Integration: stdio path happy-path tools/list + tools/call (deferred; stdio harness removed)
+    - [x] Integration: HTTP happy-path (initialize + tools/list) via `bin/transport/verifyHttpTransport.js`
+    - [x] CI helper: `test:http:ci` script added
   - [x] Update documentation to reflect transport and protocol standards.
   - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
 - [ ] P1: Cache Directory Rename & Migration
@@ -169,6 +170,13 @@ Follow these guidelines to ensure effective task management:
   - [ ] Add unit tests for write/scaffold with new flags (dry-run/apply, context-file, minimal template)
   - [ ] Add integration tests that verify generated markdown has no MD lint errors
   - [ ] Update README/docs and `CHANGELOG.md` instructions with examples for new flags
+- [ ] P2: CLI: CHANGELOG - Backup strategy overhaul
+  - [ ] Implement hash-based backup deduplication to prevent unbounded backup files
+  - [ ] Default to differential backups (store only changes) with flag for full backups (`--full-backup`)
+  - [ ] Add retention policy and pruning for old backups
+  - [ ] Provide integrity check and restore flow (verify chain and rehydrate)
+  - [ ] Add unit/integration tests for backup/restore; update docs and README
+  - [ ] Migration script to consolidate existing backups and remove duplicates
 - [ ] P2: CLI: repo-ops — Add `--remove-lock` to clear stale changelog lock
   - [ ] Implement `--remove-lock` (or `lock --remove`) to delete `out/changelog/changelog.write.lock` safely
   - [ ] Guard with TTL + confirmation prompt; support `--force` for CI
@@ -268,6 +276,7 @@ Follow these guidelines to ensure effective task management:
 ## Completed Action Items
 
 - [x] CI: Add optional repo-ops lint step — implemented via `.github/workflows/repo-ops-lint.yml`
+- [x] P1: Validation Runtime Extraction (Phased) — Phases 1–9 completed; coverage uplift recorded; parity preserved
 - [x] P1: CommunicationAgent clarification is config-driven — see CHANGELOG entry "2025-11-13 10:00:00 refactor: CommunicationAgent clarification via configuration; add types and templates"
 - [x] P1: MCP Server: Resolve categoryId via aliases/names and enumerate `availableCategories` on error — see CHANGELOG entry "2025-11-13 14:28:32 fix/mcp: Resolve categoryId via aliases and names in MCP tools"
 - [x] P1: Server: Add Orchestrator bridge and route MCP tools through it (Part 1) — see CHANGELOG entry "2025-11-14 09:30:00 refactor/server: Add Orchestrator bridge and route MCP tools through it (Part 1)"

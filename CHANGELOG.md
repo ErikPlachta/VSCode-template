@@ -309,23 +309,91 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
+#### 2025-11-14 17:51:13 chore: Add HTTP transport verification harness; deprecate stdio harness
+
+**Problem/Context**: Pivoted transport verification from a fragile stdio/Jest approach to a simple HTTP-based harness that validates JSON-RPC 2.0 invariants (`initialize`, `tools/list`) against the compiled server. This avoids ESM + stdio framing issues, decouples from VS Code-only dependencies in tests, and provides a CI-friendly check while keeping stdio as the default runtime transport.
+
+**Changes Made**:
+
+1. file: `package.json` — added scripts `test:http` (compile → alias rewrite → HTTP verifier) and `test:http:ci` (CI convenience); removed `test:stdio`.
+2. file: `bin/transport/verifyHttpTransport.js` — added verifier that spawns the compiled server with `MCP_HTTP_ENABLED=true` and `usercontextMCP_port=0`, parses stderr for "HTTP server listening on [port]", then POSTs JSON-RPC `initialize` and `tools/list` and asserts typed results.
+3. file: `src/server/index.ts` — confirmed HTTP server logs the bound port; JSON-RPC dispatch path remains unified (initialize/tools/list/tools/call) and is reused across transports.
+4. file: `src/server/orchestratorBridge.ts` — replaced static imports with dynamic `import()` to avoid VS Code dependency loading in the compiled runtime; added fallback cache path; tightened typings to keep compile clean.
+5. pipeline: `tsx bin/utils/aliasToRelativeOut.ts` — incorporated post-compile alias-to-relative rewrite for `out/` so compiled imports resolve at runtime.
+6. removed: `src/server/stdioMain.ts` and `bin/transport/verifyStdioTransport.ts` — deleted deprecated stdio harness artifacts.
+
+**Architecture Notes**:
+
+- Single JSON-RPC handler path (initialize/tools/list/tools/call) reused across transports; prevents drift.
+- Default transport remains stdio; HTTP is enabled only with `MCP_HTTP_ENABLED=true` for local debugging and verification.
+- Tools registry remains data-driven via orchestrator/config; no hardcoded arrays.
+- Harness intentionally runs outside Jest to avoid ESM and stdio framing pitfalls.
+
+**Files Changed**:
+
+- `package.json`
+- `bin/transport/verifyHttpTransport.js` (added)
+- `src/server/index.ts`
+- `src/server/orchestratorBridge.ts`
+- `src/server/stdioMain.ts` (removed)
+- `bin/transport/verifyStdioTransport.ts` (removed)
+- `bin/utils/aliasToRelativeOut.ts` (used in pipeline)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (full Jest suite; latest run green)
+- HTTP Harness: PASS (`npm run test:http`) — initialize + tools/list validated
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
+**Impact**:
+
+- Provides a stable, repeatable transport verification without VS Code coupling.
+- Reduces maintenance by removing stdio harness artifacts and scripts.
+- Unblocks CI by offering a fast `test:http:ci` check for protocol invariants.
+
+##### Verification – 2025-11-14 (HTTP transport harness)
+
+- Build: PASS
+- Tests: PASS (suite green; 2 skipped observed recently)
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
 #### 2025-11-14 15:42:32 test: Phase 9: Increase shared configValidation coverage to ~92/89%
 
 **Problem/Context**: Raised coverage for src/shared/validation/configValidation.ts by adding focused tests for orchestrator branches, agent warnings, compatibility, and report formatting. New coverage: Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30%.
 
 **Changes Made**:
 
-1. file: PATH (lines X–Y) — what changed and why
-2. file: PATH (lines A–B) — what changed and why
+1. file: `tests/configValidation.coverage.test.ts` — added comprehensive tests covering invalid `$configId`, orchestrator `intents` type errors, `textProcessing.stopWords`, `scoring.weights` type checks, unknown agent type warnings, semver warning for `agent.version`, compatibility checks, and report formatting.
+2. file: `TODO.md` — marked Phase 9 coverage as complete and recorded new coverage metrics for `configValidation.ts`.
 
 **Architecture Notes**: (patterns/decisions)
 
+- Focused tests target previously unexercised branches while preserving behavior locked by parity tests.
+- No runtime logic changes; validates shared module extraction quality and completeness.
+
 **Files Changed**: (list files with line counts)
 
-**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+- `tests/configValidation.coverage.test.ts` (+~170 loc)
+- `TODO.md` (Phase 9 status/details)
+
+**Testing**: Build: PASS; Tests: PASS (1 skipped, 45 passed); Coverage (configValidation.ts): Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30%; Lint: not run; Docs/Health: not run
 
 **Impact**: (what this enables/fixes)
 
+- Improves confidence in shared validation layer; unlocks subsequent refactors knowing edge paths are guarded by tests.
+
+##### Verification – 2025-11-14 (Phase 9 Coverage)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test`) — 1 skipped, 45 passed
+- Coverage: `src/shared/validation/configValidation.ts` — Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30%
+- Lint: Not run
+- Docs/Health: Not run
 
 #### 2025-11-14 15:28:43 docs: Validation runtime extraction: Phase 8 audit complete
 
