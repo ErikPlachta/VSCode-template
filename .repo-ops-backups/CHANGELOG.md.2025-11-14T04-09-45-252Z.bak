@@ -43,36 +43,6 @@ Flow: Plan → Verify → Scaffold → Write → Verify Block → Reconcile.
 - New rollbacks use a fresh CLI entry (type `fix`).
 - Cross-reference tasks with `See TODO: <label>`.
 - Fenced code only for multi-line output; otherwise inline.
-- Timestamp Integrity: Never add or retain a future date header or timestamp; if an incorrect future timestamp is discovered, correct via CLI or adjust heading + verification date (see Timestamp Integrity section below).
-- Write Flag Ordering: If a write attempt still reports `CHANGES (dry-run)`, place `--write` before `--context` (Windows Git Bash can tokenize multi-line context causing a trailing `--write` to be lost).
-
-### Write Flag Reliability
-
-Dry-run first; then apply:
-
-1. Dry-run example:
-  ```bash
-  npm run repo:ops -- changelog write --type docs --summary "Add X" --context "$CTX"
-  ```
-  Output should include: `changelog write: CHANGES (dry-run)` and a plan.
-2. Apply example (prefer `--write` early):
-  ```bash
-  npm run repo:ops -- changelog write --write --type docs --summary "Add X" --context "$CTX"
-  ```
-  Output should include: `changelog write: APPLIED`.
-
-If you see `CHANGES (dry-run)` despite using `--write`:
-
-- Re-run with `--write` placed immediately after `write` subcommand.
-- Ensure `$CTX` was set via heredoc (Pattern A/B/C) and does not contain a stray literal `--write` string.
-- Confirm shell is not expanding newline characters into separate tokens that mask `--write`.
-
-Quick verification snippet (returns 0 when applied):
-```bash
-npm run repo:ops -- changelog write --write --type docs --summary Test --context "Just a test" | grep -q "APPLIED" && echo OK
-```
-
-Escalation: If write continues to fail, capture the full command echo with `set -x` (bash) and inspect tokenization; avoid manual edits while investigating.
 
 ### Command Reference
 
@@ -287,24 +257,6 @@ All other changes must be performed via the CLI.
 ## Logs
 
 ### [2025-11-13]
-
-#### 2025-11-13 23:09:45 docs: Cleanup
-
-**Problem/Context**: Finalize CHANGELOG cleanup actions:
-
-**Changes Made**:
-
-1. <file path> (lines X-Y): <What changed and why>
-2. <file path> (lines A-B): <What changed and why>
-
-**Architecture Notes**: <Patterns/decisions>
-
-**Files Changed**: <List files with line counts>
-
-**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
-
-**Impact**: <What this enables/fixes>
-
 
 #### 2025-11-13 23:03:00 docs/guidance+cli: Polish multiline context guidance; add newline validator & workflow example
 

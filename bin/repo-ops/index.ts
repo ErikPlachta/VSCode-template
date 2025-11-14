@@ -430,6 +430,12 @@ const main = (): void => {
             const summary =
               sumIdx !== -1 ? rest[sumIdx + 1] : "Describe the change";
             const context = ctxIdx !== -1 ? rest[ctxIdx + 1] : undefined;
+            // Newline validation: warn if literal \n sequences appear (suggesting ANSI C quoting misuse)
+            if (context && /\\n/.test(context) && !/\n/.test(context.replace(/\\n/g, ""))) {
+              console.warn(
+                "warning: context contains literal \\n escapes; use heredoc or external file for real newlines (see Multi-line Context guidance)."
+              );
+            }
             const block = scaffoldEntry(type, summary, context);
             console.log(block);
           };
@@ -456,6 +462,11 @@ const main = (): void => {
               console.error("changelog write: --summary is required");
               process.exitCode = 1;
               return;
+            }
+            if (context && /\\n/.test(context) && !/\n/.test(context.replace(/\\n/g, ""))) {
+              console.warn(
+                "warning: write context contains literal \\n sequences; they will not render as newlines. Use heredoc or external file."
+              );
             }
             const result = await writeEntry({
               type,
