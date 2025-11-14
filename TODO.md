@@ -90,7 +90,6 @@ Follow these guidelines to ensure effective task management:
 ### Current Action Items
 
 - [ ] P1: Validation Runtime Extraction (Phased)
-
   - [x] Phase 1: Inventory & Tag – enumerated runtime validation exports (agent/category/relationship/errors/reporting); added Phase 1 @remarks tags to each exported function in `src/types/userContext.types.ts`, `src/types/configValidation.ts`, `src/types/configRegistry.ts`.
   - [x] Phase 2: Parity Test Scaffold – added `tests/validation.parity.test.ts` (locks behavior for category + config validators, 38 passed, 1 skipped total suites now 39).
   - [x] Phase 3: Shared Module Completion (Category subset) – created `src/shared/validation/categoryValidation.ts` (extracted logic; delegation deferred to preserve types-only constraint).
@@ -99,9 +98,9 @@ Follow these guidelines to ensure effective task management:
   - [x] Phase 5: Multi-Agent Switch – migrated remaining agents to shared config validation; runtime removal deferred to Phase 6 enforcement.
   - [x] Phase 6: Enforcement Test – removed all runtime validator implementations from `src/types/**`; added `tests/types.purity.test.ts` scanning for forbidden validator names; updated affected imports to shared modules; test passing.
   - [x] Phase 7: Cleanup & Changelog – removed phased inline remarks across types; added verification changelog entry confirming tests (42 passed / 1 skipped) and purity intact.
-  - [ ] Phase 8: Post-Migration Audit – confirm no hardcoded business values introduced; validate agent isolation remains intact.
+  - [x] Phase 8: Post-Migration Audit – confirm no hardcoded business values introduced; validate agent isolation remains intact.
+    - Findings: No hardcoded category ids or business strings found in `src/shared/validation/**`; agent modules under `src/agent/**` only import their own `agent.config.ts` and do not import other agents. Orchestrator remains sole coordinator. Test suite remains green (44 passed, 1 skipped).
   - [ ] Phase 9: Coverage Review – ensure parity tests + new shared module maintain or improve coverage metrics.
-
 - [ ] P1: MCP Transport & Protocol Enforcement
   - [x] Ensure JSON-RPC 2.0 compliance end-to-end.
   - [x] Verify stdio is default transport; HTTP enabled only with `MCP_HTTP_ENABLED=true`.
@@ -114,6 +113,12 @@ Follow these guidelines to ensure effective task management:
     - [x] Integration: HTTP behind `MCP_HTTP_ENABLED=true` only; disabled by default
   - [x] Update documentation to reflect transport and protocol standards.
   - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
+- [ ] P1: Cache Directory Rename & Migration
+  - [ ] Rename root cache directory `usercontext-mcp-extension` to `.usercontext-mcp-extension` (leading dot for hidden semantics on Unix).
+  - [ ] Update all path references in source (`src/`), tests, and any docs mentioning the old name.
+  - [ ] Add migration cleanup script to remove old directory if present and copy/merge contents safely.
+  - [ ] Verify extension still initializes correctly after rename (compile + tests + fresh run scenario).
+  - [ ] Add CHANGELOG entry with verification block documenting migration.
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
   - [ ] Types: Complete comprehensive TSDoc for remaining configuration types (no placeholders).
   - [ ] Extract functions from `src/types/**` into `src/shared/**` (e.g., `setConfigItem`, `createDescriptorMap`, `_getConfig`, `getUserFacingConfig`).
@@ -218,7 +223,6 @@ Follow these guidelines to ensure effective task management:
     - [ ] Update documentation to reflect the new build process.
   - [ ] P1: Lint/Docs: Adopt TSDoc in `src`, keep JSDoc for `out`
     - [ ] P2: DOCS/BUILD: Adopt TSDoc in `bin/**` (currently mixed or implicit) and add enforcement rule (eslint-plugin-tsdoc) parity with `src/**`.
-  - [ ] P2: MCP Server: Rename root cache dir `usercontext-mcp-extension` to `.usercontext-mcp-extension` (leading dot), update all references and add migration cleanup script.
     - [ ] Add TSDoc module `@packageDocumentation` headers in each bin TypeScript file.
     - [ ] Add symbol-level docs for exported functions (repo-ops helpers, lock, integrity, fast map).
     - [ ] Update governance references to reflect completed adoption.

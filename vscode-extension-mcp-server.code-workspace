@@ -5,7 +5,7 @@
     }
   ],
   "settings": {
-    "cSpell.words": ["docblocks", "usercontext", "Retryable"]
+    "cSpell.words": ["docblocks", "prebuild", "Retryable", "usercontext"]
   },
   "launch": {
     "version": "0.2.0",

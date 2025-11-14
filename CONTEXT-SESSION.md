@@ -47,9 +47,9 @@ Formatting Conventions
 
 ## Current Focus Summary
 
-- High-level focus: Validation runtime extraction (types‑only enforcement) and governance tooling hardening.
-- Stabilization: Dynamic MCP tools registry & orchestrator bridge considered stable; maintain data‑driven descriptors and formatting isolation.
-- Compliance: Agent cleanup & TSDoc completeness continue in background (incremental, non‑blocking).
+- High-level focus: Validation runtime extraction — Phase 8 audit in progress; Phase 9 coverage next.
+- Stabilization: Dynamic MCP tools registry & orchestrator bridge stable; data‑driven descriptors and formatting isolation maintained.
+- Migration: Cache directory rename to `.usercontext-mcp-extension` staged in Current with migration script follow‑ups.
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
 - Keep quality gates green: build, tests, lint, docs, and health.
 
@@ -84,7 +84,7 @@ Risks & Mitigations:
 - Risk: Test brittleness due to internal refactor. Mitigation: Parity tests target public surface only.
 - Risk: Enforcement false positives on type guards. Mitigation: Pattern-match `function is*(` returning `value is` type.
 
-Current Status: Phase 0 (Baseline) — Shared scaffold exists, unused; inventory not yet executed. TODO updated with full phased plan.
+Current Status: Phase 7 complete; Phase 8 (Post‑Migration Audit) in progress; Phase 9 (Coverage Review) pending. TODO updated accordingly.
 
 ### Recently Completed & Stable
 
@@ -106,11 +106,11 @@ Current Status: Phase 0 (Baseline) — Shared scaffold exists, unused; inventory
 
 ### Next Immediate Actions
 
-1. Concurrency lock completed for changelog writes (added hash chain + atomic workflow).
-2. Plan incremental map refresh optimization (performance gate) – pending.
-3. Implement diff & rebuild fallback after lock stabilization.
-4. JSON-RPC tests already green; next: TypeDoc external link warnings regression guard.
-5. Begin Phase 1 inventory for validation extraction after tooling tasks finalize.
+1. Finish Phase 8 audit: confirm no hardcoded business values; validate agent isolation across validators/agents.
+2. Start Phase 9: add targeted tests to sustain/improve coverage for shared validators; report metrics.
+3. Implement cache directory rename and migration script; update references and verify initialization.
+4. Optional: Add `reindex` CLI enhancement (non‑mutating index rebuild) in repo‑ops.
+5. Monitor docs lint and TypeDoc external link warnings; add regression guard as needed.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

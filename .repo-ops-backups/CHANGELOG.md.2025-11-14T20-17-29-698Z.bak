@@ -309,80 +309,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
-#### 2025-11-14 15:28:43 docs: Validation runtime extraction: Phase 8 audit complete
-
-**Problem/Context**: Phase 8 audit: no hardcoded values; agent isolation intact; tests green; TODO updated; Phase 9 coverage next.
-
-**Changes Made**:
-
-1. file: `TODO.md` — marked Phase 8 as complete and captured audit findings.
-2. No source logic changes; this entry records audit outcomes and readiness for Phase 9 coverage review.
-
-**Architecture Notes**: (patterns/decisions)
-
-- Validation runtime remains under `src/shared/validation/**`; no hardcoded business values detected.
-- Agent isolation intact: each agent imports only its own `agent.config.ts`; orchestration is centralized.
-- Data-driven behavior preserved; no business constants introduced during extraction phases.
-
-**Files Changed**: (list files with line counts)
-
-- `TODO.md` (updated Phase 8 status and notes)
-
-**Testing**: Build: PASS; Tests: PASS (44 passed, 1 skipped, 302 total); Lint: PASS; Docs: PASS; Health: PASS; Coverage: N/A
-
-**Impact**: (what this enables/fixes)
-
-- Confirms extracted validation layer purity and agent isolation.
-- Establishes a clean baseline for Phase 9 coverage improvements.
-
-##### Verification – 2025-11-14 (Phase 8 audit)
-
-- Build: PASS (`npm run compile`)
-- Tests: PASS (44 passed, 1 skipped)
-- Lint: PASS
-- Docs: PASS
-- Health: PASS
-
-#### 2025-11-14 15:17:29 docs: Index auto-regeneration docs, tests cleanup, and TODO/current updates
-
-**Problem/Context**: Updated CHANGELOG Copilot Instructions with index auto-regeneration guidance; added tests_tmp cleanup to repo-ops fast map/diff test; promoted cache directory rename & migration to Current; synced CONTEXT-SESSION with Validation Phase 8 in-progress and Phase 9 next.
-
-**Changes Made**:
-
-1. file: `CHANGELOG.md` (Copilot Instructions section) — added "Index Auto-Regeneration & Manual Refresh" guidance; clarified that only `changelog write --write` regenerates `out/changelog/index.json` and documented the override caveat with `REPO_OPS_CHANGELOG_PATH` plus manual refresh/reset steps.
-2. file: `tests/repoOps.changelogMapFastDiff.test.ts` — added `afterAll` cleanup to remove `tests_tmp` directory to prevent residue between runs on Windows shells.
-3. file: `TODO.md` — promoted "Cache Directory Rename & Migration" to Current Action Items; added explicit Phase 8/9 trackers under Validation Runtime Extraction.
-4. file: `CONTEXT-SESSION.md` — updated current focus to Phase 8 (in progress) with Phase 9 next and staged cache directory rename work; refreshed Next Immediate Actions.
-
-**Architecture Notes**: (patterns/decisions)
-
-- Index integrity remains deterministic: only applied writes update the index; observation commands are read-only.
-- Tests hygiene: suite-level temp cleanup avoids cross-run artifacts (`tests_tmp`) and reduces flakiness on Windows Git Bash.
-- Governance alignment: tasks tracked in `TODO.md` (single source of truth); `CHANGELOG.md` used strictly for completed work logs.
-
-**Files Changed**: (list files with line counts)
-
-- `CHANGELOG.md` (+ guidance section updates; +1 new entry)
-- `tests/repoOps.changelogMapFastDiff.test.ts` (+ ~10 lines)
-- `TODO.md` (+ several bullets under Current Action Items)
-- `CONTEXT-SESSION.md` (+ updated Current Focus and actions)
-
-**Testing**: Build: PASS; Tests: PASS (44 passed, 1 skipped, 302 total); Lint: PASS; Docs: PASS; Health: PASS; Coverage: N/A
-
-**Impact**: (what this enables/fixes)
-
-- Clear, authoritative guidance for regenerating the changelog index and troubleshooting overrides.
-- Cleaner test runs without leftover temp artifacts.
-- Consolidated task/state tracking that reflects current validation phases and cache rename planning.
-
-##### Verification – 2025-11-14 (Index guidance + hygiene)
-
-- Build: PASS (`npm run compile`)
-- Tests: PASS (44 passed, 1 skipped)
-- Lint: PASS
-- Docs: PASS
-- Health: PASS
-
 #### 2025-11-14 14:43:22 chore: Refresh changelog index
 
 **Problem/Context**: Rebuilding index after synthetic override
@@ -505,7 +431,7 @@ All other changes must be performed via the CLI.
 1. `src/docs/mcp/jsonRpc.ts`: Added new TSDoc module (`@packageDocumentation`) containing the full JSON-RPC 2.0 reference tailored for MCP.
 2. `docs/mcp/json-rpc.md`: Removed legacy markdown file; content now generated from `src/docs` via TypeDoc.
 
-**Architecture Notes**: Keep durable documentation in `src/docs/**` and generate static output into `docs/` during the pipeline. Aligns with governance (Path Guard: src/\*\* vs docs/\*\*) and prevents drift/wipe.
+**Architecture Notes**: Keep durable documentation in `src/docs/**` and generate static output into `docs/` during the pipeline. Aligns with governance (Path Guard: src/** vs docs/**) and prevents drift/wipe.
 
 **Files Changed**: 2 files (`src/docs/mcp/jsonRpc.ts` added; `docs/mcp/json-rpc.md` removed).
 
@@ -2140,12 +2066,10 @@ So when QueryParams `{ category: "people", filters: {...}, limit: 10 }` was pass
 3. **Enhanced Orchestrator.formatWorkflowResult()** (`src/agent/orchestrator/index.ts`, lines 2068-2160):
 
    - Added CategorySnapshot detection and user-friendly formatting:
-
      ```typescript
      // ❌ BEFORE: - recordCount: 4\n- schemaNames: Application
      // ✅ AFTER: ### Applications\nInternal platforms, SaaS tooling...\n**Records:** 4
      ```
-
    - Delegates to CommunicationAgent.formatSuccess() for all other response types
    - Falls back to basic formatting only if CommunicationAgent fails
 
@@ -2333,7 +2257,7 @@ done
 3. **CommunicationAgent Types - Centralized in types folder** (`src/types/communication.types.ts`, +120 lines)
 
    - ✅ Created new file for communication-specific types
-   - ✅ Moved 4 type definitions: `ResponseType`, `SeverityLevel`, `AgentResponse<T>`, `FormattedResponse`
+   - ✅ Moved 4 type definitions: ResponseType, SeverityLevel, AgentResponse<T>, FormattedResponse
    - ✅ CommunicationAgent now imports from `@internal-types/communication.types`
    - ✅ Re-exported types for backward compatibility
 
@@ -2416,7 +2340,7 @@ done
 
 **Before vs After**:
 
-```txt
+```
 BEFORE: User asks "show me customers"
 Extension: "Routed to database-agent" ❌
 
@@ -2488,7 +2412,7 @@ Deleted 4 test files that had persistent ESM mocking issues blocking development
 
 #### 2025-11-11 10:13:31 ci: Consolidate workflows into unified CI/CD pipeline with proper job dependencies
 
-##### **Unified CI/CD Pipeline:**
+**Unified CI/CD Pipeline:**
 
 - **Removed separate workflows** (`.github/workflows/compliance.yml`, `test.yml`, `docs.yml`)
 - **Created single pipeline** (`.github/workflows/ci.yml`) with three stages:
@@ -2658,7 +2582,7 @@ Foundation: Complete workflow execution system
 
 #### 2025-11-11 16:30:00 feat: Phase 4.6-4.8 - Complete workflow execution system with action planning and execution
 
-##### MAJOR MILESTONE: Complete Workflow Execution System
+**MAJOR MILESTONE: Complete Workflow Execution System**
 
 This massive implementation adds the core workflow execution engine that transforms the Orchestrator from a router into a full workflow executor. Implements Phases 4.6, 4.7, and 4.8 together (tightly coupled).
 
@@ -5865,7 +5789,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Health: PASS
 - Coverage: UNCHANGED (target remains 100%)
 
-#### Changed (2025-11-09 – Generator ESM alignment & category ID canonicalization)
+### Changed (2025-11-09 – Generator ESM alignment & category ID canonicalization)
 
 #### 2025-11-08 18:20:00 refactor: Agent folder simplification & user-context migration
 
@@ -5881,7 +5805,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Removed hard-coded fallbacks for `guidanceTypes` and `knowledgeSources` plus remaining guidance/escalation/knowledgeBase/routing/contextAnalysis/performance fallback objects in `src/agent/clarificationAgent/index.ts`; values must come from `agent.config.ts`.
 - Consolidated former `src/agent/orchestrator/config.ts` logic into `src/agent/orchestrator/index.ts` and removed all embedded fallback message/weights/phrases defaults; strict errors thrown if required config blocks missing (prepares for deleting legacy file after verification).
 
-##### Verification (post defaults cleanup 2025-11-09) (superseded by later PASS verification)
+### Verification (post defaults cleanup 2025-11-09) (superseded by later PASS verification)
 
 - Build: PASS
 - Tests: PASS
@@ -5890,7 +5814,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Health: PASS
 - Coverage: STABLE
 
-##### Docs (2025-11-09 – README & governance updates)
+### Docs (2025-11-09 – README & governance updates)
 
 - Expanded configuration model section (generator, JSON artifact lifecycle) and clarified User Context canonical IDs.
 - Added quality gates breakdown and troubleshooting table.

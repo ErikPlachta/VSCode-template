@@ -309,40 +309,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
-#### 2025-11-14 15:28:43 docs: Validation runtime extraction: Phase 8 audit complete
-
-**Problem/Context**: Phase 8 audit: no hardcoded values; agent isolation intact; tests green; TODO updated; Phase 9 coverage next.
-
-**Changes Made**:
-
-1. file: `TODO.md` — marked Phase 8 as complete and captured audit findings.
-2. No source logic changes; this entry records audit outcomes and readiness for Phase 9 coverage review.
-
-**Architecture Notes**: (patterns/decisions)
-
-- Validation runtime remains under `src/shared/validation/**`; no hardcoded business values detected.
-- Agent isolation intact: each agent imports only its own `agent.config.ts`; orchestration is centralized.
-- Data-driven behavior preserved; no business constants introduced during extraction phases.
-
-**Files Changed**: (list files with line counts)
-
-- `TODO.md` (updated Phase 8 status and notes)
-
-**Testing**: Build: PASS; Tests: PASS (44 passed, 1 skipped, 302 total); Lint: PASS; Docs: PASS; Health: PASS; Coverage: N/A
-
-**Impact**: (what this enables/fixes)
-
-- Confirms extracted validation layer purity and agent isolation.
-- Establishes a clean baseline for Phase 9 coverage improvements.
-
-##### Verification – 2025-11-14 (Phase 8 audit)
-
-- Build: PASS (`npm run compile`)
-- Tests: PASS (44 passed, 1 skipped)
-- Lint: PASS
-- Docs: PASS
-- Health: PASS
-
 #### 2025-11-14 15:17:29 docs: Index auto-regeneration docs, tests cleanup, and TODO/current updates
 
 **Problem/Context**: Updated CHANGELOG Copilot Instructions with index auto-regeneration guidance; added tests_tmp cleanup to repo-ops fast map/diff test; promoted cache directory rename & migration to Current; synced CONTEXT-SESSION with Validation Phase 8 in-progress and Phase 9 next.
