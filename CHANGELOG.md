@@ -39,6 +39,32 @@ Operational Rules
 - Use backticks for paths, commands, and identifiers. Wrap code/results in fenced blocks only when necessary.
 - Linkages: Reference related `TODO.md` items and `CONTEXT-SESSION.md` focus when relevant.
 
+### Workflows (CHANGELOG ↔ TODO Synchronization)
+
+Maintain a closed-loop between planning (`TODO.md`) and logging (`CHANGELOG.md`). Each change moves through these explicit stages:
+
+1. Plan / Update: Define or modify the task/phase in `TODO.md` (set status). Do not log prospective work.
+2. Implement: Perform scoped edits—avoid mixing unrelated tasks.
+3. Verify: Run gates (`npm run compile && npm run test` + optional `npm run prebuild`).
+4. Log: Add a new CHANGELOG entry referencing the corresponding task/phase (concise cross‑reference, no duplication of task text).
+5. Verification Block: Record gate outcomes immediately under the entry.
+6. Reconcile: Update `TODO.md` (mark complete or advance). Never retro-edit prior log entries beyond typo fixes.
+
+Rules:
+
+- Future tasks never appear in CHANGELOG; only completed, verified work.
+- Multi-phase efforts: each phase gets its own entry + verification.
+- Scope change mid-flight: revise `TODO.md` first, then proceed with an accurately scoped log entry.
+- Rollbacks: create a new entry detailing reversal; do not alter the original.
+- Cross-references: cite the task label (e.g., “See TODO: Validation Runtime Extraction – Phase 3”) without copying its full description.
+
+Pre-Log Checklist:
+
+- Task/phase exists in `TODO.md`.
+- Gates just ran and results are known.
+- Entry is self-contained (no “above/below” references).
+- Verification block matches actual outcomes.
+
 Workflow
 
 1. Implement change (code/docs/tests) with focused commits.
