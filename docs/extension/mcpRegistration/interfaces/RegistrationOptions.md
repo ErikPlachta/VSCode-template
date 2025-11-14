@@ -6,7 +6,7 @@
 
 # Interface: RegistrationOptions
 
-Defined in: [src/extension/mcpRegistration.ts:222](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L222)
+Defined in: [src/extension/mcpRegistration.ts:222](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L222)
 
 Registration options supporting both stdio and HTTP servers.
 
@@ -16,7 +16,7 @@ Registration options supporting both stdio and HTTP servers.
 
 > `optional` **args**: `string`[]
 
-Defined in: [src/extension/mcpRegistration.ts:230](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L230)
+Defined in: [src/extension/mcpRegistration.ts:230](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L230)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/extension/mcpRegistration.ts:230](https://github.com/ErikPlacht
 
 > `optional` **command**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L229)
+Defined in: [src/extension/mcpRegistration.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L229)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/extension/mcpRegistration.ts:229](https://github.com/ErikPlacht
 
 > `optional` **env**: `Record`\<`string`, `string`\>
 
-Defined in: [src/extension/mcpRegistration.ts:231](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L231)
+Defined in: [src/extension/mcpRegistration.ts:231](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L231)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/extension/mcpRegistration.ts:231](https://github.com/ErikPlacht
 
 > **id**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L223)
+Defined in: [src/extension/mcpRegistration.ts:223](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L223)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/extension/mcpRegistration.ts:223](https://github.com/ErikPlacht
 
 > `optional` **includeAuthHeader**: `boolean`
 
-Defined in: [src/extension/mcpRegistration.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L226)
+Defined in: [src/extension/mcpRegistration.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L226)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/extension/mcpRegistration.ts:226](https://github.com/ErikPlacht
 
 > `optional` **token**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L227)
+Defined in: [src/extension/mcpRegistration.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L227)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/extension/mcpRegistration.ts:227](https://github.com/ErikPlacht
 
 > **type**: `"http"` \| `"stdio"`
 
-Defined in: [src/extension/mcpRegistration.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L233)
+Defined in: [src/extension/mcpRegistration.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L233)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [src/extension/mcpRegistration.ts:233](https://github.com/ErikPlacht
 
 > `optional` **url**: `string`
 
-Defined in: [src/extension/mcpRegistration.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L225)
+Defined in: [src/extension/mcpRegistration.ts:225](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L225)

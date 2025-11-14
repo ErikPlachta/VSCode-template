@@ -72,6 +72,10 @@ async function run(): Promise<void> {
       src: path.join(generatedBase, "orchestration", "README.md"),
       dest: path.join(docsDir, "concepts", "orchestration.md"),
     },
+    {
+      src: path.join(generatedBase, "mcp", "jsonRpc", "README.md"),
+      dest: path.join(docsDir, "mcp", "json-rpc.md"),
+    },
   ];
   for (const { src, dest } of structuredPromotions) {
     try {

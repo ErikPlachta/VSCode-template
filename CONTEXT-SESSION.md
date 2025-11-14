@@ -109,6 +109,8 @@ Current Status: Phase 0 (Baseline) — Shared scaffold exists, unused; inventory
 1. Commit updated TODO with phased extraction plan.
 2. Begin Inventory & Tag (Phase 1) in next session.
 3. Scaffold parity tests prior to code migration (Phase 2).
+4. Consolidate JSON-RPC into a single dispatcher and add stdio/HTTP tests (see TODO).
+5. Resolve TypeDoc external link warnings and add a regression test for JSON-RPC page promotion.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

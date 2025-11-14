@@ -6,7 +6,7 @@
 
 # Interface: ApplicationFacingConfig
 
-Defined in: [src/types/agentConfig.ts:345](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L345)
+Defined in: [src/types/agentConfig.ts:345](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L345)
 
 Technical/application-facing metadata for operators and docs.
 
@@ -41,7 +41,7 @@ throughput: 100,
 
 > `optional` **capabilities**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:348](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L348)
+Defined in: [src/types/agentConfig.ts:348](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L348)
 
 ***
 
@@ -49,7 +49,7 @@ Defined in: [src/types/agentConfig.ts:348](https://github.com/ErikPlachta/vscode
 
 > `optional` **dependencies**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:347](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L347)
+Defined in: [src/types/agentConfig.ts:347](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L347)
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: [src/types/agentConfig.ts:347](https://github.com/ErikPlachta/vscode
 
 > `optional` **errorHandling**: [`ErrorHandlingConfig`](ErrorHandlingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:350](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L350)
+Defined in: [src/types/agentConfig.ts:350](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L350)
 
 ***
 
@@ -65,7 +65,7 @@ Defined in: [src/types/agentConfig.ts:350](https://github.com/ErikPlachta/vscode
 
 > `optional` **monitoring**: [`MonitoringConfig`](MonitoringConfig.md)
 
-Defined in: [src/types/agentConfig.ts:351](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L351)
+Defined in: [src/types/agentConfig.ts:351](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L351)
 
 ***
 
@@ -73,7 +73,7 @@ Defined in: [src/types/agentConfig.ts:351](https://github.com/ErikPlachta/vscode
 
 > `optional` **performance**: [`PerformanceConfig`](PerformanceConfig.md)
 
-Defined in: [src/types/agentConfig.ts:349](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L349)
+Defined in: [src/types/agentConfig.ts:349](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L349)
 
 ***
 
@@ -81,4 +81,4 @@ Defined in: [src/types/agentConfig.ts:349](https://github.com/ErikPlachta/vscode
 
 > `optional` **technicalDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:346](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L346)
+Defined in: [src/types/agentConfig.ts:346](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L346)

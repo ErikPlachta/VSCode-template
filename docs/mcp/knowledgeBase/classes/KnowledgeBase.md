@@ -6,7 +6,7 @@
 
 # Class: KnowledgeBase
 
-Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/knowledgeBase.ts#L30)
+Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/knowledgeBase.ts#L30)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-
 
 > **indexDocument**(`document`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/knowledgeBase.ts#L38)
+Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/knowledgeBase.ts#L38)
 
 indexDocument function.
 
@@ -46,7 +46,7 @@ document parameter.
 
 > **indexDocuments**(`documents`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/knowledgeBase.ts#L47)
+Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/knowledgeBase.ts#L47)
 
 indexDocuments function.
 
@@ -68,7 +68,7 @@ documents parameter.
 
 > **query**(`term`, `limit?`): [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/mcp/knowledgeBase.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/knowledgeBase.ts#L61)
+Defined in: [src/mcp/knowledgeBase.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/knowledgeBase.ts#L61)
 
 Performs a keyword-based query over indexed knowledge documents.
 Extracts simple word tokens (>=3 chars, alphanumeric or hyphen) from the

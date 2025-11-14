@@ -8,7 +8,7 @@
 
 > **initializeAnalytics**(): `Promise`\<[`AgentUsageAnalytics`](../../agentAnalytics/classes/AgentUsageAnalytics.md)\>
 
-Defined in: [src/shared/analyticsIntegration.ts:280](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/analyticsIntegration.ts#L280)
+Defined in: [src/shared/analyticsIntegration.ts:280](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/analyticsIntegration.ts#L280)
 
 Initializes analytics for the application based on configuration.
 

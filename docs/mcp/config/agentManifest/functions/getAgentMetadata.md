@@ -8,7 +8,7 @@
 
 > **getAgentMetadata**(`agentId`): [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/config/agentManifest.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/config/agentManifest.ts#L71)
+Defined in: [src/mcp/config/agentManifest.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/config/agentManifest.ts#L71)
 
 Retrieve manifest metadata for a given agent identifier.
 

@@ -8,6 +8,6 @@
 
 > `const` **DEFAULT\_STOP\_WORDS**: `Set`\<`string`\>
 
-Defined in: [src/shared/textProcessing.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/textProcessing.ts#L37)
+Defined in: [src/shared/textProcessing.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/textProcessing.ts#L37)
 
 Default stop words commonly excluded from keyword analysis.

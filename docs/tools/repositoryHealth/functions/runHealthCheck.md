@@ -8,7 +8,7 @@
 
 > **runHealthCheck**(): `Promise`\<`void`\>
 
-Defined in: [src/tools/repositoryHealth.ts:526](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/tools/repositoryHealth.ts#L526)
+Defined in: [src/tools/repositoryHealth.ts:526](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/tools/repositoryHealth.ts#L526)
 
 CLI-friendly runner that executes all checks, prints a summary, and writes the markdown report.
 

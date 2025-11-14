@@ -8,7 +8,7 @@
 
 > **CategoryRecord** = [`PersonRecord`](../interfaces/PersonRecord.md) \| [`DepartmentRecord`](../interfaces/DepartmentRecord.md) \| [`ApplicationRecord`](../interfaces/ApplicationRecord.md) \| [`CompanyPolicyRecord`](../interfaces/CompanyPolicyRecord.md) \| [`CompanyResourceRecord`](../interfaces/CompanyResourceRecord.md) \| [`BaseRecord`](../interfaces/BaseRecord.md)
 
-Defined in: [src/types/userContext.types.ts:199](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/userContext.types.ts#L199)
+Defined in: [src/types/userContext.types.ts:199](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L199)
 
 Union type for category records in the current UserContext data model.
 

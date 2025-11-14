@@ -292,24 +292,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
-#### 2025-11-14 12:26:05 docs: Docs: generate and promote JSON-RPC page; verify
-
-**Problem/Context**: Docs regenerated after removing tsdoc.json. Promoted generated JSON-RPC page to a stable path.
-
-**Changes Made**:
-
-1. <file path> (lines X-Y): <What changed and why>
-2. <file path> (lines A-B): <What changed and why>
-
-**Architecture Notes**: <Patterns/decisions>
-
-**Files Changed**: <List files with line counts>
-
-**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
-
-**Impact**: <What this enables/fixes>
-
-
 #### 2025-11-14 11:29:07 docs: Move JSON-RPC reference to src/docs; convert to TSDoc
 
 **Problem/Context**: `docs/` is generated and wiped by the docs pipeline. The JSON-RPC 2.0 reference should live in source so TypeDoc can generate it reliably.

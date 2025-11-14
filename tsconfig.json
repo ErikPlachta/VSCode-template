@@ -29,7 +29,7 @@
     "out",
     "tests",
     "bin/tests/**",
-    "jest.config.js",
+    "jest.config.ts",
     "*.config.js"
   ]
 }

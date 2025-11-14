@@ -8,7 +8,7 @@
 
 > **formatValidationErrorsImpl**(`errors`, `maxErrors`): `string`
 
-Defined in: [src/shared/validation/categoryValidation.ts:296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/validation/categoryValidation.ts#L296)
+Defined in: [src/shared/validation/categoryValidation.ts:296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/validation/categoryValidation.ts#L296)
 
 Format validation errors (same semantics as original).
 

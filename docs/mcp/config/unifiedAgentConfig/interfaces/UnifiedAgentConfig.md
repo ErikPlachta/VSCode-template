@@ -6,7 +6,7 @@
 
 # Interface: UnifiedAgentConfig
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/config/unifiedAgentConfig.ts#L82)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:82](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/config/unifiedAgentConfig.ts#L82)
 
 Complete agent configuration combining all aspects
 
@@ -16,7 +16,7 @@ Complete agent configuration combining all aspects
 
 > **execution**: [`ExecutionProfile`](ExecutionProfile.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/config/unifiedAgentConfig.ts#L84)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/config/unifiedAgentConfig.ts#L84)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:84](https://github.com/ErikPla
 
 > **metadata**: [`RichMetadata`](RichMetadata.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/config/unifiedAgentConfig.ts#L85)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/config/unifiedAgentConfig.ts#L85)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:85](https://github.com/ErikPla
 
 > **orchestration**: [`OrchestrationProfile`](OrchestrationProfile.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/mcp/config/unifiedAgentConfig.ts#L83)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/config/unifiedAgentConfig.ts#L83)

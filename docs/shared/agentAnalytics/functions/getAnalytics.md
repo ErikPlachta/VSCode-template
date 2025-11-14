@@ -8,7 +8,7 @@
 
 > **getAnalytics**(`config`): [`AgentUsageAnalytics`](../classes/AgentUsageAnalytics.md)
 
-Defined in: [src/shared/agentAnalytics.ts:464](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L464)
+Defined in: [src/shared/agentAnalytics.ts:464](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L464)
 
 Gets the global analytics instance.
 

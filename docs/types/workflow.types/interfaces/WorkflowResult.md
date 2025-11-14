@@ -6,7 +6,7 @@
 
 # Interface: WorkflowResult
 
-Defined in: [src/types/workflow.types.ts:351](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L351)
+Defined in: [src/types/workflow.types.ts:351](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L351)
 
 Workflow result returned to the caller.
 
@@ -18,7 +18,7 @@ Contains final state and formatted response.
 
 > `optional` **data**: `unknown`
 
-Defined in: [src/types/workflow.types.ts:356](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L356)
+Defined in: [src/types/workflow.types.ts:356](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L356)
 
 Result data (if completed)
 
@@ -28,7 +28,7 @@ Result data (if completed)
 
 > `optional` **error**: `Error`
 
-Defined in: [src/types/workflow.types.ts:359](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L359)
+Defined in: [src/types/workflow.types.ts:359](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L359)
 
 Error (if failed)
 
@@ -38,7 +38,7 @@ Error (if failed)
 
 > `optional` **formatted**: `object`
 
-Defined in: [src/types/workflow.types.ts:362](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L362)
+Defined in: [src/types/workflow.types.ts:362](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L362)
 
 Formatted response for user display
 
@@ -56,7 +56,7 @@ Formatted response for user display
 
 > `optional` **metrics**: [`PerformanceMetrics`](PerformanceMetrics.md)
 
-Defined in: [src/types/workflow.types.ts:368](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L368)
+Defined in: [src/types/workflow.types.ts:368](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L368)
 
 Performance metrics
 
@@ -66,7 +66,7 @@ Performance metrics
 
 > **state**: [`WorkflowState`](../type-aliases/WorkflowState.md)
 
-Defined in: [src/types/workflow.types.ts:353](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L353)
+Defined in: [src/types/workflow.types.ts:353](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L353)
 
 Final workflow state
 
@@ -76,6 +76,6 @@ Final workflow state
 
 > **workflowId**: `string`
 
-Defined in: [src/types/workflow.types.ts:371](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/workflow.types.ts#L371)
+Defined in: [src/types/workflow.types.ts:371](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L371)
 
 Workflow identifier for diagnostics

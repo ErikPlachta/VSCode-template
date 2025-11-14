@@ -6,7 +6,7 @@
 
 # Interface: GrayMatterFile\<T\>
 
-Defined in: [src/types/external.d.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L8)
+Defined in: [src/types/external.d.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/external.d.ts#L8)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [src/types/external.d.ts:8](https://github.com/ErikPlachta/vscode-ex
 
 > **content**: `string`
 
-Defined in: [src/types/external.d.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L10)
+Defined in: [src/types/external.d.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/external.d.ts#L10)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/types/external.d.ts:10](https://github.com/ErikPlachta/vscode-e
 
 > **data**: `T`
 
-Defined in: [src/types/external.d.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L9)
+Defined in: [src/types/external.d.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/external.d.ts#L9)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [src/types/external.d.ts:9](https://github.com/ErikPlachta/vscode-ex
 
 > `optional` **excerpt**: `string`
 
-Defined in: [src/types/external.d.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L11)
+Defined in: [src/types/external.d.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/external.d.ts#L11)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/types/external.d.ts:11](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **language**: `string`
 
-Defined in: [src/types/external.d.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L16)
+Defined in: [src/types/external.d.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/external.d.ts#L16)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/types/external.d.ts:16](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **matter**: `string`
 
-Defined in: [src/types/external.d.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L17)
+Defined in: [src/types/external.d.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/external.d.ts#L17)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [src/types/external.d.ts:17](https://github.com/ErikPlachta/vscode-e
 
 > **orig**: `object`
 
-Defined in: [src/types/external.d.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/external.d.ts#L12)
+Defined in: [src/types/external.d.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/external.d.ts#L12)
 
 #### content
 

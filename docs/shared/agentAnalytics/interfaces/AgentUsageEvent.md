@@ -6,7 +6,7 @@
 
 # Interface: AgentUsageEvent
 
-Defined in: [src/shared/agentAnalytics.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L19)
+Defined in: [src/shared/agentAnalytics.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L19)
 
 Agent usage event data structure.
 
@@ -16,7 +16,7 @@ Agent usage event data structure.
 
 > **agentName**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L25)
+Defined in: [src/shared/agentAnalytics.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L25)
 
 Name of the agent that was invoked.
 
@@ -26,7 +26,7 @@ Name of the agent that was invoked.
 
 > `optional` **errorMessage**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L37)
+Defined in: [src/shared/agentAnalytics.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L37)
 
 Error message if execution failed.
 
@@ -36,7 +36,7 @@ Error message if execution failed.
 
 > **executionTime**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L31)
+Defined in: [src/shared/agentAnalytics.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L31)
 
 Duration of execution in milliseconds.
 
@@ -46,7 +46,7 @@ Duration of execution in milliseconds.
 
 > **id**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L21)
+Defined in: [src/shared/agentAnalytics.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L21)
 
 Unique identifier for the event.
 
@@ -56,7 +56,7 @@ Unique identifier for the event.
 
 > **inputSize**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L33)
+Defined in: [src/shared/agentAnalytics.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L33)
 
 Input parameters passed to the agent.
 
@@ -66,7 +66,7 @@ Input parameters passed to the agent.
 
 > `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/shared/agentAnalytics.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L41)
+Defined in: [src/shared/agentAnalytics.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L41)
 
 Additional context metadata.
 
@@ -76,7 +76,7 @@ Additional context metadata.
 
 > **method**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L27)
+Defined in: [src/shared/agentAnalytics.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L27)
 
 Method or operation that was called.
 
@@ -86,7 +86,7 @@ Method or operation that was called.
 
 > **outputSize**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L35)
+Defined in: [src/shared/agentAnalytics.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L35)
 
 Output data size in bytes.
 
@@ -96,7 +96,7 @@ Output data size in bytes.
 
 > **status**: [`AgentExecutionStatus`](../enumerations/AgentExecutionStatus.md)
 
-Defined in: [src/shared/agentAnalytics.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L29)
+Defined in: [src/shared/agentAnalytics.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L29)
 
 Execution status of the agent call.
 
@@ -106,7 +106,7 @@ Execution status of the agent call.
 
 > **timestamp**: `Date`
 
-Defined in: [src/shared/agentAnalytics.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L23)
+Defined in: [src/shared/agentAnalytics.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L23)
 
 Timestamp when the event occurred.
 
@@ -116,6 +116,6 @@ Timestamp when the event occurred.
 
 > `optional` **userId**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/agentAnalytics.ts#L39)
+Defined in: [src/shared/agentAnalytics.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L39)
 
 User or session identifier.

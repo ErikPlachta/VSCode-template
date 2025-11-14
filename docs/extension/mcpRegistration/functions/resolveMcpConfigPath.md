@@ -8,7 +8,7 @@
 
 > **resolveMcpConfigPath**(`options?`): `string`
 
-Defined in: [src/extension/mcpRegistration.ts:128](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/extension/mcpRegistration.ts#L128)
+Defined in: [src/extension/mcpRegistration.ts:128](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpRegistration.ts#L128)
 
 Resolve the full path to the MCP configuration file (mcp.json) for the current VS Code build.
 

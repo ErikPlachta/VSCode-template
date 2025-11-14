@@ -6,7 +6,7 @@
 
 # Interface: ValidationWarning
 
-Defined in: [src/shared/config/agentConfigValidation.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/config/agentConfigValidation.ts#L39)
+Defined in: [src/shared/config/agentConfigValidation.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/config/agentConfigValidation.ts#L39)
 
 Non-blocking validation warning (subset of ValidationError fields).
 
@@ -20,7 +20,7 @@ Non-blocking validation warning (subset of ValidationError fields).
 
 > `optional` **actual**: `unknown`
 
-Defined in: [src/shared/config/agentConfigValidation.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/config/agentConfigValidation.ts#L33)
+Defined in: [src/shared/config/agentConfigValidation.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/config/agentConfigValidation.ts#L33)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [src/shared/config/agentConfigValidation.ts:33](https://github.com/E
 
 > **category**: `"schema"` \| `"type"` \| `"business_rule"` \| `"compatibility"`
 
-Defined in: [src/shared/config/agentConfigValidation.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/config/agentConfigValidation.ts#L29)
+Defined in: [src/shared/config/agentConfigValidation.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/config/agentConfigValidation.ts#L29)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: [src/shared/config/agentConfigValidation.ts:29](https://github.com/E
 
 > `optional` **expected**: `unknown`
 
-Defined in: [src/shared/config/agentConfigValidation.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/config/agentConfigValidation.ts#L32)
+Defined in: [src/shared/config/agentConfigValidation.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/config/agentConfigValidation.ts#L32)
 
 #### Inherited from
 
@@ -56,7 +56,7 @@ Defined in: [src/shared/config/agentConfigValidation.ts:32](https://github.com/E
 
 > **level**: `"warning"`
 
-Defined in: [src/shared/config/agentConfigValidation.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/config/agentConfigValidation.ts#L40)
+Defined in: [src/shared/config/agentConfigValidation.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/config/agentConfigValidation.ts#L40)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/shared/config/agentConfigValidation.ts:40](https://github.com/E
 
 > **message**: `string`
 
-Defined in: [src/shared/config/agentConfigValidation.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/config/agentConfigValidation.ts#L31)
+Defined in: [src/shared/config/agentConfigValidation.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/config/agentConfigValidation.ts#L31)
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ Defined in: [src/shared/config/agentConfigValidation.ts:31](https://github.com/E
 
 > **path**: `string`
 
-Defined in: [src/shared/config/agentConfigValidation.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/shared/config/agentConfigValidation.ts#L30)
+Defined in: [src/shared/config/agentConfigValidation.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/config/agentConfigValidation.ts#L30)
 
 #### Inherited from
 

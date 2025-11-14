@@ -106,7 +106,12 @@ Follow these guidelines to ensure effective task management:
   - [x] Ensure JSON-RPC 2.0 compliance end-to-end.
   - [x] Verify stdio is default transport; HTTP enabled only with `MCP_HTTP_ENABLED=true`.
   - [ ] Consolidate JSON-RPC handlers into a single path reused across transports.
+    - [ ] Implement single dispatcher (initialize, tools/list, tools/call) and remove duplicates
+    - [ ] Wire both stdio and HTTP to reuse the same dispatcher
   - [ ] Add tests to validate protocol and transport behavior (single-handler + negative transport cases).
+    - [ ] Unit: method not found / invalid params error shapes
+    - [ ] Integration: stdio path happy-path tools/list + tools/call
+    - [ ] Integration: HTTP behind `MCP_HTTP_ENABLED=true` only; disabled by default
   - [x] Update documentation to reflect transport and protocol standards.
   - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
@@ -151,12 +156,23 @@ Follow these guidelines to ensure effective task management:
   - [ ] Integrate with CommunicationAgent formatting
 
 - [ ] P1: Refactor shared config utilities into `src/shared`
+
   - [ ] Extract `BaseAgentConfig` helpers and related utilities into `src/shared/config/`
   - [ ] Candidates: `setConfigItem`, `getUserFacingConfig`, `_getConfig`, `getExecutionConfig`, descriptor helpers
   - [ ] Extract `createDescriptorMap()` into `src/shared/config/descriptors.ts`
   - [ ] Update all imports across agents and tools; run `npm run fix:imports` if needed
   - [ ] Add unit tests for shared helpers; update existing tests to new import paths
   - [ ] Update type docs to reference new shared modules; add CHANGELOG entry
+
+- [ ] P2: DOCS: Resolve TypeDoc external link warnings
+
+  - [ ] Add `externalSymbolLinkMappings` for `process.platform`, `os.homedir`, and `process.env.*`
+  - [ ] Alternatively adjust comments to avoid unresolved links
+  - [ ] Re-run `npm run docs` and confirm 0 warnings
+
+- [ ] P2: DOCS: Add regression test for JSON-RPC page promotion
+  - [ ] Test `bin/utils/postprocessDocs.ts` promotes `docs/docs/mcp/jsonRpc/README.md` → `docs/mcp/json-rpc.md`
+  - [ ] Guard against path changes in TypeDoc output
 - [ ] P1: Data-Driven Architecture Integrity
 
   - [ ] Objective: Complete workflow execution system and finalize architectural cleanup.
@@ -238,6 +254,10 @@ Follow these guidelines to ensure effective task management:
 - [x] P1: Server: Add Orchestrator bridge and route MCP tools through it (Part 1) — see CHANGELOG entry "2025-11-14 09:30:00 refactor/server: Add Orchestrator bridge and route MCP tools through it (Part 1)"
 - [x] ✅ P1: Replace static tools registry with orchestrator/config derived list
 - [x] Objective: Remove hardcoded `tools` array in `src/server/index.ts` and generate tool descriptors from orchestrator or config sources.
+- [x] P1: DOCS: Move JSON-RPC reference into `src/docs` and promote stable page
+  - Completed: Added `src/docs/mcp/jsonRpc.ts` with `@packageDocumentation`
+  - Completed: Promoted generated page to `docs/mcp/json-rpc.md` via postprocess
+  - Verified via `npm run docs` and changelog entry (2025-11-14)
 
 <!-- END:COMPLETED_ACTION_ITEMS -->
 <!-- BEGIN:GENERATED-ACTION-ITEMS -->

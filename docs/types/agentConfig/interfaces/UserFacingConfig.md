@@ -6,7 +6,7 @@
 
 # Interface: UserFacingConfig
 
-Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L265)
+Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L265)
 
 User-facing documentation and guidance shown in help/UX.
 
@@ -31,7 +31,7 @@ const userFacing: UserFacingConfig = {
 
 > `optional` **exampleQueries**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L268)
+Defined in: [src/types/agentConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L268)
 
 ***
 
@@ -39,7 +39,7 @@ Defined in: [src/types/agentConfig.ts:268](https://github.com/ErikPlachta/vscode
 
 > `optional` **friendlyDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L266)
+Defined in: [src/types/agentConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L266)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: [src/types/agentConfig.ts:266](https://github.com/ErikPlachta/vscode
 
 > `optional` **helpText**: `string`
 
-Defined in: [src/types/agentConfig.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L269)
+Defined in: [src/types/agentConfig.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L269)
 
 ***
 
@@ -55,4 +55,4 @@ Defined in: [src/types/agentConfig.ts:269](https://github.com/ErikPlachta/vscode
 
 > `optional` **useWhen**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:267](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/agentConfig.ts#L267)
+Defined in: [src/types/agentConfig.ts:267](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L267)

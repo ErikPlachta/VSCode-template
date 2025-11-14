@@ -6,7 +6,7 @@
 
 # Interface: McpServerConfig
 
-Defined in: [src/types/applicationConfig.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L57)
+Defined in: [src/types/applicationConfig.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L57)
 
 MCP server configuration settings.
 
@@ -33,7 +33,7 @@ const server: McpServerConfig = {
 
 > **defaultPort**: `number`
 
-Defined in: [src/types/applicationConfig.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L61)
+Defined in: [src/types/applicationConfig.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L61)
 
 Default port for HTTP server.
 
@@ -43,7 +43,7 @@ Default port for HTTP server.
 
 > **embedded**: `object`
 
-Defined in: [src/types/applicationConfig.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L67)
+Defined in: [src/types/applicationConfig.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L67)
 
 Embedded server settings.
 
@@ -65,7 +65,7 @@ Enable embedded server mode.
 
 > **protocol**: `"http"` \| `"stdio"` \| `"websocket"`
 
-Defined in: [src/types/applicationConfig.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L59)
+Defined in: [src/types/applicationConfig.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L59)
 
 Protocol for MCP communication.
 
@@ -75,7 +75,7 @@ Protocol for MCP communication.
 
 > **retries**: `number`
 
-Defined in: [src/types/applicationConfig.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L65)
+Defined in: [src/types/applicationConfig.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L65)
 
 Number of retry attempts for failed requests.
 
@@ -85,6 +85,6 @@ Number of retry attempts for failed requests.
 
 > **timeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/applicationConfig.ts#L63)
+Defined in: [src/types/applicationConfig.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L63)
 
 Request timeout in milliseconds.

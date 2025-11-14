@@ -6,7 +6,7 @@
 
 # Interface: ClarificationResponse
 
-Defined in: [src/types/interfaces.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L268)
+Defined in: [src/types/interfaces.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/interfaces.ts#L268)
 
 Clarification response from a ClarificationAgent.
 
@@ -16,7 +16,7 @@ Clarification response from a ClarificationAgent.
 
 > **knowledgeSnippets**: [`KnowledgeSnippet`](KnowledgeSnippet.md)[]
 
-Defined in: [src/types/interfaces.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L270)
+Defined in: [src/types/interfaces.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/interfaces.ts#L270)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/interfaces.ts:270](https://github.com/ErikPlachta/vscode-
 
 > **prompt**: `string`
 
-Defined in: [src/types/interfaces.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/34d5103edd858c3d7864722981843ec2d9768bc3/src/types/interfaces.ts#L269)
+Defined in: [src/types/interfaces.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/interfaces.ts#L269)
