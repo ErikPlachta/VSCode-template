@@ -1,28 +1,7 @@
 import { describe, test, expect } from "@jest/globals";
 import * as fs from "fs";
 import * as path from "path";
-import { spawnSync } from "node:child_process";
-
-/** Utility to run the repo-ops CLI and capture stdout as string. */
-function runRepoOps(
-  args: string[],
-  env?: Record<string, string>
-): { code: number; stdout: string; stderr: string } {
-  const res = spawnSync(
-    process.platform === "win32" ? "npx.cmd" : "npx",
-    ["tsx", "bin/repo-ops/index.ts", ...args],
-    {
-      cwd: path.resolve(__dirname, ".."),
-      env: { ...process.env, ...(env || {}) },
-      encoding: "utf8",
-    }
-  );
-  return {
-    code: res.status ?? 0,
-    stdout: res.stdout.trim(),
-    stderr: res.stderr.trim(),
-  };
-}
+import { execSync } from "child_process";
 
 function syntheticChangelogBase(): string {
   return [
@@ -49,39 +28,29 @@ function createSyntheticChangelog(): string {
 }
 
 function parseOutputJson(output: string): any {
-  // Some commands may emit advisory lines before JSON; take last non-empty line.
-  const lines = output.split(/\r?\n/).filter(l => l.trim().length);
-  const candidate = lines[lines.length - 1];
-  try {
-    return JSON.parse(candidate);
-  } catch (e) {
-    throw new Error(`Failed to parse JSON from output. Raw:\n${output}`);
-  }
+  const trimmed = output.trim();
+  return JSON.parse(trimmed);
 }
 
 describe("repo-ops changelog map --fast and diff", () => {
-  test("map --fast emits notes when prior index exists", () => {
+  test("map --fast emits notes or succeeds with incremental path", () => {
     const changelogPath = createSyntheticChangelog();
-    // First write (dry-run) won't create index; need --write to build index.json
-    const writeRes = runRepoOps(
-      [
-        "changelog",
-        "write",
-        "--type",
-        "chore",
-        "--summary",
-        "Initial entry",
-        "--write",
-      ],
-      { REPO_OPS_CHANGELOG_PATH: changelogPath }
+    // Perform write to generate index
+    execSync(
+      `npx tsx bin/repo-ops/index.ts changelog write --type chore --summary "Initial entry" --write`,
+      {
+        encoding: "utf8",
+        env: { ...process.env, REPO_OPS_CHANGELOG_PATH: changelogPath },
+      }
     );
-    expect(writeRes.code).toBe(0);
-    // Now run map fast
-    const mapRes = runRepoOps(["changelog", "map", "--fast"], {
-      REPO_OPS_CHANGELOG_PATH: changelogPath,
-    });
-    expect(mapRes.code).toBe(0);
-    const json = parseOutputJson(mapRes.stdout);
+    const output = execSync(
+      `npx tsx bin/repo-ops/index.ts changelog map --fast`,
+      {
+        encoding: "utf8",
+        env: { ...process.env, REPO_OPS_CHANGELOG_PATH: changelogPath },
+      }
+    );
+    const json = parseOutputJson(output);
     expect(json.file.endsWith(".md")).toBe(true);
     expect(json.dayCount).toBeGreaterThanOrEqual(1);
     // notes should contain at least one fast-related message or be undefined if incremental succeeded silently
@@ -92,19 +61,13 @@ describe("repo-ops changelog map --fast and diff", () => {
 
   test("diff reports added entry after manual file modification", () => {
     const changelogPath = createSyntheticChangelog();
-    const writeRes = runRepoOps(
-      [
-        "changelog",
-        "write",
-        "--type",
-        "chore",
-        "--summary",
-        "Entry A",
-        "--write",
-      ],
-      { REPO_OPS_CHANGELOG_PATH: changelogPath }
+    execSync(
+      `npx tsx bin/repo-ops/index.ts changelog write --type chore --summary "Entry A" --write`,
+      {
+        encoding: "utf8",
+        env: { ...process.env, REPO_OPS_CHANGELOG_PATH: changelogPath },
+      }
     );
-    expect(writeRes.code).toBe(0);
     // Manually append a new entry without updating index
     const now = new Date();
     const ts = now
@@ -120,11 +83,11 @@ describe("repo-ops changelog map --fast and diff", () => {
       `$1${manualEntry}\n\n`
     );
     fs.writeFileSync(changelogPath, updated, "utf8");
-    const diffRes = runRepoOps(["changelog", "diff"], {
-      REPO_OPS_CHANGELOG_PATH: changelogPath,
+    const diffOut = execSync(`npx tsx bin/repo-ops/index.ts changelog diff`, {
+      encoding: "utf8",
+      env: { ...process.env, REPO_OPS_CHANGELOG_PATH: changelogPath },
     });
-    expect(diffRes.code).toBe(0);
-    const payload = parseOutputJson(diffRes.stdout);
+    const payload = parseOutputJson(diffOut);
     expect(payload.addedCount).toBeGreaterThanOrEqual(1);
     expect(payload.removedCount).toBe(0);
     expect(payload.modifiedCount).toBeGreaterThanOrEqual(0);

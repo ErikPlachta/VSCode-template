@@ -275,23 +275,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
-#### 2025-11-14 14:43:22 chore: Refresh changelog index
-
-**Problem/Context**: Rebuilding index after synthetic override
-
-**Changes Made**:
-
-1. file: PATH (lines X–Y) — what changed and why
-2. file: PATH (lines A–B) — what changed and why
-
-**Architecture Notes**: (patterns/decisions)
-
-**Files Changed**: (list files with line counts)
-
-**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
-
-**Impact**: (what this enables/fixes)
-
 #### 2025-11-14 14:55:30 test: repo-ops: add fast map & diff test coverage
 
 **Problem/Context**: Lacked automated validation for new `--fast` map path and `diff` subcommand ensuring JSON shape stability and non-regression across Windows environment.

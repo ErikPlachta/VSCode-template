@@ -217,6 +217,11 @@ Follow these guidelines to ensure effective task management:
     - [ ] Test the bundled extension to ensure it works correctly in VS Code.
     - [ ] Update documentation to reflect the new build process.
   - [ ] P1: Lint/Docs: Adopt TSDoc in `src`, keep JSDoc for `out`
+    - [ ] P2: DOCS/BUILD: Adopt TSDoc in `bin/**` (currently mixed or implicit) and add enforcement rule (eslint-plugin-tsdoc) parity with `src/**`.
+      - [ ] Add TSDoc module `@packageDocumentation` headers in each bin TypeScript file.
+      - [ ] Add symbol-level docs for exported functions (repo-ops helpers, lock, integrity, fast map).
+      - [ ] Update governance references to reflect completed adoption.
+      - [ ] Add tests/lint step confirming absence of JSDoc-only patterns in `bin/**`.
     - [ ] Install `eslint-plugin-tsdoc` and update local dev (`npm i`).
     - [ ] Run `npm run lint` to validate TSDoc tags (e.g., `@remarks`) do not error.
     - [ ] Confirm TypeDoc renders `@remarks` and examples from `src` as expected.

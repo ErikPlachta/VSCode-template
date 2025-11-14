@@ -74,6 +74,8 @@ The Core Principles guarantee agents do not drift from directives and always ope
 - Enforcement: Development Best Practices (typed params, TSDoc documentation, no hardcoded business values).
 - Isolation: Relaxed; may orchestrate tooling but must not import agent runtime modules directly.
 - Protocol: Reuse shared JSON-RPC handling when needed—do not implement divergent handlers.
+- Documentation Standard: Use TSDoc (not JSDoc) for all TypeScript files under `bin/**` (future enforcement task in TODO backlog).
+- Changelog Tooling: `repo-ops` provides `changelog map`, `map --fast`, `diff`, and `verify` for observation; only `write` mutates the file. Fast path falls back automatically if index absent.
 
 <!-- END: CORE-PRINCIPLES -->
 
