@@ -11,17 +11,45 @@ Started: 2025-11-12T17:30:00Z
 
 ## Copilot Instructions
 
-- Keep this session file concise; use it for current focus, quick notes, and links.
-- Tasks live in TODO.md; add/change priorities there.
-- Log changes and verification in CHANGELOG.md.
-- CoPilot Chat should use this file as a sandbox for thinking, along with tracking the high-level goals. Create additional sections at the end (below CURRENT-FOCUS-DETAILS), use the content, and then cleanup as you go without breaking the core CURRENT-FUCUS-DETAILS or anything above.
+Purpose and Scope
+
+- Use this file as the active session hub: capture current focus, short-term plans, quick notes, and links. Keep it skim-friendly and up to date.
+- Do not duplicate tasks or logs here. Tasks live in `TODO.md`. Logs and verification live in `CHANGELOG.md`.
+
+Authoritative Relationships
+
+- Source of truth for tasks: `TODO.md` (Current/Next/Backlog/Completed). Reflect changing priorities here, not in this file.
+- Source of truth for history and verification: `CHANGELOG.md`. Every meaningful change should be logged with a Verification block.
+- Transient thinking and branch plans belong in this file under the Notes area, and should be cleaned up regularly.
+
+Editing Rules
+
+- Maintain these markers: `<!-- BEGIN:CURRENT-FOCUS-SUMMARY -->`, `<!-- BEGIN:CURRENT-FOCUS-DETAIL -->`, and `<!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->`.
+- Update the Focus Summary first; keep it concise (3–5 bullets). Use the Focus Detail section for phases, risks, constraints, and immediate actions.
+- When plans change, update `TODO.md` first, then reflect the change here. Add a corresponding CHANGELOG entry after verification.
+- Rotate/trim Notes frequently. Leave breadcrumbs that link to relevant CHANGELOG entries or TODO items.
+
+Workflow Expectations
+
+- Start of session: Read `TODO.md` (Current/Next), skim latest day in `CHANGELOG.md`, update Focus Summary/Detail.
+- Implementation cadence: Make minimal, focused edits. Run `npm run compile && npm test`. If touching docs or governance, consider `npm run prebuild`.
+- After changes: Add a CHANGELOG entry with Problem/Context, Changes Made, Testing, Impact, and a Verification block.
+- Hygiene: Prefer American English; avoid “above/below” references; wrap file paths and commands in backticks.
+
+Formatting Conventions
+
+- Section titles in Title Case. Bullets should be short, action-oriented, and grouped by theme.
+- Use fenced code blocks with language tags for commands and examples.
+- Do not embed long code or logs here—link to files/tests and summarize outcomes.
 
 <!-- END:COPILOT_INSTRUCTIONS -->
 <!-- BEGIN:CURRENT-FOCUS-SUMMARY -->
 
 ## Current Focus Summary
 
-- High-level focus: Agent cleanup and orchestrator rule compliance (data-driven design, agent isolation, typed data only). Strengthen TSDoc across types to power IntelliSense and reduce duplication.
+- High-level focus: Phase kickoff for validation runtime extraction (move all runtime validation logic out of `src/types/**` into shared module, enforce types‑only rule).
+- Stabilization: Dynamic MCP tools registry & orchestrator bridge considered stable; maintain data‑driven descriptors and formatting isolation.
+- Compliance: Agent cleanup & TSDoc completeness continue in background (incremental, non‑blocking).
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
 - Keep quality gates green: build, tests, lint, docs, and health.
 
@@ -30,65 +58,57 @@ Started: 2025-11-12T17:30:00Z
 
 ## Current Focus Detail
 
-### Agent Cleanup (Validated Plan)
+### Validation Runtime Extraction (Phased Plan)
 
-- Objectives: enforce agent isolation and data-driven design; orchestrator returns typed data only; `CommunicationAgent` owns all user-facing formatting.
+Objective: Enforce "types-only" governance by relocating all runtime validation logic out of `src/types/configValidation.ts` (and any peers) into `src/shared/config/agentConfigValidation.ts` with parity tests, then add an automated enforcement test.
 
-#### Validated Findings
+Phases:
 
-- Orchestrator hardcoded agent ids in `validateAction` → replaced with registry-derived keys (complete).
-- Orchestrator assembled markdown in `route()`, `handle()`, and `formatResponseForUser()` → formatting delegated to `CommunicationAgent` (complete); `markdown` retained temporarily for compatibility.
+1. Inventory & Tag: Enumerate all runtime exports in `src/types/configValidation.ts` (validators, normalizers). Add inline TODO tags referencing phase numbers (non-invasive).
+2. Parity Test Scaffold: Create focused test file(s) asserting current behaviors (inputs/outputs, error shapes) before migration.
+3. Shared Module Completion: Flesh out `src/shared/config/agentConfigValidation.ts` with copied logic + improved TSDoc; keep legacy file exporting wrappers calling shared implementations.
+4. Single-Agent Import Switch: Point one agent (e.g., `UserContextAgent`) to the shared module; run full verification cycle.
+5. Multi-Agent Switch: Migrate remaining agents/tools; remove transitional wrappers.
+6. Types Folder Enforcement: Add test scanning `src/types/**` for function declarations (excluding type guards returning boolean for type predicates) to fail on runtime logic.
+7. Cleanup & Changelog: Remove obsolete comments/TODO tags; add CHANGELOG entry with Verification block.
 
-#### Plan of Action
+Constraints:
 
-- Orchestrator refactor:
-  - Remove inline markdown and `formatResponseForUser`; change `route`/`handle` to typed-only results.
-  - Use `callAgentWithResponse` pattern; derive valid agent ids from the registry.
-- Per-agent audits:
-  - Apply 5 Ws review; confirm isolation (no agent-to-agent imports) and config-driven behavior (no hardcoded business values).
-  - Update/complete JSDoc for all public APIs with precise @param/@returns.
-  - Open one-line follow-up TODOs for any gaps found.
-- Documentation:
-  - Expand `src/agent/index.ts` JSDoc with an architecture overview (data flow, isolation, typed-data contract, formatting ownership).
-- Testing:
-  - Adjust tests for typed-only orchestrator responses; ensure CommunicationAgent formatting is covered; keep gates green.
+- Zero behavior drift per phase; run `npm run compile && npm test` before progressing.
+- Avoid simultaneous multi-agent import changes (limits blast radius).
+- No hardcoded business values introduced; retain data-driven usage.
 
-#### Per-Agent Review Checklist (working notes)
+Risks & Mitigations:
 
-- Purpose & problem: design intention; problems solved and why.
-- Interfaces: typed inputs/outputs; minimal side effects.
-- Configuration: derive from config/data; no hardcoded business values.
-- Isolation: no agent-to-agent imports; orchestrator coordinates.
-- JSDoc: complete and accurate for public APIs.
-- Tests: cover public surface, error paths, and edge cases.
+- Risk: Hidden side-effect utilities inside types. Mitigation: Inventory step includes AST scan for non-type exports.
+- Risk: Test brittleness due to internal refactor. Mitigation: Parity tests target public surface only.
+- Risk: Enforcement false positives on type guards. Mitigation: Pattern-match `function is*(` returning `value is` type.
 
-#### Orchestrator Remediation Status
+Current Status: Phase 0 (Baseline) — Shared scaffold exists, unused; inventory not yet executed. TODO updated with full phased plan.
 
-- ✅ Replace hardcoded `validAgents` in `validateAction` with registry keys.
-- ✅ Remove `formatResponseForUser` and inline markdown assembly; delegate formatting to `CommunicationAgent`.
-- ✅ Ensure `route`/`handle` return typed data only; orchestrator no longer emits `markdown` (deprecated field remains in types for compatibility, not populated).
+### Recently Completed & Stable
 
-#### Recent Changes
+- Category Resolution & Aliases: Natural language category identifiers resolved; errors enumerate `availableCategories`.
+- Dynamic Tools Registry: Live descriptors sourced from category summaries via orchestrator bridge; static array removed.
+- Orchestrator Bridge: Server delegates category describe/search; formatting centralized in `CommunicationAgent`.
+- Governance Overhaul: `.github/copilot-instructions.md` replaced; architecture & TSDoc rules codified.
 
-- Added `formatted` response field; marked `markdown` as deprecated (compatibility shim remains).
-- Removed `formatRecords()`/`formatObject()` helpers from Orchestrator.
-- Removed hardcoded category fallbacks from `extractQueryParams`; derive strictly from `UserContextAgent` data/aliases.
-- CommunicationAgent: Refactored `formatClarification` to be fully config-driven via `communication.clarification`; removed hardcoded examples/headers; templates and limits read from config.
-- Types: Extended `CommunicationConfig` with `clarification` block; added `CommunicationClarificationConfig`.
-- Verification: `npm run prebuild` and full tests executed on 2025-11-13 — all gates PASS.
+### Agent Cleanup (Ongoing, Low Priority)
 
-#### Documentation Updates
+- Orchestrator returns typed data only; `markdown` field deprecated.
+- Registry-derived agent identifiers in validation; no hardcoded agent names.
+- Remaining work: incremental JSDoc refinements & optional success enumeration of categories (config-gated).
 
-- Expand `src/agent/index.ts` with architecture overview and examples aligned to CommunicationAgent formatting.
-- Correct and complete JSDoc across agents during audits.
-- Document `communication.clarification` configuration structure in README and internal docs (planned).
-- Governance: Added “TSDoc: Practices and Pitfalls” to `.github/copilot-instructions.md` so Copilot Chat consistently applies safe examples and block comment rules.
+### TSDoc Sweep (Snapshot)
 
-### TSDoc Sweep Progress (2025-11-13 12:55)
+- High-value type files annotated (applicationConfig, configValidation, communication.types, workflow.types, userContext.types, configRegistry).
+- Remaining: Minor stragglers; schedule after Phase 3 of extraction to avoid doc churn during migration.
 
-- Done: `src/types/applicationConfig.ts` (interface-level examples + @see), `src/types/configValidation.ts` (params/returns + examples), `src/types/communication.types.ts` (remarks + examples), `src/types/workflow.types.ts` (remarks + example), `src/types/userContext.types.ts` (guards/validators examples), `src/types/configRegistry.ts` (utils with examples and precise params/returns).
-- Next: Remaining stragglers only (Types sweep checklist now includes interfaces.ts, configRegistry.ts, index.ts as done).
-- Verification: `npm run compile` PASS; plan to run `npm run prebuild` and capture results in CHANGELOG verification block.
+### Next Immediate Actions
+
+1. Commit updated TODO with phased extraction plan.
+2. Begin Inventory & Tag (Phase 1) in next session.
+3. Scaffold parity tests prior to code migration (Phase 2).
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

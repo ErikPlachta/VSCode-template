@@ -1,9 +1,12 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+import { describe, it, expect, afterEach } from "@jest/globals";
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import { RepositoryHealthAgent } from "../src/tools/repositoryHealth";
 import { loadApplicationConfig } from "../src/shared/configurationLoader";
+
+// Preserve original working directory so other test suites are not affected by chdir operations here.
+const ORIGINAL_CWD = process.cwd();
 
 // Helper to create a minimal out/mcp.config.json so health agent loads TS config successfully.
 async function ensureGeneratedConfig(tempDir: string) {
@@ -19,6 +22,14 @@ async function ensureGeneratedConfig(tempDir: string) {
 }
 
 describe("RepositoryHealthAgent legacy JSON detection", () => {
+  // Ensure we always restore the original CWD after each test to prevent cross-suite side effects.
+  afterEach(() => {
+    try {
+      process.chdir(ORIGINAL_CWD);
+    } catch {
+      // swallow — restoring CWD should not fail the test suite
+    }
+  });
   it("passes when only out/mcp.config.json exists", async () => {
     const tempDir = await fs.mkdtemp(
       path.join(os.tmpdir(), "health-no-legacy-")

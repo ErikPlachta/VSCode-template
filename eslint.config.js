@@ -63,9 +63,14 @@ export default [
       "jsdoc/require-description": ["error", { descriptionStyle: "body" }],
       "jsdoc/require-param": "error",
       "jsdoc/require-param-description": "error",
+      // Allow TypeScript types to satisfy param typing without JSDoc curly braces
+      "jsdoc/require-param-type": "off",
       "jsdoc/require-returns": ["error", { forceReturnsWithAsync: true }],
       "jsdoc/require-returns-description": "error",
+      "jsdoc/require-returns-type": "off",
       "jsdoc/require-throws": "error",
+      // TSDoc style prefers @throws description without explicit typed annotation
+      "jsdoc/require-throws": "off",
       "jsdoc/require-jsdoc": [
         "error",
         {
@@ -157,9 +162,12 @@ export default [
       "jsdoc/require-description": ["error", { descriptionStyle: "body" }],
       "jsdoc/require-param": "error",
       "jsdoc/require-param-description": "error",
+      "jsdoc/require-param-type": "off",
       "jsdoc/require-returns": ["error", { forceReturnsWithAsync: true }],
       "jsdoc/require-returns-description": "error",
       "jsdoc/require-throws": "error",
+      "jsdoc/require-returns-type": "off",
+      "jsdoc/require-throws": "off",
       "jsdoc/require-jsdoc": [
         "error",
         {

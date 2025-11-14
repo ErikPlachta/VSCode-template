@@ -45,6 +45,11 @@ Repo-ops CLI essentials:
 - No hardcoded categories: Detect categories/aliases from `UserContextAgent` runtime data.
 - Formatting centralization: Orchestrator returns typed data; CommunicationAgent performs all formatting, including clarification and optional category enumeration via metadata.
 - TSDoc over JSDoc in `src/**`: Validate with `eslint-plugin-tsdoc`; keep examples on symbol-level docblocks.
+- TSDoc enforcement: All new or modified TypeScript files must include:
+  - A top-of-file `@packageDocumentation` block describing module purpose and constraints
+  - Symbol-level TSDoc for all exported types, classes, functions, and interfaces
+  - Precise `@param`/`@returns` descriptions (no placeholders like “TODO: describe return value”)
+  - Build/Lint gates: `tsdoc/syntax` + strict JSDoc rules are errors; PRs must pass `npm run compile && npm test` and lint checks
 
 ---
 
@@ -69,6 +74,13 @@ const __dirname = path.dirname(__filename);
 
 - Generated config: `src/tools/generateMcpConfig.ts` emits `out/mcp.config.json`; health fails if JSON exists outside `out/`.
 - ID derivation: Use `src/shared/ids.ts` to keep `package.json` contributions and runtime aligned.
+
+### MCP Transport & Protocol
+
+- Protocol: Use JSON-RPC 2.0 end-to-end; do not invent custom shapes.
+- Transport: Use stdio by default. Enable HTTP only with `MCP_HTTP_ENABLED=true` for local debugging; never in CI.
+- Single handler: Keep one JSON-RPC path (`initialize`, `tools/list`, `tools/call`) and reuse it across transports to avoid drift. Remove duplicate handlers when discovered.
+- Entrypoint: Default startup runs stdio; pass `--stdio` to force. HTTP startup is guarded by `MCP_HTTP_ENABLED`.
 
 ---
 

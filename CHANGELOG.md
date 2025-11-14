@@ -9,59 +9,314 @@ associations:
   - history
   - reference
   - documentation
+---
 
-  #### 2025-11-13 14:28:32 fix/mcp: Resolve categoryId via aliases and names in MCP tools
+<!-- BEGIN:COPILOT-INSTRUCTIONS -->
 
-  **Problem/Context**: Invoking MCP tools with natural phrases (e.g., "list all departments") failed with `Tool execution error: 'categoryId' is required.` The server expected a strict `categoryId` and did not resolve names/aliases, leading to a poor UX.
+## Copilot Instructions
 
-  **Changes Made**:
+Purpose
 
-  - `src/server/index.ts`: Added `listCategoryIds`, `loadCategoryMetadata`, and `resolveCategoryId` to resolve category id from id/name/aliases found in `category.json` under each category folder. Updated tool handlers (`user-context.describeCategory`, `user-context.searchRecords`) to resolve the provided value and, on failure, return an error message enumerating available categories.
+- This file is the authoritative, chronological log of changes. It records Problem/Context, Changes Made, Testing, Impact, and a Verification block for each change.
+- Do not place tasks or future plans here. Use `TODO.md` for planning and priorities; use `CONTEXT-SESSION.md` for active focus and notes.
 
-  **Architecture Notes**: Keeps logic data-driven by reading metadata from category folders (no hardcoded values). Avoids agent-to-agent imports; the server remains a thin HTTP/stdio surface.
+Required Entry Structure
 
-  **Files Changed**: `src/server/index.ts`
+- Heading: `#### YYYY-MM-DD HH:MM:SS <scope>/<area>: <short, imperative summary>`
+- Sections under each heading:
+  - Problem/Context: Why this change was needed; brief but concrete.
+  - Changes Made: Bullet list summarizing edits (files, behaviors). Prefer paths in backticks.
+  - Files Changed (optional): Only when helpful; otherwise fold into Changes Made.
+  - Testing: Explicit commands/outcomes (Build/Tests/Lint/Docs/Health). Note any skipped gates and why.
+  - Impact: User-facing or architectural impact. Mention risk mitigation and follow-ups if any.
+  - Verification – <date or label>: Checklist of gates (Build/Tests/Lint/Docs/Health/Coverage if relevant).
 
-  **Testing**:
+Operational Rules
 
-  - Build: PASS (`npm run compile`)
-  - Tests: PASS (34 passed, 1 skipped, 272 total)
-  - Prebuild: PASS (`npm run prebuild`)
+- Chronological order (newest after the header). Never re-date older entries; fix typos only.
+- Every meaningful change should include a Verification block after you run gates.
+- Keep language American English and concise. Avoid “above/below”; make entries self-contained.
+- Use backticks for paths, commands, and identifiers. Wrap code/results in fenced blocks only when necessary.
+- Linkages: Reference related `TODO.md` items and `CONTEXT-SESSION.md` focus when relevant.
 
-  **Impact**: Natural phrases and aliases (e.g., "departments", "dept", "teams") now resolve to canonical ids. When resolution fails, error messages enumerate available categories to guide the Orchestrator/CommunicationAgent.
+Workflow
 
-  ##### Verification – 2025-11-13 (MCP category resolver)
+1. Implement change (code/docs/tests) with focused commits.
+2. Run gates:
+   - `npm run compile`
+   - `npm run test`
+   - Optionally `npm run prebuild` for docs/health validations
+3. Draft entry using the template below and insert under this header.
+4. Re-run tests if you adjusted docs/scripts during logging. Then finalize the Verification block.
 
-  - Build: PASS
-  - Tests: PASS
-  - Lint/Docs/Health: PASS
+Template
 
-  #### 2025-11-13 14:05:45 docs/governance: Replace Copilot instructions with approved overhaul
+```
+#### YYYY-MM-DD HH:MM:SS <scope>/<area>: <short summary>
 
-  **Problem/Context**: The existing `.github/copilot-instructions.md` had grown verbose and partially redundant. We finalized an LLM‑friendly governance overhaul aligned with the current architecture (agent isolation, typed-only agents, CommunicationAgent formatting, ESM pathing, generated config under `out/`). A timestamped backup existed; we needed to safely replace the authoritative doc and verify gates.
+**Problem/Context**: <why>
 
-  **Changes Made**:
+**Changes Made**:
+- <bullet 1>
+- <bullet 2>
 
-  - `.github/copilot-instructions.md`: Replaced content with the approved governance overhaul; ensured first-line H1 to satisfy markdownlint MD041.
-  - Kept explicit references to `CONTEXT-SESSION.md`, repo-ops session commands, and verification cadence.
+**Testing**:
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`)
+- Lint/Docs/Health: PASS | N/A
 
-  **Files Changed**: `.github/copilot-instructions.md`
+**Impact**: <who/what changed; risks mitigated; follow-ups>
 
-  **Testing**:
+##### Verification – YYYY-MM-DD (<label>)
+- Build: PASS | FAIL
+- Tests: PASS | FAIL
+- Lint/Docs: PASS | FAIL
+- Health: PASS | FAIL
+```
 
-  - Build: PASS (`npm run compile`)
-  - Tests: PASS (34 passed, 1 skipped, 272 total)
-  - Prebuild: PASS (`npm run prebuild` → config generated; templates processed; docs updated)
+CLI Quick Start
 
-  **Impact**: Consolidates governance into a concise, LLM-friendly document with explicit guardrails. Reduces drift risk and clarifies operational workflow (tasks in `TODO.md`, logs-only `CHANGELOG.md`, session hygiene in `CONTEXT-SESSION.md`).
+- Show help: `npm run repo:ops -- help`
+- Scaffold a logs-only entry (copy/paste):
+  - `npm run repo:ops -- changelog scaffold --type <feat|fix|docs|refactor|test|perf|ci|build|style|chore> --summary "<short summary>" [--context "<problem/context>"]`
+- Plan insertion (dry-run):
+  - `npm run repo:ops -- changelog write --type <type> --summary "<short summary>" [--context "<problem/context>"]`
+- Apply insertion with backup:
+  - `npm run repo:ops -- changelog write --type <type> --summary "<short summary>" [--context "<problem/context>"] --write`
+- After applying, run gates and append a Verification block:
+  - `npm run compile && npm run test` (and `npm run prebuild` if docs/health)
+  - Add a heading like: `##### Verification – 2025-11-13 (Label)` with Build/Tests/Lint/Docs/Health checklist
 
-  ##### Verification – 2025-11-13 (Governance Overhaul)
+<!-- END:COPILOT-INSTRUCTIONS -->
+<!-- START OF COPILOT CONTENT -->
 
-  - Build: PASS (`npm run compile`)
-  - Tests: PASS (34 passed, 1 skipped, 272 total)
-  - Lint/Docs: PASS (markdownlint MD041 resolved by H1 at first line)
-  - Health: PASS (generated config under `out/`; no stray JSON)
-  - Coverage: Unchanged (docs-only)
+## Notes for Copilot
+
+- Maintain this file as the single source of truth for application changes and history.
+- Do not put tasks here. Tasks live in `TODO.md` only. Use this file for logs, decisions, and verification of completed work.
+
+### Guidelines
+
+This changelog records Logs only.
+
+1. Tasks: Track all outstanding work exclusively in `TODO.md` (sections: Current, Next, Backlog, Completed). Do not add tasks to this file.
+2. Logs: Capture change history with timestamped, semantic titles. Include what changed, where (file paths), and why.
+3. Verification: After meaningful batches, add a Verification block covering Build, Tests, Lint, Docs, Health, and Coverage where applicable.
+4. Cross-references: Link related TODO IDs in log entries when relevant; do not duplicate task content here.
+5. Working context: Before starting work, read `TODO.md`, `CONTEXT-SESSION.md` (current session focus), and the most recent Logs in this file.
+6. Migration note: Any historical Outstanding Tasks mirrors in this file are read-only artifacts and will be pruned; `TODO.md` is the single source of truth for tasks.
+
+<!-- END OF COPILOT CONTENT -->
+<!-- CHANGELOG:BEGIN:LOGS -->
+
+## Logs
+
+### [2025-11-13]
+
+#### 2025-11-13 17:15:00 chore/tests+health: Baseline verification prior to validation runtime extraction
+
+**Problem/Context**: Before beginning Phase 1 (Inventory & Tag) of the validation runtime extraction, a clean, verified baseline is required to anchor forthcoming parity tests and quickly isolate any regression introduced by moving validation logic out of `src/types/**`.
+
+**Changes Made**:
+
+- No source edits. Executed baseline gates only (compile + full test suite) after prior CONTEXT/TODO refresh.
+- Captured suite metrics (pass/skip counts) to reference during parity test authoring.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (37 passed, 1 skipped, 278 total)
+- Lint/Docs: N/A (no code changes)
+
+**Impact**: Establishes a frozen, green baseline immediately before validation extraction work. Reduces noise in future comparisons and accelerates pinpointing of extraction-related issues.
+
+##### Verification – 2025-11-13 (Baseline pre-extraction)
+
+- Build: PASS
+- Tests: PASS (37 passed, 1 skipped)
+- Lint/Docs: N/A
+- Health: PASS (no unintended artifacts)
+
+#### 2025-11-13 16:30:00 chore/docs+tests: Context/TODO refresh & legacy health test isolation
+
+**Problem/Context**: Session focus had shifted from categoryId triage to phased validation runtime extraction, but `CONTEXT-SESSION.md` still contained obsolete triage detail and the plan was not fully reflected in `TODO.md`. Additionally, the full test suite intermittently failed (`orchestratorBridge.test.ts`) when run after `repositoryHealth.legacyConfig.test.ts` because that test changed the process working directory and never restored it, causing dataset discovery to point at a temp path.
+
+**Changes Made**:
+
+- `CONTEXT-SESSION.md`: Replaced outdated categoryId triage section with concise current focus summary; added structured Validation Runtime Extraction phased plan (Phases 1–9), risks, constraints, and next immediate actions; organized recent completions & ongoing tasks.
+- `TODO.md`: Added explicit phased extraction plan under Current Action Items; mapped user high-level checklist items to phases; preserved existing P1/P2 tasks while clarifying validation milestones.
+- `tests/repositoryHealth.legacyConfig.test.ts`: Captured original CWD and added `afterEach` restore to prevent cross‑suite side effects leading to UserContextAgent initialization failures.
+- Markdown lint spacing fixes in session file (headings/lists) to satisfy MD022/MD032.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (37 passed, 1 skipped, 278 total) after cwd restore; orchestratorBridge no longer fails in suite order.
+- Lint/Docs: PASS (no new TSDoc or markdown lint violations introduced).
+
+**Impact**: Establishes a clear migration roadmap for enforcing types-only governance; removes stale triage noise; stabilizes test ordering to ensure deterministic suite health; reduces future friction for validation extraction phases and CHANGELOG verification cadence.
+
+##### Verification – 2025-11-13 (Context/TODO refresh + test isolation)
+
+- Build: PASS
+- Tests: PASS (37 passed, 1 skipped)
+- Lint/Docs: PASS
+- Health: PASS (no stray legacy config; dataset discovery stable)
+
+#### 2025-11-14 12:00:00 refactor/server: Dynamic MCP tools registry (remove static array)
+
+**Problem/Context**: The server exposed a hardcoded `tools` array in `src/server/index.ts`, risking drift whenever categories or agent metadata changed. Governance mandates data-driven descriptors sourced from runtime state (agents via orchestrator bridge).
+
+**Changes Made**:
+
+- `src/server/index.ts`: Removed static `tools` array; added `getTools()` that calls `listCategorySummariesBridge()` to build live descriptors. Updated `tools/list` and `tools/call` paths to use dynamic registry. Provided resilient fallback descriptors on enumeration failure.
+- Added TSDoc block for `getTools` with proper spacing (lint enforced).
+- All existing tests still green; added dynamic registry without breaking JSON-RPC surface.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (36 passed, 1 skipped, 276 total)
+- Lint/Docs: PASS (TSDoc spacing rule satisfied after minor fix)
+
+**Impact**: Eliminates manual maintenance of MCP tool metadata; descriptors now reflect live category set (ids, aliases) through agent layer, reducing drift and strengthening orchestrator-centric architecture.
+
+##### Verification – 2025-11-14 (Dynamic tools registry)
+
+- Build: PASS
+- Tests: PASS
+- Lint/Docs: PASS
+- No runtime regressions observed; server remains stdio-only JSON-RPC dispatcher.
+
+#### 2025-11-14 10:05:00 docs/governance+server: Enforce stdio transport by default and strict TSDoc
+
+**Problem/Context**: We want a single transport (stdio) and strict documentation discipline. HTTP should be opt-in only for local debugging, and all TypeScript must have comprehensive TSDoc.
+
+**Changes Made**:
+
+- `.github/copilot-instructions.md`: Added “MCP Transport & Protocol” section mandating JSON-RPC 2.0 over stdio by default, single handler reuse, and HTTP behind `MCP_HTTP_ENABLED`. Expanded “Development Best Practices” with strict TSDoc enforcement (module `@packageDocumentation`, symbol-level docs, precise params/returns, lint gates).
+- `src/server/index.ts`: Default startup to stdio; HTTP only when `MCP_HTTP_ENABLED=true` and not forcing `--stdio`.
+- `src/server/orchestratorBridge.ts`: Added TSDoc for module and public API.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`)
+
+**Impact**: Aligns runtime with “stdio-only by default” preference and raises documentation quality gates. Future refactors will unify duplicate JSON-RPC handlers and derive the tools registry from orchestrator/config.
+
+##### Verification – 2025-11-14 (Stdio default + TSDoc enforcement docs)
+
+- Build: PASS
+- Tests: PASS
+
+#### 2025-11-14 11:20:00 refactor/server: Migrate data loaders & category resolution to agents; add bridge tests
+
+**Problem/Context**: Server transport still contained filesystem loaders (`loadJson`, `listCategoryIds`, alias resolution) duplicating agent logic and increasing drift risk. Needed to delegate all dataset access and resolution to `UserContextAgent` via the orchestrator bridge, enforce success message inclusion of category identifiers, and introduce focused bridge tests without coupling to internal FS helpers.
+
+**Changes Made**:
+
+- `src/server/index.ts`: Removed all data loader and category resolution functions; simplified `handleInvoke` to pass raw topic string directly to bridge functions. Dropped unused path/FS imports.
+- `src/server/orchestratorBridge.ts`: Augmented success formatting to append category id/name when not already present, preserving `FormattedResponse` shape.
+- Added test `tests/server.bridge.migration.test.ts` validating `Available categories` enumeration for unknown topics using dataset override (`VSCODE_TEMPLATE_DATA_ROOT=src/userContext`).
+- Updated existing `tests/orchestratorBridge.test.ts` expectations now satisfied (category id injected).
+- Ensured strict TSDoc rules remain (eslint config unchanged) while removing transport-level docs that became obsolete.
+
+**Files Changed**: `src/server/index.ts`, `src/server/orchestratorBridge.ts`, `tests/server.bridge.migration.test.ts`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (36 passed, 1 skipped, 276 total)
+- Lint: PASS (no unused imports or TSDoc regressions introduced)
+
+**Impact**: Server is now a pure JSON-RPC stdio dispatcher; all data access and resolution are agent-driven, reducing duplication and aligning with orchestrator-centric governance. Bridge tests provide guard rails for error enumeration behavior without coupling to internal FS utilities.
+
+##### Verification – 2025-11-14 (Server data loader migration)
+
+- Build: PASS
+- Tests: PASS
+- Lint/Docs: PASS
+
+#### 2025-11-14 09:30:00 refactor/server: Add Orchestrator bridge and route MCP tools through it (Part 1)
+
+**Problem/Context**: The MCP server performed direct filesystem reads and handled business logic/formatting, drifting from the orchestrator‑centric architecture. We need a bridge that coordinates agents and centralizes formatting via `CommunicationAgent` while keeping the server surface minimal.
+
+**Changes Made**:
+
+- Added `src/server/orchestratorBridge.ts` exposing `describeCategoryBridge` and `searchCategoryRecordsBridge` that:
+  - Instantiate `Orchestrator`, `UserContextAgent`, and `DatabaseAgent` in a data‑driven way
+  - Resolve categories via `UserContextAgent` (id/name/alias) and include `availableCategories` on errors
+  - Use `CommunicationAgent` to format success/error messages
+- Updated `src/server/index.ts` to route `user-context.describeCategory` and `user-context.searchRecords` through the bridge, preserving existing input validation.
+
+**Files Changed**: `src/server/orchestratorBridge.ts`, `src/server/index.ts`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 272 total)
+
+**Impact**: Begins the transition to orchestrator compliance. Server no longer executes core logic for these tools and leverages agent‑coordinated, data‑driven behavior with centralized formatting. Follow‑ups will remove remaining direct FS usage, unify handlers, and derive the tools registry from orchestrator/config.
+
+##### Verification – 2025-11-14 (Server → Orchestrator Bridge, Part 1)
+
+- Build: PASS
+- Tests: PASS
+- Health: N/A (no generated config movement)
+
+#### 2025-11-13 14:28:32 fix/mcp: Resolve categoryId via aliases and names in MCP tools
+
+**Problem/Context**: Invoking MCP tools with natural phrases (e.g., "list all departments") failed with `Tool execution error: 'categoryId' is required.` The server expected a strict `categoryId` and did not resolve names/aliases, leading to a poor UX.
+
+**Changes Made**:
+
+- `src/server/index.ts`: Added `listCategoryIds`, `loadCategoryMetadata`, and `resolveCategoryId` to resolve category id from id/name/aliases found in `category.json` under each category folder. Updated tool handlers (`user-context.describeCategory`, `user-context.searchRecords`) to resolve the provided value and, on failure, return an error message enumerating available categories.
+
+**Architecture Notes**: Keeps logic data-driven by reading metadata from category folders (no hardcoded values). Avoids agent-to-agent imports; the server remains a thin HTTP/stdio surface.
+
+**Files Changed**: `src/server/index.ts`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 272 total)
+- Prebuild: PASS (`npm run prebuild`)
+
+**Impact**: Natural phrases and aliases (e.g., "departments", "dept", "teams") now resolve to canonical ids. When resolution fails, error messages enumerate available categories to guide the Orchestrator/CommunicationAgent.
+
+##### Verification – 2025-11-13 (MCP category resolver)
+
+- Build: PASS
+- Tests: PASS
+- Lint/Docs/Health: PASS
+
+#### 2025-11-13 14:05:45 docs/governance: Replace Copilot instructions with approved overhaul
+
+**Problem/Context**: The existing `.github/copilot-instructions.md` had grown verbose and partially redundant. We finalized an LLM‑friendly governance overhaul aligned with the current architecture (agent isolation, typed-only agents, CommunicationAgent formatting, ESM pathing, generated config under `out/`). A timestamped backup existed; we needed to safely replace the authoritative doc and verify gates.
+
+**Changes Made**:
+
+- `.github/copilot-instructions.md`: Replaced content with the approved governance overhaul; ensured first-line H1 to satisfy markdownlint MD041.
+- Kept explicit references to `CONTEXT-SESSION.md`, repo-ops session commands, and verification cadence.
+
+**Files Changed**: `.github/copilot-instructions.md`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 272 total)
+- Prebuild: PASS (`npm run prebuild` → config generated; templates processed; docs updated)
+
+**Impact**: Consolidates governance into a concise, LLM-friendly document with explicit guardrails. Reduces drift risk and clarifies operational workflow (tasks in `TODO.md`, logs-only `CHANGELOG.md`, session hygiene in `CONTEXT-SESSION.md`).
+
+##### Verification – 2025-11-13 (Governance Overhaul)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (34 passed, 1 skipped, 272 total)
+- Lint/Docs: PASS (markdownlint MD041 resolved by H1 at first line)
+- Health: PASS (generated config under `out/`; no stray JSON)
+- Coverage: Unchanged (docs-only)
 - Tests: PASS
 - Lint/Docs/Health: PASS
 
@@ -2934,8 +3189,7 @@ Master routing and coordination service...
 
 Direct data access and filtering...
 ...
-
-````
+```
 
 **Quality Gates:**
 
@@ -3127,7 +3381,7 @@ interface TextProcessingConfig {
   fuzzyMatchThreshold?: number;
   handleInflections?: boolean;
 }
-````
+```
 
 **Test Coverage: `tests/textProcessing.test.ts`**
 
