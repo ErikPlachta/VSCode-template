@@ -51,7 +51,7 @@ Formatting Conventions
 - CI: HTTP transport verifier wired (separate `transport` job runs `npm run test:http:ci`).
 - Validation runtime extraction: Phase 8 audit in progress; Phase 9 coverage next.
 - Stabilization: Dynamic MCP tools registry & orchestrator bridge stable; data‑driven descriptors and formatting isolation maintained.
-- Migration: Cache directory rename to `.usercontext-mcp-extension` staged in Current with migration script follow‑ups.
+- Migration: Cache directory rename & migration COMPLETE; Docs/Health prebuild PASS and CHANGELOG updated.
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->

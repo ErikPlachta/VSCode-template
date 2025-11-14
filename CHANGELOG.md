@@ -309,6 +309,48 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
+#### 2025-11-14 18:33:55 fix: Cache: rename cache directory to hidden name and migrate contents
+
+**Problem/Context**: Updated cache directory naming to a hidden folder and added best-effort migration from legacy path.
+
+**Changes Made**:
+
+1. file: `src/shared/env.ts` — `getCacheDirectoryName()` now returns a dot‑prefixed directory (hidden on Unix) derived from `getExtensionName()`; avoids double dots and normalizes the cache folder to `.usercontext-mcp-extension` by default.
+2. file: `src/extension/mcpCache.ts` — added best‑effort migration inside `ensureCacheDirectory()` from legacy `usercontext-mcp-extension` to the new hidden name. Implemented `migrateDirectory()` with rename‑or‑copy semantics, non‑overwriting merge, and safe cleanup; wrapped migrations in try/catch to avoid startup/test failures. Applied migration for both local (workspace/home) and global (`~/.vscode/extensions`) cache roots.
+
+**Architecture Notes**:
+
+- Hidden cache dir: normalize to a dot‑prefixed name for Unix hidden semantics while preserving Windows compatibility.
+- Backward compatible: automatically migrates existing caches (local and global) without breaking users or tests.
+- Safe merge: prefers atomic rename; falls back to copy and merges files without overwriting existing content, then removes the old directory if empty.
+- Non‑throwing: migration errors are swallowed to ensure server/tools/tests still initialize even if migration cannot complete.
+- Source of truth: local base resolves to workspace root when available, otherwise `os.homedir()`; global base approximates `~/.vscode/extensions`.
+
+**Files Changed**:
+
+- `src/shared/env.ts`
+- `src/extension/mcpCache.ts`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: N/A
+- Docs/Health: N/A
+
+**Impact**:
+
+- Preserves existing user cache data automatically while switching to a hidden folder name.
+- Reduces workspace clutter on Unix systems; no breaking changes for Windows users.
+- Centralizes cache naming logic and ensures both local and global caches stay in sync with the new convention.
+
+##### Verification – 2025-11-14 (Cache Migration)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: N/A
+- Docs/Health: PASS (`npm run prebuild`) — config generated; 5 templates processed
+
 #### 2025-11-14 18:20:00 ci: Add HTTP transport verifier job; local run docs
 
 **Problem/Context**: Add a fast, deterministic HTTP transport verification to CI and document the local command so developers can run the same protocol check outside Jest. Keeps stdio as the default runtime while enabling optional HTTP (`MCP_HTTP_ENABLED=true`) for verification.

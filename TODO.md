@@ -89,13 +89,6 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
-- [ ] P1: Cache Directory Rename & Migration
-  - [ ] Rename root cache directory `usercontext-mcp-extension` to `.usercontext-mcp-extension` (leading dot for hidden semantics on Unix).
-  - [ ] Update all path references in source (`src/`), tests, and any docs mentioning the old name.
-  - [ ] Add migration cleanup script to remove old directory if present and copy/merge contents safely.
-  - [ ] Verify extension still initializes correctly after rename (compile + tests + fresh run scenario).
-  - [ ] Add CHANGELOG entry with verification block documenting migration.
-  - Next Step: implement migration script and update references, then run `npm run compile && npm run test`.
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
   - [ ] Types: Complete comprehensive TSDoc for remaining configuration types (no placeholders).
   - [ ] Extract functions from `src/types/**` into `src/shared/**` (e.g., `setConfigItem`, `createDescriptorMap`, `_getConfig`, `getUserFacingConfig`).
@@ -248,6 +241,10 @@ Follow these guidelines to ensure effective task management:
 
 ## Completed Action Items
 
+- [x] P1: Cache Directory Rename & Migration — complete; verification updated with Docs/Health PASS
+  - Rename root cache directory to hidden `.usercontext-mcp-extension` and add best‑effort migration
+  - Updated code/tests/docs; tests green; CHANGELOG entry added
+  - Post-verification: ran `npm run prebuild`; appended Docs/Health PASS to Verification block
 - [x] CI: Add optional repo-ops lint step — implemented via `.github/workflows/repo-ops-lint.yml`
 - [x] P1: Validation Runtime Extraction (Phased) — Phases 1–9 completed; coverage uplift recorded; parity preserved
 - [x] P1: CommunicationAgent clarification is config-driven — see CHANGELOG entry "2025-11-13 10:00:00 refactor: CommunicationAgent clarification via configuration; add types and templates"
