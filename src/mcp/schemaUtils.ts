@@ -29,20 +29,20 @@ export interface SchemaValidationSummary {
 }
 
 /**
- * NormalizeSchemaName function.
+ * Normalize a schema name by trimming whitespace and lowercasing.
  *
- * @param {string} name - name parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {string} name - Raw schema name.
+ * @returns {string} Normalized lowercase name suitable for duplicate detection.
  */
 export function NormalizeSchemaName(name: string): string {
   return name.trim().toLowerCase();
 }
 
 /**
- * detectDuplicateSchemas function.
+ * Detect duplicate schema names (case-insensitive) within a category.
  *
- * @param {CategorySchema[]} schemas - schemas parameter.
- * @returns {string[]} - TODO: describe return value.
+ * @param {CategorySchema[]} schemas - List of schema descriptors.
+ * @returns {string[]} Array of original schema names that appear more than once when normalized.
  */
 export function detectDuplicateSchemas(schemas: CategorySchema[]): string[] {
   const seen = new Map<string, number>();
@@ -59,10 +59,10 @@ export function detectDuplicateSchemas(schemas: CategorySchema[]): string[] {
 }
 
 /**
- * validateRelationships function.
+ * Validate that all declared relationships target existing categories.
  *
- * @param {BusinessCategory[]} categories - categories parameter.
- * @returns {RelationshipIntegrityIssue[]} - TODO: describe return value.
+ * @param {BusinessCategory[]} categories - All business categories loaded.
+ * @returns {RelationshipIntegrityIssue[]} Issues for each relationship referencing a missing target category.
  */
 export function validateRelationships(
   categories: BusinessCategory[]
@@ -85,10 +85,10 @@ export function validateRelationships(
 }
 
 /**
- * validateCategorySchemas function.
+ * Aggregate schema validation results for provided categories.
  *
- * @param {BusinessCategory[]} categories - categories parameter.
- * @returns {SchemaValidationSummary} - TODO: describe return value.
+ * @param {BusinessCategory[]} categories - All business categories loaded.
+ * @returns {SchemaValidationSummary} Summary containing missing relationship issues and duplicate schema names.
  */
 export function validateCategorySchemas(
   categories: BusinessCategory[]

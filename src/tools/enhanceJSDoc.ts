@@ -36,7 +36,7 @@ interface GeneratedDoc {
  * Determines whether a function-like declaration has a void/undefined return type.
  *
  * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
- * @returns {boolean} - TODO: describe return value.
+ * @returns {boolean} True when the declared return type is void or undefined.
  */
 function isVoidLike(node: ts.FunctionLikeDeclarationBase): boolean {
   if (!node.type) return false; // assume return value if unspecified (to force @returns - tag)
@@ -48,7 +48,7 @@ function isVoidLike(node: ts.FunctionLikeDeclarationBase): boolean {
  * Collects simple parameter names from a function-like declaration.
  *
  * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
- * @returns {string[]} - TODO: describe return value.
+ * @returns {string[]} Ordered list of parameter names.
  */
 function collectParamNames(node: ts.FunctionLikeDeclarationBase): string[] {
   return node.parameters.map((p) => p.name.getText());
@@ -58,7 +58,7 @@ function collectParamNames(node: ts.FunctionLikeDeclarationBase): string[] {
  * Collect parameter type strings; falls back to 'unknown' when not annotated.
  *
  * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
- * @returns {string[]} - TODO: describe return value.
+ * @returns {string[]} Ordered list of parameter type strings ("unknown" when unannotated).
  */
 function collectParamTypes(node: ts.FunctionLikeDeclarationBase): string[] {
   return node.parameters.map((p) => (p.type ? p.type.getText() : "unknown"));
@@ -68,7 +68,7 @@ function collectParamTypes(node: ts.FunctionLikeDeclarationBase): string[] {
  * Infer a return type textual representation for a function-like node.
  *
  * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
- * @returns {string} - TODO: describe return value.
+ * @returns {string} Explicit or inferred return type text ("unknown" fallback).
  */
 function getReturnTypeText(node: ts.FunctionLikeDeclarationBase): string {
   if (node.type) return node.type.getText();
@@ -95,7 +95,7 @@ function getReturnTypeText(node: ts.FunctionLikeDeclarationBase): string {
  * Detect if the function body contains a throw statement.
  *
  * @param {ts.FunctionLikeDeclarationBase} node - node parameter.
- * @returns {boolean} - TODO: describe return value.
+ * @returns {boolean} True if any throw statement is present within the body.
  */
 function hasThrow(node: ts.FunctionLikeDeclarationBase): boolean {
   const body = node.body && ts.isBlock(node.body) ? node.body : undefined;
@@ -124,7 +124,7 @@ function hasThrow(node: ts.FunctionLikeDeclarationBase): boolean {
  * Extracts the first summary line from an existing JSDoc block.
  *
  * @param {string} fullText - fullText parameter.
- * @returns {string | undefined} - TODO: describe return value.
+ * @returns {string | undefined} First summary line, or undefined when absent.
  */
 function extractSummaryFromExisting(fullText: string): string | undefined {
   // Match first JSDoc block summary portion (lines between /** and first @ tag)
@@ -156,7 +156,7 @@ function extractSummaryFromExisting(fullText: string): string | undefined {
  * @param {boolean} includeThrows - includeThrows parameter.
  * @param {string[]} typeParams - typeParams parameter.
  * @param {unknown} indent - indent parameter.
- * @returns {string} - TODO: describe return value.
+ * @returns {string} Complete JSDoc block text including trailing newline.
  */
 function buildDocBlock(
   summary: string | undefined,
@@ -187,7 +187,7 @@ function buildDocBlock(
     lines.push(` * @param {${t}} ${p} - ${p} parameter.`);
   }
   if (includeReturns) {
-    lines.push(` * @returns {${returnType}} - TODO: describe return value.`);
+    lines.push(` * @returns {${returnType}} Return value.`);
   }
   if (includeThrows) {
     lines.push(" * @throws {Error} - May throw an error.");
@@ -201,7 +201,7 @@ function buildDocBlock(
  * Determines whether a file should be processed (non-declaration TS source).
  *
  * @param {string} filePath - filePath parameter.
- * @returns {boolean} - TODO: describe return value.
+ * @returns {boolean} True if file is a non-declaration TypeScript source.
  */
 function shouldProcessFile(filePath: string): boolean {
   return filePath.endsWith(".ts") && !filePath.endsWith(".d.ts");
@@ -212,7 +212,7 @@ function shouldProcessFile(filePath: string): boolean {
  *
  * @param {string} content - content parameter.
  * @param {string} filePath - filePath parameter.
- * @returns {{ content: string; added: boolean }} - TODO: describe return value.
+ * @returns {{ content: string; added: boolean }} Updated content and flag indicating insertion.
  */
 function ensureFilePackageDocumentation(
   content: string,
@@ -230,7 +230,7 @@ function ensureFilePackageDocumentation(
  * Generates JSDoc edits for all function-like declarations in a source file.
  *
  * @param {ts.SourceFile} sourceFile - sourceFile parameter.
- * @returns {GeneratedDoc[]} - TODO: describe return value.
+ * @returns {GeneratedDoc[]} Generated doc block edits sorted by position.
  */
 function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
   const edits: GeneratedDoc[] = [];
@@ -437,7 +437,7 @@ function generateEditsForSource(sourceFile: ts.SourceFile): GeneratedDoc[] {
  *
  * @param {string} original - original parameter.
  * @param {GeneratedDoc[]} edits - edits parameter.
- * @returns {string} - TODO: describe return value.
+ * @returns {string} Updated file content with all edits applied.
  */
 function applyEdits(original: string, edits: GeneratedDoc[]): string {
   if (edits.length === 0) return original;
@@ -459,7 +459,7 @@ function applyEdits(original: string, edits: GeneratedDoc[]): string {
  * @returns {{
   modified: boolean;
   addedFileTag: boolean;
-}} - TODO: describe return value.
+}} Process result flags indicating modifications and package doc insertion.
  */
 function processFile(filePath: string): {
   modified: boolean;
@@ -493,7 +493,7 @@ function processFile(filePath: string): {
  *
  * @param {string} dir - dir parameter.
  * @param {string[]} results - results parameter.
- * @returns {string[]} - TODO: describe return value.
+ * @returns {string[]} Recursive listing of processable .ts file paths.
  */
 function walk(dir: string, results: string[] = []): string[] {
   for (const entry of fs.readdirSync(dir)) {

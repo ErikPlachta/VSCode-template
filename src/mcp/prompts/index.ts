@@ -2,7 +2,7 @@
  * @packageDocumentation index implementation for prompts module
  */
 
-// TODO: Verify why this is in a folder like this, and what it's even doing.
+// NOTE: Prompt rendering helpers used by agents for escalation / clarification.
 
 import type { AgentCapabilityMetadata } from "@mcp/config/agentManifest";
 

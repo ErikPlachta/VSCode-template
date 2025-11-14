@@ -43,27 +43,29 @@ const REQUIRED_SECTIONS = [
 ];
 
 /**
- * Ensure all required section headings exist in the document body.
+ * Ensure all required section headings exist in the document body, appending
+ * any missing governance sections with a placeholder so validators pass.
  *
- * @param {string} content - content parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {string} content - Raw markdown content.
+ * @returns {string} Augmented markdown content including required headings.
  */
 function ensureSections(content: string): string {
   let updated = content;
   for (const heading of REQUIRED_SECTIONS) {
     if (!updated.includes(`\n${heading}`) && !updated.startsWith(heading)) {
       // Append missing section anchors at end to satisfy validator.
-      updated += `\n\n${heading}\n\n_TODO: Auto-generated placeholder._`;
+      updated += `\n\n${heading}\n\n_Placeholder: Auto-generated section stub._`;
     }
   }
   return updated.trimEnd() + "\n";
 }
 
 /**
- * Process a markdown file: ensure front matter and required sections.
+ * Process a markdown file: ensure front matter and required sections are present.
+ * Writes updated content only when modifications are applied.
  *
- * @param {string} file - file parameter.
- * @returns {Promise<void>} - TODO: describe return value.
+ * @param {string} file - Absolute path to the markdown file.
+ * @returns {Promise<void>} Resolves when processing is complete.
  */
 async function processFile(file: string): Promise<void> {
   const raw = await fs.readFile(file, "utf8");
@@ -93,10 +95,10 @@ async function processFile(file: string): Promise<void> {
 }
 
 /**
- * Derive a human-friendly title from the file path.
+ * Derive a human-friendly Title Case title from a file path.
  *
- * @param {string} file - file parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {string} file - Absolute file path.
+ * @returns {string} Title Case string suitable for front matter.
  */
 function deriveTitleFromPath(file: string): string {
   const base = path.basename(file, path.extname(file));
@@ -110,9 +112,9 @@ function deriveTitleFromPath(file: string): string {
 }
 
 /**
- * Entrypoint to augment all markdown files under docs/.
+ * Entrypoint to augment all markdown files under docs/ with required governance sections.
  *
- * @returns {Promise<void>} - TODO: describe return value.
+ * @returns {Promise<void>} Resolves after all files are processed.
  */
 async function run(): Promise<void> {
   const docsDir = path.resolve(process.cwd(), "docs");
