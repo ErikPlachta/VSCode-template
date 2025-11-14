@@ -9,34 +9,61 @@ associations:
   - history
   - reference
   - documentation
----
 
-<!-- START OF COPILOT CONTENT -->
+  #### 2025-11-13 14:28:32 fix/mcp: Resolve categoryId via aliases and names in MCP tools
 
-## Notes for Copilot
+  **Problem/Context**: Invoking MCP tools with natural phrases (e.g., "list all departments") failed with `Tool execution error: 'categoryId' is required.` The server expected a strict `categoryId` and did not resolve names/aliases, leading to a poor UX.
 
-- Maintain this file as the single source of truth for application changes and history.
-- Do not put tasks here. Tasks live in `TODO.md` only. Use this file for logs, decisions, and verification of completed work.
+  **Changes Made**:
 
-### Guidelines
+  - `src/server/index.ts`: Added `listCategoryIds`, `loadCategoryMetadata`, and `resolveCategoryId` to resolve category id from id/name/aliases found in `category.json` under each category folder. Updated tool handlers (`user-context.describeCategory`, `user-context.searchRecords`) to resolve the provided value and, on failure, return an error message enumerating available categories.
 
-This changelog records Logs only.
+  **Architecture Notes**: Keeps logic data-driven by reading metadata from category folders (no hardcoded values). Avoids agent-to-agent imports; the server remains a thin HTTP/stdio surface.
 
-1. Tasks: Track all outstanding work exclusively in `TODO.md` (sections: Current, Next, Backlog, Completed). Do not add tasks to this file.
-2. Logs: Capture change history with timestamped, semantic titles. Include what changed, where (file paths), and why.
-3. Verification: After meaningful batches, add a Verification block covering Build, Tests, Lint, Docs, Health, and Coverage where applicable.
-4. Cross-references: Link related TODO IDs in log entries when relevant; do not duplicate task content here.
-5. Working context: Before starting work, read `TODO.md`, `CONTEXT-SESSION.md` (current session focus), and the most recent Logs in this file.
-6. Migration note: Any historical Outstanding Tasks mirrors in this file are read-only artifacts and will be pruned; `TODO.md` is the single source of truth for tasks.
+  **Files Changed**: `src/server/index.ts`
 
-<!-- END OF COPILOT CONTENT -->
-<!-- CHANGELOG:BEGIN:LOGS -->
+  **Testing**:
 
-## Logs
+  - Build: PASS (`npm run compile`)
+  - Tests: PASS (34 passed, 1 skipped, 272 total)
+  - Prebuild: PASS (`npm run prebuild`)
 
-### [2025-11-13]
+  **Impact**: Natural phrases and aliases (e.g., "departments", "dept", "teams") now resolve to canonical ids. When resolution fails, error messages enumerate available categories to guide the Orchestrator/CommunicationAgent.
 
-#### 2025-11-13 14:05:45 docs/governance: Replace Copilot instructions with approved overhaul
+  ##### Verification – 2025-11-13 (MCP category resolver)
+
+  - Build: PASS
+  - Tests: PASS
+  - Lint/Docs/Health: PASS
+
+  #### 2025-11-13 14:05:45 docs/governance: Replace Copilot instructions with approved overhaul
+
+  **Problem/Context**: The existing `.github/copilot-instructions.md` had grown verbose and partially redundant. We finalized an LLM‑friendly governance overhaul aligned with the current architecture (agent isolation, typed-only agents, CommunicationAgent formatting, ESM pathing, generated config under `out/`). A timestamped backup existed; we needed to safely replace the authoritative doc and verify gates.
+
+  **Changes Made**:
+
+  - `.github/copilot-instructions.md`: Replaced content with the approved governance overhaul; ensured first-line H1 to satisfy markdownlint MD041.
+  - Kept explicit references to `CONTEXT-SESSION.md`, repo-ops session commands, and verification cadence.
+
+  **Files Changed**: `.github/copilot-instructions.md`
+
+  **Testing**:
+
+  - Build: PASS (`npm run compile`)
+  - Tests: PASS (34 passed, 1 skipped, 272 total)
+  - Prebuild: PASS (`npm run prebuild` → config generated; templates processed; docs updated)
+
+  **Impact**: Consolidates governance into a concise, LLM-friendly document with explicit guardrails. Reduces drift risk and clarifies operational workflow (tasks in `TODO.md`, logs-only `CHANGELOG.md`, session hygiene in `CONTEXT-SESSION.md`).
+
+  ##### Verification – 2025-11-13 (Governance Overhaul)
+
+  - Build: PASS (`npm run compile`)
+  - Tests: PASS (34 passed, 1 skipped, 272 total)
+  - Lint/Docs: PASS (markdownlint MD041 resolved by H1 at first line)
+  - Health: PASS (generated config under `out/`; no stray JSON)
+  - Coverage: Unchanged (docs-only)
+- Tests: PASS
+- Lint/Docs/Health: PASS
 
 **Problem/Context**: The existing `.github/copilot-instructions.md` had grown verbose and partially redundant. We finalized an LLM‑friendly governance overhaul aligned with the current architecture (agent isolation, typed-only agents, CommunicationAgent formatting, ESM pathing, generated config under `out/`). A timestamped backup existed; we needed to safely replace the authoritative doc and verify gates.
 
@@ -2907,7 +2934,8 @@ Master routing and coordination service...
 
 Direct data access and filtering...
 ...
-```
+
+````
 
 **Quality Gates:**
 
@@ -3099,7 +3127,7 @@ interface TextProcessingConfig {
   fuzzyMatchThreshold?: number;
   handleInflections?: boolean;
 }
-```
+````
 
 **Test Coverage: `tests/textProcessing.test.ts`**
 

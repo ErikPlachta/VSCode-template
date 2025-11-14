@@ -9,7 +9,7 @@
  */
 
 import { createServer, IncomingMessage, Server, ServerResponse } from "http";
-import { readFile, readdir } from "fs/promises";
+import { readFile, readdir, stat } from "fs/promises";
 import * as path from "path";
 import { fileURLToPath } from "url";
 import { MCPTool } from "@shared/mcpTypes";
@@ -116,6 +116,97 @@ async function loadJsonCollection(
     }
     throw error;
   }
+}
+
+/**
+ * listCategoryIds function.
+ *
+ * Discover available category folders by locating a category.json file under each subdirectory of DATA_ROOT.
+ *
+ * @returns {Promise<string[]>} Sorted list of category ids (folder names).
+ */
+async function listCategoryIds(): Promise<string[]> {
+  try {
+    const entries = await readdir(DATA_ROOT, { withFileTypes: true } as never);
+    const candidates = entries
+      .filter((e: any) => e.isDirectory())
+      .map((e: any) => e.name);
+    const results: string[] = [];
+    for (const name of candidates) {
+      try {
+        const s = await stat(path.join(DATA_ROOT, name, "category.json"));
+        if (s.isFile()) results.push(name);
+      } catch {
+        // ignore non-category directories
+      }
+    }
+    results.sort();
+    return results;
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * loadCategoryMetadata function.
+ *
+ * @param {string} categoryId - Folder name containing category.json.
+ * @returns {Promise<{ id: string; name?: string; aliases?: string[] }>} Basic metadata used for resolving names/aliases.
+ */
+async function loadCategoryMetadata(categoryId: string): Promise<{
+  id: string;
+  name?: string;
+  aliases?: string[];
+}> {
+  const meta = await loadJson<Record<string, unknown>>(
+    categoryId,
+    "category.json"
+  );
+  const id = String(meta.id ?? categoryId);
+  const name = typeof meta.name === "string" ? meta.name : undefined;
+  const aliases = Array.isArray((meta as any).aliases)
+    ? (((meta as any).aliases as unknown[]).filter(
+        (v) => typeof v === "string"
+      ) as string[])
+    : undefined;
+  return { id, name, aliases };
+}
+
+/**
+ * resolveCategoryId function.
+ *
+ * Accepts a user-provided topic (id/name/alias) and resolves it to a canonical category id using data-driven metadata.
+ *
+ * @param {string} topic - User-provided id/name/alias.
+ * @returns {Promise<{ resolved?: string; available: string[] }>} Resolution result with available ids for clarification.
+ */
+async function resolveCategoryId(
+  topic: string
+): Promise<{ resolved?: string; available: string[] }> {
+  const input = topic.trim().toLowerCase();
+  const ids = await listCategoryIds();
+  const available = [...ids];
+  if (!input) return { available };
+
+  // Build alias map (id, name, aliases)
+  const map = new Map<string, string>();
+  for (const id of ids) {
+    map.set(id.toLowerCase(), id);
+    try {
+      const meta = await loadCategoryMetadata(id);
+      if (meta.name) map.set(meta.name.trim().toLowerCase(), meta.id);
+      if (meta.aliases) {
+        for (const a of meta.aliases) {
+          map.set(a.trim().toLowerCase(), meta.id);
+        }
+      }
+    } catch {
+      // ignore malformed metadata; id still present
+    }
+  }
+
+  const resolved = map.get(input);
+  return { resolved, available };
 }
 
 /**
@@ -233,20 +324,28 @@ async function handleInvoke(
 ): Promise<unknown> {
   switch (name) {
     case "user-context.describeCategory": {
-      const categoryId = String(args.categoryId ?? "");
-      if (!categoryId) {
-        throw new Error("'categoryId' is required.");
+      const raw = String(args.categoryId ?? "");
+      const { resolved, available } = await resolveCategoryId(raw);
+      if (!resolved) {
+        const suffix = available.length
+          ? ` Available categories: ${available.join(", ")}`
+          : "";
+        throw new Error(`'categoryId' is required or unknown.${suffix}`);
       }
-      return describeCategory(categoryId);
+      return describeCategory(resolved);
     }
     case "user-context.searchRecords": {
-      const categoryId = String(args.categoryId ?? "");
-      if (!categoryId) {
-        throw new Error("'categoryId' is required.");
+      const raw = String(args.categoryId ?? "");
+      const { resolved, available } = await resolveCategoryId(raw);
+      if (!resolved) {
+        const suffix = available.length
+          ? ` Available categories: ${available.join(", ")}`
+          : "";
+        throw new Error(`'categoryId' is required or unknown.${suffix}`);
       }
       const filters =
         (args.filters as Record<string, unknown> | undefined) ?? {};
-      return searchRecords(categoryId, filters);
+      return searchRecords(resolved, filters);
     }
     default:
       throw new Error(`Unknown tool: ${name}`);
