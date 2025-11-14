@@ -139,6 +139,30 @@ This changelog records Logs only.
 
 ### [2025-11-13]
 
+#### 2025-11-13 18:05:00 refactor/validation: Add shared config validation module (Phase 3 partial)
+
+**Problem/Context**: Continue Phase 3 of validation runtime extraction by creating a shared module for configuration validation (`validateAgentConfig`, `validateCompatibility`, `generateValidationReport` and helpers). Logic duplicated verbatim to maintain parity test guarantees while `src/types/configValidation.ts` retains original implementations (types directory not yet cleaned of runtime functions).
+
+**Changes Made**:
+
+- Added `src/shared/validation/configValidation.ts` with duplicated implementations from `src/types/configValidation.ts` (no behavioral changes).
+- Left original implementations in `src/types/configValidation.ts` (no delegation imports to avoid violating types-only constraint ahead of Phase 4).
+- Updated `TODO.md` marking Phase 3 shared module completion for category and config subsets; removed duplicate Phase 2 bullet.
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (38 passed, 1 skipped, 39 total) – parity suite unchanged.
+
+**Impact**: Establishes shared foundation for future migration of config validation logic; enables later removal of runtime code from `src/types/**` without risk. Maintains green parity tests and stable public API surface.
+
+##### Verification – 2025-11-13 (Shared config validation module)
+
+- Build: PASS
+- Tests: PASS (38 passed, 1 skipped)
+- Lint/Docs: PASS (no new markdown/TSDoc violations introduced)
+- Coverage: Unchanged (duplicate logic only)
+
 #### 2025-11-13 17:45:00 refactor/validation: Introduce shared category validation module (Phase 3 partial)
 
 **Problem/Context**: Begin Phase 3 of validation runtime extraction by creating a shared module for category/record/relationship validation while retaining existing logic in `src/types/userContext.types.ts` (cannot yet delegate due to types-only import guard). Shared code will enable later agent migration without editing type definitions.
@@ -236,7 +260,7 @@ This changelog records Logs only.
 - Lint/Docs: PASS
 - Health: PASS (no stray legacy config; dataset discovery stable)
 
-#### 2025-11-14 12:00:00 refactor/server: Dynamic MCP tools registry (remove static array)
+#### 2025-11-13 12:00:00 refactor/server: Dynamic MCP tools registry (remove static array)
 
 **Problem/Context**: The server exposed a hardcoded `tools` array in `src/server/index.ts`, risking drift whenever categories or agent metadata changed. Governance mandates data-driven descriptors sourced from runtime state (agents via orchestrator bridge).
 
@@ -254,14 +278,14 @@ This changelog records Logs only.
 
 **Impact**: Eliminates manual maintenance of MCP tool metadata; descriptors now reflect live category set (ids, aliases) through agent layer, reducing drift and strengthening orchestrator-centric architecture.
 
-##### Verification – 2025-11-14 (Dynamic tools registry)
+##### Verification – 2025-11-13 (Dynamic tools registry)
 
 - Build: PASS
 - Tests: PASS
 - Lint/Docs: PASS
 - No runtime regressions observed; server remains stdio-only JSON-RPC dispatcher.
 
-#### 2025-11-14 10:05:00 docs/governance+server: Enforce stdio transport by default and strict TSDoc
+#### 2025-11-13 10:05:00 docs/governance+server: Enforce stdio transport by default and strict TSDoc
 
 **Problem/Context**: We want a single transport (stdio) and strict documentation discipline. HTTP should be opt-in only for local debugging, and all TypeScript must have comprehensive TSDoc.
 
@@ -278,12 +302,12 @@ This changelog records Logs only.
 
 **Impact**: Aligns runtime with “stdio-only by default” preference and raises documentation quality gates. Future refactors will unify duplicate JSON-RPC handlers and derive the tools registry from orchestrator/config.
 
-##### Verification – 2025-11-14 (Stdio default + TSDoc enforcement docs)
+##### Verification – 2025-11-13 (Stdio default + TSDoc enforcement docs)
 
 - Build: PASS
 - Tests: PASS
 
-#### 2025-11-14 11:20:00 refactor/server: Migrate data loaders & category resolution to agents; add bridge tests
+#### 2025-11-13 11:20:00 refactor/server: Migrate data loaders & category resolution to agents; add bridge tests
 
 **Problem/Context**: Server transport still contained filesystem loaders (`loadJson`, `listCategoryIds`, alias resolution) duplicating agent logic and increasing drift risk. Needed to delegate all dataset access and resolution to `UserContextAgent` via the orchestrator bridge, enforce success message inclusion of category identifiers, and introduce focused bridge tests without coupling to internal FS helpers.
 
@@ -305,13 +329,13 @@ This changelog records Logs only.
 
 **Impact**: Server is now a pure JSON-RPC stdio dispatcher; all data access and resolution are agent-driven, reducing duplication and aligning with orchestrator-centric governance. Bridge tests provide guard rails for error enumeration behavior without coupling to internal FS utilities.
 
-##### Verification – 2025-11-14 (Server data loader migration)
+##### Verification – 2025-11-13 (Server data loader migration)
 
 - Build: PASS
 - Tests: PASS
 - Lint/Docs: PASS
 
-#### 2025-11-14 09:30:00 refactor/server: Add Orchestrator bridge and route MCP tools through it (Part 1)
+#### 2025-11-13 09:30:00 refactor/server: Add Orchestrator bridge and route MCP tools through it (Part 1)
 
 **Problem/Context**: The MCP server performed direct filesystem reads and handled business logic/formatting, drifting from the orchestrator‑centric architecture. We need a bridge that coordinates agents and centralizes formatting via `CommunicationAgent` while keeping the server surface minimal.
 
@@ -332,7 +356,7 @@ This changelog records Logs only.
 
 **Impact**: Begins the transition to orchestrator compliance. Server no longer executes core logic for these tools and leverages agent‑coordinated, data‑driven behavior with centralized formatting. Follow‑ups will remove remaining direct FS usage, unify handlers, and derive the tools registry from orchestrator/config.
 
-##### Verification – 2025-11-14 (Server → Orchestrator Bridge, Part 1)
+##### Verification – 2025-11-13 (Server → Orchestrator Bridge, Part 1)
 
 - Build: PASS
 - Tests: PASS
