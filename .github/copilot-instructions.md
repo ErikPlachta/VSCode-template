@@ -24,6 +24,16 @@ High-level governing directives for working within this repository. These princi
 12. Quality Safeguards: Use [Common Pitfalls + Quick Checks](#common-pitfalls--quick-checks) before merging significant changes.
 13. Evolution Logging: Any governance modification must be logged with verification (see: [Merge Process](#merge-process)).
 14. Completion Criteria: A task closes only after Decision Tree branches pass and verification is recorded (see: [Decision Tree](#decision-tree)).
+15. Start/End Compliance: No task is “done” until both Core Principles and Decision Tree permit closure; all sections must fall back here.
+16. Source of Truth Integrity: Configuration, data and governance docs are authoritative; never hardcode business values or bypass documented flows. (See: Session Workflow; Tools & Integrations.)
+17. Deterministic Workflow: Every request follows the lifecycle: Classify → Plan → Execute → Verify → Record. A request is incomplete until Record + Verification are finished.
+18. Mandatory Verification Loop: Build/test (and health/docs when relevant) must pass before logging completion. No partial closures.
+19. American English Standard: Enforce consistent US spelling across code and docs; deprecated variants produce warnings and are never reintroduced.
+20. Data-Driven Behavior: Categories, examples, and tool descriptors derive from runtime/config, never static in code. (See: Development Best Practices; Design Patterns.)
+21. Explicit Context, Task, and Logging: Agent must always take `CONTEXT-SESSION.md`, `TODO.md`, and `CHANGELOG.md` into consideration. (See [Default Behaviors - Interaction](#default-behaviors--interaction) for more details.)
+22. Escalate Ambiguity: If instructions conflict or context is insufficient, halt execution and ask for clarification—do not guess.
+23. Idempotent Operations: Re-running the same classification or generation step should produce stable, predictable output unless inputs changed.
+24. Governance Evolution: Changes to this file must reference Core Principles in the changelog and undergo full verification.
 
 Fallback: For any uncertainty, restart at [Decision Tree](#decision-tree) Branch 0 (Path Guard) then walk sequentially.
 
@@ -39,6 +49,10 @@ The Core Principles guarantee agents do not drift from directives and always ope
 - Verification: compile, test, health/docs (when applicable) required before closure.
 - Formatting: Only CommunicationAgent produces user-facing formatting; agents return typed data.
 - Structure: Two-file agent pattern (`agent.config.ts`, `index.ts`) plus shared helpers under `src/shared/**`.
+- Types Purity: `src/types/**` contains declarations only; runtime logic belongs under `src/shared/**` or agent modules. (Scope: src/\*\*)
+- Agent Isolation: Orchestrator alone coordinates agents; individual agents produce typed data only; individual agents needing to use services provided by other Agents are coordinated through and by Orchestrator. Formatting belongs solely to CommunicationAgent. (See Critical Operating Rules)
+- Minimal Surface Area: Agents use two-file pattern (`agent.config.ts` + `index.ts`); avoid proliferation of utility mutations inside agents.
+- Single-Path Protocol Handling: JSON-RPC handlers are unified; transport variations reuse the same path to prevent drift. (See [Tools & Integrations](#tools--integrations) → [MCP Transport & Protocol](#mcp-transport--protocol))
 
 #### `docs/**`
 
@@ -61,23 +75,6 @@ The Core Principles guarantee agents do not drift from directives and always ope
 - Isolation: Relaxed; may orchestrate tooling but must not import agent runtime modules directly.
 - Protocol: Reuse shared JSON-RPC handling when needed—do not implement divergent handlers.
 
-### Scope-Specific Rules
-
-1. Source of Truth Integrity: Configuration, data and governance docs are authoritative; never hardcode business values or bypass documented flows. (See: Session Workflow; Tools & Integrations.)
-2. Agent Isolation: Orchestrator alone coordinates agents; individual agents produce typed data only. Formatting belongs solely to CommunicationAgent. (Scope: `src/**`; excludes `bin/**`, `docs/**`, `out/**`; see Critical Operating Rules)
-3. Deterministic Workflow: Every request follows the lifecycle: Classify → Plan → Execute → Verify → Record. A request is incomplete until Record + Verification are finished.
-4. Mandatory Verification Loop: Build/test (and health/docs when relevant) must pass before logging completion. No partial closures.
-5. American English Standard: Enforce consistent US spelling across code and docs; deprecated variants produce warnings and are never reintroduced.
-6. Types Purity: `src/types/**` contains declarations only; runtime logic belongs under `src/shared/**` or agent modules. (Scope: src/\*\*)
-7. Data-Driven Behavior: Categories, examples, and tool descriptors derive from runtime/config, never static in code. (See: Development Best Practices; Design Patterns.)
-8. Single-Path Protocol Handling: JSON-RPC handlers are unified; transport variations reuse the same path to prevent drift. (Scope: `src/**`; see Tools & Integrations → MCP Transport & Protocol)
-9. Explicit Change Logging: Every meaningful change gets a timestamped CHANGELOG entry plus a verification block; TODO.md reconciled immediately after.
-10. Minimal Surface Area: Agents use two-file pattern (`agent.config.ts` + `index.ts`); avoid proliferation of utility mutations inside agents.
-11. Escalate Ambiguity: If instructions conflict or context is insufficient, halt execution and ask for clarification—do not guess.
-12. Idempotent Operations: Re-running the same classification or generation step should produce stable, predictable output unless inputs changed.
-13. Governance Evolution: Changes to this file must reference Core Principles in the changelog and undergo full verification.
-14. Start/End Compliance: No task is “done” until both Core Principles and Decision Tree permit closure; all sections must fall back here.
-
 <!-- END: CORE-PRINCIPLES -->
 
 ### De-duplication Policy
@@ -92,21 +89,21 @@ Fallback: All sections below inherit and must remain consistent with [Core Princ
 
 The Decision Tree ensures agents always know the next correct action—even under uncertainty—by providing ordered fallbacks. Apply the first matching branch; if a branch fails its guard, advance downward. Never skip verification or logging steps.
 
-0. Path Guard: Identify the scope of the change (src/**, bin/**, docs/**, out/**). Apply rules accordingly (see Core Principles → Scope & Path Applicability). Link to relevant rule sections; do not duplicate.
-1. Is the request classified? If no: classify intent (feature, refactor, docs, fix, analysis) using config + runtime data. (See Default Behaviors & Interaction)
-2. Is a Current TODO aligned? If no: add or update TODO.md (Current/Next) per guidelines.
-3. Is there an existing plan? If no: draft minimal high‑value steps (avoid trivial steps) linked to TODO hierarchy. (See Development Best Practices → Planning)
-4. Are prerequisites green? If uncertain: run `npm run compile && npm test` (add `npm run prebuild` if config/docs touched). (See Session Workflow)
-5. Can execution proceed without ambiguity? If ambiguity remains: request clarification from user (escalate) and pause modifications.
-6. Execute smallest safe increment: perform targeted patch/change; avoid broad refactors outside scope. (See Design Patterns)
-7. Verify gates: rerun compile/test (+ health/docs as needed). On failure: rollback or fix only directly related issues. (See Session Workflow)
-8. Record outcome: add CHANGELOG entry (scaffold/write via repo-ops or manual format) including Verification block.
-9. Reconcile tracking: update TODO.md statuses, mark completed subtasks, ensure CONTEXT-SESSION.md reflects branch plan deltas.
-10. Coverage/Audit Fallback: If change impacts validation, protocol, or data paths, trigger audit (hardcoded values, coverage review) before closure.
-11. Closure Guard: Only mark task “complete” once verification logged + TODO updated + no pending Decision Tree branches remain.
-12. Drift Detection: If unexpected files (legacy configs, British spellings) appear, prioritize remediation tasks before new feature work.
-13. Recovery Path: On repeated failures (≥2 attempts), pause, document failing context in CONTEXT-SESSION.md, and request user guidance.
-14. Evolution Rule: Modifications to Decision Tree must themselves follow branches 1–11 and cite rationale in CHANGELOG.
+1. Path Guard: Identify the scope of the change (src/**, bin/**, docs/**, out/**). Apply rules accordingly (see Core Principles → Scope & Path Applicability). Link to relevant rule sections; do not duplicate.
+2. Is the request classified? If no: classify intent (feature, refactor, docs, fix, analysis) using config + runtime data. (See Default Behaviors & Interaction)
+3. Is a Current TODO aligned? If no: add or update TODO.md (Current/Next) per guidelines.
+4. Is there an existing plan? If no: draft minimal high‑value steps (avoid trivial steps) linked to TODO hierarchy. (See Development Best Practices → Planning)
+5. Are prerequisites green? If uncertain: run `npm run compile && npm test` (add `npm run prebuild` if config/docs touched). (See Session Workflow)
+6. Can execution proceed without ambiguity? If ambiguity remains: request clarification from user (escalate) and pause modifications.
+7. Execute smallest safe increment: perform targeted patch/change; avoid broad refactors outside scope. (See Design Patterns)
+8. Verify gates: rerun compile/test (+ health/docs as needed). On failure: rollback or fix only directly related issues. (See Session Workflow)
+9. Record outcome: add CHANGELOG entry (scaffold/write via repo-ops or manual format) including Verification block.
+10. Reconcile tracking: update TODO.md statuses, mark completed subtasks, ensure CONTEXT-SESSION.md reflects branch plan deltas.
+11. Coverage/Audit Fallback: If change impacts validation, protocol, or data paths, trigger audit (hardcoded values, coverage review) before closure.
+12. Closure Guard: Only mark task “complete” once verification logged + TODO updated + no pending Decision Tree branches remain.
+13. Drift Detection: If unexpected files (legacy configs, British spellings) appear, prioritize remediation tasks before new feature work.
+14. Recovery Path: On repeated failures (≥2 attempts), pause, document failing context in CONTEXT-SESSION.md, and request user guidance.
+15. Evolution Rule: Modifications to Decision Tree must themselves follow branches 1–11 and cite rationale in CHANGELOG.
 
 Fallback: On any uncertainty, restart at Branch 0 (Path Guard), then Branch 1; cross-reference [Scope Specific Core Principles](#scope-specific-core-principles) before proceeding.
 
