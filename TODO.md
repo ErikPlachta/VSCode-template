@@ -106,15 +106,15 @@ Follow these guidelines to ensure effective task management:
     - Action: Added `tests/configValidation.coverage.test.ts` to exercise invalid `$configId`, orchestrator `intents` type, `textProcessing.stopWords`, and `scoring.weights` branches; unknown agent type warning; semver warning; compatibility paths; and report generation.
     - Result (2025-11-14): `src/shared/validation/configValidation.ts` – Statements 92.30%, Branches 89.15%, Functions 91.66%, Lines 92.30%.
     - Suite status: PASS (1 skipped, 45 passed). Coverage updated via `npm test -- --coverage`.
-- [ ] P1: MCP Transport & Protocol Enforcement
+- [x] P1: MCP Transport & Protocol Enforcement
   - [x] Ensure JSON-RPC 2.0 compliance end-to-end.
   - [x] Verify stdio is default transport; HTTP enabled only with `MCP_HTTP_ENABLED=true`.
   - [x] Consolidate JSON-RPC handlers into a single path reused across transports.
     - [x] Implement single dispatcher (initialize, tools/list, tools/call) and remove duplicates+
     - [x] Wire both stdio and HTTP to reuse the same dispatcher
-  - [ ] Add tests to validate protocol and transport behavior (single-handler + negative transport cases).
+  - [x] Add tests to validate protocol and transport behavior (single-handler + negative transport cases).
     - [x] Unit: method not found / invalid params error shapes
-    - [ ] Integration: stdio path happy-path tools/list + tools/call (deferred; stdio harness removed)
+    - ❌ Integration: stdio path happy-path tools/list + tools/call (deferred; stdio harness removed — moved to Backlog)
     - [x] Integration: HTTP happy-path (initialize + tools/list) via `bin/transport/verifyHttpTransport.js`
     - [x] CI helper: `test:http:ci` script added
     - [x] CI: wired `test:http:ci` into GitHub Actions (separate `transport` job)
@@ -126,6 +126,7 @@ Follow these guidelines to ensure effective task management:
   - [ ] Add migration cleanup script to remove old directory if present and copy/merge contents safely.
   - [ ] Verify extension still initializes correctly after rename (compile + tests + fresh run scenario).
   - [ ] Add CHANGELOG entry with verification block documenting migration.
+  - Next Step: implement migration script and update references, then run `npm run compile && npm run test`.
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
   - [ ] Types: Complete comprehensive TSDoc for remaining configuration types (no placeholders).
   - [ ] Extract functions from `src/types/**` into `src/shared/**` (e.g., `setConfigItem`, `createDescriptorMap`, `_getConfig`, `getUserFacingConfig`).
@@ -260,6 +261,8 @@ Follow these guidelines to ensure effective task management:
 ### Backlog Action Items
 
 - [ ] P3: Review the code base and identify british-english words `artefacts`, that should be american-english `artifacts`. Also seeing other words like 'behaviour', 'optimise', 'utilise', 'customise', 'organisation' etc.
+- [ ] P3: Optional stdio integration harness tests (deferred)
+  - Add a lightweight stdio transport verifier or targeted integration tests if/when needed; keep default verification via HTTP harness in CI.
 - [ ] P3: SECURITY: Assess need for build-time obfuscation (risk vs benefit)
 - [ ] P3: Evaluate the logic in `C:\repo\vscode-extension-mcp-server\src\tools`, and identify things that should exist in `C:\repo\vscode-extension-mcp-server\bin\utils\`, and update all imports, tests, documentation, etc. accordingly.
   - [ ] Specific follow-up: Move `src/tools/repositoryHealth.ts` into a `bin/utils` library and consolidate shared helpers with `bin/utils/validateMarkdown.ts` and `bin/utils/validateJson.ts`.
