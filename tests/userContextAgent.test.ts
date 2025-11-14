@@ -9,6 +9,7 @@ import {
   jest,
 } from "@jest/globals";
 import { promises as fs } from "fs";
+import * as fsSync from "fs";
 import * as os from "os";
 import * as path from "path";
 import { fileURLToPath } from "url";
@@ -63,7 +64,7 @@ describe("UserContextAgent", () => {
   it("lists categories and resolves aliases", async () => {
     const { manager } = await createManager();
     const categories = manager.listCategories();
-    const catalogue = manager.getDatasetCatalogue();
+    const catalogue = manager.getDatasetCatalog();
     expect(categories).toHaveLength(catalogue.length);
     const departments = manager.getCategory("dept");
     expect(departments.name).toBe("Departments");
@@ -111,30 +112,44 @@ describe("UserContextAgent", () => {
     );
   });
 
-  it("persists a consolidated catalogue cache", async () => {
+  it("persists a consolidated catalog cache (new key with legacy fallback)", async () => {
     const { manager, cacheDir } = await createManager();
-    const cataloguePath = path.join(
+    const catalogPathNew = path.join(
+      cacheDir,
+      "shared",
+      "relevant-data_catalog.json"
+    );
+    const catalogPathLegacy = path.join(
       cacheDir,
       "shared",
       "relevant-data_catalogue.json"
     );
-    for (let attempt = 0; attempt < 5; attempt += 1) {
-      try {
-        await fs.stat(cataloguePath);
-        break;
-      } catch (error) {
-        if (attempt === 4) {
-          throw error;
-        }
-        await new Promise((resolve) => setTimeout(resolve, 25));
-      }
+    // Poll for the appearance of either new or legacy catalog cache file.
+    let existingPath: string | undefined;
+    for (let attempt = 0; attempt < 40; attempt += 1) {
+      const candidates = [catalogPathNew, catalogPathLegacy];
+      existingPath = candidates.find((p) => fsSync.existsSync(p));
+      if (existingPath) break;
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
-    const raw = await fs.readFile(cataloguePath, "utf8");
+    if (!existingPath) {
+      const sharedDir = path.join(cacheDir, "shared");
+      if (fsSync.existsSync(sharedDir)) {
+        const files = fsSync.readdirSync(sharedDir);
+        throw new Error(
+          `Catalog cache file not created. Shared dir contents: ${files.join(
+            ", "
+          )}`
+        );
+      }
+      throw new Error("Catalog cache file not created (shared dir missing)");
+    }
+    const raw = await fs.readFile(existingPath, "utf8");
     const entry = JSON.parse(raw);
     expect(entry.value).toBeInstanceOf(Array);
     expect(entry.value[0]).toHaveProperty("id");
     expect(entry.metadata?.fingerprint).toBeDefined();
-    const datasetIds = manager.getDatasetCatalogue().map((item) => item.id);
+    const datasetIds = manager.getDatasetCatalog().map((item) => item.id);
     expect(entry.value.map((item: { id: string }) => item.id)).toEqual(
       datasetIds
     );

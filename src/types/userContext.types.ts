@@ -427,9 +427,9 @@ export interface CategorySnapshot {
 }
 
 /**
- * Consolidated index entry persisted to the shared cache
+ * Consolidated index entry persisted to the shared cache (American English primary form).
  */
-export interface DatasetCatalogueEntry {
+export interface DatasetCatalogEntry {
   id: CategoryId;
   name: string;
   description: string;
@@ -463,9 +463,15 @@ export interface LoadedDataset {
   categories: Map<CategoryId, BusinessCategory>;
   lookupIndex: Map<string, BusinessCategory>;
   relationships: InternalRelationshipDefinition[];
-  consolidatedIndex: DatasetCatalogueEntry[];
+  consolidatedIndex: DatasetCatalogEntry[];
   fingerprint: string;
 }
+
+/**
+ * Deprecated British English alias retained for backwards compatibility.
+ * @deprecated Use DatasetCatalogEntry instead.
+ */
+export type DatasetCatalogueEntry = DatasetCatalogEntry;
 
 /** Relationship load result (descriptions exposed + internal definitions) */
 export interface RelationshipLoadResult {
@@ -626,7 +632,7 @@ export interface ValidationResult {
 /**
  * Validates a {@link CategoryConfig} object with detailed error reporting.
  *
- * @remarks Phase 1 Inventory: runtime validation function scheduled for extraction to `src/shared/validation/categoryValidation.ts` in Phase 3. Present here temporarily; do not add new runtime functions under `src/types/**`.
+ * @remarks Runtime validation logic now resides in `src/shared/validation/categoryValidation.ts`. This types module remains declarative only; do not introduce runtime functions here.
  *
  * @param obj - The value to validate.
  * @returns Validation result with detailed errors.
@@ -639,6 +645,5 @@ export interface ValidationResult {
  * }
  * ```
  */
-// Phase 6: Runtime validation functions removed from types. Use shared implementations in
-// `src/shared/validation/categoryValidation.ts` for all runtime behavior. This file now
-// provides type declarations only.
+// Runtime validation functions have been extracted; this file intentionally contains
+// only type/interface declarations per governance rules.

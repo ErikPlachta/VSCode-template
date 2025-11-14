@@ -50,6 +50,7 @@ import {
   BusinessCategory,
   EntityConnections,
   CategorySnapshot,
+  DatasetCatalogEntry,
   DatasetCatalogueEntry,
   InternalRelationshipDefinition,
   LoadedDataset,
@@ -63,6 +64,12 @@ import {
   RawExampleFile,
   RawQueryFile,
 } from "@internal-types/userContext.types";
+import {
+  BusinessDataCatalog,
+  BusinessDataCatalogue,
+  UserContextCatalog,
+  UserContextCatalogue,
+} from "@internal-types/interfaces";
 // Phase 5: use shared category validation implementations (types directory will drop runtime copies after enforcement test).
 import {
   validateCategoryRecordImpl as validateCategoryRecord,
@@ -128,23 +135,18 @@ function hasUserCategories(root: string): boolean {
     return false;
   }
 }
-
-/**
- * Choose the active data root for the agent. Preference order:
- * 1. Explicit override via VSCODE_TEMPLATE_DATA_ROOT (tests/dev)
- * 2. External user data directory if it contains categories
- * 3. Built-in default dataset bundled in the extension source.
- * Ensures external directory exists for future imports.
- *
- * @returns {{ activeRoot: string; externalRoot: string; usingExternal: boolean }} Resolution outcome.
- */
-function chooseDataRoot(): {
+function resolveActiveDataRoots(): {
   activeRoot: string;
   externalRoot: string;
   usingExternal: boolean;
 } {
+  // Highest priority: explicit override via environment variable (used heavily by tests)
   const override = process.env.VSCODE_TEMPLATE_DATA_ROOT;
-  if (override) {
+  if (
+    override &&
+    fs.existsSync(override) &&
+    fs.statSync(override).isDirectory()
+  ) {
     return {
       activeRoot: override,
       externalRoot: override,
@@ -170,13 +172,23 @@ function chooseDataRoot(): {
     usingExternal: false,
   };
 }
-const CONSOLIDATED_INDEX_CACHE_KEY = "relevant-data:catalogue";
+
+// Backwards-compatible wrapper preserving legacy name used elsewhere in the agent.
+function chooseDataRoot(): {
+  activeRoot: string;
+  externalRoot: string;
+  usingExternal: boolean;
+} {
+  return resolveActiveDataRoots();
+}
+const LEGACY_CONSOLIDATED_INDEX_CACHE_KEY = "relevant-data:catalogue";
+const CONSOLIDATED_INDEX_CACHE_KEY = "relevant-data:catalog";
 
 /**
  * toPosixPath function.
  *
  * @param {string} filePath - filePath parameter.
- * @returns {string} Normalized path using POSIX separators for stable catalogue hashing.
+ * @returns {string} Normalized path using POSIX separators for stable catalog hashing.
  */
 function toPosixPath(filePath: string): string {
   return filePath.split(path.sep).join("/");
@@ -384,7 +396,7 @@ export class UserContextAgent extends BaseAgentConfig {
     CategoryId,
     InternalRelationshipDefinition[]
   >;
-  private readonly consolidatedIndex: DatasetCatalogueEntry[];
+  private readonly consolidatedIndex: DatasetCatalogEntry[];
   private readonly datasetFingerprint: string;
   private readonly telemetry = createInvocationLogger(
     UserContextAgentProfile.id
@@ -414,7 +426,7 @@ export class UserContextAgent extends BaseAgentConfig {
 
     // Initialize cache and data root
     this.cacheDirPromise = cacheDirPromise ?? ensureCacheDirectory();
-    const rootChoice = chooseDataRoot();
+    const rootChoice = resolveActiveDataRoots();
     this.dataRoot = rootChoice.activeRoot;
     this.externalRoot = rootChoice.externalRoot;
     this.usingExternal = rootChoice.usingExternal;
@@ -891,12 +903,70 @@ export class UserContextAgent extends BaseAgentConfig {
   }
 
   /**
-   * Expose the consolidated dataset catalogue built from the data directory.
-   *
-   * @returns {DatasetCatalogueEntry[]} Consolidated dataset catalogue entries for every category.
+   * Expose the consolidated dataset catalog built from the data directory (American English).
+   * @returns {DatasetCatalogEntry[]} Consolidated dataset catalog entries for every category.
+   */
+  getDatasetCatalog(): DatasetCatalogEntry[] {
+    return this.consolidatedIndex;
+  }
+
+  /**
+   * Deprecated British English variant retained for compatibility.
+   * @deprecated Use {@link getDatasetCatalog} instead.
    */
   getDatasetCatalogue(): DatasetCatalogueEntry[] {
-    return this.consolidatedIndex;
+    return this.consolidatedIndex as DatasetCatalogueEntry[];
+  }
+
+  /**
+   * Build an aggregate business data catalog snapshot (American English).
+   * @returns {BusinessDataCatalog} Catalog containing categories, relationship descriptions, schemas and timestamp.
+   */
+  getBusinessDataCatalog(): BusinessDataCatalog {
+    return {
+      categories: Array.from(this.categories.values()).map((cat) => ({
+        id: cat.id,
+        name: cat.name,
+        description: cat.description,
+        recordCount: cat.records.length,
+        schemaVersion: "1",
+        relationships: cat.config.relationships,
+      })),
+      relationships: this.relationshipDefinitions.map((def) => ({
+        name: def.relationshipName,
+        description: def.relationshipName,
+        targetCategory: def.targetCategory,
+        viaField: def.sourceField,
+      })),
+      schemas: Array.from(this.categories.values()).flatMap((cat) =>
+        cat.schemas.map((s) => ({ name: s.name, schema: s.schema }))
+      ),
+      lastUpdated: new Date().toISOString(),
+    };
+  }
+
+  /**
+   * Deprecated British English variant of business data catalog accessor.
+   * @deprecated Use getBusinessDataCatalog instead.
+   */
+  getBusinessDataCatalogue(): BusinessDataCatalogue {
+    return this.getBusinessDataCatalog();
+  }
+
+  /**
+   * User context catalog accessor (semantic alias for business catalog).
+   * @returns {UserContextCatalog} User context catalog snapshot.
+   */
+  getUserContextCatalog(): UserContextCatalog {
+    return this.getBusinessDataCatalog();
+  }
+
+  /**
+   * Deprecated British English user context accessor.
+   * @deprecated Use getUserContextCatalog instead.
+   */
+  getUserContextCatalogue(): UserContextCatalogue {
+    return this.getUserContextCatalog();
   }
 
   /**
@@ -912,7 +982,7 @@ export class UserContextAgent extends BaseAgentConfig {
     const categories = new Map<CategoryId, BusinessCategory>();
     const lookupIndex = new Map<string, BusinessCategory>();
     const relationships: InternalRelationshipDefinition[] = [];
-    const consolidatedIndex: DatasetCatalogueEntry[] = [];
+    const consolidatedIndex: DatasetCatalogEntry[] = [];
     const loadErrors: Array<{ categoryName: string; error: string }> = [];
 
     const entries = fs
@@ -932,7 +1002,7 @@ export class UserContextAgent extends BaseAgentConfig {
           entry.name
         );
         categories.set(category.id, category);
-        consolidatedIndex.push(this.createCatalogueEntry(category));
+        consolidatedIndex.push(this.createCatalogEntry(category));
         relationships.push(...relationshipDefinitions);
         for (const key of [category.id, category.name, ...category.aliases]) {
           lookupIndex.set(NormalizeLookupKey(key), category);
@@ -1705,14 +1775,21 @@ export class UserContextAgent extends BaseAgentConfig {
     await this.telemetry("persistConsolidatedIndex", async () => {
       try {
         const cacheDir = await this.cacheDirPromise;
-        const cached = await readSharedCacheEntry<DatasetCatalogueEntry[]>(
+        // Attempt to read both new and legacy cache keys for backward compatibility.
+        let cached = await readSharedCacheEntry<DatasetCatalogEntry[]>(
           cacheDir,
           CONSOLIDATED_INDEX_CACHE_KEY
         );
+        if (!cached) {
+          cached = await readSharedCacheEntry<DatasetCatalogEntry[]>(
+            cacheDir,
+            LEGACY_CONSOLIDATED_INDEX_CACHE_KEY
+          );
+        }
         if (cached?.metadata?.fingerprint === this.datasetFingerprint) {
           return;
         }
-        const entry: SharedCacheEntry<DatasetCatalogueEntry[]> = {
+        const entry: SharedCacheEntry<DatasetCatalogEntry[]> = {
           key: CONSOLIDATED_INDEX_CACHE_KEY,
           toolName: UserContextAgentProfile.id,
           timestamp: new Date().toISOString(),
@@ -1727,14 +1804,12 @@ export class UserContextAgent extends BaseAgentConfig {
   }
 
   /**
-   * createCatalogueEntry function.
+   * createCatalogEntry function.
    *
-   * @param {BusinessCategory} category - category parameter.
-   * @returns {DatasetCatalogueEntry} Catalogue entry summarising identifiers, relationships and schema names.
+   * @param {BusinessCategory} category - Category metadata and records.
+   * @returns {DatasetCatalogEntry} Catalog entry summarizing identifiers, relationships and schema names.
    */
-  private createCatalogueEntry(
-    category: BusinessCategory
-  ): DatasetCatalogueEntry {
+  private createCatalogEntry(category: BusinessCategory): DatasetCatalogEntry {
     return {
       id: category.id,
       name: category.name,

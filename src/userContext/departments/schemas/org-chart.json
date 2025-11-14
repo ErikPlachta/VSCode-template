@@ -1,6 +1,6 @@
 {
   "name": "OrgChart",
-  "description": "Hierarchy representation for organisational modelling.",
+  "description": "Hierarchy representation for organizational modeling.",
   "schema": {
     "type": "object",
     "properties": {

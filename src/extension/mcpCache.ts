@@ -1,7 +1,7 @@
 /**
  * @packageDocumentation Utilities for managing the local `.mcp-cache` directory.
  *
- * Module for working with on-disk cache artefacts shared across tools and agents.
+ * Module for working with on-disk cache artifacts shared across tools and agents.
  */
 
 import { promises as fs } from "fs";
@@ -25,7 +25,7 @@ function getGlobalExtensionsRoot(): string {
 }
 
 /**
- * Minimal representation of a cached artefact that can be exchanged across tools.
+ * Minimal representation of a cached artifact that can be exchanged across tools.
  *
  * @template T - Payload type stored in the cache entry.
  */
@@ -141,7 +141,7 @@ export async function readSharedCacheEntry<T = unknown>(
 }
 
 /**
- * Enumerate all cached artefacts currently stored on disk.
+ * Enumerate all cached artifacts currently stored on disk.
  *
  * @template T - Payload type associated with entries.
  * @param {string} cacheDir - Absolute path returned by {@link ensureCacheDirectory}.

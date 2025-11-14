@@ -1,6 +1,6 @@
 {
   "name": "Resource",
-  "description": "Reusable knowledge artefact.",
+  "description": "Reusable knowledge artifact.",
   "schema": {
     "type": "object",
     "required": ["id", "name", "departmentId"],

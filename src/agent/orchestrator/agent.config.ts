@@ -83,7 +83,7 @@ export const orchestratorConfig: AgentConfigDefinition = {
           "workflow", // Process-related questions
           "schema", // Data structure queries
           "metadata", // Information about data organization
-          "catalogue", // Data catalog requests
+          "catalog", // Data catalog requests (American English primary)
           "snapshot", // Data snapshot requests
         ],
       },

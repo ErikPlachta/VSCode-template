@@ -1,15 +1,74 @@
 # Copilot Chat Governance (Overhaul)
 
-<!-- Replaced with the approved governance overhaul on 2025-11-13 -->
+- This document codifies the operational rules, architecture guardrails, and day-to-day workflows for developing and maintaining this VS Code extension with embedded MCP server.
+- It is designed for LLM-friendly consumption with explicit constraints to prevent drift.
+- This governance overhaul was approved and implemented on 2025-11-13 to enhance clarity, consistency, and maintainability across the codebase and development processes.
 
-This document codifies the operational rules, architecture guardrails, and day-to-day workflows for developing and maintaining this VS Code extension with embedded MCP server. It is designed for LLM-friendly consumption with explicit constraints to prevent drift.
+---
 
-Use American English throughout.
+## CoPilot Chat Communication Protocols
+
+This section represents how the user wants CoPilot Chat and all Agents work to handle communication during active sessions. As such, all agents must adhere to these protocols when interacting with the user via CoPilot Chat.
+
+- The goal of this directive is to supplement, not override or replace.
+- As an Agent is working through tasks and executing work, it must always prioritize clear, concise, and contextually relevant communication with the user.
+- After agent thinks and then verifies an action, agent will provide concise summary. Details related to how decision was made should remain in chat in a collapsible box.
+- Agent should avoid unnecessary repetition of information already provided in the chat history. The goal is to provide small and concise updates as you're moving through actions, so User can clearly understand decisions being made.
+
+### Communication Patterns (Micro‑updates)
+
+- Default cadence: Post short micro‑updates during active work, including when no TODO list is in use.
+- Preambles: Start each tool/action with an 8–12 word sentence explaining why, what, and expected outcome.
+- Headers: When running multi‑step tasks, include a short Markdown header to anchor context (e.g., "Preparing Changelog Entry").
+- Tie to focus: Reference the active TODO when present, e.g., "Starting: add Phase 7 changelog entry (2/9)".
+- No repetition: Do not restate unchanged plans; report deltas and results only.
+- Result echo: After each action, report a one‑line outcome (SUCCESS/FAIL with minimal details).
+
+### Tool & CLI Narration (Standard)
+
+When invoking CLI or multi‑step tools, narrate with this four‑step pattern:
+
+1. Preparing: What and why you are doing a dry‑run/scaffold.
+2. Result: Outcome of the dry‑run (success/failure + next action).
+3. Writing: What and why you are committing/applying the change.
+4. Result: Outcome of the write (success/failure + follow‑up).
+
+Example (changelog):
+
+```text
+## Preparing Changelog Entry
+Preparing: Executing scaffold (dry‑run) to validate content and placement…
+SUCCESS: Scaffold validated. No errors; ready to commit.
+
+## Writing Changelog Entry
+Writing: Executing commit to apply entry via repo‑ops CLI…
+SUCCESS: Changelog entry applied.
+```
+
+### Formatting & Tone
+
+- Brevity first: Prefer one‑sentence updates; avoid verbose rationales in-line.
+- Collapsible details: Keep extended reasoning in a collapsible details block when necessary.
+- American English: Use American spellings and consistent terminology from the codebase.
+- Momentum: Build on prior context ("Next, I'll…") rather than re‑explaining.
+
+### Good vs. Improve Examples
+
+- Good: "Starting: add Phase 7 changelog entry via CLI (2/9)."
+- Improve: Add a brief header and purpose, then result lines as shown above.
+- Bad: Running 2+ CLI commands without purpose; always state why and expected outcome first.
+
+### Revision Policy
+
+- Iterative guidance: This section evolves. Capture refinement tasks in `TODO.md` under "Next" or "Backlog".
+- Governance alignment: Keep changes consistent with Critical Operating Rules and Default Behaviors.
+- Verification: After updating this section, add a `docs` changelog entry and run `npm run prebuild`.
 
 ---
 
 ## Critical Operating Rules
 
+- Use American English throughout.
 - Agent isolation: Only the Orchestrator coordinates agents; agents return typed data only. All user-facing formatting is owned by CommunicationAgent.
 - Data-driven by default: No hardcoded business values. Derive categories, fields, and examples from configuration or loaded data.
 - Configuration is source of truth: Never commit `src/mcp.config.json`. Generated artifacts live under `out/` only.

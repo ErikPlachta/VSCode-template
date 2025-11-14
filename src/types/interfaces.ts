@@ -166,10 +166,10 @@ export interface RelationshipDescription {
 }
 
 /**
- * BusinessDataCatalogue interface.
+ * BusinessDataCatalog interface (American English primary form).
  *
  */
-export interface BusinessDataCatalogue {
+export interface BusinessDataCatalog {
   categories: CategoryInfo[];
   relationships: RelationshipDescription[];
   schemas: CategorySchema[];
@@ -177,10 +177,24 @@ export interface BusinessDataCatalogue {
 }
 
 /**
- * UserContextCatalogue interface (renamed from BusinessDataCatalogue).
- * Backward compatible alias preserving the same shape during migration.
+ * Deprecated British English alias retained for backwards compatibility.
+ *
+ * @deprecated Use BusinessDataCatalog instead.
  */
-export type UserContextCatalogue = BusinessDataCatalogue;
+export type BusinessDataCatalogue = BusinessDataCatalog;
+
+/**
+ * UserContextCatalog alias (canonical user-facing catalog type).
+ *
+ */
+export type UserContextCatalog = BusinessDataCatalog;
+
+/**
+ * Deprecated British English user context catalog alias.
+ *
+ * @deprecated Use UserContextCatalog instead.
+ */
+export type UserContextCatalogue = UserContextCatalog;
 
 /**
  * CategoryInfo interface.
@@ -200,6 +214,15 @@ export interface CategoryInfo {
  *
  */
 export interface RelevantDataManagerInterface {
+  /**
+   * Primary American English method returning the business data catalog.
+   */
+  getBusinessDataCatalog(): BusinessDataCatalog;
+  /**
+   * Deprecated British English variant retained for migration window.
+   *
+   * @deprecated Use getBusinessDataCatalog instead.
+   */
   getBusinessDataCatalogue(): BusinessDataCatalogue;
   getCategoryInfo(categoryId: CategoryId): CategoryInfo;
   getCategorySchema(categoryId: CategoryId): CategorySchema[];
@@ -216,7 +239,15 @@ export interface RelevantDataManagerInterface {
  */
 export interface UserContextManagerInterface
   extends RelevantDataManagerInterface {
-  /** Optional transitional method returning the renamed catalogue type. */
+  /**
+   * Optional American English method returning the user context catalog.
+   */
+  getUserContextCatalog?(): UserContextCatalog;
+  /**
+   * Optional deprecated British English variant.
+   *
+   * @deprecated Use getUserContextCatalog instead.
+   */
   getUserContextCatalogue?(): UserContextCatalogue;
 }
 

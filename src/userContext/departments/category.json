@@ -1,12 +1,12 @@
 {
   "id": "departments",
   "name": "Departments",
-  "description": "Organisational units, their missions, and leadership hierarchy.",
+  "description": "Organizational units, their missions, and leadership hierarchy.",
   "aliases": ["dept", "org units", "teams"],
   "config": {
     "purpose": "Define the company's structure and accountability chains.",
     "primaryKeys": ["id"],
-    "updateCadence": "Quarterly structure review with ad-hoc updates for reorganisations.",
+    "updateCadence": "Quarterly structure review with ad-hoc updates for reorganizations.",
     "access": "All employees can view. Updates restricted to Strategy & Operations.",
     "requirements": {
       "requiredRecordFields": ["id", "name", "leadId", "description"],
@@ -24,7 +24,7 @@
     "orchestration": {
       "summary": "<Department> data anchors ownership, leadership, and cross-functional responsibilities.",
       "signals": [
-        "Requests mention a team, <department>, or organisational responsibility.",
+        "Requests mention a team, <department>, or organizational responsibility.",
         "The user needs to know which <department> owns an application, policy, or resource.",
         "The task involves understanding leadership hierarchy or <department> missions."
       ],
@@ -38,7 +38,7 @@
           "signals": [
             "We must collect fields needed to create or update a <department> record.",
             "The orchestrator needs to understand how <department> relate to applications, policies, or resources before querying.",
-            "Contributors are verifying the folder layout, schemas, or examples for organisational data."
+            "Contributors are verifying the folder layout, schemas, or examples for organizational data."
           ],
           "promptStarters": [
             "Relevant data manager, list the required metadata for a <department> entry.",
@@ -60,7 +60,7 @@
           ]
         },
         "dataAgent": {
-          "focus": "Synthesize organisational insights, collaboration maps, and onboarding briefs for teams.",
+          "focus": "Synthesize organizational insights, collaboration maps, and onboarding briefs for teams.",
           "signals": [
             "Executives need a narrative of how departments collaborate on a program or system.",
             "We are preparing onboarding guidance for a role joining a department.",

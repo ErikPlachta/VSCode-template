@@ -174,7 +174,7 @@ export const agentConfigurations: Record<string, UnifiedAgentConfig> = {
       title: "Relevant Data Manager",
       description:
         "curates category metadata, schemas, and validation artifacts",
-      primarySignals: ["schema", "metadata", "catalogue", "snapshot"],
+      primarySignals: ["schema", "metadata", "catalog", "snapshot"],
       escalateWhen: ["category folder is missing", "schema validation fails"],
     },
     execution: {

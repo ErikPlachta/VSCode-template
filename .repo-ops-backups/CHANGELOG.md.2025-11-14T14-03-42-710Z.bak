@@ -292,34 +292,23 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
-#### 2025-11-14 09:03:42 docs: Clarify Copilot communication protocols (micro-updates, CLI narration, examples)
+#### 2025-11-14 09:03:03 docs: Clarify Copilot communication protocols (micro-updates, CLI narration, examples)
 
 **Problem/Context**: Added micro-update cadence, 8–12 word preambles, standard 4-step CLI narration, formatting/tone rules, good/bad/improve examples, and revision policy.
 
 **Changes Made**:
 
-- `.github/copilot-instructions.md`: Added “Communication Patterns (Micro‑updates)”, “Tool & CLI Narration (Standard)”, example block with fenced `text` language, “Formatting & Tone”, “Good vs. Improve Examples”, and “Revision Policy”. Established headers/preambles/delta-only results and standardized 4-step CLI narration.
+1. <file path> (lines X-Y): <What changed and why>
+2. <file path> (lines A-B): <What changed and why>
 
-**Architecture Notes**: Formalizes concise, iterative micro‑updates and CLI narration to improve collaboration signals without verbosity; aligns with Critical Operating Rules and Default Behaviors.
+**Architecture Notes**: <Patterns/decisions>
 
-**Files Changed**: 1 file (`.github/copilot-instructions.md`).
+**Files Changed**: <List files with line counts>
 
-**Testing**:
+**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
 
-- Build: PASS (`npm run compile`)
-- Tests: PASS (`npm run test`)
-- Prebuild: PASS (`npm run prebuild`) – templates and config OK
-- Lint (docs): PASS – fenced language added; headings/lists spacing valid
-- Health: PASS – no generated config drift
-- Coverage: N/A (docs-only)
+**Impact**: <What this enables/fixes>
 
-**Impact**: Clearer, consistent chat updates and CLI narration improve traceability and reduce ambiguity during multi-step tasks.
-
-##### Verification – 2025-11-14 (Communication protocols docs)
-
-- Confirmed new sections render correctly with proper fenced block language.
-- Ran build/test/prebuild; all green.
-- No inline-HTML placeholders remain in this entry.
 
 #### 2025-11-14 08:35:40 refactor: Validation runtime extraction Phase 7 cleanup
 
@@ -346,7 +335,7 @@ All other changes must be performed via the CLI.
 
 **Impact**: Locks declarative state of types layer; prepares Phase 8 audit (hardcoded value scan) and Phase 9 coverage review without phased clutter.
 
-##### Verification (Phase 7 cleanup)
+##### Verification – 2025-11-14 (Phase 7 cleanup)
 
 - Confirmed removal of all phased remarks in `userContext.types.ts`.
 - Runtime validation limited to shared modules; purity test still PASS.
@@ -430,31 +419,20 @@ All other changes must be performed via the CLI.
 
 #### 2025-11-13 23:09:45 docs: Cleanup
 
-**Problem/Context**: Finalize CHANGELOG hygiene by removing placeholder artifacts and normalizing markdown spacing/headers where prior edits left scaffolding.
+**Problem/Context**: Finalize CHANGELOG cleanup actions:
 
 **Changes Made**:
 
-- `CHANGELOG.md`: Removed placeholder lines (angle‑bracket tokens), normalized list numbering and blank lines around lists/fences, and ensured fenced code blocks specify a language where missing.
+1. <file path> (lines X-Y): <What changed and why>
+2. <file path> (lines A-B): <What changed and why>
 
-**Architecture Notes**: Documentation‑only cleanup to satisfy markdownlint and improve readability; no runtime or test logic affected.
+**Architecture Notes**: <Patterns/decisions>
 
-**Files Changed**: 1 file (`CHANGELOG.md`).
+**Files Changed**: <List files with line counts>
 
-**Testing**:
+**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
 
-- Build: PASS (`npm run compile`)
-- Tests: PASS (`npm run test`)
-- Prebuild: PASS (`npm run prebuild`)
-- Lint (docs): PASS (placeholder tokens removed; spacing adjusted)
-- Health: PASS (no generated config drift)
-- Coverage: N/A (docs‑only)
-
-**Impact**: Eliminates residual placeholder scaffolding and keeps the changelog lint‑clean and easy to scan.
-
-##### Verification – 2025-11-14 (Changelog cleanup)
-
-- Verified placeholder tokens are removed from affected entry.
-- Build/test/prebuild gates green; no content outside docs changed.
+**Impact**: <What this enables/fixes>
 
 #### 2025-11-13 23:03:00 docs/guidance+cli: Polish multiline context guidance; add newline validator & workflow example
 
