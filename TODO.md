@@ -117,6 +117,7 @@ Follow these guidelines to ensure effective task management:
     - [ ] Integration: stdio path happy-path tools/list + tools/call (deferred; stdio harness removed)
     - [x] Integration: HTTP happy-path (initialize + tools/list) via `bin/transport/verifyHttpTransport.js`
     - [x] CI helper: `test:http:ci` script added
+    - [x] CI: wired `test:http:ci` into GitHub Actions (separate `transport` job)
   - [x] Update documentation to reflect transport and protocol standards.
   - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
 - [ ] P1: Cache Directory Rename & Migration
