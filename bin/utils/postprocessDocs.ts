@@ -54,29 +54,8 @@ async function run(): Promise<void> {
   // Collect generated pages for buildPipeline/orchestration/repositoryHealthAgent
   // and copy directly into structured IA without creating root duplicates.
   const generatedBase = path.join(docsDir, "docs");
-  const structuredPromotions: Array<{ src: string; dest: string }> = [
-    {
-      src: path.join(generatedBase, "buildPipeline", "README.md"),
-      dest: path.join(docsDir, "guides", "build-pipeline.md"),
-    },
-    {
-      src: path.join(generatedBase, "repositoryHealthAgent", "README.md"),
-      dest: path.join(
-        docsDir,
-        "reference",
-        "tools",
-        "repository-health-agent.md"
-      ),
-    },
-    {
-      src: path.join(generatedBase, "orchestration", "README.md"),
-      dest: path.join(docsDir, "concepts", "orchestration.md"),
-    },
-    {
-      src: path.join(generatedBase, "mcp", "jsonRpc", "README.md"),
-      dest: path.join(docsDir, "mcp", "json-rpc.md"),
-    },
-  ];
+  const structuredPromotions: Array<{ src: string; dest: string }> =
+    getStructuredPromotions(generatedBase, docsDir);
   for (const { src, dest } of structuredPromotions) {
     try {
       const content = await readFile(src, "utf8");
@@ -150,7 +129,48 @@ async function run(): Promise<void> {
   }
 }
 
-void run().catch((err: unknown) => {
-  console.error("[docs:fix] Failed while normalizing markdown files.", err);
-  process.exitCode = 1;
-});
+// Execute only when invoked directly via Node, not on import (e.g., in tests)
+import { fileURLToPath } from "node:url";
+if (typeof process !== "undefined" && Array.isArray(process.argv)) {
+  const thisFile = fileURLToPath(import.meta.url);
+  const invoked = process.argv[1] ? path.resolve(process.argv[1]) : "";
+  if (thisFile === invoked) {
+    void run().catch((err: unknown) => {
+      console.error("[docs:fix] Failed while normalizing markdown files.", err);
+      process.exitCode = 1;
+    });
+  }
+}
+
+/**
+ * Return the list of structured promotions (source generated pages to final destinations).
+ * Exported for unit tests to guard against regressions in TypeDoc pathing.
+ */
+export function getStructuredPromotions(
+  generatedBase: string,
+  docsDir: string
+): Array<{ src: string; dest: string }> {
+  return [
+    {
+      src: path.join(generatedBase, "buildPipeline", "README.md"),
+      dest: path.join(docsDir, "guides", "build-pipeline.md"),
+    },
+    {
+      src: path.join(generatedBase, "repositoryHealthAgent", "README.md"),
+      dest: path.join(
+        docsDir,
+        "reference",
+        "tools",
+        "repository-health-agent.md"
+      ),
+    },
+    {
+      src: path.join(generatedBase, "orchestration", "README.md"),
+      dest: path.join(docsDir, "concepts", "orchestration.md"),
+    },
+    {
+      src: path.join(generatedBase, "mcp", "jsonRpc", "README.md"),
+      dest: path.join(docsDir, "mcp", "json-rpc.md"),
+    },
+  ];
+}

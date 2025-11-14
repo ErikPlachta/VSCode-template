@@ -1,8 +1,8 @@
 /**
- * @packageDocumentation Configuration Validation Type Declarations (Phase 6)
+ * @packageDocumentation Configuration Validation Type Declarations
  *
- * All runtime validation logic has migrated to `src/shared/validation/configValidation.ts`.
- * This file now exposes only the type shapes consumed by agents, tools, and tests.
+ * Runtime validation logic lives in `src/shared/validation/configValidation.ts`.
+ * This module exports only type shapes for agents, tools, and tests (types-only purity).
  */
 
 /** Detailed validation error information (runtime logic lives in shared module). */
@@ -27,5 +27,5 @@ export interface ValidationResult {
   warnings: ValidationWarning[];
 }
 
-// Phase 6 completion note: previous runtime exports (validateAgentConfig, validateCompatibility,
-// generateValidationReport) removed. Import these from `@shared/validation/configValidation` instead.
+// Previous runtime exports (validateAgentConfig, validateCompatibility, generateValidationReport)
+// were migrated to shared validation. Import from `@shared/validation/configValidation` for logic.

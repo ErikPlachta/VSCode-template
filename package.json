@@ -1,5 +1,5 @@
 {
-  "name": "UserContext-mcp-extension",
+  "name": "usercontext-mcp-extension",
   "displayName": "User Context MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",

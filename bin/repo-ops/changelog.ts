@@ -8,6 +8,10 @@ import { backupFile, ensureDir, readFileUtf8, writeFileUtf8 } from "./fs";
 import { defaultConfig } from "./repo-ops.config";
 import type { ApplyPlan, RepoPaths } from "./types";
 import * as path from "path";
+import * as fs from "fs";
+// Hashing & structural integrity handled via changelogIntegrity utilities.
+import { validateChangelog, computeChainHash } from "./changelogIntegrity";
+import { acquireLock, releaseLock } from "./lock";
 
 /**
  * Normalize newlines to \n for consistent parsing.
@@ -44,13 +48,12 @@ function formatTimestamp(d: Date, timeZone: string): string {
     }, {});
   return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second}`;
 }
-
 /**
  * Format a date to 'YYYY-MM-DD' in a specific IANA timezone.
  *
- * @param {Date} d - Date instance.
- * @param {string} timeZone - IANA timezone.
- * @returns {string} Date string.
+ * @param d - Date instance.
+ * @param timeZone - IANA timezone.
+ * @returns Date string in YYYY-MM-DD.
  */
 function formatDay(d: Date, timeZone: string): string {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -92,16 +95,16 @@ export function scaffoldEntry(
     "",
     "**Changes Made**:",
     "",
-    "1. <file path> (lines X-Y): <What changed and why>",
-    "2. <file path> (lines A-B): <What changed and why>",
+    "1. file: PATH (lines X–Y) — what changed and why",
+    "2. file: PATH (lines A–B) — what changed and why",
     "",
-    "**Architecture Notes**: <Patterns/decisions>",
+    "**Architecture Notes**: (patterns/decisions)",
     "",
-    "**Files Changed**: <List files with line counts>",
+    "**Files Changed**: (list files with line counts)",
     "",
-    "**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>",
+    "**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status",
     "",
-    "**Impact**: <What this enables/fixes>",
+    "**Impact**: (what this enables/fixes)",
   ].join("\n");
 }
 
@@ -174,9 +177,7 @@ export interface WriteEntryArgs {
  * @param {WriteEntryArgs} args - Entry fields and write flag.
  * @returns {Promise<{changed:boolean; plans:ApplyPlan[]; dryRun:boolean; notes?:string[]}>} Result summary.
  */
-export async function writeEntry(
-  args: WriteEntryArgs
-): Promise<{
+export async function writeEntry(args: WriteEntryArgs): Promise<{
   changed: boolean;
   plans: ApplyPlan[];
   dryRun: boolean;
@@ -187,6 +188,38 @@ export async function writeEntry(
   const type = allowed.has(args.type) ? args.type : "chore";
   const block = scaffoldEntry(type, args.summary, args.context);
   const content = await readFileUtf8(repo.changelog);
+  // Acquire concurrency lock early (applies for dry-run to surface contention).
+  const lock = acquireLock(repo.root, "changelog");
+  let notes: string[] = [];
+  if (!lock.acquired) {
+    notes.push(
+      "Could not acquire changelog write lock: " + lock.notes.join("; ")
+    );
+    return {
+      changed: false,
+      plans: [],
+      dryRun: !(args.write ?? false),
+      notes,
+    };
+  } else if (lock.notes.length) {
+    notes.push(...lock.notes);
+  }
+  // Pre-write structural validation
+  const preValidation = await validateChangelog(repo.changelog);
+  const originalHash = preValidation.fileHash;
+  if (preValidation.errors.length) {
+    notes.push(
+      "Pre-write validation failed; aborting write: " +
+        preValidation.errors.join("; ")
+    );
+    releaseLock(lock.lockPath);
+    return {
+      changed: false,
+      plans: [],
+      dryRun: !(args.write ?? false),
+      notes,
+    };
+  }
   const { next, inserted } = insertEntryIntoChangelog(content, block);
   if (!inserted) {
     return {
@@ -208,11 +241,204 @@ export async function writeEntry(
       changed: true,
       plans: [plan],
       dryRun: true,
-      notes: ["Dry-run: no files written"],
+      notes: ["Dry-run: no files written", ...notes],
     };
   const backupRoot = path.join(repo.root, defaultConfig.backupDirName);
   await ensureDir(backupRoot);
   await backupFile(repo.changelog, backupRoot);
-  await writeFileUtf8(repo.changelog, next);
-  return { changed: true, plans: [plan], dryRun: false };
+  // Atomic write via temp file then rename to mitigate partial writes.
+  const tmpPath = repo.changelog + ".tmp";
+  await fs.promises.writeFile(tmpPath, next, "utf8");
+  await fs.promises.rename(tmpPath, repo.changelog);
+
+  // Post-write validation
+  const postValidation = await validateChangelog(repo.changelog);
+  if (postValidation.errors.length) {
+    notes.push(
+      "Post-write validation failed; restoring backup. Errors: " +
+        postValidation.errors.join("; ")
+    );
+    try {
+      await writeFileUtf8(repo.changelog, content);
+      notes.push("Rollback to pre-write state completed.");
+    } catch (e) {
+      notes.push(
+        "Rollback failed: " + (e instanceof Error ? e.message : String(e))
+      );
+    }
+    releaseLock(lock.lockPath);
+    return { changed: false, plans: [plan], dryRun: false, notes };
+  }
+
+  // Build / update JSON index (schema v2) for fast tooling & integrity checks.
+  const outDir = path.join(repo.root, "out", "changelog");
+  await ensureDir(outDir);
+  const indexPath = path.join(outDir, "index.json");
+  const hasConflictMarkers = /<<<<<<<|=======|>>>>>>>/.test(next);
+  if (hasConflictMarkers) {
+    notes.push(
+      "Detected unresolved merge conflict markers in CHANGELOG.md; resolve and rewrite."
+    );
+  }
+  let prior: ChangelogJsonIndexV2 | undefined;
+  if (fs.existsSync(indexPath)) {
+    try {
+      prior = JSON.parse(await fs.promises.readFile(indexPath, "utf8"));
+      if (prior?.fileHash && prior.fileHash !== originalHash) {
+        notes.push(
+          "Changelog file modified outside repo-ops since last index update (hash mismatch before write)."
+        );
+      }
+    } catch {
+      notes.push("Failed to parse existing changelog index.json; recreating.");
+    }
+  }
+  const parsed = await mapChangelog(repo.changelog);
+  // (Fast path reserved for future: write currently performs full parse for correctness.)
+  const newHash = postValidation.fileHash;
+  const chainHash = computeChainHash(prior?.chainHash, newHash);
+  const index: ChangelogJsonIndexV2 = {
+    schemaVersion: 2,
+    generatedAt: new Date().toISOString(),
+    changelogPath: repo.changelog,
+    previousFileHash: prior?.fileHash,
+    fileHash: newHash,
+    previousChainHash: prior?.chainHash,
+    chainHash,
+    lastWriteTimestamp: parsed.generatedAt,
+    validationWarnings: postValidation.warnings,
+    validationErrors: postValidation.errors,
+    entries: parsed.entries,
+    entryCount: parsed.entries.length,
+    days: parsed.days.map((d) => ({
+      day: d.day,
+      entryCount: d.entries.length,
+    })),
+    dayCount: parsed.days.length,
+    warnings: notes.length ? notes : undefined,
+  };
+  try {
+    await fs.promises.writeFile(
+      indexPath,
+      JSON.stringify(index, null, 2),
+      "utf8"
+    );
+  } catch (e) {
+    notes.push("Failed to write changelog index.json: " + (e as Error).message);
+  }
+  releaseLock(lock.lockPath);
+  return { changed: true, plans: [plan], dryRun: false, notes };
 }
+
+/**
+ * Parsed entry metadata for a single changelog entry.
+ */
+export interface ChangelogEntryMeta {
+  /** Day (YYYY-MM-DD) derived from the enclosing day header. */
+  day: string;
+  /** Full timestamp (YYYY-MM-DD HH:MM:SS) from the entry heading. */
+  timestamp: string;
+  /** Normalized type extracted from heading (e.g., feat, fix, docs). */
+  type: string;
+  /** One-line summary after the type. */
+  summary: string;
+  /** 0-based line number within the file for the heading line. */
+  line: number;
+  /** Raw heading line text for reference. */
+  rawHeading: string;
+}
+
+/**
+ * Complete map structure emitted by `changelog map` for rapid discovery.
+ */
+export interface ChangelogMap {
+  /** ISO timestamp when map was generated. */
+  generatedAt: string;
+  /** Absolute path to the changelog file. */
+  file: string;
+  /** Days with nested entries. */
+  days: Array<{
+    day: string;
+    /** 0-based line number of the day header. */
+    line: number;
+    entries: ChangelogEntryMeta[];
+  }>;
+  /** Flat list of all entries for quick filtering. */
+  entries: ChangelogEntryMeta[];
+  /** Total line count of the source file. */
+  totalLines: number;
+}
+
+const DAY_HEADER_RE = /^### \[(\d{4}-\d{2}-\d{2})\]/;
+// #### 2025-11-14 12:53:22 chore: Deduplicate changelog; finalize postprocessDocs guard
+const ENTRY_HEADER_RE =
+  /^#### (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+([a-zA-Z]+):\s+(.*)$/;
+
+/**
+ * Build an index map of the changelog for usability (fast navigation, tooling).
+ *
+ * @param {string} filePath - Path to changelog file.
+ * @returns {Promise<ChangelogMap>} Parsed map.
+ */
+export async function mapChangelog(filePath: string): Promise<ChangelogMap> {
+  const buf = await fs.promises.readFile(filePath, "utf8");
+  const lines = buf.replace(/\r\n?/g, "\n").split("\n");
+  const days: ChangelogMap["days"] = [];
+  const flat: ChangelogEntryMeta[] = [];
+  let currentDay:
+    | { day: string; line: number; entries: ChangelogEntryMeta[] }
+    | undefined;
+  lines.forEach((line, idx) => {
+    const dayMatch = DAY_HEADER_RE.exec(line);
+    if (dayMatch) {
+      currentDay = { day: dayMatch[1], line: idx, entries: [] };
+      days.push(currentDay);
+      return;
+    }
+    const entryMatch = ENTRY_HEADER_RE.exec(line);
+    if (entryMatch && currentDay) {
+      const [, ts, typeRaw, summary] = entryMatch;
+      const type = typeRaw.toLowerCase();
+      const meta: ChangelogEntryMeta = {
+        day: currentDay.day,
+        timestamp: ts,
+        type,
+        summary: summary.trim(),
+        line: idx,
+        rawHeading: line,
+      };
+      currentDay.entries.push(meta);
+      flat.push(meta);
+    }
+  });
+  return {
+    generatedAt: new Date().toISOString(),
+    file: path.resolve(filePath),
+    days,
+    entries: flat,
+    totalLines: lines.length,
+  };
+}
+
+/** JSON index structure persisted for integrity checks & rapid queries. */
+/** JSON index v2 structure with hash chain & validation metadata. */
+interface ChangelogJsonIndexV2 {
+  schemaVersion: number;
+  generatedAt: string;
+  changelogPath: string;
+  previousFileHash?: string;
+  fileHash: string;
+  previousChainHash?: string;
+  chainHash: string;
+  lastWriteTimestamp?: string;
+  validationWarnings: string[];
+  validationErrors: string[];
+  entries: ChangelogEntryMeta[];
+  entryCount: number;
+  days: { day: string; entryCount: number }[];
+  dayCount: number;
+  warnings?: string[];
+}
+
+/** Compute a stable SHA-256 hash of file contents. */
+// Legacy computeFileHash removed – use validateChangelog + sha256 helpers.

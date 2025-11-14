@@ -12,5 +12,11 @@
   // so we keep this config focused on generation only.
   // Avoid "API" wording: these docs describe internal extension & agent code.
   "readme": "README.md",
-  "hideGenerator": true
+  "hideGenerator": true,
+  "externalSymbolLinkMappings": {
+    "@types/node": {
+      "__global.NodeJS.Process.platform": "#",
+      "\"os\".homedir": "#"
+    }
+  }
 }

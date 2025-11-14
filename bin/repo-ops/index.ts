@@ -8,44 +8,16 @@
  * - Philosophy: dry-run first; on `--write`, create a timestamped backup before mutating files.
  * - Source of truth: tasks live only in `TODO.md`; `CHANGELOG.md` is logs-only history.
  *
- * Commands
- * - Session
- *   - `session rotate [--write]` – Archive current session, scaffold a fresh session file from template.
- *   - `session lint` – Validate required headings/markers and ISO 8601 Started line.
- * - TODOs
- *   - `todo add --title "..." [--priority P1|P2|P3] [--parent "..."] [--details "..."] [--child "..."] [--owner \@me] [--deps id1,id2] [--status "⏳"] [--write]`
- *   - `todo complete --match "substring" [--write]` – Move first matching bullet to Completed with a ✅ prefix.
- *   - `todo move --match "substring" --to P1|P2|P3 [--write]` – Relocate a matching bullet between sections.
- * - Changelog
- *   - `changelog scaffold --type feat|fix|docs|refactor|test|perf|ci|build|style|chore --summary "..." [--context "..."]`
- *   - `changelog write --type <type> --summary "..." [--context "..."] [--write]` – Insert entry under `## Logs`, grouped by day `### [YYYY-MM-DD]`, newest-first.
- *
- * Safety
- * - Dry-run by default: prints a plan showing file path, description, and byte size.
- * - Backups: on `--write`, creates a backup in the configured backup directory before writing.
- * - Deterministic parsing: uses configured markers for sections; avoids hardcoded business values.
- *
- * Configuration
- * - See `bin/repo-ops/repo-ops.config.ts` for:
- *   - `todoSections` markers (Current/Next/Backlog/Completed) and repo paths
- *   - `changelog.entryTypes` and `changelog.timeZone` (default: `America/New_York`)
- *   - `backupDirName` and repo path resolution
- *
- * Examples
- * ```bash
- * # Complete a TODO without writing
- * npm run repo:ops -- todo complete --match "BUILD: Update build Pipeline"
- *
- * # Add a logs-only changelog entry (dry-run)
- * npm run repo:ops -- changelog write --type chore --summary "Bump docs and tests"
- *
- * # Apply the changelog entry and create a backup
- * npm run repo:ops -- changelog write --type chore --summary "Bump docs and tests" --write
- * ```
+ * Core Changelog Commands
+ * - `changelog scaffold` – Print a logs-only entry scaffold.
+ * - `changelog write` – Insert a logs-only entry (dry-run by default, `--write` to apply).
+ * - `changelog map` – Emit JSON index (days + entries). Supports `--fast` incremental path.
+ * - `changelog diff` – Diff current changelog vs prior index (added/removed/modified).
+ * - `changelog verify` – Structural validation (errors/warnings reported).
  */
 
 import { defaultConfig } from "./repo-ops.config";
-// ESM-safe import for process argv and output
+import * as fs from "fs";
 const args = process.argv.slice(2);
 
 type Command =
@@ -121,20 +93,26 @@ const main = (): void => {
       const useAll = rest.includes("--all");
       const useDocs = useAll || rest.includes("--docs") || rest.length === 0;
       const useJson = useAll || rest.includes("--json");
-      /** Run a single npm script and return success boolean */
+      /**
+       * Run a single npm script and return success boolean.
+       *
+       * @param script - NPM script name (e.g. 'lint:docs').
+       * @returns Promise resolving true if exit code == 0.
+       */
       const runScript = async (script: string): Promise<boolean> => {
         const { spawn } = await import("node:child_process");
         return await new Promise<boolean>((resolve) => {
-          const p = spawn(process.platform === "win32" ? "npm.cmd" : "npm", [
-            "run",
-            script,
-          ], {
-            stdio: "inherit",
-          });
+          const p = spawn(
+            process.platform === "win32" ? "npm.cmd" : "npm",
+            ["run", script],
+            {
+              stdio: "inherit",
+            }
+          );
           p.on("exit", (code) => resolve(code === 0));
         });
       };
-      (async () => {
+      (async (): Promise<void> => {
         printHeader();
         console.log("lint: starting consolidated lint runner\n");
         let ok = true;
@@ -431,7 +409,11 @@ const main = (): void => {
               sumIdx !== -1 ? rest[sumIdx + 1] : "Describe the change";
             const context = ctxIdx !== -1 ? rest[ctxIdx + 1] : undefined;
             // Newline validation: warn if literal \n sequences appear (suggesting ANSI C quoting misuse)
-            if (context && /\\n/.test(context) && !/\n/.test(context.replace(/\\n/g, ""))) {
+            if (
+              context &&
+              /\\n/.test(context) &&
+              !/\n/.test(context.replace(/\\n/g, ""))
+            ) {
               console.warn(
                 "warning: context contains literal \\n escapes; use heredoc or external file for real newlines (see Multi-line Context guidance)."
               );
@@ -463,7 +445,11 @@ const main = (): void => {
               process.exitCode = 1;
               return;
             }
-            if (context && /\\n/.test(context) && !/\n/.test(context.replace(/\\n/g, ""))) {
+            if (
+              context &&
+              /\\n/.test(context) &&
+              !/\n/.test(context.replace(/\\n/g, ""))
+            ) {
               console.warn(
                 "warning: write context contains literal \\n sequences; they will not render as newlines. Use heredoc or external file."
               );
@@ -494,9 +480,231 @@ const main = (): void => {
           runWrite();
           return;
         }
+        case "map": {
+          /**
+           * Emit a JSON index of the changelog (days + entries) for tooling / quick navigation.
+           * Supports optional filters: --filter-day YYYY-MM-DD, --filter-type <type>, and --pretty.
+           * Use --fast for incremental mapping leveraging prior index (schema v2).
+           *
+           * @returns {Promise<void>} Completes after printing JSON map.
+           */
+          const runMap = async (): Promise<void> => {
+            const { mapChangelog } = await import("./changelog");
+            const { incrementalMap } = await import("./changelogFast");
+            const repo = defaultConfig.resolveRepoPaths(process.cwd());
+            const filterDayIdx = rest.indexOf("--filter-day");
+            const filterTypeIdx = rest.indexOf("--filter-type");
+            const pretty = rest.includes("--pretty");
+            const useFast = rest.includes("--fast");
+            const filterDay =
+              filterDayIdx !== -1 ? rest[filterDayIdx + 1] : undefined;
+            const filterType =
+              filterTypeIdx !== -1
+                ? rest[filterTypeIdx + 1].toLowerCase()
+                : undefined;
+            let map = await mapChangelog(repo.changelog);
+            let fastNotes: string[] = [];
+            if (useFast) {
+              const indexPath = `${repo.root}/out/changelog/index.json`;
+              if (fs.existsSync(indexPath)) {
+                try {
+                  const prior = JSON.parse(
+                    await fs.promises.readFile(indexPath, "utf8")
+                  );
+                  if (
+                    prior?.schemaVersion === 2 &&
+                    Array.isArray(prior.entries)
+                  ) {
+                    const fast = await incrementalMap(
+                      repo.changelog,
+                      prior.entries,
+                      prior.days || []
+                    );
+                    fastNotes = fast.notes;
+                    if (fast.incremental) map = fast.map;
+                  } else fastNotes.push("Fast map: unsupported index schema.");
+                } catch (e) {
+                  fastNotes.push(
+                    "Fast map: index read failed – " +
+                      (e instanceof Error ? e.message : String(e))
+                  );
+                }
+              } else fastNotes.push("Fast map: no prior index.");
+            }
+            let days = map.days;
+            if (filterDay) days = days.filter((d) => d.day === filterDay);
+            if (filterType) {
+              days = days.map((d) => ({
+                ...d,
+                entries: d.entries.filter((e) => e.type === filterType),
+              }));
+            }
+            const entries = days.flatMap((d) => d.entries);
+            const payload = {
+              generatedAt: map.generatedAt,
+              file: map.file,
+              totalLines: map.totalLines,
+              dayCount: map.days.length,
+              days: days.map((d) => ({
+                day: d.day,
+                line: d.line,
+                entryCount: d.entries.length,
+                entries: d.entries,
+              })),
+              entryCount: entries.length,
+              notes: fastNotes.length ? fastNotes : undefined,
+            };
+            const json = JSON.stringify(payload, null, pretty ? 2 : 0);
+            console.log(json);
+          };
+          runMap();
+          return;
+        }
+        case "diff": {
+          /**
+           * Produce a JSON diff between current changelog and previous index snapshot.
+           * Lists added, removed, modified entries and day additions/removals.
+           *
+           * @returns {Promise<void>} Completes after printing JSON diff payload.
+           */
+          const runDiff = async (): Promise<void> => {
+            const { mapChangelog } = await import("./changelog");
+            type PriorIndex = {
+              entries?: import("./changelog").ChangelogEntryMeta[];
+              days?: { day: string; entryCount: number }[];
+            };
+            const repo = defaultConfig.resolveRepoPaths(process.cwd());
+            const indexPath = `${repo.root}/out/changelog/index.json`;
+            if (!fs.existsSync(indexPath)) {
+              console.log(
+                JSON.stringify({
+                  error: "No prior index found; run a write first.",
+                })
+              );
+              return;
+            }
+            let prior: PriorIndex = {};
+            try {
+              const raw = JSON.parse(
+                await fs.promises.readFile(indexPath, "utf8")
+              );
+              prior = {
+                entries: Array.isArray(raw.entries)
+                  ? (raw.entries as import("./changelog").ChangelogEntryMeta[])
+                  : [],
+                days: Array.isArray(raw.days)
+                  ? (raw.days as { day: string; entryCount: number }[])
+                  : [],
+              };
+            } catch (e) {
+              console.log(
+                JSON.stringify({
+                  error: "Failed to parse prior index",
+                  detail: String(e),
+                })
+              );
+              return;
+            }
+            const current = await mapChangelog(repo.changelog);
+            const priorByTs = new Map<
+              string,
+              import("./changelog").ChangelogEntryMeta
+            >((prior.entries || []).map((e) => [e.timestamp, e]));
+            const currentByTs = new Map<
+              string,
+              import("./changelog").ChangelogEntryMeta
+            >(current.entries.map((e) => [e.timestamp, e]));
+            const added: import("./changelog").ChangelogEntryMeta[] = [];
+            const removed: import("./changelog").ChangelogEntryMeta[] = [];
+            const modified: Array<{
+              before: import("./changelog").ChangelogEntryMeta;
+              after: import("./changelog").ChangelogEntryMeta;
+            }> = [];
+            for (const e of current.entries) {
+              const p = priorByTs.get(e.timestamp);
+              if (!p) added.push(e);
+              else if (p.summary !== e.summary || p.type !== e.type) {
+                modified.push({ before: p, after: e });
+              }
+            }
+            for (const p of prior.entries || []) {
+              if (!currentByTs.has(p.timestamp)) removed.push(p);
+            }
+            const priorDaySet = new Set<string>(
+              (prior.days || []).map((d) => d.day)
+            );
+            const currentDaySet = new Set<string>(
+              current.days.map((d) => d.day)
+            );
+            const newDays = Array.from(currentDaySet).filter(
+              (d) => !priorDaySet.has(d)
+            );
+            const goneDays = Array.from(priorDaySet).filter(
+              (d) => !currentDaySet.has(d)
+            );
+            console.log(
+              JSON.stringify(
+                {
+                  generatedAt: new Date().toISOString(),
+                  file: current.file,
+                  addedCount: added.length,
+                  removedCount: removed.length,
+                  modifiedCount: modified.length,
+                  newDays,
+                  goneDays,
+                  added,
+                  removed,
+                  modified,
+                },
+                null,
+                rest.includes("--pretty") ? 2 : 0
+              )
+            );
+          };
+          runDiff();
+          return;
+        }
+        case "verify": {
+          /**
+           * Validate changelog structure and report integrity status.
+           * Prints errors/warnings and exits non-zero on errors.
+           */
+          /**
+           * Execute structural validation of CHANGELOG and print summary line items.
+           *
+           * @returns Promise resolved after printing results; sets process.exitCode on errors.
+           */
+          const runVerify = async (): Promise<void> => {
+            const { validateChangelog } = await import("./changelogIntegrity");
+            const repo = defaultConfig.resolveRepoPaths(process.cwd());
+            const result = await validateChangelog(repo.changelog);
+            console.log(
+              `changelog verify: ${
+                result.errors.length
+                  ? "FAIL"
+                  : result.warnings.length
+                  ? "WARN"
+                  : "OK"
+              }`
+            );
+            console.log(`- file: ${result.filePath}`);
+            console.log(`- hash: ${result.fileHash}`);
+            console.log(`- lines: ${result.totalLines}`);
+            console.log(`- timestamps: ${result.timestamps.length}`);
+            if (result.errors.length) {
+              for (const e of result.errors) console.log(`error: ${e}`);
+              process.exitCode = 1;
+            }
+            if (result.warnings.length) {
+              for (const w of result.warnings) console.log(`warn: ${w}`);
+            }
+          };
+          runVerify();
+          return;
+        }
         default:
           console.error(
-            "Unknown changelog subcommand. Try: changelog scaffold|write (see help)"
+            "Unknown changelog subcommand. Try: changelog scaffold|write|map|verify|diff (see help)"
           );
           process.exitCode = 1;
           return;

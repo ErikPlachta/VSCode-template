@@ -24,7 +24,7 @@ import {
  * JsonRpcRequest interface.
  *
  */
-interface JsonRpcRequest {
+export interface JsonRpcRequest {
   jsonrpc: string;
   id: number | string | null;
   method: string;
@@ -35,7 +35,7 @@ interface JsonRpcRequest {
  * JsonRpcResponse interface.
  *
  */
-interface JsonRpcResponse {
+export interface JsonRpcResponse {
   jsonrpc: "2.0";
   id: number | string | null;
   result?: unknown;
@@ -193,7 +193,7 @@ async function handleInvoke(
  * @param message - JSON-RPC request.
  * @returns JSON-RPC response.
  */
-async function handleJsonRpcMessage(
+export async function handleJsonRpcMessage(
   message: JsonRpcRequest
 ): Promise<JsonRpcResponse> {
   try {
@@ -442,6 +442,64 @@ function startStdioServer(): void {
   log("MCP stdio server ready for requests");
 }
 
+/**
+ * Start an HTTP JSON-RPC server that reuses the same dispatcher as stdio.
+ * Enabled only when MCP_HTTP_ENABLED=true. Intended for local debugging.
+ *
+ * @param port - Port to listen on (0 uses an ephemeral port for tests).
+ * @returns The created Node HTTP server instance and the bound port.
+ */
+export async function startHttpServer(
+  port: number = Number(process.env.usercontextMCP_port ?? 39200)
+): Promise<{ server: import("http").Server; port: number }> {
+  const http = await import("http");
+  const server = http.createServer(async (req, res) => {
+    if (req.method !== "POST") {
+      res.statusCode = 404;
+      res.end();
+      return;
+    }
+    try {
+      const chunks: Buffer[] = [];
+      req.on("data", (c) => chunks.push(Buffer.from(c)));
+      req.on("end", async () => {
+        try {
+          const body = Buffer.concat(chunks).toString("utf8");
+          const msg = JSON.parse(body) as JsonRpcRequest;
+          const response = await handleJsonRpcMessage(msg);
+          const payload = Buffer.from(JSON.stringify(response));
+          res.setHeader("content-type", "application/json");
+          res.setHeader("content-length", String(payload.length));
+          res.statusCode = 200;
+          res.end(payload);
+        } catch (e) {
+          const payload = Buffer.from(
+            JSON.stringify({
+              jsonrpc: "2.0",
+              id: null,
+              error: { code: -32700, message: "Parse error" },
+            })
+          );
+          res.statusCode = 200;
+          res.setHeader("content-type", "application/json");
+          res.setHeader("content-length", String(payload.length));
+          res.end(payload);
+        }
+      });
+    } catch {
+      res.statusCode = 500;
+      res.end();
+    }
+  });
+  await new Promise<void>((resolve) => server.listen(port, resolve));
+  const info = server.address();
+  let boundPort = port;
+  if (info && typeof info === "object" && "port" in info) {
+    boundPort = Number((info as unknown as { port: number }).port);
+  }
+  return { server, port: boundPort };
+}
+
 // Support both CJS and ESM entry detection
 const __isMain = ((): boolean => {
   // CJS path: require/module available
@@ -457,7 +515,17 @@ const __isMain = ((): boolean => {
 
 // Only auto-start the server if running as main module AND not in test environment
 if (__isMain && process.env.NODE_ENV !== "test") {
-  startStdioServer();
+  if (String(process.env.MCP_HTTP_ENABLED).toLowerCase() === "true") {
+    // Start HTTP for local debugging (optional)
+    void startHttpServer().then(({ port }) => {
+      console.error(
+        `[MCP Server ${new Date().toISOString()}] HTTP server listening on ${port}`
+      );
+    });
+  } else {
+    // Default stdio transport
+    startStdioServer();
+  }
 }
 
 export { getTools };

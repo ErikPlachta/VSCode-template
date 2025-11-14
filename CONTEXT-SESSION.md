@@ -47,7 +47,7 @@ Formatting Conventions
 
 ## Current Focus Summary
 
-- High-level focus: Phase kickoff for validation runtime extraction (move all runtime validation logic out of `src/types/**` into shared module, enforce types‑only rule).
+- High-level focus: Validation runtime extraction (types‑only enforcement) and governance tooling hardening.
 - Stabilization: Dynamic MCP tools registry & orchestrator bridge considered stable; maintain data‑driven descriptors and formatting isolation.
 - Compliance: Agent cleanup & TSDoc completeness continue in background (incremental, non‑blocking).
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
@@ -106,11 +106,11 @@ Current Status: Phase 0 (Baseline) — Shared scaffold exists, unused; inventory
 
 ### Next Immediate Actions
 
-1. Commit updated TODO with phased extraction plan.
-2. Begin Inventory & Tag (Phase 1) in next session.
-3. Scaffold parity tests prior to code migration (Phase 2).
-4. Consolidate JSON-RPC into a single dispatcher and add stdio/HTTP tests (see TODO).
-5. Resolve TypeDoc external link warnings and add a regression test for JSON-RPC page promotion.
+1. Concurrency lock completed for changelog writes (added hash chain + atomic workflow).
+2. Plan incremental map refresh optimization (performance gate) – pending.
+3. Implement diff & rebuild fallback after lock stabilization.
+4. JSON-RPC tests already green; next: TypeDoc external link warnings regression guard.
+5. Begin Phase 1 inventory for validation extraction after tooling tasks finalize.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

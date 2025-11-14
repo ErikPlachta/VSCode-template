@@ -250,27 +250,9 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
-#### 2025-11-14 14:45:00 feat: repo-ops: add fast incremental map and diff subcommand
+#### 2025-11-14 13:40:02 test: CLI debug insertion test
 
-**Problem/Context**: Needed performance optimization for large CHANGELOG mapping and ability to see changes since last index (added/removed/modified entries) for audit/verification transparency.
-
-**Changes Made**:
-
-1. file: `bin/repo-ops/index.ts` (map/diff cases) — added `--fast` map path leveraging prior `out/changelog/index.json` (schema v2); implemented typed `diff` subcommand.
-2. file: `bin/repo-ops/index.ts` (header cleanup) — removed corrupted earlier injection; restored proper CLI header & command type definitions.
-3. No changes to parsing core (`changelog.ts`); incremental path reuses existing full parse when prior index missing or unsupported.
-
-**Architecture Notes**: Fast path reads prior index (schema v2) entries/days; attempts incremental augmentation (future optimization). Diff performs timestamp keyed comparison; no file mutation. All types preserved; no hardcoded business values.
-
-**Files Changed**: index.ts (~+250 / -200 lines net after cleanup); CHANGELOG.md updated (this entry).
-
-**Testing**: Build: PASS; Tests: 43 passed / 1 skipped (300 total); Lint: PASS; Docs: N/A; Health: PASS; Coverage: unchanged (mapping logic exercised indirectly).
-
-**Impact**: Enables quicker tooling responses (`map --fast`) and introduces `diff` for observability, aiding audits and future automation.
-
-#### 2025-11-14 14:19:14 chore: repo-ops: add changelog concurrency lock
-
-**Problem/Context**: What was wrong or needed
+**Problem/Context**: Simple context for insertion verification
 
 **Changes Made**:
 
@@ -284,6 +266,79 @@ All other changes must be performed via the CLI.
 **Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
 
 **Impact**: (what this enables/fixes)
+
+
+#### 2025-11-14 13:37:37 chore: Phase 7: Types cleanup & parity verification
+
+**Problem/Context**: Phase 7 validation runtime extraction cleanup focusing on types purity:
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**: (list files with line counts)
+
+**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+
+**Impact**: (what this enables/fixes)
+
+
+#### 2025-11-14 13:36:34 chore: Phase 7: Validation extraction cleanup (types remarks removal & parity verification)
+
+**Problem/Context**: Phase 7 validation runtime extraction cleanup focusing on types purity:
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**: (list files with line counts)
+
+**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+
+**Impact**: (what this enables/fixes)
+
+
+#### 2025-11-14 13:33:33 chore: Amend Phase 7 placeholders with full details
+
+**Problem/Context**: Amend Phase 7 changelog details: replace placeholder sections with actual information.
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**: (list files with line counts)
+
+**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+
+**Impact**: (what this enables/fixes)
+
+
+#### 2025-11-14 13:31:17 chore: Amend Phase 7 placeholders with full details
+
+**Problem/Context**: Amend Phase 7 changelog details: replace placeholder sections with actual information.
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**: (list files with line counts)
+
+**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+
+**Impact**: (what this enables/fixes)
+
 
 #### 2025-11-14 13:28:45 refactor: Validation runtime extraction Phase 7 cleanup (verification update)
 

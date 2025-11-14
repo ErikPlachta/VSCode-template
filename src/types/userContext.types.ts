@@ -11,10 +11,8 @@
  * IntelliSense in configuration authoring.
  */
 
-// Phase 3 note: shared validation implementations exist under
-// `src/shared/validation/categoryValidation.ts` but are not imported here to
-// preserve the types-only constraint (no runtime imports). Full delegation
-// will occur after agents switch to shared module (later Phase 3).
+// Validation logic intentionally lives in shared modules (e.g. `src/shared/validation`).
+// This file remains types-only and must not import runtime implementations.
 
 /**
  * Unique identifier for a category

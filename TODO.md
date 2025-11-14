@@ -98,20 +98,20 @@ Follow these guidelines to ensure effective task management:
   - [x] Phase 4: Single-Agent Import Switch – migrated `UserContextAgent` to shared validation (aliased imports); verification green.
   - [x] Phase 5: Multi-Agent Switch – migrated remaining agents to shared config validation; runtime removal deferred to Phase 6 enforcement.
   - [x] Phase 6: Enforcement Test – removed all runtime validator implementations from `src/types/**`; added `tests/types.purity.test.ts` scanning for forbidden validator names; updated affected imports to shared modules; test passing.
-  - [ ] Phase 7: Cleanup & Changelog – remove inline TODO tags; update CHANGELOG with Verification block capturing final pass.
+  - [x] Phase 7: Cleanup & Changelog – removed phased inline remarks across types; added verification changelog entry confirming tests (42 passed / 1 skipped) and purity intact.
   - [ ] Phase 8: Post-Migration Audit – confirm no hardcoded business values introduced; validate agent isolation remains intact.
   - [ ] Phase 9: Coverage Review – ensure parity tests + new shared module maintain or improve coverage metrics.
 
 - [ ] P1: MCP Transport & Protocol Enforcement
   - [x] Ensure JSON-RPC 2.0 compliance end-to-end.
   - [x] Verify stdio is default transport; HTTP enabled only with `MCP_HTTP_ENABLED=true`.
-  - [ ] Consolidate JSON-RPC handlers into a single path reused across transports.
-    - [ ] Implement single dispatcher (initialize, tools/list, tools/call) and remove duplicates
-    - [ ] Wire both stdio and HTTP to reuse the same dispatcher
+  - [x] Consolidate JSON-RPC handlers into a single path reused across transports.
+    - [x] Implement single dispatcher (initialize, tools/list, tools/call) and remove duplicates+
+    - [x] Wire both stdio and HTTP to reuse the same dispatcher
   - [ ] Add tests to validate protocol and transport behavior (single-handler + negative transport cases).
-    - [ ] Unit: method not found / invalid params error shapes
+    - [x] Unit: method not found / invalid params error shapes
     - [ ] Integration: stdio path happy-path tools/list + tools/call
-    - [ ] Integration: HTTP behind `MCP_HTTP_ENABLED=true` only; disabled by default
+    - [x] Integration: HTTP behind `MCP_HTTP_ENABLED=true` only; disabled by default
   - [x] Update documentation to reflect transport and protocol standards.
   - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
@@ -130,51 +130,54 @@ Follow these guidelines to ensure effective task management:
 ### Next Action Items
 
 - [ ] P3: REFACTOR: Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator)
-
   - [ ] Update import paths & adjust Jest config if needed
   - [ ] Verify suite passes post-move
-
 - [ ] P3: REFACTOR: Rebuild and add governance to bin content
-
   - [ ] Convert bin/utils tools into self-contained modules
   - [ ] Migrate build logic into `bin/utils`
   - [ ] Update package.json scripts
   - [ ] Add test coverage for bin utilities
-
 - [ ] P3: UTILITY: Changelog utility follow-ups (hardening)
-
   - [ ] Unit tests for task section helpers
   - [ ] Integration test for CLI flows
   - [ ] JSON export with schemaVersion
   - [ ] Auto verification `--auto-verify` flag
   - [ ] Docs & README updates
-
+- [ ] P2: CLI: CHANGELOG - UX overhaul (dry-run/apply semantics)
+  - [ ] Update `--write` to create a record.
+  - [ ] Update so the only way to execute a dry run is with `--validate`.
+  - [ ] Update CLI output to say `VALIDATED` for dry-run and `APPLIED` for apply, with clear plan lines
+  - [ ] Update `bin/repo-ops -- help` text and examples
+  - [ ] Update `CHANGELOG.md` Copilot Instructions (Scaffold vs Write & Verification) to reflect new flags
+- [ ] P2: CLI: CHANGELOG - Provide richer changelog fields
+  - [ ] Add `--context-file <path>` to load markdown context from file (heredoc alternative)
+  - [ ] Add optional flags to populate sections directly: `--changes`, `--architecture`, `--filesChanged`, `--testing`, `--impact`
+  - [ ] Add `--template minimal` to omit placeholder sections when details are provided via flags or file
+  - [ ] Add `--auto-verify` to run `npm run compile && npm run test && npm run prebuild`, capture results, and append a Verification block
+  - [ ] Add duplicate-entry guard (same day + identical summary) with `--force` override
+- [ ] P2: CLI: Tests and docs for new flags
+  - [ ] Add unit tests for write/scaffold with new flags (dry-run/apply, context-file, minimal template)
+  - [ ] Add integration tests that verify generated markdown has no MD lint errors
+  - [ ] Update README/docs and `CHANGELOG.md` instructions with examples for new flags
 - [ ] P3: EXTENSION: Add TODO management capabilities (consider agent)
-
   - [ ] Evaluate agent vs direct extension implementation
   - [ ] Define minimal commands & UX
   - [ ] Integrate with CommunicationAgent formatting
-
 - [ ] P1: Refactor shared config utilities into `src/shared`
-
   - [ ] Extract `BaseAgentConfig` helpers and related utilities into `src/shared/config/`
   - [ ] Candidates: `setConfigItem`, `getUserFacingConfig`, `_getConfig`, `getExecutionConfig`, descriptor helpers
   - [ ] Extract `createDescriptorMap()` into `src/shared/config/descriptors.ts`
   - [ ] Update all imports across agents and tools; run `npm run fix:imports` if needed
   - [ ] Add unit tests for shared helpers; update existing tests to new import paths
   - [ ] Update type docs to reference new shared modules; add CHANGELOG entry
-
 - [ ] P2: DOCS: Resolve TypeDoc external link warnings
-
   - [ ] Add `externalSymbolLinkMappings` for `process.platform`, `os.homedir`, and `process.env.*`
   - [ ] Alternatively adjust comments to avoid unresolved links
   - [ ] Re-run `npm run docs` and confirm 0 warnings
-
 - [ ] P2: DOCS: Add regression test for JSON-RPC page promotion
   - [ ] Test `bin/utils/postprocessDocs.ts` promotes `docs/docs/mcp/jsonRpc/README.md` → `docs/mcp/json-rpc.md`
   - [ ] Guard against path changes in TypeDoc output
 - [ ] P1: Data-Driven Architecture Integrity
-
   - [ ] Objective: Complete workflow execution system and finalize architectural cleanup.
   - [ ] Status: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
   - [ ] Current Issue: DatabaseAgent initialization error - data sources not loading properly
@@ -184,19 +187,14 @@ Follow these guidelines to ensure effective task management:
     - [ ] 🔄 Phase 5: Documentation – Update migration guide with workflow patterns
     - [ ] 🔄 Phase 6: Final Verification – End-to-end testing, health check
     - [ ] 🔄 Phase 7: Legacy Cleanup – Remove relevant-data-manager references
-
 - [ ] P2: GOV: Add "Core Principles" and "Decision Tree" sections to `.github/copilot-instructions.md`
-
   - [ ] Review and refine user's draft notes for Core Principles
   - [ ] Validate, restructure, and position both sections at the top
-
 - [ ] P2: GOV: Update all sections to reference Core Principles/Decision Tree (start/end workflow)
-
   - [ ] Ensure every section has explicit fallback to principles/decision tree
   - [ ] Enforce completion-loop semantics so requests are only done when loop closed
   - [ ] Architecture Compliance:
     - [ ] ✅ Agent Isolation / Data-Driven / Single-Class / Types centralized / Communication formatting via CommunicationAgent
-
 - [ ] P1: Build Utilities Evaluation and Consolidation
   - [ ] Disable JSON lint in pipelines (bash + Windows) — COMPLETE in this branch
   - [ ] Audit `@tools/repositoryHealth` usage paths
@@ -258,6 +256,7 @@ Follow these guidelines to ensure effective task management:
   - Completed: Added `src/docs/mcp/jsonRpc.ts` with `@packageDocumentation`
   - Completed: Promoted generated page to `docs/mcp/json-rpc.md` via postprocess
   - Verified via `npm run docs` and changelog entry (2025-11-14)
+- [x] P1: repo-ops: Add fast incremental changelog map (`--fast`) and `diff` subcommand — see CHANGELOG entry "2025-11-14 14:45:00 feat: repo-ops: add fast incremental map and diff subcommand"
 
 <!-- END:COMPLETED_ACTION_ITEMS -->
 <!-- BEGIN:GENERATED-ACTION-ITEMS -->

@@ -126,9 +126,18 @@ export const defaultConfig: RepoOpsConfig = {
    * @returns {RepoPaths} Absolute paths to governance files.
    */
   resolveRepoPaths(root: string): RepoPaths {
+    // Allow environment override for changelog path to facilitate synthetic
+    // reproduction and isolated testing without mutating the primary CHANGELOG.md.
+    // Usage: REPO_OPS_CHANGELOG_PATH=CHANGELOG_SYNTHETIC.md npm run repo:ops -- changelog write ...
+    const override = process.env.REPO_OPS_CHANGELOG_PATH;
+    const changelogPath = override
+      ? path.isAbsolute(override)
+        ? override
+        : path.join(root, override)
+      : path.join(root, "CHANGELOG.md");
     return {
       root,
-      changelog: path.join(root, "CHANGELOG.md"),
+      changelog: changelogPath,
       todo: path.join(root, "TODO.md"),
     };
   },

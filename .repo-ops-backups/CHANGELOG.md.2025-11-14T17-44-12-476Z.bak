@@ -29,6 +29,69 @@ Flow: Plan → Verify → Scaffold → Write → Verify Block → Reconcile.
    - `npm run test`
    - (Optional) `npm run prebuild`
 3. Scaffold (dry-run):
+   - `npm run repo:ops -- changelog scaffold --type <feat|fix|docs|refactor|test|perf|ci|build|style|chore> --summary "<summary>" --context "<problem/context>"`
+4. Write (backup + insert):
+   - `npm run repo:ops -- changelog write --type <type> --summary "<summary>" --context "<problem/context>" --write`
+5. Add Verification block (manual until CLI adds support).
+6. Reconcile (`TODO.md` mark complete).
+
+### Rules
+
+- No future tasks; only completed, verified changes.
+- Do not edit timestamps.
+- Use backticks for paths/commands.
+- New rollbacks use a fresh CLI entry (type `fix`).
+- Cross-reference tasks with `See TODO: <label>`.
+- Fenced code only for multi-line output; otherwise inline.
+- Timestamp Integrity: Never add or retain a future date header or timestamp; if an incorrect future timestamp is discovered, correct via CLI or adjust heading + verification date (see Timestamp Integrity section below).
+- Write Flag Ordering: If a write attempt still reports `CHANGES (dry-run)`, place `--write` before `--context` (Windows Git Bash can tokenize multi-line context causing a trailing `--write` to be lost).
+
+### Write Flag Reliability
+
+Dry-run first; then apply:
+
+1. Dry-run example:
+
+```bash
+npm run repo:ops -- changelog write --type docs --summary "Add X" --context "$CTX"
+```
+
+Output should include: `changelog write: CHANGES (dry-run)` and a plan. 2. Apply example (prefer `--write` early):
+
+```bash
+npm run repo:ops -- changelog write --write --type docs --summary "Add X" --context "$CTX"
+```
+
+Output should include: `changelog write: APPLIED`.
+
+If you see `CHANGES (dry-run)` despite using `--write`:
+
+- Re-run with `--write` placed immediately after `write` subcommand.
+- Ensure `$CTX` was set via heredoc (Pattern A/B/C) and does not contain a stray literal `--write` string.
+- Confirm shell is not expanding newline characters into separate tokens that mask `--write`.
+
+Quick verification snippet (returns 0 when applied):
+
+```bash
+npm run repo:ops -- changelog write --write --type docs --summary Test --context "Just a test" | grep -q "APPLIED" && echo OK
+```
+
+Escalation: If write continues to fail, capture the full command echo with `set -x` (bash) and inspect tokenization; avoid manual edits while investigating.
+
+### Command Reference
+
+```bash
+npm run repo:ops -- help
+npm run repo:ops -- changelog scaffold --type feat --summary "Add X" --context "Why we need X"
+npm run repo:ops -- changelog write --type feat --summary "Add X" --context "Why we need X" --write
+npm run compile
+npm run test
+npm run prebuild
+```
+
+### Timestamp Integrity
+
+To prevent incorrect or future-dated timestamps:
 
 - Always use the repo-ops CLI (`changelog scaffold` / `changelog write`) to generate entries; never hand‑craft headings.
 - CLI applies `America/New_York` timezone. Do not adjust timestamps to other zones in the changelog.
@@ -89,27 +152,6 @@ This example shows a complete, compliant flow: plan task, verify gates, scaffold
   Mark the TODO item complete in `TODO.md`.
 
 **Use this template whenever adding documentation or structural governance changes.**
-
-### Scaffold vs Write & Verification
-
-- `scaffold` prints the exact markdown block it would create; it does NOT modify files.
-- `write` performs a dry-run by default (prints a plan and "CHANGES (dry-run)"). Add `--write` to apply.
-- Success signal: look for `changelog write: APPLIED` and a plan line with the path to `CHANGELOG.md`.
-- Idempotence: do not re-run `--write` for the same summary multiple times in a row; it will create duplicates.
-- Windows Git Bash tip: put `--write` immediately after `write` to avoid tokenization issues.
-
-### CLI Capabilities & Limits
-
-- Supported fields: `--type`, `--summary`, optional `--context` (becomes the Problem/Context line).
-- The CLI scaffolds placeholder sections (Changes Made, Architecture Notes, Files Changed, Testing, Impact). It does not populate them automatically.
-- Best practice: include any detailed bullets you want preserved inside your `--context` block, or plan a follow-up commit to replace placeholders.
-- Verification blocks are not auto-generated; append them manually under the entry.
-
-### CTX vs Inline `--context`
-
-- Use CTX (heredoc variable) for multi-line, formatted context. It preserves newlines reliably across shells.
-- Inline `--context "..."` is fine for short, single-line summaries but will leave placeholders to fill manually.
-- If your heredoc variable prints to console during scaffold but `CHANGELOG.md` isn’t updated, you likely skipped the `--write` apply step. Re-run with `--write` and verify `APPLIED`.
 
 ### Multi-line Context (Authoring Guidance)
 
@@ -219,7 +261,7 @@ All patterns above inject a multi-line context block in a single CLI invocation�
 ### Verification Block Format
 
 ```markdown
-##### Verification – (<label>)
+##### Verification – YYYY-MM-DD (<label>)
 
 - Build: PASS | FAIL
 - Tests: PASS | FAIL (X passed, Y skipped)
@@ -237,7 +279,7 @@ All patterns above inject a multi-line context block in a single CLI invocation�
 
 All other changes must be performed via the CLI.
 
-### Final Notes for Copilot
+## Notes for Copilot
 
 - Source of truth for completed changes only (entries via CLI).
 - Tasks reside in `TODO.md`; session focus lives in `CONTEXT-SESSION.md`.
@@ -250,83 +292,41 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
-#### 2025-11-14 14:45:00 feat: repo-ops: add fast incremental map and diff subcommand
+#### 2025-11-14 12:43:55 chore: Guard postprocessDocs execution to avoid Jest teardown logs
 
-**Problem/Context**: Needed performance optimization for large CHANGELOG mapping and ability to see changes since last index (added/removed/modified entries) for audit/verification transparency.
-
-**Changes Made**:
-
-1. file: `bin/repo-ops/index.ts` (map/diff cases) — added `--fast` map path leveraging prior `out/changelog/index.json` (schema v2); implemented typed `diff` subcommand.
-2. file: `bin/repo-ops/index.ts` (header cleanup) — removed corrupted earlier injection; restored proper CLI header & command type definitions.
-3. No changes to parsing core (`changelog.ts`); incremental path reuses existing full parse when prior index missing or unsupported.
-
-**Architecture Notes**: Fast path reads prior index (schema v2) entries/days; attempts incremental augmentation (future optimization). Diff performs timestamp keyed comparison; no file mutation. All types preserved; no hardcoded business values.
-
-**Files Changed**: index.ts (~+250 / -200 lines net after cleanup); CHANGELOG.md updated (this entry).
-
-**Testing**: Build: PASS; Tests: 43 passed / 1 skipped (300 total); Lint: PASS; Docs: N/A; Health: PASS; Coverage: unchanged (mapping logic exercised indirectly).
-
-**Impact**: Enables quicker tooling responses (`map --fast`) and introduces `diff` for observability, aiding audits and future automation.
-
-#### 2025-11-14 14:19:14 chore: repo-ops: add changelog concurrency lock
-
-**Problem/Context**: What was wrong or needed
+**Problem/Context**: Fix Jest teardown errors caused by docs postprocessor side effects during import.
 
 **Changes Made**:
 
-1. file: PATH (lines X–Y) — what changed and why
-2. file: PATH (lines A–B) — what changed and why
+1. <file path> (lines X-Y): <What changed and why>
+2. <file path> (lines A-B): <What changed and why>
 
-**Architecture Notes**: (patterns/decisions)
+**Architecture Notes**: <Patterns/decisions>
 
-**Files Changed**: (list files with line counts)
+**Files Changed**: <List files with line counts>
 
-**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
 
-**Impact**: (what this enables/fixes)
+**Impact**: <What this enables/fixes>
 
-#### 2025-11-14 13:28:45 refactor: Validation runtime extraction Phase 7 cleanup (verification update)
 
-**Problem/Context**: Final verification of Phase 7: phased @remarks removed from types (userContext.types.ts, configValidation.ts, configRegistry.ts); test suite now 42 passed / 1 skipped (298 tests); purity + parity intact; prepares Phase 8 audit.
+#### 2025-11-14 12:26:05 docs: Docs: generate and promote JSON-RPC page; verify
 
-**Changes Made**:
-
-1. file: PATH (lines X–Y) — what changed and why
-2. file: PATH (lines A–B) — what changed and why
-
-**Architecture Notes**: (patterns/decisions)
-
-**Files Changed**: (list files with line counts)
-
-**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
-
-**Impact**: (what this enables/fixes)
-
-#### 2025-11-14 12:53:22 chore: Deduplicate changelog; finalize postprocessDocs guard
-
-**Problem/Context**: Clean up duplicate changelog entries and finalize docs postprocessor guard. Testing: 42 passed, 1 skipped; no teardown errors. Impact: clean changelog, stable tests, guarded postprocessor.
+**Problem/Context**: Docs regenerated after removing tsdoc.json. Promoted generated JSON-RPC page to a stable path.
 
 **Changes Made**:
 
-1. bin/utils/postprocessDocs.ts: Guard execution to run only when invoked directly.
-2. CHANGELOG.md: Removed duplicate entries for the same change.
+1. <file path> (lines X-Y): <What changed and why>
+2. <file path> (lines A-B): <What changed and why>
 
-**Architecture Notes**: Guard prevents side effects on import (tests can import helper without running).
+**Architecture Notes**: <Patterns/decisions>
 
-**Files Changed**: 2 files (postprocessDocs.ts updated; duplicate changelog entries removed).
+**Files Changed**: <List files with line counts>
 
-**Testing**: Build: PASS; Tests: 42 passed, 1 skipped; Docs: N/A; Health: N/A; Coverage: ~65% (unchanged).
+**Testing**: Build: <PASS/FAIL>; Tests: <summary>; Lint: <PASS/FAIL>; Docs: <PASS/FAIL>; Health: <PASS/FAIL>; Coverage: <%>; JSDoc: <status>
 
-**Impact**: Stable test runs; clean, singular changelog entry; docs postprocessor remains effective under `npm run docs:fix`.
+**Impact**: <What this enables/fixes>
 
-##### Verification – 2025-11-14 (Changelog dedupe + guard)
-
-- Build: PASS
-- Tests: PASS (42 passed, 1 skipped)
-- Lint: N/A
-- Docs: N/A
-- Health: N/A
-- Coverage: 65.03%
 
 #### 2025-11-14 11:29:07 docs: Move JSON-RPC reference to src/docs; convert to TSDoc
 
@@ -356,6 +356,7 @@ All other changes must be performed via the CLI.
 - Tests: PASS
 - Docs: SKIPPED (blocked by tsdoc.json error)
 - Health: PASS
+
 
 #### 2025-11-14 09:03:42 docs: Clarify Copilot communication protocols (micro-updates, CLI narration, examples)
 
@@ -3053,7 +3054,7 @@ During AgentResponse pattern implementation (Task #5), agents were given wrapper
 
 **Violated Core Principle:**
 
-```txt
+```
 RULE: Orchestrator is the ONLY agent that coordinates inter-agent communication.
 Agents MUST NOT import from other agents.
 ```
