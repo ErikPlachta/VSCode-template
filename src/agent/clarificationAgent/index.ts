@@ -22,7 +22,7 @@ import {
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "@internal-types/configValidation";
+} from "@shared/validation/configValidation";
 import { clarificationAgentConfig } from "@agent/clarificationAgent/agent.config";
 
 export { ClarificationAgentProfile };

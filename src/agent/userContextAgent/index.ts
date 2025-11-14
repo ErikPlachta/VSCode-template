@@ -28,7 +28,7 @@ import {
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "@internal-types/configValidation";
+} from "@shared/validation/configValidation";
 import { IDS } from "@shared/ids";
 import * as os from "os";
 import {
@@ -62,9 +62,12 @@ import {
   RawTypeFile,
   RawExampleFile,
   RawQueryFile,
-  validateCategoryRecord,
-  formatValidationErrors,
 } from "@internal-types/userContext.types";
+// Phase 5: use shared category validation implementations (types directory will drop runtime copies after enforcement test).
+import {
+  validateCategoryRecordImpl as validateCategoryRecord,
+  formatValidationErrorsImpl as formatValidationErrors,
+} from "@shared/validation/categoryValidation";
 
 // ES module equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);

@@ -1,24 +1,24 @@
 import { describe, it, expect } from "@jest/globals";
 
-// UserContext validation/runtime helpers (types module)
+// Shared userContext validation helpers (migrated from types runtime)
 import {
-  validateCategoryConfig,
-  validateCategoryRecord,
-  validateRelationshipDefinition,
-  formatValidationErrors,
-  type ValidationError as UCValidationError,
-} from "../src/types/userContext.types";
+  validateCategoryConfigImpl as validateCategoryConfig,
+  validateCategoryRecordImpl as validateCategoryRecord,
+  validateRelationshipDefinitionImpl as validateRelationshipDefinition,
+  formatValidationErrorsImpl as formatValidationErrors,
+} from "../src/shared/validation/categoryValidation";
+import type { ValidationError as UCValidationError } from "../src/types/userContext.types";
 
-// Config validation helpers (config types module)
+// Shared config validation helpers (migrated from types runtime)
 import {
   validateAgentConfig,
   validateCompatibility,
   generateValidationReport,
-} from "../src/types/configValidation";
+} from "../src/shared/validation/configValidation";
 
 import { CONFIG_IDS, validateConfig } from "../src/types/configRegistry";
 
-describe("Validation Parity – userContext.types runtime validators", () => {
+describe("Validation Parity – shared category validation", () => {
   it("validateCategoryConfig: rejects non-object with informative error", () => {
     const res = validateCategoryConfig(null as unknown);
     expect(res.valid).toBe(false);
@@ -31,7 +31,7 @@ describe("Validation Parity – userContext.types runtime validators", () => {
     const res = validateCategoryConfig({});
     expect(res.valid).toBe(false);
     // Should include at least these paths
-    const paths = new Set(res.errors.map((e) => e.path));
+    const paths = new Set(res.errors.map((e: UCValidationError) => e.path));
     ["id", "name", "description", "aliases", "config"].forEach((p) =>
       expect(paths.has(p)).toBe(true)
     );
@@ -40,15 +40,17 @@ describe("Validation Parity – userContext.types runtime validators", () => {
   it("validateCategoryRecord: requires id and name/title", () => {
     const res = validateCategoryRecord({});
     expect(res.valid).toBe(false);
-    const paths = new Set(res.errors.map((e) => e.path));
+    const paths = new Set(res.errors.map((e: UCValidationError) => e.path));
     expect(paths.has("id")).toBe(true);
-    expect(res.errors.some((e) => e.path === "name/title")).toBe(true);
+    expect(
+      res.errors.some((e: UCValidationError) => e.path === "name/title")
+    ).toBe(true);
   });
 
   it("validateRelationshipDefinition: reports required fields for empty object", () => {
     const res = validateRelationshipDefinition({});
     expect(res.valid).toBe(false);
-    const paths = new Set(res.errors.map((e) => e.path));
+    const paths = new Set(res.errors.map((e: UCValidationError) => e.path));
     ["from", "to", "type", "fields", "description"].forEach((p) =>
       expect(paths.has(p)).toBe(true)
     );
@@ -65,7 +67,7 @@ describe("Validation Parity – userContext.types runtime validators", () => {
   });
 });
 
-describe("Validation Parity – configValidation runtime validators", () => {
+describe("Validation Parity – shared config validation", () => {
   it("validateAgentConfig: rejects non-object with $root type error", () => {
     const res = validateAgentConfig(42 as unknown);
     expect(res.isValid).toBe(false);

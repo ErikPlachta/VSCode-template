@@ -1,4 +1,13 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  beforeAll,
+  afterAll,
+  jest,
+} from "@jest/globals";
 
 /**
  * @file Comprehensive tests for TypeScript type guard validation functions
@@ -6,16 +15,18 @@ import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest 
  */
 
 import {
-  validateCategoryConfig,
-  validateCategoryRecord,
-  validateRelationshipDefinition,
-  formatValidationErrors,
   type ValidationError,
   type ValidationResult,
   type CategoryConfig,
   type CategoryRecord,
   type RelationshipDefinition,
 } from "@internal-types/userContext.types";
+import {
+  validateCategoryConfigImpl as validateCategoryConfig,
+  validateCategoryRecordImpl as validateCategoryRecord,
+  validateRelationshipDefinitionImpl as validateRelationshipDefinition,
+  formatValidationErrorsImpl as formatValidationErrors,
+} from "../src/shared/validation/categoryValidation";
 
 describe("Type Guard Validation Functions", () => {
   describe("validateCategoryConfig", () => {

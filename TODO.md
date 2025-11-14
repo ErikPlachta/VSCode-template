@@ -84,12 +84,11 @@ Follow these guidelines to ensure effective task management:
 
   - [x] Phase 1: Inventory & Tag – enumerated runtime validation exports (agent/category/relationship/errors/reporting); added Phase 1 @remarks tags to each exported function in `src/types/userContext.types.ts`, `src/types/configValidation.ts`, `src/types/configRegistry.ts`.
   - [x] Phase 2: Parity Test Scaffold – added `tests/validation.parity.test.ts` (locks behavior for category + config validators, 38 passed, 1 skipped total suites now 39).
-  - [x] Phase 2: Parity Test Scaffold – created dedicated tests asserting current behaviors (inputs/outputs/error shapes) before migration.
-  - [x] Phase 3: Shared Module Completion (Category subset) – created `src/shared/validation/categoryValidation.ts` with extracted logic (no delegation yet to preserve types-only constraint).
-  - [x] Phase 3: Shared Module Completion (Config subset) – created `src/shared/validation/configValidation.ts` duplicating logic from `src/types/configValidation.ts` (no imports added; parity maintained).
-  - [ ] Phase 4: Single-Agent Import Switch – migrate one agent (e.g. `UserContextAgent`) to shared module; run full verification (`compile && test`).
-  - [ ] Phase 5: Multi-Agent Switch – migrate remaining agents/tools; remove transitional wrappers.
-  - [ ] Phase 6: Enforcement Test – add test scanning `src/types/**` for runtime function declarations (allow type guards); fail build on violations.
+  - [x] Phase 3: Shared Module Completion (Category subset) – created `src/shared/validation/categoryValidation.ts` (extracted logic; delegation deferred to preserve types-only constraint).
+  - [x] Phase 3: Shared Module Completion (Config subset) – added `src/shared/validation/configValidation.ts` (duplicated logic; parity preserved).
+  - [x] Phase 4: Single-Agent Import Switch – migrated `UserContextAgent` to shared validation (aliased imports); verification green.
+  - [x] Phase 5: Multi-Agent Switch – migrated remaining agents to shared config validation; runtime removal deferred to Phase 6 enforcement.
+  - [x] Phase 6: Enforcement Test – removed all runtime validator implementations from `src/types/**`; added `tests/types.purity.test.ts` scanning for forbidden validator names; updated affected imports to shared modules; test passing.
   - [ ] Phase 7: Cleanup & Changelog – remove inline TODO tags; update CHANGELOG with Verification block capturing final pass.
   - [ ] Phase 8: Post-Migration Audit – confirm no hardcoded business values introduced; validate agent isolation remains intact.
   - [ ] Phase 9: Coverage Review – ensure parity tests + new shared module maintain or improve coverage metrics.

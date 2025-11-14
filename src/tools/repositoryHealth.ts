@@ -13,10 +13,10 @@ import fg from "fast-glob";
 import matter from "gray-matter";
 import { loadApplicationConfig } from "@shared/configurationLoader";
 import {
-  validateCategoryConfig,
-  validateCategoryRecord,
-  formatValidationErrors,
-} from "@internal-types/userContext.types";
+  validateCategoryConfigImpl as validateCategoryConfig,
+  validateCategoryRecordImpl as validateCategoryRecord,
+  formatValidationErrorsImpl as formatValidationErrors,
+} from "@shared/validation/categoryValidation";
 
 /**
  * Configuration contract for the repository health agent.
@@ -77,8 +77,8 @@ export class RepositoryHealthAgent {
   /**
    * Create a new health agent using the provided configuration.
    *
-   * @param {string} baseDir - Absolute repository root directory.
-   * @param {AgentConfig} config - Fully resolved health agent configuration contract.
+   * @param baseDir - Absolute repository root directory.
+   * @param config - Fully resolved health agent configuration contract.
    */
   public constructor(baseDir: string, config: AgentConfig) {
     this.baseDir = baseDir;
@@ -88,8 +88,8 @@ export class RepositoryHealthAgent {
   /**
    * Load configuration from the typed application config (preferred) with a legacy JSON fallback.
    *
-   * @param {string} configPath - Path to legacy JSON config used only if the TS loader throws.
-   * @returns {Promise<AgentConfig>} Resolved agent configuration object.
+   * @param configPath - Path to legacy JSON config used only if the TS loader throws.
+   * @returns Resolved agent configuration object.
    */
   public static async loadConfig(configPath: string): Promise<AgentConfig> {
     try {
@@ -113,8 +113,8 @@ export class RepositoryHealthAgent {
   /**
    * Create an agent instance by reading the preferred TS application config (or legacy JSON fallback).
    *
-   * @param {string} configPath - Optional legacy JSON path used only if TS config resolution fails.
-   * @returns {Promise<RepositoryHealthAgent>} Instantiated health agent ready to run checks.
+   * @param configPath - Optional legacy JSON path used only if TS config resolution fails.
+   * @returns Instantiated health agent ready to run checks.
    */
   public static async createFromDisk(
     configPath: string = "out/mcp.config.json"
@@ -128,8 +128,8 @@ export class RepositoryHealthAgent {
   /**
    * Create an agent using an already materialized configuration (skips disk IO).
    *
-   * @param {AgentConfig} config - Pre-baked configuration object.
-   * @returns {RepositoryHealthAgent} New agent instance.
+   * @param config - Pre-baked configuration object.
+   * @returns New agent instance.
    */
   public static createFromConfig(config: AgentConfig): RepositoryHealthAgent {
     return new RepositoryHealthAgent(process.cwd(), config);
@@ -138,7 +138,7 @@ export class RepositoryHealthAgent {
   /**
    * Execute every configured check (TS lint, JSON schema, Markdown metadata) and aggregate results.
    *
-   * @returns {Promise<HealthReport>} Composite report including per-check pass state and messages.
+   * @returns Composite report including per-check pass state and messages.
    */
   public async runAllChecks(): Promise<HealthReport> {
     const checks: CheckResult[] = [];
@@ -154,7 +154,7 @@ export class RepositoryHealthAgent {
   /**
    * Execute ESLint across configured TypeScript include globs.
    *
-   * @returns {Promise<CheckResult>} Lint result summarizing pass/fail and diagnostic messages.
+   * @returns Lint result summarizing pass/fail and diagnostic messages.
    */
   public async runTypescriptLint(): Promise<CheckResult> {
     // Skip full ESLint invocation under Jest to avoid dynamic import VM module errors.
@@ -206,7 +206,7 @@ export class RepositoryHealthAgent {
    * Note: JSON schema validation has been replaced with TypeScript type guards.
    * User data validation occurs at runtime through extension utilities.
    *
-   * @returns {Promise<CheckResult>} Result object enumerating per-file validation failures.
+   * @returns Result object enumerating per-file validation failures.
    */
   public async validateJsonSchemas(): Promise<CheckResult> {
     // If no schema rules are configured, skip validation
@@ -286,7 +286,7 @@ export class RepositoryHealthAgent {
   /**
    * Validate Markdown documents for required front matter fields and required section headings.
    *
-   * @returns {Promise<CheckResult>} Result summarizing metadata compliance across scanned documents.
+   * @returns Result summarizing metadata compliance across scanned documents.
    */
   public async validateMarkdownDocuments(): Promise<CheckResult> {
     const include: string[] = [...this.config.markdown.include];
@@ -338,7 +338,7 @@ export class RepositoryHealthAgent {
    * Rationale: Configuration source of truth is TypeScript. If external tools need JSON, it's emitted to out/mcp.config.json.
    * Any file named mcp.config.json outside the build output indicates drift or a regression.
    *
-   * @returns {Promise<CheckResult>} Result indicating success or listing offending file paths.
+   * @returns Result indicating success or listing offending file paths.
    */
   public async checkNoLegacyMcpConfigArtifacts(): Promise<CheckResult> {
     const matches: string[] = await fg(["**/mcp.config.json"], {
@@ -375,8 +375,8 @@ export class RepositoryHealthAgent {
   /**
    * Persist a markdown report summarizing the check outcomes to the configured output path.
    *
-   * @param {HealthReport} report - Completed health report to serialize.
-   * @returns {Promise<void>} Resolves when the report has been written to disk.
+   * @param report - Completed health report to serialize.
+   * @returns Resolves when the report has been written to disk.
    */
   public async writeReport(report: HealthReport): Promise<void> {
     const outputPath: string = path.resolve(
@@ -461,7 +461,7 @@ export class RepositoryHealthAgent {
 /**
  * CLI-friendly runner that executes all checks, prints a summary, and writes the markdown report.
  *
- * @returns {Promise<void>} Resolves when checks and report persistence complete (exitCode set on failure).
+ * @returns Resolves when checks and report persistence complete (exitCode set on failure).
  */
 export async function runHealthCheck(): Promise<void> {
   const agent: RepositoryHealthAgent =

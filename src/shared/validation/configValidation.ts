@@ -1,12 +1,12 @@
 /**
- * @packageDocumentation Shared Configuration Validation Implementations
+ * Shared configuration validation implementations.
  *
  * Runtime validation implementations extracted (duplicated for Phase 3) from `src/types/configValidation.ts`.
  * These functions will become the single source of truth once agents migrate to shared modules
- * and the types directory is restored to types‑only exports.
+ * and the types directory is restored to types-only exports.
  *
- * @remarks
- * Phase 3 (partial): Logic is intentionally copied without modification to preserve behavior
+ * @packageDocumentation
+ * @remarks Phase 3 (partial): Logic is intentionally copied without modification to preserve behavior
  * locked by parity tests. No consumers import this file yet; later phases will switch imports
  * and remove the duplicated runtime code from `src/types/configValidation.ts`.
  */
@@ -14,14 +14,26 @@
 import { AgentConfigDefinition } from "@internal-types/agentConfig";
 import { ConfigUtils } from "@internal-types/configRegistry";
 
-/** Validation result with detailed error and warning information. */
+/**
+ * Validation result produced by configuration validators.
+ *
+ * @remarks
+ * Exported for consumers that need to act on structured validation feedback
+ * (tooling, CI health checks, UX reporting). When Phase 5+ migration is
+ * complete this will be the single source type (types/ duplicate removed).
+ */
 export interface ValidationResult {
   isValid: boolean;
   errors: ValidationError[];
   warnings: ValidationWarning[];
 }
 
-/** Detailed validation error information. */
+/**
+ * Structured validation error entry.
+ *
+ * @remarks
+ * Errors are blocking; warnings are non-blocking (see {@link ValidationWarning}).
+ */
 export interface ValidationError {
   level: "error" | "warning";
   category: "schema" | "type" | "business_rule" | "compatibility";
@@ -31,16 +43,27 @@ export interface ValidationError {
   actual?: unknown;
 }
 
-/** Validation warning (non-blocking issue). */
+/**
+ * Non-blocking validation warning (advisory issue that does not fail validation).
+ */
 export interface ValidationWarning extends Omit<ValidationError, "level"> {
   level: "warning";
 }
 
 /**
- * Validate an unknown agent configuration object against registry metadata and rules.
+ * Validates an unknown agent configuration object against registry metadata and business rules.
  *
- * @param config - Unknown configuration candidate.
- * @returns Validation result including errors and warnings.
+ * @param config - Unknown configuration candidate object to validate.
+ * @returns {@link ValidationResult} listing blocking errors and non-blocking warnings.
+ * @remarks Behavior duplicated from `src/types/configValidation.ts` (Phase 3).
+ * @example
+ * ```ts
+ * const candidate = { $configId: 'agent.orchestrator.v1.0.0', agent: { id: 'orch', name: 'Orchestrator', version: '1.0.0', description: 'Routes intents' } };
+ * const result = validateAgentConfig(candidate);
+ * if (!result.isValid) {
+ *   console.error(generateValidationReport(result));
+ * }
+ * ```
  */
 export function validateAgentConfig(config: unknown): ValidationResult {
   const errors: ValidationError[] = [];
@@ -117,6 +140,14 @@ export function validateAgentConfig(config: unknown): ValidationResult {
   return { isValid: errors.length === 0, errors, warnings };
 }
 
+/**
+ * Internal helper validating the `agent` sub-object.
+ *
+ * @param agent - Raw agent value from config.
+ * @param errors - Collector for blocking validation errors.
+ * @param warnings - Collector for non-blocking warnings.
+ * @internal
+ */
 function validateAgentField(
   agent: unknown,
   errors: ValidationError[],
@@ -169,6 +200,15 @@ function validateAgentField(
   }
 }
 
+/**
+ * Internal dispatcher for agentType‑specific section validation.
+ *
+ * @param config - Full configuration object.
+ * @param agentType - Resolved agent type from registry metadata.
+ * @param errors - Collector for blocking errors.
+ * @param warnings - Collector for non-blocking warnings.
+ * @internal
+ */
 function validateConfigurationSections(
   config: Record<string, unknown>,
   agentType: string,
@@ -204,6 +244,14 @@ function validateConfigurationSections(
   }
 }
 
+/**
+ * Validates orchestrator‑specific configuration subsections.
+ *
+ * @param config - Full configuration object.
+ * @param errors - Collector for blocking errors.
+ * @param _warnings - Ignored warnings collector (reserved for future rules).
+ * @internal
+ */
 function validateOrchestratorConfig(
   config: Record<string, unknown>,
   errors: ValidationError[],
@@ -284,44 +332,84 @@ function validateOrchestratorConfig(
   }
 }
 
+/**
+ * Placeholder for future database agent specialized validation.
+ *
+ * @param _config - Configuration object (unused placeholder).
+ * @param _errors - Error collector (unused placeholder).
+ * @param _warnings - Warning collector (unused placeholder).
+ * @internal
+ */
 function validateDatabaseAgentConfig(
   _config: Record<string, unknown>,
   _errors: ValidationError[],
   _warnings: ValidationWarning[]
 ): void {
-  // Placeholder for future specialized validation
+  /* no-op */
 }
 
+/**
+ * Placeholder for future data agent specialized validation.
+ *
+ * @param _config - Configuration object (unused placeholder).
+ * @param _errors - Error collector (unused placeholder).
+ * @param _warnings - Warning collector (unused placeholder).
+ * @internal
+ */
 function validateDataAgentConfig(
   _config: Record<string, unknown>,
   _errors: ValidationError[],
   _warnings: ValidationWarning[]
 ): void {
-  // Placeholder for future specialized validation
+  /* no-op */
 }
 
+/**
+ * Placeholder for future clarification agent specialized validation.
+ *
+ * @param _config - Configuration object (unused placeholder).
+ * @param _errors - Error collector (unused placeholder).
+ * @param _warnings - Warning collector (unused placeholder).
+ * @internal
+ */
 function validateClarificationAgentConfig(
   _config: Record<string, unknown>,
   _errors: ValidationError[],
   _warnings: ValidationWarning[]
 ): void {
-  // Placeholder for future specialized validation
+  /* no-op */
 }
 
+/**
+ * Placeholder for future relevant‑data‑manager (user-context alias) specialized validation.
+ *
+ * @param _config - Configuration object (unused placeholder).
+ * @param _errors - Error collector (unused placeholder).
+ * @param _warnings - Warning collector (unused placeholder).
+ * @internal
+ */
 function validateRelevantDataManagerConfig(
   _config: Record<string, unknown>,
   _errors: ValidationError[],
   _warnings: ValidationWarning[]
 ): void {
-  // Placeholder for future specialized validation
+  /* no-op */
 }
 
 /**
- * Check compatibility between two configuration definitions.
+ * Checks compatibility between two configuration definitions (same agent type & major version).
  *
  * @param config1 - Baseline configuration.
- * @param config2 - Candidate configuration.
- * @returns ValidationResult describing compatibility outcome.
+ * @param config2 - Candidate configuration being compared.
+ * @returns {@link ValidationResult} describing compatibility outcome (errors only if incompatible).
+ * @remarks Behavior duplicated for parity; future phases will remove the types version.
+ * @example
+ * ```ts
+ * const a = { $configId: 'agent.orchestrator.v1.0.0' } as AgentConfigDefinition;
+ * const b = { $configId: 'agent.orchestrator.v1.1.0' } as AgentConfigDefinition;
+ * const compat = validateCompatibility(a, b);
+ * console.log(compat.isValid);
+ * ```
  */
 export function validateCompatibility(
   config1: AgentConfigDefinition,
@@ -351,10 +439,10 @@ export function validateCompatibility(
 }
 
 /**
- * Generate a human‑readable validation report.
+ * Generates a human-readable multi-line report summarizing validation outcome.
  *
- * @param result - Validation outcome.
- * @returns Multi‑line formatted string summarizing validation.
+ * @param result - Validation outcome produced by a validator.
+ * @returns Multi‑line string (errors listed first, then warnings).
  */
 export function generateValidationReport(result: ValidationResult): string {
   const lines: string[] = [];

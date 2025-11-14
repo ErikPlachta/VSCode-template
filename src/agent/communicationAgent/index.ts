@@ -22,7 +22,7 @@ import { communicationAgentConfig } from "@agent/communicationAgent/agent.config
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "@internal-types/configValidation";
+} from "@shared/validation/configValidation";
 import type {
   ResponseType,
   SeverityLevel,

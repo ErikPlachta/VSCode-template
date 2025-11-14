@@ -14,7 +14,7 @@ import {
 import {
   validateAgentConfig,
   generateValidationReport,
-} from "@internal-types/configValidation";
+} from "@shared/validation/configValidation";
 import { orchestratorConfig } from "@agent/orchestrator/agent.config";
 import type {
   OrchestratorIntent,
