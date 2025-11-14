@@ -47,6 +47,9 @@ describe("repo-ops.changelog.writeEntry", () => {
     expect(res.changed).toBe(true);
     expect(res.plans.length).toBe(1);
     const after = res.plans[0].afterSnippet;
+    // Debug output for investigation
+    // eslint-disable-next-line no-console
+    console.log("AFTER_SNIPPET:\n" + after);
     expect(after.includes(`### [${today}]`)).toBe(true);
     expect(after.includes(`: ${summary}`)).toBe(true);
     expect(after.includes("## Logs")).toBe(true);
