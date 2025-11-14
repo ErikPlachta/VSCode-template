@@ -89,37 +89,6 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
-- [x] P1: Validation Runtime Extraction (Phased)
-  - [x] Phase 1: Inventory & Tag – enumerated runtime validation exports (agent/category/relationship/errors/reporting); added Phase 1 @remarks tags to each exported function in `src/types/userContext.types.ts`, `src/types/configValidation.ts`, `src/types/configRegistry.ts`.
-  - [x] Phase 2: Parity Test Scaffold – added `tests/validation.parity.test.ts` (locks behavior for category + config validators, 38 passed, 1 skipped total suites now 39).
-  - [x] Phase 3: Shared Module Completion (Category subset) – created `src/shared/validation/categoryValidation.ts` (extracted logic; delegation deferred to preserve types-only constraint).
-  - [x] Phase 3: Shared Module Completion (Config subset) – added `src/shared/validation/configValidation.ts` (duplicated logic; parity preserved).
-  - [x] Phase 4: Single-Agent Import Switch – migrated `UserContextAgent` to shared validation (aliased imports); verification green.
-  - [x] Phase 5: Multi-Agent Switch – migrated remaining agents to shared config validation; runtime removal deferred to Phase 6 enforcement.
-  - [x] Phase 6: Enforcement Test – removed all runtime validator implementations from `src/types/**`; added `tests/types.purity.test.ts` scanning for forbidden validator names; updated affected imports to shared modules; test passing.
-  - [x] Phase 7: Cleanup & Changelog – removed phased inline remarks across types; added verification changelog entry confirming tests (42 passed / 1 skipped) and purity intact.
-  - [x] Phase 8: Post-Migration Audit – confirm no hardcoded business values introduced; validate agent isolation remains intact.
-    - Findings: No hardcoded category ids or business strings found in `src/shared/validation/**`; agent modules under `src/agent/**` only import their own `agent.config.ts` and do not import other agents. Orchestrator remains sole coordinator. Test suite remains green (44 passed, 1 skipped).
-  - [x] Phase 9: Coverage Review – ensure parity tests + new shared module maintain or improve coverage metrics.
-    - Baseline (2025-11-14): `src/shared/validation/categoryValidation.ts` – Statements 95%, Branches 93.82%, Functions 100%, Lines 94.73%.
-    - Baseline (2025-11-14): `src/shared/validation/configValidation.ts` – Statements 63.73%, Branches 61.44%, Functions 75%, Lines 63.73%.
-    - Action: Added `tests/configValidation.coverage.test.ts` to exercise invalid `$configId`, orchestrator `intents` type, `textProcessing.stopWords`, and `scoring.weights` branches; unknown agent type warning; semver warning; compatibility paths; and report generation.
-    - Result (2025-11-14): `src/shared/validation/configValidation.ts` – Statements 92.30%, Branches 89.15%, Functions 91.66%, Lines 92.30%.
-    - Suite status: PASS (1 skipped, 45 passed). Coverage updated via `npm test -- --coverage`.
-- [x] P1: MCP Transport & Protocol Enforcement
-  - [x] Ensure JSON-RPC 2.0 compliance end-to-end.
-  - [x] Verify stdio is default transport; HTTP enabled only with `MCP_HTTP_ENABLED=true`.
-  - [x] Consolidate JSON-RPC handlers into a single path reused across transports.
-    - [x] Implement single dispatcher (initialize, tools/list, tools/call) and remove duplicates+
-    - [x] Wire both stdio and HTTP to reuse the same dispatcher
-  - [x] Add tests to validate protocol and transport behavior (single-handler + negative transport cases).
-    - [x] Unit: method not found / invalid params error shapes
-    - ❌ Integration: stdio path happy-path tools/list + tools/call (deferred; stdio harness removed — moved to Backlog)
-    - [x] Integration: HTTP happy-path (initialize + tools/list) via `bin/transport/verifyHttpTransport.js`
-    - [x] CI helper: `test:http:ci` script added
-    - [x] CI: wired `test:http:ci` into GitHub Actions (separate `transport` job)
-  - [x] Update documentation to reflect transport and protocol standards.
-  - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
 - [ ] P1: Cache Directory Rename & Migration
   - [ ] Rename root cache directory `usercontext-mcp-extension` to `.usercontext-mcp-extension` (leading dot for hidden semantics on Unix).
   - [ ] Update all path references in source (`src/`), tests, and any docs mentioning the old name.
@@ -291,6 +260,37 @@ Follow these guidelines to ensure effective task management:
   - Completed: Promoted generated page to `docs/mcp/json-rpc.md` via postprocess
   - Verified via `npm run docs` and changelog entry (2025-11-14)
 - [x] P1: repo-ops: Add fast incremental changelog map (`--fast`) and `diff` subcommand — see CHANGELOG entry "2025-11-14 14:45:00 feat: repo-ops: add fast incremental map and diff subcommand"
+- [x] P1: Validation Runtime Extraction (Phased)
+  - [x] Phase 1: Inventory & Tag – enumerated runtime validation exports (agent/category/relationship/errors/reporting); added Phase 1 @remarks tags to each exported function in `src/types/userContext.types.ts`, `src/types/configValidation.ts`, `src/types/configRegistry.ts`.
+  - [x] Phase 2: Parity Test Scaffold – added `tests/validation.parity.test.ts` (locks behavior for category + config validators, 38 passed, 1 skipped total suites now 39).
+  - [x] Phase 3: Shared Module Completion (Category subset) – created `src/shared/validation/categoryValidation.ts` (extracted logic; delegation deferred to preserve types-only constraint).
+  - [x] Phase 3: Shared Module Completion (Config subset) – added `src/shared/validation/configValidation.ts` (duplicated logic; parity preserved).
+  - [x] Phase 4: Single-Agent Import Switch – migrated `UserContextAgent` to shared validation (aliased imports); verification green.
+  - [x] Phase 5: Multi-Agent Switch – migrated remaining agents to shared config validation; runtime removal deferred to Phase 6 enforcement.
+  - [x] Phase 6: Enforcement Test – removed all runtime validator implementations from `src/types/**`; added `tests/types.purity.test.ts` scanning for forbidden validator names; updated affected imports to shared modules; test passing.
+  - [x] Phase 7: Cleanup & Changelog – removed phased inline remarks across types; added verification changelog entry confirming tests (42 passed / 1 skipped) and purity intact.
+  - [x] Phase 8: Post-Migration Audit – confirm no hardcoded business values introduced; validate agent isolation remains intact.
+    - Findings: No hardcoded category ids or business strings found in `src/shared/validation/**`; agent modules under `src/agent/**` only import their own `agent.config.ts` and do not import other agents. Orchestrator remains sole coordinator. Test suite remains green (44 passed, 1 skipped).
+  - [x] Phase 9: Coverage Review – ensure parity tests + new shared module maintain or improve coverage metrics.
+    - Baseline (2025-11-14): `src/shared/validation/categoryValidation.ts` – Statements 95%, Branches 93.82%, Functions 100%, Lines 94.73%.
+    - Baseline (2025-11-14): `src/shared/validation/configValidation.ts` – Statements 63.73%, Branches 61.44%, Functions 75%, Lines 63.73%.
+    - Action: Added `tests/configValidation.coverage.test.ts` to exercise invalid `$configId`, orchestrator `intents` type, `textProcessing.stopWords`, and `scoring.weights` branches; unknown agent type warning; semver warning; compatibility paths; and report generation.
+    - Result (2025-11-14): `src/shared/validation/configValidation.ts` – Statements 92.30%, Branches 89.15%, Functions 91.66%, Lines 92.30%.
+    - Suite status: PASS (1 skipped, 45 passed). Coverage updated via `npm test -- --coverage`.
+- [x] P1: MCP Transport & Protocol Enforcement
+  - [x] Ensure JSON-RPC 2.0 compliance end-to-end.
+  - [x] Verify stdio is default transport; HTTP enabled only with `MCP_HTTP_ENABLED=true`.
+  - [x] Consolidate JSON-RPC handlers into a single path reused across transports.
+    - [x] Implement single dispatcher (initialize, tools/list, tools/call) and remove duplicates+
+    - [x] Wire both stdio and HTTP to reuse the same dispatcher
+  - [x] Add tests to validate protocol and transport behavior (single-handler + negative transport cases).
+    - [x] Unit: method not found / invalid params error shapes
+    - ❌ Integration: stdio path happy-path tools/list + tools/call (deferred; stdio harness removed — moved to Backlog)
+    - [x] Integration: HTTP happy-path (initialize + tools/list) via `bin/transport/verifyHttpTransport.js`
+    - [x] CI helper: `test:http:ci` script added
+    - [x] CI: wired `test:http:ci` into GitHub Actions (separate `transport` job)
+  - [x] Update documentation to reflect transport and protocol standards.
+  - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
 
 <!-- END:COMPLETED_ACTION_ITEMS -->
 <!-- BEGIN:GENERATED-ACTION-ITEMS -->
