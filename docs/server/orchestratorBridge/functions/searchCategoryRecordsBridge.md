@@ -8,7 +8,7 @@
 
 > **searchCategoryRecordsBridge**(`topicOrId`, `filters`): `Promise`\<[`BridgeResult`](../interfaces/BridgeResult.md)\>
 
-Defined in: [src/server/orchestratorBridge.ts:138](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/server/orchestratorBridge.ts#L138)
+Defined in: [src/server/orchestratorBridge.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/server/orchestratorBridge.ts#L188)
 
 Search records within a category resolved by id, name, or alias.
 Returns a formatted result and includes available categories on error.

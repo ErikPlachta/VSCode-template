@@ -23,8 +23,8 @@ import {
   type TopicSearchResult,
   type CrossCategoryConnection,
   type ConfigDescriptor,
-  createDescriptorMap,
 } from "@internal-types/agentConfig";
+import { createDescriptorMap } from "@shared/config/descriptors";
 // No external validation helpers needed here; BaseAgentConfig-based checks are used
 import { dataAgentConfig } from "@agent/dataAgent/agent.config";
 

@@ -237,6 +237,40 @@ export class CommunicationAgent extends BaseAgentConfig {
 
     message = message || "Operation completed successfully.";
 
+    // Optionally include available categories on success when configured
+    const includeOnSuccess =
+      this.getConfigItem<boolean>(
+        "communication.successDisplay.includeAvailableCategories"
+      ) ?? false;
+    if (includeOnSuccess) {
+      const availableCategories =
+        (response.metadata?.availableCategories as string[] | undefined) || [];
+      if (availableCategories.length > 0) {
+        const successDisp = this.getConfigItem<{
+          availableCategoriesHeader?: string;
+          maxCategoriesInSuccess?: number;
+        }>("communication.successDisplay");
+        const clar = this.getConfigItem<{
+          availableCategoriesHeader?: string;
+        }>("communication.clarification");
+        const header =
+          successDisp?.availableCategoriesHeader ||
+          clar?.availableCategoriesHeader ||
+          "Available Categories:";
+        const max = successDisp?.maxCategoriesInSuccess ?? 6;
+        const top = availableCategories.slice(0, max);
+
+        if (format === "markdown") {
+          const list = top.map((c) => `- ${c}`).join("\n");
+          message += `\n\n**${header}**\n${list}`;
+        } else {
+          const rawHeader = header.replace(/\*\*/g, "");
+          const list = top.map((c) => `• ${c}`).join("\n");
+          message += `\n\n${rawHeader}\n${list}`;
+        }
+      }
+    }
+
     // Apply formatting based on output format
     const formatted = this._applyFormatting(message, response, format);
 

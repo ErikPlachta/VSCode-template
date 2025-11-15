@@ -6,9 +6,11 @@
 
 # extension/mcpCache
 
-Utilities for managing the local `.mcp-cache` directory.
+Utilities for managing the local cache directory.
 
 Module for working with on-disk cache artifacts shared across tools and agents.
+The cache directory name is derived via [getCacheDirectoryName](../../shared/env/functions/getCacheDirectoryName.md) and
+defaults to a hidden, dot-prefixed folder (e.g., `.usercontext-mcp-extension`).
 
 ## Interfaces
 

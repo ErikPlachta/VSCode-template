@@ -8,7 +8,7 @@
 
 > **logInvocation**(`cacheDir`, `entry`): `Promise`\<`void`\>
 
-Defined in: [src/extension/mcpCache.ts:88](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/mcpCache.ts#L88)
+Defined in: [src/extension/mcpCache.ts:185](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/extension/mcpCache.ts#L185)
 
 Append an invocation log entry to `.mcp-cache/invocations.jsonl`.
 

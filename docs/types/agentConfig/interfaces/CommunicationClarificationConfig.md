@@ -6,7 +6,7 @@
 
 # Interface: CommunicationClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:692](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L692)
+Defined in: [src/types/agentConfig.ts:701](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L701)
 
 Clarification formatting configuration for the CommunicationAgent.
 
@@ -38,7 +38,7 @@ const clar: CommunicationClarificationConfig = {
 
 > `optional` **availableCategoriesHeader**: `string`
 
-Defined in: [src/types/agentConfig.ts:698](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L698)
+Defined in: [src/types/agentConfig.ts:707](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L707)
 
 Heading before category list
 
@@ -48,7 +48,7 @@ Heading before category list
 
 > `optional` **closingPrompt**: `string`
 
-Defined in: [src/types/agentConfig.ts:700](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L700)
+Defined in: [src/types/agentConfig.ts:709](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L709)
 
 Closing prompt encouraging specificity
 
@@ -58,7 +58,7 @@ Closing prompt encouraging specificity
 
 > `optional` **examplesHeader**: `string`
 
-Defined in: [src/types/agentConfig.ts:696](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L696)
+Defined in: [src/types/agentConfig.ts:705](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L705)
 
 Heading before example prompts
 
@@ -68,7 +68,7 @@ Heading before example prompts
 
 > `optional` **groups**: `object`[]
 
-Defined in: [src/types/agentConfig.ts:706](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L706)
+Defined in: [src/types/agentConfig.ts:715](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L715)
 
 Example groups; when usesCategories=true, replace {{category}}
 
@@ -90,7 +90,7 @@ Example groups; when usesCategories=true, replace {{category}}
 
 > `optional` **matchedIntentTemplate**: `string`
 
-Defined in: [src/types/agentConfig.ts:704](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L704)
+Defined in: [src/types/agentConfig.ts:713](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L713)
 
 Template when an intent is guessed: uses {{intent}}
 
@@ -100,7 +100,7 @@ Template when an intent is guessed: uses {{intent}}
 
 > `optional` **maxCategoriesInExamples**: `number`
 
-Defined in: [src/types/agentConfig.ts:694](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L694)
+Defined in: [src/types/agentConfig.ts:703](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L703)
 
 Max number of categories to include in examples
 
@@ -110,6 +110,6 @@ Max number of categories to include in examples
 
 > `optional` **unknownRequestTemplate**: `string`
 
-Defined in: [src/types/agentConfig.ts:702](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L702)
+Defined in: [src/types/agentConfig.ts:711](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L711)
 
 Template: I'm not sure what you're looking for with "{{question}}".

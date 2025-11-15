@@ -24,8 +24,8 @@ import {
   type DataSource,
   type QueryOptions,
   type ConfigDescriptor,
-  createDescriptorMap,
 } from "@internal-types/agentConfig";
+import { createDescriptorMap } from "@shared/config/descriptors";
 import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";
 
 // Re-export DataSource type for test suites expecting it from this module

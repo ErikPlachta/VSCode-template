@@ -5,15 +5,43 @@
  * via UserContextAgent, runs queries via DatabaseAgent, and delegates
  * user-facing formatting to CommunicationAgent to keep the server thin.
  */
-import { CommunicationAgent } from "@agent/communicationAgent";
-import { Orchestrator } from "@agent/orchestrator";
-import { UserContextAgent } from "@agent/userContextAgent";
-import { DatabaseAgent } from "@agent/databaseAgent";
-import { ensureCacheDirectory } from "@extension/mcpCache";
+// Use dynamic imports inside createAgents to avoid extension-only dependencies at module load time
+import * as os from "os";
+import * as path from "path";
+
+async function resolveCacheDirectory(): Promise<string> {
+  try {
+    const mod = (await import("@extension/mcpCache")) as unknown as {
+      ensureCacheDirectory: () => string;
+    };
+    return mod.ensureCacheDirectory();
+  } catch {
+    // Fallback for non-extension environments (e.g., Node harness): hidden cache dir under home
+    const home = os.homedir();
+    const dir = path.join(home, ".usercontext-mcp-extension", "cache");
+    return dir;
+  }
+}
 
 /** Result returned to the MCP server after CommunicationAgent formatting. */
 export interface BridgeResult {
   message: string;
+}
+
+interface CategorySummary {
+  id: string;
+  name: string;
+}
+
+interface CategoryInfo {
+  id: string;
+  name: string;
+  description?: string;
+  config?: { relationships?: unknown[] };
+  schemas?: unknown;
+  examples?: unknown;
+  queries?: unknown;
+  records?: unknown;
 }
 
 /**
@@ -30,13 +58,32 @@ export interface BridgeResult {
  * @returns Initialized orchestrator, userContext, and database agents.
  */
 export async function createAgents(): Promise<{
-  orchestrator: Orchestrator;
-  userContext: UserContextAgent;
-  database: DatabaseAgent;
+  orchestrator: any;
+  userContext: any;
+  database: any;
 }> {
+  const { Orchestrator } = (await import("@agent/orchestrator")) as unknown as {
+    Orchestrator: new () => any;
+  };
+  const { UserContextAgent } = (await import(
+    "@agent/userContextAgent"
+  )) as unknown as {
+    UserContextAgent: new (a?: unknown, b?: string) => any;
+  };
+  const { DatabaseAgent } = (await import(
+    "@agent/databaseAgent"
+  )) as unknown as {
+    DatabaseAgent: new (sources: any, cacheDir?: string) => any;
+  };
+  const { CommunicationAgent } = (await import(
+    "@agent/communicationAgent"
+  )) as unknown as {
+    CommunicationAgent: new () => any;
+    createErrorResponse: (msg: string, meta?: any) => any;
+  };
   const orchestrator = new Orchestrator();
-  const cacheDir = ensureCacheDirectory();
-  let userContext: UserContextAgent;
+  const cacheDir = await resolveCacheDirectory();
+  let userContext: any;
   try {
     userContext = new UserContextAgent(undefined, cacheDir);
   } catch (e) {
@@ -48,9 +95,9 @@ export async function createAgents(): Promise<{
   }
 
   // Build DatabaseAgent data sources from UserContextAgent (data-driven)
-  const summaries = userContext.listCategories();
-  const dataSources = summaries.map((s) => {
-    const c = userContext.getCategory(s.id);
+  const summaries = userContext.listCategories() as CategorySummary[];
+  const dataSources = summaries.map((s: CategorySummary) => {
+    const c = userContext.getCategory(s.id) as CategoryInfo;
     return {
       id: c.id,
       name: c.name,
@@ -74,6 +121,7 @@ export async function describeCategoryBridge(
   topicOrId: string
 ): Promise<BridgeResult> {
   const { orchestrator, userContext } = await createAgents();
+  const { CommunicationAgent } = await import("@agent/communicationAgent");
   const comms = new CommunicationAgent();
 
   try {
@@ -108,7 +156,9 @@ export async function describeCategoryBridge(
   } catch (error) {
     // Enumerate available categories for helpful guidance
     try {
-      const available = userContext.listCategories().map((c) => c.id);
+      const available = (userContext.listCategories() as CategorySummary[]).map(
+        (c: CategorySummary) => c.id
+      );
       const err = CommunicationAgent.createErrorResponse(
         error instanceof Error ? error.message : String(error),
         {
@@ -140,6 +190,7 @@ export async function searchCategoryRecordsBridge(
   filters: Record<string, unknown> = {}
 ): Promise<BridgeResult> {
   const { orchestrator, userContext, database } = await createAgents();
+  const { CommunicationAgent } = await import("@agent/communicationAgent");
   const comms = new CommunicationAgent();
 
   try {
@@ -158,7 +209,9 @@ export async function searchCategoryRecordsBridge(
     return { message: formatted.message };
   } catch (error) {
     try {
-      const available = userContext.listCategories().map((c) => c.id);
+      const available = (userContext.listCategories() as CategorySummary[]).map(
+        (c: CategorySummary) => c.id
+      );
       const err = CommunicationAgent.createErrorResponse(
         error instanceof Error ? error.message : String(error),
         {
@@ -187,5 +240,7 @@ export async function listCategorySummariesBridge(): Promise<
   Array<{ id: string; name: string }>
 > {
   const { userContext } = await createAgents();
-  return userContext.listCategories().map((c) => ({ id: c.id, name: c.name }));
+  return (userContext.listCategories() as CategorySummary[]).map(
+    (c: CategorySummary) => ({ id: c.id, name: c.name })
+  );
 }

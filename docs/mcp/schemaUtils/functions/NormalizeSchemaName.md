@@ -8,7 +8,7 @@
 
 > **NormalizeSchemaName**(`name`): `string`
 
-Defined in: [src/mcp/schemaUtils.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/mcp/schemaUtils.ts#L37)
+Defined in: [src/mcp/schemaUtils.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/mcp/schemaUtils.ts#L37)
 
 Normalize a schema name by trimming whitespace and lowercasing.
 

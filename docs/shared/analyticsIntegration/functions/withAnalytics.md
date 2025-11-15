@@ -8,7 +8,7 @@
 
 > **withAnalytics**\<`T`\>(`agentName`, `methodName`, `handler`): `T`
 
-Defined in: [src/shared/analyticsIntegration.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/analyticsIntegration.ts#L142)
+Defined in: [src/shared/analyticsIntegration.ts:142](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/analyticsIntegration.ts#L142)
 
 Analytics middleware for MCP method invocations.
 

@@ -6,7 +6,7 @@
 
 # Interface: WorkflowHistory
 
-Defined in: [src/types/workflow.types.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L283)
+Defined in: [src/types/workflow.types.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L283)
 
 Workflow history record.
 
@@ -22,7 +22,7 @@ ORCHESTRATOR_WORKFLOW_ANALYSIS.md (Workflow History)
 
 > **duration**: `number`
 
-Defined in: [src/types/workflow.types.ts:306](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L306)
+Defined in: [src/types/workflow.types.ts:306](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L306)
 
 Total duration in milliseconds
 
@@ -32,7 +32,7 @@ Total duration in milliseconds
 
 > **events**: `object`[]
 
-Defined in: [src/types/workflow.types.ts:312](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L312)
+Defined in: [src/types/workflow.types.ts:312](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L312)
 
 Event log for replay
 
@@ -60,7 +60,7 @@ Event type
 
 > **input**: `object`
 
-Defined in: [src/types/workflow.types.ts:288](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L288)
+Defined in: [src/types/workflow.types.ts:288](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L288)
 
 Original user input
 
@@ -82,7 +82,7 @@ Original user input
 
 > **result**: `object`
 
-Defined in: [src/types/workflow.types.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L295)
+Defined in: [src/types/workflow.types.ts:295](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L295)
 
 Final workflow result
 
@@ -116,7 +116,7 @@ Final workflow result
 
 > **timestamp**: `number`
 
-Defined in: [src/types/workflow.types.ts:309](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L309)
+Defined in: [src/types/workflow.types.ts:309](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L309)
 
 Completion timestamp
 
@@ -126,6 +126,6 @@ Completion timestamp
 
 > **workflowId**: `string`
 
-Defined in: [src/types/workflow.types.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/workflow.types.ts#L285)
+Defined in: [src/types/workflow.types.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L285)
 
 Unique workflow identifier

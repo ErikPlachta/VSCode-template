@@ -2,6 +2,8 @@ export default {
   preset: "ts-jest/presets/default-esm",
   testEnvironment: "node",
   roots: ["<rootDir>/tests"],
+  // Enable ESM for tests directly (NodeNext modules)
+  extensionsToTreatAsEsm: [".ts"],
   moduleFileExtensions: ["ts", "js", "json"],
   testMatch: ["**/*.test.ts"],
   verbose: true,
@@ -9,7 +11,6 @@ export default {
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov", "html"],
   testTimeout: 30000,
-  extensionsToTreatAsEsm: [".ts"],
   // Module name mapping for absolute imports
   moduleNameMapper: {
     "^@agent/(.*)$": "<rootDir>/src/agent/$1",

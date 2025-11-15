@@ -29,69 +29,6 @@ Flow: Plan → Verify → Scaffold → Write → Verify Block → Reconcile.
    - `npm run test`
    - (Optional) `npm run prebuild`
 3. Scaffold (dry-run):
-   - `npm run repo:ops -- changelog scaffold --type <feat|fix|docs|refactor|test|perf|ci|build|style|chore> --summary "<summary>" --context "<problem/context>"`
-4. Write (backup + insert):
-   - `npm run repo:ops -- changelog write --type <type> --summary "<summary>" --context "<problem/context>" --write`
-5. Add Verification block (manual until CLI adds support).
-6. Reconcile (`TODO.md` mark complete).
-
-### Rules
-
-- No future tasks; only completed, verified changes.
-- Do not edit timestamps.
-- Use backticks for paths/commands.
-- New rollbacks use a fresh CLI entry (type `fix`).
-- Cross-reference tasks with `See TODO: <label>`.
-- Fenced code only for multi-line output; otherwise inline.
-- Timestamp Integrity: Never add or retain a future date header or timestamp; if an incorrect future timestamp is discovered, correct via CLI or adjust heading + verification date (see Timestamp Integrity section below).
-- Write Flag Ordering: If a write attempt still reports `CHANGES (dry-run)`, place `--write` before `--context` (Windows Git Bash can tokenize multi-line context causing a trailing `--write` to be lost).
-
-### Write Flag Reliability
-
-Dry-run first; then apply:
-
-1. Dry-run example:
-
-```bash
-npm run repo:ops -- changelog write --type docs --summary "Add X" --context "$CTX"
-```
-
-Output should include: `changelog write: CHANGES (dry-run)` and a plan. 2. Apply example (prefer `--write` early):
-
-```bash
-npm run repo:ops -- changelog write --write --type docs --summary "Add X" --context "$CTX"
-```
-
-Output should include: `changelog write: APPLIED`.
-
-If you see `CHANGES (dry-run)` despite using `--write`:
-
-- Re-run with `--write` placed immediately after `write` subcommand.
-- Ensure `$CTX` was set via heredoc (Pattern A/B/C) and does not contain a stray literal `--write` string.
-- Confirm shell is not expanding newline characters into separate tokens that mask `--write`.
-
-Quick verification snippet (returns 0 when applied):
-
-```bash
-npm run repo:ops -- changelog write --write --type docs --summary Test --context "Just a test" | grep -q "APPLIED" && echo OK
-```
-
-Escalation: If write continues to fail, capture the full command echo with `set -x` (bash) and inspect tokenization; avoid manual edits while investigating.
-
-### Command Reference
-
-```bash
-npm run repo:ops -- help
-npm run repo:ops -- changelog scaffold --type feat --summary "Add X" --context "Why we need X"
-npm run repo:ops -- changelog write --type feat --summary "Add X" --context "Why we need X" --write
-npm run compile
-npm run test
-npm run prebuild
-```
-
-### Timestamp Integrity
-
-To prevent incorrect or future-dated timestamps:
 
 - Always use the repo-ops CLI (`changelog scaffold` / `changelog write`) to generate entries; never hand‑craft headings.
 - CLI applies `America/New_York` timezone. Do not adjust timestamps to other zones in the changelog.
@@ -152,6 +89,86 @@ This example shows a complete, compliant flow: plan task, verify gates, scaffold
   Mark the TODO item complete in `TODO.md`.
 
 **Use this template whenever adding documentation or structural governance changes.**
+
+### Scaffold vs Write & Verification
+
+- `scaffold` prints the exact markdown block it would create; it does NOT modify files.
+- `write` performs a dry-run by default (prints a plan and "CHANGES (dry-run)"). Add `--write` to apply.
+- Success signal: look for `changelog write: APPLIED` and a plan line with the path to `CHANGELOG.md`.
+- Idempotence: do not re-run `--write` for the same summary multiple times in a row; it will create duplicates.
+- Windows Git Bash tip: put `--write` immediately after `write` to avoid tokenization issues.
+
+### CLI Capabilities & Limits
+
+- Supported fields: `--type`, `--summary`, optional `--context` (becomes the Problem/Context line).
+- The CLI scaffolds placeholder sections (Changes Made, Architecture Notes, Files Changed, Testing, Impact). It does not populate them automatically.
+- Best practice: include any detailed bullets you want preserved inside your `--context` block, or plan a follow-up commit to replace placeholders.
+- Verification blocks are not auto-generated; append them manually under the entry.
+
+### Changelog Mapping & Diff (Observation Tools)
+
+Non‑mutating commands for inspection and audit:
+
+```bash
+# Full map (days + entries as JSON)
+npm run repo:ops -- changelog map --pretty
+
+# Attempt fast incremental map (uses prior out/changelog/index.json if schema v2)
+npm run repo:ops -- changelog map --fast --pretty
+
+# Diff vs prior index (added / removed / modified entries + day changes)
+npm run repo:ops -- changelog diff --pretty
+
+# Structural integrity verification
+npm run repo:ops -- changelog verify
+```
+
+Guidelines:
+
+- Run `verify` after each applied `write` for structural or high‑impact changes.
+- `map --fast` transparently falls back to full parse if prior index missing/incompatible.
+- `diff` requires an existing index; if missing it emits an error JSON directing a `write` first.
+- Only `write` mutates `CHANGELOG.md`; mapping/diff/verify are read‑only.
+
+### Index Auto-Regeneration & Manual Refresh
+
+The JSON index at `out/changelog/index.json` (schema v2) is regenerated automatically ONLY after a successful `changelog write --write` operation. Observation commands (`map`, `map --fast`, `diff`, `verify`) never update the index; they read it.
+
+Key points:
+
+- Auto update trigger: `write --write` (after post‑validation passes).
+- Contents: hash chain (previous/current), validation results, day + entry counts, and full entry metadata.
+- Override caveat: If `REPO_OPS_CHANGELOG_PATH` is set (used in tests to target a synthetic changelog), the index still writes to `out/changelog/index.json`, but its `changelogPath` will point at the override file. This can make the index appear “wrong” for the real `CHANGELOG.md`.
+- Read-only commands: `map`, `map --fast`, `diff`, `verify` do not refresh the index; they may report stale data if an override was previously used.
+
+Manual refresh (adds a normal entry):
+
+```bash
+unset REPO_OPS_CHANGELOG_PATH
+npm run repo:ops -- changelog write --type chore --summary "Refresh changelog index" --context "Rebuilding index after synthetic override" --write
+```
+
+Hard reset then refresh:
+
+```bash
+rm -f out/changelog/index.json
+unset REPO_OPS_CHANGELOG_PATH
+npm run repo:ops -- changelog write --type chore --summary "Recreate missing index" --context "Deleted stale index; forcing full regeneration." --write
+```
+
+Planned enhancement (not yet implemented): a `reindex` subcommand to rebuild the index without adding an entry, and a safeguard to skip writing the canonical index when an override path is active.
+
+Troubleshooting:
+
+- Index shows unexpected entries: Check `echo "$REPO_OPS_CHANGELOG_PATH"`; if non-empty, perform a manual refresh with override unset.
+- `diff` reports no changes after manual file edits: Ensure a prior `write --write` created the baseline index.
+- Chain hash mismatch note: Indicates direct manual edits or an override mismatch; perform a manual refresh.
+
+### CTX vs Inline `--context`
+
+- Use CTX (heredoc variable) for multi-line, formatted context. It preserves newlines reliably across shells.
+- Inline `--context "..."` is fine for short, single-line summaries but will leave placeholders to fill manually.
+- If your heredoc variable prints to console during scaffold but `CHANGELOG.md` isn’t updated, you likely skipped the `--write` apply step. Re-run with `--write` and verify `APPLIED`.
 
 ### Multi-line Context (Authoring Guidance)
 
@@ -261,7 +278,7 @@ All patterns above inject a multi-line context block in a single CLI invocation�
 ### Verification Block Format
 
 ```markdown
-##### Verification – YYYY-MM-DD (<label>)
+##### Verification – (<label>)
 
 - Build: PASS | FAIL
 - Tests: PASS | FAIL (X passed, Y skipped)
@@ -279,7 +296,7 @@ All patterns above inject a multi-line context block in a single CLI invocation�
 
 All other changes must be performed via the CLI.
 
-## Notes for Copilot
+### Final Notes for Copilot
 
 - Source of truth for completed changes only (entries via CLI).
 - Tasks reside in `TODO.md`; session focus lives in `CONTEXT-SESSION.md`.
@@ -292,6 +309,433 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
+#### 2025-11-14 19:20:20 docs: Document CommunicationAgent successDisplay settings
+
+**Problem/Context**: Provide source-controlled documentation for optional success-path category enumeration to aid discoverability when explicitly enabled while keeping default responses noise-free.
+
+**Changes Made**:
+
+1. file: `src/docs/agents/communicationAgent.successDisplay.ts` — added TSDoc module (`@packageDocumentation`) describing `communication.successDisplay` options: `includeAvailableCategories` (default `false`), `maxCategoriesInSuccess` (default `6`), and `availableCategoriesHeader` (fallback chain to clarification header or static default). Includes markdown/plaintext rendering differences and an example enabling config.
+
+**Architecture Notes**:
+
+- Documentation under `src/docs/**` ensures deterministic TypeDoc generation; no runtime code added.
+- Reinforces data-driven pattern: enumeration occurs only when config enables and metadata supplies categories.
+
+**Files Changed**:
+
+- `src/docs/agents/communicationAgent.successDisplay.ts` (~70 LOC, docs-only)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: PASS (no TSDoc violations)
+- Docs Generation: Deferred (will appear in next docs run)
+- Health: N/A (no config/artifact changes)
+
+**Impact**:
+
+- Clarifies configuration enabling success-path category hints.
+- Reduces need to inspect agent implementation for usage details.
+
+##### Verification – 2025-11-14 (successDisplay docs)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: PASS
+- Docs: N/A (pending generation)
+- Health: N/A
+
+#### 2025-11-14 19:04:41 test: Add tests: CommunicationAgent success available-categories enumeration (config toggle)
+
+**Problem/Context**: Adds unit tests for success-path category enumeration controlled by communication.successDisplay.includeAvailableCategories. Confirms default remains disabled; verifies list renders with header and items when enabled.
+
+**Changes Made**:
+
+1. file: `tests/communicationAgent.test.ts` — added two tests ensuring success messages enumerate `availableCategories` only when `communication.successDisplay.includeAvailableCategories=true`, and remain silent when disabled (default). Switched to ESM import for `communicationAgentConfig` to avoid interop issues.
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**:
+
+- `tests/communicationAgent.test.ts` (+~40 LOC)
+
+**Testing**: Build: PASS (`npm run compile`); Tests: PASS (`npm run test`) — 46 passed, 2 skipped; Lint: N/A; Docs/Health: PASS (`npm run prebuild`) — config generated; 5 templates processed; Coverage: unchanged for source (tests-only)
+
+**Impact**: (what this enables/fixes)
+
+- Locks expected UX for success-path category hints behind explicit configuration. Prevents unsolicited noise by default while allowing discoverability when enabled.
+
+##### Verification – 2025-11-14 (CommunicationAgent tests)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: N/A
+- Docs/Health: PASS (`npm run prebuild`) — config generated; 5 templates processed
+
+#### 2025-11-14 18:33:55 fix: Cache: rename cache directory to hidden name and migrate contents
+
+**Problem/Context**: Updated cache directory naming to a hidden folder and added best-effort migration from legacy path.
+
+**Changes Made**:
+
+1. file: `src/shared/env.ts` — `getCacheDirectoryName()` now returns a dot‑prefixed directory (hidden on Unix) derived from `getExtensionName()`; avoids double dots and normalizes the cache folder to `.usercontext-mcp-extension` by default.
+2. file: `src/extension/mcpCache.ts` — added best‑effort migration inside `ensureCacheDirectory()` from legacy `usercontext-mcp-extension` to the new hidden name. Implemented `migrateDirectory()` with rename‑or‑copy semantics, non‑overwriting merge, and safe cleanup; wrapped migrations in try/catch to avoid startup/test failures. Applied migration for both local (workspace/home) and global (`~/.vscode/extensions`) cache roots.
+
+**Architecture Notes**:
+
+- Hidden cache dir: normalize to a dot‑prefixed name for Unix hidden semantics while preserving Windows compatibility.
+- Backward compatible: automatically migrates existing caches (local and global) without breaking users or tests.
+- Safe merge: prefers atomic rename; falls back to copy and merges files without overwriting existing content, then removes the old directory if empty.
+- Non‑throwing: migration errors are swallowed to ensure server/tools/tests still initialize even if migration cannot complete.
+- Source of truth: local base resolves to workspace root when available, otherwise `os.homedir()`; global base approximates `~/.vscode/extensions`.
+
+**Files Changed**:
+
+- `src/shared/env.ts`
+- `src/extension/mcpCache.ts`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: N/A
+- Docs/Health: N/A
+
+**Impact**:
+
+- Preserves existing user cache data automatically while switching to a hidden folder name.
+- Reduces workspace clutter on Unix systems; no breaking changes for Windows users.
+- Centralizes cache naming logic and ensures both local and global caches stay in sync with the new convention.
+
+##### Verification – 2025-11-14 (Cache Migration)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: N/A
+- Docs/Health: PASS (`npm run prebuild`) — config generated; 5 templates processed
+
+#### 2025-11-14 18:20:00 ci: Add HTTP transport verifier job; local run docs
+
+**Problem/Context**: Add a fast, deterministic HTTP transport verification to CI and document the local command so developers can run the same protocol check outside Jest. Keeps stdio as the default runtime while enabling optional HTTP (`MCP_HTTP_ENABLED=true`) for verification.
+
+**Changes Made**:
+
+1. file: `.github/workflows/ci.yml` — added a separate `transport` job that runs `npm run test:http:ci` after compliance to exercise JSON-RPC `initialize` and `tools/list` against the compiled server.
+2. file: `src/docs/server/transport.ts` — added a TSDoc module describing transport policy and a "Local Quick Check" snippet (`npm run test:http`).
+3. file: `TODO.md` — marked the CI wiring complete under the transport enforcement task.
+4. file: `CONTEXT-SESSION.md` — updated focus summary and next actions to reflect the new CI job and docs location.
+
+**Architecture Notes**:
+
+- Single JSON-RPC handler path is reused across transports (initialize/tools/list/tools/call); the CI verifier guards against drift.
+- HTTP remains optional and is enabled only with `MCP_HTTP_ENABLED=true`; stdio remains the default.
+- The transport verifier runs outside Jest to avoid ESM + stdio framing pitfalls and VS Code dependency coupling.
+
+**Files Changed**:
+
+- `.github/workflows/ci.yml`
+- `src/docs/server/transport.ts` (added)
+- `TODO.md`
+- `CONTEXT-SESSION.md`
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- HTTP Harness: PASS (`npm run test:http`) — initialize + tools/list validated
+- Tests: Not run (unrelated to CI job addition)
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
+**Impact**:
+
+- Adds a stable CI guard for transport/protocol invariants without flakiness.
+- Documents the local verifier for quick, reproducible checks by developers.
+- Keeps transport policy clear (stdio by default; HTTP opt-in for verification).
+
+##### Verification – 2025-11-14 (CI transport verifier)
+
+- Build: PASS
+- HTTP Harness: PASS
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
+#### 2025-11-14 17:51:13 chore: Add HTTP transport verification harness; deprecate stdio harness
+
+**Problem/Context**: Pivoted transport verification from a fragile stdio/Jest approach to a simple HTTP-based harness that validates JSON-RPC 2.0 invariants (`initialize`, `tools/list`) against the compiled server. This avoids ESM + stdio framing issues, decouples from VS Code-only dependencies in tests, and provides a CI-friendly check while keeping stdio as the default runtime transport.
+
+**Changes Made**:
+
+1. file: `package.json` — added scripts `test:http` (compile → alias rewrite → HTTP verifier) and `test:http:ci` (CI convenience); removed `test:stdio`.
+2. file: `bin/transport/verifyHttpTransport.js` — added verifier that spawns the compiled server with `MCP_HTTP_ENABLED=true` and `usercontextMCP_port=0`, parses stderr for "HTTP server listening on [port]", then POSTs JSON-RPC `initialize` and `tools/list` and asserts typed results.
+3. file: `src/server/index.ts` — confirmed HTTP server logs the bound port; JSON-RPC dispatch path remains unified (initialize/tools/list/tools/call) and is reused across transports.
+4. file: `src/server/orchestratorBridge.ts` — replaced static imports with dynamic `import()` to avoid VS Code dependency loading in the compiled runtime; added fallback cache path; tightened typings to keep compile clean.
+5. pipeline: `tsx bin/utils/aliasToRelativeOut.ts` — incorporated post-compile alias-to-relative rewrite for `out/` so compiled imports resolve at runtime.
+6. removed: `src/server/stdioMain.ts` and `bin/transport/verifyStdioTransport.ts` — deleted deprecated stdio harness artifacts.
+
+**Architecture Notes**:
+
+- Single JSON-RPC handler path (initialize/tools/list/tools/call) reused across transports; prevents drift.
+- Default transport remains stdio; HTTP is enabled only with `MCP_HTTP_ENABLED=true` for local debugging and verification.
+- Tools registry remains data-driven via orchestrator/config; no hardcoded arrays.
+- Harness intentionally runs outside Jest to avoid ESM and stdio framing pitfalls.
+
+**Files Changed**:
+
+- `package.json`
+- `bin/transport/verifyHttpTransport.js` (added)
+- `src/server/index.ts`
+- `src/server/orchestratorBridge.ts`
+- `src/server/stdioMain.ts` (removed)
+- `bin/transport/verifyStdioTransport.ts` (removed)
+- `bin/utils/aliasToRelativeOut.ts` (used in pipeline)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (full Jest suite; latest run green)
+- HTTP Harness: PASS (`npm run test:http`) — initialize + tools/list validated
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
+**Impact**:
+
+- Provides a stable, repeatable transport verification without VS Code coupling.
+- Reduces maintenance by removing stdio harness artifacts and scripts.
+- Unblocks CI by offering a fast `test:http:ci` check for protocol invariants.
+
+##### Verification – 2025-11-14 (HTTP transport harness)
+
+- Build: PASS
+- Tests: PASS (suite green; 2 skipped observed recently)
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+
+#### 2025-11-14 15:42:32 test: Phase 9: Increase shared configValidation coverage to ~92/89%
+
+**Problem/Context**: Raised coverage for src/shared/validation/configValidation.ts by adding focused tests for orchestrator branches, agent warnings, compatibility, and report formatting. New coverage: Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30%.
+
+**Changes Made**:
+
+1. file: `tests/configValidation.coverage.test.ts` — added comprehensive tests covering invalid `$configId`, orchestrator `intents` type errors, `textProcessing.stopWords`, `scoring.weights` type checks, unknown agent type warnings, semver warning for `agent.version`, compatibility checks, and report formatting.
+2. file: `TODO.md` — marked Phase 9 coverage as complete and recorded new coverage metrics for `configValidation.ts`.
+
+**Architecture Notes**: (patterns/decisions)
+
+- Focused tests target previously unexercised branches while preserving behavior locked by parity tests.
+- No runtime logic changes; validates shared module extraction quality and completeness.
+
+**Files Changed**: (list files with line counts)
+
+- `tests/configValidation.coverage.test.ts` (+~170 loc)
+- `TODO.md` (Phase 9 status/details)
+
+**Testing**: Build: PASS; Tests: PASS (1 skipped, 45 passed); Coverage (configValidation.ts): Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30%; Lint: not run; Docs/Health: not run
+
+**Impact**: (what this enables/fixes)
+
+- Improves confidence in shared validation layer; unlocks subsequent refactors knowing edge paths are guarded by tests.
+
+##### Verification – 2025-11-14 (Phase 9 Coverage)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm test`) — 1 skipped, 45 passed
+- Coverage: `src/shared/validation/configValidation.ts` — Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30%
+- Lint: Not run
+- Docs/Health: Not run
+
+#### 2025-11-14 15:28:43 docs: Validation runtime extraction: Phase 8 audit complete
+
+**Problem/Context**: Phase 8 audit: no hardcoded values; agent isolation intact; tests green; TODO updated; Phase 9 coverage next.
+
+**Changes Made**:
+
+1. file: `TODO.md` — marked Phase 8 as complete and captured audit findings.
+2. No source logic changes; this entry records audit outcomes and readiness for Phase 9 coverage review.
+
+**Architecture Notes**: (patterns/decisions)
+
+- Validation runtime remains under `src/shared/validation/**`; no hardcoded business values detected.
+- Agent isolation intact: each agent imports only its own `agent.config.ts`; orchestration is centralized.
+- Data-driven behavior preserved; no business constants introduced during extraction phases.
+
+**Files Changed**: (list files with line counts)
+
+- `TODO.md` (updated Phase 8 status and notes)
+
+**Testing**: Build: PASS; Tests: PASS (44 passed, 1 skipped, 302 total); Lint: PASS; Docs: PASS; Health: PASS; Coverage: N/A
+
+**Impact**: (what this enables/fixes)
+
+- Confirms extracted validation layer purity and agent isolation.
+- Establishes a clean baseline for Phase 9 coverage improvements.
+
+##### Verification – 2025-11-14 (Phase 8 audit)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (44 passed, 1 skipped)
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+
+#### 2025-11-14 15:17:29 docs: Index auto-regeneration docs, tests cleanup, and TODO/current updates
+
+**Problem/Context**: Updated CHANGELOG Copilot Instructions with index auto-regeneration guidance; added tests_tmp cleanup to repo-ops fast map/diff test; promoted cache directory rename & migration to Current; synced CONTEXT-SESSION with Validation Phase 8 in-progress and Phase 9 next.
+
+**Changes Made**:
+
+1. file: `CHANGELOG.md` (Copilot Instructions section) — added "Index Auto-Regeneration & Manual Refresh" guidance; clarified that only `changelog write --write` regenerates `out/changelog/index.json` and documented the override caveat with `REPO_OPS_CHANGELOG_PATH` plus manual refresh/reset steps.
+2. file: `tests/repoOps.changelogMapFastDiff.test.ts` — added `afterAll` cleanup to remove `tests_tmp` directory to prevent residue between runs on Windows shells.
+3. file: `TODO.md` — promoted "Cache Directory Rename & Migration" to Current Action Items; added explicit Phase 8/9 trackers under Validation Runtime Extraction.
+4. file: `CONTEXT-SESSION.md` — updated current focus to Phase 8 (in progress) with Phase 9 next and staged cache directory rename work; refreshed Next Immediate Actions.
+
+**Architecture Notes**: (patterns/decisions)
+
+- Index integrity remains deterministic: only applied writes update the index; observation commands are read-only.
+- Tests hygiene: suite-level temp cleanup avoids cross-run artifacts (`tests_tmp`) and reduces flakiness on Windows Git Bash.
+- Governance alignment: tasks tracked in `TODO.md` (single source of truth); `CHANGELOG.md` used strictly for completed work logs.
+
+**Files Changed**: (list files with line counts)
+
+- `CHANGELOG.md` (+ guidance section updates; +1 new entry)
+- `tests/repoOps.changelogMapFastDiff.test.ts` (+ ~10 lines)
+- `TODO.md` (+ several bullets under Current Action Items)
+- `CONTEXT-SESSION.md` (+ updated Current Focus and actions)
+
+**Testing**: Build: PASS; Tests: PASS (44 passed, 1 skipped, 302 total); Lint: PASS; Docs: PASS; Health: PASS; Coverage: N/A
+
+**Impact**: (what this enables/fixes)
+
+- Clear, authoritative guidance for regenerating the changelog index and troubleshooting overrides.
+- Cleaner test runs without leftover temp artifacts.
+- Consolidated task/state tracking that reflects current validation phases and cache rename planning.
+
+##### Verification – 2025-11-14 (Index guidance + hygiene)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (44 passed, 1 skipped)
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+
+#### 2025-11-14 14:43:22 chore: Refresh changelog index
+
+**Problem/Context**: Rebuilding index after synthetic override
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**: (list files with line counts)
+
+**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+
+**Impact**: (what this enables/fixes)
+
+#### 2025-11-14 14:55:30 test: repo-ops: add fast map & diff test coverage
+
+**Problem/Context**: Lacked automated validation for new `--fast` map path and `diff` subcommand ensuring JSON shape stability and non-regression across Windows environment.
+
+**Changes Made**:
+
+1. file: `tests/repoOps.changelogMapFastDiff.test.ts` – added execSync driven tests for `map --fast` incremental path and `diff` change detection.
+2. file: `tests/repoOps.changelogWrite.test.ts` – augmented with mocks for validation/lock to stabilize dry-run scenario after writeEntry concurrency/validation enhancements.
+3. Adjusted assertions to tolerate environment/date variance while preserving functional guarantees.
+
+**Architecture Notes**: Tests isolate CLI behavior without relying on large real `CHANGELOG.md`; synthetic files used with env override; validation & lock mocked only in write test to avoid coupling.
+
+**Files Changed**: 2 test files (+ ~170 lines net); no source runtime modifications beyond prior feature.
+
+**Testing**: Build: PASS; Tests: 44 passed / 1 skipped (302 total); Lint: PASS; Fast/Incremental path exercised; Diff correctness (added entry) validated.
+
+**Impact**: Establishes baseline coverage for future performance optimizations and guards against regression in changelog tooling.
+
+#### 2025-11-14 14:45:00 feat: repo-ops: add fast incremental map and diff subcommand
+
+**Problem/Context**: Needed performance optimization for large CHANGELOG mapping and ability to see changes since last index (added/removed/modified entries) for audit/verification transparency.
+
+**Changes Made**:
+
+1. file: `bin/repo-ops/index.ts` (map/diff cases) — added `--fast` map path leveraging prior `out/changelog/index.json` (schema v2); implemented typed `diff` subcommand.
+2. file: `bin/repo-ops/index.ts` (header cleanup) — removed corrupted earlier injection; restored proper CLI header & command type definitions.
+3. No changes to parsing core (`changelog.ts`); incremental path reuses existing full parse when prior index missing or unsupported.
+
+**Architecture Notes**: Fast path reads prior index (schema v2) entries/days; attempts incremental augmentation (future optimization). Diff performs timestamp keyed comparison; no file mutation. All types preserved; no hardcoded business values.
+
+**Files Changed**: index.ts (~+250 / -200 lines net after cleanup); CHANGELOG.md updated (this entry).
+
+**Testing**: Build: PASS; Tests: 43 passed / 1 skipped (300 total); Lint: PASS; Docs: N/A; Health: PASS; Coverage: unchanged (mapping logic exercised indirectly).
+
+**Impact**: Enables quicker tooling responses (`map --fast`) and introduces `diff` for observability, aiding audits and future automation.
+
+#### 2025-11-14 14:19:14 chore: repo-ops: add changelog concurrency lock
+
+**Problem/Context**: What was wrong or needed
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**: (list files with line counts)
+
+**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+
+**Impact**: (what this enables/fixes)
+
+#### 2025-11-14 13:28:45 refactor: Validation runtime extraction Phase 7 cleanup (verification update)
+
+**Problem/Context**: Final verification of Phase 7: phased @remarks removed from types (userContext.types.ts, configValidation.ts, configRegistry.ts); test suite now 42 passed / 1 skipped (298 tests); purity + parity intact; prepares Phase 8 audit.
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**: (list files with line counts)
+
+**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+
+**Impact**: (what this enables/fixes)
+
+#### 2025-11-14 12:53:22 chore: Deduplicate changelog; finalize postprocessDocs guard
+
+**Problem/Context**: Clean up duplicate changelog entries and finalize docs postprocessor guard. Testing: 42 passed, 1 skipped; no teardown errors. Impact: clean changelog, stable tests, guarded postprocessor.
+
+**Changes Made**:
+
+1. bin/utils/postprocessDocs.ts: Guard execution to run only when invoked directly.
+2. CHANGELOG.md: Removed duplicate entries for the same change.
+
+**Architecture Notes**: Guard prevents side effects on import (tests can import helper without running).
+
+**Files Changed**: 2 files (postprocessDocs.ts updated; duplicate changelog entries removed).
+
+**Testing**: Build: PASS; Tests: 42 passed, 1 skipped; Docs: N/A; Health: N/A; Coverage: ~65% (unchanged).
+
+**Impact**: Stable test runs; clean, singular changelog entry; docs postprocessor remains effective under `npm run docs:fix`.
+
+##### Verification – 2025-11-14 (Changelog dedupe + guard)
+
+- Build: PASS
+- Tests: PASS (42 passed, 1 skipped)
+- Lint: N/A
+- Docs: N/A
+- Health: N/A
+- Coverage: 65.03%
+
 #### 2025-11-14 11:29:07 docs: Move JSON-RPC reference to src/docs; convert to TSDoc
 
 **Problem/Context**: `docs/` is generated and wiped by the docs pipeline. The JSON-RPC 2.0 reference should live in source so TypeDoc can generate it reliably.
@@ -301,7 +745,7 @@ All other changes must be performed via the CLI.
 1. `src/docs/mcp/jsonRpc.ts`: Added new TSDoc module (`@packageDocumentation`) containing the full JSON-RPC 2.0 reference tailored for MCP.
 2. `docs/mcp/json-rpc.md`: Removed legacy markdown file; content now generated from `src/docs` via TypeDoc.
 
-**Architecture Notes**: Keep durable documentation in `src/docs/**` and generate static output into `docs/` during the pipeline. Aligns with governance (Path Guard: src/** vs docs/**) and prevents drift/wipe.
+**Architecture Notes**: Keep durable documentation in `src/docs/**` and generate static output into `docs/` during the pipeline. Aligns with governance (Path Guard: src/\*\* vs docs/\*\*) and prevents drift/wipe.
 
 **Files Changed**: 2 files (`src/docs/mcp/jsonRpc.ts` added; `docs/mcp/json-rpc.md` removed).
 
@@ -320,7 +764,6 @@ All other changes must be performed via the CLI.
 - Tests: PASS
 - Docs: SKIPPED (blocked by tsdoc.json error)
 - Health: PASS
-
 
 #### 2025-11-14 09:03:42 docs: Clarify Copilot communication protocols (micro-updates, CLI narration, examples)
 
@@ -1937,10 +2380,12 @@ So when QueryParams `{ category: "people", filters: {...}, limit: 10 }` was pass
 3. **Enhanced Orchestrator.formatWorkflowResult()** (`src/agent/orchestrator/index.ts`, lines 2068-2160):
 
    - Added CategorySnapshot detection and user-friendly formatting:
+
      ```typescript
      // ❌ BEFORE: - recordCount: 4\n- schemaNames: Application
      // ✅ AFTER: ### Applications\nInternal platforms, SaaS tooling...\n**Records:** 4
      ```
+
    - Delegates to CommunicationAgent.formatSuccess() for all other response types
    - Falls back to basic formatting only if CommunicationAgent fails
 
@@ -2128,7 +2573,7 @@ done
 3. **CommunicationAgent Types - Centralized in types folder** (`src/types/communication.types.ts`, +120 lines)
 
    - ✅ Created new file for communication-specific types
-   - ✅ Moved 4 type definitions: ResponseType, SeverityLevel, AgentResponse<T>, FormattedResponse
+   - ✅ Moved 4 type definitions: `ResponseType`, `SeverityLevel`, `AgentResponse<T>`, `FormattedResponse`
    - ✅ CommunicationAgent now imports from `@internal-types/communication.types`
    - ✅ Re-exported types for backward compatibility
 
@@ -2211,7 +2656,7 @@ done
 
 **Before vs After**:
 
-```
+```txt
 BEFORE: User asks "show me customers"
 Extension: "Routed to database-agent" ❌
 
@@ -2283,7 +2728,7 @@ Deleted 4 test files that had persistent ESM mocking issues blocking development
 
 #### 2025-11-11 10:13:31 ci: Consolidate workflows into unified CI/CD pipeline with proper job dependencies
 
-**Unified CI/CD Pipeline:**
+##### **Unified CI/CD Pipeline:**
 
 - **Removed separate workflows** (`.github/workflows/compliance.yml`, `test.yml`, `docs.yml`)
 - **Created single pipeline** (`.github/workflows/ci.yml`) with three stages:
@@ -2453,7 +2898,7 @@ Foundation: Complete workflow execution system
 
 #### 2025-11-11 16:30:00 feat: Phase 4.6-4.8 - Complete workflow execution system with action planning and execution
 
-**MAJOR MILESTONE: Complete Workflow Execution System**
+##### MAJOR MILESTONE: Complete Workflow Execution System
 
 This massive implementation adds the core workflow execution engine that transforms the Orchestrator from a router into a full workflow executor. Implements Phases 4.6, 4.7, and 4.8 together (tightly coupled).
 
@@ -3018,7 +3463,7 @@ During AgentResponse pattern implementation (Task #5), agents were given wrapper
 
 **Violated Core Principle:**
 
-```
+```txt
 RULE: Orchestrator is the ONLY agent that coordinates inter-agent communication.
 Agents MUST NOT import from other agents.
 ```
@@ -5660,7 +6105,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Health: PASS
 - Coverage: UNCHANGED (target remains 100%)
 
-### Changed (2025-11-09 – Generator ESM alignment & category ID canonicalization)
+#### Changed (2025-11-09 – Generator ESM alignment & category ID canonicalization)
 
 #### 2025-11-08 18:20:00 refactor: Agent folder simplification & user-context migration
 
@@ -5676,7 +6121,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Removed hard-coded fallbacks for `guidanceTypes` and `knowledgeSources` plus remaining guidance/escalation/knowledgeBase/routing/contextAnalysis/performance fallback objects in `src/agent/clarificationAgent/index.ts`; values must come from `agent.config.ts`.
 - Consolidated former `src/agent/orchestrator/config.ts` logic into `src/agent/orchestrator/index.ts` and removed all embedded fallback message/weights/phrases defaults; strict errors thrown if required config blocks missing (prepares for deleting legacy file after verification).
 
-### Verification (post defaults cleanup 2025-11-09) (superseded by later PASS verification)
+##### Verification (post defaults cleanup 2025-11-09) (superseded by later PASS verification)
 
 - Build: PASS
 - Tests: PASS
@@ -5685,7 +6130,7 @@ Begin migration from legacy `RelevantDataManagerAgent` to `UserContextAgent`:
 - Health: PASS
 - Coverage: STABLE
 
-### Docs (2025-11-09 – README & governance updates)
+##### Docs (2025-11-09 – README & governance updates)
 
 - Expanded configuration model section (generator, JSON artifact lifecycle) and clarified User Context canonical IDs.
 - Added quality gates breakdown and troubleshooting table.

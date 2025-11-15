@@ -1,5 +1,5 @@
 {
-  "name": "usercontext-mcp-extension",
+  "name": "UserContext-mcp-extension",
   "displayName": "User Context MCP Extension",
   "description": "Auto-syncs MCP tools into VS Code Copilot Chat with full test suite and documentation.",
   "version": "1.0.0",
@@ -151,6 +151,8 @@
     "lint:docs": "tsx bin/utils/validateMarkdown.ts",
     "health:report": "tsx src/tools/repositoryHealth.ts",
     "test": "npm run templates && cross-env NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.js --runInBand --ci",
+    "test:http": "npm run compile && tsx bin/utils/aliasToRelativeOut.ts && node bin/transport/verifyHttpTransport.js",
+    "test:http:ci": "cross-env CI=true npm run test:http",
     "docs": "tsx bin/utils/cleanDocs.ts && typedoc && npm run docs:fix && npm run health:report && npm run docs:nav",
     "docs:nav": "tsx bin/utils/buildDocsNav.ts",
     "docs:fix": "tsx bin/utils/postprocessDocs.ts",

@@ -6,7 +6,7 @@
 
 # Interface: PerformanceMonitoringConfig
 
-Defined in: [src/types/applicationConfig.ts:322](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L322)
+Defined in: [src/types/applicationConfig.ts:322](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/applicationConfig.ts#L322)
 
 Performance monitoring configuration.
 
@@ -25,7 +25,7 @@ const perfMon: PerformanceMonitoringConfig = {
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:324](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L324)
+Defined in: [src/types/applicationConfig.ts:324](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/applicationConfig.ts#L324)
 
 Enable performance monitoring.
 
@@ -35,6 +35,6 @@ Enable performance monitoring.
 
 > **sampleRate**: `number`
 
-Defined in: [src/types/applicationConfig.ts:326](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/applicationConfig.ts#L326)
+Defined in: [src/types/applicationConfig.ts:326](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/applicationConfig.ts#L326)
 
 Sample rate for monitoring (0-1).

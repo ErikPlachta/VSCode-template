@@ -8,7 +8,7 @@
 
 > **promptForArgs**(`tool`): `Promise`\<`Record`\<`string`, `unknown`\> \| `undefined`\>
 
-Defined in: [src/extension/schemaPrompt.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/extension/schemaPrompt.ts#L70)
+Defined in: [src/extension/schemaPrompt.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/extension/schemaPrompt.ts#L70)
 
 Prompts the user for all required tool arguments.
 

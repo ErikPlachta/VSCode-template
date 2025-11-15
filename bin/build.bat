@@ -109,7 +109,9 @@ call :log_info "Removing build artifacts..."
 if exist "%BUILD_DIR%" rmdir /s /q "%BUILD_DIR%"
 if exist "%COVERAGE_DIR%" rmdir /s /q "%COVERAGE_DIR%"
 if exist "%REPORTS_DIR%\health-report.md" del "%REPORTS_DIR%\health-report.md"
+rem Clean legacy and current cache directories at repo root (best-effort)
 if exist "%PROJECT_ROOT%\.mcp-cache" rmdir /s /q "%PROJECT_ROOT%\.mcp-cache"
+if exist "%PROJECT_ROOT%\.usercontext-mcp-extension" rmdir /s /q "%PROJECT_ROOT%\.usercontext-mcp-extension"
 
 if "%DEEP_CLEAN%"=="true" (
     call :log_info "Performing deep clean..."

@@ -8,7 +8,7 @@
 
 > **DatasetCatalogueEntry** = [`DatasetCatalogEntry`](../interfaces/DatasetCatalogEntry.md)
 
-Defined in: [src/types/userContext.types.ts:474](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L474)
+Defined in: [src/types/userContext.types.ts:472](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L472)
 
 Deprecated British English alias retained for backwards compatibility.
 

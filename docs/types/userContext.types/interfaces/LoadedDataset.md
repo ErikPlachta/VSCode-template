@@ -6,7 +6,7 @@
 
 # Interface: LoadedDataset
 
-Defined in: [src/types/userContext.types.ts:462](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L462)
+Defined in: [src/types/userContext.types.ts:460](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L460)
 
 Loaded dataset bundle produced during agent initialisation
 
@@ -16,7 +16,7 @@ Loaded dataset bundle produced during agent initialisation
 
 > **categories**: `Map`\<`string`, [`BusinessCategory`](BusinessCategory.md)\>
 
-Defined in: [src/types/userContext.types.ts:463](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L463)
+Defined in: [src/types/userContext.types.ts:461](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L461)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:463](https://github.com/ErikPlachta/
 
 > **consolidatedIndex**: [`DatasetCatalogEntry`](DatasetCatalogEntry.md)[]
 
-Defined in: [src/types/userContext.types.ts:466](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L466)
+Defined in: [src/types/userContext.types.ts:464](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L464)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/userContext.types.ts:466](https://github.com/ErikPlachta/
 
 > **fingerprint**: `string`
 
-Defined in: [src/types/userContext.types.ts:467](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L467)
+Defined in: [src/types/userContext.types.ts:465](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L465)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/userContext.types.ts:467](https://github.com/ErikPlachta/
 
 > **lookupIndex**: `Map`\<`string`, [`BusinessCategory`](BusinessCategory.md)\>
 
-Defined in: [src/types/userContext.types.ts:464](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L464)
+Defined in: [src/types/userContext.types.ts:462](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L462)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/userContext.types.ts:464](https://github.com/ErikPlachta/
 
 > **relationships**: [`InternalRelationshipDefinition`](InternalRelationshipDefinition.md)[]
 
-Defined in: [src/types/userContext.types.ts:465](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L465)
+Defined in: [src/types/userContext.types.ts:463](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L463)

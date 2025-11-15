@@ -1,49 +1,26 @@
 /**
  * @packageDocumentation
- * Type definitions for `agentConfig` used across the application.
+ * Agent configuration type declarations used across the application.
  *
- * This file defines all structures related to agent identity, routing,
- * scoring, profiling, escalation logic, and composite configuration.
+ * This module defines structures for agent identity, routing intents,
+ * text processing, escalation logic, performance profiling, execution
+ * control, scoring, and composite configuration objects consumed by
+ * the Orchestrator and individual agents.
  *
  * @remarks
- * ### Developer & LLM Instructions:
- * - This is the **single source of truth** for all agent configuration types.
- * - Prefer placing comprehensive TSDoc comments here, rather than duplicating
- *   them in `agent.config.ts`.
- * - Add `@example` blocks to definitions where meaningful to clarify usage.
- * - Use `/** ... *\/` inline docblocks directly above each property.
- * - Avoid redundancy; focus on clarity and completeness in type definitions.
- * - Comments in `agent.config.ts` should be minimal and not diverge from this.
- *
- * @example
- * ```ts
- * const agent: AgentIdentity = {
- *   id: "comm-agent",
- *   name: "Communications Agent",
- *   version: "1.0.0",
- *   description: "Handles formatting of outbound user-facing messages."
- * };
- * ```
- *
- * @see [TSDoc Main Reference](https://tsdoc.org)
- * @see [Using TSDoc](https://tsdoc.org/pages/intro/using_tsdoc/)
- * @see [TypeScript JSDoc Reference](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)
+ * - Single source of truth for agent configuration related types.
+ * - Keep runtime helper functions in shared modules; this file remains types-only.
+ * - Add focused `@example` blocks on individual interfaces where helpful.
+ * - Prefer concise property level comments over large top-level samples.
  */
+import type { ConfigDescriptor } from "@shared/config/descriptors";
+import {
+  setConfigItem as _sharedSetConfigItem,
+  getFullConfig as _sharedGetFullConfig,
+  getUserFacingConfig as _sharedGetUserFacingConfig,
+} from "@shared/config/runtime";
 
-import type { ConfigDescriptor } from "@shared/agentConfigDescriptors";
-import { createDescriptorMap } from "@shared/agentConfigDescriptors";
-
-/**
- * Basic identity and human-readable metadata for an agent.
- *
- * @example
- * const identity: AgentIdentity = {
- *   id: "communication-agent",
- *   name: "Communication Agent",
- *   version: "1.0.0",
- *   description: "Formats responses from agents into user-friendly messages",
- * };
- */
+/** Agent identity metadata. */
 export interface AgentIdentity {
   /**
    * Unique agent identifier used in routing and logging.
@@ -72,12 +49,14 @@ export interface AgentIdentity {
  * Associates a named intent with a target agent and optional detection signals.
  *
  * @example
+ * ```ts
  * const classifyIntent: IntentConfig = {
  *   name: "fetch-metadata",
  *   description: "Retrieve category metadata and schemas",
  *   targetAgent: "data-agent",
  *   signals: ["schema", "fields", "metadata"],
  * };
+ * ```
  */
 export interface IntentConfig {
   /* Unique name of the intent */
@@ -94,6 +73,7 @@ export interface IntentConfig {
  * Text processing configuration for extracting signals and keywords.
  *
  * @example
+ * ```ts
  * const textCfg: TextProcessingConfig = {
  *   stopWords: ["the", "a", "an"],
  *   minimumKeywordLength: 3,
@@ -103,6 +83,7 @@ export interface IntentConfig {
  *     promptStarterMatch: 0.1,
  *   },
  * };
+ * ```
  */
 export interface TextProcessingConfig {
   /* List of common stop words to ignore */
@@ -124,12 +105,14 @@ export interface TextProcessingConfig {
  * Escalation configuration controlling retries and fallback behavior.
  *
  * @example
+ * ```ts
  * const esc: EscalationConfig = {
  *   conditions: ["low-confidence", "missing-signals"],
  *   fallbackAgent: "clarification-agent",
  *   maxRetries: 1,
  *   vaguePhrases: ["help", "not sure"],
  * };
+ * ```
  */
 export interface EscalationConfig {
   conditions: string[];
@@ -138,66 +121,7 @@ export interface EscalationConfig {
   vaguePhrases?: string[];
 }
 
-/**
- * Orchestration configuration: intents, text handling, escalation, and messages.
- *
- * @example
- * const orchConfig: OrchestrationConfig = {
- *   intents: {
- *     "fetch-metadata": {
- *       name: "fetch-metadata",
- *       description: "Retrieve category metadata and schemas",
- *       targetAgent: "data-agent",
- *       signals: ["schema", "fields", "metadata"],
- *     },
- *   },
- *   textProcessing: {
- *     stopWords: ["the", "a", "an"],
- *     minimumKeywordLength: 3,
- *     scoringWeights: {
- *       signalMatch: 0.6,
- *       focusMatch: 0.3,
- *       promptStarterMatch: 0.1,
- *     },
- *   },
- *   escalation: {
- *     conditions: ["low-confidence", "missing-signals"],
- *     fallbackAgent: "clarification-agent",
- *     maxRetries: 1,
- *     vaguePhrases: ["help", "not sure"],
- *   },
- *   messages: {
- *     noIntentDetected: "I'm not sure how to help with that.",
- *     needMoreContext: "Could you provide more details?",
- *     questionTooVague: "Your question seems too broad.",
- *     missingSignalsHint: [
- *       "Try including specific keywords.",
- *       "Provide more context about what you're looking for.",
- *     ],
- *     errorOccurred: "Something went wrong while processing your request.",
- *     summaries: {
- *       metadata: "Here's the metadata I found.",
- *       records: "Here are the records matching your query.",
- *       insight: "Here are some insights based on the data.",
- *       clarification: "I need some clarification to proceed.",
- *       defaultTopic: "Here's what I found on that topic.",
- *     },
- *     guidance: {
- *       metadata: "You can ask about specific categories or fields.",
- *       recordsConnections: "Try asking about relationships between categories.",
- *       recordsFiltering: "You can filter records by specific criteria.",
- *       insightPlan: [
- *         "Consider exploring related categories.",
- *         "Look for trends over time.",
- *         "Analyze key metrics for deeper insights.",
- *       ],
- *       insightOverview: "Here's an overview of the insights generated.",
- *       insightRecommendations: "Based on the insights, consider these actions.",
- *       clarificationPrompt: "Could you clarify what you're looking for?",
- *     },
- *   },
- * };
- */
+/** Orchestration configuration: intents, text handling, escalation, and messages. */
 export interface OrchestrationConfig {
   intents?: Record<string, IntentConfig>;
   textProcessing?: TextProcessingConfig;
@@ -227,72 +151,12 @@ export interface OrchestrationConfig {
   };
 }
 
-/**
- * Runtime execution configuration for an agent.
- *
- * @example
- * const exec: ExecutionConfig = {
- *   priority: "high",
- *   timeout: 8000,
- *   cacheEnabled: true,
- *   retryStrategy: "exponential",
- *   maxRetries: 2,
- * };
- */
-export interface ExecutionConfig {
-  priority: "high" | "medium" | "low";
-  timeout: number;
-  cacheEnabled?: boolean;
-  retryStrategy?: "none" | "fixed" | "exponential";
-  maxRetries?: number;
-}
-
-/**
- * User-facing documentation and guidance shown in help/UX.
- *
- * Prefer adding examples here instead of inline comments in configs.
- *
- * @example
- * const userFacing: UserFacingConfig = {
- *   friendlyDescription: "Analyze relationships and summarize insights.",
- *   useWhen: ["Find connections", "Summarize data"],
- *   exampleQueries: [
- *     "Show connections between categories",
- *     "Summarize recent changes across datasets",
- *   ],
- * };
- */
-export interface UserFacingConfig {
-  friendlyDescription?: string;
-  useWhen?: string[];
-  exampleQueries?: string[];
-  helpText?: string;
-}
-
-/**
- * Static performance profile hints for docs/diagnostics.
- *
- * @example
- * const perf: PerformanceConfig = {
- * expectedResponseTime: 5000,
- * memoryUsage: "medium",
- * complexity: "high",
- * };
- */
-export interface PerformanceConfig {
-  expectedResponseTime: number;
-  memoryUsage: "low" | "medium" | "high";
-  complexity: "low" | "medium" | "high";
-}
+/** Runtime execution configuration for an agent. */
 
 /**
  * Error handling preferences for an agent.
  *
- * @example
- * const errorHandling: ErrorHandlingConfig = {
- * retryStrategy: "exponential",
- * maxRetries: 3,
- * };
+ * Example removed for brevity; configure in agent.config.ts with preferred retry strategy.
  */
 export interface ErrorHandlingConfig {
   retryStrategy: "none" | "fixed" | "exponential";
@@ -303,45 +167,53 @@ export interface ErrorHandlingConfig {
 /**
  * Monitoring/telemetry configuration for an agent.
  *
- * @example
- * const monitoring: MonitoringConfig = {
- * metricsToTrack: ["responseTime", "errorRate"],
- * alertThresholds: {
- * responseTime: 2000,
- * errorRate: 5,
- * },
- * };
+ * Example removed for brevity; define metrics and thresholds in runtime configuration.
  */
 export interface MonitoringConfig {
   metricsToTrack: string[];
   alertThresholds: Record<string, number>;
 }
 
-/**
- * Technical/application-facing metadata for operators and docs.
- *
- * @example
- * const appFacing: ApplicationFacingConfig = {
- * technicalDescription: "This agent handles data analysis tasks.",
- * dependencies: ["database-agent", "clarification-agent"],
- * capabilities: ["data analysis", "relationship mapping"],
- * performance: {
- * expectedResponseTime: 7000,
- * memoryUsage: "high",
- * complexity: "high",
- * },
- * errorHandling: {
- * retryStrategy: "fixed",
- * maxRetries: 2,
- * },
- * monitoring: {
- * metricsToTrack: ["responseTime", "throughput"],
- * alertThresholds: {
- * responseTime: 3000,
- * throughput: 100,
- * },
- * };
- */
+/** Performance characteristics and optional limits for an agent. */
+export interface PerformanceConfig {
+  expectedResponseTime?: number;
+  memoryUsage?: string;
+  complexity?: string;
+  caching?: {
+    enabledByDefault?: boolean;
+    defaultKeyPrefix?: string;
+    maxCacheEntries?: number;
+    cacheTTL?: number;
+  };
+  limits?: {
+    queryTimeout?: number;
+    maxResultSize?: number;
+    maxJoinDepth?: number;
+  };
+  [key: string]: unknown;
+}
+
+/** Execution settings controlling runtime behavior. */
+export interface ExecutionConfig {
+  mode?: string;
+  maxConcurrency?: number;
+  timeoutMs?: number;
+  [key: string]: unknown;
+}
+
+/** User-facing descriptive configuration for docs & examples. */
+export interface UserFacingConfig {
+  friendlyDescription?: string;
+  exampleQueries?: string[];
+  successDisplay?: {
+    includeAvailableCategories?: boolean;
+    maxCategoriesInSuccess?: number;
+    availableCategoriesHeader?: string;
+  };
+  [key: string]: unknown;
+}
+
+/** Technical/application-facing metadata for operators and documentation. */
 export interface ApplicationFacingConfig {
   technicalDescription?: string;
   dependencies?: string[];
@@ -385,40 +257,49 @@ export interface DatabaseConfig {
       maxCacheEntries: number;
       cacheTTL: number;
     };
-    limits: {
-      queryTimeout: number;
-      maxResultSize: number;
-      maxJoinDepth: number;
+    limits?: {
+      /** Maximum time (ms) allowed for query execution */
+      queryTimeout?: number;
+      /** Maximum number of records to return */
+      maxResultSize?: number;
+      /** Maximum depth of joins permitted */
+      maxJoinDepth?: number;
     };
   };
-  validation: {
-    schemaValidation: {
-      enableStrictValidation: boolean;
-      allowUnknownFields: boolean;
-      autoTransformAliases: boolean;
-    };
-    integrityChecks: {
-      validateRelationships: boolean;
-      checkMissingReferences: boolean;
-      warnOnSchemaIssues: boolean;
-    };
+  validation: DatabaseValidationConfig;
+  operations: DatabaseOperationsConfig;
+}
+
+/** Validation and transformation settings for database queries. */
+export interface DatabaseValidationConfig {
+  schemaValidation: {
+    enableStrictValidation: boolean;
+    allowUnknownFields: boolean;
+    autoTransformAliases: boolean;
   };
-  operations: {
-    filtering: {
-      operators: string[];
-      caseInsensitiveStrings: boolean;
-      enableFuzzyMatching: boolean;
-    };
-    joins: {
-      supportedJoinTypes: string[];
-      autoDiscoverRelationships: boolean;
-      maxJoinRecords: number;
-    };
-    aggregation: {
-      functions: string[];
-      enableGroupBy: boolean;
-      maxGroups: number;
-    };
+  integrityChecks: {
+    validateRelationships: boolean;
+    checkMissingReferences: boolean;
+    warnOnSchemaIssues: boolean;
+  };
+}
+
+/** Supported query operations and their configurations. */
+export interface DatabaseOperationsConfig {
+  filtering: {
+    operators: string[];
+    caseInsensitiveStrings?: boolean;
+    enableFuzzyMatching?: boolean;
+  };
+  joins: {
+    supportedJoinTypes: string[];
+    autoDiscoverRelationships?: boolean;
+    maxJoinRecords?: number;
+  };
+  aggregation: {
+    functions: string[];
+    enableGroupBy?: boolean;
+    maxGroups?: number;
   };
 }
 
@@ -570,35 +451,7 @@ export interface ClarificationConfig {
   };
 }
 
-/**
- * CommunicationAgent configuration for response formatting and user interaction.
- *
- * Prefer defining copy/templates here and referencing them from agents to avoid
- * hardcoded business values in code.
- *
- * @example
- * const comm: CommunicationConfig = {
- *   formatting: {
- *     defaultFormat: "markdown",
- *     tone: { success: "friendly", error: "helpful", progress: "informative", validation: "constructive" },
- *     verbosity: "balanced",
- *     maxMessageLength: 1000,
- *   },
- *   clarification: {
- *     maxCategoriesInExamples: 3,
- *     examplesHeader: "Examples:",
- *     availableCategoriesHeader: "Available Categories:",
- *     unknownRequestTemplate: "I'm not sure what you're looking for with \"{{question}}\".",
- *     matchedIntentTemplate: "Your question seems related to {{intent}}.",
- *     groups: [
- *       { title: "**Category Information**", usesCategories: true, sampleTemplates: [
- *         "What's in the {{category}} category?",
- *         "Describe the {{category}} data model",
- *       ]},
- *     ],
- *   },
- * };
- */
+/** CommunicationAgent configuration for response formatting and user interaction. */
 export interface CommunicationConfig {
   formatting: {
     defaultFormat: "markdown" | "plaintext" | "html";
@@ -622,6 +475,15 @@ export interface CommunicationConfig {
     exportComplete?: string;
     importComplete?: string;
     validationPassed?: string;
+  };
+  /** Optional success-path display customization (enumeration of categories) */
+  successDisplay?: {
+    /** Enable enumeration of availableCategories in success responses when metadata provides them */
+    includeAvailableCategories?: boolean;
+    /** Maximum categories to enumerate (default implementation uses 6) */
+    maxCategoriesInSuccess?: number;
+    /** Header to use above enumerated categories; falls back to clarification header or static default */
+    availableCategoriesHeader?: string;
   };
   errorHandling: {
     includeStackTrace?: boolean;
@@ -665,29 +527,17 @@ export interface CommunicationConfig {
   };
   /** Clarification message templates and settings for CommunicationAgent */
   clarification?: CommunicationClarificationConfig;
+  /** Allow forward-compatible keys */
+  [key: string]: unknown;
 }
 
 /**
  * Clarification formatting configuration for the CommunicationAgent.
  *
- * Use groups with `usesCategories=true` to automatically substitute `{{category}}`
+ * Use groups with `usesCategories=true` to automatically substitute category names.
  * with runtime category names supplied via metadata.
  *
- * @example
- * const clar: CommunicationClarificationConfig = {
- *   maxCategoriesInExamples: 4,
- *   examplesHeader: "Here are some examples:",
- *   availableCategoriesHeader: "Available Categories:",
- *   closingPrompt: "Please be more specific.",
- *   unknownRequestTemplate: "I'm not sure what you're looking for with \"{{question}}\".",
- *   matchedIntentTemplate: "Your question seems related to {{intent}}.",
- *   groups: [
- *     { title: "**Query Records**", usesCategories: true, sampleTemplates: [
- *       "List recent items in {{category}}",
- *       "Find items matching specific keywords in {{category}}",
- *     ]},
- *   ],
- * };
+ * Example removed for brevity.
  */
 export interface CommunicationClarificationConfig {
   /** Max number of categories to include in examples */
@@ -698,11 +548,11 @@ export interface CommunicationClarificationConfig {
   availableCategoriesHeader?: string;
   /** Closing prompt encouraging specificity */
   closingPrompt?: string;
-  /** Template: I'm not sure what you're looking for with "{{question}}". */
+  /** Template shown when the user request is unclear. */
   unknownRequestTemplate?: string;
-  /** Template when an intent is guessed: uses {{intent}} */
+  /** Template when an intent is guessed. */
   matchedIntentTemplate?: string;
-  /** Example groups; when usesCategories=true, replace {{category}} */
+  /** Example groups; when usesCategories=true, category placeholders are substituted. */
   groups?: Array<{
     title: string;
     usesCategories?: boolean;
@@ -854,12 +704,7 @@ export interface RelevantDataManagerConfig {
  * The single source of truth for all agent settings. Agents must not hardcode
  * business values in code; derive from this configuration or loaded data.
  *
- * @example
- * const cfg: AgentConfigDefinition = {
- *   $configId: "communication-agent",
- *   agent: { id: "communication-agent", name: "Communication Agent", version: "1.0.0", description: "Formats responses" },
- *   communication: { formatting: { defaultFormat: "markdown", tone: { success: "friendly", error: "helpful", progress: "informative", validation: "constructive" }, verbosity: "balanced", maxMessageLength: 1000 } },
- * };
+ * Example removed for brevity.
  */
 export interface AgentConfigDefinition {
   /** Unique configuration schema identifier for validation and versioning */
@@ -956,7 +801,7 @@ export abstract class BaseAgentConfig {
   /**
    * Initialize the base agent configuration wrapper.
    *
-   * @param {AgentConfigDefinition} config - Fully-typed configuration object for the agent.
+   * @param config - Fully typed configuration object for the agent.
    */
   constructor(config: AgentConfigDefinition) {
     this.config = config;
@@ -969,8 +814,8 @@ export abstract class BaseAgentConfig {
    * "orchestration.escalation.vaguePhrases" or "database.performance.caching.enabledByDefault").
    * Local overrides have higher precedence than global overrides, both override the base config.
    *
-   * @param {string} path - Dot-delimited key path within the configuration object.
-   * @returns {unknown} Resolved configuration value, or undefined when not found.
+   * @param path - Dot-delimited key path within the configuration object.
+   * @returns Resolved configuration value, or undefined when not found.
    */
   public getConfigItem<T = unknown>(path: string): T | undefined {
     const fromLocal = this.deepGet<T>(this.overridesLocal, path);
@@ -988,30 +833,29 @@ export abstract class BaseAgentConfig {
    *
    * This does not persist to disk; it is intended for live adjustments (e.g., UI or chat-driven changes).
    *
-   * @param {string} path - Dot-delimited key path to set.
-   * @param {unknown} value - New value for the configuration item.
-   * @param {"local"|"global"} [env="local"] - Scope for the override; local has higher precedence than global.
-   * @returns {void}
+   * @param path - Dot-delimited key path to set.
+   * @param value - New value for the configuration item.
+   * @param env - Scope for the override; local has higher precedence than global.
    */
   public setConfigItem(
     path: string,
     value: unknown,
     env: "local" | "global" = "local"
   ): void {
-    const target = env === "local" ? this.overridesLocal : this.overridesGlobal;
-    // Setting undefined/null is treated as clearing the override so base/global resolution can fall back.
-    if (value === undefined || value === null) {
-      this.deepDelete(target, path);
-      return;
-    }
-    this.deepSet(target, path, value);
+    _sharedSetConfigItem(
+      this.overridesLocal,
+      this.overridesGlobal,
+      path,
+      value,
+      env
+    );
   }
 
   /**
    * Verify a list of required configuration paths are present after overrides are applied.
    *
-   * @param {readonly string[]} requiredPaths - Collection of dot-delimited paths that must exist.
-   * @returns {{ missing: string[]; passed: boolean }} Result indicating which required items are missing.
+   * @param requiredPaths - Collection of dot-delimited paths that must exist.
+   * @returns Result indicating which items are missing and pass status.
    */
   public confirmConfigItems(requiredPaths: readonly string[]): {
     missing: string[];
@@ -1028,8 +872,8 @@ export abstract class BaseAgentConfig {
   /**
    * Retrieve a configuration value using a {@link ConfigDescriptor} reference.
    *
-   * @param {ConfigDescriptor} descriptor - Descriptor describing the config item.
-   * @returns {unknown} Resolved configuration value or undefined when not found.
+   * @param descriptor - Descriptor describing the config item.
+   * @returns Resolved configuration value or undefined.
    */
   public getByDescriptor<T = unknown>(
     descriptor: ConfigDescriptor
@@ -1040,9 +884,9 @@ export abstract class BaseAgentConfig {
   /**
    * Set a runtime override for a configuration item given its {@link ConfigDescriptor}.
    *
-   * @param {ConfigDescriptor} descriptor - Descriptor describing the config item.
-   * @param {unknown} value - New value to assign.
-   * @param {"local"|"global"} [env="local"] - Override environment scope.
+   * @param descriptor - Descriptor describing the config item.
+   * @param value - New value to assign.
+   * @param env - Override environment scope.
    */
   public setByDescriptor(
     descriptor: ConfigDescriptor,
@@ -1055,8 +899,8 @@ export abstract class BaseAgentConfig {
   /**
    * Verify a descriptor's declared verifyPaths (or its own path if none provided) exist.
    *
-   * @param {ConfigDescriptor} descriptor - Descriptor whose paths will be validated.
-   * @returns {{ passed: boolean; missing: string[] }} Verification outcome.
+   * @param descriptor - Descriptor whose paths will be validated.
+   * @returns Verification outcome with pass flag and missing paths.
    */
   public verifyDescriptor(descriptor: ConfigDescriptor): {
     passed: boolean;
@@ -1073,7 +917,7 @@ export abstract class BaseAgentConfig {
   /**
    * Get a sanitized, public-facing view of the configuration suitable for diagnostics and UI.
    *
-   * @returns {Partial<AgentConfigDefinition>} Minimal public configuration snapshot.
+   * @returns Minimal public configuration snapshot.
    */
   public getConfig(): Partial<AgentConfigDefinition> {
     return {
@@ -1092,16 +936,16 @@ export abstract class BaseAgentConfig {
   /**
    * Get complete configuration (private method for internal use).
    *
-   * @returns {AgentConfigDefinition} Full underlying configuration object.
+   * @returns Full underlying configuration object.
    */
   protected _getConfig(): AgentConfigDefinition {
-    return this.config;
+    return _sharedGetFullConfig(this.config);
   }
 
   /**
    * Get execution configuration.
    *
-   * @returns {ExecutionConfig | undefined} Execution settings when defined.
+   * @returns Execution settings when defined.
    */
   public getExecutionConfig(): ExecutionConfig | undefined {
     return this.config.execution;
@@ -1110,16 +954,16 @@ export abstract class BaseAgentConfig {
   /**
    * Get user-facing configuration.
    *
-   * @returns {UserFacingConfig | undefined} User documentation and examples when defined.
+   * @returns User documentation and examples when defined.
    */
   public getUserFacingConfig(): UserFacingConfig | undefined {
-    return this.config.userFacing;
+    return _sharedGetUserFacingConfig(this.config);
   }
 
   /**
    * Get application-facing configuration.
    *
-   * @returns {ApplicationFacingConfig | undefined} Operational details for internal use.
+   * @returns Operational details for internal use.
    */
   public getApplicationFacingConfig(): ApplicationFacingConfig | undefined {
     return this.config.applicationFacing;
@@ -1128,7 +972,7 @@ export abstract class BaseAgentConfig {
   /**
    * Get configuration schema ID.
    *
-   * @returns {string} Canonical configuration identifier.
+   * @returns Canonical configuration identifier.
    */
   public getConfigId(): string {
     return this.config.$configId;
@@ -1141,9 +985,9 @@ export abstract class BaseAgentConfig {
   /**
    * Safely retrieve a nested value by path from the given object.
    *
-   * @param {Record<string, unknown>} obj - Source object.
-   * @param {string} path - Dot-delimited path.
-   * @returns {unknown} Value at the given path, or undefined if not present.
+   * @param obj - Source object.
+   * @param path - Dot-delimited path.
+   * @returns Resolved value or undefined when not found.
    */
   private deepGet<T = unknown>(
     obj: Record<string, unknown>,
@@ -1161,12 +1005,11 @@ export abstract class BaseAgentConfig {
   }
 
   /**
-   * Safely assign a nested value by path on the given object, creating containers as needed.
+   * Safely assign a nested value by path; creates containers as needed.
    *
-   * @param {Record<string, unknown>} obj - Target object to mutate.
-   * @param {string} path - Dot-delimited path.
-   * @param {unknown} value - Value to set.
-   * @returns {void}
+   * @param obj - Target object to mutate.
+   * @param path - Dot-delimited path.
+   * @param value - Value to set.
    */
   private deepSet(
     obj: Record<string, unknown>,
@@ -1186,11 +1029,10 @@ export abstract class BaseAgentConfig {
   }
 
   /**
-   * Safely delete a nested value by path from the given object. Prunes empty containers.
+   * Safely delete a nested value by path; prunes empty containers.
    *
-   * @param {Record<string, unknown>} obj - Target object to mutate.
-   * @param {string} path - Dot-delimited path to delete.
-   * @returns {void}
+   * @param obj - Target object to mutate.
+   * @param path - Dot-delimited path to delete.
    */
   private deepDelete(obj: Record<string, unknown>, path: string): void {
     const parts = path.split(".").filter(Boolean);
@@ -1225,9 +1067,8 @@ export abstract class BaseAgentConfig {
   /**
    * Clear an override for a configuration item given its {@link ConfigDescriptor}.
    *
-   * @param {ConfigDescriptor} descriptor - Descriptor describing the config item.
-   * @param {"local" | "global"} env - Override scope to clear.
-   * @returns {void}
+   * @param descriptor - Descriptor describing the config item.
+   * @param env - Override scope to clear.
    */
   public clearOverride(
     descriptor: ConfigDescriptor,
@@ -1242,7 +1083,7 @@ export abstract class BaseAgentConfig {
    * Get all descriptors for this agent (default implementation returns empty object).
    * Agents should override this method to provide their specific descriptors.
    *
-   * @returns {Record<string, ConfigDescriptor>} Map of descriptor keys to their definitions.
+   * @returns Map of descriptor keys to their definitions.
    */
   public getAllDescriptors(): Record<string, ConfigDescriptor> {
     return {};
@@ -1440,5 +1281,5 @@ export interface QueryOptions {
 // Re-exports are provided below to preserve existing import paths
 // (e.g., `@internal-types/agentConfig`).
 
-export type { ConfigDescriptor } from "@shared/agentConfigDescriptors";
-export { createDescriptorMap } from "@shared/agentConfigDescriptors";
+export type { ConfigDescriptor } from "@shared/config/descriptors";
+// createDescriptorMap intentionally not re-exported to preserve types-only purity.

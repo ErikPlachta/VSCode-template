@@ -6,7 +6,7 @@
 
 # Interface: AgentUsageStats
 
-Defined in: [src/shared/agentAnalytics.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L48)
+Defined in: [src/shared/agentAnalytics.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L48)
 
 Aggregated usage statistics for an agent.
 
@@ -16,7 +16,7 @@ Aggregated usage statistics for an agent.
 
 > **agentName**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L50)
+Defined in: [src/shared/agentAnalytics.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L50)
 
 Agent name.
 
@@ -26,7 +26,7 @@ Agent name.
 
 > **averageExecutionTime**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L58)
+Defined in: [src/shared/agentAnalytics.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L58)
 
 Average execution time in milliseconds.
 
@@ -36,7 +36,7 @@ Average execution time in milliseconds.
 
 > **failedInvocations**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L56)
+Defined in: [src/shared/agentAnalytics.ts:56](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L56)
 
 Number of failed invocations.
 
@@ -46,7 +46,7 @@ Number of failed invocations.
 
 > **lastInvocation**: `Date`
 
-Defined in: [src/shared/agentAnalytics.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L68)
+Defined in: [src/shared/agentAnalytics.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L68)
 
 Most recent invocation timestamp.
 
@@ -56,7 +56,7 @@ Most recent invocation timestamp.
 
 > **maxExecutionTime**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L62)
+Defined in: [src/shared/agentAnalytics.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L62)
 
 Maximum execution time in milliseconds.
 
@@ -66,7 +66,7 @@ Maximum execution time in milliseconds.
 
 > **minExecutionTime**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L60)
+Defined in: [src/shared/agentAnalytics.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L60)
 
 Minimum execution time in milliseconds.
 
@@ -76,7 +76,7 @@ Minimum execution time in milliseconds.
 
 > **mostUsedMethod**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L70)
+Defined in: [src/shared/agentAnalytics.ts:70](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L70)
 
 Most frequently called method.
 
@@ -86,7 +86,7 @@ Most frequently called method.
 
 > **successfulInvocations**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L54)
+Defined in: [src/shared/agentAnalytics.ts:54](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L54)
 
 Number of successful invocations.
 
@@ -96,7 +96,7 @@ Number of successful invocations.
 
 > **successRate**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L66)
+Defined in: [src/shared/agentAnalytics.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L66)
 
 Success rate as a percentage.
 
@@ -106,7 +106,7 @@ Success rate as a percentage.
 
 > **totalExecutionTime**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L64)
+Defined in: [src/shared/agentAnalytics.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L64)
 
 Total execution time in milliseconds.
 
@@ -116,6 +116,6 @@ Total execution time in milliseconds.
 
 > **totalInvocations**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentAnalytics.ts#L52)
+Defined in: [src/shared/agentAnalytics.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentAnalytics.ts#L52)
 
 Total number of invocations.

@@ -8,7 +8,7 @@
 
 > **validateConfig**(`config`): `boolean`
 
-Defined in: [src/types/configRegistry.ts:325](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/configRegistry.ts#L325)
+Defined in: [src/types/configRegistry.ts:325](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configRegistry.ts#L325)
 
 Validation helper for configuration objects.
 
@@ -36,4 +36,4 @@ const ok = validateConfig({ $configId: CONFIG_IDS.ORCHESTRATOR });
 
 ## Remarks
 
-Phase 1 Inventory: simple presence/registry validator slated for migration to shared validation utilities (Phase 3). Maintain current console side-effects for parity.
+Simple presence/registry validator maintained for parity; runtime logic lives in shared validation modules. Console side-effects remain for discoverability.

@@ -6,7 +6,7 @@
 
 # Interface: GeneratedMcpConfig
 
-Defined in: [src/tools/generateMcpConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/tools/generateMcpConfig.ts#L46)
+Defined in: [src/tools/generateMcpConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/tools/generateMcpConfig.ts#L46)
 
 Structure of the generated MCP configuration file
 
@@ -16,7 +16,7 @@ Structure of the generated MCP configuration file
 
 > **agents**: [`GeneratedAgentConfig`](GeneratedAgentConfig.md)[]
 
-Defined in: [src/tools/generateMcpConfig.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/tools/generateMcpConfig.ts#L53)
+Defined in: [src/tools/generateMcpConfig.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/tools/generateMcpConfig.ts#L53)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/tools/generateMcpConfig.ts:53](https://github.com/ErikPlachta/v
 
 > **application**: `object`
 
-Defined in: [src/tools/generateMcpConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/tools/generateMcpConfig.ts#L48)
+Defined in: [src/tools/generateMcpConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/tools/generateMcpConfig.ts#L48)
 
 #### description?
 
@@ -44,4 +44,4 @@ Defined in: [src/tools/generateMcpConfig.ts:48](https://github.com/ErikPlachta/v
 
 > **generatedAt**: `string`
 
-Defined in: [src/tools/generateMcpConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/tools/generateMcpConfig.ts#L47)
+Defined in: [src/tools/generateMcpConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/tools/generateMcpConfig.ts#L47)

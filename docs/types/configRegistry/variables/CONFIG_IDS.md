@@ -8,7 +8,7 @@
 
 > `const` **CONFIG\_IDS**: `object`
 
-Defined in: [src/types/configRegistry.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/configRegistry.ts#L22)
+Defined in: [src/types/configRegistry.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configRegistry.ts#L22)
 
 Configuration ID format: agent.{agentType}.v{major}.{minor}.{patch}
 

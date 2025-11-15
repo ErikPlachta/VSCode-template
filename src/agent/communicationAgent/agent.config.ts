@@ -80,6 +80,18 @@ export const communicationAgentConfig: AgentConfigDefinition = {
     },
 
     /**
+     * Success display options
+     */
+    successDisplay: {
+      /** Disabled by default to avoid unsolicited noise */
+      includeAvailableCategories: false,
+      /** Reasonable default cap */
+      maxCategoriesInSuccess: 6,
+      /** Optional: fallback header if clarification header not set */
+      availableCategoriesHeader: "Available Categories:",
+    },
+
+    /**
      * Success message templates
      */
     successTemplates: {
@@ -253,7 +265,7 @@ export const communicationAgentConfig: AgentConfigDefinition = {
 
       /** Template for the opening sentence when the request is unclear */
       unknownRequestTemplate:
-        'I\'m not sure what you\'re looking for with "{{question}}".',
+        "I'm not sure what you're looking for with \"{{question}}\".",
 
       /** Optional note when a likely intent was detected */
       matchedIntentTemplate:

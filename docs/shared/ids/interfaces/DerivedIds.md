@@ -6,7 +6,7 @@
 
 # Interface: DerivedIds
 
-Defined in: [src/shared/ids.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L27)
+Defined in: [src/shared/ids.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L27)
 
 Derived identifiers used across the extension and packaging.
 
@@ -16,7 +16,7 @@ Derived identifiers used across the extension and packaging.
 
 > **baseId**: `string`
 
-Defined in: [src/shared/ids.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L28)
+Defined in: [src/shared/ids.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L28)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/shared/ids.ts:28](https://github.com/ErikPlachta/vscode-extensi
 
 > **commandPrefix**: `string`
 
-Defined in: [src/shared/ids.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L31)
+Defined in: [src/shared/ids.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L31)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/shared/ids.ts:31](https://github.com/ErikPlachta/vscode-extensi
 
 > **extensionFullId**: `string`
 
-Defined in: [src/shared/ids.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L35)
+Defined in: [src/shared/ids.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L35)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/shared/ids.ts:35](https://github.com/ErikPlachta/vscode-extensi
 
 > **extensionName**: `string`
 
-Defined in: [src/shared/ids.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L33)
+Defined in: [src/shared/ids.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L33)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/shared/ids.ts:33](https://github.com/ErikPlachta/vscode-extensi
 
 > **extensionPublisher**: `string`
 
-Defined in: [src/shared/ids.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L34)
+Defined in: [src/shared/ids.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L34)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/shared/ids.ts:34](https://github.com/ErikPlachta/vscode-extensi
 
 > **mention**: `string`
 
-Defined in: [src/shared/ids.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L30)
+Defined in: [src/shared/ids.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L30)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/shared/ids.ts:30](https://github.com/ErikPlachta/vscode-extensi
 
 > **participantId**: `string`
 
-Defined in: [src/shared/ids.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L29)
+Defined in: [src/shared/ids.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L29)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [src/shared/ids.ts:29](https://github.com/ErikPlachta/vscode-extensi
 
 > **settingsPrefix**: `string`
 
-Defined in: [src/shared/ids.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/ids.ts#L32)
+Defined in: [src/shared/ids.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/ids.ts#L32)

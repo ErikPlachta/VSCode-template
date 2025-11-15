@@ -6,7 +6,7 @@
 
 # Interface: CategoryRecord
 
-Defined in: [src/types/agentConfig.ts:1267](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1267)
+Defined in: [src/types/agentConfig.ts:1276](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1276)
 
 Generic record model allowing arbitrary fields.
 Represents a minimal record from any business data category.
@@ -33,7 +33,7 @@ Optional alternative to name (some records use title instead)
 
 > **id**: `string`
 
-Defined in: [src/types/agentConfig.ts:1268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1268)
+Defined in: [src/types/agentConfig.ts:1277](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1277)
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [src/types/agentConfig.ts:1268](https://github.com/ErikPlachta/vscod
 
 > `optional` **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:1269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1269)
+Defined in: [src/types/agentConfig.ts:1278](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1278)
 
 ***
 
@@ -49,4 +49,4 @@ Defined in: [src/types/agentConfig.ts:1269](https://github.com/ErikPlachta/vscod
 
 > `optional` **title**: `string`
 
-Defined in: [src/types/agentConfig.ts:1270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1270)
+Defined in: [src/types/agentConfig.ts:1279](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1279)

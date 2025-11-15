@@ -8,6 +8,6 @@
 
 > **CategoryId** = `string`
 
-Defined in: [src/types/agentConfig.ts:1257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1257)
+Defined in: [src/types/agentConfig.ts:1266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1266)
 
 Identifier for a generic category or data source.

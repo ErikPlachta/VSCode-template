@@ -54,4 +54,8 @@ describe("JSON-RPC dispatcher", () => {
     );
     expect(res.error?.code).toBe(-32602);
   });
+
+  // Note: initialize path covered by server.http test; list path covered above.
+
+  // Happy-path tools/call cases will be covered by transport-specific tests
 });

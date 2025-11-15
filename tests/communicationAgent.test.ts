@@ -16,7 +16,10 @@ import {
  * progress tracking, and validation result formatting.
  */
 
-import { CommunicationAgent } from "../src/agent/communicationAgent";
+import {
+  CommunicationAgent,
+  communicationAgentConfig,
+} from "../src/agent/communicationAgent";
 import type { AgentResponse } from "../src/agent/communicationAgent";
 
 describe("CommunicationAgent", () => {
@@ -117,6 +120,44 @@ describe("CommunicationAgent", () => {
       const result = agent.formatSuccess(response);
 
       expect(result.message).toBe("Operation completed successfully.");
+    });
+
+    test("should enumerate available categories on success when enabled", () => {
+      // Clone default config and enable success enumeration
+      const cfg = JSON.parse(JSON.stringify(communicationAgentConfig));
+      cfg.communication.successDisplay.includeAvailableCategories = true;
+
+      const customAgent = new CommunicationAgent(cfg);
+
+      const response: AgentResponse = {
+        type: "success",
+        status: "success",
+        message: "Found items",
+        metadata: {
+          availableCategories: ["people", "departments", "projects"],
+        },
+      };
+
+      const result = customAgent.formatSuccess(response);
+      expect(result.message).toContain("Available Categories:");
+      expect(result.message).toContain("- people");
+      expect(result.message).toContain("- departments");
+      expect(result.message).toContain("- projects");
+    });
+
+    test("should NOT enumerate available categories on success when disabled", () => {
+      const response: AgentResponse = {
+        type: "success",
+        status: "success",
+        message: "Completed",
+        metadata: {
+          availableCategories: ["people", "departments"],
+        },
+      };
+
+      const result = agent.formatSuccess(response);
+      expect(result.message).not.toContain("Available Categories:");
+      expect(result.message).not.toContain("- people");
     });
   });
 

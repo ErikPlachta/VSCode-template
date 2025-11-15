@@ -6,7 +6,7 @@
 
 # Interface: BaseRecord
 
-Defined in: [src/types/userContext.types.ts:92](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L92)
+Defined in: [src/types/userContext.types.ts:90](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L90)
 
 Base record interface - all records must have an ID and either name or title
 
@@ -30,7 +30,7 @@ Additional dynamic properties
 
 > **id**: `string`
 
-Defined in: [src/types/userContext.types.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L94)
+Defined in: [src/types/userContext.types.ts:92](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L92)
 
 Unique identifier for this record
 
@@ -40,7 +40,7 @@ Unique identifier for this record
 
 > `optional` **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L96)
+Defined in: [src/types/userContext.types.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L94)
 
 Human-readable name (optional, but either name or title required)
 
@@ -50,6 +50,6 @@ Human-readable name (optional, but either name or title required)
 
 > `optional` **title**: `string`
 
-Defined in: [src/types/userContext.types.ts:98](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L98)
+Defined in: [src/types/userContext.types.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L96)
 
 Alternative to name (optional, but either name or title required)

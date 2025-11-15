@@ -53,9 +53,11 @@ Formatting Conventions
 - Stabilization: Dynamic MCP tools registry & orchestrator bridge stable; data‑driven descriptors and formatting isolation maintained.
 - Migration: Cache directory rename & migration COMPLETE; Docs/Health prebuild PASS and CHANGELOG updated.
 - Documentation: CommunicationAgent successDisplay settings page added (config options clarified).
+- CHANGELOG hygiene complete for this session (lists normalized; MD005/MD007 enabled; MD013/MD033 relaxed); shared config runtime tests added.
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
-- New changelog entry with detailed successDisplay context added; verification block appended; placeholders populated in related earlier entry.
-- Lint currently FAIL (large TSDoc/JSDoc violations); bulk TSDoc sweep prioritized.
+- New changelog entries added: compile mismatch fix and backups purge/cache reset; verification blocks appended.
+- Key CHANGELOG.md lint issues patched (headings punctuation, emphasis-as-heading, generic type formatting, fence languages).
+- TSDoc hotfix complete for `src/types/agentConfig.ts`; bulk sweep deferred until purity refactor plan executes.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
@@ -112,11 +114,22 @@ Current Status: Phase 7 complete; Phase 8 (Post‑Migration Audit) in progress; 
 
 1. Finish Phase 8 audit: confirm no hardcoded business values; validate agent isolation across validators/agents.
 2. Start Phase 9: add targeted tests to sustain/improve coverage for shared validators; report metrics.
-3. Begin TSDoc sweep for remaining configuration types (align with Current Action Items).
+3. Execute P1 Purity Refactor plan for `src/types/**` (see below), then resume TSDoc sweep.
 4. Optional: Add `reindex` CLI enhancement (non‑mutating index rebuild) in repo‑ops.
 5. Monitor docs lint and TypeDoc external link warnings; add regression guard as needed.
-6. Plan extraction of remaining config helpers from `src/types/**` to `src/shared/**`.
-7. Address lint FAIL by staged TSDoc normalization (focus on high-error files: `src/extension/**`, `src/types/agentConfig.ts`). Track in TODO sub-steps.
+6. Plan extraction of remaining config helpers from `src/types/**` to `src/shared/**` (runtime helpers covered with tests).
+7. Address lint by staged TSDoc normalization (post‑purity): focus `src/extension/**`, remaining `src/types/**`.
+
+### Purity Refactor Plan (Priority 1)
+
+- Scope: Ensure `src/types/**` is types-only. Move all runtime logic to `src/shared/**`.
+- Targets:
+  - Extract `BaseAgentConfig` into `src/shared/config/baseAgentConfig.ts`
+  - Move `deepGet/deepSet/deepDelete` and similar helpers into shared config runtime
+  - Consolidate imports across agents/tools to shared modules
+  - Add enforcement test to block functions in `src/types/**`
+  - Update docs and CHANGELOG with verification
+- Verification: `npm run compile && npm test && npm run prebuild`; add coverage deltas for new shared helpers.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

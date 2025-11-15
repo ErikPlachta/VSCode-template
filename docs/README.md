@@ -27,9 +27,9 @@ This extension embeds (or connects to) an MCP server and a small set of agents (
 
 3. First-run setup (performed automatically):
 
-- Creates `.mcp-cache` in two places:
-  - Workspace-local: `<your workspace>/.mcp-cache`
-  - Global: `%USERPROFILE%/.vscode/extensions/.mcp-cache` (Windows example: `C:\Users\plach\.vscode\extensions\.mcp-cache`)
+- Creates a hidden cache directory (e.g., `.usercontext-mcp-extension`) in two places:
+  - Workspace-local: `<your workspace>/.usercontext-mcp-extension`
+  - Global: `%USERPROFILE%/.vscode/extensions/.usercontext-mcp-extension` (Windows example: `C:\Users\plach\.vscode\extensions\.usercontext-mcp-extension`)
 - Processes your User Context datasets and builds an index (catalog) used by the agents.
 - Starts the embedded MCP server (if no external Server URL is configured) and registers the chat participant `@userContext`.
 
@@ -86,8 +86,8 @@ Settings validation will prevent invalid values from taking effect; invalid over
 
 User Context now replaces the legacy “Relevant Data Manager” terminology. Backwards‑compatible aliases (e.g. agent id `relevant-data-manager` alongside `user-context`) remain for one release cycle and then will emit warnings before removal.
 
-- Global context cache: `%USERPROFILE%/.vscode/extensions/<extensionName>/.mcp-cache`
-- Local context cache: `<workspace>/.mcp-cache`
+- Global context cache: `%USERPROFILE%/.vscode/extensions/<extensionName>/.usercontext-mcp-extension`
+- Local context cache: `<workspace>/.usercontext-mcp-extension`
 - The indexing process builds:
   - Category snapshots (structure/record counts)
   - A consolidated catalog (schemas, relationships, primary keys)

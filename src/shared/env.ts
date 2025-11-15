@@ -22,5 +22,7 @@ export function getExtensionName(): string {
  * @returns {string} Directory name to use for cache storage.
  */
 export function getCacheDirectoryName(): string {
-  return getExtensionName();
+  const name = getExtensionName();
+  // Normalize to a hidden directory (leading dot) without duplicating dots
+  return name.startsWith(".") ? name : `.${name}`;
 }

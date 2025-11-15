@@ -6,7 +6,7 @@
 
 # Interface: RawSchemaFile
 
-Defined in: [src/types/userContext.types.ts:529](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L529)
+Defined in: [src/types/userContext.types.ts:527](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L527)
 
 Raw schema file contents
 
@@ -16,7 +16,7 @@ Raw schema file contents
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:531](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L531)
+Defined in: [src/types/userContext.types.ts:529](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L529)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:531](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:530](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L530)
+Defined in: [src/types/userContext.types.ts:528](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L528)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:530](https://github.com/ErikPlachta/
 
 > **schema**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/userContext.types.ts:532](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/userContext.types.ts#L532)
+Defined in: [src/types/userContext.types.ts:530](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/userContext.types.ts#L530)

@@ -6,10 +6,10 @@
 
 # types/configValidation
 
-Configuration Validation Type Declarations (Phase 6)
+Configuration Validation Type Declarations
 
-All runtime validation logic has migrated to `src/shared/validation/configValidation.ts`.
-This file now exposes only the type shapes consumed by agents, tools, and tests.
+Runtime validation logic lives in `src/shared/validation/configValidation.ts`.
+This module exports only type shapes for agents, tools, and tests (types-only purity).
 
 ## Interfaces
 

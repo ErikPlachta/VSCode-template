@@ -528,4 +528,4 @@ if (__isMain && process.env.NODE_ENV !== "test") {
   }
 }
 
-export { getTools };
+export { getTools, startStdioServer };

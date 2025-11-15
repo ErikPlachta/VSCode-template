@@ -6,7 +6,7 @@
 
 # Interface: OrchestratorResponse
 
-Defined in: [src/types/agentConfig.ts:1296](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1296)
+Defined in: [src/types/agentConfig.ts:1305](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1305)
 
 Result of orchestrating a question across the available agents.
 
@@ -16,7 +16,7 @@ Result of orchestrating a question across the available agents.
 
 > **agent**: `string`
 
-Defined in: [src/types/agentConfig.ts:1298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1298)
+Defined in: [src/types/agentConfig.ts:1307](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1307)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:1298](https://github.com/ErikPlachta/vscod
 
 > `optional` **formatted**: `object`
 
-Defined in: [src/types/agentConfig.ts:1307](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1307)
+Defined in: [src/types/agentConfig.ts:1316](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1316)
 
 Optional pre-formatted content. Prefer using `WorkflowResult.formatted` in
 end-to-end workflows. This field exists only for transitional compatibility
@@ -48,7 +48,7 @@ Human-readable message describing the routing/decision
 
 > **intent**: `string`
 
-Defined in: [src/types/agentConfig.ts:1297](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1297)
+Defined in: [src/types/agentConfig.ts:1306](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1306)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/agentConfig.ts:1297](https://github.com/ErikPlachta/vscod
 
 > `optional` **markdown**: `string`
 
-Defined in: [src/types/agentConfig.ts:1319](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1319)
+Defined in: [src/types/agentConfig.ts:1328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1328)
 
 #### Deprecated
 
@@ -70,7 +70,7 @@ will be removed in a future release after the deprecation lifecycle.
 
 > **payload**: `unknown`
 
-Defined in: [src/types/agentConfig.ts:1301](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1301)
+Defined in: [src/types/agentConfig.ts:1310](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1310)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [src/types/agentConfig.ts:1301](https://github.com/ErikPlachta/vscod
 
 > **rationale**: `string`
 
-Defined in: [src/types/agentConfig.ts:1300](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1300)
+Defined in: [src/types/agentConfig.ts:1309](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1309)
 
 ***
 
@@ -86,4 +86,4 @@ Defined in: [src/types/agentConfig.ts:1300](https://github.com/ErikPlachta/vscod
 
 > **summary**: `string`
 
-Defined in: [src/types/agentConfig.ts:1299](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/types/agentConfig.ts#L1299)
+Defined in: [src/types/agentConfig.ts:1308](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1308)

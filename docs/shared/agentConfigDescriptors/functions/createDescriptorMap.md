@@ -8,7 +8,7 @@
 
 > **createDescriptorMap**(`entries`): `Record`\<`string`, [`ConfigDescriptor`](../interfaces/ConfigDescriptor.md)\>
 
-Defined in: [src/shared/agentConfigDescriptors.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/84c7df18722468bc459406ee76296926ff429dc0/src/shared/agentConfigDescriptors.ts#L51)
+Defined in: [src/shared/agentConfigDescriptors.ts:51](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/agentConfigDescriptors.ts#L51)
 
 Create a descriptor map from a list of descriptor entries.
 

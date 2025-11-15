@@ -17,8 +17,8 @@ import {
   type ClarificationAgentInput,
   type ClarificationResponse,
   type ConfigDescriptor,
-  createDescriptorMap,
 } from "@internal-types/agentConfig";
+import { createDescriptorMap } from "@shared/config/descriptors";
 import {
   validateAgentConfig,
   generateValidationReport,

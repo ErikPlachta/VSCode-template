@@ -7,10 +7,10 @@ import {
   type AgentConfigDefinition,
   type OrchestrationConfig,
   type IntentConfig,
-  createDescriptorMap,
   type ConfigDescriptor,
   type DataSource,
 } from "@internal-types/agentConfig";
+import { createDescriptorMap } from "@shared/config/descriptors";
 import {
   validateAgentConfig,
   generateValidationReport,

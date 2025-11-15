@@ -1,14 +1,16 @@
 /**
- * @packageDocumentation Utilities for managing the local `.mcp-cache` directory.
+ * @packageDocumentation Utilities for managing the local cache directory.
  *
  * Module for working with on-disk cache artifacts shared across tools and agents.
+ * The cache directory name is derived via {@link getCacheDirectoryName} and
+ * defaults to a hidden, dot-prefixed folder (e.g., `.usercontext-mcp-extension`).
  */
 
 import { promises as fs } from "fs";
 import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
-import { getCacheDirectoryName } from "@shared/env";
+import { getCacheDirectoryName, getExtensionName } from "@shared/env";
 
 /** Name of the subdirectory that stores cross-tool shared cache entries. */
 const SHARED_CACHE_DIR = "shared";
@@ -65,17 +67,112 @@ export interface ToolLogEntry {
  */
 export async function ensureCacheDirectory(): Promise<string> {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-  const cacheFolderName = getCacheDirectoryName();
+  const newCacheFolderName = getCacheDirectoryName(); // hidden name (e.g., .usercontext-mcp-extension)
+  const oldCacheFolderName = getExtensionName(); // legacy (no leading dot)
+
   const localBase = workspaceRoot ?? os.homedir();
-  const localCache = path.join(localBase, cacheFolderName);
+  const localCache = path.join(localBase, newCacheFolderName);
+  const localOldCache = path.join(localBase, oldCacheFolderName);
+
+  // Migrate local cache if needed (best-effort; do not throw)
+  try {
+    await migrateDirectory(localOldCache, localCache);
+  } catch {
+    // ignore migration errors; continue with fresh directory
+  }
   await fs.mkdir(localCache, { recursive: true });
 
   // Also ensure global cache exists for cross-workspace sharing.
   const globalRoot = getGlobalExtensionsRoot();
-  const globalCache = path.join(globalRoot, cacheFolderName);
+  const globalCache = path.join(globalRoot, newCacheFolderName);
+  const globalOldCache = path.join(globalRoot, oldCacheFolderName);
+
+  // Migrate global cache if needed (best-effort; do not throw)
+  try {
+    await migrateDirectory(globalOldCache, globalCache);
+  } catch {
+    // ignore migration errors
+  }
   await fs.mkdir(globalCache, { recursive: true });
 
   return localCache;
+}
+
+/**
+ * Safely migrate a directory from an old path to a new path.
+ * - If old doesn't exist: no-op
+ * - If new doesn't exist: attempt rename; fallback to copy then remove
+ * - If both exist: merge content from old → new without overwriting existing files; then remove old if empty
+ */
+async function migrateDirectory(
+  oldPath: string,
+  newPath: string
+): Promise<void> {
+  if (oldPath === newPath) return;
+  const oldExists = await pathExists(oldPath);
+  if (!oldExists) return;
+
+  const newExists = await pathExists(newPath);
+  if (!newExists) {
+    try {
+      await fs.mkdir(path.dirname(newPath), { recursive: true });
+      await fs.rename(oldPath, newPath);
+      return;
+    } catch {
+      // Fall back to copy when rename across devices or locked
+      await copyDir(oldPath, newPath, { overwrite: false });
+      await removeIfEmpty(oldPath);
+      return;
+    }
+  }
+
+  // Both exist: merge without overwriting
+  await copyDir(oldPath, newPath, { overwrite: false });
+  await removeIfEmpty(oldPath);
+}
+
+async function pathExists(p: string): Promise<boolean> {
+  try {
+    await fs.stat(p);
+    return true;
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === "ENOENT") return false;
+    throw e;
+  }
+}
+
+async function copyDir(
+  src: string,
+  dest: string,
+  opts: { overwrite: boolean }
+): Promise<void> {
+  await fs.mkdir(dest, { recursive: true });
+  const entries = await fs.readdir(src, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      await copyDir(srcPath, destPath, opts);
+    } else if (entry.isFile()) {
+      const exists = await pathExists(destPath);
+      if (!exists || opts.overwrite) {
+        await fs.copyFile(srcPath, destPath);
+      }
+    }
+    // symlinks and others are ignored for safety
+  }
+}
+
+async function removeIfEmpty(dirPath: string): Promise<void> {
+  try {
+    const items = await fs.readdir(dirPath);
+    if (items.length === 0) {
+      await fs.rmdir(dirPath);
+    }
+  } catch (e) {
+    // If directory doesn't exist or not empty, ignore; migration is best-effort
+    if ((e as NodeJS.ErrnoException).code === "ENOENT") return;
+  }
 }
 
 /**
