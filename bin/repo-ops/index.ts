@@ -436,6 +436,7 @@ const main = (): void => {
             const sumIdx = rest.indexOf("--summary");
             const ctxIdx = rest.indexOf("--context");
             const writeFlag = rest.includes("--write");
+            const autoVerify = rest.includes("--auto-verify");
             const type = typeIdx !== -1 ? rest[typeIdx + 1] : "chore";
             const summary =
               sumIdx !== -1 ? rest[sumIdx + 1] : "Describe the change";
@@ -459,6 +460,7 @@ const main = (): void => {
               summary,
               context,
               write: writeFlag,
+              autoVerify,
             });
             console.log(
               `changelog write: ${
@@ -700,6 +702,33 @@ const main = (): void => {
             }
           };
           runVerify();
+          return;
+        }
+        case "lock": {
+          // changelog lock --remove [--force] [--ttl-minutes N]
+          const runLock = async (): Promise<void> => {
+            const action = (rest[0] as string | undefined) ?? "";
+            if (action !== "--remove") {
+              console.error(
+                "Usage: changelog lock --remove [--force] [--ttl-minutes N]"
+              );
+              process.exitCode = 1;
+              return;
+            }
+            const force = rest.includes("--force");
+            const ttlIdx = rest.indexOf("--ttl-minutes");
+            const ttlMin = ttlIdx !== -1 ? Number(rest[ttlIdx + 1]) : undefined;
+            const ttlMs = ttlMin && !isNaN(ttlMin) ? ttlMin * 60 * 1000 : undefined;
+            const repo = defaultConfig.resolveRepoPaths(process.cwd());
+            const { removeLock } = await import("./lock");
+            const res = removeLock(repo.root, "changelog", { force, ttlMs });
+            console.log(
+              res.removed
+                ? `Removed lock: ${res.lockPath}`
+                : `Did not remove lock: ${res.reason} (${res.lockPath})`
+            );
+          };
+          runLock();
           return;
         }
         default:

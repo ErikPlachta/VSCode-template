@@ -82,3 +82,45 @@ export function releaseLock(lockPath: string): void {
     /* ignore */
   }
 }
+
+/**
+ * Remove a lock file if stale or when forced.
+ * @param rootDir - Repository root directory.
+ * @param label - Lock label (e.g., 'changelog').
+ * @param opts - Options controlling removal behavior.
+ */
+export function removeLock(
+  rootDir: string,
+  label: string,
+  opts: { force?: boolean; ttlMs?: number } = {}
+): { removed: boolean; reason?: string; lockPath: string } {
+  const lockDir = path.join(rootDir, "out", label);
+  const lockPath = path.join(lockDir, `${label}.write.lock`);
+  if (!fs.existsSync(lockPath)) {
+    return { removed: false, reason: "No lock present", lockPath };
+  }
+  const ttl = opts.ttlMs ?? 15 * 60 * 1000; // default 15 minutes
+  try {
+    const stat = fs.statSync(lockPath);
+    const age = Date.now() - stat.mtimeMs;
+    if (opts.force || age > ttl) {
+      fs.unlinkSync(lockPath);
+      return { removed: true, lockPath };
+    }
+    return {
+      removed: false,
+      reason: `Active lock present (age ${Math.round(
+        age / 1000
+      )}s) — use --force or wait`,
+      lockPath,
+    };
+  } catch (e) {
+    return {
+      removed: false,
+      reason: `Failed to inspect/remove lock: ${
+        e instanceof Error ? e.message : String(e)
+      }`,
+      lockPath,
+    };
+  }
+}

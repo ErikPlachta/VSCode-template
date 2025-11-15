@@ -134,31 +134,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
-#### 2025-11-15 12:53:29 docs: Verifying changelog repo-ops workflow and integrity
-
-**Problem/Context**: What was wrong or needed
-
-**Changes Made**:
-
-1. file: PATH (lines X–Y) — what changed and why
-2. file: PATH (lines A–B) — what changed and why
-
-**Architecture Notes**: (patterns/decisions)
-
-**Files Changed**: (list files with line counts)
-
-**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
-
-**Impact**: (what this enables/fixes)
-
-##### Verification – 2025-11-15 (Auto Verify)
-
-- Build: PASS
-- Tests: PASS
-- Docs: PASS
-- Health: PASS
-- Lint: N/A
-
 #### 2025-11-15 12:10:00 chore: Purge changelog backups, reset cache; integrity cleanup
 
 **Problem/Context**: Intermittent integrity warnings were traced to accumulated changelog backup artifacts and a stale cache index. To restore a clean baseline, backups were purged and caches reset to eliminate mismatches during verification and diff calculations.

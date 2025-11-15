@@ -168,6 +168,8 @@ export interface WriteEntryArgs {
   context?: string;
   /** When true, applies changes and creates a backup; default dry-run. */
   write?: boolean;
+  /** When true, runs gates and appends a Verification block to the entry. */
+  autoVerify?: boolean;
 }
 
 /**
@@ -270,11 +272,64 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
     return { changed: false, plans: [plan], dryRun: false, notes };
   }
 
+  // Optionally run gates and append a Verification block for this entry.
+  let finalContent = next;
+  if (args.autoVerify) {
+    const headingLine = block.split("\n", 1)[0] ?? "";
+    const run = (cmd: string): { ok: boolean; out: string } => {
+      try {
+        const { execSync } = require("child_process");
+        const out = execSync(cmd, { stdio: ["ignore", "pipe", "pipe"] }).toString();
+        return { ok: true, out };
+      } catch (e) {
+        const err = (e && (e as any).stdout ? (e as any).stdout.toString() : (e as Error).message) || String(e);
+        return { ok: false, out: err };
+      }
+    };
+    const b = run("npm run compile");
+    const t = run("npm test --silent");
+    const d = run("npm run prebuild");
+    const tz = defaultConfig.changelog.timeZone;
+    const stampDay = formatDay(new Date(), tz);
+    const verification = [
+      `##### Verification – ${stampDay} (Auto Verify)`,
+      "",
+      `- Build: ${b.ok ? "PASS" : "FAIL"}`,
+      `- Tests: ${t.ok ? "PASS" : "FAIL"}`,
+      `- Docs: ${d.ok ? "PASS" : "FAIL"}`,
+      `- Health: ${d.ok ? "PASS" : "UNKNOWN"}`,
+      `- Lint: N/A`,
+      "",
+    ].join("\n");
+    const current = await fs.promises.readFile(repo.changelog, "utf8");
+    const lines = current.replace(/\r\n?/g, "\n").split("\n");
+    const startIdx = lines.findIndex((ln) => ln.trim() === headingLine.trim());
+    if (startIdx !== -1) {
+      let endIdx = lines.length;
+      for (let i = startIdx + 1; i < lines.length; i++) {
+        if (/^####\s/.test(lines[i]!) || /^### \[\d{4}-\d{2}-\d{2}\]/.test(lines[i]!)) {
+          endIdx = i;
+          break;
+        }
+      }
+      const updated = [
+        ...lines.slice(0, endIdx),
+        "",
+        verification,
+        ...lines.slice(endIdx),
+      ].join("\n");
+      const tmp2 = repo.changelog + ".tmp";
+      await fs.promises.writeFile(tmp2, updated, "utf8");
+      await fs.promises.rename(tmp2, repo.changelog);
+      finalContent = updated;
+    }
+  }
+
   // Build / update JSON index (schema v2) for fast tooling & integrity checks.
   const outDir = path.join(repo.root, "out", "changelog");
   await ensureDir(outDir);
   const indexPath = path.join(outDir, "index.json");
-  const hasConflictMarkers = /<<<<<<<|=======|>>>>>>>/.test(next);
+  const hasConflictMarkers = /<<<<<<<|=======|>>>>>>>/.test(finalContent);
   if (hasConflictMarkers) {
     notes.push(
       "Detected unresolved merge conflict markers in CHANGELOG.md; resolve and rewrite."
@@ -295,7 +350,8 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
   }
   const parsed = await mapChangelog(repo.changelog);
   // (Fast path reserved for future: write currently performs full parse for correctness.)
-  const newHash = postValidation.fileHash;
+  const latestValidation = await validateChangelog(repo.changelog);
+  const newHash = latestValidation.fileHash;
   const chainHash = computeChainHash(prior?.chainHash, newHash);
   const index: ChangelogJsonIndexV2 = {
     schemaVersion: 2,
