@@ -309,6 +309,140 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-14]
 
+#### 2025-11-14 20:22:22 docs: docs: detail successDisplay addition & aborted extraction
+
+**Problem/Context**: Added optional CommunicationConfig.successDisplay block (lines 620-640 in src/types/agentConfig.ts) enabling success-path category enumeration; aborted unsafe BaseAgentConfig extraction after TS2353 error; preserved types-only purity; staged extraction plan deferred; tests PASS (320/322), build PASS, prebuild PASS, lint FAIL (TSDoc errors); no runtime changes outside type declarations.
+
+**Changes Made**:
+
+- `src/types/agentConfig.ts` (lines ~620–640): Added optional `successDisplay` block to `CommunicationConfig` with fields `includeAvailableCategories?`, `maxCategoriesInSuccess?`, and `availableCategoriesHeader?` to control success-path category enumeration.
+- No runtime logic altered; existing agents consume types only. Prior aborted `BaseAgentConfig` extraction was not applied.
+
+**Architecture Notes**:
+
+- Data-driven and opt-in: enumeration occurs only when enabled in configuration and when metadata provides categories.
+- Types-only change preserves isolation and avoids hardcoded business values; formatting remains owned by CommunicationAgent.
+
+**Files Changed**:
+
+- `src/types/agentConfig.ts` (+~25 LOC docs/types-only)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 320 passed, 2 skipped
+- Lint: FAIL (TSDoc/JSDoc violations outstanding — tracked in TODO)
+- Docs: PASS (`npm run prebuild`)
+- Health: PASS (via prebuild)
+- Coverage: Unchanged for this types-only change; shared `configValidation.ts` remains at Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30%.
+
+**Impact**:
+
+- Enables optional, clearer success-path hints listing available categories when configured, improving discoverability without adding unsolicited noise by default.
+
+##### Verification – 2025-11-14 (successDisplay detail entry)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 320 passed, 2 skipped
+- Lint: FAIL (TSDoc/JSDoc violations outstanding – sweep scheduled)
+- Docs: PASS (`npm run prebuild`)
+- Health: PASS (prebuild integrated checks)
+- Coverage: configValidation.ts Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30% (unchanged since Phase 9 uplift)
+
+#### 2025-11-14 19:33:11 docs: Add successDisplay type to CommunicationConfig; abort unsafe BaseAgentConfig extraction
+
+**Problem/Context**: Adds optional successDisplay block (includeAvailableCategories, maxCategoriesInSuccess, availableCategoriesHeader) to CommunicationConfig after reverting a partial BaseAgentConfig extraction attempt to preserve stability. Extraction deferred pending safer staged plan.
+
+**Changes Made**:
+
+- Introduced `successDisplay` to `CommunicationConfig` in `src/types/agentConfig.ts` with `includeAvailableCategories?`, `maxCategoriesInSuccess?`, and `availableCategoriesHeader?` to support optional category enumeration on success responses.
+- Aborted partial `BaseAgentConfig` extraction after encountering TypeScript type errors (TS2353) to prevent instability.
+
+**Architecture Notes**:
+
+- Keep documentation and configuration as the single source for behavior; no agent formatting changes here.
+- Maintain types-only purity under `src/types/**` and delegate any runtime behavior to agents/shared modules.
+
+**Files Changed**:
+
+- `src/types/agentConfig.ts` (+types/docs only)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (suite green at time of change)
+- Lint: Known TSDoc gaps remain; scheduled for sweep
+- Docs/Health: PASS (`npm run prebuild`)
+
+**Impact**:
+
+- Prepares CommunicationAgent to show category hints when explicitly enabled by users, improving UX while keeping defaults minimal.
+
+#### 2025-11-14 19:20:20 docs: Document CommunicationAgent successDisplay settings
+
+**Problem/Context**: Provide source-controlled documentation for optional success-path category enumeration to aid discoverability when explicitly enabled while keeping default responses noise-free.
+
+**Changes Made**:
+
+1. file: `src/docs/agents/communicationAgent.successDisplay.ts` — added TSDoc module (`@packageDocumentation`) describing `communication.successDisplay` options: `includeAvailableCategories` (default `false`), `maxCategoriesInSuccess` (default `6`), and `availableCategoriesHeader` (fallback chain to clarification header or static default). Includes markdown/plaintext rendering differences and an example enabling config.
+
+**Architecture Notes**:
+
+- Documentation under `src/docs/**` ensures deterministic TypeDoc generation; no runtime code added.
+- Reinforces data-driven pattern: enumeration occurs only when config enables and metadata supplies categories.
+
+**Files Changed**:
+
+- `src/docs/agents/communicationAgent.successDisplay.ts` (~70 LOC, docs-only)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: PASS (no TSDoc violations)
+- Docs: PASS (`npm run docs`) — TypeDoc generated; 4 warnings (external link resolution) no errors; page emitted.
+- Health: PASS (`npm run health:report` via docs pipeline)
+
+**Impact**:
+
+- Clarifies configuration enabling success-path category hints.
+- Reduces need to inspect agent implementation for usage details.
+
+##### Verification – 2025-11-14 (successDisplay docs)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: PASS
+- Docs: PASS (`npm run docs`) — 4 warnings, no errors
+- Health: PASS
+
+#### 2025-11-14 19:04:41 test: Add tests: CommunicationAgent success available-categories enumeration (config toggle)
+
+**Problem/Context**: Adds unit tests for success-path category enumeration controlled by communication.successDisplay.includeAvailableCategories. Confirms default remains disabled; verifies list renders with header and items when enabled.
+
+**Changes Made**:
+
+1. file: `tests/communicationAgent.test.ts` — added two tests ensuring success messages enumerate `availableCategories` only when `communication.successDisplay.includeAvailableCategories=true`, and remain silent when disabled (default). Switched to ESM import for `communicationAgentConfig` to avoid interop issues.
+
+**Architecture Notes**: (patterns/decisions)
+
+**Files Changed**:
+
+- `tests/communicationAgent.test.ts` (+~40 LOC)
+
+**Testing**: Build: PASS (`npm run compile`); Tests: PASS (`npm run test`) — 46 passed, 2 skipped; Lint: N/A; Docs/Health: PASS (`npm run prebuild`) — config generated; 5 templates processed; Coverage: unchanged for source (tests-only)
+
+**Impact**: (what this enables/fixes)
+
+- Locks expected UX for success-path category hints behind explicit configuration. Prevents unsolicited noise by default while allowing discoverability when enabled.
+
+##### Verification – 2025-11-14 (CommunicationAgent tests)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: N/A
+- Docs/Health: PASS (`npm run prebuild`) — config generated; 5 templates processed
+
 #### 2025-11-14 18:33:55 fix: Cache: rename cache directory to hidden name and migrate contents
 
 **Problem/Context**: Updated cache directory naming to a hidden folder and added best-effort migration from legacy path.

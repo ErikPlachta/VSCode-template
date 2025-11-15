@@ -91,12 +91,16 @@ Follow these guidelines to ensure effective task management:
 
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
   - [ ] Types: Complete comprehensive TSDoc for remaining configuration types (no placeholders).
+    - [ ] Normalize TSDoc in `src/extension/**` (remove JSDoc `{type}` in @param, escape braces, replace `@module`).
+    - [ ] Fix high-noise file `src/types/agentConfig.ts` (malformed inline tags, escape `}`).
+    - [ ] Sweep `src/shared/**` analytics files for `@template`/inline tag issues.
+    - [ ] Re-run `npm run lint` to confirm PASS.
   - [ ] Extract functions from `src/types/**` into `src/shared/**` (e.g., `setConfigItem`, `createDescriptorMap`, `_getConfig`, `getUserFacingConfig`).
-  - [ ] CommunicationAgent: Add conditional enumeration of `availableCategories` on success when helpful (config flag).
+  - [x] CommunicationAgent: Add conditional enumeration of `availableCategories` on success when helpful (config flag).
   - [ ] ClarificationAgent: Derive examples/capabilities strictly from config/manifest (remove any residual hardcoding).
   - [ ] DatabaseAgent/DataAgent: Audit to confirm zero hardcoded business values; all derived from config/user data.
   - [ ] Add unit tests covering extracted shared helpers.
-  - [ ] Update CHANGELOG with verification block after refactor.
+  - [x] Update CHANGELOG with verification block after refactor (successDisplay detail entry added with statuses; lint FAIL noted).
   - [ ] Final pass: run `npm run compile && npm test && npm run prebuild` and capture outputs.
 
 <!-- END:CURRENT_ACTION_ITEMS -->
@@ -257,6 +261,7 @@ Follow these guidelines to ensure effective task management:
   - Completed: Promoted generated page to `docs/mcp/json-rpc.md` via postprocess
   - Verified via `npm run docs` and changelog entry (2025-11-14)
 - [x] P1: repo-ops: Add fast incremental changelog map (`--fast`) and `diff` subcommand — see CHANGELOG entry "2025-11-14 14:45:00 feat: repo-ops: add fast incremental map and diff subcommand"
+- [x] P2: CommunicationAgent successDisplay documentation added — see CHANGELOG entry "2025-11-14 19:20:20 docs: Document CommunicationAgent successDisplay settings"
 - [x] P1: Validation Runtime Extraction (Phased)
   - [x] Phase 1: Inventory & Tag – enumerated runtime validation exports (agent/category/relationship/errors/reporting); added Phase 1 @remarks tags to each exported function in `src/types/userContext.types.ts`, `src/types/configValidation.ts`, `src/types/configRegistry.ts`.
   - [x] Phase 2: Parity Test Scaffold – added `tests/validation.parity.test.ts` (locks behavior for category + config validators, 38 passed, 1 skipped total suites now 39).

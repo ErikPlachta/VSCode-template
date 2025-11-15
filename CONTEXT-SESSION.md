@@ -52,7 +52,10 @@ Formatting Conventions
 - Validation runtime extraction: Phase 8 audit in progress; Phase 9 coverage next.
 - Stabilization: Dynamic MCP tools registry & orchestrator bridge stable; data‑driven descriptors and formatting isolation maintained.
 - Migration: Cache directory rename & migration COMPLETE; Docs/Health prebuild PASS and CHANGELOG updated.
+- Documentation: CommunicationAgent successDisplay settings page added (config options clarified).
 - Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
+- New changelog entry with detailed successDisplay context added; verification block appended; placeholders populated in related earlier entry.
+- Lint currently FAIL (large TSDoc/JSDoc violations); bulk TSDoc sweep prioritized.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
@@ -109,10 +112,11 @@ Current Status: Phase 7 complete; Phase 8 (Post‑Migration Audit) in progress; 
 
 1. Finish Phase 8 audit: confirm no hardcoded business values; validate agent isolation across validators/agents.
 2. Start Phase 9: add targeted tests to sustain/improve coverage for shared validators; report metrics.
-3. Implement cache directory rename and migration script; update references and verify initialization.
+3. Begin TSDoc sweep for remaining configuration types (align with Current Action Items).
 4. Optional: Add `reindex` CLI enhancement (non‑mutating index rebuild) in repo‑ops.
-5. Add a short docs note for local runs (now added under `src/docs/server/transport.ts`).
-6. Monitor docs lint and TypeDoc external link warnings; add regression guard as needed.
+5. Monitor docs lint and TypeDoc external link warnings; add regression guard as needed.
+6. Plan extraction of remaining config helpers from `src/types/**` to `src/shared/**`.
+7. Address lint FAIL by staged TSDoc normalization (focus on high-error files: `src/extension/**`, `src/types/agentConfig.ts`). Track in TODO sub-steps.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->
