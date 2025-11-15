@@ -134,80 +134,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
-#### 2025-11-15 21:40:00 docs: Cleanup CHANGELOG (lists, lint); add shared config runtime tests
-
-**Problem/Context**: Finalized CHANGELOG hygiene to reduce lint noise and improve readability, and added unit tests for shared config runtime helpers to support the ongoing types-purity refactor.
-
-**Changes Made**:
-
-1. Re-enabled markdownlint list rules (MD005/MD007) and normalized ordered lists to 1/1/1 in targeted sections.
-1. Verified and labeled adjacent code fences (bash/typescript/markdown); left MD013/MD033 relaxed to avoid sweeping reflow/escapes.
-1. Added `tests/shared.config.runtime.test.ts` covering `setConfigItem`, `getFullConfig`, and `getUserFacingConfig`.
-1. Ran verification gates to ensure no regressions.
-
-**Architecture Notes**:
-
-- Documentation-only cleanup plus unit tests; no runtime behavior changes.
-- Supports the types-only governance by hardening shared config helpers and keeping `src/types/**` free of runtime logic.
-
-**Files Changed**:
-
-- `CHANGELOG.md` (list normalization, lint directive scope)
-- `tests/shared.config.runtime.test.ts` (new)
-
-**Testing**:
-
-- Build: PASS
-- Tests: PASS (new tests added for shared config runtime)
-- Docs/Health: PASS (`npm run prebuild`)
-
-##### Verification – 2025-11-15 (Docs + Tests)
-
-- Build: PASS
-- Tests: PASS
-- Lint: PASS
-- Docs: PASS
-- Health: PASS
-
-#### 2025-11-15 22:05:00 refactor(types/shared): Move BaseAgentConfig to shared; update imports; add tests
-
-**Problem/Context**: Enforce types-only purity under `src/types/**` by removing the `BaseAgentConfig` runtime class from `src/types/agentConfig.ts`. Centralize runtime configuration logic in `src/shared/**` to align with governance and simplify future enforcement tests.
-
-**Changes Made**:
-
-1. Extracted `BaseAgentConfig` to `src/shared/config/baseAgentConfig.ts` with override handling and descriptor helpers.
-1. Updated all agents to import `BaseAgentConfig` from shared and keep type-only imports from `@internal-types/agentConfig`.
-1. Removed the class implementation from `src/types/agentConfig.ts`, keeping it types-only.
-1. Added `tests/shared.config.baseAgentConfig.test.ts` covering path resolution, override precedence, descriptor helpers, and sanitized snapshot.
-1. Ran compile, tests, and prebuild to validate changes.
-
-**Architecture Notes**:
-
-- Preserves agent isolation and data-driven configuration. Types remain in `src/types/**`; runtime resides in `src/shared/**`.
-- Aligns imports to avoid runtime paths through `src/types/**`.
-
-**Files Changed**:
-
-- `src/shared/config/baseAgentConfig.ts` (new)
-- `src/types/agentConfig.ts` (remove runtime class; keep types)
-- `src/agent/*/index.ts` (update `BaseAgentConfig` import to shared)
-- `tests/shared.config.baseAgentConfig.test.ts` (new)
-
-**Testing**:
-
-- Build: PASS (`npm run compile`)
-- Tests: PASS (49 passed, 2 skipped)
-- Docs/Health: PASS (`npm run prebuild`)
-
-##### Verification – 2025-11-15 (Refactor)
-
-- Build: PASS
-- Tests: PASS
-- Lint: PASS
-- Docs: PASS
-- Health: PASS
-- Coverage: N/A
-
 #### 2025-11-15 21:10:00 chore: Purge changelog backups, reset cache; integrity cleanup
 
 **Problem/Context**: Intermittent integrity warnings were traced to accumulated changelog backup artifacts and a stale cache index. To restore a clean baseline, backups were purged and caches reset to eliminate mismatches during verification and diff calculations.
@@ -293,6 +219,80 @@ All other changes must be performed via the CLI.
 - Docs: N/A
 - Health: PASS
 - Coverage: UNCHANGED
+
+#### 2025-11-15 12:11:38 refactor(types/shared): Move BaseAgentConfig to shared; update imports; add tests
+
+**Problem/Context**: Enforce types-only purity under `src/types/**` by removing the `BaseAgentConfig` runtime class from `src/types/agentConfig.ts`. Centralize runtime configuration logic in `src/shared/**` to align with governance and simplify future enforcement tests.
+
+**Changes Made**:
+
+1. Extracted `BaseAgentConfig` to `src/shared/config/baseAgentConfig.ts` with override handling and descriptor helpers.
+1. Updated all agents to import `BaseAgentConfig` from shared and keep type-only imports from `@internal-types/agentConfig`.
+1. Removed the class implementation from `src/types/agentConfig.ts`, keeping it types-only.
+1. Added `tests/shared.config.baseAgentConfig.test.ts` covering path resolution, override precedence, descriptor helpers, and sanitized snapshot.
+1. Ran compile, tests, and prebuild to validate changes.
+
+**Architecture Notes**:
+
+- Preserves agent isolation and data-driven configuration. Types remain in `src/types/**`; runtime resides in `src/shared/**`.
+- Aligns imports to avoid runtime paths through `src/types/**`.
+
+**Files Changed**:
+
+- `src/shared/config/baseAgentConfig.ts` (new)
+- `src/types/agentConfig.ts` (remove runtime class; keep types)
+- `src/agent/*/index.ts` (update `BaseAgentConfig` import to shared)
+- `tests/shared.config.baseAgentConfig.test.ts` (new)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (49 passed, 2 skipped)
+- Docs/Health: PASS (`npm run prebuild`)
+
+##### Verification – 2025-11-15 (Refactor)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
+- Coverage: N/A
+
+#### 2025-11-15 12:01:01 docs: Cleanup CHANGELOG (lists, lint); add shared config runtime tests
+
+**Problem/Context**: Finalized CHANGELOG hygiene to reduce lint noise and improve readability, and added unit tests for shared config runtime helpers to support the ongoing types-purity refactor.
+
+**Changes Made**:
+
+1. Re-enabled markdownlint list rules (MD005/MD007) and normalized ordered lists to 1/1/1 in targeted sections.
+1. Verified and labeled adjacent code fences (bash/typescript/markdown); left MD013/MD033 relaxed to avoid sweeping reflow/escapes.
+1. Added `tests/shared.config.runtime.test.ts` covering `setConfigItem`, `getFullConfig`, and `getUserFacingConfig`.
+1. Ran verification gates to ensure no regressions.
+
+**Architecture Notes**:
+
+- Documentation-only cleanup plus unit tests; no runtime behavior changes.
+- Supports the types-only governance by hardening shared config helpers and keeping `src/types/**` free of runtime logic.
+
+**Files Changed**:
+
+- `CHANGELOG.md` (list normalization, lint directive scope)
+- `tests/shared.config.runtime.test.ts` (new)
+
+**Testing**:
+
+- Build: PASS
+- Tests: PASS (new tests added for shared config runtime)
+- Docs/Health: PASS (`npm run prebuild`)
+
+##### Verification – 2025-11-15 (Docs + Tests)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
 
 #### 2025-11-15 09:44:20 refactor: Extract remaining config helpers to shared runtime
 
