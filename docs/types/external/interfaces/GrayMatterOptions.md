@@ -6,7 +6,7 @@
 
 # Interface: GrayMatterOptions\<T\>
 
-Defined in: [src/types/external.d.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/external.d.ts#L22)
+Defined in: [src/types/external.d.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/external.d.ts#L22)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [src/types/external.d.ts:22](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **engines**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/external.d.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/external.d.ts#L24)
+Defined in: [src/types/external.d.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/external.d.ts#L24)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/types/external.d.ts:24](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **excerpt**: `boolean` \| (`file`) => `unknown`
 
-Defined in: [src/types/external.d.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/external.d.ts#L23)
+Defined in: [src/types/external.d.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/external.d.ts#L23)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [src/types/external.d.ts:23](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **language**: `string`
 
-Defined in: [src/types/external.d.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/external.d.ts#L25)
+Defined in: [src/types/external.d.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/external.d.ts#L25)

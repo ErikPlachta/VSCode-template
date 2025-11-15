@@ -8,7 +8,7 @@
 
 > **WorkflowState** = `"pending"` \| `"classifying"` \| `"executing"` \| `"processing"` \| `"needs-clarification"` \| `"completed"` \| `"failed"`
 
-Defined in: [src/types/workflow.types.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L28)
+Defined in: [src/types/workflow.types.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L28)
 
 Workflow state during lifecycle
 

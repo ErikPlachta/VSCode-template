@@ -6,7 +6,7 @@
 
 # Interface: UserContextManagerInterface
 
-Defined in: [src/types/interfaces.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L240)
+Defined in: [src/types/interfaces.ts:240](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L240)
 
 UserContextManagerInterface interface (renamed from RelevantDataManagerInterface).
 Provides forward-compatible method names while delegating to legacy implementations.
@@ -21,7 +21,7 @@ Provides forward-compatible method names while delegating to legacy implementati
 
 > **getBusinessDataCatalog**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
 
-Defined in: [src/types/interfaces.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L220)
+Defined in: [src/types/interfaces.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L220)
 
 Primary American English method returning the business data catalog.
 
@@ -39,7 +39,7 @@ Primary American English method returning the business data catalog.
 
 > **getBusinessDataCatalogue**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
 
-Defined in: [src/types/interfaces.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L226)
+Defined in: [src/types/interfaces.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L226)
 
 Deprecated British English variant retained for migration window.
 
@@ -61,7 +61,7 @@ Use getBusinessDataCatalog instead.
 
 > **getCategoryInfo**(`categoryId`): [`CategoryInfo`](CategoryInfo.md)
 
-Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L227)
+Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L227)
 
 #### Parameters
 
@@ -83,7 +83,7 @@ Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-
 
 > **getCategorySchema**(`categoryId`): [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L228)
+Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L228)
 
 #### Parameters
 
@@ -105,7 +105,7 @@ Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-
 
 > **getRelationships**(`categoryId`): [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L233)
+Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L233)
 
 #### Parameters
 
@@ -127,7 +127,7 @@ Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-
 
 > `optional` **getUserContextCatalog**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
 
-Defined in: [src/types/interfaces.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L245)
+Defined in: [src/types/interfaces.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L245)
 
 Optional American English method returning the user context catalog.
 
@@ -141,7 +141,7 @@ Optional American English method returning the user context catalog.
 
 > `optional` **getUserContextCatalogue**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
 
-Defined in: [src/types/interfaces.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L251)
+Defined in: [src/types/interfaces.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L251)
 
 Optional deprecated British English variant.
 
@@ -159,7 +159,7 @@ Use getUserContextCatalog instead.
 
 > **validateCategoryData**(`categoryId`, `records`): [`ValidationResult`](ValidationResult.md)
 
-Defined in: [src/types/interfaces.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L229)
+Defined in: [src/types/interfaces.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L229)
 
 #### Parameters
 

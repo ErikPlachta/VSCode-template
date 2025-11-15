@@ -6,7 +6,7 @@
 
 # Interface: OrchestratorResponse
 
-Defined in: [src/types/agentConfig.ts:1305](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1305)
+Defined in: [src/types/agentConfig.ts:836](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L836)
 
 Result of orchestrating a question across the available agents.
 
@@ -16,7 +16,7 @@ Result of orchestrating a question across the available agents.
 
 > **agent**: `string`
 
-Defined in: [src/types/agentConfig.ts:1307](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1307)
+Defined in: [src/types/agentConfig.ts:838](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L838)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:1307](https://github.com/ErikPlachta/vscod
 
 > `optional` **formatted**: `object`
 
-Defined in: [src/types/agentConfig.ts:1316](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1316)
+Defined in: [src/types/agentConfig.ts:847](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L847)
 
 Optional pre-formatted content. Prefer using `WorkflowResult.formatted` in
 end-to-end workflows. This field exists only for transitional compatibility
@@ -48,7 +48,7 @@ Human-readable message describing the routing/decision
 
 > **intent**: `string`
 
-Defined in: [src/types/agentConfig.ts:1306](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1306)
+Defined in: [src/types/agentConfig.ts:837](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L837)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/agentConfig.ts:1306](https://github.com/ErikPlachta/vscod
 
 > `optional` **markdown**: `string`
 
-Defined in: [src/types/agentConfig.ts:1328](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1328)
+Defined in: [src/types/agentConfig.ts:859](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L859)
 
 #### Deprecated
 
@@ -70,7 +70,7 @@ will be removed in a future release after the deprecation lifecycle.
 
 > **payload**: `unknown`
 
-Defined in: [src/types/agentConfig.ts:1310](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1310)
+Defined in: [src/types/agentConfig.ts:841](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L841)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [src/types/agentConfig.ts:1310](https://github.com/ErikPlachta/vscod
 
 > **rationale**: `string`
 
-Defined in: [src/types/agentConfig.ts:1309](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1309)
+Defined in: [src/types/agentConfig.ts:840](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L840)
 
 ***
 
@@ -86,4 +86,4 @@ Defined in: [src/types/agentConfig.ts:1309](https://github.com/ErikPlachta/vscod
 
 > **summary**: `string`
 
-Defined in: [src/types/agentConfig.ts:1308](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1308)
+Defined in: [src/types/agentConfig.ts:839](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L839)

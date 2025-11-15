@@ -18,6 +18,7 @@
 
 import { defaultConfig } from "./repo-ops.config";
 import * as fs from "fs";
+import * as path from "path";
 const args = process.argv.slice(2);
 
 type Command =
@@ -72,7 +73,9 @@ const printVersion = (): void => {
   console.log("repo-ops version 0.0.1-scaffold");
 };
 
-/** CLI main entrypoint. Parses argv and dispatches subcommands. */
+/**
+ * CLI main entrypoint. Parses argv and dispatches subcommands.
+ */
 const main = (): void => {
   const cmd: Command = (args[0] as Command) || "help";
   switch (cmd) {
@@ -435,12 +438,46 @@ const main = (): void => {
             const typeIdx = rest.indexOf("--type");
             const sumIdx = rest.indexOf("--summary");
             const ctxIdx = rest.indexOf("--context");
+            const changesIdx = rest.indexOf("--changes");
+            const archIdx = rest.indexOf("--architecture");
+            const filesIdx = rest.indexOf("--files");
+            const includeFilesFlag = rest.includes("--include-files");
+            const testingIdx = rest.indexOf("--testing");
+            const impactIdx = rest.indexOf("--impact");
+            const filesIncludeIdx = rest.indexOf("--files-include");
+            const filesExcludeIdx = rest.indexOf("--files-exclude");
             const writeFlag = rest.includes("--write");
-            const autoVerify = rest.includes("--auto-verify");
+            const explicitAutoVerify = rest.includes("--auto-verify");
+            const noAutoVerify = rest.includes("--no-auto-verify");
+            const autoVerifyForce = rest.includes("--auto-verify-force");
+            const verifyBlock = rest.includes("--verify-block");
             const type = typeIdx !== -1 ? rest[typeIdx + 1] : "chore";
             const summary =
               sumIdx !== -1 ? rest[sumIdx + 1] : "Describe the change";
             const context = ctxIdx !== -1 ? rest[ctxIdx + 1] : undefined;
+            const changesMade =
+              changesIdx !== -1 ? rest[changesIdx + 1] : undefined;
+            const architectureNotes =
+              archIdx !== -1 ? rest[archIdx + 1] : undefined;
+            const filesChanged =
+              filesIdx !== -1 ? rest[filesIdx + 1] : undefined;
+            const testingDetails =
+              testingIdx !== -1 ? rest[testingIdx + 1] : undefined;
+            const impact = impactIdx !== -1 ? rest[impactIdx + 1] : undefined;
+            const filesIncludePrefixes =
+              filesIncludeIdx !== -1
+                ? String(rest[filesIncludeIdx + 1])
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                : undefined;
+            const filesExcludePrefixes =
+              filesExcludeIdx !== -1
+                ? String(rest[filesExcludeIdx + 1])
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                : undefined;
             if (!summary) {
               console.error("changelog write: --summary is required");
               process.exitCode = 1;
@@ -455,12 +492,30 @@ const main = (): void => {
                 "warning: write context contains literal \\n sequences; they will not render as newlines. Use heredoc or external file."
               );
             }
+            const hasOverride = Boolean(process.env.REPO_OPS_CHANGELOG_PATH);
+            const autoVerify = noAutoVerify
+              ? false
+              : explicitAutoVerify
+              ? true
+              : writeFlag
+              ? !hasOverride
+              : false;
             const result = await writeEntry({
               type,
               summary,
               context,
+              changesMade,
+              architectureNotes,
+              filesChanged,
+              includeFiles: includeFilesFlag,
+              testingDetails,
+              impact,
+              filesIncludePrefixes,
+              filesExcludePrefixes,
               write: writeFlag,
               autoVerify,
+              autoVerifyForce,
+              verifyBlock,
             });
             console.log(
               `changelog write: ${
@@ -480,6 +535,25 @@ const main = (): void => {
               for (const n of result.notes) console.log(`note: ${n}`);
           };
           runWrite();
+          return;
+        }
+        case "verify-only": {
+          /**
+           * Update Verification block for the latest entry without inserting a new entry.
+           *
+           * @returns Promise resolved after printing result line.
+           */
+          const runVerifyOnly = async (): Promise<void> => {
+            const { verifyLatestEntry } = await import("./changelog");
+            const force = rest.includes("--force");
+            const result = await verifyLatestEntry({ force });
+            console.log(
+              `changelog verify-only: ${result.updated ? "UPDATED" : "NO-OP"}`
+            );
+            if (result.notes?.length)
+              for (const n of result.notes) console.log(`note: ${n}`);
+          };
+          runVerifyOnly();
           return;
         }
         case "map": {
@@ -590,14 +664,28 @@ const main = (): void => {
               const raw = JSON.parse(
                 await fs.promises.readFile(indexPath, "utf8")
               );
-              prior = {
-                entries: Array.isArray(raw.entries)
-                  ? (raw.entries as import("./changelog").ChangelogEntryMeta[])
-                  : [],
-                days: Array.isArray(raw.days)
-                  ? (raw.days as { day: string; entryCount: number }[])
-                  : [],
-              };
+              let useRaw = true;
+              try {
+                const repo = defaultConfig.resolveRepoPaths(process.cwd());
+                const currentPath = path.resolve(repo.changelog);
+                const rawPath = path.resolve(String(raw.changelogPath || ""));
+                if (currentPath !== rawPath) {
+                  // Index refers to a different changelog path (likely override mismatch); ignore prior entries.
+                  useRaw = false;
+                }
+              } catch {
+                // ignore path comparison errors; fall back to using raw
+              }
+              prior = useRaw
+                ? {
+                    entries: Array.isArray(raw.entries)
+                      ? (raw.entries as import("./changelog").ChangelogEntryMeta[])
+                      : [],
+                    days: Array.isArray(raw.days)
+                      ? (raw.days as { day: string; entryCount: number }[])
+                      : [],
+                  }
+                : { entries: [], days: [] };
             } catch (e) {
               console.log(
                 JSON.stringify({
@@ -706,6 +794,11 @@ const main = (): void => {
         }
         case "lock": {
           // changelog lock --remove [--force] [--ttl-minutes N]
+          /**
+           * Remove a stale or forced changelog lock.
+           *
+           * @returns Promise resolved after printing outcome.
+           */
           const runLock = async (): Promise<void> => {
             const action = (rest[0] as string | undefined) ?? "";
             if (action !== "--remove") {
@@ -718,7 +811,8 @@ const main = (): void => {
             const force = rest.includes("--force");
             const ttlIdx = rest.indexOf("--ttl-minutes");
             const ttlMin = ttlIdx !== -1 ? Number(rest[ttlIdx + 1]) : undefined;
-            const ttlMs = ttlMin && !isNaN(ttlMin) ? ttlMin * 60 * 1000 : undefined;
+            const ttlMs =
+              ttlMin && !isNaN(ttlMin) ? ttlMin * 60 * 1000 : undefined;
             const repo = defaultConfig.resolveRepoPaths(process.cwd());
             const { removeLock } = await import("./lock");
             const res = removeLock(repo.root, "changelog", { force, ttlMs });
@@ -733,7 +827,7 @@ const main = (): void => {
         }
         default:
           console.error(
-            "Unknown changelog subcommand. Try: changelog scaffold|write|map|verify|diff (see help)"
+            "Unknown changelog subcommand. Try: changelog scaffold|write|map|verify|verify-only|diff (see help)"
           );
           process.exitCode = 1;
           return;

@@ -6,58 +6,34 @@
 
 # Interface: ExecutionConfig
 
-Defined in: [src/types/agentConfig.ts:242](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L242)
+Defined in: [src/types/agentConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L192)
 
-Runtime execution configuration for an agent.
+Execution settings controlling runtime behavior.
 
-## Example
+## Indexable
 
-```ts
-const exec: ExecutionConfig = {
-  priority: "high",
-  timeout: 8000,
-  cacheEnabled: true,
-  retryStrategy: "exponential",
-  maxRetries: 2,
-};
-```
+\[`key`: `string`\]: `unknown`
 
 ## Properties
 
-### cacheEnabled?
+### maxConcurrency?
 
-> `optional` **cacheEnabled**: `boolean`
+> `optional` **maxConcurrency**: `number`
 
-Defined in: [src/types/agentConfig.ts:245](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L245)
-
-***
-
-### maxRetries?
-
-> `optional` **maxRetries**: `number`
-
-Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L247)
+Defined in: [src/types/agentConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L194)
 
 ***
 
-### priority
+### mode?
 
-> **priority**: `"high"` \| `"medium"` \| `"low"`
+> `optional` **mode**: `string`
 
-Defined in: [src/types/agentConfig.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L243)
-
-***
-
-### retryStrategy?
-
-> `optional` **retryStrategy**: `"none"` \| `"fixed"` \| `"exponential"`
-
-Defined in: [src/types/agentConfig.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L246)
+Defined in: [src/types/agentConfig.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L193)
 
 ***
 
-### timeout
+### timeoutMs?
 
-> **timeout**: `number`
+> `optional` **timeoutMs**: `number`
 
-Defined in: [src/types/agentConfig.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L244)
+Defined in: [src/types/agentConfig.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L195)

@@ -6,7 +6,7 @@
 
 # Interface: ValidationError
 
-Defined in: [src/types/configValidation.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configValidation.ts#L9)
+Defined in: [src/types/configValidation.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/configValidation.ts#L9)
 
 Detailed validation error information (runtime logic lives in shared module).
 
@@ -16,7 +16,7 @@ Detailed validation error information (runtime logic lives in shared module).
 
 > `optional` **actual**: `unknown`
 
-Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configValidation.ts#L15)
+Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/configValidation.ts#L15)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vs
 
 > **category**: `"schema"` \| `"type"` \| `"business_rule"` \| `"compatibility"`
 
-Defined in: [src/types/configValidation.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configValidation.ts#L11)
+Defined in: [src/types/configValidation.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/configValidation.ts#L11)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/configValidation.ts:11](https://github.com/ErikPlachta/vs
 
 > `optional` **expected**: `unknown`
 
-Defined in: [src/types/configValidation.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configValidation.ts#L14)
+Defined in: [src/types/configValidation.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/configValidation.ts#L14)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/configValidation.ts:14](https://github.com/ErikPlachta/vs
 
 > **level**: `"warning"` \| `"error"`
 
-Defined in: [src/types/configValidation.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configValidation.ts#L10)
+Defined in: [src/types/configValidation.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/configValidation.ts#L10)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/configValidation.ts:10](https://github.com/ErikPlachta/vs
 
 > **message**: `string`
 
-Defined in: [src/types/configValidation.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configValidation.ts#L13)
+Defined in: [src/types/configValidation.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/configValidation.ts#L13)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/types/configValidation.ts:13](https://github.com/ErikPlachta/vs
 
 > **path**: `string`
 
-Defined in: [src/types/configValidation.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/configValidation.ts#L12)
+Defined in: [src/types/configValidation.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/configValidation.ts#L12)

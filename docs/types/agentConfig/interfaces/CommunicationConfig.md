@@ -6,38 +6,15 @@
 
 # Interface: CommunicationConfig
 
-Defined in: [src/types/agentConfig.ts:602](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L602)
+Defined in: [src/types/agentConfig.ts:450](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L450)
 
 CommunicationAgent configuration for response formatting and user interaction.
 
-Prefer defining copy/templates here and referencing them from agents to avoid
-hardcoded business values in code.
+## Indexable
 
-## Example
+\[`key`: `string`\]: `unknown`
 
-```ts
-const comm: CommunicationConfig = {
-  formatting: {
-    defaultFormat: "markdown",
-    tone: { success: "friendly", error: "helpful", progress: "informative", validation: "constructive" },
-    verbosity: "balanced",
-    maxMessageLength: 1000,
-  },
-  clarification: {
-    maxCategoriesInExamples: 3,
-    examplesHeader: "Examples:",
-    availableCategoriesHeader: "Available Categories:",
-    unknownRequestTemplate: "I'm not sure what you're looking for with \"{{question}}\".",
-    matchedIntentTemplate: "Your question seems related to {{intent}}.",
-    groups: [
-      { title: "**Category Information**", usesCategories: true, sampleTemplates: [
-        "What's in the {{category}} category?",
-        "Describe the {{category}} data model",
-      ]},
-    ],
-  },
-};
-```
+Allow forward-compatible keys
 
 ## Properties
 
@@ -45,7 +22,7 @@ const comm: CommunicationConfig = {
 
 > `optional` **clarification**: [`CommunicationClarificationConfig`](CommunicationClarificationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:676](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L676)
+Defined in: [src/types/agentConfig.ts:524](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L524)
 
 Clarification message templates and settings for CommunicationAgent
 
@@ -55,7 +32,7 @@ Clarification message templates and settings for CommunicationAgent
 
 > **errorHandling**: `object`
 
-Defined in: [src/types/agentConfig.ts:635](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L635)
+Defined in: [src/types/agentConfig.ts:483](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L483)
 
 #### errorTemplates?
 
@@ -127,7 +104,7 @@ Defined in: [src/types/agentConfig.ts:635](https://github.com/ErikPlachta/vscode
 
 > **formatting**: `object`
 
-Defined in: [src/types/agentConfig.ts:603](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L603)
+Defined in: [src/types/agentConfig.ts:451](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L451)
 
 #### defaultFormat
 
@@ -183,7 +160,7 @@ Defined in: [src/types/agentConfig.ts:603](https://github.com/ErikPlachta/vscode
 
 > `optional` **progressTracking**: `object`
 
-Defined in: [src/types/agentConfig.ts:655](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L655)
+Defined in: [src/types/agentConfig.ts:503](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L503)
 
 #### enabled?
 
@@ -231,27 +208,27 @@ Defined in: [src/types/agentConfig.ts:655](https://github.com/ErikPlachta/vscode
 
 > `optional` **successDisplay**: `object`
 
-Defined in: [src/types/agentConfig.ts:619](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L619)
+Defined in: [src/types/agentConfig.ts:475](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L475)
 
-Success display options
+Optional success-path display customization (enumeration of categories)
 
 #### availableCategoriesHeader?
 
 > `optional` **availableCategoriesHeader**: `string`
 
-Optional header override for Available Categories on success
+Header to use above enumerated categories; falls back to clarification header or static default
 
 #### includeAvailableCategories?
 
 > `optional` **includeAvailableCategories**: `boolean`
 
-When true, include Available Categories on success when provided via metadata
+Enable enumeration of availableCategories in success responses when metadata provides them
 
 #### maxCategoriesInSuccess?
 
 > `optional` **maxCategoriesInSuccess**: `number`
 
-Max number of categories to show on success (defaults to 6)
+Maximum categories to enumerate (default implementation uses 6)
 
 ***
 
@@ -259,7 +236,7 @@ Max number of categories to show on success (defaults to 6)
 
 > `optional` **successTemplates**: `object`
 
-Defined in: [src/types/agentConfig.ts:627](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L627)
+Defined in: [src/types/agentConfig.ts:466](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L466)
 
 #### analysisComplete?
 
@@ -291,7 +268,7 @@ Defined in: [src/types/agentConfig.ts:627](https://github.com/ErikPlachta/vscode
 
 > `optional` **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:668](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L668)
+Defined in: [src/types/agentConfig.ts:516](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L516)
 
 #### groupByCategory?
 

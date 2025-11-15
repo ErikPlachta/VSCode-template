@@ -6,7 +6,7 @@
 
 # Interface: AgentProfile
 
-Defined in: [src/types/applicationConfig.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/applicationConfig.ts#L188)
+Defined in: [src/types/applicationConfig.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/applicationConfig.ts#L188)
 
 Agent profile configuration.
 
@@ -26,7 +26,7 @@ const profile: AgentProfile = {
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/applicationConfig.ts#L194)
+Defined in: [src/types/applicationConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/applicationConfig.ts#L194)
 
 Enable caching for this agent.
 
@@ -36,7 +36,7 @@ Enable caching for this agent.
 
 > **priority**: [`AgentPriority`](../type-aliases/AgentPriority.md)
 
-Defined in: [src/types/applicationConfig.ts:190](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/applicationConfig.ts#L190)
+Defined in: [src/types/applicationConfig.ts:190](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/applicationConfig.ts#L190)
 
 Execution priority for the agent.
 
@@ -46,6 +46,6 @@ Execution priority for the agent.
 
 > **timeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/applicationConfig.ts#L192)
+Defined in: [src/types/applicationConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/applicationConfig.ts#L192)
 
 Maximum execution timeout in milliseconds.

@@ -8,7 +8,7 @@
 
 > **validateAgentConfig**(`config`): [`ValidationResult`](../interfaces/ValidationResult.md)
 
-Defined in: [src/shared/validation/configValidation.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/validation/configValidation.ts#L68)
+Defined in: [src/shared/validation/configValidation.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/validation/configValidation.ts#L68)
 
 Validates an unknown agent configuration object against registry metadata and business rules.
 

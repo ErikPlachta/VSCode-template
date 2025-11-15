@@ -6,34 +6,9 @@
 
 # Interface: ApplicationFacingConfig
 
-Defined in: [src/types/agentConfig.ts:345](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L345)
+Defined in: [src/types/agentConfig.ts:212](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L212)
 
-Technical/application-facing metadata for operators and docs.
-
-## Example
-
-```ts
-const appFacing: ApplicationFacingConfig = {
-technicalDescription: "This agent handles data analysis tasks.",
-dependencies: ["database-agent", "clarification-agent"],
-capabilities: ["data analysis", "relationship mapping"],
-performance: {
-expectedResponseTime: 7000,
-memoryUsage: "high",
-complexity: "high",
-},
-errorHandling: {
-retryStrategy: "fixed",
-maxRetries: 2,
-},
-monitoring: {
-metricsToTrack: ["responseTime", "throughput"],
-alertThresholds: {
-responseTime: 3000,
-throughput: 100,
-},
-};
-```
+Technical/application-facing metadata for operators and documentation.
 
 ## Properties
 
@@ -41,7 +16,7 @@ throughput: 100,
 
 > `optional` **capabilities**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:348](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L348)
+Defined in: [src/types/agentConfig.ts:215](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L215)
 
 ***
 
@@ -49,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:348](https://github.com/ErikPlachta/vscode
 
 > `optional` **dependencies**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:347](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L347)
+Defined in: [src/types/agentConfig.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L214)
 
 ***
 
@@ -57,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:347](https://github.com/ErikPlachta/vscode
 
 > `optional` **errorHandling**: [`ErrorHandlingConfig`](ErrorHandlingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:350](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L350)
+Defined in: [src/types/agentConfig.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L217)
 
 ***
 
@@ -65,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:350](https://github.com/ErikPlachta/vscode
 
 > `optional` **monitoring**: [`MonitoringConfig`](MonitoringConfig.md)
 
-Defined in: [src/types/agentConfig.ts:351](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L351)
+Defined in: [src/types/agentConfig.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L218)
 
 ***
 
@@ -73,7 +48,7 @@ Defined in: [src/types/agentConfig.ts:351](https://github.com/ErikPlachta/vscode
 
 > `optional` **performance**: [`PerformanceConfig`](PerformanceConfig.md)
 
-Defined in: [src/types/agentConfig.ts:349](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L349)
+Defined in: [src/types/agentConfig.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L216)
 
 ***
 
@@ -81,4 +56,4 @@ Defined in: [src/types/agentConfig.ts:349](https://github.com/ErikPlachta/vscode
 
 > `optional` **technicalDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:346](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L346)
+Defined in: [src/types/agentConfig.ts:213](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L213)

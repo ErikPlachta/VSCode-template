@@ -8,7 +8,7 @@
 
 > **fetchLocalTools**(): `Promise`\<[`MCPTool`](../../shared/mcpTypes/interfaces/MCPTool.md)[]\>
 
-Defined in: [src/extension/mcpSync.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/extension/mcpSync.ts#L169)
+Defined in: [src/extension/mcpSync.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/extension/mcpSync.ts#L169)
 
 Fetch tools from the locally embedded server module when running in stdio mode.
 This avoids HTTP and reads the exported tool catalogue directly.

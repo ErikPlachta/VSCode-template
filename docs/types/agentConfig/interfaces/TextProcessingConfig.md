@@ -6,7 +6,7 @@
 
 # Interface: TextProcessingConfig
 
-Defined in: [src/types/agentConfig.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L107)
+Defined in: [src/types/agentConfig.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L83)
 
 Text processing configuration for extracting signals and keywords.
 
@@ -30,7 +30,7 @@ const textCfg: TextProcessingConfig = {
 
 > **minimumKeywordLength**: `number`
 
-Defined in: [src/types/agentConfig.ts:111](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L111)
+Defined in: [src/types/agentConfig.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L87)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/agentConfig.ts:111](https://github.com/ErikPlachta/vscode
 
 > **scoringWeights**: `object`
 
-Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L113)
+Defined in: [src/types/agentConfig.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L89)
 
 #### focusMatch
 
@@ -58,4 +58,4 @@ Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode
 
 > **stopWords**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L109)
+Defined in: [src/types/agentConfig.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L85)

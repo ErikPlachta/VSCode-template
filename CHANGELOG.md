@@ -134,9 +134,9 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
-#### 2025-11-15 12:53:29 docs: Verifying changelog repo-ops workflow and integrity
+#### 2025-11-15 16:27:43 refactor: Split changelog CLI into scaffold/write/verify modules; add barrel exports
 
-**Problem/Context**: What was wrong or needed
+**Problem/Context**: Refactor: split modules (scaffold/write/verify/map/date); add barrel exports in bin/repo-ops/changelog.ts; behavior unchanged; compile and tests pass; updated TODOs to reflect completion.
 
 **Changes Made**:
 
@@ -145,16 +145,48 @@ All other changes must be performed via the CLI.
 
 **Architecture Notes**: (patterns/decisions)
 
-**Files Changed**: (list files with line counts)
-
-**Testing**: Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status
+**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
 
 **Impact**: (what this enables/fixes)
 
-##### Verification – 2025-11-15 (Auto Verify)
+#### 2025-11-15 15:18:40 test: repo-ops: add tests for flags + inline Testing; integrity review
+
+**Problem/Context**: Added unit tests for changelog flags (--changes, --architecture, --files, --testing, --impact) and inline Testing auto-update via auto-verify with a test-only gate hook. Ran session lint and changelog verify; both OK.
+
+**Changes Made**:
+
+tests/repoOps.changelogWrite.flags.test.ts — new; bin/repo-ops/changelog.ts — add fake gates + Testing line update; bin/repo-ops/index.ts — flags parsing + auto-verify precedence; docs/changelog.md — document flags + auto-population
+
+**Architecture Notes**: Explicit flag precedence; default auto-verify disabled under override; test-only REPO_OPS_FAKE_GATES to avoid nested jest; no hardcoded business values; JSON-RPC unaffected
+
+**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**: Eliminates manual post-editing for common sections; increases reliability of changelog process
+
+<!-- Verification block intentionally omitted; inline Testing line reflects gate results -->
+
+#### 2025-11-15 15:09:54 fix: Resolve config path resolution
+
+**Problem/Context**: Fixed path mismatch and added guard for overrides.
+
+**Changes Made**:
+
+1. [env.ts](http://_vscodecontentref_/9) — normalize cache dir\n2. [mcpCache.ts](http://_vscodecontentref_/10) — add migration step
+
+**Architecture Notes**: Single-path JSON-RPC; no hardcoded business values; agent isolation retained.
+
+**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: PASS
+
+**Impact**: Reduces cache drift; improves migration safety and startup reliability.
+
+#### 2025-11-15 14:57:11 feat: repo-ops: default auto-verify; add --auto-verify-force and verify-only
+
+**Problem/Context**: Make auto-verify the default for changelog writes with opt-out via --no-auto-verify. Add --auto-verify-force to label forced verification even when gates fail, and add verify-only to update the latest entry’s Verification block without adding a new entry. Updated docs and synced TODO/CONTEXT-SESSION.
+
+##### Verification – 2025-11-15 (Verify Only, Force)
 
 - Build: PASS
-- Tests: PASS
+- Tests: FAIL
 - Docs: PASS
 - Health: PASS
 - Lint: N/A
@@ -174,10 +206,6 @@ All other changes must be performed via the CLI.
 - Non-functional maintenance; no runtime or API changes.
 - Aligns with governance: backups are auxiliary and can be regenerated; source of truth remains the log content.
 
-**Files Changed**:
-
-- Operational cleanup only; no source files modified.
-
 **Testing**:
 
 - Build: PASS (`npm run compile`)
@@ -190,15 +218,6 @@ All other changes must be performed via the CLI.
 
 - Removes noisy integrity warnings and reduces risk of false-positive diffs.
 - Establishes a clean slate for subsequent changelog entries and verification.
-
-##### Verification – backups purged and cache reset (2025-11-15)
-
-- Build: PASS
-- Tests: PASS (321 passed / 2 skipped)
-- Lint: PARTIAL
-- Docs: N/A
-- Health: PASS
-- Coverage: UNCHANGED
 
 #### 2025-11-15 11:25:40 fix: Align database & clarification types; resolve compile mismatch
 

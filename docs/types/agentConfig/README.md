@@ -6,42 +6,19 @@
 
 # types/agentConfig
 
-Type definitions for `agentConfig` used across the application.
+Agent configuration type declarations used across the application.
 
-This file defines all structures related to agent identity, routing,
-scoring, profiling, escalation logic, and composite configuration.
+This module defines structures for agent identity, routing intents,
+text processing, escalation logic, performance profiling, execution
+control, scoring, and composite configuration objects consumed by
+the Orchestrator and individual agents.
 
 ## Remarks
 
-### Developer & LLM Instructions:
-- This is the **single source of truth** for all agent configuration types.
-- Prefer placing comprehensive TSDoc comments here, rather than duplicating
-  them in `agent.config.ts`.
-- Add `@example` blocks to definitions where meaningful to clarify usage.
-- Use `/** ... */` inline docblocks directly above each property.
-- Avoid redundancy; focus on clarity and completeness in type definitions.
-- Comments in `agent.config.ts` should be minimal and not diverge from this.
-
-## Example
-
-```ts
-const agent: AgentIdentity = {
-  id: "comm-agent",
-  name: "Communications Agent",
-  version: "1.0.0",
-  description: "Handles formatting of outbound user-facing messages."
-};
-```
-
-## See
-
- - [TSDoc Main Reference](https://tsdoc.org)
- - [Using TSDoc](https://tsdoc.org/pages/intro/using_tsdoc/)
- - [TypeScript JSDoc Reference](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)
-
-## Classes
-
-- [BaseAgentConfig](classes/BaseAgentConfig.md)
+- Single source of truth for agent configuration related types.
+- Keep runtime helper functions in shared modules; this file remains types-only.
+- Add focused `@example` blocks on individual interfaces where helpful.
+- Prefer concise property level comments over large top-level samples.
 
 ## Interfaces
 
@@ -58,6 +35,8 @@ const agent: AgentIdentity = {
 - [CommunicationConfig](interfaces/CommunicationConfig.md)
 - [CrossCategoryConnection](interfaces/CrossCategoryConnection.md)
 - [DatabaseConfig](interfaces/DatabaseConfig.md)
+- [DatabaseOperationsConfig](interfaces/DatabaseOperationsConfig.md)
+- [DatabaseValidationConfig](interfaces/DatabaseValidationConfig.md)
 - [DataConfig](interfaces/DataConfig.md)
 - [DataInsight](interfaces/DataInsight.md)
 - [DataLoaderConfig](interfaces/DataLoaderConfig.md)
@@ -92,10 +71,4 @@ const agent: AgentIdentity = {
 
 ### ConfigDescriptor
 
-Re-exports [ConfigDescriptor](../../shared/agentConfigDescriptors/interfaces/ConfigDescriptor.md)
-
-***
-
-### createDescriptorMap
-
-Re-exports [createDescriptorMap](../../shared/agentConfigDescriptors/functions/createDescriptorMap.md)
+Re-exports [ConfigDescriptor](../../shared/config/descriptors/interfaces/ConfigDescriptor.md)

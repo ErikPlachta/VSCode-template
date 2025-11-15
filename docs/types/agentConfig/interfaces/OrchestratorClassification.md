@@ -6,7 +6,7 @@
 
 # Interface: OrchestratorClassification
 
-Defined in: [src/types/agentConfig.ts:1289](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1289)
+Defined in: [src/types/agentConfig.ts:820](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L820)
 
 Classification metadata returned before executing a task.
 
@@ -16,7 +16,7 @@ Classification metadata returned before executing a task.
 
 > `optional` **escalationPrompt**: `string`
 
-Defined in: [src/types/agentConfig.ts:1292](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1292)
+Defined in: [src/types/agentConfig.ts:823](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L823)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:1292](https://github.com/ErikPlachta/vscod
 
 > **intent**: `string`
 
-Defined in: [src/types/agentConfig.ts:1290](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1290)
+Defined in: [src/types/agentConfig.ts:821](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L821)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:1290](https://github.com/ErikPlachta/vscod
 
 > `optional` **matchedSignals**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:1293](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1293)
+Defined in: [src/types/agentConfig.ts:824](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L824)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:1293](https://github.com/ErikPlachta/vscod
 
 > `optional` **missingSignals**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:1294](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1294)
+Defined in: [src/types/agentConfig.ts:825](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L825)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/agentConfig.ts:1294](https://github.com/ErikPlachta/vscod
 
 > **rationale**: `string`
 
-Defined in: [src/types/agentConfig.ts:1291](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1291)
+Defined in: [src/types/agentConfig.ts:822](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L822)

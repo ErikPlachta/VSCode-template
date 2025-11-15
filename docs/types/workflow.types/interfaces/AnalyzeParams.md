@@ -6,7 +6,7 @@
 
 # Interface: AnalyzeParams
 
-Defined in: [src/types/workflow.types.ts:415](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L415)
+Defined in: [src/types/workflow.types.ts:415](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L415)
 
 Parameters for DataAgent.analyzeData()
 
@@ -18,7 +18,7 @@ Accepts data from previous action or explicit dataset
 
 > `optional` **analysisType**: `"correlation"` \| `"trend"` \| `"summary"` \| `"distribution"`
 
-Defined in: [src/types/workflow.types.ts:420](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L420)
+Defined in: [src/types/workflow.types.ts:420](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L420)
 
 Type of analysis to perform
 
@@ -28,7 +28,7 @@ Type of analysis to perform
 
 > `optional` **data**: `unknown`[]
 
-Defined in: [src/types/workflow.types.ts:417](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L417)
+Defined in: [src/types/workflow.types.ts:417](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L417)
 
 Data to analyze. Can come from dependency resolution
 
@@ -38,6 +38,6 @@ Data to analyze. Can come from dependency resolution
 
 > `optional` **fields**: `string`[]
 
-Defined in: [src/types/workflow.types.ts:423](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L423)
+Defined in: [src/types/workflow.types.ts:423](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L423)
 
 Fields to analyze. If undefined, analyzes all numeric/categorical fields

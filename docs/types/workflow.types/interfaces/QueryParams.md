@@ -6,7 +6,7 @@
 
 # Interface: QueryParams
 
-Defined in: [src/types/workflow.types.ts:393](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L393)
+Defined in: [src/types/workflow.types.ts:393](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L393)
 
 Parameters for DatabaseAgent.executeQuery()
 
@@ -18,7 +18,7 @@ All fields optional to support data-driven querying
 
 > `optional` **category**: `string`
 
-Defined in: [src/types/workflow.types.ts:395](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L395)
+Defined in: [src/types/workflow.types.ts:395](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L395)
 
 Category to query. If undefined, agent determines from context
 
@@ -28,7 +28,7 @@ Category to query. If undefined, agent determines from context
 
 > `optional` **fields**: `string`[]
 
-Defined in: [src/types/workflow.types.ts:404](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L404)
+Defined in: [src/types/workflow.types.ts:404](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L404)
 
 Fields to return. If undefined, returns all fields
 
@@ -38,7 +38,7 @@ Fields to return. If undefined, returns all fields
 
 > `optional` **filters**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/workflow.types.ts:398](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L398)
+Defined in: [src/types/workflow.types.ts:398](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L398)
 
 Filters to apply. Structure depends on category schema
 
@@ -48,7 +48,7 @@ Filters to apply. Structure depends on category schema
 
 > `optional` **limit**: `number`
 
-Defined in: [src/types/workflow.types.ts:401](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L401)
+Defined in: [src/types/workflow.types.ts:401](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L401)
 
 Maximum number of results. Defaults to agent-specific limit
 
@@ -58,6 +58,6 @@ Maximum number of results. Defaults to agent-specific limit
 
 > `optional` **sort**: `Record`\<`string`, `"asc"` \| `"desc"`\>
 
-Defined in: [src/types/workflow.types.ts:407](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/workflow.types.ts#L407)
+Defined in: [src/types/workflow.types.ts:407](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L407)
 
 Sort order. Format: { field: 'asc' | 'desc' }

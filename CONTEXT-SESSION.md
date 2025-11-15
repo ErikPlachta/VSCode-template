@@ -58,6 +58,7 @@ Formatting Conventions
 - New changelog entries added: compile mismatch fix and backups purge/cache reset; verification blocks appended.
 - Key CHANGELOG.md lint issues patched (headings punctuation, emphasis-as-heading, generic type formatting, fence languages).
 - TSDoc hotfix complete for `src/types/agentConfig.ts`; bulk sweep deferred until purity refactor plan executes.
+- Repo-ops: Changelog `write` now auto-verifies by default; added `--no-auto-verify`, `--auto-verify-force`, and `verify-only` for updating latest entry verification.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->

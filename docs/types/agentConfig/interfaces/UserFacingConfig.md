@@ -6,24 +6,13 @@
 
 # Interface: UserFacingConfig
 
-Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L265)
+Defined in: [src/types/agentConfig.ts:200](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L200)
 
-User-facing documentation and guidance shown in help/UX.
+User-facing descriptive configuration for docs & examples.
 
-Prefer adding examples here instead of inline comments in configs.
+## Indexable
 
-## Example
-
-```ts
-const userFacing: UserFacingConfig = {
-  friendlyDescription: "Analyze relationships and summarize insights.",
-  useWhen: ["Find connections", "Summarize data"],
-  exampleQueries: [
-    "Show connections between categories",
-    "Summarize recent changes across datasets",
-  ],
-};
-```
+\[`key`: `string`\]: `unknown`
 
 ## Properties
 
@@ -31,7 +20,7 @@ const userFacing: UserFacingConfig = {
 
 > `optional` **exampleQueries**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:268](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L268)
+Defined in: [src/types/agentConfig.ts:202](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L202)
 
 ***
 
@@ -39,20 +28,24 @@ Defined in: [src/types/agentConfig.ts:268](https://github.com/ErikPlachta/vscode
 
 > `optional` **friendlyDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:266](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L266)
+Defined in: [src/types/agentConfig.ts:201](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L201)
 
 ***
 
-### helpText?
+### successDisplay?
 
-> `optional` **helpText**: `string`
+> `optional` **successDisplay**: `object`
 
-Defined in: [src/types/agentConfig.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L269)
+Defined in: [src/types/agentConfig.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L203)
 
-***
+#### availableCategoriesHeader?
 
-### useWhen?
+> `optional` **availableCategoriesHeader**: `string`
 
-> `optional` **useWhen**: `string`[]
+#### includeAvailableCategories?
 
-Defined in: [src/types/agentConfig.ts:267](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L267)
+> `optional` **includeAvailableCategories**: `boolean`
+
+#### maxCategoriesInSuccess?
+
+> `optional` **maxCategoriesInSuccess**: `number`

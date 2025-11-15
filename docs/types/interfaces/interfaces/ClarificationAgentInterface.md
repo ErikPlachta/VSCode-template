@@ -6,7 +6,7 @@
 
 # Interface: ClarificationAgentInterface
 
-Defined in: [src/types/interfaces.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L285)
+Defined in: [src/types/interfaces.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L285)
 
 Interface for agents that generate clarification prompts.
 
@@ -16,7 +16,7 @@ Interface for agents that generate clarification prompts.
 
 > **clarify**(`input`): `Promise`\<[`ClarificationResponse`](ClarificationResponse.md)\>
 
-Defined in: [src/types/interfaces.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/interfaces.ts#L286)
+Defined in: [src/types/interfaces.ts:286](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L286)
 
 #### Parameters
 

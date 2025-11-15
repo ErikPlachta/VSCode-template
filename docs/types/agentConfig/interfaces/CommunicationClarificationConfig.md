@@ -6,31 +6,14 @@
 
 # Interface: CommunicationClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:701](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L701)
+Defined in: [src/types/agentConfig.ts:537](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L537)
 
 Clarification formatting configuration for the CommunicationAgent.
 
-Use groups with `usesCategories=true` to automatically substitute `{{category}}`
+Use groups with `usesCategories=true` to automatically substitute category names.
 with runtime category names supplied via metadata.
 
-## Example
-
-```ts
-const clar: CommunicationClarificationConfig = {
-  maxCategoriesInExamples: 4,
-  examplesHeader: "Here are some examples:",
-  availableCategoriesHeader: "Available Categories:",
-  closingPrompt: "Please be more specific.",
-  unknownRequestTemplate: "I'm not sure what you're looking for with \"{{question}}\".",
-  matchedIntentTemplate: "Your question seems related to {{intent}}.",
-  groups: [
-    { title: "**Query Records**", usesCategories: true, sampleTemplates: [
-      "List recent items in {{category}}",
-      "Find items matching specific keywords in {{category}}",
-    ]},
-  ],
-};
-```
+Example removed for brevity.
 
 ## Properties
 
@@ -38,7 +21,7 @@ const clar: CommunicationClarificationConfig = {
 
 > `optional` **availableCategoriesHeader**: `string`
 
-Defined in: [src/types/agentConfig.ts:707](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L707)
+Defined in: [src/types/agentConfig.ts:543](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L543)
 
 Heading before category list
 
@@ -48,7 +31,7 @@ Heading before category list
 
 > `optional` **closingPrompt**: `string`
 
-Defined in: [src/types/agentConfig.ts:709](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L709)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L545)
 
 Closing prompt encouraging specificity
 
@@ -58,7 +41,7 @@ Closing prompt encouraging specificity
 
 > `optional` **examplesHeader**: `string`
 
-Defined in: [src/types/agentConfig.ts:705](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L705)
+Defined in: [src/types/agentConfig.ts:541](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L541)
 
 Heading before example prompts
 
@@ -68,9 +51,9 @@ Heading before example prompts
 
 > `optional` **groups**: `object`[]
 
-Defined in: [src/types/agentConfig.ts:715](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L715)
+Defined in: [src/types/agentConfig.ts:551](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L551)
 
-Example groups; when usesCategories=true, replace {{category}}
+Example groups; when usesCategories=true, category placeholders are substituted.
 
 #### sampleTemplates
 
@@ -90,9 +73,9 @@ Example groups; when usesCategories=true, replace {{category}}
 
 > `optional` **matchedIntentTemplate**: `string`
 
-Defined in: [src/types/agentConfig.ts:713](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L713)
+Defined in: [src/types/agentConfig.ts:549](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L549)
 
-Template when an intent is guessed: uses {{intent}}
+Template when an intent is guessed.
 
 ***
 
@@ -100,7 +83,7 @@ Template when an intent is guessed: uses {{intent}}
 
 > `optional` **maxCategoriesInExamples**: `number`
 
-Defined in: [src/types/agentConfig.ts:703](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L703)
+Defined in: [src/types/agentConfig.ts:539](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L539)
 
 Max number of categories to include in examples
 
@@ -110,6 +93,6 @@ Max number of categories to include in examples
 
 > `optional` **unknownRequestTemplate**: `string`
 
-Defined in: [src/types/agentConfig.ts:711](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L711)
+Defined in: [src/types/agentConfig.ts:547](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L547)
 
-Template: I'm not sure what you're looking for with "{{question}}".
+Template shown when the user request is unclear.

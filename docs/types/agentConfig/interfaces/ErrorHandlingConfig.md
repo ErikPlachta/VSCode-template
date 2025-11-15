@@ -6,18 +6,11 @@
 
 # Interface: ErrorHandlingConfig
 
-Defined in: [src/types/agentConfig.ts:297](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L297)
+Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L156)
 
 Error handling preferences for an agent.
 
-## Example
-
-```ts
-const errorHandling: ErrorHandlingConfig = {
-retryStrategy: "exponential",
-maxRetries: 3,
-};
-```
+Example removed for brevity; configure in agent.config.ts with preferred retry strategy.
 
 ## Properties
 
@@ -25,7 +18,7 @@ maxRetries: 3,
 
 > `optional` **fallbackAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:300](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L300)
+Defined in: [src/types/agentConfig.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L159)
 
 ***
 
@@ -33,7 +26,7 @@ Defined in: [src/types/agentConfig.ts:300](https://github.com/ErikPlachta/vscode
 
 > **maxRetries**: `number`
 
-Defined in: [src/types/agentConfig.ts:299](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L299)
+Defined in: [src/types/agentConfig.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L158)
 
 ***
 
@@ -41,4 +34,4 @@ Defined in: [src/types/agentConfig.ts:299](https://github.com/ErikPlachta/vscode
 
 > **retryStrategy**: `"none"` \| `"fixed"` \| `"exponential"`
 
-Defined in: [src/types/agentConfig.ts:298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L298)
+Defined in: [src/types/agentConfig.ts:157](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L157)

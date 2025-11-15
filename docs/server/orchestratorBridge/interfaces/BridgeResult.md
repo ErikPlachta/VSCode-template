@@ -6,7 +6,7 @@
 
 # Interface: BridgeResult
 
-Defined in: [src/server/orchestratorBridge.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/server/orchestratorBridge.ts#L27)
+Defined in: [src/server/orchestratorBridge.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/server/orchestratorBridge.ts#L27)
 
 Result returned to the MCP server after CommunicationAgent formatting.
 
@@ -16,4 +16,4 @@ Result returned to the MCP server after CommunicationAgent formatting.
 
 > **message**: `string`
 
-Defined in: [src/server/orchestratorBridge.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/server/orchestratorBridge.ts#L28)
+Defined in: [src/server/orchestratorBridge.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/server/orchestratorBridge.ts#L28)

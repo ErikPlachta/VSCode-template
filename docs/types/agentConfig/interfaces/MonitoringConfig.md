@@ -6,21 +6,11 @@
 
 # Interface: MonitoringConfig
 
-Defined in: [src/types/agentConfig.ts:315](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L315)
+Defined in: [src/types/agentConfig.ts:167](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L167)
 
 Monitoring/telemetry configuration for an agent.
 
-## Example
-
-```ts
-const monitoring: MonitoringConfig = {
-metricsToTrack: ["responseTime", "errorRate"],
-alertThresholds: {
-responseTime: 2000,
-errorRate: 5,
-},
-};
-```
+Example removed for brevity; define metrics and thresholds in runtime configuration.
 
 ## Properties
 
@@ -28,7 +18,7 @@ errorRate: 5,
 
 > **alertThresholds**: `Record`\<`string`, `number`\>
 
-Defined in: [src/types/agentConfig.ts:317](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L317)
+Defined in: [src/types/agentConfig.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L169)
 
 ***
 
@@ -36,4 +26,4 @@ Defined in: [src/types/agentConfig.ts:317](https://github.com/ErikPlachta/vscode
 
 > **metricsToTrack**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:316](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L316)
+Defined in: [src/types/agentConfig.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L168)

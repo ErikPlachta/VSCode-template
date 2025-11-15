@@ -124,10 +124,23 @@ Follow these guidelines to ensure effective task management:
   - [x] Extract remaining helpers (`setConfigItem`, `_getConfig`, `getUserFacingConfig`) into shared config modules
   - [ ] Update type docs to reference new shared modules; add CHANGELOG entry (descriptor extraction entry added; docs pending)
 - [x] P1: TSDoc Hotfix – `src/types/agentConfig.ts`
+
   - [x] Remove malformed code fences and brace placeholders
   - [x] Convert JSDoc-style `@param {Type}` to TSDoc format
   - [x] Trim oversized examples; keep concise symbol-level docs
   - [x] Ensure compile/test gates remain green (follow-up after purity plan)
+
+- [ ] P1: Repo-ops: Changelog data-driven refinements (Phase 1)
+  - [x] Suppress Verification block by default; add `--verify-block` opt-in
+  - [x] Exclude noisy folders from Files Changed via config (docs/ backups/ out/ coverage/)
+  - [x] Add `--files-include` and `--files-exclude` flags (comma-separated prefixes)
+  - [x] Merge flags with config defaults in derivation; normalize paths
+  - [x] Document new flags in `docs/changelog.md` CLI examples section
+  - [x] Add unit tests: include-only and exclude precedence (introduce test seam for git diff)
+  - [x] Refactor: extract git diff + filtering into `bin/repo-ops/git.ts`
+  - [x] Refactor: split `changelog.ts` into `scaffold.ts` | `write.ts` | `verify.ts` with shared types
+  - [x] Add typed GateResults and single command runner helper
+  - [x] Update CLI help text to mention new flags
 
 <!-- END:CURRENT_ACTION_ITEMS -->
 <!-- BEGIN:NEXT_ACTION_ITEMS -->
@@ -146,8 +159,9 @@ Follow these guidelines to ensure effective task management:
   - [ ] Unit tests for task section helpers
   - [ ] Integration test for CLI flows
   - [ ] JSON export with schemaVersion
-  - [ ] Auto verification `--auto-verify` flag
-  - [ ] Docs & README updates
+  - [x] Auto verification `--auto-verify` flag (now default on --write; supports --no-auto-verify)
+  - [x] Docs & README updates (changelog docs section updated)
+  - [x] Add `verify-only` command to refresh latest entry Verification block
 - [ ] P2: CLI: CHANGELOG - UX overhaul (dry-run/apply semantics)
   - [ ] Update `--write` to create a record.
   - [ ] Update so the only way to execute a dry run is with `--validate`.

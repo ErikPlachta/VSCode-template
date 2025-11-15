@@ -6,10 +6,14 @@
 
 # shared/agentConfigDescriptors
 
-## Interfaces
+## References
 
-- [ConfigDescriptor](interfaces/ConfigDescriptor.md)
+### ~~ConfigDescriptor~~
 
-## Functions
+Re-exports [ConfigDescriptor](../config/descriptors/interfaces/ConfigDescriptor.md)
 
-- [createDescriptorMap](functions/createDescriptorMap.md)
+***
+
+### ~~createDescriptorMap~~
+
+Re-exports [createDescriptorMap](../config/descriptors/functions/createDescriptorMap.md)

@@ -6,7 +6,7 @@
 
 # Interface: DatabaseConfig
 
-Defined in: [src/types/agentConfig.ts:379](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L379)
+Defined in: [src/types/agentConfig.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L246)
 
 DatabaseAgent configuration for query behavior, validation, and performance.
 
@@ -39,63 +39,15 @@ const dbCfg: DatabaseConfig = {
 
 > **fieldAliases**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [src/types/agentConfig.ts:380](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L380)
+Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L247)
 
 ***
 
 ### operations
 
-> **operations**: `object`
+> **operations**: [`DatabaseOperationsConfig`](DatabaseOperationsConfig.md)
 
-Defined in: [src/types/agentConfig.ts:406](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L406)
-
-#### aggregation
-
-> **aggregation**: `object`
-
-##### aggregation.enableGroupBy
-
-> **enableGroupBy**: `boolean`
-
-##### aggregation.functions
-
-> **functions**: `string`[]
-
-##### aggregation.maxGroups
-
-> **maxGroups**: `number`
-
-#### filtering
-
-> **filtering**: `object`
-
-##### filtering.caseInsensitiveStrings
-
-> **caseInsensitiveStrings**: `boolean`
-
-##### filtering.enableFuzzyMatching
-
-> **enableFuzzyMatching**: `boolean`
-
-##### filtering.operators
-
-> **operators**: `string`[]
-
-#### joins
-
-> **joins**: `object`
-
-##### joins.autoDiscoverRelationships
-
-> **autoDiscoverRelationships**: `boolean`
-
-##### joins.maxJoinRecords
-
-> **maxJoinRecords**: `number`
-
-##### joins.supportedJoinTypes
-
-> **supportedJoinTypes**: `string`[]
+Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L265)
 
 ***
 
@@ -103,7 +55,7 @@ Defined in: [src/types/agentConfig.ts:406](https://github.com/ErikPlachta/vscode
 
 > **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:381](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L381)
+Defined in: [src/types/agentConfig.ts:248](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L248)
 
 #### caching
 
@@ -125,58 +77,32 @@ Defined in: [src/types/agentConfig.ts:381](https://github.com/ErikPlachta/vscode
 
 > **maxCacheEntries**: `number`
 
-#### limits
+#### limits?
 
-> **limits**: `object`
+> `optional` **limits**: `object`
 
-##### limits.maxJoinDepth
+##### limits.maxJoinDepth?
 
-> **maxJoinDepth**: `number`
+> `optional` **maxJoinDepth**: `number`
 
-##### limits.maxResultSize
+Maximum depth of joins permitted
 
-> **maxResultSize**: `number`
+##### limits.maxResultSize?
 
-##### limits.queryTimeout
+> `optional` **maxResultSize**: `number`
 
-> **queryTimeout**: `number`
+Maximum number of records to return
+
+##### limits.queryTimeout?
+
+> `optional` **queryTimeout**: `number`
+
+Maximum time (ms) allowed for query execution
 
 ***
 
 ### validation
 
-> **validation**: `object`
+> **validation**: [`DatabaseValidationConfig`](DatabaseValidationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:394](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L394)
-
-#### integrityChecks
-
-> **integrityChecks**: `object`
-
-##### integrityChecks.checkMissingReferences
-
-> **checkMissingReferences**: `boolean`
-
-##### integrityChecks.validateRelationships
-
-> **validateRelationships**: `boolean`
-
-##### integrityChecks.warnOnSchemaIssues
-
-> **warnOnSchemaIssues**: `boolean`
-
-#### schemaValidation
-
-> **schemaValidation**: `object`
-
-##### schemaValidation.allowUnknownFields
-
-> **allowUnknownFields**: `boolean`
-
-##### schemaValidation.autoTransformAliases
-
-> **autoTransformAliases**: `boolean`
-
-##### schemaValidation.enableStrictValidation
-
-> **enableStrictValidation**: `boolean`
+Defined in: [src/types/agentConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L264)

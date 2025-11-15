@@ -55,6 +55,13 @@ export interface RepoOpsConfig {
     entryTypes: string[];
     /** IANA timezone for timestamps and day headers, e.g., 'America/New_York'. */
     timeZone: string;
+    /** Defaults for auto-derived Files Changed list. */
+    filesChangedDefaults?: {
+      /** Exclude path prefixes (normalized to forward slashes). */
+      excludePrefixes?: string[];
+      /** Optional include prefixes to narrow scope; if present, only these are kept. */
+      includePrefixes?: string[];
+    };
   };
 }
 
@@ -240,7 +247,21 @@ export const defaultConfig: RepoOpsConfig = {
           { name: "scaffold", description: "Print a logs-only entry template" },
           {
             name: "write",
-            description: "Insert a logs-only entry (with backup)",
+            description:
+              "Insert a logs-only entry (with backup). Flags: --write, --context <text>, --verify-block, --include-files, --files '<text>', --files-include 'p1,p2', --files-exclude 'p1,p2'",
+          },
+          {
+            name: "verify-only [--force]",
+            description:
+              "Append/replace Verification block for the latest entry",
+          },
+          {
+            name: "map [--fast] [--pretty]",
+            description: "Emit changelog JSON map (fast uses prior index)",
+          },
+          {
+            name: "diff [--pretty]",
+            description: "Diff current changelog vs prior index snapshot",
           },
         ],
       },
@@ -265,5 +286,14 @@ export const defaultConfig: RepoOpsConfig = {
       "chore",
       "revert",
     ],
+    filesChangedDefaults: {
+      excludePrefixes: [
+        "docs/",
+        ".repo-ops-backups/",
+        "out/",
+        "coverage/",
+        "node_modules/",
+      ],
+    },
   },
 };

@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult
 
-Defined in: [src/shared/config/agentConfigValidation.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/config/agentConfigValidation.ts#L18)
+Defined in: [src/shared/config/agentConfigValidation.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/agentConfigValidation.ts#L18)
 
 Structured outcome produced by configuration validation routines.
 
@@ -19,7 +19,7 @@ non‑blocking warnings.
 
 > **errors**: [`ValidationError`](ValidationError.md)[]
 
-Defined in: [src/shared/config/agentConfigValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/config/agentConfigValidation.ts#L20)
+Defined in: [src/shared/config/agentConfigValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/agentConfigValidation.ts#L20)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [src/shared/config/agentConfigValidation.ts:20](https://github.com/E
 
 > **isValid**: `boolean`
 
-Defined in: [src/shared/config/agentConfigValidation.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/config/agentConfigValidation.ts#L19)
+Defined in: [src/shared/config/agentConfigValidation.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/agentConfigValidation.ts#L19)
 
 ***
 
@@ -35,4 +35,4 @@ Defined in: [src/shared/config/agentConfigValidation.ts:19](https://github.com/E
 
 > **warnings**: [`ValidationWarning`](ValidationWarning.md)[]
 
-Defined in: [src/shared/config/agentConfigValidation.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/shared/config/agentConfigValidation.ts#L21)
+Defined in: [src/shared/config/agentConfigValidation.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/agentConfigValidation.ts#L21)

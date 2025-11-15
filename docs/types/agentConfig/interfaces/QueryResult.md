@@ -6,7 +6,7 @@
 
 # Interface: QueryResult
 
-Defined in: [src/types/agentConfig.ts:1433](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1433)
+Defined in: [src/types/agentConfig.ts:964](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L964)
 
 Metadata for the result of executing a query.
 
@@ -16,7 +16,7 @@ Metadata for the result of executing a query.
 
 > **cached**: `boolean`
 
-Defined in: [src/types/agentConfig.ts:1437](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1437)
+Defined in: [src/types/agentConfig.ts:968](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L968)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:1437](https://github.com/ErikPlachta/vscod
 
 > **categoryId**: `string`
 
-Defined in: [src/types/agentConfig.ts:1434](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1434)
+Defined in: [src/types/agentConfig.ts:965](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L965)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:1434](https://github.com/ErikPlachta/vscod
 
 > **records**: [`CategoryRecord`](CategoryRecord.md)[]
 
-Defined in: [src/types/agentConfig.ts:1435](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1435)
+Defined in: [src/types/agentConfig.ts:966](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L966)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:1435](https://github.com/ErikPlachta/vscod
 
 > **totalCount**: `number`
 
-Defined in: [src/types/agentConfig.ts:1436](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/33bfd1a9c24e1d43878717d24d385933ad1aba5a/src/types/agentConfig.ts#L1436)
+Defined in: [src/types/agentConfig.ts:967](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L967)
