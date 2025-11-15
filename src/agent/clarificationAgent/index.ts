@@ -10,13 +10,13 @@ import { KnowledgeBase } from "@mcp/knowledgeBase";
 import { renderClarificationPrompt } from "@mcp/prompts";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { ClarificationAgentProfile } from "@mcp/config/agentProfiles";
-import {
-  BaseAgentConfig,
-  type AgentConfigDefinition,
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
+import type {
+  AgentConfigDefinition,
   // ClarificationConfig,
-  type ClarificationAgentInput,
-  type ClarificationResponse,
-  type ConfigDescriptor,
+  ClarificationAgentInput,
+  ClarificationResponse,
+  ConfigDescriptor,
 } from "@internal-types/agentConfig";
 import { createDescriptorMap } from "@shared/config/descriptors";
 import {

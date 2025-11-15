@@ -91,16 +91,17 @@ Follow these guidelines to ensure effective task management:
 
 - [ ] P1: Types Purity Refactor – Extract runtime from `src/types/**`
   - [ ] Inventory runtime code in `src/types/**` (classes, functions)
-  - [ ] Extract `BaseAgentConfig` into `src/shared/config/baseAgentConfig.ts`
-  - [ ] Move helpers (`deepGet`, `deepSet`, `deepDelete`) into shared module
-  - [ ] Update all imports in agents/tools to shared config modules
+  - [x] Extract `BaseAgentConfig` into `src/shared/config/baseAgentConfig.ts`
+  - [x] Move helpers (`deepGet`, `deepSet`, `deepDelete`) into shared module
+  - [x] Update all imports in agents/tools to shared config modules
   - [ ] Add enforcement test: fail on functions inside `src/types/**`
   - [ ] Add unit tests for shared config helpers and BaseAgentConfig
     - [x] Add unit tests for shared config runtime helpers (`src/shared/config/runtime.ts`)
-    - [ ] Add unit tests for `BaseAgentConfig` behaviors
+    - [x] Add unit tests for `BaseAgentConfig` behaviors
   - [ ] Update docs: governance “types-only” section and references
-  - [ ] Run `npm run compile && npm test && npm run prebuild`
+  - [x] Run `npm run compile && npm test && npm run prebuild`
   - [ ] Add CHANGELOG entry with Verification block
+  - [x] Add CHANGELOG entry with Verification block
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
   - [ ] Types: Complete comprehensive TSDoc for remaining configuration types (no placeholders).
     - [ ] Normalize TSDoc in `src/extension/**` (remove JSDoc `{type}` in @param, escape braces, replace `@module`).
@@ -116,11 +117,11 @@ Follow these guidelines to ensure effective task management:
   - [x] Update CHANGELOG with verification block after refactor (successDisplay detail entry added with statuses; lint FAIL noted).
   - [ ] Final pass: run `npm run compile && npm test && npm run prebuild` and capture outputs.
 - [ ] P1: Refactor shared config utilities into `src/shared` (Promoted)
-  - [ ] Extract `BaseAgentConfig` helpers and related utilities into `src/shared/config/`
+  - [x] Extract `BaseAgentConfig` helpers and related utilities into `src/shared/config/`
   - [x] Extract `createDescriptorMap()` into `src/shared/config/descriptors.ts`
   - [x] Update all imports across agents and tools; run `npm run fix:imports` if needed
   - [x] Add unit test for descriptor helper; update existing tests to new import paths
-  - [ ] Extract remaining helpers (`setConfigItem`, `_getConfig`, `getUserFacingConfig`) into shared config modules
+  - [x] Extract remaining helpers (`setConfigItem`, `_getConfig`, `getUserFacingConfig`) into shared config modules
   - [ ] Update type docs to reference new shared modules; add CHANGELOG entry (descriptor extraction entry added; docs pending)
 - [x] P1: TSDoc Hotfix – `src/types/agentConfig.ts`
   - [x] Remove malformed code fences and brace placeholders

@@ -168,6 +168,44 @@ All other changes must be performed via the CLI.
 - Lint: PASS
 - Docs: PASS
 - Health: PASS
+
+#### 2025-11-15 22:05:00 refactor(types/shared): Move BaseAgentConfig to shared; update imports; add tests
+
+**Problem/Context**: Enforce types-only purity under `src/types/**` by removing the `BaseAgentConfig` runtime class from `src/types/agentConfig.ts`. Centralize runtime configuration logic in `src/shared/**` to align with governance and simplify future enforcement tests.
+
+**Changes Made**:
+
+1. Extracted `BaseAgentConfig` to `src/shared/config/baseAgentConfig.ts` with override handling and descriptor helpers.
+1. Updated all agents to import `BaseAgentConfig` from shared and keep type-only imports from `@internal-types/agentConfig`.
+1. Removed the class implementation from `src/types/agentConfig.ts`, keeping it types-only.
+1. Added `tests/shared.config.baseAgentConfig.test.ts` covering path resolution, override precedence, descriptor helpers, and sanitized snapshot.
+1. Ran compile, tests, and prebuild to validate changes.
+
+**Architecture Notes**:
+
+- Preserves agent isolation and data-driven configuration. Types remain in `src/types/**`; runtime resides in `src/shared/**`.
+- Aligns imports to avoid runtime paths through `src/types/**`.
+
+**Files Changed**:
+
+- `src/shared/config/baseAgentConfig.ts` (new)
+- `src/types/agentConfig.ts` (remove runtime class; keep types)
+- `src/agent/*/index.ts` (update `BaseAgentConfig` import to shared)
+- `tests/shared.config.baseAgentConfig.test.ts` (new)
+
+**Testing**:
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (49 passed, 2 skipped)
+- Docs/Health: PASS (`npm run prebuild`)
+
+##### Verification – 2025-11-15 (Refactor)
+
+- Build: PASS
+- Tests: PASS
+- Lint: PASS
+- Docs: PASS
+- Health: PASS
 - Coverage: N/A
 
 #### 2025-11-15 21:10:00 chore: Purge changelog backups, reset cache; integrity cleanup

@@ -10,7 +10,7 @@
 
 import * as fs from "fs";
 import * as path from "path";
-import { BaseAgentConfig } from "@internal-types/agentConfig";
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
 import type {
   AgentConfigDefinition,
   DataLoaderConfig,

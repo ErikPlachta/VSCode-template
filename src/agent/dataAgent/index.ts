@@ -9,20 +9,20 @@
 
 import { createInvocationLogger } from "@mcp/telemetry";
 import { DataAgentProfile } from "@mcp/config/agentProfiles";
-import {
-  BaseAgentConfig,
-  type AgentConfigDefinition,
-  type DataConfig,
-  type CategoryId,
-  type CategoryRecord,
-  type RelationshipDescription,
-  type AnalysisInput,
-  type DataInsight,
-  type ExplorationPlan,
-  type ExplorationStep,
-  type TopicSearchResult,
-  type CrossCategoryConnection,
-  type ConfigDescriptor,
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
+import type {
+  AgentConfigDefinition,
+  DataConfig,
+  CategoryId,
+  CategoryRecord,
+  RelationshipDescription,
+  AnalysisInput,
+  DataInsight,
+  ExplorationPlan,
+  ExplorationStep,
+  TopicSearchResult,
+  CrossCategoryConnection,
+  ConfigDescriptor,
 } from "@internal-types/agentConfig";
 import { createDescriptorMap } from "@shared/config/descriptors";
 // No external validation helpers needed here; BaseAgentConfig-based checks are used

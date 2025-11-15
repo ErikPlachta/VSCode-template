@@ -15,15 +15,15 @@ import {
 } from "@extension/mcpCache";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { DatabaseAgentProfile } from "@mcp/config/agentProfiles";
-import {
-  BaseAgentConfig,
-  type AgentConfigDefinition,
-  type DatabaseConfig,
-  type CategoryId,
-  type CategoryRecord,
-  type DataSource,
-  type QueryOptions,
-  type ConfigDescriptor,
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
+import type {
+  AgentConfigDefinition,
+  DatabaseConfig,
+  CategoryId,
+  CategoryRecord,
+  DataSource,
+  QueryOptions,
+  ConfigDescriptor,
 } from "@internal-types/agentConfig";
 import { createDescriptorMap } from "@shared/config/descriptors";
 import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";

@@ -16,7 +16,7 @@
  * all responses maintain consistent quality and user experience standards.
  */
 
-import { BaseAgentConfig } from "@internal-types/agentConfig";
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
 import type { AgentConfigDefinition } from "@internal-types/agentConfig";
 import { communicationAgentConfig } from "@agent/communicationAgent/agent.config";
 import {

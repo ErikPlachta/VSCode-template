@@ -2,13 +2,13 @@
  * @packageDocumentation Configuration-driven orchestrator implementation
  */
 
-import {
-  BaseAgentConfig,
-  type AgentConfigDefinition,
-  type OrchestrationConfig,
-  type IntentConfig,
-  type ConfigDescriptor,
-  type DataSource,
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
+import type {
+  AgentConfigDefinition,
+  OrchestrationConfig,
+  IntentConfig,
+  ConfigDescriptor,
+  DataSource,
 } from "@internal-types/agentConfig";
 import { createDescriptorMap } from "@shared/config/descriptors";
 import {

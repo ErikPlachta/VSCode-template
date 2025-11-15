@@ -19,10 +19,10 @@ import {
 import { createInvocationLogger } from "@mcp/telemetry";
 import { UserContextAgentProfile } from "@mcp/config/agentProfiles";
 import { userContextAgentConfig } from "@agent/userContextAgent/agent.config";
-import {
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
+import type {
   CategoryId,
   CategoryRecord,
-  BaseAgentConfig,
   AgentConfigDefinition,
 } from "@internal-types/agentConfig";
 import {
