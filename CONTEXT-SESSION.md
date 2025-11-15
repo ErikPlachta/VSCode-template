@@ -47,90 +47,40 @@ Formatting Conventions
 
 ## Current Focus Summary
 
-- Transport verification: HTTP harness in place (initialize + tools/list); stdio harness removed.
-- CI: HTTP transport verifier wired (separate `transport` job runs `npm run test:http:ci`).
-- Validation runtime extraction: Phase 8 audit in progress; Phase 9 coverage next.
-- Stabilization: Dynamic MCP tools registry & orchestrator bridge stable; data‑driven descriptors and formatting isolation maintained.
-- Migration: Cache directory rename & migration COMPLETE; Docs/Health prebuild PASS and CHANGELOG updated.
-- Documentation: CommunicationAgent successDisplay settings page added (config options clarified).
-- CHANGELOG hygiene complete for this session (lists normalized; MD005/MD007 enabled; MD013/MD033 relaxed); shared config runtime tests added.
-- Branch planning is consolidated here; actionable tasks live in `TODO.md`; logs and verification go in `CHANGELOG.md`.
-- New changelog entries added: compile mismatch fix and backups purge/cache reset; verification blocks appended.
-- Key CHANGELOG.md lint issues patched (headings punctuation, emphasis-as-heading, generic type formatting, fence languages).
-- TSDoc hotfix complete for `src/types/agentConfig.ts`; bulk sweep deferred until purity refactor plan executes.
-- Repo-ops: Changelog `write` now auto-verifies by default; added `--no-auto-verify`, `--auto-verify-force`, and `verify-only` for updating latest entry verification.
+- Repo-ops cleanup finalized; pivoting focus to agent design.
+- Primary blocker: DatabaseAgent data source initialization bug.
+- Goal: end-to-end verification run (workflow + health checks).
+- Docs: update migration guide with workflow patterns.
+- Legacy: remove relevant‑data‑manager references post-verification.
+- Gates: compile/test/prebuild PASS at current commit.
+- PR: Active PR #40 (Feat: finalize agent concept).
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
 
 ## Current Focus Detail
 
-### Validation Runtime Extraction (Phased Plan)
+### Agent Design Finalization
 
-Objective: Enforce "types-only" governance by relocating all runtime validation logic out of `src/types/configValidation.ts` (and any peers) into `src/shared/config/agentConfigValidation.ts` with parity tests, then add an automated enforcement test.
+Objective: Resolve the DatabaseAgent initialization blocker and complete end‑to‑end verification so the orchestrator + agents are stable, data‑driven, and compliant with the single JSON‑RPC handler pattern.
 
-Phases:
+Key Constraints
 
-1. Inventory & Tag: Enumerate all runtime exports in `src/types/configValidation.ts` (validators, normalizers). Add inline TODO tags referencing phase numbers (non-invasive).
-2. Parity Test Scaffold: Create focused test file(s) asserting current behaviors (inputs/outputs, error shapes) before migration.
-3. Shared Module Completion: Flesh out `src/shared/config/agentConfigValidation.ts` with copied logic + improved TSDoc; keep legacy file exporting wrappers calling shared implementations.
-4. Single-Agent Import Switch: Point one agent (e.g., `UserContextAgent`) to the shared module; run full verification cycle.
-5. Multi-Agent Switch: Migrate remaining agents/tools; remove transitional wrappers.
-6. Types Folder Enforcement: Add test scanning `src/types/**` for function declarations (excluding type guards returning boolean for type predicates) to fail on runtime logic.
-7. Cleanup & Changelog: Remove obsolete comments/TODO tags; add CHANGELOG entry with Verification block.
+- Agents return typed data only; formatting stays in CommunicationAgent.
+- No hardcoded business values; derive behavior from config/runtime data.
+- Single JSON‑RPC dispatcher reused across transports.
 
-Constraints:
+Immediate Actions
 
-- Zero behavior drift per phase; run `npm run compile && npm test` before progressing.
-- Avoid simultaneous multi-agent import changes (limits blast radius).
-- No hardcoded business values introduced; retain data-driven usage.
+1. Debug and fix DatabaseAgent data source initialization.
+2. Run full workflow + health checks; capture results.
+3. Update migration guide with finalized workflow patterns.
+4. Remove legacy relevant‑data‑manager references.
 
-Risks & Mitigations:
+Upcoming (Next)
 
-- Risk: Hidden side-effect utilities inside types. Mitigation: Inventory step includes AST scan for non-type exports.
-- Risk: Test brittleness due to internal refactor. Mitigation: Parity tests target public surface only.
-- Risk: Enforcement false positives on type guards. Mitigation: Pattern-match `function is*(` returning `value is` type.
-
-Current Status: Phase 7 complete; Phase 8 (Post‑Migration Audit) in progress; Phase 9 (Coverage Review) pending. TODO updated accordingly.
-
-### Recently Completed & Stable
-
-- Category Resolution & Aliases: Natural language category identifiers resolved; errors enumerate `availableCategories`.
-- Dynamic Tools Registry: Live descriptors sourced from category summaries via orchestrator bridge; static array removed.
-- Orchestrator Bridge: Server delegates category describe/search; formatting centralized in `CommunicationAgent`.
-- Governance Overhaul: `.github/copilot-instructions.md` replaced; architecture & TSDoc rules codified.
-
-### Agent Cleanup (Ongoing, Low Priority)
-
-- Orchestrator returns typed data only; `markdown` field deprecated.
-- Registry-derived agent identifiers in validation; no hardcoded agent names.
-- Remaining work: incremental JSDoc refinements & optional success enumeration of categories (config-gated).
-
-### TSDoc Sweep (Snapshot)
-
-- High-value type files annotated (applicationConfig, configValidation, communication.types, workflow.types, userContext.types, configRegistry).
-- Remaining: Minor stragglers; schedule after Phase 3 of extraction to avoid doc churn during migration.
-
-### Next Immediate Actions
-
-1. Finish Phase 8 audit: confirm no hardcoded business values; validate agent isolation across validators/agents.
-2. Start Phase 9: add targeted tests to sustain/improve coverage for shared validators; report metrics.
-3. Execute P1 Purity Refactor plan for `src/types/**` (see below), then resume TSDoc sweep.
-4. Optional: Add `reindex` CLI enhancement (non‑mutating index rebuild) in repo‑ops.
-5. Monitor docs lint and TypeDoc external link warnings; add regression guard as needed.
-6. Plan extraction of remaining config helpers from `src/types/**` to `src/shared/**` (runtime helpers covered with tests).
-7. Address lint by staged TSDoc normalization (post‑purity): focus `src/extension/**`, remaining `src/types/**`.
-
-### Purity Refactor Plan (Priority 1)
-
-- Scope: Ensure `src/types/**` is types-only. Move all runtime logic to `src/shared/**`.
-- Targets:
-  - Extract `BaseAgentConfig` into `src/shared/config/baseAgentConfig.ts`
-  - Move `deepGet/deepSet/deepDelete` and similar helpers into shared config runtime
-  - Consolidate imports across agents/tools to shared modules
-  - Add enforcement test to block functions in `src/types/**`
-  - Update docs and CHANGELOG with verification
-- Verification: `npm run compile && npm test && npm run prebuild`; add coverage deltas for new shared helpers.
+- Types purity refactor for `src/types/**` (enforcement test + docs).
+- Agent cleanup and orchestrator compliance sweep (TSDoc + shared helper extraction).
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

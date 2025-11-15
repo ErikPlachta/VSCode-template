@@ -120,21 +120,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
-#### 2025-11-15 17:16:26 docs: Changelog write smoke test
-
-**Problem/Context**: Create a minimal entry to verify the full inline-args policy applies a record (non-dry-run) and renders as expected.
-
-**Changes Made**:
-
-No functional changes; verification-only log entry.
-
-**Architecture Notes**: Docs-only; no runtime or protocol impact.
-
-**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**: Confirms end-to-end CLI write path is healthy.
-
-
 #### 2025-11-15 17:13:10 docs: Enforce full inline-args policy for changelog writes; update docs
 
 **Problem/Context**: We updated governance to mandate full inline-argument payloads for all changelog writes to ensure consistent, deterministic quoting across Windows Git Bash and CI. This replaces variable- or heredoc-based patterns and clarifies required flags.

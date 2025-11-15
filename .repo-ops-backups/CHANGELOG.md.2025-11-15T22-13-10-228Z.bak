@@ -120,64 +120,19 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
-#### 2025-11-15 17:16:26 docs: Changelog write smoke test
-
-**Problem/Context**: Create a minimal entry to verify the full inline-args policy applies a record (non-dry-run) and renders as expected.
-
-**Changes Made**:
-
-No functional changes; verification-only log entry.
-
-**Architecture Notes**: Docs-only; no runtime or protocol impact.
-
-**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**: Confirms end-to-end CLI write path is healthy.
-
-
-#### 2025-11-15 17:13:10 docs: Enforce full inline-args policy for changelog writes; update docs
-
-**Problem/Context**: We updated governance to mandate full inline-argument payloads for all changelog writes to ensure consistent, deterministic quoting across Windows Git Bash and CI. This replaces variable- or heredoc-based patterns and clarifies required flags.
-
-**Changes Made**:
-
-- CHANGELOG.md — replaced multi-line context patterns with a "Full Payload Requirement" section; added inline example; removed CTX/heredoc patterns
-- .github/copilot-instructions.md — added "Changelog CLI Usage Policy" requiring full inline arguments and forbidding CTX/heredocs
-- Ran compile, tests, and prebuild to verify gates and refresh generated artifacts
-
-**Architecture Notes**:
-
-- Governance: deterministic CLI usage; no hardcoded business values introduced
-- Scope: docs-only; MCP JSON-RPC handlers and agent isolation unchanged
-
-**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**:
-
-- Standardizes future changelog entries and reduces formatting drift
-- Eliminates shell-quoting ambiguity; improves repeatability across local and CI
-
 #### 2025-11-15 17:06:02 docs: Refocus follow-up: complete details and next objectives
 
 **Problem/Context**: We finalized the planning pivot from repo-ops cleanup to agent design. Active work is consolidated into a single Current P1 in `TODO.md`, and `CONTEXT-SESSION.md` now reflects the focus, gates status, and PR context to keep execution aligned with governance.
 
 **Changes Made**:
 
-- Consolidated Current work in TODO.md to one P1 parent (Finalize Agent Design); moved types‑purity/cleanup tasks to Next
-- Updated CONTEXT-SESSION Focus Summary/Detail with agent-design plan, gates PASS note, and active PR reference
-- Verified gates: compile/test/prebuild all PASS; no runtime code changes
+- Consolidated Current work in TODO.md to one P1 parent (Finalize Agent Design); moved types‑purity/cleanup tasks to Next\n- Updated CONTEXT-SESSION Focus Summary/Detail with agent-design plan, gates PASS note, and active PR reference\n- Verified gates: compile/test/prebuild all PASS; no runtime code changes
 
-**Architecture Notes**:
-
-- Guardrails: agent isolation, data-driven behavior; single JSON-RPC handler
-- Planning hygiene: single Current parent item; logs-only changelog entries via CLI
+**Architecture Notes**: - Guardrails: agent isolation, data-driven behavior; single JSON-RPC handler\n- Planning hygiene: single Current parent item; logs-only changelog entries via CLI
 
 **Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
 
-**Impact**:
-
-- Clear next steps focused on DatabaseAgent init fix and E2E verification
-- Aligns tasks and session context with governance; reduces planning noise
+**Impact**: - Clear next steps focused on DatabaseAgent init fix and E2E verification\n- Aligns tasks and session context with governance; reduces planning noise
 
 #### 2025-11-15 16:27:43 refactor: Split changelog CLI into scaffold/write/verify modules; add barrel exports
 

@@ -153,6 +153,12 @@ Writing: Executing commit to apply entry via repo‑ops CLI…
 SUCCESS: Changelog entry applied.
 ```
 
+#### Changelog CLI Usage Policy
+
+- Always create entries via `npm run repo:ops -- changelog write` using a full inline-argument payload: `--type`, `--summary`, `--context`, `--changes`, `--architecture`, `--testing`, `--impact`, and `--write`.
+- Pass multi-line text inline within single quotes; do not use shell variables (e.g., `CTX`) or heredocs for these fields.
+- This guarantees consistent, deterministic quoting and formatting across Windows Git Bash and CI.
+
 ### Formatting & Tone
 
 - Brevity first: Prefer one‑sentence updates; avoid verbose rationales in-line.

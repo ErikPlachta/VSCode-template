@@ -38,53 +38,67 @@ Flow: Plan → Verify → Scaffold → Write → Verify Block → Reconcile.
   - If an incorrect future date is discovered, recreate the entry via CLI with the correct current timestamp or, if recreating is impractical, adjust the heading date/time and verification block date to the actual completion moment.
   - Add a follow-up task in `TODO.md` when correcting timestamps to maintain audit visibility.
 
-### Full Payload Requirement (Authoring Guidance)
+### Multi-line Context (Authoring Guidance)
 
-Always invoke `npm run repo:ops -- changelog write` with the full set of arguments, passing all text inline (no shell variables like `CTX`, no heredocs). This ensures consistent, complete entries with deterministic quoting across environments.
+Use the `--context` flag to supply a fully formatted, multi-line Markdown block for the "Problem/Context" section. Requirements:
 
-Required flags for every entry:
+- Must describe only completed, verified work (no speculative future tasks).
+- Should open with a single overview paragraph, followed by optional headings, lists, and ordered steps.
+- Must avoid ANSI C quoting (`$'..'`) – this shell form does not produce real newlines reliably in Windows/VS Code task environments and is prohibited.
+- Prefer one of the three reliable injection patterns below
 
-- `--type <feat|fix|docs|refactor|test|perf|ci|build|style|chore>`
-- `--summary "<short summary>"`
-- `--context '<multi-line Problem/Context markdown>'` (inline, single-quoted; may span lines)
-- `--changes '<multi-line bullet list>'` (inline)
-- `--architecture '<multi-line notes>'` (inline)
-- `--testing '<concise line: Build/Tests/Docs/Health/Lint>'` (inline)
-- `--impact '<multi-line outcomes>'` (inline)
-- `--write`
+#### Formatting Guidelines
 
-Notes:
+- Overview: Start with a 1–2 sentence summary of the problem or motivation.
+- Headings: Use `##` for major sections (Motivation, Approach, Risks). Avoid `#` which conflicts with entry heading.
+- Lists: Use `-` for bullets; use numeric ordered lists only for sequences of actions taken.
+- Line Length: Keep lines under ~120 characters for clean diffs.
+- Whitespace: Do not add trailing spaces; they will be preserved.
+- Integrity: Do not include a concluding statement that asserts verification (that belongs in the Verification block).
+- Prohibited: ANSI C quoting (`$'..'`) and inline HTML.
 
-- Do not use shell variables (e.g., `CTX`) or heredocs for these fields; supply text inline within single quotes to preserve newlines exactly.
-- Keep lines under ~120 characters where reasonable for clean diffs.
-- Use `-` for bullets; avoid `#` in inline text to prevent confusion with entry headings.
-- Do not include verification assertions inside `--context`; use a Verification block when appropriate.
+#### Quick Validation Snippet
 
-#### Inline full-args example
+You can preview newline fidelity before writing the entry:
 
 ```bash
+node -e "console.log(process.argv.pop())" "$CTX" | sed -n '1,15p'
+```
+
+#### Using --context (quick example)
+
+```bash
+# Compose multi-line context safely (Git Bash / bash)
+read -r -d '' CTX << 'EOF'
+Problem/Context: One–two sentence overview.
+
+Changes Made:
+- Bullet one
+- Bullet two
+
+Testing:
+- Build: PASS
+- Tests: PASS
+
+Impact:
+- Short outcome statement
+EOF
+
+# Apply a changelog entry via repo-ops (example)
 npm run repo:ops -- changelog write \
-  --type docs \
-  --summary "Refocus follow-up: complete details and next objectives" \
-  --context 'We finalized the planning pivot from repo-ops cleanup to agent design. Active work is consolidated into a single Current P1 in `TODO.md`, and `CONTEXT-SESSION.md` now reflects the focus, gates status, and PR context to keep execution aligned with governance.' \
-  --changes '- Consolidated Current work in TODO.md to one P1 parent (Finalize Agent Design); moved types‑purity/cleanup tasks to Next
-- Updated CONTEXT-SESSION Focus Summary/Detail with agent-design plan, gates PASS note, and active PR reference
-- Verified gates: compile/test/prebuild all PASS; no runtime code changes' \
-  --architecture '- Guardrails: agent isolation, data-driven behavior; single JSON-RPC handler
-- Planning hygiene: single Current parent item; logs-only changelog entries via CLI' \
-  --testing 'Build: PASS; Tests: PASS (51/53 suites; 335/337 tests; 2 skipped); Docs: PASS; Health: PASS; Lint: N/A' \
-  --impact '- Clear next steps focused on DatabaseAgent init fix and E2E verification
-- Aligns tasks and session context with governance; reduces planning noise' \
+  --type fix \
+  --summary "Align database & clarification types; resolve compile mismatch" \
+  --context "$CTX" \
   --write
 ```
 
 #### Troubleshooting
 
-- Literal `\n` characters appear in output: Ensure the string is single-quoted and includes real line breaks, not escaped sequences.
-- Headings render as plain text: Ensure inline content does not start with `#` (reserve headings for the entry title only).
-- Backticks or `$` expand unexpectedly: Use single quotes for all multi-line values to prevent shell expansion.
+- Literal `\n` visible in entry: Re-generate using Pattern A or C.
+- Markdown headings rendered as plain text: Ensure no leading spaces before `##`.
+- Unexpected escaping of backticks: Wrap context in single quotes inside heredoc (already shown) to prevent shell expansion.
 
-All entries must be created via the CLI with inline full-argument payloads—no manual editing of Logs content afterward.
+All patterns above inject a multi-line context block in a single CLI invocation—no manual editing afterward.
 
 ### Verification Block Format
 
@@ -120,68 +134,36 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
-#### 2025-11-15 17:16:26 docs: Changelog write smoke test
+#### 2025-11-15 17:03:46 docs: Refocus on agent design; sync TODO/session; gates green
 
-**Problem/Context**: Create a minimal entry to verify the full inline-args policy applies a record (non-dry-run) and renders as expected.
-
-**Changes Made**:
-
-No functional changes; verification-only log entry.
-
-**Architecture Notes**: Docs-only; no runtime or protocol impact.
-
-**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**: Confirms end-to-end CLI write path is healthy.
-
-
-#### 2025-11-15 17:13:10 docs: Enforce full inline-args policy for changelog writes; update docs
-
-**Problem/Context**: We updated governance to mandate full inline-argument payloads for all changelog writes to ensure consistent, deterministic quoting across Windows Git Bash and CI. This replaces variable- or heredoc-based patterns and clarifies required flags.
+**Problem/Context**: Problem/Context:
 
 **Changes Made**:
 
-- CHANGELOG.md — replaced multi-line context patterns with a "Full Payload Requirement" section; added inline example; removed CTX/heredoc patterns
-- .github/copilot-instructions.md — added "Changelog CLI Usage Policy" requiring full inline arguments and forbidding CTX/heredocs
-- Ran compile, tests, and prebuild to verify gates and refresh generated artifacts
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
 
-**Architecture Notes**:
-
-- Governance: deterministic CLI usage; no hardcoded business values introduced
-- Scope: docs-only; MCP JSON-RPC handlers and agent isolation unchanged
+**Architecture Notes**: (patterns/decisions)
 
 **Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
 
-**Impact**:
+**Impact**: (what this enables/fixes)
 
-- Standardizes future changelog entries and reduces formatting drift
-- Eliminates shell-quoting ambiguity; improves repeatability across local and CI
-
-#### 2025-11-15 17:06:02 docs: Refocus follow-up: complete details and next objectives
-
-**Problem/Context**: We finalized the planning pivot from repo-ops cleanup to agent design. Active work is consolidated into a single Current P1 in `TODO.md`, and `CONTEXT-SESSION.md` now reflects the focus, gates status, and PR context to keep execution aligned with governance.
-
-**Changes Made**:
-
-- Consolidated Current work in TODO.md to one P1 parent (Finalize Agent Design); moved types‑purity/cleanup tasks to Next
-- Updated CONTEXT-SESSION Focus Summary/Detail with agent-design plan, gates PASS note, and active PR reference
-- Verified gates: compile/test/prebuild all PASS; no runtime code changes
-
-**Architecture Notes**:
-
-- Guardrails: agent isolation, data-driven behavior; single JSON-RPC handler
-- Planning hygiene: single Current parent item; logs-only changelog entries via CLI
-
-**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**:
-
-- Clear next steps focused on DatabaseAgent init fix and E2E verification
-- Aligns tasks and session context with governance; reduces planning noise
 
 #### 2025-11-15 16:27:43 refactor: Split changelog CLI into scaffold/write/verify modules; add barrel exports
 
 **Problem/Context**: Refactor: split modules (scaffold/write/verify/map/date); add barrel exports in bin/repo-ops/changelog.ts; behavior unchanged; compile and tests pass; updated TODOs to reflect completion.
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**: (what this enables/fixes)
 
 #### 2025-11-15 15:18:40 test: repo-ops: add tests for flags + inline Testing; integrity review
 

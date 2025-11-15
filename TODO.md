@@ -89,19 +89,25 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
+- [ ] P1: Finalize Agent Design & Architecture Integrity
+  - [ ] Debug & fix: DatabaseAgent data source initialization (blocking bug)
+  - [ ] End-to-end verification: run full workflow and health checks
+  - [ ] Documentation: update migration guide with workflow patterns
+  - [ ] Legacy cleanup: remove relevant‑data‑manager references
+  - [ ] Orchestrator compliance sweep: confirm dynamic tools registry + single JSON‑RPC handler invariants
+  - [ ] Stabilization: audit agents for hardcoded business values; keep data‑driven behavior
+
+<!-- END:CURRENT_ACTION_ITEMS -->
+<!-- BEGIN:NEXT_ACTION_ITEMS -->
+
+### Next Action Items
+
 - [ ] P1: Types Purity Refactor – Extract runtime from `src/types/**`
   - [ ] Inventory runtime code in `src/types/**` (classes, functions)
-  - [x] Extract `BaseAgentConfig` into `src/shared/config/baseAgentConfig.ts`
-  - [x] Move helpers (`deepGet`, `deepSet`, `deepDelete`) into shared module
-  - [x] Update all imports in agents/tools to shared config modules
   - [ ] Add enforcement test: fail on functions inside `src/types/**`
   - [ ] Add unit tests for shared config helpers and BaseAgentConfig
-    - [x] Add unit tests for shared config runtime helpers (`src/shared/config/runtime.ts`)
-    - [x] Add unit tests for `BaseAgentConfig` behaviors
   - [ ] Update docs: governance “types-only” section and references
-  - [x] Run `npm run compile && npm test && npm run prebuild`
   - [ ] Add CHANGELOG entry with Verification block
-  - [x] Add CHANGELOG entry with Verification block
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
   - [ ] Types: Complete comprehensive TSDoc for remaining configuration types (no placeholders).
     - [ ] Normalize TSDoc in `src/extension/**` (remove JSDoc `{type}` in @param, escape braces, replace `@module`).
@@ -110,42 +116,14 @@ Follow these guidelines to ensure effective task management:
     - [ ] Re-run `npm run lint` to confirm PASS.
     - [ ] Note: Run this sweep after config helpers extraction to avoid churn.
   - [ ] Extract functions from `src/types/**` into `src/shared/**` (e.g., `setConfigItem`, `createDescriptorMap`, `_getConfig`, `getUserFacingConfig`).
-  - [x] CommunicationAgent: Add conditional enumeration of `availableCategories` on success when helpful (config flag).
   - [ ] ClarificationAgent: Derive examples/capabilities strictly from config/manifest (remove any residual hardcoding).
   - [ ] DatabaseAgent/DataAgent: Audit to confirm zero hardcoded business values; all derived from config/user data.
   - [ ] Add unit tests covering extracted shared helpers.
-  - [x] Update CHANGELOG with verification block after refactor (successDisplay detail entry added with statuses; lint FAIL noted).
   - [ ] Final pass: run `npm run compile && npm test && npm run prebuild` and capture outputs.
-- [ ] P1: Refactor shared config utilities into `src/shared` (Promoted)
-  - [x] Extract `BaseAgentConfig` helpers and related utilities into `src/shared/config/`
-  - [x] Extract `createDescriptorMap()` into `src/shared/config/descriptors.ts`
-  - [x] Update all imports across agents and tools; run `npm run fix:imports` if needed
-  - [x] Add unit test for descriptor helper; update existing tests to new import paths
-  - [x] Extract remaining helpers (`setConfigItem`, `_getConfig`, `getUserFacingConfig`) into shared config modules
-  - [ ] Update type docs to reference new shared modules; add CHANGELOG entry (descriptor extraction entry added; docs pending)
-- [x] P1: TSDoc Hotfix – `src/types/agentConfig.ts`
+- [ ] P1: Refactor shared config utilities into `src/shared` (docs follow-up)
 
-  - [x] Remove malformed code fences and brace placeholders
-  - [x] Convert JSDoc-style `@param {Type}` to TSDoc format
-  - [x] Trim oversized examples; keep concise symbol-level docs
-  - [x] Ensure compile/test gates remain green (follow-up after purity plan)
-
-- [ ] P1: Repo-ops: Changelog data-driven refinements (Phase 1)
-  - [x] Suppress Verification block by default; add `--verify-block` opt-in
-  - [x] Exclude noisy folders from Files Changed via config (docs/ backups/ out/ coverage/)
-  - [x] Add `--files-include` and `--files-exclude` flags (comma-separated prefixes)
-  - [x] Merge flags with config defaults in derivation; normalize paths
-  - [x] Document new flags in `docs/changelog.md` CLI examples section
-  - [x] Add unit tests: include-only and exclude precedence (introduce test seam for git diff)
-  - [x] Refactor: extract git diff + filtering into `bin/repo-ops/git.ts`
-  - [x] Refactor: split `changelog.ts` into `scaffold.ts` | `write.ts` | `verify.ts` with shared types
-  - [x] Add typed GateResults and single command runner helper
-  - [x] Update CLI help text to mention new flags
-
-<!-- END:CURRENT_ACTION_ITEMS -->
-<!-- BEGIN:NEXT_ACTION_ITEMS -->
-
-### Next Action Items
+  - [ ] Update type docs to reference new shared modules
+  - [ ] Add CHANGELOG entry (descriptor extraction docs)
 
 - [ ] P3: REFACTOR: Organize tests to mirror source hierarchy (e.g., tests/src/agent/orchestrator)
   - [ ] Update import paths & adjust Jest config if needed
@@ -202,16 +180,6 @@ Follow these guidelines to ensure effective task management:
 - [ ] P2: DOCS: Add regression test for JSON-RPC page promotion
   - [ ] Test `bin/utils/postprocessDocs.ts` promotes `docs/docs/mcp/jsonRpc/README.md` → `docs/mcp/json-rpc.md`
   - [ ] Guard against path changes in TypeDoc output
-- [ ] P1: Data-Driven Architecture Integrity
-  - [ ] Objective: Complete workflow execution system and finalize architectural cleanup.
-  - [ ] Status: ✅ Phase 4 COMPLETE - Workflow system implemented and integrated
-  - [ ] Current Issue: DatabaseAgent initialization error - data sources not loading properly
-  - [ ] Next Steps:
-    - [x] ✅ Phase 1-4: COMPLETE (Agent isolation, response handling, testing, workflow coordination)
-    - [ ] 🔄 Debug & Fix: DatabaseAgent data source initialization
-    - [ ] 🔄 Phase 5: Documentation – Update migration guide with workflow patterns
-    - [ ] 🔄 Phase 6: Final Verification – End-to-end testing, health check
-    - [ ] 🔄 Phase 7: Legacy Cleanup – Remove relevant-data-manager references
 - [ ] P2: GOV: Add "Core Principles" and "Decision Tree" sections to `.github/copilot-instructions.md`
   - [ ] Review and refine user's draft notes for Core Principles
   - [ ] Validate, restructure, and position both sections at the top
