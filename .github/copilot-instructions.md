@@ -34,6 +34,7 @@ High-level governing directives for working within this repository. These princi
 22. Escalate Ambiguity: If instructions conflict or context is insufficient, halt execution and ask for clarification—do not guess.
 23. Idempotent Operations: Re-running the same classification or generation step should produce stable, predictable output unless inputs changed.
 24. Governance Evolution: Changes to this file must reference Core Principles in the changelog and undergo full verification.
+25. TypeScript Only: All new source code, examples, scripts, verification harnesses, and operational utilities must be authored in TypeScript (`.ts`). JavaScript (`.js`) files may exist only as compiled emit under `out/**` or as temporary legacy artifacts scheduled for upgrade. Prefer migrating any legacy `.js` in `bin/**` to `.ts` before modification.
 
 Fallback: For any uncertainty, restart at [Decision Tree](#decision-tree) Branch 0 (Path Guard) then walk sequentially.
 

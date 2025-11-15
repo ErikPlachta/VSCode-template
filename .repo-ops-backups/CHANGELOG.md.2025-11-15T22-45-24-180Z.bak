@@ -113,49 +113,12 @@ All other changes must be performed via the CLI.
 - Tasks reside in `TODO.md`; session focus lives in `CONTEXT-SESSION.md`.
 - Manual edits limited to Allowed Manual Edits above.
 
-### Lock Handling (Changelog Writes)
-
-- Repo-ops uses a filesystem lock at `out/changelog/changelog.write.lock` to guard concurrent writes.
-- If a changelog write fails with a lock error, first wait a few minutes and retry; most locks are short-lived.
-- If a lock becomes clearly stale (e.g., prior CLI run was interrupted), you may manually delete `out/changelog/changelog.write.lock` and rerun the CLI.
-- A dedicated `repo:ops` flag to clear stale changelog locks is tracked as a TODO; once implemented, prefer that CLI over manual deletion.
-
 <!-- END:COPILOT-INSTRUCTIONS -->
 <!-- CHANGELOG:BEGIN:LOGS -->
 
 ## Logs
 
 ### [2025-11-15]
-
-#### 2025-11-15 18:31:04 test: Dry-run lock check
-
-**Problem/Context**: Dry-run only to verify no changelog.write.lock is created.
-
-**Changes Made**:
-
-- No-op change; validation only
-
-**Architecture Notes**: - N/A
-
-**Testing**: Build: FAIL; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**: - Validate repo-ops dry-run does not create locks
-
-#### 2025-11-15 17:45:24 docs: governance: add TypeScript-only directive
-
-**Problem/Context**: Added Core Principles item 25 establishing mandatory TypeScript for all new source, scripts, examples, and verification harnesses. Addresses prior ambiguity where ad-hoc JS harness was introduced for DatabaseAgent E2E validation.
-
-**Changes Made**:
-
-- Inserted item 25 in .github/copilot-instructions.md
-- Updated TODO.md with new GOV task
-- Replaced JS harness bin/transport/verifyDatabaseSearch.js with bin/transport/verifyDatabaseSearch.ts
-
-**Architecture Notes**: Reinforces existing TypeScript-only orientation; aligns bin/** utilities with src/** purity. Harness remains isolated (no agent imports); server entry invoked via compiled out/src/server/index.js.
-
-**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**: Establishes clear policy preventing future JS drift; improves maintainability and type safety for verification tooling; sets precedent for migrating remaining legacy JS in bin/\*\*.
 
 #### 2025-11-15 17:16:26 docs: Changelog write smoke test
 
@@ -170,6 +133,7 @@ No functional changes; verification-only log entry.
 **Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
 
 **Impact**: Confirms end-to-end CLI write path is healthy.
+
 
 #### 2025-11-15 17:13:10 docs: Enforce full inline-args policy for changelog writes; update docs
 
@@ -536,6 +500,15 @@ tests/repoOps.changelogWrite.flags.test.ts — new; bin/repo-ops/changelog.ts �
 
 - Enables optional, clearer success-path hints listing available categories when configured, improving discoverability without adding unsolicited noise by default.
 
+##### Verification – 2025-11-14 (successDisplay detail entry)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 320 passed, 2 skipped
+- Lint: FAIL (TSDoc/JSDoc violations outstanding – sweep scheduled)
+- Docs: PASS (`npm run prebuild`)
+- Health: PASS (prebuild integrated checks)
+- Coverage: configValidation.ts Stmts 92.30%, Branches 89.15%, Funcs 91.66%, Lines 92.30% (unchanged since Phase 9 uplift)
+
 #### 2025-11-14 19:33:11 docs: Add successDisplay type to CommunicationConfig; abort unsafe BaseAgentConfig extraction
 
 **Problem/Context**: Adds optional successDisplay block (includeAvailableCategories, maxCategoriesInSuccess, availableCategoriesHeader) to CommunicationConfig after reverting a partial BaseAgentConfig extraction attempt to preserve stability. Extraction deferred pending safer staged plan.
@@ -594,6 +567,14 @@ tests/repoOps.changelogWrite.flags.test.ts — new; bin/repo-ops/changelog.ts �
 
 - Clarifies configuration enabling success-path category hints.
 - Reduces need to inspect agent implementation for usage details.
+
+##### Verification – 2025-11-14 (successDisplay docs)
+
+- Build: PASS (`npm run compile`)
+- Tests: PASS (`npm run test`) — 46 passed, 2 skipped
+- Lint: PASS
+- Docs: PASS (`npm run docs`) — 4 warnings, no errors
+- Health: PASS
 
 #### 2025-11-14 19:04:41 test: Add tests: CommunicationAgent success available-categories enumeration (config toggle)
 
@@ -1006,6 +987,13 @@ tests/repoOps.changelogWrite.flags.test.ts — new; bin/repo-ops/changelog.ts �
 
 **Impact**: Documentation is now source-controlled and generated deterministically; prevents accidental loss when `docs/` is cleaned.
 
+##### Verification – 2025-11-14 (Docs migration)
+
+- Build: PASS
+- Tests: PASS
+- Docs: SKIPPED (blocked by tsdoc.json error)
+- Health: PASS
+
 #### 2025-11-14 09:03:42 docs: Clarify Copilot communication protocols (micro-updates, CLI narration, examples)
 
 **Problem/Context**: Added micro-update cadence, 8–12 word preambles, standard 4-step CLI narration, formatting/tone rules, good/bad/improve examples, and revision policy.
@@ -1028,6 +1016,12 @@ tests/repoOps.changelogWrite.flags.test.ts — new; bin/repo-ops/changelog.ts �
 - Coverage: N/A (docs-only)
 
 **Impact**: Clearer, consistent chat updates and CLI narration improve traceability and reduce ambiguity during multi-step tasks.
+
+##### Verification – 2025-11-14 (Communication protocols docs)
+
+- Confirmed new sections render correctly with proper fenced block language.
+- Ran build/test/prebuild; all green.
+- No inline-HTML placeholders remain in this entry.
 
 #### 2025-11-14 08:35:40 refactor: Validation runtime extraction Phase 7 cleanup
 

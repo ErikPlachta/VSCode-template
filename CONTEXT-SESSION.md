@@ -47,40 +47,66 @@ Formatting Conventions
 
 ## Current Focus Summary
 
-- Repo-ops cleanup finalized; pivoting focus to agent design.
-- Primary blocker: DatabaseAgent data source initialization bug.
-- Goal: end-to-end verification run (workflow + health checks).
-- Docs: update migration guide with workflow patterns.
-- Legacy: remove relevant‑data‑manager references post-verification.
-- Gates: compile/test/prebuild PASS at current commit.
-- PR: Active PR #40 (Feat: finalize agent concept).
+- Focus: DatabaseAgent init + E2E verification (db-agent only).
+- Blocker: clarify and harden DatabaseAgent data source initialization.
+- Goal: reliable search via `user-context.searchRecords` over HTTP harness.
+- Tests: align unit tests + harness around shared db init behavior.
+- Docs: capture db-agent init + troubleshooting patterns after verification.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
 
 ## Current Focus Detail
 
-### Agent Design Finalization
+### DatabaseAgent Init & E2E Verification
 
-Objective: Resolve the DatabaseAgent initialization blocker and complete end‑to‑end verification so the orchestrator + agents are stable, data‑driven, and compliant with the single JSON‑RPC handler pattern.
+Objective: Resolve DatabaseAgent data source initialization so `user-context.searchRecords` can reliably query configured categories via HTTP (MCP JSON-RPC), then lock behavior in tests and docs.
 
 Key Constraints
 
-- Agents return typed data only; formatting stays in CommunicationAgent.
+- Agents return typed data only; formatting stays in `CommunicationAgent`.
 - No hardcoded business values; derive behavior from config/runtime data.
 - Single JSON‑RPC dispatcher reused across transports.
+- TypeScript-only harness: `bin/transport/verifyDatabaseSearch.ts` drives HTTP path.
 
-Immediate Actions
+Deep Review Notes
 
-1. Debug and fix DatabaseAgent data source initialization.
-2. Run full workflow + health checks; capture results.
-3. Update migration guide with finalized workflow patterns.
-4. Remove legacy relevant‑data‑manager references.
+- `DatabaseAgent` constructor: merges `databaseAgentConfig` with overrides, builds `dataSources` map from provided `DataSource[]`, stores `cacheDirectory` promise, loads `database` block via `getConfigItem`, then calls `_validateRequiredSections()`.
+- `_validateRequiredSections()`: asserts presence of `database.*` performance, validation, and operations paths via `confirmConfigItems`; failures surface as init errors.
+- Query and helpers: `executeQuery()` uses `dataSources.get(categoryId)`, cache helpers, `filterRecords()`, and operator logic; tests already cover operators, aliases, and cache read/write behavior.
+- E2E harness: `bin/transport/verifyDatabaseSearch.ts` spawns `out/src/server/index.js` with `MCP_HTTP_ENABLED=true` and `VSCODE_TEMPLATE_DATA_ROOT=src/userContext`, then exercises `initialize → tools/list → tools/call(user-context.searchRecords)` with `{ categoryId: "people", filters: { skill: "python" } }`.
 
-Upcoming (Next)
+Immediate Actions (db-agent only)
 
-- Types purity refactor for `src/types/**` (enforcement test + docs).
-- Agent cleanup and orchestrator compliance sweep (TSDoc + shared helper extraction).
+1. Reproduce init behavior
+
+- Use `tests/databaseAgent.test.ts` and `tests/databaseAgent.operators.test.ts` to confirm local construction paths.
+- Run `bin/transport/verifyDatabaseSearch.ts` to observe DatabaseAgent behavior via HTTP (pay attention to missing data sources, config, or cache path issues).
+
+1. Diagnose data source + config wiring
+
+- Verify that `UserContextAgent`-derived `DataSource[]` (ids, names, records, `fieldAliases`) match category ids used by `searchRecords`.
+- Inspect `databaseAgentConfig` and `getConfigItem("database")` to ensure all `_validateRequiredSections()` paths are present for the active config id.
+- Add temporary telemetry/logging around the constructor and `_validateRequiredSections()` to capture failing conditions (ids, config presence, cache directory resolution).
+
+1. Implement targeted fix
+
+- Adjust data source construction or mapping if category ids diverge between config, `UserContextAgent`, and `DatabaseAgent`.
+- Refine `_validateRequiredSections()` expectations or ensure config supplies required `database.*` paths without hardcoding business values.
+- Confirm `cacheDirectory` resolves correctly in both Jest and HTTP harness environments.
+
+1. Extend tests around init behavior
+
+- Add or adjust tests in `tests/databaseAgent.test.ts` (and/or new files) to cover:
+  - Successful init for the config used by `user-context.searchRecords`.
+  - Clear error behavior when data sources or required `database.*` paths are missing.
+- Keep tests aligned with the HTTP harness scenario (people + skill search).
+
+1. Run E2E verification and capture outcomes
+
+- Run `npm run compile && npm test` (and `npm run prebuild` if docs/governance touched).
+- Run `node bin/transport/verifyDatabaseSearch.js` (or the appropriate script entry) and record results.
+- After success, log a `CHANGELOG.md` entry via repo-ops and update `TODO.md` db-agent items to reflect completion.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

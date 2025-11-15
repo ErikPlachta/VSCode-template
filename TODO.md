@@ -183,6 +183,7 @@ Follow these guidelines to ensure effective task management:
 - [ ] P2: GOV: Add "Core Principles" and "Decision Tree" sections to `.github/copilot-instructions.md`
   - [ ] Review and refine user's draft notes for Core Principles
   - [ ] Validate, restructure, and position both sections at the top
+- [ ] P2: GOV: Add TypeScript-only coding directive (Core Principles item 25) and ensure all new harnesses/scripts use `.ts`
 - [ ] P2: GOV: Update all sections to reference Core Principles/Decision Tree (start/end workflow)
   - [ ] Ensure every section has explicit fallback to principles/decision tree
   - [ ] Enforce completion-loop semantics so requests are only done when loop closed

@@ -145,14 +145,17 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
   const block = scaffoldEntry(type, args.summary, args.context, extras);
   const content = await readFileUtf8(repo.changelog);
 
-  const lock = acquireLock(repo.root, "changelog");
+  // Acquire a filesystem lock only for actual write operations.
+  // Dry-run validations must not hold or create locks.
+  const willWrite = args.write ?? false;
+  const lock = willWrite ? acquireLock(repo.root, "changelog") : undefined;
   let notes: string[] = [];
-  if (!lock.acquired) {
+  if (willWrite && lock && !lock.acquired) {
     notes.push(
       "Could not acquire changelog write lock: " + lock.notes.join("; ")
     );
-    return { changed: false, plans: [], dryRun: !(args.write ?? false), notes };
-  } else if (lock.notes.length) {
+    return { changed: false, plans: [], dryRun: true, notes };
+  } else if (lock && lock.notes.length) {
     notes.push(...lock.notes);
   }
 
@@ -163,8 +166,10 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
       "Pre-write validation failed; aborting write: " +
         preValidation.errors.join("; ")
     );
-    releaseLock(lock.lockPath);
-    return { changed: false, plans: [], dryRun: !(args.write ?? false), notes };
+    if (lock) {
+      releaseLock(lock.lockPath);
+    }
+    return { changed: false, plans: [], dryRun: true, notes };
   }
 
   const { next, inserted } = insertEntryIntoChangelog(content, block);
@@ -172,7 +177,7 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
     return {
       changed: false,
       plans: [],
-      dryRun: !(args.write ?? false),
+      dryRun: !willWrite,
       notes: ["Could not locate Logs section markers in CHANGELOG.md."],
     };
   }
@@ -185,7 +190,7 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
     wouldWriteBytes: Buffer.byteLength(next, "utf8"),
   };
 
-  if (!args.write)
+  if (!willWrite)
     return {
       changed: true,
       plans: [plan],
@@ -215,7 +220,9 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
         "Rollback failed: " + (e instanceof Error ? e.message : String(e))
       );
     }
-    releaseLock(lock.lockPath);
+    if (lock) {
+      releaseLock(lock.lockPath);
+    }
     return { changed: false, plans: [plan], dryRun: false, notes };
   }
 
@@ -347,7 +354,9 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
   } catch (e) {
     notes.push("Failed to write changelog index.json: " + (e as Error).message);
   }
-  releaseLock(lock.lockPath);
+  if (lock) {
+    releaseLock(lock.lockPath);
+  }
   return { changed: true, plans: [plan], dryRun: false, notes };
 }
 

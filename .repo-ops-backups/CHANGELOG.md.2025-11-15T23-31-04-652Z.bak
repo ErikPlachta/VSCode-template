@@ -127,20 +127,6 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
-#### 2025-11-15 18:31:04 test: Dry-run lock check
-
-**Problem/Context**: Dry-run only to verify no changelog.write.lock is created.
-
-**Changes Made**:
-
-- No-op change; validation only
-
-**Architecture Notes**: - N/A
-
-**Testing**: Build: FAIL; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
-
-**Impact**: - Validate repo-ops dry-run does not create locks
-
 #### 2025-11-15 17:45:24 docs: governance: add TypeScript-only directive
 
 **Problem/Context**: Added Core Principles item 25 establishing mandatory TypeScript for all new source, scripts, examples, and verification harnesses. Addresses prior ambiguity where ad-hoc JS harness was introduced for DatabaseAgent E2E validation.
