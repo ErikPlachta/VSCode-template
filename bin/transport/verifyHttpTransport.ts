@@ -6,17 +6,17 @@
  Exits 0 on success, 1 on failure.
 */
 
-import { spawn } from "child_process";
+import { spawn, type ChildProcess } from "child_process";
 import http from "http";
 import fs from "fs";
 
-function fail(message, detail) {
+function fail(message: string, detail?: unknown): never {
   console.error("[HTTP-TRANSPORT] FAIL:", message);
   if (detail) console.error(detail);
   process.exit(1);
 }
 
-function postJson(port, payload) {
+function postJson(port: number, payload: unknown): Promise<any> {
   return new Promise((resolve, reject) => {
     const data = Buffer.from(JSON.stringify(payload));
     const req = http.request(
@@ -31,12 +31,12 @@ function postJson(port, payload) {
         },
       },
       (res) => {
-        const chunks = [];
-        res.on("data", (c) => chunks.push(Buffer.from(c)));
+        const chunks: Buffer[] = [];
+        res.on("data", (c: Buffer) => chunks.push(Buffer.from(c)));
         res.on("end", () => {
           try {
             const body = Buffer.concat(chunks).toString("utf8");
-            const json = JSON.parse(body);
+            const json: any = JSON.parse(body);
             resolve(json);
           } catch (e) {
             reject(e);
@@ -66,10 +66,10 @@ async function main() {
     stdio: ["ignore", "ignore", "pipe"],
   });
 
-  let boundPort = null;
+  let boundPort: number | null = null;
   let stderrBuf = "";
   child.stderr.setEncoding("utf8");
-  child.stderr.on("data", (d) => {
+  child.stderr.on("data", (d: string) => {
     const text = String(d);
     stderrBuf += text;
     const m = text.match(/HTTP server listening on (\d+)/);
@@ -94,8 +94,8 @@ async function main() {
   }, 15000);
 }
 
-async function verify(port, child) {
-  const init = await postJson(port, {
+async function verify(port: number, child: ChildProcess): Promise<void> {
+  const init: any = await postJson(port, {
     jsonrpc: "2.0",
     id: 1,
     method: "initialize",
@@ -106,18 +106,18 @@ async function verify(port, child) {
   if (!init.result || !init.result.serverInfo)
     fail("initialize missing result.serverInfo", init);
 
-  const list = await postJson(port, {
+  const list: any = await postJson(port, {
     jsonrpc: "2.0",
     id: 2,
     method: "tools/list",
     params: {},
   });
   if (list.error) fail("tools/list returned error", list.error);
-  const tools = list.result && list.result.tools;
+  const tools: any[] | undefined = list.result && list.result.tools;
   if (!Array.isArray(tools) || tools.length === 0)
     fail("tools/list returned empty tools", list);
 
-  const names = tools.map((t) => t && t.name).filter(Boolean);
+  const names = tools.map((t: any) => t && t.name).filter(Boolean);
   if (names.length === 0) fail("tools/list missing tool names", tools);
 
   try {
