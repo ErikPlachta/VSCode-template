@@ -446,6 +446,9 @@ const main = (): void => {
             const impactIdx = rest.indexOf("--impact");
             const filesIncludeIdx = rest.indexOf("--files-include");
             const filesExcludeIdx = rest.indexOf("--files-exclude");
+            // NOTE: writeFlag controls whether changelog writes are applied or treated as dry-run.
+            // It must reflect only the presence of --write on the CLI and must not
+            // be coupled to any other flags (auto-verify, include-files, etc.).
             const writeFlag = rest.includes("--write");
             const explicitAutoVerify = rest.includes("--auto-verify");
             const noAutoVerify = rest.includes("--no-auto-verify");

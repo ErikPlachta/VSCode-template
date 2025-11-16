@@ -72,6 +72,48 @@ describe("DatabaseAgent", () => {
     return { manager, database, cacheDir };
   }
 
+  it("initializes with all configured data sources", async () => {
+    const { manager, database } = await createAgents();
+
+    const categorySummaries = manager.listCategories();
+    expect(categorySummaries.length).toBeGreaterThan(0);
+
+    for (const summary of categorySummaries as any[]) {
+      // Execute a no-op query per category to ensure it is wired as a data source.
+      await expect(
+        database.executeQuery(summary.id, {})
+      ).resolves.toBeInstanceOf(Array);
+    }
+  });
+
+  it("fails clearly when a required category is not wired as a data source", async () => {
+    const { manager, cacheDir } = await createAgents();
+
+    const allSummaries = manager.listCategories() as any[];
+    const withoutPeople = allSummaries.filter((s) => s.id !== "people");
+
+    const dataSourcesWithoutPeople: DataSource[] = withoutPeople.map(
+      (summary) => {
+        const category = manager.getCategory(summary.id);
+        return {
+          id: category.id,
+          name: category.name,
+          records: category.records,
+          fieldAliases: {},
+        };
+      }
+    );
+
+    const database = new DatabaseAgent(
+      dataSourcesWithoutPeople,
+      Promise.resolve(cacheDir)
+    );
+
+    await expect(
+      database.executeQuery("people", { skill: "python" })
+    ).rejects.toThrow();
+  });
+
   it("filters people by skill and application access", async () => {
     const { database } = await createAgents();
     const results = await database.executeQuery("people", {
