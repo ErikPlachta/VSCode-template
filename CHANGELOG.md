@@ -127,6 +127,42 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
+#### 2025-11-15 22:14:26 docs: Prioritize Types Purity and align session context
+
+**Problem/Context**: Reshuffled TODO and CONTEXT-SESSION so Types Purity Refactor in `src/types/**` is Current P1 and MCP Server & `src/**` Integrity Review is Next P1.
+
+**Changes Made**:
+
+Updated TODO/CONTEXT-SESSION to reflect Types Purity first, integrity review next; no runtime code changes.
+
+**Architecture Notes**:
+
+Governance and planning alignment only; no MCP or extension changes.
+
+**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**:
+
+Records pivot from repo-ops work to src/\*\* integrity review with Types Purity as first concrete step.
+
+#### 2025-11-15 22:07:09 docs: Test write flag minimal
+
+**Problem/Context**: Minimal test to confirm changelog write works with --write.
+
+**Changes Made**:
+
+- Single-line change
+
+**Architecture Notes**:
+
+- None
+
+**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**:
+
+- None
+
 #### 2025-11-15 21:10:22 docs: Clarify repo-ops changelog backups and test cleanup
 
 **Problem/Context**: Unify changelog backups under .repo-ops-backups/changelog-backup and document behavior

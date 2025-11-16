@@ -47,68 +47,120 @@ Formatting Conventions
 
 ## Current Focus Summary
 
-- Focus: repo-ops changelog backups under `.repo-ops-backups/changelog-backup/`.
-- Goal: keep backups unified and predictable, with no stray temp dirs from tests.
-- Scope: changelog write pipeline, backup directory naming, and test cleanup.
-- Status: backups unified, docs updated, Jest cleans up `tests_tmp` in root and backup dir.
+- Focus: types purity refactor in `src/types/**` as the first step of the integrity review.
+- Goal: fully enforce types-only behavior and shared-runtime boundaries before deeper server/agent review.
+- Scope (immediate): `src/types/**`, `src/shared/**` helpers, and associated tests/docs.
+- Scope (next): broader `src/**` integrity review and MCP server checklist already documented below.
+- Status: repo-ops/changelog stabilization merged; TODOs reshuffled so Types Purity is Current P1 and integrity review is the next P1.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
 
 ## Current Focus Detail
 
-### Repo-ops Backups – Unified `changelog-backup` Layout
+### Integrity Review – `src/**` and MCP Server
 
-Objective: Ensure changelog writes use a single backup root (`.repo-ops-backups/changelog-backup/`) with timestamped `.bak` archives and colocated temp files, and that any test-only temp folders are removed after Jest runs.
+Objective: Perform a structured integrity review of the core MCP server and agent infrastructure under `src/**` before further feature work.
 
 Key Constraints
 
-- Agents return typed data only; formatting stays in `CommunicationAgent`.
-- No hardcoded business values; derive behavior from config/runtime data.
-- Single JSON‑RPC dispatcher reused across transports.
-- TypeScript-only harnesses for HTTP transport and verification tooling.
+- Agent isolation: orchestrator coordinates; agents return typed data only; formatting stays in `CommunicationAgent`.
+- Data-driven behavior: no hardcoded business values; derive categories, IDs, and examples from config/runtime data.
+- Single JSON-RPC dispatcher reused across transports; stdio default, HTTP guarded by env.
+- TypeScript-only code for agents, server, and validation harnesses.
 
-Immediate Actions
+Initial Pass Targets (Granular Checklist)
 
-1. Backup layout and naming
+1. Server (`src/server/**`)
 
-- Use `.repo-ops-backups/changelog-backup/` as the unified backup root for changelog writes.
-- Rely on `backupFile` to create timestamped `.bak` archives only (no special rollback filename).
-- Keep the atomic write temp file (`CHANGELOG.next.tmp`) inside the same backup directory.
+- JSON-RPC dispatcher integrity:
+  - Confirm a single dispatcher handles `initialize`, `tools/list`, and `tools/call` for both stdio and HTTP.
+  - Verify error shapes match JSON-RPC 2.0 (codes, messages, `data` usage) and are stable across transports.
+  - Check that unsupported methods and invalid params never leak stack traces or internal details.
+- Transport guards and configuration:
+  - Ensure stdio is the default transport; HTTP only enabled behind `MCP_HTTP_ENABLED`.
+  - Confirm there is no per-transport divergence in logic (only path/wiring differences).
+- Dynamic tools registry:
+  - Verify `getTools` resolves tool descriptors exclusively from orchestrator/config, with no hardcoded arrays or business IDs.
+  - Confirm tools reported in `tools/list` have consistent schemas and names with orchestrator definitions.
+- Logging and failure modes:
+  - Check server logging is structured and not excessively noisy under normal operation.
+  - Confirm catastrophic errors fail gracefully and do not wedge the process.
 
-1. Test-only temp directories
+1. Agents (`src/agent/**`)
 
-- Ensure repo-ops tests that create synthetic changelog files under `tests_tmp` also remove `tests_tmp` from both the repo root and backup root.
-- Keep CHANGELOG/TODO docs and README aligned so users know backups live under `.repo-ops-backups/changelog-backup/` and that temporary test folders are cleaned up.
+- Isolation and responsibilities:
+  - Confirm no agent imports another agent directly; all coordination flows through the orchestrator.
+  - Ensure `CommunicationAgent` is formatting-only, with no hidden data access or config writes.
+  - Verify `ClarificationAgent`, `DatabaseAgent`, `DataAgent`, and `UserContextAgent` consume only typed config/manifest data.
+- Config-driven behavior (no hardcoding):
+  - Audit for hardcoded category IDs, names, or business strings; ensure they all come from configuration or descriptors.
+  - Confirm `ClarificationAgent` examples/capabilities are derived from config/manifest only.
+  - Validate `DatabaseAgent` operators and queries rely on schema and config metadata, not inline business assumptions.
+- Error handling and telemetry:
+  - Verify agents do not throw unhandled errors for expected edge cases (missing categories, malformed records, etc.).
+  - Check telemetry/logging paths for sensitive data and volume; ensure they align with governance.
+- UserContextAgent data roots:
+  - Confirm data-root detection and external override behavior are deterministic, documented, and safe when directories are missing.
+  - Review cache/snapshot behavior so corruption and partial failures are handled via warnings, not crashes.
+
+1. Shared helpers (`src/shared/**`)
+
+- Config and validation modules:
+  - Confirm `shared/config/**` and `shared/validation/**` contain all runtime logic previously extracted from `src/types/**`.
+  - Cross-check descriptor maps, runtime config helpers, and validator implementations for no hardcoded business IDs or category names.
+  - Ensure error reporting and result shapes are consistent and documented.
+- Environment and IDs:
+  - Verify `env.ts` derives names and cache directories consistently and matches docs/README.
+  - Confirm `ids.ts` remains the single source of truth for IDs shared between manifest/config and extension contributions.
+- Analytics and logging utilities:
+  - Audit analytics and workflow logging helpers for respect of configuration toggles.
+  - Ensure safe behavior when telemetry sinks fail or are unavailable.
+  - Check there are no circular dependencies with agents or server.
+
+1. Types (`src/types/**`)
+
+- Types-only enforcement:
+  - Confirm no runtime logic remains in `src/types/**` beyond explicitly allowed patterns.
+  - Ensure `types.purity.test.ts` covers the current set of forbidden patterns and matches shared validation moves.
+- TSDoc and clarity:
+  - Spot-check high-traffic type surfaces (agentConfig, applicationConfig, userContext.types, workflow.types) for clear, accurate TSDoc.
+  - Verify there are no stale references to pre-refactor locations (e.g., validators now in `src/shared/**`).
+
+1. MCP config and docs (`src/mcp/**`, `src/docs/**`)
+
+- Schema and validation:
+  - Confirm `schemaUtils` checks align with the latest category/relationship definitions and errors are actionable.
+  - Ensure knowledge base utilities do not assume specific categories or datasets.
+- Prompts and manifest:
+  - Verify prompt generators use manifest data and do not embed hardcoded business examples.
+  - Check that manifest metadata for each agent is consistent with orchestrator/agent behavior and the dynamic tools registry.
+
+1. Extension integration (`src/extension/**`)
+
+- MCP registration:
+  - Confirm MCP registration logic points to the correct config locations on all platforms (including Insiders/OSS variants).
+  - Ensure registration removal/refresh paths do not leave stale entries.
+- Cache and logs:
+  - Verify extension-level cache behavior matches the hidden cache directory pattern and cannot corrupt user data.
+  - Check that log volume and locations are reasonable for typical VS Code usage.
+
+1. Tests as guardrails (`tests/**`)
+
+- Coverage and gaps:
+  - Map each of the above areas to existing tests (server/orchestrator, agents, shared/config/validation).
+  - Identify critical paths in `src/server/**` or `src/agent/**` that currently lack direct test coverage.
+- Repo-ops and governance:
+  - Use `repoOps.*.test.ts` and `sessionLint` tests to keep governance tooling aligned, while keeping the primary focus on `src/**` integrity.
 
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->
 
-### Notes – TSDoc normalization for examples (2025-11-13 11:55)
+### Notes – Integrity Review Context (2025-11-15)
 
-- Updated `src/types/agentConfig.ts` to move `@example` blocks from member-level to interface-level docblocks for: `DatabaseConfig`, `DataConfig`, `ClarificationConfig`, `RelevantDataManagerConfig` (aligns with TSDoc best practices; improves IntelliSense association).
-- Build verified after changes: `npm run compile` PASS.
-- Planned per-file TSDoc sweep (configuration-centric types first):
-
-  - `src/types/applicationConfig.ts` — add interface-level TSDoc, @remarks, @example; relocate any inline examples
-  - `src/types/configValidation.ts` — document validators with @param/@returns and concise examples
-  - `src/types/configRegistry.ts` — document registry types and usage
-  - `src/types/interfaces.ts` — summaries/examples for shared interfaces
-  - `src/types/communication.types.ts` — document formatting/response types
-  - `src/types/workflow.types.ts` — document workflow models with small example
-  - `src/types/userContext.types.ts` — document user context models
-  - `src/types/index.ts` — add @packageDocumentation and export notes
-
-- Execution rules for the sweep:
-  - Prefer types-as-docs; avoid duplication in `agent.config.ts`
-  - Examples at symbol (interface/type) level; keep member comments concise
-  - Ensure structural completeness: @param/@returns where applicable; add @remarks for nuanced behavior
-
-### Notes – CommunicationAgent examples audit & JSDoc plan (2025-11-13 11:30)
-
-- CommunicationAgent audit: No hardcoded category names found in example queries outside clarification. Clarification path already config-driven via `communication.clarification.groups` using `{{category}}` substitution. Other response formatters (success/error/progress/validation) do not embed example queries.
-- Follow-up UX: Consider optionally showing category-aware tips for `metadataRetrieved` success when `metadata.availableCategories` is present; should be config-gated to avoid unsolicited noise.
-- JSDoc pass focus: Centralize semantics and examples in `src/types/agentConfig.ts` (types-as-docs). Avoid inline duplication in `agent.config.ts`. Added examples for `AgentIdentity`, `IntentConfig`, `TextProcessingConfig`, `ExecutionConfig`, `UserFacingConfig`, `CommunicationConfig`, and `CommunicationClarificationConfig`.
-- Risk & scope: Broader type files can be incrementally annotated later; today’s pass covers primary configuration surfaces used by extension and agents.
+- Branch state: `feat/changelog-repo-ops-stabilization` merged into `develop`; repo-ops changelog semantics and backups stabilized.
+- Current priority has shifted from repo-ops internals to a `src/**` integrity review, with Types Purity refactor in `src/types/**` designated as the first concrete step.
+- The checklist in the Focus Detail section is the authoritative high-level reference for what the integrity review should cover; the Types Purity work burns down the `src/types/**` and shared-runtime pieces first.
+- `TODO.md` has been reshuffled so Types Purity is the Current P1 and the broader MCP Server & `src/**` integrity review is the next P1, preserving the detailed checklist for that phase.
 
 <!-- END:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

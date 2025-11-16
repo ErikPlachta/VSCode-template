@@ -89,6 +89,36 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
+- [ ] P1: Repo-ops CLI Rebuild – Robust, typed, config-driven tooling for TODO/CONTEXT-SESSION/CHANGELOG
+  - [ ] Architecture & design
+    - [ ] Define repo-ops goals, inputs/outputs, and config surface for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md` (including marker awareness and backup expectations).
+    - [ ] Decide on a single CLI entry point and subcommand structure (e.g., `status`, `session`, `todo`, `changelog`) with consistent flag semantics.
+    - [ ] Specify logging, debug modes (e.g., `--debug-args`, verbose flags), and error-handling strategy so failures are observable but safe.
+    - [ ] Normalize process exit codes across commands (0 for success/dry-run, non-zero for validation/IO/parse errors) and document this behavior.
+  - [ ] Core utilities & shared helpers
+    - [ ] Extract shared file IO, backup, and text-processing utilities into typed modules (e.g., `bin/repo-ops/core` or `bin/utils/repoOps`) so reading/writing files, building lists, and backups are fully data-driven and reusable.
+    - [ ] Centralize marker/config awareness (section markers, headings, YAML front-matter) into a config/descriptor file rather than hardcoding in command logic.
+    - [ ] Ensure all runtime logic is strongly typed (TypeScript), with types in `bin` or shared locations matching governance rules.
+  - [ ] Argument parsing & execution model
+    - [ ] Replace manual `rest.indexOf("--flag")` parsing in `bin/repo-ops/index.ts` with a small, robust flag parser that walks argv left-to-right and supports boolean flags like `--write`/`--validate` and value flags like `--context`, `--changes`, etc.
+    - [ ] Ensure `writeFlag` is derived solely from the presence of `--write` (independent of other flags) and that dry-run vs applied behavior is fully decoupled.
+    - [ ] Add optional debug output (e.g., `--debug-args`) to print parsed args, `writeFlag`, and related flags when troubleshooting.
+  - [ ] Changelog management (logs-only, backup-aware)
+    - [ ] Rebuild `changelog write`/`verify` and `changelog map`/index flows to use the new parser and shared backup utilities; keep logs-only policy and backup semantics intact.
+    - [ ] Ensure lock handling is robust and clearly reported (no silent failures); keep `--validate`/dry-run semantics explicit.
+    - [ ] Confirm behavior when `REPO_OPS_CHANGELOG_PATH` is set (synthetic path) is documented and tested.
+  - [ ] TODO management (single source of outstanding work)
+    - [ ] Rebuild TODO commands to add/update tasks, enforce sections (Current/Next/Backlog) and priorities (P1–P3), and respect status markers (✅/⏳/etc.).
+    - [ ] Ensure all edits are marker-aware and keep the `<!-- BEGIN:/END:... -->` structure intact.
+  - [ ] CONTEXT-SESSION management (session hub alignment)
+    - [ ] Rebuild `session rotate`/`session lint` to use shared helpers and config, keeping Focus Summary/Detail synced with `TODO.md` and `CHANGELOG.md` without duplicating tasks or logs.
+    - [ ] Validate lint rules against governance (markers present, sections formatted correctly, links to TODO/CHANGELOG).
+  - [ ] Testing & verification
+    - [ ] Remove or replace existing repo-ops tests as needed; design a fresh test suite (unit + integration) for argument parsing, file operations, and cross-file invariants.
+    - [ ] Add tests around representative long commands (including ones with backticks, `/**`, and multi-word values) to confirm `--write` and other flags are always detected when present.
+    - [ ] Add end-to-end tests that exercise typical flows: add TODO, rotate session, write changelog entry, and verify consistency.
+    - [ ] Add a CHANGELOG entry with Verification block once the rebuilt CLI and tests are in place.
+
 <!-- END:CURRENT_ACTION_ITEMS -->
 <!-- BEGIN:NEXT_ACTION_ITEMS -->
 
@@ -100,6 +130,30 @@ Follow these guidelines to ensure effective task management:
   - [ ] Add unit tests for shared config helpers and BaseAgentConfig
   - [ ] Update docs: governance “types-only” section and references
   - [ ] Add CHANGELOG entry with Verification block
+- [ ] P1: MCP Server & `src/**` Integrity Review (Phase 1)
+  - [ ] Server (`src/server/**`)
+    - [ ] Confirm single JSON-RPC dispatcher handles `initialize`, `tools/list`, and `tools/call` for stdio and HTTP.
+    - [ ] Verify error shapes follow JSON-RPC 2.0 and are consistent across transports.
+    - [ ] Ensure stdio is default transport and HTTP is guarded by `MCP_HTTP_ENABLED`.
+    - [ ] Confirm dynamic tools registry (`getTools`) is driven by orchestrator/config only (no hardcoded tools/IDs).
+    - [ ] Review logging and failure modes so catastrophic errors fail gracefully without wedging the process.
+  - [ ] Orchestrator & Agents (`src/agent/**`)
+    - [ ] Check that no agent imports another agent directly; orchestrator is the sole coordinator.
+    - [ ] Confirm `CommunicationAgent` is formatting-only with no hidden data access or config writes.
+    - [ ] Audit `ClarificationAgent`, `DatabaseAgent`, `DataAgent`, and `UserContextAgent` for config-driven behavior (no hardcoded category IDs/names/business strings).
+    - [ ] Verify `UserContextAgent` data-root detection and external override behavior are deterministic and handle missing directories safely.
+    - [ ] Review agent error handling and telemetry/logging paths for volume, sensitivity, and alignment with governance.
+  - [ ] Shared helpers & Types (`src/shared/**`, `src/types/**`)
+    - [ ] Confirm runtime validation/config helpers live in `src/shared/**` and `src/types/**` remains types-only.
+    - [ ] Re-run `types.purity.test.ts` and adjust if any new patterns need enforcement.
+    - [ ] Spot-check `agentConfig`, `applicationConfig`, `userContext.types`, and `workflow.types` for clear TSDoc and no stale references to pre-refactor locations.
+  - [ ] Extension & MCP config/docs (`src/extension/**`, `src/mcp/**`, `src/docs/**`)
+    - [ ] Reconfirm MCP registration paths for stable vs Insiders/OSS VS Code builds.
+    - [ ] Verify cache behavior and log locations for the extension are consistent with the hidden cache directory pattern.
+    - [ ] Ensure MCP manifest, prompts, and schema utilities remain data-driven and aligned with current category/relationship definitions.
+  - [ ] Tests as guardrails (`tests/**`)
+    - [ ] Map integrity-review items above to existing tests (server/orchestrator, agents, shared/config/validation).
+    - [ ] Identify and list any critical `src/server/**` or `src/agent/**` paths lacking direct test coverage for follow-up tasks.
 - [ ] P2: Agent Cleanup & Orchestrator Compliance (Stabilization)
   - [ ] Types: Complete comprehensive TSDoc for remaining configuration types (no placeholders).
     - [ ] Normalize TSDoc in `src/extension/**` (remove JSDoc `{type}` in @param, escape braces, replace `@module`).
@@ -132,12 +186,6 @@ Follow these guidelines to ensure effective task management:
   - [x] Auto verification `--auto-verify` flag (now default on --write; supports --no-auto-verify)
   - [x] Docs & README updates (changelog docs section updated)
   - [x] Add `verify-only` command to refresh latest entry Verification block
-- [ ] P2: CLI: CHANGELOG - UX overhaul (dry-run/apply semantics)
-  - [ ] Update `--write` to create a record.
-  - [ ] Update so the only way to execute a dry run is with `--validate`.
-  - [ ] Update CLI output to say `VALIDATED` for dry-run and `APPLIED` for apply, with clear plan lines
-  - [ ] Update `bin/repo-ops -- help` text and examples
-  - [ ] Update `CHANGELOG.md` Copilot Instructions (Scaffold vs Write & Verification) to reflect new flags
 - [ ] P2: CLI: CHANGELOG - Provide richer changelog fields
   - [ ] Add `--context-file <path>` to load markdown context from file (heredoc alternative)
   - [ ] Add optional flags to populate sections directly: `--changes`, `--architecture`, `--filesChanged`, `--testing`, `--impact`
@@ -148,19 +196,6 @@ Follow these guidelines to ensure effective task management:
   - [ ] Add unit tests for write/scaffold with new flags (dry-run/apply, context-file, minimal template)
   - [ ] Add integration tests that verify generated markdown has no MD lint errors
   - [ ] Update README/docs and `CHANGELOG.md` instructions with examples for new flags
-- [ ] P2: CLI: CHANGELOG - Backup strategy overhaul
-  - [ ] Implement hash-based backup deduplication to prevent unbounded backup files
-  - [ ] Default to differential backups (store only changes) with flag for full backups (`--full-backup`)
-  - [ ] Add retention policy and pruning for old backups
-  - [ ] Provide integrity check and restore flow (verify chain and rehydrate)
-  - [ ] Add unit/integration tests for backup/restore; update docs and README
-  - [ ] Migration script to consolidate existing backups and remove duplicates
-- [ ] P2: CLI: repo-ops — Add `--remove-lock` to clear stale changelog lock
-  - [ ] Implement `--remove-lock` (or `lock --remove`) to delete `out/changelog/changelog.write.lock` safely
-  - [ ] Guard with TTL + confirmation prompt; support `--force` for CI
-  - [ ] Add unit tests for stale vs active lock scenarios
-  - [ ] Update CLI help/README and `CHANGELOG.md` instructions
-  - [ ] Add docs note warning against use during active writes
 - [ ] P3: EXTENSION: Add TODO management capabilities (consider agent)
   - [ ] Evaluate agent vs direct extension implementation
   - [ ] Define minimal commands & UX
