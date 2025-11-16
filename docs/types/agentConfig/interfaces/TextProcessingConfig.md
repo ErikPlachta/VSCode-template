@@ -1,31 +1,28 @@
----
-title: Text Processing Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / TextProcessingConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / TextProcessingConfig
 
 # Interface: TextProcessingConfig
 
-Defined in: [src/types/agentConfig.ts:28](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L28)
+Defined in: [src/types/agentConfig.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L83)
 
-Text processing configuration
+Text processing configuration for extracting signals and keywords.
+
+## Example
+
+```ts
+const textCfg: TextProcessingConfig = {
+  stopWords: ["the", "a", "an"],
+  minimumKeywordLength: 3,
+  scoringWeights: {
+    signalMatch: 0.6,
+    focusMatch: 0.3,
+    promptStarterMatch: 0.1,
+  },
+};
+```
 
 ## Properties
 
@@ -33,7 +30,7 @@ Text processing configuration
 
 > **minimumKeywordLength**: `number`
 
-Defined in: [src/types/agentConfig.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L30)
+Defined in: [src/types/agentConfig.ts:87](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L87)
 
 ***
 
@@ -41,7 +38,7 @@ Defined in: [src/types/agentConfig.ts:30](https://github.com/ErikPlachta/VSCode-
 
 > **scoringWeights**: `object`
 
-Defined in: [src/types/agentConfig.ts:31](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L31)
+Defined in: [src/types/agentConfig.ts:89](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L89)
 
 #### focusMatch
 
@@ -61,33 +58,4 @@ Defined in: [src/types/agentConfig.ts:31](https://github.com/ErikPlachta/VSCode-
 
 > **stopWords**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:29](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L29)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L85)

@@ -1,11 +1,11 @@
 /**
  * @packageDocumentation Enforced documentation and metadata compliance.
  *
- * All source files must provide comprehensive docblocks per project standards.
+ * All source files must provide comprehensive doc-blocs per project standards.
  */
 
 import process from "node:process";
-import { RepositoryHealthAgent } from "./repositoryHealth";
+import { RepositoryHealthAgent } from "@tools/repositoryHealth";
 
 /**
  * Execute JSON schema validation using the repository health agent.

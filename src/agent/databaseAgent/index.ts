@@ -15,41 +15,23 @@ import {
 } from "@extension/mcpCache";
 import { createInvocationLogger } from "@mcp/telemetry";
 import { DatabaseAgentProfile } from "@mcp/config/agentProfiles";
-import { DatabaseAgentConfig } from "./config";
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
+import type {
+  AgentConfigDefinition,
+  DatabaseConfig,
+  CategoryId,
+  CategoryRecord,
+  DataSource,
+  QueryOptions,
+  ConfigDescriptor,
+} from "@internal-types/agentConfig";
+import { createDescriptorMap } from "@shared/config/descriptors";
+import { databaseAgentConfig } from "@agent/databaseAgent/agent.config";
+
+// Re-export DataSource type for test suites expecting it from this module
+export type { DataSource };
 
 // Generic types that work with any data structure
-/** Identifier for a generic category or data source. */
-export type CategoryId = string;
-
-/** Generic record model allowing arbitrary fields. */
-export interface CategoryRecord {
-  id: string;
-  [key: string]: unknown;
-}
-
-/** Definition for a data source the agent can query. */
-export interface DataSource {
-  id: CategoryId;
-  name: string;
-  records: CategoryRecord[];
-  schema?: unknown;
-  /** Optional field mapping for this data source */
-  fieldAliases?: Record<string, string>;
-}
-
-/** Result metadata returned after executing a query. */
-export interface QueryResult {
-  categoryId: CategoryId;
-  records: CategoryRecord[];
-  totalCount: number;
-  cached: boolean;
-}
-
-/** Optional knobs for query execution behaviour. */
-export interface QueryOptions {
-  useCache?: boolean;
-  cacheKeyPrefix?: string;
-}
 
 /**
  * Generic database agent that can query any structured data without hard-coded assumptions.
@@ -74,43 +56,213 @@ export interface QueryOptions {
  * const results = await agent.executeQuery("employees", { skill: "javascript" });
  * ```
  */
-export class DatabaseAgent {
+export class DatabaseAgent extends BaseAgentConfig {
   private readonly dataSources: Map<CategoryId, DataSource>;
   private readonly cacheDirectory: Promise<string>;
   private readonly telemetry: ReturnType<typeof createInvocationLogger>;
   private readonly profile: typeof DatabaseAgentProfile;
-  private readonly config: DatabaseAgentConfig;
+  // Snapshot of database-specific configuration block for convenience
+  private readonly databaseConfig: DatabaseConfig;
 
-    /**
+  /**
    * Creates a new DatabaseAgent instance.
    *
-   * @param {DataSource[]} dataSources - dataSources parameter.
-   * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
-   * @param {Partial<DatabaseAgentConfig>} _config - _config parameter.
-   * @returns {unknown} - TODO: describe return value.
+   * @param {DataSource[]} dataSources - One or more data sources to query.
+   * @param {Promise<string>} cacheDirectory - Directory where shared cache entries are stored.
+   * @param {Partial<AgentConfigDefinition>} config - Optional overrides for agent behavior.
    */
-constructor(
+  constructor(
     dataSources: DataSource[],
     cacheDirectory: Promise<string>,
-    _config?: Partial<DatabaseAgentConfig>
+    config?: Partial<AgentConfigDefinition>
   ) {
+    // Merge partial overrides with defaults while preserving mandatory identity fields
+    const merged: AgentConfigDefinition = {
+      ...databaseAgentConfig,
+      ...(config || {}),
+      agent: { ...databaseAgentConfig.agent, ...(config?.agent || {}) },
+      $configId: databaseAgentConfig.$configId,
+    } as AgentConfigDefinition;
+    super(merged);
     this.dataSources = new Map(dataSources.map((ds) => [ds.id, ds]));
     this.cacheDirectory = cacheDirectory;
-    this.config = new DatabaseAgentConfig();
     this.profile = DatabaseAgentProfile;
     this.telemetry = createInvocationLogger(this.profile.id);
+    this.databaseConfig =
+      (this.getConfigItem<DatabaseConfig>("database") as DatabaseConfig) ||
+      ({} as DatabaseConfig);
+    this._validateRequiredSections();
   }
 
-    /**
- * Executes a generic query against any data source.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @param {Record<string, unknown>} criteria - criteria parameter.
- * @param {QueryOptions} options - options parameter.
- * @returns {Promise<CategoryRecord[]>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
-async executeQuery(
+  /**
+   * Validate required configuration sections exist down to leaf paths.
+   * Mirrors previous wrapper validation but uses unified BaseAgentConfig access.
+   *
+   * @throws {Error} When any required path is missing.
+   */
+  private _validateRequiredSections(): void {
+    const requiredPaths: readonly string[] = [
+      "database.fieldAliases",
+      "database.performance.caching.enabledByDefault",
+      "database.performance.caching.defaultKeyPrefix",
+      "database.performance.caching.maxCacheEntries",
+      "database.performance.caching.cacheTTL",
+      "database.performance.limits.queryTimeout",
+      "database.performance.limits.maxResultSize",
+      "database.performance.limits.maxJoinDepth",
+      "database.validation.schemaValidation.enableStrictValidation",
+      "database.validation.schemaValidation.allowUnknownFields",
+      "database.validation.schemaValidation.autoTransformAliases",
+      "database.validation.integrityChecks.validateRelationships",
+      "database.validation.integrityChecks.checkMissingReferences",
+      "database.validation.integrityChecks.warnOnSchemaIssues",
+      "database.operations.filtering.operators",
+      "database.operations.filtering.caseInsensitiveStrings",
+      "database.operations.filtering.enableFuzzyMatching",
+      "database.operations.joins.supportedJoinTypes",
+      "database.operations.joins.autoDiscoverRelationships",
+      "database.operations.joins.maxJoinRecords",
+      "database.operations.aggregation.functions",
+      "database.operations.aggregation.enableGroupBy",
+      "database.operations.aggregation.maxGroups",
+    ];
+    const { passed, missing } = this.confirmConfigItems(requiredPaths);
+    if (!passed) {
+      throw new Error(
+        `Database agent config missing required paths: ${missing.join(", ")}`
+      );
+    }
+  }
+
+  /**
+   * Descriptor map for dynamic configuration surfaces.
+   *
+   * @returns {Record<string, ConfigDescriptor>} Descriptor definitions with deep verifyPaths for strict validation.
+   */
+  public getConfigDescriptors(): Record<string, ConfigDescriptor> {
+    return createDescriptorMap([
+      [
+        "fieldAliases",
+        {
+          name: "Field Aliases",
+          path: "database.fieldAliases",
+          type: "Record<string, Record<string,string>>",
+          visibility: "public",
+          verifyPaths: ["database.fieldAliases"],
+        },
+      ],
+      [
+        "caching",
+        {
+          name: "Caching",
+          path: "database.performance.caching",
+          type: "DatabaseConfig['performance']['caching']",
+          visibility: "public",
+          verifyPaths: [
+            "database.performance.caching.enabledByDefault",
+            "database.performance.caching.defaultKeyPrefix",
+            "database.performance.caching.maxCacheEntries",
+            "database.performance.caching.cacheTTL",
+          ],
+        },
+      ],
+      [
+        "limits",
+        {
+          name: "Limits",
+          path: "database.performance.limits",
+          type: "DatabaseConfig['performance']['limits']",
+          visibility: "public",
+          verifyPaths: [
+            "database.performance.limits.queryTimeout",
+            "database.performance.limits.maxResultSize",
+            "database.performance.limits.maxJoinDepth",
+          ],
+        },
+      ],
+      [
+        "schemaValidation",
+        {
+          name: "Schema Validation",
+          path: "database.validation.schemaValidation",
+          type: "DatabaseConfig['validation']['schemaValidation']",
+          visibility: "public",
+          verifyPaths: [
+            "database.validation.schemaValidation.enableStrictValidation",
+            "database.validation.schemaValidation.allowUnknownFields",
+            "database.validation.schemaValidation.autoTransformAliases",
+          ],
+        },
+      ],
+      [
+        "integrityChecks",
+        {
+          name: "Integrity Checks",
+          path: "database.validation.integrityChecks",
+          type: "DatabaseConfig['validation']['integrityChecks']",
+          visibility: "public",
+          verifyPaths: [
+            "database.validation.integrityChecks.validateRelationships",
+            "database.validation.integrityChecks.checkMissingReferences",
+            "database.validation.integrityChecks.warnOnSchemaIssues",
+          ],
+        },
+      ],
+      [
+        "filtering",
+        {
+          name: "Filtering",
+          path: "database.operations.filtering",
+          type: "DatabaseConfig['operations']['filtering']",
+          visibility: "public",
+          verifyPaths: [
+            "database.operations.filtering.operators",
+            "database.operations.filtering.caseInsensitiveStrings",
+            "database.operations.filtering.enableFuzzyMatching",
+          ],
+        },
+      ],
+      [
+        "joins",
+        {
+          name: "Joins",
+          path: "database.operations.joins",
+          type: "DatabaseConfig['operations']['joins']",
+          visibility: "public",
+          verifyPaths: [
+            "database.operations.joins.supportedJoinTypes",
+            "database.operations.joins.autoDiscoverRelationships",
+            "database.operations.joins.maxJoinRecords",
+          ],
+        },
+      ],
+      [
+        "aggregation",
+        {
+          name: "Aggregation",
+          path: "database.operations.aggregation",
+          type: "DatabaseConfig['operations']['aggregation']",
+          visibility: "public",
+          verifyPaths: [
+            "database.operations.aggregation.functions",
+            "database.operations.aggregation.enableGroupBy",
+            "database.operations.aggregation.maxGroups",
+          ],
+        },
+      ],
+    ]);
+  }
+
+  /**
+   * Executes a generic query against any data source.
+   *
+   * @param {CategoryId} categoryId - Identifier of the data source to query.
+   * @param {Record<string, unknown>} criteria - Key-value filters; supports operators like $eq, $in, $regex, etc.
+   * @param {QueryOptions} options - Execution options (cache behavior, key prefix).
+   * @returns {Promise<CategoryRecord[]>} Matching records (possibly retrieved from cache when enabled).
+   * @throws {Error} When the categoryId does not exist.
+   */
+  async executeQuery(
     categoryId: CategoryId,
     criteria: Record<string, unknown> = {},
     options: QueryOptions = {}
@@ -125,7 +277,7 @@ async executeQuery(
         throw new Error(`Data source not found: ${categoryId}`);
       }
 
-      // Try cache first if enabled
+      // Try cache first if enabled. If cached exists, validate staleness by comparing record id sets.
       if (useCache) {
         const cacheKey = this.buildCacheKey(
           categoryId,
@@ -134,17 +286,29 @@ async executeQuery(
         );
         const cached = await this.getCachedResult(cacheKey);
         if (cached) {
-          // Emit telemetry for cache hit
-          await this.telemetry("cacheHit", async () => cached, {
-            categoryId,
-            criteria,
-            cacheKey,
-          });
-          return cached;
+          // Compute current results to detect catalogue changes
+          const current = this.filterRecords(dataSource, criteria);
+          const cachedIds = cached.map((r) => r.id).sort();
+          const currentIds = current.map((r) => r.id).sort();
+          const same =
+            cachedIds.length === currentIds.length &&
+            cachedIds.every((v, i) => v === currentIds[i]);
+          if (same) {
+            // Emit telemetry for cache hit and return cached value
+            await this.telemetry("cacheHit", async () => cached, {
+              categoryId,
+              criteria,
+              cacheKey,
+            });
+            return cached;
+          }
+          // Results changed – refresh cache entry and return fresh results
+          await this.cacheResult(cacheKey, current);
+          return current;
         }
       }
 
-      // Execute the query
+      // Execute the query when no cache available or caching is disabled
       const results = this.filterRecords(dataSource, criteria);
       const duration = Date.now() - startTime;
 
@@ -179,32 +343,32 @@ async executeQuery(
     }
   }
 
-    /**
- * Gets available data sources.
- *
- * @returns {CategoryId[]} - TODO: describe return value.
- */
-getAvailableCategories(): CategoryId[] {
+  /**
+   * Gets available data sources.
+   *
+   * @returns {CategoryId[]} Array of known category identifiers.
+   */
+  getAvailableCategories(): CategoryId[] {
     return Array.from(this.dataSources.keys());
   }
 
-    /**
- * Gets metadata for a specific data source.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {DataSource | undefined} - TODO: describe return value.
- */
-getCategoryInfo(categoryId: CategoryId): DataSource | undefined {
+  /**
+   * Gets metadata for a specific data source.
+   *
+   * @param {CategoryId} categoryId - Category identifier to look up.
+   * @returns {DataSource | undefined} Data source details or undefined when not found.
+   */
+  getCategoryInfo(categoryId: CategoryId): DataSource | undefined {
     return this.dataSources.get(categoryId);
   }
 
-    /**
- * Clears cached results for a specific category.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {Promise<void>} - TODO: describe return value.
- */
-async clearCache(categoryId: CategoryId): Promise<void> {
+  /**
+   * Clears cached results for a specific category.
+   *
+   * @param {CategoryId} categoryId - Category identifier for which to clear cached results.
+   * @returns {Promise<void>} Resolves when deletion attempts complete.
+   */
+  async clearCache(categoryId: CategoryId): Promise<void> {
     const cacheDir = await this.cacheDirectory;
     const pattern = this.buildCacheKey(categoryId, {});
     // Note: This is a simplified implementation - in practice you'd want more sophisticated cache management
@@ -212,14 +376,14 @@ async clearCache(categoryId: CategoryId): Promise<void> {
     await this.telemetry("cacheCleared", async () => true, { categoryId });
   }
 
-    /**
- * Filters records based on generic criteria.
- *
- * @param {DataSource} dataSource - dataSource parameter.
- * @param {Record<string, unknown>} criteria - criteria parameter.
- * @returns {CategoryRecord[]} - TODO: describe return value.
- */
-private filterRecords(
+  /**
+   * Filters records based on generic criteria.
+   *
+   * @param {DataSource} dataSource - Data source to scan.
+   * @param {Record<string, unknown>} criteria - Key-value filters to apply.
+   * @returns {CategoryRecord[]} Records that satisfy all provided criteria.
+   */
+  private filterRecords(
     dataSource: DataSource,
     criteria: Record<string, unknown>
   ): CategoryRecord[] {
@@ -229,7 +393,7 @@ private filterRecords(
 
     const fieldAliases = dataSource.fieldAliases ?? {};
 
-    return dataSource.records.filter((record) => {
+    return dataSource.records.filter((record: CategoryRecord) => {
       return Object.entries(criteria).every(([field, value]) => {
         // Support field aliases for flexible querying
         const actualField = fieldAliases[field] ?? field;
@@ -238,15 +402,15 @@ private filterRecords(
     });
   }
 
-    /**
- * Checks if a record matches specific criteria.
- *
- * @param {CategoryRecord} record - record parameter.
- * @param {string} field - field parameter.
- * @param {unknown} value - value parameter.
- * @returns {boolean} - TODO: describe return value.
- */
-private matchesCriteria(
+  /**
+   * Checks if a record matches specific criteria.
+   *
+   * @param {CategoryRecord} record - Candidate record to test.
+   * @param {string} field - Field to evaluate.
+   * @param {unknown} value - Expected value or operator object.
+   * @returns {boolean} True when the record satisfies the condition.
+   */
+  private matchesCriteria(
     record: CategoryRecord,
     field: string,
     value: unknown
@@ -340,15 +504,15 @@ private matchesCriteria(
     return recordValue === value;
   }
 
-    /**
- * Builds a stable cache key for a query.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @param {Record<string, unknown>} criteria - criteria parameter.
- * @param {string} prefix - prefix parameter.
- * @returns {string} - TODO: describe return value.
- */
-private buildCacheKey(
+  /**
+   * Builds a stable cache key for a query.
+   *
+   * @param {CategoryId} categoryId - Category identifier.
+   * @param {Record<string, unknown>} criteria - Query criteria used to derive a hash.
+   * @param {string} prefix - Optional namespace prefix to avoid collisions.
+   * @returns {string} Stable cache key.
+   */
+  private buildCacheKey(
     categoryId: CategoryId,
     criteria: Record<string, unknown>,
     prefix?: string
@@ -372,13 +536,13 @@ private buildCacheKey(
     return parts.join(".");
   }
 
-    /**
- * Retrieves cached query result.
- *
- * @param {string} cacheKey - cacheKey parameter.
- * @returns {Promise<CategoryRecord[] | null>} - TODO: describe return value.
- */
-private async getCachedResult(
+  /**
+   * Retrieves cached query result.
+   *
+   * @param {string} cacheKey - Cache key previously generated via {@link buildCacheKey}.
+   * @returns {Promise<CategoryRecord[] | null>} Cached records or null when not found.
+   */
+  private async getCachedResult(
     cacheKey: string
   ): Promise<CategoryRecord[] | null> {
     try {
@@ -393,25 +557,29 @@ private async getCachedResult(
     }
   }
 
-    /**
- * Stores query result in cache.
- *
- * @param {string} cacheKey - cacheKey parameter.
- * @param {CategoryRecord[]} results - results parameter.
- * @returns {Promise<void>} - TODO: describe return value.
- */
-private async cacheResult(
+  /**
+   * Stores query result in cache.
+   *
+   * @param {string} cacheKey - Cache key where the results will be stored.
+   * @param {CategoryRecord[]} results - Records to persist.
+   * @returns {Promise<void>} Resolves when the cache entry is written (errors are swallowed and logged).
+   */
+  private async cacheResult(
     cacheKey: string,
     results: CategoryRecord[]
   ): Promise<void> {
     try {
       const cacheDir = await this.cacheDirectory;
+      const recordHash = crypto
+        .createHash("md5")
+        .update(JSON.stringify(results.map((r) => r.id).sort()))
+        .digest("hex");
       const entry: SharedCacheEntry<CategoryRecord[]> = {
         key: cacheKey,
         toolName: this.profile.id,
         timestamp: new Date().toISOString(),
         value: results,
-        metadata: { version: "1.0" },
+        metadata: { version: "1.0", recordHash },
       };
       await storeSharedCacheEntry(cacheDir, entry);
     } catch (error) {
@@ -422,19 +590,18 @@ private async cacheResult(
     }
   }
 }
-
 /**
  * Creates a new DatabaseAgent instance with the provided data sources.
  *
  * @param {DataSource[]} dataSources - dataSources parameter.
  * @param {Promise<string>} cacheDirectory - cacheDirectory parameter.
- * @param {Partial<DatabaseAgentConfig>} config - config parameter.
- * @returns {DatabaseAgent} - TODO: describe return value.
+ * @param {Partial<AgentConfigDefinition>} config - config parameter.
+ * @returns {DatabaseAgent} A configured database agent.
  */
 export function createDatabaseAgent(
   dataSources: DataSource[],
   cacheDirectory: Promise<string>,
-  config?: Partial<DatabaseAgentConfig>
+  config?: Partial<AgentConfigDefinition>
 ): DatabaseAgent {
   return new DatabaseAgent(dataSources, cacheDirectory, config);
 }

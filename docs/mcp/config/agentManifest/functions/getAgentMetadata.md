@@ -1,31 +1,14 @@
----
-title: Get Agent Metadata
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/agentManifest](../README.md) / getAgentMetadata
+[UserContext-mcp-extension](../../../../modules.md) / [mcp/config/agentManifest](../README.md) / getAgentMetadata
 
 # Function: getAgentMetadata()
 
 > **getAgentMetadata**(`agentId`): [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)
 
-Defined in: [src/mcp/config/agentManifest.ts:61](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/agentManifest.ts#L61)
+Defined in: [src/mcp/config/agentManifest.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/agentManifest.ts#L71)
 
 Retrieve manifest metadata for a given agent identifier.
 
@@ -35,35 +18,14 @@ Retrieve manifest metadata for a given agent identifier.
 
 [`AgentIdentifier`](../../unifiedAgentConfig/type-aliases/AgentIdentifier.md)
 
+agentId parameter.
+
 ## Returns
 
 [`AgentCapabilityMetadata`](../interfaces/AgentCapabilityMetadata.md)
 
+- TODO: describe return value.
 
-## Summary
+## Throws
 
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- May throw an error.

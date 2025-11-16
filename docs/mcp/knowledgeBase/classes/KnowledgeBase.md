@@ -1,29 +1,12 @@
----
-title: Knowledge Base
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeBase
+[UserContext-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeBase
 
 # Class: KnowledgeBase
 
-Defined in: [src/mcp/knowledgeBase.ts:19](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L19)
+Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L30)
 
 ## Constructors
 
@@ -41,13 +24,17 @@ Defined in: [src/mcp/knowledgeBase.ts:19](https://github.com/ErikPlachta/VSCode-
 
 > **indexDocument**(`document`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L22)
+Defined in: [src/mcp/knowledgeBase.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L38)
+
+indexDocument function.
 
 #### Parameters
 
 ##### document
 
 [`KnowledgeDocument`](../interfaces/KnowledgeDocument.md)
+
+document parameter.
 
 #### Returns
 
@@ -59,13 +46,17 @@ Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/VSCode-
 
 > **indexDocuments**(`documents`): `void`
 
-Defined in: [src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L26)
+Defined in: [src/mcp/knowledgeBase.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L47)
+
+indexDocuments function.
 
 #### Parameters
 
 ##### documents
 
 [`KnowledgeDocument`](../interfaces/KnowledgeDocument.md)[]
+
+documents parameter.
 
 #### Returns
 
@@ -75,9 +66,14 @@ Defined in: [src/mcp/knowledgeBase.ts:26](https://github.com/ErikPlachta/VSCode-
 
 ### query()
 
-> **query**(`term`, `limit`): [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
+> **query**(`term`, `limit?`): [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L30)
+Defined in: [src/mcp/knowledgeBase.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L61)
+
+Performs a keyword-based query over indexed knowledge documents.
+Extracts simple word tokens (>=3 chars, alphanumeric or hyphen) from the
+search term, scores each document by keyword presence, builds a summary
+snippet, then returns the highest scoring hits.
 
 #### Parameters
 
@@ -85,39 +81,16 @@ Defined in: [src/mcp/knowledgeBase.ts:30](https://github.com/ErikPlachta/VSCode-
 
 `string`
 
-##### limit
+Raw search term entered by the user.
+
+##### limit?
 
 `number` = `3`
+
+Maximum number of results to return after sorting by descending score.
 
 #### Returns
 
 [`KnowledgeHit`](../interfaces/KnowledgeHit.md)[]
 
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- Ranked list of matching documents including id, title, summary snippet and score.

@@ -1,29 +1,12 @@
----
-title: Performance Monitor
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
+[UserContext-mcp-extension](../../../modules.md) / [shared/analyticsIntegration](../README.md) / PerformanceMonitor
 
 # Class: PerformanceMonitor
 
-Defined in: [src/shared/analyticsIntegration.ts:144](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L144)
+Defined in: [src/shared/analyticsIntegration.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/analyticsIntegration.ts#L165)
 
 Performance monitoring utility for critical operations.
 
@@ -33,7 +16,7 @@ Performance monitoring utility for critical operations.
 
 > **new PerformanceMonitor**(): `PerformanceMonitor`
 
-Defined in: [src/shared/analyticsIntegration.ts:150](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L150)
+Defined in: [src/shared/analyticsIntegration.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/analyticsIntegration.ts#L173)
 
 Creates a new performance monitor instance.
 
@@ -41,15 +24,17 @@ Creates a new performance monitor instance.
 
 `PerformanceMonitor`
 
+- TODO: describe return value.
+
 ## Methods
 
 ### monitorDatabaseQuery()
 
 > **monitorDatabaseQuery**\<`T`\>(`queryType`, `query`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:162](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L162)
+Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/analyticsIntegration.ts#L188)
 
-Monitors the performance of a database query operation.
+Monitor a database query operation and record performance metadata.
 
 #### Type Parameters
 
@@ -63,25 +48,35 @@ Monitors the performance of a database query operation.
 
 `string`
 
+Logical query classification (e.g. 'findRecords').
+
 ##### query
 
 () => `Promise`\<`T`\>
 
+Async function performing the query.
+
 ##### options
+
+Optional query context.
 
 ###### category?
 
 `string`
 
+Target category identifier.
+
 ###### filters?
 
-`Record`\<`string`, `any`\>
+`Record`\<`string`, `unknown`\>
+
+Applied filter map.
 
 #### Returns
 
 `Promise`\<`T`\>
 
-- Promise resolving to query result.
+Result returned by the query function.
 
 ***
 
@@ -89,9 +84,9 @@ Monitors the performance of a database query operation.
 
 > **monitorDataProcessing**\<`T`\>(`operationType`, `processor`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:188](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L188)
+Defined in: [src/shared/analyticsIntegration.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/analyticsIntegration.ts#L217)
 
-Monitors data processing operations.
+Monitor a data processing operation and record performance metadata.
 
 #### Type Parameters
 
@@ -105,25 +100,35 @@ Monitors data processing operations.
 
 `string`
 
+Semantic operation type (e.g. 'aggregate').
+
 ##### processor
 
 () => `Promise`\<`T`\>
 
+Async processing function.
+
 ##### options
+
+Optional processing context.
 
 ###### category?
 
 `string`
 
+Category identifier involved.
+
 ###### inputSize?
 
 `number`
+
+Number of items processed.
 
 #### Returns
 
 `Promise`\<`T`\>
 
-- Promise resolving to processing result.
+Result of the processing function.
 
 ***
 
@@ -131,9 +136,9 @@ Monitors data processing operations.
 
 > **monitorOrchestration**\<`T`\>(`decision`, `orchestration`, `options`): `Promise`\<`T`\>
 
-Defined in: [src/shared/analyticsIntegration.ts:219](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/analyticsIntegration.ts#L219)
+Defined in: [src/shared/analyticsIntegration.ts:251](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/analyticsIntegration.ts#L251)
 
-Monitors orchestration decisions and routing.
+Monitor an orchestration decision and record routing metadata.
 
 #### Type Parameters
 
@@ -147,51 +152,32 @@ Monitors orchestration decisions and routing.
 
 `string`
 
+Decision identifier (e.g. 'routeIntent').
+
 ##### orchestration
 
 () => `Promise`\<`T`\>
 
+Async function performing orchestration.
+
 ##### options
+
+Optional orchestration context.
 
 ###### agentCount?
 
 `number`
 
+Number of candidate agents considered.
+
 ###### intent?
 
 `string`
+
+Classified intent name.
 
 #### Returns
 
 `Promise`\<`T`\>
 
-- Promise resolving to orchestration result.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Result returned by the orchestration function.

@@ -1,86 +1,145 @@
 # My Business MCP Extension
 
-## Features
+Customizable MCP server experience inside VS Code Copilot Chat — with User Context as the core feature.
 
-- Dynamically discovers all MCP tools from your server with enriched metadata and schema validation.
-- Registers `/commands`, `@mentions`, and the **My Business MCP: Invoke Tool** automation command in VS Code.
-- Maintains conversational context for multi-turn orchestration, automatically persisting a rolling history per tool.
-- Renders MCP responses as rich markdown within Copilot Chat, including structured JSON when appropriate.
-- Captures invocation logs inside a local `.mcp-cache` directory to keep diagnostics client-side.
-- Ships with a modular mock orchestration sandbox (`src/agents/`) featuring dedicated data, database, and relevant-data manager agents backed by rich local dummy datasets.
-- Persists cross-tool shared cache artifacts so generated context can be re-used between agents without remaining in memory.
-- Fully unit-tested, documented, and CI-integrated.
-- Enforces repository-wide documentation standards through a modular health check agent and GitHub Actions pipeline.
+## Overview
 
-## Architecture overview
+This extension embeds (or connects to) an MCP server and a small set of agents (orchestrator, data, database, clarification, and user-context). It focuses on:
 
-| Component           | Location         | Purpose                                                                                                                |
-| ------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **VSIX extension**  | `src/extension/` | Ships the VS Code client that registers commands, connects to an MCP endpoint, and renders responses in Copilot Chat.  |
-| **Agents**          | `src/agents/`    | Provide orchestration logic and reusable domain behaviours that power tool responses regardless of the transport.      |
-| **Mock MCP server** | `src/server/`    | Lightweight JSON-RPC server that exposes the sample datasets so the extension has a local endpoint during development. |
+- User Context: local and global domain knowledge that the agents use to answer questions and take actions.
+- Customization: settings via VS Code Settings UI first, and via chat as a secondary path.
+- Quality gates: 100% test coverage, strict JSDoc, generated docs.
+- Migration safety: backwards-compatible aliases when we rename concepts (e.g., businessData → userContext).
 
-The extension always communicates with an MCP server over HTTP(S). Installing the VSIX does **not** embed the backend logic; you must point the extension to a running MCP endpoint (for example the mock server included in this repository).
+## Installation and first-run
 
-## Run the local MCP server
+1. Install the VSIX (or from Marketplace when available).
 
-```bash
-npm run server
-```
+2. Open Settings → Extensions → “My Business MCP Extension” and review:
 
-This compiles the TypeScript sources and starts a JSON-RPC server on `http://localhost:3030`. Configure the VS Code settings `mybusinessMCP.serverUrl` to that URL (leave `mybusinessMCP.token` empty unless you add authentication). The extension will then discover the mock tools via `listTools` and send `invokeTool` calls to the same endpoint.
+- Server URL (leave blank to use the embedded server)
+- Token (optional bearer token)
+- Auto-register (adds/removes an entry in your global `mcp.json`)
 
-## Compliance and Documentation Tooling
+3. First-run setup (performed automatically):
 
-The repository includes a **Repository Health Agent** (`src/tools/repositoryHealth.ts`) that coordinates linting, schema validation, and documentation audits. Its behaviour is driven by the typed application config [`src/config/application.config.ts`](src/config/application.config.ts) with a temporary fallback to legacy `src/mcp.config.json` during the migration period. Supporting JSON Schemas live under [`src/schemas/`](src/schemas/).
+- Creates a hidden cache directory (e.g., `.usercontext-mcp-extension`) in two places:
+  - Workspace-local: `<your workspace>/.usercontext-mcp-extension`
+  - Global: `%USERPROFILE%/.vscode/extensions/.usercontext-mcp-extension` (Windows example: `C:\Users\plach\.vscode\extensions\.usercontext-mcp-extension`)
+- Processes your User Context datasets and builds an index (catalog) used by the agents.
+- Starts the embedded MCP server (if no external Server URL is configured) and registers the chat participant `@userContext`.
 
-- `npm run lint` ensures every TypeScript file includes exhaustive docblocks, examples, and error documentation.
-- `npm run lint:json` validates dataset records, relationships, and category metadata against centrally managed JSON Schemas.
-- `npm run lint:docs` audits Markdown content for mandatory front matter and hierarchical sections.
-- `npm run health:report` executes the full suite and writes an aggregated report to [`docs/reports/health-report.md`](docs/reports/health-report.md).
+4. Try it:
 
-Refer to [`docs/build-pipeline.md`](docs/build-pipeline.md) for pipeline details and [`docs/agents/repository-health-agent.md`](docs/agents/repository-health-agent.md) for agent behaviour.
+- In Copilot Chat, type `@UserContext` and ask a question.
+- Or run the command palette action: “My Business MCP: Invoke Tool”.
 
-## Commands
+## Core concepts
 
-- `/getBusinessMetric`
-- `@listProjects`
-- Command Palette → **My Business MCP: Invoke Tool**
+- Orchestrator: classifies intent and routes to the right agent(s). Falls back to Clarification when requests are vague.
+- User Context (primary feature): structured, user-specific domain data. Can be global or workspace-local.
+- Data / Database Agents: query records, analyze relationships, and generate insights or exploration plans.
+- Clarification Agent: asks for missing details when a request is ambiguous or incomplete.
 
-See [`docs/orchestration.md`](docs/orchestration.md) for a deep dive into the orchestration lifecycle, cache layout, and extension architecture.
+## Configuration model (source of truth)
 
-## Scripts
+All configuration now originates in TypeScript for transparency, version control, and type safety:
 
-```bash
-npm run compile     # build TypeScript
-npm test            # run Jest tests
-npm run docs        # generate Typedoc markdown docs
-npm run lint        # enforce TypeScript documentation coverage
-npm run lint:json   # validate dataset schemas
-npm run lint:docs   # enforce Markdown metadata rules
-npm run health:report # execute the full repository health check and write reports
-npm run package     # build VSIX package
-```
+- Application configuration: `src/config/application.config.ts`
+- Agent definitions & profiles: `src/mcp/config/unifiedAgentConfig.ts`
+- Build‑generated JSON (for external tools expecting a flat file): `out/mcp.config.json` (NOT committed)
 
-## Continuous Integration
+The legacy `src/mcp.config.json` will be fully removed after one migration cycle. During the transition:
 
-- `.github/workflows/test.yml` → validates build & tests.
-- `.github/workflows/docs.yml` → publishes typedoc output to GitHub Pages.
-- `.github/workflows/compliance.yml` → runs linting, schema validation, markdown audits, and generates the compliance report on every push and pull request.
+- The generator script `src/tools/generateMcpConfig.ts` materializes `out/mcp.config.json` during `npm run prebuild`.
+- Consumers and internal loaders already default to the generated JSON or the TS sources directly.
+- If you previously imported `src/mcp.config.json`, switch to the TS source modules or read the generated file after build.
+
+Template processing, test fixtures, and docs generation all use the TS sources as the single source of truth to prevent drift.
+
+### Configuration & IntelliSense
+
+- Types-as-docs: Core configuration types live in type definitions, for example `src/types/agentConfig.ts`, and will include rich JSDoc (purpose, defaults, and examples) to power IntelliSense across the repo and prevent duplication and drift.
+- Agent configs: Keep inline comments in `agent.config.ts` minimal; rely on type JSDoc for canonical docs to avoid duplication and drift.
+- CommunicationAgent clarification: The `communication.clarification` block drives all clarification copy (headers, templates, limits). Avoid hardcoded business values in code; update config instead.
+- Available categories: When a caller includes `metadata.availableCategories` in a response, `CommunicationAgent` appends an “Available Categories” section (markdown/plaintext) using the configured header.
+
+## Settings: UI first, chat second
+
+You can configure the extension in two ways:
+
+1. VS Code Settings UI (preferred): “My Business MCP Extension”
+
+   - Server URL, Token, Auto-register, Port, etc.
+   - Future: agent-level knobs (timeouts, keywords, priorities) exposed in organized sections with help links.
+
+2. Chat commands (secondary):
+   - Planned commands to list, get, and set settings with validation and safe fallback.
+
+Settings validation will prevent invalid values from taking effect; invalid overrides will be rejected with a helpful warning.
+
+## User Context: global and local
+
+User Context now replaces the legacy “Relevant Data Manager” terminology. Backwards‑compatible aliases (e.g. agent id `relevant-data-manager` alongside `user-context`) remain for one release cycle and then will emit warnings before removal.
+
+- Global context cache: `%USERPROFILE%/.vscode/extensions/<extensionName>/.usercontext-mcp-extension`
+- Local context cache: `<workspace>/.usercontext-mcp-extension`
+- The indexing process builds:
+  - Category snapshots (structure/record counts)
+  - A consolidated catalog (schemas, relationships, primary keys)
+  - Validation reports (schema + relationship integrity)
+
+You can evolve User Context by editing the folders under `src/userContext/` (applications, departments, people, companyPolicies, companyResources). Placeholders have been fully replaced with canonical IDs for stability.
+
+## Development
+
+Requirements:
+
+- Node 18+
+- VS Code 1.95+
+
+Useful scripts (all run through a deterministic prebuild):
+
+- Prebuild (config + JSON generation + templates): `npm run prebuild`
+- Build: `npm run compile`
+- Test (100% coverage target, templates preprocessed): `npm test`
+- Lint (strict JSDoc, zero warnings policy): `npm run lint`
+- Docs (TypeDoc → markdown + post‑processing + health report): `npm run docs`
+
+Quality gates (must all PASS before merge):
+
+1. Build (TypeScript compile) – no errors.
+2. Tests – 100% line/branch/function coverage; explicit remediation plan required for any temporary dip.
+3. Lint – zero errors/warnings with strict JSDoc (no placeholder @returns, no undocumented public APIs).
+4. Docs – regenerated, no manual edits to generated markdown, no orphan pages.
+5. Health – repository governance checks (naming, front matter, schema alignment) all pass.
+6. Config drift – generated `out/mcp.config.json` matches TS sources (checked implicitly by tests).
+
+## Troubleshooting
+
+| Issue                               | Check                                               | Resolution                                                                              |
+| ----------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Embedded server not reachable       | Port conflict / `mcp.json` registration             | Change port in Settings or disable auto‑register and retry                              |
+| Missing User Context data           | Folder names / canonical IDs in `src/userContext/*` | Ensure category `id` fields are canonical (e.g. `applications`, not placeholder tokens) |
+| Template placeholders still visible | Prebuild execution                                  | Run `npm run prebuild` or `npm test` (auto‑runs templates)                              |
+| Generated config absent             | Build directory contents                            | Run `npm run mcp:gen` (invokes generator)                                               |
+| Coverage below 100%                 | Jest coverage summary                               | Add tests for uncovered branches then re‑run `npm test`                                 |
+| Lint failures (JSDoc)               | ESLint output                                       | Replace placeholder text, add missing tags, ensure param descriptions                   |
+
+More diagnostics: `docs/template-variables.md` (resolved template values), shared cache contents under `.mcp-cache` for snapshot & catalog verification.
+
+## Contributing
+
+Follow the CHANGELOG “Unreleased” sections (Planned / Added / Changed / Fixed / Docs / Verification / Next Focus) for active work. Every non‑trivial PR must:
+
+1. Update CHANGELOG (at least one section).
+2. Preserve migration aliases until scheduled removal (e.g. keep `relevant-data-manager` alongside `user-context`).
+3. Maintain 100% coverage – add tests first for new logic.
+4. Avoid manual edits to generated docs; regenerate via scripts.
+5. Include precise JSDoc (no placeholders, hyphenated param descriptions, concrete @returns).
+
+After the alias deprecation window, remove legacy agent folders and update tests to only reference the canonical name.
 
 ---
 
-## ✅ **Expected Outcome**
-
-- A complete, buildable VS Code MCP extension repository.
-- Unit tests run with Jest via `npm test`.
-- Typedoc generates Markdown docs into `/docs`.
-- GitHub Actions:
-  - Runs tests on each push.
-  - Publishes `/docs` to GitHub Pages automatically.
-  - Blocks merges when documentation, schema, or metadata requirements fail.
-- JSDoc present across all files for maintainability.
-
----
-
-**End of Prompt — `mybusiness-mcp-extension`**
+Made with ❤️ to streamline customizable MCP tooling in Copilot Chat.

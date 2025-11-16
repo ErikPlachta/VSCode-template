@@ -1,29 +1,12 @@
----
-title: Check Result
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / CheckResult
+[UserContext-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / CheckResult
 
 # Interface: CheckResult
 
-Defined in: src/tools/repositoryHealth.ts:40
+Defined in: [src/tools/repositoryHealth.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L45)
 
 Result of a single compliance check.
 
@@ -33,7 +16,7 @@ Result of a single compliance check.
 
 > `readonly` **messages**: readonly `string`[]
 
-Defined in: src/tools/repositoryHealth.ts:43
+Defined in: [src/tools/repositoryHealth.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L48)
 
 ***
 
@@ -41,7 +24,7 @@ Defined in: src/tools/repositoryHealth.ts:43
 
 > `readonly` **name**: `string`
 
-Defined in: src/tools/repositoryHealth.ts:41
+Defined in: [src/tools/repositoryHealth.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L46)
 
 ***
 
@@ -49,33 +32,4 @@ Defined in: src/tools/repositoryHealth.ts:41
 
 > `readonly` **passed**: `boolean`
 
-Defined in: src/tools/repositoryHealth.ts:42
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/tools/repositoryHealth.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L47)

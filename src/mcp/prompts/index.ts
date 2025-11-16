@@ -2,10 +2,14 @@
  * @packageDocumentation index implementation for prompts module
  */
 
-// TODO: Verify why this is in a folder like this, and what it's even doing.
+// NOTE: Prompt rendering helpers used by agents for escalation / clarification.
 
 import type { AgentCapabilityMetadata } from "@mcp/config/agentManifest";
 
+/**
+ * EscalationPromptOptions interface.
+ *
+ */
 export interface EscalationPromptOptions {
   topic?: string;
   missingSignals?: string[];
@@ -14,20 +18,14 @@ export interface EscalationPromptOptions {
 }
 
 /**
- * renderEscalationPrompt function.
+ * Renders an escalation prompt for clarification or routing.
  *
- * @param {EscalationPromptOptions} {
-  topic,
-  missingSignals,
-  manifest,
-  additionalGuidance,
-} - {
-  topic,
-  missingSignals,
-  manifest,
-  additionalGuidance,
-} parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {EscalationPromptOptions} options - Prompt construction options.
+ * @param {string} [options.topic] - Domain or category topic needing clarification.
+ * @param {string[]} [options.missingSignals] - Routing signals that were absent and should be highlighted.
+ * @param {AgentCapabilityMetadata | null} [options.manifest] - Capability manifest describing agent scope/escalation criteria.
+ * @param {string} [options.additionalGuidance] - Extra guidance text appended at end.
+ * @returns {string} Markdown-formatted escalation prompt.
  */
 export function renderEscalationPrompt({
   topic,
@@ -61,6 +59,10 @@ export function renderEscalationPrompt({
   return lines.join("\n");
 }
 
+/**
+ * ClarificationPromptOptions interface.
+ *
+ */
 export interface ClarificationPromptOptions {
   question: string;
   manifest: AgentCapabilityMetadata;
@@ -69,20 +71,14 @@ export interface ClarificationPromptOptions {
 }
 
 /**
- * renderClarificationPrompt function.
+ * Renders a clarification prompt to solicit more precise user input.
  *
- * @param {ClarificationPromptOptions} {
-  question,
-  manifest,
-  missingSignals,
-  knowledgeSnippets,
-} - {
-  question,
-  manifest,
-  missingSignals,
-  knowledgeSnippets,
-} parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {ClarificationPromptOptions} options - Prompt construction options.
+ * @param {string} options.question - Original user question text.
+ * @param {AgentCapabilityMetadata} options.manifest - Capability manifest describing agent scope.
+ * @param {string[]} [options.missingSignals] - Signals missing from the question to enumerate.
+ * @param {{ source: string; summary: string }[]} [options.knowledgeSnippets] - Optional background knowledge entries.
+ * @returns {string} Markdown-formatted clarification prompt.
  */
 export function renderClarificationPrompt({
   question,
@@ -108,22 +104,22 @@ export function renderClarificationPrompt({
   return segments.join("\n");
 }
 
+/**
+ * ClassificationSummaryOptions interface.
+ *
+ */
 export interface ClassificationSummaryOptions {
   agent: AgentCapabilityMetadata;
   matchedSignals?: string[];
 }
 
 /**
- * renderClassificationSummary function.
+ * Renders a concise classification summary for logging or UI display.
  *
- * @param {ClassificationSummaryOptions} {
-  agent,
-  matchedSignals,
-} - {
-  agent,
-  matchedSignals,
-} parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {ClassificationSummaryOptions} options - Summary construction options.
+ * @param {AgentCapabilityMetadata} options.agent - Capability metadata for matched agent.
+ * @param {string[]} [options.matchedSignals] - Signals that contributed to the match.
+ * @returns {string} Summary string with matched signals appended when provided.
  */
 export function renderClassificationSummary({
   agent,

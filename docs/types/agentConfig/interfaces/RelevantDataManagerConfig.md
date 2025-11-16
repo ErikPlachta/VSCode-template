@@ -1,31 +1,26 @@
----
-title: Relevant Data Manager Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / RelevantDataManagerConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / RelevantDataManagerConfig
 
 # Interface: RelevantDataManagerConfig
 
-Defined in: [src/types/agentConfig.ts:315](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L315)
+Defined in: [src/types/agentConfig.ts:631](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L631)
 
-Relevant data manager-specific configuration
+RelevantDataManager configuration for metadata validation, relationship integrity,
+caching, schema management, and operational performance.
+
+## Example
+
+```ts
+const rdmCfg: RelevantDataManagerConfig = {
+  metadata: { enableSchemaValidation: true, enforceDataQuality: true, trackDataLineage: false },
+  caching: { enableSnapshotCaching: true, snapshotTTL: 60000, maxCachedSnapshots: 10 },
+  validation: { strictModeEnabled: true, allowPartialValidation: false, validationTimeout: 15000 },
+  performance: { enableParallelProcessing: true, maxConcurrentOperations: 4 }
+};
+```
 
 ## Properties
 
@@ -33,7 +28,7 @@ Relevant data manager-specific configuration
 
 > **caching**: `object`
 
-Defined in: [src/types/agentConfig.ts:326](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L326)
+Defined in: [src/types/agentConfig.ts:642](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L642)
 
 #### cacheCleanupThreshold?
 
@@ -69,7 +64,7 @@ Defined in: [src/types/agentConfig.ts:326](https://github.com/ErikPlachta/VSCode
 
 > `optional` **dataManagement**: `object`
 
-Defined in: [src/types/agentConfig.ts:362](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L362)
+Defined in: [src/types/agentConfig.ts:678](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L678)
 
 #### backupRetentionDays?
 
@@ -105,7 +100,7 @@ Defined in: [src/types/agentConfig.ts:362](https://github.com/ErikPlachta/VSCode
 
 > **metadata**: `object`
 
-Defined in: [src/types/agentConfig.ts:316](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L316)
+Defined in: [src/types/agentConfig.ts:632](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L632)
 
 #### autoGenerateMetadata?
 
@@ -145,7 +140,7 @@ Defined in: [src/types/agentConfig.ts:316](https://github.com/ErikPlachta/VSCode
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:371](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L371)
+Defined in: [src/types/agentConfig.ts:687](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L687)
 
 #### defaultOperationTimeout?
 
@@ -173,7 +168,7 @@ Defined in: [src/types/agentConfig.ts:371](https://github.com/ErikPlachta/VSCode
 
 > `optional` **relationships**: `object`
 
-Defined in: [src/types/agentConfig.ts:354](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L354)
+Defined in: [src/types/agentConfig.ts:670](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L670)
 
 #### buildRelationshipIndexes?
 
@@ -205,7 +200,7 @@ Defined in: [src/types/agentConfig.ts:354](https://github.com/ErikPlachta/VSCode
 
 > `optional` **schemaManagement**: `object`
 
-Defined in: [src/types/agentConfig.ts:345](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L345)
+Defined in: [src/types/agentConfig.ts:661](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L661)
 
 #### autoDetectSchemaChanges?
 
@@ -241,7 +236,7 @@ Defined in: [src/types/agentConfig.ts:345](https://github.com/ErikPlachta/VSCode
 
 > **validation**: `object`
 
-Defined in: [src/types/agentConfig.ts:335](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L335)
+Defined in: [src/types/agentConfig.ts:651](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L651)
 
 #### allowPartialValidation
 
@@ -274,32 +269,3 @@ Defined in: [src/types/agentConfig.ts:335](https://github.com/ErikPlachta/VSCode
 #### validationWarningThreshold?
 
 > `optional` **validationWarningThreshold**: `number`
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

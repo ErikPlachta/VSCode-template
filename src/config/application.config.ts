@@ -6,7 +6,7 @@
  * @packageDocumentation application.config implementation for config module
  */
 
-import type { ApplicationConfig } from "../types/applicationConfig";
+import type { ApplicationConfig } from "@internal-types/applicationConfig";
 
 // Note: We cast to ApplicationConfig to avoid strict excess property checks while
 // we complete the migration away from the JSON-only shape.
@@ -112,26 +112,10 @@ export const applicationConfig: ApplicationConfig = {
   typescript: {
     include: ["src/**/*.ts"],
   },
-  jsonSchemas: [
-    {
-      pattern: "src/businessData/*/category.json",
-      schema: "src/schemas/category.schema.json",
-      description:
-        "Category metadata must define purpose, orchestration, and agent responsibilities.",
-    },
-    {
-      pattern: "src/businessData/*/records.json",
-      schema: "src/schemas/records.schema.json",
-      description:
-        "Entity records require identifiers, human-readable names, and linkage metadata.",
-    },
-    {
-      pattern: "src/businessData/*/relationships.json",
-      schema: "src/schemas/relationships.schema.json",
-      description:
-        "Relationship definitions must clearly communicate target categories and join keys.",
-    },
-  ],
+  // JSON schema validation removed - now using native TypeScript type guards
+  // Validation is performed by type guard functions in src/types/userContext.types.ts
+  // Users will onboard custom UserContext data through extension utilities (not source code)
+  jsonSchemas: [],
   markdown: {
     include: ["docs/**/*.md"],
     exclude: ["docs/**"],

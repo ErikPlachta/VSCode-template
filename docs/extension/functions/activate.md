@@ -1,33 +1,22 @@
----
-title: Activate
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / [extension](../README.md) / activate
+[UserContext-mcp-extension](../../modules.md) / [extension](../README.md) / activate
 
 # Function: activate()
 
 > **activate**(`context`): `Promise`\<`void`\>
 
-Defined in: [src/extension/index.ts:16](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/index.ts#L16)
+Defined in: [src/extension/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/extension/index.ts#L31)
 
-Activates the extension, registering the chat participant.
+Activate the UserContext MCP extension.
+
+Responsibilities:
+- Optionally start the embedded MCP server (when no external serverUrl is configured).
+- Register the MCP provider for server discovery.
+- Register the chat participant that routes user prompts through the orchestrator.
+- Expose a command for manual tool invocation.
 
 ## Parameters
 
@@ -35,35 +24,10 @@ Activates the extension, registering the chat participant.
 
 `ExtensionContext`
 
+VS Code extension lifecycle context used for disposables.
+
 ## Returns
 
 `Promise`\<`void`\>
 
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Resolves when activation sequence has completed (server started, participant registered).

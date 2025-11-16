@@ -1,97 +1,39 @@
----
-title: Execution Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ExecutionConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ExecutionConfig
 
 # Interface: ExecutionConfig
 
-Defined in: [src/types/agentConfig.ts:86](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L86)
+Defined in: [src/types/agentConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L192)
 
-Runtime execution configuration
+Execution settings controlling runtime behavior.
+
+## Indexable
+
+\[`key`: `string`\]: `unknown`
 
 ## Properties
 
-### cacheEnabled?
+### maxConcurrency?
 
-> `optional` **cacheEnabled**: `boolean`
+> `optional` **maxConcurrency**: `number`
 
-Defined in: [src/types/agentConfig.ts:89](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L89)
-
-***
-
-### maxRetries?
-
-> `optional` **maxRetries**: `number`
-
-Defined in: [src/types/agentConfig.ts:91](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L91)
+Defined in: [src/types/agentConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L194)
 
 ***
 
-### priority
+### mode?
 
-> **priority**: `"high"` \| `"medium"` \| `"low"`
+> `optional` **mode**: `string`
 
-Defined in: [src/types/agentConfig.ts:87](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L87)
-
-***
-
-### retryStrategy?
-
-> `optional` **retryStrategy**: `"none"` \| `"fixed"` \| `"exponential"`
-
-Defined in: [src/types/agentConfig.ts:90](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L90)
+Defined in: [src/types/agentConfig.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L193)
 
 ***
 
-### timeout
+### timeoutMs?
 
-> **timeout**: `number`
+> `optional` **timeoutMs**: `number`
 
-Defined in: [src/types/agentConfig.ts:88](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L88)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L195)

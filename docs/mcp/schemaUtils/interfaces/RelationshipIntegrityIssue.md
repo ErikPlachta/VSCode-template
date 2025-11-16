@@ -1,29 +1,14 @@
----
-title: Relationship Integrity Issue
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/schemaUtils](../README.md) / RelationshipIntegrityIssue
+[UserContext-mcp-extension](../../../modules.md) / [mcp/schemaUtils](../README.md) / RelationshipIntegrityIssue
 
 # Interface: RelationshipIntegrityIssue
 
-Defined in: [src/mcp/schemaUtils.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L12)
+Defined in: [src/mcp/schemaUtils.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L16)
+
+RelationshipIntegrityIssue interface.
 
 ## Properties
 
@@ -31,7 +16,7 @@ Defined in: [src/mcp/schemaUtils.ts:12](https://github.com/ErikPlachta/VSCode-te
 
 > **categoryId**: `string`
 
-Defined in: [src/mcp/schemaUtils.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L13)
+Defined in: [src/mcp/schemaUtils.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L17)
 
 ***
 
@@ -39,41 +24,12 @@ Defined in: [src/mcp/schemaUtils.ts:13](https://github.com/ErikPlachta/VSCode-te
 
 > **reason**: `string`
 
-Defined in: [src/mcp/schemaUtils.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L15)
+Defined in: [src/mcp/schemaUtils.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L19)
 
 ***
 
 ### relationship
 
-> **relationship**: [`RelationshipDescription`](../../../agent/relevantDataManagerAgent/interfaces/RelationshipDescription.md)
+> **relationship**: [`RelationshipDescription`](../../../types/userContext.types/interfaces/RelationshipDescription.md)
 
-Defined in: [src/mcp/schemaUtils.ts:14](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L14)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/mcp/schemaUtils.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L18)

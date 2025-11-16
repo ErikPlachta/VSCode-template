@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, afterEach, beforeAll, afterAll, jest } from "@jest/globals";
 import { loadApplicationConfig } from "../src/shared/configurationLoader";
 
 /**

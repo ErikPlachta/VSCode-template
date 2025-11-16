@@ -1,31 +1,30 @@
----
-title: Application Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / ApplicationConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / ApplicationConfig
 
 # Interface: ApplicationConfig
 
-Defined in: [src/types/applicationConfig.ts:270](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L270)
+Defined in: [src/types/applicationConfig.ts:461](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L461)
 
 Comprehensive application configuration structure.
+
+## Remarks
+
+Serves as the single entry point for app configuration. External tools can
+generate or validate this structure during build.
+
+## Example
+
+```ts
+See generated docs for a complete sample.
+```
+
+## See
+
+ - docs/config/application.config/variables/applicationConfig.md
+ - src/config/application.config.ts
 
 ## Properties
 
@@ -33,7 +32,7 @@ Comprehensive application configuration structure.
 
 > **agents**: `object`
 
-Defined in: [src/types/applicationConfig.ts:296](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L296)
+Defined in: [src/types/applicationConfig.ts:487](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L487)
 
 Agent configuration and profiles.
 
@@ -62,6 +61,10 @@ Detailed agent definitions with metadata.
 ##### definitions.relevantDataManager
 
 > **relevantDataManager**: [`AgentDefinition`](AgentDefinition.md)
+
+##### definitions.userContext?
+
+> `optional` **userContext**: [`AgentDefinition`](AgentDefinition.md)
 
 #### global
 
@@ -95,6 +98,10 @@ Individual agent profiles.
 
 > **relevantDataManager**: [`AgentProfile`](AgentProfile.md)
 
+##### profiles.userContext?
+
+> `optional` **userContext**: [`AgentProfile`](AgentProfile.md)
+
 #### templateReplacements?
 
 > `optional` **templateReplacements**: `Record`\<`string`, `string`\>
@@ -107,7 +114,7 @@ Template replacement mappings.
 
 > **application**: `object`
 
-Defined in: [src/types/applicationConfig.ts:272](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L272)
+Defined in: [src/types/applicationConfig.ts:463](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L463)
 
 Application metadata and environment settings.
 
@@ -153,7 +160,7 @@ Application version.
 
 > **data**: `object`
 
-Defined in: [src/types/applicationConfig.ts:320](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L320)
+Defined in: [src/types/applicationConfig.ts:513](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L513)
 
 Data management configuration.
 
@@ -181,7 +188,7 @@ Data validation settings.
 
 > **features**: `object`
 
-Defined in: [src/types/applicationConfig.ts:375](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L375)
+Defined in: [src/types/applicationConfig.ts:568](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L568)
 
 Feature flags and experimental settings.
 
@@ -203,7 +210,7 @@ Extension management configuration.
 
 > **jsonSchemas**: [`JsonSchemaConfig`](JsonSchemaConfig.md)[]
 
-Defined in: [src/types/applicationConfig.ts:336](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L336)
+Defined in: [src/types/applicationConfig.ts:529](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L529)
 
 JSON schema validation configurations.
 
@@ -213,7 +220,7 @@ JSON schema validation configurations.
 
 > **logging**: `object`
 
-Defined in: [src/types/applicationConfig.ts:345](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L345)
+Defined in: [src/types/applicationConfig.ts:538](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L538)
 
 Logging configuration.
 
@@ -247,7 +254,7 @@ Log output destinations.
 
 > **markdown**: [`MarkdownConfig`](MarkdownConfig.md)
 
-Defined in: [src/types/applicationConfig.ts:339](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L339)
+Defined in: [src/types/applicationConfig.ts:532](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L532)
 
 Markdown validation configuration.
 
@@ -257,7 +264,7 @@ Markdown validation configuration.
 
 > **mcp**: `object`
 
-Defined in: [src/types/applicationConfig.ts:288](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L288)
+Defined in: [src/types/applicationConfig.ts:479](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L479)
 
 MCP (Model Context Protocol) configuration.
 
@@ -279,7 +286,7 @@ Server configuration settings.
 
 > **performance**: `object`
 
-Defined in: [src/types/applicationConfig.ts:367](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L367)
+Defined in: [src/types/applicationConfig.ts:560](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L560)
 
 Performance configuration.
 
@@ -301,7 +308,7 @@ Performance monitoring settings.
 
 > **report**: [`ReportConfig`](ReportConfig.md)
 
-Defined in: [src/types/applicationConfig.ts:342](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L342)
+Defined in: [src/types/applicationConfig.ts:535](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L535)
 
 Report generation configuration.
 
@@ -311,7 +318,7 @@ Report generation configuration.
 
 > **security**: `object`
 
-Defined in: [src/types/applicationConfig.ts:357](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L357)
+Defined in: [src/types/applicationConfig.ts:550](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L550)
 
 Security configuration.
 
@@ -339,7 +346,7 @@ Rate limiting configuration.
 
 > **typescript**: `object`
 
-Defined in: [src/types/applicationConfig.ts:330](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L330)
+Defined in: [src/types/applicationConfig.ts:523](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L523)
 
 TypeScript compilation settings.
 
@@ -348,32 +355,3 @@ TypeScript compilation settings.
 > **include**: `string`[]
 
 Files to include in compilation.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

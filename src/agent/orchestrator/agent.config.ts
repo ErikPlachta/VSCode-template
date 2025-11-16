@@ -14,8 +14,8 @@
  * - Ability to use computed values and imports
  */
 
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
+import type { AgentConfigDefinition } from "@internal-types/agentConfig";
+import { CONFIG_IDS } from "@internal-types/configRegistry";
 
 /**
  * Complete configuration for the Orchestrator agent.
@@ -83,7 +83,7 @@ export const orchestratorConfig: AgentConfigDefinition = {
           "workflow", // Process-related questions
           "schema", // Data structure queries
           "metadata", // Information about data organization
-          "catalogue", // Data catalog requests
+          "catalog", // Data catalog requests (American English primary)
           "snapshot", // Data snapshot requests
         ],
       },
@@ -251,18 +251,31 @@ export const orchestratorConfig: AgentConfigDefinition = {
        * clarification regardless of intent matching.
        */
       vaguePhrases: [
+        // Generic record requests without category
         "list records",
         "show records",
         "get records",
         "find records",
+        "display records",
+        "retrieve records",
+        // Generic data requests without context
         "show data",
         "get data",
         "list data",
-        "display records",
-        "retrieve records",
         "fetch data",
         "get information",
         "show information",
+        // Generic database requests
+        "database info",
+        "database data",
+        "database records",
+        "show database",
+        "list database",
+        // Too generic queries
+        "tell me about",
+        "what is",
+        "info about",
+        "information on",
       ],
     },
 

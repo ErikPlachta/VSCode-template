@@ -1,7 +1,13 @@
 /**
- * @packageDocumentation telemetry implementation for mcp module
+ * @packageDocumentation telemetry implementation for mcp module.
+ * Captures timing, success/error status, and lightweight metadata for
+ * agent and tool invocations to aid debugging and performance analysis.
+ *
+ * These utilities are lightweight and safe to use in production flows.
+ * Use the {@link createInvocationLogger} helper to wrap async operations and
+ * automatically emit {@link InvocationEvent | telemetry events}.
  */
-
+/** Invocation event envelope emitted for each wrapped operation. */
 export interface InvocationEvent {
   agent: string;
   operation: string;
@@ -13,17 +19,17 @@ export interface InvocationEvent {
   error?: { name: string; message: string };
 }
 
+/** Logger abstraction used by {@link createInvocationLogger} to emit events. */
 export interface InvocationLogger {
   log(event: InvocationEvent): void;
 }
 
-class ConsoleInvocationLogger implements InvocationLogger {
-    /**
- * log function.
- *
- * @param {InvocationEvent} event - event parameter.
+/**
+ * Console-based {@link InvocationLogger} implementation.
  */
-log(event: InvocationEvent): void {
+class ConsoleInvocationLogger implements InvocationLogger {
+  /** @inheritDoc */
+  log(event: InvocationEvent): void {
     if (process.env.JEST_WORKER_ID) {
       return;
     }
@@ -36,6 +42,7 @@ log(event: InvocationEvent): void {
   }
 }
 
+/** Function signature returned by {@link createInvocationLogger}. */
 export interface InvocationWrapper {
   <T>(
     operation: string,
@@ -47,10 +54,11 @@ export interface InvocationWrapper {
 /**
  * Create a helper that wraps asynchronous operations and emits telemetry events.
  *
- * @param {string} agent - agent parameter.
- * @param {InvocationLogger} logger - logger parameter.
- * @returns {InvocationWrapper} - TODO: describe return value.
- * @throws {Error} - May throw an error.
+ * @param {string} agent - Identifier of the calling agent/tool.
+ * @param {InvocationLogger} logger - Destination for emitted events (defaults to console logger).
+ * @returns {InvocationWrapper} Function that wraps async operations and records timing + status.
+ * @throws {Error} Propagates any error thrown by the wrapped function after logging it.
+ * @see InvocationLogger
  */
 export function createInvocationLogger(
   agent: string,

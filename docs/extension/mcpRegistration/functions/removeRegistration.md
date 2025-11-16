@@ -1,31 +1,14 @@
----
-title: Remove Registration
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [extension/mcpRegistration](../README.md) / removeRegistration
+[UserContext-mcp-extension](../../../modules.md) / [extension/mcpRegistration](../README.md) / removeRegistration
 
 # Function: removeRegistration()
 
-> **removeRegistration**(`id`): `Promise`\<`string`\>
+> **removeRegistration**(`id`, `pathOptions?`): `Promise`\<`string`\>
 
-Defined in: [src/extension/mcpRegistration.ts:91](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpRegistration.ts#L91)
+Defined in: [src/extension/mcpRegistration.ts:298](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/extension/mcpRegistration.ts#L298)
 
 Remove our server entry from mcp.json if present.
 
@@ -35,35 +18,16 @@ Remove our server entry from mcp.json if present.
 
 `string`
 
+id parameter.
+
+### pathOptions?
+
+[`McpConfigPathOptions`](../interfaces/McpConfigPathOptions.md) = `{}`
+
+Optional overrides used to resolve the configuration path.
+
 ## Returns
 
 `Promise`\<`string`\>
 
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Absolute path to the updated `mcp.json` file.

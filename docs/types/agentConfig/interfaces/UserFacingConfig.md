@@ -1,31 +1,18 @@
----
-title: User Facing Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / UserFacingConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / UserFacingConfig
 
 # Interface: UserFacingConfig
 
-Defined in: [src/types/agentConfig.ts:97](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L97)
+Defined in: [src/types/agentConfig.ts:200](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L200)
 
-User-facing metadata
+User-facing descriptive configuration for docs & examples.
+
+## Indexable
+
+\[`key`: `string`\]: `unknown`
 
 ## Properties
 
@@ -33,7 +20,7 @@ User-facing metadata
 
 > `optional` **exampleQueries**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:100](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L100)
+Defined in: [src/types/agentConfig.ts:202](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L202)
 
 ***
 
@@ -41,49 +28,24 @@ Defined in: [src/types/agentConfig.ts:100](https://github.com/ErikPlachta/VSCode
 
 > `optional` **friendlyDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L98)
+Defined in: [src/types/agentConfig.ts:201](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L201)
 
 ***
 
-### helpText?
+### successDisplay?
 
-> `optional` **helpText**: `string`
+> `optional` **successDisplay**: `object`
 
-Defined in: [src/types/agentConfig.ts:101](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L101)
+Defined in: [src/types/agentConfig.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L203)
 
-***
+#### availableCategoriesHeader?
 
-### useWhen?
+> `optional` **availableCategoriesHeader**: `string`
 
-> `optional` **useWhen**: `string`[]
+#### includeAvailableCategories?
 
-Defined in: [src/types/agentConfig.ts:99](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L99)
+> `optional` **includeAvailableCategories**: `boolean`
 
+#### maxCategoriesInSuccess?
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+> `optional` **maxCategoriesInSuccess**: `number`

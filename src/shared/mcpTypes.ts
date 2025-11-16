@@ -1,13 +1,10 @@
 /**
- * Shared MCP type definitions consumed by both the VS Code extension client
- * and the standalone development server.
+ * @packageDocumentation mcpTypes shared definitions for shared module.
+ * Cross-cutting MCP JSON-RPC and tool schema types consumed by extension and agents.
  */
-
 /**
- * @packageDocumentation mcpTypes implementation for shared module
+ * Shared MCP type definitions consumed by both the VS Code extension client
  */
-
-/** JSON schema fragment describing a tool argument. */
 export interface MCPProperty {
   /** Argument identifier used when invoking the tool. */
   name: string;
@@ -25,7 +22,10 @@ export interface MCPProperty {
   required?: boolean;
 }
 
-/** Minimal JSON schema definition used by MCP tool payloads. */
+/**
+ * Minimal JSON schema definition used by MCP tool payloads.
+ *
+ */
 export interface MCPInputSchema {
   /** Map of argument names to property descriptors. */
   properties?: Record<string, MCPProperty & Record<string, unknown>>;
@@ -33,7 +33,10 @@ export interface MCPInputSchema {
   required?: string[];
 }
 
-/** Full MCP tool definition returned by `listTools`. */
+/**
+ * Full MCP tool definition returned by `listTools`.
+ *
+ */
 export interface MCPTool {
   /** Machine-readable tool identifier. */
   name: string;
@@ -49,7 +52,10 @@ export interface MCPTool {
   input_schema?: MCPInputSchema;
 }
 
-/** JSON-RPC 2.0 payload returned by the MCP server. */
+/**
+ * JSON-RPC 2.0 payload returned by the MCP server.
+ *
+ */
 export interface MCPListToolsResponse {
   jsonrpc: string;
   id: number | string;

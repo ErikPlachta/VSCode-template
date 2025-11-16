@@ -1,0 +1,19 @@
+* text=auto
+
+# Enforce LF line endings for source and docs across platforms
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.cjs text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+docs/** text eol=lf
+
+# Keep binary files untouched
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.gif -text
+*.ico -text
+*.pdf -text

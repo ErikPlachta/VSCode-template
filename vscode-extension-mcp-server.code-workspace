@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "node_modules"
+    },
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "cSpell.words": ["docblocks", "prebuild", "Retryable", "usercontext"]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": []
+  }
+}

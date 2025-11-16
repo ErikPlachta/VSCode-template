@@ -1,29 +1,14 @@
----
-title: Invocation Logger
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/telemetry](../README.md) / InvocationLogger
+[UserContext-mcp-extension](../../../modules.md) / [mcp/telemetry](../README.md) / InvocationLogger
 
 # Interface: InvocationLogger
 
-Defined in: [src/mcp/telemetry.ts:16](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L16)
+Defined in: [src/mcp/telemetry.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/telemetry.ts#L23)
+
+Logger abstraction used by [createInvocationLogger](../functions/createInvocationLogger.md) to emit events.
 
 ## Methods
 
@@ -31,7 +16,7 @@ Defined in: [src/mcp/telemetry.ts:16](https://github.com/ErikPlachta/VSCode-temp
 
 > **log**(`event`): `void`
 
-Defined in: [src/mcp/telemetry.ts:17](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/telemetry.ts#L17)
+Defined in: [src/mcp/telemetry.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/telemetry.ts#L24)
 
 #### Parameters
 
@@ -42,32 +27,3 @@ Defined in: [src/mcp/telemetry.ts:17](https://github.com/ErikPlachta/VSCode-temp
 #### Returns
 
 `void`
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

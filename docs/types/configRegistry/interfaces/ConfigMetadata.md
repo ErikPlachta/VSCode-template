@@ -1,31 +1,14 @@
----
-title: Config Metadata
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / ConfigMetadata
+[UserContext-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / ConfigMetadata
 
 # Interface: ConfigMetadata
 
-Defined in: [src/types/configRegistry.ts:46](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L46)
+Defined in: [src/types/configRegistry.ts:53](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L53)
 
-Configuration metadata for each schema ID
+Configuration metadata for each schema ID.
 
 ## Properties
 
@@ -33,7 +16,7 @@ Configuration metadata for each schema ID
 
 > **agentType**: `string`
 
-Defined in: [src/types/configRegistry.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L64)
+Defined in: [src/types/configRegistry.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L71)
 
 Agent type this configuration is for
 
@@ -43,7 +26,7 @@ Agent type this configuration is for
 
 > `optional` **breakingChanges**: `string`[]
 
-Defined in: [src/types/configRegistry.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L70)
+Defined in: [src/types/configRegistry.ts:77](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L77)
 
 List of breaking changes from previous versions
 
@@ -53,7 +36,7 @@ List of breaking changes from previous versions
 
 > **createdDate**: `string`
 
-Defined in: [src/types/configRegistry.ts:67](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L67)
+Defined in: [src/types/configRegistry.ts:74](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L74)
 
 Date this schema version was created
 
@@ -63,7 +46,7 @@ Date this schema version was created
 
 > **description**: `string`
 
-Defined in: [src/types/configRegistry.ts:61](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L61)
+Defined in: [src/types/configRegistry.ts:68](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L68)
 
 Description of what this configuration schema covers
 
@@ -73,7 +56,7 @@ Description of what this configuration schema covers
 
 > **id**: `string`
 
-Defined in: [src/types/configRegistry.ts:48](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L48)
+Defined in: [src/types/configRegistry.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L55)
 
 Unique configuration ID
 
@@ -83,7 +66,7 @@ Unique configuration ID
 
 > `optional` **migrationNotes**: `string`[]
 
-Defined in: [src/types/configRegistry.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L73)
+Defined in: [src/types/configRegistry.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L80)
 
 Migration notes for upgrading from previous versions
 
@@ -93,7 +76,7 @@ Migration notes for upgrading from previous versions
 
 > **name**: `string`
 
-Defined in: [src/types/configRegistry.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L51)
+Defined in: [src/types/configRegistry.ts:58](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L58)
 
 Human-readable name
 
@@ -103,7 +86,7 @@ Human-readable name
 
 > **version**: `object`
 
-Defined in: [src/types/configRegistry.ts:54](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L54)
+Defined in: [src/types/configRegistry.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L61)
 
 Version information
 
@@ -118,32 +101,3 @@ Version information
 #### patch
 
 > **patch**: `number`
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

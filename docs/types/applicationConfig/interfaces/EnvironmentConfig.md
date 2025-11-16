@@ -1,31 +1,30 @@
----
-title: Environment Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / EnvironmentConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / EnvironmentConfig
 
 # Interface: EnvironmentConfig
 
-Defined in: [src/types/applicationConfig.ts:8](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L8)
+Defined in: [src/types/applicationConfig.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L28)
 
-Environment-specific configuration settings.
+Environment configuration controlling debug behavior and defaults.
+
+## Remarks
+
+Use different instances for `development`, `staging`, and `production` in
+the `ApplicationConfig.application.environments` block.
+
+## Example
+
+```ts
+const devEnv: EnvironmentConfig = {
+  debug: true,
+  logLevel: "verbose",
+  hotReload: true,
+  mockData: true,
+};
+```
 
 ## Properties
 
@@ -33,7 +32,7 @@ Environment-specific configuration settings.
 
 > **debug**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:10](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L10)
+Defined in: [src/types/applicationConfig.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L30)
 
 Enable debug mode for detailed logging and error reporting.
 
@@ -43,7 +42,7 @@ Enable debug mode for detailed logging and error reporting.
 
 > **hotReload**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:14](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L14)
+Defined in: [src/types/applicationConfig.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L34)
 
 Enable hot reload for development.
 
@@ -51,9 +50,9 @@ Enable hot reload for development.
 
 ### logLevel
 
-> **logLevel**: `"error"` \| `"verbose"` \| `"info"` \| `"warn"`
+> **logLevel**: `"info"` \| `"error"` \| `"verbose"` \| `"warn"`
 
-Defined in: [src/types/applicationConfig.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L12)
+Defined in: [src/types/applicationConfig.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L32)
 
 Logging level for the environment.
 
@@ -63,35 +62,6 @@ Logging level for the environment.
 
 > **mockData**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:16](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L16)
+Defined in: [src/types/applicationConfig.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L36)
 
 Use mock data instead of real data sources.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

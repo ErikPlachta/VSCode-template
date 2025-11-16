@@ -1,31 +1,31 @@
----
-title: Mcp Server Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / McpServerConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / McpServerConfig
 
 # Interface: McpServerConfig
 
-Defined in: [src/types/applicationConfig.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L22)
+Defined in: [src/types/applicationConfig.ts:57](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L57)
 
 MCP server configuration settings.
+
+## Remarks
+
+When `embedded.enabled=true`, the extension may launch the stdio server
+internally. For HTTP, set `defaultPort` and ensure firewall rules allow it.
+
+## Example
+
+```ts
+const server: McpServerConfig = {
+  protocol: "stdio",
+  defaultPort: 3000,
+  timeout: 10000,
+  retries: 2,
+  embedded: { enabled: true, autoStart: true },
+};
+```
 
 ## Properties
 
@@ -33,7 +33,7 @@ MCP server configuration settings.
 
 > **defaultPort**: `number`
 
-Defined in: [src/types/applicationConfig.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L26)
+Defined in: [src/types/applicationConfig.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L61)
 
 Default port for HTTP server.
 
@@ -43,7 +43,7 @@ Default port for HTTP server.
 
 > **embedded**: `object`
 
-Defined in: [src/types/applicationConfig.ts:32](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L32)
+Defined in: [src/types/applicationConfig.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L67)
 
 Embedded server settings.
 
@@ -65,7 +65,7 @@ Enable embedded server mode.
 
 > **protocol**: `"http"` \| `"stdio"` \| `"websocket"`
 
-Defined in: [src/types/applicationConfig.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L24)
+Defined in: [src/types/applicationConfig.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L59)
 
 Protocol for MCP communication.
 
@@ -75,7 +75,7 @@ Protocol for MCP communication.
 
 > **retries**: `number`
 
-Defined in: [src/types/applicationConfig.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L30)
+Defined in: [src/types/applicationConfig.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L65)
 
 Number of retry attempts for failed requests.
 
@@ -85,35 +85,6 @@ Number of retry attempts for failed requests.
 
 > **timeout**: `number`
 
-Defined in: [src/types/applicationConfig.ts:28](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L28)
+Defined in: [src/types/applicationConfig.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L63)
 
 Request timeout in milliseconds.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

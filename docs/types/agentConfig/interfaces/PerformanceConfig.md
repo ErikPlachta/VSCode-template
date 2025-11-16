@@ -1,81 +1,83 @@
----
-title: Performance Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / PerformanceConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / PerformanceConfig
 
 # Interface: PerformanceConfig
 
-Defined in: [src/types/agentConfig.ts:107](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L107)
+Defined in: [src/types/agentConfig.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L173)
 
-Performance configuration
+Performance characteristics and optional limits for an agent.
+
+## Indexable
+
+\[`key`: `string`\]: `unknown`
 
 ## Properties
 
-### complexity
+### caching?
 
-> **complexity**: `"high"` \| `"medium"` \| `"low"`
+> `optional` **caching**: `object`
 
-Defined in: [src/types/agentConfig.ts:110](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L110)
+Defined in: [src/types/agentConfig.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L177)
+
+#### cacheTTL?
+
+> `optional` **cacheTTL**: `number`
+
+#### defaultKeyPrefix?
+
+> `optional` **defaultKeyPrefix**: `string`
+
+#### enabledByDefault?
+
+> `optional` **enabledByDefault**: `boolean`
+
+#### maxCacheEntries?
+
+> `optional` **maxCacheEntries**: `number`
 
 ***
 
-### expectedResponseTime
+### complexity?
 
-> **expectedResponseTime**: `number`
+> `optional` **complexity**: `string`
 
-Defined in: [src/types/agentConfig.ts:108](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L108)
+Defined in: [src/types/agentConfig.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L176)
 
 ***
 
-### memoryUsage
+### expectedResponseTime?
 
-> **memoryUsage**: `"high"` \| `"medium"` \| `"low"`
+> `optional` **expectedResponseTime**: `number`
 
-Defined in: [src/types/agentConfig.ts:109](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L109)
+Defined in: [src/types/agentConfig.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L174)
 
+***
 
-## Summary
+### limits?
 
-_TODO: Auto-generated placeholder._
+> `optional` **limits**: `object`
 
-## Responsibilities
+Defined in: [src/types/agentConfig.ts:183](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L183)
 
-_TODO: Auto-generated placeholder._
+#### maxJoinDepth?
 
-## Inputs
+> `optional` **maxJoinDepth**: `number`
 
-_TODO: Auto-generated placeholder._
+#### maxResultSize?
 
-## Outputs
+> `optional` **maxResultSize**: `number`
 
-_TODO: Auto-generated placeholder._
+#### queryTimeout?
 
-## Error Handling
+> `optional` **queryTimeout**: `number`
 
-_TODO: Auto-generated placeholder._
+***
 
-## Examples
+### memoryUsage?
 
-_TODO: Auto-generated placeholder._
+> `optional` **memoryUsage**: `string`
 
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:175](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L175)

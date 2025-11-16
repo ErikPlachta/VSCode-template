@@ -28,7 +28,6 @@ readonly REPORTS_DIR="${DOCS_DIR}/reports"
 readonly STAGES=(
     "clean"
     "validate-config"
-    "lint-json"
     "lint-docs" 
     "lint-code"
     "compile"
@@ -170,18 +169,6 @@ stage_validate_config() {
         log_success "Typed application configuration validated"
         return
     fi
-
-    # Legacy fallback: validate JSON if TS config not present
-    log_info "Validating legacy mcp.config.json..."
-    if [[ ! -f "src/mcp.config.json" ]]; then
-        log_error "Configuration file not found: src/mcp.config.json"
-        exit 1
-    fi
-    if ! json_pp < "src/mcp.config.json" > /dev/null 2>&1; then
-        log_error "Invalid JSON syntax in src/mcp.config.json"
-        exit 1
-    fi
-    log_success "Legacy JSON configuration validated"
 }
 
 stage_lint_json() {

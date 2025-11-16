@@ -37,7 +37,7 @@ declare module "vscode" {
     /**
      * Registers a chat mention that triggers a handler when referenced.
      *
-     * @param {string} mention - Mention identifier (e.g., `@mybusiness`).
+     * @param {string} mention - Mention identifier (e.g., `@usercontext`).
      * @param {{ title: string; description?: string; handler: (message: string) => MarkdownString | string | Promise<MarkdownString | string | void> | void }} options - Mention metadata and handler.
      * @returns {Disposable} Disposable to unregister the mention.
      */

@@ -5,7 +5,9 @@
  * @module mcpSync
  */
 
-import axios, { AxiosError } from "axios";
+import * as https from "https";
+import * as http from "http";
+import { URL } from "url";
 import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
 
 /**
@@ -17,14 +19,14 @@ import { MCPListToolsResponse, MCPProperty, MCPTool } from "@shared/mcpTypes";
  * ```
  */
 export class MCPDiscoveryError extends Error {
-    /**
+  /**
    * constructor function.
    *
    * @param {string} message - message parameter.
    * @param {unknown} cause - cause parameter.
    * @returns {unknown} - TODO: describe return value.
    */
-constructor(message: string, public readonly cause?: unknown) {
+  constructor(message: string, public readonly cause?: unknown) {
     super(message);
     this.name = "MCPDiscoveryError";
   }
@@ -86,28 +88,91 @@ export async function fetchTools(
   };
 
   try {
-    const res = await axios.post<MCPListToolsResponse>(serverUrl, payload, {
-      headers,
-      timeout: 15000,
+    const url = new URL(serverUrl);
+    const isHttps = url.protocol === "https:";
+    const httpModule = isHttps ? https : http;
+    const payloadData = JSON.stringify(payload);
+
+    const response = await new Promise<{
+      statusCode: number;
+      data: string;
+    }>((resolve, reject) => {
+      const options = {
+        hostname: url.hostname,
+        port: url.port || (isHttps ? 443 : 80),
+        path: url.pathname + url.search,
+        method: "POST",
+        headers: {
+          ...headers,
+          "Content-Length": Buffer.byteLength(payloadData),
+        },
+        timeout: 15000,
+      };
+
+      const req = httpModule.request(options, (res) => {
+        let data = "";
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+        res.on("end", () => {
+          resolve({
+            statusCode: res.statusCode || 0,
+            data,
+          });
+        });
+      });
+
+      req.on("error", reject);
+      req.on("timeout", () => {
+        req.destroy();
+        reject(new Error("Request timeout"));
+      });
+
+      req.write(payloadData);
+      req.end();
     });
-    if (res.data?.error) {
+
+    if (response.statusCode !== 200) {
       throw new MCPDiscoveryError(
-        `MCP server responded with an error: ${res.data.error.message}`,
-        res.data.error
+        `MCP server responded with status ${response.statusCode}.`
       );
     }
-    const tools = res.data?.result?.tools ?? [];
+
+    const parsedData = JSON.parse(response.data) as MCPListToolsResponse;
+
+    if (parsedData?.error) {
+      throw new MCPDiscoveryError(
+        `MCP server responded with an error: ${parsedData.error.message}`,
+        parsedData.error
+      );
+    }
+    const tools = parsedData?.result?.tools ?? [];
     return tools.map(NormalizeTool);
   } catch (error) {
     if (error instanceof MCPDiscoveryError) {
       throw error;
     }
-    const axiosError = error as AxiosError;
-    const message = axiosError.response?.data
-      ? `Unable to fetch tools. Server responded with status ${axiosError.response.status}.`
-      : `Unable to reach MCP server at ${serverUrl}.`;
+    const message =
+      error instanceof Error
+        ? `Unable to reach MCP server at ${serverUrl}: ${error.message}`
+        : `Unable to reach MCP server at ${serverUrl}.`;
     throw new MCPDiscoveryError(message, error);
   }
+}
+
+/**
+ * Fetch tools from the locally embedded server module when running in stdio mode.
+ * This avoids HTTP and reads the exported tool catalogue directly.
+ *
+ * @returns {Promise<MCPTool[]>} Normalized tool list from the embedded server.
+ */
+export async function fetchLocalTools(): Promise<MCPTool[]> {
+  // Dynamic import to avoid bundling order issues; alias will be rewritten in out/ to a relative .js path
+  const mod = (await import("@server/index")) as unknown as {
+    tools?: MCPTool[];
+  };
+  const serverTools = Array.isArray(mod.tools) ? mod.tools : [];
+  return serverTools.map(NormalizeTool);
 }
 
 export type {

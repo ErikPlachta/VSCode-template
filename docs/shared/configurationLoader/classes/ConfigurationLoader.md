@@ -1,29 +1,12 @@
----
-title: Configuration Loader
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/configurationLoader](../README.md) / ConfigurationLoader
+[UserContext-mcp-extension](../../../modules.md) / [shared/configurationLoader](../README.md) / ConfigurationLoader
 
 # Class: ConfigurationLoader
 
-Defined in: [src/shared/configurationLoader.ts:64](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L64)
+Defined in: [src/shared/configurationLoader.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/configurationLoader.ts#L62)
 
 Configuration loader class for managing application settings.
 
@@ -33,7 +16,7 @@ Configuration loader class for managing application settings.
 
 > **new ConfigurationLoader**(`configPath`): `ConfigurationLoader`
 
-Defined in: [src/shared/configurationLoader.ts:73](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L73)
+Defined in: [src/shared/configurationLoader.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/configurationLoader.ts#L71)
 
 Creates a new configuration loader instance.
 
@@ -41,7 +24,9 @@ Creates a new configuration loader instance.
 
 ##### configPath
 
-`string` = `"src/mcp.config.json"`
+`string` = `"out/mcp.config.json"`
+
+Deprecated JSON config path for legacy fallback (kept for API compatibility).
 
 #### Returns
 
@@ -51,11 +36,11 @@ Creates a new configuration loader instance.
 
 ### getAgentConfig()
 
-> **getAgentConfig**(`agentName`): `Promise`\<`any`\>
+> **getAgentConfig**(`agentName`): `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/shared/configurationLoader.ts:174](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L174)
+Defined in: [src/shared/configurationLoader.ts:118](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/configurationLoader.ts#L118)
 
-Gets agent-specific configuration.
+Gets agent-specific configuration merged with global defaults.
 
 #### Parameters
 
@@ -63,15 +48,13 @@ Gets agent-specific configuration.
 
 `string`
 
+Registered agent profile id.
+
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<`Record`\<`string`, `unknown`\>\>
 
-- Promise resolving to agent configuration.
-
-#### Throws
-
-- When agent configuration cannot be found.
+Concrete settings for the agent.
 
 ***
 
@@ -79,9 +62,9 @@ Gets agent-specific configuration.
 
 > **getEnvironmentConfig**(`environment`): `Promise`\<[`EnvironmentConfig`](../../../types/applicationConfig/interfaces/EnvironmentConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:149](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L149)
+Defined in: [src/shared/configurationLoader.ts:96](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/configurationLoader.ts#L96)
 
-Gets configuration for the current environment.
+Gets configuration for the requested environment.
 
 #### Parameters
 
@@ -89,15 +72,13 @@ Gets configuration for the current environment.
 
 `string` = `"development"`
 
+Environment name (development|staging|production).
+
 #### Returns
 
 `Promise`\<[`EnvironmentConfig`](../../../types/applicationConfig/interfaces/EnvironmentConfig.md)\>
 
-- Promise resolving to environment-specific configuration.
-
-#### Throws
-
-- When environment is not found or configuration cannot be loaded.
+Environment-specific configuration slice.
 
 ***
 
@@ -105,19 +86,15 @@ Gets configuration for the current environment.
 
 > **loadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:83](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L83)
+Defined in: [src/shared/configurationLoader.ts:80](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/configurationLoader.ts#L80)
 
-Loads and validates the application configuration.
+Load and return the merged application configuration (TS source of truth).
 
 #### Returns
 
 `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-- Promise resolving to the loaded configuration.
-
-#### Throws
-
-- When configuration file cannot be loaded or is invalid.
+Merged configuration object.
 
 ***
 
@@ -125,41 +102,12 @@ Loads and validates the application configuration.
 
 > **reloadConfig**(): `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-Defined in: [src/shared/configurationLoader.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/configurationLoader.ts#L194)
+Defined in: [src/shared/configurationLoader.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/configurationLoader.ts#L136)
 
-Reloads configuration from disk.
+Reload configuration (clears cache and re-reads TS config).
 
 #### Returns
 
 `Promise`\<[`ApplicationConfig`](../../../types/applicationConfig/interfaces/ApplicationConfig.md)\>
 
-- Promise resolving to reloaded configuration.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Freshly loaded configuration.

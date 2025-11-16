@@ -1,29 +1,14 @@
----
-title: Knowledge Hit
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeHit
+[UserContext-mcp-extension](../../../modules.md) / [mcp/knowledgeBase](../README.md) / KnowledgeHit
 
 # Interface: KnowledgeHit
 
-Defined in: [src/mcp/knowledgeBase.ts:12](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L12)
+Defined in: [src/mcp/knowledgeBase.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L20)
+
+KnowledgeHit interface.
 
 ## Properties
 
@@ -31,7 +16,7 @@ Defined in: [src/mcp/knowledgeBase.ts:12](https://github.com/ErikPlachta/VSCode-
 
 > **id**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:13](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L13)
+Defined in: [src/mcp/knowledgeBase.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L21)
 
 ***
 
@@ -39,7 +24,7 @@ Defined in: [src/mcp/knowledgeBase.ts:13](https://github.com/ErikPlachta/VSCode-
 
 > **score**: `number`
 
-Defined in: [src/mcp/knowledgeBase.ts:16](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L16)
+Defined in: [src/mcp/knowledgeBase.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L24)
 
 ***
 
@@ -47,7 +32,7 @@ Defined in: [src/mcp/knowledgeBase.ts:16](https://github.com/ErikPlachta/VSCode-
 
 > **summary**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:15](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L15)
+Defined in: [src/mcp/knowledgeBase.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L23)
 
 ***
 
@@ -55,33 +40,4 @@ Defined in: [src/mcp/knowledgeBase.ts:15](https://github.com/ErikPlachta/VSCode-
 
 > **title**: `string`
 
-Defined in: [src/mcp/knowledgeBase.ts:14](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/knowledgeBase.ts#L14)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/mcp/knowledgeBase.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/knowledgeBase.ts#L22)

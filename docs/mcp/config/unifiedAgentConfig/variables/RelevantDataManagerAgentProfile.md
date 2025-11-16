@@ -1,57 +1,11 @@
----
-title: Relevant Data Manager Agent Profile
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / RelevantDataManagerAgentProfile
+[UserContext-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / RelevantDataManagerAgentProfile
 
 # Variable: RelevantDataManagerAgentProfile
 
 > `const` **RelevantDataManagerAgentProfile**: [`OrchestrationProfile`](../interfaces/OrchestrationProfile.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:481](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L481)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:519](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L519)

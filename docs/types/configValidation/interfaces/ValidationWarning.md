@@ -1,31 +1,14 @@
----
-title: Validation Warning
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / ValidationWarning
+[UserContext-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / ValidationWarning
 
 # Interface: ValidationWarning
 
-Defined in: [src/types/configValidation.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L51)
+Defined in: [src/types/configValidation.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L19)
 
-Validation warning (non-blocking issue)
+Validation warning (non-blocking issue).
 
 ## Extends
 
@@ -37,9 +20,7 @@ Validation warning (non-blocking issue)
 
 > `optional` **actual**: `unknown`
 
-Defined in: [src/types/configValidation.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L45)
-
-Actual value found
+Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L15)
 
 #### Inherited from
 
@@ -51,9 +32,7 @@ Actual value found
 
 > **category**: `"schema"` \| `"type"` \| `"business_rule"` \| `"compatibility"`
 
-Defined in: [src/types/configValidation.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L33)
-
-Error category
+Defined in: [src/types/configValidation.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L11)
 
 #### Inherited from
 
@@ -65,9 +44,7 @@ Error category
 
 > `optional` **expected**: `unknown`
 
-Defined in: [src/types/configValidation.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L42)
-
-Expected value or format
+Defined in: [src/types/configValidation.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L14)
 
 #### Inherited from
 
@@ -79,7 +56,7 @@ Expected value or format
 
 > **level**: `"warning"`
 
-Defined in: [src/types/configValidation.ts:52](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L52)
+Defined in: [src/types/configValidation.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L20)
 
 ***
 
@@ -87,9 +64,7 @@ Defined in: [src/types/configValidation.ts:52](https://github.com/ErikPlachta/VS
 
 > **message**: `string`
 
-Defined in: [src/types/configValidation.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L39)
-
-Human-readable error message
+Defined in: [src/types/configValidation.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L13)
 
 #### Inherited from
 
@@ -101,39 +76,8 @@ Human-readable error message
 
 > **path**: `string`
 
-Defined in: [src/types/configValidation.ts:36](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L36)
-
-JSON path to the problematic field
+Defined in: [src/types/configValidation.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L12)
 
 #### Inherited from
 
 [`ValidationError`](ValidationError.md).[`path`](ValidationError.md#path)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

@@ -1,31 +1,14 @@
----
-title: Application Facing Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ApplicationFacingConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ApplicationFacingConfig
 
 # Interface: ApplicationFacingConfig
 
-Defined in: [src/types/agentConfig.ts:133](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L133)
+Defined in: [src/types/agentConfig.ts:212](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L212)
 
-Application-facing metadata
+Technical/application-facing metadata for operators and documentation.
 
 ## Properties
 
@@ -33,7 +16,7 @@ Application-facing metadata
 
 > `optional` **capabilities**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L136)
+Defined in: [src/types/agentConfig.ts:215](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L215)
 
 ***
 
@@ -41,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:136](https://github.com/ErikPlachta/VSCode
 
 > `optional` **dependencies**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:135](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L135)
+Defined in: [src/types/agentConfig.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L214)
 
 ***
 
@@ -49,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:135](https://github.com/ErikPlachta/VSCode
 
 > `optional` **errorHandling**: [`ErrorHandlingConfig`](ErrorHandlingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:138](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L138)
+Defined in: [src/types/agentConfig.ts:217](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L217)
 
 ***
 
@@ -57,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:138](https://github.com/ErikPlachta/VSCode
 
 > `optional` **monitoring**: [`MonitoringConfig`](MonitoringConfig.md)
 
-Defined in: [src/types/agentConfig.ts:139](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L139)
+Defined in: [src/types/agentConfig.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L218)
 
 ***
 
@@ -65,7 +48,7 @@ Defined in: [src/types/agentConfig.ts:139](https://github.com/ErikPlachta/VSCode
 
 > `optional` **performance**: [`PerformanceConfig`](PerformanceConfig.md)
 
-Defined in: [src/types/agentConfig.ts:137](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L137)
+Defined in: [src/types/agentConfig.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L216)
 
 ***
 
@@ -73,33 +56,4 @@ Defined in: [src/types/agentConfig.ts:137](https://github.com/ErikPlachta/VSCode
 
 > `optional` **technicalDescription**: `string`
 
-Defined in: [src/types/agentConfig.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L134)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:213](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L213)

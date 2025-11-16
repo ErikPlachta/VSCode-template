@@ -2,15 +2,6 @@
  * @packageDocumentation external.d implementation for types module
  */
 
-declare module "ajv-formats" {
-  import type Ajv from "ajv";
-
-  type AddFormats = (ajv: Ajv) => Ajv;
-
-  const addFormats: AddFormats;
-  export default addFormats;
-}
-
 declare module "gray-matter" {
   import type { Buffer } from "node:buffer";
 

@@ -4,12 +4,33 @@
  * This script helps update import statements throughout the project when files
  * are moved or when switching from relative to absolute imports.
  *
- * @author VSCode-template project
+ * @author vscode-extension-mcp-server project
  * @since 1.0.0
  */
 
 import { promises as fs } from "fs";
 import { join, extname } from "path";
+
+/**
+ * Central configuration object for default import path rewrites.
+ *
+ * Adjust this object rather than editing logic in `runImportFixer`.
+ */
+const DEFAULT_IMPORT_REWRITE: ImportFixConfig = {
+  targetDirectory: join(process.cwd(), "src"),
+  transformations: [
+    { find: "../agents/", replace: "@agents/" },
+    { find: "../extension/", replace: "@extension/" },
+    { find: "../mcp/", replace: "@mcp/" },
+    { find: "../server/", replace: "@server/" },
+    { find: "../shared/", replace: "@shared/" },
+    { find: "../types/", replace: "@internal-types/" },
+    { find: "../tools/", replace: "@tools/" },
+    { find: "../agent/", replace: "@agent/" },
+  ],
+  extensions: [".ts"],
+  dryRun: false,
+};
 
 /**
  * Configuration interface for import path transformations.
@@ -145,7 +166,7 @@ function transformImports(
  * ```typescript
  * // Convert ../ to ../../ in test files (regex example)
  * const stats = await fixImports({
- *   targetDirectory: './bin/tests',
+ *   targetDirectory: './tests',
  *   transformations: [
  *     { find: '\\.\\./(?!\\.\\.)', replace: '../../', isRegex: true }
  *   ]
@@ -229,23 +250,10 @@ export async function fixImports(
  * Runs predefined import transformations commonly needed in this project.
  */
 export async function runImportFixer(): Promise<void> {
-  console.log("🚀 Starting import path fixes...\n");
-
-  // Fix relative imports to absolute imports in src directory
-  await fixImports({
-    targetDirectory: join(process.cwd(), "src"),
-    transformations: [
-      { find: "../agents/", replace: "@agents/" },
-      { find: "../extension/", replace: "@extension/" },
-      { find: "../mcp/", replace: "@mcp/" },
-      { find: "../server/", replace: "@server/" },
-      { find: "../shared/", replace: "@shared/" },
-      { find: "../types/", replace: "@types/" },
-      { find: "../tools/", replace: "@tools/" },
-      { find: "../agent/", replace: "@agent/" },
-    ],
-  });
-
+  console.log(
+    "🚀 Starting import path fixes using DEFAULT_IMPORT_REWRITE...\n"
+  );
+  await fixImports(DEFAULT_IMPORT_REWRITE);
   console.log("\n✅ Import fixing completed!");
 }
 

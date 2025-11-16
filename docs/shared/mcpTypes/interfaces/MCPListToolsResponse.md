@@ -1,29 +1,12 @@
----
-title: MCPList Tools Response
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/mcpTypes](../README.md) / MCPListToolsResponse
+[UserContext-mcp-extension](../../../modules.md) / [shared/mcpTypes](../README.md) / MCPListToolsResponse
 
 # Interface: MCPListToolsResponse
 
-Defined in: [src/shared/mcpTypes.ts:53](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L53)
+Defined in: [src/shared/mcpTypes.ts:59](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L59)
 
 JSON-RPC 2.0 payload returned by the MCP server.
 
@@ -33,7 +16,7 @@ JSON-RPC 2.0 payload returned by the MCP server.
 
 > `optional` **error**: `object`
 
-Defined in: [src/shared/mcpTypes.ts:57](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L57)
+Defined in: [src/shared/mcpTypes.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L63)
 
 #### code?
 
@@ -53,7 +36,7 @@ Defined in: [src/shared/mcpTypes.ts:57](https://github.com/ErikPlachta/VSCode-te
 
 > **id**: `string` \| `number`
 
-Defined in: [src/shared/mcpTypes.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L55)
+Defined in: [src/shared/mcpTypes.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L61)
 
 ***
 
@@ -61,7 +44,7 @@ Defined in: [src/shared/mcpTypes.ts:55](https://github.com/ErikPlachta/VSCode-te
 
 > **jsonrpc**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:54](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L54)
+Defined in: [src/shared/mcpTypes.ts:60](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L60)
 
 ***
 
@@ -69,37 +52,8 @@ Defined in: [src/shared/mcpTypes.ts:54](https://github.com/ErikPlachta/VSCode-te
 
 > `optional` **result**: `object`
 
-Defined in: [src/shared/mcpTypes.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L56)
+Defined in: [src/shared/mcpTypes.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L62)
 
 #### tools?
 
 > `optional` **tools**: [`MCPTool`](MCPTool.md)[]
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

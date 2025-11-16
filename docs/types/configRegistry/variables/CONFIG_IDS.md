@@ -1,31 +1,14 @@
----
-title: CONFIG IDS
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG\_IDS
+[UserContext-mcp-extension](../../../modules.md) / [types/configRegistry](../README.md) / CONFIG\_IDS
 
 # Variable: CONFIG\_IDS
 
 > `const` **CONFIG\_IDS**: `object`
 
-Defined in: [src/types/configRegistry.ts:23](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configRegistry.ts#L23)
+Defined in: [src/types/configRegistry.ts:22](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L22)
 
 Configuration ID format: agent.{agentType}.v{major}.{minor}.{patch}
 
@@ -42,11 +25,23 @@ Examples:
 
 Clarification agent configuration schema
 
+### COMMUNICATION\_AGENT
+
+> `readonly` **COMMUNICATION\_AGENT**: `"agent.communication.v1.0.0"` = `"agent.communication.v1.0.0"`
+
+Communication agent configuration schema
+
 ### DATA\_AGENT
 
 > `readonly` **DATA\_AGENT**: `"agent.data.v1.0.0"` = `"agent.data.v1.0.0"`
 
 Data agent configuration schema
+
+### DATA\_LOADER\_AGENT
+
+> `readonly` **DATA\_LOADER\_AGENT**: `"agent.data-loader.v1.0.0"` = `"agent.data-loader.v1.0.0"`
+
+DataLoader agent configuration schema
 
 ### DATABASE\_AGENT
 
@@ -72,31 +67,8 @@ Relevant data manager agent configuration schema
 
 Repository health agent configuration schema
 
+### USER\_CONTEXT
 
-## Summary
+> `readonly` **USER\_CONTEXT**: `"agent.user-context.v1.0.0"` = `"agent.user-context.v1.0.0"`
 
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+User Context (renamed) agent configuration schema - alias of relevant-data-manager

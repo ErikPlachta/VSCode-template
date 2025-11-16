@@ -1,29 +1,12 @@
----
-title: Analytics Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/agentAnalytics](../README.md) / AnalyticsConfig
+[UserContext-mcp-extension](../../../modules.md) / [shared/agentAnalytics](../README.md) / AnalyticsConfig
 
 # Interface: AnalyticsConfig
 
-Defined in: [src/shared/agentAnalytics.ts:98](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L98)
+Defined in: [src/shared/agentAnalytics.ts:102](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L102)
 
 Configuration for analytics collection.
 
@@ -33,7 +16,7 @@ Configuration for analytics collection.
 
 > **batchSize**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:108](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L108)
+Defined in: [src/shared/agentAnalytics.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L112)
 
 Batch size for event processing.
 
@@ -43,7 +26,7 @@ Batch size for event processing.
 
 > **enabled**: `boolean`
 
-Defined in: [src/shared/agentAnalytics.ts:100](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L100)
+Defined in: [src/shared/agentAnalytics.ts:104](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L104)
 
 Enable analytics collection.
 
@@ -53,7 +36,7 @@ Enable analytics collection.
 
 > **maxEvents**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:104](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L104)
+Defined in: [src/shared/agentAnalytics.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L108)
 
 Maximum number of events to store.
 
@@ -63,7 +46,7 @@ Maximum number of events to store.
 
 > **persistentStorage**: `boolean`
 
-Defined in: [src/shared/agentAnalytics.ts:110](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L110)
+Defined in: [src/shared/agentAnalytics.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L114)
 
 Enable persistent storage.
 
@@ -73,7 +56,7 @@ Enable persistent storage.
 
 > **retentionPeriod**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:106](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L106)
+Defined in: [src/shared/agentAnalytics.ts:110](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L110)
 
 Retention period in milliseconds.
 
@@ -83,7 +66,7 @@ Retention period in milliseconds.
 
 > **sampleRate**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:102](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L102)
+Defined in: [src/shared/agentAnalytics.ts:106](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L106)
 
 Sample rate for event collection (0-1).
 
@@ -93,35 +76,6 @@ Sample rate for event collection (0-1).
 
 > `optional` **storageFile**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:112](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L112)
+Defined in: [src/shared/agentAnalytics.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L116)
 
 Storage file path for persistent storage.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

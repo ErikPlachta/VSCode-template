@@ -1,39 +1,22 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / types/configRegistry
+[UserContext-mcp-extension](../../modules.md) / types/configRegistry
 
 # types/configRegistry
 
-Configuration ID Registry - Central registry for all agent configuration schema IDs
+Configuration ID Registry – Central registry for agent configuration schema IDs.
 
-This file provides a centralized registry of unique configuration IDs (UIDs) for all
-agent configurations. Instead of using file paths in schema references, each configuration
-type has a unique ID that can be validated and versioned independently.
+Centralized registry of unique configuration IDs (UIDs) for all agent configurations.
+Instead of file-path based references, each configuration type has a stable ID that can
+be validated and versioned independently.
 
-Benefits:
-- Unique identification of configuration schemas
-- Version tracking for configuration changes
-- Validation and compatibility checking
-- Decoupling from file system structure
+## Remarks
+
+Use these IDs across configs, validators, and tooling to avoid file-structure coupling.
+Prefer type-safe references (`ConfigId`) and utility helpers (`ConfigUtils`) when working
+with IDs at runtime.
 
 ## Interfaces
 
@@ -52,32 +35,3 @@ Benefits:
 ## Functions
 
 - [validateConfig](functions/validateConfig.md)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
