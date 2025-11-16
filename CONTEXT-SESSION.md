@@ -47,20 +47,41 @@ Formatting Conventions
 
 ## Current Focus Summary
 
-- Focus: types purity refactor in `src/types/**` as the first step of the integrity review.
-- Goal: fully enforce types-only behavior and shared-runtime boundaries before deeper server/agent review.
-- Scope (immediate): `src/types/**`, `src/shared/**` helpers, and associated tests/docs.
-- Scope (next): broader `src/**` integrity review and MCP server checklist already documented below.
-- Status: repo-ops/changelog stabilization merged; TODOs reshuffled so Types Purity is Current P1 and integrity review is the next P1.
+- Focus: repo-ops CLI rebuild (argument parsing, exit codes, and governance flows) on branch `feat/repo-ops-cli-rebuild`.
+- Goal: make repo-ops a robust, typed, config-driven CLI for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md` so governance workflows are reliable.
+- Scope (immediate): `bin/repo-ops/**` (shared flag parser, changelog/todo/session commands, tests) plus README/docs touch-ups.
+- Scope (next): Types Purity refactor in `src/types/**`, then the broader `src/**` integrity review checklist below.
+- Status: shared `parseFlags` wired into `todo` and all `changelog` subcommands; Jest tests green after refactor.
 
 <!-- END:CURRENT-FOCUS-SUMMARY -->
 <!-- BEGIN:CURRENT-FOCUS-DETAIL -->
 
 ## Current Focus Detail
 
-### Integrity Review – `src/**` and MCP Server
+### Current – Repo-ops CLI Rebuild
 
-Objective: Perform a structured integrity review of the core MCP server and agent infrastructure under `src/**` before further feature work.
+Objective: Rebuild repo-ops into a single, robust CLI with consistent flag parsing, clear exit codes, and safe, backup-aware governance operations for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md`.
+
+Immediate Focus (Current P1 from `TODO.md`)
+
+- Shared argument parsing
+  - Shared `parseFlags` helper created in `bin/repo-ops/flags.ts` and wired into `todo` and all `changelog` subcommands.
+  - `writeFlag` and related booleans are now derived solely from presence of flags in the parsed map, decoupled from other behavior.
+- Changelog flows
+  - `changelog scaffold`, `write`, `map`, `diff`, and `lock` all use the shared parser; behavior validated via existing Jest tests.
+  - Next slice: normalize exit codes for changelog commands (`write/map/diff/verify/verify-only/lock`) and add focused CLI tests for success/error paths.
+- TODO/session flows (upcoming within this branch)
+  - Rebuild TODO commands to be fully marker-aware and aligned with `TODO.md` sections and priorities.
+  - Revisit `session rotate` and `session lint` to ensure they use shared helpers and reflect the governance rules described in `.github/copilot-instructions.md`.
+
+Planned Verification
+
+- Continue to run `npm test` after each significant repo-ops slice (flags, exit codes, TODO/session changes).
+- Once the rebuilt CLI surface stabilizes, add an end-to-end test that exercises: add TODO → rotate session → write changelog entry → verify consistency.
+
+### Next – Integrity Review `src/**` and MCP Server
+
+Objective (Next P1): After repo-ops CLI rebuild is stable, perform a structured integrity review of the core MCP server and agent infrastructure under `src/**`.
 
 Key Constraints
 
@@ -156,11 +177,11 @@ Initial Pass Targets (Granular Checklist)
 <!-- END:CURRENT-FOCUS-DETAIL -->
 <!-- BEGIN:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->
 
-### Notes – Integrity Review Context (2025-11-15)
+### Notes – Repo-ops CLI Rebuild Context (2025-11-16)
 
-- Branch state: `feat/changelog-repo-ops-stabilization` merged into `develop`; repo-ops changelog semantics and backups stabilized.
-- Current priority has shifted from repo-ops internals to a `src/**` integrity review, with Types Purity refactor in `src/types/**` designated as the first concrete step.
-- The checklist in the Focus Detail section is the authoritative high-level reference for what the integrity review should cover; the Types Purity work burns down the `src/types/**` and shared-runtime pieces first.
-- `TODO.md` has been reshuffled so Types Purity is the Current P1 and the broader MCP Server & `src/**` integrity review is the next P1, preserving the detailed checklist for that phase.
+- Branch state: working on `feat/repo-ops-cli-rebuild`; prior changelog stabilization work is already merged.
+- Current priority (Current P1 in `TODO.md`) is the repo-ops CLI rebuild; Types Purity and the broader `src/**` integrity review are Next P1 items.
+- Recent progress: introduced shared `parseFlags` under `bin/repo-ops/flags.ts` and wired it into `todo` and all `changelog` subcommands; Jest tests remain green.
+- Near-term focus: normalize exit codes and add targeted CLI tests for changelog commands, then expand to TODO and session flows before circling back to Types Purity.
 
 <!-- END:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

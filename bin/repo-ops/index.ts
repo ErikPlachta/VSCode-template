@@ -17,6 +17,7 @@
  */
 
 import { defaultConfig } from "./repo-ops.config";
+import { parseFlags as parseSharedFlags } from "./flags";
 import * as fs from "fs";
 import * as path from "path";
 const args = process.argv.slice(2);
@@ -208,32 +209,6 @@ const main = (): void => {
       }
     }
     case "todo": {
-      /**
-       * Parse simple --flag value pairs into a map supporting multi-flags.
-       *
-       * @param {string[]} argv - Argument vector to parse (excluding command/subcommand).
-       * @returns {Record<string, string | string[] | boolean>} Parsed flags.
-       */
-      const parseFlags = (
-        argv: string[]
-      ): Record<string, string | string[] | boolean> => {
-        const out: Record<string, string | string[] | boolean> = {};
-        for (let i = 0; i < argv.length; i++) {
-          const t = argv[i];
-          if (!t.startsWith("--")) continue;
-          const key = t.slice(2);
-          const next = argv[i + 1];
-          if (!next || next.startsWith("--")) {
-            out[key] = true;
-          } else {
-            if (out[key] === undefined) out[key] = next;
-            else if (Array.isArray(out[key])) (out[key] as string[]).push(next);
-            else out[key] = [out[key] as string, next];
-            i++;
-          }
-        }
-        return out;
-      };
       const sub = (args[1] as string | undefined) ?? "add";
       const rest = args.slice(2);
       switch (sub) {
@@ -245,7 +220,7 @@ const main = (): void => {
            */
           const runAdd = async (): Promise<void> => {
             const { addTodo } = await import("./todo");
-            const flags = parseFlags(rest);
+            const flags = parseSharedFlags(rest);
             const title = (flags.title as string) ?? "";
             if (!title) {
               console.error("todo add: --title is required");
@@ -313,7 +288,7 @@ const main = (): void => {
            */
           const runComplete = async (): Promise<void> => {
             const { completeTodo } = await import("./todo");
-            const flags = parseFlags(rest);
+            const flags = parseSharedFlags(rest);
             const match = (flags.match as string) ?? "";
             if (!match) {
               console.error(
@@ -352,7 +327,7 @@ const main = (): void => {
            */
           const runMove = async (): Promise<void> => {
             const { moveTodo } = await import("./todo");
-            const flags = parseFlags(rest);
+            const flags = parseSharedFlags(rest);
             const match = (flags.match as string) ?? "";
             const to = (flags.to as "P1" | "P2" | "P3") ?? undefined;
             if (!match || !to) {
@@ -395,6 +370,7 @@ const main = (): void => {
     case "changelog": {
       const sub = (args[1] as string | undefined) ?? "scaffold";
       const rest = args.slice(2);
+      const flags = parseSharedFlags(rest);
       switch (sub) {
         case "scaffold": {
           /**
@@ -404,13 +380,9 @@ const main = (): void => {
            */
           const runScaffold = async (): Promise<void> => {
             const { scaffoldEntry } = await import("./changelog");
-            const typeIdx = rest.indexOf("--type");
-            const sumIdx = rest.indexOf("--summary");
-            const ctxIdx = rest.indexOf("--context");
-            const type = typeIdx !== -1 ? rest[typeIdx + 1] : "chore";
-            const summary =
-              sumIdx !== -1 ? rest[sumIdx + 1] : "Describe the change";
-            const context = ctxIdx !== -1 ? rest[ctxIdx + 1] : undefined;
+            const type = (flags.type as string) ?? "chore";
+            const summary = (flags.summary as string) ?? "Describe the change";
+            const context = flags.context as string | undefined;
             // Newline validation: warn if literal \n sequences appear (suggesting ANSI C quoting misuse)
             if (
               context &&
@@ -435,49 +407,34 @@ const main = (): void => {
            */
           const runWrite = async (): Promise<void> => {
             const { writeEntry } = await import("./changelog");
-            const typeIdx = rest.indexOf("--type");
-            const sumIdx = rest.indexOf("--summary");
-            const ctxIdx = rest.indexOf("--context");
-            const changesIdx = rest.indexOf("--changes");
-            const archIdx = rest.indexOf("--architecture");
-            const filesIdx = rest.indexOf("--files");
-            const includeFilesFlag = rest.includes("--include-files");
-            const testingIdx = rest.indexOf("--testing");
-            const impactIdx = rest.indexOf("--impact");
-            const filesIncludeIdx = rest.indexOf("--files-include");
-            const filesExcludeIdx = rest.indexOf("--files-exclude");
-            const validateFlag = rest.includes("--validate");
-            // NOTE: writeFlag controls whether changelog writes are applied or treated as dry-run.
-            // It must reflect only the presence of --write on the CLI and must not
-            // be coupled to any other flags (auto-verify, include-files, etc.).
-            const writeFlag = rest.includes("--write");
-            const explicitAutoVerify = rest.includes("--auto-verify");
-            const noAutoVerify = rest.includes("--no-auto-verify");
-            const autoVerifyForce = rest.includes("--auto-verify-force");
-            const verifyBlock = rest.includes("--verify-block");
-            const type = typeIdx !== -1 ? rest[typeIdx + 1] : "chore";
-            const summary =
-              sumIdx !== -1 ? rest[sumIdx + 1] : "Describe the change";
-            const context = ctxIdx !== -1 ? rest[ctxIdx + 1] : undefined;
-            const changesMade =
-              changesIdx !== -1 ? rest[changesIdx + 1] : undefined;
+            const writeFlag = Boolean(flags.write);
+            const validateFlag = Boolean(flags.validate);
+            const explicitAutoVerify = Boolean(flags["auto-verify"]);
+            const noAutoVerify = Boolean(flags["no-auto-verify"]);
+            const autoVerifyForce = Boolean(flags["auto-verify-force"]);
+            const verifyBlock = Boolean(flags["verify-block"]);
+            const includeFilesFlag = Boolean(flags["include-files"]);
+            const type = (flags.type as string) ?? "chore";
+            const summary = (flags.summary as string) ?? "Describe the change";
+            const context = flags.context as string | undefined;
+            const changesMade = flags.changes as string | undefined;
             const architectureNotes =
-              archIdx !== -1 ? rest[archIdx + 1] : undefined;
-            const filesChanged =
-              filesIdx !== -1 ? rest[filesIdx + 1] : undefined;
-            const testingDetails =
-              testingIdx !== -1 ? rest[testingIdx + 1] : undefined;
-            const impact = impactIdx !== -1 ? rest[impactIdx + 1] : undefined;
+              (flags.architecture as string) ?? undefined;
+            const filesChanged = flags.files as string | undefined;
+            const testingDetails = flags.testing as string | undefined;
+            const impact = flags.impact as string | undefined;
+            const filesIncludeRaw = flags["files-include"];
+            const filesExcludeRaw = flags["files-exclude"];
             const filesIncludePrefixes =
-              filesIncludeIdx !== -1
-                ? String(rest[filesIncludeIdx + 1])
+              typeof filesIncludeRaw === "string"
+                ? filesIncludeRaw
                     .split(",")
                     .map((s) => s.trim())
                     .filter(Boolean)
                 : undefined;
             const filesExcludePrefixes =
-              filesExcludeIdx !== -1
-                ? String(rest[filesExcludeIdx + 1])
+              typeof filesExcludeRaw === "string"
+                ? filesExcludeRaw
                     .split(",")
                     .map((s) => s.trim())
                     .filter(Boolean)
@@ -571,16 +528,13 @@ const main = (): void => {
             const { mapChangelog } = await import("./changelog");
             const { incrementalMap } = await import("./changelogFast");
             const repo = defaultConfig.resolveRepoPaths(process.cwd());
-            const filterDayIdx = rest.indexOf("--filter-day");
-            const filterTypeIdx = rest.indexOf("--filter-type");
-            const pretty = rest.includes("--pretty");
-            const useFast = rest.includes("--fast");
-            const filterDay =
-              filterDayIdx !== -1 ? rest[filterDayIdx + 1] : undefined;
-            const filterType =
-              filterTypeIdx !== -1
-                ? rest[filterTypeIdx + 1].toLowerCase()
-                : undefined;
+            const pretty = Boolean(flags.pretty);
+            const useFast = Boolean(flags.fast);
+            const filterDay = flags["filter-day"] as string | undefined;
+            const filterTypeRaw = flags["filter-type"] as string | undefined;
+            const filterType = filterTypeRaw
+              ? filterTypeRaw.toLowerCase()
+              : undefined;
             let map = await mapChangelog(repo.changelog);
             let fastNotes: string[] = [];
             if (useFast) {
@@ -750,7 +704,7 @@ const main = (): void => {
                   modified,
                 },
                 null,
-                rest.includes("--pretty") ? 2 : 0
+                flags.pretty ? 2 : 0
               )
             );
           };
@@ -811,9 +765,9 @@ const main = (): void => {
               process.exitCode = 1;
               return;
             }
-            const force = rest.includes("--force");
-            const ttlIdx = rest.indexOf("--ttl-minutes");
-            const ttlMin = ttlIdx !== -1 ? Number(rest[ttlIdx + 1]) : undefined;
+            const force = Boolean(flags.force);
+            const ttlRaw = flags["ttl-minutes"] as string | undefined;
+            const ttlMin = ttlRaw ? Number(ttlRaw) : undefined;
             const ttlMs =
               ttlMin && !isNaN(ttlMin) ? ttlMin * 60 * 1000 : undefined;
             const repo = defaultConfig.resolveRepoPaths(process.cwd());
