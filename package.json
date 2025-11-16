@@ -161,7 +161,7 @@
     "mcp:gen": "tsx src/tools/generateMcpConfig.ts",
     "package": "npm run build && npx vsce package",
     "prepublishOnly": "npm run prebuild",
-    "install": "code --install-extension UserContext-mcp-extension-1.0.0.vsix",
+    "vsix:install": "code --install-extension UserContext-mcp-extension-1.0.0.vsix",
     "server": "npm run compile -- --pretty false && node ./out/server/index.js",
     "repo:ops": "tsx bin/repo-ops/index.ts"
   },

@@ -8,7 +8,7 @@
 
 > **validateRelationshipDefinitionImpl**(`obj`): [`ValidationResult`](../../../../types/userContext.types/interfaces/ValidationResult.md)
 
-Defined in: [src/shared/validation/categoryValidation.ts:205](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/validation/categoryValidation.ts#L205)
+Defined in: [src/shared/validation/categoryValidation.ts:205](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/categoryValidation.ts#L205)
 
 Validate a RelationshipDefinition-like object.
 

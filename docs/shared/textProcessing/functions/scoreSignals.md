@@ -8,7 +8,7 @@
 
 > **scoreSignals**(`text`, `signals`, `config?`): [`SignalMatchResult`](../interfaces/SignalMatchResult.md)
 
-Defined in: [src/shared/textProcessing.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/textProcessing.ts#L203)
+Defined in: [src/shared/textProcessing.ts:203](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/textProcessing.ts#L203)
 
 Scores how well input text matches a set of signals, accounting for inflections.
 

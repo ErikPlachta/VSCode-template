@@ -8,7 +8,7 @@
 
 > **getOrchestrationProfile**(`agentId`): [`OrchestrationProfile`](../interfaces/OrchestrationProfile.md)
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:480](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/mcp/config/unifiedAgentConfig.ts#L480)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:480](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L480)
 
 Utility functions for accessing specific aspects of agent configurations
 

@@ -8,7 +8,7 @@
 
 > **validateCategorySchemas**(`categories`): [`SchemaValidationSummary`](../interfaces/SchemaValidationSummary.md)
 
-Defined in: [src/mcp/schemaUtils.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/mcp/schemaUtils.ts#L93)
+Defined in: [src/mcp/schemaUtils.ts:93](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L93)
 
 Aggregate schema validation results for provided categories.
 

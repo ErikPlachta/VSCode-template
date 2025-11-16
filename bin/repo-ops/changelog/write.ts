@@ -103,6 +103,7 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
   dryRun: boolean;
   notes?: string[];
 }> {
+  const willWrite = args.write === true;
   const repo: RepoPaths = defaultConfig.resolveRepoPaths(process.cwd());
   const allowed = new Set(defaultConfig.changelog.entryTypes);
   const type = allowed.has(args.type) ? args.type : "chore";
@@ -117,7 +118,7 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
         })
       : undefined;
 
-  const shouldAutoVerify = (args.write ?? false) && args.autoVerify !== false;
+  const shouldAutoVerify = willWrite && args.autoVerify !== false;
 
   let b: { ok: boolean; out: string } | undefined;
   let t: { ok: boolean; out: string } | undefined;
@@ -147,7 +148,6 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
 
   // Acquire a filesystem lock only for actual write operations.
   // Dry-run validations must not hold or create locks.
-  const willWrite = args.write ?? false;
   const lock = willWrite ? acquireLock(repo.root, "changelog") : undefined;
   let notes: string[] = [];
   if (willWrite && lock && !lock.acquired) {
@@ -200,9 +200,9 @@ export async function writeEntry(args: WriteEntryArgs): Promise<{
 
   const backupRoot = path.join(repo.root, defaultConfig.backupDirName);
   await ensureDir(backupRoot);
-  await backupFile(repo.changelog, backupRoot);
+  const archiveBackupPath = await backupFile(repo.changelog, backupRoot);
 
-  const tmpPath = repo.changelog + ".tmp";
+  const tmpPath = path.join(backupRoot, "CHANGELOG.next.tmp");
   await fs.promises.writeFile(tmpPath, next, "utf8");
   await fs.promises.rename(tmpPath, repo.changelog);
 

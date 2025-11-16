@@ -6,7 +6,7 @@
 
 # Interface: CompanyPolicyRecord
 
-Defined in: [src/types/userContext.types.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L165)
+Defined in: [src/types/userContext.types.ts:165](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L165)
 
 Company policy record
 
@@ -26,7 +26,7 @@ Additional dynamic properties
 
 > **applicableDepartments**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L173)
+Defined in: [src/types/userContext.types.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L173)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [src/types/userContext.types.ts:173](https://github.com/ErikPlachta/
 
 > **category**: `string`
 
-Defined in: [src/types/userContext.types.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L169)
+Defined in: [src/types/userContext.types.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L169)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [src/types/userContext.types.ts:169](https://github.com/ErikPlachta/
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L168)
+Defined in: [src/types/userContext.types.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L168)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [src/types/userContext.types.ts:168](https://github.com/ErikPlachta/
 
 > **effectiveDate**: `string`
 
-Defined in: [src/types/userContext.types.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L170)
+Defined in: [src/types/userContext.types.ts:170](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L170)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [src/types/userContext.types.ts:170](https://github.com/ErikPlachta/
 
 > **id**: `string`
 
-Defined in: [src/types/userContext.types.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L166)
+Defined in: [src/types/userContext.types.ts:166](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L166)
 
 Unique identifier for this record
 
@@ -72,7 +72,7 @@ Unique identifier for this record
 
 > **lastUpdated**: `string`
 
-Defined in: [src/types/userContext.types.ts:171](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L171)
+Defined in: [src/types/userContext.types.ts:171](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L171)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [src/types/userContext.types.ts:171](https://github.com/ErikPlachta/
 
 > `optional` **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L94)
+Defined in: [src/types/userContext.types.ts:94](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L94)
 
 Human-readable name (optional, but either name or title required)
 
@@ -94,7 +94,7 @@ Human-readable name (optional, but either name or title required)
 
 > **owner**: `string`
 
-Defined in: [src/types/userContext.types.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L172)
+Defined in: [src/types/userContext.types.ts:172](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L172)
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: [src/types/userContext.types.ts:172](https://github.com/ErikPlachta/
 
 > **requiresAcknowledgment**: `boolean`
 
-Defined in: [src/types/userContext.types.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L174)
+Defined in: [src/types/userContext.types.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L174)
 
 ***
 
@@ -110,7 +110,7 @@ Defined in: [src/types/userContext.types.ts:174](https://github.com/ErikPlachta/
 
 > **title**: `string`
 
-Defined in: [src/types/userContext.types.ts:167](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L167)
+Defined in: [src/types/userContext.types.ts:167](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L167)
 
 Alternative to name (optional, but either name or title required)
 

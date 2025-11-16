@@ -6,7 +6,7 @@
 
 # Interface: CheckResult
 
-Defined in: [src/tools/repositoryHealth.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/tools/repositoryHealth.ts#L45)
+Defined in: [src/tools/repositoryHealth.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L45)
 
 Result of a single compliance check.
 
@@ -16,7 +16,7 @@ Result of a single compliance check.
 
 > `readonly` **messages**: readonly `string`[]
 
-Defined in: [src/tools/repositoryHealth.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/tools/repositoryHealth.ts#L48)
+Defined in: [src/tools/repositoryHealth.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L48)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/tools/repositoryHealth.ts:48](https://github.com/ErikPlachta/vs
 
 > `readonly` **name**: `string`
 
-Defined in: [src/tools/repositoryHealth.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/tools/repositoryHealth.ts#L46)
+Defined in: [src/tools/repositoryHealth.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L46)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/tools/repositoryHealth.ts:46](https://github.com/ErikPlachta/vs
 
 > `readonly` **passed**: `boolean`
 
-Defined in: [src/tools/repositoryHealth.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/tools/repositoryHealth.ts#L47)
+Defined in: [src/tools/repositoryHealth.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L47)

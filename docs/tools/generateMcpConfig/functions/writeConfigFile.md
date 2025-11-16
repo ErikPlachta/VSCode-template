@@ -8,7 +8,7 @@
 
 > **writeConfigFile**(`config`): `string`
 
-Defined in: [src/tools/generateMcpConfig.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/tools/generateMcpConfig.ts#L107)
+Defined in: [src/tools/generateMcpConfig.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/generateMcpConfig.ts#L107)
 
 Persist generated configuration to disk under out/mcp.config.json
 

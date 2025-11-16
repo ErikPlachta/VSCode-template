@@ -8,7 +8,7 @@
 
 > **buildConfig**(): [`GeneratedMcpConfig`](../interfaces/GeneratedMcpConfig.md)
 
-Defined in: [src/tools/generateMcpConfig.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/tools/generateMcpConfig.ts#L61)
+Defined in: [src/tools/generateMcpConfig.ts:61](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/generateMcpConfig.ts#L61)
 
 Synthesize the MCP JSON configuration from TS sources.
 

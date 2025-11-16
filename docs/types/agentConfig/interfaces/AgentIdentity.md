@@ -6,7 +6,7 @@
 
 # Interface: AgentIdentity
 
-Defined in: [src/types/agentConfig.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L19)
+Defined in: [src/types/agentConfig.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L19)
 
 Agent identity metadata.
 
@@ -16,7 +16,7 @@ Agent identity metadata.
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L38)
+Defined in: [src/types/agentConfig.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L38)
 
 Comprehensive description of the agent's purpose and capabilities.
 
@@ -26,7 +26,7 @@ Comprehensive description of the agent's purpose and capabilities.
 
 > **id**: `string`
 
-Defined in: [src/types/agentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L23)
+Defined in: [src/types/agentConfig.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L23)
 
 Unique agent identifier used in routing and logging.
 
@@ -36,7 +36,7 @@ Unique agent identifier used in routing and logging.
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L28)
+Defined in: [src/types/agentConfig.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L28)
 
 Human-readable name of the agent.
 
@@ -46,6 +46,6 @@ Human-readable name of the agent.
 
 > **version**: `string`
 
-Defined in: [src/types/agentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L33)
+Defined in: [src/types/agentConfig.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L33)
 
 Semantic version of the agent configuration.

@@ -6,7 +6,7 @@
 
 # Interface: RelevantDataManagerInterface
 
-Defined in: [src/types/interfaces.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L216)
+Defined in: [src/types/interfaces.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L216)
 
 RelevantDataManagerInterface interface.
 
@@ -20,7 +20,7 @@ RelevantDataManagerInterface interface.
 
 > **getBusinessDataCatalog**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
 
-Defined in: [src/types/interfaces.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L220)
+Defined in: [src/types/interfaces.ts:220](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L220)
 
 Primary American English method returning the business data catalog.
 
@@ -34,7 +34,7 @@ Primary American English method returning the business data catalog.
 
 > **getBusinessDataCatalogue**(): [`BusinessDataCatalog`](BusinessDataCatalog.md)
 
-Defined in: [src/types/interfaces.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L226)
+Defined in: [src/types/interfaces.ts:226](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L226)
 
 Deprecated British English variant retained for migration window.
 
@@ -52,7 +52,7 @@ Use getBusinessDataCatalog instead.
 
 > **getCategoryInfo**(`categoryId`): [`CategoryInfo`](CategoryInfo.md)
 
-Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L227)
+Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L227)
 
 #### Parameters
 
@@ -70,7 +70,7 @@ Defined in: [src/types/interfaces.ts:227](https://github.com/ErikPlachta/vscode-
 
 > **getCategorySchema**(`categoryId`): [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L228)
+Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L228)
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: [src/types/interfaces.ts:228](https://github.com/ErikPlachta/vscode-
 
 > **getRelationships**(`categoryId`): [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L233)
+Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L233)
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Defined in: [src/types/interfaces.ts:233](https://github.com/ErikPlachta/vscode-
 
 > **validateCategoryData**(`categoryId`, `records`): [`ValidationResult`](ValidationResult.md)
 
-Defined in: [src/types/interfaces.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L229)
+Defined in: [src/types/interfaces.ts:229](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L229)
 
 #### Parameters
 

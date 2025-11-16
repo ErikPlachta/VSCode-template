@@ -12,6 +12,13 @@ Safety:
 - Mutating commands support `--write` to apply changes; otherwise they run as dry-run and print plans.
 - Before any write, a timestamped backup is created under the configured backup directory.
 
+Backups and temporary files:
+
+- Persistent backups live under the configured backup directory (default: `.repo-ops-backups/changelog-backup/`).
+- Each changelog write produces a timestamped `.bak` archive in that folder via the shared `backupFile` helper.
+- A single temporary file (`CHANGELOG.next.tmp`) is used during atomic writes and kept inside the same backup directory.
+- No `test_tmp` folders are used; all changelog backup artifacts live under the backup directory for easy discovery and cleanup.
+
 Usage examples:
 
 - Show help: `npm run repo:ops -- help`
@@ -59,7 +66,7 @@ Hash Chain: `chainHash = sha256(previousChainHash + fileHash)`; detects manual e
 ### Commands
 
 - `changelog scaffold` – Emit scaffold block (no mutation).
-- `changelog write --type <type> --summary "..." [--context "..."] [--write]` – Insert logs-only entry.
+- `changelog write --type <type> --summary "..." [--context "..."] [--write|--validate]` – Insert logs-only entry (use `--write` to apply, `--validate` for dry-run).
 - `changelog map [--filter-day YYYY-MM-DD] [--filter-type <type>] [--pretty]` – Emit derived navigation map.
 - `changelog verify` – Validate structure; exits non-zero on errors.
 

@@ -8,7 +8,7 @@
 
 > **ensureRegistration**(`opts`, `pathOptions?`): `Promise`\<`string`\>
 
-Defined in: [src/extension/mcpRegistration.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/extension/mcpRegistration.ts#L244)
+Defined in: [src/extension/mcpRegistration.ts:244](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/extension/mcpRegistration.ts#L244)
 
 Ensure an MCP server entry exists in mcp.json for Copilot Chat.
 Supports both stdio and HTTP transports using the legacy format.

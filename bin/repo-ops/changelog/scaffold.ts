@@ -51,6 +51,24 @@ export function scaffoldEntry(
     "Build: PASS|FAIL; Tests: summary; Lint: PASS|FAIL; Docs: PASS|FAIL; Health: PASS|FAIL; Coverage: %; JSDoc: status"
   ).trim();
   const impact = (extras?.impact || "(what this enables/fixes)").trim();
+  const normalizeList = (value: string): string => {
+    const src = value.replace(/\r\n?/g, "\n").trim();
+    if (!src) return src;
+    const segments = src
+      .split(/\.\s*-\s*|\.\s*-/g)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (segments.length <= 1) {
+      return src;
+    }
+    const normalized: string[] = [];
+    for (let i = 0; i < segments.length; i++) {
+      const part = segments[i]!;
+      const suffix = i < segments.length - 1 ? "." : "";
+      normalized.push(`- ${part}${suffix}`);
+    }
+    return normalized.join("\n");
+  };
   const lines: string[] = [
     `#### ${ts} ${cleanType}: ${cleanSummary}`,
     "",
@@ -58,13 +76,17 @@ export function scaffoldEntry(
     "",
     "**Changes Made**:",
     "",
-    changesMade,
+    normalizeList(changesMade),
     "",
-    `**Architecture Notes**: ${architectureNotes}`,
+    `**Architecture Notes**:`,
+    "",
+    normalizeList(architectureNotes),
     "",
     `**Testing**: ${testingDetails}`,
     "",
-    `**Impact**: ${impact}`,
+    `**Impact**:`,
+    "",
+    normalizeList(impact),
   ];
 
   if (filesChanged) {

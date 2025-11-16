@@ -69,14 +69,18 @@ describe("repo-ops changelog write flags & inline testing", () => {
 
     const text = fs.readFileSync(changelogPath, "utf8");
     expect(text).toContain("**Changes Made**:");
-    expect(text).toContain("file a.ts");
-    expect(text).toContain("**Architecture Notes**: No hardcoded values");
+    expect(text).toMatch(
+      /\*\*Changes Made\*\*:\s*\n1\. file a\.ts; 2\. file b\.ts/
+    );
+    expect(text).toMatch(
+      /\*\*Architecture Notes\*\*:\s*\nNo hardcoded values; single-path CLI/
+    );
     expect(text).toMatch(
       /\*\*Files Changed\*\*:\s*\n- bin\/repo-ops\/index\.ts/
     );
     expect(text).toContain("**Testing**: Build: PASS; Tests: PASS");
-    expect(text).toContain(
-      "**Impact**: Reduces manual edits; improves reliability."
+    expect(text).toMatch(
+      /\*\*Impact\*\*:\s*\nReduces manual edits; improves reliability\./
     );
   });
 
@@ -118,13 +122,22 @@ describe("repo-ops changelog write flags & inline testing", () => {
   });
 
   afterAll(() => {
-    const dir = path.join(process.cwd(), "tests_tmp");
-    if (fs.existsSync(dir)) {
-      try {
-        fs.rmSync(dir, { recursive: true, force: true });
-      } catch {
-        // ignore
+    const root = process.cwd();
+    const dir = path.join(root, "tests_tmp");
+    const backupTestsTmp = path.join(
+      root,
+      ".repo-ops-backups",
+      "changelog-backup",
+      "tests_tmp"
+    );
+    [dir, backupTestsTmp].forEach((p) => {
+      if (fs.existsSync(p)) {
+        try {
+          fs.rmSync(p, { recursive: true, force: true });
+        } catch {
+          // ignore
+        }
       }
-    }
+    });
   });
 });

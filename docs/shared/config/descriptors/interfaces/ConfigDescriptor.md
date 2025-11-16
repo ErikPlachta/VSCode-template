@@ -6,7 +6,7 @@
 
 # Interface: ConfigDescriptor
 
-Defined in: [src/shared/config/descriptors.ts:6](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L6)
+Defined in: [src/shared/config/descriptors.ts:6](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L6)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/shared/config/descriptors.ts:6](https://github.com/ErikPlachta/
 
 > `optional` **description**: `string`
 
-Defined in: [src/shared/config/descriptors.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L13)
+Defined in: [src/shared/config/descriptors.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L13)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/shared/config/descriptors.ts:13](https://github.com/ErikPlachta
 
 > `optional` **group**: `string`
 
-Defined in: [src/shared/config/descriptors.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L12)
+Defined in: [src/shared/config/descriptors.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L12)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/shared/config/descriptors.ts:12](https://github.com/ErikPlachta
 
 > **name**: `string`
 
-Defined in: [src/shared/config/descriptors.ts:7](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L7)
+Defined in: [src/shared/config/descriptors.ts:7](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L7)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/shared/config/descriptors.ts:7](https://github.com/ErikPlachta/
 
 > **path**: `string`
 
-Defined in: [src/shared/config/descriptors.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L8)
+Defined in: [src/shared/config/descriptors.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L8)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/shared/config/descriptors.ts:8](https://github.com/ErikPlachta/
 
 > **type**: `string`
 
-Defined in: [src/shared/config/descriptors.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L9)
+Defined in: [src/shared/config/descriptors.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L9)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/shared/config/descriptors.ts:9](https://github.com/ErikPlachta/
 
 > `optional` **validate**: (`value`) => `string` \| `boolean`
 
-Defined in: [src/shared/config/descriptors.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L14)
+Defined in: [src/shared/config/descriptors.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L14)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [src/shared/config/descriptors.ts:14](https://github.com/ErikPlachta
 
 > `optional` **verifyPaths**: `string`[]
 
-Defined in: [src/shared/config/descriptors.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L11)
+Defined in: [src/shared/config/descriptors.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L11)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [src/shared/config/descriptors.ts:11](https://github.com/ErikPlachta
 
 > **visibility**: `"public"` \| `"private"`
 
-Defined in: [src/shared/config/descriptors.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/config/descriptors.ts#L10)
+Defined in: [src/shared/config/descriptors.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L10)

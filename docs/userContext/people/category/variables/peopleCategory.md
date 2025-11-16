@@ -8,7 +8,7 @@
 
 > `const` **peopleCategory**: `CategoryConfig`
 
-Defined in: [src/userContext/people/category.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/userContext/people/category.ts#L55)
+Defined in: [src/userContext/people/category.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/userContext/people/category.ts#L55)
 
 People category configuration
 Employee directory complete with capabilities and system access.

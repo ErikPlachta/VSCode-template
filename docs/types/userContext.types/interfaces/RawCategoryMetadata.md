@@ -6,7 +6,7 @@
 
 # Interface: RawCategoryMetadata
 
-Defined in: [src/types/userContext.types.ts:481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L481)
+Defined in: [src/types/userContext.types.ts:481](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L481)
 
 Raw (unvalidated) category metadata structure read from category.json
 
@@ -16,7 +16,7 @@ Raw (unvalidated) category metadata structure read from category.json
 
 > `optional` **aliases**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:485](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L485)
+Defined in: [src/types/userContext.types.ts:485](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L485)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:485](https://github.com/ErikPlachta/
 
 > **config**: `object`
 
-Defined in: [src/types/userContext.types.ts:486](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L486)
+Defined in: [src/types/userContext.types.ts:486](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L486)
 
 #### access
 
@@ -56,7 +56,7 @@ Defined in: [src/types/userContext.types.ts:486](https://github.com/ErikPlachta/
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:484](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L484)
+Defined in: [src/types/userContext.types.ts:484](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L484)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/types/userContext.types.ts:484](https://github.com/ErikPlachta/
 
 > **id**: `string`
 
-Defined in: [src/types/userContext.types.ts:482](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L482)
+Defined in: [src/types/userContext.types.ts:482](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L482)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [src/types/userContext.types.ts:482](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:483](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L483)
+Defined in: [src/types/userContext.types.ts:483](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L483)

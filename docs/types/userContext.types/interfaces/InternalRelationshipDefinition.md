@@ -6,7 +6,7 @@
 
 # Interface: InternalRelationshipDefinition
 
-Defined in: [src/types/userContext.types.ts:450](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L450)
+Defined in: [src/types/userContext.types.ts:450](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L450)
 
 Internal relationship definition used by the agent for resolution logic.
 (Distinct from public RelationshipDefinition which models high-level joins.)
@@ -17,7 +17,7 @@ Internal relationship definition used by the agent for resolution logic.
 
 > **cardinality**: `"one"` \| `"many"`
 
-Defined in: [src/types/userContext.types.ts:456](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L456)
+Defined in: [src/types/userContext.types.ts:456](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L456)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/userContext.types.ts:456](https://github.com/ErikPlachta/
 
 > **relationshipName**: `string`
 
-Defined in: [src/types/userContext.types.ts:453](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L453)
+Defined in: [src/types/userContext.types.ts:453](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L453)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/userContext.types.ts:453](https://github.com/ErikPlachta/
 
 > **sourceCategory**: `string`
 
-Defined in: [src/types/userContext.types.ts:451](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L451)
+Defined in: [src/types/userContext.types.ts:451](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L451)
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [src/types/userContext.types.ts:451](https://github.com/ErikPlachta/
 
 > **sourceField**: `string`
 
-Defined in: [src/types/userContext.types.ts:454](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L454)
+Defined in: [src/types/userContext.types.ts:454](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L454)
 
 ***
 
@@ -49,7 +49,7 @@ Defined in: [src/types/userContext.types.ts:454](https://github.com/ErikPlachta/
 
 > **targetCategory**: `string`
 
-Defined in: [src/types/userContext.types.ts:452](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L452)
+Defined in: [src/types/userContext.types.ts:452](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L452)
 
 ***
 
@@ -57,4 +57,4 @@ Defined in: [src/types/userContext.types.ts:452](https://github.com/ErikPlachta/
 
 > **targetField**: `string`
 
-Defined in: [src/types/userContext.types.ts:455](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L455)
+Defined in: [src/types/userContext.types.ts:455](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L455)

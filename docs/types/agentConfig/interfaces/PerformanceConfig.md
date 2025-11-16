@@ -6,7 +6,7 @@
 
 # Interface: PerformanceConfig
 
-Defined in: [src/types/agentConfig.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L173)
+Defined in: [src/types/agentConfig.ts:173](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L173)
 
 Performance characteristics and optional limits for an agent.
 
@@ -20,7 +20,7 @@ Performance characteristics and optional limits for an agent.
 
 > `optional` **caching**: `object`
 
-Defined in: [src/types/agentConfig.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L177)
+Defined in: [src/types/agentConfig.ts:177](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L177)
 
 #### cacheTTL?
 
@@ -44,7 +44,7 @@ Defined in: [src/types/agentConfig.ts:177](https://github.com/ErikPlachta/vscode
 
 > `optional` **complexity**: `string`
 
-Defined in: [src/types/agentConfig.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L176)
+Defined in: [src/types/agentConfig.ts:176](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L176)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/types/agentConfig.ts:176](https://github.com/ErikPlachta/vscode
 
 > `optional` **expectedResponseTime**: `number`
 
-Defined in: [src/types/agentConfig.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L174)
+Defined in: [src/types/agentConfig.ts:174](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L174)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [src/types/agentConfig.ts:174](https://github.com/ErikPlachta/vscode
 
 > `optional` **limits**: `object`
 
-Defined in: [src/types/agentConfig.ts:183](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L183)
+Defined in: [src/types/agentConfig.ts:183](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L183)
 
 #### maxJoinDepth?
 
@@ -80,4 +80,4 @@ Defined in: [src/types/agentConfig.ts:183](https://github.com/ErikPlachta/vscode
 
 > `optional` **memoryUsage**: `string`
 
-Defined in: [src/types/agentConfig.ts:175](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L175)
+Defined in: [src/types/agentConfig.ts:175](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L175)

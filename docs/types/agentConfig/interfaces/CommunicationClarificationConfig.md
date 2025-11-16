@@ -6,7 +6,7 @@
 
 # Interface: CommunicationClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:537](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L537)
+Defined in: [src/types/agentConfig.ts:537](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L537)
 
 Clarification formatting configuration for the CommunicationAgent.
 
@@ -21,7 +21,7 @@ Example removed for brevity.
 
 > `optional` **availableCategoriesHeader**: `string`
 
-Defined in: [src/types/agentConfig.ts:543](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L543)
+Defined in: [src/types/agentConfig.ts:543](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L543)
 
 Heading before category list
 
@@ -31,7 +31,7 @@ Heading before category list
 
 > `optional` **closingPrompt**: `string`
 
-Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L545)
+Defined in: [src/types/agentConfig.ts:545](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L545)
 
 Closing prompt encouraging specificity
 
@@ -41,7 +41,7 @@ Closing prompt encouraging specificity
 
 > `optional` **examplesHeader**: `string`
 
-Defined in: [src/types/agentConfig.ts:541](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L541)
+Defined in: [src/types/agentConfig.ts:541](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L541)
 
 Heading before example prompts
 
@@ -51,7 +51,7 @@ Heading before example prompts
 
 > `optional` **groups**: `object`[]
 
-Defined in: [src/types/agentConfig.ts:551](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L551)
+Defined in: [src/types/agentConfig.ts:551](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L551)
 
 Example groups; when usesCategories=true, category placeholders are substituted.
 
@@ -73,7 +73,7 @@ Example groups; when usesCategories=true, category placeholders are substituted.
 
 > `optional` **matchedIntentTemplate**: `string`
 
-Defined in: [src/types/agentConfig.ts:549](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L549)
+Defined in: [src/types/agentConfig.ts:549](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L549)
 
 Template when an intent is guessed.
 
@@ -83,7 +83,7 @@ Template when an intent is guessed.
 
 > `optional` **maxCategoriesInExamples**: `number`
 
-Defined in: [src/types/agentConfig.ts:539](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L539)
+Defined in: [src/types/agentConfig.ts:539](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L539)
 
 Max number of categories to include in examples
 
@@ -93,6 +93,6 @@ Max number of categories to include in examples
 
 > `optional` **unknownRequestTemplate**: `string`
 
-Defined in: [src/types/agentConfig.ts:547](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L547)
+Defined in: [src/types/agentConfig.ts:547](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L547)
 
 Template shown when the user request is unclear.

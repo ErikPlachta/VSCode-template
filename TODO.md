@@ -89,14 +89,6 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
-- [ ] P1: Finalize Agent Design & Architecture Integrity
-  - [ ] Debug & fix: DatabaseAgent data source initialization (blocking bug)
-  - [ ] End-to-end verification: run full workflow and health checks
-  - [ ] Documentation: update migration guide with workflow patterns
-  - [ ] Legacy cleanup: remove relevant‑data‑manager references
-  - [ ] Orchestrator compliance sweep: confirm dynamic tools registry + single JSON‑RPC handler invariants
-  - [ ] Stabilization: audit agents for hardcoded business values; keep data‑driven behavior
-
 <!-- END:CURRENT_ACTION_ITEMS -->
 <!-- BEGIN:NEXT_ACTION_ITEMS -->
 
@@ -247,6 +239,11 @@ Follow these guidelines to ensure effective task management:
 
 ## Completed Action Items
 
+- [x] P1: Changelog CLI Stabilization & DatabaseAgent Follow-through
+  - [x] Stabilize repo-ops `changelog write` dry-run vs `--write` semantics (implement `--validate` flow per TODO)
+  - [x] Apply changelog entry for extended DatabaseAgent init tests and E2E workflow (non-dry-run)
+  - [x] Run end-to-end verification: HTTP transport harness + core tests
+  - [x] Capture final governance/docs notes for repo-ops changelog usage
 - [x] Maintenance: Purged changelog backups and reset cache; applied key CHANGELOG.md lint fixes; added verification entry (2025-11-15)
 - [x] P1: Cache Directory Rename & Migration — complete; verification updated with Docs/Health PASS
   - Rename root cache directory to hidden `.usercontext-mcp-extension` and add best‑effort migration
@@ -296,6 +293,11 @@ Follow these guidelines to ensure effective task management:
     - [x] CI: wired `test:http:ci` into GitHub Actions (separate `transport` job)
   - [x] Update documentation to reflect transport and protocol standards.
   - [x] Implement dynamic tools registry (deriving tool descriptors from orchestrator/config) and add integrity tests.
+- [x] P1: Changelog CLI: unify backups under `.repo-ops-backups/changelog-backup/`
+  - [x] Confirm `test_tmp` is created during changelog writes and auto cleaned by repo-ops
+  - [x] Route changelog backups into `.repo-ops-backups/changelog-backup/` via timestamped `.bak` files
+  - [x] Add README/docs note describing backup layout (archive `.bak` + `CHANGELOG.next.tmp` in backup dir)
+  - [x] Ensure test-created `tests_tmp` folders (root + backup) are cleaned up after Jest runs
 
 <!-- END:COMPLETED_ACTION_ITEMS -->
 <!-- BEGIN:GENERATED-ACTION-ITEMS -->

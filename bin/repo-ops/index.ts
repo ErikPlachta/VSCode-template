@@ -5,12 +5,12 @@
  *
  * Overview
  * - Purpose: governance automation for `CONTEXT-SESSION.md`, `TODO.md`, and `CHANGELOG.md`.
- * - Philosophy: dry-run first; on `--write`, create a timestamped backup before mutating files.
+ * - Philosophy: explicit dry-run via `--validate`; on `--write`, create a timestamped backup before mutating files.
  * - Source of truth: tasks live only in `TODO.md`; `CHANGELOG.md` is logs-only history.
  *
  * Core Changelog Commands
  * - `changelog scaffold` – Print a logs-only entry scaffold.
- * - `changelog write` – Insert a logs-only entry (dry-run by default, `--write` to apply).
+ * - `changelog write` – Insert a logs-only entry; `--write` applies, `--validate` performs a dry-run.
  * - `changelog map` – Emit JSON index (days + entries). Supports `--fast` incremental path.
  * - `changelog diff` – Diff current changelog vs prior index (added/removed/modified).
  * - `changelog verify` – Structural validation (errors/warnings reported).
@@ -446,6 +446,7 @@ const main = (): void => {
             const impactIdx = rest.indexOf("--impact");
             const filesIncludeIdx = rest.indexOf("--files-include");
             const filesExcludeIdx = rest.indexOf("--files-exclude");
+            const validateFlag = rest.includes("--validate");
             // NOTE: writeFlag controls whether changelog writes are applied or treated as dry-run.
             // It must reflect only the presence of --write on the CLI and must not
             // be coupled to any other flags (auto-verify, include-files, etc.).
@@ -520,15 +521,14 @@ const main = (): void => {
               autoVerifyForce,
               verifyBlock,
             });
-            console.log(
-              `changelog write: ${
-                result.changed
-                  ? result.dryRun
-                    ? "CHANGES (dry-run)"
-                    : "APPLIED"
-                  : "NO-OP"
-              }`
-            );
+            const modeLabel = writeFlag
+              ? "APPLIED"
+              : validateFlag
+              ? "VALIDATED"
+              : result.changed
+              ? "CHANGES (dry-run)"
+              : "NO-OP";
+            console.log(`changelog write: ${modeLabel}`);
             for (const plan of result.plans) {
               console.log(
                 `- ${plan.description} → ${plan.filePath} (${plan.wouldWriteBytes} bytes)`

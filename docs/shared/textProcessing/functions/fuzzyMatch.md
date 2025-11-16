@@ -8,7 +8,7 @@
 
 > **fuzzyMatch**(`str1`, `str2`): `number`
 
-Defined in: [src/shared/textProcessing.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/shared/textProcessing.ts#L136)
+Defined in: [src/shared/textProcessing.ts:136](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/textProcessing.ts#L136)
 
 Calculates fuzzy match score between two strings using Levenshtein distance ratio.
 Score ranges from 0 (no match) to 1 (exact match).

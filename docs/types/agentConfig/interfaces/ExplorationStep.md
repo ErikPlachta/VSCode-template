@@ -6,7 +6,7 @@
 
 # Interface: ExplorationStep
 
-Defined in: [src/types/agentConfig.ts:919](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L919)
+Defined in: [src/types/agentConfig.ts:919](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L919)
 
 Single step within a generated exploration plan.
 
@@ -16,7 +16,7 @@ Single step within a generated exploration plan.
 
 > **description**: `string`
 
-Defined in: [src/types/agentConfig.ts:921](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L921)
+Defined in: [src/types/agentConfig.ts:921](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L921)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:921](https://github.com/ErikPlachta/vscode
 
 > **hints**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:923](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L923)
+Defined in: [src/types/agentConfig.ts:923](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L923)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:923](https://github.com/ErikPlachta/vscode
 
 > **recommendedCategory**: `string`
 
-Defined in: [src/types/agentConfig.ts:922](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L922)
+Defined in: [src/types/agentConfig.ts:922](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L922)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:922](https://github.com/ErikPlachta/vscode
 
 > **title**: `string`
 
-Defined in: [src/types/agentConfig.ts:920](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L920)
+Defined in: [src/types/agentConfig.ts:920](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L920)

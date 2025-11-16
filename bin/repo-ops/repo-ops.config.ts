@@ -148,7 +148,7 @@ export const defaultConfig: RepoOpsConfig = {
       todo: path.join(root, "TODO.md"),
     };
   },
-  backupDirName: ".repo-ops-backups",
+  backupDirName: ".repo-ops-backups/changelog-backup",
   sessionTemplate: defaultSessionTemplate,
   // Align with current TODO.md marker usage (no TODO: prefix)
   actionsMarkers: {

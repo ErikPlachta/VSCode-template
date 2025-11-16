@@ -6,7 +6,7 @@
 
 # Interface: ClarificationResponse
 
-Defined in: [src/types/agentConfig.ts:874](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L874)
+Defined in: [src/types/agentConfig.ts:874](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L874)
 
 Response from the clarification agent containing guidance and context.
 
@@ -16,7 +16,7 @@ Response from the clarification agent containing guidance and context.
 
 > **knowledgeSnippets**: [`KnowledgeHit`](../../../mcp/knowledgeBase/interfaces/KnowledgeHit.md)[]
 
-Defined in: [src/types/agentConfig.ts:876](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L876)
+Defined in: [src/types/agentConfig.ts:876](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L876)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/agentConfig.ts:876](https://github.com/ErikPlachta/vscode
 
 > **prompt**: `string`
 
-Defined in: [src/types/agentConfig.ts:875](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/agentConfig.ts#L875)
+Defined in: [src/types/agentConfig.ts:875](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L875)

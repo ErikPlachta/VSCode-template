@@ -8,7 +8,7 @@
 
 > **isRecordArray**(`obj`): `obj is BaseRecord[]`
 
-Defined in: [src/types/userContext.types.ts:602](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/userContext.types.ts#L602)
+Defined in: [src/types/userContext.types.ts:602](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L602)
 
 Type guard to check if a value is an array of [BaseRecord](../interfaces/BaseRecord.md).
 

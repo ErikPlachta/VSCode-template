@@ -6,7 +6,7 @@
 
 # Interface: GetSnapshotParams
 
-Defined in: [src/types/workflow.types.ts:383](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L383)
+Defined in: [src/types/workflow.types.ts:383](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/workflow.types.ts#L383)
 
 Parameters for UserContextAgent.getOrCreateSnapshot()
 
@@ -18,6 +18,6 @@ If topicOrId is undefined, agent will use first available category (data-driven)
 
 > `optional` **topicOrId**: `string`
 
-Defined in: [src/types/workflow.types.ts:385](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/workflow.types.ts#L385)
+Defined in: [src/types/workflow.types.ts:385](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/workflow.types.ts#L385)
 
 Optional category identifier. If undefined, uses first available category

@@ -127,6 +127,75 @@ All other changes must be performed via the CLI.
 
 ### [2025-11-15]
 
+#### 2025-11-15 21:10:22 docs: Clarify repo-ops changelog backups and test cleanup
+
+**Problem/Context**: Unify changelog backups under .repo-ops-backups/changelog-backup and document behavior
+
+**Changes Made**:
+
+Route changelog backups through .repo-ops-backups/changelog-backup via backupFile; Keep CHANGELOG.next.tmp in backup dir; Ensure tests clean up tests_tmp in repo root and backup root
+
+**Architecture Notes**:
+
+Reuse shared backupFile helper; no special rollback filename; temp file colocated with backups
+
+**Testing**: Build: PASS; Tests: PASS; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**:
+
+Makes backups predictable and discoverable while avoiding stray test-only temp directories
+
+#### 2025-11-15 20:29:01 test: Scaffold bullet formatting demo
+
+**Problem/Context**: What was wrong or needed
+
+**Changes Made**:
+
+- First sentence.
+- Second sentence.
+- Third sentence
+
+**Architecture Notes**:
+
+- Single path.
+- No behavioral change
+
+**Testing**: Build: PASS; Tests: FAIL; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**:
+
+- Improves readability.
+- Safer defaults
+
+#### 2025-11-15 20:20:30 fix: Extend DatabaseAgent init tests and verify E2E workflow
+
+**Problem/Context**: Extended DatabaseAgent initialization coverage with success and failure-path tests and ran full compile/test gates to validate end-to-end behavior.
+
+**Changes Made**:
+
+- Added init-focused tests in tests/databaseAgent.test.ts to assert that all configured categories are wired as data sources. - Added negative-path coverage for missing required data sources (people category) to ensure clear failure behavior. - Ran npm run compile and npm test on feat/dbagent-init-e2e to verify DatabaseAgent behavior in the broader workflow.
+
+**Architecture Notes**: - No structural changes to DatabaseAgent; tests exercise the existing configuration-driven data source wiring. - Confirms DatabaseAgent continues to rely on UserContextAgent-provided categories and maintains cache behavior for queries.
+
+**Testing**: Build: PASS; Tests: FAIL; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**: - Increases confidence that DatabaseAgent initialization is robust across configured categories and misconfigurations. - Reduces risk of regressions by locking expected behavior into unit tests while keeping the public MCP/extension surface unchanged.
+
+#### 2025-11-15 20:17:46 test: Debug test entry
+
+**Problem/Context**: What was wrong or needed
+
+**Changes Made**:
+
+1. file: PATH (lines X–Y) — what changed and why
+2. file: PATH (lines A–B) — what changed and why
+
+**Architecture Notes**: (patterns/decisions)
+
+**Testing**: Build: PASS; Tests: FAIL; Docs: PASS; Health: PASS; Lint: N/A
+
+**Impact**: (what this enables/fixes)
+
 #### 2025-11-15 19:04:55 fix: Verify DatabaseAgent initialization and HTTP search harness
 
 **Problem/Context**: Documented investigation and verification of DatabaseAgent data source initialization and HTTP transport search behavior.

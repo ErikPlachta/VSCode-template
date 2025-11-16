@@ -113,11 +113,22 @@ describe("repo-ops changelog write – files filter and verify block", () => {
   });
 
   afterAll(() => {
-    const dir = path.join(process.cwd(), "tests_tmp");
-    if (fs.existsSync(dir)) {
-      try {
-        fs.rmSync(dir, { recursive: true, force: true });
-      } catch {}
-    }
+    const root = process.cwd();
+    const dir = path.join(root, "tests_tmp");
+    const backupTestsTmp = path.join(
+      root,
+      ".repo-ops-backups",
+      "changelog-backup",
+      "tests_tmp"
+    );
+    [dir, backupTestsTmp].forEach((p) => {
+      if (fs.existsSync(p)) {
+        try {
+          fs.rmSync(p, { recursive: true, force: true });
+        } catch {
+          // ignore
+        }
+      }
+    });
   });
 });

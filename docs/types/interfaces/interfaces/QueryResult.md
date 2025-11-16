@@ -6,7 +6,7 @@
 
 # Interface: QueryResult
 
-Defined in: [src/types/interfaces.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L34)
+Defined in: [src/types/interfaces.ts:34](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L34)
 
 Represents the result of a database query operation.
 
@@ -16,7 +16,7 @@ Represents the result of a database query operation.
 
 > **cached**: `boolean`
 
-Defined in: [src/types/interfaces.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L38)
+Defined in: [src/types/interfaces.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L38)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:38](https://github.com/ErikPlachta/vscode-e
 
 > **categoryId**: `string`
 
-Defined in: [src/types/interfaces.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L35)
+Defined in: [src/types/interfaces.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L35)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:35](https://github.com/ErikPlachta/vscode-e
 
 > **records**: [`CategoryRecord`](../../agentConfig/interfaces/CategoryRecord.md)[]
 
-Defined in: [src/types/interfaces.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L36)
+Defined in: [src/types/interfaces.ts:36](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L36)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:36](https://github.com/ErikPlachta/vscode-e
 
 > **totalCount**: `number`
 
-Defined in: [src/types/interfaces.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/b4c7eb91d4c81b0905b15627db7e7e79adb27331/src/types/interfaces.ts#L37)
+Defined in: [src/types/interfaces.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L37)
