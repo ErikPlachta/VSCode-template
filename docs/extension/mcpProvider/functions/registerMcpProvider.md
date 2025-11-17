@@ -1,31 +1,16 @@
----
-title: Register Mcp Provider
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [extension/mcpProvider](../README.md) / registerMcpProvider
+[UserContext-mcp-extension](../../../modules.md) / [extension/mcpProvider](../README.md) / registerMcpProvider
 
 # Function: registerMcpProvider()
 
 > **registerMcpProvider**(`serverUrl`, `token`, `includeAuthHeader`, `context`): `void`
 
-Defined in: [src/extension/mcpProvider.ts:7](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpProvider.ts#L7)
+Defined in: [src/extension/mcpProvider.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/extension/mcpProvider.ts#L16)
+
+Register a McpServerDefinitionProvider to let VS Code discover the embedded MCP server.
 
 ## Parameters
 
@@ -33,47 +18,28 @@ Defined in: [src/extension/mcpProvider.ts:7](https://github.com/ErikPlachta/VSCo
 
 `string`
 
+MCP server URL (ignored for stdio definition but kept for future expansion).
+
 ### token
 
 `string`
+
+Authentication token to use when contacting the server.
 
 ### includeAuthHeader
 
 `boolean`
 
+Whether to include the auth token as an HTTP header.
+
 ### context
 
 `ExtensionContext`
+
+Extension context for managing disposables.
 
 ## Returns
 
 `void`
 
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Nothing is returned; disposables are pushed to the provided context.

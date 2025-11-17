@@ -1,31 +1,14 @@
----
-title: Fetch Tools
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / [mcpSync](../README.md) / fetchTools
+[UserContext-mcp-extension](../../modules.md) / [mcpSync](../README.md) / fetchTools
 
 # Function: fetchTools()
 
 > **fetchTools**(`serverUrl`, `token?`): `Promise`\<[`MCPTool`](../../shared/mcpTypes/interfaces/MCPTool.md)[]\>
 
-Defined in: [src/extension/mcpSync.ts:72](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/extension/mcpSync.ts#L72)
+Defined in: [src/extension/mcpSync.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/extension/mcpSync.ts#L71)
 
 Fetch all available MCP tools from the configured server.
 
@@ -35,56 +18,20 @@ Fetch all available MCP tools from the configured server.
 
 `string`
 
-Base URL of the MCP server.
+serverUrl parameter.
 
 ### token?
 
 `string`
 
-Optional Bearer token.
+token parameter.
 
 ## Returns
 
 `Promise`\<[`MCPTool`](../../shared/mcpTypes/interfaces/MCPTool.md)[]\>
 
-- Array of available MCP tools with enriched metadata.
+- TODO: describe return value.
 
 ## Throws
 
-- When the server cannot be reached or returns an invalid payload.
-
-## Example
-
-```ts
-const tools = await fetchTools("https://mcp.example.com", "token");
-console.log(tools.length);
-```
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- May throw an error.

@@ -1,31 +1,23 @@
----
-title: Performance Monitoring Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / PerformanceMonitoringConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / PerformanceMonitoringConfig
 
 # Interface: PerformanceMonitoringConfig
 
-Defined in: [src/types/applicationConfig.ts:194](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L194)
+Defined in: [src/types/applicationConfig.ts:322](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L322)
 
 Performance monitoring configuration.
+
+## Example
+
+```ts
+const perfMon: PerformanceMonitoringConfig = {
+  enabled: true,
+  sampleRate: 0.25,
+};
+```
 
 ## Properties
 
@@ -33,7 +25,7 @@ Performance monitoring configuration.
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:196](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L196)
+Defined in: [src/types/applicationConfig.ts:324](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L324)
 
 Enable performance monitoring.
 
@@ -43,35 +35,6 @@ Enable performance monitoring.
 
 > **sampleRate**: `number`
 
-Defined in: [src/types/applicationConfig.ts:198](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L198)
+Defined in: [src/types/applicationConfig.ts:326](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L326)
 
 Sample rate for monitoring (0-1).
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

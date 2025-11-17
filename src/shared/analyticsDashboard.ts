@@ -2,7 +2,7 @@
  * @packageDocumentation Analytics dashboard utilities for generating usage reports and visualizations.
  */
 
-import type { UsageAnalyticsSummary, AgentUsageStats } from "./agentAnalytics";
+import type { UsageAnalyticsSummary } from "@shared/agentAnalytics";
 
 /**
  * Dashboard report section enumeration.
@@ -16,6 +16,7 @@ export enum ReportSection {
 
 /**
  * Report generation options.
+ *
  */
 export interface ReportOptions {
   /** Sections to include in the report. */
@@ -35,37 +36,37 @@ export interface ReportOptions {
  * Analytics dashboard for generating usage reports and insights.
  */
 export class AnalyticsDashboard {
-    /**
- * Generates a comprehensive analytics report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
-generateReport(
+  /**
+   * Generates a comprehensive analytics report.
+   *
+   * @param {UsageAnalyticsSummary} summary - Aggregated usage analytics summary.
+   * @param {ReportOptions} _options - Report generation options (format & sections).
+   * @returns {string} Report content rendered in the requested format.
+   * @throws {Error} If an unsupported format is requested.
+   */
+  generateReport(
     summary: UsageAnalyticsSummary,
-    options: ReportOptions
+    _options: ReportOptions
   ): string {
-    switch (options.format) {
+    switch (_options.format) {
       case "markdown":
-        return this.generateMarkdownReport(summary, options);
+        return this.generateMarkdownReport(summary, _options);
       case "json":
-        return this.generateJsonReport(summary, options);
+        return this.generateJsonReport(summary, _options);
       case "csv":
-        return this.generateCsvReport(summary, options);
+        return this.generateCsvReport(summary, _options);
       default:
-        throw new Error(`Unsupported report format: ${options.format}`);
+        throw new Error(`Unsupported report format: ${_options.format}`);
     }
   }
 
-    /**
- * Generates performance recommendations based on analytics data.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @returns {string[]} - TODO: describe return value.
- */
-generateRecommendations(summary: UsageAnalyticsSummary): string[] {
+  /**
+   * Generates performance recommendations based on analytics data.
+   *
+   * @param {UsageAnalyticsSummary} summary - summary parameter.
+   * @returns {string[]} - TODO: describe return value.
+   */
+  generateRecommendations(summary: UsageAnalyticsSummary): string[] {
     const recommendations: string[] = [];
 
     // Overall success rate recommendations
@@ -139,14 +140,14 @@ generateRecommendations(summary: UsageAnalyticsSummary): string[] {
     return recommendations;
   }
 
-    /**
- * Generates a Markdown format report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- */
-private generateMarkdownReport(
+  /**
+   * Generates a Markdown format report.
+   *
+   * @param {UsageAnalyticsSummary} summary - summary parameter.
+   * @param {ReportOptions} options - options parameter.
+   * @returns {string} - TODO: describe return value.
+   */
+  private generateMarkdownReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
   ): string {
@@ -255,14 +256,14 @@ private generateMarkdownReport(
     return lines.join("\n");
   }
 
-    /**
- * Generates a JSON format report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- */
-private generateJsonReport(
+  /**
+   * Generates a JSON format report.
+   *
+   * @param {UsageAnalyticsSummary} summary - Aggregated usage analytics summary.
+   * @param {ReportOptions} options - Report generation options (sections/time period).
+   * @returns {string} JSON string representing the report.
+   */
+  private generateJsonReport(
     summary: UsageAnalyticsSummary,
     options: ReportOptions
   ): string {
@@ -289,16 +290,16 @@ private generateJsonReport(
     return JSON.stringify(report, null, 2);
   }
 
-    /**
- * Generates a CSV format report.
- *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {ReportOptions} options - options parameter.
- * @returns {string} - TODO: describe return value.
- */
-private generateCsvReport(
+  /**
+   * Generates a CSV format report.
+   *
+   * @param {UsageAnalyticsSummary} summary - Aggregated usage analytics summary.
+   * @param {ReportOptions} _options - Report generation options (time period only; sections ignored for CSV).
+   * @returns {string} CSV output with agent usage statistics.
+   */
+  private generateCsvReport(
     summary: UsageAnalyticsSummary,
-    options: ReportOptions
+    _options: ReportOptions
   ): string {
     const lines: string[] = [];
 
@@ -330,12 +331,12 @@ private generateCsvReport(
 }
 
 /**
- * Creates a standard analytics report with default options.
+ * Create a standard markdown analytics report for a given date range.
  *
- * @param {UsageAnalyticsSummary} summary - summary parameter.
- * @param {Date} startDate - startDate parameter.
- * @param {Date} endDate - endDate parameter.
- * @returns {string} - TODO: describe return value.
+ * @param {UsageAnalyticsSummary} summary - Aggregated usage analytics summary.
+ * @param {Date} startDate - Start of reporting period.
+ * @param {Date} endDate - End of reporting period.
+ * @returns {string} Markdown report string.
  */
 export function createStandardReport(
   summary: UsageAnalyticsSummary,

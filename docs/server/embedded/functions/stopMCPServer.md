@@ -1,65 +1,23 @@
----
-title: Stop MCPServer
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [server/embedded](../README.md) / stopMCPServer
+[UserContext-mcp-extension](../../../modules.md) / [server/embedded](../README.md) / stopMCPServer
 
-# Function: stopMCPServer()
+# ~~Function: stopMCPServer()~~
 
 > **stopMCPServer**(): `Promise`\<`void`\>
 
-Defined in: [src/server/embedded.ts:70](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/server/embedded.ts#L70)
+Defined in: [src/server/embedded.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/embedded.ts#L32)
 
-Stop the embedded MCP server.
+Stops the (deprecated) embedded HTTP MCP server stub (no-op).
 
 ## Returns
 
 `Promise`\<`void`\>
 
-- Promise that resolves when server is stopped
+Resolves immediately; no resources are allocated.
 
+## Deprecated
 
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+HTTP transport disabled; use stdio lifecycle in `src/server/index.ts`.

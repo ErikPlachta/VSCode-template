@@ -7,8 +7,8 @@
  * offering helpful guidance and context to improve query quality and user experience.
  */
 
-import type { AgentConfigDefinition } from "../../types/agentConfig";
-import { CONFIG_IDS } from "../../types/configRegistry";
+import type { AgentConfigDefinition } from "@internal-types/agentConfig";
+import { CONFIG_IDS } from "@internal-types/configRegistry";
 
 /**
  * Complete configuration for the Clarification Agent
@@ -76,6 +76,27 @@ export const clarificationAgentConfig: AgentConfigDefinition = {
         formality: "friendly",
         includeEncouragement: true,
         maxResponseLength: 500,
+      },
+
+      /** Help system configuration for capability discovery */
+      helpSystem: {
+        /** Whether to enable the help command system */
+        enabled: true,
+
+        /** Whether to list all available agent capabilities */
+        listAgentCapabilities: true,
+
+        /** Whether to include example queries for each agent */
+        includeExampleQueries: true,
+
+        /** Maximum number of example queries per agent */
+        maxExamplesPerAgent: 3,
+
+        /** Whether to include category summaries in help */
+        includeCategorySummaries: true,
+
+        /** Maximum number of categories to list in help */
+        maxCategoriesToList: 5,
       },
     },
 

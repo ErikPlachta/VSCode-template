@@ -1,29 +1,12 @@
----
-title: MCPTool
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/mcpTypes](../README.md) / MCPTool
+[UserContext-mcp-extension](../../../modules.md) / [shared/mcpTypes](../README.md) / MCPTool
 
 # Interface: MCPTool
 
-Defined in: [src/shared/mcpTypes.ts:37](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L37)
+Defined in: [src/shared/mcpTypes.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L40)
 
 Full MCP tool definition returned by `listTools`.
 
@@ -33,7 +16,7 @@ Full MCP tool definition returned by `listTools`.
 
 > **description**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L43)
+Defined in: [src/shared/mcpTypes.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L46)
 
 Rich description detailing the tool purpose.
 
@@ -43,7 +26,7 @@ Rich description detailing the tool purpose.
 
 > `optional` **input\_schema**: [`MCPInputSchema`](MCPInputSchema.md)
 
-Defined in: [src/shared/mcpTypes.ts:49](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L49)
+Defined in: [src/shared/mcpTypes.ts:52](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L52)
 
 JSON schema describing the tool arguments.
 
@@ -53,7 +36,7 @@ JSON schema describing the tool arguments.
 
 > **name**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L39)
+Defined in: [src/shared/mcpTypes.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L42)
 
 Machine-readable tool identifier.
 
@@ -63,7 +46,7 @@ Machine-readable tool identifier.
 
 > `optional` **summary**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L45)
+Defined in: [src/shared/mcpTypes.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L48)
 
 Optional extended summary for reference content.
 
@@ -73,7 +56,7 @@ Optional extended summary for reference content.
 
 > `optional` **tags**: `string`[]
 
-Defined in: [src/shared/mcpTypes.ts:47](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L47)
+Defined in: [src/shared/mcpTypes.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L50)
 
 Optional category or tags provided by the MCP server.
 
@@ -83,35 +66,6 @@ Optional category or tags provided by the MCP server.
 
 > **title**: `string`
 
-Defined in: [src/shared/mcpTypes.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/mcpTypes.ts#L41)
+Defined in: [src/shared/mcpTypes.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L44)
 
 Title displayed to VS Code users.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

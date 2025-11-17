@@ -1,31 +1,25 @@
----
-title: Cache Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / CacheConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / CacheConfig
 
 # Interface: CacheConfig
 
-Defined in: [src/types/applicationConfig.ts:154](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L154)
+Defined in: [src/types/applicationConfig.ts:255](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L255)
 
 Cache configuration settings.
+
+## Example
+
+```ts
+const cache: CacheConfig = {
+  enabled: true,
+  directory: ".cache",
+  maxSize: "256mb",
+  ttl: 60000,
+};
+```
 
 ## Properties
 
@@ -33,7 +27,7 @@ Cache configuration settings.
 
 > **directory**: `string`
 
-Defined in: [src/types/applicationConfig.ts:158](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L158)
+Defined in: [src/types/applicationConfig.ts:259](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L259)
 
 Cache directory path.
 
@@ -43,7 +37,7 @@ Cache directory path.
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:156](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L156)
+Defined in: [src/types/applicationConfig.ts:257](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L257)
 
 Enable caching.
 
@@ -53,7 +47,7 @@ Enable caching.
 
 > **maxSize**: `string`
 
-Defined in: [src/types/applicationConfig.ts:160](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L160)
+Defined in: [src/types/applicationConfig.ts:261](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L261)
 
 Maximum cache size.
 
@@ -63,35 +57,6 @@ Maximum cache size.
 
 > **ttl**: `number`
 
-Defined in: [src/types/applicationConfig.ts:162](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L162)
+Defined in: [src/types/applicationConfig.ts:263](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L263)
 
 Time-to-live for cached items in milliseconds.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

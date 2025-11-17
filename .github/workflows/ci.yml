@@ -1,0 +1,141 @@
+name: CI/CD Pipeline
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  # Stage 1: Compliance checks (lint, validate, health)
+  compliance:
+    name: Compliance & Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run prebuild (config + templates)
+        run: npm run prebuild
+      
+      - name: Compile TypeScript
+        run: npm run compile
+      
+      - name: Lint TypeScript and JSDoc
+        run: npm run lint
+      
+      - name: Validate JSON schemas
+        run: npm run lint:json
+      
+      - name: Validate Markdown metadata
+        run: npm run lint:docs
+      
+      - name: Generate compliance report
+        run: npm run health:report
+      
+      - name: Upload health report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compliance-health-report
+          path: docs/reports/health-report.md
+
+  # Stage 2: Run tests (only if compliance passes)
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: compliance
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run prebuild (config + templates)
+        run: npm run prebuild
+      
+      - name: Compile TypeScript
+        run: npm run compile
+      
+      - name: Run tests with coverage
+        run: npm test
+      
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+
+  # Stage 2b: HTTP transport verifier (fast protocol check)
+  transport:
+    name: Verify HTTP Transport (JSON-RPC)
+    runs-on: ubuntu-latest
+    needs: compliance
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run HTTP transport verifier
+        run: npm run test:http:ci
+
+  # Stage 3: Build and publish docs (only on main branch, only if tests pass)
+  docs:
+    name: Build & Publish Docs
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run prebuild (config + templates)
+        run: npm run prebuild
+      
+      - name: Compile TypeScript
+        run: npm run compile
+      
+      - name: Generate documentation
+        run: npm run docs
+      
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

@@ -1,67 +1,27 @@
----
-title: Validate Relationships
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [mcp/schemaUtils](../README.md) / validateRelationships
+[UserContext-mcp-extension](../../../modules.md) / [mcp/schemaUtils](../README.md) / validateRelationships
 
 # Function: validateRelationships()
 
 > **validateRelationships**(`categories`): [`RelationshipIntegrityIssue`](../interfaces/RelationshipIntegrityIssue.md)[]
 
-Defined in: [src/mcp/schemaUtils.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/schemaUtils.ts#L41)
+Defined in: [src/mcp/schemaUtils.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L67)
+
+Validate that all declared relationships target existing categories.
 
 ## Parameters
 
 ### categories
 
-[`BusinessCategory`](../../../agent/relevantDataManagerAgent/interfaces/BusinessCategory.md)[]
+[`BusinessCategory`](../../../types/userContext.types/interfaces/BusinessCategory.md)[]
+
+All business categories loaded.
 
 ## Returns
 
 [`RelationshipIntegrityIssue`](../interfaces/RelationshipIntegrityIssue.md)[]
 
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Issues for each relationship referencing a missing target category.

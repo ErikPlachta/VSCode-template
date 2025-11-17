@@ -22,7 +22,7 @@ set "COVERAGE_DIR=%PROJECT_ROOT%\coverage"
 set "REPORTS_DIR=%DOCS_DIR%\reports"
 
 REM Build stages
-set "STAGES=clean,validate-config,lint-json,lint-docs,lint-code,compile,process-templates,test,docs,health-report,package"
+set "STAGES=clean,validate-config,lint-docs,lint-code,compile,process-templates,test,docs,health-report,package"
 
 REM Default configuration
 set "COVERAGE=true"
@@ -109,7 +109,9 @@ call :log_info "Removing build artifacts..."
 if exist "%BUILD_DIR%" rmdir /s /q "%BUILD_DIR%"
 if exist "%COVERAGE_DIR%" rmdir /s /q "%COVERAGE_DIR%"
 if exist "%REPORTS_DIR%\health-report.md" del "%REPORTS_DIR%\health-report.md"
+rem Clean legacy and current cache directories at repo root (best-effort)
 if exist "%PROJECT_ROOT%\.mcp-cache" rmdir /s /q "%PROJECT_ROOT%\.mcp-cache"
+if exist "%PROJECT_ROOT%\.usercontext-mcp-extension" rmdir /s /q "%PROJECT_ROOT%\.usercontext-mcp-extension"
 
 if "%DEEP_CLEAN%"=="true" (
     call :log_info "Performing deep clean..."
@@ -136,13 +138,17 @@ if exist "src\config\application.config.ts" (
     goto :eof
 )
 
-call :log_info "Validating legacy mcp.config.json..."
-if not exist "src\mcp.config.json" (
-    call :log_error "Configuration file not found: src\mcp.config.json"
-    exit /b 1
+call :log_info "Validating generated mcp.config.json..."
+if not exist "out\mcp.config.json" (
+    call :log_info "out\mcp.config.json not found; generating from TS sources..."
+    npm run mcp:gen >NUL 2>&1
+    if errorlevel 1 (
+        call :log_error "Failed to generate out\\mcp.config.json from TS sources"
+        exit /b 1
+    )
 )
-REM Basic JSON existence check (Windows lacks json_pp); rely on later schema linting for structure
-call :log_success "Legacy JSON configuration validated"
+REM Basic existence check; schema correctness verified later in pipeline
+call :log_success "Generated JSON configuration validated"
 goto :eof
 
 :stage_lint_json
@@ -315,7 +321,6 @@ exit /b 1
 REM Execute stages (simplified - run all stages)
 call :stage_clean
 call :stage_validate_config
-call :stage_lint_json
 call :stage_lint_docs
 call :stage_lint_code
 call :stage_compile

@@ -1,29 +1,12 @@
----
-title: Agent Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / AgentConfig
+[UserContext-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / AgentConfig
 
 # Interface: AgentConfig
 
-Defined in: src/tools/repositoryHealth.ts:21
+Defined in: [src/tools/repositoryHealth.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L25)
 
 Configuration contract for the repository health agent.
 
@@ -33,7 +16,7 @@ Configuration contract for the repository health agent.
 
 > `readonly` **jsonSchemas**: readonly `object`[]
 
-Defined in: src/tools/repositoryHealth.ts:23
+Defined in: [src/tools/repositoryHealth.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L27)
 
 ***
 
@@ -41,7 +24,7 @@ Defined in: src/tools/repositoryHealth.ts:23
 
 > `readonly` **markdown**: `object`
 
-Defined in: src/tools/repositoryHealth.ts:28
+Defined in: [src/tools/repositoryHealth.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L32)
 
 #### exclude?
 
@@ -65,7 +48,7 @@ Defined in: src/tools/repositoryHealth.ts:28
 
 > `readonly` **report**: `object`
 
-Defined in: src/tools/repositoryHealth.ts:34
+Defined in: [src/tools/repositoryHealth.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L38)
 
 #### output
 
@@ -77,37 +60,8 @@ Defined in: src/tools/repositoryHealth.ts:34
 
 > `readonly` **typescript**: `object`
 
-Defined in: src/tools/repositoryHealth.ts:22
+Defined in: [src/tools/repositoryHealth.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L26)
 
 #### include
 
 > `readonly` **include**: readonly `string`[]
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

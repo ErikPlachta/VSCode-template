@@ -8,430 +8,192 @@
  * @packageDocumentation index implementation for server module
  */
 
-import { createServer, IncomingMessage, Server, ServerResponse } from "http";
-import { readFile, readdir } from "fs/promises";
-import * as path from "path";
+// HTTP transport removed: stdio-only JSON-RPC server retained for MCP compliance
+// HTTP transport fully removed; stdio-only JSON-RPC server retained.
+// (No path-dependent logic required; dataset access migrated.)
 import { MCPTool } from "@shared/mcpTypes";
+import {
+  describeCategoryBridge,
+  searchCategoryRecordsBridge,
+  listCategorySummariesBridge,
+} from "@server/orchestratorBridge";
 
-interface JsonRpcRequest {
+// ES module path variables no longer needed after data loader migration.
+
+/**
+ * JsonRpcRequest interface.
+ *
+ */
+export interface JsonRpcRequest {
   jsonrpc: string;
   id: number | string | null;
   method: string;
   params?: Record<string, unknown>;
 }
 
-interface JsonRpcResponse {
+/**
+ * JsonRpcResponse interface.
+ *
+ */
+export interface JsonRpcResponse {
   jsonrpc: "2.0";
   id: number | string | null;
   result?: unknown;
   error?: { code: number; message: string; data?: unknown };
 }
 
-interface InvokeParams {
-  name?: string;
-  arguments?: Record<string, unknown>;
-}
+/**
+ * InvokeParams interface.
+ *
+ */
+// (InvokeParams removed with HTTP transport elimination)
 
-const DATA_ROOT = process.env.VSCODE_TEMPLATE_DATA_ROOT
-  ? path.resolve(process.env.VSCODE_TEMPLATE_DATA_ROOT)
-  : path.join(__dirname, "..", "..", "bin", "data");
+// Data loading & category resolution removed – handled by agents (orchestratorBridge + UserContextAgent).
 
 /**
- * loadJson function.
+ * Build dynamic MCP tool descriptors using live category metadata.
+ * Falls back to minimal static descriptors if enumeration fails.
  *
- * @template T
- *
- * @param {string[]} segments - segments parameter.
- * @returns {Promise<T>} - TODO: describe return value.
+ * @returns Promise resolving to array of MCPTool definitions.
  */
-async function loadJson<T>(...segments: string[]): Promise<T> {
-  const filePath = path.join(DATA_ROOT, ...segments);
-  const raw = await readFile(filePath, "utf8");
-  return JSON.parse(raw) as T;
-}
-
-/**
- * loadOptionalJson function.
- *
- * @template T
- *
- * @param {string[]} segments - segments parameter.
- * @returns {Promise<T | undefined>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
-async function loadOptionalJson<T>(
-  ...segments: string[]
-): Promise<T | undefined> {
+async function getTools(): Promise<MCPTool[]> {
   try {
-    return await loadJson<T>(...segments);
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
-      return undefined;
-    }
-    throw error;
-  }
-}
-
-/**
- * loadJsonCollection function.
- *
- * @param {string} categoryId - categoryId parameter.
- * @param {string} folder - folder parameter.
- * @returns {Promise<unknown[]>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
- */
-async function loadJsonCollection(
-  categoryId: string,
-  folder: string
-): Promise<unknown[]> {
-  try {
-    const directory = path.join(DATA_ROOT, categoryId, folder);
-    const entries = await readdir(directory);
-    const jsonFiles = entries.filter((file) => file.endsWith(".json"));
-    const results: unknown[] = [];
-    for (const file of jsonFiles) {
-      results.push(await loadJson(categoryId, folder, file));
-    }
-    return results;
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
-      return [];
-    }
-    throw error;
-  }
-}
-
-/**
- * describeCategory function.
- *
- * @param {string} categoryId - categoryId parameter.
- * @returns {Promise<unknown>} - TODO: describe return value.
- */
-async function describeCategory(categoryId: string): Promise<unknown> {
-  const [category, relationships, schemas, examples, queries] =
-    await Promise.all([
-      loadJson<Record<string, unknown>>(categoryId, "category.json"),
-      loadOptionalJson<unknown[]>(categoryId, "relationships.json"),
-      loadJsonCollection(categoryId, "schemas"),
-      loadJsonCollection(categoryId, "examples"),
-      loadJsonCollection(categoryId, "queries"),
-    ]);
-  return {
-    category,
-    relationships: relationships ?? [],
-    schemas,
-    examples,
-    queries,
-  };
-}
-
-/**
- * searchRecords function.
- *
- * @param {string} categoryId - categoryId parameter.
- * @param {Record<string, unknown>} filters - filters parameter.
- * @returns {Promise<unknown[]>} - TODO: describe return value.
- */
-async function searchRecords(
-  categoryId: string,
-  filters: Record<string, unknown> = {}
-): Promise<unknown[]> {
-  const records = await loadJson<Record<string, unknown>[]>(
-    categoryId,
-    "records.json"
-  );
-  const activeFilters = Object.entries(filters).filter(
-    ([, value]) => value !== undefined && value !== ""
-  );
-  if (activeFilters.length === 0) {
-    return records;
-  }
-  return records.filter((record) =>
-    activeFilters.every(([key, value]) => {
-      const recordValue = record[key];
-      if (Array.isArray(recordValue)) {
-        return value !== undefined && recordValue.includes(value);
-      }
-      return recordValue === value;
-    })
-  );
-}
-
-const tools: MCPTool[] = [
-  {
-    name: "relevant-data.describeCategory",
-    title: "Describe category",
-    description:
-      "Return the configuration, schema catalogue, and relationship metadata for a business category.",
-    tags: ["metadata", "documentation"],
-    input_schema: {
-      required: ["categoryId"],
-      properties: {
-        categoryId: {
-          name: "categoryId",
-          type: "string",
-          description: "Identifier of the category to describe.",
-          required: true,
+    const summaries = await listCategorySummariesBridge();
+    const categoryList = summaries.map((s) => s.id).join(", ");
+    const describe: MCPTool = {
+      name: "user-context.describeCategory",
+      title: "Describe category",
+      description:
+        "Return configuration, schemas, relationships, examples & queries for a category. Available: " +
+        categoryList,
+      tags: ["metadata", "documentation"],
+      input_schema: {
+        required: ["categoryId"],
+        properties: {
+          categoryId: {
+            name: "categoryId",
+            type: "string",
+            description:
+              "Identifier, name, or alias of the category to describe.",
+            required: true,
+          },
         },
       },
-    },
-  },
-  {
-    name: "relevant-data.searchRecords",
-    title: "Search category records",
-    description:
-      "Search the mock dataset for a category using optional equality filters over structured fields.",
-    tags: ["records", "query"],
-    input_schema: {
-      required: ["categoryId"],
-      properties: {
-        categoryId: {
-          name: "categoryId",
-          type: "string",
-          description: "Identifier of the category to query.",
-          required: true,
-        },
-        filters: {
-          name: "filters",
-          type: "object",
-          description:
-            "Map of field names to equality values used when filtering records.",
+    };
+    const search: MCPTool = {
+      name: "user-context.searchRecords",
+      title: "Search category records",
+      description:
+        "Search records within a category (id/name/alias). Available: " +
+        categoryList,
+      tags: ["records", "query"],
+      input_schema: {
+        required: ["categoryId"],
+        properties: {
+          categoryId: {
+            name: "categoryId",
+            type: "string",
+            description: "Identifier, name, or alias of the category to query.",
+            required: true,
+          },
+          filters: {
+            name: "filters",
+            type: "object",
+            description:
+              "Map of field names to equality values used when filtering records.",
+          },
         },
       },
-    },
-  },
-];
+    };
+    return [describe, search];
+  } catch {
+    return [
+      {
+        name: "user-context.describeCategory",
+        title: "Describe category",
+        description:
+          "Return configuration, schemas, relationships, examples & queries for a category.",
+        tags: ["metadata", "documentation"],
+        input_schema: {
+          required: ["categoryId"],
+          properties: {
+            categoryId: {
+              name: "categoryId",
+              type: "string",
+              description:
+                "Identifier, name, or alias of the category to describe.",
+              required: true,
+            },
+          },
+        },
+      },
+      {
+        name: "user-context.searchRecords",
+        title: "Search category records",
+        description:
+          "Search records within a category using optional equality filters.",
+        tags: ["records", "query"],
+        input_schema: {
+          required: ["categoryId"],
+          properties: {
+            categoryId: {
+              name: "categoryId",
+              type: "string",
+              description:
+                "Identifier, name, or alias of the category to query.",
+              required: true,
+            },
+            filters: {
+              name: "filters",
+              type: "object",
+              description:
+                "Map of field names to equality values used when filtering records.",
+            },
+          },
+        },
+      },
+    ];
+  }
+}
 
 /**
- * handleInvoke function.
+ * Invoke a tool by name using data-driven resolution and bridge formatting.
  *
- * @param {string} name - name parameter.
- * @param {Record<string, unknown>} args - args parameter.
- * @returns {Promise<unknown>} - TODO: describe return value.
- * @throws {Error} - May throw an error.
+ * @param name - Tool name.
+ * @param args - Tool arguments.
+ * @returns Tool execution result (formatted message object).
  */
 async function handleInvoke(
   name: string,
   args: Record<string, unknown> = {}
 ): Promise<unknown> {
   switch (name) {
-    case "relevant-data.describeCategory": {
-      const categoryId = String(args.categoryId ?? "");
-      if (!categoryId) {
-        throw new Error("'categoryId' is required.");
-      }
-      return describeCategory(categoryId);
+    case "user-context.describeCategory": {
+      const topic = String(args.categoryId ?? "").trim();
+      if (!topic) throw new Error("'categoryId' is required.");
+      return await describeCategoryBridge(topic);
     }
-    case "relevant-data.searchRecords": {
-      const categoryId = String(args.categoryId ?? "");
-      if (!categoryId) {
-        throw new Error("'categoryId' is required.");
-      }
+    case "user-context.searchRecords": {
+      const topic = String(args.categoryId ?? "").trim();
+      if (!topic) throw new Error("'categoryId' is required.");
       const filters =
         (args.filters as Record<string, unknown> | undefined) ?? {};
-      return searchRecords(categoryId, filters);
+      return await searchCategoryRecordsBridge(topic, filters);
     }
     default:
       throw new Error(`Unknown tool: ${name}`);
   }
 }
 
-/**
- * sendJson function.
- *
- * @param {ServerResponse} res - res parameter.
- * @param {JsonRpcResponse} response - response parameter.
- */
-function sendJson(res: ServerResponse, response: JsonRpcResponse): void {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end(JSON.stringify(response));
-}
+// Legacy HTTP comment blocks removed.
 
 /**
- * handleRequest function.
+ * Handle a single JSON-RPC request and produce a response.
  *
- * @param {IncomingMessage} req - req parameter.
- * @param {ServerResponse} res - res parameter.
- * @returns {Promise<void>} - TODO: describe return value.
+ * @param message - JSON-RPC request.
+ * @returns JSON-RPC response.
  */
-async function handleRequest(
-  req: IncomingMessage,
-  res: ServerResponse
-): Promise<void> {
-  if (req.method !== "POST") {
-    res.writeHead(405, { Allow: "POST" });
-    res.end();
-    return;
-  }
-
-  const chunks: Buffer[] = [];
-  for await (const chunk of req) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-  }
-  let payload: JsonRpcRequest;
-  try {
-    payload = JSON.parse(Buffer.concat(chunks).toString("utf8"));
-  } catch (error) {
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: null,
-      error: {
-        code: -32700,
-        message: "Invalid JSON",
-        data: (error as Error).message,
-      },
-    });
-    return;
-  }
-
-  if (payload.method === "initialize") {
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: payload.id ?? null,
-      result: {
-        protocolVersion: "2024-11-05",
-        capabilities: {
-          tools: {},
-        },
-        serverInfo: {
-          name: "mybusiness-mcp-server", // TODO: Update this to be an arg from a config in the bin folder or something.
-          version: "1.0.0",
-        },
-      },
-    });
-    return;
-  }
-
-  if (payload.method === "listTools") {
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: payload.id ?? null,
-      result: { tools },
-    });
-    return;
-  }
-
-  if (payload.method === "tools/call") {
-    const params = (payload.params ?? {}) as {
-      name: string;
-      arguments?: Record<string, unknown>;
-    };
-    const toolName = params.name;
-    if (!toolName) {
-      sendJson(res, {
-        jsonrpc: "2.0",
-        id: payload.id ?? null,
-        error: { code: -32602, message: "Tool name is required" },
-      });
-      return;
-    }
-
-    try {
-      const result = await handleInvoke(toolName, params.arguments ?? {});
-      sendJson(res, {
-        jsonrpc: "2.0",
-        id: payload.id ?? null,
-        result: {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(result, null, 2),
-            },
-          ],
-        },
-      });
-    } catch (error) {
-      sendJson(res, {
-        jsonrpc: "2.0",
-        id: payload.id ?? null,
-        error: { code: -32000, message: (error as Error).message },
-      });
-    }
-    return;
-  }
-
-  if (payload.method === "listTools") {
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: payload.id ?? null,
-      result: { tools },
-    });
-    return;
-  }
-
-  if (payload.method !== "invokeTool") {
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: payload.id ?? null,
-      error: { code: -32601, message: `Unknown method: ${payload.method}` },
-    });
-    return;
-  }
-
-  const params = (payload.params ?? {}) as InvokeParams;
-  const toolName = params.name;
-  if (!toolName) {
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: payload.id ?? null,
-      error: { code: -32602, message: "Tool name is required" },
-    });
-    return;
-  }
-
-  try {
-    const result = await handleInvoke(toolName, params.arguments ?? {});
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: payload.id ?? null,
-      result: { content: result },
-    });
-  } catch (error) {
-    sendJson(res, {
-      jsonrpc: "2.0",
-      id: payload.id ?? null,
-      error: { code: -32000, message: (error as Error).message },
-    });
-  }
-}
-
-/**
- * createMcpServer function.
- *
- * @param {unknown} port - port parameter.
- * @returns {Server} - TODO: describe return value.
- */
-export function createMcpServer(
-  port = Number(process.env.MCP_PORT ?? 3030)
-): Server {
-  const server = createServer((req, res) => {
-    void handleRequest(req, res).catch((error) => {
-      sendJson(res, {
-        jsonrpc: "2.0",
-        id: null,
-        error: {
-          code: -32603,
-          message: "Internal error",
-          data: (error as Error).message,
-        },
-      });
-    });
-  });
-
-  server.listen(port, () => {
-    console.log(`MCP mock server listening on http://localhost:${port}`);
-  });
-
-  return server;
-}
-
-/**
- * Handle JSON-RPC message processing for MCP protocol.
- *
- * @param {JsonRpcRequest} message - message parameter.
- * @returns {Promise<JsonRpcResponse>} - TODO: describe return value.
- */
-async function handleJsonRpcMessage(
+export async function handleJsonRpcMessage(
   message: JsonRpcRequest
 ): Promise<JsonRpcResponse> {
   try {
@@ -468,7 +230,7 @@ async function handleJsonRpcMessage(
             tools: {},
           },
           serverInfo: {
-            name: "mybusiness-mcp-server",
+            name: "usercontext-mcp-server",
             version: "1.0.0",
           },
         },
@@ -476,6 +238,7 @@ async function handleJsonRpcMessage(
     }
 
     if (message.method === "tools/list") {
+      const tools = await getTools();
       return {
         jsonrpc: "2.0",
         id: message.id ?? null,
@@ -501,8 +264,8 @@ async function handleJsonRpcMessage(
         };
       }
 
-      // Validate that the tool exists
-      const availableTools = tools.map((tool) => tool.name);
+      // Validate that the tool exists using dynamic registry
+      const availableTools = (await getTools()).map((tool) => tool.name);
       if (!availableTools.includes(toolName)) {
         return {
           jsonrpc: "2.0",
@@ -518,6 +281,12 @@ async function handleJsonRpcMessage(
 
       try {
         const result = await handleInvoke(toolName, params.arguments ?? {});
+        type ToolResult = { message?: string } & Record<string, unknown>;
+        const r = result as ToolResult;
+        const text =
+          typeof r.message === "string"
+            ? r.message
+            : JSON.stringify(result, null, 2);
         return {
           jsonrpc: "2.0",
           id: message.id ?? null,
@@ -525,7 +294,7 @@ async function handleJsonRpcMessage(
             content: [
               {
                 type: "text",
-                text: JSON.stringify(result, null, 2),
+                text,
               },
             ],
           },
@@ -575,15 +344,14 @@ function startStdioServer(): void {
   let isInitialized = false;
 
   // Log to stderr to avoid interfering with stdout JSON-RPC communication
-  const log =
-        /**
- * log function.
- *
- * @param {string} message - message parameter.
- */
-(message: string): void => {
-      console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
-    };
+  /**
+   * Log helper writing to stderr.
+   *
+   * @param message - Text to emit.
+   */
+  const log = (message: string): void => {
+    console.error(`[MCP Server ${new Date().toISOString()}] ${message}`);
+  };
 
   log("MCP stdio server starting...");
 
@@ -674,14 +442,90 @@ function startStdioServer(): void {
   log("MCP stdio server ready for requests");
 }
 
-if (require.main === module) {
-  // Check if we should run in stdio mode
-  const args = process.argv.slice(2);
-  if (args.includes("--stdio")) {
-    startStdioServer();
+/**
+ * Start an HTTP JSON-RPC server that reuses the same dispatcher as stdio.
+ * Enabled only when MCP_HTTP_ENABLED=true. Intended for local debugging.
+ *
+ * @param port - Port to listen on (0 uses an ephemeral port for tests).
+ * @returns The created Node HTTP server instance and the bound port.
+ */
+export async function startHttpServer(
+  port: number = Number(process.env.usercontextMCP_port ?? 39200)
+): Promise<{ server: import("http").Server; port: number }> {
+  const http = await import("http");
+  const server = http.createServer(async (req, res) => {
+    if (req.method !== "POST") {
+      res.statusCode = 404;
+      res.end();
+      return;
+    }
+    try {
+      const chunks: Buffer[] = [];
+      req.on("data", (c) => chunks.push(Buffer.from(c)));
+      req.on("end", async () => {
+        try {
+          const body = Buffer.concat(chunks).toString("utf8");
+          const msg = JSON.parse(body) as JsonRpcRequest;
+          const response = await handleJsonRpcMessage(msg);
+          const payload = Buffer.from(JSON.stringify(response));
+          res.setHeader("content-type", "application/json");
+          res.setHeader("content-length", String(payload.length));
+          res.statusCode = 200;
+          res.end(payload);
+        } catch (e) {
+          const payload = Buffer.from(
+            JSON.stringify({
+              jsonrpc: "2.0",
+              id: null,
+              error: { code: -32700, message: "Parse error" },
+            })
+          );
+          res.statusCode = 200;
+          res.setHeader("content-type", "application/json");
+          res.setHeader("content-length", String(payload.length));
+          res.end(payload);
+        }
+      });
+    } catch {
+      res.statusCode = 500;
+      res.end();
+    }
+  });
+  await new Promise<void>((resolve) => server.listen(port, resolve));
+  const info = server.address();
+  let boundPort = port;
+  if (info && typeof info === "object" && "port" in info) {
+    boundPort = Number((info as unknown as { port: number }).port);
+  }
+  return { server, port: boundPort };
+}
+
+// Support both CJS and ESM entry detection
+const __isMain = ((): boolean => {
+  // CJS path: require/module available
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const req: any = typeof require !== "undefined" ? require : undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mod: any = typeof module !== "undefined" ? module : undefined;
+  if (req && mod) return req.main === mod;
+  // ESM path: simplified check for running directly
+  // If we're here and not in a require() context, assume we're main
+  return true;
+})();
+
+// Only auto-start the server if running as main module AND not in test environment
+if (__isMain && process.env.NODE_ENV !== "test") {
+  if (String(process.env.MCP_HTTP_ENABLED).toLowerCase() === "true") {
+    // Start HTTP for local debugging (optional)
+    void startHttpServer().then(({ port }) => {
+      console.error(
+        `[MCP Server ${new Date().toISOString()}] HTTP server listening on ${port}`
+      );
+    });
   } else {
-    createMcpServer();
+    // Default stdio transport
+    startStdioServer();
   }
 }
 
-export { tools, handleRequest };
+export { getTools, startStdioServer };

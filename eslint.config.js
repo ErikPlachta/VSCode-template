@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsparser from "@typescript-eslint/parser";
 import jsdoc from "eslint-plugin-jsdoc";
+import tsdoc from "eslint-plugin-tsdoc";
 
 export default [
   js.configs.recommended,
@@ -33,10 +34,20 @@ export default [
     plugins: {
       "@typescript-eslint": tseslint,
       jsdoc: jsdoc,
+      tsdoc: tsdoc,
     },
     rules: {
       ...tseslint.configs.recommended.rules,
       ...jsdoc.configs.recommended.rules,
+      // Validate TSDoc syntax and tags in TypeScript source
+      "tsdoc/syntax": "error",
+      // Disallow relative imports – enforce path aliases defined in tsconfig.json
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: ["./*", "../*"],
+        },
+      ],
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/explicit-function-return-type": [
         "error",
@@ -52,9 +63,111 @@ export default [
       "jsdoc/require-description": ["error", { descriptionStyle: "body" }],
       "jsdoc/require-param": "error",
       "jsdoc/require-param-description": "error",
+      // Allow TypeScript types to satisfy param typing without JSDoc curly braces
+      "jsdoc/require-param-type": "off",
+      "jsdoc/require-returns": ["error", { forceReturnsWithAsync: true }],
+      "jsdoc/require-returns-description": "error",
+      "jsdoc/require-returns-type": "off",
+      "jsdoc/require-throws": "error",
+      // TSDoc style prefers @throws description without explicit typed annotation
+      "jsdoc/require-throws": "off",
+      "jsdoc/require-jsdoc": [
+        "error",
+        {
+          require: {
+            FunctionDeclaration: true,
+            MethodDefinition: true,
+            ClassDeclaration: true,
+            ArrowFunctionExpression: true,
+            FunctionExpression: true,
+          },
+          contexts: [
+            'ExportNamedDeclaration[declaration.type="TSInterfaceDeclaration"]',
+            'ExportNamedDeclaration[declaration.type="TSTypeAliasDeclaration"]',
+          ],
+        },
+      ],
+      "jsdoc/require-property-description": "error",
+      "jsdoc/no-undefined-types": ["error", { definedTypes: ["NodeJS"] }],
+      "jsdoc/no-defaults": "off",
+      "jsdoc/tag-lines": ["error", "any", { startLines: 1 }],
+      "jsdoc/require-example": "off",
+      "jsdoc/require-hyphen-before-param-description": "error",
+      // We rely on tsdoc/syntax for tag validation in TS; avoid double-reporting unknown tags like @remarks
+      "jsdoc/check-tag-names": "off",
+    },
+    settings: {
+      jsdoc: {
+        mode: "typescript",
+        // Allow common TSDoc tags so other jsdoc rules (like require-description) don't choke on them
+        definedTags: [
+          "remarks",
+          "defaultValue",
+          "eventProperty",
+          "inheritDoc",
+          "label",
+          "link",
+          "override",
+          "sealed",
+          "virtual",
+          "alpha",
+          "beta",
+          "internal",
+          "public",
+          "privateRemarks",
+          "packageDocumentation",
+        ],
+        tagNamePreference: {
+          file: "packageDocumentation",
+          fileoverview: "packageDocumentation",
+          packageDocumentation: "packageDocumentation",
+        },
+      },
+    },
+  },
+  {
+    files: ["bin/repo-ops/**/*.ts"],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        sourceType: "module",
+      },
+      globals: {
+        console: "readonly",
+        process: "readonly",
+        Buffer: "readonly",
+      },
+    },
+    plugins: {
+      "@typescript-eslint": tseslint,
+      jsdoc: jsdoc,
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      ...jsdoc.configs.recommended.rules,
+      // In bin tools, relative imports are expected (module-local helpers)
+      "no-restricted-imports": "off",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/explicit-function-return-type": [
+        "error",
+        { allowExpressions: false },
+      ],
+      "@typescript-eslint/explicit-module-boundary-types": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
+      // Strict JSDoc in bin as well
+      "jsdoc/require-file-overview": "error",
+      "jsdoc/require-description": ["error", { descriptionStyle: "body" }],
+      "jsdoc/require-param": "error",
+      "jsdoc/require-param-description": "error",
+      "jsdoc/require-param-type": "off",
       "jsdoc/require-returns": ["error", { forceReturnsWithAsync: true }],
       "jsdoc/require-returns-description": "error",
       "jsdoc/require-throws": "error",
+      "jsdoc/require-returns-type": "off",
+      "jsdoc/require-throws": "off",
       "jsdoc/require-jsdoc": [
         "error",
         {
@@ -90,6 +203,6 @@ export default [
     },
   },
   {
-    ignores: ["out/**", "bin/**", "node_modules/**", "*.config.js"],
+    ignores: ["out/**", "node_modules/**", "*.config.js"],
   },
 ];

@@ -1,83 +1,34 @@
 /**
- * @packageDocumentation Embedded MCP server for VS Code extension use.
- * Starts the MCP server on a random available port for internal extension use.
+ * Deprecated HTTP embedded server stub.
+ *
+ * The project migrated to stdio-only JSON-RPC transport. This file remains as a
+ * no-op placeholder to avoid breaking historical imports during refactor stages.
+ * Remove after all references are cleaned.
+ *
+ * @packageDocumentation
  */
-
-import { createServer, Server } from "http";
-import { AddressInfo } from "net";
-import { handleRequest } from "@server/index";
-import { createMcpServer } from "@server/index";
-
-let serverInstance: Server | null = null;
-let serverPort: number | null = null;
 
 /**
- * Start the embedded MCP server on an available port.
+ * Starts the (deprecated) embedded HTTP MCP server stub.
  *
- * @param {number} port - port parameter.
- * @returns {Promise<string>} - TODO: describe return value.
+ * @returns Informational string indicating stdio-only transport.
+ * @deprecated HTTP transport disabled; use stdio startup in `src/server/index.ts`.
+ * @example
+ * ```ts
+ * const msg = await startMCPServer();
+ * console.log(msg); // "stdio-only: no HTTP server"
+ * ```
  */
-export async function startMCPServer(port?: number): Promise<string> {
-  if (serverInstance) {
-    return `http://localhost:${serverPort}`;
-  }
-
-  return new Promise((resolve, reject) => {
-    try {
-      if (port) {
-        serverInstance = createMcpServer(port);
-        serverPort = port;
-        resolve(`http://localhost:${serverPort}`);
-        return;
-      }
-
-      serverInstance = createServer((req, res) => {
-        // Delegate to the main server logic
-        void handleRequest(req, res).catch((error) => {
-          res.writeHead(500, { "Content-Type": "application/json" });
-          res.end(
-            JSON.stringify({
-              jsonrpc: "2.0",
-              id: null,
-              error: {
-                code: -32603,
-                message: "Internal error",
-                data: (error as Error).message,
-              },
-            })
-          );
-        });
-      });
-
-      serverInstance.listen(0, "localhost", () => {
-        const address = serverInstance!.address() as AddressInfo;
-        serverPort = address.port;
-        console.log(`Embedded MCP server started on port ${serverPort}`);
-        resolve(`http://localhost:${serverPort}`);
-      });
-
-      serverInstance.on("error", (error) => {
-        reject(error);
-      });
-    } catch (error) {
-      reject(error);
-    }
-  });
+export async function startMCPServer(): Promise<string> {
+  return "stdio-only: no HTTP server";
 }
 
 /**
- * Stop the embedded MCP server.
+ * Stops the (deprecated) embedded HTTP MCP server stub (no-op).
  *
- * @returns {Promise<void>} - TODO: describe return value.
+ * @returns Resolves immediately; no resources are allocated.
+ * @deprecated HTTP transport disabled; use stdio lifecycle in `src/server/index.ts`.
  */
 export async function stopMCPServer(): Promise<void> {
-  if (serverInstance) {
-    return new Promise((resolve) => {
-      serverInstance!.close(() => {
-        serverInstance = null;
-        serverPort = null;
-        resolve();
-      });
-    });
-  }
+  return Promise.resolve();
 }

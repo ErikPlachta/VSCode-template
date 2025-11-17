@@ -9,81 +9,24 @@
 
 import { createInvocationLogger } from "@mcp/telemetry";
 import { DataAgentProfile } from "@mcp/config/agentProfiles";
-import { DataAgentConfig } from "./config";
-
-// Define core data types without importing from other agents
-export type CategoryId = string;
-
-export interface CategoryRecord {
-  id: string;
-  [key: string]: unknown;
-}
-
-export interface CategorySchema {
-  name: string;
-  schema: unknown;
-}
-
-export interface RelationshipDescription {
-  name: string;
-  description: string;
-  targetCategory: CategoryId;
-  viaField: string;
-}
-
-export interface AnalysisInput {
-  categoryId: CategoryId;
-  records: CategoryRecord[];
-  schemas?: CategorySchema[];
-  relationships?: RelationshipDescription[];
-}
-
-export interface DataInsight {
-  type:
-    | "pattern"
-    | "anomaly"
-    | "correlation"
-    | "trend"
-    | "opportunity"
-    | "risk";
-  description: string;
-  confidence: number;
-  category: CategoryId;
-  affectedRecords?: string[];
-}
-
-export interface ExplorationPlan {
-  topic: string;
-  question: string;
-  steps: ExplorationStep[];
-  recommendedQueries: string[];
-  supportingResources: Array<{
-    categoryId: CategoryId;
-    ids: string[];
-  }>;
-}
-
-export interface ExplorationStep {
-  title: string;
-  description: string;
-  recommendedCategory: CategoryId;
-  hints: string[];
-}
-
-export interface TopicSearchResult {
-  categoryId: CategoryId;
-  recordId: string;
-  displayName: string;
-  matchingFields: string[];
-}
-
-export interface CrossCategoryConnection {
-  sourceCategory: CategoryId;
-  targetCategory: CategoryId;
-  connectionType: string;
-  strength: number;
-  description: string;
-}
+import { BaseAgentConfig } from "@shared/config/baseAgentConfig";
+import type {
+  AgentConfigDefinition,
+  DataConfig,
+  CategoryId,
+  CategoryRecord,
+  RelationshipDescription,
+  AnalysisInput,
+  DataInsight,
+  ExplorationPlan,
+  ExplorationStep,
+  TopicSearchResult,
+  CrossCategoryConnection,
+  ConfigDescriptor,
+} from "@internal-types/agentConfig";
+import { createDescriptorMap } from "@shared/config/descriptors";
+// No external validation helpers needed here; BaseAgentConfig-based checks are used
+import { dataAgentConfig } from "@agent/dataAgent/agent.config";
 
 /**
  * Agent that analyzes data and generates insights.
@@ -96,29 +39,153 @@ export interface CrossCategoryConnection {
  * console.log(insights.map(insight => insight.description));
  * ```
  */
-export class DataAgent {
+export class DataAgent extends BaseAgentConfig {
   private readonly telemetry = createInvocationLogger(DataAgentProfile.id);
-  private readonly config: DataAgentConfig;
+  private readonly dataConfig: DataConfig;
 
-    /**
-   * Create a new {@link DataAgent}.
+  /**
+   * Create a new {@link DataAgent} instance using default configuration merged with optional partial overrides.
    *
-   * @returns {unknown} - TODO: describe return value.
+   * @param {Partial<AgentConfigDefinition>} [config] - Optional partial configuration overrides (merged atop defaults; identity preserved).
    */
-constructor() {
-    this.config = new DataAgentConfig();
+  constructor(config?: Partial<AgentConfigDefinition>) {
+    const merged: AgentConfigDefinition = {
+      ...dataAgentConfig,
+      ...(config || {}),
+      agent: { ...dataAgentConfig.agent, ...(config?.agent || {}) },
+      $configId: dataAgentConfig.$configId,
+    } as AgentConfigDefinition;
+    super(merged);
+    this.dataConfig =
+      (this.getConfigItem<DataConfig>("data") as DataConfig) ||
+      ({} as DataConfig);
+    this._validateRequiredSections();
   }
 
-    /**
- * Analyze data and generate insights.
- *
- * @param {AnalysisInput} input - input parameter.
- * @returns {Promise<DataInsight[]>} - TODO: describe return value.
- */
-async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
+  /**
+   * Validate required configuration leaf paths.
+   *
+   * @throws {Error} When mandatory paths missing.
+   */
+  private _validateRequiredSections(): void {
+    const requiredPaths: readonly string[] = [
+      "data.analysis.enableInsightGeneration",
+      "data.analysis.maxInsightDepth",
+      "data.exploration.maxExplorationSteps",
+      "data.exploration.enableAutomaticPlanGeneration",
+      "data.exploration.planComplexityLimit",
+      "data.relationships.enableRelationshipMapping",
+      "data.relationships.maxRelationshipDepth",
+    ];
+    const { passed, missing } = this.confirmConfigItems(requiredPaths);
+    if (!passed) {
+      throw new Error(
+        `Data agent config missing required paths: ${missing.join(", ")}`
+      );
+    }
+  }
+
+  /**
+   * Descriptor map for dynamic configuration access.
+   *
+   * @returns {Record<string, ConfigDescriptor>} Descriptors.
+   */
+  public getConfigDescriptors(): Record<string, ConfigDescriptor> {
+    return createDescriptorMap([
+      [
+        "analysis",
+        {
+          name: "Analysis",
+          path: "data.analysis",
+          type: "DataConfig['analysis']",
+          visibility: "public",
+          verifyPaths: [
+            "data.analysis.enableInsightGeneration",
+            "data.analysis.maxInsightDepth",
+            "data.analysis.crossCategoryAnalysis",
+          ],
+        },
+      ],
+      [
+        "exploration",
+        {
+          name: "Exploration",
+          path: "data.exploration",
+          type: "DataConfig['exploration']",
+          visibility: "public",
+          verifyPaths: [
+            "data.exploration.maxExplorationSteps",
+            "data.exploration.enableAutomaticPlanGeneration",
+            "data.exploration.planComplexityLimit",
+          ],
+        },
+      ],
+      [
+        "relationships",
+        {
+          name: "Relationships",
+          path: "data.relationships",
+          type: "DataConfig['relationships']",
+          visibility: "public",
+          verifyPaths: [
+            "data.relationships.enableRelationshipMapping",
+            "data.relationships.maxRelationshipDepth",
+          ],
+        },
+      ],
+      [
+        "search",
+        {
+          name: "Search",
+          path: "data.search",
+          type: "NonNullable<DataConfig['search']>",
+          visibility: "public",
+          verifyPaths: ["data.search.maxResults"],
+        },
+      ],
+      [
+        "synthesis",
+        {
+          name: "Synthesis",
+          path: "data.synthesis",
+          type: "NonNullable<DataConfig['synthesis']>",
+          visibility: "public",
+          verifyPaths: ["data.synthesis.enableTopicOverviews"],
+        },
+      ],
+      [
+        "performance",
+        {
+          name: "Performance",
+          path: "data.performance",
+          type: "NonNullable<DataConfig['performance']>",
+          visibility: "public",
+          verifyPaths: ["data.performance.analysisTimeout"],
+        },
+      ],
+      [
+        "quality",
+        {
+          name: "Quality",
+          path: "data.quality",
+          type: "NonNullable<DataConfig['quality']>",
+          visibility: "public",
+          verifyPaths: ["data.quality.missingFieldThreshold"],
+        },
+      ],
+    ]);
+  }
+
+  /**
+   * Analyze data and generate insights.
+   *
+   * @param {AnalysisInput} input - input parameter.
+   * @returns {Promise<DataInsight[]>} - TODO: describe return value.
+   */
+  async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     return this.telemetry("analyzeData", async () => {
-      const analysisConfig = this.config.getAnalysisConfig();
-      const qualityConfig = this.config.getQualityConfig();
+      const analysisConfig = this.getAnalysisConfig();
+      // Quality configuration is used in detectAnomalies; no need to fetch here.
       const insights: DataInsight[] = [];
 
       if (!analysisConfig.enableInsightGeneration) {
@@ -154,21 +221,21 @@ async analyzeData(input: AnalysisInput): Promise<DataInsight[]> {
     });
   }
 
-    /**
- * Generate an exploration plan for data analysis.
- *
- * @param {CategoryId} categoryId - categoryId parameter.
- * @param {string} question - question parameter.
- * @param {AnalysisInput} availableData - availableData parameter.
- * @returns {Promise<ExplorationPlan>} - TODO: describe return value.
- */
-async generateExplorationPlan(
+  /**
+   * Generate an exploration plan for data analysis.
+   *
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @param {string} question - question parameter.
+   * @param {AnalysisInput} availableData - availableData parameter.
+   * @returns {Promise<ExplorationPlan>} - TODO: describe return value.
+   */
+  async generateExplorationPlan(
     categoryId: CategoryId,
     question: string,
     availableData: AnalysisInput
   ): Promise<ExplorationPlan> {
     return this.telemetry("generateExplorationPlan", async () => {
-      const explorationConfig = this.config.getExplorationConfig();
+      const explorationConfig = this.getExplorationConfig();
 
       const steps: ExplorationStep[] = [];
 
@@ -212,15 +279,15 @@ async generateExplorationPlan(
     });
   }
 
-    /**
- * Analyze relationships between categories.
- *
- * @param {AnalysisInput} sourceData - sourceData parameter.
- * @param {AnalysisInput} targetData - targetData parameter.
- * @param {RelationshipDescription} relationship - relationship parameter.
- * @returns {Promise<CrossCategoryConnection>} - TODO: describe return value.
- */
-async analyzeConnection(
+  /**
+   * Analyze relationships between categories.
+   *
+   * @param {AnalysisInput} sourceData - sourceData parameter.
+   * @param {AnalysisInput} targetData - targetData parameter.
+   * @param {RelationshipDescription} relationship - relationship parameter.
+   * @returns {Promise<CrossCategoryConnection>} - TODO: describe return value.
+   */
+  async analyzeConnection(
     sourceData: AnalysisInput,
     targetData: AnalysisInput,
     relationship: RelationshipDescription
@@ -243,15 +310,15 @@ async analyzeConnection(
     });
   }
 
-    /**
- * Search for patterns in data records.
- *
- * @param {string} keyword - keyword parameter.
- * @param {AnalysisInput[]} data - data parameter.
- * @returns {TopicSearchResult[]} - TODO: describe return value.
- */
-searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
-    const searchConfig = this.config.getSearchConfig();
+  /**
+   * Search for patterns in data records.
+   *
+   * @param {string} keyword - keyword parameter.
+   * @param {AnalysisInput[]} data - data parameter.
+   * @returns {TopicSearchResult[]} - TODO: describe return value.
+   */
+  searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
+    const searchConfig = this.getSearchConfig();
     const results: TopicSearchResult[] = [];
 
     data.forEach((input) => {
@@ -282,14 +349,14 @@ searchData(keyword: string, data: AnalysisInput[]): TopicSearchResult[] {
     return results.slice(0, searchConfig.maxResults || 50);
   }
 
-    /**
- * Detect patterns in data records.
- *
- * @param {CategoryRecord[]} records - records parameter.
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {DataInsight[]} - TODO: describe return value.
- */
-private detectPatterns(
+  /**
+   * Detect patterns in data records.
+   *
+   * @param {CategoryRecord[]} records - records parameter.
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @returns {DataInsight[]} - TODO: describe return value.
+   */
+  private detectPatterns(
     records: CategoryRecord[],
     categoryId: CategoryId
   ): DataInsight[] {
@@ -322,19 +389,19 @@ private detectPatterns(
     return insights;
   }
 
-    /**
- * Detect anomalies in data records.
- *
- * @param {CategoryRecord[]} records - records parameter.
- * @param {CategoryId} categoryId - categoryId parameter.
- * @returns {DataInsight[]} - TODO: describe return value.
- */
-private detectAnomalies(
+  /**
+   * Detect anomalies in data records.
+   *
+   * @param {CategoryRecord[]} records - records parameter.
+   * @param {CategoryId} categoryId - categoryId parameter.
+   * @returns {DataInsight[]} - TODO: describe return value.
+   */
+  private detectAnomalies(
     records: CategoryRecord[],
     categoryId: CategoryId
   ): DataInsight[] {
     const insights: DataInsight[] = [];
-    const qualityConfig = this.config.getQualityConfig();
+    const qualityConfig = this.getQualityConfig();
 
     // Missing field analysis
     const allFields = new Set<string>();
@@ -344,7 +411,7 @@ private detectAnomalies(
 
     allFields.forEach((field) => {
       const missingCount = records.filter(
-        (record) => !record.hasOwnProperty(field)
+        (record) => !(field in record)
       ).length;
       if (
         missingCount > 0 &&
@@ -358,7 +425,7 @@ private detectAnomalies(
           confidence: missingCount / records.length,
           category: categoryId,
           affectedRecords: records
-            .filter((record) => !record.hasOwnProperty(field))
+            .filter((record) => !(field in record))
             .map((record) => record.id),
         });
       }
@@ -367,13 +434,13 @@ private detectAnomalies(
     return insights;
   }
 
-    /**
- * Analyze relationships for insights.
- *
- * @param {RelationshipDescription[]} relationships - relationships parameter.
- * @returns {DataInsight[]} - TODO: describe return value.
- */
-private analyzeRelationships(
+  /**
+   * Analyze relationships for insights.
+   *
+   * @param {RelationshipDescription[]} relationships - relationships parameter.
+   * @returns {DataInsight[]} - TODO: describe return value.
+   */
+  private analyzeRelationships(
     relationships: RelationshipDescription[]
   ): DataInsight[] {
     const insights: DataInsight[] = [];
@@ -390,30 +457,211 @@ private analyzeRelationships(
     return insights;
   }
 
-    /**
- * Get display name for a record.
- *
- * @param {CategoryRecord} record - record parameter.
- * @returns {string} - TODO: describe return value.
- */
-private getRecordDisplayName(record: CategoryRecord): string {
+  /**
+   * Get display name for a record.
+   *
+   * @param {CategoryRecord} record - record parameter.
+   * @returns {string} - TODO: describe return value.
+   */
+  private getRecordDisplayName(record: CategoryRecord): string {
     return (
       (typeof record.name === "string" && record.name) ||
       (typeof record.title === "string" && record.title) ||
       String(record.id)
     );
   }
+  // -------------------------
+  // Configuration accessors migrated from legacy wrapper
+  // -------------------------
+  /**
+   * Get analysis configuration block.
+   *
+   * @returns {DataConfig['analysis']} Insight generation and depth settings.
+   */
+  public getAnalysisConfig(): DataConfig["analysis"] {
+    return this.dataConfig.analysis || ({} as DataConfig["analysis"]);
+  }
+  /**
+   * Get quality configuration block.
+   *
+   * @returns {NonNullable<DataConfig['quality']>} Data quality thresholds and flags.
+   */
+  public getQualityConfig(): NonNullable<DataConfig["quality"]> {
+    return (
+      this.dataConfig.quality || ({} as NonNullable<DataConfig["quality"]>)
+    );
+  }
+  /**
+   * Get exploration configuration block.
+   *
+   * @returns {DataConfig['exploration']} Exploration plan and complexity settings.
+   */
+  public getExplorationConfig(): DataConfig["exploration"] {
+    return this.dataConfig.exploration || ({} as DataConfig["exploration"]);
+  }
+  /**
+   * Get relationships configuration block.
+   *
+   * @returns {DataConfig['relationships']} Relationship mapping settings.
+   */
+  public getRelationshipsConfig(): DataConfig["relationships"] {
+    return this.dataConfig.relationships || ({} as DataConfig["relationships"]);
+  }
+  /**
+   * Get synthesis configuration block.
+   *
+   * @returns {NonNullable<DataConfig['synthesis']>} Topic overview & synthesis settings.
+   */
+  public getSynthesisConfig(): NonNullable<DataConfig["synthesis"]> {
+    return (
+      this.dataConfig.synthesis || ({} as NonNullable<DataConfig["synthesis"]>)
+    );
+  }
+  /**
+   * Get performance configuration block.
+   *
+   * @returns {NonNullable<DataConfig['performance']>} Performance and concurrency settings.
+   */
+  public getPerformanceConfig(): NonNullable<DataConfig["performance"]> {
+    return (
+      this.dataConfig.performance ||
+      ({} as NonNullable<DataConfig["performance"]>)
+    );
+  }
+  /**
+   * Get search configuration block.
+   *
+   * @returns {NonNullable<DataConfig['search']>} Search behavior (fuzzy matching, limits).
+   */
+  public getSearchConfig(): NonNullable<DataConfig["search"]> {
+    return this.dataConfig.search || ({} as NonNullable<DataConfig["search"]>);
+  }
+  /**
+   * Determine if insight generation is enabled.
+   *
+   * @returns {boolean} True when insights will be produced.
+   */
+  public isInsightGenerationEnabled(): boolean {
+    return this.getAnalysisConfig().enableInsightGeneration;
+  }
+  /**
+   * Determine if cross-category analysis is enabled.
+   *
+   * @returns {boolean} True when relationships across categories are considered.
+   */
+  public isCrossCategoryAnalysisEnabled(): boolean {
+    return this.getAnalysisConfig().crossCategoryAnalysis;
+  }
+  /**
+   * Determine if relationship mapping is enabled.
+   *
+   * @returns {boolean} True when mapping across category relationships.
+   */
+  public isRelationshipMappingEnabled(): boolean {
+    return this.getRelationshipsConfig().enableRelationshipMapping;
+  }
+  /**
+   * Determine if automatic exploration plan generation is enabled.
+   *
+   * @returns {boolean} True when plans auto-generate.
+   */
+  public isAutomaticPlanGenerationEnabled(): boolean {
+    return this.getExplorationConfig().enableAutomaticPlanGeneration;
+  }
+  /**
+   * Maximum insight reasoning depth.
+   *
+   * @returns {number} Depth limit.
+   */
+  public getMaxInsightDepth(): number {
+    return this.getAnalysisConfig().maxInsightDepth;
+  }
+  /**
+   * Maximum exploration steps allowed.
+   *
+   * @returns {number} Step limit.
+   */
+  public getMaxExplorationSteps(): number {
+    return this.getExplorationConfig().maxExplorationSteps;
+  }
+  /**
+   * Maximum relationship traversal depth.
+   *
+   * @returns {number} Depth limit.
+   */
+  public getMaxRelationshipDepth(): number {
+    return this.getRelationshipsConfig().maxRelationshipDepth;
+  }
+  /**
+   * Exploration plan complexity cap.
+   *
+   * @returns {"low"|"medium"|"high"} Complexity limit.
+   */
+  public getPlanComplexityLimit(): "low" | "medium" | "high" {
+    return this.getExplorationConfig().planComplexityLimit;
+  }
+  /**
+   * Minimum insight confidence threshold.
+   *
+   * @returns {number} Confidence threshold.
+   */
+  public getInsightConfidenceThreshold(): number {
+    return this.getAnalysisConfig().insightConfidenceThreshold ?? 0.7;
+  }
+  /**
+   * Minimum relationship strength threshold.
+   *
+   * @returns {number} Strength threshold.
+   */
+  public getRelationshipStrengthThreshold(): number {
+    return this.getRelationshipsConfig().relationshipStrengthThreshold ?? 0.3;
+  }
+  /**
+   * Maximum insights per analysis.
+   *
+   * @returns {number} Cap for insights returned per run.
+   */
+  public getMaxInsightsPerAnalysis(): number {
+    return this.getAnalysisConfig().maxInsightsPerAnalysis ?? 10;
+  }
+  /**
+   * Maximum relationships per analysis.
+   *
+   * @returns {number} Cap for relationships evaluated per run.
+   */
+  public getMaxRelationshipsPerAnalysis(): number {
+    return this.getRelationshipsConfig().maxRelationshipsPerAnalysis ?? 25;
+  }
+  /**
+   * Insight categories focus order.
+   *
+   * @returns {string[]} Category order for insight classification.
+   */
+  public getInsightCategories(): string[] {
+    return this.getAnalysisConfig().insightCategories ?? [];
+  }
+  /**
+   * Ordered exploration priorities for categories.
+   *
+   * @returns {string[]} Category priority list (may be empty).
+   */
+  public getExplorationPriorities(): string[] {
+    const priorities = this.getExplorationConfig().explorationPriorities;
+    return Array.isArray(priorities) ? priorities : [];
+  }
 }
 
 /**
- * Factory function that creates a {@link DataAgent} with default configuration.
+ * Factory function that creates a {@link DataAgent} with default (or partially overridden) configuration.
  *
- * @returns {DataAgent} - TODO: describe return value.
+ * @param {Partial<AgentConfigDefinition>} [config] - Optional partial configuration overrides.
+ * @returns {DataAgent} DataAgent instance.
  */
-export function createDataAgent(): DataAgent {
-  return new DataAgent();
+export function createDataAgent(
+  config?: Partial<AgentConfigDefinition>
+): DataAgent {
+  return new DataAgent(config);
 }
 
 // Export configuration types and instances for external use
-export { DataAgentConfig } from "./config";
-export { dataAgentConfig } from "./agent.config";
+export { dataAgentConfig } from "@agent/dataAgent/agent.config";

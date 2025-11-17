@@ -1,9 +1,29 @@
 /**
- * @packageDocumentation Application configuration types for comprehensive settings management.
+ * @packageDocumentation applicationConfig definitions for types module.
+ * Strongly typed configuration primitives for environment, MCP server/client,
+ * agent metadata, performance characteristics, and validation scaffolding.
+ *
+ * @remarks
+ * These types are the source of truth for application-level configuration.
+ * Prefer documenting semantics here (types-as-docs) and keep runtime config
+ * files minimal to avoid duplication and drift.
  */
-
 /**
- * Environment-specific configuration settings.
+ * Environment configuration controlling debug behavior and defaults.
+ *
+ * @remarks
+ * Use different instances for `development`, `staging`, and `production` in
+ * the `ApplicationConfig.application.environments` block.
+ *
+ * @example
+ * ```ts
+ * const devEnv: EnvironmentConfig = {
+ *   debug: true,
+ *   logLevel: "verbose",
+ *   hotReload: true,
+ *   mockData: true,
+ * };
+ * ```
  */
 export interface EnvironmentConfig {
   /** Enable debug mode for detailed logging and error reporting. */
@@ -18,6 +38,21 @@ export interface EnvironmentConfig {
 
 /**
  * MCP server configuration settings.
+ *
+ * @remarks
+ * When `embedded.enabled=true`, the extension may launch the stdio server
+ * internally. For HTTP, set `defaultPort` and ensure firewall rules allow it.
+ *
+ * @example
+ * ```ts
+ * const server: McpServerConfig = {
+ *   protocol: "stdio",
+ *   defaultPort: 3000,
+ *   timeout: 10000,
+ *   retries: 2,
+ *   embedded: { enabled: true, autoStart: true },
+ * };
+ * ```
  */
 export interface McpServerConfig {
   /** Protocol for MCP communication. */
@@ -39,6 +74,15 @@ export interface McpServerConfig {
 
 /**
  * MCP client configuration settings.
+ *
+ * @example
+ * ```ts
+ * const client: McpClientConfig = {
+ *   maxConcurrentRequests: 8,
+ *   requestTimeout: 8000,
+ *   retryDelay: 250,
+ * };
+ * ```
  */
 export interface McpClientConfig {
   /** Maximum number of concurrent requests. */
@@ -56,6 +100,25 @@ export type AgentPriority = "high" | "medium" | "low";
 
 /**
  * Agent definition with comprehensive metadata.
+ *
+ * @remarks
+ * `capabilities` describe high-level functions; detailed behavior is driven by
+ * the agent's typed configuration (see `ApplicationConfig.agents`).
+ *
+ * @example
+ * ```ts
+ * const commAgent: AgentDefinition = {
+ *   name: "communicationAgent",
+ *   description: "Formats responses for end users",
+ *   label: "Communication",
+ *   displayName: "Communication Agent",
+ *   className: "CommunicationAgent",
+ *   capabilities: ["formatting", "templating"],
+ *   responsibility: "Owns all user-facing formatting",
+ *   userFacing: { friendlyDescription: "Converts data into readable messages" },
+ * };
+ * ```
+ *
  */
 export interface AgentDefinition {
   /** Technical name used in code/imports. */
@@ -112,6 +175,15 @@ export interface AgentDefinition {
 
 /**
  * Agent profile configuration.
+ *
+ * @example
+ * ```ts
+ * const profile: AgentProfile = {
+ *   priority: "high",
+ *   timeout: 5000,
+ *   cacheEnabled: true,
+ * };
+ * ```
  */
 export interface AgentProfile {
   /** Execution priority for the agent. */
@@ -124,6 +196,16 @@ export interface AgentProfile {
 
 /**
  * Global agent configuration settings.
+ *
+ * @example
+ * ```ts
+ * const global: AgentGlobalConfig = {
+ *   maxExecutionTime: 15000,
+ *   enableTelemetry: true,
+ *   cacheEnabled: true,
+ *   cacheTtl: 60000,
+ * };
+ * ```
  */
 export interface AgentGlobalConfig {
   /** Maximum execution time for any agent in milliseconds. */
@@ -138,6 +220,15 @@ export interface AgentGlobalConfig {
 
 /**
  * Data validation configuration.
+ *
+ * @example
+ * ```ts
+ * const validation: DataValidationConfig = {
+ *   strictMode: true,
+ *   validateOnLoad: true,
+ *   validateRelationships: true,
+ * };
+ * ```
  */
 export interface DataValidationConfig {
   /** Enable strict validation mode. */
@@ -150,6 +241,16 @@ export interface DataValidationConfig {
 
 /**
  * Cache configuration settings.
+ *
+ * @example
+ * ```ts
+ * const cache: CacheConfig = {
+ *   enabled: true,
+ *   directory: ".cache",
+ *   maxSize: "256mb",
+ *   ttl: 60000,
+ * };
+ * ```
  */
 export interface CacheConfig {
   /** Enable caching. */
@@ -164,6 +265,16 @@ export interface CacheConfig {
 
 /**
  * Logging file configuration.
+ *
+ * @example
+ * ```ts
+ * const file: LoggingFileConfig = {
+ *   enabled: true,
+ *   path: "logs/app.log",
+ *   maxSize: "10mb",
+ *   maxFiles: 5,
+ * };
+ * ```
  */
 export interface LoggingFileConfig {
   /** Enable file logging. */
@@ -178,6 +289,15 @@ export interface LoggingFileConfig {
 
 /**
  * Rate limiting configuration.
+ *
+ * @example
+ * ```ts
+ * const rl: RateLimitConfig = {
+ *   enabled: true,
+ *   windowMs: 60000,
+ *   maxRequests: 100,
+ * };
+ * ```
  */
 export interface RateLimitConfig {
   /** Enable rate limiting. */
@@ -190,6 +310,14 @@ export interface RateLimitConfig {
 
 /**
  * Performance monitoring configuration.
+ *
+ * @example
+ * ```ts
+ * const perfMon: PerformanceMonitoringConfig = {
+ *   enabled: true,
+ *   sampleRate: 0.25,
+ * };
+ * ```
  */
 export interface PerformanceMonitoringConfig {
   /** Enable performance monitoring. */
@@ -200,6 +328,14 @@ export interface PerformanceMonitoringConfig {
 
 /**
  * Memory management configuration.
+ *
+ * @example
+ * ```ts
+ * const mem: MemoryConfig = {
+ *   maxHeapSize: "1gb",
+ *   gcThreshold: 0.7,
+ * };
+ * ```
  */
 export interface MemoryConfig {
   /** Maximum heap size. */
@@ -210,6 +346,15 @@ export interface MemoryConfig {
 
 /**
  * Experimental features configuration.
+ *
+ * @example
+ * ```ts
+ * const experimental: ExperimentalConfig = {
+ *   enableAdvancedCaching: false,
+ *   enableParallelProcessing: true,
+ *   enableStreamingResponses: false,
+ * };
+ * ```
  */
 export interface ExperimentalConfig {
   /** Enable advanced caching features. */
@@ -222,6 +367,14 @@ export interface ExperimentalConfig {
 
 /**
  * Extension features configuration.
+ *
+ * @example
+ * ```ts
+ * const ext: ExtensionConfig = {
+ *   allowThirdParty: false,
+ *   sandboxMode: true,
+ * };
+ * ```
  */
 export interface ExtensionConfig {
   /** Allow third-party extensions. */
@@ -232,6 +385,17 @@ export interface ExtensionConfig {
 
 /**
  * JSON schema validation configuration.
+ *
+ * @example
+ * ```ts
+ * const schema: JsonSchemaConfig = {
+ *   pattern: "docs/*.json",
+ *   schema: "schemas/doc.schema.json",
+ *   description: "Validate docs JSON files",
+ * };
+ * ```
+ *
+ * @see docs/tools/validateJson/README.md
  */
 export interface JsonSchemaConfig {
   /** File pattern to match. */
@@ -244,6 +408,18 @@ export interface JsonSchemaConfig {
 
 /**
  * Markdown validation configuration.
+ *
+ * @example
+ * ```ts
+ * const md: MarkdownConfig = {
+ *   include: ["docs/*.md"],
+ *   exclude: ["_ARCHIVE/**"],
+ *   requiredFrontMatter: ["title"],
+ *   requiredSections: ["## Logs"],
+ * };
+ * ```
+ *
+ * @see docs/tools/validateMarkdown/README.md
  */
 export interface MarkdownConfig {
   /** File patterns to include in validation. */
@@ -258,6 +434,11 @@ export interface MarkdownConfig {
 
 /**
  * Report generation configuration.
+ *
+ * @example
+ * ```ts
+ * const reportCfg: ReportConfig = { output: "coverage/report.json" };
+ * ```
  */
 export interface ReportConfig {
   /** Output path for generated reports. */
@@ -266,6 +447,16 @@ export interface ReportConfig {
 
 /**
  * Comprehensive application configuration structure.
+ *
+ * @remarks
+ * Serves as the single entry point for app configuration. External tools can
+ * generate or validate this structure during build.
+ *
+ * @example
+ * See generated docs for a complete sample.
+ *
+ * @see docs/config/application.config/variables/applicationConfig.md
+ * @see src/config/application.config.ts
  */
 export interface ApplicationConfig {
   /** Application metadata and environment settings. */
@@ -300,6 +491,7 @@ export interface ApplicationConfig {
     definitions: {
       orchestrator: AgentDefinition;
       relevantDataManager: AgentDefinition;
+      userContext?: AgentDefinition;
       databaseAgent: AgentDefinition;
       dataAgent: AgentDefinition;
       clarificationAgent: AgentDefinition;
@@ -308,6 +500,7 @@ export interface ApplicationConfig {
     profiles: {
       orchestrator: AgentProfile;
       relevantDataManager: AgentProfile;
+      userContext?: AgentProfile;
       databaseAgent: AgentProfile;
       dataAgent: AgentProfile;
       clarificationAgent: AgentProfile;

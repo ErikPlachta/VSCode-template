@@ -1,65 +1,19 @@
----
-title: Run Health Check
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / runHealthCheck
+[UserContext-mcp-extension](../../../modules.md) / [tools/repositoryHealth](../README.md) / runHealthCheck
 
 # Function: runHealthCheck()
 
 > **runHealthCheck**(): `Promise`\<`void`\>
 
-Defined in: src/tools/repositoryHealth.ts:376
+Defined in: [src/tools/repositoryHealth.ts:526](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/tools/repositoryHealth.ts#L526)
 
-CLI-friendly runner that executes all checks and writes the report.
+CLI-friendly runner that executes all checks, prints a summary, and writes the markdown report.
 
 ## Returns
 
 `Promise`\<`void`\>
 
-- Resolves on completion.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Resolves when checks and report persistence complete (exitCode set on failure).

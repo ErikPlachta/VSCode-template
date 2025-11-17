@@ -1,31 +1,16 @@
----
-title: Monitoring Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / MonitoringConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / MonitoringConfig
 
 # Interface: MonitoringConfig
 
-Defined in: [src/types/agentConfig.ts:125](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L125)
+Defined in: [src/types/agentConfig.ts:167](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L167)
 
-Monitoring configuration
+Monitoring/telemetry configuration for an agent.
+
+Example removed for brevity; define metrics and thresholds in runtime configuration.
 
 ## Properties
 
@@ -33,7 +18,7 @@ Monitoring configuration
 
 > **alertThresholds**: `Record`\<`string`, `number`\>
 
-Defined in: [src/types/agentConfig.ts:127](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L127)
+Defined in: [src/types/agentConfig.ts:169](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L169)
 
 ***
 
@@ -41,33 +26,4 @@ Defined in: [src/types/agentConfig.ts:127](https://github.com/ErikPlachta/VSCode
 
 > **metricsToTrack**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:126](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L126)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:168](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L168)

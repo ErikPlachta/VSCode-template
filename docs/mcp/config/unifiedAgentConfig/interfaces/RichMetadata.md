@@ -1,29 +1,12 @@
----
-title: Rich Metadata
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / RichMetadata
+[UserContext-mcp-extension](../../../../modules.md) / [mcp/config/unifiedAgentConfig](../README.md) / RichMetadata
 
 # Interface: RichMetadata
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:38](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L38)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L42)
 
 Rich metadata for user and application interfaces
 
@@ -33,7 +16,7 @@ Rich metadata for user and application interfaces
 
 > **applicationFacing**: `object`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L51)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:55](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L55)
 
 #### dependencies
 
@@ -81,7 +64,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPla
 
 ##### performance.complexity
 
-> **complexity**: `"high"` \| `"medium"` \| `"low"`
+> **complexity**: `"low"` \| `"medium"` \| `"high"`
 
 ##### performance.expectedResponseTime
 
@@ -89,7 +72,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPla
 
 ##### performance.memoryUsage
 
-> **memoryUsage**: `"high"` \| `"medium"` \| `"low"`
+> **memoryUsage**: `"low"` \| `"medium"` \| `"high"`
 
 #### technicalDescription
 
@@ -101,7 +84,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:51](https://github.com/ErikPla
 
 > **capabilities**: `string`[]
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L43)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L47)
 
 ***
 
@@ -109,7 +92,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:43](https://github.com/ErikPla
 
 > **className**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L42)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:46](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L46)
 
 ***
 
@@ -117,7 +100,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:42](https://github.com/ErikPla
 
 > **displayName**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L41)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:45](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L45)
 
 ***
 
@@ -125,7 +108,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:41](https://github.com/ErikPla
 
 > **label**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L40)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:44](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L44)
 
 ***
 
@@ -133,7 +116,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:40](https://github.com/ErikPla
 
 > **name**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L39)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L43)
 
 ***
 
@@ -141,7 +124,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:39](https://github.com/ErikPla
 
 > **responsibility**: `string`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:44](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L44)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:48](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L48)
 
 ***
 
@@ -149,7 +132,7 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:44](https://github.com/ErikPla
 
 > **userFacing**: `object`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/mcp/config/unifiedAgentConfig.ts#L45)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L49)
 
 #### exampleQueries
 
@@ -166,32 +149,3 @@ Defined in: [src/mcp/config/unifiedAgentConfig.ts:45](https://github.com/ErikPla
 #### useWhen
 
 > **useWhen**: `string`[]
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

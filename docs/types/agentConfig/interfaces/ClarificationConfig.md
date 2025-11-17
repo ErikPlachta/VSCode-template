@@ -1,31 +1,24 @@
----
-title: Clarification Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ClarificationConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / ClarificationConfig
 
 # Interface: ClarificationConfig
 
-Defined in: [src/types/agentConfig.ts:260](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L260)
+Defined in: [src/types/agentConfig.ts:389](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L389)
 
-Clarification agent-specific configuration
+ClarificationAgent configuration for guidance, escalation, knowledge search, routing, and performance.
+
+## Example
+
+```ts
+const clarCfg: ClarificationConfig = {
+  guidance: { maxSuggestions: 5, includeCategoryExamples: true, includeQueryTemplates: true },
+  escalation: { escalationThreshold: 0.4, fallbackStrategies: ["rephrase", "handoff"], maxClarificationRounds: 1 },
+  knowledgeBase: { enableKnowledgeSearch: true, maxKnowledgeSnippets: 3, relevanceThreshold: 0.5 },
+};
+```
 
 ## Properties
 
@@ -33,7 +26,7 @@ Clarification agent-specific configuration
 
 > `optional` **contextAnalysis**: `object`
 
-Defined in: [src/types/agentConfig.ts:296](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L296)
+Defined in: [src/types/agentConfig.ts:433](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L433)
 
 #### contextConfidenceThreshold?
 
@@ -61,7 +54,7 @@ Defined in: [src/types/agentConfig.ts:296](https://github.com/ErikPlachta/VSCode
 
 > **escalation**: `object`
 
-Defined in: [src/types/agentConfig.ts:274](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L274)
+Defined in: [src/types/agentConfig.ts:411](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L411)
 
 #### clarificationTimeWindow?
 
@@ -89,11 +82,39 @@ Defined in: [src/types/agentConfig.ts:274](https://github.com/ErikPlachta/VSCode
 
 > **guidance**: `object`
 
-Defined in: [src/types/agentConfig.ts:261](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L261)
+Defined in: [src/types/agentConfig.ts:390](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L390)
 
 #### guidanceTypes?
 
 > `optional` **guidanceTypes**: `string`[]
+
+#### helpSystem?
+
+> `optional` **helpSystem**: `object`
+
+##### helpSystem.enabled?
+
+> `optional` **enabled**: `boolean`
+
+##### helpSystem.includeCategorySummaries?
+
+> `optional` **includeCategorySummaries**: `boolean`
+
+##### helpSystem.includeExampleQueries?
+
+> `optional` **includeExampleQueries**: `boolean`
+
+##### helpSystem.listAgentCapabilities?
+
+> `optional` **listAgentCapabilities**: `boolean`
+
+##### helpSystem.maxCategoriesToList?
+
+> `optional` **maxCategoriesToList**: `number`
+
+##### helpSystem.maxExamplesPerAgent?
+
+> `optional` **maxExamplesPerAgent**: `number`
 
 #### includeCategoryExamples
 
@@ -137,7 +158,7 @@ Defined in: [src/types/agentConfig.ts:261](https://github.com/ErikPlachta/VSCode
 
 > **knowledgeBase**: `object`
 
-Defined in: [src/types/agentConfig.ts:281](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L281)
+Defined in: [src/types/agentConfig.ts:418](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L418)
 
 #### enableKnowledgeRanking?
 
@@ -169,7 +190,7 @@ Defined in: [src/types/agentConfig.ts:281](https://github.com/ErikPlachta/VSCode
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:303](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L303)
+Defined in: [src/types/agentConfig.ts:440](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L440)
 
 #### enableParallelProcessing?
 
@@ -197,7 +218,7 @@ Defined in: [src/types/agentConfig.ts:303](https://github.com/ErikPlachta/VSCode
 
 > `optional` **routing**: `object`
 
-Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L289)
+Defined in: [src/types/agentConfig.ts:426](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L426)
 
 #### analyzeMissingSignals?
 
@@ -218,32 +239,3 @@ Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/VSCode
 #### suggestAlternativeAgents?
 
 > `optional` **suggestAlternativeAgents**: `boolean`
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

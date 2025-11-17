@@ -1,58 +1,22 @@
----
-title: README
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../modules.md) / types/external
+[UserContext-mcp-extension](../../modules.md) / types/external
 
 # types/external
 
-## Modules
+external.d implementation for types module
 
-- [ajv-formats](ajv-formats/README.md)
-- [gray-matter](gray-matter/README.md)
+## Interfaces
 
+- [GrayMatterFile](interfaces/GrayMatterFile.md)
+- [GrayMatterOptions](interfaces/GrayMatterOptions.md)
 
-## Summary
+## Type Aliases
 
-_TODO: Auto-generated placeholder._
+- [GrayMatterInput](type-aliases/GrayMatterInput.md)
 
-## Responsibilities
+## Functions
 
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+- [default](functions/default.md)

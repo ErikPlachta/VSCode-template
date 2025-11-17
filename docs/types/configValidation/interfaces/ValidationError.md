@@ -1,31 +1,14 @@
----
-title: Validation Error
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / ValidationError
+[UserContext-mcp-extension](../../../modules.md) / [types/configValidation](../README.md) / ValidationError
 
 # Interface: ValidationError
 
-Defined in: [src/types/configValidation.ts:28](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L28)
+Defined in: [src/types/configValidation.ts:9](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L9)
 
-Detailed validation error information
+Detailed validation error information (runtime logic lives in shared module).
 
 ## Properties
 
@@ -33,9 +16,7 @@ Detailed validation error information
 
 > `optional` **actual**: `unknown`
 
-Defined in: [src/types/configValidation.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L45)
-
-Actual value found
+Defined in: [src/types/configValidation.ts:15](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L15)
 
 ***
 
@@ -43,9 +24,7 @@ Actual value found
 
 > **category**: `"schema"` \| `"type"` \| `"business_rule"` \| `"compatibility"`
 
-Defined in: [src/types/configValidation.ts:33](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L33)
-
-Error category
+Defined in: [src/types/configValidation.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L11)
 
 ***
 
@@ -53,19 +32,15 @@ Error category
 
 > `optional` **expected**: `unknown`
 
-Defined in: [src/types/configValidation.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L42)
-
-Expected value or format
+Defined in: [src/types/configValidation.ts:14](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L14)
 
 ***
 
 ### level
 
-> **level**: `"error"` \| `"warning"`
+> **level**: `"warning"` \| `"error"`
 
-Defined in: [src/types/configValidation.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L30)
-
-Error severity level
+Defined in: [src/types/configValidation.ts:10](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L10)
 
 ***
 
@@ -73,9 +48,7 @@ Error severity level
 
 > **message**: `string`
 
-Defined in: [src/types/configValidation.ts:39](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L39)
-
-Human-readable error message
+Defined in: [src/types/configValidation.ts:13](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L13)
 
 ***
 
@@ -83,35 +56,4 @@ Human-readable error message
 
 > **path**: `string`
 
-Defined in: [src/types/configValidation.ts:36](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/configValidation.ts#L36)
-
-JSON path to the problematic field
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/configValidation.ts:12](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configValidation.ts#L12)

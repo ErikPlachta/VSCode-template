@@ -1,31 +1,25 @@
----
-title: Agent Global Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / AgentGlobalConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/applicationConfig](../README.md) / AgentGlobalConfig
 
 # Interface: AgentGlobalConfig
 
-Defined in: [src/types/applicationConfig.ts:128](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L128)
+Defined in: [src/types/applicationConfig.ts:210](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L210)
 
 Global agent configuration settings.
+
+## Example
+
+```ts
+const global: AgentGlobalConfig = {
+  maxExecutionTime: 15000,
+  enableTelemetry: true,
+  cacheEnabled: true,
+  cacheTtl: 60000,
+};
+```
 
 ## Properties
 
@@ -33,7 +27,7 @@ Global agent configuration settings.
 
 > **cacheEnabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:134](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L134)
+Defined in: [src/types/applicationConfig.ts:216](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L216)
 
 Enable caching globally for agents.
 
@@ -43,7 +37,7 @@ Enable caching globally for agents.
 
 > **cacheTtl**: `number`
 
-Defined in: [src/types/applicationConfig.ts:136](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L136)
+Defined in: [src/types/applicationConfig.ts:218](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L218)
 
 Cache time-to-live in milliseconds.
 
@@ -53,7 +47,7 @@ Cache time-to-live in milliseconds.
 
 > **enableTelemetry**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:132](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L132)
+Defined in: [src/types/applicationConfig.ts:214](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L214)
 
 Enable telemetry collection for agents.
 
@@ -63,35 +57,6 @@ Enable telemetry collection for agents.
 
 > **maxExecutionTime**: `number`
 
-Defined in: [src/types/applicationConfig.ts:130](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/applicationConfig.ts#L130)
+Defined in: [src/types/applicationConfig.ts:212](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L212)
 
 Maximum execution time for any agent in milliseconds.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._

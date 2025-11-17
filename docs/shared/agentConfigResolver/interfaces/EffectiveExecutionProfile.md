@@ -1,29 +1,14 @@
----
-title: Effective Execution Profile
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/agentConfigResolver](../README.md) / EffectiveExecutionProfile
+[UserContext-mcp-extension](../../../modules.md) / [shared/agentConfigResolver](../README.md) / EffectiveExecutionProfile
 
 # Interface: EffectiveExecutionProfile
 
-Defined in: [src/shared/agentConfigResolver.ts:55](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L55)
+Defined in: [src/shared/agentConfigResolver.ts:83](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentConfigResolver.ts#L83)
+
+EffectiveExecutionProfile interface.
 
 ## Properties
 
@@ -31,15 +16,15 @@ Defined in: [src/shared/agentConfigResolver.ts:55](https://github.com/ErikPlacht
 
 > `optional` **cacheEnabled**: `boolean`
 
-Defined in: [src/shared/agentConfigResolver.ts:58](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L58)
+Defined in: [src/shared/agentConfigResolver.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentConfigResolver.ts#L86)
 
 ***
 
 ### priority
 
-> **priority**: `Priority`
+> **priority**: [`Priority`](../type-aliases/Priority.md)
 
-Defined in: [src/shared/agentConfigResolver.ts:56](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L56)
+Defined in: [src/shared/agentConfigResolver.ts:84](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentConfigResolver.ts#L84)
 
 ***
 
@@ -47,33 +32,4 @@ Defined in: [src/shared/agentConfigResolver.ts:56](https://github.com/ErikPlacht
 
 > **timeout**: `number`
 
-Defined in: [src/shared/agentConfigResolver.ts:57](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentConfigResolver.ts#L57)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/shared/agentConfigResolver.ts:85](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentConfigResolver.ts#L85)

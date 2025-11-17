@@ -1,31 +1,25 @@
----
-title: Escalation Config
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / EscalationConfig
+[UserContext-mcp-extension](../../../modules.md) / [types/agentConfig](../README.md) / EscalationConfig
 
 # Interface: EscalationConfig
 
-Defined in: [src/types/agentConfig.ts:41](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L41)
+Defined in: [src/types/agentConfig.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L112)
 
-Escalation configuration
+Escalation configuration controlling retries and fallback behavior.
+
+## Example
+
+```ts
+const esc: EscalationConfig = {
+  conditions: ["low-confidence", "missing-signals"],
+  fallbackAgent: "clarification-agent",
+  maxRetries: 1,
+  vaguePhrases: ["help", "not sure"],
+};
+```
 
 ## Properties
 
@@ -33,7 +27,7 @@ Escalation configuration
 
 > **conditions**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:42](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L42)
+Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L113)
 
 ***
 
@@ -41,7 +35,7 @@ Defined in: [src/types/agentConfig.ts:42](https://github.com/ErikPlachta/VSCode-
 
 > **fallbackAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:43](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L43)
+Defined in: [src/types/agentConfig.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L114)
 
 ***
 
@@ -49,7 +43,7 @@ Defined in: [src/types/agentConfig.ts:43](https://github.com/ErikPlachta/VSCode-
 
 > **maxRetries**: `number`
 
-Defined in: [src/types/agentConfig.ts:44](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L44)
+Defined in: [src/types/agentConfig.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L115)
 
 ***
 
@@ -57,33 +51,4 @@ Defined in: [src/types/agentConfig.ts:44](https://github.com/ErikPlachta/VSCode-
 
 > `optional` **vaguePhrases**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:45](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/types/agentConfig.ts#L45)
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
+Defined in: [src/types/agentConfig.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L116)

@@ -1,29 +1,12 @@
----
-title: Agent Usage Event
-summary: >-
-  Generated internal code documentation for extension, agents, and server
-  modules.
-roles:
-  - documentation
-  - engineering
-associations:
-  - extension
-  - agent-framework
-  - mcp-server
-hierarchy:
-  - docs
-  - code
-  - generated
----
-[**mybusiness-mcp-extension v1.0.0**](../../../README.md)
+[**UserContext-mcp-extension v1.0.0**](../../../README.md)
 
 ***
 
-[mybusiness-mcp-extension](../../../modules.md) / [shared/agentAnalytics](../README.md) / AgentUsageEvent
+[UserContext-mcp-extension](../../../modules.md) / [shared/agentAnalytics](../README.md) / AgentUsageEvent
 
 # Interface: AgentUsageEvent
 
-Defined in: [src/shared/agentAnalytics.ts:18](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L18)
+Defined in: [src/shared/agentAnalytics.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L19)
 
 Agent usage event data structure.
 
@@ -33,7 +16,7 @@ Agent usage event data structure.
 
 > **agentName**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:24](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L24)
+Defined in: [src/shared/agentAnalytics.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L25)
 
 Name of the agent that was invoked.
 
@@ -43,7 +26,7 @@ Name of the agent that was invoked.
 
 > `optional` **errorMessage**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:36](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L36)
+Defined in: [src/shared/agentAnalytics.ts:37](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L37)
 
 Error message if execution failed.
 
@@ -53,7 +36,7 @@ Error message if execution failed.
 
 > **executionTime**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:30](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L30)
+Defined in: [src/shared/agentAnalytics.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L31)
 
 Duration of execution in milliseconds.
 
@@ -63,7 +46,7 @@ Duration of execution in milliseconds.
 
 > **id**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:20](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L20)
+Defined in: [src/shared/agentAnalytics.ts:21](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L21)
 
 Unique identifier for the event.
 
@@ -73,7 +56,7 @@ Unique identifier for the event.
 
 > **inputSize**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:32](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L32)
+Defined in: [src/shared/agentAnalytics.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L33)
 
 Input parameters passed to the agent.
 
@@ -81,9 +64,9 @@ Input parameters passed to the agent.
 
 ### metadata?
 
-> `optional` **metadata**: `Record`\<`string`, `any`\>
+> `optional` **metadata**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/shared/agentAnalytics.ts:40](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L40)
+Defined in: [src/shared/agentAnalytics.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L41)
 
 Additional context metadata.
 
@@ -93,7 +76,7 @@ Additional context metadata.
 
 > **method**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:26](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L26)
+Defined in: [src/shared/agentAnalytics.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L27)
 
 Method or operation that was called.
 
@@ -103,7 +86,7 @@ Method or operation that was called.
 
 > **outputSize**: `number`
 
-Defined in: [src/shared/agentAnalytics.ts:34](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L34)
+Defined in: [src/shared/agentAnalytics.ts:35](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L35)
 
 Output data size in bytes.
 
@@ -113,7 +96,7 @@ Output data size in bytes.
 
 > **status**: [`AgentExecutionStatus`](../enumerations/AgentExecutionStatus.md)
 
-Defined in: [src/shared/agentAnalytics.ts:28](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L28)
+Defined in: [src/shared/agentAnalytics.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L29)
 
 Execution status of the agent call.
 
@@ -123,7 +106,7 @@ Execution status of the agent call.
 
 > **timestamp**: `Date`
 
-Defined in: [src/shared/agentAnalytics.ts:22](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L22)
+Defined in: [src/shared/agentAnalytics.ts:23](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L23)
 
 Timestamp when the event occurred.
 
@@ -133,35 +116,6 @@ Timestamp when the event occurred.
 
 > `optional` **userId**: `string`
 
-Defined in: [src/shared/agentAnalytics.ts:38](https://github.com/ErikPlachta/VSCode-template/blob/30df51b386dfde8189b2a5aec97b736e2d5dab7f/src/shared/agentAnalytics.ts#L38)
+Defined in: [src/shared/agentAnalytics.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/agentAnalytics.ts#L39)
 
 User or session identifier.
-
-
-## Summary
-
-_TODO: Auto-generated placeholder._
-
-## Responsibilities
-
-_TODO: Auto-generated placeholder._
-
-## Inputs
-
-_TODO: Auto-generated placeholder._
-
-## Outputs
-
-_TODO: Auto-generated placeholder._
-
-## Error Handling
-
-_TODO: Auto-generated placeholder._
-
-## Examples
-
-_TODO: Auto-generated placeholder._
-
-## Maintenance
-
-_TODO: Auto-generated placeholder._
