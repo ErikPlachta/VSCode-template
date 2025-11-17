@@ -48,6 +48,32 @@
       },
       "problemMatcher": [],
       "isBackground": true
+    },
+    {
+      "label": "repo:ops:next",
+      "type": "npm",
+      "script": "repo:ops:next",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "repo:ops:next:status",
+      "type": "npm",
+      "script": "repo:ops:next:status",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
     }
   ]
 }

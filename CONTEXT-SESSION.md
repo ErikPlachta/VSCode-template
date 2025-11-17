@@ -58,21 +58,20 @@ Formatting Conventions
 
 ## Current Focus Detail
 
-### Current – Repo-ops CLI Rebuild
+### Current – Repo-ops CLI Rebuild (Next-Gen)
 
-Objective: Rebuild repo-ops into a single, robust CLI with consistent flag parsing, clear exit codes, and safe, backup-aware governance operations for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md`.
+Objective: Build a new, clean repo-ops CLI under `bin/repo-ops-next/**`, side-by-side with the legacy `bin/repo-ops` code, then migrate once the new implementation is stable.
 
 Immediate Focus (Current P1 from `TODO.md`)
 
-- Shared argument parsing
-  - Shared `parseFlags` helper created in `bin/repo-ops/flags.ts` and wired into `todo` and all `changelog` subcommands.
-  - `writeFlag` and related booleans are now derived solely from presence of flags in the parsed map, decoupled from other behavior.
-- Changelog flows
-  - `changelog scaffold`, `write`, `map`, `diff`, and `lock` all use the shared parser; behavior validated via existing Jest tests.
-  - Next slice: normalize exit codes for changelog commands (`write/map/diff/verify/verify-only/lock`) and add focused CLI tests for success/error paths.
-- TODO/session flows (upcoming within this branch)
-  - Rebuild TODO commands to be fully marker-aware and aligned with `TODO.md` sections and priorities.
-  - Revisit `session rotate` and `session lint` to ensure they use shared helpers and reflect the governance rules described in `.github/copilot-instructions.md`.
+- Legacy vs next-gen
+  - Legacy `bin/repo-ops` CLI remains in place as a reference and fallback; behavior is captured in existing tests and prior changelog entries.
+  - New work will occur in `bin/repo-ops-next/**` as a greenfield implementation to avoid risky refactors in the old tree.
+- Initial focus for next-gen CLI
+  - Define the new CLI surface (subcommands, flags, exit-code semantics) in a dedicated `bin/repo-ops-next/README.md`.
+  - Scaffold a minimal TypeScript entrypoint and shared helpers (flag parser, IO utilities) under `bin/repo-ops-next/**`.
+- TODO/session flows (planned)
+  - Implement TODO and session commands in the new CLI using governance rules and markers from `TODO.md` and `.github/copilot-instructions.md`.
 
 Planned Verification
 
@@ -180,8 +179,8 @@ Initial Pass Targets (Granular Checklist)
 ### Notes – Repo-ops CLI Rebuild Context (2025-11-16)
 
 - Branch state: working on `feat/repo-ops-cli-rebuild`; prior changelog stabilization work is already merged.
-- Current priority (Current P1 in `TODO.md`) is the repo-ops CLI rebuild; Types Purity and the broader `src/**` integrity review are Next P1 items.
-- Recent progress: introduced shared `parseFlags` under `bin/repo-ops/flags.ts` and wired it into `todo` and all `changelog` subcommands; Jest tests remain green.
-- Near-term focus: normalize exit codes and add targeted CLI tests for changelog commands, then expand to TODO and session flows before circling back to Types Purity.
+- Current priority (Current P1 in `TODO.md`) is still the repo-ops CLI rebuild, but strategy has shifted from refactoring `bin/repo-ops` to building a new CLI under `bin/repo-ops-next`.
+- Recent progress: legacy CLI refactor work (shared flag parser, changelog wiring) has been snapshotted in a commit for reference; test suite is green.
+- Near-term focus: design and scaffold the next-gen CLI in `bin/repo-ops-next/**` (entrypoint, helpers, docs), then incrementally add TODO/session/changelog capabilities.
 
 <!-- END:CONTEXT-SESSION-LLM-THINKING-NOTES-AREA -->

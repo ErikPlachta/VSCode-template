@@ -163,7 +163,9 @@
     "prepublishOnly": "npm run prebuild",
     "vsix:install": "code --install-extension UserContext-mcp-extension-1.0.0.vsix",
     "server": "npm run compile -- --pretty false && node ./out/server/index.js",
-    "repo:ops": "tsx bin/repo-ops/index.ts"
+    "repo:ops": "tsx bin/repo-ops/index.ts",
+    "repo:ops:next": "tsx bin/repo-ops-next/index.ts",
+    "repo:ops:next:status": "npm run repo:ops:next -- status"
   },
   "dependencies": {
     "fast-glob": "^3.3.2",
