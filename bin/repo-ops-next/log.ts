@@ -9,6 +9,7 @@ export interface DebugContext {
   argv: string[];
   positionals: string[];
   flags: Record<string, unknown>;
+  derived?: Record<string, unknown>;
 }
 
 /** Print a line to stderr. */
@@ -23,6 +24,7 @@ export function logDebug(context: DebugContext): void {
     argv: context.argv,
     positionals: context.positionals,
     flags: context.flags,
+    derived: context.derived,
   };
 
   // eslint-disable-next-line no-console

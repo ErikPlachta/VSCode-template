@@ -88,3 +88,20 @@ export function parseFlags(argv: string[]): ParsedFlags {
 
   return { positionals, flags };
 }
+
+export interface DerivedBooleanFlags {
+  write: boolean;
+  validate: boolean;
+}
+
+/**
+ * Derive normalized boolean flags (write/validate) purely from the presence
+ * of corresponding CLI flags.
+ */
+export function deriveBooleanFlags(
+  flags: Record<string, FlagValue>
+): DerivedBooleanFlags {
+  const write = flags.write === true;
+  const validate = flags.validate === true;
+  return { write, validate };
+}

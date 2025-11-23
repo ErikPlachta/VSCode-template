@@ -8,11 +8,12 @@
  */
 
 import process from "node:process";
-import { parseFlags } from "./flags";
+import { parseFlags, deriveBooleanFlags } from "./flags";
 import { getStatus, printStatus } from "./commands/status";
 import { lintSession, printSessionLint } from "./commands/session";
 import { COMMANDS, EXIT_CODES, RepoOpsCommandId } from "./architecture";
 import { isDebugEnabled, logDebug, logError, ensureErrorExitCode } from "./log";
+import { runChangelogCommand } from "./commands/changelog";
 
 /** Supported top-level commands for the next-gen CLI. */
 type NextCommand = RepoOpsCommandId;
@@ -55,7 +56,9 @@ function printVersion(): void {
 export function main(argv: string[] = process.argv.slice(2)): void {
   const { positionals, flags } = parseFlags(argv);
   if (isDebugEnabled(flags)) {
-    logDebug({ argv, positionals, flags });
+    const { write, validate } = deriveBooleanFlags(flags);
+    const derived: Record<string, unknown> = { write, validate };
+    logDebug({ argv, positionals, flags, derived });
   }
 
   const [command, subcommand] = positionals;
@@ -86,12 +89,28 @@ export function main(argv: string[] = process.argv.slice(2)): void {
       }
       break;
     case "todo":
-    case "changelog":
       logError(
-        `Command '${cmd}' is not implemented yet. This is a placeholder based on the architecture descriptor.`
+        "Command 'todo' is not implemented yet. This is a placeholder based on the architecture descriptor."
       );
       process.exitCode = EXIT_CODES.validationError;
       break;
+    case "changelog": {
+      runChangelogCommand(subcommand, flags)
+        .then((code) => {
+          process.exitCode = code;
+          ensureErrorExitCode(EXIT_CODES.unknownError);
+        })
+        .catch((error: unknown) => {
+          logError(
+            `Unexpected error in changelog command: ${
+              error instanceof Error ? error.message : String(error)
+            }`
+          );
+          process.exitCode = EXIT_CODES.unknownError;
+          ensureErrorExitCode(EXIT_CODES.unknownError);
+        });
+      return;
+    }
     default:
       logError(`Unknown command: ${command ?? "<none>"}`);
       logError("Try: repo-ops-next help");

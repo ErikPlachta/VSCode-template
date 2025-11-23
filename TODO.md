@@ -90,23 +90,24 @@ Follow these guidelines to ensure effective task management:
 ### Current Action Items
 
 - [ ] P1: Repo-ops CLI Rebuild (Next-Gen) – Robust, typed, config-driven tooling for TODO/CONTEXT-SESSION/CHANGELOG
-  - [ ] Architecture & design
+  - [x] Architecture & design
     - [x] Define repo-ops goals, inputs/outputs, and config surface for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md` (including marker awareness and backup expectations) in a new implementation under `bin/repo-ops-next/**`.
     - [x] Decide on a single CLI entry point and subcommand structure (e.g., `status`, `session`, `todo`, `changelog`) with consistent flag semantics in `bin/repo-ops-next/index.ts`.
     - [x] Specify logging, debug modes (e.g., `--debug-args`, verbose flags), and error-handling strategy so failures are observable but safe.
     - [x] Normalize process exit codes across commands (0 for success/dry-run, non-zero for validation/IO/parse errors) and document this behavior.
-  - [ ] Core utilities & shared helpers
+  - [x] Core utilities & shared helpers
     - [x] Implement shared file IO, backup, and text-processing utilities in typed modules under `bin/repo-ops-next/**` so reading/writing files, building lists, and backups are fully data-driven and reusable.
     - [x] Centralize marker/config awareness (section markers, headings, YAML front-matter) into a config/descriptor file rather than hardcoding in command logic.
     - [x] Ensure all runtime logic is strongly typed (TypeScript), with types in `bin` or shared locations matching governance rules.
-  - [ ] Argument parsing & execution model
-    - [ ] Implement a small, robust flag parser in `bin/repo-ops-next/**` that walks argv left-to-right and supports boolean flags like `--write`/`--validate` and value flags like `--context`, `--changes`, etc.
-    - [ ] Ensure `writeFlag` (and other booleans) are derived solely from the presence of flags (independent of other behavior) and that dry-run vs applied behavior is fully decoupled.
-    - [ ] Add optional debug output (e.g., `--debug-args`) to print parsed args, `writeFlag`, and related flags when troubleshooting.
-  - [ ] Changelog management (logs-only, backup-aware)
-    - [ ] Rebuild `changelog write`/`verify` and `changelog map`/index flows to use the new parser and shared backup utilities; keep logs-only policy and backup semantics intact.
-    - [ ] Ensure lock handling is robust and clearly reported (no silent failures); keep `--validate`/dry-run semantics explicit.
-    - [ ] Confirm behavior when `REPO_OPS_CHANGELOG_PATH` is set (synthetic path) is documented and tested.
+  - [x] Argument parsing & execution model
+    - [x] Implement a small, robust flag parser in `bin/repo-ops-next/**` that walks argv left-to-right and supports boolean flags like `--write`/`--validate` and value flags like `--context`, `--changes`, etc.
+    - [x] Ensure `writeFlag` (and other booleans) are derived solely from the presence of flags (independent of other behavior) and that dry-run vs applied behavior is fully decoupled.
+    - [x] Add optional debug output (e.g., `--debug-args`) to print parsed args, `writeFlag`, and related flags when troubleshooting.
+  - [x] Changelog management (logs-only, backup-aware)
+    - [x] Rebuild `changelog write`/`verify` and `changelog map`/index flows to use the new parser and shared backup utilities; keep logs-only policy and backup semantics intact.
+    - [x] Ensure lock handling is robust and clearly reported (no silent failures); keep `--validate`/dry-run semantics explicit.
+    - [x] Confirm behavior when `REPO_OPS_CHANGELOG_PATH` is set (synthetic path) is documented and tested.
+    - [x] Add explicit next-gen tests for REPO_OPS_CHANGELOG_PATH and synthetic changelog writes.
   - [ ] TODO management (single source of outstanding work)
     - [ ] Rebuild TODO commands to add/update tasks, enforce sections (Current/Next/Backlog) and priorities (P1–P3), and respect status markers (✅/⏳/etc.).
     - [ ] Ensure all edits are marker-aware and keep the `<!-- BEGIN:/END:... -->` structure intact.
@@ -126,6 +127,15 @@ Follow these guidelines to ensure effective task management:
 
 ### Next Action Items
 
+- [ ] P2: Research VSCode Copilot Chat APIs to Identify New Agent Opportunities within MCP Server
+  - [ ] Research VSCode APIs for managing TODOs and other relevant functionalities.
+    - [ ] Identify all that exist and document their capabilities. Include how we could use the different features now or in the future.
+      - [ ] Among other things, consider managing TODOs in VSCode CoPilot Chat, using CLI Agents, and other VS Code Copilot Chat API's I'm not thinking of.
+    - [ ] Identify priority APIs that would add the most value to our design. Based on each, how could Orchestrator use this Agent to provide solutions to other Agents and workflows. What scould be integrated into existing Agents we have? Any opportunities to create new agents?
+  - [ ] Design a Data-Driven solution that could take advantage of existing configuration patterns.
+  - [ ] Design an agent that's prepared to receive and manage requests accordingly, with full tsdoc, data-driven, and works with configuration.
+  - [ ] Add unit tests and integration tests for the new Agent.
+  - [ ] Update documentation to include usage instructions for the new Agent.
 - [ ] P1: Types Purity Refactor – Extract runtime from `src/types/**`
   - [ ] Inventory runtime code in `src/types/**` (classes, functions)
   - [ ] Add enforcement test: fail on functions inside `src/types/**`
