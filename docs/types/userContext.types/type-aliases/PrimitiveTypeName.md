@@ -8,6 +8,6 @@
 
 > **PrimitiveTypeName** = `"str"` \| `"int"` \| `"float"` \| `"bool"` \| `"datetime"`
 
-Defined in: [src/types/userContext.types.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L274)
+Defined in: [src/types/userContext.types.ts:274](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L274)
 
 Supported primitive names within a type definition schema

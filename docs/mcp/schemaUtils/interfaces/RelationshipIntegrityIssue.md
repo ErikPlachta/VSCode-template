@@ -6,7 +6,7 @@
 
 # Interface: RelationshipIntegrityIssue
 
-Defined in: [src/mcp/schemaUtils.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L16)
+Defined in: [src/mcp/schemaUtils.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/schemaUtils.ts#L16)
 
 RelationshipIntegrityIssue interface.
 
@@ -16,7 +16,7 @@ RelationshipIntegrityIssue interface.
 
 > **categoryId**: `string`
 
-Defined in: [src/mcp/schemaUtils.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L17)
+Defined in: [src/mcp/schemaUtils.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/schemaUtils.ts#L17)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/mcp/schemaUtils.ts:17](https://github.com/ErikPlachta/vscode-ex
 
 > **reason**: `string`
 
-Defined in: [src/mcp/schemaUtils.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L19)
+Defined in: [src/mcp/schemaUtils.ts:19](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/schemaUtils.ts#L19)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/mcp/schemaUtils.ts:19](https://github.com/ErikPlachta/vscode-ex
 
 > **relationship**: [`RelationshipDescription`](../../../types/userContext.types/interfaces/RelationshipDescription.md)
 
-Defined in: [src/mcp/schemaUtils.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L18)
+Defined in: [src/mcp/schemaUtils.ts:18](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/schemaUtils.ts#L18)

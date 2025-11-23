@@ -10,10 +10,15 @@
 import process from "node:process";
 import { parseFlags, deriveBooleanFlags } from "./flags";
 import { getStatus, printStatus } from "./commands/status";
-import { lintSession, printSessionLint } from "./commands/session";
+import {
+  lintSession,
+  printSessionLint,
+  rotateSession,
+} from "./commands/session";
 import { COMMANDS, EXIT_CODES, RepoOpsCommandId } from "./architecture";
 import { isDebugEnabled, logDebug, logError, ensureErrorExitCode } from "./log";
 import { runChangelogCommand } from "./commands/changelog";
+import { runTodoCommand } from "./commands/todo";
 
 /** Supported top-level commands for the next-gen CLI. */
 type NextCommand = RepoOpsCommandId;
@@ -79,21 +84,38 @@ export function main(argv: string[] = process.argv.slice(2)): void {
       process.exitCode = EXIT_CODES.success;
       break;
     case "session":
+      printHeader();
       if (subcommand === "lint" || subcommand === undefined) {
-        printHeader();
         printSessionLint(lintSession());
         process.exitCode = EXIT_CODES.success;
+      } else if (subcommand === "rotate") {
+        const result = rotateSession();
+        printSessionLint(result);
+        process.exitCode = result.ok
+          ? EXIT_CODES.success
+          : EXIT_CODES.validationError;
       } else {
         logError(`Unknown session subcommand: ${subcommand}`);
         process.exitCode = EXIT_CODES.validationError;
       }
       break;
-    case "todo":
-      logError(
-        "Command 'todo' is not implemented yet. This is a placeholder based on the architecture descriptor."
-      );
-      process.exitCode = EXIT_CODES.validationError;
-      break;
+    case "todo": {
+      runTodoCommand(subcommand, flags)
+        .then((code) => {
+          process.exitCode = code;
+          ensureErrorExitCode(EXIT_CODES.unknownError);
+        })
+        .catch((error: unknown) => {
+          logError(
+            `Unexpected error in todo command: ${
+              error instanceof Error ? error.message : String(error)
+            }`
+          );
+          process.exitCode = EXIT_CODES.unknownError;
+          ensureErrorExitCode(EXIT_CODES.unknownError);
+        });
+      return;
+    }
     case "changelog": {
       runChangelogCommand(subcommand, flags)
         .then((code) => {

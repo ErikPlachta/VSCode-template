@@ -6,7 +6,7 @@
 
 # Interface: AgentRequest
 
-Defined in: [src/types/interfaces.ts:317](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L317)
+Defined in: [src/types/interfaces.ts:317](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L317)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/types/interfaces.ts:317](https://github.com/ErikPlachta/vscode-
 
 > **agentType**: `"clarification"` \| `"database"` \| `"data"` \| `"relevantDataManager"`
 
-Defined in: [src/types/interfaces.ts:318](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L318)
+Defined in: [src/types/interfaces.ts:318](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L318)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:318](https://github.com/ErikPlachta/vscode-
 
 > **operation**: `string`
 
-Defined in: [src/types/interfaces.ts:319](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L319)
+Defined in: [src/types/interfaces.ts:319](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L319)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/interfaces.ts:319](https://github.com/ErikPlachta/vscode-
 
 > **parameters**: `unknown`
 
-Defined in: [src/types/interfaces.ts:320](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L320)
+Defined in: [src/types/interfaces.ts:320](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L320)

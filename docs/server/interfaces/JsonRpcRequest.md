@@ -6,7 +6,7 @@
 
 # Interface: JsonRpcRequest
 
-Defined in: [src/server/index.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L27)
+Defined in: [src/server/index.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L27)
 
 JsonRpcRequest interface.
 
@@ -16,7 +16,7 @@ JsonRpcRequest interface.
 
 > **id**: `string` \| `number` \| `null`
 
-Defined in: [src/server/index.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L29)
+Defined in: [src/server/index.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L29)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/server/index.ts:29](https://github.com/ErikPlachta/vscode-exten
 
 > **jsonrpc**: `string`
 
-Defined in: [src/server/index.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L28)
+Defined in: [src/server/index.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L28)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/server/index.ts:28](https://github.com/ErikPlachta/vscode-exten
 
 > **method**: `string`
 
-Defined in: [src/server/index.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L30)
+Defined in: [src/server/index.ts:30](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L30)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/server/index.ts:30](https://github.com/ErikPlachta/vscode-exten
 
 > `optional` **params**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/server/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L31)
+Defined in: [src/server/index.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L31)

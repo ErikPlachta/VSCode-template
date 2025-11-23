@@ -6,7 +6,7 @@
 
 # Interface: AnalysisInput
 
-Defined in: [src/types/interfaces.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L62)
+Defined in: [src/types/interfaces.ts:62](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L62)
 
 ======================================
 
@@ -16,7 +16,7 @@ Defined in: [src/types/interfaces.ts:62](https://github.com/ErikPlachta/vscode-e
 
 > **categoryId**: `string`
 
-Defined in: [src/types/interfaces.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L63)
+Defined in: [src/types/interfaces.ts:63](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L63)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:63](https://github.com/ErikPlachta/vscode-e
 
 > **records**: [`CategoryRecord`](../../agentConfig/interfaces/CategoryRecord.md)[]
 
-Defined in: [src/types/interfaces.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L64)
+Defined in: [src/types/interfaces.ts:64](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L64)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:64](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **relationships**: [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/interfaces.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L66)
+Defined in: [src/types/interfaces.ts:66](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L66)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:66](https://github.com/ErikPlachta/vscode-e
 
 > `optional` **schemas**: [`CategorySchema`](CategorySchema.md)[]
 
-Defined in: [src/types/interfaces.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L65)
+Defined in: [src/types/interfaces.ts:65](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L65)

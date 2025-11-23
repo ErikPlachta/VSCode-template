@@ -281,7 +281,7 @@ const __dirname = path.dirname(__filename);
 - Transport: Use stdio by default. Enable HTTP only with `MCP_HTTP_ENABLED=true` for local debugging; never in CI.
 - Single handler: Keep one JSON-RPC path (`initialize`, `tools/list`, `tools/call`) and reuse it across transports to avoid drift. Remove duplicate handlers when discovered.
 - Entrypoint: Default startup runs stdio; pass `--stdio` to force. HTTP startup is guarded by `MCP_HTTP_ENABLED`.
-- Reference: See [JSON-RPC 2.0 Reference (MCP)](../docs/mcp/json-rpc.md) and the official [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification).
+- Reference: Load only when working in `src` or `src` related tests. see [JSON-RPC 2.0 Reference (MCP)](../docs/mcp/json-rpc.md).
 
 ---
 

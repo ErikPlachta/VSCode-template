@@ -6,7 +6,7 @@
 
 # Interface: RemoteQueryBlueprint
 
-Defined in: [src/types/userContext.types.ts:346](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L346)
+Defined in: [src/types/userContext.types.ts:346](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L346)
 
 Remote query blueprint associated with the category
 
@@ -16,7 +16,7 @@ Remote query blueprint associated with the category
 
 > **description**: `string`
 
-Defined in: [src/types/userContext.types.ts:348](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L348)
+Defined in: [src/types/userContext.types.ts:348](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L348)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/userContext.types.ts:348](https://github.com/ErikPlachta/
 
 > **name**: `string`
 
-Defined in: [src/types/userContext.types.ts:347](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L347)
+Defined in: [src/types/userContext.types.ts:347](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L347)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/userContext.types.ts:347](https://github.com/ErikPlachta/
 
 > **samplePayload**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/userContext.types.ts:349](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L349)
+Defined in: [src/types/userContext.types.ts:349](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L349)

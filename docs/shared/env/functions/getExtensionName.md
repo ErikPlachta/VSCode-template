@@ -8,7 +8,7 @@
 
 > **getExtensionName**(): `string`
 
-Defined in: [src/shared/env.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/env.ts#L11)
+Defined in: [src/shared/env.ts:11](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/env.ts#L11)
 
 Return the extension name for cache scoping, preferring EXTENSION_NAME from env.
 Falls back to a safe default when not set.

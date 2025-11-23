@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult
 
-Defined in: [src/shared/validation/configValidation.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L25)
+Defined in: [src/shared/validation/configValidation.ts:25](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L25)
 
 Validation result produced by configuration validators.
 
@@ -22,7 +22,7 @@ complete this will be the single source type (types/ duplicate removed).
 
 > **errors**: [`ValidationError`](ValidationError.md)[]
 
-Defined in: [src/shared/validation/configValidation.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L27)
+Defined in: [src/shared/validation/configValidation.ts:27](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L27)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/shared/validation/configValidation.ts:27](https://github.com/Er
 
 > **isValid**: `boolean`
 
-Defined in: [src/shared/validation/configValidation.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L26)
+Defined in: [src/shared/validation/configValidation.ts:26](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L26)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [src/shared/validation/configValidation.ts:26](https://github.com/Er
 
 > **warnings**: [`ValidationWarning`](ValidationWarning.md)[]
 
-Defined in: [src/shared/validation/configValidation.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L28)
+Defined in: [src/shared/validation/configValidation.ts:28](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L28)

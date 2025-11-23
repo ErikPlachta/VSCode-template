@@ -6,7 +6,7 @@
 
 # Interface: AgentConfigDefinition
 
-Defined in: [src/types/agentConfig.ts:704](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L704)
+Defined in: [src/types/agentConfig.ts:704](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L704)
 
 Complete TypeScript-based agent configuration definition.
 
@@ -21,7 +21,7 @@ Example removed for brevity.
 
 > **$configId**: `string`
 
-Defined in: [src/types/agentConfig.ts:706](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L706)
+Defined in: [src/types/agentConfig.ts:706](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L706)
 
 Unique configuration schema identifier for validation and versioning
 
@@ -31,7 +31,7 @@ Unique configuration schema identifier for validation and versioning
 
 > **agent**: [`AgentIdentity`](AgentIdentity.md)
 
-Defined in: [src/types/agentConfig.ts:709](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L709)
+Defined in: [src/types/agentConfig.ts:709](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L709)
 
 Basic agent identity and metadata
 
@@ -41,7 +41,7 @@ Basic agent identity and metadata
 
 > `optional` **applicationFacing**: [`ApplicationFacingConfig`](ApplicationFacingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:727](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L727)
+Defined in: [src/types/agentConfig.ts:727](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L727)
 
 Application-facing metadata
 
@@ -51,7 +51,7 @@ Application-facing metadata
 
 > `optional` **clarification**: [`ClarificationConfig`](ClarificationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:715](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L715)
+Defined in: [src/types/agentConfig.ts:715](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L715)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [src/types/agentConfig.ts:715](https://github.com/ErikPlachta/vscode
 
 > `optional` **communication**: [`CommunicationConfig`](CommunicationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:716](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L716)
+Defined in: [src/types/agentConfig.ts:716](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L716)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: [src/types/agentConfig.ts:716](https://github.com/ErikPlachta/vscode
 
 > `optional` **data**: [`DataConfig`](DataConfig.md)
 
-Defined in: [src/types/agentConfig.ts:714](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L714)
+Defined in: [src/types/agentConfig.ts:714](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L714)
 
 ***
 
@@ -75,7 +75,7 @@ Defined in: [src/types/agentConfig.ts:714](https://github.com/ErikPlachta/vscode
 
 > `optional` **database**: [`DatabaseConfig`](DatabaseConfig.md)
 
-Defined in: [src/types/agentConfig.ts:713](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L713)
+Defined in: [src/types/agentConfig.ts:713](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L713)
 
 ***
 
@@ -83,7 +83,7 @@ Defined in: [src/types/agentConfig.ts:713](https://github.com/ErikPlachta/vscode
 
 > `optional` **dataLoader**: [`DataLoaderConfig`](DataLoaderConfig.md)
 
-Defined in: [src/types/agentConfig.ts:717](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L717)
+Defined in: [src/types/agentConfig.ts:717](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L717)
 
 ***
 
@@ -91,7 +91,7 @@ Defined in: [src/types/agentConfig.ts:717](https://github.com/ErikPlachta/vscode
 
 > `optional` **errorHandling**: `object`
 
-Defined in: [src/types/agentConfig.ts:758](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L758)
+Defined in: [src/types/agentConfig.ts:758](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L758)
 
 Error handling configuration
 
@@ -157,7 +157,7 @@ Error handling configuration
 
 > `optional` **execution**: [`ExecutionConfig`](ExecutionConfig.md)
 
-Defined in: [src/types/agentConfig.ts:721](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L721)
+Defined in: [src/types/agentConfig.ts:721](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L721)
 
 Runtime execution configuration
 
@@ -167,7 +167,7 @@ Runtime execution configuration
 
 > `optional` **orchestration**: [`OrchestrationConfig`](OrchestrationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:712](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L712)
+Defined in: [src/types/agentConfig.ts:712](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L712)
 
 Agent-specific configuration (varies by agent type)
 
@@ -177,7 +177,7 @@ Agent-specific configuration (varies by agent type)
 
 > `optional` **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:730](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L730)
+Defined in: [src/types/agentConfig.ts:730](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L730)
 
 Performance configuration
 
@@ -223,7 +223,7 @@ Performance configuration
 
 > `optional` **relevantDataManager**: [`RelevantDataManagerConfig`](RelevantDataManagerConfig.md)
 
-Defined in: [src/types/agentConfig.ts:718](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L718)
+Defined in: [src/types/agentConfig.ts:718](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L718)
 
 ***
 
@@ -231,7 +231,7 @@ Defined in: [src/types/agentConfig.ts:718](https://github.com/ErikPlachta/vscode
 
 > `optional` **telemetry**: `object`
 
-Defined in: [src/types/agentConfig.ts:743](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L743)
+Defined in: [src/types/agentConfig.ts:743](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L743)
 
 Telemetry configuration
 
@@ -285,6 +285,6 @@ Telemetry configuration
 
 > `optional` **userFacing**: [`UserFacingConfig`](UserFacingConfig.md)
 
-Defined in: [src/types/agentConfig.ts:724](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L724)
+Defined in: [src/types/agentConfig.ts:724](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L724)
 
 User-facing metadata

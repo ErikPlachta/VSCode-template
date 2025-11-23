@@ -8,6 +8,6 @@
 
 > **SeverityLevel** = `"low"` \| `"medium"` \| `"high"` \| `"critical"`
 
-Defined in: [src/types/communication.types.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/communication.types.ts#L24)
+Defined in: [src/types/communication.types.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/communication.types.ts#L24)
 
 Severity levels for error and warning messages.

@@ -8,7 +8,7 @@
 
 > **createDescriptorMap**(`entries`): `Record`\<`string`, [`ConfigDescriptor`](../interfaces/ConfigDescriptor.md)\>
 
-Defined in: [src/shared/config/descriptors.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/descriptors.ts#L17)
+Defined in: [src/shared/config/descriptors.ts:17](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/config/descriptors.ts#L17)
 
 ## Parameters
 

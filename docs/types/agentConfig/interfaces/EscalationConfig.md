@@ -6,7 +6,7 @@
 
 # Interface: EscalationConfig
 
-Defined in: [src/types/agentConfig.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L112)
+Defined in: [src/types/agentConfig.ts:112](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L112)
 
 Escalation configuration controlling retries and fallback behavior.
 
@@ -27,7 +27,7 @@ const esc: EscalationConfig = {
 
 > **conditions**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L113)
+Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L113)
 
 ***
 
@@ -35,7 +35,7 @@ Defined in: [src/types/agentConfig.ts:113](https://github.com/ErikPlachta/vscode
 
 > **fallbackAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L114)
+Defined in: [src/types/agentConfig.ts:114](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L114)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: [src/types/agentConfig.ts:114](https://github.com/ErikPlachta/vscode
 
 > **maxRetries**: `number`
 
-Defined in: [src/types/agentConfig.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L115)
+Defined in: [src/types/agentConfig.ts:115](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L115)
 
 ***
 
@@ -51,4 +51,4 @@ Defined in: [src/types/agentConfig.ts:115](https://github.com/ErikPlachta/vscode
 
 > `optional` **vaguePhrases**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L116)
+Defined in: [src/types/agentConfig.ts:116](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L116)

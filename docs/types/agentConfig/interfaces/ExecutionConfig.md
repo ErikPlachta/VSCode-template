@@ -6,7 +6,7 @@
 
 # Interface: ExecutionConfig
 
-Defined in: [src/types/agentConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L192)
+Defined in: [src/types/agentConfig.ts:192](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L192)
 
 Execution settings controlling runtime behavior.
 
@@ -20,7 +20,7 @@ Execution settings controlling runtime behavior.
 
 > `optional` **maxConcurrency**: `number`
 
-Defined in: [src/types/agentConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L194)
+Defined in: [src/types/agentConfig.ts:194](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L194)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/types/agentConfig.ts:194](https://github.com/ErikPlachta/vscode
 
 > `optional` **mode**: `string`
 
-Defined in: [src/types/agentConfig.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L193)
+Defined in: [src/types/agentConfig.ts:193](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L193)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [src/types/agentConfig.ts:193](https://github.com/ErikPlachta/vscode
 
 > `optional` **timeoutMs**: `number`
 
-Defined in: [src/types/agentConfig.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L195)
+Defined in: [src/types/agentConfig.ts:195](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L195)

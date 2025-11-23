@@ -8,7 +8,7 @@
 
 > **stopMCPServer**(): `Promise`\<`void`\>
 
-Defined in: [src/server/embedded.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/embedded.ts#L32)
+Defined in: [src/server/embedded.ts:32](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/embedded.ts#L32)
 
 Stops the (deprecated) embedded HTTP MCP server stub (no-op).
 

@@ -8,6 +8,6 @@
 
 > `const` **agentConfigurations**: `Record`\<`string`, [`UnifiedAgentConfig`](../interfaces/UnifiedAgentConfig.md)\>
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L91)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:91](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/config/unifiedAgentConfig.ts#L91)
 
 Central agent configuration registry

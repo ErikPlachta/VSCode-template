@@ -6,7 +6,7 @@
 
 # Interface: FolderBlueprint
 
-Defined in: [src/types/userContext.types.ts:231](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L231)
+Defined in: [src/types/userContext.types.ts:231](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L231)
 
 Description for how a category folder is organized
 
@@ -16,7 +16,7 @@ Description for how a category folder is organized
 
 > **configFile**: `string`
 
-Defined in: [src/types/userContext.types.ts:235](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L235)
+Defined in: [src/types/userContext.types.ts:235](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L235)
 
 Path to the category configuration file
 
@@ -26,7 +26,7 @@ Path to the category configuration file
 
 > **examplesDir**: `string`
 
-Defined in: [src/types/userContext.types.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L241)
+Defined in: [src/types/userContext.types.ts:241](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L241)
 
 Directory containing example datasets
 
@@ -36,7 +36,7 @@ Directory containing example datasets
 
 > **queriesDir**: `string`
 
-Defined in: [src/types/userContext.types.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L243)
+Defined in: [src/types/userContext.types.ts:243](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L243)
 
 Directory containing query blueprints
 
@@ -46,7 +46,7 @@ Directory containing query blueprints
 
 > **root**: `string`
 
-Defined in: [src/types/userContext.types.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L233)
+Defined in: [src/types/userContext.types.ts:233](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L233)
 
 Root directory for the category
 
@@ -56,7 +56,7 @@ Root directory for the category
 
 > **schemaFiles**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:237](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L237)
+Defined in: [src/types/userContext.types.ts:237](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L237)
 
 JSON schema file paths
 
@@ -66,6 +66,6 @@ JSON schema file paths
 
 > **typeFiles**: `string`[]
 
-Defined in: [src/types/userContext.types.ts:239](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L239)
+Defined in: [src/types/userContext.types.ts:239](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L239)
 
 Structured type definition file paths

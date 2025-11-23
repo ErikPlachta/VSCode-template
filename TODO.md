@@ -108,12 +108,12 @@ Follow these guidelines to ensure effective task management:
     - [x] Ensure lock handling is robust and clearly reported (no silent failures); keep `--validate`/dry-run semantics explicit.
     - [x] Confirm behavior when `REPO_OPS_CHANGELOG_PATH` is set (synthetic path) is documented and tested.
     - [x] Add explicit next-gen tests for REPO_OPS_CHANGELOG_PATH and synthetic changelog writes.
-  - [ ] TODO management (single source of outstanding work)
-    - [ ] Rebuild TODO commands to add/update tasks, enforce sections (Current/Next/Backlog) and priorities (P1–P3), and respect status markers (✅/⏳/etc.).
-    - [ ] Ensure all edits are marker-aware and keep the `<!-- BEGIN:/END:... -->` structure intact.
-  - [ ] CONTEXT-SESSION management (session hub alignment)
-    - [ ] Rebuild `session rotate`/`session lint` to use shared helpers and config, keeping Focus Summary/Detail synced with `TODO.md` and `CHANGELOG.md` without duplicating tasks or logs.
-    - [ ] Validate lint rules against governance (markers present, sections formatted correctly, links to TODO/CHANGELOG).
+  - [x] TODO management (single source of outstanding work)
+    - [x] Rebuild TODO commands to add/update tasks, enforce sections (Current/Next/Backlog) and priorities (P1–P3), and respect status markers (✅/⏳/etc.) for initial `todo add` support.
+    - [x] Ensure all edits are marker-aware and keep the `<!-- BEGIN:/END:... -->` structure intact for `todo add`.
+  - [x] CONTEXT-SESSION management (session hub alignment)
+    - [x] Rebuild `session rotate`/`session lint` to use shared helpers and config, keeping Focus Summary/Detail synced with `TODO.md` and `CHANGELOG.md` without duplicating tasks or logs.
+    - [x] Validate lint rules against governance (markers present, sections formatted correctly, links to TODO/CHANGELOG).
   - [ ] Testing & verification
     - [ ] Remove or replace existing repo-ops tests as needed; design a fresh test suite (unit + integration) for argument parsing, file operations, and cross-file invariants.
     - [ ] Add tests around representative long commands (including ones with backticks, `/**`, and multi-word values) to confirm `--write` and other flags are always detected when present.
@@ -264,6 +264,10 @@ Follow these guidelines to ensure effective task management:
 
 <!-- END:NEXT_ACTION_ITEMS -->
 <!-- BEGIN:BACKLOG_ACTION_ITEMS -->
+
+- [ ] P2: E2E flow task
+
+- [ ] P2: E2E flow task
 
 ### Backlog Action Items
 

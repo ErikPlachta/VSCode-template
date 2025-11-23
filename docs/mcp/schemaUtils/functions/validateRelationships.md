@@ -8,7 +8,7 @@
 
 > **validateRelationships**(`categories`): [`RelationshipIntegrityIssue`](../interfaces/RelationshipIntegrityIssue.md)[]
 
-Defined in: [src/mcp/schemaUtils.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L67)
+Defined in: [src/mcp/schemaUtils.ts:67](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/schemaUtils.ts#L67)
 
 Validate that all declared relationships target existing categories.
 

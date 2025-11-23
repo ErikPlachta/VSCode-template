@@ -6,7 +6,7 @@
 
 # Interface: JsonRpcResponse
 
-Defined in: [src/server/index.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L38)
+Defined in: [src/server/index.ts:38](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L38)
 
 JsonRpcResponse interface.
 
@@ -16,7 +16,7 @@ JsonRpcResponse interface.
 
 > `optional` **error**: `object`
 
-Defined in: [src/server/index.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L42)
+Defined in: [src/server/index.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L42)
 
 #### code
 
@@ -36,7 +36,7 @@ Defined in: [src/server/index.ts:42](https://github.com/ErikPlachta/vscode-exten
 
 > **id**: `string` \| `number` \| `null`
 
-Defined in: [src/server/index.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L40)
+Defined in: [src/server/index.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L40)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/server/index.ts:40](https://github.com/ErikPlachta/vscode-exten
 
 > **jsonrpc**: `"2.0"`
 
-Defined in: [src/server/index.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L39)
+Defined in: [src/server/index.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L39)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [src/server/index.ts:39](https://github.com/ErikPlachta/vscode-exten
 
 > `optional` **result**: `unknown`
 
-Defined in: [src/server/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/index.ts#L41)
+Defined in: [src/server/index.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/index.ts#L41)

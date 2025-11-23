@@ -8,7 +8,7 @@
 
 > **detectDuplicateSchemas**(`schemas`): `string`[]
 
-Defined in: [src/mcp/schemaUtils.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/schemaUtils.ts#L47)
+Defined in: [src/mcp/schemaUtils.ts:47](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/schemaUtils.ts#L47)
 
 Detect duplicate schema names (case-insensitive) within a category.
 

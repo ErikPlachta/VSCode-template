@@ -6,7 +6,7 @@
 
 # Interface: DatabaseConfig
 
-Defined in: [src/types/agentConfig.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L246)
+Defined in: [src/types/agentConfig.ts:246](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L246)
 
 DatabaseAgent configuration for query behavior, validation, and performance.
 
@@ -39,7 +39,7 @@ const dbCfg: DatabaseConfig = {
 
 > **fieldAliases**: `Record`\<`string`, `Record`\<`string`, `string`\>\>
 
-Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L247)
+Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L247)
 
 ***
 
@@ -47,7 +47,7 @@ Defined in: [src/types/agentConfig.ts:247](https://github.com/ErikPlachta/vscode
 
 > **operations**: [`DatabaseOperationsConfig`](DatabaseOperationsConfig.md)
 
-Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L265)
+Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L265)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: [src/types/agentConfig.ts:265](https://github.com/ErikPlachta/vscode
 
 > **performance**: `object`
 
-Defined in: [src/types/agentConfig.ts:248](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L248)
+Defined in: [src/types/agentConfig.ts:248](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L248)
 
 #### caching
 
@@ -105,4 +105,4 @@ Maximum time (ms) allowed for query execution
 
 > **validation**: [`DatabaseValidationConfig`](DatabaseValidationConfig.md)
 
-Defined in: [src/types/agentConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L264)
+Defined in: [src/types/agentConfig.ts:264](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L264)

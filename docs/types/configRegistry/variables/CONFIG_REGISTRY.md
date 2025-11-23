@@ -8,6 +8,6 @@
 
 > `const` **CONFIG\_REGISTRY**: `Record`\<`string`, [`ConfigMetadata`](../interfaces/ConfigMetadata.md)\>
 
-Defined in: [src/types/configRegistry.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/configRegistry.ts#L86)
+Defined in: [src/types/configRegistry.ts:86](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/configRegistry.ts#L86)
 
 Registry of all configuration metadata.

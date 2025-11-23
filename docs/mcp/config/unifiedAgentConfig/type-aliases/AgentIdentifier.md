@@ -8,6 +8,6 @@
 
 > **AgentIdentifier** = `"orchestrator"` \| `"relevant-data-manager"` \| `"user-context"` \| `"database-agent"` \| `"data-agent"` \| `"clarification-agent"`
 
-Defined in: [src/mcp/config/unifiedAgentConfig.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/mcp/config/unifiedAgentConfig.ts#L8)
+Defined in: [src/mcp/config/unifiedAgentConfig.ts:8](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/mcp/config/unifiedAgentConfig.ts#L8)
 
 Agent identifiers for type safety

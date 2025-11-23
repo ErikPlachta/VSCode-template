@@ -6,7 +6,7 @@
 
 # Interface: DataSource
 
-Defined in: [src/types/agentConfig.ts:955](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L955)
+Defined in: [src/types/agentConfig.ts:955](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L955)
 
 Definition for a data source the database agent can query.
 
@@ -16,7 +16,7 @@ Definition for a data source the database agent can query.
 
 > `optional` **fieldAliases**: `Record`\<`string`, `string`\>
 
-Defined in: [src/types/agentConfig.ts:960](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L960)
+Defined in: [src/types/agentConfig.ts:960](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L960)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:960](https://github.com/ErikPlachta/vscode
 
 > **id**: `string`
 
-Defined in: [src/types/agentConfig.ts:956](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L956)
+Defined in: [src/types/agentConfig.ts:956](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L956)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:956](https://github.com/ErikPlachta/vscode
 
 > **name**: `string`
 
-Defined in: [src/types/agentConfig.ts:957](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L957)
+Defined in: [src/types/agentConfig.ts:957](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L957)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/agentConfig.ts:957](https://github.com/ErikPlachta/vscode
 
 > **records**: [`CategoryRecord`](CategoryRecord.md)[]
 
-Defined in: [src/types/agentConfig.ts:958](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L958)
+Defined in: [src/types/agentConfig.ts:958](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L958)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/agentConfig.ts:958](https://github.com/ErikPlachta/vscode
 
 > `optional` **schema**: `unknown`
 
-Defined in: [src/types/agentConfig.ts:959](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L959)
+Defined in: [src/types/agentConfig.ts:959](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L959)

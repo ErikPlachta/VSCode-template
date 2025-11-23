@@ -8,7 +8,7 @@
 
 > **validateCategoryConfigImpl**(`obj`): [`ValidationResult`](../../../../types/userContext.types/interfaces/ValidationResult.md)
 
-Defined in: [src/shared/validation/categoryValidation.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/categoryValidation.ts#L16)
+Defined in: [src/shared/validation/categoryValidation.ts:16](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/categoryValidation.ts#L16)
 
 Validate a CategoryConfig-like object.
 

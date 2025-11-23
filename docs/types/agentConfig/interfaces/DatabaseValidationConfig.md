@@ -6,7 +6,7 @@
 
 # Interface: DatabaseValidationConfig
 
-Defined in: [src/types/agentConfig.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L269)
+Defined in: [src/types/agentConfig.ts:269](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L269)
 
 Validation and transformation settings for database queries.
 
@@ -16,7 +16,7 @@ Validation and transformation settings for database queries.
 
 > **integrityChecks**: `object`
 
-Defined in: [src/types/agentConfig.ts:275](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L275)
+Defined in: [src/types/agentConfig.ts:275](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L275)
 
 #### checkMissingReferences
 
@@ -36,7 +36,7 @@ Defined in: [src/types/agentConfig.ts:275](https://github.com/ErikPlachta/vscode
 
 > **schemaValidation**: `object`
 
-Defined in: [src/types/agentConfig.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L270)
+Defined in: [src/types/agentConfig.ts:270](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L270)
 
 #### allowUnknownFields
 

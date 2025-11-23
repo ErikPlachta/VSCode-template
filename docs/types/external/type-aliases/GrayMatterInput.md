@@ -8,4 +8,4 @@
 
 > **GrayMatterInput** = `string` \| `Buffer`
 
-Defined in: [src/types/external.d.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/external.d.ts#L20)
+Defined in: [src/types/external.d.ts:20](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/external.d.ts#L20)

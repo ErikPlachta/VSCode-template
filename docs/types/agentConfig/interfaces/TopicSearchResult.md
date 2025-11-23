@@ -6,7 +6,7 @@
 
 # Interface: TopicSearchResult
 
-Defined in: [src/types/agentConfig.ts:936](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L936)
+Defined in: [src/types/agentConfig.ts:936](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L936)
 
 Match result from searching across topic records.
 
@@ -16,7 +16,7 @@ Match result from searching across topic records.
 
 > **categoryId**: `string`
 
-Defined in: [src/types/agentConfig.ts:937](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L937)
+Defined in: [src/types/agentConfig.ts:937](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L937)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/agentConfig.ts:937](https://github.com/ErikPlachta/vscode
 
 > **displayName**: `string`
 
-Defined in: [src/types/agentConfig.ts:939](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L939)
+Defined in: [src/types/agentConfig.ts:939](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L939)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/agentConfig.ts:939](https://github.com/ErikPlachta/vscode
 
 > **matchingFields**: `string`[]
 
-Defined in: [src/types/agentConfig.ts:940](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L940)
+Defined in: [src/types/agentConfig.ts:940](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L940)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/agentConfig.ts:940](https://github.com/ErikPlachta/vscode
 
 > **recordId**: `string`
 
-Defined in: [src/types/agentConfig.ts:938](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L938)
+Defined in: [src/types/agentConfig.ts:938](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L938)

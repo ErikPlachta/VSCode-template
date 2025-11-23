@@ -6,7 +6,7 @@
 
 # Interface: MCPInputSchema
 
-Defined in: [src/shared/mcpTypes.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L29)
+Defined in: [src/shared/mcpTypes.ts:29](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/mcpTypes.ts#L29)
 
 Minimal JSON schema definition used by MCP tool payloads.
 
@@ -16,7 +16,7 @@ Minimal JSON schema definition used by MCP tool payloads.
 
 > `optional` **properties**: `Record`\<`string`, [`MCPProperty`](MCPProperty.md) & `Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/shared/mcpTypes.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L31)
+Defined in: [src/shared/mcpTypes.ts:31](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/mcpTypes.ts#L31)
 
 Map of argument names to property descriptors.
 
@@ -26,6 +26,6 @@ Map of argument names to property descriptors.
 
 > `optional` **required**: `string`[]
 
-Defined in: [src/shared/mcpTypes.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/mcpTypes.ts#L33)
+Defined in: [src/shared/mcpTypes.ts:33](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/mcpTypes.ts#L33)
 
 List of keys that must be present.

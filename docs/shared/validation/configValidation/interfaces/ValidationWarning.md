@@ -6,7 +6,7 @@
 
 # Interface: ValidationWarning
 
-Defined in: [src/shared/validation/configValidation.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L49)
+Defined in: [src/shared/validation/configValidation.ts:49](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L49)
 
 Non-blocking validation warning (advisory issue that does not fail validation).
 
@@ -20,7 +20,7 @@ Non-blocking validation warning (advisory issue that does not fail validation).
 
 > `optional` **actual**: `unknown`
 
-Defined in: [src/shared/validation/configValidation.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L43)
+Defined in: [src/shared/validation/configValidation.ts:43](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L43)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [src/shared/validation/configValidation.ts:43](https://github.com/Er
 
 > **category**: `"schema"` \| `"type"` \| `"business_rule"` \| `"compatibility"`
 
-Defined in: [src/shared/validation/configValidation.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L39)
+Defined in: [src/shared/validation/configValidation.ts:39](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L39)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: [src/shared/validation/configValidation.ts:39](https://github.com/Er
 
 > `optional` **expected**: `unknown`
 
-Defined in: [src/shared/validation/configValidation.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L42)
+Defined in: [src/shared/validation/configValidation.ts:42](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L42)
 
 #### Inherited from
 
@@ -56,7 +56,7 @@ Defined in: [src/shared/validation/configValidation.ts:42](https://github.com/Er
 
 > **level**: `"warning"`
 
-Defined in: [src/shared/validation/configValidation.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L50)
+Defined in: [src/shared/validation/configValidation.ts:50](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L50)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/shared/validation/configValidation.ts:50](https://github.com/Er
 
 > **message**: `string`
 
-Defined in: [src/shared/validation/configValidation.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L41)
+Defined in: [src/shared/validation/configValidation.ts:41](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L41)
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ Defined in: [src/shared/validation/configValidation.ts:41](https://github.com/Er
 
 > **path**: `string`
 
-Defined in: [src/shared/validation/configValidation.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/validation/configValidation.ts#L40)
+Defined in: [src/shared/validation/configValidation.ts:40](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/validation/configValidation.ts#L40)
 
 #### Inherited from
 

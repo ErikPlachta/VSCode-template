@@ -6,7 +6,7 @@
 
 # Interface: LoggingFileConfig
 
-Defined in: [src/types/applicationConfig.ts:279](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L279)
+Defined in: [src/types/applicationConfig.ts:279](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/applicationConfig.ts#L279)
 
 Logging file configuration.
 
@@ -27,7 +27,7 @@ const file: LoggingFileConfig = {
 
 > **enabled**: `boolean`
 
-Defined in: [src/types/applicationConfig.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L281)
+Defined in: [src/types/applicationConfig.ts:281](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/applicationConfig.ts#L281)
 
 Enable file logging.
 
@@ -37,7 +37,7 @@ Enable file logging.
 
 > **maxFiles**: `number`
 
-Defined in: [src/types/applicationConfig.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L287)
+Defined in: [src/types/applicationConfig.ts:287](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/applicationConfig.ts#L287)
 
 Maximum number of log files to keep.
 
@@ -47,7 +47,7 @@ Maximum number of log files to keep.
 
 > **maxSize**: `string`
 
-Defined in: [src/types/applicationConfig.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L285)
+Defined in: [src/types/applicationConfig.ts:285](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/applicationConfig.ts#L285)
 
 Maximum file size before rotation.
 
@@ -57,6 +57,6 @@ Maximum file size before rotation.
 
 > **path**: `string`
 
-Defined in: [src/types/applicationConfig.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/applicationConfig.ts#L283)
+Defined in: [src/types/applicationConfig.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/applicationConfig.ts#L283)
 
 Log file path.

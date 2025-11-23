@@ -8,7 +8,7 @@
 
 > **getUserFacingConfig**(`config`): [`UserFacingConfig`](../../../../types/agentConfig/interfaces/UserFacingConfig.md) \| `undefined`
 
-Defined in: [src/shared/config/runtime.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/config/runtime.ts#L72)
+Defined in: [src/shared/config/runtime.ts:72](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/config/runtime.ts#L72)
 
 ## Parameters
 

@@ -47,6 +47,11 @@ Formatting Conventions
 
 ## Current Focus Summary
 
+- Focus: repo-ops CLI rebuild (next-gen repo-ops-next).
+- Current P1 from TODO.md: Repo-ops CLI Rebuild (Next-Gen) – Robust, typed, config-driven tooling for TODO/CONTEXT-SESSION/CHANGELOG
+
+- Focus: repo-ops CLI rebuild (next-gen repo-ops-next).
+- Current P1 from TODO.md: Repo-ops CLI Rebuild (Next-Gen) – Robust, typed, config-driven tooling for TODO/CONTEXT-SESSION/CHANGELOG
 - Focus: repo-ops CLI rebuild (argument parsing, exit codes, and governance flows) on branch `feat/repo-ops-cli-rebuild`.
 - Goal: make repo-ops a robust, typed, config-driven CLI for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md` so governance workflows are reliable.
 - Scope (immediate): `bin/repo-ops/**` (shared flag parser, changelog/todo/session commands, tests) plus README/docs touch-ups.

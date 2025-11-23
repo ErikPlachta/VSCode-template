@@ -8,7 +8,7 @@
 
 > **getCacheDirectoryName**(): `string`
 
-Defined in: [src/shared/env.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/shared/env.ts#L24)
+Defined in: [src/shared/env.ts:24](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/shared/env.ts#L24)
 
 Compute the cache directory name based on the extension name.
 This is used for both workspace-local and global cache folder naming.

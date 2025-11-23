@@ -8,7 +8,7 @@
 
 > **fetchTools**(`serverUrl`, `token?`): `Promise`\<[`MCPTool`](../../shared/mcpTypes/interfaces/MCPTool.md)[]\>
 
-Defined in: [src/extension/mcpSync.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/extension/mcpSync.ts#L71)
+Defined in: [src/extension/mcpSync.ts:71](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/extension/mcpSync.ts#L71)
 
 Fetch all available MCP tools from the configured server.
 

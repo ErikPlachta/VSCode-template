@@ -6,7 +6,7 @@
 
 # Interface: ErrorHandlingConfig
 
-Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L156)
+Defined in: [src/types/agentConfig.ts:156](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L156)
 
 Error handling preferences for an agent.
 
@@ -18,7 +18,7 @@ Example removed for brevity; configure in agent.config.ts with preferred retry s
 
 > `optional` **fallbackAgent**: `string`
 
-Defined in: [src/types/agentConfig.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L159)
+Defined in: [src/types/agentConfig.ts:159](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L159)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [src/types/agentConfig.ts:159](https://github.com/ErikPlachta/vscode
 
 > **maxRetries**: `number`
 
-Defined in: [src/types/agentConfig.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L158)
+Defined in: [src/types/agentConfig.ts:158](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L158)
 
 ***
 
@@ -34,4 +34,4 @@ Defined in: [src/types/agentConfig.ts:158](https://github.com/ErikPlachta/vscode
 
 > **retryStrategy**: `"none"` \| `"fixed"` \| `"exponential"`
 
-Defined in: [src/types/agentConfig.ts:157](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L157)
+Defined in: [src/types/agentConfig.ts:157](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L157)

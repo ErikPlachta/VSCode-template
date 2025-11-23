@@ -6,7 +6,7 @@
 
 # Interface: ExplorationStep
 
-Defined in: [src/types/interfaces.ts:106](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L106)
+Defined in: [src/types/interfaces.ts:106](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L106)
 
 ExplorationStep interface.
 
@@ -16,7 +16,7 @@ ExplorationStep interface.
 
 > **description**: `string`
 
-Defined in: [src/types/interfaces.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L108)
+Defined in: [src/types/interfaces.ts:108](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L108)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/interfaces.ts:108](https://github.com/ErikPlachta/vscode-
 
 > **hints**: `string`[]
 
-Defined in: [src/types/interfaces.ts:110](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L110)
+Defined in: [src/types/interfaces.ts:110](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L110)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/interfaces.ts:110](https://github.com/ErikPlachta/vscode-
 
 > **recommendedCategory**: `string`
 
-Defined in: [src/types/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L109)
+Defined in: [src/types/interfaces.ts:109](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L109)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/types/interfaces.ts:109](https://github.com/ErikPlachta/vscode-
 
 > **title**: `string`
 
-Defined in: [src/types/interfaces.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/interfaces.ts#L107)
+Defined in: [src/types/interfaces.ts:107](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/interfaces.ts#L107)

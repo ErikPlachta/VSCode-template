@@ -6,7 +6,7 @@
 
 # Interface: DatabaseOperationsConfig
 
-Defined in: [src/types/agentConfig.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L283)
+Defined in: [src/types/agentConfig.ts:283](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L283)
 
 Supported query operations and their configurations.
 
@@ -16,7 +16,7 @@ Supported query operations and their configurations.
 
 > **aggregation**: `object`
 
-Defined in: [src/types/agentConfig.ts:294](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L294)
+Defined in: [src/types/agentConfig.ts:294](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L294)
 
 #### enableGroupBy?
 
@@ -36,7 +36,7 @@ Defined in: [src/types/agentConfig.ts:294](https://github.com/ErikPlachta/vscode
 
 > **filtering**: `object`
 
-Defined in: [src/types/agentConfig.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L284)
+Defined in: [src/types/agentConfig.ts:284](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L284)
 
 #### caseInsensitiveStrings?
 
@@ -56,7 +56,7 @@ Defined in: [src/types/agentConfig.ts:284](https://github.com/ErikPlachta/vscode
 
 > **joins**: `object`
 
-Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/agentConfig.ts#L289)
+Defined in: [src/types/agentConfig.ts:289](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/agentConfig.ts#L289)
 
 #### autoDiscoverRelationships?
 

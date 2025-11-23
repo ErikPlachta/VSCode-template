@@ -8,7 +8,7 @@
 
 > **listCategorySummariesBridge**(): `Promise`\<`object`[]\>
 
-Defined in: [src/server/orchestratorBridge.ts:239](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/server/orchestratorBridge.ts#L239)
+Defined in: [src/server/orchestratorBridge.ts:239](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/server/orchestratorBridge.ts#L239)
 
 List available business categories (id + name) without formatting.
 Used by server to derive dynamic tool descriptor metadata.

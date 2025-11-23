@@ -6,7 +6,7 @@
 
 # Interface: RelationshipLoadResult
 
-Defined in: [src/types/userContext.types.ts:475](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L475)
+Defined in: [src/types/userContext.types.ts:475](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L475)
 
 Relationship load result (descriptions exposed + internal definitions)
 
@@ -16,7 +16,7 @@ Relationship load result (descriptions exposed + internal definitions)
 
 > **definitions**: [`InternalRelationshipDefinition`](InternalRelationshipDefinition.md)[]
 
-Defined in: [src/types/userContext.types.ts:477](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L477)
+Defined in: [src/types/userContext.types.ts:477](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L477)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/userContext.types.ts:477](https://github.com/ErikPlachta/
 
 > **descriptions**: [`RelationshipDescription`](RelationshipDescription.md)[]
 
-Defined in: [src/types/userContext.types.ts:476](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/1e5d865769408edfe3205c1b04613b0b4271874f/src/types/userContext.types.ts#L476)
+Defined in: [src/types/userContext.types.ts:476](https://github.com/ErikPlachta/vscode-extension-mcp-server/blob/e0ff590bdf5a0d15840bcfb8a45d352ad9172eae/src/types/userContext.types.ts#L476)
