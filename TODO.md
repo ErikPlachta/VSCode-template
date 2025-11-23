@@ -89,52 +89,6 @@ Follow these guidelines to ensure effective task management:
 
 ### Current Action Items
 
-- [ ] P1: Repo-ops CLI Rebuild (Next-Gen) – Robust, typed, config-driven tooling for TODO/CONTEXT-SESSION/CHANGELOG
-  - [x] Architecture & design
-    - [x] Define repo-ops goals, inputs/outputs, and config surface for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md` (including marker awareness and backup expectations) in a new implementation under `bin/repo-ops-next/**`.
-    - [x] Decide on a single CLI entry point and subcommand structure (e.g., `status`, `session`, `todo`, `changelog`) with consistent flag semantics in `bin/repo-ops-next/index.ts`.
-    - [x] Specify logging, debug modes (e.g., `--debug-args`, verbose flags), and error-handling strategy so failures are observable but safe.
-    - [x] Normalize process exit codes across commands (0 for success/dry-run, non-zero for validation/IO/parse errors) and document this behavior.
-  - [x] Core utilities & shared helpers
-    - [x] Implement shared file IO, backup, and text-processing utilities in typed modules under `bin/repo-ops-next/**` so reading/writing files, building lists, and backups are fully data-driven and reusable.
-    - [x] Centralize marker/config awareness (section markers, headings, YAML front-matter) into a config/descriptor file rather than hardcoding in command logic.
-    - [x] Ensure all runtime logic is strongly typed (TypeScript), with types in `bin` or shared locations matching governance rules.
-  - [x] Argument parsing & execution model
-    - [x] Implement a small, robust flag parser in `bin/repo-ops-next/**` that walks argv left-to-right and supports boolean flags like `--write`/`--validate` and value flags like `--context`, `--changes`, etc.
-    - [x] Ensure `writeFlag` (and other booleans) are derived solely from the presence of flags (independent of other behavior) and that dry-run vs applied behavior is fully decoupled.
-    - [x] Add optional debug output (e.g., `--debug-args`) to print parsed args, `writeFlag`, and related flags when troubleshooting.
-  - [x] Changelog management (logs-only, backup-aware)
-    - [x] Rebuild `changelog write`/`verify` and `changelog map`/index flows to use the new parser and shared backup utilities; keep logs-only policy and backup semantics intact.
-    - [x] Ensure lock handling is robust and clearly reported (no silent failures); keep `--validate`/dry-run semantics explicit.
-    - [x] Confirm behavior when `REPO_OPS_CHANGELOG_PATH` is set (synthetic path) is documented and tested.
-    - [x] Add explicit next-gen tests for REPO_OPS_CHANGELOG_PATH and synthetic changelog writes.
-  - [x] TODO management (single source of outstanding work)
-    - [x] Rebuild TODO commands to add/update tasks, enforce sections (Current/Next/Backlog) and priorities (P1–P3), and respect status markers (✅/⏳/etc.) for initial `todo add` support.
-    - [x] Ensure all edits are marker-aware and keep the `<!-- BEGIN:/END:... -->` structure intact for `todo add`.
-  - [x] CONTEXT-SESSION management (session hub alignment)
-    - [x] Rebuild `session rotate`/`session lint` to use shared helpers and config, keeping Focus Summary/Detail synced with `TODO.md` and `CHANGELOG.md` without duplicating tasks or logs.
-    - [x] Validate lint rules against governance (markers present, sections formatted correctly, links to TODO/CHANGELOG).
-  - [ ] `CHANGELOG.md` management (logs-only, backup-aware)
-    - [ ] Add integration tests for `runChangelogCommand("write", ...)` that:
-      - [ ] Use a temp cwd with a minimal `CHANGELOG.md` (header + `## Logs` markers)
-      - [ ] Call the next-gen CLI write path with `--write` and assert the file content changes
-      - [ ] Assert backups are created under `.repo-ops-backups/changelog-backup` with timestamped `.bak` files
-    - [ ] Verify integrity of CLI features:
-      - [ ] Confirm `changelog map`, `verify-only`, and `write` all honor `REPO_OPS_CHANGELOG_PATH` and exit codes
-      - [ ] Confirm `--write` vs dry-run behavior is driven solely by the parsed boolean flags (no hidden coupling)
-      - [ ] Confirm behavior when `CHANGELOG.md` is missing, read-only, or malformed is surfaced with clear error messages
-    - [ ] End-to-end changelog write verification:
-      - [ ] Run `npm run repo:ops:next -- changelog write ... --write` against the real repo root
-      - [ ] Confirm a new log entry appears under `## Logs` in `CHANGELOG.md` and a backup is written
-      - [ ] Add or update a Verification block for this entry reflecting the latest `npm run test` (and compile/docs if run)
-  - [ ] Testing & verification
-    - [ ] Remove or replace existing repo-ops tests as needed; design a fresh test suite (unit + integration) for argument parsing, file operations, and cross-file invariants.
-    - [ ] Add tests around representative long commands (including ones with backticks, `/**`, and multi-word values) to confirm `--write` and other flags are always detected when present.
-    - [ ] Add end-to-end tests that exercise typical flows: add TODO, rotate session, write changelog entry, and verify consistency.
-    - [ ] Add a CHANGELOG entry with Verification block once the rebuilt CLI and tests are in place.
-    - [x] Implement shared read helpers in `bin/repo-ops-next/fs.ts` (e.g., `readFileSafe`) and refactor `status`/`session lint` to use them.
-    - [x] Implement a `writeWithBackup` helper API in `bin/repo-ops-next/fs.ts` and add focused tests to cover new writes and backup creation.
-
 <!-- END:CURRENT_ACTION_ITEMS -->
 <!-- BEGIN:NEXT_ACTION_ITEMS -->
 
@@ -284,6 +238,51 @@ Follow these guidelines to ensure effective task management:
 
 ### Backlog Action Items
 
+- [ ] P1: Repo-ops CLI Rebuild (Next-Gen) – Robust, typed, config-driven tooling for TODO/CONTEXT-SESSION/CHANGELOG
+  - [x] Architecture & design
+    - [x] Define repo-ops goals, inputs/outputs, and config surface for `TODO.md`, `CONTEXT-SESSION.md`, and `CHANGELOG.md` (including marker awareness and backup expectations) in a new implementation under `bin/repo-ops-next/**`.
+    - [x] Decide on a single CLI entry point and subcommand structure (e.g., `status`, `session`, `todo`, `changelog`) with consistent flag semantics in `bin/repo-ops-next/index.ts`.
+    - [x] Specify logging, debug modes (e.g., `--debug-args`, verbose flags), and error-handling strategy so failures are observable but safe.
+    - [x] Normalize process exit codes across commands (0 for success/dry-run, non-zero for validation/IO/parse errors) and document this behavior.
+  - [x] Core utilities & shared helpers
+    - [x] Implement shared file IO, backup, and text-processing utilities in typed modules under `bin/repo-ops-next/**` so reading/writing files, building lists, and backups are fully data-driven and reusable.
+    - [x] Centralize marker/config awareness (section markers, headings, YAML front-matter) into a config/descriptor file rather than hardcoding in command logic.
+    - [x] Ensure all runtime logic is strongly typed (TypeScript), with types in `bin` or shared locations matching governance rules.
+  - [x] Argument parsing & execution model
+    - [x] Implement a small, robust flag parser in `bin/repo-ops-next/**` that walks argv left-to-right and supports boolean flags like `--write`/`--validate` and value flags like `--context`, `--changes`, etc.
+    - [x] Ensure `writeFlag` (and other booleans) are derived solely from the presence of flags (independent of other behavior) and that dry-run vs applied behavior is fully decoupled.
+    - [x] Add optional debug output (e.g., `--debug-args`) to print parsed args, `writeFlag`, and related flags when troubleshooting.
+  - [x] Changelog management (logs-only, backup-aware)
+    - [x] Rebuild `changelog write`/`verify` and `changelog map`/index flows to use the new parser and shared backup utilities; keep logs-only policy and backup semantics intact.
+    - [x] Ensure lock handling is robust and clearly reported (no silent failures); keep `--validate`/dry-run semantics explicit.
+    - [x] Confirm behavior when `REPO_OPS_CHANGELOG_PATH` is set (synthetic path) is documented and tested.
+    - [x] Add explicit next-gen tests for REPO_OPS_CHANGELOG_PATH and synthetic changelog writes.
+  - [x] TODO management (single source of outstanding work)
+    - [x] Rebuild TODO commands to add/update tasks, enforce sections (Current/Next/Backlog) and priorities (P1–P3), and respect status markers (✅/⏳/etc.) for initial `todo add` support.
+    - [x] Ensure all edits are marker-aware and keep the `<!-- BEGIN:/END:... -->` structure intact for `todo add`.
+  - [x] CONTEXT-SESSION management (session hub alignment)
+    - [x] Rebuild `session rotate`/`session lint` to use shared helpers and config, keeping Focus Summary/Detail synced with `TODO.md` and `CHANGELOG.md` without duplicating tasks or logs.
+    - [x] Validate lint rules against governance (markers present, sections formatted correctly, links to TODO/CHANGELOG).
+  - [ ] `CHANGELOG.md` management (logs-only, backup-aware)
+    - [ ] Add integration tests for `runChangelogCommand("write", ...)` that:
+      - [ ] Use a temp cwd with a minimal `CHANGELOG.md` (header + `## Logs` markers)
+      - [ ] Call the next-gen CLI write path with `--write` and assert the file content changes
+      - [ ] Assert backups are created under `.repo-ops-backups/changelog-backup` with timestamped `.bak` files
+    - [ ] Verify integrity of CLI features:
+      - [ ] Confirm `changelog map`, `verify-only`, and `write` all honor `REPO_OPS_CHANGELOG_PATH` and exit codes
+      - [ ] Confirm `--write` vs dry-run behavior is driven solely by the parsed boolean flags (no hidden coupling)
+      - [ ] Confirm behavior when `CHANGELOG.md` is missing, read-only, or malformed is surfaced with clear error messages
+    - [ ] End-to-end changelog write verification:
+      - [ ] Run `npm run repo:ops:next -- changelog write ... --write` against the real repo root
+      - [ ] Confirm a new log entry appears under `## Logs` in `CHANGELOG.md` and a backup is written
+      - [ ] Add or update a Verification block for this entry reflecting the latest `npm run test` (and compile/docs if run)
+  - [ ] Testing & verification
+    - [ ] Remove or replace existing repo-ops tests as needed; design a fresh test suite (unit + integration) for argument parsing, file operations, and cross-file invariants.
+    - [ ] Add tests around representative long commands (including ones with backticks, `/**`, and multi-word values) to confirm `--write` and other flags are always detected when present.
+    - [ ] Add end-to-end tests that exercise typical flows: add TODO, rotate session, write changelog entry, and verify consistency.
+    - [ ] Add a CHANGELOG entry with Verification block once the rebuilt CLI and tests are in place.
+    - [x] Implement shared read helpers in `bin/repo-ops-next/fs.ts` (e.g., `readFileSafe`) and refactor `status`/`session lint` to use them.
+    - [x] Implement a `writeWithBackup` helper API in `bin/repo-ops-next/fs.ts` and add focused tests to cover new writes and backup creation.
 - [ ] P3: Review the code base and identify british-english words `artefacts`, that should be american-english `artifacts`. Also seeing other words like 'behaviour', 'optimise', 'utilise', 'customise', 'organisation' etc.
 - [ ] P3: Optional stdio integration harness tests (deferred)
   - Add a lightweight stdio transport verifier or targeted integration tests if/when needed; keep default verification via HTTP harness in CI.
