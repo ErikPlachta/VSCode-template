@@ -88,9 +88,9 @@ export async function runChangelogCommand(
         testing: typeof flags.testing === "string" ? flags.testing : undefined,
         impact: typeof flags.impact === "string" ? flags.impact : undefined,
       };
-      const result = write
+      const result = await (write
         ? writeEntry({ changelogPath, flags: entryFlags })
-        : writeEntryDryRun({ changelogPath, flags: entryFlags });
+        : writeEntryDryRun({ changelogPath, flags: entryFlags }));
       if (!result.ok) {
         if (result.error) {
           logError(result.error);

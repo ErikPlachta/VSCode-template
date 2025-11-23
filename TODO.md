@@ -114,6 +114,19 @@ Follow these guidelines to ensure effective task management:
   - [x] CONTEXT-SESSION management (session hub alignment)
     - [x] Rebuild `session rotate`/`session lint` to use shared helpers and config, keeping Focus Summary/Detail synced with `TODO.md` and `CHANGELOG.md` without duplicating tasks or logs.
     - [x] Validate lint rules against governance (markers present, sections formatted correctly, links to TODO/CHANGELOG).
+  - [ ] `CHANGELOG.md` management (logs-only, backup-aware)
+    - [ ] Add integration tests for `runChangelogCommand("write", ...)` that:
+      - [ ] Use a temp cwd with a minimal `CHANGELOG.md` (header + `## Logs` markers)
+      - [ ] Call the next-gen CLI write path with `--write` and assert the file content changes
+      - [ ] Assert backups are created under `.repo-ops-backups/changelog-backup` with timestamped `.bak` files
+    - [ ] Verify integrity of CLI features:
+      - [ ] Confirm `changelog map`, `verify-only`, and `write` all honor `REPO_OPS_CHANGELOG_PATH` and exit codes
+      - [ ] Confirm `--write` vs dry-run behavior is driven solely by the parsed boolean flags (no hidden coupling)
+      - [ ] Confirm behavior when `CHANGELOG.md` is missing, read-only, or malformed is surfaced with clear error messages
+    - [ ] End-to-end changelog write verification:
+      - [ ] Run `npm run repo:ops:next -- changelog write ... --write` against the real repo root
+      - [ ] Confirm a new log entry appears under `## Logs` in `CHANGELOG.md` and a backup is written
+      - [ ] Add or update a Verification block for this entry reflecting the latest `npm run test` (and compile/docs if run)
   - [ ] Testing & verification
     - [ ] Remove or replace existing repo-ops tests as needed; design a fresh test suite (unit + integration) for argument parsing, file operations, and cross-file invariants.
     - [ ] Add tests around representative long commands (including ones with backticks, `/**`, and multi-word values) to confirm `--write` and other flags are always detected when present.
